@@ -20,13 +20,26 @@ async function loadData() {
         const data = await response.json();
         
         if (data.error) {
-            showError('Failed to load data: ' + data.error);
+            // Check if it's an initialization error
+            if (data.error === 'No spreadsheet configured' || data.companies === undefined) {
+                showInitializationError();
+                return;
+            }
+            // Show specific error message if available
+            const errorMessage = typeof data.error === 'string' ? data.error : 'Unable to load data';
+            showError(errorMessage);
             return;
         }
         
         // Update global state
         allCompanies = data.companies || [];
         allUpdates = data.recentUpdates || [];
+        
+        // Check if we have data but no companies
+        if (allCompanies.length === 0) {
+            showEmptyDataError();
+            return;
+        }
         
         // Update UI
         updateStats(data);
@@ -37,6 +50,55 @@ async function loadData() {
         console.error('Error loading data:', error);
         showError('Failed to connect to the monitoring system. Please check your configuration.');
     }
+}
+
+// Show initialization error with helpful instructions
+function showInitializationError() {
+    const feed = document.getElementById('activity-feed');
+    const grid = document.getElementById('companies-grid');
+    
+    const errorHtml = `
+        <div class="error-message" style="background: #1a1a1a; border: 1px solid #ff4444; border-radius: 8px; padding: 20px;">
+            <h3 style="color: #ff4444; margin-top: 0;">⚠️ System Not Initialized</h3>
+            <p>The monitoring system needs to be set up before it can display data.</p>
+            <p style="margin-top: 15px;"><strong>To initialize the system:</strong></p>
+            <ol style="margin-left: 20px;">
+                <li>Open the <a href="manual-check.html" style="color: #00ff88;">Manual Check Tool</a></li>
+                <li>Click "Initialize Spreadsheet" to create the database</li>
+                <li>Click "Run Full Check" to populate company data</li>
+                <li>Return here and refresh the page</li>
+            </ol>
+            <p style="margin-top: 15px;">
+                <a href="manual-check.html" class="button" style="display: inline-block; background: #00ff88; color: #000; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600;">
+                    Open Manual Check Tool →
+                </a>
+            </p>
+        </div>
+    `;
+    
+    feed.innerHTML = errorHtml;
+    grid.innerHTML = errorHtml;
+}
+
+// Show empty data error
+function showEmptyDataError() {
+    const feed = document.getElementById('activity-feed');
+    const grid = document.getElementById('companies-grid');
+    
+    const errorHtml = `
+        <div class="error-message" style="background: #1a1a1a; border: 1px solid #ffaa44; border-radius: 8px; padding: 20px;">
+            <h3 style="color: #ffaa44; margin-top: 0;">📊 No Data Available</h3>
+            <p>The system is initialized but no company data has been collected yet.</p>
+            <p style="margin-top: 15px;">
+                <a href="manual-check.html" class="button" style="display: inline-block; background: #00ff88; color: #000; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600;">
+                    Run Company Check →
+                </a>
+            </p>
+        </div>
+    `;
+    
+    feed.innerHTML = errorHtml;
+    grid.innerHTML = errorHtml;
 }
 
 // Update header statistics
