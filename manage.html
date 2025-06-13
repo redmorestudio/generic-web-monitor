@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Monitor - Management Interface</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            padding: 20px;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #00ff88;
+            border-bottom: 2px solid #00ff88;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links {
+            font-size: 16px;
+            font-weight: normal;
+        }
+        .nav-links a {
+            color: #00ff88;
+            text-decoration: none;
+            margin-left: 20px;
+        }
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+        .button {
+            background: #00ff88;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+            font-weight: 600;
+        }
+        .button:hover {
+            background: #00cc6a;
+        }
+        .button.secondary {
+            background: #333;
+            color: #e0e0e0;
+        }
+        .button.secondary:hover {
+            background: #444;
+        }
+        .button:disabled {
+            background: #333;
+            color: #666;
+            cursor: not-allowed;
+        }
+        .company-manager {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .company-item {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .company-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #00ff88;
+        }
+        .company-category {
+            color: #888;
+            font-size: 14px;
+        }
+        .field-group {
+            margin: 10px 0;
+        }
+        .field-label {
+            display: block;
+            font-size: 12px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+        .field-input {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            color: #e0e0e0;
+            padding: 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .field-input:focus {
+            outline: none;
+            border-color: #00ff88;
+        }
+        .extracted-data {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        .extracted-data h4 {
+            margin: 0 0 10px 0;
+            color: #00ff88;
+        }
+        .data-item {
+            margin: 5px 0;
+        }
+        .data-label {
+            color: #888;
+        }
+        .data-value {
+            color: #e0e0e0;
+            word-break: break-word;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-active {
+            background: #00ff88;
+        }
+        .status-error {
+            background: #ff4444;
+        }
+        .status-inactive {
+            background: #666;
+        }
+        .actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .tab-container {
+            margin: 20px 0;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #333;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            color: #888;
+        }
+        .tab.active {
+            color: #00ff88;
+            border-bottom-color: #00ff88;
+        }
+        .tab-content {
+            padding: 20px 0;
+        }
+        .add-company-form {
+            background: #1a1a1a;
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .keyword-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 10px 0;
+        }
+        .keyword-tag {
+            background: #333;
+            color: #00ff88;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #888;
+        }
+        .error-message {
+            background: #ff4444;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success-message {
+            background: #00ff88;
+            color: #000;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>
+            🔧 AI Monitor - Management Interface
+            <div class="nav-links">
+                <a href="index.html">Dashboard</a>
+                <a href="manual-check.html">Manual Check</a>
+            </div>
+        </h1>
+        
+        <div class="tab-container">
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('companies')">Companies</div>
+                <div class="tab" onclick="switchTab('extracted')">Extracted Data</div>
+                <div class="tab" onclick="switchTab('settings')">Settings</div>
+            </div>
+            
+            <div class="tab-content" id="companies-tab">
+                <div class="company-manager">
+                    <h2>Monitored Companies</h2>
+                    <p>Configure which companies and pages to monitor. Changes are saved to Google Apps Script.</p>
+                    
+                    <div class="actions">
+                        <button class="button" onclick="loadCompanies()">Refresh Data</button>
+                        <button class="button secondary" onclick="showAddCompanyForm()">Add Company</button>
+                        <button class="button secondary" onclick="saveAllChanges()">Save All Changes</button>
+                    </div>
+                    
+                    <div id="add-company-form" class="add-company-form" style="display: none;">
+                        <h3>Add New Company</h3>
+                        <div class="form-row">
+                            <div class="field-group">
+                                <label class="field-label">Company Name</label>
+                                <input type="text" id="new-name" class="field-input" placeholder="e.g., New AI Company">
+                            </div>
+                            <div class="field-group">
+                                <label class="field-label">Category</label>
+                                <select id="new-category" class="field-input">
+                                    <option value="Image Generation">Image Generation</option>
+                                    <option value="Video Generation">Video Generation</option>
+                                    <option value="Language Models">Language Models</option>
+                                    <option value="Developer Tools">Developer Tools</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">URL to Monitor</label>
+                            <input type="text" id="new-url" class="field-input" placeholder="https://example.com">
+                        </div>
+                        <div class="field-group">
+                            <label class="field-label">CSS Selector (for extracting description)</label>
+                            <input type="text" id="new-selector" class="field-input" placeholder='meta[name="description"]'>
+                        </div>
+                        <div class="actions">
+                            <button class="button" onclick="addCompany()">Add Company</button>
+                            <button class="button secondary" onclick="hideAddCompanyForm()">Cancel</button>
+                        </div>
+                    </div>
+                    
+                    <div id="companies-list" class="companies-list">
+                        <div class="loading">Loading companies...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="extracted-tab" style="display: none;">
+                <div class="company-manager">
+                    <h2>Extracted Data</h2>
+                    <p>View the latest data extracted from each company's website.</p>
+                    
+                    <div class="actions">
+                        <button class="button" onclick="loadExtractedData()">Refresh Data</button>
+                        <button class="button secondary" onclick="runFullCheck()">Run Full Check Now</button>
+                    </div>
+                    
+                    <div id="extracted-list" class="extracted-list">
+                        <div class="loading">Loading extracted data...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="settings-tab" style="display: none;">
+                <div class="company-manager">
+                    <h2>Monitoring Settings</h2>
+                    
+                    <div class="field-group">
+                        <label class="field-label">Keywords that trigger "update" detection</label>
+                        <div class="keyword-list">
+                            <span class="keyword-tag">new</span>
+                            <span class="keyword-tag">update</span>
+                            <span class="keyword-tag">launch</span>
+                            <span class="keyword-tag">release</span>
+                            <span class="keyword-tag">announce</span>
+                            <span class="keyword-tag">introducing</span>
+                            <span class="keyword-tag">now available</span>
+                            <span class="keyword-tag">beta</span>
+                            <span class="keyword-tag">preview</span>
+                        </div>
+                    </div>
+                    
+                    <div class="field-group">
+                        <label class="field-label">Common CSS Selectors</label>
+                        <pre class="extracted-data">
+meta[property="og:description"]  - Open Graph description
+meta[name="description"]         - Standard meta description
+h1                              - Main heading
+title                           - Page title
+meta[property="og:title"]       - Open Graph title
+.hero-text                      - Custom hero text
+.announcement                   - Announcement sections</pre>
+                    </div>
+                    
+                    <div class="field-group">
+                        <label class="field-label">Monitoring Configuration</label>
+                        <div class="extracted-data">
+                            <div class="data-item">
+                                <span class="data-label">Check Interval:</span>
+                                <span class="data-value">Every 6 hours</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Email Notifications:</span>
+                                <span class="data-value">seth@redmore.studio</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Script ID:</span>
+                                <span class="data-value" style="font-size: 11px;">12l6cAE0m_NMRCze5T0sZTvNuPPC0RfwAKf1k7VIlF3jdcywonZNe_oMK</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const API_URL = 'https://script.google.com/macros/s/AKfycby-iOEDRaIPyqoaJNrYPVcwJpr5nhcAVFzhMpQp7HZXyB2-L5MUERODD1H55Fb3Ndqm6w/exec';
+        
+        let companiesData = [];
+        let extractedData = {};
+        let pendingChanges = {};
+        
+        // Switch tabs
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update content
+            document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
+            document.getElementById(`${tabName}-tab`).style.display = 'block';
+            
+            // Load data for the tab
+            if (tabName === 'companies') {
+                loadCompanies();
+            } else if (tabName === 'extracted') {
+                loadExtractedData();
+            }
+        }
+        
+        // Load companies data
+        async function loadCompanies() {
+            const listDiv = document.getElementById('companies-list');
+            listDiv.innerHTML = '<div class="loading">Loading companies...</div>';
+            
+            try {
+                const response = await fetch(`${API_URL}?function=getLatestData`);
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                companiesData = data.companies || [];
+                displayCompanies();
+                
+            } catch (error) {
+                listDiv.innerHTML = `<div class="error-message">Error loading companies: ${error.message}</div>`;
+            }
+        }
+        
+        // Display companies list
+        function displayCompanies() {
+            const listDiv = document.getElementById('companies-list');
+            
+            if (companiesData.length === 0) {
+                listDiv.innerHTML = '<div class="error-message">No companies found. Initialize the system first.</div>';
+                return;
+            }
+            
+            // Group by category
+            const grouped = {};
+            companiesData.forEach(company => {
+                if (!grouped[company.category]) {
+                    grouped[company.category] = [];
+                }
+                grouped[company.category].push(company);
+            });
+            
+            let html = '';
+            Object.entries(grouped).forEach(([category, companies]) => {
+                html += `<h3 style="margin-top: 20px; color: #00ff88;">${category}</h3>`;
+                
+                companies.forEach((company, index) => {
+                    const companyId = `${category}-${index}`;
+                    const statusClass = company.status === 'Active' ? 'status-active' : 
+                                      company.status === 'Error' ? 'status-error' : 'status-inactive';
+                    
+                    html += `
+                        <div class="company-item" id="company-${companyId}">
+                            <div class="company-header">
+                                <div>
+                                    <span class="company-name">${company.name}</span>
+                                    <span class="status-indicator ${statusClass}"></span>
+                                    <span style="color: #888; font-size: 14px;">${company.status || 'Not checked'}</span>
+                                </div>
+                                <button class="button secondary" onclick="removeCompany('${companyId}')">Remove</button>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label class="field-label">URL</label>
+                                <input type="text" 
+                                       class="field-input" 
+                                       value="${company.url}" 
+                                       onchange="updateCompany('${companyId}', 'url', this.value)"
+                                       placeholder="https://example.com">
+                            </div>
+                            
+                            <div class="field-group">
+                                <label class="field-label">CSS Selector</label>
+                                <input type="text" 
+                                       class="field-input" 
+                                       value="${getSelector(company.name)}" 
+                                       onchange="updateCompany('${companyId}', 'selector', this.value)"
+                                       placeholder='meta[name="description"]'>
+                            </div>
+                            
+                            <div class="field-group">
+                                <label class="field-label">Last Checked</label>
+                                <div style="color: #888;">
+                                    ${company.lastChecked && company.lastChecked !== 'Never' ? 
+                                      new Date(company.lastChecked).toLocaleString() : 'Never'}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+            
+            listDiv.innerHTML = html;
+        }
+        
+        // Get selector for a company (from hardcoded config)
+        function getSelector(companyName) {
+            // This would need to be retrieved from the Google Apps Script config
+            const selectors = {
+                'Midjourney': 'meta[property="og:description"]',
+                'DALL-E 3': 'h1',
+                'Ideogram AI': 'meta[name="description"]',
+                'Leonardo AI': 'meta[name="description"]',
+                'Playground AI': 'meta[name="description"]',
+                'NightCafe': 'meta[name="description"]',
+                'Runway': 'meta[property="og:description"]',
+                'Pika': 'meta[name="description"]',
+                'Synthesia': 'h1',
+                'HeyGen': 'meta[name="description"]',
+                'D-ID': 'meta[name="description"]',
+                'Claude': 'meta[property="og:description"]',
+                'ChatGPT': 'meta[name="description"]',
+                'Gemini': 'meta[name="description"]',
+                'Llama': 'meta[property="og:description"]',
+                'Mistral AI': 'meta[name="description"]',
+                'GitHub Copilot': 'meta[name="description"]',
+                'Cursor': 'meta[name="description"]',
+                'Replit': 'meta[name="description"]'
+            };
+            return selectors[companyName] || 'meta[name="description"]';
+        }
+        
+        // Update company configuration
+        function updateCompany(companyId, field, value) {
+            if (!pendingChanges[companyId]) {
+                pendingChanges[companyId] = {};
+            }
+            pendingChanges[companyId][field] = value;
+            
+            // Show save button
+            showMessage('You have unsaved changes. Click "Save All Changes" to apply them.', 'info');
+        }
+        
+        // Remove company
+        function removeCompany(companyId) {
+            if (confirm('Are you sure you want to remove this company?')) {
+                pendingChanges[companyId] = { remove: true };
+                document.getElementById(`company-${companyId}`).style.display = 'none';
+                showMessage('Company marked for removal. Click "Save All Changes" to apply.', 'info');
+            }
+        }
+        
+        // Show add company form
+        function showAddCompanyForm() {
+            document.getElementById('add-company-form').style.display = 'block';
+        }
+        
+        // Hide add company form
+        function hideAddCompanyForm() {
+            document.getElementById('add-company-form').style.display = 'none';
+            // Clear form
+            document.getElementById('new-name').value = '';
+            document.getElementById('new-url').value = '';
+            document.getElementById('new-selector').value = '';
+        }
+        
+        // Add new company
+        function addCompany() {
+            const name = document.getElementById('new-name').value;
+            const category = document.getElementById('new-category').value;
+            const url = document.getElementById('new-url').value;
+            const selector = document.getElementById('new-selector').value || 'meta[name="description"]';
+            
+            if (!name || !url) {
+                alert('Please fill in company name and URL');
+                return;
+            }
+            
+            // Add to pending changes
+            const newId = `new-${Date.now()}`;
+            pendingChanges[newId] = {
+                add: true,
+                name: name,
+                category: category,
+                url: url,
+                selector: selector
+            };
+            
+            showMessage('New company added. Click "Save All Changes" to apply.', 'success');
+            hideAddCompanyForm();
+            
+            // Refresh display
+            loadCompanies();
+        }
+        
+        // Save all changes
+        async function saveAllChanges() {
+            // This would need to be implemented to save back to Google Apps Script
+            showMessage('Saving changes to Google Apps Script...', 'info');
+            
+            // For now, show what would be saved
+            console.log('Pending changes:', pendingChanges);
+            
+            setTimeout(() => {
+                showMessage('Note: Direct saving to Google Apps Script config requires additional implementation. Changes logged to console.', 'info');
+                pendingChanges = {};
+            }, 2000);
+        }
+        
+        // Load extracted data
+        async function loadExtractedData() {
+            const listDiv = document.getElementById('extracted-list');
+            listDiv.innerHTML = '<div class="loading">Loading extracted data...</div>';
+            
+            try {
+                // For each company, we'd need to check what was last extracted
+                // This would require an API endpoint that returns the last check results
+                
+                const response = await fetch(`${API_URL}?function=getLatestData`);
+                const data = await response.json();
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                displayExtractedData(data.companies || []);
+                
+            } catch (error) {
+                listDiv.innerHTML = `<div class="error-message">Error loading data: ${error.message}</div>`;
+            }
+        }
+        
+        // Display extracted data
+        function displayExtractedData(companies) {
+            const listDiv = document.getElementById('extracted-list');
+            
+            if (companies.length === 0) {
+                listDiv.innerHTML = '<div class="error-message">No data available. Run a check first.</div>';
+                return;
+            }
+            
+            let html = '';
+            companies.forEach(company => {
+                html += `
+                    <div class="company-item">
+                        <div class="company-header">
+                            <span class="company-name">${company.name}</span>
+                            <span class="company-category">${company.category}</span>
+                        </div>
+                        
+                        <div class="extracted-data">
+                            <h4>Last Extraction</h4>
+                            <div class="data-item">
+                                <span class="data-label">URL:</span>
+                                <span class="data-value">${company.url}</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Status:</span>
+                                <span class="data-value">${company.status || 'Not checked'}</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Last Checked:</span>
+                                <span class="data-value">${company.lastChecked && company.lastChecked !== 'Never' ? 
+                                    new Date(company.lastChecked).toLocaleString() : 'Never'}</span>
+                            </div>
+                            <div class="data-item">
+                                <span class="data-label">Last Change Detected:</span>
+                                <span class="data-value">${company.lastChange ? 
+                                    new Date(company.lastChange).toLocaleString() : 'No changes detected'}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="actions">
+                            <button class="button secondary" onclick="checkSingleCompany('${company.name}')">
+                                Check Now
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            listDiv.innerHTML = html;
+        }
+        
+        // Check single company
+        async function checkSingleCompany(companyName) {
+            showMessage(`Checking ${companyName}...`, 'info');
+            
+            try {
+                const response = await fetch(`${API_URL}?function=checkSingleCompany&company=${encodeURIComponent(companyName)}`);
+                const result = await response.json();
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                // Show results
+                let message = `<strong>${companyName} Check Results:</strong><br>`;
+                message += `Status Code: ${result.statusCode}<br>`;
+                message += `Title: ${result.title}<br>`;
+                message += `Description: ${result.description || 'No description found'}<br>`;
+                message += `Update Detected: ${result.hasUpdate ? 'Yes' : 'No'}`;
+                
+                showMessage(message, result.hasUpdate ? 'success' : 'info');
+                
+            } catch (error) {
+                showMessage(`Error checking ${companyName}: ${error.message}`, 'error');
+            }
+        }
+        
+        // Run full check
+        async function runFullCheck() {
+            if (!confirm('This will check all 19 companies. Continue?')) return;
+            
+            showMessage('Running full check on all companies...', 'info');
+            
+            try {
+                const response = await fetch(`${API_URL}?function=checkAllCompanies`);
+                const result = await response.json();
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                showMessage(`Check complete! Checked ${result.companiesChecked} companies, found ${result.updatesFound} updates.`, 'success');
+                
+                // Reload data
+                loadExtractedData();
+                
+            } catch (error) {
+                showMessage(`Error running check: ${error.message}`, 'error');
+            }
+        }
+        
+        // Show message
+        function showMessage(message, type = 'info') {
+            // Create message element
+            const messageDiv = document.createElement('div');
+            messageDiv.className = type === 'error' ? 'error-message' : 
+                                  type === 'success' ? 'success-message' : 
+                                  'extracted-data';
+            messageDiv.innerHTML = message;
+            messageDiv.style.position = 'fixed';
+            messageDiv.style.top = '20px';
+            messageDiv.style.right = '20px';
+            messageDiv.style.zIndex = '1000';
+            messageDiv.style.maxWidth = '400px';
+            
+            document.body.appendChild(messageDiv);
+            
+            // Remove after 5 seconds
+            setTimeout(() => {
+                messageDiv.remove();
+            }, 5000);
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCompanies();
+        });
+    </script>
+</body>
+</html>
