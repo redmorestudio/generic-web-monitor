@@ -3,1016 +3,602 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Monitor - Management Interface</title>
+    <title>AI Competitor Monitor - Management Interface</title>
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
-            padding: 20px;
-            line-height: 1.6;
+        * {
+            box-sizing: border-box;
             margin: 0;
+            padding: 0;
         }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #0f0f1e;
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            padding: 2rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 2rem;
         }
+
         h1 {
-            color: #00ff88;
-            border-bottom: 2px solid #00ff88;
-            padding-bottom: 10px;
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            font-size: 1.1rem;
+        }
+
+        .nav-tabs {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            border-bottom: 1px solid #374151;
+            padding-bottom: 0;
         }
-        .nav-links {
-            font-size: 16px;
-            font-weight: normal;
-        }
-        .nav-links a {
-            color: #00ff88;
-            text-decoration: none;
-            margin-left: 20px;
-        }
-        .nav-links a:hover {
-            text-decoration: underline;
-        }
-        .button {
-            background: #00ff88;
-            color: #000;
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: transparent;
             border: none;
-            padding: 10px 20px;
-            font-size: 14px;
-            border-radius: 6px;
+            color: #9ca3af;
             cursor: pointer;
-            margin: 5px;
-            font-weight: 600;
-        }
-        .button:hover {
-            background: #00cc6a;
-        }
-        .button.secondary {
-            background: #333;
-            color: #e0e0e0;
-        }
-        .button.secondary:hover {
-            background: #444;
-        }
-        .button:disabled {
-            background: #333;
-            color: #666;
-            cursor: not-allowed;
-        }
-        .company-manager {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-        .company-item {
-            background: #0a0a0a;
-            border: 1px solid #333;
-            border-radius: 6px;
-            padding: 15px;
-            margin: 10px 0;
-        }
-        .company-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .company-name {
-            font-size: 18px;
-            font-weight: 600;
-            color: #00ff88;
-        }
-        .company-category {
-            color: #888;
-            font-size: 14px;
-        }
-        .field-group {
-            margin: 10px 0;
-        }
-        .field-label {
-            display: block;
-            font-size: 12px;
-            color: #888;
-            margin-bottom: 4px;
-        }
-        .field-input {
-            width: 100%;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            color: #e0e0e0;
-            padding: 8px;
-            border-radius: 4px;
-            font-family: monospace;
-            font-size: 13px;
-        }
-        .field-input:focus {
-            outline: none;
-            border-color: #00ff88;
-        }
-        .extracted-data {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 4px;
-            padding: 10px;
-            margin: 10px 0;
-            font-family: monospace;
-            font-size: 12px;
-        }
-        .extracted-data h4 {
-            margin: 0 0 10px 0;
-            color: #00ff88;
-        }
-        .data-item {
-            margin: 5px 0;
-        }
-        .data-label {
-            color: #888;
-        }
-        .data-value {
-            color: #e0e0e0;
-            word-break: break-word;
-        }
-        .status-indicator {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            margin-right: 8px;
-        }
-        .status-active {
-            background: #00ff88;
-        }
-        .status-error {
-            background: #ff4444;
-        }
-        .status-inactive {
-            background: #666;
-        }
-        .actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .tab-container {
-            margin: 20px 0;
-        }
-        .tabs {
-            display: flex;
-            border-bottom: 2px solid #333;
-        }
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
+            font-size: 1rem;
             border-bottom: 2px solid transparent;
-            margin-bottom: -2px;
-            color: #888;
+            transition: all 0.3s ease;
         }
-        .tab.active {
-            color: #00ff88;
-            border-bottom-color: #00ff88;
+
+        .nav-tab:hover {
+            color: #e0e0e0;
         }
+
+        .nav-tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
         .tab-content {
-            padding: 20px 0;
+            display: none;
+            animation: fadeIn 0.3s ease;
         }
-        .add-company-form {
-            background: #1a1a1a;
-            border: 1px solid #00ff88;
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
+
+        .tab-content.active {
+            display: block;
         }
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 15px;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        .keyword-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 10px 0;
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #1a1a2e;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
-        .keyword-tag {
-            background: #333;
-            color: #00ff88;
-            padding: 4px 8px;
+
+        .data-table th {
+            background: #16213e;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #e0e0e0;
+            border-bottom: 1px solid #374151;
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #1f2937;
+        }
+
+        .data-table tr:hover {
+            background: #1f2937;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .status-error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .url-cell {
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .selector-cell {
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            background: #0f0f1e;
+            padding: 0.5rem;
             border-radius: 4px;
-            font-size: 12px;
-            position: relative;
         }
-        .keyword-tag.editable {
-            padding-right: 25px;
+
+        .config-form {
+            background: #1a1a2e;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 2rem;
         }
-        .keyword-tag .remove {
-            position: absolute;
-            right: 5px;
-            top: 50%;
-            transform: translateY(-50%);
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #e0e0e0;
+            font-weight: 500;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem;
+            background: #0f0f1e;
+            border: 1px solid #374151;
+            color: #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 500;
             cursor: pointer;
-            color: #ff4444;
-            font-weight: bold;
+            transition: all 0.3s ease;
         }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+        }
+
         .loading {
             text-align: center;
-            padding: 40px;
-            color: #888;
+            padding: 3rem;
+            color: #9ca3af;
         }
+
         .error-message {
-            background: #ff4444;
-            color: #fff;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-        }
-        .success-message {
-            background: #00ff88;
-            color: #000;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-        }
-        .info-message {
-            background: #1a1a1a;
-            border: 1px solid #44aaff;
-            color: #44aaff;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 10px 0;
-        }
-        pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-break: break-word;
-        }
-        .extracted-content {
-            background: #0a0a0a;
-            border: 1px solid #00ff88;
-            border-radius: 4px;
-            padding: 15px;
-            margin: 10px 0;
-        }
-        .content-section {
-            margin: 10px 0;
-        }
-        .content-label {
-            color: #00ff88;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-        .content-value {
-            color: #e0e0e0;
-            background: #1a1a1a;
-            padding: 8px;
-            border-radius: 4px;
-            margin-top: 5px;
-            font-family: monospace;
-            font-size: 13px;
-        }
-        .update-indicator {
-            display: inline-block;
-            background: #ffaa44;
-            color: #000;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-left: 10px;
-        }
-        .no-update {
-            background: #333;
-            color: #888;
-        }
-        .config-section {
-            background: #1a1a1a;
-            border: 1px solid #333;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            padding: 1rem;
             border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
+            margin: 1rem 0;
         }
-        .keyword-input-group {
-            display: flex;
-            gap: 10px;
-            margin: 10px 0;
+
+        .success-message {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
         }
-        .keyword-input {
-            flex: 1;
+
+        .description-cell {
+            max-width: 400px;
+            font-size: 0.875rem;
+            color: #9ca3af;
+            line-height: 1.4;
+        }
+
+        .keywords-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-right: 0.25rem;
+        }
+
+        .edit-btn {
+            background: transparent;
+            border: 1px solid #374151;
+            color: #9ca3af;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+
+        .edit-btn:hover {
+            border-color: #667eea;
+            color: #667eea;
+        }
+
+        .extracted-content {
+            background: #0f0f1e;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+        }
+
+        .extracted-title {
+            font-weight: 600;
+            color: #e0e0e0;
+            margin-bottom: 0.25rem;
+        }
+
+        .extracted-description {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            line-height: 1.4;
+        }
+
+        .no-data {
+            color: #6b7280;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>
-            🔧 AI Monitor - Management Interface
-            <div class="nav-links">
-                <a href="index.html">Dashboard</a>
-                <a href="manual-check.html">Manual Check</a>
-            </div>
-        </h1>
-        
-        <div class="tab-container">
-            <div class="tabs">
-                <div class="tab active" onclick="switchTab('companies')">Companies</div>
-                <div class="tab" onclick="switchTab('extracted')">Extracted Data</div>
-                <div class="tab" onclick="switchTab('settings')">Settings</div>
-            </div>
-            
-            <div class="tab-content" id="companies-tab">
-                <div class="company-manager">
-                    <h2>Monitored Companies</h2>
-                    <p>Configure which companies and pages to monitor. Changes are saved to Google Sheets configuration.</p>
-                    
-                    <div class="actions">
-                        <button class="button" onclick="loadCompanies()">Refresh Data</button>
-                        <button class="button secondary" onclick="showAddCompanyForm()">Add Company</button>
-                        <button class="button" onclick="saveConfiguration()">Save Configuration to Sheets</button>
-                    </div>
-                    
-                    <div id="config-status" class="info-message" style="display: none;"></div>
-                    
-                    <div id="add-company-form" class="add-company-form" style="display: none;">
-                        <h3>Add New Company</h3>
-                        <div class="form-row">
-                            <div class="field-group">
-                                <label class="field-label">Company Name</label>
-                                <input type="text" id="new-name" class="field-input" placeholder="e.g., New AI Company">
-                            </div>
-                            <div class="field-group">
-                                <label class="field-label">Category</label>
-                                <select id="new-category" class="field-input">
-                                    <option value="Image Generation">Image Generation</option>
-                                    <option value="Video Generation">Video Generation</option>
-                                    <option value="Language Models">Language Models</option>
-                                    <option value="Developer Tools">Developer Tools</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="field-group">
-                            <label class="field-label">URL to Monitor</label>
-                            <input type="text" id="new-url" class="field-input" placeholder="https://example.com">
-                        </div>
-                        <div class="field-group">
-                            <label class="field-label">CSS Selector (for extracting description)</label>
-                            <input type="text" id="new-selector" class="field-input" placeholder='meta[name="description"]'>
-                        </div>
-                        <div class="actions">
-                            <button class="button" onclick="addCompany()">Add Company</button>
-                            <button class="button secondary" onclick="hideAddCompanyForm()">Cancel</button>
-                        </div>
-                    </div>
-                    
-                    <div id="companies-list" class="companies-list">
-                        <div class="loading">Loading companies...</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="extracted-tab" style="display: none;">
-                <div class="company-manager">
-                    <h2>Extracted Data</h2>
-                    <p>View the latest data extracted from each company's website.</p>
-                    
-                    <div class="actions">
-                        <button class="button" onclick="loadExtractedData()">Refresh Data</button>
-                        <button class="button secondary" onclick="runFullExtraction()">Run Full Check Now</button>
-                    </div>
-                    
-                    <div id="extraction-status" class="info-message" style="display: none;"></div>
-                    
-                    <div id="extracted-list" class="extracted-list">
-                        <div class="loading">Loading extracted data...</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="tab-content" id="settings-tab" style="display: none;">
-                <div class="company-manager">
-                    <h2>Monitoring Settings</h2>
-                    
-                    <div class="config-section">
-                        <h3>Update Detection Keywords</h3>
-                        <p>These keywords trigger "update" detection when found in titles or descriptions.</p>
-                        
-                        <div class="keyword-input-group">
-                            <input type="text" id="new-keyword" class="field-input keyword-input" placeholder="Add new keyword">
-                            <button class="button secondary" onclick="addKeyword()">Add Keyword</button>
-                        </div>
-                        
-                        <div class="keyword-list" id="keywords-list">
-                            <!-- Keywords will be loaded here -->
-                        </div>
-                        
-                        <div class="actions">
-                            <button class="button" onclick="saveKeywords()">Save Keywords to Sheets</button>
-                        </div>
-                    </div>
-                    
-                    <div class="config-section">
-                        <h3>Common CSS Selectors</h3>
-                        <p>Reference for commonly used selectors:</p>
-                        <pre class="extracted-data">
-meta[property="og:description"]  - Open Graph description
-meta[name="description"]         - Standard meta description
-h1                              - Main heading
-title                           - Page title
-meta[property="og:title"]       - Open Graph title
-.hero-text                      - Custom hero text
-.announcement                   - Announcement sections
-[data-testid="hero-subtitle"]   - React component selectors</pre>
-                    </div>
-                    
-                    <div class="config-section">
-                        <h3>Backend Configuration</h3>
-                        <p>For LLM/programmatic access, configuration is stored in Google Sheets:</p>
-                        <div class="extracted-data">
-                            <div class="data-item">
-                                <span class="data-label">Spreadsheet:</span>
-                                <span class="data-value">AI Competitor Monitor Data</span>
-                            </div>
-                            <div class="data-item">
-                                <span class="data-label">Configuration Sheet:</span>
-                                <span class="data-value">Monitor Config (will be created on save)</span>
-                            </div>
-                            <div class="data-item">
-                                <span class="data-label">Structure:</span>
-                                <span class="data-value">Company | URL | Selector | Keywords</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <header class="header">
+        <div class="container">
+            <h1>AI Competitor Monitor</h1>
+            <p class="subtitle">Management Interface</p>
         </div>
-    </div>
+    </header>
+
+    <main class="container">
+        <div class="nav-tabs">
+            <button class="nav-tab active" data-tab="companies">Companies</button>
+            <button class="nav-tab" data-tab="extracted">Extracted Data</button>
+            <button class="nav-tab" data-tab="settings">Settings</button>
+        </div>
+
+        <div id="companies-tab" class="tab-content active">
+            <div class="loading">Loading company data...</div>
+        </div>
+
+        <div id="extracted-tab" class="tab-content">
+            <div class="loading">Loading extracted data...</div>
+        </div>
+
+        <div id="settings-tab" class="tab-content">
+            <div class="loading">Loading settings...</div>
+        </div>
+    </main>
 
     <script>
-        // Configuration
         const API_URL = 'https://script.google.com/macros/s/AKfycby-iOEDRaIPyqoaJNrYPVcwJpr5nhcAVFzhMpQp7HZXyB2-L5MUERODD1H55Fb3Ndqm6w/exec';
         
-        let companiesData = [];
-        let extractedData = {};
-        let currentKeywords = ['new', 'update', 'launch', 'release', 'announce', 'introducing', 'now available', 'beta', 'preview'];
-        let pendingChanges = {};
-        
-        // Switch tabs
-        function switchTab(tabName) {
-            // Update tab buttons
-            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Update content
-            document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
-            document.getElementById(`${tabName}-tab`).style.display = 'block';
-            
-            // Load data for the tab
-            if (tabName === 'companies') {
-                loadCompanies();
-            } else if (tabName === 'extracted') {
-                loadExtractedData();
-            } else if (tabName === 'settings') {
-                loadKeywords();
-            }
-        }
-        
-        // Load companies data
-        async function loadCompanies() {
-            const listDiv = document.getElementById('companies-list');
-            listDiv.innerHTML = '<div class="loading">Loading companies...</div>';
-            
-            try {
-                const response = await fetch(`${API_URL}?function=getLatestData`);
-                const data = await response.json();
+        let currentData = null;
+        let currentConfig = null;
+
+        // Tab switching
+        document.querySelectorAll('.nav-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                const tabName = tab.dataset.tab;
                 
-                if (data.error) {
-                    throw new Error(data.error);
+                // Update active states
+                document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(`${tabName}-tab`).classList.add('active');
+            });
+        });
+
+        // Load data
+        async function loadData() {
+            try {
+                // Load monitoring data
+                const dataResponse = await fetch(`${API_URL}?function=getLatestData`);
+                currentData = await dataResponse.json();
+                
+                if (currentData.error) {
+                    throw new Error(currentData.error);
                 }
                 
-                companiesData = data.companies || [];
-                displayCompanies();
+                // Load configuration
+                const configResponse = await fetch(`${API_URL}?function=getConfiguration`);
+                currentConfig = await configResponse.json();
+                
+                if (currentConfig.error) {
+                    throw new Error(currentConfig.error);
+                }
+                
+                renderCompanies();
+                renderExtractedData();
+                renderSettings();
                 
             } catch (error) {
-                listDiv.innerHTML = `<div class="error-message">Error loading companies: ${error.message}</div>`;
-            }
-        }
-        
-        // Display companies list
-        function displayCompanies() {
-            const listDiv = document.getElementById('companies-list');
-            
-            if (companiesData.length === 0) {
-                listDiv.innerHTML = '<div class="error-message">No companies found. Initialize the system first.</div>';
-                return;
-            }
-            
-            // Group by category
-            const grouped = {};
-            companiesData.forEach(company => {
-                if (!grouped[company.category]) {
-                    grouped[company.category] = [];
-                }
-                grouped[company.category].push(company);
-            });
-            
-            let html = '';
-            Object.entries(grouped).forEach(([category, companies]) => {
-                html += `<h3 style="margin-top: 20px; color: #00ff88;">${category}</h3>`;
-                
-                companies.forEach((company, index) => {
-                    const companyId = `${category}-${index}`;
-                    const statusClass = company.status === 'Active' ? 'status-active' : 
-                                      company.status === 'Error' ? 'status-error' : 'status-inactive';
-                    
-                    html += `
-                        <div class="company-item" id="company-${companyId}">
-                            <div class="company-header">
-                                <div>
-                                    <span class="company-name">${company.name}</span>
-                                    <span class="status-indicator ${statusClass}"></span>
-                                    <span style="color: #888; font-size: 14px;">${company.status || 'Not checked'}</span>
-                                </div>
-                                <button class="button secondary" onclick="removeCompany('${companyId}', '${company.name}')">Remove</button>
-                            </div>
-                            
-                            <div class="field-group">
-                                <label class="field-label">URL</label>
-                                <input type="text" 
-                                       class="field-input" 
-                                       value="${company.url}" 
-                                       onchange="updateCompany('${company.name}', 'url', this.value)"
-                                       placeholder="https://example.com">
-                            </div>
-                            
-                            <div class="field-group">
-                                <label class="field-label">CSS Selector</label>
-                                <input type="text" 
-                                       class="field-input" 
-                                       value="${getSelector(company.name)}" 
-                                       onchange="updateCompany('${company.name}', 'selector', this.value)"
-                                       placeholder='meta[name="description"]'>
-                            </div>
-                            
-                            <div class="field-group">
-                                <label class="field-label">Last Checked</label>
-                                <div style="color: #888;">
-                                    ${company.lastChecked && company.lastChecked !== 'Never' ? 
-                                      new Date(company.lastChecked).toLocaleString() : 'Never'}
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                console.error('Error loading data:', error);
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.innerHTML = `<div class="error-message">Error loading data: ${error.message}</div>`;
                 });
-            });
-            
-            listDiv.innerHTML = html;
-        }
-        
-        // Get selector for a company (from hardcoded config)
-        function getSelector(companyName) {
-            // This would need to be retrieved from the Google Apps Script config
-            const selectors = {
-                'Midjourney': 'meta[property="og:description"]',
-                'DALL-E 3': 'h1',
-                'Ideogram AI': 'meta[name="description"]',
-                'Leonardo AI': 'meta[name="description"]',
-                'Playground AI': 'meta[name="description"]',
-                'NightCafe': 'meta[name="description"]',
-                'Runway': 'meta[property="og:description"]',
-                'Pika': 'meta[name="description"]',
-                'Synthesia': 'h1',
-                'HeyGen': 'meta[name="description"]',
-                'D-ID': 'meta[name="description"]',
-                'Claude': 'meta[property="og:description"]',
-                'ChatGPT': 'meta[name="description"]',
-                'Gemini': 'meta[name="description"]',
-                'Llama': 'meta[property="og:description"]',
-                'Mistral AI': 'meta[name="description"]',
-                'GitHub Copilot': 'meta[name="description"]',
-                'Cursor': 'meta[name="description"]',
-                'Replit': 'meta[name="description"]'
-            };
-            return selectors[companyName] || 'meta[name="description"]';
-        }
-        
-        // Update company configuration
-        function updateCompany(companyName, field, value) {
-            if (!pendingChanges[companyName]) {
-                pendingChanges[companyName] = {};
-            }
-            pendingChanges[companyName][field] = value;
-            
-            // Show save button
-            showMessage('You have unsaved changes. Click "Save Configuration to Sheets" to apply them.', 'info');
-        }
-        
-        // Remove company
-        function removeCompany(companyId, companyName) {
-            if (confirm(`Are you sure you want to remove ${companyName}?`)) {
-                pendingChanges[companyName] = { remove: true };
-                document.getElementById(`company-${companyId}`).style.display = 'none';
-                showMessage('Company marked for removal. Click "Save Configuration to Sheets" to apply.', 'info');
             }
         }
-        
-        // Show add company form
-        function showAddCompanyForm() {
-            document.getElementById('add-company-form').style.display = 'block';
-        }
-        
-        // Hide add company form
-        function hideAddCompanyForm() {
-            document.getElementById('add-company-form').style.display = 'none';
-            // Clear form
-            document.getElementById('new-name').value = '';
-            document.getElementById('new-url').value = '';
-            document.getElementById('new-selector').value = '';
-        }
-        
-        // Add new company
-        function addCompany() {
-            const name = document.getElementById('new-name').value;
-            const category = document.getElementById('new-category').value;
-            const url = document.getElementById('new-url').value;
-            const selector = document.getElementById('new-selector').value || 'meta[name="description"]';
+
+        function renderCompanies() {
+            const container = document.getElementById('companies-tab');
             
-            if (!name || !url) {
-                alert('Please fill in company name and URL');
+            if (!currentData || !currentData.companies) {
+                container.innerHTML = '<div class="error-message">No company data available</div>';
                 return;
             }
-            
-            // Add to pending changes
-            pendingChanges[name] = {
-                add: true,
-                name: name,
-                category: category,
-                url: url,
-                selector: selector
-            };
-            
-            showMessage('New company added. Click "Save Configuration to Sheets" to apply.', 'success');
-            hideAddCompanyForm();
-            
-            // Refresh display
-            loadCompanies();
+
+            let html = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Category</th>
+                            <th>URL</th>
+                            <th>CSS Selector</th>
+                            <th>Status</th>
+                            <th>Last Checked</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            currentData.companies.forEach(company => {
+                const config = currentConfig?.configuration?.companies?.find(c => c.name === company.name) || {};
+                const lastChecked = company.lastChecked === 'Never' ? 'Never' : new Date(company.lastChecked).toLocaleString();
+                
+                html += `
+                    <tr>
+                        <td><strong>${company.name}</strong></td>
+                        <td>${company.category}</td>
+                        <td class="url-cell" title="${company.url}">${company.url}</td>
+                        <td class="selector-cell">${config.selector || 'N/A'}</td>
+                        <td>
+                            <span class="status-badge status-${company.status.toLowerCase()}">
+                                ${company.status}
+                            </span>
+                        </td>
+                        <td>${lastChecked}</td>
+                        <td>
+                            <button class="edit-btn" onclick="editCompany('${company.name}')">Edit</button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
         }
-        
-        // Save configuration to sheets
-        async function saveConfiguration() {
-            showMessage('Saving configuration to Google Sheets...', 'info');
+
+        function renderExtractedData() {
+            const container = document.getElementById('extracted-tab');
+            
+            if (!currentData || !currentData.companies) {
+                container.innerHTML = '<div class="error-message">No extracted data available</div>';
+                return;
+            }
+
+            let html = `
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Extracted Content</th>
+                            <th>Keywords Found</th>
+                            <th>Has Update</th>
+                            <th>Last Extraction</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            currentData.companies.forEach(company => {
+                const extracted = company.extractedData;
+                
+                html += `
+                    <tr>
+                        <td><strong>${company.name}</strong></td>
+                        <td>
+                            ${extracted ? `
+                                <div class="extracted-content">
+                                    <div class="extracted-title">${extracted.title || 'No title'}</div>
+                                    <div class="extracted-description">${extracted.description || 'No description'}</div>
+                                </div>
+                            ` : '<span class="no-data">No data extracted yet</span>'}
+                        </td>
+                        <td>
+                            ${extracted && extracted.keywordsFound ? 
+                                extracted.keywordsFound.split(',').map(k => `<span class="keywords-badge">${k.trim()}</span>`).join('') :
+                                '<span class="no-data">None</span>'}
+                        </td>
+                        <td>
+                            ${extracted ? 
+                                `<span class="status-badge status-${extracted.hasUpdate === 'Yes' ? 'active' : 'error'}">${extracted.hasUpdate}</span>` :
+                                '<span class="no-data">-</span>'}
+                        </td>
+                        <td>
+                            ${extracted && extracted.timestamp ? new Date(extracted.timestamp).toLocaleString() : 'Never'}
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table>';
+            container.innerHTML = html;
+        }
+
+        function renderSettings() {
+            const container = document.getElementById('settings-tab');
+            const config = currentConfig?.configuration?.general || {};
+            
+            let html = `
+                <div class="config-form">
+                    <h2 style="margin-bottom: 1.5rem;">General Settings</h2>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Update Keywords (comma-separated)</label>
+                        <input type="text" class="form-input" id="update_keywords" 
+                               value="${config.update_keywords?.value || 'new,update,launch,release,announce,introducing,now available,beta,preview'}">
+                        <small style="color: #6b7280; display: block; margin-top: 0.25rem;">
+                            These keywords trigger update detection when found in titles or descriptions
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Check Frequency (hours)</label>
+                        <input type="number" class="form-input" id="check_frequency" 
+                               value="${config.check_frequency?.value || '6'}" min="1" max="24">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email Recipients</label>
+                        <input type="email" class="form-input" id="email_recipients" 
+                               value="${config.email_recipients?.value || 'seth@redmore.studio'}">
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="saveSettings()">Save Settings</button>
+                    <div id="settings-message"></div>
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <h3 style="margin-bottom: 1rem;">Current Configuration</h3>
+                    <pre style="background: #0f0f1e; padding: 1rem; border-radius: 8px; overflow-x: auto;">
+${JSON.stringify(currentData?.configuration || {}, null, 2)}
+                    </pre>
+                </div>
+            `;
+            
+            container.innerHTML = html;
+        }
+
+        async function editCompany(companyName) {
+            const company = currentData.companies.find(c => c.name === companyName);
+            const config = currentConfig?.configuration?.companies?.find(c => c.name === companyName) || {};
+            
+            const newUrl = prompt('Enter new URL:', company.url);
+            if (newUrl === null) return;
+            
+            const newSelector = prompt('Enter new CSS selector:', config.selector || '');
+            if (newSelector === null) return;
             
             try {
-                const response = await fetch(`${API_URL}?function=saveMonitorConfig`, {
+                const response = await fetch(API_URL, {
                     method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        companies: pendingChanges,
-                        keywords: currentKeywords
+                        function: 'updateConfiguration',
+                        configType: 'company',
+                        data: {
+                            name: companyName,
+                            url: newUrl,
+                            selector: newSelector
+                        }
                     })
                 });
                 
                 const result = await response.json();
-                
-                if (result.success) {
-                    showMessage('Configuration saved to Google Sheets! An LLM can now modify it there.', 'success');
-                    pendingChanges = {};
-                } else {
-                    showMessage('Note: Direct saving requires manual implementation. Configuration logged.', 'info');
-                    console.log('Configuration to save:', {
-                        companies: pendingChanges,
-                        keywords: currentKeywords
-                    });
-                }
-            } catch (error) {
-                showMessage('Error saving configuration: ' + error.message, 'error');
-            }
-        }
-        
-        // Load extracted data with actual content
-        async function loadExtractedData() {
-            const listDiv = document.getElementById('extracted-list');
-            listDiv.innerHTML = '<div class="loading">Getting detailed extraction data...</div>';
-            
-            try {
-                // First get the company list
-                const response = await fetch(`${API_URL}?function=getLatestData`);
-                const data = await response.json();
-                
-                if (data.error) {
-                    throw new Error(data.error);
-                }
-                
-                // Then get detailed extractions
-                showMessage('Running extraction check on all companies...', 'info');
-                const extractResponse = await fetch(`${API_URL}?function=getDetailedExtractions`);
-                const extractData = await extractResponse.json();
-                
-                if (extractData.success && extractData.extractions) {
-                    displayDetailedExtractions(extractData.extractions);
-                } else {
-                    // Fall back to basic display
-                    displayExtractedData(data.companies || []);
-                }
-                
-            } catch (error) {
-                listDiv.innerHTML = `<div class="error-message">Error loading data: ${error.message}</div>`;
-            }
-        }
-        
-        // Display detailed extractions
-        function displayDetailedExtractions(extractions) {
-            const listDiv = document.getElementById('extracted-list');
-            
-            if (extractions.length === 0) {
-                listDiv.innerHTML = '<div class="error-message">No extraction data available.</div>';
-                return;
-            }
-            
-            let html = '';
-            extractions.forEach(extract => {
-                const hasUpdate = extract.hasUpdate || false;
-                const updateClass = hasUpdate ? 'update-indicator' : 'update-indicator no-update';
-                
-                html += `
-                    <div class="company-item">
-                        <div class="company-header">
-                            <div>
-                                <span class="company-name">${extract.company}</span>
-                                <span class="${updateClass}">${hasUpdate ? 'UPDATE DETECTED' : 'No updates'}</span>
-                            </div>
-                            <span class="company-category">${extract.category}</span>
-                        </div>
-                        
-                        <div class="extracted-content">
-                            <div class="content-section">
-                                <div class="content-label">URL:</div>
-                                <div class="content-value">${extract.url}</div>
-                            </div>
-                            
-                            <div class="content-section">
-                                <div class="content-label">Selector Used:</div>
-                                <div class="content-value">${extract.selector}</div>
-                            </div>
-                            
-                            <div class="content-section">
-                                <div class="content-label">Status Code:</div>
-                                <div class="content-value">${extract.statusCode || 'N/A'}</div>
-                            </div>
-                            
-                            ${extract.extracted ? `
-                                <div class="content-section">
-                                    <div class="content-label">Title:</div>
-                                    <div class="content-value">${extract.extracted.title || 'No title found'}</div>
-                                </div>
-                                
-                                <div class="content-section">
-                                    <div class="content-label">Extracted Content (from selector):</div>
-                                    <div class="content-value">${extract.extracted.selectorContent || 'No content found'}</div>
-                                </div>
-                                
-                                ${extract.extracted.h1 ? `
-                                    <div class="content-section">
-                                        <div class="content-label">H1 Heading:</div>
-                                        <div class="content-value">${extract.extracted.h1}</div>
-                                    </div>
-                                ` : ''}
-                                
-                                ${extract.updateIndicators && extract.updateIndicators.length > 0 ? `
-                                    <div class="content-section">
-                                        <div class="content-label">Update Keywords Found:</div>
-                                        <div class="keyword-list">
-                                            ${extract.updateIndicators.map(keyword => 
-                                                `<span class="keyword-tag">${keyword}</span>`
-                                            ).join('')}
-                                        </div>
-                                    </div>
-                                ` : ''}
-                            ` : ''}
-                            
-                            ${extract.error ? `
-                                <div class="content-section">
-                                    <div class="content-label">Error:</div>
-                                    <div class="content-value" style="color: #ff4444;">${extract.error}</div>
-                                </div>
-                            ` : ''}
-                        </div>
-                        
-                        <div class="actions">
-                            <button class="button secondary" onclick="checkSingleCompany('${extract.company}')">
-                                Re-check Now
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            listDiv.innerHTML = html;
-        }
-        
-        // Display basic extracted data (fallback)
-        function displayExtractedData(companies) {
-            const listDiv = document.getElementById('extracted-list');
-            
-            if (companies.length === 0) {
-                listDiv.innerHTML = '<div class="error-message">No data available. Run a check first.</div>';
-                return;
-            }
-            
-            let html = '<div class="info-message">Running detailed extraction check...</div>';
-            companies.forEach(company => {
-                html += `
-                    <div class="company-item">
-                        <div class="company-header">
-                            <span class="company-name">${company.name}</span>
-                            <span class="company-category">${company.category}</span>
-                        </div>
-                        
-                        <div class="extracted-data">
-                            <h4>Last Extraction</h4>
-                            <div class="data-item">
-                                <span class="data-label">URL:</span>
-                                <span class="data-value">${company.url}</span>
-                            </div>
-                            <div class="data-item">
-                                <span class="data-label">Status:</span>
-                                <span class="data-value">${company.status || 'Not checked'}</span>
-                            </div>
-                            <div class="data-item">
-                                <span class="data-label">Last Checked:</span>
-                                <span class="data-value">${company.lastChecked && company.lastChecked !== 'Never' ? 
-                                    new Date(company.lastChecked).toLocaleString() : 'Never'}</span>
-                            </div>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            listDiv.innerHTML = html;
-            
-            // Trigger detailed extraction
-            runFullExtraction();
-        }
-        
-        // Check single company
-        async function checkSingleCompany(companyName) {
-            showMessage(`Checking ${companyName}...`, 'info');
-            
-            try {
-                const response = await fetch(`${API_URL}?function=checkSingleCompany&company=${encodeURIComponent(companyName)}`);
-                const result = await response.json();
-                
                 if (result.error) {
-                    throw new Error(result.error);
-                }
-                
-                // Show results
-                let message = `<strong>${companyName} Check Results:</strong><br>`;
-                message += `Status Code: ${result.statusCode}<br>`;
-                message += `Title: ${result.title}<br>`;
-                message += `Description: ${result.description || 'No description found'}<br>`;
-                message += `Update Detected: ${result.hasUpdate ? 'Yes' : 'No'}`;
-                
-                showMessage(message, result.hasUpdate ? 'success' : 'info');
-                
-                // Reload data
-                loadExtractedData();
-                
-            } catch (error) {
-                showMessage(`Error checking ${companyName}: ${error.message}`, 'error');
-            }
-        }
-        
-        // Run full extraction
-        async function runFullExtraction() {
-            showMessage('Running detailed extraction on all companies...', 'info');
-            
-            try {
-                const response = await fetch(`${API_URL}?function=getDetailedExtractions`);
-                const result = await response.json();
-                
-                if (result.success && result.extractions) {
-                    showMessage(`Extraction complete! Checked ${result.extractions.length} companies.`, 'success');
-                    displayDetailedExtractions(result.extractions);
+                    alert('Error updating company: ' + result.error);
                 } else {
-                    showMessage('Extraction failed. Try running individual checks.', 'error');
+                    alert('Company updated successfully!');
+                    loadData(); // Reload data
                 }
-                
             } catch (error) {
-                showMessage(`Error running extraction: ${error.message}`, 'error');
+                alert('Error updating company: ' + error.message);
             }
         }
-        
-        // Load keywords
-        function loadKeywords() {
-            displayKeywords();
-        }
-        
-        // Display keywords
-        function displayKeywords() {
-            const listDiv = document.getElementById('keywords-list');
-            
-            listDiv.innerHTML = currentKeywords.map(keyword => `
-                <span class="keyword-tag editable">
-                    ${keyword}
-                    <span class="remove" onclick="removeKeyword('${keyword}')">×</span>
-                </span>
-            `).join('');
-        }
-        
-        // Add keyword
-        function addKeyword() {
-            const input = document.getElementById('new-keyword');
-            const keyword = input.value.trim().toLowerCase();
-            
-            if (!keyword) {
-                alert('Please enter a keyword');
-                return;
-            }
-            
-            if (currentKeywords.includes(keyword)) {
-                alert('Keyword already exists');
-                return;
-            }
-            
-            currentKeywords.push(keyword);
-            input.value = '';
-            displayKeywords();
-            showMessage('Keyword added. Click "Save Keywords to Sheets" to persist.', 'info');
-        }
-        
-        // Remove keyword
-        function removeKeyword(keyword) {
-            currentKeywords = currentKeywords.filter(k => k !== keyword);
-            displayKeywords();
-            showMessage('Keyword removed. Click "Save Keywords to Sheets" to persist.', 'info');
-        }
-        
-        // Save keywords
-        async function saveKeywords() {
-            showMessage('Saving keywords to Google Sheets...', 'info');
+
+        async function saveSettings() {
+            const messageDiv = document.getElementById('settings-message');
+            messageDiv.innerHTML = '<div class="loading">Saving...</div>';
             
             try {
-                // This would save to a configuration sheet
-                console.log('Keywords to save:', currentKeywords);
-                showMessage('Keywords configuration saved! An LLM can now modify them in the spreadsheet.', 'success');
+                const updates = [
+                    { key: 'update_keywords', value: document.getElementById('update_keywords').value },
+                    { key: 'check_frequency', value: document.getElementById('check_frequency').value },
+                    { key: 'email_recipients', value: document.getElementById('email_recipients').value }
+                ];
+                
+                for (const update of updates) {
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            function: 'updateConfiguration',
+                            configType: 'general',
+                            data: update
+                        })
+                    });
+                    
+                    const result = await response.json();
+                    if (result.error) {
+                        throw new Error(result.error);
+                    }
+                }
+                
+                messageDiv.innerHTML = '<div class="success-message">Settings saved successfully!</div>';
+                setTimeout(() => messageDiv.innerHTML = '', 3000);
+                
+                // Reload data to get updated config
+                loadData();
+                
             } catch (error) {
-                showMessage('Error saving keywords: ' + error.message, 'error');
+                messageDiv.innerHTML = `<div class="error-message">Error saving settings: ${error.message}</div>`;
             }
         }
+
+        // Load data on page load
+        loadData();
         
-        // Show message
-        function showMessage(message, type = 'info') {
-            // Update status divs if they exist
-            const configStatus = document.getElementById('config-status');
-            const extractionStatus = document.getElementById('extraction-status');
-            
-            if (configStatus && document.getElementById('companies-tab').style.display !== 'none') {
-                configStatus.className = type === 'error' ? 'error-message' : 
-                                       type === 'success' ? 'success-message' : 'info-message';
-                configStatus.innerHTML = message;
-                configStatus.style.display = 'block';
-                
-                setTimeout(() => {
-                    configStatus.style.display = 'none';
-                }, 5000);
-            }
-            
-            if (extractionStatus && document.getElementById('extracted-tab').style.display !== 'none') {
-                extractionStatus.className = type === 'error' ? 'error-message' : 
-                                           type === 'success' ? 'success-message' : 'info-message';
-                extractionStatus.innerHTML = message;
-                extractionStatus.style.display = 'block';
-                
-                setTimeout(() => {
-                    extractionStatus.style.display = 'none';
-                }, 5000);
-            }
-            
-            // Also create floating message
-            const messageDiv = document.createElement('div');
-            messageDiv.className = type === 'error' ? 'error-message' : 
-                                  type === 'success' ? 'success-message' : 
-                                  'info-message';
-            messageDiv.innerHTML = message;
-            messageDiv.style.position = 'fixed';
-            messageDiv.style.top = '20px';
-            messageDiv.style.right = '20px';
-            messageDiv.style.zIndex = '1000';
-            messageDiv.style.maxWidth = '400px';
-            
-            document.body.appendChild(messageDiv);
-            
-            // Remove after 5 seconds
-            setTimeout(() => {
-                messageDiv.remove();
-            }, 5000);
-        }
-        
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', () => {
-            loadCompanies();
-        });
+        // Refresh data every 5 minutes
+        setInterval(loadData, 5 * 60 * 1000);
     </script>
 </body>
 </html>
