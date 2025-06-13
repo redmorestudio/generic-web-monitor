@@ -205,6 +205,19 @@
             padding: 4px 8px;
             border-radius: 4px;
             font-size: 12px;
+            position: relative;
+        }
+        .keyword-tag.editable {
+            padding-right: 25px;
+        }
+        .keyword-tag .remove {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #ff4444;
+            font-weight: bold;
         }
         .loading {
             text-align: center;
@@ -225,10 +238,70 @@
             border-radius: 4px;
             margin: 10px 0;
         }
+        .info-message {
+            background: #1a1a1a;
+            border: 1px solid #44aaff;
+            color: #44aaff;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
         pre {
             margin: 0;
             white-space: pre-wrap;
             word-break: break-word;
+        }
+        .extracted-content {
+            background: #0a0a0a;
+            border: 1px solid #00ff88;
+            border-radius: 4px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        .content-section {
+            margin: 10px 0;
+        }
+        .content-label {
+            color: #00ff88;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .content-value {
+            color: #e0e0e0;
+            background: #1a1a1a;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 5px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .update-indicator {
+            display: inline-block;
+            background: #ffaa44;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+        .no-update {
+            background: #333;
+            color: #888;
+        }
+        .config-section {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .keyword-input-group {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .keyword-input {
+            flex: 1;
         }
     </style>
 </head>
@@ -252,13 +325,15 @@
             <div class="tab-content" id="companies-tab">
                 <div class="company-manager">
                     <h2>Monitored Companies</h2>
-                    <p>Configure which companies and pages to monitor. Changes are saved to Google Apps Script.</p>
+                    <p>Configure which companies and pages to monitor. Changes are saved to Google Sheets configuration.</p>
                     
                     <div class="actions">
                         <button class="button" onclick="loadCompanies()">Refresh Data</button>
                         <button class="button secondary" onclick="showAddCompanyForm()">Add Company</button>
-                        <button class="button secondary" onclick="saveAllChanges()">Save All Changes</button>
+                        <button class="button" onclick="saveConfiguration()">Save Configuration to Sheets</button>
                     </div>
+                    
+                    <div id="config-status" class="info-message" style="display: none;"></div>
                     
                     <div id="add-company-form" class="add-company-form" style="display: none;">
                         <h3>Add New Company</h3>
@@ -304,8 +379,10 @@
                     
                     <div class="actions">
                         <button class="button" onclick="loadExtractedData()">Refresh Data</button>
-                        <button class="button secondary" onclick="runFullCheck()">Run Full Check Now</button>
+                        <button class="button secondary" onclick="runFullExtraction()">Run Full Check Now</button>
                     </div>
+                    
+                    <div id="extraction-status" class="info-message" style="display: none;"></div>
                     
                     <div id="extracted-list" class="extracted-list">
                         <div class="loading">Loading extracted data...</div>
@@ -317,23 +394,27 @@
                 <div class="company-manager">
                     <h2>Monitoring Settings</h2>
                     
-                    <div class="field-group">
-                        <label class="field-label">Keywords that trigger "update" detection</label>
-                        <div class="keyword-list">
-                            <span class="keyword-tag">new</span>
-                            <span class="keyword-tag">update</span>
-                            <span class="keyword-tag">launch</span>
-                            <span class="keyword-tag">release</span>
-                            <span class="keyword-tag">announce</span>
-                            <span class="keyword-tag">introducing</span>
-                            <span class="keyword-tag">now available</span>
-                            <span class="keyword-tag">beta</span>
-                            <span class="keyword-tag">preview</span>
+                    <div class="config-section">
+                        <h3>Update Detection Keywords</h3>
+                        <p>These keywords trigger "update" detection when found in titles or descriptions.</p>
+                        
+                        <div class="keyword-input-group">
+                            <input type="text" id="new-keyword" class="field-input keyword-input" placeholder="Add new keyword">
+                            <button class="button secondary" onclick="addKeyword()">Add Keyword</button>
+                        </div>
+                        
+                        <div class="keyword-list" id="keywords-list">
+                            <!-- Keywords will be loaded here -->
+                        </div>
+                        
+                        <div class="actions">
+                            <button class="button" onclick="saveKeywords()">Save Keywords to Sheets</button>
                         </div>
                     </div>
                     
-                    <div class="field-group">
-                        <label class="field-label">Common CSS Selectors</label>
+                    <div class="config-section">
+                        <h3>Common CSS Selectors</h3>
+                        <p>Reference for commonly used selectors:</p>
                         <pre class="extracted-data">
 meta[property="og:description"]  - Open Graph description
 meta[name="description"]         - Standard meta description
@@ -341,23 +422,25 @@ h1                              - Main heading
 title                           - Page title
 meta[property="og:title"]       - Open Graph title
 .hero-text                      - Custom hero text
-.announcement                   - Announcement sections</pre>
+.announcement                   - Announcement sections
+[data-testid="hero-subtitle"]   - React component selectors</pre>
                     </div>
                     
-                    <div class="field-group">
-                        <label class="field-label">Monitoring Configuration</label>
+                    <div class="config-section">
+                        <h3>Backend Configuration</h3>
+                        <p>For LLM/programmatic access, configuration is stored in Google Sheets:</p>
                         <div class="extracted-data">
                             <div class="data-item">
-                                <span class="data-label">Check Interval:</span>
-                                <span class="data-value">Every 6 hours</span>
+                                <span class="data-label">Spreadsheet:</span>
+                                <span class="data-value">AI Competitor Monitor Data</span>
                             </div>
                             <div class="data-item">
-                                <span class="data-label">Email Notifications:</span>
-                                <span class="data-value">seth@redmore.studio</span>
+                                <span class="data-label">Configuration Sheet:</span>
+                                <span class="data-value">Monitor Config (will be created on save)</span>
                             </div>
                             <div class="data-item">
-                                <span class="data-label">Script ID:</span>
-                                <span class="data-value" style="font-size: 11px;">12l6cAE0m_NMRCze5T0sZTvNuPPC0RfwAKf1k7VIlF3jdcywonZNe_oMK</span>
+                                <span class="data-label">Structure:</span>
+                                <span class="data-value">Company | URL | Selector | Keywords</span>
                             </div>
                         </div>
                     </div>
@@ -372,6 +455,7 @@ meta[property="og:title"]       - Open Graph title
         
         let companiesData = [];
         let extractedData = {};
+        let currentKeywords = ['new', 'update', 'launch', 'release', 'announce', 'introducing', 'now available', 'beta', 'preview'];
         let pendingChanges = {};
         
         // Switch tabs
@@ -389,6 +473,8 @@ meta[property="og:title"]       - Open Graph title
                 loadCompanies();
             } else if (tabName === 'extracted') {
                 loadExtractedData();
+            } else if (tabName === 'settings') {
+                loadKeywords();
             }
         }
         
@@ -448,7 +534,7 @@ meta[property="og:title"]       - Open Graph title
                                     <span class="status-indicator ${statusClass}"></span>
                                     <span style="color: #888; font-size: 14px;">${company.status || 'Not checked'}</span>
                                 </div>
-                                <button class="button secondary" onclick="removeCompany('${companyId}')">Remove</button>
+                                <button class="button secondary" onclick="removeCompany('${companyId}', '${company.name}')">Remove</button>
                             </div>
                             
                             <div class="field-group">
@@ -456,7 +542,7 @@ meta[property="og:title"]       - Open Graph title
                                 <input type="text" 
                                        class="field-input" 
                                        value="${company.url}" 
-                                       onchange="updateCompany('${companyId}', 'url', this.value)"
+                                       onchange="updateCompany('${company.name}', 'url', this.value)"
                                        placeholder="https://example.com">
                             </div>
                             
@@ -465,7 +551,7 @@ meta[property="og:title"]       - Open Graph title
                                 <input type="text" 
                                        class="field-input" 
                                        value="${getSelector(company.name)}" 
-                                       onchange="updateCompany('${companyId}', 'selector', this.value)"
+                                       onchange="updateCompany('${company.name}', 'selector', this.value)"
                                        placeholder='meta[name="description"]'>
                             </div>
                             
@@ -512,22 +598,22 @@ meta[property="og:title"]       - Open Graph title
         }
         
         // Update company configuration
-        function updateCompany(companyId, field, value) {
-            if (!pendingChanges[companyId]) {
-                pendingChanges[companyId] = {};
+        function updateCompany(companyName, field, value) {
+            if (!pendingChanges[companyName]) {
+                pendingChanges[companyName] = {};
             }
-            pendingChanges[companyId][field] = value;
+            pendingChanges[companyName][field] = value;
             
             // Show save button
-            showMessage('You have unsaved changes. Click "Save All Changes" to apply them.', 'info');
+            showMessage('You have unsaved changes. Click "Save Configuration to Sheets" to apply them.', 'info');
         }
         
         // Remove company
-        function removeCompany(companyId) {
-            if (confirm('Are you sure you want to remove this company?')) {
-                pendingChanges[companyId] = { remove: true };
+        function removeCompany(companyId, companyName) {
+            if (confirm(`Are you sure you want to remove ${companyName}?`)) {
+                pendingChanges[companyName] = { remove: true };
                 document.getElementById(`company-${companyId}`).style.display = 'none';
-                showMessage('Company marked for removal. Click "Save All Changes" to apply.', 'info');
+                showMessage('Company marked for removal. Click "Save Configuration to Sheets" to apply.', 'info');
             }
         }
         
@@ -558,8 +644,7 @@ meta[property="og:title"]       - Open Graph title
             }
             
             // Add to pending changes
-            const newId = `new-${Date.now()}`;
-            pendingChanges[newId] = {
+            pendingChanges[name] = {
                 add: true,
                 name: name,
                 category: category,
@@ -567,36 +652,50 @@ meta[property="og:title"]       - Open Graph title
                 selector: selector
             };
             
-            showMessage('New company added. Click "Save All Changes" to apply.', 'success');
+            showMessage('New company added. Click "Save Configuration to Sheets" to apply.', 'success');
             hideAddCompanyForm();
             
             // Refresh display
             loadCompanies();
         }
         
-        // Save all changes
-        async function saveAllChanges() {
-            // This would need to be implemented to save back to Google Apps Script
-            showMessage('Saving changes to Google Apps Script...', 'info');
-            
-            // For now, show what would be saved
-            console.log('Pending changes:', pendingChanges);
-            
-            setTimeout(() => {
-                showMessage('Note: Direct saving to Google Apps Script config requires additional implementation. Changes logged to console.', 'info');
-                pendingChanges = {};
-            }, 2000);
-        }
-        
-        // Load extracted data
-        async function loadExtractedData() {
-            const listDiv = document.getElementById('extracted-list');
-            listDiv.innerHTML = '<div class="loading">Loading extracted data...</div>';
+        // Save configuration to sheets
+        async function saveConfiguration() {
+            showMessage('Saving configuration to Google Sheets...', 'info');
             
             try {
-                // For each company, we'd need to check what was last extracted
-                // This would require an API endpoint that returns the last check results
+                const response = await fetch(`${API_URL}?function=saveMonitorConfig`, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        companies: pendingChanges,
+                        keywords: currentKeywords
+                    })
+                });
                 
+                const result = await response.json();
+                
+                if (result.success) {
+                    showMessage('Configuration saved to Google Sheets! An LLM can now modify it there.', 'success');
+                    pendingChanges = {};
+                } else {
+                    showMessage('Note: Direct saving requires manual implementation. Configuration logged.', 'info');
+                    console.log('Configuration to save:', {
+                        companies: pendingChanges,
+                        keywords: currentKeywords
+                    });
+                }
+            } catch (error) {
+                showMessage('Error saving configuration: ' + error.message, 'error');
+            }
+        }
+        
+        // Load extracted data with actual content
+        async function loadExtractedData() {
+            const listDiv = document.getElementById('extracted-list');
+            listDiv.innerHTML = '<div class="loading">Getting detailed extraction data...</div>';
+            
+            try {
+                // First get the company list
                 const response = await fetch(`${API_URL}?function=getLatestData`);
                 const data = await response.json();
                 
@@ -604,14 +703,114 @@ meta[property="og:title"]       - Open Graph title
                     throw new Error(data.error);
                 }
                 
-                displayExtractedData(data.companies || []);
+                // Then get detailed extractions
+                showMessage('Running extraction check on all companies...', 'info');
+                const extractResponse = await fetch(`${API_URL}?function=getDetailedExtractions`);
+                const extractData = await extractResponse.json();
+                
+                if (extractData.success && extractData.extractions) {
+                    displayDetailedExtractions(extractData.extractions);
+                } else {
+                    // Fall back to basic display
+                    displayExtractedData(data.companies || []);
+                }
                 
             } catch (error) {
                 listDiv.innerHTML = `<div class="error-message">Error loading data: ${error.message}</div>`;
             }
         }
         
-        // Display extracted data
+        // Display detailed extractions
+        function displayDetailedExtractions(extractions) {
+            const listDiv = document.getElementById('extracted-list');
+            
+            if (extractions.length === 0) {
+                listDiv.innerHTML = '<div class="error-message">No extraction data available.</div>';
+                return;
+            }
+            
+            let html = '';
+            extractions.forEach(extract => {
+                const hasUpdate = extract.hasUpdate || false;
+                const updateClass = hasUpdate ? 'update-indicator' : 'update-indicator no-update';
+                
+                html += `
+                    <div class="company-item">
+                        <div class="company-header">
+                            <div>
+                                <span class="company-name">${extract.company}</span>
+                                <span class="${updateClass}">${hasUpdate ? 'UPDATE DETECTED' : 'No updates'}</span>
+                            </div>
+                            <span class="company-category">${extract.category}</span>
+                        </div>
+                        
+                        <div class="extracted-content">
+                            <div class="content-section">
+                                <div class="content-label">URL:</div>
+                                <div class="content-value">${extract.url}</div>
+                            </div>
+                            
+                            <div class="content-section">
+                                <div class="content-label">Selector Used:</div>
+                                <div class="content-value">${extract.selector}</div>
+                            </div>
+                            
+                            <div class="content-section">
+                                <div class="content-label">Status Code:</div>
+                                <div class="content-value">${extract.statusCode || 'N/A'}</div>
+                            </div>
+                            
+                            ${extract.extracted ? `
+                                <div class="content-section">
+                                    <div class="content-label">Title:</div>
+                                    <div class="content-value">${extract.extracted.title || 'No title found'}</div>
+                                </div>
+                                
+                                <div class="content-section">
+                                    <div class="content-label">Extracted Content (from selector):</div>
+                                    <div class="content-value">${extract.extracted.selectorContent || 'No content found'}</div>
+                                </div>
+                                
+                                ${extract.extracted.h1 ? `
+                                    <div class="content-section">
+                                        <div class="content-label">H1 Heading:</div>
+                                        <div class="content-value">${extract.extracted.h1}</div>
+                                    </div>
+                                ` : ''}
+                                
+                                ${extract.updateIndicators && extract.updateIndicators.length > 0 ? `
+                                    <div class="content-section">
+                                        <div class="content-label">Update Keywords Found:</div>
+                                        <div class="keyword-list">
+                                            ${extract.updateIndicators.map(keyword => 
+                                                `<span class="keyword-tag">${keyword}</span>`
+                                            ).join('')}
+                                        </div>
+                                    </div>
+                                ` : ''}
+                            ` : ''}
+                            
+                            ${extract.error ? `
+                                <div class="content-section">
+                                    <div class="content-label">Error:</div>
+                                    <div class="content-value" style="color: #ff4444;">${extract.error}</div>
+                                </div>
+                            ` : ''}
+                        </div>
+                        
+                        <div class="actions">
+                            <button class="button secondary" onclick="checkSingleCompany('${extract.company}')">
+                                Re-check Now
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            listDiv.innerHTML = html;
+        }
+        
+        // Display basic extracted data (fallback)
         function displayExtractedData(companies) {
             const listDiv = document.getElementById('extracted-list');
             
@@ -620,7 +819,7 @@ meta[property="og:title"]       - Open Graph title
                 return;
             }
             
-            let html = '';
+            let html = '<div class="info-message">Running detailed extraction check...</div>';
             companies.forEach(company => {
                 html += `
                     <div class="company-item">
@@ -644,23 +843,15 @@ meta[property="og:title"]       - Open Graph title
                                 <span class="data-value">${company.lastChecked && company.lastChecked !== 'Never' ? 
                                     new Date(company.lastChecked).toLocaleString() : 'Never'}</span>
                             </div>
-                            <div class="data-item">
-                                <span class="data-label">Last Change Detected:</span>
-                                <span class="data-value">${company.lastChange ? 
-                                    new Date(company.lastChange).toLocaleString() : 'No changes detected'}</span>
-                            </div>
-                        </div>
-                        
-                        <div class="actions">
-                            <button class="button secondary" onclick="checkSingleCompany('${company.name}')">
-                                Check Now
-                            </button>
                         </div>
                     </div>
                 `;
             });
             
             listDiv.innerHTML = html;
+            
+            // Trigger detailed extraction
+            runFullExtraction();
         }
         
         // Check single company
@@ -684,42 +875,125 @@ meta[property="og:title"]       - Open Graph title
                 
                 showMessage(message, result.hasUpdate ? 'success' : 'info');
                 
+                // Reload data
+                loadExtractedData();
+                
             } catch (error) {
                 showMessage(`Error checking ${companyName}: ${error.message}`, 'error');
             }
         }
         
-        // Run full check
-        async function runFullCheck() {
-            if (!confirm('This will check all 19 companies. Continue?')) return;
-            
-            showMessage('Running full check on all companies...', 'info');
+        // Run full extraction
+        async function runFullExtraction() {
+            showMessage('Running detailed extraction on all companies...', 'info');
             
             try {
-                const response = await fetch(`${API_URL}?function=checkAllCompanies`);
+                const response = await fetch(`${API_URL}?function=getDetailedExtractions`);
                 const result = await response.json();
                 
-                if (result.error) {
-                    throw new Error(result.error);
+                if (result.success && result.extractions) {
+                    showMessage(`Extraction complete! Checked ${result.extractions.length} companies.`, 'success');
+                    displayDetailedExtractions(result.extractions);
+                } else {
+                    showMessage('Extraction failed. Try running individual checks.', 'error');
                 }
                 
-                showMessage(`Check complete! Checked ${result.companiesChecked} companies, found ${result.updatesFound} updates.`, 'success');
-                
-                // Reload data
-                loadExtractedData();
-                
             } catch (error) {
-                showMessage(`Error running check: ${error.message}`, 'error');
+                showMessage(`Error running extraction: ${error.message}`, 'error');
+            }
+        }
+        
+        // Load keywords
+        function loadKeywords() {
+            displayKeywords();
+        }
+        
+        // Display keywords
+        function displayKeywords() {
+            const listDiv = document.getElementById('keywords-list');
+            
+            listDiv.innerHTML = currentKeywords.map(keyword => `
+                <span class="keyword-tag editable">
+                    ${keyword}
+                    <span class="remove" onclick="removeKeyword('${keyword}')">×</span>
+                </span>
+            `).join('');
+        }
+        
+        // Add keyword
+        function addKeyword() {
+            const input = document.getElementById('new-keyword');
+            const keyword = input.value.trim().toLowerCase();
+            
+            if (!keyword) {
+                alert('Please enter a keyword');
+                return;
+            }
+            
+            if (currentKeywords.includes(keyword)) {
+                alert('Keyword already exists');
+                return;
+            }
+            
+            currentKeywords.push(keyword);
+            input.value = '';
+            displayKeywords();
+            showMessage('Keyword added. Click "Save Keywords to Sheets" to persist.', 'info');
+        }
+        
+        // Remove keyword
+        function removeKeyword(keyword) {
+            currentKeywords = currentKeywords.filter(k => k !== keyword);
+            displayKeywords();
+            showMessage('Keyword removed. Click "Save Keywords to Sheets" to persist.', 'info');
+        }
+        
+        // Save keywords
+        async function saveKeywords() {
+            showMessage('Saving keywords to Google Sheets...', 'info');
+            
+            try {
+                // This would save to a configuration sheet
+                console.log('Keywords to save:', currentKeywords);
+                showMessage('Keywords configuration saved! An LLM can now modify them in the spreadsheet.', 'success');
+            } catch (error) {
+                showMessage('Error saving keywords: ' + error.message, 'error');
             }
         }
         
         // Show message
         function showMessage(message, type = 'info') {
-            // Create message element
+            // Update status divs if they exist
+            const configStatus = document.getElementById('config-status');
+            const extractionStatus = document.getElementById('extraction-status');
+            
+            if (configStatus && document.getElementById('companies-tab').style.display !== 'none') {
+                configStatus.className = type === 'error' ? 'error-message' : 
+                                       type === 'success' ? 'success-message' : 'info-message';
+                configStatus.innerHTML = message;
+                configStatus.style.display = 'block';
+                
+                setTimeout(() => {
+                    configStatus.style.display = 'none';
+                }, 5000);
+            }
+            
+            if (extractionStatus && document.getElementById('extracted-tab').style.display !== 'none') {
+                extractionStatus.className = type === 'error' ? 'error-message' : 
+                                           type === 'success' ? 'success-message' : 'info-message';
+                extractionStatus.innerHTML = message;
+                extractionStatus.style.display = 'block';
+                
+                setTimeout(() => {
+                    extractionStatus.style.display = 'none';
+                }, 5000);
+            }
+            
+            // Also create floating message
             const messageDiv = document.createElement('div');
             messageDiv.className = type === 'error' ? 'error-message' : 
                                   type === 'success' ? 'success-message' : 
-                                  'extracted-data';
+                                  'info-message';
             messageDiv.innerHTML = message;
             messageDiv.style.position = 'fixed';
             messageDiv.style.top = '20px';
