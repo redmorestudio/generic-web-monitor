@@ -3,75 +3,352 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Competitor Monitor - Real-time Intelligence Dashboard</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>AI Competitive Monitor - Multi-URL Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <style>
+        .url-type-badge {
+            @apply px-2 py-1 text-xs font-semibold rounded-full;
+        }
+        .type-pricing { @apply bg-red-100 text-red-800; }
+        .type-product { @apply bg-blue-100 text-blue-800; }
+        .type-homepage { @apply bg-green-100 text-green-800; }
+        .type-blog { @apply bg-purple-100 text-purple-800; }
+        .type-news { @apply bg-yellow-100 text-yellow-800; }
+        .type-docs { @apply bg-gray-100 text-gray-800; }
+        .type-features { @apply bg-indigo-100 text-indigo-800; }
+        .type-about { @apply bg-pink-100 text-pink-800; }
+        .type-platform { @apply bg-teal-100 text-teal-800; }
+        .type-solutions { @apply bg-orange-100 text-orange-800; }
+        .type-resources { @apply bg-cyan-100 text-cyan-800; }
+        .type-technology { @apply bg-violet-100 text-violet-800; }
+    </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <h1 class="logo">AI Competitor Monitor</h1>
-                <div class="header-stats">
-                    <div class="stat-badge">
-                        <span class="stat-value" id="total-companies">0</span>
-                        <span class="stat-label">Companies</span>
+<body class="bg-gray-50" x-data="monitorDashboard()">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-900">AI Competitive Monitor</h1>
+                    <p class="text-sm text-gray-600">Multi-URL Intelligence Dashboard - Version 19</p>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-sm text-gray-600">
+                        <span x-text="stats.companies"></span> Companies • 
+                        <span x-text="stats.totalUrls"></span> URLs • 
+                        <span x-text="stats.lastUpdate"></span>
                     </div>
-                    <div class="stat-badge">
-                        <span class="stat-value" id="total-updates">0</span>
-                        <span class="stat-label">Updates</span>
-                    </div>
-                    <div class="stat-badge">
-                        <span class="stat-value" id="last-check">Never</span>
-                        <span class="stat-label">Last Check</span>
-                    </div>
+                    <button @click="refreshData()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+                        Refresh
+                    </button>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <!-- Activity Feed -->
-            <section class="activity-section">
-                <h2 class="section-title">Recent Activity</h2>
-                <div id="activity-feed" class="activity-feed">
-                    <div class="loading">Loading updates...</div>
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Stats Overview -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-sm font-medium text-gray-500">Total URLs Monitored</h3>
+                <p class="text-3xl font-bold text-gray-900" x-text="stats.totalUrls"></p>
+                <p class="text-sm text-gray-600">Across <span x-text="stats.companies"></span> companies</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-sm font-medium text-gray-500">Recent Changes</h3>
+                <p class="text-3xl font-bold text-blue-600" x-text="stats.recentChanges"></p>
+                <p class="text-sm text-gray-600">Last 24 hours</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-sm font-medium text-gray-500">Critical Alerts</h3>
+                <p class="text-3xl font-bold text-red-600" x-text="stats.criticalAlerts"></p>
+                <p class="text-sm text-gray-600">Require attention</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <h3 class="text-sm font-medium text-gray-500">Avg URLs/Company</h3>
+                <p class="text-3xl font-bold text-gray-900" x-text="stats.avgUrlsPerCompany"></p>
+                <p class="text-sm text-gray-600">Multi-URL coverage</p>
+            </div>
+        </div>
+
+        <!-- URL Type Distribution -->
+        <div class="bg-white rounded-lg shadow mb-8 p-6">
+            <h2 class="text-lg font-semibold text-gray-900 mb-4">URL Type Distribution</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <template x-for="type in urlTypes" :key="type.type">
+                    <div class="text-center">
+                        <div :class="'url-type-badge type-' + type.type" x-text="type.type"></div>
+                        <p class="text-sm text-gray-600 mt-1" x-text="type.count + ' URLs'"></p>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Companies and URLs -->
+        <div class="bg-white rounded-lg shadow">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h2 class="text-lg font-semibold text-gray-900">Companies & Monitored URLs</h2>
+            </div>
+            <div class="divide-y divide-gray-200">
+                <template x-for="company in companies" :key="company.name">
+                    <div class="p-6" x-data="{ expanded: false }">
+                        <!-- Company Header -->
+                        <div class="flex items-center justify-between cursor-pointer" @click="expanded = !expanded">
+                            <div class="flex items-center space-x-4">
+                                <h3 class="text-lg font-medium text-gray-900" x-text="company.name"></h3>
+                                <span class="text-sm text-gray-500">
+                                    <span x-text="company.urls.length"></span> URLs monitored
+                                </span>
+                                <template x-if="company.recentChanges > 0">
+                                    <span class="px-2 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">
+                                        <span x-text="company.recentChanges"></span> recent changes
+                                    </span>
+                                </template>
+                            </div>
+                            <svg class="w-5 h-5 text-gray-400 transform transition-transform" :class="{ 'rotate-180': expanded }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </div>
+                        
+                        <!-- URLs List (Expandable) -->
+                        <div x-show="expanded" x-transition class="mt-4 space-y-3">
+                            <template x-for="url in company.urls" :key="url.url">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <div class="flex items-start justify-between">
+                                        <div class="flex-1">
+                                            <div class="flex items-center space-x-2 mb-2">
+                                                <span :class="'url-type-badge type-' + url.type" x-text="url.type"></span>
+                                                <a :href="url.url" target="_blank" class="text-sm text-blue-600 hover:text-blue-800 font-mono">
+                                                    <span x-text="url.url"></span>
+                                                </a>
+                                            </div>
+                                            
+                                            <!-- Extracted Information -->
+                                            <template x-if="url.extractedInfo">
+                                                <div class="mt-2 space-y-1">
+                                                    <p class="text-sm text-gray-700">
+                                                        <span class="font-medium">Title:</span> 
+                                                        <span x-text="url.extractedInfo.title || 'Page monitored'"></span>
+                                                    </p>
+                                                    <p class="text-sm text-gray-700">
+                                                        <span class="font-medium">Last Checked:</span> 
+                                                        <span x-text="url.extractedInfo.lastChecked || 'Never'"></span>
+                                                    </p>
+                                                    <p class="text-sm text-gray-700">
+                                                        <span class="font-medium">Status:</span> 
+                                                        <span x-text="url.extractedInfo.status || 'pending'"></span>
+                                                    </p>
+                                                    <template x-if="url.extractedInfo.lastChange">
+                                                        <div class="mt-2 p-2 bg-yellow-50 rounded">
+                                                            <p class="text-sm text-yellow-800">
+                                                                <span class="font-medium">Last Change:</span> 
+                                                                <span x-text="url.extractedInfo.lastChange.summary"></span>
+                                                            </p>
+                                                            <p class="text-xs text-yellow-600 mt-1">
+                                                                <span x-text="url.extractedInfo.lastChange.magnitude"></span>% change • 
+                                                                Relevance: <span x-text="url.extractedInfo.lastChange.relevance"></span>/10
+                                                            </p>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </template>
+                                            
+                                            <!-- Loading State -->
+                                            <template x-if="!url.extractedInfo">
+                                                <div class="mt-2">
+                                                    <p class="text-sm text-gray-500 italic">Run monitoring to see extracted information</p>
+                                                </div>
+                                            </template>
+                                        </div>
+                                        
+                                        <!-- Status Indicator -->
+                                        <div class="ml-4">
+                                            <template x-if="url.status === 'active'">
+                                                <span class="inline-flex items-center px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
+                                                    Active
+                                                </span>
+                                            </template>
+                                            <template x-if="url.status === 'error'">
+                                                <span class="inline-flex items-center px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
+                                                    Error
+                                                </span>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+
+        <!-- Recent Changes Feed -->
+        <div class="mt-8 bg-white rounded-lg shadow">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h2 class="text-lg font-semibold text-gray-900">Recent Changes</h2>
+            </div>
+            <div class="p-6">
+                <template x-if="recentChanges.length === 0">
+                    <p class="text-gray-500 text-center py-8">No recent changes detected. Run setupMultiUrlMonitoring() and runCompleteMultiUrlMonitoring() in Apps Script to start monitoring.</p>
+                </template>
+                <div class="space-y-4">
+                    <template x-for="change in recentChanges" :key="change.id">
+                        <div class="border-l-4 pl-4 py-2" :class="change.relevance >= 8 ? 'border-red-500' : change.relevance >= 6 ? 'border-yellow-500' : 'border-gray-300'">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h4 class="font-medium text-gray-900">
+                                        <span x-text="change.company"></span> - 
+                                        <span :class="'url-type-badge type-' + change.urlType" x-text="change.urlType"></span>
+                                    </h4>
+                                    <p class="text-sm text-gray-600 mt-1" x-text="change.summary"></p>
+                                    <p class="text-xs text-gray-500 mt-1">
+                                        <span x-text="change.timestamp"></span> • 
+                                        <span x-text="change.magnitude"></span>% change • 
+                                        Relevance: <span x-text="change.relevance"></span>/10
+                                    </p>
+                                </div>
+                                <a :href="change.url" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm">
+                                    View →
+                                </a>
+                            </div>
+                        </div>
+                    </template>
                 </div>
-            </section>
+            </div>
+        </div>
+    </main>
 
-            <!-- Companies Grid -->
-            <section class="companies-section">
-                <h2 class="section-title">Companies</h2>
-                <div class="filter-tabs">
-                    <button class="filter-tab active" data-filter="all">All</button>
-                    <button class="filter-tab" data-filter="Image Generation">Image Generation</button>
-                    <button class="filter-tab" data-filter="Video Generation">Video Generation</button>
-                    <button class="filter-tab" data-filter="Language Models">Language Models</button>
-                    <button class="filter-tab" data-filter="Developer Tools">Developer Tools</button>
-                </div>
-                <div id="companies-grid" class="companies-grid">
-                    <div class="loading">Loading companies...</div>
-                </div>
-            </section>
-        </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p>Powered by Google Apps Script & GitHub Pages • 
-                <a href="https://github.com/redmorestudio/ai-competitive-monitor" target="_blank">View Source</a> • 
-                Updates every 6 hours
-            </p>
-        </footer>
-    </div>
-
-    <!-- Configuration -->
     <script>
-        // IMPORTANT: Update this with your deployed Apps Script URL
-        const CONFIG = {
-            apiUrl: 'https://script.google.com/macros/s/AKfycby-iOEDRaIPyqoaJNrYPVcwJpr5nhcAVFzhMpQp7HZXyB2-L5MUERODD1H55Fb3Ndqm6w/exec'
-        };
+        // API endpoint - using deployment version 19
+        const API_BASE = 'https://script.google.com/macros/s/AKfycbz7ScPU2jnINiR5Q4dZXYcF99okQFhtR64Xvibaw7BveK8D-ZMktOuskcb3RtfAXa72/exec';
+        
+        function monitorDashboard() {
+            return {
+                stats: {
+                    companies: 0,
+                    totalUrls: 0,
+                    recentChanges: 0,
+                    criticalAlerts: 0,
+                    avgUrlsPerCompany: '0',
+                    lastUpdate: 'Loading...'
+                },
+                urlTypes: [],
+                companies: [],
+                recentChanges: [],
+                loading: true,
+                
+                async init() {
+                    await this.loadData();
+                    // Refresh every 5 minutes
+                    setInterval(() => this.loadData(), 5 * 60 * 1000);
+                },
+                
+                async loadData() {
+                    try {
+                        // Load configuration
+                        const configResponse = await fetch(`${API_BASE}?path=config`);
+                        const configData = await configResponse.json();
+                        
+                        if (configData.success) {
+                            this.companies = configData.companies.map(company => ({
+                                name: company.company,
+                                urls: company.urls.map(url => ({
+                                    ...url,
+                                    shortUrl: url.url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0],
+                                    status: 'active',
+                                    extractedInfo: null
+                                })),
+                                recentChanges: 0
+                            }));
+                            
+                            this.stats.companies = configData.stats.totalCompanies;
+                            this.stats.totalUrls = configData.stats.totalUrls;
+                            this.stats.avgUrlsPerCompany = configData.stats.avgUrlsPerCompany;
+                            this.urlTypes = configData.stats.typeDistribution || [];
+                        }
+                        
+                        // Load changes
+                        const changesResponse = await fetch(`${API_BASE}?path=changes`);
+                        const changesData = await changesResponse.json();
+                        
+                        if (changesData.success) {
+                            this.recentChanges = changesData.recentChanges || [];
+                            this.stats.recentChanges = changesData.totalChanges || 0;
+                            this.stats.criticalAlerts = this.recentChanges.filter(c => c.relevance >= 8).length;
+                            
+                            // Update company change counts
+                            if (changesData.byCompany) {
+                                changesData.byCompany.forEach(companyData => {
+                                    const company = this.companies.find(c => c.name === companyData.company);
+                                    if (company) {
+                                        company.recentChanges = companyData.changes.length;
+                                    }
+                                });
+                            }
+                        }
+                        
+                        // Load extracted information for each URL
+                        await this.loadExtractedInfo();
+                        
+                        this.stats.lastUpdate = new Date().toLocaleTimeString();
+                        this.loading = false;
+                        
+                    } catch (error) {
+                        console.error('Error loading data:', error);
+                        this.stats.lastUpdate = 'Error loading data';
+                    }
+                },
+                
+                async loadExtractedInfo() {
+                    // For each company, load detailed info
+                    for (const company of this.companies) {
+                        try {
+                            const response = await fetch(`${API_BASE}?path=company&company=${encodeURIComponent(company.name)}`);
+                            const data = await response.json();
+                            
+                            if (data.success && data.urlStatuses) {
+                                // Update URL info with extracted data
+                                company.urls.forEach((url, index) => {
+                                    const urlStatus = data.urlStatuses[index];
+                                    if (urlStatus) {
+                                        url.extractedInfo = {
+                                            title: 'Page monitored',
+                                            lastChecked: urlStatus.lastChecked,
+                                            hash: urlStatus.hasBaseline ? 'baseline-set' : 'no-baseline',
+                                            status: urlStatus.hasBaseline ? 'active' : 'pending'
+                                        };
+                                    }
+                                });
+                                
+                                // Add recent changes for URLs
+                                if (data.recentChanges) {
+                                    data.recentChanges.forEach(change => {
+                                        const url = company.urls.find(u => u.url === change.url);
+                                        if (url && url.extractedInfo) {
+                                            url.extractedInfo.lastChange = {
+                                                summary: change.summary,
+                                                magnitude: change.magnitude || 0,
+                                                relevance: change.relevanceScore
+                                            };
+                                        }
+                                    });
+                                }
+                            }
+                        } catch (error) {
+                            console.error(`Error loading data for ${company.name}:`, error);
+                        }
+                    }
+                },
+                
+                async refreshData() {
+                    this.stats.lastUpdate = 'Refreshing...';
+                    await this.loadData();
+                }
+            }
+        }
     </script>
-    <script src="script.js"></script>
 </body>
 </html>
