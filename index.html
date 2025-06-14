@@ -22,16 +22,24 @@
         .type-solutions { @apply bg-orange-100 text-orange-800; }
         .type-resources { @apply bg-cyan-100 text-cyan-800; }
         .type-technology { @apply bg-violet-100 text-violet-800; }
+        .type-general { @apply bg-gray-100 text-gray-800; }
     </style>
 </head>
 <body class="bg-gray-50" x-data="monitorDashboard()">
+    <!-- Debug Panel -->
+    <div x-show="debugMode" class="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg max-w-md">
+        <h3 class="font-bold mb-2">Debug Info</h3>
+        <pre class="text-xs" x-text="JSON.stringify(debugInfo, null, 2)"></pre>
+        <button @click="debugMode = false" class="mt-2 text-sm text-blue-600">Close</button>
+    </div>
+
     <!-- Header -->
     <header class="bg-white shadow-sm border-b">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <div>
                     <h1 class="text-2xl font-bold text-gray-900">AI Competitive Monitor</h1>
-                    <p class="text-sm text-gray-600">Multi-URL Intelligence Dashboard - Version 19</p>
+                    <p class="text-sm text-gray-600">Multi-URL Intelligence Dashboard - Version 23</p>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="text-sm text-gray-600">
@@ -42,13 +50,36 @@
                     <button @click="refreshData()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
                         Refresh
                     </button>
+                    <button @click="debugMode = !debugMode" class="px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-sm">
+                        Debug
+                    </button>
                 </div>
             </div>
         </div>
     </header>
 
+    <!-- Loading State -->
+    <div x-show="loading" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-lg">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+            <p class="mt-4 text-gray-600">Loading data...</p>
+            <p class="text-sm text-gray-500 mt-2" x-text="loadingStatus"></p>
+        </div>
+    </div>
+
+    <!-- Error State -->
+    <div x-show="error" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="bg-red-50 border border-red-200 rounded-lg p-6">
+            <h3 class="text-red-800 font-semibold mb-2">Error Loading Data</h3>
+            <p class="text-red-700" x-text="errorMessage"></p>
+            <button @click="testApi()" class="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
+                Run API Test
+            </button>
+        </div>
+    </div>
+
     <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main x-show="!loading && !error" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Stats Overview -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div class="bg-white p-6 rounded-lg shadow">
@@ -192,7 +223,18 @@
             </div>
             <div class="p-6">
                 <template x-if="recentChanges.length === 0">
-                    <p class="text-gray-500 text-center py-8">No recent changes detected. Run setupMultiUrlMonitoring() and runCompleteMultiUrlMonitoring() in Apps Script to start monitoring.</p>
+                    <div class="text-center py-8">
+                        <p class="text-gray-500 mb-4">No recent changes detected.</p>
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-2xl mx-auto">
+                            <p class="text-blue-900 font-semibold mb-2">To start monitoring:</p>
+                            <ol class="text-left text-blue-800 space-y-1">
+                                <li>1. Go to Apps Script Editor</li>
+                                <li>2. Run: <code class="bg-blue-100 px-2 py-1 rounded">setupMultiUrlMonitoring()</code></li>
+                                <li>3. Run: <code class="bg-blue-100 px-2 py-1 rounded">runCompleteMultiUrlMonitoring()</code></li>
+                                <li>4. Refresh this dashboard</li>
+                            </ol>
+                        </div>
+                    </div>
                 </template>
                 <div class="space-y-4">
                     <template x-for="change in recentChanges" :key="change.id">
@@ -221,9 +263,15 @@
         </div>
     </main>
 
+    <!-- API Test Link -->
+    <div class="text-center py-4 text-sm text-gray-500">
+        <a href="api-test.html" target="_blank" class="text-blue-600 hover:text-blue-800">Run API Test</a> • 
+        Script: <a href="https://script.google.com/home/projects/1i4qaE4iLJRAjcoirYxKjOmHf27U-kXjHBZBEJw_LxFgaJiwWf1REvSxH/edit" target="_blank" class="text-blue-600 hover:text-blue-800">Apps Script Editor</a>
+    </div>
+
     <script>
-        // API endpoint - using deployment version 19
-        const API_BASE = 'https://script.google.com/macros/s/AKfycbz7ScPU2jnINiR5Q4dZXYcF99okQFhtR64Xvibaw7BveK8D-ZMktOuskcb3RtfAXa72/exec';
+        // API endpoint - using deployment version 23 with fixed API
+        const API_BASE = 'https://script.google.com/macros/s/AKfycbxo5Lb7BC8hCB4tfma3cz-qalPkpYB2jMAmirjzA80Lf5WRyT5X5AlGA_GJ1fpxQdPn/exec';
         
         function monitorDashboard() {
             return {
@@ -239,16 +287,46 @@
                 companies: [],
                 recentChanges: [],
                 loading: true,
+                loadingStatus: 'Initializing...',
+                error: false,
+                errorMessage: '',
+                debugMode: false,
+                debugInfo: {},
                 
                 async init() {
+                    console.log('Dashboard initializing...');
                     await this.loadData();
                     // Refresh every 5 minutes
                     setInterval(() => this.loadData(), 5 * 60 * 1000);
                 },
                 
                 async loadData() {
+                    this.loading = true;
+                    this.error = false;
+                    this.debugInfo = { apiBase: API_BASE, timestamp: new Date().toISOString() };
+                    
                     try {
+                        // Test API connection first
+                        this.loadingStatus = 'Testing API connection...';
+                        const testResponse = await fetch(`${API_BASE}?path=status`);
+                        const testText = await testResponse.text();
+                        console.log('API test response:', testText.substring(0, 200));
+                        
+                        let testData;
+                        try {
+                            testData = JSON.parse(testText);
+                        } catch (e) {
+                            throw new Error('Invalid JSON from API: ' + testText.substring(0, 200));
+                        }
+                        
+                        if (!testData.success) {
+                            throw new Error('API returned error: ' + (testData.error || 'Unknown error'));
+                        }
+                        
+                        this.debugInfo.apiStatus = testData;
+                        
                         // Load configuration
+                        this.loadingStatus = 'Loading configuration...';
                         const configResponse = await fetch(`${API_BASE}?path=config`);
                         const configData = await configResponse.json();
                         
@@ -257,20 +335,26 @@
                                 name: company.company,
                                 urls: company.urls.map(url => ({
                                     ...url,
-                                    shortUrl: url.url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0],
                                     status: 'active',
                                     extractedInfo: null
                                 })),
                                 recentChanges: 0
                             }));
                             
-                            this.stats.companies = configData.stats.totalCompanies;
-                            this.stats.totalUrls = configData.stats.totalUrls;
-                            this.stats.avgUrlsPerCompany = configData.stats.avgUrlsPerCompany;
+                            this.stats.companies = configData.stats.totalCompanies || 0;
+                            this.stats.totalUrls = configData.stats.totalUrls || 0;
+                            this.stats.avgUrlsPerCompany = configData.stats.avgUrlsPerCompany || '0';
                             this.urlTypes = configData.stats.typeDistribution || [];
+                            
+                            this.debugInfo.configLoaded = true;
+                            this.debugInfo.companiesFound = this.stats.companies;
+                        } else {
+                            console.error('Config failed:', configData);
+                            this.debugInfo.configError = configData.error;
                         }
                         
                         // Load changes
+                        this.loadingStatus = 'Loading changes...';
                         const changesResponse = await fetch(`${API_BASE}?path=changes`);
                         const changesData = await changesResponse.json();
                         
@@ -288,64 +372,53 @@
                                     }
                                 });
                             }
+                            
+                            this.debugInfo.changesLoaded = true;
+                            this.debugInfo.changesFound = this.stats.recentChanges;
+                        } else {
+                            console.error('Changes failed:', changesData);
+                            this.debugInfo.changesError = changesData.error;
                         }
                         
                         // Load extracted information for each URL
+                        this.loadingStatus = 'Loading URL details...';
                         await this.loadExtractedInfo();
                         
                         this.stats.lastUpdate = new Date().toLocaleTimeString();
                         this.loading = false;
+                        this.loadingStatus = '';
+                        
+                        console.log('Dashboard loaded successfully:', this.debugInfo);
                         
                     } catch (error) {
                         console.error('Error loading data:', error);
-                        this.stats.lastUpdate = 'Error loading data';
+                        this.error = true;
+                        this.errorMessage = error.toString();
+                        this.loading = false;
+                        this.debugInfo.error = error.toString();
                     }
                 },
                 
                 async loadExtractedInfo() {
-                    // For each company, load detailed info
-                    for (const company of this.companies) {
-                        try {
-                            const response = await fetch(`${API_BASE}?path=company&company=${encodeURIComponent(company.name)}`);
-                            const data = await response.json();
-                            
-                            if (data.success && data.urlStatuses) {
-                                // Update URL info with extracted data
-                                company.urls.forEach((url, index) => {
-                                    const urlStatus = data.urlStatuses[index];
-                                    if (urlStatus) {
-                                        url.extractedInfo = {
-                                            title: 'Page monitored',
-                                            lastChecked: urlStatus.lastChecked,
-                                            hash: urlStatus.hasBaseline ? 'baseline-set' : 'no-baseline',
-                                            status: urlStatus.hasBaseline ? 'active' : 'pending'
-                                        };
-                                    }
-                                });
-                                
-                                // Add recent changes for URLs
-                                if (data.recentChanges) {
-                                    data.recentChanges.forEach(change => {
-                                        const url = company.urls.find(u => u.url === change.url);
-                                        if (url && url.extractedInfo) {
-                                            url.extractedInfo.lastChange = {
-                                                summary: change.summary,
-                                                magnitude: change.magnitude || 0,
-                                                relevance: change.relevanceScore
-                                            };
-                                        }
-                                    });
-                                }
-                            }
-                        } catch (error) {
-                            console.error(`Error loading data for ${company.name}:`, error);
-                        }
-                    }
+                    // For demo, just show basic info for all URLs
+                    this.companies.forEach(company => {
+                        company.urls.forEach(url => {
+                            url.extractedInfo = {
+                                title: 'Page monitored',
+                                lastChecked: 'Run monitoring to update',
+                                status: 'pending'
+                            };
+                        });
+                    });
                 },
                 
                 async refreshData() {
                     this.stats.lastUpdate = 'Refreshing...';
                     await this.loadData();
+                },
+                
+                async testApi() {
+                    window.open('api-test.html', '_blank');
                 }
             }
         }
