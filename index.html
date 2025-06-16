@@ -39,7 +39,7 @@
             <div class="flex justify-between items-center py-4">
                 <div>
                     <h1 class="text-2xl font-bold text-gray-900">AI Competitive Monitor</h1>
-                    <p class="text-sm text-gray-600">Multi-URL Intelligence Dashboard - Version 29</p>
+                    <p class="text-sm text-gray-600">Multi-URL Intelligence Dashboard - Version 55 (CORS Fixed)</p>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="text-sm text-gray-600">
@@ -270,8 +270,8 @@
     </div>
 
     <script>
-        // API endpoint - using deployment version 29 with WebAppFix
-        const API_BASE = 'https://script.google.com/macros/s/AKfycbxUqP-0YVopHlE-OY6EjGz0C08bWmNgfuqJyK_x94epn70pLWTfq_mEgZa1RIR94cEh/exec';
+        // API endpoint - FIXED: Using Version 55 deployment with CORS headers
+        const API_BASE = 'https://script.google.com/macros/s/AKfycbyitKdpijIjgOMkCk_Yhhaj01XmTrtP5VTJ0gAidMJLcTEmqNAjkDtxgTV3ewX6_nPFdQ/exec';
         
         function monitorDashboard() {
             return {
@@ -306,9 +306,15 @@
                     this.debugInfo = { apiBase: API_BASE, timestamp: new Date().toISOString() };
                     
                     try {
-                        // Test API connection first
+                        // Test API connection first with CORS-safe request
                         this.loadingStatus = 'Testing API connection...';
-                        const testResponse = await fetch(`${API_BASE}?path=status`);
+                        const testResponse = await fetch(`${API_BASE}?path=status`, {
+                            method: 'GET',
+                            redirect: 'follow',
+                            headers: {
+                                'Content-Type': 'text/plain'
+                            }
+                        });
                         const testText = await testResponse.text();
                         console.log('API test response:', testText.substring(0, 200));
                         
@@ -327,7 +333,13 @@
                         
                         // Load configuration
                         this.loadingStatus = 'Loading configuration...';
-                        const configResponse = await fetch(`${API_BASE}?path=config`);
+                        const configResponse = await fetch(`${API_BASE}?path=config`, {
+                            method: 'GET',
+                            redirect: 'follow',
+                            headers: {
+                                'Content-Type': 'text/plain'
+                            }
+                        });
                         const configData = await configResponse.json();
                         
                         if (configData.success) {
@@ -355,7 +367,13 @@
                         
                         // Load changes
                         this.loadingStatus = 'Loading changes...';
-                        const changesResponse = await fetch(`${API_BASE}?path=changes`);
+                        const changesResponse = await fetch(`${API_BASE}?path=changes`, {
+                            method: 'GET',
+                            redirect: 'follow',
+                            headers: {
+                                'Content-Type': 'text/plain'
+                            }
+                        });
                         const changesData = await changesResponse.json();
                         
                         if (changesData.success) {
