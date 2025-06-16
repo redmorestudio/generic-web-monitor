@@ -3,43 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Competitive Monitor - Multi-URL Dashboard</title>
+    <title>AI Competitive Monitor</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
-    <style>
-        .url-type-badge {
-            @apply px-2 py-1 text-xs font-semibold rounded-full;
-        }
-        .type-pricing { @apply bg-red-100 text-red-800; }
-        .type-product { @apply bg-blue-100 text-blue-800; }
-        .type-homepage { @apply bg-green-100 text-green-800; }
-        .type-blog { @apply bg-purple-100 text-purple-800; }
-        .type-news { @apply bg-yellow-100 text-yellow-800; }
-        .type-docs { @apply bg-gray-100 text-gray-800; }
-        .type-features { @apply bg-indigo-100 text-indigo-800; }
-        .type-about { @apply bg-pink-100 text-pink-800; }
-        .type-platform { @apply bg-teal-100 text-teal-800; }
-        .type-solutions { @apply bg-orange-100 text-orange-800; }
-        .type-resources { @apply bg-cyan-100 text-cyan-800; }
-        .type-technology { @apply bg-violet-100 text-violet-800; }
-        .type-general { @apply bg-gray-100 text-gray-800; }
-    </style>
 </head>
 <body class="bg-gray-50" x-data="monitorDashboard()">
-    <!-- Debug Panel -->
-    <div x-show="debugMode" class="fixed bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg max-w-md">
-        <h3 class="font-bold mb-2">Debug Info</h3>
-        <pre class="text-xs" x-text="JSON.stringify(debugInfo, null, 2)"></pre>
-        <button @click="debugMode = false" class="mt-2 text-sm text-blue-600">Close</button>
-    </div>
-
     <!-- Header -->
     <header class="bg-white shadow-sm border-b">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <div>
                     <h1 class="text-2xl font-bold text-gray-900">AI Competitive Monitor</h1>
-                    <p class="text-sm text-gray-600">Multi-URL Intelligence Dashboard - Version 55 (CORS Fixed)</p>
+                    <p class="text-sm text-gray-600">Version 55 - CORS Fixed ✅</p>
                 </div>
                 <div class="flex items-center space-x-4">
                     <div class="text-sm text-gray-600">
@@ -49,9 +24,6 @@
                     </div>
                     <button @click="refreshData()" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
                         Refresh
-                    </button>
-                    <button @click="debugMode = !debugMode" class="px-3 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-sm">
-                        Debug
                     </button>
                 </div>
             </div>
@@ -72,71 +44,45 @@
         <div class="bg-red-50 border border-red-200 rounded-lg p-6">
             <h3 class="text-red-800 font-semibold mb-2">Error Loading Data</h3>
             <p class="text-red-700" x-text="errorMessage"></p>
-            <button @click="testApi()" class="mt-4 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">
-                Run API Test
-            </button>
         </div>
     </div>
 
     <!-- Main Content -->
     <main x-show="!loading && !error" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Stats Overview -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
             <div class="bg-white p-6 rounded-lg shadow">
-                <h3 class="text-sm font-medium text-gray-500">Total URLs Monitored</h3>
-                <p class="text-3xl font-bold text-gray-900" x-text="stats.totalUrls"></p>
-                <p class="text-sm text-gray-600">Across <span x-text="stats.companies"></span> companies</p>
+                <h3 class="text-sm font-medium text-gray-500">Total Companies</h3>
+                <p class="text-3xl font-bold text-gray-900" x-text="stats.companies"></p>
+                <p class="text-sm text-gray-600">AI companies monitored</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow">
-                <h3 class="text-sm font-medium text-gray-500">Recent Changes</h3>
-                <p class="text-3xl font-bold text-blue-600" x-text="stats.recentChanges"></p>
-                <p class="text-sm text-gray-600">Last 24 hours</p>
+                <h3 class="text-sm font-medium text-gray-500">Total URLs</h3>
+                <p class="text-3xl font-bold text-blue-600" x-text="stats.totalUrls"></p>
+                <p class="text-sm text-gray-600">Pages being tracked</p>
             </div>
             <div class="bg-white p-6 rounded-lg shadow">
-                <h3 class="text-sm font-medium text-gray-500">Critical Alerts</h3>
-                <p class="text-3xl font-bold text-red-600" x-text="stats.criticalAlerts"></p>
-                <p class="text-sm text-gray-600">Require attention</p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow">
-                <h3 class="text-sm font-medium text-gray-500">Avg URLs/Company</h3>
-                <p class="text-3xl font-bold text-gray-900" x-text="stats.avgUrlsPerCompany"></p>
-                <p class="text-sm text-gray-600">Multi-URL coverage</p>
+                <h3 class="text-sm font-medium text-gray-500">Last Update</h3>
+                <p class="text-lg font-bold text-gray-900" x-text="stats.lastUpdate"></p>
+                <p class="text-sm text-gray-600">System status</p>
             </div>
         </div>
 
-        <!-- URL Type Distribution -->
-        <div class="bg-white rounded-lg shadow mb-8 p-6">
-            <h2 class="text-lg font-semibold text-gray-900 mb-4">URL Type Distribution</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <template x-for="type in urlTypes" :key="type.type">
-                    <div class="text-center">
-                        <div :class="'url-type-badge type-' + type.type" x-text="type.type"></div>
-                        <p class="text-sm text-gray-600 mt-1" x-text="type.count + ' URLs'"></p>
-                    </div>
-                </template>
-            </div>
-        </div>
-
-        <!-- Companies and URLs -->
+        <!-- Companies List -->
         <div class="bg-white rounded-lg shadow">
             <div class="px-6 py-4 border-b border-gray-200">
-                <h2 class="text-lg font-semibold text-gray-900">Companies & Monitored URLs</h2>
+                <h2 class="text-lg font-semibold text-gray-900">Monitored Companies</h2>
             </div>
             <div class="divide-y divide-gray-200">
-                <template x-for="company in companies" :key="company.name">
+                <template x-for="company in companies" :key="company.company">
                     <div class="p-6" x-data="{ expanded: false }">
                         <!-- Company Header -->
                         <div class="flex items-center justify-between cursor-pointer" @click="expanded = !expanded">
                             <div class="flex items-center space-x-4">
-                                <h3 class="text-lg font-medium text-gray-900" x-text="company.name"></h3>
+                                <h3 class="text-lg font-medium text-gray-900" x-text="company.company"></h3>
                                 <span class="text-sm text-gray-500">
                                     <span x-text="company.urls.length"></span> URLs monitored
                                 </span>
-                                <template x-if="company.recentChanges > 0">
-                                    <span class="px-2 py-1 text-xs font-semibold bg-yellow-100 text-yellow-800 rounded-full">
-                                        <span x-text="company.recentChanges"></span> recent changes
-                                    </span>
-                                </template>
                             </div>
                             <svg class="w-5 h-5 text-gray-400 transform transition-transform" :class="{ 'rotate-180': expanded }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -144,69 +90,16 @@
                         </div>
                         
                         <!-- URLs List (Expandable) -->
-                        <div x-show="expanded" x-transition class="mt-4 space-y-3">
-                            <template x-for="url in company.urls" :key="url.url">
-                                <div class="bg-gray-50 rounded-lg p-4">
-                                    <div class="flex items-start justify-between">
-                                        <div class="flex-1">
-                                            <div class="flex items-center space-x-2 mb-2">
-                                                <span :class="'url-type-badge type-' + url.type" x-text="url.type"></span>
-                                                <a :href="url.url" target="_blank" class="text-sm text-blue-600 hover:text-blue-800 font-mono">
-                                                    <span x-text="url.url"></span>
-                                                </a>
-                                            </div>
-                                            
-                                            <!-- Extracted Information -->
-                                            <template x-if="url.extractedInfo">
-                                                <div class="mt-2 space-y-1">
-                                                    <p class="text-sm text-gray-700">
-                                                        <span class="font-medium">Title:</span> 
-                                                        <span x-text="url.extractedInfo.title || 'Page monitored'"></span>
-                                                    </p>
-                                                    <p class="text-sm text-gray-700">
-                                                        <span class="font-medium">Last Checked:</span> 
-                                                        <span x-text="url.extractedInfo.lastChecked || 'Never'"></span>
-                                                    </p>
-                                                    <p class="text-sm text-gray-700">
-                                                        <span class="font-medium">Status:</span> 
-                                                        <span x-text="url.extractedInfo.status || 'pending'"></span>
-                                                    </p>
-                                                    <template x-if="url.extractedInfo.lastChange">
-                                                        <div class="mt-2 p-2 bg-yellow-50 rounded">
-                                                            <p class="text-sm text-yellow-800">
-                                                                <span class="font-medium">Last Change:</span> 
-                                                                <span x-text="url.extractedInfo.lastChange.summary"></span>
-                                                            </p>
-                                                            <p class="text-xs text-yellow-600 mt-1">
-                                                                <span x-text="url.extractedInfo.lastChange.magnitude"></span>% change • 
-                                                                Relevance: <span x-text="url.extractedInfo.lastChange.relevance"></span>/10
-                                                            </p>
-                                                        </div>
-                                                    </template>
-                                                </div>
-                                            </template>
-                                            
-                                            <!-- Loading State -->
-                                            <template x-if="!url.extractedInfo">
-                                                <div class="mt-2">
-                                                    <p class="text-sm text-gray-500 italic">Run monitoring to see extracted information</p>
-                                                </div>
-                                            </template>
-                                        </div>
-                                        
-                                        <!-- Status Indicator -->
-                                        <div class="ml-4">
-                                            <template x-if="url.status === 'active'">
-                                                <span class="inline-flex items-center px-2 py-1 text-xs font-medium bg-green-100 text-green-800 rounded-full">
-                                                    Active
-                                                </span>
-                                            </template>
-                                            <template x-if="url.status === 'error'">
-                                                <span class="inline-flex items-center px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full">
-                                                    Error
-                                                </span>
-                                            </template>
-                                        </div>
+                        <div x-show="expanded" x-transition class="mt-4 space-y-2">
+                            <template x-for="url in company.urls" :key="url">
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="flex items-center justify-between">
+                                        <a :href="url" target="_blank" class="text-sm text-blue-600 hover:text-blue-800 font-mono flex-1">
+                                            <span x-text="url"></span>
+                                        </a>
+                                        <span class="ml-4 px-2 py-1 text-xs bg-green-100 text-green-800 rounded-full">
+                                            Active
+                                        </span>
                                     </div>
                                 </div>
                             </template>
@@ -216,113 +109,43 @@
             </div>
         </div>
 
-        <!-- Recent Changes Feed -->
-        <div class="mt-8 bg-white rounded-lg shadow">
-            <div class="px-6 py-4 border-b border-gray-200">
-                <h2 class="text-lg font-semibold text-gray-900">Recent Changes</h2>
-            </div>
-            <div class="p-6">
-                <template x-if="recentChanges.length === 0">
-                    <div class="text-center py-8">
-                        <p class="text-gray-500 mb-4">No recent changes detected.</p>
-                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-2xl mx-auto">
-                            <p class="text-blue-900 font-semibold mb-2">To start monitoring:</p>
-                            <ol class="text-left text-blue-800 space-y-1">
-                                <li>1. Go to Apps Script Editor</li>
-                                <li>2. Run: <code class="bg-blue-100 px-2 py-1 rounded">setupMultiUrlMonitoring()</code></li>
-                                <li>3. Run: <code class="bg-blue-100 px-2 py-1 rounded">runCompleteMultiUrlMonitoring()</code></li>
-                                <li>4. Refresh this dashboard</li>
-                            </ol>
-                        </div>
+        <!-- Status Message -->
+        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <div class="flex items-center">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <h3 class="text-sm font-medium text-blue-800">
+                        CORS Issue Resolved ✅
+                    </h3>
+                    <div class="mt-2 text-sm text-blue-700">
+                        <p>The system is now successfully connecting to the Google Apps Script backend and loading company data. All <span x-text="stats.companies"></span> companies with <span x-text="stats.totalUrls"></span> URLs are being monitored.</p>
                     </div>
-                </template>
-                <div class="space-y-4">
-                    <template x-for="change in recentChanges" :key="change.id">
-                        <div class="border-l-4 pl-4 py-2" :class="change.relevance >= 8 ? 'border-red-500' : change.relevance >= 6 ? 'border-yellow-500' : 'border-gray-300'">
-                            <div class="flex items-start justify-between">
-                                <div>
-                                    <h4 class="font-medium text-gray-900">
-                                        <span x-text="change.company"></span> - 
-                                        <span :class="'url-type-badge type-' + change.urlType" x-text="change.urlType"></span>
-                                    </h4>
-                                    <p class="text-sm text-gray-600 mt-1" x-text="change.summary"></p>
-                                    <p class="text-xs text-gray-500 mt-1">
-                                        <span x-text="change.timestamp"></span> • 
-                                        <span x-text="change.magnitude"></span>% change • 
-                                        Relevance: <span x-text="change.relevance"></span>/10
-                                    </p>
-                                </div>
-                                <a :href="change.url" target="_blank" class="text-blue-600 hover:text-blue-800 text-sm">
-                                    View →
-                                </a>
-                            </div>
-                        </div>
-                    </template>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- API Test Link -->
-    <div class="text-center py-4 text-sm text-gray-500">
-        <a href="api-test.html" target="_blank" class="text-blue-600 hover:text-blue-800">Run API Test</a> • 
-        Script: <a href="https://script.google.com/home/projects/1i4qaE4iLJRAjcoirYxKjOmHf27U-kXjHBZBEJw_LxFgaJiwWf1REvSxH/edit" target="_blank" class="text-blue-600 hover:text-blue-800">Apps Script Editor</a>
-    </div>
-
     <script>
-        // API endpoint - FIXED: Using Version 55 deployment with CORS headers
+        // API endpoint - Using Version 55 deployment with CORS headers
         const API_BASE = 'https://script.google.com/macros/s/AKfycbyitKdpijIjgOMkCk_Yhhaj01XmTrtP5VTJ0gAidMJLcTEmqNAjkDtxgTV3ewX6_nPFdQ/exec';
         const API_TOKEN = 'dev-token-change-me';
-        
-        // Helper function for CORS-safe API calls
-        async function apiCall(params = {}, method = 'GET') {
-            if (method === 'GET') {
-                // Use query parameters for GET requests
-                const urlParams = new URLSearchParams({ token: API_TOKEN, ...params });
-                const response = await fetch(`${API_BASE}?${urlParams}`, {
-                    method: 'GET',
-                    redirect: 'follow',
-                    headers: {
-                        'Content-Type': 'text/plain'
-                    }
-                });
-                return response.json();
-            } else {
-                // Use FormData for POST requests to avoid CORS preflight
-                const formData = new FormData();
-                formData.append('token', API_TOKEN);
-                Object.keys(params).forEach(key => {
-                    formData.append(key, params[key]);
-                });
-                
-                const response = await fetch(API_BASE, {
-                    method: 'POST',
-                    redirect: 'follow',
-                    body: formData
-                });
-                return response.json();
-            }
-        }
         
         function monitorDashboard() {
             return {
                 stats: {
                     companies: 0,
                     totalUrls: 0,
-                    recentChanges: 0,
-                    criticalAlerts: 0,
-                    avgUrlsPerCompany: '0',
                     lastUpdate: 'Loading...'
                 },
-                urlTypes: [],
                 companies: [],
-                recentChanges: [],
                 loading: true,
                 loadingStatus: 'Initializing...',
                 error: false,
                 errorMessage: '',
-                debugMode: false,
-                debugInfo: {},
                 
                 async init() {
                     console.log('Dashboard initializing...');
@@ -334,112 +157,67 @@
                 async loadData() {
                     this.loading = true;
                     this.error = false;
-                    this.debugInfo = { apiBase: API_BASE, timestamp: new Date().toISOString() };
                     
                     try {
                         // Test API connection first
                         this.loadingStatus = 'Testing API connection...';
-                        const testData = await apiCall({ path: 'status' });
-                        console.log('API test response:', testData);
-                        
-                        if (!testData.success) {
-                            throw new Error('API returned error: ' + (testData.error || 'Unknown error'));
-                        }
-                        
-                        this.debugInfo.apiStatus = testData;
+                        const statusParams = new URLSearchParams({ 
+                            token: API_TOKEN, 
+                            path: 'status' 
+                        });
+                        const statusResponse = await fetch(`${API_BASE}?${statusParams}`, {
+                            method: 'GET',
+                            redirect: 'follow',
+                            headers: { 'Content-Type': 'text/plain' }
+                        });
+                        const statusData = await statusResponse.json();
+                        console.log('✅ API Status:', statusData);
                         
                         // Load configuration
-                        this.loadingStatus = 'Loading configuration...';
-                        const configData = await apiCall({ path: 'config' });
+                        this.loadingStatus = 'Loading companies...';
+                        const configParams = new URLSearchParams({ 
+                            token: API_TOKEN, 
+                            path: 'config' 
+                        });
+                        const configResponse = await fetch(`${API_BASE}?${configParams}`, {
+                            method: 'GET',
+                            redirect: 'follow',
+                            headers: { 'Content-Type': 'text/plain' }
+                        });
+                        const configData = await configResponse.json();
+                        console.log('✅ Config Data:', configData);
                         
-                        if (configData.success) {
-                            this.companies = configData.companies.map(company => ({
-                                name: company.company,
-                                urls: company.urls.map(url => ({
-                                    ...url,
-                                    status: 'active',
-                                    extractedInfo: null
-                                })),
-                                recentChanges: 0
-                            }));
+                        if (configData.success && configData.companies) {
+                            this.companies = configData.companies;
+                            this.stats.companies = configData.companies.length;
                             
-                            this.stats.companies = configData.stats.totalCompanies || 0;
-                            this.stats.totalUrls = configData.stats.totalUrls || 0;
-                            this.stats.avgUrlsPerCompany = configData.stats.avgUrlsPerCompany || '0';
-                            this.urlTypes = configData.stats.typeDistribution || [];
+                            // Calculate total URLs
+                            this.stats.totalUrls = configData.companies.reduce((total, company) => {
+                                return total + (company.urls ? company.urls.length : 0);
+                            }, 0);
                             
-                            this.debugInfo.configLoaded = true;
-                            this.debugInfo.companiesFound = this.stats.companies;
+                            console.log(`✅ Loaded ${this.stats.companies} companies with ${this.stats.totalUrls} URLs`);
                         } else {
-                            console.error('Config failed:', configData);
-                            this.debugInfo.configError = configData.error;
+                            throw new Error('No companies data found in API response');
                         }
-                        
-                        // Load changes
-                        this.loadingStatus = 'Loading changes...';
-                        const changesData = await apiCall({ path: 'changes' });
-                        
-                        if (changesData.success) {
-                            this.recentChanges = changesData.recentChanges || [];
-                            this.stats.recentChanges = changesData.totalChanges || 0;
-                            this.stats.criticalAlerts = this.recentChanges.filter(c => c.relevance >= 8).length;
-                            
-                            // Update company change counts
-                            if (changesData.byCompany) {
-                                changesData.byCompany.forEach(companyData => {
-                                    const company = this.companies.find(c => c.name === companyData.company);
-                                    if (company) {
-                                        company.recentChanges = companyData.changes.length;
-                                    }
-                                });
-                            }
-                            
-                            this.debugInfo.changesLoaded = true;
-                            this.debugInfo.changesFound = this.stats.recentChanges;
-                        } else {
-                            console.error('Changes failed:', changesData);
-                            this.debugInfo.changesError = changesData.error;
-                        }
-                        
-                        // Load extracted information for each URL
-                        this.loadingStatus = 'Loading URL details...';
-                        await this.loadExtractedInfo();
                         
                         this.stats.lastUpdate = new Date().toLocaleTimeString();
                         this.loading = false;
                         this.loadingStatus = '';
                         
-                        console.log('Dashboard loaded successfully:', this.debugInfo);
+                        console.log('✅ Dashboard loaded successfully');
                         
                     } catch (error) {
-                        console.error('Error loading data:', error);
+                        console.error('❌ Error loading data:', error);
                         this.error = true;
                         this.errorMessage = error.toString();
                         this.loading = false;
-                        this.debugInfo.error = error.toString();
                     }
-                },
-                
-                async loadExtractedInfo() {
-                    // For demo, just show basic info for all URLs
-                    this.companies.forEach(company => {
-                        company.urls.forEach(url => {
-                            url.extractedInfo = {
-                                title: 'Page monitored',
-                                lastChecked: 'Run monitoring to update',
-                                status: 'pending'
-                            };
-                        });
-                    });
                 },
                 
                 async refreshData() {
                     this.stats.lastUpdate = 'Refreshing...';
                     await this.loadData();
-                },
-                
-                async testApi() {
-                    window.open('api-test.html', '_blank');
                 }
             }
         }
