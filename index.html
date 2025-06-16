@@ -272,6 +272,37 @@
     <script>
         // API endpoint - FIXED: Using Version 55 deployment with CORS headers
         const API_BASE = 'https://script.google.com/macros/s/AKfycbyitKdpijIjgOMkCk_Yhhaj01XmTrtP5VTJ0gAidMJLcTEmqNAjkDtxgTV3ewX6_nPFdQ/exec';
+        const API_TOKEN = 'dev-token-change-me';
+        
+        // Helper function for CORS-safe API calls
+        async function apiCall(params = {}, method = 'GET') {
+            if (method === 'GET') {
+                // Use query parameters for GET requests
+                const urlParams = new URLSearchParams({ token: API_TOKEN, ...params });
+                const response = await fetch(`${API_BASE}?${urlParams}`, {
+                    method: 'GET',
+                    redirect: 'follow',
+                    headers: {
+                        'Content-Type': 'text/plain'
+                    }
+                });
+                return response.json();
+            } else {
+                // Use FormData for POST requests to avoid CORS preflight
+                const formData = new FormData();
+                formData.append('token', API_TOKEN);
+                Object.keys(params).forEach(key => {
+                    formData.append(key, params[key]);
+                });
+                
+                const response = await fetch(API_BASE, {
+                    method: 'POST',
+                    redirect: 'follow',
+                    body: formData
+                });
+                return response.json();
+            }
+        }
         
         function monitorDashboard() {
             return {
@@ -306,24 +337,10 @@
                     this.debugInfo = { apiBase: API_BASE, timestamp: new Date().toISOString() };
                     
                     try {
-                        // Test API connection first with CORS-safe request
+                        // Test API connection first
                         this.loadingStatus = 'Testing API connection...';
-                        const testResponse = await fetch(`${API_BASE}?path=status`, {
-                            method: 'GET',
-                            redirect: 'follow',
-                            headers: {
-                                'Content-Type': 'text/plain'
-                            }
-                        });
-                        const testText = await testResponse.text();
-                        console.log('API test response:', testText.substring(0, 200));
-                        
-                        let testData;
-                        try {
-                            testData = JSON.parse(testText);
-                        } catch (e) {
-                            throw new Error('Invalid JSON from API: ' + testText.substring(0, 200));
-                        }
+                        const testData = await apiCall({ path: 'status' });
+                        console.log('API test response:', testData);
                         
                         if (!testData.success) {
                             throw new Error('API returned error: ' + (testData.error || 'Unknown error'));
@@ -333,14 +350,7 @@
                         
                         // Load configuration
                         this.loadingStatus = 'Loading configuration...';
-                        const configResponse = await fetch(`${API_BASE}?path=config`, {
-                            method: 'GET',
-                            redirect: 'follow',
-                            headers: {
-                                'Content-Type': 'text/plain'
-                            }
-                        });
-                        const configData = await configResponse.json();
+                        const configData = await apiCall({ path: 'config' });
                         
                         if (configData.success) {
                             this.companies = configData.companies.map(company => ({
@@ -367,14 +377,7 @@
                         
                         // Load changes
                         this.loadingStatus = 'Loading changes...';
-                        const changesResponse = await fetch(`${API_BASE}?path=changes`, {
-                            method: 'GET',
-                            redirect: 'follow',
-                            headers: {
-                                'Content-Type': 'text/plain'
-                            }
-                        });
-                        const changesData = await changesResponse.json();
+                        const changesData = await apiCall({ path: 'changes' });
                         
                         if (changesData.success) {
                             this.recentChanges = changesData.recentChanges || [];
