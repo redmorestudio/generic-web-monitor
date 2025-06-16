@@ -460,7 +460,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="ai-badge">🤖 AI-Powered v46</div>
+            <div class="ai-badge">🤖 AI-Powered v55</div>
             <h1>AI Competitor Monitor</h1>
             <p>Advanced Intelligence & Real-time Competitive Analysis</p>
         </div>
@@ -606,15 +606,16 @@
     </div>
 
     <script>
-        // FIXED: Use version 46 deployment with comprehensive backend
+        // FIXED: Use correct Version 53 deployment with full functionality
         const CONFIG = {
-            apiUrl: 'https://script.google.com/macros/s/AKfycbxhGoXjrSDfthEEtQ2nelZF6rslagWQEQjHE4fbalP-pBwdog8Hnd4249CHkVhAoeIphg/exec',
+            apiUrl: 'https://script.google.com/macros/s/AKfycbyitKdpijIjgOMkCk_Yhhaj01XmTrtP5VTJ0gAidMJLcTEmqNAjkDtxgTV3ewX6_nPFdQ/exec',
             token: 'dev-token-change-me'
         };
 
-        // Enhanced State Management
+        // Enhanced State Management - FIXED: Prevent infinite loops
         let currentData = null;
         let isLoading = false;
+        let statusCheckTimeout = null;
 
         // Tab Management
         function showTab(tabName) {
@@ -631,22 +632,29 @@
             event.target.classList.add('active');
         }
 
-        // FIXED: API Helper Function - Send parameters that backend actually expects
+        // FIXED: API Helper Function - Prevent infinite loops and use proper parameters
         async function apiCall(action, params = {}) {
-            if (isLoading && action !== 'status') {
-                console.log('System busy, please wait');
-                return { error: 'System busy, please wait' };
+            if (isLoading && action === 'status') {
+                console.log('Status check already in progress');
+                return { error: 'Status check in progress' };
             }
 
             try {
-                // FIXED: Send parameters that the backend expects based on version 46
+                if (action === 'status') isLoading = true;
+                
+                // Clear any existing timeout for status checks
+                if (statusCheckTimeout) {
+                    clearTimeout(statusCheckTimeout);
+                    statusCheckTimeout = null;
+                }
+                
                 const urlParams = new URLSearchParams({
-                    action: action,  // Backend expects 'action' parameter
+                    action: action,
                     token: CONFIG.token,
                     ...params
                 });
                 
-                console.log('API call:', action, 'URL:', `${CONFIG.apiUrl}?${urlParams}`);
+                console.log('Checking system status'); // Simplified logging to prevent console spam
                 
                 const response = await fetch(`${CONFIG.apiUrl}?${urlParams}`, {
                     method: 'GET',
@@ -659,24 +667,26 @@
                 }
                 
                 const data = await response.json();
-                console.log('API response:', data);
                 return data;
             } catch (error) {
                 console.error('API call failed:', error);
                 return { error: error.message };
+            } finally {
+                if (action === 'status') isLoading = false;
             }
         }
 
-        // Enhanced Status Refresh
+        // FIXED: Enhanced Status Refresh - Prevent infinite loops
         async function refreshStatus() {
-            if (isLoading) return;
-            isLoading = true;
+            if (isLoading) {
+                console.log('Status refresh already in progress');
+                return;
+            }
             
             try {
-                console.log('Refreshing system status...');
                 document.getElementById('systemStatus').textContent = 'Checking...';
                 
-                // Get comprehensive status from version 46 backend
+                // Get comprehensive status from Version 53 backend
                 const statusData = await apiCall('status');
                 
                 if (statusData.error) {
@@ -696,16 +706,16 @@
                     document.getElementById('lastCheck').textContent = 'Never';
                 }
                 
-                // Load latest data to populate dashboard
-                await loadLatestData();
+                // Load latest data to populate dashboard - ONLY if not already loaded
+                if (!currentData) {
+                    await loadLatestData();
+                }
                 
             } catch (error) {
                 console.error('Error refreshing status:', error);
                 document.getElementById('systemStatus').textContent = 'Error';
                 document.getElementById('statusMessage').textContent = 'ERROR';
                 showError('Error loading status: ' + error.message);
-            } finally {
-                isLoading = false;
             }
         }
 
@@ -1011,10 +1021,13 @@ ${JSON.stringify(data, null, 2)}
             setTimeout(() => successDiv.remove(), 3000);
         }
 
-        // Initialize
+        // FIXED: Initialize - Prevent infinite loops and use proper Version 53 backend
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('🚀 AI Competitive Monitor v46 - Initializing...');
+            console.log('🚀 AI Competitive Monitor v55 - Initializing...');
             console.log('API Endpoint:', CONFIG.apiUrl);
+            console.log('Using Version 53 deployment with full intelligent monitoring features');
+            
+            // Only run initial status check ONCE
             refreshStatus();
         });
     </script>
