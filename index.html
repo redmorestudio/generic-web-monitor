@@ -471,7 +471,7 @@
             <p>Enter your API token to access the advanced monitoring system:</p>
             <div class="input-group">
                 <input type="password" id="apiToken" placeholder="Enter API token" value="dev-token-change-me">
-                <button class="button button-primary" onclick="saveToken()" style="margin-top: 10px;">💾 Save Token</button>
+                <button id="saveTokenBtn" class="button button-primary" style="margin-top: 10px;" type="button">💾 Save Token</button>
             </div>
         </div>
 
@@ -608,7 +608,7 @@
     <script>
         // FIXED: Use correct Version 53 deployment with full functionality
         const CONFIG = {
-            apiUrl: 'https://script.google.com/macros/s/AKfycbyitKdpijIjgOMkCk_Yhhaj01XmTrtP5VTJ0gAidMJLcTEmqNAjkDtxgTV3ewX6_nPFdQ/exec',
+            apiUrl: 'https://script.google.com/macros/s/AKfycbwC4ybmtlMW5O2ZFTucAo-We2fDFkFLz96eEEa5f1vj7ECqE8hJ18IktOgP0zu2m4a5JQ/exec',
             token: 'dev-token-change-me'
         };
 
@@ -969,11 +969,38 @@ ${JSON.stringify(data, null, 2)}
             window.open('https://thebrain.com', '_blank');
         }
 
-        // Save Token
-        function saveToken() {
+        // Save Token - FIXED: Prevent infinite loops
+        let isSavingToken = false;
+        function saveToken(event) {
+            // Prevent any default behavior and event bubbling
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            if (isSavingToken) {
+                console.log('Token save already in progress');
+                return;
+            }
+            
+            isSavingToken = true;
             const token = document.getElementById('apiToken').value;
             CONFIG.token = token;
+            
+            // Save to localStorage to persist
+            localStorage.setItem('apiToken', token);
+            
+            // Use console.log instead of repeated showSuccess calls
+            console.log('Token saved successfully');
             showSuccess('💾 API token saved successfully!');
+            
+            // Reset flag after a delay
+            setTimeout(() => {
+                isSavingToken = false;
+            }, 1000);
+            
+            // Return false to prevent any further processing
+            return false;
         }
 
         // Utility Functions
@@ -1010,15 +1037,36 @@ ${JSON.stringify(data, null, 2)}
         }
 
         function showSuccess(message) {
-            const existing = document.querySelector('.success-message.temp');
-            if (existing) existing.remove();
+            // FIXED: Prevent DOM mutation loops with debouncing
+            // Clear any existing timeout
+            if (window.successTimeout) {
+                clearTimeout(window.successTimeout);
+            }
             
+            // Remove any existing success messages
+            const existingMessages = document.querySelectorAll('.success-message.temp');
+            existingMessages.forEach(msg => msg.remove());
+            
+            // Create new message
             const successDiv = document.createElement('div');
             successDiv.className = 'success-message temp';
             successDiv.textContent = message;
-            document.querySelector('.container').insertBefore(successDiv, document.querySelector('.tabs'));
             
-            setTimeout(() => successDiv.remove(), 3000);
+            // Use requestAnimationFrame to ensure DOM is ready
+            requestAnimationFrame(() => {
+                const container = document.querySelector('.container');
+                const tabs = document.querySelector('.tabs');
+                if (container && tabs && !document.querySelector('.success-message.temp')) {
+                    container.insertBefore(successDiv, tabs);
+                }
+                
+                // Remove after delay
+                window.successTimeout = setTimeout(() => {
+                    if (successDiv && successDiv.parentNode) {
+                        successDiv.remove();
+                    }
+                }, 3000);
+            });
         }
 
         // FIXED: Initialize - Prevent infinite loops and use proper Version 53 backend
@@ -1026,6 +1074,22 @@ ${JSON.stringify(data, null, 2)}
             console.log('🚀 AI Competitive Monitor v55 - Initializing...');
             console.log('API Endpoint:', CONFIG.apiUrl);
             console.log('Using Version 53 deployment with full intelligent monitoring features');
+            
+            // FIXED: Add proper event listener for save token button
+            const saveTokenBtn = document.getElementById('saveTokenBtn');
+            if (saveTokenBtn) {
+                // Remove any existing listeners first
+                saveTokenBtn.removeEventListener('click', saveToken);
+                // Add the event listener with proper handling
+                saveTokenBtn.addEventListener('click', saveToken, { once: false });
+            }
+            
+            // Load saved token if exists
+            const savedToken = localStorage.getItem('apiToken');
+            if (savedToken) {
+                document.getElementById('apiToken').value = savedToken;
+                CONFIG.token = savedToken;
+            }
             
             // Only run initial status check ONCE
             refreshStatus();
