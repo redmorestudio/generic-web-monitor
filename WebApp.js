@@ -1,7 +1,7 @@
 /**
  * WebApp Fixed - Corrected API endpoints for AI Competitive Monitor
  * ENHANCED CORS FIX: More robust headers for GitHub Pages integration
- * v80: Fixed extracted data handler - removed conflicting WebApp files
+ * v81: Batch processing for baseline generation with AI intelligence
  */
 
 /**
@@ -249,7 +249,7 @@ function getSystemStatusFixed() {
       lastRun: lastRun || 'Never',
       companies: config.length,
       urls: totalUrls,
-      version: 78, // PUBLIC ACCESS & FIXED PERMISSIONS VERSION
+      version: 81, // v81: Batch processing + AI intelligence
       corsFixed: true,
       timestamp: new Date().toISOString()
     };
