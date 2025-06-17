@@ -279,7 +279,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="ai-badge">🤖 AI-Enhanced v69 ✅ CORS Fixed + Full AI Intelligence</div>
+            <div class="ai-badge">🤖 AI-Enhanced v70 ✅ Frontend Fixed + Vanilla JS</div>
             <h1>AI Competitor Monitor</h1>
             <p>Advanced Intelligence & Real-time Competitive Analysis with Enhanced CORS Support</p>
         </div>
@@ -375,7 +375,7 @@
         const CONFIG = {
             apiUrl: 'https://script.google.com/macros/s/AKfycbyn_EA2xjOVdw-FsRNOLBFOakSuMLzFOFIGNoaPk_5KFlE01-d6kpUQHKiumPE86hLrsA/exec',
             token: 'dev-token-change-me',
-            version: 69,
+            version: 70,
             aiEnhanced: true,
             corsFixed: true
         };
@@ -389,7 +389,7 @@
 
         // Initialize
         window.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 AI Competitive Monitor v69 - Enhanced Intelligence with CORS Fixes');
+            console.log('🚀 AI Competitive Monitor v70 - Frontend Fixed with Vanilla JavaScript');
             console.log('✅ CORS Fixed - Using deployment URL:', CONFIG.apiUrl);
             
             // Load saved token
@@ -441,6 +441,12 @@
                     action: action,
                     token: CONFIG.token,
                     ...params
+                });
+                
+                console.log('🔍 API Call Details:', {
+                    action: action,
+                    token: CONFIG.token,
+                    fullUrl: `${CONFIG.apiUrl}?${urlParams}`
                 });
                 
                 console.log(`🤖 AI API Call: ${action} - CORS Fixed Version`);
@@ -597,7 +603,7 @@
             const data = await apiCall('logs');
             const content = data.error ? 
                 '<div class="error-message">Unable to load system logs</div>' :
-                '<div class="success-message">🤖 AI-Enhanced System v69: All systems operational with CORS fixes active</div>';
+                '<div class="success-message">🤖 AI-Enhanced System v70: All systems operational with frontend fixes active</div>';
             
             document.getElementById('logsContent').innerHTML = content;
         }
