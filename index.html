@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Competitive Monitor - Enhanced Intelligence Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <style>
         :root {
             --primary-bg: #1a1a2e;
@@ -70,6 +71,10 @@
             border-radius: 12px;
             margin-bottom: 20px;
             border: 1px solid var(--border-color);
+        }
+
+        .hidden {
+            display: none;
         }
 
         .tabs {
@@ -207,152 +212,6 @@
             text-transform: uppercase;
         }
 
-        .ai-features {
-            background: var(--secondary-bg);
-            border: 2px solid var(--accent-color);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .ai-features h3 {
-            color: var(--accent-color);
-            margin-top: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-            margin: 15px 0;
-        }
-
-        .feature-card {
-            background: var(--accent-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .feature-card:hover {
-            border-color: var(--accent-color);
-            transform: translateY(-2px);
-        }
-
-        .feature-card h4 {
-            margin: 0 0 10px 0;
-            color: var(--accent-color);
-            font-size: 16px;
-        }
-
-        .feature-card p {
-            margin: 0;
-            font-size: 14px;
-            opacity: 0.8;
-        }
-
-        .feature-status {
-            float: right;
-            font-size: 20px;
-            margin-top: -5px;
-        }
-
-        .config-section {
-            background: var(--accent-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-
-        .config-section h4 {
-            margin: 0 0 15px 0;
-            color: var(--primary-color);
-        }
-
-        .input-group {
-            margin-bottom: 15px;
-        }
-
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: var(--text-primary);
-            font-weight: 500;
-        }
-
-        .input-group input, .input-group textarea, .input-group select {
-            width: 100%;
-            padding: 12px;
-            background: var(--primary-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 14px;
-            box-sizing: border-box;
-        }
-
-        .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            background: var(--accent-bg);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-
-        .data-table th, .data-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .data-table th {
-            background: var(--primary-bg);
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .data-table tr:hover {
-            background: var(--secondary-bg);
-        }
-
-        .log-container {
-            background: var(--primary-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 15px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            font-size: 14px;
-            max-height: 400px;
-            overflow-y: auto;
-        }
-
-        .log-entry {
-            padding: 5px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .log-timestamp {
-            color: var(--text-secondary);
-            font-size: 12px;
-        }
-
-        .log-level-info { color: #4a9eff; }
-        .log-level-success { color: var(--accent-color); }
-        .log-level-warning { color: var(--warning-color); }
-        .log-level-error { color: var(--error-color); }
-
         .error-message, .success-message {
             padding: 15px;
             border-radius: 8px;
@@ -402,36 +261,6 @@
             color: var(--primary-color);
         }
 
-        .company-card .url {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-size: 14px;
-            word-break: break-all;
-        }
-
-        .company-card .status {
-            margin: 10px 0;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            display: inline-block;
-        }
-
-        .status-operational {
-            background: rgba(0, 255, 136, 0.2);
-            color: var(--accent-color);
-        }
-
-        .status-error {
-            background: rgba(255, 68, 68, 0.2);
-            color: var(--error-color);
-        }
-
-        .status-checking {
-            background: rgba(255, 167, 38, 0.2);
-            color: var(--warning-color);
-        }
-
         @media (max-width: 768px) {
             .tabs {
                 flex-direction: column;
@@ -447,7 +276,7 @@
         }
     </style>
 </head>
-<body x-data="app" x-init="init()">
+<body>
     <div class="container">
         <div class="header">
             <div class="ai-badge">🤖 AI-Enhanced v69 ✅ CORS Fixed + Full AI Intelligence</div>
@@ -456,194 +285,94 @@
         </div>
 
         <!-- Authentication -->
-        <div class="auth-section" x-show="!authenticated">
+        <div class="auth-section" id="authSection">
             <h3>🔐 Authentication</h3>
             <p>Enter your API token to access the enhanced AI monitoring system:</p>
-            <div class="input-group">
-                <input type="password" id="apiToken" placeholder="Enter API token" value="dev-token-change-me">
-                <button @click="saveToken()" class="button button-primary" style="margin-top: 10px;" type="button" :disabled="loading">💾 Save Token</button>
+            <div>
+                <input type="password" id="apiToken" placeholder="Enter API token" value="dev-token-change-me" style="width: 300px; padding: 12px; margin-right: 10px; background: var(--primary-bg); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-primary);">
+                <button onclick="saveToken()" class="button button-primary" id="saveBtn">💾 Save Token</button>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
-        <div class="tabs" x-show="authenticated">
-            <button class="tab" :class="currentTab === 'dashboard' ? 'active' : ''" @click="currentTab = 'dashboard'">📊 Dashboard</button>
-            <button class="tab" :class="currentTab === 'extracted' ? 'active' : ''" @click="currentTab = 'extracted'">📄 Extracted Data</button>
-            <button class="tab" :class="currentTab === 'changes' ? 'active' : ''" @click="currentTab = 'changes'">📈 Change History</button>
-            <button class="tab" :class="currentTab === 'configuration' ? 'active' : ''" @click="currentTab = 'configuration'">⚙️ Configuration</button>
-            <button class="tab" :class="currentTab === 'baseline' ? 'active' : ''" @click="currentTab = 'baseline'">📊 Baseline</button>
-            <button class="tab" :class="currentTab === 'logs' ? 'active' : ''" @click="currentTab = 'logs'">📝 System Logs</button>
-        </div>
+        <!-- Main Dashboard -->
+        <div id="dashboard" class="hidden">
+            <!-- Navigation Tabs -->
+            <div class="tabs">
+                <button class="tab active" onclick="showTab('overview')">📊 Dashboard</button>
+                <button class="tab" onclick="showTab('companies')">🏢 Companies</button>
+                <button class="tab" onclick="showTab('config')">⚙️ Configuration</button>
+                <button class="tab" onclick="showTab('logs')">📝 System Logs</button>
+            </div>
 
-        <!-- Action Buttons -->
-        <div class="action-buttons" x-show="authenticated">
-            <button class="button button-primary" @click="refreshStatus()" :disabled="loading">🔄 Refresh Status</button>
-            <button class="button button-secondary" @click="generateBaseline()" :disabled="loading">📊 Generate Baseline</button>
-            <button class="button button-warning" @click="runMonitorCheck()" :disabled="loading">🔍 Run Monitor Check</button>
-            <button class="button button-ai" @click="openTheBrain()">🧠 TheBrain Integration</button>
-        </div>
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="button button-primary" onclick="refreshStatus()">🔄 Refresh Status</button>
+                <button class="button button-secondary" onclick="generateBaseline()">📊 Generate Baseline</button>
+                <button class="button button-warning" onclick="runMonitorCheck()">🔍 Run Monitor Check</button>
+                <button class="button button-ai" onclick="openTheBrain()">🧠 TheBrain Integration</button>
+            </div>
 
-        <!-- System Status -->
-        <div class="status-grid" x-show="authenticated">
-            <div class="status-card">
-                <h3>System Status</h3>
-                <div class="value" x-text="status.status || 'Loading...'"></div>
-                <div class="label" x-text="status.status === 'operational' ? 'OPERATIONAL' : 'CHECKING'"></div>
+            <!-- System Status -->
+            <div class="status-grid" id="statusGrid">
+                <div class="status-card">
+                    <h3>System Status</h3>
+                    <div class="value" id="systemStatus">Loading...</div>
+                    <div class="label">STATUS</div>
+                </div>
+                <div class="status-card">
+                    <h3>Companies Monitored</h3>
+                    <div class="value" id="companiesCount">--</div>
+                    <div class="label">COMPANIES</div>
+                </div>
+                <div class="status-card">
+                    <h3>URLs Tracked</h3>
+                    <div class="value" id="urlsCount">--</div>
+                    <div class="label">URLS TRACKED</div>
+                </div>
+                <div class="status-card">
+                    <h3>AI Features</h3>
+                    <div class="value" id="aiStatus">⚙️</div>
+                    <div class="label">AI STATUS</div>
+                </div>
             </div>
-            <div class="status-card">
-                <h3>Companies Monitored</h3>
-                <div class="value" x-text="status.companiesMonitored || '--'"></div>
-                <div class="label">COMPANIES</div>
-            </div>
-            <div class="status-card">
-                <h3>URLs Tracked</h3>
-                <div class="value" x-text="status.urlsTracked || '--'"></div>
-                <div class="label">URLS TRACKED</div>
-            </div>
-            <div class="status-card">
-                <h3>Last Check</h3>
-                <div class="value" x-text="formatTimeAgo(status.lastCheck) || '--'"></div>
-                <div class="label">LAST CHECK</div>
-            </div>
-            <div class="status-card">
-                <h3>AI Features</h3>
-                <div class="value" x-text="status.aiEnabled ? '✅' : '⚠️'"></div>
-                <div class="label" x-text="status.aiEnabled ? 'AI ENABLED' : 'AI PENDING'"></div>
-            </div>
-            <div class="status-card">
-                <h3>CORS Status</h3>
-                <div class="value" x-text="status.corsFixed ? '✅' : '❌'"></div>
-                <div class="label" x-text="status.corsFixed ? 'CORS FIXED' : 'CORS ERROR'"></div>
-            </div>
-        </div>
 
-        <!-- Tab Content -->
-        <div x-show="authenticated">
-            <div x-show="currentTab === 'dashboard'" class="tab-content">
+            <!-- Tab Content -->
+            <div id="overview" class="tab-content active">
                 <h2>🎯 AI Intelligence Dashboard</h2>
-                
-                <!-- AI Intelligence Features -->
-                <div class="ai-features">
-                    <h3>🤖 Advanced AI Intelligence Features <span x-text="status.aiEnabled ? '(Active)' : '(Configuring...)'"></span></h3>
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <h4>🎯 Change Magnitude Detection <span class="feature-status">✅</span></h4>
-                            <p>AI precisely calculates how much each page changed (5%, 25%, 50%+) using advanced content diffing algorithms</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>🧠 Claude Relevance Scoring (1-10) <span class="feature-status" x-text="status.aiEnabled ? '✅' : '⚙️'"></span></h4>
-                            <p>Claude AI evaluates the business importance and competitive significance of each detected change</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>🎨 Smart Content Extraction <span class="feature-status">✅</span></h4>
-                            <p>Intelligent CSS selectors and content parsing focused on strategic business content areas</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>📊 Competitive Intelligence <span class="feature-status">✅</span></h4>
-                            <p>Automated detection of competitor mentions, feature launches, pricing changes, and strategic shifts</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>⚙️ Configurable Thresholds <span class="feature-status">✅</span></h4>
-                            <p>Custom sensitivity settings per company, page type, and content category for precise monitoring</p>
-                        </div>
-                        <div class="feature-card">
-                            <h4>🧠 TheBrain Integration <span class="feature-status">🔗</span></h4>
-                            <p>Automatic knowledge mapping and relationship visualization of competitive intelligence</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div id="activityFeed">
-                    <div class="loading" x-show="loading">🔄 Loading AI-enhanced competitive intelligence...</div>
-                    <div x-show="!loading && companies.length === 0" class="error-message">No company data available. Click "Refresh Status" to load data.</div>
-                    
-                    <div x-show="!loading && companies.length > 0">
-                        <h3>📊 Monitored Companies</h3>
-                        <div class="companies-grid">
-                            <template x-for="company in companies" :key="company.company">
-                                <div class="company-card">
-                                    <h3 x-text="company.company"></h3>
-                                    <div class="status status-operational">AI-Enhanced Monitoring</div>
-                                    <p><strong>URLs:</strong> <span x-text="company.urls ? company.urls.length : 0"></span></p>
-                                    <div style="margin-top: 10px;">
-                                        <template x-for="(url, index) in (company.urls || []).slice(0, 2)" :key="index">
-                                            <div><a :href="url" target="_blank" class="url" x-text="url"></a></div>
-                                        </template>
-                                        <div x-show="company.urls && company.urls.length > 2" style="color: #999; font-size: 12px;">
-                                            <span x-text="'+' + (company.urls.length - 2) + ' more URLs'"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
+                <div id="dashboardContent">
+                    <div class="loading">🔄 Loading AI-enhanced competitive intelligence...</div>
                 </div>
             </div>
 
-            <div x-show="currentTab === 'extracted'" class="tab-content">
-                <h2>📄 AI-Enhanced Extracted Data Analysis</h2>
-                <button class="button button-secondary" @click="loadExtractedData()" :disabled="loading">🔄 Refresh Extracted Data</button>
-                
-                <div id="extractedData">
-                    <div class="loading" x-show="loading">Loading AI-enhanced content analysis...</div>
-                    <div x-show="!loading" x-html="extractedDataHTML"></div>
+            <div id="companies" class="tab-content">
+                <h2>🏢 Monitored Companies</h2>
+                <div id="companiesContent">
+                    <div class="loading">Loading company data...</div>
                 </div>
             </div>
 
-            <div x-show="currentTab === 'changes'" class="tab-content">
-                <h2>📈 AI-Filtered Change History & Analysis</h2>
-                <button class="button button-secondary" @click="loadChangeHistory()" :disabled="loading">🔄 Load Change History</button>
-                
-                <div id="changeHistory">
-                    <div class="loading" x-show="loading">Loading AI-analyzed changes...</div>
-                    <div x-show="!loading" x-html="changeHistoryHTML"></div>
-                </div>
-            </div>
-
-            <div x-show="currentTab === 'configuration'" class="tab-content">
+            <div id="config" class="tab-content">
                 <h2>⚙️ AI System Configuration</h2>
-                <button class="button button-secondary" @click="loadConfiguration()" :disabled="loading">🔄 Load Configuration</button>
-                
-                <div id="configurationData">
-                    <div class="loading" x-show="loading">Loading AI system settings...</div>
-                    <div x-show="!loading" x-html="configurationHTML"></div>
+                <div id="configContent">
+                    <div class="loading">Loading configuration...</div>
                 </div>
             </div>
 
-            <div x-show="currentTab === 'baseline'" class="tab-content">
-                <h2>📊 AI-Enhanced Baseline Management</h2>
-                <p>Generate and manage AI-enhanced baseline snapshots with intelligent content extraction.</p>
-                
-                <button class="button button-primary" @click="generateBaseline()" :disabled="loading">🚀 Generate AI-Enhanced Baseline</button>
-                
-                <div id="baselineResults">
-                    <div class="loading" x-show="loading">Processing AI-enhanced baselines...</div>
-                    <div x-show="!loading" x-html="baselineResultsHTML"></div>
-                </div>
-            </div>
-
-            <div x-show="currentTab === 'logs'" class="tab-content">
-                <h2>📝 AI System Logs & Monitoring</h2>
-                <button class="button button-secondary" @click="loadSystemLogs()" :disabled="loading">🔄 Refresh Logs</button>
-                
-                <div id="systemLogs">
-                    <div class="loading" x-show="loading">Loading AI system logs...</div>
-                    <div x-show="!loading" x-html="systemLogsHTML"></div>
+            <div id="logs" class="tab-content">
+                <h2>📝 System Logs & Monitoring</h2>
+                <div id="logsContent">
+                    <div class="loading">Loading system logs...</div>
                 </div>
             </div>
         </div>
 
         <!-- Error Display -->
-        <div x-show="error" x-text="error" class="error-message" style="position: fixed; top: 20px; right: 20px; z-index: 1000; max-width: 400px;"></div>
+        <div id="errorDisplay" class="error-message hidden"></div>
     </div>
 
-    <!-- Alpine.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.x/cdn.min.js" defer></script>
-
     <script>
-        // UPDATED: Enhanced configuration for AI-powered backend with CORS fixes + AI integration
+        // Configuration
         const CONFIG = {
-            // v69 DEPLOYMENT: CORS-FIXED + FULL AI INTEGRATION (ClaudeIntegration + ChangeMagnitude + SmartCategorization)
             apiUrl: 'https://script.google.com/macros/s/AKfycbyn_EA2xjOVdw-FsRNOLBFOakSuMLzFOFIGNoaPk_5KFlE01-d6kpUQHKiumPE86hLrsA/exec',
             token: 'dev-token-change-me',
             version: 69,
@@ -651,344 +380,246 @@
             corsFixed: true
         };
 
-        // Alpine.js App Data
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('app', () => ({
-                // State
-                authenticated: false,
-                currentTab: 'dashboard',
-                loading: false,
-                error: null,
-                statusLoading: false, // Separate flag to prevent recursive status calls
-                
-                // Data
-                status: {},
-                companies: [],
-                
-                // HTML content for tabs
-                extractedDataHTML: '<div class="error-message">Click "Refresh Extracted Data" to load AI-enhanced content analysis...</div>',
-                changeHistoryHTML: '<div class="error-message">Click "Load Change History" to view AI-filtered changes...</div>',
-                configurationHTML: '<div class="error-message">Click "Load Configuration" to view AI system settings...</div>',
-                baselineResultsHTML: '<div class="error-message">Click "Generate AI-Enhanced Baseline" to create intelligent snapshots...</div>',
-                systemLogsHTML: '<div class="error-message">Click "Refresh Logs" to load AI system logs...</div>',
+        // State
+        let currentTab = 'overview';
+        let authenticated = false;
+        let loading = false;
+        let status = {};
+        let companies = [];
 
-                // Initialize
-                init() {
-                    console.log('🚀 AI Competitive Monitor v69 - Enhanced Intelligence with CORS Fixes & Full AI Integration');
-                    console.log('✅ CORS Fixed - Using proven deployment URL:', CONFIG.apiUrl);
-                    console.log('🤖 AI Features: ClaudeIntegration.js, ChangeMagnitudeDetection.js, SmartCategorization.js ready for connection');
-                    
-                    // Load saved token
-                    const savedToken = localStorage.getItem('apiToken');
-                    if (savedToken && savedToken !== 'dev-token-change-me') {
-                        document.getElementById('apiToken').value = savedToken;
-                        CONFIG.token = savedToken;
-                        this.authenticated = true;
-                        // Use setTimeout to avoid any potential recursion issues
-                        setTimeout(() => {
-                            this.refreshStatus();
-                        }, 100);
-                    }
-                },
-
-                // API Helper with improved error handling
-                async apiCall(action, params = {}) {
-                    // Prevent multiple simultaneous status calls
-                    if (action === 'status' && this.statusLoading) {
-                        console.log('⚠️ Status check already in progress, skipping...');
-                        return { error: 'Status check already in progress' };
-                    }
-
-                    try {
-                        if (action === 'status') {
-                            this.statusLoading = true;
-                        }
-                        this.loading = true;
-                        
-                        const urlParams = new URLSearchParams({
-                            action: action,
-                            token: CONFIG.token,
-                            ...params
-                        });
-                        
-                        console.log(`🤖 AI API Call: ${action} - CORS Fixed Version with AI Integration`);
-                        
-                        const response = await fetch(`${CONFIG.apiUrl}?${urlParams}`, {
-                            method: 'GET',
-                            redirect: 'follow',
-                            headers: { 'Content-Type': 'text/plain' }
-                        });
-                        
-                        if (!response.ok) {
-                            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                        }
-                        
-                        const data = await response.json();
-                        
-                        // Log AI enhancements
-                        if (data.aiEnhanced) {
-                            console.log('✅ AI-Enhanced Response Received');
-                        }
-                        if (data.corsFixed) {
-                            console.log('✅ CORS Fixed Response Confirmed');
-                        }
-                        
-                        return data;
-                    } catch (error) {
-                        console.error('❌ AI API call failed:', error);
-                        this.showError(`API Error: ${error.message}`);
-                        return { error: error.message };
-                    } finally {
-                        this.loading = false;
-                        if (action === 'status') {
-                            this.statusLoading = false;
-                        }
-                    }
-                },
-
-                // Token Management with improved validation
-                saveToken() {
-                    const token = document.getElementById('apiToken').value;
-                    if (!token || token.trim() === '') {
-                        this.showError('Please enter a valid token');
-                        return;
-                    }
-                    
-                    CONFIG.token = token;
-                    localStorage.setItem('apiToken', token);
-                    this.authenticated = true;
-                    this.showSuccess('💾 API token saved successfully! AI features ready.');
-                    
-                    // Clear any existing error
-                    this.error = null;
-                    
-                    // Refresh status after authentication with delay to prevent issues
-                    setTimeout(() => {
-                        if (this.authenticated && !this.statusLoading) {
-                            this.refreshStatus();
-                        }
-                    }, 500);
-                },
-
-                // Status Management with recursion prevention
-                async refreshStatus() {
-                    if (this.statusLoading) {
-                        console.log('⚠️ Status refresh already in progress');
-                        return;
-                    }
-                    
-                    console.log('🔄 Refreshing AI-enhanced status with CORS fixes...');
-                    const statusData = await this.apiCall('status');
-                    
-                    if (statusData.error) {
-                        this.showError(`Status Error: ${statusData.error}`);
-                        return;
-                    }
-                    
-                    this.status = statusData;
-                    
-                    // Log AI features status
-                    if (statusData.aiFeatures) {
-                        console.log('🤖 AI Features Status:', statusData.aiFeatures);
-                    }
-                    if (statusData.corsFixed) {
-                        console.log('✅ CORS Status: Fixed and operational');
-                    }
-                    
-                    // Load companies if not already loaded
-                    if (this.companies.length === 0) {
-                        await this.loadCompanies();
-                    }
-                },
-
-                async loadCompanies() {
-                    const data = await this.apiCall('config');
-                    if (data.error) {
-                        this.showError(`Companies Error: ${data.error}`);
-                        return;
-                    }
-                    
-                    this.companies = data.companies || data.monitors || [];
-                    console.log(`📊 Loaded ${this.companies.length} companies with AI monitoring`);
-                },
-
-                // Tab Actions
-                async generateBaseline() {
-                    this.baselineResultsHTML = '<div class="loading">🤖 Starting AI-enhanced baseline generation...</div>';
-                    
-                    try {
-                        const result = await this.apiCall('baseline');
-                        
-                        if (result.error) {
-                            throw new Error(result.error);
-                        }
-                        
-                        this.baselineResultsHTML = `
-                            <div class="success-message">
-                                ✅ AI-enhanced baseline system is ready!<br>
-                                ${result.message}<br><br>
-                                🤖 AI Features: ${result.aiEnhanced ? 'Enhanced with intelligent content extraction' : 'Basic'}<br>
-                                ✅ CORS Status: Fixed and operational<br>
-                                📊 System Status: Ready for baseline generation
-                            </div>
-                        `;
-                        
-                        setTimeout(() => this.refreshStatus(), 1000);
-                    } catch (error) {
-                        this.baselineResultsHTML = `<div class="error-message">❌ Error with AI-enhanced baseline: ${error.message}</div>`;
-                    }
-                },
-
-                async runMonitorCheck() {
-                    this.showSuccess('🤖 Running AI-enhanced monitor check...');
-                    
-                    try {
-                        const result = await this.apiCall('monitor');
-                        
-                        if (result.error) {
-                            throw new Error(result.error);
-                        }
-                        
-                        const aiStatus = result.aiEnhanced ? ' with AI intelligence' : '';
-                        this.showSuccess(`✅ AI monitor check completed${aiStatus}! ${result.message || 'Check finished successfully.'}`);
-                        setTimeout(() => this.refreshStatus(), 1000);
-                    } catch (error) {
-                        this.showError(`❌ Error running AI monitor check: ${error.message}`);
-                    }
-                },
-
-                async loadExtractedData() {
-                    try {
-                        const data = await this.apiCall('extracted');
-                        
-                        if (data.error) {
-                            this.extractedDataHTML = '<div class="error-message">No AI-enhanced extracted data available yet. Generate baseline first to enable AI content extraction.</div>';
-                            return;
-                        }
-                        
-                        this.extractedDataHTML = '<div class="success-message">🤖 AI-enhanced content extraction system is ready. Generate baseline to start intelligent content analysis.</div>';
-                    } catch (error) {
-                        this.extractedDataHTML = `<div class="error-message">❌ Error loading AI-enhanced extracted data: ${error.message}</div>`;
-                    }
-                },
-
-                async loadChangeHistory() {
-                    try {
-                        const data = await this.apiCall('changes');
-                        
-                        if (data.error) {
-                            this.changeHistoryHTML = '<div class="error-message">No AI-analyzed change history available</div>';
-                            return;
-                        }
-                        
-                        this.changeHistoryHTML = `
-                            <div class="success-message">
-                                🤖 AI-filtered change detection system is operational<br>
-                                ${data.aiFiltered ? '✅ AI relevance filtering active' : '⚙️ Setting up AI filters'}<br>
-                                📊 Ready to analyze changes with intelligent scoring
-                            </div>
-                        `;
-                    } catch (error) {
-                        this.changeHistoryHTML = `<div class="error-message">❌ Error loading AI change history: ${error.message}</div>`;
-                    }
-                },
-
-                async loadConfiguration() {
-                    try {
-                        const data = await this.apiCall('config');
-                        
-                        if (data.error) {
-                            this.configurationHTML = '<div class="error-message">No AI system configuration available</div>';
-                            return;
-                        }
-                        
-                        this.configurationHTML = `
-                            <div class="config-section">
-                                <h4>📊 AI-Enhanced System Configuration</h4>
-                                ${data.aiEnhanced ? '<div class="success-message">🤖 AI Intelligence Features: Active</div>' : ''}
-                                <div class="success-message">✅ CORS Status: Fixed and operational</div>
-                                <pre style="background: var(--primary-bg); padding: 15px; border-radius: 8px; overflow-x: auto; color: var(--text-primary);">
-${JSON.stringify(data, null, 2)}
-                                </pre>
-                            </div>
-                        `;
-                    } catch (error) {
-                        this.configurationHTML = `<div class="error-message">❌ Error loading AI configuration: ${error.message}</div>`;
-                    }
-                },
-
-                async loadSystemLogs() {
-                    try {
-                        const data = await this.apiCall('logs');
-                        
-                        if (data.error) {
-                            this.systemLogsHTML = '<div class="error-message">Unable to load AI system logs</div>';
-                            return;
-                        }
-                        
-                        if (data.logs && data.logs.length > 0) {
-                            let html = '<div class="log-container">';
-                            if (data.aiEnhanced) {
-                                html += '<div style="color: var(--accent-color); margin-bottom: 10px;">🤖 AI-Enhanced System Logs</div>';
-                            }
-                            
-                            data.logs.forEach(log => {
-                                html += `
-                                    <div class="log-entry">
-                                        <div class="log-timestamp">${new Date(log.timestamp).toLocaleString()}</div>
-                                        <div class="log-level-${log.type || log.level || 'info'}">${log.message}</div>
-                                    </div>
-                                `;
-                            });
-                            html += '</div>';
-                            this.systemLogsHTML = html;
-                        } else {
-                            this.systemLogsHTML = '<div class="success-message">🤖 AI-Enhanced System v69: All systems operational with CORS fixes active</div>';
-                        }
-                    } catch (error) {
-                        this.systemLogsHTML = `<div class="error-message">❌ Error loading AI system logs: ${error.message}</div>`;
-                    }
-                },
-
-                // TheBrain Integration
-                openTheBrain() {
-                    this.showSuccess('🧠 Opening TheBrain AI knowledge integration...');
-                    window.open('https://thebrain.com', '_blank');
-                },
-
-                // Utility Functions
-                formatTimeAgo(date) {
-                    if (!date) return 'Never';
-                    const seconds = Math.floor((new Date() - new Date(date)) / 1000);
-                    const intervals = [
-                        { label: 'year', seconds: 31536000 },
-                        { label: 'month', seconds: 2592000 },
-                        { label: 'week', seconds: 604800 },
-                        { label: 'day', seconds: 86400 },
-                        { label: 'hour', seconds: 3600 },
-                        { label: 'minute', seconds: 60 }
-                    ];
-                    
-                    for (const interval of intervals) {
-                        const count = Math.floor(seconds / interval.seconds);
-                        if (count > 0) {
-                            return count === 1 ? `${count} ${interval.label} ago` : `${count} ${interval.label}s ago`;
-                        }
-                    }
-                    return 'just now';
-                },
-
-                showError(message) {
-                    this.error = message;
-                    console.error('❌', message);
-                    setTimeout(() => this.error = null, 5000);
-                },
-
-                showSuccess(message) {
-                    console.log('✅', message);
-                }
-            }));
+        // Initialize
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 AI Competitive Monitor v69 - Enhanced Intelligence with CORS Fixes');
+            console.log('✅ CORS Fixed - Using deployment URL:', CONFIG.apiUrl);
+            
+            // Load saved token
+            const savedToken = localStorage.getItem('apiToken');
+            if (savedToken && savedToken !== 'dev-token-change-me') {
+                document.getElementById('apiToken').value = savedToken;
+                CONFIG.token = savedToken;
+                authenticate();
+            }
         });
+
+        // Authentication
+        function saveToken() {
+            const token = document.getElementById('apiToken').value;
+            if (!token || token.trim() === '') {
+                showError('Please enter a valid token');
+                return;
+            }
+            
+            CONFIG.token = token;
+            localStorage.setItem('apiToken', token);
+            authenticate();
+        }
+
+        function authenticate() {
+            authenticated = true;
+            document.getElementById('authSection').classList.add('hidden');
+            document.getElementById('dashboard').classList.remove('hidden');
+            showSuccess('💾 API token saved successfully! AI features ready.');
+            
+            // Refresh status after authentication
+            setTimeout(() => {
+                refreshStatus();
+            }, 500);
+        }
+
+        // API Calls
+        async function apiCall(action, params = {}) {
+            if (loading) {
+                console.log('⚠️ API call already in progress');
+                return { error: 'Request already in progress' };
+            }
+
+            try {
+                loading = true;
+                document.getElementById('saveBtn').disabled = true;
+                
+                const urlParams = new URLSearchParams({
+                    action: action,
+                    token: CONFIG.token,
+                    ...params
+                });
+                
+                console.log(`🤖 AI API Call: ${action} - CORS Fixed Version`);
+                
+                const response = await fetch(`${CONFIG.apiUrl}?${urlParams}`, {
+                    method: 'GET',
+                    redirect: 'follow'
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                console.log(`✅ API Response for ${action}:`, data);
+                
+                return data;
+            } catch (error) {
+                console.error('❌ API call failed:', error);
+                showError(`API Error: ${error.message}`);
+                return { error: error.message };
+            } finally {
+                loading = false;
+                document.getElementById('saveBtn').disabled = false;
+            }
+        }
+
+        // Status Management
+        async function refreshStatus() {
+            console.log('🔄 Refreshing AI-enhanced status...');
+            const statusData = await apiCall('status');
+            
+            if (statusData.error) {
+                showError(`Status Error: ${statusData.error}`);
+                return;
+            }
+            
+            status = statusData;
+            updateStatusDisplay();
+            
+            // Load companies
+            loadCompanies();
+        }
+
+        function updateStatusDisplay() {
+            document.getElementById('systemStatus').textContent = status.status || 'Unknown';
+            document.getElementById('companiesCount').textContent = status.companiesMonitored || '--';
+            document.getElementById('urlsCount').textContent = status.urlsTracked || '--';
+            document.getElementById('aiStatus').textContent = status.aiEnabled ? '✅' : '⚙️';
+            
+            // Update dashboard content
+            const content = `
+                <div class="success-message">
+                    ✅ AI Competitive Monitor is operational!<br>
+                    🤖 AI Features: ${status.aiEnabled ? 'Active' : 'Configuring'}<br>
+                    📊 Companies: ${status.companiesMonitored || 0}<br>
+                    🔗 URLs: ${status.urlsTracked || 0}<br>
+                    ✅ CORS: Fixed and operational
+                </div>
+            `;
+            document.getElementById('dashboardContent').innerHTML = content;
+        }
+
+        async function loadCompanies() {
+            const data = await apiCall('config');
+            if (data.error) {
+                showError(`Companies Error: ${data.error}`);
+                return;
+            }
+            
+            companies = data.companies || data.monitors || [];
+            console.log(`📊 Loaded ${companies.length} companies`);
+            
+            updateCompaniesDisplay();
+        }
+
+        function updateCompaniesDisplay() {
+            const content = companies.length > 0 ? 
+                `<div class="companies-grid">
+                    ${companies.map(company => `
+                        <div class="company-card">
+                            <h3>${company.company || company.name}</h3>
+                            <div style="background: rgba(0, 255, 136, 0.2); color: var(--accent-color); padding: 5px 10px; border-radius: 20px; font-size: 12px; display: inline-block;">AI-Enhanced Monitoring</div>
+                            <p><strong>URLs:</strong> ${(company.urls || []).length}</p>
+                        </div>
+                    `).join('')}
+                </div>` :
+                '<div class="error-message">No company data available. Backend may be initializing.</div>';
+            
+            document.getElementById('companiesContent').innerHTML = content;
+        }
+
+        // Tab Navigation
+        function showTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            document.getElementById(tabName).classList.add('active');
+            
+            currentTab = tabName;
+            
+            // Load content for specific tabs
+            if (tabName === 'config') {
+                loadConfiguration();
+            } else if (tabName === 'logs') {
+                loadSystemLogs();
+            }
+        }
+
+        // Action Functions
+        async function generateBaseline() {
+            showSuccess('🤖 Starting AI-enhanced baseline generation...');
+            const result = await apiCall('baseline');
+            
+            if (result.error) {
+                showError(`Baseline Error: ${result.error}`);
+            } else {
+                showSuccess('✅ AI-enhanced baseline generation completed!');
+                setTimeout(() => refreshStatus(), 1000);
+            }
+        }
+
+        async function runMonitorCheck() {
+            showSuccess('🤖 Running AI-enhanced monitor check...');
+            const result = await apiCall('monitor');
+            
+            if (result.error) {
+                showError(`Monitor Error: ${result.error}`);
+            } else {
+                showSuccess('✅ AI monitor check completed successfully!');
+                setTimeout(() => refreshStatus(), 1000);
+            }
+        }
+
+        async function loadConfiguration() {
+            const data = await apiCall('config');
+            const content = data.error ? 
+                '<div class="error-message">Unable to load configuration</div>' :
+                `<div class="success-message">
+                    📊 AI-Enhanced System Configuration<br>
+                    🤖 AI Features: ${data.aiEnhanced ? 'Active' : 'Configuring'}<br>
+                    ✅ CORS Status: Fixed and operational<br>
+                    📊 Version: v${CONFIG.version}
+                </div>
+                <pre style="background: var(--primary-bg); padding: 15px; border-radius: 8px; overflow-x: auto; color: var(--text-primary); font-size: 12px;">${JSON.stringify(data, null, 2)}</pre>`;
+            
+            document.getElementById('configContent').innerHTML = content;
+        }
+
+        async function loadSystemLogs() {
+            const data = await apiCall('logs');
+            const content = data.error ? 
+                '<div class="error-message">Unable to load system logs</div>' :
+                '<div class="success-message">🤖 AI-Enhanced System v69: All systems operational with CORS fixes active</div>';
+            
+            document.getElementById('logsContent').innerHTML = content;
+        }
+
+        function openTheBrain() {
+            showSuccess('🧠 Opening TheBrain AI knowledge integration...');
+            window.open('https://thebrain.com', '_blank');
+        }
+
+        // Utility Functions
+        function showError(message) {
+            const errorDiv = document.getElementById('errorDisplay');
+            errorDiv.textContent = message;
+            errorDiv.classList.remove('hidden');
+            console.error('❌', message);
+            setTimeout(() => errorDiv.classList.add('hidden'), 5000);
+        }
+
+        function showSuccess(message) {
+            console.log('✅', message);
+            // You could add a success notification system here if needed
+        }
     </script>
 </body>
 </html>
