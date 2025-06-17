@@ -462,7 +462,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="ai-badge">🤖 AI-Enhanced v80 ✅ EXTRACTED DATA FIX</div>
+            <div class="ai-badge">🤖 AI-Enhanced v81 🚀 BATCH PROCESSING</div>
             <h1>AI Competitor Monitor</h1>
             <p>Advanced Intelligence & Real-time Competitive Analysis with Enhanced CORS Support</p>
         </div>
@@ -653,7 +653,7 @@
         const CONFIG = {
             apiUrl: 'https://script.google.com/macros/s/AKfycbw6O7u_y1bLvWZlTWqO50tH2f5YhzvqrihQBr3eig9TJeh28ik0eC3Qphpjg_EgPEG2bQ/exec',
             token: 'dev-token-change-me',
-            version: 80,
+            version: 81,
             aiEnhanced: true,
             corsFixed: true
         };
@@ -668,10 +668,11 @@
 
         // Initialize the application
         function init() {
-            console.log('🚀 AI Competitive Monitor v80 - Extracted Data Fix + Enhanced Intelligence');
+            console.log('🚀 AI Competitive Monitor v81 - Batch Processing + AI Intelligence');
             console.log('✅ CORS Fixed - Using proven deployment URL:', CONFIG.apiUrl);
-            console.log('🤖 AI Features: Ready for connection');
-            console.log('🔧 Fixed: Conflicting WebApp files and extracted data handler');
+            console.log('🤖 AI Features: Relevance scoring, keyword extraction, competitor detection');
+            console.log('🚀 New: Batch processing for all 55 URLs with progress tracking');
+            console.log('📊 Progress: Real-time updates during baseline generation');
             
             // Load saved token - FIXED: Prevent corruption on reload
             const savedToken = localStorage.getItem('apiToken');
@@ -816,6 +817,29 @@
             document.getElementById(tabName + 'Tab').style.display = 'block';
             
             currentTab = tabName;
+            
+            // Check for existing baseline job when baseline tab is shown
+            if (tabName === 'baseline') {
+                checkExistingBaselineJob();
+            }
+        }
+        
+        // Check for existing baseline job
+        async function checkExistingBaselineJob() {
+            try {
+                const status = await apiCall('baseline-status');
+                
+                if (status.active) {
+                    // There's an active job, start polling
+                    if (!baselinePollingInterval) {
+                        baselinePollingInterval = setInterval(pollBaselineProgress, 2000);
+                    }
+                    // Show current progress immediately
+                    pollBaselineProgress();
+                }
+            } catch (error) {
+                console.error('Error checking baseline job:', error);
+            }
         }
 
         // Status Management - FIXED: Prevent infinite loop
@@ -926,6 +950,51 @@
             }, 150);
         }
 
+        // Progress polling for baseline generation
+        let baselinePollingInterval = null;
+        
+        async function pollBaselineProgress() {
+            try {
+                const status = await apiCall('baseline-status');
+                
+                if (status.error) {
+                    console.error('Error getting baseline status:', status.error);
+                    return;
+                }
+                
+                if (status.active) {
+                    // Update progress display
+                    const progress = status.progress;
+                    const progressHtml = `
+                        <div class="success-message">
+                            🤖 AI-enhanced baseline generation in progress!<br>
+                            <div style="margin: 15px 0;">
+                                <div style="background: var(--secondary-bg); border-radius: 8px; height: 30px; overflow: hidden; position: relative;">
+                                    <div style="background: linear-gradient(90deg, var(--accent-color), var(--primary-color)); height: 100%; width: ${progress.percent}%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center;">
+                                        <span style="color: white; font-weight: bold; position: absolute; left: 50%; transform: translateX(-50%);">${progress.percent}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            Progress: ${progress.completed}/${progress.total} URLs processed<br>
+                            ${progress.failed > 0 ? `Errors: ${progress.failed}<br>` : ''}
+                            Estimated time remaining: ${progress.estimated_time_remaining}<br><br>
+                            <em>The system will continue processing in the background. You can safely navigate away.</em>
+                        </div>
+                    `;
+                    document.getElementById('baselineContent').innerHTML = progressHtml;
+                } else {
+                    // No active job, stop polling
+                    if (baselinePollingInterval) {
+                        clearInterval(baselinePollingInterval);
+                        baselinePollingInterval = null;
+                    }
+                }
+                
+            } catch (error) {
+                console.error('Error polling baseline progress:', error);
+            }
+        }
+        
         // Enhanced baseline generation with better debugging - FIXED: Prevent infinite loop
         async function generateBaseline(event) {
             if (event) {
@@ -966,15 +1035,34 @@
                 console.log('📊 Baseline result:', result);
                 
                 if (result.status === 'in_progress') {
+                    // Start polling for progress
+                    if (!baselinePollingInterval) {
+                        baselinePollingInterval = setInterval(pollBaselineProgress, 2000); // Poll every 2 seconds
+                    }
+                    
+                    // Show initial progress
                     document.getElementById('baselineContent').innerHTML = `
                         <div class="success-message">
-                            🤖 AI-enhanced baseline generation in progress!<br>
+                            🤖 AI-enhanced baseline generation started!<br>
+                            <div style="margin: 15px 0;">
+                                <div style="background: var(--secondary-bg); border-radius: 8px; height: 30px; overflow: hidden; position: relative;">
+                                    <div style="background: linear-gradient(90deg, var(--accent-color), var(--primary-color)); height: 100%; width: ${result.percentComplete || 0}%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center;">
+                                        <span style="color: white; font-weight: bold; position: absolute; left: 50%; transform: translateX(-50%);">${result.percentComplete || 0}%</span>
+                                    </div>
+                                </div>
+                            </div>
                             Progress: ${result.processed || 0}/${result.total || 0} URLs<br>
                             ${result.percentComplete ? `(${result.percentComplete}% complete)` : ''}<br><br>
-                            This will create persistent data that you only need to generate once.
+                            <em>The system will continue processing in the background. You can safely navigate away.</em>
                         </div>
                     `;
                 } else if (result.status === 'completed') {
+                    // Stop polling
+                    if (baselinePollingInterval) {
+                        clearInterval(baselinePollingInterval);
+                        baselinePollingInterval = null;
+                    }
+                    
                     document.getElementById('baselineContent').innerHTML = `
                         <div class="success-message">
                             ✅ AI-enhanced baseline generation completed!<br>
@@ -1138,8 +1226,8 @@
                         .substring(0, 100) + (item.extractedContent && item.extractedContent.length > 100 ? '...' : '');
                     
                     const aiAnalysis = item.aiProcessed ? 
-                        `Relevance: ${item.relevanceScore || 'N/A'}, Keywords: ${item.keywords || 'N/A'}` :
-                        'Basic extraction';
+                        `Relevance: ${item.relevanceScore || 0}/10, Keywords: ${item.keywords || 'None detected'}` :
+                        `Relevance: ${item.relevanceScore || 0}/10`;
                     
                     const urlShort = item.url ? 
                         (item.url.length > 40 ? item.url.substring(0, 40) + '...' : item.url) : 'N/A';
