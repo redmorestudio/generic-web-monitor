@@ -168,6 +168,18 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
+        .button:active:not(:disabled) {
+            transform: translateY(0px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            transition: all 0.1s ease;
+        }
+
+        .button.clicking {
+            transform: scale(0.95);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.1s ease;
+        }
+
         .status-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -450,7 +462,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="ai-badge">🤖 AI-Enhanced v70 ✅ Infinite Loop FIXED</div>
+            <div class="ai-badge">🤖 AI-Enhanced v75 ✅ Permissions FIXED</div>
             <h1>AI Competitor Monitor</h1>
             <p>Advanced Intelligence & Real-time Competitive Analysis with Enhanced CORS Support</p>
         </div>
@@ -639,10 +651,10 @@
     <script>
         // UPDATED: Enhanced configuration for AI-powered backend with CORS fixes + AI integration
         const CONFIG = {
-            // v70 DEPLOYMENT: INFINITE LOOP FIXED + CORS-FIXED + FULL AI INTEGRATION
+            // v75 DEPLOYMENT: PERMISSIONS FIXED + TOKEN BUG FIXED + FULL AI INTEGRATION
             apiUrl: 'https://script.google.com/macros/s/AKfycbyn_EA2xjOVdw-FsRNOLBFOakSuMLzFOFIGNoaPk_5KFlE01-d6kpUQHKiumPE86hLrsA/exec',
             token: 'dev-token-change-me',
-            version: 70,
+            version: 75,
             aiEnhanced: true,
             corsFixed: true
         };
@@ -661,19 +673,29 @@
             console.log('✅ CORS Fixed - Using proven deployment URL:', CONFIG.apiUrl);
             console.log('🤖 AI Features: Ready for connection');
             
-            // Load saved token
+            // Load saved token - FIXED: Prevent corruption on reload
             const savedToken = localStorage.getItem('apiToken');
-            if (savedToken && savedToken !== 'dev-token-change-me') {
-                document.getElementById('apiToken').value = savedToken;
-                CONFIG.token = savedToken;
-                authenticated = true;
-                showMainInterface();
-                // Use a timeout to prevent any initialization race conditions
-                setTimeout(() => {
-                    if (!isStatusLoading) {
-                        refreshStatus();
-                    }
-                }, 1000);
+            if (savedToken && savedToken !== 'dev-token-change-me' && savedToken.trim() !== '') {
+                // Only use the saved token if it's clean (not duplicated)
+                const cleanToken = savedToken.trim();
+                if (!cleanToken.includes('dev-token-change-medev-token-change-me')) {
+                    document.getElementById('apiToken').value = cleanToken;
+                    CONFIG.token = cleanToken;
+                    authenticated = true;
+                    showMainInterface();
+                    console.log('✅ Loaded clean saved token:', cleanToken.substring(0, 10) + '...');
+                    // Use a timeout to prevent any initialization race conditions
+                    setTimeout(() => {
+                        if (!isStatusLoading) {
+                            refreshStatus();
+                        }
+                    }, 1000);
+                } else {
+                    // Token is corrupted, clear it
+                    console.log('⚠️ Corrupted token detected, clearing...');
+                    localStorage.removeItem('apiToken');
+                    document.getElementById('apiToken').value = 'dev-token-change-me';
+                }
             }
         }
 
@@ -732,19 +754,28 @@
             }
         }
 
-        // Token Management
+        // Token Management - FIXED: Prevent token duplication
         function saveToken() {
-            const token = document.getElementById('apiToken').value;
-            if (!token || token.trim() === '') {
+            const button = event.target;
+            addClickFeedback(button);
+            
+            const token = document.getElementById('apiToken').value.trim();
+            if (!token || token === '') {
                 showError('Please enter a valid token');
                 return;
             }
             
+            // Clear any existing token to prevent duplication
+            localStorage.removeItem('apiToken');
+            
+            // Save the clean token
             CONFIG.token = token;
             localStorage.setItem('apiToken', token);
             authenticated = true;
             showMainInterface();
             showSuccess('💾 API token saved successfully! AI features ready.');
+            
+            console.log('✅ Token saved:', token.substring(0, 10) + '...');
             
             // Refresh status after authentication with delay to prevent issues
             setTimeout(() => {
@@ -870,34 +901,104 @@
             companiesDisplay.innerHTML = html;
         }
 
-        // Tab Actions
+        // Enhanced button click feedback
+        function addClickFeedback(buttonElement) {
+            buttonElement.classList.add('clicking');
+            setTimeout(() => {
+                buttonElement.classList.remove('clicking');
+            }, 150);
+        }
+
+        // Enhanced baseline generation with better debugging
         async function generateBaseline() {
+            const button = event.target;
+            addClickFeedback(button);
+            
+            console.log('🚀 Starting enhanced baseline generation...');
             document.getElementById('baselineContent').innerHTML = '<div class="loading">🤖 Starting AI-enhanced baseline generation...</div>';
             
             try {
+                // First, let's check if we already have baseline data
+                console.log('📊 Checking for existing baseline data...');
+                const existingData = await apiCall('extracted', { limit: 5 });
+                
+                if (existingData.extractedData && existingData.extractedData.length > 0) {
+                    console.log('✅ Found existing baseline data:', existingData.extractedData.length, 'items');
+                    document.getElementById('baselineContent').innerHTML = `
+                        <div class="success-message">
+                            ✅ Baseline data already exists!<br>
+                            Found ${existingData.extractedData.length} extracted data items.<br>
+                            🤖 AI Features: Active with intelligent content extraction<br>
+                            📊 Status: Ready for monitoring<br><br>
+                            <strong>No need to regenerate baseline.</strong> Your data is already available in the Extracted Data tab.
+                        </div>
+                    `;
+                    return;
+                }
+                
+                console.log('📝 No existing data found, starting new baseline generation...');
                 const result = await apiCall('baseline');
                 
                 if (result.error) {
                     throw new Error(result.error);
                 }
                 
+                console.log('📊 Baseline result:', result);
+                
+                if (result.status === 'in_progress') {
+                    document.getElementById('baselineContent').innerHTML = `
+                        <div class="success-message">
+                            🤖 AI-enhanced baseline generation in progress!<br>
+                            Progress: ${result.processed || 0}/${result.total || 0} URLs<br>
+                            ${result.percentComplete ? `(${result.percentComplete}% complete)` : ''}<br><br>
+                            This will create persistent data that you only need to generate once.
+                        </div>
+                    `;
+                } else if (result.status === 'completed') {
+                    document.getElementById('baselineContent').innerHTML = `
+                        <div class="success-message">
+                            ✅ AI-enhanced baseline generation completed!<br>
+                            ${result.message}<br><br>
+                            🤖 AI Features: Enhanced with intelligent content extraction<br>
+                            ✅ CORS Status: Fixed and operational<br>
+                            📊 Baseline Status: Complete and persistent<br><br>
+                            <strong>Your baseline is now saved and will persist between sessions.</strong>
+                        </div>
+                    `;
+                    
+                    // Refresh status and try to load extracted data
+                    setTimeout(() => {
+                        refreshStatus();
+                        console.log('🔄 Baseline complete, data should now be available');
+                    }, 1000);
+                } else {
+                    document.getElementById('baselineContent').innerHTML = `
+                        <div class="success-message">
+                            ✅ AI-enhanced baseline system is ready!<br>
+                            ${result.message}<br><br>
+                            🤖 AI Features: ${result.aiEnhanced ? 'Enhanced with intelligent content extraction' : 'Basic'}<br>
+                            ✅ CORS Status: Fixed and operational<br>
+                            📊 System Status: Ready for baseline generation
+                        </div>
+                    `;
+                }
+                
+            } catch (error) {
+                console.error('❌ Baseline generation error:', error);
                 document.getElementById('baselineContent').innerHTML = `
-                    <div class="success-message">
-                        ✅ AI-enhanced baseline system is ready!<br>
-                        ${result.message}<br><br>
-                        🤖 AI Features: ${result.aiEnhanced ? 'Enhanced with intelligent content extraction' : 'Basic'}<br>
-                        ✅ CORS Status: Fixed and operational<br>
-                        📊 System Status: Ready for baseline generation
+                    <div class="error-message">
+                        ❌ Error with AI-enhanced baseline: ${error.message}<br><br>
+                        This might be a temporary issue. Please try again.<br>
+                        If the problem persists, the backend might need debugging.
                     </div>
                 `;
-                
-                setTimeout(() => refreshStatus(), 1000);
-            } catch (error) {
-                document.getElementById('baselineContent').innerHTML = `<div class="error-message">❌ Error with AI-enhanced baseline: ${error.message}</div>`;
             }
         }
 
         async function runMonitorCheck() {
+            const button = event.target;
+            addClickFeedback(button);
+            
             showSuccess('🤖 Running AI-enhanced monitor check...');
             
             try {
@@ -916,6 +1017,9 @@
         }
 
         async function loadExtractedData() {
+            const button = event.target;
+            addClickFeedback(button);
+            
             // Get filter values
             const company = document.getElementById('companyFilter').value;
             const type = document.getElementById('typeFilter').value;
@@ -927,30 +1031,41 @@
             if (keyword) filters.keyword = keyword;
             filters.limit = 100; // Get more results for filtering
             
+            console.log('📊 Loading extracted data with filters:', filters);
             document.getElementById('extractedDataContent').innerHTML = '<div class="loading">🤖 Loading AI-enhanced extracted data with filters...</div>';
             
             try {
                 const data = await apiCall('extracted', filters);
+                console.log('📊 Extracted data response:', data);
                 
                 if (data.error) {
+                    console.log('❌ API returned error:', data.error);
                     document.getElementById('extractedDataContent').innerHTML = '<div class="error-message">No AI-enhanced extracted data available yet. Generate baseline first to enable AI content extraction.</div>';
                     return;
                 }
                 
                 if (!data.extractedData || data.extractedData.length === 0) {
+                    console.log('📊 No extracted data found. Suggestions:', {
+                        filtersApplied: Object.keys(filters).length > 1,
+                        shouldGenerateBaseline: true
+                    });
+                    
                     document.getElementById('extractedDataContent').innerHTML = `
                         <div class="error-message">
                             No extracted data found with current filters.<br>
                             ${Object.keys(filters).length > 1 ? 'Try removing some filters or ' : ''}
-                            Generate baseline first to enable AI content extraction.
+                            Generate baseline first to enable AI content extraction.<br><br>
+                            <strong>Tip:</strong> The baseline only needs to be generated once and will persist between sessions.
                         </div>
                     `;
                     return;
                 }
                 
+                console.log('✅ Successfully loaded', data.extractedData.length, 'extracted data items');
                 displayExtractedData(data);
                 
             } catch (error) {
+                console.error('❌ Error loading extracted data:', error);
                 document.getElementById('extractedDataContent').innerHTML = `<div class="error-message">❌ Error loading AI-enhanced extracted data: ${error.message}</div>`;
             }
         }
@@ -1016,6 +1131,9 @@
         }
         
         function clearFilters() {
+            const button = event.target;
+            addClickFeedback(button);
+            
             document.getElementById('companyFilter').value = '';
             document.getElementById('typeFilter').value = '';
             document.getElementById('keywordFilter').value = '';
