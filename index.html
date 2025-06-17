@@ -1128,6 +1128,8 @@
         }
 
         // FIXED: Prevent infinite loop in loadExtractedData
+        let isExtractedDataLoading = false; // Separate flag for this function
+        
         async function loadExtractedData(event) {
             if (event) {
                 event.preventDefault();
@@ -1135,11 +1137,13 @@
                 addClickFeedback(event.target);
             }
             
-            // Prevent concurrent calls
-            if (isLoading) {
-                console.log('⚠️ Already loading data, skipping...');
+            // Prevent concurrent calls with dedicated flag
+            if (isExtractedDataLoading) {
+                console.log('⚠️ Already loading extracted data, skipping...');
                 return;
             }
+            
+            isExtractedDataLoading = true; // Set flag immediately
             
             // Get filter values
             const company = document.getElementById('companyFilter').value;
@@ -1188,6 +1192,9 @@
             } catch (error) {
                 console.error('❌ Error loading extracted data:', error);
                 document.getElementById('extractedDataContent').innerHTML = `<div class="error-message">❌ Error loading AI-enhanced extracted data: ${error.message}</div>`;
+            } finally {
+                // Always clear the flag
+                isExtractedDataLoading = false;
             }
         }
         
@@ -1313,7 +1320,7 @@
                         <h4>📊 AI-Enhanced System Configuration</h4>
                         ${data.aiEnhanced ? '<div class="success-message">🤖 AI Intelligence Features: Active</div>' : ''}
                         <div class="success-message">✅ CORS Status: Fixed and operational</div>
-                        <div class="success-message">🔧 Version: v80 - Extracted data handler fixed</div>
+                        <div class="success-message">🔧 Version: v81 - Fixed infinite loop in extracted data</div>
                         <pre style="background: var(--primary-bg); padding: 15px; border-radius: 8px; overflow-x: auto; color: var(--text-primary);">
 ${JSON.stringify(data, null, 2)}
                         </pre>
