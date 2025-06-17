@@ -462,7 +462,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="ai-badge">🤖 AI-Enhanced v78 ✅ PUBLIC ACCESS</div>
+            <div class="ai-badge">🤖 AI-Enhanced v79 ✅ LOOP FIX</div>
             <h1>AI Competitor Monitor</h1>
             <p>Advanced Intelligence & Real-time Competitive Analysis with Enhanced CORS Support</p>
         </div>
@@ -473,26 +473,26 @@
             <p>Enter your API token to access the enhanced AI monitoring system:</p>
             <div class="input-group">
                 <input type="password" id="apiToken" placeholder="Enter API token" value="dev-token-change-me">
-                <button onclick="saveToken()" class="button button-primary" style="margin-top: 10px;" type="button">💾 Save Token</button>
+                <button onclick="saveToken(event)" class="button button-primary" style="margin-top: 10px;" type="button">💾 Save Token</button>
             </div>
         </div>
 
         <!-- Navigation Tabs -->
         <div class="tabs" id="tabsSection" style="display: none;">
-            <button class="tab active" onclick="showTab('dashboard')">📊 Dashboard</button>
-            <button class="tab" onclick="showTab('extracted')">📄 Extracted Data</button>
-            <button class="tab" onclick="showTab('changes')">📈 Change History</button>
-            <button class="tab" onclick="showTab('configuration')">⚙️ Configuration</button>
-            <button class="tab" onclick="showTab('baseline')">📊 Baseline</button>
-            <button class="tab" onclick="showTab('logs')">📝 System Logs</button>
+            <button class="tab active" onclick="showTab(event, 'dashboard')">📊 Dashboard</button>
+            <button class="tab" onclick="showTab(event, 'extracted')">📄 Extracted Data</button>
+            <button class="tab" onclick="showTab(event, 'changes')">📈 Change History</button>
+            <button class="tab" onclick="showTab(event, 'configuration')">⚙️ Configuration</button>
+            <button class="tab" onclick="showTab(event, 'baseline')">📊 Baseline</button>
+            <button class="tab" onclick="showTab(event, 'logs')">📝 System Logs</button>
         </div>
 
         <!-- Action Buttons -->
         <div class="action-buttons" id="actionButtonsSection" style="display: none;">
-            <button class="button button-primary" onclick="refreshStatus()">🔄 Refresh Status</button>
-            <button class="button button-secondary" onclick="generateBaseline()">📊 Generate Baseline</button>
-            <button class="button button-warning" onclick="runMonitorCheck()">🔍 Run Monitor Check</button>
-            <button class="button button-ai" onclick="openTheBrain()">🧠 TheBrain Integration</button>
+            <button class="button button-primary" onclick="refreshStatus(event)">🔄 Refresh Status</button>
+            <button class="button button-secondary" onclick="generateBaseline(event)">📊 Generate Baseline</button>
+            <button class="button button-warning" onclick="runMonitorCheck(event)">🔍 Run Monitor Check</button>
+            <button class="button button-ai" onclick="openTheBrain(event)">🧠 TheBrain Integration</button>
         </div>
 
         <!-- System Status -->
@@ -600,8 +600,8 @@
                         </div>
                     </div>
                     <div class="action-buttons" style="margin: 0;">
-                        <button class="button button-primary" onclick="loadExtractedData()">🔄 Apply Filters & Load Data</button>
-                        <button class="button button-secondary" onclick="clearFilters()">🗑️ Clear Filters</button>
+                        <button class="button button-primary" onclick="loadExtractedData(event)">🔄 Apply Filters & Load Data</button>
+                        <button class="button button-secondary" onclick="clearFilters(event)">🗑️ Clear Filters</button>
                     </div>
                 </div>
                 
@@ -612,7 +612,7 @@
 
             <div id="changesTab" class="tab-content">
                 <h2>📈 AI-Filtered Change History & Analysis</h2>
-                <button class="button button-secondary" onclick="loadChangeHistory()">🔄 Load Change History</button>
+                <button class="button button-secondary" onclick="loadChangeHistory(event)">🔄 Load Change History</button>
                 <div id="changeHistoryContent">
                     <div class="error-message">Click "Load Change History" to view AI-filtered changes...</div>
                 </div>
@@ -620,7 +620,7 @@
 
             <div id="configurationTab" class="tab-content">
                 <h2>⚙️ AI System Configuration</h2>
-                <button class="button button-secondary" onclick="loadConfiguration()">🔄 Load Configuration</button>
+                <button class="button button-secondary" onclick="loadConfiguration(event)">🔄 Load Configuration</button>
                 <div id="configurationContent">
                     <div class="error-message">Click "Load Configuration" to view AI system settings...</div>
                 </div>
@@ -629,7 +629,7 @@
             <div id="baselineTab" class="tab-content">
                 <h2>📊 AI-Enhanced Baseline Management</h2>
                 <p>Generate and manage AI-enhanced baseline snapshots with intelligent content extraction.</p>
-                <button class="button button-primary" onclick="generateBaseline()">🚀 Generate AI-Enhanced Baseline</button>
+                <button class="button button-primary" onclick="generateBaseline(event)">🚀 Generate AI-Enhanced Baseline</button>
                 <div id="baselineContent">
                     <div class="error-message">Click "Generate AI-Enhanced Baseline" to create intelligent snapshots...</div>
                 </div>
@@ -637,7 +637,7 @@
 
             <div id="logsTab" class="tab-content">
                 <h2>📝 AI System Logs & Monitoring</h2>
-                <button class="button button-secondary" onclick="loadSystemLogs()">🔄 Refresh Logs</button>
+                <button class="button button-secondary" onclick="loadSystemLogs(event)">🔄 Refresh Logs</button>
                 <div id="systemLogsContent">
                     <div class="error-message">Click "Refresh Logs" to load AI system logs...</div>
                 </div>
@@ -649,12 +649,11 @@
     </div>
 
     <script>
-        // UPDATED: Enhanced configuration for AI-powered backend with CORS fixes + AI integration
+        // v79: FIXED INFINITE LOOPS + PROPER EVENT HANDLING
         const CONFIG = {
-            // v78 DEPLOYMENT: PUBLIC ACCESS + PERMISSIONS FIXED + TOKEN BUG FIXED + FULL AI INTEGRATION
             apiUrl: 'https://script.google.com/macros/s/AKfycbzzBwLL4dlgaMX2iGTh88O6Uxfrnk0F4W9b_6Qf582ffEcODnfJP5ymxNmrtvT3sYASCw/exec',
             token: 'dev-token-change-me',
-            version: 78,
+            version: 79,
             aiEnhanced: true,
             corsFixed: true
         };
@@ -669,9 +668,10 @@
 
         // Initialize the application
         function init() {
-            console.log('🚀 AI Competitive Monitor v78 - Public Access + Enhanced Intelligence');
+            console.log('🚀 AI Competitive Monitor v79 - Loop Fix + Enhanced Intelligence');
             console.log('✅ CORS Fixed - Using proven deployment URL:', CONFIG.apiUrl);
             console.log('🤖 AI Features: Ready for connection');
+            console.log('🔧 Fixed: Infinite loops and event handling issues');
             
             // Load saved token - FIXED: Prevent corruption on reload
             const savedToken = localStorage.getItem('apiToken');
@@ -719,7 +719,7 @@
                     ...params
                 });
                 
-                console.log(`🤖 AI API Call: ${action} - CORS Fixed Version with AI Integration`);
+                console.log(`🤖 AI API Call: ${action} - v79 with loop fixes`);
                 
                 const response = await fetch(`${CONFIG.apiUrl}?${urlParams}`, {
                     method: 'GET',
@@ -755,9 +755,12 @@
         }
 
         // Token Management - FIXED: Prevent token duplication
-        function saveToken() {
-            const button = event.target;
-            addClickFeedback(button);
+        function saveToken(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
             
             const token = document.getElementById('apiToken').value.trim();
             if (!token || token === '') {
@@ -794,11 +797,18 @@
             document.getElementById('contentArea').style.display = 'block';
         }
 
-        function showTab(tabName) {
+        function showTab(event, tabName) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
             // Update tab buttons
             const tabs = document.querySelectorAll('.tab');
             tabs.forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
             
             // Update tab content
             const contents = document.querySelectorAll('.tab-content');
@@ -808,14 +818,20 @@
             currentTab = tabName;
         }
 
-        // Status Management
-        async function refreshStatus() {
+        // Status Management - FIXED: Prevent infinite loop
+        async function refreshStatus(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
             if (isStatusLoading) {
                 console.log('⚠️ Status refresh already in progress');
                 return;
             }
             
-            console.log('🔄 Refreshing AI-enhanced status with CORS fixes...');
+            console.log('🔄 Refreshing AI-enhanced status (v79 - loop fixed)...');
             const statusData = await apiCall('status');
             
             if (statusData.error) {
@@ -903,18 +919,22 @@
 
         // Enhanced button click feedback
         function addClickFeedback(buttonElement) {
+            if (!buttonElement) return;
             buttonElement.classList.add('clicking');
             setTimeout(() => {
                 buttonElement.classList.remove('clicking');
             }, 150);
         }
 
-        // Enhanced baseline generation with better debugging
-        async function generateBaseline() {
-            const button = event.target;
-            addClickFeedback(button);
+        // Enhanced baseline generation with better debugging - FIXED: Prevent infinite loop
+        async function generateBaseline(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
             
-            console.log('🚀 Starting enhanced baseline generation...');
+            console.log('🚀 Starting enhanced baseline generation (v79)...');
             document.getElementById('baselineContent').innerHTML = '<div class="loading">🤖 Starting AI-enhanced baseline generation...</div>';
             
             try {
@@ -995,9 +1015,12 @@
             }
         }
 
-        async function runMonitorCheck() {
-            const button = event.target;
-            addClickFeedback(button);
+        async function runMonitorCheck(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
             
             showSuccess('🤖 Running AI-enhanced monitor check...');
             
@@ -1016,9 +1039,19 @@
             }
         }
 
-        async function loadExtractedData() {
-            const button = event.target;
-            addClickFeedback(button);
+        // FIXED: Prevent infinite loop in loadExtractedData
+        async function loadExtractedData(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
+            // Prevent concurrent calls
+            if (isLoading) {
+                console.log('⚠️ Already loading data, skipping...');
+                return;
+            }
             
             // Get filter values
             const company = document.getElementById('companyFilter').value;
@@ -1130,9 +1163,12 @@
             document.getElementById('extractedDataContent').innerHTML = html;
         }
         
-        function clearFilters() {
-            const button = event.target;
-            addClickFeedback(button);
+        function clearFilters(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
             
             document.getElementById('companyFilter').value = '';
             document.getElementById('typeFilter').value = '';
@@ -1142,7 +1178,13 @@
             document.getElementById('extractedDataContent').innerHTML = '<div class="error-message">Filters cleared. Click "Apply Filters & Load Data" to view all extracted data...</div>';
         }
 
-        async function loadChangeHistory() {
+        async function loadChangeHistory(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
             try {
                 const data = await apiCall('changes');
                 
@@ -1163,7 +1205,13 @@
             }
         }
 
-        async function loadConfiguration() {
+        async function loadConfiguration(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
             try {
                 const data = await apiCall('config');
                 
@@ -1177,6 +1225,7 @@
                         <h4>📊 AI-Enhanced System Configuration</h4>
                         ${data.aiEnhanced ? '<div class="success-message">🤖 AI Intelligence Features: Active</div>' : ''}
                         <div class="success-message">✅ CORS Status: Fixed and operational</div>
+                        <div class="success-message">🔧 Version: v79 - Infinite loops fixed</div>
                         <pre style="background: var(--primary-bg); padding: 15px; border-radius: 8px; overflow-x: auto; color: var(--text-primary);">
 ${JSON.stringify(data, null, 2)}
                         </pre>
@@ -1187,7 +1236,13 @@ ${JSON.stringify(data, null, 2)}
             }
         }
 
-        async function loadSystemLogs() {
+        async function loadSystemLogs(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
             try {
                 const data = await apiCall('logs');
                 
@@ -1213,7 +1268,7 @@ ${JSON.stringify(data, null, 2)}
                     html += '</div>';
                     document.getElementById('systemLogsContent').innerHTML = html;
                 } else {
-                    document.getElementById('systemLogsContent').innerHTML = '<div class="success-message">🤖 AI-Enhanced System v70: All systems operational with CORS fixes active</div>';
+                    document.getElementById('systemLogsContent').innerHTML = '<div class="success-message">🤖 AI-Enhanced System v79: All systems operational with loop fixes active</div>';
                 }
             } catch (error) {
                 document.getElementById('systemLogsContent').innerHTML = `<div class="error-message">❌ Error loading AI system logs: ${error.message}</div>`;
@@ -1221,7 +1276,13 @@ ${JSON.stringify(data, null, 2)}
         }
 
         // TheBrain Integration
-        function openTheBrain() {
+        function openTheBrain(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
             showSuccess('🧠 Opening TheBrain AI knowledge integration...');
             window.open('https://thebrain.com', '_blank');
         }
