@@ -244,7 +244,7 @@ function getSystemStatusFixed() {
       lastRun: lastRun || 'Never',
       companies: config.length,
       urls: totalUrls,
-      version: 76, // FIXED PERMISSIONS & CORS VERSION
+      version: 78, // PUBLIC ACCESS & FIXED PERMISSIONS VERSION
       corsFixed: true,
       timestamp: new Date().toISOString()
     };
