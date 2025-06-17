@@ -447,7 +447,7 @@
         }
     </style>
 </head>
-<body>
+<body x-data="app" x-init="init()">
     <div class="container">
         <div class="header">
             <div class="ai-badge">🤖 AI-Enhanced v69 ✅ CORS Fixed + Full AI Intelligence</div>
@@ -456,35 +456,35 @@
         </div>
 
         <!-- Authentication -->
-        <div class="auth-section" x-show="!authenticated" x-data="app">
+        <div class="auth-section" x-show="!authenticated">
             <h3>🔐 Authentication</h3>
             <p>Enter your API token to access the enhanced AI monitoring system:</p>
             <div class="input-group">
                 <input type="password" id="apiToken" placeholder="Enter API token" value="dev-token-change-me">
-                <button id="saveTokenBtn" class="button button-primary" style="margin-top: 10px;" type="button">💾 Save Token</button>
+                <button @click="saveToken()" class="button button-primary" style="margin-top: 10px;" type="button" :disabled="loading">💾 Save Token</button>
             </div>
         </div>
 
         <!-- Navigation Tabs -->
-        <div class="tabs" x-data="app" x-show="authenticated">
-            <button class="tab" :class="currentTab === 'dashboard' ? 'active' : ''" x-on:click="currentTab = 'dashboard'">📊 Dashboard</button>
-            <button class="tab" :class="currentTab === 'extracted' ? 'active' : ''" x-on:click="currentTab = 'extracted'">📄 Extracted Data</button>
-            <button class="tab" :class="currentTab === 'changes' ? 'active' : ''" x-on:click="currentTab = 'changes'">📈 Change History</button>
-            <button class="tab" :class="currentTab === 'configuration' ? 'active' : ''" x-on:click="currentTab = 'configuration'">⚙️ Configuration</button>
-            <button class="tab" :class="currentTab === 'baseline' ? 'active' : ''" x-on:click="currentTab = 'baseline'">📊 Baseline</button>
-            <button class="tab" :class="currentTab === 'logs' ? 'active' : ''" x-on:click="currentTab = 'logs'">📝 System Logs</button>
+        <div class="tabs" x-show="authenticated">
+            <button class="tab" :class="currentTab === 'dashboard' ? 'active' : ''" @click="currentTab = 'dashboard'">📊 Dashboard</button>
+            <button class="tab" :class="currentTab === 'extracted' ? 'active' : ''" @click="currentTab = 'extracted'">📄 Extracted Data</button>
+            <button class="tab" :class="currentTab === 'changes' ? 'active' : ''" @click="currentTab = 'changes'">📈 Change History</button>
+            <button class="tab" :class="currentTab === 'configuration' ? 'active' : ''" @click="currentTab = 'configuration'">⚙️ Configuration</button>
+            <button class="tab" :class="currentTab === 'baseline' ? 'active' : ''" @click="currentTab = 'baseline'">📊 Baseline</button>
+            <button class="tab" :class="currentTab === 'logs' ? 'active' : ''" @click="currentTab = 'logs'">📝 System Logs</button>
         </div>
 
         <!-- Action Buttons -->
-        <div class="action-buttons" x-data="app" x-show="authenticated">
-            <button class="button button-primary" x-on:click="refreshStatus()" :disabled="loading">🔄 Refresh Status</button>
-            <button class="button button-secondary" x-on:click="generateBaseline()" :disabled="loading">📊 Generate Baseline</button>
-            <button class="button button-warning" x-on:click="runMonitorCheck()" :disabled="loading">🔍 Run Monitor Check</button>
-            <button class="button button-ai" x-on:click="openTheBrain()">🧠 TheBrain Integration</button>
+        <div class="action-buttons" x-show="authenticated">
+            <button class="button button-primary" @click="refreshStatus()" :disabled="loading">🔄 Refresh Status</button>
+            <button class="button button-secondary" @click="generateBaseline()" :disabled="loading">📊 Generate Baseline</button>
+            <button class="button button-warning" @click="runMonitorCheck()" :disabled="loading">🔍 Run Monitor Check</button>
+            <button class="button button-ai" @click="openTheBrain()">🧠 TheBrain Integration</button>
         </div>
 
         <!-- System Status -->
-        <div class="status-grid" x-data="app" x-show="authenticated">
+        <div class="status-grid" x-show="authenticated">
             <div class="status-card">
                 <h3>System Status</h3>
                 <div class="value" x-text="status.status || 'Loading...'"></div>
@@ -518,7 +518,7 @@
         </div>
 
         <!-- Tab Content -->
-        <div x-data="app" x-show="authenticated">
+        <div x-show="authenticated">
             <div x-show="currentTab === 'dashboard'" class="tab-content">
                 <h2>🎯 AI Intelligence Dashboard</h2>
                 
@@ -582,7 +582,7 @@
 
             <div x-show="currentTab === 'extracted'" class="tab-content">
                 <h2>📄 AI-Enhanced Extracted Data Analysis</h2>
-                <button class="button button-secondary" x-on:click="loadExtractedData()" :disabled="loading">🔄 Refresh Extracted Data</button>
+                <button class="button button-secondary" @click="loadExtractedData()" :disabled="loading">🔄 Refresh Extracted Data</button>
                 
                 <div id="extractedData">
                     <div class="loading" x-show="loading">Loading AI-enhanced content analysis...</div>
@@ -592,7 +592,7 @@
 
             <div x-show="currentTab === 'changes'" class="tab-content">
                 <h2>📈 AI-Filtered Change History & Analysis</h2>
-                <button class="button button-secondary" x-on:click="loadChangeHistory()" :disabled="loading">🔄 Load Change History</button>
+                <button class="button button-secondary" @click="loadChangeHistory()" :disabled="loading">🔄 Load Change History</button>
                 
                 <div id="changeHistory">
                     <div class="loading" x-show="loading">Loading AI-analyzed changes...</div>
@@ -602,7 +602,7 @@
 
             <div x-show="currentTab === 'configuration'" class="tab-content">
                 <h2>⚙️ AI System Configuration</h2>
-                <button class="button button-secondary" x-on:click="loadConfiguration()" :disabled="loading">🔄 Load Configuration</button>
+                <button class="button button-secondary" @click="loadConfiguration()" :disabled="loading">🔄 Load Configuration</button>
                 
                 <div id="configurationData">
                     <div class="loading" x-show="loading">Loading AI system settings...</div>
@@ -614,7 +614,7 @@
                 <h2>📊 AI-Enhanced Baseline Management</h2>
                 <p>Generate and manage AI-enhanced baseline snapshots with intelligent content extraction.</p>
                 
-                <button class="button button-primary" x-on:click="generateBaseline()" :disabled="loading">🚀 Generate AI-Enhanced Baseline</button>
+                <button class="button button-primary" @click="generateBaseline()" :disabled="loading">🚀 Generate AI-Enhanced Baseline</button>
                 
                 <div id="baselineResults">
                     <div class="loading" x-show="loading">Processing AI-enhanced baselines...</div>
@@ -624,7 +624,7 @@
 
             <div x-show="currentTab === 'logs'" class="tab-content">
                 <h2>📝 AI System Logs & Monitoring</h2>
-                <button class="button button-secondary" x-on:click="loadSystemLogs()" :disabled="loading">🔄 Refresh Logs</button>
+                <button class="button button-secondary" @click="loadSystemLogs()" :disabled="loading">🔄 Refresh Logs</button>
                 
                 <div id="systemLogs">
                     <div class="loading" x-show="loading">Loading AI system logs...</div>
@@ -632,6 +632,9 @@
                 </div>
             </div>
         </div>
+
+        <!-- Error Display -->
+        <div x-show="error" x-text="error" class="error-message" style="position: fixed; top: 20px; right: 20px; z-index: 1000; max-width: 400px;"></div>
     </div>
 
     <!-- Alpine.js -->
@@ -656,6 +659,7 @@
                 currentTab: 'dashboard',
                 loading: false,
                 error: null,
+                statusLoading: false, // Separate flag to prevent recursive status calls
                 
                 // Data
                 status: {},
@@ -676,28 +680,30 @@
                     
                     // Load saved token
                     const savedToken = localStorage.getItem('apiToken');
-                    if (savedToken) {
+                    if (savedToken && savedToken !== 'dev-token-change-me') {
                         document.getElementById('apiToken').value = savedToken;
                         CONFIG.token = savedToken;
                         this.authenticated = true;
-                        this.refreshStatus();
+                        // Use setTimeout to avoid any potential recursion issues
+                        setTimeout(() => {
+                            this.refreshStatus();
+                        }, 100);
                     }
-
-                    // Setup token save handler
-                    document.getElementById('saveTokenBtn').addEventListener('click', (e) => {
-                        e.preventDefault();
-                        this.saveToken();
-                    });
                 },
 
-                // API Helper
+                // API Helper with improved error handling
                 async apiCall(action, params = {}) {
-                    if (this.loading && action === 'status') {
+                    // Prevent multiple simultaneous status calls
+                    if (action === 'status' && this.statusLoading) {
+                        console.log('⚠️ Status check already in progress, skipping...');
                         return { error: 'Status check already in progress' };
                     }
 
                     try {
-                        if (action === 'status') this.loading = true;
+                        if (action === 'status') {
+                            this.statusLoading = true;
+                        }
+                        this.loading = true;
                         
                         const urlParams = new URLSearchParams({
                             action: action,
@@ -733,14 +739,17 @@
                         this.showError(`API Error: ${error.message}`);
                         return { error: error.message };
                     } finally {
-                        if (action === 'status') this.loading = false;
+                        this.loading = false;
+                        if (action === 'status') {
+                            this.statusLoading = false;
+                        }
                     }
                 },
 
-                // Token Management (Simplified)
+                // Token Management with improved validation
                 saveToken() {
                     const token = document.getElementById('apiToken').value;
-                    if (!token) {
+                    if (!token || token.trim() === '') {
                         this.showError('Please enter a valid token');
                         return;
                     }
@@ -750,14 +759,24 @@
                     this.authenticated = true;
                     this.showSuccess('💾 API token saved successfully! AI features ready.');
                     
-                    // Refresh status after authentication
+                    // Clear any existing error
+                    this.error = null;
+                    
+                    // Refresh status after authentication with delay to prevent issues
                     setTimeout(() => {
-                        this.refreshStatus();
+                        if (this.authenticated && !this.statusLoading) {
+                            this.refreshStatus();
+                        }
                     }, 500);
                 },
 
-                // Status Management
+                // Status Management with recursion prevention
                 async refreshStatus() {
+                    if (this.statusLoading) {
+                        console.log('⚠️ Status refresh already in progress');
+                        return;
+                    }
+                    
                     console.log('🔄 Refreshing AI-enhanced status with CORS fixes...');
                     const statusData = await this.apiCall('status');
                     
@@ -795,7 +814,6 @@
 
                 // Tab Actions
                 async generateBaseline() {
-                    this.loading = true;
                     this.baselineResultsHTML = '<div class="loading">🤖 Starting AI-enhanced baseline generation...</div>';
                     
                     try {
@@ -818,13 +836,10 @@
                         setTimeout(() => this.refreshStatus(), 1000);
                     } catch (error) {
                         this.baselineResultsHTML = `<div class="error-message">❌ Error with AI-enhanced baseline: ${error.message}</div>`;
-                    } finally {
-                        this.loading = false;
                     }
                 },
 
                 async runMonitorCheck() {
-                    this.loading = true;
                     this.showSuccess('🤖 Running AI-enhanced monitor check...');
                     
                     try {
@@ -839,13 +854,10 @@
                         setTimeout(() => this.refreshStatus(), 1000);
                     } catch (error) {
                         this.showError(`❌ Error running AI monitor check: ${error.message}`);
-                    } finally {
-                        this.loading = false;
                     }
                 },
 
                 async loadExtractedData() {
-                    this.loading = true;
                     try {
                         const data = await this.apiCall('extracted');
                         
@@ -857,13 +869,10 @@
                         this.extractedDataHTML = '<div class="success-message">🤖 AI-enhanced content extraction system is ready. Generate baseline to start intelligent content analysis.</div>';
                     } catch (error) {
                         this.extractedDataHTML = `<div class="error-message">❌ Error loading AI-enhanced extracted data: ${error.message}</div>`;
-                    } finally {
-                        this.loading = false;
                     }
                 },
 
                 async loadChangeHistory() {
-                    this.loading = true;
                     try {
                         const data = await this.apiCall('changes');
                         
@@ -881,13 +890,10 @@
                         `;
                     } catch (error) {
                         this.changeHistoryHTML = `<div class="error-message">❌ Error loading AI change history: ${error.message}</div>`;
-                    } finally {
-                        this.loading = false;
                     }
                 },
 
                 async loadConfiguration() {
-                    this.loading = true;
                     try {
                         const data = await this.apiCall('config');
                         
@@ -908,13 +914,10 @@ ${JSON.stringify(data, null, 2)}
                         `;
                     } catch (error) {
                         this.configurationHTML = `<div class="error-message">❌ Error loading AI configuration: ${error.message}</div>`;
-                    } finally {
-                        this.loading = false;
                     }
                 },
 
                 async loadSystemLogs() {
-                    this.loading = true;
                     try {
                         const data = await this.apiCall('logs');
                         
@@ -940,12 +943,10 @@ ${JSON.stringify(data, null, 2)}
                             html += '</div>';
                             this.systemLogsHTML = html;
                         } else {
-                            this.systemLogsHTML = '<div class="success-message">🤖 AI-Enhanced System v62: All systems operational with CORS fixes active</div>';
+                            this.systemLogsHTML = '<div class="success-message">🤖 AI-Enhanced System v69: All systems operational with CORS fixes active</div>';
                         }
                     } catch (error) {
                         this.systemLogsHTML = `<div class="error-message">❌ Error loading AI system logs: ${error.message}</div>`;
-                    } finally {
-                        this.loading = false;
                     }
                 },
 
