@@ -92,6 +92,15 @@ function doGet(e) {
         response = getLogsForAPIFixed(parseInt(e.parameter.limit) || 50);
         break;
         
+      case 'extracted':
+        response = getExtractedDataForAPI({
+          company: e.parameter.company,
+          type: e.parameter.type,
+          keyword: e.parameter.keyword,
+          limit: parseInt(e.parameter.limit) || 50
+        });
+        break;
+        
       default:
         response = {
           success: false,
@@ -235,7 +244,7 @@ function getSystemStatusFixed() {
       lastRun: lastRun || 'Never',
       companies: config.length,
       urls: totalUrls,
-      version: 56, // ENHANCED CORS VERSION
+      version: 70, // EXTRACTED DATA ENDPOINT VERSION
       corsFixed: true,
       timestamp: new Date().toISOString()
     };
@@ -715,6 +724,182 @@ function getUrlsForAPIFixed() {
  */
 function createJsonResponse(data, statusCode = 200) {
   return createJsonResponseWithCORS(data, statusCode);
+}
+
+/**
+ * Get extracted data from spreadsheet with filtering capabilities
+ * Supports filtering by company, type (blog, pricing, etc), and keyword
+ */
+function getExtractedDataForAPI(filters = {}) {
+  try {
+    let sheet;
+    try {
+      sheet = getOrCreateMonitorSheet();
+    } catch (error) {
+      console.error('Error getting sheet:', error);
+      return {
+        success: true,
+        extractedData: [],
+        total: 0,
+        message: 'No sheet available'
+      };
+    }
+    
+    if (!sheet || !sheet.spreadsheet) {
+      return {
+        success: true,
+        extractedData: [],
+        total: 0,
+        message: 'No spreadsheet available'
+      };
+    }
+    
+    const ss = sheet.spreadsheet;
+    const extractedData = [];
+    
+    // Read from AI_Baselines sheet (stores extracted content)
+    const baselinesSheet = ss.getSheetByName('AI_Baselines');
+    if (baselinesSheet && baselinesSheet.getLastRow() > 1) {
+      const baselineData = baselinesSheet.getDataRange().getValues();
+      const headers = baselineData[0];
+      
+      for (let i = 1; i < baselineData.length; i++) {
+        const row = baselineData[i];
+        if (row && row[0]) { // Has timestamp
+          const item = {
+            timestamp: row[0],
+            company: row[1] || '',
+            url: row[2] || '',
+            type: row[3] || 'unknown',
+            statusCode: row[4] || '',
+            contentLength: row[5] || 0,
+            contentHash: row[6] || '',
+            extractedContent: row[7] || '',
+            keyElements: row[8] || '',
+            structural: row[9] || '',
+            semantic: row[10] || '',
+            aiProcessed: row[11] || false,
+            source: 'baseline',
+            dataType: 'extracted_content'
+          };
+          
+          // Apply filters
+          if (passesFilters(item, filters)) {
+            extractedData.push(item);
+          }
+        }
+      }
+    }
+    
+    // Read from Changes sheet (stores change data with content)
+    const changesSheet = ss.getSheetByName('Changes');
+    if (changesSheet && changesSheet.getLastRow() > 1) {
+      const changeData = changesSheet.getDataRange().getValues();
+      
+      for (let i = 1; i < changeData.length; i++) {
+        const row = changeData[i];
+        if (row && row[0]) { // Has timestamp
+          const item = {
+            timestamp: row[0],
+            company: row[1] || '',
+            url: row[2] || '',
+            type: row[3] || 'change',
+            summary: row[4] || '',
+            previousHash: row[5] || '',
+            newHash: row[6] || '',
+            relevanceScore: row[7] || 0,
+            keywords: row[8] || '',
+            urlType: row[9] || '',
+            magnitude: row[10] || 0,
+            aiCategory: row[11] || '',
+            aiConfidence: row[12] || 0,
+            competitiveImpact: row[13] || 'low',
+            source: 'changes',
+            dataType: 'change_detection'
+          };
+          
+          // Apply filters
+          if (passesFilters(item, filters)) {
+            extractedData.push(item);
+          }
+        }
+      }
+    }
+    
+    // Sort by timestamp descending and limit results
+    extractedData.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+    
+    const limit = filters.limit || 50;
+    const limitedData = extractedData.slice(0, limit);
+    
+    return {
+      success: true,
+      extractedData: limitedData,
+      total: limitedData.length,
+      totalUnfiltered: extractedData.length,
+      filters: filters,
+      timestamp: new Date().toISOString()
+    };
+    
+  } catch (error) {
+    console.error('Error in getExtractedDataForAPI:', error);
+    return {
+      success: false,
+      error: error.toString()
+    };
+  }
+}
+
+/**
+ * Helper function to check if an item passes the applied filters
+ */
+function passesFilters(item, filters) {
+  // Company filter (exact match, case insensitive)
+  if (filters.company && filters.company.trim()) {
+    if (item.company.toLowerCase() !== filters.company.toLowerCase().trim()) {
+      return false;
+    }
+  }
+  
+  // Type filter (matches urlType, type, or inferred from URL)
+  if (filters.type && filters.type.trim()) {
+    const filterType = filters.type.toLowerCase().trim();
+    const itemUrlType = (item.urlType || '').toLowerCase();
+    const itemType = (item.type || '').toLowerCase();
+    const urlLower = (item.url || '').toLowerCase();
+    
+    // Check if type matches urlType, type field, or can be inferred from URL
+    const typeMatches = 
+      itemUrlType.includes(filterType) ||
+      itemType.includes(filterType) ||
+      (filterType === 'pricing' && (urlLower.includes('pricing') || urlLower.includes('plans'))) ||
+      (filterType === 'blog' && (urlLower.includes('blog') || urlLower.includes('news'))) ||
+      (filterType === 'product' && (urlLower.includes('product') || urlLower.includes('features'))) ||
+      (filterType === 'docs' && (urlLower.includes('docs') || urlLower.includes('documentation')));
+    
+    if (!typeMatches) {
+      return false;
+    }
+  }
+  
+  // Keyword filter (searches in multiple fields)
+  if (filters.keyword && filters.keyword.trim()) {
+    const keyword = filters.keyword.toLowerCase().trim();
+    const searchFields = [
+      item.extractedContent || '',
+      item.summary || '',
+      item.keywords || '',
+      item.url || '',
+      item.keyElements || '',
+      item.aiCategory || ''
+    ].join(' ').toLowerCase();
+    
+    if (!searchFields.includes(keyword)) {
+      return false;
+    }
+  }
+  
+  return true;
 }
 
 /**

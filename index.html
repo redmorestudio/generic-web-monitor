@@ -561,9 +561,40 @@
 
             <div id="extractedTab" class="tab-content">
                 <h2>📄 AI-Enhanced Extracted Data Analysis</h2>
-                <button class="button button-secondary" onclick="loadExtractedData()">🔄 Refresh Extracted Data</button>
+                
+                <!-- Filter Controls -->
+                <div class="config-section">
+                    <h4>🔍 Filter Options</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                        <div class="input-group">
+                            <label for="companyFilter">Company:</label>
+                            <select id="companyFilter">
+                                <option value="">All Companies</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="typeFilter">Content Type:</label>
+                            <select id="typeFilter">
+                                <option value="">All Types</option>
+                                <option value="pricing">Pricing</option>
+                                <option value="blog">Blog</option>
+                                <option value="product">Product</option>
+                                <option value="docs">Documentation</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="keywordFilter">Keyword Search:</label>
+                            <input type="text" id="keywordFilter" placeholder="Enter keyword...">
+                        </div>
+                    </div>
+                    <div class="action-buttons" style="margin: 0;">
+                        <button class="button button-primary" onclick="loadExtractedData()">🔄 Apply Filters & Load Data</button>
+                        <button class="button button-secondary" onclick="clearFilters()">🗑️ Clear Filters</button>
+                    </div>
+                </div>
+                
                 <div id="extractedDataContent">
-                    <div class="error-message">Click "Refresh Extracted Data" to load AI-enhanced content analysis...</div>
+                    <div class="error-message">Select filters and click "Apply Filters & Load Data" to view AI-enhanced content analysis...</div>
                 </div>
             </div>
 
@@ -788,6 +819,23 @@
             companies = data.companies || data.monitors || [];
             console.log(`📊 Loaded ${companies.length} companies with AI monitoring`);
             updateCompaniesDisplay();
+            updateCompanyFilter();
+        }
+        
+        function updateCompanyFilter() {
+            const companyFilter = document.getElementById('companyFilter');
+            if (!companyFilter) return;
+            
+            // Clear existing options except "All Companies"
+            companyFilter.innerHTML = '<option value="">All Companies</option>';
+            
+            // Add company options
+            companies.forEach(company => {
+                const option = document.createElement('option');
+                option.value = company.company;
+                option.textContent = company.company;
+                companyFilter.appendChild(option);
+            });
         }
 
         function updateCompaniesDisplay() {
@@ -868,18 +916,112 @@
         }
 
         async function loadExtractedData() {
+            // Get filter values
+            const company = document.getElementById('companyFilter').value;
+            const type = document.getElementById('typeFilter').value;
+            const keyword = document.getElementById('keywordFilter').value;
+            
+            const filters = {};
+            if (company) filters.company = company;
+            if (type) filters.type = type;
+            if (keyword) filters.keyword = keyword;
+            filters.limit = 100; // Get more results for filtering
+            
+            document.getElementById('extractedDataContent').innerHTML = '<div class="loading">🤖 Loading AI-enhanced extracted data with filters...</div>';
+            
             try {
-                const data = await apiCall('extracted');
+                const data = await apiCall('extracted', filters);
                 
                 if (data.error) {
                     document.getElementById('extractedDataContent').innerHTML = '<div class="error-message">No AI-enhanced extracted data available yet. Generate baseline first to enable AI content extraction.</div>';
                     return;
                 }
                 
-                document.getElementById('extractedDataContent').innerHTML = '<div class="success-message">🤖 AI-enhanced content extraction system is ready. Generate baseline to start intelligent content analysis.</div>';
+                if (!data.extractedData || data.extractedData.length === 0) {
+                    document.getElementById('extractedDataContent').innerHTML = `
+                        <div class="error-message">
+                            No extracted data found with current filters.<br>
+                            ${Object.keys(filters).length > 1 ? 'Try removing some filters or ' : ''}
+                            Generate baseline first to enable AI content extraction.
+                        </div>
+                    `;
+                    return;
+                }
+                
+                displayExtractedData(data);
+                
             } catch (error) {
                 document.getElementById('extractedDataContent').innerHTML = `<div class="error-message">❌ Error loading AI-enhanced extracted data: ${error.message}</div>`;
             }
+        }
+        
+        function displayExtractedData(data) {
+            const extractedData = data.extractedData || [];
+            const totalUnfiltered = data.totalUnfiltered || extractedData.length;
+            
+            let html = `
+                <div class="success-message">
+                    🤖 AI-Enhanced Extracted Data<br>
+                    Found ${extractedData.length} items
+                    ${totalUnfiltered > extractedData.length ? ` (filtered from ${totalUnfiltered} total)` : ''}
+                </div>
+            `;
+            
+            if (extractedData.length > 0) {
+                html += '<div class="data-table-container" style="overflow-x: auto; margin: 20px 0;">';
+                html += '<table class="data-table">';
+                html += `
+                    <thead>
+                        <tr>
+                            <th>Timestamp</th>
+                            <th>Company</th>
+                            <th>Type</th>
+                            <th>URL</th>
+                            <th>Content Preview</th>
+                            <th>Source</th>
+                            <th>AI Analysis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+                
+                extractedData.forEach(item => {
+                    const contentPreview = (item.extractedContent || item.summary || 'No content')
+                        .substring(0, 100) + (item.extractedContent && item.extractedContent.length > 100 ? '...' : '');
+                    
+                    const aiAnalysis = item.aiProcessed ? 
+                        `Relevance: ${item.relevanceScore || 'N/A'}, Keywords: ${item.keywords || 'N/A'}` :
+                        'Basic extraction';
+                    
+                    const urlShort = item.url ? 
+                        (item.url.length > 40 ? item.url.substring(0, 40) + '...' : item.url) : 'N/A';
+                    
+                    html += `
+                        <tr>
+                            <td>${new Date(item.timestamp).toLocaleDateString()}</td>
+                            <td><strong>${item.company || 'Unknown'}</strong></td>
+                            <td><span class="status status-operational">${item.type || item.urlType || 'General'}</span></td>
+                            <td><a href="${item.url}" target="_blank" class="url">${urlShort}</a></td>
+                            <td style="max-width: 200px;">${contentPreview}</td>
+                            <td>${item.source || 'Unknown'}</td>
+                            <td style="font-size: 12px;">${aiAnalysis}</td>
+                        </tr>
+                    `;
+                });
+                
+                html += '</tbody></table></div>';
+            }
+            
+            document.getElementById('extractedDataContent').innerHTML = html;
+        }
+        
+        function clearFilters() {
+            document.getElementById('companyFilter').value = '';
+            document.getElementById('typeFilter').value = '';
+            document.getElementById('keywordFilter').value = '';
+            
+            // Optional: Auto-reload with cleared filters
+            document.getElementById('extractedDataContent').innerHTML = '<div class="error-message">Filters cleared. Click "Apply Filters & Load Data" to view all extracted data...</div>';
         }
 
         async function loadChangeHistory() {
