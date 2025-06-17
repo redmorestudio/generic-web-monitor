@@ -462,7 +462,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="ai-badge">🤖 AI-Enhanced v79 ✅ LOOP FIX</div>
+            <div class="ai-badge">🤖 AI-Enhanced v80 ✅ EXTRACTED DATA FIX</div>
             <h1>AI Competitor Monitor</h1>
             <p>Advanced Intelligence & Real-time Competitive Analysis with Enhanced CORS Support</p>
         </div>
@@ -651,9 +651,9 @@
     <script>
         // v79: FIXED INFINITE LOOPS + PROPER EVENT HANDLING
         const CONFIG = {
-            apiUrl: 'https://script.google.com/macros/s/AKfycbzzBwLL4dlgaMX2iGTh88O6Uxfrnk0F4W9b_6Qf582ffEcODnfJP5ymxNmrtvT3sYASCw/exec',
+            apiUrl: 'https://script.google.com/macros/s/AKfycbw6O7u_y1bLvWZlTWqO50tH2f5YhzvqrihQBr3eig9TJeh28ik0eC3Qphpjg_EgPEG2bQ/exec',
             token: 'dev-token-change-me',
-            version: 79,
+            version: 80,
             aiEnhanced: true,
             corsFixed: true
         };
@@ -668,10 +668,10 @@
 
         // Initialize the application
         function init() {
-            console.log('🚀 AI Competitive Monitor v79 - Loop Fix + Enhanced Intelligence');
+            console.log('🚀 AI Competitive Monitor v80 - Extracted Data Fix + Enhanced Intelligence');
             console.log('✅ CORS Fixed - Using proven deployment URL:', CONFIG.apiUrl);
             console.log('🤖 AI Features: Ready for connection');
-            console.log('🔧 Fixed: Infinite loops and event handling issues');
+            console.log('🔧 Fixed: Conflicting WebApp files and extracted data handler');
             
             // Load saved token - FIXED: Prevent corruption on reload
             const savedToken = localStorage.getItem('apiToken');
@@ -719,7 +719,7 @@
                     ...params
                 });
                 
-                console.log(`🤖 AI API Call: ${action} - v79 with loop fixes`);
+                console.log(`🤖 AI API Call: ${action} - v80 with extracted data fix`);
                 
                 const response = await fetch(`${CONFIG.apiUrl}?${urlParams}`, {
                     method: 'GET',
@@ -831,7 +831,7 @@
                 return;
             }
             
-            console.log('🔄 Refreshing AI-enhanced status (v79 - loop fixed)...');
+            console.log('🔄 Refreshing AI-enhanced status (v80 - extracted data fixed)...');
             const statusData = await apiCall('status');
             
             if (statusData.error) {
@@ -934,7 +934,7 @@
                 addClickFeedback(event.target);
             }
             
-            console.log('🚀 Starting enhanced baseline generation (v79)...');
+            console.log('🚀 Starting enhanced baseline generation (v80)...');
             document.getElementById('baselineContent').innerHTML = '<div class="loading">🤖 Starting AI-enhanced baseline generation...</div>';
             
             try {
@@ -1225,7 +1225,7 @@
                         <h4>📊 AI-Enhanced System Configuration</h4>
                         ${data.aiEnhanced ? '<div class="success-message">🤖 AI Intelligence Features: Active</div>' : ''}
                         <div class="success-message">✅ CORS Status: Fixed and operational</div>
-                        <div class="success-message">🔧 Version: v79 - Infinite loops fixed</div>
+                        <div class="success-message">🔧 Version: v80 - Extracted data handler fixed</div>
                         <pre style="background: var(--primary-bg); padding: 15px; border-radius: 8px; overflow-x: auto; color: var(--text-primary);">
 ${JSON.stringify(data, null, 2)}
                         </pre>
@@ -1268,7 +1268,7 @@ ${JSON.stringify(data, null, 2)}
                     html += '</div>';
                     document.getElementById('systemLogsContent').innerHTML = html;
                 } else {
-                    document.getElementById('systemLogsContent').innerHTML = '<div class="success-message">🤖 AI-Enhanced System v79: All systems operational with loop fixes active</div>';
+                    document.getElementById('systemLogsContent').innerHTML = '<div class="success-message">🤖 AI-Enhanced System v80: All systems operational with extracted data fixes active</div>';
                 }
             } catch (error) {
                 document.getElementById('systemLogsContent').innerHTML = `<div class="error-message">❌ Error loading AI system logs: ${error.message}</div>`;

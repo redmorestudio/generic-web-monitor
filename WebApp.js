@@ -1,6 +1,7 @@
 /**
  * WebApp Fixed - Corrected API endpoints for AI Competitive Monitor
  * ENHANCED CORS FIX: More robust headers for GitHub Pages integration
+ * v80: Fixed extracted data handler - removed conflicting WebApp files
  */
 
 /**
