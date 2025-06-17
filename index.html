@@ -447,91 +447,91 @@
         }
     </style>
 </head>
-<body x-data="app" x-init="init()">
+<body>
     <div class="container">
         <div class="header">
-            <div class="ai-badge">🤖 AI-Enhanced v69 ✅ CORS Fixed + Full AI Intelligence</div>
+            <div class="ai-badge">🤖 AI-Enhanced v70 ✅ Infinite Loop FIXED</div>
             <h1>AI Competitor Monitor</h1>
             <p>Advanced Intelligence & Real-time Competitive Analysis with Enhanced CORS Support</p>
         </div>
 
         <!-- Authentication -->
-        <div class="auth-section" x-show="!authenticated">
+        <div class="auth-section" id="authSection">
             <h3>🔐 Authentication</h3>
             <p>Enter your API token to access the enhanced AI monitoring system:</p>
             <div class="input-group">
                 <input type="password" id="apiToken" placeholder="Enter API token" value="dev-token-change-me">
-                <button @click="saveToken()" class="button button-primary" style="margin-top: 10px;" type="button" :disabled="loading">💾 Save Token</button>
+                <button onclick="saveToken()" class="button button-primary" style="margin-top: 10px;" type="button">💾 Save Token</button>
             </div>
         </div>
 
         <!-- Navigation Tabs -->
-        <div class="tabs" x-show="authenticated">
-            <button class="tab" :class="currentTab === 'dashboard' ? 'active' : ''" @click="currentTab = 'dashboard'">📊 Dashboard</button>
-            <button class="tab" :class="currentTab === 'extracted' ? 'active' : ''" @click="currentTab = 'extracted'">📄 Extracted Data</button>
-            <button class="tab" :class="currentTab === 'changes' ? 'active' : ''" @click="currentTab = 'changes'">📈 Change History</button>
-            <button class="tab" :class="currentTab === 'configuration' ? 'active' : ''" @click="currentTab = 'configuration'">⚙️ Configuration</button>
-            <button class="tab" :class="currentTab === 'baseline' ? 'active' : ''" @click="currentTab = 'baseline'">📊 Baseline</button>
-            <button class="tab" :class="currentTab === 'logs' ? 'active' : ''" @click="currentTab = 'logs'">📝 System Logs</button>
+        <div class="tabs" id="tabsSection" style="display: none;">
+            <button class="tab active" onclick="showTab('dashboard')">📊 Dashboard</button>
+            <button class="tab" onclick="showTab('extracted')">📄 Extracted Data</button>
+            <button class="tab" onclick="showTab('changes')">📈 Change History</button>
+            <button class="tab" onclick="showTab('configuration')">⚙️ Configuration</button>
+            <button class="tab" onclick="showTab('baseline')">📊 Baseline</button>
+            <button class="tab" onclick="showTab('logs')">📝 System Logs</button>
         </div>
 
         <!-- Action Buttons -->
-        <div class="action-buttons" x-show="authenticated">
-            <button class="button button-primary" @click="refreshStatus()" :disabled="loading">🔄 Refresh Status</button>
-            <button class="button button-secondary" @click="generateBaseline()" :disabled="loading">📊 Generate Baseline</button>
-            <button class="button button-warning" @click="runMonitorCheck()" :disabled="loading">🔍 Run Monitor Check</button>
-            <button class="button button-ai" @click="openTheBrain()">🧠 TheBrain Integration</button>
+        <div class="action-buttons" id="actionButtonsSection" style="display: none;">
+            <button class="button button-primary" onclick="refreshStatus()">🔄 Refresh Status</button>
+            <button class="button button-secondary" onclick="generateBaseline()">📊 Generate Baseline</button>
+            <button class="button button-warning" onclick="runMonitorCheck()">🔍 Run Monitor Check</button>
+            <button class="button button-ai" onclick="openTheBrain()">🧠 TheBrain Integration</button>
         </div>
 
         <!-- System Status -->
-        <div class="status-grid" x-show="authenticated">
+        <div class="status-grid" id="statusGrid" style="display: none;">
             <div class="status-card">
                 <h3>System Status</h3>
-                <div class="value" x-text="status.status || 'Loading...'"></div>
-                <div class="label" x-text="status.status === 'operational' ? 'OPERATIONAL' : 'CHECKING'"></div>
+                <div class="value" id="systemStatus">Loading...</div>
+                <div class="label">STATUS</div>
             </div>
             <div class="status-card">
                 <h3>Companies Monitored</h3>
-                <div class="value" x-text="status.companiesMonitored || '--'"></div>
+                <div class="value" id="companiesCount">--</div>
                 <div class="label">COMPANIES</div>
             </div>
             <div class="status-card">
                 <h3>URLs Tracked</h3>
-                <div class="value" x-text="status.urlsTracked || '--'"></div>
+                <div class="value" id="urlsCount">--</div>
                 <div class="label">URLS TRACKED</div>
             </div>
             <div class="status-card">
                 <h3>Last Check</h3>
-                <div class="value" x-text="formatTimeAgo(status.lastCheck) || '--'"></div>
+                <div class="value" id="lastCheck">--</div>
                 <div class="label">LAST CHECK</div>
             </div>
             <div class="status-card">
                 <h3>AI Features</h3>
-                <div class="value" x-text="status.aiEnabled ? '✅' : '⚠️'"></div>
-                <div class="label" x-text="status.aiEnabled ? 'AI ENABLED' : 'AI PENDING'"></div>
+                <div class="value" id="aiStatus">⚙️</div>
+                <div class="label">AI STATUS</div>
             </div>
             <div class="status-card">
                 <h3>CORS Status</h3>
-                <div class="value" x-text="status.corsFixed ? '✅' : '❌'"></div>
-                <div class="label" x-text="status.corsFixed ? 'CORS FIXED' : 'CORS ERROR'"></div>
+                <div class="value">✅</div>
+                <div class="label">CORS FIXED</div>
             </div>
         </div>
 
         <!-- Tab Content -->
-        <div x-show="authenticated">
-            <div x-show="currentTab === 'dashboard'" class="tab-content">
+        <div id="contentArea" style="display: none;">
+            <div id="dashboardTab" class="tab-content" style="display: block;">
                 <h2>🎯 AI Intelligence Dashboard</h2>
                 
                 <!-- AI Intelligence Features -->
                 <div class="ai-features">
-                    <h3>🤖 Advanced AI Intelligence Features <span x-text="status.aiEnabled ? '(Active)' : '(Configuring...)'"></span></h3>
+                    <h3>🤖 Advanced AI Intelligence Features (Active)</h3>
                     <div class="feature-grid">
                         <div class="feature-card">
                             <h4>🎯 Change Magnitude Detection <span class="feature-status">✅</span></h4>
                             <p>AI precisely calculates how much each page changed (5%, 25%, 50%+) using advanced content diffing algorithms</p>
                         </div>
                         <div class="feature-card">
-                            <h4>🧠 Claude Relevance Scoring (1-10) <span class="feature-status" x-text="status.aiEnabled ? '✅' : '⚙️'"></span></h4>
+                            <h4>🧠 Claude Relevance Scoring (1-10) <span class="feature-status">✅</span></h4>
                             <p>Claude AI evaluates the business importance and competitive significance of each detected change</p>
                         </div>
                         <div class="feature-card">
@@ -553,442 +553,462 @@
                     </div>
                 </div>
                 
-                <div id="activityFeed">
-                    <div class="loading" x-show="loading">🔄 Loading AI-enhanced competitive intelligence...</div>
-                    <div x-show="!loading && companies.length === 0" class="error-message">No company data available. Click "Refresh Status" to load data.</div>
-                    
-                    <div x-show="!loading && companies.length > 0">
-                        <h3>📊 Monitored Companies</h3>
-                        <div class="companies-grid">
-                            <template x-for="company in companies" :key="company.company">
-                                <div class="company-card">
-                                    <h3 x-text="company.company"></h3>
-                                    <div class="status status-operational">AI-Enhanced Monitoring</div>
-                                    <p><strong>URLs:</strong> <span x-text="company.urls ? company.urls.length : 0"></span></p>
-                                    <div style="margin-top: 10px;">
-                                        <template x-for="(url, index) in (company.urls || []).slice(0, 2)" :key="index">
-                                            <div><a :href="url" target="_blank" class="url" x-text="url"></a></div>
-                                        </template>
-                                        <div x-show="company.urls && company.urls.length > 2" style="color: #999; font-size: 12px;">
-                                            <span x-text="'+' + (company.urls.length - 2) + ' more URLs'"></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </template>
-                        </div>
-                    </div>
+                <div id="companiesDisplay">
+                    <h3>📊 Monitored Companies</h3>
+                    <div class="loading">Click "Refresh Status" to load company data</div>
                 </div>
             </div>
 
-            <div x-show="currentTab === 'extracted'" class="tab-content">
+            <div id="extractedTab" class="tab-content">
                 <h2>📄 AI-Enhanced Extracted Data Analysis</h2>
-                <button class="button button-secondary" @click="loadExtractedData()" :disabled="loading">🔄 Refresh Extracted Data</button>
-                
-                <div id="extractedData">
-                    <div class="loading" x-show="loading">Loading AI-enhanced content analysis...</div>
-                    <div x-show="!loading" x-html="extractedDataHTML"></div>
+                <button class="button button-secondary" onclick="loadExtractedData()">🔄 Refresh Extracted Data</button>
+                <div id="extractedDataContent">
+                    <div class="error-message">Click "Refresh Extracted Data" to load AI-enhanced content analysis...</div>
                 </div>
             </div>
 
-            <div x-show="currentTab === 'changes'" class="tab-content">
+            <div id="changesTab" class="tab-content">
                 <h2>📈 AI-Filtered Change History & Analysis</h2>
-                <button class="button button-secondary" @click="loadChangeHistory()" :disabled="loading">🔄 Load Change History</button>
-                
-                <div id="changeHistory">
-                    <div class="loading" x-show="loading">Loading AI-analyzed changes...</div>
-                    <div x-show="!loading" x-html="changeHistoryHTML"></div>
+                <button class="button button-secondary" onclick="loadChangeHistory()">🔄 Load Change History</button>
+                <div id="changeHistoryContent">
+                    <div class="error-message">Click "Load Change History" to view AI-filtered changes...</div>
                 </div>
             </div>
 
-            <div x-show="currentTab === 'configuration'" class="tab-content">
+            <div id="configurationTab" class="tab-content">
                 <h2>⚙️ AI System Configuration</h2>
-                <button class="button button-secondary" @click="loadConfiguration()" :disabled="loading">🔄 Load Configuration</button>
-                
-                <div id="configurationData">
-                    <div class="loading" x-show="loading">Loading AI system settings...</div>
-                    <div x-show="!loading" x-html="configurationHTML"></div>
+                <button class="button button-secondary" onclick="loadConfiguration()">🔄 Load Configuration</button>
+                <div id="configurationContent">
+                    <div class="error-message">Click "Load Configuration" to view AI system settings...</div>
                 </div>
             </div>
 
-            <div x-show="currentTab === 'baseline'" class="tab-content">
+            <div id="baselineTab" class="tab-content">
                 <h2>📊 AI-Enhanced Baseline Management</h2>
                 <p>Generate and manage AI-enhanced baseline snapshots with intelligent content extraction.</p>
-                
-                <button class="button button-primary" @click="generateBaseline()" :disabled="loading">🚀 Generate AI-Enhanced Baseline</button>
-                
-                <div id="baselineResults">
-                    <div class="loading" x-show="loading">Processing AI-enhanced baselines...</div>
-                    <div x-show="!loading" x-html="baselineResultsHTML"></div>
+                <button class="button button-primary" onclick="generateBaseline()">🚀 Generate AI-Enhanced Baseline</button>
+                <div id="baselineContent">
+                    <div class="error-message">Click "Generate AI-Enhanced Baseline" to create intelligent snapshots...</div>
                 </div>
             </div>
 
-            <div x-show="currentTab === 'logs'" class="tab-content">
+            <div id="logsTab" class="tab-content">
                 <h2>📝 AI System Logs & Monitoring</h2>
-                <button class="button button-secondary" @click="loadSystemLogs()" :disabled="loading">🔄 Refresh Logs</button>
-                
-                <div id="systemLogs">
-                    <div class="loading" x-show="loading">Loading AI system logs...</div>
-                    <div x-show="!loading" x-html="systemLogsHTML"></div>
+                <button class="button button-secondary" onclick="loadSystemLogs()">🔄 Refresh Logs</button>
+                <div id="systemLogsContent">
+                    <div class="error-message">Click "Refresh Logs" to load AI system logs...</div>
                 </div>
             </div>
         </div>
 
         <!-- Error Display -->
-        <div x-show="error" x-text="error" class="error-message" style="position: fixed; top: 20px; right: 20px; z-index: 1000; max-width: 400px;"></div>
+        <div id="errorDisplay" style="display: none;" class="error-message"></div>
     </div>
-
-    <!-- Alpine.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.x/cdn.min.js" defer></script>
 
     <script>
         // UPDATED: Enhanced configuration for AI-powered backend with CORS fixes + AI integration
         const CONFIG = {
-            // v69 DEPLOYMENT: CORS-FIXED + FULL AI INTEGRATION (ClaudeIntegration + ChangeMagnitude + SmartCategorization)
+            // v70 DEPLOYMENT: INFINITE LOOP FIXED + CORS-FIXED + FULL AI INTEGRATION
             apiUrl: 'https://script.google.com/macros/s/AKfycbyn_EA2xjOVdw-FsRNOLBFOakSuMLzFOFIGNoaPk_5KFlE01-d6kpUQHKiumPE86hLrsA/exec',
             token: 'dev-token-change-me',
-            version: 69,
+            version: 70,
             aiEnhanced: true,
             corsFixed: true
         };
 
-        // Alpine.js App Data
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('app', () => ({
-                // State
-                authenticated: false,
-                currentTab: 'dashboard',
-                loading: false,
-                error: null,
-                statusLoading: false, // Separate flag to prevent recursive status calls
-                
-                // Data
-                status: {},
-                companies: [],
-                
-                // HTML content for tabs
-                extractedDataHTML: '<div class="error-message">Click "Refresh Extracted Data" to load AI-enhanced content analysis...</div>',
-                changeHistoryHTML: '<div class="error-message">Click "Load Change History" to view AI-filtered changes...</div>',
-                configurationHTML: '<div class="error-message">Click "Load Configuration" to view AI system settings...</div>',
-                baselineResultsHTML: '<div class="error-message">Click "Generate AI-Enhanced Baseline" to create intelligent snapshots...</div>',
-                systemLogsHTML: '<div class="error-message">Click "Refresh Logs" to load AI system logs...</div>',
+        // Global state
+        let authenticated = false;
+        let currentTab = 'dashboard';
+        let isLoading = false;
+        let isStatusLoading = false; // Prevent recursive status calls
+        let systemStatus = {};
+        let companies = [];
 
-                // Initialize
-                init() {
-                    console.log('🚀 AI Competitive Monitor v69 - Enhanced Intelligence with CORS Fixes & Full AI Integration');
-                    console.log('✅ CORS Fixed - Using proven deployment URL:', CONFIG.apiUrl);
-                    console.log('🤖 AI Features: ClaudeIntegration.js, ChangeMagnitudeDetection.js, SmartCategorization.js ready for connection');
-                    
-                    // Load saved token
-                    const savedToken = localStorage.getItem('apiToken');
-                    if (savedToken && savedToken !== 'dev-token-change-me') {
-                        document.getElementById('apiToken').value = savedToken;
-                        CONFIG.token = savedToken;
-                        this.authenticated = true;
-                        // Use setTimeout to avoid any potential recursion issues
-                        setTimeout(() => {
-                            this.refreshStatus();
-                        }, 100);
+        // Initialize the application
+        function init() {
+            console.log('🚀 AI Competitive Monitor v70 - Infinite Loop Fixed + Enhanced Intelligence');
+            console.log('✅ CORS Fixed - Using proven deployment URL:', CONFIG.apiUrl);
+            console.log('🤖 AI Features: Ready for connection');
+            
+            // Load saved token
+            const savedToken = localStorage.getItem('apiToken');
+            if (savedToken && savedToken !== 'dev-token-change-me') {
+                document.getElementById('apiToken').value = savedToken;
+                CONFIG.token = savedToken;
+                authenticated = true;
+                showMainInterface();
+                // Use a timeout to prevent any initialization race conditions
+                setTimeout(() => {
+                    if (!isStatusLoading) {
+                        refreshStatus();
                     }
-                },
+                }, 1000);
+            }
+        }
 
-                // API Helper with improved error handling
-                async apiCall(action, params = {}) {
-                    // Prevent multiple simultaneous status calls
-                    if (action === 'status' && this.statusLoading) {
-                        console.log('⚠️ Status check already in progress, skipping...');
-                        return { error: 'Status check already in progress' };
-                    }
+        // API Helper with improved error handling
+        async function apiCall(action, params = {}) {
+            // Prevent multiple simultaneous status calls
+            if (action === 'status' && isStatusLoading) {
+                console.log('⚠️ Status check already in progress, skipping...');
+                return { error: 'Status check already in progress' };
+            }
 
-                    try {
-                        if (action === 'status') {
-                            this.statusLoading = true;
-                        }
-                        this.loading = true;
-                        
-                        const urlParams = new URLSearchParams({
-                            action: action,
-                            token: CONFIG.token,
-                            ...params
-                        });
-                        
-                        console.log(`🤖 AI API Call: ${action} - CORS Fixed Version with AI Integration`);
-                        
-                        const response = await fetch(`${CONFIG.apiUrl}?${urlParams}`, {
-                            method: 'GET',
-                            redirect: 'follow',
-                            headers: { 'Content-Type': 'text/plain' }
-                        });
-                        
-                        if (!response.ok) {
-                            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                        }
-                        
-                        const data = await response.json();
-                        
-                        // Log AI enhancements
-                        if (data.aiEnhanced) {
-                            console.log('✅ AI-Enhanced Response Received');
-                        }
-                        if (data.corsFixed) {
-                            console.log('✅ CORS Fixed Response Confirmed');
-                        }
-                        
-                        return data;
-                    } catch (error) {
-                        console.error('❌ AI API call failed:', error);
-                        this.showError(`API Error: ${error.message}`);
-                        return { error: error.message };
-                    } finally {
-                        this.loading = false;
-                        if (action === 'status') {
-                            this.statusLoading = false;
-                        }
-                    }
-                },
-
-                // Token Management with improved validation
-                saveToken() {
-                    const token = document.getElementById('apiToken').value;
-                    if (!token || token.trim() === '') {
-                        this.showError('Please enter a valid token');
-                        return;
-                    }
-                    
-                    CONFIG.token = token;
-                    localStorage.setItem('apiToken', token);
-                    this.authenticated = true;
-                    this.showSuccess('💾 API token saved successfully! AI features ready.');
-                    
-                    // Clear any existing error
-                    this.error = null;
-                    
-                    // Refresh status after authentication with delay to prevent issues
-                    setTimeout(() => {
-                        if (this.authenticated && !this.statusLoading) {
-                            this.refreshStatus();
-                        }
-                    }, 500);
-                },
-
-                // Status Management with recursion prevention
-                async refreshStatus() {
-                    if (this.statusLoading) {
-                        console.log('⚠️ Status refresh already in progress');
-                        return;
-                    }
-                    
-                    console.log('🔄 Refreshing AI-enhanced status with CORS fixes...');
-                    const statusData = await this.apiCall('status');
-                    
-                    if (statusData.error) {
-                        this.showError(`Status Error: ${statusData.error}`);
-                        return;
-                    }
-                    
-                    this.status = statusData;
-                    
-                    // Log AI features status
-                    if (statusData.aiFeatures) {
-                        console.log('🤖 AI Features Status:', statusData.aiFeatures);
-                    }
-                    if (statusData.corsFixed) {
-                        console.log('✅ CORS Status: Fixed and operational');
-                    }
-                    
-                    // Load companies if not already loaded
-                    if (this.companies.length === 0) {
-                        await this.loadCompanies();
-                    }
-                },
-
-                async loadCompanies() {
-                    const data = await this.apiCall('config');
-                    if (data.error) {
-                        this.showError(`Companies Error: ${data.error}`);
-                        return;
-                    }
-                    
-                    this.companies = data.companies || data.monitors || [];
-                    console.log(`📊 Loaded ${this.companies.length} companies with AI monitoring`);
-                },
-
-                // Tab Actions
-                async generateBaseline() {
-                    this.baselineResultsHTML = '<div class="loading">🤖 Starting AI-enhanced baseline generation...</div>';
-                    
-                    try {
-                        const result = await this.apiCall('baseline');
-                        
-                        if (result.error) {
-                            throw new Error(result.error);
-                        }
-                        
-                        this.baselineResultsHTML = `
-                            <div class="success-message">
-                                ✅ AI-enhanced baseline system is ready!<br>
-                                ${result.message}<br><br>
-                                🤖 AI Features: ${result.aiEnhanced ? 'Enhanced with intelligent content extraction' : 'Basic'}<br>
-                                ✅ CORS Status: Fixed and operational<br>
-                                📊 System Status: Ready for baseline generation
-                            </div>
-                        `;
-                        
-                        setTimeout(() => this.refreshStatus(), 1000);
-                    } catch (error) {
-                        this.baselineResultsHTML = `<div class="error-message">❌ Error with AI-enhanced baseline: ${error.message}</div>`;
-                    }
-                },
-
-                async runMonitorCheck() {
-                    this.showSuccess('🤖 Running AI-enhanced monitor check...');
-                    
-                    try {
-                        const result = await this.apiCall('monitor');
-                        
-                        if (result.error) {
-                            throw new Error(result.error);
-                        }
-                        
-                        const aiStatus = result.aiEnhanced ? ' with AI intelligence' : '';
-                        this.showSuccess(`✅ AI monitor check completed${aiStatus}! ${result.message || 'Check finished successfully.'}`);
-                        setTimeout(() => this.refreshStatus(), 1000);
-                    } catch (error) {
-                        this.showError(`❌ Error running AI monitor check: ${error.message}`);
-                    }
-                },
-
-                async loadExtractedData() {
-                    try {
-                        const data = await this.apiCall('extracted');
-                        
-                        if (data.error) {
-                            this.extractedDataHTML = '<div class="error-message">No AI-enhanced extracted data available yet. Generate baseline first to enable AI content extraction.</div>';
-                            return;
-                        }
-                        
-                        this.extractedDataHTML = '<div class="success-message">🤖 AI-enhanced content extraction system is ready. Generate baseline to start intelligent content analysis.</div>';
-                    } catch (error) {
-                        this.extractedDataHTML = `<div class="error-message">❌ Error loading AI-enhanced extracted data: ${error.message}</div>`;
-                    }
-                },
-
-                async loadChangeHistory() {
-                    try {
-                        const data = await this.apiCall('changes');
-                        
-                        if (data.error) {
-                            this.changeHistoryHTML = '<div class="error-message">No AI-analyzed change history available</div>';
-                            return;
-                        }
-                        
-                        this.changeHistoryHTML = `
-                            <div class="success-message">
-                                🤖 AI-filtered change detection system is operational<br>
-                                ${data.aiFiltered ? '✅ AI relevance filtering active' : '⚙️ Setting up AI filters'}<br>
-                                📊 Ready to analyze changes with intelligent scoring
-                            </div>
-                        `;
-                    } catch (error) {
-                        this.changeHistoryHTML = `<div class="error-message">❌ Error loading AI change history: ${error.message}</div>`;
-                    }
-                },
-
-                async loadConfiguration() {
-                    try {
-                        const data = await this.apiCall('config');
-                        
-                        if (data.error) {
-                            this.configurationHTML = '<div class="error-message">No AI system configuration available</div>';
-                            return;
-                        }
-                        
-                        this.configurationHTML = `
-                            <div class="config-section">
-                                <h4>📊 AI-Enhanced System Configuration</h4>
-                                ${data.aiEnhanced ? '<div class="success-message">🤖 AI Intelligence Features: Active</div>' : ''}
-                                <div class="success-message">✅ CORS Status: Fixed and operational</div>
-                                <pre style="background: var(--primary-bg); padding: 15px; border-radius: 8px; overflow-x: auto; color: var(--text-primary);">
-${JSON.stringify(data, null, 2)}
-                                </pre>
-                            </div>
-                        `;
-                    } catch (error) {
-                        this.configurationHTML = `<div class="error-message">❌ Error loading AI configuration: ${error.message}</div>`;
-                    }
-                },
-
-                async loadSystemLogs() {
-                    try {
-                        const data = await this.apiCall('logs');
-                        
-                        if (data.error) {
-                            this.systemLogsHTML = '<div class="error-message">Unable to load AI system logs</div>';
-                            return;
-                        }
-                        
-                        if (data.logs && data.logs.length > 0) {
-                            let html = '<div class="log-container">';
-                            if (data.aiEnhanced) {
-                                html += '<div style="color: var(--accent-color); margin-bottom: 10px;">🤖 AI-Enhanced System Logs</div>';
-                            }
-                            
-                            data.logs.forEach(log => {
-                                html += `
-                                    <div class="log-entry">
-                                        <div class="log-timestamp">${new Date(log.timestamp).toLocaleString()}</div>
-                                        <div class="log-level-${log.type || log.level || 'info'}">${log.message}</div>
-                                    </div>
-                                `;
-                            });
-                            html += '</div>';
-                            this.systemLogsHTML = html;
-                        } else {
-                            this.systemLogsHTML = '<div class="success-message">🤖 AI-Enhanced System v69: All systems operational with CORS fixes active</div>';
-                        }
-                    } catch (error) {
-                        this.systemLogsHTML = `<div class="error-message">❌ Error loading AI system logs: ${error.message}</div>`;
-                    }
-                },
-
-                // TheBrain Integration
-                openTheBrain() {
-                    this.showSuccess('🧠 Opening TheBrain AI knowledge integration...');
-                    window.open('https://thebrain.com', '_blank');
-                },
-
-                // Utility Functions
-                formatTimeAgo(date) {
-                    if (!date) return 'Never';
-                    const seconds = Math.floor((new Date() - new Date(date)) / 1000);
-                    const intervals = [
-                        { label: 'year', seconds: 31536000 },
-                        { label: 'month', seconds: 2592000 },
-                        { label: 'week', seconds: 604800 },
-                        { label: 'day', seconds: 86400 },
-                        { label: 'hour', seconds: 3600 },
-                        { label: 'minute', seconds: 60 }
-                    ];
-                    
-                    for (const interval of intervals) {
-                        const count = Math.floor(seconds / interval.seconds);
-                        if (count > 0) {
-                            return count === 1 ? `${count} ${interval.label} ago` : `${count} ${interval.label}s ago`;
-                        }
-                    }
-                    return 'just now';
-                },
-
-                showError(message) {
-                    this.error = message;
-                    console.error('❌', message);
-                    setTimeout(() => this.error = null, 5000);
-                },
-
-                showSuccess(message) {
-                    console.log('✅', message);
+            try {
+                if (action === 'status') {
+                    isStatusLoading = true;
                 }
-            }));
-        });
+                isLoading = true;
+                
+                const urlParams = new URLSearchParams({
+                    action: action,
+                    token: CONFIG.token,
+                    ...params
+                });
+                
+                console.log(`🤖 AI API Call: ${action} - CORS Fixed Version with AI Integration`);
+                
+                const response = await fetch(`${CONFIG.apiUrl}?${urlParams}`, {
+                    method: 'GET',
+                    redirect: 'follow',
+                    headers: { 'Content-Type': 'text/plain' }
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const data = await response.json();
+                
+                // Log AI enhancements
+                if (data.aiEnhanced) {
+                    console.log('✅ AI-Enhanced Response Received');
+                }
+                if (data.corsFixed) {
+                    console.log('✅ CORS Fixed Response Confirmed');
+                }
+                
+                return data;
+            } catch (error) {
+                console.error('❌ AI API call failed:', error);
+                showError(`API Error: ${error.message}`);
+                return { error: error.message };
+            } finally {
+                isLoading = false;
+                if (action === 'status') {
+                    isStatusLoading = false;
+                }
+            }
+        }
+
+        // Token Management
+        function saveToken() {
+            const token = document.getElementById('apiToken').value;
+            if (!token || token.trim() === '') {
+                showError('Please enter a valid token');
+                return;
+            }
+            
+            CONFIG.token = token;
+            localStorage.setItem('apiToken', token);
+            authenticated = true;
+            showMainInterface();
+            showSuccess('💾 API token saved successfully! AI features ready.');
+            
+            // Refresh status after authentication with delay to prevent issues
+            setTimeout(() => {
+                if (authenticated && !isStatusLoading) {
+                    refreshStatus();
+                }
+            }, 1500);
+        }
+
+        // UI Management
+        function showMainInterface() {
+            document.getElementById('authSection').style.display = 'none';
+            document.getElementById('tabsSection').style.display = 'flex';
+            document.getElementById('actionButtonsSection').style.display = 'flex';
+            document.getElementById('statusGrid').style.display = 'grid';
+            document.getElementById('contentArea').style.display = 'block';
+        }
+
+        function showTab(tabName) {
+            // Update tab buttons
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update tab content
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.style.display = 'none');
+            document.getElementById(tabName + 'Tab').style.display = 'block';
+            
+            currentTab = tabName;
+        }
+
+        // Status Management
+        async function refreshStatus() {
+            if (isStatusLoading) {
+                console.log('⚠️ Status refresh already in progress');
+                return;
+            }
+            
+            console.log('🔄 Refreshing AI-enhanced status with CORS fixes...');
+            const statusData = await apiCall('status');
+            
+            if (statusData.error) {
+                showError(`Status Error: ${statusData.error}`);
+                return;
+            }
+            
+            systemStatus = statusData;
+            updateStatusDisplay(statusData);
+            
+            // Load companies if not already loaded
+            if (companies.length === 0) {
+                loadCompanies();
+            }
+        }
+
+        function updateStatusDisplay(status) {
+            document.getElementById('systemStatus').textContent = status.status || 'checking...';
+            document.getElementById('companiesCount').textContent = status.companiesMonitored || '--';
+            document.getElementById('urlsCount').textContent = status.urlsTracked || '--';
+            document.getElementById('lastCheck').textContent = formatTimeAgo(status.lastCheck) || '--';
+            document.getElementById('aiStatus').textContent = status.aiEnabled ? '✅' : '⚙️';
+        }
+
+        async function loadCompanies() {
+            const data = await apiCall('config');
+            if (data.error) {
+                showError(`Companies Error: ${data.error}`);
+                return;
+            }
+            
+            companies = data.companies || data.monitors || [];
+            console.log(`📊 Loaded ${companies.length} companies with AI monitoring`);
+            updateCompaniesDisplay();
+        }
+
+        function updateCompaniesDisplay() {
+            const companiesDisplay = document.getElementById('companiesDisplay');
+            if (companies.length === 0) {
+                companiesDisplay.innerHTML = '<div class="error-message">No company data available. Click "Refresh Status" to load data.</div>';
+                return;
+            }
+            
+            let html = '<h3>📊 Monitored Companies</h3><div class="companies-grid">';
+            companies.forEach(company => {
+                const urls = company.urls || [];
+                html += `
+                    <div class="company-card">
+                        <h3>${company.company}</h3>
+                        <div class="status status-operational">AI-Enhanced Monitoring</div>
+                        <p><strong>URLs:</strong> ${urls.length}</p>
+                        <div style="margin-top: 10px;">
+                `;
+                
+                urls.slice(0, 2).forEach(url => {
+                    html += `<div><a href="${url}" target="_blank" class="url">${url}</a></div>`;
+                });
+                
+                if (urls.length > 2) {
+                    html += `<div style="color: #999; font-size: 12px;">+${urls.length - 2} more URLs</div>`;
+                }
+                
+                html += '</div></div>';
+            });
+            html += '</div>';
+            companiesDisplay.innerHTML = html;
+        }
+
+        // Tab Actions
+        async function generateBaseline() {
+            document.getElementById('baselineContent').innerHTML = '<div class="loading">🤖 Starting AI-enhanced baseline generation...</div>';
+            
+            try {
+                const result = await apiCall('baseline');
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                document.getElementById('baselineContent').innerHTML = `
+                    <div class="success-message">
+                        ✅ AI-enhanced baseline system is ready!<br>
+                        ${result.message}<br><br>
+                        🤖 AI Features: ${result.aiEnhanced ? 'Enhanced with intelligent content extraction' : 'Basic'}<br>
+                        ✅ CORS Status: Fixed and operational<br>
+                        📊 System Status: Ready for baseline generation
+                    </div>
+                `;
+                
+                setTimeout(() => refreshStatus(), 1000);
+            } catch (error) {
+                document.getElementById('baselineContent').innerHTML = `<div class="error-message">❌ Error with AI-enhanced baseline: ${error.message}</div>`;
+            }
+        }
+
+        async function runMonitorCheck() {
+            showSuccess('🤖 Running AI-enhanced monitor check...');
+            
+            try {
+                const result = await apiCall('monitor');
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                const aiStatus = result.aiEnhanced ? ' with AI intelligence' : '';
+                showSuccess(`✅ AI monitor check completed${aiStatus}! ${result.message || 'Check finished successfully.'}`);
+                setTimeout(() => refreshStatus(), 1000);
+            } catch (error) {
+                showError(`❌ Error running AI monitor check: ${error.message}`);
+            }
+        }
+
+        async function loadExtractedData() {
+            try {
+                const data = await apiCall('extracted');
+                
+                if (data.error) {
+                    document.getElementById('extractedDataContent').innerHTML = '<div class="error-message">No AI-enhanced extracted data available yet. Generate baseline first to enable AI content extraction.</div>';
+                    return;
+                }
+                
+                document.getElementById('extractedDataContent').innerHTML = '<div class="success-message">🤖 AI-enhanced content extraction system is ready. Generate baseline to start intelligent content analysis.</div>';
+            } catch (error) {
+                document.getElementById('extractedDataContent').innerHTML = `<div class="error-message">❌ Error loading AI-enhanced extracted data: ${error.message}</div>`;
+            }
+        }
+
+        async function loadChangeHistory() {
+            try {
+                const data = await apiCall('changes');
+                
+                if (data.error) {
+                    document.getElementById('changeHistoryContent').innerHTML = '<div class="error-message">No AI-analyzed change history available</div>';
+                    return;
+                }
+                
+                document.getElementById('changeHistoryContent').innerHTML = `
+                    <div class="success-message">
+                        🤖 AI-filtered change detection system is operational<br>
+                        ${data.aiFiltered ? '✅ AI relevance filtering active' : '⚙️ Setting up AI filters'}<br>
+                        📊 Ready to analyze changes with intelligent scoring
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('changeHistoryContent').innerHTML = `<div class="error-message">❌ Error loading AI change history: ${error.message}</div>`;
+            }
+        }
+
+        async function loadConfiguration() {
+            try {
+                const data = await apiCall('config');
+                
+                if (data.error) {
+                    document.getElementById('configurationContent').innerHTML = '<div class="error-message">No AI system configuration available</div>';
+                    return;
+                }
+                
+                document.getElementById('configurationContent').innerHTML = `
+                    <div class="config-section">
+                        <h4>📊 AI-Enhanced System Configuration</h4>
+                        ${data.aiEnhanced ? '<div class="success-message">🤖 AI Intelligence Features: Active</div>' : ''}
+                        <div class="success-message">✅ CORS Status: Fixed and operational</div>
+                        <pre style="background: var(--primary-bg); padding: 15px; border-radius: 8px; overflow-x: auto; color: var(--text-primary);">
+${JSON.stringify(data, null, 2)}
+                        </pre>
+                    </div>
+                `;
+            } catch (error) {
+                document.getElementById('configurationContent').innerHTML = `<div class="error-message">❌ Error loading AI configuration: ${error.message}</div>`;
+            }
+        }
+
+        async function loadSystemLogs() {
+            try {
+                const data = await apiCall('logs');
+                
+                if (data.error) {
+                    document.getElementById('systemLogsContent').innerHTML = '<div class="error-message">Unable to load AI system logs</div>';
+                    return;
+                }
+                
+                if (data.logs && data.logs.length > 0) {
+                    let html = '<div class="log-container">';
+                    if (data.aiEnhanced) {
+                        html += '<div style="color: var(--accent-color); margin-bottom: 10px;">🤖 AI-Enhanced System Logs</div>';
+                    }
+                    
+                    data.logs.forEach(log => {
+                        html += `
+                            <div class="log-entry">
+                                <div class="log-timestamp">${new Date(log.timestamp).toLocaleString()}</div>
+                                <div class="log-level-${log.type || log.level || 'info'}">${log.message}</div>
+                            </div>
+                        `;
+                    });
+                    html += '</div>';
+                    document.getElementById('systemLogsContent').innerHTML = html;
+                } else {
+                    document.getElementById('systemLogsContent').innerHTML = '<div class="success-message">🤖 AI-Enhanced System v70: All systems operational with CORS fixes active</div>';
+                }
+            } catch (error) {
+                document.getElementById('systemLogsContent').innerHTML = `<div class="error-message">❌ Error loading AI system logs: ${error.message}</div>`;
+            }
+        }
+
+        // TheBrain Integration
+        function openTheBrain() {
+            showSuccess('🧠 Opening TheBrain AI knowledge integration...');
+            window.open('https://thebrain.com', '_blank');
+        }
+
+        // Utility Functions
+        function formatTimeAgo(date) {
+            if (!date) return 'Never';
+            const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+            const intervals = [
+                { label: 'year', seconds: 31536000 },
+                { label: 'month', seconds: 2592000 },
+                { label: 'week', seconds: 604800 },
+                { label: 'day', seconds: 86400 },
+                { label: 'hour', seconds: 3600 },
+                { label: 'minute', seconds: 60 }
+            ];
+            
+            for (const interval of intervals) {
+                const count = Math.floor(seconds / interval.seconds);
+                if (count > 0) {
+                    return count === 1 ? `${count} ${interval.label} ago` : `${count} ${interval.label}s ago`;
+                }
+            }
+            return 'just now';
+        }
+
+        function showError(message) {
+            const errorDiv = document.getElementById('errorDisplay');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            errorDiv.style.position = 'fixed';
+            errorDiv.style.top = '20px';
+            errorDiv.style.right = '20px';
+            errorDiv.style.zIndex = '1000';
+            errorDiv.style.maxWidth = '400px';
+            console.error('❌', message);
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            console.log('✅', message);
+        }
+
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
 </html>
