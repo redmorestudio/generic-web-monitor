@@ -379,79 +379,67 @@ function getRecentChangesForAPIFixed() {
 }
 
 /**
- * Generate baseline for all companies via API - FIXED
+ * Generate baseline for all companies via API - FIXED WITH BATCHING
  */
 function generateBaselineForAPIFixed() {
   try {
-    let config = [];
-    try {
-      config = getMonitorConfigurationsMultiUrl();
-    } catch (error) {
-      config = COMPLETE_MONITOR_CONFIG || [];
+    // Check if there's already a baseline generation in progress
+    const progress = getBaselineProgress();
+    
+    if (progress.status === 'in_progress') {
+      // Continue the existing batch
+      const result = generateBaselineBatched();
+      
+      // Format response for frontend
+      if (result.status === 'in_progress') {
+        return {
+          success: true,
+          status: 'in_progress',
+          message: result.message,
+          processed: result.processed,
+          total: result.total,
+          percentComplete: result.percentComplete,
+          errors: result.errors || 0
+        };
+      } else if (result.status === 'completed') {
+        return {
+          success: true,
+          status: 'completed',
+          message: 'Baseline generation completed successfully!',
+          processed: result.processed,
+          total: result.total,
+          errors: result.errors || 0,
+          timestamp: new Date().toISOString()
+        };
+      } else {
+        return {
+          success: false,
+          error: result.error || 'Unknown error'
+        };
+      }
+    } else {
+      // Start new baseline generation
+      const result = generateBaselineBatched();
+      
+      if (result.status === 'in_progress') {
+        return {
+          success: true,
+          status: 'in_progress',
+          message: 'Baseline generation started. Processing in batches to avoid timeout.',
+          processed: result.processed,
+          total: result.total,
+          percentComplete: result.percentComplete
+        };
+      } else if (result.status === 'error') {
+        return {
+          success: false,
+          error: result.error || 'Failed to start baseline generation'
+        };
+      } else {
+        return result;
+      }
     }
     
-    let processed = 0;
-    let errors = [];
-    
-    config.forEach(company => {
-      if (company.urls && Array.isArray(company.urls)) {
-        company.urls.forEach(urlObj => {
-          try {
-            const url = typeof urlObj === 'string' ? urlObj : (urlObj ? urlObj.url : null);
-            if (url) {
-              // Simple baseline generation
-              try {
-                const response = UrlFetchApp.fetch(url, {
-                  muteHttpExceptions: true,
-                  validateHttpsCertificates: false
-                });
-                
-                if (response.getResponseCode() === 200) {
-                  const content = response.getContentText();
-                  const extraction = {
-                    content: content.substring(0, 5000),
-                    contentHash: Utilities.computeDigest(
-                      Utilities.DigestAlgorithm.MD5, 
-                      content
-                    ).toString(),
-                    timestamp: new Date().toISOString()
-                  };
-                  
-                  // Store simple baseline
-                  const key = 'baseline_' + Utilities.computeDigest(
-                    Utilities.DigestAlgorithm.MD5,
-                    url
-                  ).toString();
-                  
-                  PropertiesService.getScriptProperties().setProperty(
-                    key, 
-                    JSON.stringify({
-                      company: company.company,
-                      url: url,
-                      ...extraction
-                    })
-                  );
-                  
-                  processed++;
-                }
-              } catch (e) {
-                errors.push(`${company.company}: ${e.toString()}`);
-              }
-            }
-          } catch (e) {
-            errors.push(`Error processing ${company.company}: ${e.toString()}`);
-          }
-        });
-      }
-    });
-    
-    return {
-      success: true,
-      processed: processed,
-      total: config.reduce((sum, c) => sum + (c.urls ? c.urls.length : 0), 0),
-      errors: errors,
-      timestamp: new Date().toISOString()
-    };
   } catch (error) {
     console.error('Error in generateBaselineForAPIFixed:', error);
     return {

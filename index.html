@@ -781,28 +781,72 @@
             feedContainer.innerHTML = html;
         }
 
-        // Generate Baseline
+        // Generate Baseline with batching support
         async function generateBaseline() {
             const resultsDiv = document.getElementById('baselineResults');
-            resultsDiv.innerHTML = '<div class="loading">Generating baseline snapshots...</div>';
+            resultsDiv.innerHTML = '<div class="loading">Starting baseline generation...</div>';
             
             try {
-                const result = await apiCall('baseline');
+                // Function to check progress
+                const checkProgress = async () => {
+                    const result = await apiCall('baseline');
+                    
+                    if (result.error) {
+                        throw new Error(result.error);
+                    }
+                    
+                    if (result.status === 'in_progress') {
+                        // Show progress
+                        resultsDiv.innerHTML = `
+                            <div class="loading">
+                                <h3>⏳ Baseline Generation in Progress</h3>
+                                <p>${result.message}</p>
+                                <div style="margin: 20px 0;">
+                                    <div style="background: var(--secondary-bg); border-radius: 8px; height: 30px; overflow: hidden;">
+                                        <div style="background: var(--accent-color); height: 100%; width: ${result.percentComplete}%; transition: width 0.5s ease;"></div>
+                                    </div>
+                                    <p style="margin-top: 10px;">Progress: ${result.percentComplete}% (${result.processed} of ${result.total} URLs)</p>
+                                </div>
+                                <p style="color: var(--warning-color);">This process may take several minutes. The page will update automatically.</p>
+                            </div>
+                        `;
+                        
+                        // Check again in 5 seconds
+                        setTimeout(checkProgress, 5000);
+                        
+                    } else if (result.status === 'completed') {
+                        // Show completion
+                        resultsDiv.innerHTML = `
+                            <div class="success-message">
+                                ✅ Baseline generation completed successfully!<br>
+                                ${result.message}
+                                <br><br>
+                                📊 Processed: ${result.processed} URLs<br>
+                                📈 Total: ${result.total} URLs<br>
+                                ${result.errors > 0 ? `⚠️ Errors: ${result.errors}` : '✨ No errors!'}
+                            </div>
+                        `;
+                        
+                        // Refresh status after completion
+                        setTimeout(refreshStatus, 1000);
+                        
+                    } else {
+                        // Legacy response format (non-batched)
+                        resultsDiv.innerHTML = `
+                            <div class="success-message">
+                                ✅ Baseline generated successfully!<br>
+                                ${result.message || 'Baseline snapshots created for all monitored URLs.'}
+                                <br><br>
+                                📊 Processed: ${result.processed || 0} URLs<br>
+                                📈 Total: ${result.total || 0} URLs<br>
+                                ${result.errors && result.errors.length > 0 ? `⚠️ Errors: ${result.errors.length}` : ''}
+                            </div>
+                        `;
+                    }
+                };
                 
-                if (result.error) {
-                    throw new Error(result.error);
-                }
-                
-                resultsDiv.innerHTML = `
-                    <div class="success-message">
-                        ✅ Baseline generated successfully!<br>
-                        ${result.message || 'Baseline snapshots created for all monitored URLs.'}
-                        <br><br>
-                        📊 Processed: ${result.processed || 0} URLs<br>
-                        📈 Total: ${result.total || 0} URLs<br>
-                        ${result.errors && result.errors.length > 0 ? `⚠️ Errors: ${result.errors.length}` : ''}
-                    </div>
-                `;
+                // Start checking progress
+                await checkProgress();
                 
             } catch (error) {
                 console.error('Error generating baseline:', error);
