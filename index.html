@@ -640,8 +640,8 @@
     <script>
         // UPDATED: Enhanced configuration for AI-powered backend with CORS fixes + AI integration
         const CONFIG = {
-            // WORKING v55 DEPLOYMENT: CORS-FIXED + Basic functionality - Will upgrade to AI after testing
-            apiUrl: 'https://script.google.com/macros/s/AKfycbyitKdpijIjgOMkCk_Yhhaj01XmTrtP5VTJ0gAidMJLcTEmqNAjkDtxgTV3ewX6_nPFdQ/exec',
+            // v69 DEPLOYMENT: CORS-FIXED + FULL AI INTEGRATION (ClaudeIntegration + ChangeMagnitude + SmartCategorization)
+            apiUrl: 'https://script.google.com/macros/s/AKfycbyn_EA2xjOVdw-FsRNOLBFOakSuMLzFOFIGNoaPk_5KFlE01-d6kpUQHKiumPE86hLrsA/exec',
             token: 'dev-token-change-me',
             version: 69,
             aiEnhanced: true,
@@ -737,14 +737,23 @@
                     }
                 },
 
-                // Token Management
+                // Token Management (Simplified)
                 saveToken() {
                     const token = document.getElementById('apiToken').value;
+                    if (!token) {
+                        this.showError('Please enter a valid token');
+                        return;
+                    }
+                    
                     CONFIG.token = token;
                     localStorage.setItem('apiToken', token);
                     this.authenticated = true;
-                    this.showSuccess('💾 API token saved successfully! AI features and CORS fixes ready.');
-                    this.refreshStatus();
+                    this.showSuccess('💾 API token saved successfully! AI features ready.');
+                    
+                    // Refresh status after authentication
+                    setTimeout(() => {
+                        this.refreshStatus();
+                    }, 500);
                 },
 
                 // Status Management
