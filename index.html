@@ -462,7 +462,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="ai-badge">🤖 AI-Enhanced v82 🚀 IMPROVED ERROR HANDLING</div>
+            <div class="ai-badge">🤖 AI-Enhanced v82 🚀 ENHANCED BASELINE & MARKDOWN EXPORT</div>
             <h1>AI Competitor Monitor</h1>
             <p>Advanced Intelligence & Real-time Competitive Analysis with Enhanced Error Visibility</p>
         </div>
@@ -483,29 +483,14 @@
             <button class="tab" onclick="showTab(event, 'extracted')">📄 Extracted Data</button>
             <button class="tab" onclick="showTab(event, 'changes')">📈 Change History</button>
             <button class="tab" onclick="showTab(event, 'configuration')">⚙️ Configuration</button>
+            <button class="tab" onclick="showTab(event, 'baseline')">🚀 Baseline</button>
             <button class="tab" onclick="showTab(event, 'logs')">📝 System Logs</button>
         </div>
 
         <!-- Action Buttons -->
         <div class="action-buttons" id="actionButtonsSection" style="display: none;">
             <button class="button button-primary" onclick="refreshStatus(event)">🔄 Refresh Status</button>
-            <div class="dropdown" style="position: relative; display: inline-block;">
-                <button class="button button-secondary" onclick="toggleFetchDropdown(event)">📊 Fetch Data ▼</button>
-                <div id="fetchDropdown" class="dropdown-content" style="display: none; position: absolute; background: var(--secondary-bg); min-width: 250px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-radius: 8px; margin-top: 5px; border: 1px solid var(--border-color);">
-                    <a href="#" onclick="performFetch(event, 'baseline-all')" style="color: var(--text-primary); padding: 12px 16px; text-decoration: none; display: block; border-bottom: 1px solid var(--border-color);">
-                        <strong>🔄 Baseline All</strong><br>
-                        <small style="color: var(--text-secondary);">Wipe & rebuild everything</small>
-                    </a>
-                    <a href="#" onclick="performFetch(event, 'baseline-new')" style="color: var(--text-primary); padding: 12px 16px; text-decoration: none; display: block; border-bottom: 1px solid var(--border-color);">
-                        <strong>➕ Baseline New</strong><br>
-                        <small style="color: var(--text-secondary);">Only new companies/URLs</small>
-                    </a>
-                    <a href="#" onclick="performFetch(event, 'check-updates')" style="color: var(--text-primary); padding: 12px 16px; text-decoration: none; display: block;">
-                        <strong>🔍 Check for Updates</strong><br>
-                        <small style="color: var(--text-secondary);">Look for new content</small>
-                    </a>
-                </div>
-            </div>
+            <button class="button button-secondary" onclick="checkForUpdates(event)">🔍 Check for Updates</button>
             <button class="button button-warning" onclick="runMonitorCheck(event)">🔍 Run Monitor Check</button>
             <button class="button button-ai" onclick="openTheBrain(event)">🧠 TheBrain Integration</button>
         </div>
@@ -708,11 +693,24 @@
             </div>
 
             <div id="baselineTab" class="tab-content">
-                <h2>📊 AI-Enhanced Baseline Management</h2>
-                <p>Generate and manage AI-enhanced baseline snapshots with intelligent content extraction.</p>
-                <button class="button button-primary" onclick="generateBaseline(event)">🚀 Generate AI-Enhanced Baseline</button>
+                <h2>🚀 AI-Enhanced Baseline Management</h2>
+                <p>Generate and manage AI-enhanced baseline snapshots with intelligent content extraction and markdown export.</p>
+                
+                <!-- Baseline Options -->
+                <div class="config-section">
+                    <h4>🎯 Baseline Generation Options</h4>
+                    <div class="action-buttons" style="margin: 15px 0;">
+                        <button class="button button-primary" onclick="generateBaseline(event, { mode: 'all', clearExisting: true })" title="Delete all existing data and create fresh baseline">🔄 Baseline All (Fresh Start)</button>
+                        <button class="button button-secondary" onclick="generateBaseline(event, { mode: 'new', clearExisting: false })" title="Only process URLs not already in baseline">➕ Baseline New URLs Only</button>
+                        <button class="button button-warning" onclick="checkBaselineStatus(event)" title="Check current baseline status">📊 Check Status</button>
+                    </div>
+                    <p style="font-size: 14px; color: var(--text-secondary); margin: 10px 0;">
+                        <strong>Tip:</strong> "Baseline All" will delete existing data and rebuild everything. "Baseline New" only processes URLs not already captured.
+                    </p>
+                </div>
+                
                 <div id="baselineContent">
-                    <div class="error-message">Click "Generate AI-Enhanced Baseline" to create intelligent snapshots...</div>
+                    <div class="error-message">Select a baseline option above to begin AI-enhanced content extraction with progress tracking and error handling...</div>
                 </div>
             </div>
 
@@ -732,7 +730,7 @@
     <script>
         // v79: FIXED INFINITE LOOPS + PROPER EVENT HANDLING
         const CONFIG = {
-            apiUrl: 'https://script.google.com/macros/s/AKfycbww2uBd5rKX4vJ0Ia_nVgejx1t-NfBIg568NOM_mPWJNu5yjukYKpgYxcai1xvMa9KRAg/exec',
+            apiUrl: 'https://script.google.com/macros/s/AKfycbwrlbyR_MS-zywM7K9CJFa2ot9WiTF8XTvMCksqsM-9JOpHikVowWfxxZZPOIm8ttZgLQ/exec',
             token: 'dev-token-change-me',
             version: 82,
             aiEnhanced: true,
@@ -1138,50 +1136,50 @@
             }
         }
         
-        // Toggle fetch dropdown
-        function toggleFetchDropdown(event) {
+        // Check baseline status
+        async function checkBaselineStatus(event) {
             if (event) {
                 event.preventDefault();
                 event.stopPropagation();
+                addClickFeedback(event.target);
             }
             
-            const dropdown = document.getElementById('fetchDropdown');
-            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
-            
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function closeDropdown(e) {
-                if (!e.target.closest('.dropdown')) {
-                    dropdown.style.display = 'none';
-                    document.removeEventListener('click', closeDropdown);
+            try {
+                const completed = await apiCall('baseline-completed');
+                const status = await apiCall('baseline-status');
+                
+                let statusHtml = '<div class="success-message">';
+                
+                if (completed.completed) {
+                    statusHtml += `
+                        ✅ <strong>Baseline Completed</strong><br>
+                        Generated: ${new Date(completed.timestamp).toLocaleString()}<br>
+                        URLs Processed: ${completed.rowCount}<br>
+                        Status: Ready for monitoring and markdown export<br><br>
+                        <small>To regenerate baseline, use "Baseline All" option above.</small>
+                    `;
+                } else if (status.active) {
+                    statusHtml += `
+                        🔄 <strong>Baseline Generation In Progress</strong><br>
+                        Progress: ${status.progress.completed}/${status.progress.total} URLs<br>
+                        Percentage: ${status.progress.percent}%<br>
+                        Estimated time remaining: ${status.progress.estimated_time_remaining}<br>
+                    `;
+                } else {
+                    statusHtml += `
+                        ⚠️ <strong>No Baseline Found</strong><br>
+                        No baseline has been generated yet.<br>
+                        Use "Baseline All" to create your first baseline.<br>
+                    `;
                 }
-            });
-        }
-        
-        // Perform fetch based on type
-        async function performFetch(event, fetchType) {
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-            }
-            
-            // Close dropdown
-            document.getElementById('fetchDropdown').style.display = 'none';
-            
-            switch(fetchType) {
-                case 'baseline-all':
-                    // Show confirmation dialog
-                    if (confirm('⚠️ This will DELETE all existing data and create a fresh baseline. Are you sure?')) {
-                        await generateBaseline(event, { mode: 'all', clearExisting: true });
-                    }
-                    break;
-                    
-                case 'baseline-new':
-                    await generateBaseline(event, { mode: 'new', clearExisting: false });
-                    break;
-                    
-                case 'check-updates':
-                    await checkForUpdates(event);
-                    break;
+                
+                statusHtml += '</div>';
+                document.getElementById('baselineContent').innerHTML = statusHtml;
+                
+            } catch (error) {
+                document.getElementById('baselineContent').innerHTML = `
+                    <div class="error-message">❌ Error checking baseline status: ${error.message}</div>
+                `;
             }
         }
         
@@ -1260,6 +1258,13 @@
             
             const mode = options.mode || 'all';
             const clearExisting = options.clearExisting !== false;
+            
+            // Show confirmation for destructive operations
+            if (mode === 'all' && clearExisting) {
+                if (!confirm('⚠️ This will DELETE all existing baseline data and create a fresh baseline. Are you sure?')) {
+                    return;
+                }
+            }
             
             console.log(`🚀 Starting baseline generation - Mode: ${mode}, Clear: ${clearExisting}`);
             
