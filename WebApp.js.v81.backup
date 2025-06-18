@@ -74,10 +74,7 @@ function doGet(e) {
         const url = e.parameter.url;
         if (!url) {
           // No URL specified, generate baseline for all companies
-          response = generateBaselineForAPIBatchedEnhanced({
-            mode: e.parameter.mode || 'all',
-            clearExisting: e.parameter.clearExisting !== 'false'
-          });
+          response = generateBaselineForAPIBatched();
         } else {
           // URL specified, get baseline for specific URL
           const baselineData = getBaselineForUrl(url);
@@ -90,42 +87,6 @@ function doGet(e) {
         
       case 'baseline-status':
         response = getBaselineGenerationStatus();
-        break;
-        
-      case 'baseline-completed':
-        response = isBaselineCompleted();
-        break;
-        
-      case 'baseline-content':
-        const contentUrl = e.parameter.url;
-        const format = e.parameter.format || 'json';
-        if (contentUrl) {
-          const content = format === 'markdown' ? 
-            exportBaselineAsMarkdown(contentUrl) : 
-            getFullBaselineContent(contentUrl);
-          response = {
-            success: content !== null,
-            data: content,
-            format: format
-          };
-        } else {
-          response = {
-            success: false,
-            error: 'URL parameter required'
-          };
-        }
-        break;
-        
-      case 'baseline-resume':
-        response = resumeBaselineJob();
-        break;
-        
-      case 'baseline-cancel':
-        response = cancelBaselineJob();
-        break;
-        
-      case 'check-updates':
-        response = checkForContentUpdates();
         break;
         
       case 'monitor':
@@ -143,18 +104,6 @@ function doGet(e) {
           keyword: e.parameter.keyword,
           limit: parseInt(e.parameter.limit) || 50
         });
-        break;
-        
-      case 'add-company':
-        response = addCompanyToMonitoring(e.parameter);
-        break;
-        
-      case 'remove-company':
-        response = removeCompanyFromMonitoring(e.parameter.company);
-        break;
-        
-      case 'update-parameters':
-        response = updateMonitoringParameters(e.parameter);
         break;
         
       default:

@@ -462,9 +462,9 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="ai-badge">🤖 AI-Enhanced v81 🚀 BATCH PROCESSING</div>
+            <div class="ai-badge">🤖 AI-Enhanced v82 🚀 IMPROVED ERROR HANDLING</div>
             <h1>AI Competitor Monitor</h1>
-            <p>Advanced Intelligence & Real-time Competitive Analysis with Enhanced CORS Support</p>
+            <p>Advanced Intelligence & Real-time Competitive Analysis with Enhanced Error Visibility</p>
         </div>
 
         <!-- Authentication -->
@@ -483,7 +483,6 @@
             <button class="tab" onclick="showTab(event, 'extracted')">📄 Extracted Data</button>
             <button class="tab" onclick="showTab(event, 'changes')">📈 Change History</button>
             <button class="tab" onclick="showTab(event, 'configuration')">⚙️ Configuration</button>
-            <button class="tab" onclick="showTab(event, 'baseline')">📊 Baseline</button>
             <button class="tab" onclick="showTab(event, 'logs')">📝 System Logs</button>
         </div>
 
@@ -735,7 +734,7 @@
         const CONFIG = {
             apiUrl: 'https://script.google.com/macros/s/AKfycbww2uBd5rKX4vJ0Ia_nVgejx1t-NfBIg568NOM_mPWJNu5yjukYKpgYxcai1xvMa9KRAg/exec',
             token: 'dev-token-change-me',
-            version: 81,
+            version: 82,
             aiEnhanced: true,
             corsFixed: true
         };
@@ -900,9 +899,38 @@
             
             currentTab = tabName;
             
-            // Check for existing baseline job when baseline tab is shown
-            if (tabName === 'baseline') {
-                checkExistingBaselineJob();
+            // Check for existing baseline job when extracted tab is shown
+            if (tabName === 'extracted') {
+                checkBaselineStatus();
+            }
+        }
+        
+        // Check baseline completion status
+        async function checkBaselineStatus() {
+            try {
+                const completed = await apiCall('baseline-completed');
+                if (completed.completed) {
+                    // Show baseline completed status
+                    const extractedTab = document.getElementById('extractedTab');
+                    const statusBanner = document.createElement('div');
+                    statusBanner.className = 'success-message';
+                    statusBanner.style.marginBottom = '20px';
+                    statusBanner.innerHTML = `
+                        ✅ Baseline completed on ${new Date(completed.timestamp).toLocaleString()}<br>
+                        ${completed.rowCount} URLs successfully extracted and stored.<br>
+                        <small>To regenerate baseline, use "Fetch Data" > "Baseline All"</small>
+                    `;
+                    
+                    // Insert at the top of the tab
+                    const existingBanner = extractedTab.querySelector('.baseline-status-banner');
+                    if (existingBanner) {
+                        existingBanner.remove();
+                    }
+                    statusBanner.className = 'success-message baseline-status-banner';
+                    extractedTab.insertBefore(statusBanner, extractedTab.firstChild.nextSibling);
+                }
+            } catch (error) {
+                console.error('Error checking baseline status:', error);
             }
         }
         
@@ -1047,6 +1075,16 @@
                 if (status.active) {
                     // Update progress display
                     const progress = status.progress;
+                    let errorDetails = '';
+                    if (status.recentErrors && status.recentErrors.length > 0) {
+                        errorDetails = '<div style="margin-top: 10px; padding: 10px; background: rgba(255, 68, 68, 0.1); border-radius: 5px;">';
+                        errorDetails += '<strong>Recent Errors:</strong><br>';
+                        status.recentErrors.forEach(err => {
+                            errorDetails += `<small>${err.company} - ${err.url}: ${err.error}</small><br>`;
+                        });
+                        errorDetails += '</div>';
+                    }
+                    
                     const progressHtml = `
                         <div class="success-message">
                             🤖 AI-enhanced baseline generation in progress!<br>
@@ -1058,12 +1096,35 @@
                                 </div>
                             </div>
                             Progress: ${progress.completed}/${progress.total} URLs processed<br>
-                            ${progress.failed > 0 ? `Errors: ${progress.failed}<br>` : ''}
-                            Estimated time remaining: ${progress.estimated_time_remaining}<br><br>
+                            ${status.successful ? `Successful: ${status.successful}<br>` : ''}
+                            ${progress.failed > 0 ? `<span style="color: var(--error-color);">Errors: ${progress.failed}</span><br>` : ''}
+                            Estimated time remaining: ${progress.estimated_time_remaining}<br>
+                            ${errorDetails}
+                            <br>
                             <em>The system will continue processing in the background. You can safely navigate away.</em>
                         </div>
                     `;
                     document.getElementById('baselineContent').innerHTML = progressHtml;
+                } else if (status.status === 'paused_error') {
+                    // Job paused due to errors
+                    const progressHtml = `
+                        <div class="error-message">
+                            ⚠️ Baseline generation paused due to errors!<br><br>
+                            Progress: ${status.processed}/${status.total} URLs<br>
+                            Successful: ${status.successful}<br>
+                            Failed: ${status.failed}<br>
+                            Last error: ${status.lastError}<br><br>
+                            <button class="button button-primary" onclick="resumeBaselineGeneration(event)">🔄 Resume</button>
+                            <button class="button button-warning" onclick="cancelBaselineGeneration(event)">❌ Cancel</button>
+                        </div>
+                    `;
+                    document.getElementById('baselineContent').innerHTML = progressHtml;
+                    
+                    // Stop polling
+                    if (baselinePollingInterval) {
+                        clearInterval(baselinePollingInterval);
+                        baselinePollingInterval = null;
+                    }
                 } else {
                     // No active job, stop polling
                     if (baselinePollingInterval) {
@@ -1418,6 +1479,7 @@
                             <th>Content Preview</th>
                             <th>Source</th>
                             <th>AI Analysis</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -1439,10 +1501,20 @@
                             <td>${new Date(item.timestamp).toLocaleDateString()}</td>
                             <td><strong>${item.company || 'Unknown'}</strong></td>
                             <td><span class="status status-operational">${item.type || item.urlType || 'General'}</span></td>
-                            <td><a href="${item.url}" target="_blank" class="url">${urlShort}</a></td>
+                            <td><a href="${item.url}" target="_blank" class="url" title="${item.url}">${urlShort}</a></td>
                             <td style="max-width: 200px;">${contentPreview}</td>
                             <td>${item.source || 'Unknown'}</td>
                             <td style="font-size: 12px;">${aiAnalysis}</td>
+                            <td>
+                                <button class="button button-secondary" style="padding: 5px 10px; font-size: 12px;" 
+                                        onclick="viewFullContent('${encodeURIComponent(item.url)}', 'json')" title="View full content">
+                                    📄 View
+                                </button>
+                                <button class="button button-secondary" style="padding: 5px 10px; font-size: 12px; margin-left: 5px;" 
+                                        onclick="viewFullContent('${encodeURIComponent(item.url)}', 'markdown')" title="Export as Markdown">
+                                    📝 MD
+                                </button>
+                            </td>
                         </tr>
                     `;
                 });
@@ -1466,6 +1538,147 @@
             
             // Optional: Auto-reload with cleared filters
             document.getElementById('extractedDataContent').innerHTML = '<div class="error-message">Filters cleared. Click "Apply Filters & Load Data" to view all extracted data...</div>';
+        }
+        
+        // View full content in a modal or new window
+        async function viewFullContent(encodedUrl, format) {
+            const url = decodeURIComponent(encodedUrl);
+            
+            try {
+                const result = await apiCall('baseline-content', { url: url, format: format });
+                
+                if (result.success && result.data) {
+                    if (format === 'markdown') {
+                        // Create a downloadable markdown file
+                        const blob = new Blob([result.data], { type: 'text/markdown' });
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = `${result.data.company || 'content'}_${new Date().toISOString().split('T')[0]}.md`;
+                        link.click();
+                        showSuccess('📥 Markdown file downloaded!');
+                    } else {
+                        // Show in a modal
+                        showContentModal(result.data);
+                    }
+                } else {
+                    showError('Failed to load content: ' + (result.error || 'Unknown error'));
+                }
+            } catch (error) {
+                showError('Error loading content: ' + error.message);
+            }
+        }
+        
+        // Show content in a modal
+        function showContentModal(content) {
+            // Create modal
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10000;
+            `;
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: var(--secondary-bg);
+                border-radius: 12px;
+                padding: 30px;
+                max-width: 80%;
+                max-height: 80%;
+                overflow-y: auto;
+                position: relative;
+            `;
+            
+            modalContent.innerHTML = `
+                <h2>${content.title || content.url}</h2>
+                <p><strong>Company:</strong> ${content.company}</p>
+                <p><strong>URL:</strong> <a href="${content.url}" target="_blank">${content.url}</a></p>
+                <p><strong>Extracted:</strong> ${new Date(content.timestamp).toLocaleString()}</p>
+                <p><strong>Content Length:</strong> ${content.contentLength} characters</p>
+                <p><strong>Relevance Score:</strong> ${content.relevanceScore}/10</p>
+                <p><strong>Keywords:</strong> ${content.keywords}</p>
+                <hr style="margin: 20px 0; border-color: var(--border-color);">
+                <h3>Full Content</h3>
+                <pre style="white-space: pre-wrap; font-family: inherit; background: var(--primary-bg); padding: 15px; border-radius: 8px; max-height: 400px; overflow-y: auto;">${content.fullContent}</pre>
+                <button class="button button-primary" style="position: absolute; top: 20px; right: 20px;" onclick="this.parentElement.parentElement.remove()">✕ Close</button>
+            `;
+            
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+            
+            // Close on background click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+        
+        // Resume paused baseline generation
+        async function resumeBaselineGeneration(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
+            try {
+                const result = await apiCall('baseline-resume');
+                
+                if (result.success) {
+                    showSuccess('🔄 Baseline generation resumed!');
+                    
+                    // Restart polling
+                    if (!baselinePollingInterval) {
+                        baselinePollingInterval = setInterval(pollBaselineProgress, 2000);
+                    }
+                    pollBaselineProgress();
+                } else {
+                    showError('Failed to resume: ' + (result.error || 'Unknown error'));
+                }
+            } catch (error) {
+                showError('Error resuming baseline: ' + error.message);
+            }
+        }
+        
+        // Cancel baseline generation
+        async function cancelBaselineGeneration(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
+            if (!confirm('Are you sure you want to cancel the baseline generation?')) {
+                return;
+            }
+            
+            try {
+                const result = await apiCall('baseline-cancel');
+                
+                if (result.success) {
+                    showSuccess('❌ Baseline generation cancelled');
+                    
+                    // Stop polling
+                    if (baselinePollingInterval) {
+                        clearInterval(baselinePollingInterval);
+                        baselinePollingInterval = null;
+                    }
+                    
+                    document.getElementById('baselineContent').innerHTML = '<div class="error-message">Baseline generation was cancelled.</div>';
+                } else {
+                    showError('Failed to cancel: ' + (result.error || 'Unknown error'));
+                }
+            } catch (error) {
+                showError('Error cancelling baseline: ' + error.message);
+            }
         }
 
         async function loadChangeHistory(event) {
