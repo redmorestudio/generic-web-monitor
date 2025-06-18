@@ -249,7 +249,7 @@ function getSystemStatusFixed() {
       lastRun: lastRun || 'Never',
       companies: config.length,
       urls: totalUrls,
-      version: 81, // v81: Batch processing + AI intelligence
+      version: 81, // v81: Batch processing + flexible fetch options
       corsFixed: true,
       timestamp: new Date().toISOString()
     };
@@ -1891,6 +1891,439 @@ function passesFilters(item, filters) {
   }
   
   return true;
+}
+
+/**
+ * Clear existing baseline data
+ */
+function clearExistingBaselineData() {
+  try {
+    console.log('🗑️ Clearing existing baseline data...');
+    
+    const sheet = getOrCreateMonitorSheet();
+    if (!sheet || !sheet.spreadsheet) {
+      console.log('⚠️ No spreadsheet to clear');
+      return;
+    }
+    
+    const ss = sheet.spreadsheet;
+    const baselineSheet = ss.getSheetByName('AI_Baselines');
+    
+    if (baselineSheet && baselineSheet.getLastRow() > 1) {
+      // Archive data to a backup sheet first
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+      const backupName = `AI_Baselines_Backup_${timestamp}`;
+      const backupSheet = baselineSheet.copyTo(ss);
+      backupSheet.setName(backupName);
+      
+      // Clear all data except headers
+      baselineSheet.getRange(2, 1, baselineSheet.getLastRow() - 1, baselineSheet.getLastColumn()).clear();
+      console.log('✅ Baseline data cleared and backed up to:', backupName);
+    }
+    
+  } catch (error) {
+    console.error('❌ Error clearing baseline data:', error);
+  }
+}
+
+/**
+ * Get list of URLs already in baseline
+ */
+function getExistingBaselineUrls() {
+  const urls = new Set();
+  
+  try {
+    const sheet = getOrCreateMonitorSheet();
+    if (!sheet || !sheet.spreadsheet) {
+      return urls;
+    }
+    
+    const ss = sheet.spreadsheet;
+    const baselineSheet = ss.getSheetByName('AI_Baselines');
+    
+    if (baselineSheet && baselineSheet.getLastRow() > 1) {
+      const data = baselineSheet.getDataRange().getValues();
+      
+      // URL is in column 3 (index 2)
+      for (let i = 1; i < data.length; i++) {
+        if (data[i][2]) {
+          urls.add(data[i][2]);
+        }
+      }
+    }
+    
+    console.log(`📊 Found ${urls.size} existing URLs in baseline`);
+    
+  } catch (error) {
+    console.error('❌ Error getting existing URLs:', error);
+  }
+  
+  return urls;
+}
+
+/**
+ * Check for content updates without full baseline
+ */
+function checkForContentUpdates() {
+  try {
+    console.log('🔍 Checking for content updates...');
+    
+    // Get existing baseline data
+    const sheet = getOrCreateMonitorSheet();
+    if (!sheet || !sheet.spreadsheet) {
+      return {
+        success: false,
+        error: 'No spreadsheet available'
+      };
+    }
+    
+    const ss = sheet.spreadsheet;
+    const baselineSheet = ss.getSheetByName('AI_Baselines');
+    
+    if (!baselineSheet || baselineSheet.getLastRow() <= 1) {
+      return {
+        success: true,
+        changes: [],
+        message: 'No baseline data to compare against'
+      };
+    }
+    
+    // Get baseline data
+    const baselineData = baselineSheet.getDataRange().getValues();
+    const changes = [];
+    const urlsChecked = 0;
+    const errors = 0;
+    
+    // Process a sample of URLs (to avoid timeout)
+    const sampleSize = 5;
+    const urlsToCheck = [];
+    
+    for (let i = 1; i < Math.min(sampleSize + 1, baselineData.length); i++) {
+      const row = baselineData[i];
+      if (row[2]) { // URL exists
+        urlsToCheck.push({
+          company: row[1],
+          url: row[2],
+          type: row[3],
+          oldHash: row[5],
+          oldContent: row[6]
+        });
+      }
+    }
+    
+    // Check each URL for changes
+    urlsToCheck.forEach(urlData => {
+      try {
+        const extractionResult = extractPageContent(urlData.url);
+        
+        if (extractionResult.success) {
+          // Compare hashes
+          if (extractionResult.contentHash !== urlData.oldHash) {
+            // Calculate change magnitude
+            const magnitude = calculateChangeMagnitude(
+              urlData.oldContent || '',
+              extractionResult.content || ''
+            );
+            
+            changes.push({
+              company: urlData.company,
+              url: urlData.url,
+              type: urlData.type,
+              magnitude: magnitude,
+              relevanceScore: extractionResult.intelligence?.relevanceScore || 0,
+              summary: `Content changed by ${magnitude}%`,
+              oldHash: urlData.oldHash,
+              newHash: extractionResult.contentHash,
+              keywords: (extractionResult.intelligence?.keywords || []).join(', '),
+              insights: extractionResult.intelligence?.keyInsights || []
+            });
+          }
+        }
+        
+        // Add delay
+        Utilities.sleep(1000);
+        
+      } catch (error) {
+        console.error(`❌ Error checking ${urlData.url}:`, error);
+      }
+    });
+    
+    // Sort changes by relevance
+    changes.sort((a, b) => b.relevanceScore - a.relevanceScore);
+    
+    return {
+      success: true,
+      changes: changes,
+      checked: urlsToCheck.length,
+      errors: errors,
+      message: `Found ${changes.length} changes in ${urlsToCheck.length} URLs checked`
+    };
+    
+  } catch (error) {
+    console.error('❌ Error checking for updates:', error);
+    return {
+      success: false,
+      error: error.toString()
+    };
+  }
+}
+
+/**
+ * Calculate magnitude of change between two texts
+ */
+function calculateChangeMagnitude(oldText, newText) {
+  if (!oldText || !newText) return 100;
+  
+  // Simple character-based comparison
+  const maxLen = Math.max(oldText.length, newText.length);
+  if (maxLen === 0) return 0;
+  
+  let differences = 0;
+  const minLen = Math.min(oldText.length, newText.length);
+  
+  // Count character differences
+  for (let i = 0; i < minLen; i++) {
+    if (oldText[i] !== newText[i]) {
+      differences++;
+    }
+  }
+  
+  // Add length difference
+  differences += Math.abs(oldText.length - newText.length);
+  
+  // Calculate percentage
+  const magnitude = Math.round((differences / maxLen) * 100);
+  return Math.min(magnitude, 100);
+}
+
+/**
+ * Add a new company to monitoring
+ */
+function addCompanyToMonitoring(params) {
+  try {
+    const company = params.company;
+    const urls = params.urls ? params.urls.split(',').map(u => u.trim()) : [];
+    const type = params.type || 'competitor';
+    
+    if (!company) {
+      return {
+        success: false,
+        error: 'Company name is required'
+      };
+    }
+    
+    if (urls.length === 0) {
+      return {
+        success: false,
+        error: 'At least one URL is required'
+      };
+    }
+    
+    console.log(`➕ Adding company: ${company} with ${urls.length} URLs`);
+    
+    // Get current configuration
+    let config = [];
+    try {
+      config = getMonitorConfigurationsMultiUrl();
+    } catch (error) {
+      console.error('Error getting config:', error);
+      config = COMPLETE_MONITOR_CONFIG || [];
+    }
+    
+    // Check if company already exists
+    const existingIndex = config.findIndex(c => 
+      c.company.toLowerCase() === company.toLowerCase()
+    );
+    
+    if (existingIndex >= 0) {
+      return {
+        success: false,
+        error: 'Company already exists in configuration'
+      };
+    }
+    
+    // Add new company
+    config.push({
+      company: company,
+      type: type,
+      urls: urls.map(url => ({ url: url, type: 'unknown' }))
+    });
+    
+    // Save configuration
+    saveMonitorConfiguration(config);
+    
+    return {
+      success: true,
+      message: `Company "${company}" added successfully with ${urls.length} URLs`,
+      company: company,
+      urls: urls
+    };
+    
+  } catch (error) {
+    console.error('❌ Error adding company:', error);
+    return {
+      success: false,
+      error: error.toString()
+    };
+  }
+}
+
+/**
+ * Remove a company from monitoring
+ */
+function removeCompanyFromMonitoring(companyName) {
+  try {
+    if (!companyName) {
+      return {
+        success: false,
+        error: 'Company name is required'
+      };
+    }
+    
+    console.log(`🗑️ Removing company: ${companyName}`);
+    
+    // Get current configuration
+    let config = [];
+    try {
+      config = getMonitorConfigurationsMultiUrl();
+    } catch (error) {
+      console.error('Error getting config:', error);
+      config = COMPLETE_MONITOR_CONFIG || [];
+    }
+    
+    // Find and remove company
+    const originalLength = config.length;
+    config = config.filter(c => 
+      c.company.toLowerCase() !== companyName.toLowerCase()
+    );
+    
+    if (config.length === originalLength) {
+      return {
+        success: false,
+        error: 'Company not found in configuration'
+      };
+    }
+    
+    // Save updated configuration
+    saveMonitorConfiguration(config);
+    
+    // Optionally archive company data
+    archiveCompanyData(companyName);
+    
+    return {
+      success: true,
+      message: `Company "${companyName}" removed successfully`
+    };
+    
+  } catch (error) {
+    console.error('❌ Error removing company:', error);
+    return {
+      success: false,
+      error: error.toString()
+    };
+  }
+}
+
+/**
+ * Update monitoring parameters
+ */
+function updateMonitoringParameters(params) {
+  try {
+    const props = PropertiesService.getScriptProperties();
+    
+    // Update frequency
+    if (params.frequency) {
+      props.setProperty('MONITOR_FREQUENCY', params.frequency);
+    }
+    
+    // Update change threshold
+    if (params.changeThreshold) {
+      props.setProperty('CHANGE_THRESHOLD', params.changeThreshold);
+    }
+    
+    // Update relevance threshold
+    if (params.relevanceThreshold) {
+      props.setProperty('RELEVANCE_THRESHOLD', params.relevanceThreshold);
+    }
+    
+    // Get updated values
+    const currentParams = {
+      frequency: props.getProperty('MONITOR_FREQUENCY') || 'daily',
+      changeThreshold: props.getProperty('CHANGE_THRESHOLD') || '5',
+      relevanceThreshold: props.getProperty('RELEVANCE_THRESHOLD') || '7'
+    };
+    
+    console.log('✅ Parameters updated:', currentParams);
+    
+    return {
+      success: true,
+      message: 'Monitoring parameters updated successfully',
+      parameters: currentParams
+    };
+    
+  } catch (error) {
+    console.error('❌ Error updating parameters:', error);
+    return {
+      success: false,
+      error: error.toString()
+    };
+  }
+}
+
+/**
+ * Save monitor configuration
+ */
+function saveMonitorConfiguration(config) {
+  try {
+    // Save to script properties as JSON
+    const props = PropertiesService.getScriptProperties();
+    props.setProperty('MONITOR_CONFIG_JSON', JSON.stringify(config));
+    
+    console.log(`💾 Saved configuration with ${config.length} companies`);
+    
+  } catch (error) {
+    console.error('❌ Error saving configuration:', error);
+    throw error;
+  }
+}
+
+/**
+ * Archive data for a removed company
+ */
+function archiveCompanyData(companyName) {
+  try {
+    console.log(`📁 Archiving data for: ${companyName}`);
+    
+    // This is a placeholder - implement actual archiving if needed
+    // Could move company data to an archive sheet
+    
+  } catch (error) {
+    console.error('❌ Error archiving company data:', error);
+  }
+}
+
+/**
+ * Get monitor configurations - Enhanced to use saved JSON config
+ */
+function getMonitorConfigurationsMultiUrl() {
+  try {
+    // First try to load from saved JSON configuration
+    const props = PropertiesService.getScriptProperties();
+    const savedConfig = props.getProperty('MONITOR_CONFIG_JSON');
+    
+    if (savedConfig) {
+      console.log('💾 Loading configuration from saved JSON');
+      return JSON.parse(savedConfig);
+    }
+    
+    // Fallback to default configuration
+    console.log('📄 Using default configuration');
+    return COMPLETE_MONITOR_CONFIG || [];
+    
+  } catch (error) {
+    console.error('❌ Error loading configuration:', error);
+    return COMPLETE_MONITOR_CONFIG || [];
+  }
 }
 
 /**
