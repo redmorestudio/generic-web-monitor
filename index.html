@@ -490,7 +490,23 @@
         <!-- Action Buttons -->
         <div class="action-buttons" id="actionButtonsSection" style="display: none;">
             <button class="button button-primary" onclick="refreshStatus(event)">🔄 Refresh Status</button>
-            <button class="button button-secondary" onclick="generateBaseline(event)">📊 Generate Baseline</button>
+            <div class="dropdown" style="position: relative; display: inline-block;">
+                <button class="button button-secondary" onclick="toggleFetchDropdown(event)">📊 Fetch Data ▼</button>
+                <div id="fetchDropdown" class="dropdown-content" style="display: none; position: absolute; background: var(--secondary-bg); min-width: 250px; box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); z-index: 1; border-radius: 8px; margin-top: 5px; border: 1px solid var(--border-color);">
+                    <a href="#" onclick="performFetch(event, 'baseline-all')" style="color: var(--text-primary); padding: 12px 16px; text-decoration: none; display: block; border-bottom: 1px solid var(--border-color);">
+                        <strong>🔄 Baseline All</strong><br>
+                        <small style="color: var(--text-secondary);">Wipe & rebuild everything</small>
+                    </a>
+                    <a href="#" onclick="performFetch(event, 'baseline-new')" style="color: var(--text-primary); padding: 12px 16px; text-decoration: none; display: block; border-bottom: 1px solid var(--border-color);">
+                        <strong>➕ Baseline New</strong><br>
+                        <small style="color: var(--text-secondary);">Only new companies/URLs</small>
+                    </a>
+                    <a href="#" onclick="performFetch(event, 'check-updates')" style="color: var(--text-primary); padding: 12px 16px; text-decoration: none; display: block;">
+                        <strong>🔍 Check for Updates</strong><br>
+                        <small style="color: var(--text-secondary);">Look for new content</small>
+                    </a>
+                </div>
+            </div>
             <button class="button button-warning" onclick="runMonitorCheck(event)">🔍 Run Monitor Check</button>
             <button class="button button-ai" onclick="openTheBrain(event)">🧠 TheBrain Integration</button>
         </div>
@@ -619,10 +635,76 @@
             </div>
 
             <div id="configurationTab" class="tab-content">
-                <h2>⚙️ AI System Configuration</h2>
-                <button class="button button-secondary" onclick="loadConfiguration(event)">🔄 Load Configuration</button>
-                <div id="configurationContent">
-                    <div class="error-message">Click "Load Configuration" to view AI system settings...</div>
+                <h2>⚙️ System Configuration</h2>
+                
+                <!-- Company Management -->
+                <div class="config-section">
+                    <h4>🏢 Company Management</h4>
+                    <div class="action-buttons" style="margin: 15px 0;">
+                        <button class="button button-primary" onclick="showAddCompanyForm(event)">➕ Add Company</button>
+                        <button class="button button-secondary" onclick="loadCompanyList(event)">🔄 Refresh List</button>
+                    </div>
+                    
+                    <div id="addCompanyForm" style="display: none; background: var(--accent-bg); padding: 20px; border-radius: 8px; margin: 20px 0;">
+                        <h5>Add New Company</h5>
+                        <div class="input-group">
+                            <label for="newCompanyName">Company Name:</label>
+                            <input type="text" id="newCompanyName" placeholder="Enter company name">
+                        </div>
+                        <div class="input-group">
+                            <label for="newCompanyUrls">URLs (one per line):</label>
+                            <textarea id="newCompanyUrls" rows="5" placeholder="https://example.com/pricing\nhttps://example.com/blog\nhttps://example.com/docs"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label for="newCompanyType">Primary Type:</label>
+                            <select id="newCompanyType">
+                                <option value="competitor">Competitor</option>
+                                <option value="partner">Partner</option>
+                                <option value="vendor">Vendor</option>
+                                <option value="customer">Customer</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="action-buttons" style="margin: 15px 0;">
+                            <button class="button button-primary" onclick="addCompany(event)">✅ Add Company</button>
+                            <button class="button button-secondary" onclick="hideAddCompanyForm(event)">❌ Cancel</button>
+                        </div>
+                    </div>
+                    
+                    <div id="companyListContainer">
+                        <div class="loading">Click "Refresh List" to load companies...</div>
+                    </div>
+                </div>
+                
+                <!-- Monitoring Parameters -->
+                <div class="config-section">
+                    <h4>🎛️ Monitoring Parameters</h4>
+                    <div class="input-group">
+                        <label for="checkFrequency">Check Frequency:</label>
+                        <select id="checkFrequency">
+                            <option value="hourly">Every Hour</option>
+                            <option value="daily" selected>Daily</option>
+                            <option value="weekly">Weekly</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="changeThreshold">Change Detection Threshold (%):</label>
+                        <input type="number" id="changeThreshold" value="5" min="1" max="100">
+                    </div>
+                    <div class="input-group">
+                        <label for="relevanceThreshold">Minimum Relevance Score:</label>
+                        <input type="number" id="relevanceThreshold" value="7" min="1" max="10">
+                    </div>
+                    <button class="button button-primary" onclick="saveMonitoringParameters(event)" style="margin-top: 15px;">💾 Save Parameters</button>
+                </div>
+                
+                <!-- System Info -->
+                <div class="config-section">
+                    <h4>📊 System Information</h4>
+                    <button class="button button-secondary" onclick="loadSystemConfig(event)">🔄 Load System Config</button>
+                    <div id="systemConfigContent">
+                        <div class="error-message">Click "Load System Config" to view current settings...</div>
+                    </div>
                 </div>
             </div>
 
@@ -995,38 +1077,151 @@
             }
         }
         
-        // Enhanced baseline generation with better debugging - FIXED: Prevent infinite loop
-        async function generateBaseline(event) {
+        // Toggle fetch dropdown
+        function toggleFetchDropdown(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            const dropdown = document.getElementById('fetchDropdown');
+            dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function closeDropdown(e) {
+                if (!e.target.closest('.dropdown')) {
+                    dropdown.style.display = 'none';
+                    document.removeEventListener('click', closeDropdown);
+                }
+            });
+        }
+        
+        // Perform fetch based on type
+        async function performFetch(event, fetchType) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            // Close dropdown
+            document.getElementById('fetchDropdown').style.display = 'none';
+            
+            switch(fetchType) {
+                case 'baseline-all':
+                    // Show confirmation dialog
+                    if (confirm('⚠️ This will DELETE all existing data and create a fresh baseline. Are you sure?')) {
+                        await generateBaseline(event, { mode: 'all', clearExisting: true });
+                    }
+                    break;
+                    
+                case 'baseline-new':
+                    await generateBaseline(event, { mode: 'new', clearExisting: false });
+                    break;
+                    
+                case 'check-updates':
+                    await checkForUpdates(event);
+                    break;
+            }
+        }
+        
+        // Check for content updates
+        async function checkForUpdates(event) {
             if (event) {
                 event.preventDefault();
                 event.stopPropagation();
                 addClickFeedback(event.target);
             }
             
-            console.log('🚀 Starting enhanced baseline generation (v80)...');
+            showTab(null, 'changes');
+            document.getElementById('changeHistoryContent').innerHTML = '<div class="loading">🔍 Checking for content updates...</div>';
+            
+            try {
+                const result = await apiCall('check-updates');
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                let html = `<div class="success-message">✅ Update check completed!</div>`;
+                
+                if (result.changes && result.changes.length > 0) {
+                    html += `
+                        <h3>📊 ${result.changes.length} Changes Detected</h3>
+                        <div class="data-table-container" style="overflow-x: auto;">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Company</th>
+                                        <th>URL</th>
+                                        <th>Change Type</th>
+                                        <th>Magnitude</th>
+                                        <th>AI Relevance</th>
+                                        <th>Summary</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    `;
+                    
+                    result.changes.forEach(change => {
+                        html += `
+                            <tr>
+                                <td>${change.company}</td>
+                                <td><a href="${change.url}" target="_blank">${change.url.substring(0, 40)}...</a></td>
+                                <td><span class="status status-operational">${change.type}</span></td>
+                                <td>${change.magnitude}%</td>
+                                <td>${change.relevanceScore}/10</td>
+                                <td>${change.summary}</td>
+                            </tr>
+                        `;
+                    });
+                    
+                    html += '</tbody></table></div>';
+                } else {
+                    html += '<div class="success-message">No significant changes detected since last check.</div>';
+                }
+                
+                document.getElementById('changeHistoryContent').innerHTML = html;
+                
+            } catch (error) {
+                document.getElementById('changeHistoryContent').innerHTML = `
+                    <div class="error-message">❌ Error checking for updates: ${error.message}</div>
+                `;
+            }
+        }
+        
+        // Enhanced baseline generation with options
+        async function generateBaseline(event, options = {}) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
+            const mode = options.mode || 'all';
+            const clearExisting = options.clearExisting !== false;
+            
+            console.log(`🚀 Starting baseline generation - Mode: ${mode}, Clear: ${clearExisting}`);
+            
+            // Navigate to baseline tab
+            showTab(null, 'baseline');
             document.getElementById('baselineContent').innerHTML = '<div class="loading">🤖 Starting AI-enhanced baseline generation...</div>';
             
             try {
-                // First, let's check if we already have baseline data
-                console.log('📊 Checking for existing baseline data...');
-                const existingData = await apiCall('extracted', { limit: 5 });
-                
-                if (existingData.extractedData && existingData.extractedData.length > 0) {
-                    console.log('✅ Found existing baseline data:', existingData.extractedData.length, 'items');
-                    document.getElementById('baselineContent').innerHTML = `
-                        <div class="success-message">
-                            ✅ Baseline data already exists!<br>
-                            Found ${existingData.extractedData.length} extracted data items.<br>
-                            🤖 AI Features: Active with intelligent content extraction<br>
-                            📊 Status: Ready for monitoring<br><br>
-                            <strong>No need to regenerate baseline.</strong> Your data is already available in the Extracted Data tab.
-                        </div>
-                    `;
-                    return;
+                // For baseline-new mode, check if we already have data
+                if (mode === 'new') {
+                    console.log('📊 Checking for existing baseline data...');
+                    const existingData = await apiCall('extracted', { limit: 5 });
+                    
+                    if (existingData.extractedData && existingData.extractedData.length > 0) {
+                        console.log('✅ Found existing baseline data, will only process new URLs');
+                    }
                 }
                 
-                console.log('📝 No existing data found, starting new baseline generation...');
-                const result = await apiCall('baseline');
+                console.log(`📝 Starting baseline generation with mode: ${mode}`);
+                const result = await apiCall('baseline', { 
+                    mode: mode,
+                    clearExisting: clearExisting 
+                });
                 
                 if (result.error) {
                     throw new Error(result.error);
@@ -1382,6 +1577,196 @@ ${JSON.stringify(data, null, 2)}
             window.open('https://thebrain.com', '_blank');
         }
 
+        // Configuration Management Functions
+        function showAddCompanyForm(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            document.getElementById('addCompanyForm').style.display = 'block';
+        }
+        
+        function hideAddCompanyForm(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            document.getElementById('addCompanyForm').style.display = 'none';
+            // Clear form
+            document.getElementById('newCompanyName').value = '';
+            document.getElementById('newCompanyUrls').value = '';
+            document.getElementById('newCompanyType').value = 'competitor';
+        }
+        
+        async function addCompany(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
+            const name = document.getElementById('newCompanyName').value.trim();
+            const urls = document.getElementById('newCompanyUrls').value.trim().split('\n').filter(u => u.trim());
+            const type = document.getElementById('newCompanyType').value;
+            
+            if (!name) {
+                showError('Please enter a company name');
+                return;
+            }
+            
+            if (urls.length === 0) {
+                showError('Please enter at least one URL');
+                return;
+            }
+            
+            try {
+                const result = await apiCall('add-company', {
+                    company: name,
+                    urls: urls.join(','),
+                    type: type
+                });
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                showSuccess(`✅ Company "${name}" added successfully!`);
+                hideAddCompanyForm();
+                loadCompanyList();
+                
+            } catch (error) {
+                showError(`❌ Error adding company: ${error.message}`);
+            }
+        }
+        
+        async function loadCompanyList(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
+            document.getElementById('companyListContainer').innerHTML = '<div class="loading">Loading companies...</div>';
+            
+            try {
+                const data = await apiCall('config');
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                const companies = data.companies || data.monitors || [];
+                
+                let html = '<div class="companies-grid">';
+                companies.forEach((company, index) => {
+                    html += `
+                        <div class="company-card">
+                            <h3>${company.company}</h3>
+                            <div class="status status-operational">${company.type || 'Competitor'}</div>
+                            <p><strong>URLs:</strong> ${company.urls ? company.urls.length : 0}</p>
+                            <div class="action-buttons" style="margin: 10px 0;">
+                                <button class="button button-secondary" onclick="editCompany(${index})">✏️ Edit</button>
+                                <button class="button button-warning" onclick="removeCompany('${company.company}')">🗑️ Remove</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                html += '</div>';
+                
+                if (companies.length === 0) {
+                    html = '<div class="error-message">No companies configured yet. Click "Add Company" to get started.</div>';
+                }
+                
+                document.getElementById('companyListContainer').innerHTML = html;
+                
+            } catch (error) {
+                document.getElementById('companyListContainer').innerHTML = `
+                    <div class="error-message">❌ Error loading companies: ${error.message}</div>
+                `;
+            }
+        }
+        
+        async function removeCompany(companyName) {
+            if (!confirm(`Are you sure you want to remove "${companyName}" and all its data?`)) {
+                return;
+            }
+            
+            try {
+                const result = await apiCall('remove-company', { company: companyName });
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                showSuccess(`✅ Company "${companyName}" removed successfully`);
+                loadCompanyList();
+                
+            } catch (error) {
+                showError(`❌ Error removing company: ${error.message}`);
+            }
+        }
+        
+        async function saveMonitoringParameters(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
+            const frequency = document.getElementById('checkFrequency').value;
+            const changeThreshold = document.getElementById('changeThreshold').value;
+            const relevanceThreshold = document.getElementById('relevanceThreshold').value;
+            
+            try {
+                const result = await apiCall('update-parameters', {
+                    frequency: frequency,
+                    changeThreshold: changeThreshold,
+                    relevanceThreshold: relevanceThreshold
+                });
+                
+                if (result.error) {
+                    throw new Error(result.error);
+                }
+                
+                showSuccess('✅ Monitoring parameters saved successfully!');
+                
+            } catch (error) {
+                showError(`❌ Error saving parameters: ${error.message}`);
+            }
+        }
+        
+        async function loadSystemConfig(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
+            try {
+                const data = await apiCall('config');
+                
+                if (data.error) {
+                    throw new Error(data.error);
+                }
+                
+                document.getElementById('systemConfigContent').innerHTML = `
+                    <div class="success-message">
+                        <h4>📊 Current System Configuration</h4>
+                        <pre style="background: var(--primary-bg); padding: 15px; border-radius: 8px; overflow-x: auto;">
+${JSON.stringify(data, null, 2)}
+                        </pre>
+                    </div>
+                `;
+                
+            } catch (error) {
+                document.getElementById('systemConfigContent').innerHTML = `
+                    <div class="error-message">❌ Error loading config: ${error.message}</div>
+                `;
+            }
+        }
+        
         // Utility Functions
         function formatTimeAgo(date) {
             if (!date) return 'Never';
