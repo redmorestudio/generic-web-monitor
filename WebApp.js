@@ -199,6 +199,40 @@ function doGet(e) {
         response = searchTheBrain(e.parameter.query);
         break;
         
+      // NEW: Enhanced TheBrain features
+      case 'thebrain-init-clustering':
+        response = initializeTheBrainClustering();
+        break;
+        
+      case 'thebrain-init-config':
+        response = createTheBrainConfiguration();
+        break;
+        
+      case 'thebrain-init-all':
+        response = setupEnhancedTheBrainIntegration();
+        break;
+        
+      case 'thebrain-update-alert':
+        response = updateTheBrainAlert({
+          company: e.parameter.company,
+          url: e.parameter.url,
+          changeType: e.parameter.changeType,
+          magnitude: parseFloat(e.parameter.magnitude) || 0,
+          relevanceScore: parseFloat(e.parameter.relevanceScore) || 0,
+          previousState: e.parameter.previousState || '',
+          currentState: e.parameter.currentState || '',
+          keywords: e.parameter.keywords ? e.parameter.keywords.split(',') : []
+        });
+        break;
+        
+      case 'thebrain-get-concepts':
+        response = getRelatedConcepts(e.parameter.thoughtId);
+        break;
+        
+      case 'thebrain-test':
+        response = testEnhancedTheBrainIntegration();
+        break;
+        
       // NEW: Advanced scheduling
       case 'get-schedules':
         response = getMonitoringSchedules();
@@ -1368,17 +1402,38 @@ function generateBaselineForAPIBatchedEnhanced(options = {}) {
             job.successful_urls++;
             console.log(`✅ Successfully processed: ${urlData.company}`);
             
-            // Sync with TheBrain if configured
+            // Enhanced TheBrain sync with visual alerts
             if (getTheBrainStatus().success) {
               try {
-                createTheBrainThought({
-                  name: `${urlData.company} - ${urlData.type}`,
-                  type: 'webpage',
-                  notes: `URL: ${urlData.url}\nRelevance: ${baselineData.relevanceScore}/10\nKeywords: ${baselineData.keywords}`,
-                  color: urlData.priority === 'high' ? '#ff6b6b' : '#4a90e2'
-                });
+                // Determine if this is a significant baseline
+                if (baselineData.relevanceScore >= 6) {
+                  const alertLevel = calculateAlertLevel(0, baselineData.relevanceScore);
+                  const visualProps = getVisualPropertiesForAlert(alertLevel, urlData.type);
+                  
+                  // Create company thought if needed
+                  const companyThought = createOrUpdateCompanyThought(urlData.company, {
+                    color: visualProps.color,
+                    emoji: '🏢'
+                  });
+                  
+                  // Create baseline thought
+                  const baselineThought = createTheBrainThought({
+                    name: `${visualProps.emoji} ${urlData.company} - ${urlData.type} Baseline`,
+                    type: 'baseline',
+                    notes: `URL: ${urlData.url}\nRelevance: ${baselineData.relevanceScore}/10\nKeywords: ${baselineData.keywords}\nExtracted: ${new Date().toISOString()}\n\nContent Preview:\n${baselineData.extractedContent}`,
+                    color: visualProps.color
+                  });
+                  
+                  if (baselineThought.success && companyThought.success) {
+                    // Link baseline to company
+                    linkThoughts(companyThought.thoughtId, baselineThought.thoughtId, 'child');
+                    
+                    // Link to concept clusters
+                    linkToConceptClusters(baselineThought.thoughtId, urlData.type, alertLevel);
+                  }
+                }
               } catch (theBrainError) {
-                console.log('TheBrain sync failed:', theBrainError);
+                console.log('Enhanced TheBrain sync failed:', theBrainError);
               }
             }
             
