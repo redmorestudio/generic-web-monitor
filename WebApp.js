@@ -2574,7 +2574,7 @@ function testEnhancedCORSWebApp() {
 
 // Include any remaining functions from the original file...
 // All functions from the original WebApp.js should be preserved and enhanced
-// Force update v85
+// Force update v94 - With forceReauthorization function
 
 /**
  * Force re-authorization by using UrlFetchApp
