@@ -479,20 +479,20 @@
 
         <!-- Navigation Tabs -->
         <div class="tabs" id="tabsSection" style="display: none;">
-            <button class="tab active" onclick="showTab(event, 'dashboard')">📊 Dashboard</button>
-            <button class="tab" onclick="showTab(event, 'extracted')">📄 Extracted Data</button>
-            <button class="tab" onclick="showTab(event, 'changes')">📈 Change History</button>
-            <button class="tab" onclick="showTab(event, 'configuration')">⚙️ Configuration</button>
-            <button class="tab" onclick="showTab(event, 'baseline')">🚀 Baseline</button>
-            <button class="tab" onclick="showTab(event, 'logs')">📝 System Logs</button>
+            <button type="button" class="tab active" onclick="showTab(event, 'dashboard')">📊 Dashboard</button>
+            <button type="button" class="tab" onclick="showTab(event, 'extracted')">📄 Extracted Data</button>
+            <button type="button" class="tab" onclick="showTab(event, 'changes')">📈 Change History</button>
+            <button type="button" class="tab" onclick="showTab(event, 'configuration')">⚙️ Configuration</button>
+            <button type="button" class="tab" onclick="showTab(event, 'baseline')">🚀 Baseline</button>
+            <button type="button" class="tab" onclick="showTab(event, 'logs')">📝 System Logs</button>
         </div>
 
         <!-- Action Buttons -->
         <div class="action-buttons" id="actionButtonsSection" style="display: none;">
-            <button class="button button-primary" onclick="refreshStatus(event)">🔄 Refresh Status</button>
-            <button class="button button-secondary" onclick="checkForUpdates(event)">🔍 Check for Updates</button>
-            <button class="button button-warning" onclick="runMonitorCheck(event)">🔍 Run Monitor Check</button>
-            <button class="button button-ai" onclick="openTheBrain(event)">🧠 TheBrain Integration</button>
+            <button type="button" class="button button-primary" onclick="refreshStatus(event)">🔄 Refresh Status</button>
+            <button type="button" class="button button-secondary" onclick="checkForUpdates(event)">🔍 Check for Updates</button>
+            <button type="button" class="button button-warning" onclick="runMonitorCheck(event)">🔍 Run Monitor Check</button>
+            <button type="button" class="button button-ai" onclick="openTheBrain(event)">🧠 TheBrain Integration</button>
         </div>
 
         <!-- System Status -->
@@ -600,8 +600,8 @@
                         </div>
                     </div>
                     <div class="action-buttons" style="margin: 0;">
-                        <button class="button button-primary" onclick="loadExtractedData(event)">🔄 Apply Filters & Load Data</button>
-                        <button class="button button-secondary" onclick="clearFilters(event)">🗑️ Clear Filters</button>
+                        <button type="button" class="button button-primary" onclick="loadExtractedData(event)">🔄 Apply Filters & Load Data</button>
+                        <button type="button" class="button button-secondary" onclick="clearFilters(event)">🗑️ Clear Filters</button>
                     </div>
                 </div>
                 
@@ -612,7 +612,7 @@
 
             <div id="changesTab" class="tab-content">
                 <h2>📈 AI-Filtered Change History & Analysis</h2>
-                <button class="button button-secondary" onclick="loadChangeHistory(event)">🔄 Load Change History</button>
+                <button type="button" class="button button-secondary" onclick="loadChangeHistory(event)">🔄 Load Change History</button>
                 <div id="changeHistoryContent">
                     <div class="error-message">Click "Load Change History" to view AI-filtered changes...</div>
                 </div>
@@ -625,8 +625,8 @@
                 <div class="config-section">
                     <h4>🏢 Company Management</h4>
                     <div class="action-buttons" style="margin: 15px 0;">
-                        <button class="button button-primary" onclick="showAddCompanyForm(event)">➕ Add Company</button>
-                        <button class="button button-secondary" onclick="loadCompanyList(event)">🔄 Refresh List</button>
+                        <button type="button" class="button button-primary" onclick="showAddCompanyForm(event)">➕ Add Company</button>
+                        <button type="button" class="button button-secondary" onclick="loadCompanyList(event)">🔄 Refresh List</button>
                     </div>
                     
                     <div id="addCompanyForm" style="display: none; background: var(--accent-bg); padding: 20px; border-radius: 8px; margin: 20px 0;">
@@ -650,8 +650,8 @@
                             </select>
                         </div>
                         <div class="action-buttons" style="margin: 15px 0;">
-                            <button class="button button-primary" onclick="addCompany(event)">✅ Add Company</button>
-                            <button class="button button-secondary" onclick="hideAddCompanyForm(event)">❌ Cancel</button>
+                            <button type="button" class="button button-primary" onclick="addCompany(event)">✅ Add Company</button>
+                            <button type="button" class="button button-secondary" onclick="hideAddCompanyForm(event)">❌ Cancel</button>
                         </div>
                     </div>
                     
@@ -679,13 +679,13 @@
                         <label for="relevanceThreshold">Minimum Relevance Score:</label>
                         <input type="number" id="relevanceThreshold" value="7" min="1" max="10">
                     </div>
-                    <button class="button button-primary" onclick="saveMonitoringParameters(event)" style="margin-top: 15px;">💾 Save Parameters</button>
+                    <button type="button" class="button button-primary" onclick="saveMonitoringParameters(event)" style="margin-top: 15px;">💾 Save Parameters</button>
                 </div>
                 
                 <!-- System Info -->
                 <div class="config-section">
                     <h4>📊 System Information</h4>
-                    <button class="button button-secondary" onclick="loadSystemConfig(event)">🔄 Load System Config</button>
+                    <button type="button" class="button button-secondary" onclick="loadSystemConfig(event)">🔄 Load System Config</button>
                     <div id="systemConfigContent">
                         <div class="error-message">Click "Load System Config" to view current settings...</div>
                     </div>
@@ -700,9 +700,9 @@
                 <div class="config-section">
                     <h4>🎯 Baseline Generation Options</h4>
                     <div class="action-buttons" style="margin: 15px 0;">
-                        <button class="button button-primary" onclick="generateBaseline(event, { mode: 'all', clearExisting: true })" title="Delete all existing data and create fresh baseline">🔄 Baseline All (Fresh Start)</button>
-                        <button class="button button-secondary" onclick="generateBaseline(event, { mode: 'new', clearExisting: false })" title="Only process URLs not already in baseline">➕ Baseline New URLs Only</button>
-                        <button class="button button-warning" onclick="checkBaselineStatus(event)" title="Check current baseline status">📊 Check Status</button>
+                        <button type="button" class="button button-primary" onclick="generateBaseline(event, { mode: 'all', clearExisting: true })" title="Delete all existing data and create fresh baseline">🔄 Baseline All (Fresh Start)</button>
+                        <button type="button" class="button button-secondary" onclick="generateBaseline(event, { mode: 'new', clearExisting: false })" title="Only process URLs not already in baseline">➕ Baseline New URLs Only</button>
+                        <button type="button" class="button button-warning" onclick="checkBaselineStatus(event)" title="Check current baseline status">📊 Check Status</button>
                     </div>
                     <p style="font-size: 14px; color: var(--text-secondary); margin: 10px 0;">
                         <strong>Tip:</strong> "Baseline All" will delete existing data and rebuild everything. "Baseline New" only processes URLs not already captured.
@@ -716,7 +716,7 @@
 
             <div id="logsTab" class="tab-content">
                 <h2>📝 AI System Logs & Monitoring</h2>
-                <button class="button button-secondary" onclick="loadSystemLogs(event)">🔄 Refresh Logs</button>
+                <button type="button" class="button button-secondary" onclick="loadSystemLogs(event)">🔄 Refresh Logs</button>
                 <div id="systemLogsContent">
                     <div class="error-message">Click "Refresh Logs" to load AI system logs...</div>
                 </div>
@@ -728,11 +728,11 @@
     </div>
 
     <script>
-        // v79: FIXED INFINITE LOOPS + PROPER EVENT HANDLING
+        // v86: COMPREHENSIVE INFINITE LOOP FIXES + DEBOUNCING
         const CONFIG = {
             apiUrl: 'https://script.google.com/macros/s/AKfycbyn_EA2xjOVdw-FsRNOLBFOakSuMLzFOFIGNoaPk_5KFlE01-d6kpUQHKiumPE86hLrsA/exec',
             token: 'dev-token-change-me',
-            version: 85,
+            version: 86,
             aiEnhanced: true,
             corsFixed: true
         };
@@ -742,16 +742,61 @@
         let currentTab = 'dashboard';
         let isLoading = false;
         let isStatusLoading = false; // Prevent recursive status calls
+        let isGeneratingBaseline = false; // Prevent concurrent baseline generation
+        let clickCooldowns = {}; // Track button click cooldowns
         let systemStatus = {};
         let companies = [];
 
+        // Debounce helper to prevent rapid repeated calls
+        function debounce(func, wait, immediate) {
+            let timeout;
+            return function executedFunction() {
+                const context = this;
+                const args = arguments;
+                const later = function() {
+                    timeout = null;
+                    if (!immediate) func.apply(context, args);
+                };
+                const callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+            };
+        }
+
+        // Click cooldown helper to prevent rapid clicks
+        function withClickCooldown(funcName, func, cooldownMs = 1000) {
+            return function(event, ...args) {
+                // Always handle the event first
+                if (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    event.stopImmediatePropagation(); // Stop ALL event propagation
+                    addClickFeedback(event.target);
+                }
+                
+                // Check cooldown
+                const now = Date.now();
+                const lastClick = clickCooldowns[funcName] || 0;
+                if (now - lastClick < cooldownMs) {
+                    console.log(`⚠️ ${funcName} on cooldown, ignoring click`);
+                    return;
+                }
+                
+                // Update cooldown and execute
+                clickCooldowns[funcName] = now;
+                return func.call(this, event, ...args);
+            };
+        }
+
         // Initialize the application
         function init() {
-            console.log('🚀 AI Competitive Monitor v85 - WebApp.js v83 Backend + All Features Restored');
+            console.log('🚀 AI Competitive Monitor v86 - INFINITE LOOP FIXES APPLIED');
             console.log('✅ CORS Fixed - Using proven deployment URL:', CONFIG.apiUrl);
             console.log('🤖 AI Features: Relevance scoring, keyword extraction, competitor detection');
             console.log('🚀 New: Batch processing for all 55 URLs with progress tracking');
             console.log('📊 Progress: Real-time updates during baseline generation');
+            console.log('🔒 Protection: Debouncing and cooldowns to prevent infinite loops');
             
             // Load saved token - FIXED: Prevent corruption on reload
             const savedToken = localStorage.getItem('apiToken');
@@ -897,14 +942,32 @@
             
             currentTab = tabName;
             
+            // Clear any active intervals when switching tabs to prevent accumulation
+            if (baselinePollingInterval) {
+                clearInterval(baselinePollingInterval);
+                baselinePollingInterval = null;
+            }
+            
             // Check for existing baseline job when extracted tab is shown
             if (tabName === 'extracted') {
-                checkBaselineStatus();
+                // Use setTimeout to prevent immediate call loops
+                setTimeout(() => checkBaselineStatus(), 100);
             }
         }
         
+        // Flag to prevent concurrent baseline status checks
+        let isCheckingBaselineStatus = false;
+        
         // Check baseline completion status
         async function checkBaselineStatus() {
+            // Prevent concurrent calls
+            if (isCheckingBaselineStatus) {
+                console.log('⚠️ Already checking baseline status, skipping...');
+                return;
+            }
+            
+            isCheckingBaselineStatus = true;
+            
             try {
                 const completed = await apiCall('baseline-completed');
                 if (completed.completed) {
@@ -929,6 +992,8 @@
                 }
             } catch (error) {
                 console.error('Error checking baseline status:', error);
+            } finally {
+                isCheckingBaselineStatus = false;
             }
         }
         
@@ -1248,29 +1313,34 @@
             }
         }
         
-        // Enhanced baseline generation with options
-        async function generateBaseline(event, options = {}) {
-            if (event) {
-                event.preventDefault();
-                event.stopPropagation();
-                addClickFeedback(event.target);
+        // Enhanced baseline generation with options - PROTECTED AGAINST INFINITE LOOPS
+        async function generateBaselineCore(event, options = {}) {
+            // Double-check we're not already generating
+            if (isGeneratingBaseline) {
+                console.log('⚠️ Baseline generation already in progress, ignoring request');
+                return;
             }
             
-            const mode = options.mode || 'all';
-            const clearExisting = options.clearExisting !== false;
+            // Set flag immediately
+            isGeneratingBaseline = true;
             
-            // Show confirmation for destructive operations
-            if (mode === 'all' && clearExisting) {
-                if (!confirm('⚠️ This will DELETE all existing baseline data and create a fresh baseline. Are you sure?')) {
-                    return;
+            try {
+                const mode = options.mode || 'all';
+                const clearExisting = options.clearExisting !== false;
+                
+                // Show confirmation for destructive operations
+                if (mode === 'all' && clearExisting) {
+                    if (!confirm('⚠️ This will DELETE all existing baseline data and create a fresh baseline. Are you sure?')) {
+                        isGeneratingBaseline = false;
+                        return;
+                    }
                 }
-            }
-            
-            console.log(`🚀 Starting baseline generation - Mode: ${mode}, Clear: ${clearExisting}`);
-            
-            // Navigate to baseline tab
-            showTab(null, 'baseline');
-            document.getElementById('baselineContent').innerHTML = '<div class="loading">🤖 Starting AI-enhanced baseline generation...</div>';
+                
+                console.log(`🚀 Starting baseline generation - Mode: ${mode}, Clear: ${clearExisting}`);
+                
+                // Navigate to baseline tab
+                showTab(null, 'baseline');
+                document.getElementById('baselineContent').innerHTML = '<div class="loading">🤖 Starting AI-enhanced baseline generation...</div>';
             
             try {
                 // For baseline-new mode, check if we already have data
@@ -1362,7 +1432,14 @@
                     </div>
                 `;
             }
+            } finally {
+                // Always clear the flag
+                isGeneratingBaseline = false;
+            }
         }
+        
+        // Wrap generateBaseline with click cooldown protection
+        const generateBaseline = withClickCooldown('generateBaseline', generateBaselineCore, 2000);
 
         async function runMonitorCheck(event) {
             if (event) {
