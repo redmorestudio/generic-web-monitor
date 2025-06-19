@@ -124,6 +124,10 @@ function doGet(e) {
         response = cancelBaselineJob();
         break;
         
+      case 'baseline-continue':
+        response = continueBaselineJob();
+        break;
+        
       case 'baseline-schedule':
         response = scheduleBaselineGeneration(e.parameter);
         break;
@@ -396,7 +400,7 @@ function getSystemStatusFixed() {
       lastRun: lastRun || 'Never',
       companies: config.length,
       urls: totalUrls,
-      version: 83, // v83: RESTORED missing functionality
+      version: 84, // v84: FIXED infinite loops + rate limiting
       corsFixed: true,
       theBrainIntegrated: theBrainStatus.success,
       enhancedFeatures: {
@@ -1351,7 +1355,7 @@ function generateBaselineForAPIBatchedEnhanced(options = {}) {
     }
     
     // Process next batch with enhanced error handling
-    const BATCH_SIZE = 3; // Reduced to prevent timeouts
+    const BATCH_SIZE = 1; // Process one URL at a time to prevent rate limiting issues
     const startIndex = job.processed_urls;
     const endIndex = Math.min(startIndex + BATCH_SIZE, job.urls.length);
     
@@ -1475,8 +1479,8 @@ function generateBaselineForAPIBatchedEnhanced(options = {}) {
         // Update job progress
         job.processed_urls++;
         
-        // Add delay between requests to prevent rate limiting
-        Utilities.sleep(2000); // Increased delay
+        // Add proper delay between requests to prevent rate limiting and server overload
+        Utilities.sleep(12000); // 12 second delay for proper rate limiting
         
       } catch (error) {
         console.error(`❌ Error processing ${urlData.url}:`, error);
@@ -1549,10 +1553,9 @@ function generateBaselineForAPIBatchedEnhanced(options = {}) {
       // More to process
       props.setProperty('BASELINE_JOB', JSON.stringify(job));
       
-      // Schedule next batch with a trigger (if not too many timeouts)
-      if (!timeoutOccurred) {
-        scheduleNextBaselineBatch(job.id);
-      }
+      // REMOVED: Automatic scheduling to prevent infinite loops
+      // Jobs will now be manually triggered or polled
+      // Next batch will be processed when user requests status update
       
       return {
         success: true,
@@ -1999,8 +2002,543 @@ function extractKeyInsights(text, url) {
   return insights.length > 0 ? insights : ['Standard content update'];
 }
 
-// Include all remaining functions from the original WebApp.js...
-// (getAllFunctionsFromOriginalFile would continue here)
+/**
+ * Get existing baseline URLs for 'new' mode processing
+ */
+function getExistingBaselineUrls() {
+  try {
+    const sheetResult = getOrCreateMonitorSheet();
+    if (!sheetResult.success) {
+      return new Set();
+    }
+    
+    const ss = sheetResult.spreadsheet;
+    const baselineSheet = ss.getSheetByName('AI_Baselines');
+    
+    if (!baselineSheet) {
+      return new Set();
+    }
+    
+    const dataRange = baselineSheet.getDataRange();
+    const values = dataRange.getValues();
+    const existingUrls = new Set();
+    
+    // Skip header row (index 0)
+    for (let i = 1; i < values.length; i++) {
+      const url = values[i][2]; // URL is in column C (index 2)
+      if (url) {
+        existingUrls.add(url);
+      }
+    }
+    
+    console.log(`📊 Found ${existingUrls.size} existing baseline URLs`);
+    return existingUrls;
+    
+  } catch (error) {
+    console.error('Error getting existing baseline URLs:', error);
+    return new Set();
+  }
+}
+
+/**
+ * Clear existing baseline data
+ */
+function clearExistingBaselineData() {
+  try {
+    console.log('🗑️ Clearing existing baseline data...');
+    
+    const sheetResult = getOrCreateMonitorSheet();
+    if (!sheetResult.success) {
+      console.error('Failed to get spreadsheet for clearing data');
+      return false;
+    }
+    
+    const ss = sheetResult.spreadsheet;
+    const baselineSheet = ss.getSheetByName('AI_Baselines');
+    
+    if (baselineSheet) {
+      // Clear all data except headers
+      const dataRange = baselineSheet.getDataRange();
+      if (dataRange.getNumRows() > 1) {
+        const clearRange = baselineSheet.getRange(2, 1, dataRange.getNumRows() - 1, dataRange.getNumColumns());
+        clearRange.clear();
+        console.log('✅ Cleared existing baseline data');
+      }
+    }
+    
+    return true;
+    
+  } catch (error) {
+    console.error('Error clearing baseline data:', error);
+    return false;
+  }
+}
+
+/**
+ * Get extracted data for API with filters
+ */
+function getExtractedDataForAPI(filters = {}) {
+  try {
+    console.log('📊 Getting extracted data with filters:', filters);
+    
+    const sheetResult = getOrCreateMonitorSheet();
+    if (!sheetResult.success) {
+      return {
+        success: false,
+        error: 'Could not access spreadsheet',
+        extractedData: []
+      };
+    }
+    
+    const ss = sheetResult.spreadsheet;
+    const baselineSheet = ss.getSheetByName('AI_Baselines');
+    
+    if (!baselineSheet) {
+      return {
+        success: true,
+        extractedData: [],
+        message: 'No baseline data found. Generate baseline first.'
+      };
+    }
+    
+    const dataRange = baselineSheet.getDataRange();
+    const values = dataRange.getValues();
+    
+    if (values.length <= 1) {
+      return {
+        success: true,
+        extractedData: [],
+        message: 'No baseline data found. Generate baseline first.'
+      };
+    }
+    
+    // Get headers
+    const headers = values[0];
+    const extractedData = [];
+    
+    // Process data rows
+    for (let i = 1; i < values.length; i++) {
+      const row = values[i];
+      const item = {
+        timestamp: row[0],
+        company: row[1],
+        url: row[2],
+        type: row[3] || 'unknown',
+        priority: row[4] || 'normal',
+        contentLength: row[5] || 0,
+        contentHash: row[6] || '',
+        extractedContent: row[7] || '',
+        title: row[8] || '',
+        intelligence: row[9] ? JSON.parse(row[9]) : {},
+        processed: row[10] !== false,
+        relevanceScore: row[11] || 0,
+        keywords: row[12] || '',
+        processingTime: row[13] || 0,
+        scheduled: row[14] === true
+      };
+      
+      // Apply filters
+      let includeItem = true;
+      
+      if (filters.company && item.company.toLowerCase() !== filters.company.toLowerCase()) {
+        includeItem = false;
+      }
+      
+      if (filters.type && item.type.toLowerCase() !== filters.type.toLowerCase()) {
+        includeItem = false;
+      }
+      
+      if (filters.keyword) {
+        const keyword = filters.keyword.toLowerCase();
+        const searchText = (item.extractedContent + ' ' + item.title + ' ' + item.keywords).toLowerCase();
+        if (!searchText.includes(keyword)) {
+          includeItem = false;
+        }
+      }
+      
+      if (includeItem) {
+        extractedData.push(item);
+      }
+    }
+    
+    // Apply limit
+    const limit = parseInt(filters.limit) || 50;
+    const limitedData = extractedData.slice(0, limit);
+    
+    console.log(`📊 Returning ${limitedData.length} filtered items from ${values.length - 1} total`);
+    
+    return {
+      success: true,
+      extractedData: limitedData,
+      totalUnfiltered: values.length - 1,
+      totalFiltered: extractedData.length,
+      returned: limitedData.length
+    };
+    
+  } catch (error) {
+    console.error('Error getting extracted data:', error);
+    return {
+      success: false,
+      error: error.toString(),
+      extractedData: []
+    };
+  }
+}
+
+/**
+ * Get monitor configurations for multi-URL support
+ */
+function getMonitorConfigurationsMultiUrl() {
+  // Use the existing complete monitor config if available
+  if (typeof COMPLETE_MONITOR_CONFIG !== 'undefined' && COMPLETE_MONITOR_CONFIG) {
+    return COMPLETE_MONITOR_CONFIG;
+  }
+  
+  // Fallback configuration
+  return [
+    {
+      company: "OpenAI",
+      type: "competitor",
+      urls: [
+        { url: "https://openai.com/pricing", type: "pricing" },
+        { url: "https://openai.com/blog", type: "blog" },
+        { url: "https://help.openai.com", type: "docs" }
+      ]
+    },
+    {
+      company: "Google AI",
+      type: "competitor", 
+      urls: [
+        { url: "https://cloud.google.com/ai", type: "product" },
+        { url: "https://blog.google/technology/ai", type: "blog" }
+      ]
+    },
+    {
+      company: "Microsoft AI",
+      type: "competitor",
+      urls: [
+        { url: "https://azure.microsoft.com/en-us/solutions/ai", type: "product" },
+        { url: "https://blogs.microsoft.com/ai", type: "blog" }
+      ]
+    }
+  ];
+}
+
+/**
+ * Save monitor configuration
+ */
+function saveMonitorConfiguration(config) {
+  try {
+    const props = PropertiesService.getScriptProperties();
+    props.setProperty('MONITOR_CONFIGURATION', JSON.stringify(config));
+    
+    // Also update the global variable if it exists
+    if (typeof COMPLETE_MONITOR_CONFIG !== 'undefined') {
+      COMPLETE_MONITOR_CONFIG = config;
+    }
+    
+    console.log('✅ Monitor configuration saved');
+    return true;
+    
+  } catch (error) {
+    console.error('Error saving monitor configuration:', error);
+    return false;
+  }
+}
+
+// Include all remaining helper functions...
+
+/**
+ * Continue an existing baseline job manually
+ */
+function continueBaselineJob() {
+  try {
+    const props = PropertiesService.getScriptProperties();
+    const jobData = props.getProperty('BASELINE_JOB');
+    
+    if (!jobData) {
+      return {
+        success: false,
+        error: 'No baseline job found to continue'
+      };
+    }
+    
+    const job = JSON.parse(jobData);
+    
+    if (job.status === 'completed') {
+      return {
+        success: false,
+        error: 'Job already completed'
+      };
+    }
+    
+    if (job.status === 'paused_error') {
+      // Reset timeout count and resume
+      job.timeout_count = 0;
+      job.status = 'in_progress';
+      props.setProperty('BASELINE_JOB', JSON.stringify(job));
+    }
+    
+    // Continue processing by calling the main baseline function
+    return generateBaselineForAPIBatchedEnhanced({
+      mode: job.mode,
+      clearExisting: false, // Don't clear when continuing
+      scheduled: job.scheduled
+    });
+    
+  } catch (error) {
+    console.error('Error continuing baseline job:', error);
+    return {
+      success: false,
+      error: error.toString()
+    };
+  }
+}
+
+/**
+ * Get detailed baseline generation status
+ */
+function getBaselineGenerationStatus() {
+  try {
+    const props = PropertiesService.getScriptProperties();
+    const jobData = props.getProperty('BASELINE_JOB');
+    
+    if (!jobData) {
+      return {
+        success: true,
+        active: false,
+        status: 'no_job',
+        message: 'No baseline generation job found'
+      };
+    }
+    
+    const job = JSON.parse(jobData);
+    
+    // Calculate progress
+    const progress = {
+      total: job.total_urls || 0,
+      completed: job.processed_urls || 0,
+      successful: job.successful_urls || 0,
+      failed: job.failed_urls || 0,
+      percent: job.total_urls > 0 ? Math.round((job.processed_urls / job.total_urls) * 100) : 0,
+      estimated_time_remaining: calculateEstimatedTime(job)
+    };
+    
+    const isActive = job.status === 'in_progress';
+    
+    return {
+      success: true,
+      active: isActive,
+      status: job.status,
+      progress: progress,
+      job: {
+        id: job.id,
+        mode: job.mode,
+        start_time: job.start_time,
+        last_update: job.last_update,
+        scheduled: job.scheduled
+      },
+      successful: job.successful_urls || 0,
+      failed: job.failed_urls || 0,
+      processed: job.processed_urls || 0,
+      total: job.total_urls || 0,
+      recentErrors: job.recent_errors ? job.recent_errors.slice(-5) : [],
+      canContinue: job.status === 'in_progress' && job.processed_urls < job.total_urls,
+      canResume: job.status === 'paused_error',
+      lastError: job.last_error || null
+    };
+    
+  } catch (error) {
+    console.error('Error getting baseline status:', error);
+    return {
+      success: false,
+      error: error.toString(),
+      active: false
+    };
+  }
+}
+
+/**
+ * Calculate estimated time remaining for baseline job
+ */
+function calculateEstimatedTime(job) {
+  try {
+    if (!job.start_time || job.processed_urls === 0) {
+      return 'Calculating...';
+    }
+    
+    const startTime = new Date(job.start_time);
+    const currentTime = new Date();
+    const elapsedMs = currentTime - startTime;
+    const elapsedMinutes = elapsedMs / (1000 * 60);
+    
+    const urlsPerMinute = job.processed_urls / elapsedMinutes;
+    const remainingUrls = job.total_urls - job.processed_urls;
+    
+    if (urlsPerMinute <= 0 || remainingUrls <= 0) {
+      return 'Almost done';
+    }
+    
+    const remainingMinutes = Math.ceil(remainingUrls / urlsPerMinute);
+    
+    if (remainingMinutes < 60) {
+      return `${remainingMinutes} minutes`;
+    } else {
+      const hours = Math.floor(remainingMinutes / 60);
+      const mins = remainingMinutes % 60;
+      return `${hours}h ${mins}m`;
+    }
+    
+  } catch (error) {
+    console.error('Error calculating estimated time:', error);
+    return 'Unknown';
+  }
+}
+
+/**
+ * Check if baseline is completed
+ */
+function isBaselineCompleted() {
+  try {
+    const props = PropertiesService.getScriptProperties();
+    const lastGenerated = props.getProperty('LAST_BASELINE_GENERATED');
+    
+    if (!lastGenerated) {
+      return {
+        success: true,
+        completed: false,
+        message: 'No baseline generated yet'
+      };
+    }
+    
+    // Check if we have baseline data in the spreadsheet
+    const sheetResult = getOrCreateMonitorSheet();
+    if (!sheetResult.success) {
+      return {
+        success: false,
+        error: 'Could not access spreadsheet',
+        completed: false
+      };
+    }
+    
+    const ss = sheetResult.spreadsheet;
+    const baselineSheet = ss.getSheetByName('AI_Baselines');
+    
+    if (!baselineSheet) {
+      return {
+        success: true,
+        completed: false,
+        message: 'No baseline data found'
+      };
+    }
+    
+    const dataRange = baselineSheet.getDataRange();
+    const numRows = dataRange.getNumRows();
+    
+    // Check if we have data (more than just header row)
+    if (numRows <= 1) {
+      return {
+        success: true,
+        completed: false,
+        message: 'No baseline data found in spreadsheet'
+      };
+    }
+    
+    return {
+      success: true,
+      completed: true,
+      timestamp: lastGenerated,
+      rowCount: numRows - 1, // Exclude header row
+      message: `Baseline completed with ${numRows - 1} entries`
+    };
+    
+  } catch (error) {
+    console.error('Error checking baseline completion:', error);
+    return {
+      success: false,
+      error: error.toString(),
+      completed: false
+    };
+  }
+}
+
+/**
+ * Resume a paused baseline job
+ */
+function resumeBaselineJob() {
+  try {
+    const props = PropertiesService.getScriptProperties();
+    const jobData = props.getProperty('BASELINE_JOB');
+    
+    if (!jobData) {
+      return {
+        success: false,
+        error: 'No baseline job found to resume'
+      };
+    }
+    
+    const job = JSON.parse(jobData);
+    
+    if (job.status !== 'paused_error') {
+      return {
+        success: false,
+        error: 'Job is not in a paused state'
+      };
+    }
+    
+    // Reset error state and resume
+    job.status = 'in_progress';
+    job.timeout_count = 0;
+    job.last_update = new Date().toISOString();
+    
+    props.setProperty('BASELINE_JOB', JSON.stringify(job));
+    
+    return {
+      success: true,
+      message: 'Baseline job resumed',
+      job: job
+    };
+    
+  } catch (error) {
+    console.error('Error resuming baseline job:', error);
+    return {
+      success: false,
+      error: error.toString()
+    };
+  }
+}
+
+/**
+ * Cancel a baseline job
+ */
+function cancelBaselineJob() {
+  try {
+    const props = PropertiesService.getScriptProperties();
+    const jobData = props.getProperty('BASELINE_JOB');
+    
+    if (!jobData) {
+      return {
+        success: false,
+        error: 'No baseline job found to cancel'
+      };
+    }
+    
+    // Remove the job
+    props.deleteProperty('BASELINE_JOB');
+    
+    return {
+      success: true,
+      message: 'Baseline job cancelled and removed'
+    };
+    
+  } catch (error) {
+    console.error('Error cancelling baseline job:', error);
+    return {
+      success: false,
+      error: error.toString()
+    };
+  }
+}
 
 /**
  * Test function to verify the enhanced CORS web app

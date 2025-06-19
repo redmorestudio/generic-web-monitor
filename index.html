@@ -462,7 +462,7 @@
 <body>
     <div class="container">
         <div class="header">
-            <div class="ai-badge">🤖 AI-Enhanced v85 🚀 WebApp.js v83 - ALL FEATURES RESTORED</div>
+            <div class="ai-badge">🤖 AI-Enhanced v87 🚀 WebApp.js v84 - INFINITE LOOP FIXED + RATE LIMITED</div>
             <h1>AI Competitor Monitor</h1>
             <p>Advanced Intelligence & Real-time Competitive Analysis with Enhanced Error Visibility</p>
         </div>
@@ -1136,7 +1136,7 @@
                 }
                 
                 if (status.active) {
-                    // Update progress display
+                    // Update progress display with continue button
                     const progress = status.progress;
                     let errorDetails = '';
                     if (status.recentErrors && status.recentErrors.length > 0) {
@@ -1164,7 +1164,10 @@
                             Estimated time remaining: ${progress.estimated_time_remaining}<br>
                             ${errorDetails}
                             <br>
-                            <em>The system will continue processing in the background. You can safely navigate away.</em>
+                            <button class="button button-secondary" onclick="continueBaselineJob(event)" style="margin-right: 10px;">⏩ Continue Now</button>
+                            <button class="button button-warning" onclick="cancelBaselineGeneration(event)">❌ Cancel</button><br><br>
+                            <em>⚠️ With new rate limiting: ~12 seconds per URL. Expected total time: ~12 minutes for 55 URLs.</em><br>
+                            <em>Click "Continue Now" to process the next batch manually.</em>
                         </div>
                     `;
                     document.getElementById('baselineContent').innerHTML = progressHtml;
@@ -1188,8 +1191,43 @@
                         clearInterval(baselinePollingInterval);
                         baselinePollingInterval = null;
                     }
+                } else if (status.canContinue) {
+                    // Job can be continued
+                    const progressHtml = `
+                        <div class="success-message">
+                            ⏸️ Baseline generation ready to continue<br><br>
+                            Progress: ${status.processed}/${status.total} URLs<br>
+                            Successful: ${status.successful}<br>
+                            Failed: ${status.failed}<br><br>
+                            <button class="button button-primary" onclick="continueBaselineJob(event)">⏩ Continue Processing</button>
+                            <button class="button button-warning" onclick="cancelBaselineGeneration(event)">❌ Cancel</button><br><br>
+                            <em>⚠️ New rate limiting: One URL every 12 seconds. Total time: ~${Math.ceil((status.total - status.processed) * 12 / 60)} minutes remaining.</em>
+                        </div>
+                    `;
+                    document.getElementById('baselineContent').innerHTML = progressHtml;
+                    
+                    // Stop polling since job is paused
+                    if (baselinePollingInterval) {
+                        clearInterval(baselinePollingInterval);
+                        baselinePollingInterval = null;
+                    }
                 } else {
-                    // No active job, stop polling
+                    // No active job, check if completed
+                    const completed = await apiCall('baseline-completed');
+                    if (completed.completed) {
+                        const progressHtml = `
+                            <div class="success-message">
+                                ✅ <strong>Baseline Generation Completed!</strong><br>
+                                Generated: ${new Date(completed.timestamp).toLocaleString()}<br>
+                                URLs Processed: ${completed.rowCount}<br>
+                                Status: Ready for monitoring and markdown export<br><br>
+                                <small>To regenerate baseline, use "Baseline All" option above.</small>
+                            </div>
+                        `;
+                        document.getElementById('baselineContent').innerHTML = progressHtml;
+                    }
+                    
+                    // Stop polling
                     if (baselinePollingInterval) {
                         clearInterval(baselinePollingInterval);
                         baselinePollingInterval = null;
@@ -1198,10 +1236,15 @@
                 
             } catch (error) {
                 console.error('Error polling baseline progress:', error);
+                // Stop polling on error
+                if (baselinePollingInterval) {
+                    clearInterval(baselinePollingInterval);
+                    baselinePollingInterval = null;
+                }
             }
         }
         
-        // Check baseline status
+        // Check baseline status and continue job if needed
         async function checkBaselineStatus(event) {
             if (event) {
                 event.preventDefault();
@@ -1228,7 +1271,33 @@
                         🔄 <strong>Baseline Generation In Progress</strong><br>
                         Progress: ${status.progress.completed}/${status.progress.total} URLs<br>
                         Percentage: ${status.progress.percent}%<br>
-                        Estimated time remaining: ${status.progress.estimated_time_remaining}<br>
+                        Estimated time remaining: ${status.progress.estimated_time_remaining}<br><br>
+                        <button class="button button-secondary" onclick="continueBaselineJob(event)">⏩ Continue Processing</button>
+                        <button class="button button-warning" onclick="cancelBaselineGeneration(event)">❌ Cancel</button>
+                    `;
+                    
+                    // Start polling if not already polling
+                    if (!baselinePollingInterval) {
+                        baselinePollingInterval = setInterval(pollBaselineProgress, 3000);
+                    }
+                } else if (status.canContinue) {
+                    statusHtml += `
+                        ⏸️ <strong>Baseline Generation Paused</strong><br>
+                        Progress: ${status.processed}/${status.total} URLs<br>
+                        Successful: ${status.successful}<br>
+                        Failed: ${status.failed}<br><br>
+                        <button class="button button-primary" onclick="continueBaselineJob(event)">⏩ Continue Processing</button>
+                        <button class="button button-warning" onclick="cancelBaselineGeneration(event)">❌ Cancel</button>
+                    `;
+                } else if (status.canResume) {
+                    statusHtml += `
+                        ⚠️ <strong>Baseline Generation Paused (Errors)</strong><br>
+                        Progress: ${status.processed}/${status.total} URLs<br>
+                        Successful: ${status.successful}<br>
+                        Failed: ${status.failed}<br>
+                        Last error: ${status.lastError}<br><br>
+                        <button class="button button-primary" onclick="resumeBaselineGeneration(event)">🔄 Resume</button>
+                        <button class="button button-warning" onclick="cancelBaselineGeneration(event)">❌ Cancel</button>
                     `;
                 } else {
                     statusHtml += `
@@ -1244,6 +1313,37 @@
             } catch (error) {
                 document.getElementById('baselineContent').innerHTML = `
                     <div class="error-message">❌ Error checking baseline status: ${error.message}</div>
+                `;
+            }
+        }
+        
+        // Continue baseline job manually
+        async function continueBaselineJob(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+                addClickFeedback(event.target);
+            }
+            
+            try {
+                document.getElementById('baselineContent').innerHTML = '<div class="loading">⏩ Continuing baseline generation...</div>';
+                
+                const result = await apiCall('baseline-continue');
+                
+                if (result.success) {
+                    // Start polling for progress
+                    if (!baselinePollingInterval) {
+                        baselinePollingInterval = setInterval(pollBaselineProgress, 3000);
+                    }
+                    pollBaselineProgress();
+                } else {
+                    document.getElementById('baselineContent').innerHTML = `
+                        <div class="error-message">❌ Failed to continue baseline: ${result.error}</div>
+                    `;
+                }
+            } catch (error) {
+                document.getElementById('baselineContent').innerHTML = `
+                    <div class="error-message">❌ Error continuing baseline: ${error.message}</div>
                 `;
             }
         }
@@ -2105,6 +2205,52 @@ ${JSON.stringify(data, null, 2)}
 
         // Initialize when DOM is ready
         document.addEventListener('DOMContentLoaded', init);
+        
+        // Check for existing baseline job on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            if (authenticated) {
+                setTimeout(checkAndResumeExistingBaselineJob, 2000);
+            }
+        });
+        
+        /**
+         * Check for existing baseline job and resume monitoring
+         */
+        async function checkAndResumeExistingBaselineJob() {
+            try {
+                const status = await apiCall('baseline-status');
+                
+                if (status.active || status.canContinue) {
+                    console.log('🔄 Found existing baseline job, resuming monitoring...');
+                    
+                    // Show the baseline tab
+                    showTab(null, 'baseline');
+                    
+                    // Start polling if job is active
+                    if (status.active && !baselinePollingInterval) {
+                        baselinePollingInterval = setInterval(pollBaselineProgress, 3000);
+                    }
+                    
+                    // Show current status immediately
+                    pollBaselineProgress();
+                } else if (status.canResume) {
+                    // Show paused job status
+                    document.getElementById('baselineContent').innerHTML = `
+                        <div class="error-message">
+                            ⚠️ Baseline generation was paused due to errors!<br><br>
+                            Progress: ${status.processed}/${status.total} URLs<br>
+                            Successful: ${status.successful}<br>
+                            Failed: ${status.failed}<br>
+                            Last error: ${status.lastError}<br><br>
+                            <button class="button button-primary" onclick="resumeBaselineGeneration(event)">🔄 Resume</button>
+                            <button class="button button-warning" onclick="cancelBaselineGeneration(event)">❌ Cancel</button>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error checking existing baseline job:', error);
+            }
+        }
     </script>
 </body>
 </html>
