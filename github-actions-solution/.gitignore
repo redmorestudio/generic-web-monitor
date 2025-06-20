@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment
+.env
+.env.local
+
+# MacOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+.changes
+*.tmp
+
+# Keep data structure but not content (for initial commit)
+# Remove these lines after first run to track data
+data/raw/*
+data/analysis/*
+data/reports/*
+data/changes/*
+data/alerts/*
+
+# Always keep latest files
+!data/*/latest.*

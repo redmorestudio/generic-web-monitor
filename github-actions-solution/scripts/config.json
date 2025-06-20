@@ -1,0 +1,58 @@
+{
+  "companies": [
+    {
+      "name": "Anthropic",
+      "urls": [
+        { "url": "https://anthropic.com", "type": "homepage" },
+        { "url": "https://anthropic.com/claude", "type": "product" },
+        { "url": "https://anthropic.com/pricing", "type": "pricing" },
+        { "url": "https://anthropic.com/news", "type": "news" }
+      ]
+    },
+    {
+      "name": "OpenAI",
+      "urls": [
+        { "url": "https://openai.com", "type": "homepage" },
+        { "url": "https://openai.com/chatgpt", "type": "product" },
+        { "url": "https://openai.com/pricing", "type": "pricing" },
+        { "url": "https://openai.com/blog", "type": "blog" }
+      ]
+    },
+    {
+      "name": "Google AI",
+      "urls": [
+        { "url": "https://ai.google", "type": "homepage" },
+        { "url": "https://ai.google/discover/gemini", "type": "product" },
+        { "url": "https://cloud.google.com/vertex-ai/pricing", "type": "pricing" },
+        { "url": "https://blog.google/technology/ai", "type": "blog" }
+      ]
+    },
+    {
+      "name": "Microsoft AI",
+      "urls": [
+        { "url": "https://azure.microsoft.com/en-us/solutions/ai", "type": "homepage" },
+        { "url": "https://azure.microsoft.com/en-us/products/ai-services", "type": "product" },
+        { "url": "https://azure.microsoft.com/en-us/pricing/details/cognitive-services", "type": "pricing" },
+        { "url": "https://blogs.microsoft.com/ai", "type": "blog" }
+      ]
+    },
+    {
+      "name": "Cohere",
+      "urls": [
+        { "url": "https://cohere.ai", "type": "homepage" },
+        { "url": "https://cohere.ai/products", "type": "product" },
+        { "url": "https://cohere.ai/pricing", "type": "pricing" },
+        { "url": "https://cohere.ai/blog", "type": "blog" }
+      ]
+    },
+    {
+      "name": "Mistral AI",
+      "urls": [
+        { "url": "https://mistral.ai", "type": "homepage" },
+        { "url": "https://mistral.ai/technology", "type": "product" },
+        { "url": "https://mistral.ai/pricing", "type": "pricing" },
+        { "url": "https://mistral.ai/news", "type": "news" }
+      ]
+    }
+  ]
+}

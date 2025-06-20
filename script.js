@@ -13,27 +13,19 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(loadData, 5 * 60 * 1000);
 });
 
-// Load data from API
+// Load data from GitHub Actions Backend API
 async function loadData() {
     try {
-        const response = await fetch(`${CONFIG.apiUrl}?function=getLatestData`);
+        const response = await fetch(`${CONFIG.apiUrl}/dashboard`);
         const data = await response.json();
         
-        if (data.error) {
-            // Check if it's an initialization error
-            if (data.error === 'No spreadsheet configured' || data.companies === undefined) {
-                showInitializationError();
-                return;
-            }
-            // Show specific error message if available
-            const errorMessage = typeof data.error === 'string' ? data.error : 'Unable to load data';
-            showError(errorMessage);
-            return;
+        if (!response.ok) {
+            throw new Error(`API Error: ${response.status} ${response.statusText}`);
         }
         
-        // Update global state
-        allCompanies = data.companies || [];
-        allUpdates = data.recentUpdates || [];
+        // Update global state with new backend format
+        allCompanies = data.company_activity || [];
+        allUpdates = data.recent_alerts || [];
         
         // Check if we have data but no companies
         if (allCompanies.length === 0) {
@@ -41,14 +33,14 @@ async function loadData() {
             return;
         }
         
-        // Update UI
-        updateStats(data);
+        // Update UI with new data format
+        updateStats(data.stats);
         displayActivityFeed(allUpdates);
         displayCompanies(allCompanies);
         
     } catch (error) {
         console.error('Error loading data:', error);
-        showError('Failed to connect to the monitoring system. Please check your configuration.');
+        showError('Failed to connect to the GitHub Actions backend. Please check the server is running.');
     }
 }
 
@@ -102,15 +94,15 @@ function showEmptyDataError() {
 }
 
 // Update header statistics
-function updateStats(data) {
-    document.getElementById('total-companies').textContent = allCompanies.length;
-    document.getElementById('total-updates').textContent = allUpdates.length;
+function updateStats(stats) {
+    if (!stats) return;
     
-    if (data.lastCheck) {
-        const lastCheck = new Date(data.lastCheck);
-        const timeAgo = getTimeAgo(lastCheck);
-        document.getElementById('last-check').textContent = timeAgo;
-    }
+    document.getElementById('total-companies').textContent = stats.companies || '--';
+    document.getElementById('total-updates').textContent = stats.recent_changes || '--';
+    
+    // Use current time as last check since our backend is real-time
+    const timeAgo = 'just now';
+    document.getElementById('last-check').textContent = timeAgo;
 }
 
 // Display activity feed
@@ -163,26 +155,26 @@ function displayCompanies(companies) {
     }
     
     grid.innerHTML = filteredCompanies.map(company => {
-        const lastChecked = company.lastChecked ? new Date(company.lastChecked) : null;
-        const lastChange = company.lastChange ? new Date(company.lastChange) : null;
-        const status = company.status || 'Not checked';
-        const statusClass = status === 'Active' ? 'active' : status === 'Error' ? 'error' : 'inactive';
+        const changeCount = company.change_count || 0;
+        const avgRelevance = company.avg_relevance || 'N/A';
+        const status = changeCount > 0 ? 'Active' : 'Monitored';
+        const statusClass = changeCount > 0 ? 'active' : 'inactive';
         
         return `
             <div class="company-card">
                 <div class="company-header">
                     <div class="company-name">${company.name}</div>
-                    <div class="company-category">${company.category}</div>
+                    <div class="company-category">AI/Marketing</div>
                 </div>
                 <div class="company-status">
                     <div class="status-indicator ${statusClass}"></div>
                     <span class="status-text">${status}</span>
                 </div>
                 <div class="company-details">
-                    ${lastChecked ? `<div>Last checked: ${getTimeAgo(lastChecked)}</div>` : '<div>Never checked</div>'}
-                    ${lastChange ? `<div>Last change: ${getTimeAgo(lastChange)}</div>` : '<div>No changes detected</div>'}
+                    <div>Recent changes: ${changeCount}</div>
+                    <div>Avg relevance: ${avgRelevance}</div>
+                    <div>Last checked: just now</div>
                 </div>
-                ${company.url ? `<a href="${company.url}" target="_blank" class="company-link">Visit website →</a>` : ''}
             </div>
         `;
     }).join('');

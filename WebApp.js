@@ -69,6 +69,10 @@ function doGet(e) {
         response = getUrlsForAPIFixed();
         break;
         
+      case 'force-process-all':
+        response = forceProcessAllUrls();
+        break;
+        
       case 'baseline':
         const url = e.parameter.url;
         if (!url) {
@@ -1711,11 +1715,18 @@ function getOrCreateMonitorSheet() {
     
     // Use the hardcoded ID if not in properties
     if (!spreadsheetId) {
-      spreadsheetId = '1pOZ96O50x6n2SrNf0aGOcZZxS3hvLWh2HW8Xev95Euc';
+      // Update the spreadsheet ID to match the one in the checkpoint: 18sv6UITXpNu0oMDjMkuQCBHjLYwjWNm21OmLNNwDQlM
+      spreadsheetId = '18sv6UITXpNu0oMDjMkuQCBHjLYwjWNm21OmLNNwDQlM';
       props.setProperty('MONITOR_SPREADSHEET_ID', spreadsheetId);
       console.log('🔑 Using hardcoded spreadsheet ID:', spreadsheetId);
     } else {
       console.log('📊 Found existing spreadsheet ID:', spreadsheetId);
+      // Force update the spreadsheet ID to the correct one
+      if (spreadsheetId !== '18sv6UITXpNu0oMDjMkuQCBHjLYwjWNm21OmLNNwDQlM') {
+        spreadsheetId = '18sv6UITXpNu0oMDjMkuQCBHjLYwjWNm21OmLNNwDQlM';
+        props.setProperty('MONITOR_SPREADSHEET_ID', spreadsheetId);
+        console.log('⚠️ Updated spreadsheet ID to correct value:', spreadsheetId);
+      }
     }
     
     // Try to open the spreadsheet
