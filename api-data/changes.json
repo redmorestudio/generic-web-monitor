@@ -1,0 +1,42 @@
+{
+  "changes": [
+    {
+      "id": 1,
+      "url": "https://openai.com/pricing",
+      "company": "OpenAI",
+      "status": "success",
+      "change_detected": true,
+      "change_percentage": 15,
+      "relevance_score": 9,
+      "summary": "Updated GPT-4 pricing structure, reduced cost by 10% for high-volume customers",
+      "created_at": "2025-06-20T17:30:00.000Z",
+      "error_message": null
+    },
+    {
+      "id": 2,
+      "url": "https://anthropic.com/pricing",
+      "company": "Anthropic", 
+      "status": "success",
+      "change_detected": false,
+      "change_percentage": 2,
+      "relevance_score": 3,
+      "summary": "Minor formatting changes, no pricing updates",
+      "created_at": "2025-06-20T17:15:00.000Z",
+      "error_message": null
+    },
+    {
+      "id": 3,
+      "url": "https://ai.google.dev/pricing",
+      "company": "Google AI",
+      "status": "success", 
+      "change_detected": true,
+      "change_percentage": 25,
+      "relevance_score": 8,
+      "summary": "Introduced new Gemini Ultra pricing tier, expanded free tier limits",
+      "created_at": "2025-06-20T16:45:00.000Z",
+      "error_message": null
+    }
+  ],
+  "aiFiltered": true,
+  "generated_at": "2025-06-20T18:31:10.246Z"
+}

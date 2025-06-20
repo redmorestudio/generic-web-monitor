@@ -1,0 +1,212 @@
+name: AI Competitive Intelligence Monitor
+
+on:
+  # Run every 6 hours
+  schedule:
+    - cron: '0 */6 * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'full-monitor'
+        type: choice
+        options:
+          - full-monitor
+          - scrape-only
+          - analyze-only
+          - generate-data-only
+
+env:
+  NODE_ENV: production
+
+jobs:
+  # Job 1: Run monitoring and generate static data
+  monitor-and-generate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: github-actions-backend/package-lock.json
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm ci
+      
+      - name: Install Puppeteer browsers
+        run: |
+          cd github-actions-backend
+          npx puppeteer browsers install chrome
+      
+      - name: Initialize database and add sample companies
+        run: |
+          cd github-actions-backend
+          mkdir -p data
+          node scripts/init-db.js
+          # Add sample companies if none exist
+          ./add-companies.sh
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      
+      - name: Run intelligent scraper
+        if: ${{ inputs.action != 'analyze-only' && inputs.action != 'generate-data-only' }}
+        run: |
+          cd github-actions-backend
+          timeout 1800 node scraper.js || echo "Scraper completed or timed out"
+        timeout-minutes: 30
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      
+      - name: Run AI analysis
+        if: ${{ inputs.action != 'scrape-only' && inputs.action != 'generate-data-only' }}
+        run: |
+          cd github-actions-backend
+          node ai-analyzer.js analyze || echo "AI analysis completed"
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        timeout-minutes: 20
+      
+      - name: Generate static data files for GitHub Pages
+        run: |
+          cd github-actions-backend
+          node generate-static-data.js
+          # Copy generated files to root for GitHub Pages
+          cp -r ../api-data/* ../api-data/ || echo "No api-data directory to copy"
+          # Ensure api-data directory exists in root
+          mkdir -p ../api-data
+          # Copy any new files
+          cp -f ../api-data/* ../api-data/ 2>/dev/null || echo "Static data generated"
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      
+      - name: Update status file
+        run: |
+          cd github-actions-backend
+          echo "{
+            \"last_run\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"status\": \"success\",
+            \"workflow_run_id\": \"$GITHUB_RUN_ID\",
+            \"action\": \"${{ inputs.action || 'scheduled' }}\",
+            \"backend\": \"github-actions\"
+          }" > ../api-data/workflow-status.json
+      
+      - name: Commit and push updated data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add api-data/
+          git diff --staged --quiet || git commit -m "🤖 Auto-update monitoring data - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+          git push
+      
+      - name: Upload database backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitor-database-backup
+          path: github-actions-backend/data/monitor.db
+          retention-days: 30
+
+  # Job 2: Deploy to GitHub Pages (runs after monitor-and-generate)
+  deploy:
+    needs: monitor-and-generate
+    runs-on: ubuntu-latest
+    if: success()
+    
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout updated code
+        uses: actions/checkout@v4
+        with:
+          ref: main  # Get the latest version with updated data
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'  # Upload the entire repository (includes api-data)
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # Job 3: Create alerts for high-priority changes
+  create-alerts:
+    needs: monitor-and-generate
+    runs-on: ubuntu-latest
+    if: success()
+    
+    steps:
+      - name: Checkout updated code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      
+      - name: Check for high-priority changes
+        id: check-changes
+        run: |
+          # Check if there are any high-priority changes (relevance score >= 8)
+          HIGH_PRIORITY=$(jq '[.changes[] | select(.relevance_score >= 8)] | length' api-data/changes.json 2>/dev/null || echo "0")
+          echo "high_priority_count=$HIGH_PRIORITY" >> $GITHUB_OUTPUT
+          
+          if [ "$HIGH_PRIORITY" -gt 0 ]; then
+            echo "Found $HIGH_PRIORITY high-priority changes"
+            # Get the details
+            jq -r '.changes[] | select(.relevance_score >= 8) | "- \(.company): \(.summary) (Score: \(.relevance_score)/10)"' api-data/changes.json > /tmp/changes.txt || echo "No changes file"
+            echo "changes_details<<EOF" >> $GITHUB_OUTPUT
+            cat /tmp/changes.txt >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create GitHub Issue for high-priority alerts
+        if: steps.check-changes.outputs.high_priority_count > 0
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const count = ${{ steps.check-changes.outputs.high_priority_count }};
+            const changes = `${{ steps.check-changes.outputs.changes_details }}`;
+            
+            const body = `# 🔴 High Priority Competitive Intelligence Alert
+            
+            **${count} high-priority changes detected** in competitor monitoring.
+            
+            ## Changes Detected:
+            ${changes}
+            
+            ## Next Steps:
+            - Review the [full dashboard](https://redmorestudio.github.io/ai-competitive-monitor) for detailed analysis
+            - Check the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) for technical details
+            - Consider updating our competitive strategy based on these changes
+            
+            ---
+            *This is an automated alert from the AI Competitive Intelligence Monitor.*
+            *Generated: ${new Date().toISOString()}*`;
+            
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔴 ${count} High Priority Competitive Intelligence Alert${count > 1 ? 's' : ''}`,
+              body: body,
+              labels: ['competitive-intel', 'high-priority', 'automated', 'ai-generated']
+            });
+            
+            console.log(`Created issue #${issue.data.number} for high-priority alerts`);
