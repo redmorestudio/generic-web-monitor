@@ -1,12 +1,53 @@
 {
   "stats": {
-    "companies": 0,
-    "urls": 0,
-    "snapshots": 0,
-    "lastCheck": "2025-06-21T18:20:36.596Z"
+    "companies": 4,
+    "urls": 9,
+    "snapshots": 9,
+    "lastCheck": "2025-06-21T20:33:10.321Z"
   },
-  "company_activity": [],
-  "generated_at": "2025-06-21T18:20:36.596Z",
-  "backend": "github-actions-static",
-  "error": "no such column: company"
+  "company_activity": [
+    {
+      "company": "Anthropic",
+      "type": "competitor",
+      "url_count": 2,
+      "last_check": "2025-06-21 20:32:58",
+      "urls": [
+        "https://anthropic.com",
+        "https://anthropic.com/claude"
+      ]
+    },
+    {
+      "company": "Google AI",
+      "type": "competitor",
+      "url_count": 2,
+      "last_check": "2025-06-21 20:33:02",
+      "urls": [
+        "https://ai.google",
+        "https://blog.google/technology/ai/"
+      ]
+    },
+    {
+      "company": "Microsoft AI",
+      "type": "competitor",
+      "url_count": 2,
+      "last_check": "2025-06-21 20:33:09",
+      "urls": [
+        "https://azure.microsoft.com/en-us/products/ai-services/",
+        "https://www.microsoft.com/ai"
+      ]
+    },
+    {
+      "company": "OpenAI",
+      "type": "competitor",
+      "url_count": 3,
+      "last_check": "2025-06-21 20:32:54",
+      "urls": [
+        "https://openai.com",
+        "https://openai.com/blog",
+        "https://openai.com/pricing"
+      ]
+    }
+  ],
+  "generated_at": "2025-06-21T20:33:10.322Z",
+  "backend": "github-actions-static"
 }

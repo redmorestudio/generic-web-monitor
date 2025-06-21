@@ -1,6 +1,30 @@
 {
-  "logs": [],
-  "aiEnhanced": false,
-  "generated_at": "2025-06-21T18:20:36.600Z",
-  "error": "no such column: created_at"
+  "logs": [
+    {
+      "timestamp": "2025-06-21 20:33:10",
+      "type": "success",
+      "level": "info",
+      "message": "ai_analysis - completed",
+      "details": {
+        "run_type": "ai_analysis",
+        "urls_checked": 0,
+        "changes_detected": 0,
+        "errors": null
+      }
+    },
+    {
+      "timestamp": "2025-06-21 20:32:44",
+      "type": "success",
+      "level": "info",
+      "message": "scraper - completed - 9 changes detected",
+      "details": {
+        "run_type": "scraper",
+        "urls_checked": 9,
+        "changes_detected": 9,
+        "errors": null
+      }
+    }
+  ],
+  "aiEnhanced": true,
+  "generated_at": "2025-06-21T20:33:10.341Z"
 }

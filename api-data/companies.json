@@ -1,5 +1,42 @@
 {
-  "companies": [],
-  "generated_at": "2025-06-21T18:20:36.597Z",
-  "error": "no such column: u.company"
+  "companies": [
+    {
+      "company": "Anthropic",
+      "type": "competitor",
+      "created_at": "2025-06-21 20:32:44",
+      "urls": [
+        "https://anthropic.com",
+        "https://anthropic.com/claude"
+      ]
+    },
+    {
+      "company": "Google AI",
+      "type": "competitor",
+      "created_at": "2025-06-21 20:32:44",
+      "urls": [
+        "https://ai.google",
+        "https://blog.google/technology/ai/"
+      ]
+    },
+    {
+      "company": "Microsoft AI",
+      "type": "competitor",
+      "created_at": "2025-06-21 20:32:44",
+      "urls": [
+        "https://azure.microsoft.com/en-us/products/ai-services/",
+        "https://www.microsoft.com/ai"
+      ]
+    },
+    {
+      "company": "OpenAI",
+      "type": "competitor",
+      "created_at": "2025-06-21 20:32:44",
+      "urls": [
+        "https://openai.com",
+        "https://openai.com/blog",
+        "https://openai.com/pricing"
+      ]
+    }
+  ],
+  "generated_at": "2025-06-21T20:33:10.323Z"
 }
