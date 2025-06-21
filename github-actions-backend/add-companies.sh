@@ -1,7 +1,10 @@
 #!/bin/bash
 
+# NOTE: This script requires the Express server to be running (npm run server)
+# It's intended for local development only, not for CI/CD environments
+
 # Add remaining social marketing companies
-cd /Users/sethredmore/ai-monitor-fresh/github-actions-backend
+# Make sure you're in the github-actions-backend directory
 
 # SocialPilot
 node cli.js company:add "SocialPilot" --type marketing --urls "https://socialpilot.co" "https://socialpilot.co/pricing" "https://socialpilot.co/blog"

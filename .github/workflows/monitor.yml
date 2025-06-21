@@ -46,13 +46,13 @@ jobs:
           cd github-actions-backend
           npx puppeteer browsers install chrome
       
-      - name: Initialize database and add sample companies
+      - name: Initialize database
         run: |
           cd github-actions-backend
           mkdir -p data
           node scripts/init-db.js
-          # Add sample companies if none exist
-          ./add-companies.sh
+          # Note: add-companies.sh requires running server, skipping in CI
+          # The init-db.js already adds 4 initial companies
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
