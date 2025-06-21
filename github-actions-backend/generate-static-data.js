@@ -30,7 +30,7 @@ function generateDashboardData(db) {
         
         // Get stats
         const stats = {
-            companies: db.prepare('SELECT COUNT(DISTINCT company) as count FROM companies').get()?.count || 0,
+            companies: db.prepare('SELECT COUNT(*) as count FROM companies').get()?.count || 0,
             urls: db.prepare('SELECT COUNT(*) as count FROM urls').get()?.count || 0,
             snapshots: db.prepare('SELECT COUNT(*) as count FROM content_snapshots').get()?.count || 0,
             lastCheck: new Date().toISOString()
@@ -39,26 +39,32 @@ function generateDashboardData(db) {
         // Get company activity
         const companyActivity = db.prepare(`
             SELECT 
+                c.id,
                 c.name as company,
                 c.type,
                 COUNT(u.id) as url_count,
-                MAX(cs.created_at) as last_check,
-                GROUP_CONCAT(u.url) as urls
+                MAX(cs.created_at) as last_check
             FROM companies c
-            LEFT JOIN urls u ON c.name = u.company
+            LEFT JOIN urls u ON c.id = u.company_id
             LEFT JOIN content_snapshots cs ON u.id = cs.url_id
-            GROUP BY c.name
+            GROUP BY c.id, c.name, c.type
             ORDER BY c.name
         `).all();
         
+        // Get URLs for each company
+        const urlsStmt = db.prepare('SELECT url FROM urls WHERE company_id = ?');
+        
         // Process company data
-        const processedCompanies = companyActivity.map(company => ({
-            company: company.company,
-            type: company.type || 'competitor',
-            url_count: company.url_count || 0,
-            last_check: company.last_check,
-            urls: company.urls ? company.urls.split(',').filter(u => u) : []
-        }));
+        const processedCompanies = companyActivity.map(company => {
+            const urls = urlsStmt.all(company.id).map(row => row.url);
+            return {
+                company: company.company,
+                type: company.type || 'competitor',
+                url_count: company.url_count || 0,
+                last_check: company.last_check,
+                urls: urls
+            };
+        });
         
         const dashboardData = {
             stats,
@@ -89,22 +95,26 @@ function generateCompaniesData(db) {
         
         const companies = db.prepare(`
             SELECT 
+                c.id,
                 c.name as company,
                 c.type,
-                c.created_at,
-                GROUP_CONCAT(u.url) as urls
+                c.created_at
             FROM companies c
-            LEFT JOIN urls u ON c.name = u.company
-            GROUP BY c.name
             ORDER BY c.name
         `).all();
         
-        const processedCompanies = companies.map(company => ({
-            company: company.company,
-            type: company.type || 'competitor',
-            created_at: company.created_at,
-            urls: company.urls ? company.urls.split(',').filter(u => u) : []
-        }));
+        // Get URLs for each company
+        const urlsStmt = db.prepare('SELECT url FROM urls WHERE company_id = ?');
+        
+        const processedCompanies = companies.map(company => {
+            const urls = urlsStmt.all(company.id).map(row => row.url);
+            return {
+                company: company.company,
+                type: company.type || 'competitor',
+                created_at: company.created_at,
+                urls: urls
+            };
+        });
         
         return {
             companies: processedCompanies,
@@ -131,10 +141,11 @@ function generateContentSnapshotsData(db) {
             SELECT 
                 cs.*,
                 u.url,
-                u.company,
-                u.url_type as type
+                u.type as url_type,
+                c.name as company
             FROM content_snapshots cs
             JOIN urls u ON cs.url_id = u.id
+            JOIN companies c ON u.company_id = c.id
             ORDER BY cs.created_at DESC
             LIMIT 100
         `).all();
@@ -143,13 +154,13 @@ function generateContentSnapshotsData(db) {
             id: snapshot.id,
             url: snapshot.url,
             company: snapshot.company,
-            type: snapshot.type || 'general',
+            type: snapshot.url_type || 'general',
             timestamp: snapshot.created_at,
-            content_length: snapshot.content ? snapshot.content.length : 0,
-            extractedContent: snapshot.content ? snapshot.content.substring(0, 500) + '...' : 'No content',
-            relevanceScore: snapshot.relevance_score || 0,
-            keywords: snapshot.keywords || 'None detected',
-            aiProcessed: !!snapshot.relevance_score,
+            content_length: snapshot.extracted_content ? snapshot.extracted_content.length : 0,
+            extractedContent: snapshot.extracted_content ? snapshot.extracted_content.substring(0, 500) + '...' : 'No content',
+            relevanceScore: 0, // We'll get this from ai_analysis later
+            keywords: '[]',
+            aiProcessed: false,
             source: 'GitHub Actions Monitor'
         }));
         
@@ -176,29 +187,41 @@ function generateRecentChangesData(db) {
     try {
         console.log('📈 Generating recent changes data...');
         
-        // Get recent monitoring runs
-        const recentRuns = db.prepare(`
-            SELECT *
-            FROM monitoring_runs
-            ORDER BY created_at DESC
+        // Get recent changes with AI analysis
+        const recentChanges = db.prepare(`
+            SELECT 
+                ch.id,
+                ch.created_at,
+                ch.change_percentage,
+                ch.keywords_found,
+                u.url,
+                c.name as company,
+                aa.relevance_score,
+                aa.summary,
+                aa.category
+            FROM changes ch
+            JOIN urls u ON ch.url_id = u.id
+            JOIN companies c ON u.company_id = c.id
+            LEFT JOIN ai_analysis aa ON ch.id = aa.change_id
+            ORDER BY ch.created_at DESC
             LIMIT 50
         `).all();
         
-        const processedRuns = recentRuns.map(run => ({
-            id: run.id,
-            url: run.url,
-            company: run.company,
-            status: run.status,
-            change_detected: !!run.change_detected,
-            change_percentage: run.change_percentage || 0,
-            relevance_score: run.relevance_score || 0,
-            summary: run.summary || 'No summary available',
-            created_at: run.created_at,
-            error_message: run.error_message
+        const processedChanges = recentChanges.map(change => ({
+            id: change.id,
+            url: change.url,
+            company: change.company,
+            change_percentage: change.change_percentage || 0,
+            relevance_score: change.relevance_score || 0,
+            summary: change.summary || 'No AI analysis available',
+            category: change.category || 'uncategorized',
+            keywords_found: change.keywords_found || '[]',
+            created_at: change.created_at,
+            ai_processed: !!change.relevance_score
         }));
         
         return {
-            changes: processedRuns,
+            changes: processedChanges,
             aiFiltered: true,
             generated_at: new Date().toISOString()
         };
@@ -223,17 +246,21 @@ function generateMonitoringRunsData(db) {
         const logs = db.prepare(`
             SELECT *
             FROM monitoring_runs
-            ORDER BY created_at DESC
+            ORDER BY started_at DESC
             LIMIT 100
         `).all();
         
         const processedLogs = logs.map(log => ({
-            timestamp: log.created_at,
-            type: log.status === 'success' ? 'success' : 'error',
-            level: log.status === 'success' ? 'info' : 'error',
-            message: log.summary || log.error_message || `${log.status} - ${log.url}`,
-            company: log.company,
-            url: log.url
+            timestamp: log.started_at,
+            type: log.status === 'completed' ? 'success' : 'error',
+            level: log.status === 'completed' ? 'info' : 'error',
+            message: `${log.run_type} - ${log.status}` + (log.changes_detected ? ` - ${log.changes_detected} changes detected` : ''),
+            details: {
+                run_type: log.run_type,
+                urls_checked: log.urls_checked,
+                changes_detected: log.changes_detected,
+                errors: log.errors
+            }
         }));
         
         return {
