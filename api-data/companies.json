@@ -1,52 +1,5 @@
 {
-  "companies": [
-    {
-      "company": "OpenAI",
-      "type": "competitor",
-      "created_at": "2025-06-20T18:00:00.000Z",
-      "urls": [
-        "https://openai.com/pricing",
-        "https://openai.com/blog", 
-        "https://platform.openai.com/docs"
-      ]
-    },
-    {
-      "company": "Anthropic", 
-      "type": "competitor",
-      "created_at": "2025-06-20T18:00:00.000Z",
-      "urls": [
-        "https://anthropic.com/pricing",
-        "https://anthropic.com/news"
-      ]
-    },
-    {
-      "company": "Google AI",
-      "type": "competitor",
-      "created_at": "2025-06-20T18:00:00.000Z", 
-      "urls": [
-        "https://ai.google.dev/pricing",
-        "https://blog.google/technology/ai/",
-        "https://ai.google.dev/docs"
-      ]
-    },
-    {
-      "company": "Microsoft AI",
-      "type": "competitor",
-      "created_at": "2025-06-20T18:00:00.000Z",
-      "urls": [
-        "https://azure.microsoft.com/en-us/pricing/details/cognitive-services/",
-        "https://blogs.microsoft.com/ai/"
-      ]
-    },
-    {
-      "company": "Meta AI",
-      "type": "competitor", 
-      "created_at": "2025-06-20T18:00:00.000Z",
-      "urls": [
-        "https://ai.meta.com/",
-        "https://ai.meta.com/blog/"
-      ]
-    }
-  ],
-  "generated_at": "2025-06-20T18:31:10.246Z"
+  "companies": [],
+  "generated_at": "2025-06-21T13:53:37.198Z",
+  "error": "no such column: u.company"
 }
