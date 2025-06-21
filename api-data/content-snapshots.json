@@ -1,45 +1,6 @@
 {
-  "extractedData": [
-    {
-      "id": 1,
-      "url": "https://openai.com/pricing",
-      "company": "OpenAI",
-      "type": "pricing",
-      "timestamp": "2025-06-20T18:00:00.000Z",
-      "content_length": 2547,
-      "extractedContent": "OpenAI API Pricing. We offer several pricing plans for different use cases. GPT-4 costs $0.03 per 1K tokens for input and $0.06 per 1K tokens for output. GPT-3.5 Turbo costs $0.0015 per 1K tokens for input and $0.002 per 1K tokens for output...",
-      "relevanceScore": 9,
-      "keywords": "pricing, GPT-4, API, tokens, cost",
-      "aiProcessed": true,
-      "source": "GitHub Actions Monitor"
-    },
-    {
-      "id": 2,
-      "url": "https://anthropic.com/pricing", 
-      "company": "Anthropic",
-      "type": "pricing",
-      "timestamp": "2025-06-20T18:00:00.000Z",
-      "content_length": 1823,
-      "extractedContent": "Claude API Pricing. Claude Sonnet: $3 per million input tokens, $15 per million output tokens. Claude Haiku: $0.25 per million input tokens, $1.25 per million output tokens. Claude Opus: $15 per million input tokens, $75 per million output tokens...",
-      "relevanceScore": 9,
-      "keywords": "Claude, pricing, Sonnet, Haiku, Opus, tokens",
-      "aiProcessed": true,
-      "source": "GitHub Actions Monitor"
-    },
-    {
-      "id": 3,
-      "url": "https://ai.google.dev/pricing",
-      "company": "Google AI",
-      "type": "pricing", 
-      "timestamp": "2025-06-20T18:00:00.000Z",
-      "content_length": 1456,
-      "extractedContent": "Gemini API Pricing. Gemini Pro is free for up to 60 requests per minute. Gemini Pro Vision supports images and costs $0.0025 per image plus standard text rates. Enterprise customers get volume discounts...",
-      "relevanceScore": 8,
-      "keywords": "Gemini, pricing, Pro, Vision, API, free tier",
-      "aiProcessed": true,
-      "source": "GitHub Actions Monitor"
-    }
-  ],
-  "totalUnfiltered": 3,
-  "generated_at": "2025-06-20T18:31:10.246Z"
+  "extractedData": [],
+  "totalUnfiltered": 0,
+  "generated_at": "2025-06-21T13:53:37.199Z",
+  "error": "no such column: u.company"
 }

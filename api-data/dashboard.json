@@ -1,44 +1,12 @@
 {
   "stats": {
-    "companies": 10,
-    "urls": 57,
+    "companies": 0,
+    "urls": 0,
     "snapshots": 0,
-    "lastCheck": "2025-06-20T18:31:10.240Z"
+    "lastCheck": "2025-06-21T13:53:37.197Z"
   },
-  "company_activity": [
-    {
-      "company": "OpenAI",
-      "type": "competitor",
-      "url_count": 3,
-      "last_check": "2025-06-20T18:31:10.240Z",
-      "urls": [
-        "https://openai.com/pricing",
-        "https://openai.com/blog",
-        "https://platform.openai.com/docs"
-      ]
-    },
-    {
-      "company": "Anthropic",
-      "type": "competitor", 
-      "url_count": 2,
-      "last_check": "2025-06-20T18:31:10.240Z",
-      "urls": [
-        "https://anthropic.com/pricing",
-        "https://anthropic.com/news"
-      ]
-    },
-    {
-      "company": "Google AI",
-      "type": "competitor",
-      "url_count": 3,
-      "last_check": "2025-06-20T18:31:10.240Z", 
-      "urls": [
-        "https://ai.google.dev/pricing",
-        "https://blog.google/technology/ai/",
-        "https://ai.google.dev/docs"
-      ]
-    }
-  ],
-  "generated_at": "2025-06-20T18:31:10.246Z",
-  "backend": "github-actions-static"
+  "company_activity": [],
+  "generated_at": "2025-06-21T13:53:37.197Z",
+  "backend": "github-actions-static",
+  "error": "no such column: company"
 }
