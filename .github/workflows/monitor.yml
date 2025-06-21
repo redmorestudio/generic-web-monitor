@@ -57,6 +57,7 @@ jobs:
           ./add-companies.sh
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
       
       - name: Run intelligent scraper
         if: ${{ inputs.action != 'analyze-only' && inputs.action != 'generate-data-only' }}
@@ -66,14 +67,16 @@ jobs:
         timeout-minutes: 30
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
       
-      - name: Run AI analysis
+      - name: Run AI analysis and TheBrain integration
         if: ${{ inputs.action != 'scrape-only' && inputs.action != 'generate-data-only' }}
         run: |
           cd github-actions-backend
           node ai-analyzer.js analyze || echo "AI analysis completed"
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
         timeout-minutes: 20
       
       - name: Generate static data files for GitHub Pages
@@ -88,6 +91,7 @@ jobs:
           cp -f ../api-data/* ../api-data/ 2>/dev/null || echo "Static data generated"
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
       
       - name: Update status file
         run: |
