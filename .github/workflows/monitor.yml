@@ -68,11 +68,12 @@ jobs:
         if: ${{ inputs.action != 'analyze-only' && inputs.action != 'generate-data-only' }}
         run: |
           cd github-actions-backend
-          timeout 1800 node scraper.js || echo "Scraper completed or timed out"
+          timeout 1800 node scraper-wrapper.js || echo "Scraper completed or timed out"
         timeout-minutes: 30
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+          GITHUB_ACTIONS: 'true'
       
       - name: Run AI analysis and TheBrain integration
         if: ${{ inputs.action != 'scrape-only' && inputs.action != 'generate-data-only' }}
