@@ -218,6 +218,34 @@ program
   });
 
 program
+  .command('monitor:brief')
+  .description('Generate enhanced intelligence brief')
+  .option('-e, --enhanced', 'Use enhanced AI analyzer (recommended)', true)
+  .action(async (options) => {
+    const analyzer = options.enhanced ? 'ai-analyzer-enhanced.js' : 'ai-analyzer.js';
+    const analyzerName = options.enhanced ? 'Enhanced AI' : 'Basic AI';
+    
+    console.log(chalk.yellow(`📋 Generating ${analyzerName} intelligence brief...`));
+    console.log(chalk.gray('This will create an executive intelligence brief.'));
+    
+    const { spawn } = require('child_process');
+    
+    const analyzerProcess = spawn('node', [analyzer, 'brief'], {
+      cwd: __dirname,
+      stdio: 'inherit',
+      env: { ...process.env }
+    });
+    
+    analyzerProcess.on('close', (code) => {
+      if (code === 0) {
+        console.log(chalk.green(`✅ ${analyzerName} brief generated!`));
+      } else {
+        console.log(chalk.red(`❌ ${analyzerName} brief generation failed with code ${code}`));
+      }
+    });
+  });
+
+program
   .command('monitor:scrape [urlId]')
   .description('Run scraper (for all URLs or specific URL)')
   .action(async (urlId) => {
@@ -245,23 +273,27 @@ program
 program
   .command('monitor:analyze')
   .description('Run AI analysis on recent changes')
-  .action(async () => {
-    console.log(chalk.yellow('🤖 Starting AI analysis...'));
+  .option('-e, --enhanced', 'Use enhanced AI analyzer (recommended)', true)
+  .action(async (options) => {
+    const analyzer = options.enhanced ? 'ai-analyzer-enhanced.js' : 'ai-analyzer.js';
+    const analyzerName = options.enhanced ? 'Enhanced AI' : 'Basic AI';
+    
+    console.log(chalk.yellow(`🤖 Starting ${analyzerName} analysis...`));
     console.log(chalk.gray('This will run the analyzer locally. For production, use GitHub Actions.'));
     
     const { spawn } = require('child_process');
     
-    const analyzer = spawn('node', ['ai-analyzer.js', 'analyze'], {
+    const analyzerProcess = spawn('node', [analyzer, 'analyze'], {
       cwd: __dirname,
       stdio: 'inherit',
       env: { ...process.env }
     });
     
-    analyzer.on('close', (code) => {
+    analyzerProcess.on('close', (code) => {
       if (code === 0) {
-        console.log(chalk.green('✅ Analysis completed!'));
+        console.log(chalk.green(`✅ ${analyzerName} analysis completed!`));
       } else {
-        console.log(chalk.red(`❌ Analyzer exited with code ${code}`));
+        console.log(chalk.red(`❌ ${analyzerName} analyzer exited with code ${code}`));
       }
     });
   });

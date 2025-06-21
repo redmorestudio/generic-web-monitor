@@ -78,11 +78,11 @@ jobs:
         if: ${{ inputs.action != 'scrape-only' && inputs.action != 'generate-data-only' }}
         run: |
           cd github-actions-backend
-          node ai-analyzer.js analyze || echo "AI analysis completed"
+          node ai-analyzer-enhanced.js analyze || echo "Enhanced AI analysis completed"
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
-        timeout-minutes: 20
+        timeout-minutes: 30
       
       - name: Generate static data files for GitHub Pages
         run: |
