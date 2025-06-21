@@ -286,6 +286,253 @@ app.delete('/api/urls/:id', (req, res) => {
   }
 });
 
+// ==================== Group Management ====================
+
+// List all groups
+app.get('/api/groups', (req, res) => {
+  try {
+    const groups = db.prepare(`
+      SELECT g.*, 
+             COUNT(DISTINCT cg.company_id) as company_count,
+             COUNT(DISTINCT ug.url_id) as url_count
+      FROM groups g
+      LEFT JOIN company_groups cg ON g.id = cg.group_id
+      LEFT JOIN url_groups ug ON g.id = ug.group_id
+      GROUP BY g.id
+      ORDER BY g.name
+    `).all();
+    
+    res.json(groups);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get group details with members
+app.get('/api/groups/:id', (req, res) => {
+  try {
+    const group = db.prepare('SELECT * FROM groups WHERE id = ?').get(req.params.id);
+    if (!group) {
+      return res.status(404).json({ error: 'Group not found' });
+    }
+    
+    // Get companies in this group
+    const companies = db.prepare(`
+      SELECT c.*, cg.assigned_at
+      FROM companies c
+      JOIN company_groups cg ON c.id = cg.company_id
+      WHERE cg.group_id = ?
+      ORDER BY c.name
+    `).all(req.params.id);
+    
+    // Get URLs in this group
+    const urls = db.prepare(`
+      SELECT u.*, c.name as company_name, ug.assigned_at
+      FROM urls u
+      JOIN url_groups ug ON u.id = ug.url_id
+      JOIN companies c ON u.company_id = c.id
+      WHERE ug.group_id = ?
+      ORDER BY c.name, u.url
+    `).all(req.params.id);
+    
+    res.json({ ...group, companies, urls });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Create new group
+app.post('/api/groups', (req, res) => {
+  const { name, description, color = '#3b82f6' } = req.body;
+  
+  if (!name) {
+    return res.status(400).json({ error: 'Group name is required' });
+  }
+  
+  try {
+    const result = db.prepare(
+      'INSERT INTO groups (name, description, color) VALUES (?, ?, ?)'
+    ).run(name, description, color);
+    
+    const group = db.prepare('SELECT * FROM groups WHERE id = ?').get(result.lastInsertRowid);
+    res.status(201).json(group);
+  } catch (error) {
+    if (error.message.includes('UNIQUE')) {
+      res.status(409).json({ error: 'Group name already exists' });
+    } else {
+      res.status(500).json({ error: error.message });
+    }
+  }
+});
+
+// Update group
+app.put('/api/groups/:id', (req, res) => {
+  const { name, description, color } = req.body;
+  
+  try {
+    const updates = [];
+    const values = [];
+    
+    if (name !== undefined) {
+      updates.push('name = ?');
+      values.push(name);
+    }
+    if (description !== undefined) {
+      updates.push('description = ?');
+      values.push(description);
+    }
+    if (color !== undefined) {
+      updates.push('color = ?');
+      values.push(color);
+    }
+    
+    if (updates.length === 0) {
+      return res.status(400).json({ error: 'No updates provided' });
+    }
+    
+    updates.push('updated_at = CURRENT_TIMESTAMP');
+    values.push(req.params.id);
+    
+    const result = db.prepare(`
+      UPDATE groups SET ${updates.join(', ')} WHERE id = ?
+    `).run(...values);
+    
+    if (result.changes === 0) {
+      return res.status(404).json({ error: 'Group not found' });
+    }
+    
+    const group = db.prepare('SELECT * FROM groups WHERE id = ?').get(req.params.id);
+    res.json(group);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Delete group
+app.delete('/api/groups/:id', (req, res) => {
+  try {
+    const result = db.prepare('DELETE FROM groups WHERE id = ?').run(req.params.id);
+    
+    if (result.changes === 0) {
+      return res.status(404).json({ error: 'Group not found' });
+    }
+    
+    res.json({ message: 'Group deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Assign company to group
+app.post('/api/companies/:id/groups', (req, res) => {
+  const { group_id } = req.body;
+  
+  if (!group_id) {
+    return res.status(400).json({ error: 'group_id is required' });
+  }
+  
+  try {
+    db.prepare(
+      'INSERT INTO company_groups (company_id, group_id) VALUES (?, ?)'
+    ).run(req.params.id, group_id);
+    
+    res.status(201).json({ message: 'Company assigned to group successfully' });
+  } catch (error) {
+    if (error.message.includes('UNIQUE')) {
+      res.status(409).json({ error: 'Company already assigned to this group' });
+    } else {
+      res.status(500).json({ error: error.message });
+    }
+  }
+});
+
+// Remove company from group
+app.delete('/api/companies/:id/groups/:groupId', (req, res) => {
+  try {
+    const result = db.prepare(
+      'DELETE FROM company_groups WHERE company_id = ? AND group_id = ?'
+    ).run(req.params.id, req.params.groupId);
+    
+    if (result.changes === 0) {
+      return res.status(404).json({ error: 'Company not assigned to this group' });
+    }
+    
+    res.json({ message: 'Company removed from group successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Assign URL to group
+app.post('/api/urls/:id/groups', (req, res) => {
+  const { group_id } = req.body;
+  
+  if (!group_id) {
+    return res.status(400).json({ error: 'group_id is required' });
+  }
+  
+  try {
+    db.prepare(
+      'INSERT INTO url_groups (url_id, group_id) VALUES (?, ?)'
+    ).run(req.params.id, group_id);
+    
+    res.status(201).json({ message: 'URL assigned to group successfully' });
+  } catch (error) {
+    if (error.message.includes('UNIQUE')) {
+      res.status(409).json({ error: 'URL already assigned to this group' });
+    } else {
+      res.status(500).json({ error: error.message });
+    }
+  }
+});
+
+// Remove URL from group
+app.delete('/api/urls/:id/groups/:groupId', (req, res) => {
+  try {
+    const result = db.prepare(
+      'DELETE FROM url_groups WHERE url_id = ? AND group_id = ?'
+    ).run(req.params.id, req.params.groupId);
+    
+    if (result.changes === 0) {
+      return res.status(404).json({ error: 'URL not assigned to this group' });
+    }
+    
+    res.json({ message: 'URL removed from group successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Get group for URL (with company fallback)
+app.get('/api/urls/:id/group', (req, res) => {
+  try {
+    // First check for direct URL group assignment
+    let group = db.prepare(`
+      SELECT g.* FROM groups g
+      JOIN url_groups ug ON g.id = ug.group_id
+      WHERE ug.url_id = ?
+    `).get(req.params.id);
+    
+    if (!group) {
+      // Fall back to company group
+      group = db.prepare(`
+        SELECT g.* FROM groups g
+        JOIN company_groups cg ON g.id = cg.group_id
+        JOIN urls u ON cg.company_id = u.company_id
+        WHERE u.id = ?
+      `).get(req.params.id);
+    }
+    
+    if (!group) {
+      return res.status(404).json({ error: 'No group assigned' });
+    }
+    
+    res.json(group);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // ==================== Content & Monitoring ====================
 
 // Store new content snapshot
@@ -429,7 +676,7 @@ app.post('/api/changes/:id/ai-analysis', (req, res) => {
 
 // Get recent changes with AI analysis
 app.get('/api/changes/recent', (req, res) => {
-  const { limit = 50, min_relevance = 0, company_id } = req.query;
+  const { limit = 50, min_relevance = 0, company_id, group } = req.query;
   
   try {
     let query = `
@@ -444,26 +691,43 @@ app.get('/api/changes/recent', (req, res) => {
         aa.summary,
         aa.category,
         aa.competitive_threats,
-        aa.strategic_opportunities
+        aa.strategic_opportunities,
+        aa.raw_response
       FROM changes c
       LEFT JOIN content_snapshots cs_old ON c.old_snapshot_id = cs_old.id
       JOIN content_snapshots cs_new ON c.new_snapshot_id = cs_new.id
       JOIN urls u ON c.url_id = u.id
       JOIN companies comp ON u.company_id = comp.id
       LEFT JOIN ai_analysis aa ON aa.change_id = c.id
-      WHERE 1=1
     `;
     
     const params = [];
+    const whereClauses = [];
     
     if (min_relevance > 0) {
-      query += ' AND aa.relevance_score >= ?';
+      whereClauses.push('aa.relevance_score >= ?');
       params.push(min_relevance);
     }
     
     if (company_id) {
-      query += ' AND comp.id = ?';
+      whereClauses.push('comp.id = ?');
       params.push(company_id);
+    }
+    
+    if (group) {
+      // Filter by group name - check both URL groups and company groups
+      query += `
+        LEFT JOIN url_groups ug ON u.id = ug.url_id
+        LEFT JOIN groups g1 ON ug.group_id = g1.id
+        LEFT JOIN company_groups cg ON comp.id = cg.company_id
+        LEFT JOIN groups g2 ON cg.group_id = g2.id
+      `;
+      whereClauses.push('(g1.name = ? OR g2.name = ?)');
+      params.push(group, group);
+    }
+    
+    if (whereClauses.length > 0) {
+      query += ` WHERE ${whereClauses.join(' AND ')}`;
     }
     
     query += ' ORDER BY c.created_at DESC LIMIT ?';

@@ -1,7 +1,285 @@
 #!/usr/bin/env node
 
 const axios = require('axios');
-const { program } = require('commander');
+const { program
+  .command('group:list')
+  .description('List all groups')
+  .action(async () => {
+    const groups = await handleApiCall(axios.get(`${API_URL}/groups`));
+    
+    const table = new Table({
+      head: ['ID', 'Name', 'Description', 'Companies', 'URLs', 'Color'],
+      colWidths: [5, 25, 35, 12, 8, 10]
+    });
+
+// ==================== Group Commands ====================
+
+program
+  .command('group:list')
+  .description('List all groups')
+  .action(async () => {
+    const groups = await handleApiCall(axios.get(`${API_URL}/groups`));
+    
+    const table = new Table({
+      head: ['ID', 'Name', 'Description', 'Companies', 'URLs', 'Color'],
+      colWidths: [5, 25, 35, 12, 8, 10]
+    });
+    
+    groups.forEach(group => {
+      table.push([
+        group.id,
+        group.name,
+        group.description || '',
+        group.company_count,
+        group.url_count,
+        chalk.hex(group.color)('█')
+      ]);
+    });
+    
+    console.log(table.toString());
+    console.log(chalk.gray(`Total: ${groups.length} groups`));
+  });
+
+program
+  .command('group:create <n>')
+  .description('Create a new group')
+  .option('-d, --description <description>', 'Group description')
+  .option('-c, --color <color>', 'Group color (hex format)', '#3b82f6')
+  .action(async (name, options) => {
+    const group = await handleApiCall(
+      axios.post(`${API_URL}/groups`, {
+        name,
+        description: options.description,
+        color: options.color
+      })
+    );
+    
+    console.log(chalk.green(`✅ Group "${group.name}" created successfully!`));
+    console.log(chalk.gray(`ID: ${group.id}`));
+    console.log(chalk.gray(`Color: ${chalk.hex(group.color)(group.color)}`));
+  });
+
+program
+  .command('group:show <id>')
+  .description('Show group details with members')
+  .action(async (id) => {
+    const group = await handleApiCall(axios.get(`${API_URL}/groups/${id}`));
+    
+    console.log(chalk.bold(`\n${chalk.hex(group.color)(group.name)} (ID: ${group.id})\n`));
+    
+    if (group.description) {
+      console.log(chalk.gray(`Description: ${group.description}\n`));
+    }
+    
+    if (group.companies.length > 0) {
+      console.log(chalk.bold('Companies:'));
+      group.companies.forEach(company => {
+        console.log(`  ${company.enabled ? chalk.green('✓') : chalk.red('✗')} ${company.name} (ID: ${company.id})`);
+      });
+      console.log('');
+    }
+    
+    if (group.urls.length > 0) {
+      console.log(chalk.bold('URLs:'));
+      group.urls.forEach(url => {
+        console.log(`  ${url.enabled ? chalk.green('✓') : chalk.red('✗')} ${url.company_name}: ${url.url.substring(0, 60)}${url.url.length > 60 ? '...' : ''}`);
+      });
+      console.log('');
+    }
+    
+    if (group.companies.length === 0 && group.urls.length === 0) {
+      console.log(chalk.gray('No companies or URLs assigned to this group yet.'));
+    }
+  });
+
+program
+  .command('group:assign')
+  .description('Assign company or URL to group')
+  .argument('<type>', 'Type: company or url')
+  .argument('<id>', 'Company or URL ID')
+  .argument('<groupName>', 'Group name')
+  .action(async (type, id, groupName) => {
+    if (type !== 'company' && type !== 'url') {
+      console.error(chalk.red('❌ Type must be "company" or "url"'));
+      process.exit(1);
+    }
+    
+    // First, get the group ID by name
+    const groups = await handleApiCall(axios.get(`${API_URL}/groups`));
+    const group = groups.find(g => g.name === groupName);
+    
+    if (!group) {
+      console.error(chalk.red(`❌ Group "${groupName}" not found`));
+      console.log(chalk.gray('Available groups:', groups.map(g => g.name).join(', ')));
+      process.exit(1);
+    }
+    
+    const endpoint = type === 'company' 
+      ? `${API_URL}/companies/${id}/groups`
+      : `${API_URL}/urls/${id}/groups`;
+    
+    await handleApiCall(
+      axios.post(endpoint, { group_id: group.id })
+    );
+    
+    console.log(chalk.green(`✅ ${type.charAt(0).toUpperCase() + type.slice(1)} assigned to group "${groupName}" successfully!`));
+  });
+    
+    groups.forEach(group => {
+      table.push([
+        group.id,
+        group.name,
+        group.description || '',
+        group.company_count,
+        group.url_count,
+        chalk.hex(group.color)('█')
+      ]);
+    });
+    
+    console.log(table.toString());
+    console.log(chalk.gray(`Total: ${groups.length} groups`));
+  });
+
+program
+  .command('group:create <name>')
+  .description('Create a new group')
+  .option('-d, --description <description>', 'Group description')
+  .option('-c, --color <color>', 'Group color (hex format)', '#3b82f6')
+  .action(async (name, options) => {
+    const group = await handleApiCall(
+      axios.post(`${API_URL}/groups`, {
+        name,
+        description: options.description,
+        color: options.color
+      })
+    );
+    
+    console.log(chalk.green(`✅ Group "${group.name}" created successfully!`));
+    console.log(chalk.gray(`ID: ${group.id}`));
+    console.log(chalk.gray(`Color: ${chalk.hex(group.color)(group.color)}`));
+  });
+
+program
+  .command('group:show <id>')
+  .description('Show group details with members')
+  .action(async (id) => {
+    const group = await handleApiCall(axios.get(`${API_URL}/groups/${id}`));
+    
+    console.log(chalk.bold(`\n${chalk.hex(group.color)(group.name)} (ID: ${group.id})\n`));
+    
+    if (group.description) {
+      console.log(chalk.gray(`Description: ${group.description}\n`));
+    }
+    
+    if (group.companies.length > 0) {
+      console.log(chalk.bold('Companies:'));
+      group.companies.forEach(company => {
+        console.log(`  ${company.enabled ? chalk.green('✓') : chalk.red('✗')} ${company.name} (ID: ${company.id})`);
+      });
+      console.log('');
+    }
+    
+    if (group.urls.length > 0) {
+      console.log(chalk.bold('URLs:'));
+      group.urls.forEach(url => {
+        console.log(`  ${url.enabled ? chalk.green('✓') : chalk.red('✗')} ${url.company_name}: ${url.url.substring(0, 60)}${url.url.length > 60 ? '...' : ''}`);
+      });
+      console.log('');
+    }
+    
+    if (group.companies.length === 0 && group.urls.length === 0) {
+      console.log(chalk.gray('No companies or URLs assigned to this group yet.'));
+    }
+  });
+
+program
+  .command('group:assign')
+  .description('Assign company or URL to group')
+  .argument('<type>', 'Type: company or url')
+  .argument('<id>', 'Company or URL ID')
+  .argument('<groupName>', 'Group name')
+  .action(async (type, id, groupName) => {
+    if (type !== 'company' && type !== 'url') {
+      console.error(chalk.red('❌ Type must be "company" or "url"'));
+      process.exit(1);
+    }
+    
+    // First, get the group ID by name
+    const groups = await handleApiCall(axios.get(`${API_URL}/groups`));
+    const group = groups.find(g => g.name === groupName);
+    
+    if (!group) {
+      console.error(chalk.red(`❌ Group "${groupName}" not found`));
+      console.log(chalk.gray('Available groups:', groups.map(g => g.name).join(', ')));
+      process.exit(1);
+    }
+    
+    const endpoint = type === 'company' 
+      ? `${API_URL}/companies/${id}/groups`
+      : `${API_URL}/urls/${id}/groups`;
+    
+    await handleApiCall(
+      axios.post(endpoint, { group_id: group.id })
+    );
+    
+    console.log(chalk.green(`✅ ${type.charAt(0).toUpperCase() + type.slice(1)} assigned to group "${groupName}" successfully!`));
+  });
+
+program
+  .command('group:remove')
+  .description('Remove company or URL from group')
+  .argument('<type>', 'Type: company or url')
+  .argument('<id>', 'Company or URL ID')
+  .argument('<groupName>', 'Group name')
+  .action(async (type, id, groupName) => {
+    if (type !== 'company' && type !== 'url') {
+      console.error(chalk.red('❌ Type must be "company" or "url"'));
+      process.exit(1);
+    }
+    
+    // Get the group ID by name
+    const groups = await handleApiCall(axios.get(`${API_URL}/groups`));
+    const group = groups.find(g => g.name === groupName);
+    
+    if (!group) {
+      console.error(chalk.red(`❌ Group "${groupName}" not found`));
+      process.exit(1);
+    }
+    
+    const endpoint = type === 'company' 
+      ? `${API_URL}/companies/${id}/groups/${group.id}`
+      : `${API_URL}/urls/${id}/groups/${group.id}`;
+    
+    await handleApiCall(axios.delete(endpoint));
+    
+    console.log(chalk.green(`✅ ${type.charAt(0).toUpperCase() + type.slice(1)} removed from group "${groupName}" successfully!`));
+  });
+
+program
+  .command('group:delete <name>')
+  .description('Delete a group')
+  .option('-f, --force', 'Skip confirmation')
+  .action(async (name, options) => {
+    // Get the group ID by name
+    const groups = await handleApiCall(axios.get(`${API_URL}/groups`));
+    const group = groups.find(g => g.name === name);
+    
+    if (!group) {
+      console.error(chalk.red(`❌ Group "${name}" not found`));
+      process.exit(1);
+    }
+    
+    if (!options.force) {
+      console.log(chalk.yellow(`⚠️  This will delete the group "${name}" and remove all assignments.`));
+      console.log(chalk.yellow('Use --force to confirm.'));
+      process.exit(1);
+    }
+    
+    await handleApiCall(axios.delete(`${API_URL}/groups/${group.id}`));
+    console.log(chalk.green(`✅ Group "${name}" deleted successfully!`));
+  });
+
+program } = require('commander');
 const Table = require('cli-table3');
 const chalk = require('chalk');
 
@@ -184,6 +462,7 @@ program
   .option('-l, --limit <limit>', 'Number of changes to show', '20')
   .option('-m, --min-relevance <score>', 'Minimum relevance score', '0')
   .option('-c, --company <id>', 'Filter by company ID')
+  .option('-g, --group <n>', 'Filter by group name')
   .action(async (options) => {
     const params = new URLSearchParams({
       limit: options.limit,
@@ -192,6 +471,10 @@ program
     
     if (options.company) {
       params.append('company_id', options.company);
+    }
+    
+    if (options.group) {
+      params.append('group', options.group);
     }
     
     const changes = await handleApiCall(
@@ -203,7 +486,8 @@ program
       return;
     }
     
-    console.log(chalk.bold(`\n📝 Recent Changes (${changes.length}):\n`));
+    const groupFilter = options.group ? ` (Group: ${options.group})` : '';
+    console.log(chalk.bold(`\n📝 Recent Changes (${changes.length})${groupFilter}:\n`));
     
     changes.forEach(change => {
       const score = change.relevance_score || 0;
