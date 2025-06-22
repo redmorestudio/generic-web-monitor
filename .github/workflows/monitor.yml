@@ -127,6 +127,9 @@ jobs:
             # Commit the changes
             git commit -m "🤖 Auto-update monitoring data - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
             
+            # Pull latest changes and rebase our changes on top
+            git pull --rebase https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git main
+            
             # Push with explicit token and retry logic
             git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
           fi
