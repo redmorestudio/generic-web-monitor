@@ -162,58 +162,34 @@
             color: #22c55e;
         }
 
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
+        .config-section {
             background: #1a1a2e;
             padding: 2rem;
             border-radius: 12px;
-            width: 90%;
-            max-width: 600px;
-            max-height: 90vh;
-            overflow-y: auto;
+            margin-bottom: 2rem;
         }
 
-        .form-group {
-            margin-bottom: 1.5rem;
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #e0e0e0;
-            font-weight: 500;
-        }
-
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            padding: 0.75rem;
+        .config-item {
             background: #0f0f1e;
-            border: 1px solid #374151;
-            color: #e0e0e0;
+            padding: 1rem;
             border-radius: 8px;
-            font-size: 1rem;
-            font-family: inherit;
         }
 
-        .form-textarea {
-            min-height: 150px;
-            resize: vertical;
+        .config-label {
+            font-size: 0.875rem;
+            color: #9ca3af;
+            margin-bottom: 0.25rem;
+        }
+
+        .config-value {
+            font-weight: 500;
         }
 
         .loading {
@@ -240,57 +216,26 @@
             margin: 1rem 0;
         }
 
-        .config-section {
-            background: #1a1a2e;
-            padding: 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-        }
-
-        .config-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .config-item {
-            background: #0f0f1e;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-
-        .config-label {
+        .url-list {
+            margin-top: 0.5rem;
             font-size: 0.875rem;
             color: #9ca3af;
-            margin-bottom: 0.25rem;
         }
 
-        .config-value {
-            font-weight: 500;
+        .url-item {
+            padding: 0.25rem 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
-        pre {
-            background: #0f0f1e;
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #3b82f6;
             padding: 1rem;
             border-radius: 8px;
-            overflow-x: auto;
-            font-size: 0.875rem;
-        }
-
-        .icon-btn {
-            padding: 0.5rem;
-            background: transparent;
-            border: none;
-            color: #9ca3af;
-            cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.2s ease;
-        }
-
-        .icon-btn:hover {
-            color: #e0e0e0;
-            background: #374151;
+            margin: 1rem 0;
         }
     </style>
 </head>
@@ -298,116 +243,76 @@
     <header class="header">
         <div class="container">
             <h1>AI Monitor</h1>
-            <p class="subtitle">Company Management via GitHub</p>
+            <p class="subtitle">Company Management Dashboard</p>
         </div>
     </header>
 
     <main class="container">
-        <div id="auth-section" class="config-section">
-            <h2>GitHub Configuration</h2>
-            <div class="form-group">
-                <label class="form-label">GitHub Personal Access Token</label>
-                <input type="password" id="github-token" class="form-input" placeholder="ghp_...">
-                <p style="font-size: 0.875rem; color: #9ca3af; margin-top: 0.5rem;">
-                    Token needs repo and workflow permissions. 
-                    <a href="https://github.com/settings/tokens" target="_blank" style="color: #667eea;">Create token</a>
-                </p>
+        <div class="actions-bar">
+            <a href="https://github.com/redmorestudio/ai-competitive-monitor" target="_blank" class="btn btn-primary">
+                <span>📝 Edit on GitHub</span>
+            </a>
+            <div class="search-box">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search companies...">
             </div>
-            <button class="btn btn-primary" onclick="saveToken()">Connect to Repository</button>
+            <div>
+                <button class="btn btn-secondary" onclick="triggerWorkflow()">
+                    <span>🚀 Run Monitor</span>
+                </button>
+                <button class="btn btn-secondary" onclick="loadData()">
+                    <span>↻ Refresh</span>
+                </button>
+            </div>
         </div>
 
-        <div id="main-content" style="display: none;">
-            <div class="actions-bar">
-                <button class="btn btn-primary" onclick="openAddCompanyModal()">
-                    <span>+ Add Company</span>
-                </button>
-                <div class="search-box">
-                    <input type="text" class="search-input" id="searchInput" placeholder="Search companies...">
-                </div>
-                <div>
-                    <button class="btn btn-secondary" onclick="triggerWorkflow()">
-                        <span>🚀 Run Monitor</span>
-                    </button>
-                    <button class="btn btn-secondary" onclick="refreshData()">
-                        <span>↻ Refresh</span>
-                    </button>
-                </div>
+        <div id="auth-section" class="info-box" style="display: none;">
+            <strong>GitHub Token Required for Actions</strong>
+            <p style="margin-top: 0.5rem;">To trigger workflows, add your token:</p>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                <input type="password" id="github-token" class="search-input" placeholder="ghp_..." style="flex: 1;">
+                <button class="btn btn-primary" onclick="saveToken()">Save</button>
             </div>
+        </div>
 
-            <div id="status-section" class="config-section">
-                <h3>System Status</h3>
-                <div class="config-grid">
-                    <div class="config-item">
-                        <div class="config-label">Companies</div>
-                        <div class="config-value" id="stat-companies">-</div>
-                    </div>
-                    <div class="config-item">
-                        <div class="config-label">URLs</div>
-                        <div class="config-value" id="stat-urls">-</div>
-                    </div>
-                    <div class="config-item">
-                        <div class="config-label">Last Check</div>
-                        <div class="config-value" id="stat-lastcheck">-</div>
-                    </div>
-                    <div class="config-item">
-                        <div class="config-label">Workflow Status</div>
-                        <div class="config-value" id="stat-workflow">-</div>
+        <div id="status-section" class="config-section">
+            <h3>System Status</h3>
+            <div class="config-grid">
+                <div class="config-item">
+                    <div class="config-label">Companies</div>
+                    <div class="config-value" id="stat-companies">Loading...</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-label">URLs</div>
+                    <div class="config-value" id="stat-urls">Loading...</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-label">Last Check</div>
+                    <div class="config-value" id="stat-lastcheck">Loading...</div>
+                </div>
+                <div class="config-item">
+                    <div class="config-label">Workflow Status</div>
+                    <div class="config-value" id="stat-workflow">
+                        <a href="https://github.com/redmorestudio/ai-competitive-monitor/actions" target="_blank">View on GitHub</a>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div id="companies-container" class="companies-grid">
-                <div class="loading">Loading companies...</div>
-            </div>
+        <div id="companies-container" class="companies-grid">
+            <div class="loading">Loading companies...</div>
         </div>
     </main>
-
-    <!-- Add Company Modal -->
-    <div id="addCompanyModal" class="modal">
-        <div class="modal-content">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-                <h2>Add Company to Monitor</h2>
-                <button class="icon-btn" onclick="closeModal()">✕</button>
-            </div>
-            
-            <div class="form-group">
-                <label class="form-label">Company Configuration (JSON)</label>
-                <textarea id="companyConfig" class="form-textarea" placeholder='{
-  "name": "Example AI",
-  "type": "competitor",
-  "urls": [
-    {
-      "url": "https://example.com",
-      "type": "homepage"
-    },
-    {
-      "url": "https://example.com/pricing",
-      "type": "pricing"
-    }
-  ]
-}'></textarea>
-                <p style="font-size: 0.875rem; color: #9ca3af; margin-top: 0.5rem;">
-                    This will be added to the companies configuration file via GitHub
-                </p>
-            </div>
-            
-            <div style="display: flex; gap: 1rem; justify-content: flex-end;">
-                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
-                <button class="btn btn-primary" onclick="addCompany()">Add Company</button>
-            </div>
-        </div>
-    </div>
 
     <script>
         const REPO_OWNER = 'redmorestudio';
         const REPO_NAME = 'ai-competitive-monitor';
+        const BASE_URL = `https://${REPO_OWNER}.github.io/${REPO_NAME}`;
         let githubToken = localStorage.getItem('github_token');
         let companiesData = [];
         
-        // Check if token exists on load
-        if (githubToken) {
-            document.getElementById('github-token').value = githubToken;
-            connectToRepo();
+        // Show token input if not saved
+        if (!githubToken) {
+            document.getElementById('auth-section').style.display = 'block';
         }
         
         function saveToken() {
@@ -418,96 +323,131 @@
             }
             githubToken = token;
             localStorage.setItem('github_token', token);
-            connectToRepo();
-        }
-        
-        async function connectToRepo() {
-            try {
-                // Test token by fetching repo info
-                const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}`, {
-                    headers: {
-                        'Authorization': `Bearer ${githubToken}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Invalid token or repository not accessible');
-                }
-                
-                document.getElementById('auth-section').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                
-                loadData();
-            } catch (error) {
-                alert('Failed to connect: ' + error.message);
-            }
+            document.getElementById('auth-section').style.display = 'none';
+            checkWorkflowStatus();
         }
         
         async function loadData() {
             try {
-                // Load dashboard data from GitHub Pages
-                const dashResponse = await fetch(`https://${REPO_OWNER}.github.io/${REPO_NAME}/api-data/dashboard.json`);
+                console.log('Loading dashboard data from:', `${BASE_URL}/api-data/dashboard.json`);
+                
+                // Simple fetch without authentication for public GitHub Pages
+                const dashResponse = await fetch(`${BASE_URL}/api-data/dashboard.json`, {
+                    cache: 'no-cache'
+                });
+                
+                if (!dashResponse.ok) {
+                    throw new Error(`Dashboard fetch failed: ${dashResponse.status}`);
+                }
+                
                 const dashData = await dashResponse.json();
+                console.log('Dashboard data loaded:', dashData);
                 
                 // Update stats
-                document.getElementById('stat-companies').textContent = dashData.stats.companies;
-                document.getElementById('stat-urls').textContent = dashData.stats.urls;
-                document.getElementById('stat-lastcheck').textContent = new Date(dashData.stats.lastCheck).toLocaleString();
+                document.getElementById('stat-companies').textContent = dashData.stats.companies || '0';
+                document.getElementById('stat-urls').textContent = dashData.stats.urls || '0';
+                document.getElementById('stat-lastcheck').textContent = 
+                    dashData.stats.lastCheck ? new Date(dashData.stats.lastCheck).toLocaleString() : 'Never';
                 
-                // Load companies data
-                const compResponse = await fetch(`https://${REPO_OWNER}.github.io/${REPO_NAME}/api-data/companies.json`);
-                companiesData = await compResponse.json();
+                // Load companies from dashboard data (it includes company_activity)
+                if (dashData.company_activity) {
+                    companiesData = dashData.company_activity;
+                    renderCompanies();
+                } else {
+                    // Fallback to separate companies.json
+                    console.log('Loading companies data...');
+                    const compResponse = await fetch(`${BASE_URL}/api-data/companies.json`, {
+                        cache: 'no-cache'
+                    });
+                    
+                    if (!compResponse.ok) {
+                        throw new Error(`Companies fetch failed: ${compResponse.status}`);
+                    }
+                    
+                    companiesData = await compResponse.json();
+                    renderCompanies();
+                }
                 
-                renderCompanies();
-                checkWorkflowStatus();
+                // Check workflow status if token available
+                if (githubToken) {
+                    checkWorkflowStatus();
+                }
+                
             } catch (error) {
                 console.error('Error loading data:', error);
                 document.getElementById('companies-container').innerHTML = 
-                    '<div class="error-message">Failed to load data. Check console for details.</div>';
+                    `<div class="error-message" style="grid-column: 1/-1;">
+                        Failed to load data: ${error.message}<br>
+                        <small>Check if the monitoring workflow has run at least once to generate data.</small>
+                    </div>`;
             }
         }
         
         function renderCompanies() {
             const container = document.getElementById('companies-container');
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const searchTerm = (document.getElementById('searchInput').value || '').toLowerCase();
             
             const filtered = companiesData.filter(c => 
-                c.name.toLowerCase().includes(searchTerm) ||
-                c.category.toLowerCase().includes(searchTerm)
+                (c.company || c.name || '').toLowerCase().includes(searchTerm) ||
+                (c.type || c.category || '').toLowerCase().includes(searchTerm)
             );
             
             if (filtered.length === 0) {
-                container.innerHTML = '<div class="loading">No companies found</div>';
+                container.innerHTML = '<div class="loading" style="grid-column: 1/-1;">No companies found</div>';
                 return;
             }
             
-            container.innerHTML = filtered.map(company => `
-                <div class="company-card">
-                    <div class="company-header">
-                        <div>
-                            <h3 class="company-name">${company.name}</h3>
-                            <span class="company-type">${company.category}</span>
+            container.innerHTML = filtered.map(company => {
+                const name = company.company || company.name;
+                const type = company.type || company.category || 'monitoring';
+                const urls = company.urls || [];
+                const urlCount = company.url_count || company.urlCount || urls.length;
+                const lastCheck = company.last_check || company.lastChecked || 'Never';
+                
+                return `
+                    <div class="company-card">
+                        <div class="company-header">
+                            <div>
+                                <h3 class="company-name">${name}</h3>
+                                <span class="company-type">${type}</span>
+                            </div>
+                            <span class="status-badge status-active">Active</span>
                         </div>
-                        <span class="status-badge status-active">Active</span>
+                        <div style="margin: 1rem 0; font-size: 0.875rem; color: #9ca3af;">
+                            <div>URLs: ${urlCount}</div>
+                            <div>Last Check: ${lastCheck}</div>
+                        </div>
+                        ${urls.length > 0 ? `
+                            <div class="url-list">
+                                ${urls.map(url => `
+                                    <div class="url-item" title="${url}">
+                                        ${url.length > 50 ? url.substring(0, 50) + '...' : url}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : ''}
                     </div>
-                    <div style="margin: 1rem 0; font-size: 0.875rem; color: #9ca3af;">
-                        <div>URLs: ${company.urlCount}</div>
-                        <div>Last Check: ${company.lastChecked}</div>
-                        <div>Status: ${company.status}</div>
-                    </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
         
         async function checkWorkflowStatus() {
+            if (!githubToken) return;
+            
             try {
-                const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runs?per_page=1`, {
-                    headers: {
-                        'Authorization': `Bearer ${githubToken}`,
-                        'Accept': 'application/vnd.github.v3+json'
+                const response = await fetch(
+                    `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/runs?per_page=1`,
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${githubToken}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
                     }
-                });
+                );
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch workflow status');
+                }
                 
                 const data = await response.json();
                 if (data.workflow_runs && data.workflow_runs.length > 0) {
@@ -517,7 +457,8 @@
                                  status === 'in_progress' ? '#f59e0b' : '#ef4444';
                     
                     document.getElementById('stat-workflow').innerHTML = 
-                        `<span style="color: ${color}">${status}</span> (${new Date(run.created_at).toLocaleString()})`;
+                        `<span style="color: ${color}">${status}</span> 
+                         <small>(${new Date(run.created_at).toLocaleTimeString()})</small>`;
                 }
             } catch (error) {
                 console.error('Error checking workflow:', error);
@@ -525,6 +466,12 @@
         }
         
         async function triggerWorkflow() {
+            if (!githubToken) {
+                alert('Please add your GitHub token first (click Save button above)');
+                document.getElementById('auth-section').style.display = 'block';
+                return;
+            }
+            
             try {
                 const response = await fetch(
                     `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/actions/workflows/monitor.yml/dispatches`,
@@ -541,64 +488,30 @@
                     }
                 );
                 
-                if (response.ok) {
-                    alert('Monitoring workflow triggered successfully!');
-                    setTimeout(checkWorkflowStatus, 3000);
+                if (response.ok || response.status === 204) {
+                    alert('Monitoring workflow triggered successfully! Check back in a few minutes.');
+                    setTimeout(() => {
+                        checkWorkflowStatus();
+                        loadData();
+                    }, 5000);
                 } else {
-                    throw new Error(`Failed: ${response.statusText}`);
+                    const error = await response.text();
+                    throw new Error(`Failed (${response.status}): ${error}`);
                 }
             } catch (error) {
                 alert('Failed to trigger workflow: ' + error.message);
+                console.error('Workflow trigger error:', error);
             }
-        }
-        
-        function openAddCompanyModal() {
-            document.getElementById('addCompanyModal').classList.add('active');
-        }
-        
-        function closeModal() {
-            document.getElementById('addCompanyModal').classList.remove('active');
-        }
-        
-        async function addCompany() {
-            try {
-                const configText = document.getElementById('companyConfig').value;
-                const config = JSON.parse(configText);
-                
-                if (!config.name || !config.urls) {
-                    throw new Error('Invalid configuration: name and urls required');
-                }
-                
-                // For now, show instructions since we'd need to modify files in the repo
-                alert(`To add this company:
-
-1. Add to github-actions-backend/add-companies.sh
-2. Or use the CLI locally:
-   cd github-actions-backend
-   node cli.js company:add "${config.name}" -t ${config.type} -u ${config.urls.map(u => u.url).join(' ')}
-3. Then trigger the workflow to update
-
-This UI will be enhanced to directly modify the repository files.`);
-                
-                closeModal();
-            } catch (error) {
-                alert('Error: ' + error.message);
-            }
-        }
-        
-        function refreshData() {
-            loadData();
         }
         
         // Search functionality
         document.getElementById('searchInput').addEventListener('input', renderCompanies);
         
+        // Load data on page load
+        loadData();
+        
         // Auto-refresh every 60 seconds
-        setInterval(() => {
-            if (document.getElementById('main-content').style.display !== 'none') {
-                checkWorkflowStatus();
-            }
-        }, 60000);
+        setInterval(loadData, 60000);
     </script>
 </body>
 </html>
