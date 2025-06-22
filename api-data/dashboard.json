@@ -1,229 +1,53 @@
 {
   "stats": {
-    "companies": 20,
-    "urls": 57,
-    "snapshots": 74,
-    "lastCheck": "2025-06-22T03:09:24.776Z"
+    "companies": 4,
+    "urls": 9,
+    "snapshots": 9,
+    "lastCheck": "2025-06-22T03:26:24.045Z"
   },
   "company_activity": [
     {
       "company": "Anthropic",
       "type": "competitor",
-      "url_count": 4,
-      "last_check": "2025-06-21 15:06:50",
+      "url_count": 2,
+      "last_check": "2025-06-22 03:26:06",
       "urls": [
         "https://anthropic.com",
         "https://anthropic.com/claude"
       ]
     },
     {
-      "company": "Anysphere (Cursor)",
-      "type": "competitor",
-      "url_count": 3,
-      "last_check": "2025-06-20 17:47:14",
-      "urls": [
-        "https://cursor.sh",
-        "https://cursor.sh/features",
-        "https://cursor.sh/pricing"
-      ]
-    },
-    {
-      "company": "Articul8",
-      "type": "competitor",
-      "url_count": 3,
-      "last_check": "2025-06-20 17:47:18",
-      "urls": [
-        "https://articul8.ai",
-        "https://articul8.ai/resources",
-        "https://articul8.ai/solutions"
-      ]
-    },
-    {
-      "company": "Brandwatch",
-      "type": "marketing",
-      "url_count": 4,
-      "last_check": "2025-06-21 15:03:57",
-      "urls": [
-        "https://brandwatch.com",
-        "https://brandwatch.com/blog",
-        "https://brandwatch.com/pricing"
-      ]
-    },
-    {
-      "company": "Codeium",
-      "type": "competitor",
-      "url_count": 3,
-      "last_check": "2025-06-20 17:47:35",
-      "urls": [
-        "https://codeium.com",
-        "https://codeium.com/blog",
-        "https://codeium.com/pricing"
-      ]
-    },
-    {
-      "company": "Crowdfire",
-      "type": "marketing",
-      "url_count": 3,
-      "last_check": "2025-06-20 17:47:39",
-      "urls": [
-        "https://crowdfireapp.com",
-        "https://crowdfireapp.com/blog",
-        "https://crowdfireapp.com/pricing"
-      ]
-    },
-    {
       "company": "Google AI",
       "type": "competitor",
       "url_count": 2,
-      "last_check": "2025-06-20 17:47:44",
+      "last_check": "2025-06-22 03:26:12",
       "urls": [
         "https://ai.google",
         "https://blog.google/technology/ai/"
       ]
     },
     {
-      "company": "Later",
-      "type": "marketing",
-      "url_count": 4,
-      "last_check": "2025-06-21 15:04:18",
-      "urls": [
-        "https://later.com",
-        "https://later.com/blog",
-        "https://later.com/pricing"
-      ]
-    },
-    {
-      "company": "Loomly",
-      "type": "marketing",
-      "url_count": 3,
-      "last_check": "2025-06-20 17:47:57",
-      "urls": [
-        "https://loomly.com",
-        "https://loomly.com/blog",
-        "https://loomly.com/pricing"
-      ]
-    },
-    {
       "company": "Microsoft AI",
       "type": "competitor",
       "url_count": 2,
-      "last_check": "2025-06-20 17:48:03",
+      "last_check": "2025-06-22 03:26:21",
       "urls": [
         "https://azure.microsoft.com/en-us/products/ai-services/",
         "https://www.microsoft.com/ai"
       ]
     },
     {
-      "company": "Mistral AI",
-      "type": "competitor",
-      "url_count": 3,
-      "last_check": "2025-06-20 17:48:09",
-      "urls": [
-        "https://mistral.ai",
-        "https://mistral.ai/news",
-        "https://mistral.ai/pricing"
-      ]
-    },
-    {
-      "company": "Moonvalley",
-      "type": "competitor",
-      "url_count": 3,
-      "last_check": "2025-06-20 17:48:15",
-      "urls": [
-        "https://moonvalley.ai",
-        "https://moonvalley.ai/create",
-        "https://moonvalley.ai/explore"
-      ]
-    },
-    {
       "company": "OpenAI",
       "type": "competitor",
-      "url_count": 7,
-      "last_check": "2025-06-21 15:06:42",
+      "url_count": 3,
+      "last_check": "2025-06-22 03:26:02",
       "urls": [
         "https://openai.com",
         "https://openai.com/blog",
         "https://openai.com/pricing"
       ]
-    },
-    {
-      "company": "Planable",
-      "type": "marketing",
-      "url_count": 4,
-      "last_check": "2025-06-21 15:05:08",
-      "urls": [
-        "https://planable.io",
-        "https://planable.io/blog",
-        "https://planable.io/pricing"
-      ]
-    },
-    {
-      "company": "PostPlanner",
-      "type": "marketing",
-      "url_count": 3,
-      "last_check": "2025-06-20 17:48:39",
-      "urls": [
-        "https://postplanner.com",
-        "https://postplanner.com/blog",
-        "https://postplanner.com/pricing"
-      ]
-    },
-    {
-      "company": "SocialBee",
-      "type": "marketing",
-      "url_count": 3,
-      "last_check": "2025-06-20 17:48:48",
-      "urls": [
-        "https://socialbee.io",
-        "https://socialbee.io/blog",
-        "https://socialbee.io/pricing"
-      ]
-    },
-    {
-      "company": "SocialPilot",
-      "type": "marketing",
-      "url_count": 5,
-      "last_check": "2025-06-21 15:05:36",
-      "urls": [
-        "https://socialpilot.co",
-        "https://socialpilot.co/blog",
-        "https://socialpilot.co/pricing"
-      ]
-    },
-    {
-      "company": "Sprout Social",
-      "type": "marketing",
-      "url_count": 6,
-      "last_check": "2025-06-21 15:05:49",
-      "urls": [
-        "https://sproutsocial.com",
-        "https://sproutsocial.com/insights",
-        "https://sproutsocial.com/pricing"
-      ]
-    },
-    {
-      "company": "Synthesia",
-      "type": "competitor",
-      "url_count": 5,
-      "last_check": "2025-06-21 15:05:59",
-      "urls": [
-        "https://synthesia.io",
-        "https://synthesia.io/blog",
-        "https://synthesia.io/pricing"
-      ]
-    },
-    {
-      "company": "Zoho Social",
-      "type": "marketing",
-      "url_count": 4,
-      "last_check": "2025-06-21 15:06:17",
-      "urls": [
-        "https://zoho.com/social",
-        "https://zoho.com/social/blog",
-        "https://zoho.com/social/pricing.html"
-      ]
     }
   ],
-  "generated_at": "2025-06-22T03:09:24.777Z",
+  "generated_at": "2025-06-22T03:26:24.046Z",
   "backend": "github-actions-static"
 }
