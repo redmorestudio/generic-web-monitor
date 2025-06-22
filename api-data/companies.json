@@ -3,40 +3,200 @@
     {
       "company": "Anthropic",
       "type": "competitor",
-      "created_at": "2025-06-22 02:53:19",
+      "created_at": "2025-06-20 17:23:35",
       "urls": [
         "https://anthropic.com",
         "https://anthropic.com/claude"
       ]
     },
     {
+      "company": "Anysphere (Cursor)",
+      "type": "competitor",
+      "created_at": "2025-06-20 17:40:08",
+      "urls": [
+        "https://cursor.sh",
+        "https://cursor.sh/features",
+        "https://cursor.sh/pricing"
+      ]
+    },
+    {
+      "company": "Articul8",
+      "type": "competitor",
+      "created_at": "2025-06-20 17:40:03",
+      "urls": [
+        "https://articul8.ai",
+        "https://articul8.ai/resources",
+        "https://articul8.ai/solutions"
+      ]
+    },
+    {
+      "company": "Brandwatch",
+      "type": "marketing",
+      "created_at": "2025-06-20 17:40:24",
+      "urls": [
+        "https://brandwatch.com",
+        "https://brandwatch.com/blog",
+        "https://brandwatch.com/pricing"
+      ]
+    },
+    {
+      "company": "Codeium",
+      "type": "competitor",
+      "created_at": "2025-06-20 17:39:30",
+      "urls": [
+        "https://codeium.com",
+        "https://codeium.com/blog",
+        "https://codeium.com/pricing"
+      ]
+    },
+    {
+      "company": "Crowdfire",
+      "type": "marketing",
+      "created_at": "2025-06-20 17:40:42",
+      "urls": [
+        "https://crowdfireapp.com",
+        "https://crowdfireapp.com/blog",
+        "https://crowdfireapp.com/pricing"
+      ]
+    },
+    {
       "company": "Google AI",
       "type": "competitor",
-      "created_at": "2025-06-22 02:53:19",
+      "created_at": "2025-06-20 17:23:35",
       "urls": [
         "https://ai.google",
         "https://blog.google/technology/ai/"
       ]
     },
     {
+      "company": "Later",
+      "type": "marketing",
+      "created_at": "2025-06-20 17:40:42",
+      "urls": [
+        "https://later.com",
+        "https://later.com/blog",
+        "https://later.com/pricing"
+      ]
+    },
+    {
+      "company": "Loomly",
+      "type": "marketing",
+      "created_at": "2025-06-20 17:40:42",
+      "urls": [
+        "https://loomly.com",
+        "https://loomly.com/blog",
+        "https://loomly.com/pricing"
+      ]
+    },
+    {
       "company": "Microsoft AI",
       "type": "competitor",
-      "created_at": "2025-06-22 02:53:19",
+      "created_at": "2025-06-20 17:23:35",
       "urls": [
         "https://azure.microsoft.com/en-us/products/ai-services/",
         "https://www.microsoft.com/ai"
       ]
     },
     {
+      "company": "Mistral AI",
+      "type": "competitor",
+      "created_at": "2025-06-20 17:39:25",
+      "urls": [
+        "https://mistral.ai",
+        "https://mistral.ai/news",
+        "https://mistral.ai/pricing"
+      ]
+    },
+    {
+      "company": "Moonvalley",
+      "type": "competitor",
+      "created_at": "2025-06-20 17:40:13",
+      "urls": [
+        "https://moonvalley.ai",
+        "https://moonvalley.ai/create",
+        "https://moonvalley.ai/explore"
+      ]
+    },
+    {
       "company": "OpenAI",
       "type": "competitor",
-      "created_at": "2025-06-22 02:53:19",
+      "created_at": "2025-06-20 17:23:35",
       "urls": [
         "https://openai.com",
         "https://openai.com/blog",
         "https://openai.com/pricing"
       ]
+    },
+    {
+      "company": "Planable",
+      "type": "marketing",
+      "created_at": "2025-06-20 17:40:42",
+      "urls": [
+        "https://planable.io",
+        "https://planable.io/blog",
+        "https://planable.io/pricing"
+      ]
+    },
+    {
+      "company": "PostPlanner",
+      "type": "marketing",
+      "created_at": "2025-06-20 17:40:42",
+      "urls": [
+        "https://postplanner.com",
+        "https://postplanner.com/blog",
+        "https://postplanner.com/pricing"
+      ]
+    },
+    {
+      "company": "SocialBee",
+      "type": "marketing",
+      "created_at": "2025-06-20 17:40:42",
+      "urls": [
+        "https://socialbee.io",
+        "https://socialbee.io/blog",
+        "https://socialbee.io/pricing"
+      ]
+    },
+    {
+      "company": "SocialPilot",
+      "type": "marketing",
+      "created_at": "2025-06-20 17:40:42",
+      "urls": [
+        "https://socialpilot.co",
+        "https://socialpilot.co/blog",
+        "https://socialpilot.co/pricing"
+      ]
+    },
+    {
+      "company": "Sprout Social",
+      "type": "marketing",
+      "created_at": "2025-06-20 17:40:18",
+      "urls": [
+        "https://sproutsocial.com",
+        "https://sproutsocial.com/insights",
+        "https://sproutsocial.com/pricing"
+      ]
+    },
+    {
+      "company": "Synthesia",
+      "type": "competitor",
+      "created_at": "2025-06-20 17:39:35",
+      "urls": [
+        "https://synthesia.io",
+        "https://synthesia.io/blog",
+        "https://synthesia.io/pricing"
+      ]
+    },
+    {
+      "company": "Zoho Social",
+      "type": "marketing",
+      "created_at": "2025-06-20 17:40:42",
+      "urls": [
+        "https://zoho.com/social",
+        "https://zoho.com/social/blog",
+        "https://zoho.com/social/pricing.html"
+      ]
     }
   ],
-  "generated_at": "2025-06-22T02:53:56.645Z"
+  "generated_at": "2025-06-22T03:09:24.778Z"
 }

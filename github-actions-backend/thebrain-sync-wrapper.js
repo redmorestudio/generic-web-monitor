@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 
 require('dotenv').config();
-const TheBrainIntegration = require('./thebrain-sync.js');
+
+// Use direct API in GitHub Actions, MCP locally
+const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
+const TheBrainIntegration = require(isGitHubActions ? './thebrain-sync-direct.js' : './thebrain-sync.js');
 
 async function main() {
   console.log('🧠 TheBrain Sync Starting...');
@@ -15,11 +18,11 @@ async function main() {
     return;
   }
 
-  // Skip TheBrain sync in GitHub Actions for now (needs direct API instead of MCP)
+  // Using direct API in GitHub Actions
   if (process.env.GITHUB_ACTIONS === 'true') {
-    console.log('⚠️  TheBrain sync requires MCP server - skipping in GitHub Actions');
-    console.log('   To enable: Use direct TheBrain API instead of MCP');
-    return;
+    console.log('   Mode: Direct API (cloud-compatible)');
+  } else {
+    console.log('   Mode: MCP Server (local)');
   }
   
   const command = process.argv[2] || 'sync';

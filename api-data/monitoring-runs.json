@@ -1,30 +1,18 @@
 {
   "logs": [
     {
-      "timestamp": "2025-06-22 02:53:56",
-      "type": "success",
-      "level": "info",
-      "message": "ai_analysis - completed",
-      "details": {
-        "run_type": "ai_analysis",
-        "urls_checked": 0,
-        "changes_detected": 0,
-        "errors": null
-      }
-    },
-    {
-      "timestamp": "2025-06-22 02:53:19",
-      "type": "success",
-      "level": "info",
-      "message": "scraper - completed - 9 changes detected",
+      "timestamp": "2025-06-21 15:06:38",
+      "type": "error",
+      "level": "error",
+      "message": "scraper - running",
       "details": {
         "run_type": "scraper",
-        "urls_checked": 9,
-        "changes_detected": 9,
+        "urls_checked": 0,
+        "changes_detected": 0,
         "errors": null
       }
     }
   ],
   "aiEnhanced": true,
-  "generated_at": "2025-06-22T02:53:56.658Z"
+  "generated_at": "2025-06-22T03:09:24.904Z"
 }
