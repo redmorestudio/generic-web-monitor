@@ -63,6 +63,8 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+          THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
+          THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
       
       - name: Run intelligent scraper
         if: ${{ inputs.action != 'analyze-only' && inputs.action != 'generate-data-only' }}
@@ -73,16 +75,21 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+          THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
           GITHUB_ACTIONS: 'true'
       
       - name: Run AI analysis and TheBrain integration
         if: ${{ inputs.action != 'scrape-only' && inputs.action != 'generate-data-only' }}
         run: |
           cd github-actions-backend
-          node ai-analyzer-wrapper.js analyze || echo "Enhanced AI analysis completed"
+          # Run ultra-enhanced AI analysis with entity extraction and auto-grouping
+          node ai-analyzer-ultra-wrapper.js full || echo "Ultra-enhanced AI analysis completed"
+          # Sync to TheBrain if credentials are available
+          node thebrain-sync-wrapper.js full || echo "TheBrain sync completed or skipped"
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+          THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
           GITHUB_ACTIONS: 'true'
         timeout-minutes: 30
       
