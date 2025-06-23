@@ -245,6 +245,63 @@ ${await this.getRecentActivity(company.id)}
     return synced;
   }
 
+  async syncBaselineAnalyses() {
+    console.log('Syncing baseline analyses to TheBrain...');
+    
+    const analyses = this.db.prepare(`
+      SELECT 
+        ba.*, 
+        c.name as company_name,
+        c.type as company_type,
+        c.thebrain_thought_id as company_thought_id,
+        u.url,
+        u.type as url_type
+      FROM baseline_analysis ba
+      JOIN companies c ON ba.company_id = c.id
+      JOIN urls u ON ba.url_id = u.id
+      WHERE ba.thebrain_synced IS NULL OR ba.thebrain_synced = 0
+      ORDER BY ba.relevance_score DESC
+    `).all();
+    
+    let synced = 0;
+    for (const analysis of analyses) {
+      const thoughtName = `${analysis.company_name} - Current State (${analysis.url_type})`;
+      const thoughtId = this.generateThoughtId(thoughtName);
+      
+      const thoughtData = {
+        name: thoughtName,
+        kind: 1, // Normal thought
+        acType: 0, // Public
+        foregroundColor: this.getColorForRelevance(analysis.relevance_score),
+        backgroundColor: '#1a1a2e'
+      };
+      
+      // Create note from baseline analysis
+      const noteContent = this.createBaselineNote(analysis);
+      
+      // Store thought data with relationship to company
+      this.storeThoughtData(thoughtId, {
+        thought: thoughtData,
+        note: noteContent,
+        type: 'baseline',
+        analysisId: analysis.id,
+        parentThoughtId: analysis.company_thought_id,
+        relation: 'child'
+      });
+      
+      // Mark as synced
+      this.db.prepare(`
+        UPDATE baseline_analysis SET thebrain_synced = 1 WHERE id = ?
+      `).run(analysis.id);
+      
+      synced++;
+      await this.sleep(100); // Rate limiting
+    }
+    
+    console.log(`✅ Synced ${synced}/${analyses.length} baseline analyses`);
+    return synced;
+  }
+
   async syncRecentChanges(hours = 24) {
     console.log(`Syncing changes from last ${hours} hours...`);
     
@@ -444,6 +501,109 @@ ${await this.getRecentActivity(company.id)}
     ).join('\n');
   }
 
+  createBaselineNote(analysis) {
+    let noteContent = `# ${analysis.company_name} - Current State Analysis
+
+**URL:** ${analysis.url}
+**Type:** ${analysis.url_type}
+**Analysis Date:** ${new Date(analysis.created_at).toLocaleString()}
+**Relevance Score:** ${analysis.relevance_score}/10
+
+## Summary
+${analysis.summary}
+
+`;
+    
+    try {
+      const entities = JSON.parse(analysis.entities);
+      const currentState = JSON.parse(analysis.semantic_categories);
+      const strategic = JSON.parse(analysis.competitive_data);
+      const quantData = JSON.parse(analysis.quantitative_data);
+      
+      // Products Section
+      if (entities.products?.length > 0) {
+        noteContent += '## Products & Services\n';
+        entities.products.forEach(p => {
+          noteContent += `- **${p.name}** (${p.status || 'active'}): ${p.description}\n`;
+          if (p.features?.length > 0) {
+            noteContent += `  Features: ${p.features.join(', ')}\n`;
+          }
+        });
+        noteContent += '\n';
+      }
+      
+      // Technologies Section
+      if (entities.technologies?.length > 0) {
+        noteContent += '## Technologies\n';
+        entities.technologies.forEach(t => {
+          noteContent += `- **${t.name}** (${t.category}): ${t.purpose}\n`;
+        });
+        noteContent += '\n';
+      }
+      
+      // Partnerships Section
+      if (entities.partnerships?.length > 0) {
+        noteContent += '## Partnerships & Integrations\n';
+        entities.partnerships.forEach(p => {
+          noteContent += `- **${p.partner}** (${p.type}): ${p.description}\n`;
+        });
+        noteContent += '\n';
+      }
+      
+      // Pricing Section
+      if (entities.pricing?.length > 0) {
+        noteContent += '## Pricing\n';
+        entities.pricing.forEach(p => {
+          noteContent += `- **${p.tier}**: ${p.price}\n`;
+          if (p.features?.length > 0) {
+            noteContent += `  Includes: ${p.features.join(', ')}\n`;
+          }
+        });
+        noteContent += '\n';
+      }
+      
+      // Current State Analysis
+      if (currentState.positioning || currentState.value_props?.length > 0) {
+        noteContent += '## Market Position\n';
+        if (currentState.positioning) {
+          noteContent += `**Positioning:** ${currentState.positioning}\n\n`;
+        }
+        if (currentState.value_props?.length > 0) {
+          noteContent += `**Value Propositions:**\n${currentState.value_props.map(v => `- ${v}`).join('\n')}\n\n`;
+        }
+        if (currentState.competitive_advantages?.length > 0) {
+          noteContent += `**Competitive Advantages:**\n${currentState.competitive_advantages.map(a => `- ${a}`).join('\n')}\n\n`;
+        }
+      }
+      
+      // Strategic Intelligence
+      if (strategic.threat_assessment) {
+        noteContent += '## Competitive Intelligence\n';
+        noteContent += `**Threat Level:** ${strategic.threat_assessment.level}/10\n\n`;
+        if (strategic.threat_assessment.areas?.length > 0) {
+          noteContent += `**Threat Areas:**\n${strategic.threat_assessment.areas.map(a => `- ${a}`).join('\n')}\n\n`;
+        }
+        if (strategic.growth_indicators?.length > 0) {
+          noteContent += `**Growth Signals:**\n${strategic.growth_indicators.map(g => `- ${g}`).join('\n')}\n\n`;
+        }
+      }
+      
+      // Quantitative Data
+      if (quantData.metrics?.length > 0) {
+        noteContent += '## Key Metrics\n';
+        quantData.metrics.forEach(m => {
+          noteContent += `- **${m.name}**: ${m.value} ${m.context || ''}\n`;
+        });
+        noteContent += '\n';
+      }
+      
+    } catch (e) {
+      noteContent += '\n*Note: Some analysis data could not be parsed*\n';
+    }
+    
+    return noteContent;
+  }
+
   createChangeNote(change, thoughtName) {
     return `# ${thoughtName}
 
@@ -539,6 +699,9 @@ ${this.getEnhancedAnalysisForChange(change.id)}`;
         `ALTER TABLE ${table} ADD COLUMN thebrain_thought_id TEXT;`
       );
       
+      // Add thebrain_synced column to baseline_analysis
+      columns.push('ALTER TABLE baseline_analysis ADD COLUMN thebrain_synced INTEGER DEFAULT 0;');
+      
       for (const sql of columns) {
         try {
           this.db.exec(sql);
@@ -578,10 +741,13 @@ if (require.main === module) {
     let companiesSynced = 0;
     let changesSynced = 0;
     
+    let baselinesSynced = 0;
+    
     switch (command) {
       case 'sync':
-        // Sync all companies and recent changes
+        // Sync all companies, baseline analyses, and recent changes
         companiesSynced = await integration.syncAllCompanies();
+        baselinesSynced = await integration.syncBaselineAnalyses();
         changesSynced = await integration.syncRecentChanges(24);
         break;
         
@@ -601,9 +767,15 @@ if (require.main === module) {
         await integration.createCompetitiveLandscapeView();
         break;
         
+      case 'baseline':
+        // Sync baseline analyses only
+        baselinesSynced = await integration.syncBaselineAnalyses();
+        break;
+        
       case 'full':
         // Full sync with landscape
         companiesSynced = await integration.syncAllCompanies();
+        baselinesSynced = await integration.syncBaselineAnalyses();
         changesSynced = await integration.syncRecentChanges(168); // Last week
         await integration.createCompetitiveLandscapeView();
         break;
@@ -615,8 +787,9 @@ if (require.main === module) {
         
       default:
         console.log('Usage:');
-        console.log('  node thebrain-sync-direct.js sync       - Sync companies and 24h changes');
+        console.log('  node thebrain-sync-direct.js sync       - Sync companies, baseline, and 24h changes');
         console.log('  node thebrain-sync-direct.js companies  - Sync only companies');
+        console.log('  node thebrain-sync-direct.js baseline   - Sync only baseline analyses');
         console.log('  node thebrain-sync-direct.js changes [hours] - Sync recent changes');
         console.log('  node thebrain-sync-direct.js landscape  - Create landscape view');
         console.log('  node thebrain-sync-direct.js full       - Full sync with landscape');
@@ -625,6 +798,7 @@ if (require.main === module) {
     
     console.log('\n📊 TheBrain sync completed');
     console.log(`   Companies: ${companiesSynced}`);
+    console.log(`   Baseline Analyses: ${baselinesSynced}`);
     console.log(`   Changes: ${changesSynced}`);
   }
   

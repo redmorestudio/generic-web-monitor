@@ -81,7 +81,9 @@ jobs:
         if: ${{ inputs.action != 'scrape-only' && inputs.action != 'generate-data-only' }}
         run: |
           cd github-actions-backend
-          # Run ultra-enhanced AI analysis with entity extraction and auto-grouping
+          # First run baseline analysis on all current content
+          node ai-analyzer-baseline.js || echo "Baseline AI analysis completed"
+          # Then run change analysis with entity extraction and auto-grouping
           node ai-analyzer-ultra-wrapper.js full || echo "Ultra-enhanced AI analysis completed"
           # Sync to TheBrain if credentials are available
           node thebrain-sync-wrapper.js full || echo "TheBrain sync completed or skipped"

@@ -64,8 +64,9 @@ async function main() {
         break;
         
       case 'full':
-        // Run everything
+        // Run everything including baseline analyses
         await integration.syncAllCompanies();
+        await integration.syncBaselineAnalyses();
         await integration.syncRecentChanges(168); // Last week
         await integration.createCompetitiveLandscapeView();
         break;
