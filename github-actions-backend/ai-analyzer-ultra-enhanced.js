@@ -117,10 +117,10 @@ ${newContent.substring(0, 3000)}
 
 Analyze the changes and provide comprehensive extraction following the specified JSON structure. Focus on what's NEW or CHANGED.`;
 
-    console.log('🧠 Using Claude 4 Opus for maximum intelligence extraction...');
+    console.log('🧠 Using Claude Sonnet 4 for sophisticated entity extraction...');
     
     const response = await anthropic.messages.create({
-      model: 'claude-opus-4-20250514',  // Claude 4 Opus - the most powerful model!
+      model: 'claude-sonnet-4-20250514',  // Claude Sonnet 4 for efficiency
       max_tokens: 4000,
       temperature: 0.3,
       messages: [{

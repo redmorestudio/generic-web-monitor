@@ -38,46 +38,99 @@ db.exec(`
 `);
 
 // Baseline extraction prompt
-const BASELINE_EXTRACTION_PROMPT = `You are an AI competitive intelligence analyst. Analyze this company's current web content to extract comprehensive data about their current state, offerings, and market position.
+const BASELINE_EXTRACTION_PROMPT = `You are an AI competitive intelligence analyst. Analyze this company's current web content to extract comprehensive data with a focus on RELATIONSHIPS between entities.
 
-Extract the following information:
+Extract the following information with relationship context:
 
-1. **Core Entities**:
-   - Products and features currently offered
-   - Technologies and technical stack
-   - Partnerships and integrations
-   - Key personnel and leadership
-   - Pricing and business models
-   - Target markets and customers
+1. **Core Entities with Relationships**:
+   - Products: Include what technologies they USE, what integrations they PROVIDE, what markets they TARGET
+   - Technologies: Include what products IMPLEMENT them, what capabilities they ENABLE
+   - Partnerships: Include the nature of partnership (INTEGRATES_WITH, PARTNERS_WITH, DEPENDS_ON)
+   - Key personnel: Include their roles (LEADS, EMPLOYS, FOUNDED)
+   - Pricing tiers: Include what features each tier INCLUDES
+   - Markets: Include size, geography, and what products TARGET them
 
-2. **Current State Assessment**:
-   - Market positioning
-   - Core value propositions
-   - Competitive advantages
-   - Technical capabilities
-   - Business focus areas
+2. **Integration Capabilities** (CRITICAL):
+   - List ALL integrations, APIs, connectors mentioned
+   - Specify which products INTEGRATE_WITH which external services
+   - Note any platforms this company's products DEPEND_ON
 
-3. **Strategic Intelligence**:
-   - Innovation indicators
-   - Growth signals
-   - Market opportunities they're pursuing
-   - Potential threats to competitors
+3. **Competitive Relationships**:
+   - Companies they explicitly or implicitly COMPETE_WITH
+   - Technologies or approaches they claim to REPLACE or IMPROVE_UPON
+   - Markets where they COMPETE
 
-4. **Quantitative Data**:
-   - Metrics, numbers, statistics
-   - Pricing details
-   - Market size claims
-   - Performance benchmarks
+4. **Technical Architecture**:
+   - Core technologies the platform/product USES
+   - Infrastructure it DEPENDS_ON
+   - Standards it IMPLEMENTS
 
 Provide your analysis in this JSON structure:
 {
   "entities": {
-    "products": [{"name": "", "type": "", "description": "", "features": [], "status": "active/beta/announced"}],
-    "technologies": [{"name": "", "category": "", "purpose": ""}],
-    "partnerships": [{"partner": "", "type": "", "description": ""}],
-    "people": [{"name": "", "title": "", "role": ""}],
-    "pricing": [{"tier": "", "price": "", "features": []}],
-    "markets": [{"segment": "", "geography": "", "size": ""}]
+    "products": [{
+      "name": "", 
+      "type": "", 
+      "description": "", 
+      "features": [], 
+      "status": "active/beta/announced",
+      "uses_technologies": [],
+      "provides_integrations": [],
+      "targets_markets": []
+    }],
+    "technologies": [{
+      "name": "", 
+      "category": "", 
+      "purpose": "",
+      "implemented_by": [],
+      "enables_capabilities": []
+    }],
+    "integrations": [{
+      "name": "",
+      "type": "api/connector/plugin/native",
+      "platform": "",
+      "description": "",
+      "available_in_products": []
+    }],
+    "partnerships": [{
+      "partner": "", 
+      "relationship_type": "integrates_with/partners_with/depends_on/resells",
+      "description": "",
+      "products_affected": []
+    }],
+    "people": [{
+      "name": "", 
+      "title": "", 
+      "role": "ceo/cto/founder/executive",
+      "relationship": "leads/employs"
+    }],
+    "pricing": [{
+      "tier": "", 
+      "price": "", 
+      "features": [],
+      "includes_products": [],
+      "limitations": []
+    }],
+    "markets": [{
+      "segment": "", 
+      "geography": "", 
+      "size": "",
+      "targeted_by_products": []
+    }],
+    "competitors": [{
+      "company": "",
+      "compete_in": [],
+      "our_advantages": [],
+      "their_advantages": []
+    }]
+  },
+  "relationships": [
+    {"from": "", "to": "", "type": "owns/implements/integrates_with/competes_with/partners_with/uses/provides/targets/employs/leads/depends_on", "context": ""}
+  ],
+  "capabilities": {
+    "integration_capabilities": [],
+    "technical_capabilities": [],
+    "business_capabilities": []
   },
   "current_state": {
     "positioning": "",
@@ -105,7 +158,7 @@ Provide your analysis in this JSON structure:
     "key_insights": [],
     "notable_facts": []
   }
-}`;
+}}`;
 
 async function analyzeSnapshot(snapshot, company, url) {
   try {
@@ -120,10 +173,10 @@ ${snapshot.extracted_content.substring(0, 5000)}
 
 Analyze this company's current state and provide comprehensive extraction following the specified JSON structure.`;
 
-    console.log(`🧠 Analyzing ${company.name} - ${url.type} with Claude 4 Opus...`);
+    console.log(`🧠 Analyzing ${company.name} - ${url.type} with Claude Sonnet 4...`);
     
     const response = await anthropic.messages.create({
-      model: 'claude-opus-4-20250514',
+      model: 'claude-sonnet-4-20250514',
       max_tokens: 4000,
       temperature: 0.3,
       messages: [{
