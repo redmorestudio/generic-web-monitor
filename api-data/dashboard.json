@@ -3,14 +3,14 @@
     "companies": 4,
     "urls": 9,
     "snapshots": 9,
-    "lastCheck": "2025-06-23T01:23:34.329Z"
+    "lastCheck": "2025-06-23T06:26:30.946Z"
   },
   "company_activity": [
     {
       "company": "Anthropic",
       "type": "competitor",
       "url_count": 2,
-      "last_check": "2025-06-23 01:23:13",
+      "last_check": "2025-06-23 06:26:14",
       "urls": [
         "https://anthropic.com",
         "https://anthropic.com/claude"
@@ -20,7 +20,7 @@
       "company": "Google AI",
       "type": "competitor",
       "url_count": 2,
-      "last_check": "2025-06-23 01:23:25",
+      "last_check": "2025-06-23 06:26:22",
       "urls": [
         "https://ai.google",
         "https://blog.google/technology/ai/"
@@ -30,7 +30,7 @@
       "company": "Microsoft AI",
       "type": "competitor",
       "url_count": 2,
-      "last_check": "2025-06-23 01:23:32",
+      "last_check": "2025-06-23 06:26:28",
       "urls": [
         "https://azure.microsoft.com/en-us/products/ai-services/",
         "https://www.microsoft.com/ai"
@@ -40,7 +40,7 @@
       "company": "OpenAI",
       "type": "competitor",
       "url_count": 3,
-      "last_check": "2025-06-23 01:23:06",
+      "last_check": "2025-06-23 06:26:10",
       "urls": [
         "https://openai.com",
         "https://openai.com/blog",
@@ -48,6 +48,6 @@
       ]
     }
   ],
-  "generated_at": "2025-06-23T01:23:34.329Z",
+  "generated_at": "2025-06-23T06:26:30.947Z",
   "backend": "github-actions-static"
 }
