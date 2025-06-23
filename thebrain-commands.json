@@ -1,0 +1,248 @@
+{
+  "timestamp": "2025-06-23T07:42:12.442027",
+  "brain_id": "134f1325-4a8d-46d7-a078-5386c8ab3542",
+  "commands": [
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "Claude",
+        "label": "AI Product",
+        "relation": 1,
+        "sourceThoughtId": "70d8bf22-ac08-4711-82d1-f1cbc1c3c39d"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "Claude Opus 4",
+        "label": "AI Product",
+        "relation": 1,
+        "sourceThoughtId": "70d8bf22-ac08-4711-82d1-f1cbc1c3c39d"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "Claude Sonnet 4",
+        "label": "AI Product",
+        "relation": 1,
+        "sourceThoughtId": "70d8bf22-ac08-4711-82d1-f1cbc1c3c39d"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "Codex",
+        "label": "AI Product",
+        "relation": 1,
+        "sourceThoughtId": "70d8bf22-ac08-4711-82d1-f1cbc1c3c39d"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "OpenAI o3",
+        "label": "AI Product",
+        "relation": 1,
+        "sourceThoughtId": "70d8bf22-ac08-4711-82d1-f1cbc1c3c39d"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "o4-mini",
+        "label": "AI Product",
+        "relation": 1,
+        "sourceThoughtId": "70d8bf22-ac08-4711-82d1-f1cbc1c3c39d"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "GPT-4.1",
+        "label": "AI Product",
+        "relation": 1,
+        "sourceThoughtId": "70d8bf22-ac08-4711-82d1-f1cbc1c3c39d"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "4o Image Generation",
+        "label": "AI Product",
+        "relation": 1,
+        "sourceThoughtId": "70d8bf22-ac08-4711-82d1-f1cbc1c3c39d"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "ChatGPT",
+        "label": "AI Product",
+        "relation": 1,
+        "sourceThoughtId": "70d8bf22-ac08-4711-82d1-f1cbc1c3c39d"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "Claude Code",
+        "label": "Technology",
+        "relation": 1,
+        "sourceThoughtId": "6a115a81-d8a0-4f3f-9d11-607779959bec"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "GPT-4.5",
+        "label": "Technology",
+        "relation": 1,
+        "sourceThoughtId": "6a115a81-d8a0-4f3f-9d11-607779959bec"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "Sora",
+        "label": "Technology",
+        "relation": 1,
+        "sourceThoughtId": "6a115a81-d8a0-4f3f-9d11-607779959bec"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "Anthropic",
+        "label": "AI Company",
+        "relation": 1,
+        "sourceThoughtId": "d4670ba3-8065-41cd-b52f-9566232879dd"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "Mattel",
+        "label": "AI Company",
+        "relation": 1,
+        "sourceThoughtId": "d4670ba3-8065-41cd-b52f-9566232879dd"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "The New York Times",
+        "label": "AI Company",
+        "relation": 1,
+        "sourceThoughtId": "d4670ba3-8065-41cd-b52f-9566232879dd"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "\ud83c\udfaf AI Models",
+        "label": "Smart Group",
+        "foregroundColor": "#FFD700",
+        "relation": 1,
+        "sourceThoughtId": "c4b2b34b-f2b9-474e-ac1f-e5c926404c06"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "\ud83c\udfaf Platform Availability",
+        "label": "Smart Group",
+        "foregroundColor": "#FFD700",
+        "relation": 1,
+        "sourceThoughtId": "c4b2b34b-f2b9-474e-ac1f-e5c926404c06"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "\ud83c\udfaf Use Cases",
+        "label": "Smart Group",
+        "foregroundColor": "#FFD700",
+        "relation": 1,
+        "sourceThoughtId": "c4b2b34b-f2b9-474e-ac1f-e5c926404c06"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "\ud83c\udfaf Model Releases",
+        "label": "Smart Group",
+        "foregroundColor": "#FFD700",
+        "relation": 1,
+        "sourceThoughtId": "c4b2b34b-f2b9-474e-ac1f-e5c926404c06"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "\ud83c\udfaf Geographic Expansion",
+        "label": "Smart Group",
+        "foregroundColor": "#FFD700",
+        "relation": 1,
+        "sourceThoughtId": "c4b2b34b-f2b9-474e-ac1f-e5c926404c06"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "\ud83c\udfaf Safety & Security",
+        "label": "Smart Group",
+        "foregroundColor": "#FFD700",
+        "relation": 1,
+        "sourceThoughtId": "c4b2b34b-f2b9-474e-ac1f-e5c926404c06"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "\ud83c\udfaf Enterprise Partnerships",
+        "label": "Smart Group",
+        "foregroundColor": "#FFD700",
+        "relation": 1,
+        "sourceThoughtId": "c4b2b34b-f2b9-474e-ac1f-e5c926404c06"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "\ud83c\udfaf Enterprise Features",
+        "label": "Smart Group",
+        "foregroundColor": "#FFD700",
+        "relation": 1,
+        "sourceThoughtId": "c4b2b34b-f2b9-474e-ac1f-e5c926404c06"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "\ud83c\udfaf Security Capabilities",
+        "label": "Smart Group",
+        "foregroundColor": "#FFD700",
+        "relation": 1,
+        "sourceThoughtId": "c4b2b34b-f2b9-474e-ac1f-e5c926404c06"
+      }
+    },
+    {
+      "action": "create_thought",
+      "params": {
+        "name": "\ud83c\udfaf Integration Features",
+        "label": "Smart Group",
+        "foregroundColor": "#FFD700",
+        "relation": 1,
+        "sourceThoughtId": "c4b2b34b-f2b9-474e-ac1f-e5c926404c06"
+      }
+    }
+  ],
+  "summary": {
+    "total_commands": 25,
+    "products": 9,
+    "technologies": 3,
+    "companies": 3,
+    "smart_groups": 10
+  }
+}

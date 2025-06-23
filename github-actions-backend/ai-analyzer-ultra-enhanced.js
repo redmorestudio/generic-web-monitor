@@ -117,8 +117,10 @@ ${newContent.substring(0, 3000)}
 
 Analyze the changes and provide comprehensive extraction following the specified JSON structure. Focus on what's NEW or CHANGED.`;
 
+    console.log('🧠 Using Claude 4 Opus for maximum intelligence extraction...');
+    
     const response = await anthropic.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
+      model: 'claude-opus-4-20250514',  // Claude 4 Opus - the most powerful model!
       max_tokens: 4000,
       temperature: 0.3,
       messages: [{
@@ -223,7 +225,7 @@ async function storeEnhancedAnalysis(changeId, extractedData) {
       }
     }
 
-    console.log(`Stored enhanced analysis for change ${changeId}`);
+    console.log(`✅ Stored enhanced analysis for change ${changeId} using Claude 4 Opus`);
   } catch (error) {
     console.error('Error storing enhanced analysis:', error);
   }
@@ -247,6 +249,7 @@ function generateColorForGroup(groupName) {
 async function generateSmartGroupReport() {
   const report = {
     timestamp: new Date().toISOString(),
+    model: 'Claude 4 Opus',
     groups: {},
     entities: {
       products: new Set(),
@@ -345,7 +348,8 @@ async function generateSmartGroupReport() {
 }
 
 async function processRecentChanges() {
-  console.log('🔍 Starting enhanced AI analysis...');
+  console.log('🔍 Starting enhanced AI analysis with Claude 4 Opus...');
+  console.log('🧠 Using the most powerful model for maximum intelligence extraction');
 
   // Get unanalyzed changes
   const changes = db.prepare(`
@@ -364,10 +368,10 @@ async function processRecentChanges() {
     LIMIT 10
   `).all();
 
-  console.log(`Found ${changes.length} changes to analyze with enhanced extraction`);
+  console.log(`Found ${changes.length} changes to analyze with Claude 4 Opus`);
 
   for (const change of changes) {
-    console.log(`\nAnalyzing change for ${change.company_name} - ${change.url_type}`);
+    console.log(`\n🎯 Analyzing change for ${change.company_name} - ${change.url_type}`);
     
     const company = {
       id: change.company_id,
@@ -423,7 +427,7 @@ async function processRecentChanges() {
   const reportPath = path.join(__dirname, 'data', 'smart-groups-report.json');
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
   
-  console.log('\n📊 Smart Groups Report:');
+  console.log('\n📊 Smart Groups Report (Generated with Claude 4 Opus):');
   console.log(`- Total entities found: ${Object.values(report.entities).reduce((sum, arr) => sum + arr.length, 0)}`);
   console.log(`- Suggested groups: ${Object.keys(report.groups).length}`);
   console.log(`- Top themes: ${Object.keys(report.themes).slice(0, 5).join(', ')}`);
@@ -442,7 +446,7 @@ module.exports = {
 if (require.main === module) {
   processRecentChanges()
     .then(() => {
-      console.log('\n✅ Enhanced analysis complete!');
+      console.log('\n✅ Enhanced analysis with Claude 4 Opus complete!');
       process.exit(0);
     })
     .catch(error => {

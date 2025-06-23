@@ -1,8 +1,12 @@
 {
-  "generated_at": "2025-06-23T14:28:07.308Z",
+  "generated_at": "2025-06-23T15:48:33.471Z",
   "files_generated": 5,
-  "database_path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/monitor.db",
+  "database_path": "/Users/sethredmore/ai-monitor-fresh/github-actions-backend/data/monitor.db",
   "database_exists": true,
   "backend_type": "github-actions-static",
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "ai_analysis": {
+    "enabled": true,
+    "processed_items": 0
+  }
 }
