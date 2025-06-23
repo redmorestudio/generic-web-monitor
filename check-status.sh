@@ -25,7 +25,8 @@ EOF
 # Check last workflow run
 echo ""
 echo "🏃 Last Workflow Run:"
-export GITHUB_TOKEN='[REMOVED-TOKEN]'
+# GitHub token should be set as environment variable
+# export GITHUB_TOKEN='your-token-here'
 gh run list --workflow=monitor.yml --limit=1
 
 # Check if monitoring is currently running

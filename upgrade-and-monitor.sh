@@ -8,7 +8,8 @@ echo "======================================================="
 echo ""
 
 # Set environment variables
-export GITHUB_TOKEN='[REMOVED-TOKEN]'
+# GitHub token should be set as environment variable
+# export GITHUB_TOKEN='your-token-here'
 cd /Users/sethredmore/ai-monitor-fresh
 
 # Step 1: Backup current database
