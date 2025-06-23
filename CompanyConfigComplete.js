@@ -1,50 +1,129 @@
 /**
- * Complete AI Competitor Monitor Configuration
- * All 16 companies with multiple URLs per company
- * Covers: homepage, product pages, pricing, blog, news, docs
+ * Complete AI Competitor Monitor Configuration - 50+ Companies
+ * Covers the entire AI landscape: LLM providers, coding, search, voice, video, images, enterprise, infrastructure, hardware
  */
 
 const COMPLETE_MONITOR_CONFIG = [
-  // AI Model Providers
-  {
-    company: "Anthropic",
-    urls: [
-      { url: "https://anthropic.com", type: "homepage" },
-      { url: "https://anthropic.com/claude", type: "product" },
-      { url: "https://anthropic.com/pricing", type: "pricing" },
-      { url: "https://anthropic.com/news", type: "news" }
-    ]
-  },
+  // LLM Providers (10 companies)
   {
     company: "OpenAI",
+    category: "LLM Providers",
     urls: [
       { url: "https://openai.com", type: "homepage" },
       { url: "https://openai.com/chatgpt", type: "product" },
       { url: "https://openai.com/pricing", type: "pricing" },
-      { url: "https://openai.com/blog", type: "blog" }
+      { url: "https://openai.com/blog", type: "blog" },
+      { url: "https://platform.openai.com", type: "api" }
+    ]
+  },
+  {
+    company: "Anthropic",
+    category: "LLM Providers",
+    urls: [
+      { url: "https://anthropic.com", type: "homepage" },
+      { url: "https://anthropic.com/claude", type: "product" },
+      { url: "https://anthropic.com/pricing", type: "pricing" },
+      { url: "https://anthropic.com/news", type: "news" },
+      { url: "https://docs.anthropic.com", type: "docs" }
     ]
   },
   {
     company: "Google DeepMind",
+    category: "LLM Providers",
     urls: [
       { url: "https://deepmind.google", type: "homepage" },
       { url: "https://ai.google/discover/gemini", type: "product" },
-      { url: "https://blog.google/technology/ai/", type: "blog" }
+      { url: "https://cloud.google.com/vertex-ai/pricing", type: "pricing" },
+      { url: "https://blog.google/technology/ai", type: "blog" },
+      { url: "https://ai.google.dev", type: "api" }
+    ]
+  },
+  {
+    company: "Meta AI",
+    category: "LLM Providers",
+    urls: [
+      { url: "https://ai.meta.com", type: "homepage" },
+      { url: "https://ai.meta.com/llama", type: "product" },
+      { url: "https://ai.meta.com/blog", type: "blog" },
+      { url: "https://llama.meta.com", type: "api" }
     ]
   },
   {
     company: "Mistral AI",
+    category: "LLM Providers",
     urls: [
       { url: "https://mistral.ai", type: "homepage" },
-      { url: "https://mistral.ai/news/", type: "news" },
-      { url: "https://mistral.ai/technology/", type: "technology" },
+      { url: "https://mistral.ai/technology", type: "product" },
+      { url: "https://mistral.ai/pricing", type: "pricing" },
+      { url: "https://mistral.ai/news", type: "news" },
       { url: "https://docs.mistral.ai", type: "docs" }
     ]
   },
-  
-  // Code & Development AI
+  {
+    company: "Cohere",
+    category: "LLM Providers",
+    urls: [
+      { url: "https://cohere.ai", type: "homepage" },
+      { url: "https://cohere.ai/products", type: "product" },
+      { url: "https://cohere.ai/pricing", type: "pricing" },
+      { url: "https://cohere.ai/blog", type: "blog" },
+      { url: "https://docs.cohere.ai", type: "docs" }
+    ]
+  },
+  {
+    company: "AI21 Labs",
+    category: "LLM Providers",
+    urls: [
+      { url: "https://ai21.com", type: "homepage" },
+      { url: "https://ai21.com/jamba", type: "product" },
+      { url: "https://ai21.com/pricing", type: "pricing" },
+      { url: "https://ai21.com/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "Inflection AI",
+    category: "LLM Providers",
+    urls: [
+      { url: "https://inflection.ai", type: "homepage" },
+      { url: "https://pi.ai", type: "product" },
+      { url: "https://inflection.ai/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "Aleph Alpha",
+    category: "LLM Providers",
+    urls: [
+      { url: "https://aleph-alpha.com", type: "homepage" },
+      { url: "https://aleph-alpha.com/luminous", type: "product" },
+      { url: "https://aleph-alpha.com/pricing", type: "pricing" },
+      { url: "https://docs.aleph-alpha.com", type: "docs" }
+    ]
+  },
+  {
+    company: "Stability AI",
+    category: "LLM Providers",
+    urls: [
+      { url: "https://stability.ai", type: "homepage" },
+      { url: "https://stability.ai/stable-diffusion", type: "product" },
+      { url: "https://stability.ai/pricing", type: "pricing" },
+      { url: "https://stability.ai/blog", type: "blog" }
+    ]
+  },
+
+  // AI Coding (8 companies)
+  {
+    company: "GitHub Copilot",
+    category: "AI Coding",
+    urls: [
+      { url: "https://github.com/features/copilot", type: "homepage" },
+      { url: "https://github.com/pricing", type: "pricing" },
+      { url: "https://github.blog/tag/github-copilot", type: "blog" },
+      { url: "https://docs.github.com/en/copilot", type: "docs" }
+    ]
+  },
   {
     company: "Codeium",
+    category: "AI Coding",
     urls: [
       { url: "https://codeium.com", type: "homepage" },
       { url: "https://codeium.com/windsurf", type: "product" },
@@ -53,18 +132,161 @@ const COMPLETE_MONITOR_CONFIG = [
     ]
   },
   {
-    company: "Anysphere",
+    company: "Cursor",
+    category: "AI Coding",
     urls: [
-      { url: "https://anysphere.inc", type: "homepage" },
-      { url: "https://cursor.com", type: "product" },
+      { url: "https://cursor.com", type: "homepage" },
       { url: "https://cursor.com/features", type: "features" },
-      { url: "https://cursor.com/pricing", type: "pricing" }
+      { url: "https://cursor.com/pricing", type: "pricing" },
+      { url: "https://cursor.com/blog", type: "blog" }
     ]
   },
-  
-  // Video & Media AI
+  {
+    company: "Tabnine",
+    category: "AI Coding",
+    urls: [
+      { url: "https://tabnine.com", type: "homepage" },
+      { url: "https://tabnine.com/pricing", type: "pricing" },
+      { url: "https://tabnine.com/blog", type: "blog" },
+      { url: "https://docs.tabnine.com", type: "docs" }
+    ]
+  },
+  {
+    company: "Replit",
+    category: "AI Coding",
+    urls: [
+      { url: "https://replit.com", type: "homepage" },
+      { url: "https://replit.com/ai", type: "product" },
+      { url: "https://replit.com/pricing", type: "pricing" },
+      { url: "https://blog.replit.com", type: "blog" }
+    ]
+  },
+  {
+    company: "Amazon CodeWhisperer",
+    category: "AI Coding",
+    urls: [
+      { url: "https://aws.amazon.com/codewhisperer", type: "homepage" },
+      { url: "https://aws.amazon.com/codewhisperer/pricing", type: "pricing" },
+      { url: "https://aws.amazon.com/blogs/aws/tag/amazon-codewhisperer", type: "blog" },
+      { url: "https://docs.aws.amazon.com/codewhisperer", type: "docs" }
+    ]
+  },
+  {
+    company: "Sourcegraph",
+    category: "AI Coding",
+    urls: [
+      { url: "https://sourcegraph.com", type: "homepage" },
+      { url: "https://sourcegraph.com/cody", type: "product" },
+      { url: "https://sourcegraph.com/pricing", type: "pricing" },
+      { url: "https://sourcegraph.com/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "Pieces",
+    category: "AI Coding",
+    urls: [
+      { url: "https://pieces.app", type: "homepage" },
+      { url: "https://pieces.app/features", type: "features" },
+      { url: "https://pieces.app/pricing", type: "pricing" },
+      { url: "https://pieces.app/blog", type: "blog" }
+    ]
+  },
+
+  // AI Search (5 companies)
+  {
+    company: "Perplexity AI",
+    category: "AI Search",
+    urls: [
+      { url: "https://perplexity.ai", type: "homepage" },
+      { url: "https://perplexity.ai/pro", type: "product" },
+      { url: "https://blog.perplexity.ai", type: "blog" }
+    ]
+  },
+  {
+    company: "You.com",
+    category: "AI Search",
+    urls: [
+      { url: "https://you.com", type: "homepage" },
+      { url: "https://you.com/search?q=pricing", type: "pricing" },
+      { url: "https://you.com/code", type: "product" }
+    ]
+  },
+  {
+    company: "Phind",
+    category: "AI Search",
+    urls: [
+      { url: "https://phind.com", type: "homepage" },
+      { url: "https://phind.com/search?q=pricing", type: "pricing" }
+    ]
+  },
+  {
+    company: "Andi",
+    category: "AI Search",
+    urls: [
+      { url: "https://andisearch.com", type: "homepage" }
+    ]
+  },
+  {
+    company: "Neeva",
+    category: "AI Search",
+    urls: [
+      { url: "https://neeva.com", type: "homepage" }
+    ]
+  },
+
+  // AI Voice/Audio (5 companies)
+  {
+    company: "ElevenLabs",
+    category: "AI Voice/Audio",
+    urls: [
+      { url: "https://elevenlabs.io", type: "homepage" },
+      { url: "https://elevenlabs.io/voice-generator", type: "product" },
+      { url: "https://elevenlabs.io/pricing", type: "pricing" },
+      { url: "https://elevenlabs.io/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "Descript",
+    category: "AI Voice/Audio",
+    urls: [
+      { url: "https://descript.com", type: "homepage" },
+      { url: "https://descript.com/overdub", type: "product" },
+      { url: "https://descript.com/pricing", type: "pricing" },
+      { url: "https://descript.com/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "Resemble AI",
+    category: "AI Voice/Audio",
+    urls: [
+      { url: "https://resemble.ai", type: "homepage" },
+      { url: "https://resemble.ai/pricing", type: "pricing" },
+      { url: "https://resemble.ai/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "Murf AI",
+    category: "AI Voice/Audio",
+    urls: [
+      { url: "https://murf.ai", type: "homepage" },
+      { url: "https://murf.ai/pricing", type: "pricing" },
+      { url: "https://murf.ai/resources/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "WellSaid Labs",
+    category: "AI Voice/Audio",
+    urls: [
+      { url: "https://wellsaidlabs.com", type: "homepage" },
+      { url: "https://wellsaidlabs.com/pricing", type: "pricing" },
+      { url: "https://wellsaidlabs.com/blog", type: "blog" }
+    ]
+  },
+
+  // Video AI (5 companies)
   {
     company: "Synthesia",
+    category: "Video AI",
     urls: [
       { url: "https://synthesia.io", type: "homepage" },
       { url: "https://synthesia.io/features", type: "features" },
@@ -73,23 +295,8 @@ const COMPLETE_MONITOR_CONFIG = [
     ]
   },
   {
-    company: "Pika",
-    urls: [
-      { url: "https://pika.art", type: "homepage" },
-      { url: "https://pika.art/pricing", type: "pricing" },
-      { url: "https://pika.art/blog", type: "blog" }
-    ]
-  },
-  {
-    company: "Moonvalley",
-    urls: [
-      { url: "https://moonvalley.ai", type: "homepage" },
-      { url: "https://moonvalley.ai/create", type: "product" },
-      { url: "https://moonvalley.ai/pricing", type: "pricing" }
-    ]
-  },
-  {
     company: "HeyGen",
+    category: "Video AI",
     urls: [
       { url: "https://heygen.com", type: "homepage" },
       { url: "https://heygen.com/features", type: "features" },
@@ -97,58 +304,207 @@ const COMPLETE_MONITOR_CONFIG = [
       { url: "https://heygen.com/blog", type: "blog" }
     ]
   },
-  
-  // Image Generation AI
   {
-    company: "Ideogram",
+    company: "Pika",
+    category: "Video AI",
     urls: [
-      { url: "https://ideogram.ai", type: "homepage" },
-      { url: "https://ideogram.ai/features", type: "features" },
-      { url: "https://ideogram.ai/about", type: "about" }
+      { url: "https://pika.art", type: "homepage" },
+      { url: "https://pika.art/pricing", type: "pricing" },
+      { url: "https://pika.art/blog", type: "blog" }
     ]
   },
+  {
+    company: "Runway",
+    category: "Video AI",
+    urls: [
+      { url: "https://runwayml.com", type: "homepage" },
+      { url: "https://runwayml.com/pricing", type: "pricing" },
+      { url: "https://runwayml.com/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "Luma AI",
+    category: "Video AI",
+    urls: [
+      { url: "https://lumalabs.ai", type: "homepage" },
+      { url: "https://lumalabs.ai/dream-machine", type: "product" },
+      { url: "https://lumalabs.ai/pricing", type: "pricing" }
+    ]
+  },
+
+  // Image Generation (5 companies)
   {
     company: "Midjourney",
+    category: "Image Generation",
     urls: [
       { url: "https://midjourney.com", type: "homepage" },
-      { url: "https://docs.midjourney.com", type: "docs" }
-    ]
-  },
-  
-  // Enterprise & Security AI
-  {
-    company: "Articul8",
-    urls: [
-      { url: "https://articul8.ai", type: "homepage" },
-      { url: "https://articul8.ai/platform", type: "platform" },
-      { url: "https://articul8.ai/solutions", type: "solutions" }
+      { url: "https://docs.midjourney.com", type: "docs" },
+      { url: "https://docs.midjourney.com/docs/plans", type: "pricing" }
     ]
   },
   {
-    company: "Prompt Security",
+    company: "DALL-E",
+    category: "Image Generation",
     urls: [
-      { url: "https://promptsecurity.io", type: "homepage" },
-      { url: "https://promptsecurity.io/platform", type: "platform" },
-      { url: "https://promptsecurity.io/resources", type: "resources" }
+      { url: "https://openai.com/dall-e-3", type: "homepage" },
+      { url: "https://openai.com/pricing", type: "pricing" }
     ]
   },
-  
-  // AI Infrastructure
   {
-    company: "Modular",
+    company: "Ideogram",
+    category: "Image Generation",
     urls: [
-      { url: "https://modular.com", type: "homepage" },
-      { url: "https://modular.com/mojo", type: "product" },
-      { url: "https://modular.com/blog", type: "blog" }
+      { url: "https://ideogram.ai", type: "homepage" },
+      { url: "https://ideogram.ai/pricing", type: "pricing" }
+    ]
+  },
+  {
+    company: "Leonardo AI",
+    category: "Image Generation",
+    urls: [
+      { url: "https://leonardo.ai", type: "homepage" },
+      { url: "https://leonardo.ai/pricing", type: "pricing" }
+    ]
+  },
+  {
+    company: "Flux",
+    category: "Image Generation",
+    urls: [
+      { url: "https://blackforestlabs.ai", type: "homepage" },
+      { url: "https://blackforestlabs.ai/our-models", type: "product" }
+    ]
+  },
+
+  // Enterprise AI (4 companies)
+  {
+    company: "Palantir",
+    category: "Enterprise AI",
+    urls: [
+      { url: "https://palantir.com", type: "homepage" },
+      { url: "https://palantir.com/platforms/aip", type: "product" },
+      { url: "https://blog.palantir.com", type: "blog" }
+    ]
+  },
+  {
+    company: "Scale AI",
+    category: "Enterprise AI",
+    urls: [
+      { url: "https://scale.com", type: "homepage" },
+      { url: "https://scale.com/enterprise", type: "product" },
+      { url: "https://scale.com/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "DataRobot",
+    category: "Enterprise AI",
+    urls: [
+      { url: "https://datarobot.com", type: "homepage" },
+      { url: "https://datarobot.com/platform", type: "product" },
+      { url: "https://datarobot.com/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "H2O.ai",
+    category: "Enterprise AI",
+    urls: [
+      { url: "https://h2o.ai", type: "homepage" },
+      { url: "https://h2o.ai/platform", type: "product" },
+      { url: "https://h2o.ai/blog", type: "blog" }
+    ]
+  },
+
+  // AI Infrastructure (5 companies)
+  {
+    company: "Hugging Face",
+    category: "AI Infrastructure",
+    urls: [
+      { url: "https://huggingface.co", type: "homepage" },
+      { url: "https://huggingface.co/pricing", type: "pricing" },
+      { url: "https://huggingface.co/blog", type: "blog" },
+      { url: "https://huggingface.co/docs", type: "docs" }
+    ]
+  },
+  {
+    company: "Weights & Biases",
+    category: "AI Infrastructure",
+    urls: [
+      { url: "https://wandb.ai", type: "homepage" },
+      { url: "https://wandb.ai/pricing", type: "pricing" },
+      { url: "https://wandb.ai/fully-connected", type: "blog" }
     ]
   },
   {
     company: "LangChain",
+    category: "AI Infrastructure",
     urls: [
       { url: "https://langchain.com", type: "homepage" },
       { url: "https://langchain.com/langsmith", type: "product" },
       { url: "https://blog.langchain.dev", type: "blog" },
       { url: "https://docs.langchain.com", type: "docs" }
+    ]
+  },
+  {
+    company: "Anyscale",
+    category: "AI Infrastructure",
+    urls: [
+      { url: "https://anyscale.com", type: "homepage" },
+      { url: "https://anyscale.com/pricing", type: "pricing" },
+      { url: "https://anyscale.com/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "Replicate",
+    category: "AI Infrastructure",
+    urls: [
+      { url: "https://replicate.com", type: "homepage" },
+      { url: "https://replicate.com/pricing", type: "pricing" },
+      { url: "https://replicate.com/blog", type: "blog" }
+    ]
+  },
+
+  // AI Hardware (5 companies)
+  {
+    company: "NVIDIA",
+    category: "AI Hardware",
+    urls: [
+      { url: "https://nvidia.com/ai", type: "homepage" },
+      { url: "https://nvidia.com/en-us/data-center/products", type: "product" },
+      { url: "https://blogs.nvidia.com/ai", type: "blog" },
+      { url: "https://developer.nvidia.com", type: "docs" }
+    ]
+  },
+  {
+    company: "AMD",
+    category: "AI Hardware",
+    urls: [
+      { url: "https://amd.com/en/graphics/instinct-server-accelerators", type: "homepage" },
+      { url: "https://amd.com/en/newsroom", type: "news" }
+    ]
+  },
+  {
+    company: "Intel",
+    category: "AI Hardware",
+    urls: [
+      { url: "https://intel.com/content/www/us/en/artificial-intelligence", type: "homepage" },
+      { url: "https://intel.com/content/www/us/en/newsroom", type: "news" }
+    ]
+  },
+  {
+    company: "Cerebras",
+    category: "AI Hardware",
+    urls: [
+      { url: "https://cerebras.net", type: "homepage" },
+      { url: "https://cerebras.net/product-system", type: "product" },
+      { url: "https://cerebras.net/blog", type: "blog" }
+    ]
+  },
+  {
+    company: "SambaNova",
+    category: "AI Hardware",
+    urls: [
+      { url: "https://sambanova.ai", type: "homepage" },
+      { url: "https://sambanova.ai/products", type: "product" },
+      { url: "https://sambanova.ai/blog", type: "blog" }
     ]
   }
 ];
@@ -164,14 +520,14 @@ function getMonitorConfigurationsMultiUrl() {
     return JSON.parse(storedConfig);
   }
   
-  // Return default configuration
+  // Return default configuration with 50+ companies
   return COMPLETE_MONITOR_CONFIG;
 }
 
 /**
- * Update to multi-URL configuration
+ * Update to the complete 50+ company configuration
  */
-function updateToMultiUrlConfig() {
+function updateToCompleteConfig() {
   const props = PropertiesService.getScriptProperties();
   
   // Store the new configuration
@@ -182,8 +538,12 @@ function updateToMultiUrlConfig() {
     sum + company.urls.length, 0
   );
   
+  const categories = {};
   const urlTypes = {};
+  
   COMPLETE_MONITOR_CONFIG.forEach(company => {
+    categories[company.category] = (categories[company.category] || 0) + 1;
+    
     company.urls.forEach(urlObj => {
       urlTypes[urlObj.type] = (urlTypes[urlObj.type] || 0) + 1;
     });
@@ -191,192 +551,146 @@ function updateToMultiUrlConfig() {
   
   // Log the update
   logActivity('config_update', {
-    action: 'multi_url_configuration',
+    action: 'complete_50_company_configuration',
     companies: COMPLETE_MONITOR_CONFIG.length,
     totalUrls: totalUrls,
+    categories: categories,
     urlTypes: urlTypes,
     timestamp: new Date().toISOString()
   });
   
-  // Update the main monitor function to use multi-URL config
-  props.setProperty('USE_MULTI_URL', 'true');
+  // Update the main monitor function to use complete config
+  props.setProperty('USE_COMPLETE_CONFIG', 'true');
   
   return {
     success: true,
-    message: 'Multi-URL configuration activated',
+    message: 'Complete 50+ company configuration activated',
     stats: {
       companies: COMPLETE_MONITOR_CONFIG.length,
       totalUrls: totalUrls,
       avgUrlsPerCompany: (totalUrls / COMPLETE_MONITOR_CONFIG.length).toFixed(1),
+      categoryBreakdown: categories,
       urlTypeBreakdown: urlTypes
     }
   };
 }
 
 /**
- * Convert existing single-URL data to multi-URL format
+ * Get configuration summary by category
  */
-function migrateToMultiUrl() {
-  const sheet = getOrCreateMonitorSheet();
-  if (!sheet.success) return { success: false, error: 'Sheet not found' };
+function getConfigSummary() {
+  const categories = {};
+  let totalUrls = 0;
   
-  const ss = sheet.spreadsheet;
-  
-  // Create new Multi-URL sheet if it doesn't exist
-  let multiUrlSheet = ss.getSheetByName('MultiUrlConfig');
-  if (!multiUrlSheet) {
-    multiUrlSheet = ss.insertSheet('MultiUrlConfig');
-    
-    // Set headers
-    const headers = ['Company', 'URL', 'Type', 'Active', 'Last Checked', 'Status'];
-    multiUrlSheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-    multiUrlSheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
-    multiUrlSheet.setFrozenRows(1);
-  }
-  
-  // Populate with multi-URL data
-  const rows = [];
   COMPLETE_MONITOR_CONFIG.forEach(company => {
-    company.urls.forEach(urlObj => {
-      rows.push([
-        company.company,
-        urlObj.url,
-        urlObj.type,
-        'TRUE', // Active
-        '', // Last Checked
-        'Ready' // Status
-      ]);
-    });
+    if (!categories[company.category]) {
+      categories[company.category] = {
+        companies: [],
+        urlCount: 0
+      };
+    }
+    
+    categories[company.category].companies.push(company.company);
+    categories[company.category].urlCount += company.urls.length;
+    totalUrls += company.urls.length;
   });
   
-  if (rows.length > 0) {
-    multiUrlSheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
-  }
-  
   return {
-    success: true,
-    message: 'Migration complete',
-    rowsCreated: rows.length,
-    sheetUrl: ss.getUrl()
+    totalCompanies: COMPLETE_MONITOR_CONFIG.length,
+    totalUrls: totalUrls,
+    categories: Object.entries(categories).map(([category, data]) => ({
+      category: category,
+      companyCount: data.companies.length,
+      companies: data.companies,
+      urlCount: data.urlCount
+    }))
   };
 }
 
 /**
- * Test multi-URL monitoring for a specific company
+ * Test monitoring for a specific category
  */
-function testMultiUrlMonitoring(companyName) {
-  const config = COMPLETE_MONITOR_CONFIG.find(c => c.company === companyName);
+function testCategoryMonitoring(categoryName) {
+  const categoryCompanies = COMPLETE_MONITOR_CONFIG.filter(c => c.category === categoryName);
   
-  if (!config) {
-    return { success: false, error: 'Company not found' };
+  if (categoryCompanies.length === 0) {
+    return { success: false, error: 'Category not found' };
   }
   
   const results = {
-    company: companyName,
-    urls: [],
+    category: categoryName,
+    companies: [],
     totalTime: 0
   };
   
-  config.urls.forEach(urlObj => {
-    const startTime = new Date().getTime();
+  categoryCompanies.forEach(company => {
+    const companyResult = {
+      company: company.company,
+      urls: [],
+      responseTime: 0
+    };
     
-    try {
-      const response = UrlFetchApp.fetch(urlObj.url, {
-        muteHttpExceptions: true,
-        followRedirects: true,
-        validateHttpsCertificates: false
-      });
+    company.urls.forEach(urlObj => {
+      const startTime = new Date().getTime();
       
-      const endTime = new Date().getTime();
-      const responseTime = endTime - startTime;
-      
-      results.urls.push({
-        url: urlObj.url,
-        type: urlObj.type,
-        status: response.getResponseCode(),
-        success: response.getResponseCode() === 200,
-        responseTime: responseTime,
-        contentLength: response.getContentText().length
-      });
-      
-      results.totalTime += responseTime;
-      
-      Utilities.sleep(1000); // Respectful crawling
-      
-    } catch (error) {
-      results.urls.push({
-        url: urlObj.url,
-        type: urlObj.type,
-        status: 'error',
-        success: false,
-        error: error.toString()
-      });
-    }
+      try {
+        const response = UrlFetchApp.fetch(urlObj.url, {
+          muteHttpExceptions: true,
+          followRedirects: true,
+          validateHttpsCertificates: false
+        });
+        
+        const endTime = new Date().getTime();
+        const responseTime = endTime - startTime;
+        
+        companyResult.urls.push({
+          url: urlObj.url,
+          type: urlObj.type,
+          status: response.getResponseCode(),
+          success: response.getResponseCode() === 200,
+          responseTime: responseTime
+        });
+        
+        companyResult.responseTime += responseTime;
+        
+        Utilities.sleep(500); // Respectful crawling
+        
+      } catch (error) {
+        companyResult.urls.push({
+          url: urlObj.url,
+          type: urlObj.type,
+          status: 'error',
+          success: false,
+          error: error.toString()
+        });
+      }
+    });
+    
+    results.companies.push(companyResult);
+    results.totalTime += companyResult.responseTime;
   });
-  
-  results.avgResponseTime = (results.totalTime / config.urls.length).toFixed(0);
-  results.successRate = (results.urls.filter(u => u.success).length / results.urls.length * 100).toFixed(1) + '%';
   
   return results;
 }
 
 /**
- * Get configuration for dashboard
+ * Get all companies by category
  */
-function getMultiUrlConfigForDashboard() {
-  const config = getMonitorConfigurationsMultiUrl();
-  
-  // Transform for dashboard display
-  return config.map(company => ({
-    company: company.company,
-    urlCount: company.urls.length,
-    urls: (company.urls || []).filter(u => u && u.url).map(u => ({
-      url: u.url,
-      type: u.type || 'unknown',
-      shortUrl: u.url && typeof u.url === 'string' ? u.url.replace(/^https?:\/\/(www\.)?/, '').split('/')[0] : 'Invalid URL'
-    }))
-  }));
-}
-
-/**
- * Monitor a company with all its URLs
- */
-function monitorCompanyMultiUrl(companyName) {
-  const config = COMPLETE_MONITOR_CONFIG.find(c => c.company === companyName);
-  if (!config) return null;
-  
-  // Convert to monitor format expected by processMonitorUnified
-  const monitor = {
-    company: config.company,
-    urls: config.urls.map(u => u.url) // Extract just the URLs
-  };
-  
-  return processMonitorUnified(monitor);
-}
-
-/**
- * Get URL type distribution
- */
-function getUrlTypeStats() {
-  const types = {};
-  let total = 0;
+function getCompaniesByCategory() {
+  const categorized = {};
   
   COMPLETE_MONITOR_CONFIG.forEach(company => {
-    company.urls.forEach(urlObj => {
-      types[urlObj.type] = (types[urlObj.type] || 0) + 1;
-      total++;
+    if (!categorized[company.category]) {
+      categorized[company.category] = [];
+    }
+    categorized[company.category].push({
+      name: company.company,
+      urlCount: company.urls.length,
+      urls: company.urls
     });
   });
   
-  return {
-    total: total,
-    types: types,
-    distribution: Object.entries(types).map(([type, count]) => ({
-      type: type,
-      count: count,
-      percentage: (count / total * 100).toFixed(1) + '%'
-    }))
-  };
+  return categorized;
 }
 
 /**
@@ -389,14 +703,34 @@ function logActivity(type, data) {
 }
 
 /**
- * Add missing processMonitorUnified function stub
+ * Monitor all companies in the complete configuration
  */
-function processMonitorUnified(monitor) {
-  console.log('Processing monitor:', monitor.company);
-  // This would normally do the actual monitoring
-  return {
-    company: monitor.company,
-    success: true,
-    message: 'Monitoring complete'
+function monitorAllCompaniesComplete() {
+  console.log(`Starting monitoring of ${COMPLETE_MONITOR_CONFIG.length} companies...`);
+  
+  const results = {
+    totalCompanies: COMPLETE_MONITOR_CONFIG.length,
+    totalUrls: 0,
+    processed: 0,
+    errors: 0,
+    startTime: new Date()
   };
+  
+  COMPLETE_MONITOR_CONFIG.forEach(company => {
+    results.totalUrls += company.urls.length;
+    
+    try {
+      // Process each company (this would call the actual monitoring function)
+      console.log(`Processing ${company.company} (${company.category}) - ${company.urls.length} URLs`);
+      results.processed++;
+    } catch (error) {
+      console.error(`Error processing ${company.company}: ${error}`);
+      results.errors++;
+    }
+  });
+  
+  results.endTime = new Date();
+  results.duration = results.endTime - results.startTime;
+  
+  return results;
 }
