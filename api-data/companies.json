@@ -2,63 +2,90 @@
   "companies": [
     {
       "company": "AI21 Labs",
-      "type": "llm_provider",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://ai21.com",
-        "https://ai21.com/blog"
+        "https://ai21.com/blog",
+        "https://ai21.com/jamba",
+        "https://ai21.com/pricing"
+      ]
+    },
+    {
+      "company": "AMD",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
+      "urls": [
+        "https://amd.com/en/graphics/instinct-server-accelerators",
+        "https://amd.com/en/newsroom"
       ]
     },
     {
       "company": "Aleph Alpha",
-      "type": "llm_provider",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://aleph-alpha.com",
-        "https://aleph-alpha.com/luminous"
+        "https://aleph-alpha.com/luminous",
+        "https://aleph-alpha.com/pricing",
+        "https://docs.aleph-alpha.com"
       ]
     },
     {
       "company": "Amazon CodeWhisperer",
-      "type": "ai_coding",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
-        "https://aws.amazon.com/codewhisperer/",
-        "https://aws.amazon.com/codewhisperer/features/"
+        "https://aws.amazon.com/blogs/aws/tag/amazon-codewhisperer",
+        "https://aws.amazon.com/codewhisperer",
+        "https://aws.amazon.com/codewhisperer/pricing",
+        "https://docs.aws.amazon.com/codewhisperer"
       ]
     },
     {
       "company": "Andi",
-      "type": "ai_search",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://andisearch.com"
       ]
     },
     {
       "company": "Anthropic",
-      "type": "llm_provider",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://anthropic.com",
         "https://anthropic.com/claude",
         "https://anthropic.com/news",
-        "https://anthropic.com/pricing"
+        "https://anthropic.com/pricing",
+        "https://docs.anthropic.com"
+      ]
+    },
+    {
+      "company": "Anyscale",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
+      "urls": [
+        "https://anyscale.com",
+        "https://anyscale.com/blog",
+        "https://anyscale.com/pricing"
       ]
     },
     {
       "company": "Cerebras",
-      "type": "ai_hardware",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://cerebras.net",
-        "https://cerebras.net/blog/"
+        "https://cerebras.net/blog",
+        "https://cerebras.net/product-system"
       ]
     },
     {
       "company": "Codeium",
-      "type": "ai_coding",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://codeium.com",
         "https://codeium.com/blog",
@@ -68,228 +95,278 @@
     },
     {
       "company": "Cohere",
-      "type": "llm_provider",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
-        "https://cohere.com",
-        "https://cohere.com/blog",
-        "https://cohere.com/pricing",
-        "https://cohere.com/products"
+        "https://cohere.ai",
+        "https://cohere.ai/blog",
+        "https://cohere.ai/pricing",
+        "https://cohere.ai/products",
+        "https://docs.cohere.ai"
       ]
     },
     {
       "company": "Cursor",
-      "type": "ai_coding",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://cursor.com",
+        "https://cursor.com/blog",
         "https://cursor.com/features",
         "https://cursor.com/pricing"
       ]
     },
     {
-      "company": "DataRobot",
-      "type": "enterprise_ai",
-      "created_at": "2025-06-23 15:48:33",
+      "company": "DALL-E",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
-        "https://datarobot.com",
-        "https://datarobot.com/blog/",
-        "https://datarobot.com/platform/"
+        "https://openai.com/dall-e-3",
+        "https://openai.com/pricing"
       ]
     },
     {
-      "company": "Dataiku",
-      "type": "enterprise_ai",
-      "created_at": "2025-06-23 15:48:33",
+      "company": "DataRobot",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
-        "https://blog.dataiku.com",
-        "https://dataiku.com",
-        "https://dataiku.com/product/"
+        "https://datarobot.com",
+        "https://datarobot.com/blog",
+        "https://datarobot.com/platform"
       ]
     },
     {
       "company": "Descript",
-      "type": "ai_voice",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://descript.com",
         "https://descript.com/blog",
+        "https://descript.com/overdub",
         "https://descript.com/pricing"
       ]
     },
     {
       "company": "ElevenLabs",
-      "type": "ai_voice",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://elevenlabs.io",
         "https://elevenlabs.io/blog",
-        "https://elevenlabs.io/pricing"
+        "https://elevenlabs.io/pricing",
+        "https://elevenlabs.io/voice-generator"
+      ]
+    },
+    {
+      "company": "Flux",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
+      "urls": [
+        "https://blackforestlabs.ai",
+        "https://blackforestlabs.ai/our-models"
       ]
     },
     {
       "company": "GitHub Copilot",
-      "type": "ai_coding",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
-        "https://github.blog/tag/github-copilot/",
-        "https://github.com/features/copilot"
+        "https://docs.github.com/en/copilot",
+        "https://github.blog/tag/github-copilot",
+        "https://github.com/features/copilot",
+        "https://github.com/pricing"
       ]
     },
     {
       "company": "Google DeepMind",
-      "type": "llm_provider",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
+        "https://ai.google.dev",
         "https://ai.google/discover/gemini",
-        "https://blog.google/technology/ai/",
+        "https://blog.google/technology/ai",
+        "https://cloud.google.com/vertex-ai/pricing",
         "https://deepmind.google"
       ]
     },
     {
-      "company": "Graphcore",
-      "type": "ai_hardware",
-      "created_at": "2025-06-23 15:48:33",
+      "company": "H2O.ai",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
-        "https://graphcore.ai",
-        "https://graphcore.ai/posts"
+        "https://h2o.ai",
+        "https://h2o.ai/blog",
+        "https://h2o.ai/platform"
       ]
     },
     {
       "company": "HeyGen",
-      "type": "ai_video",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://heygen.com",
+        "https://heygen.com/blog",
+        "https://heygen.com/features",
         "https://heygen.com/pricing"
       ]
     },
     {
       "company": "Hugging Face",
-      "type": "ai_infrastructure",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://huggingface.co",
         "https://huggingface.co/blog",
+        "https://huggingface.co/docs",
         "https://huggingface.co/pricing"
       ]
     },
     {
       "company": "Ideogram",
-      "type": "ai_image",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://ideogram.ai",
-        "https://ideogram.ai/about"
+        "https://ideogram.ai/pricing"
       ]
     },
     {
       "company": "Inflection AI",
-      "type": "llm_provider",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://inflection.ai",
+        "https://inflection.ai/blog",
         "https://pi.ai"
       ]
     },
     {
+      "company": "Intel",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
+      "urls": [
+        "https://intel.com/content/www/us/en/artificial-intelligence",
+        "https://intel.com/content/www/us/en/newsroom"
+      ]
+    },
+    {
       "company": "LangChain",
-      "type": "ai_infrastructure",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://blog.langchain.dev",
+        "https://docs.langchain.com",
         "https://langchain.com",
         "https://langchain.com/langsmith"
       ]
     },
     {
       "company": "Leonardo AI",
-      "type": "ai_image",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://leonardo.ai",
         "https://leonardo.ai/pricing"
       ]
     },
     {
+      "company": "Luma AI",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
+      "urls": [
+        "https://lumalabs.ai",
+        "https://lumalabs.ai/dream-machine",
+        "https://lumalabs.ai/pricing"
+      ]
+    },
+    {
       "company": "Meta AI",
-      "type": "llm_provider",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://ai.meta.com",
-        "https://ai.meta.com/blog/",
-        "https://ai.meta.com/llama/"
+        "https://ai.meta.com/blog",
+        "https://ai.meta.com/llama",
+        "https://llama.meta.com"
       ]
     },
     {
       "company": "Midjourney",
-      "type": "ai_image",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://docs.midjourney.com",
+        "https://docs.midjourney.com/docs/plans",
         "https://midjourney.com"
       ]
     },
     {
       "company": "Mistral AI",
-      "type": "llm_provider",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
+        "https://docs.mistral.ai",
         "https://mistral.ai",
-        "https://mistral.ai/news/",
-        "https://mistral.ai/technology/"
-      ]
-    },
-    {
-      "company": "Modular",
-      "type": "ai_infrastructure",
-      "created_at": "2025-06-23 15:48:33",
-      "urls": [
-        "https://modular.com",
-        "https://modular.com/mojo"
+        "https://mistral.ai/news",
+        "https://mistral.ai/pricing",
+        "https://mistral.ai/technology"
       ]
     },
     {
       "company": "Murf AI",
-      "type": "ai_voice",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://murf.ai",
-        "https://murf.ai/pricing"
+        "https://murf.ai/pricing",
+        "https://murf.ai/resources/blog"
       ]
     },
     {
-      "company": "NVIDIA AI",
-      "type": "ai_hardware",
-      "created_at": "2025-06-23 15:48:33",
+      "company": "NVIDIA",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
-        "https://blogs.nvidia.com/blog/category/artificial-intelligence/",
-        "https://nvidia.com/ai"
+        "https://blogs.nvidia.com/ai",
+        "https://developer.nvidia.com",
+        "https://nvidia.com/ai",
+        "https://nvidia.com/en-us/data-center/products"
       ]
     },
     {
       "company": "Neeva",
-      "type": "ai_search",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://neeva.com"
       ]
     },
     {
       "company": "OpenAI",
-      "type": "llm_provider",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://openai.com",
         "https://openai.com/blog",
         "https://openai.com/chatgpt",
-        "https://openai.com/pricing"
+        "https://openai.com/pricing",
+        "https://platform.openai.com"
+      ]
+    },
+    {
+      "company": "Palantir",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
+      "urls": [
+        "https://blog.palantir.com",
+        "https://palantir.com",
+        "https://palantir.com/platforms/aip"
       ]
     },
     {
       "company": "Perplexity AI",
-      "type": "ai_search",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://blog.perplexity.ai",
         "https://perplexity.ai",
@@ -298,104 +375,134 @@
     },
     {
       "company": "Phind",
-      "type": "ai_search",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://phind.com",
-        "https://phind.com/about"
+        "https://phind.com/search?q=pricing"
       ]
     },
     {
       "company": "Pieces",
-      "type": "ai_coding",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://pieces.app",
-        "https://pieces.app/updates"
+        "https://pieces.app/blog",
+        "https://pieces.app/features",
+        "https://pieces.app/pricing"
       ]
     },
     {
       "company": "Pika",
-      "type": "ai_video",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://pika.art",
+        "https://pika.art/blog",
         "https://pika.art/pricing"
       ]
     },
     {
+      "company": "Replicate",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
+      "urls": [
+        "https://replicate.com",
+        "https://replicate.com/blog",
+        "https://replicate.com/pricing"
+      ]
+    },
+    {
       "company": "Replit",
-      "type": "ai_coding",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://blog.replit.com",
         "https://replit.com",
-        "https://replit.com/ai"
+        "https://replit.com/ai",
+        "https://replit.com/pricing"
       ]
     },
     {
       "company": "Resemble AI",
-      "type": "ai_voice",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://resemble.ai",
-        "https://resemble.ai/pricing/"
+        "https://resemble.ai/blog",
+        "https://resemble.ai/pricing"
       ]
     },
     {
-      "company": "RunwayML",
-      "type": "ai_video",
-      "created_at": "2025-06-23 15:48:33",
+      "company": "Runway",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://runwayml.com",
-        "https://runwayml.com/pricing",
-        "https://runwayml.com/research"
+        "https://runwayml.com/blog",
+        "https://runwayml.com/pricing"
+      ]
+    },
+    {
+      "company": "SambaNova",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
+      "urls": [
+        "https://sambanova.ai",
+        "https://sambanova.ai/blog",
+        "https://sambanova.ai/products"
       ]
     },
     {
       "company": "Scale AI",
-      "type": "enterprise_ai",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://scale.com",
         "https://scale.com/blog",
-        "https://scale.com/llm"
+        "https://scale.com/enterprise"
       ]
     },
     {
       "company": "Sourcegraph",
-      "type": "ai_coding",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
-        "https://about.sourcegraph.com/blog",
+        "https://sourcegraph.com",
+        "https://sourcegraph.com/blog",
         "https://sourcegraph.com/cody",
         "https://sourcegraph.com/pricing"
       ]
     },
     {
       "company": "Stability AI",
-      "type": "llm_provider",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://stability.ai",
-        "https://stability.ai/news"
+        "https://stability.ai/blog",
+        "https://stability.ai/pricing",
+        "https://stability.ai/stable-diffusion"
       ]
     },
     {
       "company": "Synthesia",
-      "type": "ai_video",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://synthesia.io",
+        "https://synthesia.io/blog",
         "https://synthesia.io/features",
         "https://synthesia.io/pricing"
       ]
     },
     {
       "company": "Tabnine",
-      "type": "ai_coding",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
+        "https://docs.tabnine.com",
         "https://tabnine.com",
         "https://tabnine.com/blog",
         "https://tabnine.com/pricing"
@@ -403,8 +510,8 @@
     },
     {
       "company": "Weights & Biases",
-      "type": "ai_infrastructure",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://wandb.ai",
         "https://wandb.ai/fully-connected",
@@ -413,23 +520,24 @@
     },
     {
       "company": "WellSaid Labs",
-      "type": "ai_voice",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
         "https://wellsaidlabs.com",
-        "https://wellsaidlabs.com/pricing/"
+        "https://wellsaidlabs.com/blog",
+        "https://wellsaidlabs.com/pricing"
       ]
     },
     {
       "company": "You.com",
-      "type": "ai_search",
-      "created_at": "2025-06-23 15:48:33",
+      "type": "competitor",
+      "created_at": "2025-06-23 18:40:05",
       "urls": [
-        "https://about.you.com/blog/",
         "https://you.com",
-        "https://you.com/pro"
+        "https://you.com/code",
+        "https://you.com/search?q=pricing"
       ]
     }
   ],
-  "generated_at": "2025-06-23T15:48:33.469Z"
+  "generated_at": "2025-06-23T18:48:19.517Z"
 }

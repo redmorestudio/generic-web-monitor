@@ -1,18 +1,18 @@
 {
   "logs": [
     {
-      "timestamp": "2025-06-23 15:48:16",
+      "timestamp": "2025-06-23 18:40:11",
       "type": "success",
       "level": "info",
-      "message": "scraper - completed",
+      "message": "scraper - completed - 168 changes detected",
       "details": {
         "run_type": "scraper",
-        "urls_checked": 0,
-        "changes_detected": 0,
+        "urls_checked": 168,
+        "changes_detected": 168,
         "errors": null
       }
     }
   ],
   "aiEnhanced": true,
-  "generated_at": "2025-06-23T15:48:33.471Z"
+  "generated_at": "2025-06-23T18:48:19.674Z"
 }
