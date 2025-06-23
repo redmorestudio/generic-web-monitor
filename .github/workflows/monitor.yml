@@ -245,13 +245,13 @@ jobs:
       
       # Step to send email notifications
       - name: Send email notifications
-        if: ${{ secrets.SMTP_HOST != '' && secrets.SMTP_USER != '' && secrets.SMTP_PASS != '' }}
+        if: always()  # Always run, script will check if SMTP is configured
         run: |
           cd github-actions-backend
           # Install nodemailer if not already in package.json
           npm install nodemailer
           # Run email notification check
-          node email-notifications.js check
+          node email-notifications.js check || echo "Email notifications skipped or failed"
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
@@ -262,10 +262,10 @@ jobs:
       
       # Daily summary email (only at 9 AM UTC)
       - name: Send daily summary email
-        if: ${{ github.event_name == 'schedule' && contains('09:00', github.event.schedule) && secrets.SMTP_HOST != '' }}
+        if: ${{ github.event_name == 'schedule' && contains('09:00', github.event.schedule) }}
         run: |
           cd github-actions-backend
-          node email-notifications.js daily
+          node email-notifications.js daily || echo "Daily summary email skipped or failed"
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
