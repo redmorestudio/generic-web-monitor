@@ -245,7 +245,7 @@ jobs:
       
       # Step to send email notifications
       - name: Send email notifications
-        if: ${{ secrets.SMTP_HOST && secrets.SMTP_USER && secrets.SMTP_PASS }}
+        if: ${{ secrets.SMTP_HOST != '' && secrets.SMTP_USER != '' && secrets.SMTP_PASS != '' }}
         run: |
           cd github-actions-backend
           # Install nodemailer if not already in package.json
@@ -262,7 +262,7 @@ jobs:
       
       # Daily summary email (only at 9 AM UTC)
       - name: Send daily summary email
-        if: ${{ github.event_name == 'schedule' && contains('09:00', github.event.schedule) && secrets.SMTP_HOST }}
+        if: ${{ github.event_name == 'schedule' && contains('09:00', github.event.schedule) && secrets.SMTP_HOST != '' }}
         run: |
           cd github-actions-backend
           node email-notifications.js daily
