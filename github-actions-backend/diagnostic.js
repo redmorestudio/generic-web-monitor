@@ -16,11 +16,18 @@ console.log('=================================');
 const dbPath = path.join(__dirname, 'data', 'monitor.db');
 if (!fs.existsSync(dbPath)) {
   console.error('❌ Database not found at:', dbPath);
-  console.log('Running setup-database.js...');
-  require('./setup-database.js');
-} else {
-  console.log('✅ Database found at:', dbPath);
+  console.log('Running init-db.js from scripts directory...');
+  require('./scripts/init-db.js');
+  console.log('✅ Database initialized');
 }
+
+// Check if database exists now
+if (!fs.existsSync(dbPath)) {
+  console.error('❌ Database still not found after initialization');
+  process.exit(1);
+}
+
+console.log('✅ Database found at:', dbPath);
 
 // Open database
 const db = new Database(dbPath);
