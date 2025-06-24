@@ -48,7 +48,8 @@ jobs:
       - name: Install dependencies
         run: |
           cd github-actions-backend
-          npm ci
+          # Use npm install instead of npm ci to handle package-lock.json mismatches
+          npm install --omit=dev
       
       # Download database from previous workflow if triggered by scrape
       - name: Download database artifact
