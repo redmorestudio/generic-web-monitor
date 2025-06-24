@@ -1,0 +1,59 @@
+name: Full Monitor Pipeline
+
+on:
+  # Run every 6 hours
+  schedule:
+    - cron: '0 */6 * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      skip_scrape:
+        description: 'Skip scraping (use existing data)'
+        required: false
+        type: boolean
+        default: false
+      analysis_mode:
+        description: 'Analysis mode'
+        required: false
+        type: choice
+        default: 'only-new'
+        options:
+          - all
+          - only-new
+          - force
+      skip_thebrain:
+        description: 'Skip TheBrain sync'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  # Job 1: Scrape websites
+  scrape:
+    if: ${{ !inputs.skip_scrape }}
+    uses: ./.github/workflows/scrape.yml
+    secrets: inherit
+  
+  # Job 2: Analyze content
+  analyze:
+    needs: [scrape]
+    if: always() && (needs.scrape.result == 'success' || inputs.skip_scrape)
+    uses: ./.github/workflows/analyze.yml
+    with:
+      trigger_source: ${{ inputs.skip_scrape && 'manual' || 'scrape' }}
+      run_id: ${{ needs.scrape.outputs.run_id || '' }}
+      analysis_mode: ${{ inputs.analysis_mode }}
+    secrets: inherit
+  
+  # Job 3: Sync and deploy
+  sync:
+    needs: [analyze]
+    if: always() && needs.analyze.result == 'success'
+    uses: ./.github/workflows/sync.yml
+    with:
+      trigger_source: 'analyze'
+      run_id: ${{ needs.analyze.outputs.run_id }}
+      skip_thebrain: ${{ inputs.skip_thebrain }}
+      skip_alerts: false
+    secrets: inherit
