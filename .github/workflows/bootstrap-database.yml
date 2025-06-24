@@ -1,0 +1,56 @@
+name: Bootstrap Database
+
+on:
+  workflow_dispatch:
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm ci
+    
+    - name: Create database with setup script
+      run: |
+        cd github-actions-backend
+        echo "📊 Creating database..."
+        node setup-database.js
+    
+    - name: Initialize with companies
+      run: |
+        cd github-actions-backend
+        echo "🏢 Initializing with 52 companies..."
+        node scripts/init-db.js
+    
+    - name: Verify database
+      run: |
+        cd github-actions-backend
+        ls -la data/
+        echo "📊 Running diagnostic..."
+        node diagnostic.js
+    
+    - name: Commit database
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Force add the database
+        git add -f github-actions-backend/data/monitor.db
+        
+        # Commit
+        git commit -m "🚀 Bootstrap database with 52 AI companies" || echo "No changes"
+        git push origin main
