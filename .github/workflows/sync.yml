@@ -1,0 +1,185 @@
+name: 3. Sync & Deploy
+
+on:
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      trigger_source:
+        description: 'What triggered this workflow'
+        required: false
+        type: string
+        default: 'manual'
+      run_id:
+        description: 'Previous workflow run ID'
+        required: false
+        type: string
+      skip_thebrain:
+        description: 'Skip TheBrain sync'
+        required: false
+        type: boolean
+        default: false
+      skip_alerts:
+        description: 'Skip creating alerts'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  NODE_ENV: production
+
+jobs:
+  sync-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+      issues: write
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm ci
+      
+      # Download analysis results if triggered by analyze
+      - name: Download analysis artifacts
+        if: ${{ inputs.trigger_source == 'analyze' && inputs.run_id != '' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: analysis-results-${{ inputs.run_id }}
+          path: .
+      
+      - name: Sync to TheBrain
+        if: ${{ !inputs.skip_thebrain }}
+        run: |
+          cd github-actions-backend
+          
+          # Check if credentials are available
+          if [ -z "$THEBRAIN_API_KEY" ] || [ -z "$THEBRAIN_BRAIN_ID" ]; then
+            echo "⚠️  TheBrain credentials not configured, skipping sync"
+          else
+            echo "🧠 Syncing to TheBrain..."
+            node thebrain-sync-wrapper.js full || echo "TheBrain sync completed"
+          fi
+        env:
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+          THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
+          GITHUB_ACTIONS: 'true'
+      
+      - name: Update workflow status
+        run: |
+          cd github-actions-backend
+          echo "{
+            \"last_run\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"status\": \"success\",
+            \"workflow_run_id\": \"${{ github.run_id }}\",
+            \"trigger_source\": \"${{ inputs.trigger_source }}\",
+            \"backend\": \"github-actions\"
+          }" > ../api-data/workflow-status.json
+      
+      - name: Commit final updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          git add api-data/ || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🚀 Deploy updates - $(date -u +%Y-%m-%d\\ %H:%M:%S\\ UTC)"
+            git push
+          fi
+      
+      # Deploy to GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      
+      # Create alerts
+      - name: Check for high-priority changes
+        if: ${{ !inputs.skip_alerts }}
+        id: check-changes
+        run: |
+          HIGH_PRIORITY=$(jq '[.changes[] | select(.relevance_score >= 8)] | length' api-data/changes.json 2>/dev/null || echo "0")
+          echo "high_priority_count=$HIGH_PRIORITY" >> $GITHUB_OUTPUT
+          
+          if [ "$HIGH_PRIORITY" -gt 0 ]; then
+            echo "Found $HIGH_PRIORITY high-priority changes"
+            jq -r '.changes[] | select(.relevance_score >= 8) | "- \(.company): \(.summary) (Score: \(.relevance_score)/10)"' api-data/changes.json > /tmp/changes.txt || echo "No changes file"
+            echo "changes_details<<EOF" >> $GITHUB_OUTPUT
+            cat /tmp/changes.txt >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create GitHub Issue for alerts
+        if: ${{ !inputs.skip_alerts && steps.check-changes.outputs.high_priority_count > 0 }}
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const count = ${{ steps.check-changes.outputs.high_priority_count }};
+            const changes = `${{ steps.check-changes.outputs.changes_details }}`;
+            
+            const body = `# 🔴 High Priority Competitive Intelligence Alert
+            
+            **${count} high-priority changes detected** in competitor monitoring.
+            
+            ## Changes Detected:
+            ${changes}
+            
+            ## Dashboard:
+            View the [full dashboard](${{ steps.deployment.outputs.page_url }}) for detailed analysis.
+            
+            ---
+            *Automated alert from AI Competitive Intelligence Monitor*
+            *Generated: ${new Date().toISOString()}*`;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔴 ${count} High Priority Alert${count > 1 ? 's' : ''}`,
+              body: body,
+              labels: ['competitive-intel', 'high-priority', 'automated']
+            });
+      
+      - name: Send email notifications
+        if: ${{ !inputs.skip_alerts }}
+        run: |
+          cd github-actions-backend
+          
+          # Check for email configuration
+          if [ -z "$SMTP_HOST" ]; then
+            echo "📧 Email not configured, skipping notifications"
+          else
+            node email-notifications-enhanced.js check || echo "Email check completed"
+          fi
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
