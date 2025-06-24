@@ -269,30 +269,14 @@ async function processAllSnapshots() {
 
   console.log(`Found ${latestSnapshots.length} URLs to analyze for baseline intelligence\n`);
 
-  // Check which ones already have analysis
-  const unanalyzedSnapshots = latestSnapshots.filter(snapshot => {
-    const existing = db.prepare(
-      'SELECT id FROM baseline_analysis WHERE snapshot_id = ?'
-    ).get(snapshot.id);
-    return !existing;
-  });
-
-  console.log(`${latestSnapshots.length - unanalyzedSnapshots.length} already analyzed`);
-  console.log(`${unanalyzedSnapshots.length} new URLs to analyze\n`);
-
-  if (unanalyzedSnapshots.length === 0) {
-    console.log('✅ All URLs already analyzed!');
-    return generateBaselineReport();
-  }
-
   let successCount = 0;
   let errorCount = 0;
 
   // Process in batches of 10 to avoid overwhelming the API
   const batchSize = 10;
   const batches = [];
-  for (let i = 0; i < unanalyzedSnapshots.length; i += batchSize) {
-    batches.push(unanalyzedSnapshots.slice(i, i + batchSize));
+  for (let i = 0; i < latestSnapshots.length; i += batchSize) {
+    batches.push(latestSnapshots.slice(i, i + batchSize));
   }
 
   console.log(`Processing ${batches.length} batches of up to ${batchSize} URLs each...\n`);
