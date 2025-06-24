@@ -1,0 +1,201 @@
+name: Test AI Monitor
+# Manual workflow to test the monitoring system
+
+on:
+  workflow_dispatch:
+    inputs:
+      test_type:
+        description: 'Type of test to run'
+        required: true
+        default: 'basic'
+        type: choice
+        options:
+          - basic      # Quick health check
+          - scraping   # Test scraping specific company
+          - analysis   # Test AI analysis
+          - dashboard  # Test dashboard rendering
+          - full       # Complete end-to-end test
+      company_filter:
+        description: 'Company to test (for scraping test)'
+        required: false
+        default: 'Anthropic'
+      
+jobs:
+  test-monitor:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm ci
+    
+    - name: Download current database
+      uses: actions/download-artifact@v3
+      with:
+        name: monitor-database
+        path: github-actions-backend/data
+      continue-on-error: true
+    
+    - name: Initialize database if needed
+      run: |
+        cd github-actions-backend
+        if [ ! -f data/monitor.db ]; then
+          echo "No database found, initializing..."
+          node setup-database.js
+        fi
+    
+    # Basic Health Check
+    - name: Run Basic Health Check
+      if: inputs.test_type == 'basic'
+      run: |
+        echo "🔍 Running basic health checks..."
+        cd github-actions-backend
+        
+        # Check database
+        node -e "
+        const Database = require('better-sqlite3');
+        const db = new Database('./data/monitor.db');
+        const companies = db.prepare('SELECT COUNT(*) as count FROM companies').get();
+        const urls = db.prepare('SELECT COUNT(*) as count FROM urls').get();
+        console.log('✅ Database check:');
+        console.log('  Companies:', companies.count);
+        console.log('  URLs:', urls.count);
+        db.close();
+        "
+        
+        # Check recent activity
+        node -e "
+        const Database = require('better-sqlite3');
+        const db = new Database('./data/monitor.db');
+        const recent = db.prepare('SELECT COUNT(*) as count FROM content_snapshots WHERE scraped_at > datetime(\"now\", \"-24 hours\")').get();
+        console.log('📊 Recent activity:');
+        console.log('  Scrapes in last 24h:', recent.count);
+        db.close();
+        "
+    
+    # Scraping Test
+    - name: Test Scraping
+      if: inputs.test_type == 'scraping'
+      env:
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      run: |
+        echo "🕷️ Testing scraping for: ${{ inputs.company_filter }}"
+        cd github-actions-backend
+        
+        # Run scraper for specific company
+        node scraper-wrapper.js --company "${{ inputs.company_filter }}"
+        
+        # Verify results
+        node -e "
+        const Database = require('better-sqlite3');
+        const db = new Database('./data/monitor.db');
+        const results = db.prepare('SELECT url, status_code FROM content_snapshots WHERE company_name = ? AND scraped_at > datetime(\"now\", \"-1 hour\")').all('${{ inputs.company_filter }}');
+        console.log('✅ Scraping results:');
+        results.forEach(r => console.log(`  ${r.url}: ${r.status_code}`));
+        db.close();
+        "
+    
+    # Analysis Test
+    - name: Test AI Analysis
+      if: inputs.test_type == 'analysis'
+      env:
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      run: |
+        echo "🧠 Testing AI analysis..."
+        cd github-actions-backend
+        
+        # Run analysis on recent content
+        node ai-analyzer-baseline.js --only-new
+        
+        # Check results
+        node -e "
+        const Database = require('better-sqlite3');
+        const db = new Database('./data/monitor.db');
+        const results = db.prepare('SELECT company_name, relevance_score FROM baseline_analysis WHERE analysis_date > datetime(\"now\", \"-1 hour\") LIMIT 5').all();
+        console.log('✅ Analysis results:');
+        results.forEach(r => console.log(`  ${r.company_name}: Score ${r.relevance_score}/10`));
+        db.close();
+        "
+    
+    # Dashboard Test
+    - name: Test Dashboard Generation
+      if: inputs.test_type == 'dashboard'
+      run: |
+        echo "📊 Testing dashboard data generation..."
+        cd github-actions-backend
+        
+        # Generate static data
+        node generate-static-data.js
+        
+        # Verify files
+        echo "✅ Generated files:"
+        ls -la ../api-data/
+        
+        # Check content
+        node -e "
+        const fs = require('fs');
+        const dashboard = JSON.parse(fs.readFileSync('../api-data/dashboard.json'));
+        console.log('📈 Dashboard stats:');
+        console.log('  Total companies:', dashboard.totalCompanies);
+        console.log('  Active companies:', dashboard.activeCompanies);
+        console.log('  Total URLs:', dashboard.totalUrls);
+        "
+    
+    # Full Test
+    - name: Run Full Test
+      if: inputs.test_type == 'full'
+      env:
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      run: |
+        echo "🚀 Running full end-to-end test..."
+        cd github-actions-backend
+        
+        # Test company
+        TEST_COMPANY="OpenAI"
+        
+        echo "1️⃣ Testing scrape..."
+        node scraper-wrapper.js --company "$TEST_COMPANY"
+        
+        echo "2️⃣ Testing markdown conversion..."
+        node markdown-converter.js latest
+        
+        echo "3️⃣ Testing AI analysis..."
+        node ai-analyzer-baseline.js --only-new
+        
+        echo "4️⃣ Testing data generation..."
+        node generate-static-data.js
+        
+        echo "✅ Full test complete!"
+    
+    # Upload test results
+    - name: Upload test artifacts
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-${{ github.run_id }}
+        path: |
+          github-actions-backend/data/monitor.db
+          api-data/
+    
+    # Summary
+    - name: Test Summary
+      if: always()
+      run: |
+        echo "## 📊 Test Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "- **Test Type:** ${{ inputs.test_type }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Status:** ${{ job.status }}" >> $GITHUB_STEP_SUMMARY
+        if [ "${{ inputs.test_type }}" == "scraping" ]; then
+          echo "- **Company Tested:** ${{ inputs.company_filter }}" >> $GITHUB_STEP_SUMMARY
+        fi
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "Check the logs above for detailed results." >> $GITHUB_STEP_SUMMARY
