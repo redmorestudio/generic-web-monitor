@@ -132,6 +132,7 @@ jobs:
         if: success()
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
           script: |
             await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
