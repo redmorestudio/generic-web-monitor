@@ -82,17 +82,18 @@ jobs:
         run: |
           cd github-actions-backend
           # First run baseline analysis on all current content
-          node ai-analyzer-baseline.js || echo "Baseline AI analysis completed"
+          # Use timeout command to prevent hanging, but increase to 45 minutes
+          timeout 2700 node ai-analyzer-baseline.js || echo "Baseline AI analysis completed or timed out"
           # Then run change analysis with entity extraction and auto-grouping
-          node ai-analyzer-ultra-wrapper.js full || echo "Ultra-enhanced AI analysis completed"
+          timeout 1800 node ai-analyzer-ultra-wrapper.js full || echo "Ultra-enhanced AI analysis completed or timed out"
           # Sync to TheBrain if credentials are available
-          node thebrain-sync-wrapper.js full || echo "TheBrain sync completed or skipped"
+          timeout 900 node thebrain-sync-wrapper.js full || echo "TheBrain sync completed or skipped"
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
           THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
           GITHUB_ACTIONS: 'true'
-        timeout-minutes: 30
+        timeout-minutes: 90
       
       - name: Generate static data files for GitHub Pages
         run: |
