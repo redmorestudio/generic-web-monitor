@@ -42,7 +42,7 @@ jobs:
     uses: ./.github/workflows/analyze.yml
     with:
       trigger_source: ${{ inputs.skip_scrape && 'manual' || 'scrape' }}
-      run_id: ${{ needs.scrape.outputs.run_id || '' }}
+      run_id: ${{ github.run_id }}
       analysis_mode: ${{ inputs.analysis_mode }}
     secrets: inherit
   
@@ -53,7 +53,7 @@ jobs:
     uses: ./.github/workflows/sync.yml
     with:
       trigger_source: 'analyze'
-      run_id: ${{ needs.analyze.outputs.run_id }}
+      run_id: ${{ github.run_id }}
       skip_thebrain: ${{ inputs.skip_thebrain }}
       skip_alerts: false
     secrets: inherit
