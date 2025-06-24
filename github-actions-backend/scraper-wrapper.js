@@ -7,6 +7,7 @@ const axios = require('axios');
 const API_URL = process.env.API_URL || 'http://localhost:3000/api';
 const IS_GITHUB_ACTIONS = process.env.GITHUB_ACTIONS === 'true';
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const USE_THREE_DB = process.env.USE_THREE_DB !== 'false'; // Default to true
 
 async function checkServerAvailable() {
   if (IS_GITHUB_ACTIONS || IS_PRODUCTION) {
@@ -27,6 +28,7 @@ async function main() {
   console.log('🔍 AI Monitor Scraper Starting...');
   console.log(`   Environment: ${IS_GITHUB_ACTIONS ? 'GitHub Actions' : 'Local'}`);
   console.log(`   Mode: ${IS_PRODUCTION ? 'Production' : 'Development'}`);
+  console.log(`   Architecture: ${USE_THREE_DB ? 'Three-Database' : 'Legacy'}`);
   
   const serverAvailable = await checkServerAvailable();
   
@@ -50,9 +52,13 @@ async function main() {
     }
   } else {
     console.log('   🔄 No API server - using direct database mode');
-    // Use the direct database scraper
-    const IntelligentScraperDirect = require('./scraper-direct.js');
-    const scraper = new IntelligentScraperDirect();
+    
+    // Choose between three-database and legacy scraper
+    const ScraperClass = USE_THREE_DB 
+      ? require('./scraper-three-db.js')
+      : require('./scraper-direct.js');
+      
+    const scraper = new ScraperClass();
     
     try {
       await scraper.initialize();
