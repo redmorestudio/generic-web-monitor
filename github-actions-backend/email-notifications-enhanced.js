@@ -25,10 +25,14 @@ class EnhancedEmailNotificationService {
       this.transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT || 587,
-        secure: process.env.SMTP_SECURE === 'true' || false,
+        secure: false, // Use TLS, not SSL
         auth: {
           user: process.env.SMTP_USER,
           pass: process.env.SMTP_PASS
+        },
+        tls: {
+          // do not fail on invalid certs
+          rejectUnauthorized: false
         }
       });
     }
@@ -315,6 +319,131 @@ class EnhancedEmailNotificationService {
     }
   }
 
+  // Send alert for high-priority changes
+  async sendChangeAlert(changes) {
+    if (!this.isConfigured) {
+      console.log('Email notifications not configured. Set SMTP_* environment variables.');
+      return false;
+    }
+
+    try {
+      // Filter high-priority changes
+      const highPriorityChanges = changes.filter(c => c.relevance_score >= 7);
+      
+      if (highPriorityChanges.length === 0) {
+        console.log('No high-priority changes to report');
+        return false;
+      }
+
+      // Group changes by company
+      const changesByCompany = {};
+      highPriorityChanges.forEach(change => {
+        if (!changesByCompany[change.company_name]) {
+          changesByCompany[change.company_name] = [];
+        }
+        changesByCompany[change.company_name].push(change);
+      });
+
+      // Build email content
+      const subject = `AI Monitor Alert: ${highPriorityChanges.length} High-Priority Changes Detected`;
+      
+      let htmlContent = `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #1a1a2e; border-bottom: 2px solid #667eea; padding-bottom: 10px;">
+            AI Competitive Monitor Alert
+          </h2>
+          
+          <div style="background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0;">
+            <h3 style="margin-top: 0; color: #ef4444;">
+              ⚠️ ${highPriorityChanges.length} High-Priority Changes Detected
+            </h3>
+            <p style="margin: 5px 0;">
+              <strong>Time:</strong> ${new Date().toLocaleString()}<br>
+              <strong>Companies Affected:</strong> ${Object.keys(changesByCompany).length}
+            </p>
+          </div>
+      `;
+
+      // Add changes by company
+      for (const [company, companyChanges] of Object.entries(changesByCompany)) {
+        htmlContent += `
+          <div style="margin: 20px 0; border-left: 4px solid #667eea; padding-left: 15px;">
+            <h3 style="color: #1a1a2e; margin-bottom: 10px;">${company}</h3>
+        `;
+        
+        companyChanges.forEach(change => {
+          const color = change.relevance_score >= 8 ? '#ef4444' : '#f59e0b';
+          htmlContent += `
+            <div style="background-color: #f9fafb; padding: 10px; margin-bottom: 10px; border-radius: 5px;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="color: ${color};">Score: ${change.relevance_score}/10</strong>
+                <span style="font-size: 12px; color: #6b7280;">${change.url_type} page</span>
+              </div>
+              
+              <p style="margin: 10px 0 5px 0; font-weight: bold;">${change.summary || 'Change detected'}</p>
+              
+              ${change.category ? `<p style="margin: 5px 0; font-size: 14px;"><strong>Category:</strong> ${change.category}</p>` : ''}
+              
+              ${change.competitive_threats ? `
+                <p style="margin: 5px 0; font-size: 14px;">
+                  <strong>Threats:</strong> ${change.competitive_threats}
+                </p>
+              ` : ''}
+              
+              ${change.strategic_opportunities ? `
+                <p style="margin: 5px 0; font-size: 14px;">
+                  <strong>Opportunities:</strong> ${change.strategic_opportunities}
+                </p>
+              ` : ''}
+              
+              <a href="${change.url}" style="font-size: 12px; color: #667eea;">View Page →</a>
+            </div>
+          `;
+        });
+        
+        htmlContent += '</div>';
+      }
+
+      // Add footer
+      htmlContent += `
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+          <p style="text-align: center; margin-bottom: 10px;">
+            <a href="https://redmorestudio.github.io/ai-competitive-monitor" 
+               style="background-color: #667eea; color: white; padding: 10px 20px; 
+                      text-decoration: none; border-radius: 5px; display: inline-block;">
+              View Full Dashboard
+            </a>
+          </p>
+          
+          <p style="font-size: 12px; color: #6b7280; text-align: center;">
+            This is an automated alert from AI Competitive Monitor.<br>
+            Monitoring ${this.getCompanyCount()} companies across the AI ecosystem.
+          </p>
+        </div>
+      </div>
+      `;
+
+      // Send email
+      const mailOptions = {
+        from: process.env.SMTP_USER,
+        to: this.recipient,
+        subject: subject,
+        html: htmlContent
+      };
+
+      await this.transporter.sendMail(mailOptions);
+      console.log(`✅ Alert email sent for ${highPriorityChanges.length} changes`);
+      
+      // Log notification in database
+      this.logNotification('alert', highPriorityChanges.length, Object.keys(changesByCompany).length);
+      
+      return true;
+    } catch (error) {
+      console.error('Failed to send email notification:', error);
+      return false;
+    }
+  }
+
   // Get daily statistics
   getDailyStats() {
     const changes = this.db.prepare(`
@@ -358,6 +487,10 @@ class EnhancedEmailNotificationService {
       companiesWithChanges: topCompanies.length,
       topCompanies
     };
+  }
+
+  getCompanyCount() {
+    return this.db.prepare('SELECT COUNT(*) as count FROM companies WHERE enabled = 1').get().count;
   }
 
   getNextRunTime() {
@@ -439,6 +572,17 @@ if (require.main === module) {
     
     const emailService = new EnhancedEmailNotificationService();
     
+    // Log environment for debugging
+    console.log('Email Configuration Status:');
+    console.log('SMTP_HOST:', process.env.SMTP_HOST ? '✓ Set' : '✗ Missing');
+    console.log('SMTP_PORT:', process.env.SMTP_PORT || '587 (default)');
+    console.log('SMTP_USER:', process.env.SMTP_USER ? '✓ Set' : '✗ Missing');
+    console.log('SMTP_PASS:', process.env.SMTP_PASS ? '✓ Set' : '✗ Missing');
+    console.log('NOTIFICATION_EMAIL:', process.env.NOTIFICATION_EMAIL || 'Not set (will use SMTP_USER)');
+    console.log('Email Configured:', emailService.isConfigured ? '✓ Yes' : '✗ No');
+    console.log('Recipient:', emailService.recipient);
+    console.log('');
+    
     if (!emailService.isConfigured && command !== 'export') {
       console.log('\n⚠️  Email notifications not configured!');
       console.log('\nTo enable email notifications, set these GitHub secrets:');
@@ -449,12 +593,10 @@ if (require.main === module) {
       console.log('  NOTIFICATION_EMAIL=seth@redmore.studio\n');
       
       // Still export summary even if email not configured
-      if (command === 'daily' || command === 'check') {
-        console.log('Exporting summary for dashboard display...');
-        await emailService.exportEmailSummary();
-      }
+      console.log('Exporting summary for dashboard display...');
+      await emailService.exportEmailSummary();
       
-      process.exit(1);
+      process.exit(0);
     }
 
     switch (command) {
@@ -496,9 +638,7 @@ if (require.main === module) {
         
         if (recentChanges.length > 0) {
           console.log(`Found ${recentChanges.length} high-priority changes`);
-          const OriginalService = require('./email-notifications');
-          const originalService = new OriginalService();
-          await originalService.sendChangeAlert(recentChanges);
+          await emailService.sendChangeAlert(recentChanges);
         } else {
           console.log('No high-priority changes in the last hour');
         }
