@@ -183,17 +183,31 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  # Job 3: Create alerts for high-priority changes
+  # Job 3: Create alerts and send emails
   create-alerts:
     needs: monitor-and-generate
     runs-on: ubuntu-latest
     if: success()
+    
+    permissions:
+      contents: read
+      issues: write
     
     steps:
       - name: Checkout updated code
         uses: actions/checkout@v4
         with:
           ref: main
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies for email
+        run: |
+          cd github-actions-backend
+          npm install nodemailer better-sqlite3 dotenv
       
       - name: Check for high-priority changes
         id: check-changes
@@ -245,33 +259,50 @@ jobs:
             
             console.log(`Created issue #${issue.data.number} for high-priority alerts`);
       
-      # Step to send email notifications
+      # Send enhanced email notifications
       - name: Send email notifications
         if: always()  # Always run, script will check if SMTP is configured
         run: |
           cd github-actions-backend
-          # Install nodemailer if not already in package.json
-          npm install nodemailer
-          # Run email notification check
-          node email-notifications.js check || echo "Email notifications skipped or failed"
+          # Check for high-priority changes and send alerts
+          node email-notifications-enhanced.js check || echo "Email notifications check completed"
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       
-      # Daily summary email (only at 9 AM UTC)
-      - name: Send daily summary email
-        if: ${{ github.event_name == 'schedule' && contains('09:00', github.event.schedule) }}
+      # Daily verification email (run at 9 AM UTC - cron: '0 9 * * *')
+      - name: Send daily verification email
+        # Check if the current hour is 9 (UTC)
+        if: ${{ github.event_name == 'schedule' }}
+        run: |
+          HOUR=$(date -u +%H)
+          if [ "$HOUR" = "09" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Sending daily verification email..."
+            cd github-actions-backend
+            node email-notifications-enhanced.js daily || echo "Daily verification email completed"
+          else
+            echo "Not the scheduled time for daily email (current hour: $HOUR UTC)"
+          fi
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+      
+      # Export email summary for dashboard
+      - name: Export email summary
+        if: always()
         run: |
           cd github-actions-backend
-          node email-notifications.js daily || echo "Daily summary email skipped or failed"
-        env:
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASS: ${{ secrets.SMTP_PASS }}
-          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          node email-notifications-enhanced.js export || echo "Email summary export completed"
+          # Copy to api-data if generated
+          if [ -f ../api-data/email-summary.json ]; then
+            cp ../api-data/email-summary.json ../api-data/
+            echo "Email summary exported to api-data"
+          fi
