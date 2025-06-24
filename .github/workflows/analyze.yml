@@ -1,0 +1,161 @@
+name: 2. Analyze Content
+
+on:
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      trigger_source:
+        description: 'What triggered this workflow'
+        required: false
+        type: string
+        default: 'manual'
+      run_id:
+        description: 'Previous workflow run ID'
+        required: false
+        type: string
+      analysis_mode:
+        description: 'Analysis mode'
+        required: false
+        type: choice
+        default: 'all'
+        options:
+          - all           # Analyze everything
+          - only-new      # Only unanalyzed content
+          - force         # Force re-analyze all
+          - changes-only  # Only analyze detected changes
+
+env:
+  NODE_ENV: production
+
+jobs:
+  analyze-content:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    permissions:
+      contents: write
+      actions: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm ci
+      
+      # Download database from previous workflow if triggered by scrape
+      - name: Download database artifact
+        if: ${{ inputs.trigger_source == 'scrape' && inputs.run_id != '' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: scraper-database-${{ inputs.run_id }}
+          path: github-actions-backend/data
+      
+      - name: Run baseline AI analysis
+        run: |
+          cd github-actions-backend
+          
+          echo "🧠 Running baseline analysis..."
+          echo "   Mode: ${{ inputs.analysis_mode }}"
+          
+          # Set analysis flags based on mode
+          case "${{ inputs.analysis_mode }}" in
+            "only-new")
+              node ai-analyzer-baseline.js --only-new
+              ;;
+            "force")
+              node ai-analyzer-baseline.js --force
+              ;;
+            "changes-only")
+              echo "⚠️  Changes-only mode not yet implemented"
+              node ai-analyzer-baseline.js --only-new
+              ;;
+            *)
+              node ai-analyzer-baseline.js
+              ;;
+          esac
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_ACTIONS: 'true'
+      
+      - name: Run change detection analysis
+        if: ${{ inputs.analysis_mode != 'changes-only' }}
+        run: |
+          cd github-actions-backend
+          
+          echo "🔍 Running change detection and ultra-enhanced analysis..."
+          node ai-analyzer-ultra-wrapper.js full || echo "Change analysis completed"
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_ACTIONS: 'true'
+      
+      - name: Generate static data files
+        run: |
+          cd github-actions-backend
+          node generate-static-data.js
+          
+          # Copy to api-data
+          cp -r ../api-data/* ../api-data/ 2>/dev/null || echo "Static data generated"
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      
+      - name: Create analysis summary
+        run: |
+          cd github-actions-backend
+          echo "{
+            \"workflow\": \"analyze\",
+            \"run_id\": \"${{ github.run_id }}\",
+            \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"mode\": \"${{ inputs.analysis_mode }}\",
+            \"trigger_source\": \"${{ inputs.trigger_source }}\",
+            \"status\": \"completed\"
+          }" > ../api-data/last-analysis.json
+      
+      - name: Upload analysis artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-results-${{ github.run_id }}
+          path: |
+            github-actions-backend/data/baseline-intelligence-report.json
+            api-data/
+          retention-days: 30
+      
+      - name: Commit analysis results
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Add all analysis outputs
+          git add api-data/ || true
+          git add github-actions-backend/data/*.json || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🧠 Update AI analysis - $(date -u +%Y-%m-%d\\ %H:%M:%S\\ UTC)"
+            git push
+          fi
+      
+      # Trigger next workflow if successful
+      - name: Trigger sync workflow
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'sync.yml',
+              ref: 'main',
+              inputs: {
+                trigger_source: 'analyze',
+                run_id: '${{ github.run_id }}'
+              }
+            });
