@@ -158,7 +158,7 @@ Provide your analysis in this JSON structure:
     "key_insights": [],
     "notable_facts": []
   }
-}}`;
+}`;
 
 async function analyzeSnapshot(snapshot, company, url) {
   try {
@@ -269,28 +269,40 @@ async function processAllSnapshots() {
 
   console.log(`Found ${latestSnapshots.length} URLs to analyze for baseline intelligence\n`);
 
+  // Check which ones already have analysis
+  const unanalyzedSnapshots = latestSnapshots.filter(snapshot => {
+    const existing = db.prepare(
+      'SELECT id FROM baseline_analysis WHERE snapshot_id = ?'
+    ).get(snapshot.id);
+    return !existing;
+  });
+
+  console.log(`${latestSnapshots.length - unanalyzedSnapshots.length} already analyzed`);
+  console.log(`${unanalyzedSnapshots.length} new URLs to analyze\n`);
+
+  if (unanalyzedSnapshots.length === 0) {
+    console.log('✅ All URLs already analyzed!');
+    return generateBaselineReport();
+  }
+
   let successCount = 0;
   let errorCount = 0;
 
-  // Group by company for better progress tracking
-  const companiesMap = new Map();
-  for (const snapshot of latestSnapshots) {
-    if (!companiesMap.has(snapshot.company_id)) {
-      companiesMap.set(snapshot.company_id, {
-        name: snapshot.company_name,
-        type: snapshot.company_type,
-        urls: []
-      });
-    }
-    companiesMap.get(snapshot.company_id).urls.push(snapshot);
+  // Process in batches of 10 to avoid overwhelming the API
+  const batchSize = 10;
+  const batches = [];
+  for (let i = 0; i < unanalyzedSnapshots.length; i += batchSize) {
+    batches.push(unanalyzedSnapshots.slice(i, i + batchSize));
   }
 
-  console.log(`Analyzing ${companiesMap.size} companies...\n`);
+  console.log(`Processing ${batches.length} batches of up to ${batchSize} URLs each...\n`);
 
-  for (const [companyId, companyData] of companiesMap) {
-    console.log(`\n🏢 ${companyData.name} (${companyData.type}) - ${companyData.urls.length} URLs`);
+  for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
+    const batch = batches[batchIndex];
+    console.log(`\n📦 Batch ${batchIndex + 1}/${batches.length} (${batch.length} URLs)`);
     
-    for (const snapshot of companyData.urls) {
+    // Process batch in parallel
+    const batchPromises = batch.map(async (snapshot) => {
       const company = {
         id: snapshot.company_id,
         name: snapshot.company_name,
@@ -303,35 +315,30 @@ async function processAllSnapshots() {
         type: snapshot.url_type
       };
 
-      // Check if already analyzed
-      const existing = db.prepare(
-        'SELECT id FROM baseline_analysis WHERE snapshot_id = ?'
-      ).get(snapshot.id);
-
-      if (existing) {
-        console.log(`  ✓ ${url.type} - already analyzed`);
-        successCount++;
-        continue;
-      }
-
-      const extractedData = await analyzeSnapshot(snapshot, company, url);
-
-      if (extractedData) {
-        const stored = await storeBaselineAnalysis(snapshot, company, url, extractedData);
-        if (stored) {
-          successCount++;
-          console.log(`  ✓ ${url.type} - analyzed successfully`);
-        } else {
-          errorCount++;
-          console.log(`  ✗ ${url.type} - storage failed`);
+      try {
+        const extractedData = await analyzeSnapshot(snapshot, company, url);
+        if (extractedData) {
+          const stored = await storeBaselineAnalysis(snapshot, company, url, extractedData);
+          if (stored) {
+            console.log(`  ✓ ${company.name} - ${url.type}`);
+            return { success: true };
+          }
         }
-      } else {
-        errorCount++;
-        console.log(`  ✗ ${url.type} - analysis failed`);
+        return { success: false };
+      } catch (error) {
+        console.error(`  ✗ ${company.name} - ${url.type}: ${error.message}`);
+        return { success: false };
       }
+    });
 
-      // Rate limiting
-      await new Promise(resolve => setTimeout(resolve, 2000));
+    const results = await Promise.all(batchPromises);
+    successCount += results.filter(r => r.success).length;
+    errorCount += results.filter(r => !r.success).length;
+
+    // Only add delay between batches, not individual URLs
+    if (batchIndex < batches.length - 1) {
+      console.log(`  ⏳ Waiting 3 seconds before next batch...`);
+      await new Promise(resolve => setTimeout(resolve, 3000));
     }
   }
 
