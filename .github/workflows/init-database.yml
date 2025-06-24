@@ -1,0 +1,59 @@
+name: Initialize Database
+
+on:
+  workflow_dispatch:
+
+jobs:
+  init-database:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm ci
+    
+    - name: Create and initialize database
+      run: |
+        cd github-actions-backend
+        mkdir -p data
+        echo "📊 Initializing database with 52 companies..."
+        node scripts/init-db.js
+        
+        echo "✅ Database initialized!"
+        echo "Companies:"
+        sqlite3 data/monitor.db "SELECT COUNT(*) as count FROM companies" || echo "SQLite3 not available"
+    
+    - name: Commit initial database
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Force add the database file
+        git add -f github-actions-backend/data/monitor.db
+        
+        if git diff --staged --quiet; then
+          echo "❌ No database file to commit!"
+          exit 1
+        else
+          git commit -m "🚀 Initialize monitoring database with 52 companies"
+          git push
+          echo "✅ Database committed successfully!"
+        fi
+    
+    - name: Verify database
+      run: |
+        echo "📊 Database statistics:"
+        cd github-actions-backend
+        node diagnostic.js
