@@ -1,0 +1,5 @@
+# Data Directory
+
+This directory contains the SQLite database for the AI Competitive Monitor.
+
+The database file (monitor.db) will be created automatically by the GitHub Actions workflows.
