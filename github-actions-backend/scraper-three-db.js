@@ -7,9 +7,10 @@ const path = require('path');
 const dbManager = require('./db-manager');
 
 // Configuration
-const BATCH_SIZE = 5; // Process URLs in batches
-const TIMEOUT = 30000; // 30 seconds per page
-const RATE_LIMIT_DELAY = 2000; // 2 seconds between requests
+const BATCH_SIZE = 5; // Process 5 URLs concurrently
+const PAGE_TIMEOUT = 30000; // 30 seconds per page
+const RATE_LIMIT_DELAY = 500; // 500ms between batch starts
+const MAX_RETRIES = 2; // Retry failed URLs
 
 class IntelligentScraperThreeDB {
   constructor() {
@@ -17,10 +18,12 @@ class IntelligentScraperThreeDB {
     this.runId = null;
     this.rawDb = null;
     this.intelligenceDb = null;
+    this.startTime = null;
   }
 
   async initialize() {
     console.log('🚀 Starting Intelligent Scraper (Three-Database Architecture)...');
+    this.startTime = Date.now();
     
     // Check if three-database architecture exists
     if (!dbManager.hasThreeDbArchitecture()) {
@@ -32,14 +35,17 @@ class IntelligentScraperThreeDB {
     this.rawDb = dbManager.getRawDb();
     this.intelligenceDb = dbManager.getIntelligenceDb();
     
-    // Launch Puppeteer
+    // Launch Puppeteer with optimized settings
     this.browser = await puppeteer.launch({
       headless: 'new',
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
-        '--disable-gpu'
+        '--disable-gpu',
+        '--disable-web-security',
+        '--disable-features=IsolateOrigins,site-per-process',
+        '--disable-blink-features=AutomationControlled'
       ]
     });
 
@@ -72,7 +78,8 @@ class IntelligentScraperThreeDB {
     // Close database connections
     dbManager.closeAll();
     
-    console.log('✅ Scraper shutdown complete');
+    const duration = ((Date.now() - this.startTime) / 1000 / 60).toFixed(1);
+    console.log(`✅ Scraper shutdown complete (took ${duration} minutes)`);
   }
 
   async scrapeAll() {
@@ -83,31 +90,49 @@ class IntelligentScraperThreeDB {
         FROM companies c
         LEFT JOIN urls u ON c.id = u.company_id
         GROUP BY c.id
+        ORDER BY c.name
       `);
       const companies = companiesStmt.all();
       
       console.log(`📊 Found ${companies.length} companies to monitor`);
       
-      let totalUrls = 0;
-      let processedUrls = 0;
-      let changesDetected = 0;
-      let errors = 0;
-      
-      // Process each company
+      // Collect all URLs with company info
+      const allUrls = [];
       for (const company of companies) {
-        console.log(`\n🏢 Processing ${company.name}...`);
-        
         const urlsStmt = this.intelligenceDb.prepare(`
           SELECT * FROM urls WHERE company_id = ?
         `);
         const urls = urlsStmt.all(company.id);
         
-        totalUrls += urls.length;
+        urls.forEach(url => {
+          allUrls.push({
+            ...url,
+            companyName: company.name
+          });
+        });
+      }
+      
+      console.log(`📊 Total URLs to scrape: ${allUrls.length}`);
+      
+      let processedUrls = 0;
+      let changesDetected = 0;
+      let errors = 0;
+      
+      // Process URLs in batches
+      for (let i = 0; i < allUrls.length; i += BATCH_SIZE) {
+        const batch = allUrls.slice(i, i + BATCH_SIZE);
+        const batchNum = Math.floor(i / BATCH_SIZE) + 1;
+        const totalBatches = Math.ceil(allUrls.length / BATCH_SIZE);
         
-        // Process URLs sequentially with rate limiting
-        for (const url of urls) {
-          const result = await this.scrapeUrl(url, company.name);
-          
+        console.log(`\n🔄 Processing batch ${batchNum}/${totalBatches} (${batch.length} URLs)...`);
+        
+        // Process batch concurrently
+        const results = await Promise.all(
+          batch.map(url => this.scrapeUrlWithRetry(url, url.companyName))
+        );
+        
+        // Count results
+        results.forEach(result => {
           if (result.success) {
             processedUrls++;
             if (result.changed) {
@@ -116,8 +141,14 @@ class IntelligentScraperThreeDB {
           } else {
             errors++;
           }
-          
-          // Rate limiting between requests
+        });
+        
+        // Progress update
+        const progress = ((i + batch.length) / allUrls.length * 100).toFixed(1);
+        console.log(`   Progress: ${progress}% complete`);
+        
+        // Small delay between batches to prevent overwhelming targets
+        if (i + BATCH_SIZE < allUrls.length) {
           await new Promise(resolve => setTimeout(resolve, RATE_LIMIT_DELAY));
         }
       }
@@ -131,11 +162,11 @@ class IntelligentScraperThreeDB {
       updateStmt.run(processedUrls, changesDetected, errors, this.runId);
       
       console.log(`\n📈 Scraping Summary:`);
-      console.log(`   Total URLs: ${totalUrls}`);
+      console.log(`   Total URLs: ${allUrls.length}`);
       console.log(`   Processed: ${processedUrls}`);
       console.log(`   Changes Detected: ${changesDetected}`);
       console.log(`   Errors: ${errors}`);
-      console.log(`   Success Rate: ${((processedUrls / totalUrls) * 100).toFixed(1)}%`);
+      console.log(`   Success Rate: ${((processedUrls / allUrls.length) * 100).toFixed(1)}%`);
       
     } catch (error) {
       console.error('❌ Scraping error:', error.message);
@@ -154,25 +185,46 @@ class IntelligentScraperThreeDB {
     }
   }
 
+  async scrapeUrlWithRetry(urlConfig, companyName, retryCount = 0) {
+    try {
+      return await this.scrapeUrl(urlConfig, companyName);
+    } catch (error) {
+      if (retryCount < MAX_RETRIES) {
+        console.log(`      ⚠️ Retrying ${urlConfig.url} (attempt ${retryCount + 2}/${MAX_RETRIES + 1})...`);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        return this.scrapeUrlWithRetry(urlConfig, companyName, retryCount + 1);
+      }
+      return {
+        success: false,
+        changed: false,
+        url: urlConfig.url,
+        error: error.message
+      };
+    }
+  }
+
   async scrapeUrl(urlConfig, companyName) {
     const page = await this.browser.newPage();
     
     try {
-      console.log(`   📄 Scraping ${urlConfig.url}...`);
+      console.log(`   📄 [${companyName}] ${urlConfig.url}`);
       
       // Set user agent to avoid bot detection
       await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
       
+      // Set viewport
+      await page.setViewport({ width: 1920, height: 1080 });
+      
       // Navigate to URL with timeout
       const response = await page.goto(urlConfig.url, {
         waitUntil: 'networkidle2',
-        timeout: TIMEOUT
+        timeout: PAGE_TIMEOUT
       });
       
       const statusCode = response.status();
       
-      // Wait a bit for dynamic content
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Wait a bit for dynamic content (reduced from 2000ms)
+      await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Get full HTML content
       const htmlContent = await page.content();
@@ -213,8 +265,6 @@ class IntelligentScraperThreeDB {
       
       if (hasChanged) {
         console.log(`      ✨ Change detected!`);
-      } else {
-        console.log(`      ✓ No changes detected`);
       }
       
       await page.close();
@@ -226,7 +276,7 @@ class IntelligentScraperThreeDB {
       };
       
     } catch (error) {
-      console.error(`      ❌ Error scraping ${urlConfig.url}:`, error.message);
+      console.error(`      ❌ Error: ${error.message.split('\n')[0]}`);
       
       // Store error in database
       const errorStmt = this.rawDb.prepare(`
@@ -246,12 +296,7 @@ class IntelligentScraperThreeDB {
       
       await page.close();
       
-      return {
-        success: false,
-        changed: false,
-        url: urlConfig.url,
-        error: error.message
-      };
+      throw error;
     }
   }
 
@@ -271,7 +316,7 @@ class IntelligentScraperThreeDB {
       }
       
       console.log(`🎯 Scraping single URL: ${urlConfig.url}`);
-      const result = await this.scrapeUrl(urlConfig, urlConfig.company_name);
+      const result = await this.scrapeUrlWithRetry(urlConfig, urlConfig.company_name);
       
       // Update scraping run stats
       if (this.runId) {
