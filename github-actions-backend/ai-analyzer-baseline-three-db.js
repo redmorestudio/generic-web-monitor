@@ -249,6 +249,10 @@ async function processAllSnapshots() {
   const processedDb = dbManager.getProcessedDb();
   const intelligenceDb = dbManager.getIntelligenceDb();
 
+  // Attach intelligence database for cross-database queries
+  const intelligenceDbPath = path.join(__dirname, 'data', 'intelligence.db');
+  processedDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
+
   // Check command line arguments
   const onlyNew = process.argv.includes('--only-new');
   const force = process.argv.includes('--force');
@@ -256,19 +260,20 @@ async function processAllSnapshots() {
   console.log(`Mode: ${force ? 'FORCE (re-analyze all)' : onlyNew ? 'ONLY NEW (skip analyzed)' : 'ALL'}\n`);
 
   // Get the most recent processed content for each URL
+  // Using proper database prefixes for cross-database join
   let query = `
     SELECT mc.*, u.id as url_id, u.url, u.type as url_type, 
            c.id as company_id, c.name as company_name, c.type as company_type
-    FROM markdown_content mc
-    JOIN urls u ON mc.url_id = u.id
-    JOIN companies c ON u.company_id = c.id
+    FROM main.markdown_content mc
+    JOIN intelligence.urls u ON mc.url_id = u.id
+    JOIN intelligence.companies c ON u.company_id = c.id
     WHERE mc.id IN (
       SELECT MAX(id) 
-      FROM markdown_content 
+      FROM main.markdown_content 
       GROUP BY url_id
     )
-    AND mc.markdown_content IS NOT NULL
-    AND LENGTH(mc.markdown_content) > 100
+    AND mc.markdown_text IS NOT NULL
+    AND LENGTH(mc.markdown_text) > 100
   `;
 
   // For only-new mode, we need to check the intelligence database separately
@@ -310,7 +315,7 @@ async function processAllSnapshots() {
       const company = {
         id: content.company_id,
         name: content.company_name,
-        type: content.company_type
+        type: content.company_type || 'AI'
       };
       
       const url = {
@@ -321,10 +326,10 @@ async function processAllSnapshots() {
 
       try {
         const extractedData = await analyzeContent(
-          content.markdown_content, 
+          content.markdown_text, // Fixed: was markdown_content
           company, 
           url, 
-          content.processed_at
+          content.processed_at || content.converted_at
         );
         
         if (extractedData) {
@@ -357,6 +362,9 @@ async function processAllSnapshots() {
       await new Promise(resolve => setTimeout(resolve, 3000));
     }
   }
+
+  // Detach the intelligence database
+  processedDb.exec('DETACH DATABASE intelligence');
 
   // Generate summary report
   const report = generateBaselineReport(intelligenceDb);
