@@ -255,6 +255,10 @@ async function generateSmartGroupReport() {
   const processedDb = dbManager.getProcessedDb();
   const intelligenceDb = dbManager.getIntelligenceDb();
 
+  // Attach intelligence database for cross-database queries
+  const intelligenceDbPath = path.join(__dirname, 'data', 'intelligence.db');
+  processedDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
+
   const report = {
     timestamp: new Date().toISOString(),
     model: 'Claude Sonnet 4',
@@ -271,16 +275,19 @@ async function generateSmartGroupReport() {
 
   // Get recent changes with enhanced analysis
   const changes = processedDb.prepare(`
-    SELECT cd.*, mc.markdown_content, u.url, u.type as url_type,
+    SELECT cd.*, mc.markdown_text, u.url, u.type as url_type,
            c.name as company_name, c.type as company_type
-    FROM change_detection cd
-    JOIN markdown_content mc ON cd.new_content_id = mc.id
-    JOIN urls u ON cd.url_id = u.id
-    JOIN companies c ON u.company_id = c.id
+    FROM main.change_detection cd
+    JOIN main.markdown_content mc ON cd.new_content_id = mc.id
+    JOIN intelligence.urls u ON cd.url_id = u.id
+    JOIN intelligence.companies c ON u.company_id = c.id
     WHERE cd.detected_at > datetime('now', '-7 days')
     ORDER BY cd.detected_at DESC
     LIMIT 50
   `).all();
+
+  // Detach after query
+  processedDb.exec('DETACH DATABASE intelligence');
 
   for (const change of changes) {
     // Get enhanced analysis from intelligence db
@@ -371,18 +378,22 @@ async function processRecentChanges() {
   const processedDb = dbManager.getProcessedDb();
   const intelligenceDb = dbManager.getIntelligenceDb();
 
+  // Attach intelligence database for cross-database queries
+  const intelligenceDbPath = path.join(__dirname, 'data', 'intelligence.db');
+  processedDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
+
   // Get unanalyzed changes
   const changes = processedDb.prepare(`
     SELECT cd.*, 
-           mc_old.markdown_content as old_content,
-           mc_new.markdown_content as new_content,
+           mc_old.markdown_text as old_content,
+           mc_new.markdown_text as new_content,
            u.url, u.type as url_type,
            c.id as company_id, c.name as company_name, c.type as company_type
-    FROM change_detection cd
-    JOIN urls u ON cd.url_id = u.id
-    JOIN companies c ON u.company_id = c.id
-    LEFT JOIN markdown_content mc_old ON cd.old_content_id = mc_old.id
-    JOIN markdown_content mc_new ON cd.new_content_id = mc_new.id
+    FROM main.change_detection cd
+    JOIN intelligence.urls u ON cd.url_id = u.id
+    JOIN intelligence.companies c ON u.company_id = c.id
+    LEFT JOIN main.markdown_content mc_old ON cd.old_content_id = mc_old.id
+    JOIN main.markdown_content mc_new ON cd.new_content_id = mc_new.id
     WHERE NOT EXISTS (
       SELECT 1 FROM intelligence.enhanced_analysis ea 
       WHERE ea.change_id = cd.id
@@ -390,6 +401,9 @@ async function processRecentChanges() {
     ORDER BY cd.detected_at DESC
     LIMIT 10
   `).all();
+
+  // Detach after query
+  processedDb.exec('DETACH DATABASE intelligence');
 
   console.log(`Found ${changes.length} changes to analyze with Claude Sonnet 4`);
 
@@ -399,7 +413,7 @@ async function processRecentChanges() {
     const company = {
       id: change.company_id,
       name: change.company_name,
-      type: change.company_type
+      type: change.company_type || 'AI'
     };
     
     const url = {
