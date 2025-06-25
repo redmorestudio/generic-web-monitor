@@ -159,7 +159,7 @@ class TheBrainEnhancedThreeDBIntegration {
   async syncCompaniesWithSmartGroups(rootId) {
     console.log('Syncing companies to smart groups...');
     
-    // Get companies with their data
+    // Get companies with their data (no enabled column)
     const companies = this.intelligenceDb.prepare(`
       SELECT 
         c.*,
@@ -168,9 +168,8 @@ class TheBrainEnhancedThreeDBIntegration {
       FROM companies c
       LEFT JOIN urls u ON c.id = u.company_id
       LEFT JOIN baseline_analysis ba ON c.id = ba.company_id
-      WHERE c.enabled = 1
       GROUP BY c.id
-      ORDER BY c.type, c.name
+      ORDER BY c.category, c.name
     `).all();
     
     const typeToGroupMap = {
@@ -187,8 +186,8 @@ class TheBrainEnhancedThreeDBIntegration {
     
     // Add companies to their smart groups
     for (const company of companies) {
-      const groupName = typeToGroupMap[company.type] || '🏢 Enterprise AI';
-      const groupId = await this.getSmartGroupId(company.type || 'enterprise_ai');
+      const groupName = typeToGroupMap[company.category] || '🏢 Enterprise AI';
+      const groupId = await this.getSmartGroupId(company.category || 'enterprise_ai');
       
       if (!groupId) continue;
       
@@ -198,7 +197,7 @@ class TheBrainEnhancedThreeDBIntegration {
         name: company.name,
         label: `${company.url_count} URLs | ${company.analysis_count} analyses`,
         kind: 1,
-        foregroundColor: this.getColorForType(company.type),
+        foregroundColor: this.getColorForType(company.category),
         backgroundColor: '#111827'
       }, 'company', groupId);
       
@@ -365,25 +364,19 @@ class TheBrainEnhancedThreeDBIntegration {
   async syncIntelligentChanges(rootId) {
     console.log('Syncing high-value changes with intelligence...');
     
+    // Get from change_intelligence table
     const changes = this.intelligenceDb.prepare(`
       SELECT 
-        c.*,
-        u.url,
-        u.url_type,
-        comp.name as company_name,
-        comp.type as company_type,
-        comp.thebrain_thought_id as company_thought_id,
-        aa.relevance_score,
-        aa.summary,
-        aa.category,
-        aa.raw_response
-      FROM changes c
-      JOIN urls u ON c.url_id = u.id
-      JOIN companies comp ON u.company_id = comp.id
-      LEFT JOIN ai_analysis aa ON c.id = aa.change_id
-      WHERE aa.relevance_score >= 6
-      AND c.created_at > datetime('now', '-30 days')
-      ORDER BY aa.relevance_score DESC, c.created_at DESC
+        ci.*,
+        c.name as company_name,
+        c.category as company_type,
+        c.thebrain_thought_id as company_thought_id
+      FROM change_intelligence ci
+      JOIN urls u ON ci.url_id = u.id
+      JOIN companies c ON u.company_id = c.id
+      WHERE ci.relevance_score >= 6
+      AND ci.detected_at > datetime('now', '-30 days')
+      ORDER BY ci.relevance_score DESC, ci.detected_at DESC
       LIMIT 30
     `).all();
     
@@ -402,7 +395,7 @@ class TheBrainEnhancedThreeDBIntegration {
       
       if (!groupId) continue;
       
-      const changeDate = new Date(change.created_at).toLocaleDateString();
+      const changeDate = new Date(change.detected_at).toLocaleDateString();
       const changeName = `${change.company_name}: ${category} (${changeDate})`;
       const changeId = this.generateThoughtId(`Change-${change.id}`);
       
@@ -426,10 +419,10 @@ class TheBrainEnhancedThreeDBIntegration {
       
       // Extract and link entities from the change
       try {
-        if (change.raw_response) {
-          const analysis = JSON.parse(change.raw_response);
-          if (analysis.entities?.products?.length > 0) {
-            for (const product of analysis.entities.products) {
+        if (change.entities_mentioned) {
+          const entities = JSON.parse(change.entities_mentioned);
+          if (entities.products?.length > 0) {
+            for (const product of entities.products) {
               const productId = this.generateThoughtId(`Product-${product}`);
               // Check if product thought exists
               const productExists = this.checkThoughtExists(productId);
@@ -457,11 +450,10 @@ class TheBrainEnhancedThreeDBIntegration {
         c1.thebrain_thought_id as thought1,
         c2.name as company2,
         c2.thebrain_thought_id as thought2,
-        c1.type
+        c1.category
       FROM companies c1
-      JOIN companies c2 ON c1.type = c2.type AND c1.id < c2.id
-      WHERE c1.enabled = 1 AND c2.enabled = 1
-      AND c1.thebrain_thought_id IS NOT NULL 
+      JOIN companies c2 ON c1.category = c2.category AND c1.id < c2.id
+      WHERE c1.thebrain_thought_id IS NOT NULL 
       AND c2.thebrain_thought_id IS NOT NULL
       LIMIT 50
     `).all();
@@ -500,19 +492,19 @@ class TheBrainEnhancedThreeDBIntegration {
         name: 'Raw Content DB',
         desc: 'Stores scraped HTML',
         color: '#dc2626',
-        tables: ['content_snapshots', 'changes']
+        tables: ['raw_html', 'scrape_runs']
       },
       {
         name: 'Processed Content DB', 
         desc: 'Markdown & structured text',
         color: '#f59e0b',
-        tables: ['processed_content', 'markdown_content']
+        tables: ['markdown_content', 'content_changes']
       },
       {
         name: 'Intelligence DB',
         desc: 'AI analysis & insights',
         color: '#22c55e',
-        tables: ['companies', 'urls', 'baseline_analysis', 'ai_analysis']
+        tables: ['companies', 'urls', 'baseline_analysis', 'change_intelligence']
       }
     ];
     
