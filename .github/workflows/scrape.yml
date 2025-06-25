@@ -17,9 +17,15 @@ on:
         required: false
         type: boolean
         default: false
+      use_three_db:
+        description: 'Use three-database architecture'
+        required: false
+        type: boolean
+        default: true
 
 env:
   NODE_ENV: production
+  USE_THREE_DB: ${{ inputs.use_three_db || 'true' }}
 
 jobs:
   scrape-websites:
@@ -52,7 +58,17 @@ jobs:
           cd github-actions-backend
           npx puppeteer browsers install chrome
       
-      - name: Initialize or restore database
+      - name: Initialize database (three-db architecture)
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        run: |
+          cd github-actions-backend
+          
+          # Run the three-database initialization
+          echo "📊 Initializing three-database architecture..."
+          node scripts/init-db-three.js
+      
+      - name: Initialize database (legacy)
+        if: ${{ env.USE_THREE_DB != 'true' }}
         run: |
           cd github-actions-backend
           
@@ -82,13 +98,25 @@ jobs:
           GITHUB_ACTIONS: 'true'
           FORCE_SCRAPE: ${{ inputs.force_scrape }}
       
-      - name: Convert HTML to Markdown
+      - name: Convert HTML to Markdown (legacy only)
+        if: ${{ env.USE_THREE_DB != 'true' }}
         run: |
           cd github-actions-backend
           echo "📝 Converting HTML to Markdown..."
           node markdown-converter.js latest
       
-      - name: Upload database backup
+      - name: Upload database backup (three-db)
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: scraper-databases-${{ github.run_id }}
+          path: |
+            github-actions-backend/data/raw_content.db
+            github-actions-backend/data/intelligence.db
+          retention-days: 7
+      
+      - name: Upload database backup (legacy)
+        if: ${{ env.USE_THREE_DB != 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: scraper-database-${{ github.run_id }}
@@ -103,10 +131,35 @@ jobs:
             \"workflow\": \"scrape\",
             \"run_id\": \"${{ github.run_id }}\",
             \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
-            \"status\": \"completed\"
+            \"status\": \"completed\",
+            \"use_three_db\": ${{ env.USE_THREE_DB }}
           }" > ../api-data/last-scrape.json
       
-      - name: Commit database changes
+      - name: Commit database changes (three-db)
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Add the databases and scrape status
+          git add -f github-actions-backend/data/raw_content.db || true
+          git add -f github-actions-backend/data/intelligence.db || true
+          git add api-data/last-scrape.json || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🕷️ Update scraped content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+            
+            # Pull and rebase to avoid conflicts
+            git pull --rebase origin main || true
+            
+            # Push changes
+            git push origin main
+          fi
+      
+      - name: Commit database changes (legacy)
+        if: ${{ env.USE_THREE_DB != 'true' }}
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -141,6 +194,7 @@ jobs:
               ref: 'main',
               inputs: {
                 trigger_source: 'scrape',
-                run_id: '${{ github.run_id }}'
+                run_id: '${{ github.run_id }}',
+                use_three_db: '${{ env.USE_THREE_DB }}'
               }
             });
