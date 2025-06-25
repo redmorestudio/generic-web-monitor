@@ -1,0 +1,205 @@
+name: 2. Process Content
+
+on:
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      trigger_source:
+        description: 'Source that triggered this workflow'
+        required: false
+        type: string
+        default: 'manual'
+      run_id:
+        description: 'Run ID from scraping workflow'
+        required: false
+        type: string
+      mode:
+        description: 'Processing mode'
+        required: false
+        type: choice
+        options:
+          - 'latest'
+          - 'all'
+          - 'run'
+        default: 'latest'
+      use_three_db:
+        description: 'Use three-database architecture'
+        required: false
+        type: boolean
+        default: true
+
+# Prevent concurrent runs
+concurrency:
+  group: process-workflow
+  cancel-in-progress: false
+
+env:
+  NODE_ENV: production
+  USE_THREE_DB: ${{ inputs.use_three_db || 'true' }}
+
+jobs:
+  process-content:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    permissions:
+      contents: write
+      actions: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Download database artifacts (if triggered by scrape)
+        if: ${{ inputs.trigger_source == 'scrape' && inputs.run_id }}
+        uses: actions/download-artifact@v4
+        with:
+          name: scraper-databases-${{ inputs.run_id }}
+          path: github-actions-backend/data
+      
+      - name: Convert HTML to Markdown (three-db)
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        run: |
+          cd github-actions-backend
+          
+          echo "📝 Converting HTML to Markdown..."
+          
+          # Determine mode
+          if [ "${{ inputs.mode }}" = "run" ] && [ -n "${{ inputs.run_id }}" ]; then
+            node markdown-converter-three-db.js run ${{ inputs.run_id }}
+          elif [ "${{ inputs.mode }}" = "all" ]; then
+            node markdown-converter-three-db.js all
+          else
+            node markdown-converter-three-db.js latest
+          fi
+      
+      - name: Convert HTML to Markdown (legacy)
+        if: ${{ env.USE_THREE_DB != 'true' }}
+        run: |
+          cd github-actions-backend
+          
+          echo "📝 Converting HTML to Markdown (legacy mode)..."
+          
+          if [ "${{ inputs.mode }}" = "all" ]; then
+            node markdown-converter.js all
+          else
+            node markdown-converter.js latest
+          fi
+      
+      - name: Extract structured data
+        run: |
+          cd github-actions-backend
+          
+          echo "🔍 Extracting structured data from content..."
+          
+          # TODO: Implement structured data extraction
+          # This will parse markdown and extract:
+          # - Pricing information
+          # - Product features
+          # - Company updates
+          # - Technical specifications
+      
+      - name: Upload processed databases (three-db)
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: processed-databases-${{ github.run_id }}
+          path: |
+            github-actions-backend/data/raw_content.db
+            github-actions-backend/data/processed_content.db
+            github-actions-backend/data/intelligence.db
+          retention-days: 7
+      
+      - name: Upload processed database (legacy)
+        if: ${{ env.USE_THREE_DB != 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: processed-database-${{ github.run_id }}
+          path: github-actions-backend/data/monitor.db
+          retention-days: 7
+      
+      - name: Create process summary
+        run: |
+          cd github-actions-backend
+          mkdir -p ../api-data
+          echo "{
+            \"workflow\": \"process\",
+            \"run_id\": \"${{ github.run_id }}\",
+            \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"status\": \"completed\",
+            \"mode\": \"${{ inputs.mode }}\",
+            \"use_three_db\": ${{ env.USE_THREE_DB }}
+          }" > ../api-data/last-process.json
+      
+      - name: Commit processed data (three-db)
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Ensure we're on the latest version
+          git fetch origin main
+          git reset --hard origin/main
+          
+          # Add the databases
+          git add -f github-actions-backend/data/processed_content.db || true
+          git add api-data/last-process.json || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🔄 Update processed content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+            git push --force-with-lease origin main
+          fi
+      
+      - name: Commit processed data (legacy)
+        if: ${{ env.USE_THREE_DB != 'true' }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Ensure we're on the latest version
+          git fetch origin main
+          git reset --hard origin/main
+          
+          # Add the database
+          git add -f github-actions-backend/data/monitor.db || true
+          git add api-data/last-process.json || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🔄 Update processed content - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+            git push --force-with-lease origin main
+          fi
+      
+      # Trigger next workflow if successful
+      - name: Trigger analysis workflow
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'analyze.yml',
+              ref: 'main',
+              inputs: {
+                trigger_source: 'process',
+                run_id: '${{ github.run_id }}',
+                use_three_db: '${{ env.USE_THREE_DB }}'
+              }
+            });
