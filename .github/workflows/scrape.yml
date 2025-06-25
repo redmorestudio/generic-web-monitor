@@ -141,6 +141,10 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
+          # First, ensure we're on the latest version
+          git fetch origin main
+          git reset --hard origin/main
+          
           # Add the databases and scrape status
           git add -f github-actions-backend/data/raw_content.db || true
           git add -f github-actions-backend/data/intelligence.db || true
@@ -151,11 +155,8 @@ jobs:
           else
             git commit -m "🕷️ Update scraped content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
             
-            # Pull and rebase to avoid conflicts
-            git pull --rebase origin main || true
-            
-            # Push changes
-            git push origin main
+            # Use force push with lease to avoid conflicts
+            git push --force-with-lease origin main
           fi
       
       - name: Commit database changes (legacy)
@@ -163,6 +164,10 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          
+          # First, ensure we're on the latest version
+          git fetch origin main
+          git reset --hard origin/main
           
           # Add the database and scrape status
           git add -f github-actions-backend/data/monitor.db || true
@@ -173,11 +178,8 @@ jobs:
           else
             git commit -m "🕷️ Update scraped content - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
             
-            # Pull and rebase to avoid conflicts
-            git pull --rebase origin main || true
-            
-            # Push changes
-            git push origin main
+            # Use force push with lease to avoid conflicts
+            git push --force-with-lease origin main
           fi
       
       # Trigger next workflow if successful
