@@ -23,6 +23,11 @@ on:
         type: boolean
         default: true
 
+# Prevent concurrent runs
+concurrency:
+  group: scrape-workflow
+  cancel-in-progress: false
+
 env:
   NODE_ENV: production
   USE_THREE_DB: ${{ inputs.use_three_db || 'true' }}
@@ -92,8 +97,11 @@ jobs:
             # TODO: Add company filter support to scraper
           fi
           
-          # Run scraper
-          node scraper-wrapper.js
+          # Run scraper with timeout protection
+          timeout 20m node scraper-wrapper.js || {
+            echo "⚠️ Scraper timeout after 20 minutes"
+            exit 1
+          }
         env:
           GITHUB_ACTIONS: 'true'
           FORCE_SCRAPE: ${{ inputs.force_scrape }}
