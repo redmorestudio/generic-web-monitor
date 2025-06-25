@@ -1,13 +1,46 @@
 const Anthropic = require('@anthropic-ai/sdk');
+const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
-const dbManager = require('./db-manager');
 require('dotenv').config();
 
 // Initialize Anthropic client
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY
 });
+
+// Three-database architecture
+const dataDir = path.join(__dirname, 'data');
+const rawDb = new Database(path.join(dataDir, 'raw_content.db'));
+const processedDb = new Database(path.join(dataDir, 'processed_content.db'));
+const intelligenceDb = new Database(path.join(dataDir, 'intelligence.db'));
+
+// Attach databases for cross-database queries
+intelligenceDb.exec(`ATTACH DATABASE '${path.join(dataDir, 'processed_content.db')}' AS processed`);
+intelligenceDb.exec(`ATTACH DATABASE '${path.join(dataDir, 'raw_content.db')}' AS raw`);
+
+// Create baseline_analysis table in intelligence.db
+intelligenceDb.exec(`
+  CREATE TABLE IF NOT EXISTS baseline_analysis (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    company_id INTEGER,
+    url_id INTEGER,
+    snapshot_id INTEGER UNIQUE,
+    entities TEXT,
+    relationships TEXT,
+    semantic_categories TEXT,
+    competitive_data TEXT,
+    smart_groups TEXT,
+    quantitative_data TEXT,
+    extracted_text TEXT,
+    full_extraction TEXT,
+    summary TEXT,
+    relevance_score INTEGER,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (company_id) REFERENCES companies(id),
+    FOREIGN KEY (url_id) REFERENCES urls(id)
+  )
+`);
 
 // Baseline extraction prompt
 const BASELINE_EXTRACTION_PROMPT = `You are an AI competitive intelligence analyst. Analyze this company's current web content to extract comprehensive data with a focus on RELATIONSHIPS between entities.
@@ -132,16 +165,16 @@ Provide your analysis in this JSON structure:
   }
 }`;
 
-async function analyzeContent(content, company, url, timestamp) {
+async function analyzeSnapshot(snapshot, company, url) {
   try {
     const prompt = `${BASELINE_EXTRACTION_PROMPT}
 
 Company: ${company.name} (${company.category})
 URL: ${url.url} (${url.url_type})
-Snapshot Date: ${timestamp}
+Snapshot Date: ${new Date(snapshot.created_at).toISOString()}
 
 CURRENT CONTENT:
-${content.substring(0, 5000)}
+${snapshot.markdown_text.substring(0, 5000)}
 
 Analyze this company's current state and provide comprehensive extraction following the specified JSON structure.`;
 
@@ -157,12 +190,12 @@ Analyze this company's current state and provide comprehensive extraction follow
       }]
     });
 
-    const responseContent = response.content[0].text;
+    const content = response.content[0].text;
     
     // Parse JSON response
     let extractedData;
     try {
-      const jsonMatch = responseContent.match(/\{[\s\S]*\}/);
+      const jsonMatch = content.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
         extractedData = JSON.parse(jsonMatch[0]);
       } else {
@@ -180,38 +213,15 @@ Analyze this company's current state and provide comprehensive extraction follow
   }
 }
 
-async function storeBaselineAnalysis(intelligenceDb, contentId, company, url, extractedData) {
+async function storeBaselineAnalysis(snapshot, company, url, extractedData) {
   try {
     const relevanceScore = extractedData.strategic_intelligence?.threat_assessment?.level || 5;
     const summary = extractedData.summary?.one_line || 
       `${company.name}: ${extractedData.current_state?.positioning || 'AI company'}`;
 
-    // Create baseline_analysis table if not exists
-    intelligenceDb.exec(`
-      CREATE TABLE IF NOT EXISTS baseline_analysis (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        company_id INTEGER,
-        url_id INTEGER,
-        content_id INTEGER UNIQUE,
-        entities TEXT,
-        relationships TEXT,
-        semantic_categories TEXT,
-        competitive_data TEXT,
-        smart_groups TEXT,
-        quantitative_data TEXT,
-        extracted_text TEXT,
-        full_extraction TEXT,
-        summary TEXT,
-        relevance_score INTEGER,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-        FOREIGN KEY (company_id) REFERENCES companies(id),
-        FOREIGN KEY (url_id) REFERENCES urls(id)
-      )
-    `);
-
     const stmt = intelligenceDb.prepare(`
       INSERT OR REPLACE INTO baseline_analysis 
-      (company_id, url_id, content_id, entities, relationships, semantic_categories, 
+      (company_id, url_id, snapshot_id, entities, relationships, semantic_categories, 
        competitive_data, smart_groups, quantitative_data, extracted_text, 
        full_extraction, summary, relevance_score)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
@@ -220,7 +230,7 @@ async function storeBaselineAnalysis(intelligenceDb, contentId, company, url, ex
     stmt.run(
       company.id,
       url.id,
-      contentId,
+      snapshot.id,
       JSON.stringify(extractedData.entities || {}),
       JSON.stringify(extractedData.relationships || []),
       JSON.stringify(extractedData.current_state || {}),
@@ -242,57 +252,37 @@ async function storeBaselineAnalysis(intelligenceDb, contentId, company, url, ex
 }
 
 async function processAllSnapshots() {
-  console.log('🚀 Starting BASELINE AI Analysis (Three-Database Architecture)...');
-  console.log('📊 This will analyze ALL companies\' current state, not just changes\n');
-
-  // Get database connections
-  const processedDb = dbManager.getProcessedDb();
-  const intelligenceDb = dbManager.getIntelligenceDb();
-
-  // Attach intelligence database for cross-database queries
-  const intelligenceDbPath = path.join(__dirname, 'data', 'intelligence.db');
-  processedDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
-
-  // Check command line arguments
-  const onlyNew = process.argv.includes('--only-new');
-  const force = process.argv.includes('--force');
-  
-  console.log(`Mode: ${force ? 'FORCE (re-analyze all)' : onlyNew ? 'ONLY NEW (skip analyzed)' : 'ALL'}\n`);
+  console.log('🚀 Starting BASELINE AI Analysis for Three-Database Architecture...');
+  console.log('📊 This will analyze ALL companies\' current state\n');
 
   // Get the most recent processed content for each URL
-  // Fixed: Using correct column names
-  let query = `
-    SELECT mc.*, u.id as url_id, u.url, u.url_type as url_type, 
-           c.id as company_id, c.name as company_name, c.category as company_category
-    FROM main.markdown_content mc
-    JOIN intelligence.urls u ON mc.url_id = u.id
-    JOIN intelligence.companies c ON u.company_id = c.id
-    WHERE mc.id IN (
+  const latestSnapshots = intelligenceDb.prepare(`
+    SELECT 
+      pc.id,
+      pc.url_id,
+      pc.snapshot_id,
+      pc.markdown_text,
+      pc.created_at,
+      u.id as url_id, 
+      u.url, 
+      u.url_type,
+      c.id as company_id, 
+      c.name as company_name, 
+      c.category as company_type
+    FROM processed.processed_content pc
+    JOIN urls u ON pc.url_id = u.id
+    JOIN companies c ON u.company_id = c.id
+    WHERE pc.id IN (
       SELECT MAX(id) 
-      FROM main.markdown_content 
+      FROM processed.processed_content 
       GROUP BY url_id
     )
-    AND mc.markdown_text IS NOT NULL
-    AND LENGTH(mc.markdown_text) > 100
-  `;
+    AND pc.markdown_text IS NOT NULL
+    AND LENGTH(pc.markdown_text) > 100
+    ORDER BY c.name, u.url_type
+  `).all();
 
-  // For only-new mode, we need to check the intelligence database separately
-  const latestContent = processedDb.prepare(query).all();
-  
-  let contentToAnalyze = latestContent;
-  
-  if (onlyNew && !force) {
-    // Filter out already analyzed content
-    const analyzedContentIds = intelligenceDb.prepare(`
-      SELECT content_id FROM baseline_analysis
-    `).all().map(row => row.content_id);
-    
-    contentToAnalyze = latestContent.filter(content => 
-      !analyzedContentIds.includes(content.id)
-    );
-  }
-  
-  console.log(`Found ${contentToAnalyze.length} URLs to analyze for baseline intelligence\n`);
+  console.log(`Found ${latestSnapshots.length} URLs to analyze for baseline intelligence\n`);
 
   let successCount = 0;
   let errorCount = 0;
@@ -300,8 +290,8 @@ async function processAllSnapshots() {
   // Process in batches of 10 to avoid overwhelming the API
   const batchSize = 10;
   const batches = [];
-  for (let i = 0; i < contentToAnalyze.length; i += batchSize) {
-    batches.push(contentToAnalyze.slice(i, i + batchSize));
+  for (let i = 0; i < latestSnapshots.length; i += batchSize) {
+    batches.push(latestSnapshots.slice(i, i + batchSize));
   }
 
   console.log(`Processing ${batches.length} batches of up to ${batchSize} URLs each...\n`);
@@ -311,35 +301,23 @@ async function processAllSnapshots() {
     console.log(`\n📦 Batch ${batchIndex + 1}/${batches.length} (${batch.length} URLs)`);
     
     // Process batch in parallel
-    const batchPromises = batch.map(async (content) => {
+    const batchPromises = batch.map(async (snapshot) => {
       const company = {
-        id: content.company_id,
-        name: content.company_name,
-        category: content.company_category || 'AI'
+        id: snapshot.company_id,
+        name: snapshot.company_name,
+        category: snapshot.company_type
       };
       
       const url = {
-        id: content.url_id,
-        url: content.url,
-        url_type: content.url_type
+        id: snapshot.url_id,
+        url: snapshot.url,
+        url_type: snapshot.url_type
       };
 
       try {
-        const extractedData = await analyzeContent(
-          content.markdown_text,
-          company, 
-          url, 
-          content.processed_at || content.converted_at
-        );
-        
+        const extractedData = await analyzeSnapshot(snapshot, company, url);
         if (extractedData) {
-          const stored = await storeBaselineAnalysis(
-            intelligenceDb, 
-            content.id, 
-            company, 
-            url, 
-            extractedData
-          );
+          const stored = await storeBaselineAnalysis(snapshot, company, url, extractedData);
           if (stored) {
             console.log(`  ✓ ${company.name} - ${url.url_type}`);
             return { success: true };
@@ -363,11 +341,8 @@ async function processAllSnapshots() {
     }
   }
 
-  // Detach the intelligence database
-  processedDb.exec('DETACH DATABASE intelligence');
-
   // Generate summary report
-  const report = generateBaselineReport(intelligenceDb);
+  const report = generateBaselineReport();
   
   console.log('\n📊 Baseline Analysis Complete!');
   console.log(`✅ Success: ${successCount} URLs`);
@@ -378,10 +353,10 @@ async function processAllSnapshots() {
   return report;
 }
 
-function generateBaselineReport(intelligenceDb) {
+function generateBaselineReport() {
   const analyses = intelligenceDb.prepare(`
-    SELECT ba.*, c.name as company_name, c.category as company_category,
-           u.url, u.url_type as url_type
+    SELECT ba.*, c.name as company_name, c.category as company_type,
+           u.url, u.url_type
     FROM baseline_analysis ba
     JOIN companies c ON ba.company_id = c.id
     JOIN urls u ON ba.url_id = u.id
@@ -442,7 +417,7 @@ function generateBaselineReport(intelligenceDb) {
 
 // Export for use in other modules
 module.exports = {
-  analyzeContent,
+  analyzeSnapshot,
   storeBaselineAnalysis,
   processAllSnapshots,
   generateBaselineReport
@@ -461,6 +436,14 @@ if (require.main === module) {
       console.log('\n✅ Baseline intelligence analysis complete!');
       console.log('📍 Report saved to: data/baseline-intelligence-report.json');
       console.log('\n🎯 Next step: Run TheBrain sync to visualize all this intelligence');
+      
+      // Clean up database connections
+      intelligenceDb.exec('DETACH DATABASE processed');
+      intelligenceDb.exec('DETACH DATABASE raw');
+      intelligenceDb.close();
+      processedDb.close();
+      rawDb.close();
+      
       process.exit(0);
     })
     .catch(error => {
