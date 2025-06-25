@@ -13,19 +13,19 @@ const hasThreeDB = fs.existsSync(path.join(dataDir, 'intelligence.db'));
 let TheBrainIntegration;
 if (hasThreeDB) {
   console.log('🎯 Detected three-database architecture');
-  // Use the enhanced version with smart groups
+  // Use the enhanced version for three databases
   TheBrainIntegration = require('./thebrain-sync-enhanced-three-db.js');
 } else {
-  // Fall back to original integration
-  const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
-  TheBrainIntegration = require(isGitHubActions ? './thebrain-sync-direct.js' : './thebrain-sync.js');
+  console.log('📦 Detected single-database architecture');
+  // Use the enhanced version for single database
+  TheBrainIntegration = require('./thebrain-sync-enhanced-single-db.js');
 }
 
 async function main() {
   console.log('🧠 TheBrain Sync Starting...');
   console.log(`   Environment: ${process.env.GITHUB_ACTIONS === 'true' ? 'GitHub Actions' : 'Local'}`);
   console.log(`   Brain ID: ${process.env.THEBRAIN_BRAIN_ID || 'Not configured'}`);
-  console.log(`   Architecture: ${hasThreeDB ? 'Three-Database (Enhanced)' : 'Single-Database'}`);
+  console.log(`   Architecture: ${hasThreeDB ? 'Three-Database (Enhanced)' : 'Single-Database (Enhanced)'}`);
   
   // Check if TheBrain credentials are available
   if (!process.env.THEBRAIN_API_KEY) {
@@ -50,57 +50,23 @@ async function main() {
       return;
     }
     
-    if (hasThreeDB) {
-      // Three-database specific commands
-      switch (command) {
-        case 'sync':
-        case 'full':
-          await integration.syncToTheBrain();
-          break;
-          
-        case 'export':
-          await integration.exportToTheBrainFormat();
-          break;
-          
-        default:
-          console.log('Unknown command:', command);
-          console.log('Usage for three-database architecture:');
-          console.log('  node thebrain-sync-wrapper.js sync    - Full sync with visualization');
-          console.log('  node thebrain-sync-wrapper.js export  - Export to TheBrain format');
-          return;
-      }
-    } else {
-      // Original single-database commands
-      switch (command) {
-        case 'sync':
-          await integration.syncAllCompanies();
-          await integration.syncRecentChanges(24);
-          break;
-          
-        case 'companies':
-          await integration.syncAllCompanies();
-          break;
-          
-        case 'changes':
-          await integration.syncRecentChanges(24);
-          break;
-          
-        case 'landscape':
-          await integration.createCompetitiveLandscapeView();
-          break;
-          
-        case 'full':
-          await integration.syncAllCompanies();
-          await integration.syncBaselineAnalyses();
-          await integration.syncRecentChanges(168);
-          await integration.createCompetitiveLandscapeView();
-          break;
-          
-        default:
-          console.log('Unknown command:', command);
-          console.log('Usage: node thebrain-sync-wrapper.js [sync|companies|changes|landscape|full]');
-          return;
-      }
+    // Both versions support the same interface
+    switch (command) {
+      case 'sync':
+      case 'full':
+        await integration.syncToTheBrain();
+        break;
+        
+      case 'export':
+        await integration.exportToTheBrainFormat();
+        break;
+        
+      default:
+        console.log('Unknown command:', command);
+        console.log('Usage:');
+        console.log('  node thebrain-sync-wrapper.js sync    - Full sync with visualization');
+        console.log('  node thebrain-sync-wrapper.js export  - Export to TheBrain format');
+        return;
     }
     
     console.log('✅ TheBrain sync complete!');
