@@ -23,9 +23,20 @@ on:
           - only-new      # Only unanalyzed content
           - force         # Force re-analyze all
           - changes-only  # Only analyze detected changes
+      use_three_db:
+        description: 'Use three-database architecture'
+        required: false
+        type: string
+        default: 'true'
+
+# Prevent concurrent runs
+concurrency:
+  group: analyze-workflow
+  cancel-in-progress: false
 
 env:
   NODE_ENV: production
+  USE_THREE_DB: ${{ inputs.use_three_db || 'true' }}
 
 jobs:
   analyze-content:
@@ -39,6 +50,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -52,8 +65,15 @@ jobs:
           npm install --omit=dev
       
       # Download database from previous workflow if triggered by scrape
-      - name: Download database artifact
-        if: ${{ inputs.trigger_source == 'scrape' && inputs.run_id != '' }}
+      - name: Download database artifact (three-db)
+        if: ${{ inputs.trigger_source == 'scrape' && inputs.run_id != '' && env.USE_THREE_DB == 'true' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: scraper-databases-${{ inputs.run_id }}
+          path: github-actions-backend/data
+      
+      - name: Download database artifact (legacy)
+        if: ${{ inputs.trigger_source == 'scrape' && inputs.run_id != '' && env.USE_THREE_DB != 'true' }}
         uses: actions/download-artifact@v4
         with:
           name: scraper-database-${{ inputs.run_id }}
@@ -140,8 +160,9 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # Pull latest changes to avoid conflicts
-          git pull --rebase origin main
+          # Ensure we're on the latest version
+          git fetch origin main
+          git reset --hard origin/main
           
           # Add all analysis outputs
           git add api-data/ || true
@@ -151,7 +172,9 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "🧠 Update AI analysis - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
-            git push
+            
+            # Use force push with lease to avoid conflicts
+            git push --force-with-lease origin main
           fi
       
       # Trigger next workflow if successful
