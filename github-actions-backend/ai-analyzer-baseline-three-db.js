@@ -171,7 +171,7 @@ async function analyzeSnapshot(snapshot, company, url) {
 
 Company: ${company.name} (${company.category})
 URL: ${url.url} (${url.url_type})
-Snapshot Date: ${new Date(snapshot.created_at).toISOString()}
+Snapshot Date: ${new Date(snapshot.processed_at).toISOString()}
 
 CURRENT CONTENT:
 ${snapshot.markdown_text.substring(0, 5000)}
@@ -258,27 +258,27 @@ async function processAllSnapshots() {
   // Get the most recent processed content for each URL
   const latestSnapshots = intelligenceDb.prepare(`
     SELECT 
-      pc.id,
-      pc.url_id,
-      pc.snapshot_id,
-      pc.markdown_text,
-      pc.created_at,
+      mc.id,
+      mc.url_id,
+      mc.raw_html_id as snapshot_id,
+      mc.markdown_text,
+      mc.processed_at,
       u.id as url_id, 
       u.url, 
       u.url_type,
       c.id as company_id, 
       c.name as company_name, 
       c.category as company_type
-    FROM processed.processed_content pc
-    JOIN urls u ON pc.url_id = u.id
+    FROM processed.markdown_content mc
+    JOIN urls u ON mc.url_id = u.id
     JOIN companies c ON u.company_id = c.id
-    WHERE pc.id IN (
+    WHERE mc.id IN (
       SELECT MAX(id) 
-      FROM processed.processed_content 
+      FROM processed.markdown_content 
       GROUP BY url_id
     )
-    AND pc.markdown_text IS NOT NULL
-    AND LENGTH(pc.markdown_text) > 100
+    AND mc.markdown_text IS NOT NULL
+    AND LENGTH(mc.markdown_text) > 100
     ORDER BY c.name, u.url_type
   `).all();
 
