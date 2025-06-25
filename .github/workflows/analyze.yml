@@ -79,8 +79,9 @@ jobs:
           name: scraper-database-${{ inputs.run_id }}
           path: github-actions-backend/data
       
-      # Fix missing enhanced_analysis table
-      - name: Fix database schema
+      # Fix missing enhanced_analysis table (only for legacy)
+      - name: Fix database schema (legacy)
+        if: ${{ env.USE_THREE_DB != 'true' }}
         run: |
           cd github-actions-backend
           echo "🔧 Ensuring enhanced_analysis table exists..."
@@ -92,21 +93,22 @@ jobs:
           
           echo "🧠 Running baseline analysis..."
           echo "   Mode: ${{ inputs.analysis_mode }}"
+          echo "   Architecture: ${{ env.USE_THREE_DB == 'true' && 'Three-Database' || 'Legacy' }}"
           
           # Set analysis flags based on mode
           case "${{ inputs.analysis_mode }}" in
             "only-new")
-              node ai-analyzer-baseline.js --only-new
+              node ai-analyzer-baseline-wrapper.js --only-new
               ;;
             "force")
-              node ai-analyzer-baseline.js --force
+              node ai-analyzer-baseline-wrapper.js --force
               ;;
             "changes-only")
               echo "⚠️  Changes-only mode not yet implemented"
-              node ai-analyzer-baseline.js --only-new
+              node ai-analyzer-baseline-wrapper.js --only-new
               ;;
             *)
-              node ai-analyzer-baseline.js
+              node ai-analyzer-baseline-wrapper.js
               ;;
           esac
         env:
@@ -143,6 +145,7 @@ jobs:
             \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
             \"mode\": \"${{ inputs.analysis_mode }}\",
             \"trigger_source\": \"${{ inputs.trigger_source }}\",
+            \"architecture\": \"${{ env.USE_THREE_DB == 'true' && 'three-db' || 'legacy' }}\",
             \"status\": \"completed\"
           }" > ../api-data/last-analysis.json
       
