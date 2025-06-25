@@ -59,6 +59,13 @@ jobs:
           name: scraper-database-${{ inputs.run_id }}
           path: github-actions-backend/data
       
+      # Fix missing enhanced_analysis table
+      - name: Fix database schema
+        run: |
+          cd github-actions-backend
+          echo "🔧 Ensuring enhanced_analysis table exists..."
+          node scripts/fix-enhanced-analysis-table.js
+      
       - name: Run baseline AI analysis
         run: |
           cd github-actions-backend
@@ -133,6 +140,9 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
+          # Pull latest changes to avoid conflicts
+          git pull --rebase origin main
+          
           # Add all analysis outputs
           git add api-data/ || true
           git add github-actions-backend/data/*.json || true
@@ -140,7 +150,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "🧠 Update AI analysis - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+            git commit -m "🧠 Update AI analysis - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
             git push
           fi
       
