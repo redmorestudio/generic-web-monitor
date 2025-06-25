@@ -1,19 +1,44 @@
 #!/usr/bin/env node
 
 require('dotenv').config();
-const {
-  analyzeWithEnhancedExtraction,
-  storeEnhancedAnalysis,
-  generateSmartGroupReport,
-  processRecentChanges
-} = require('./ai-analyzer-ultra-enhanced.js');
+const dbManager = require('./db-manager');
+
+// Configuration
+const USE_THREE_DB = process.env.USE_THREE_DB !== 'false'; // Default to true
 
 async function main() {
   console.log('🚀 Ultra-Enhanced AI Analyzer Starting...');
+  console.log(`   Architecture: ${USE_THREE_DB ? 'Three-Database' : 'Legacy'}`);
   console.log(`   Environment: ${process.env.GITHUB_ACTIONS === 'true' ? 'GitHub Actions' : 'Local'}`);
   console.log(`   Features: Entity extraction, relationships, automatic grouping`);
   
   const command = process.argv[2] || 'analyze';
+  
+  let analyzer;
+  
+  if (USE_THREE_DB) {
+    // Check if three-database architecture exists
+    if (!dbManager.hasThreeDbArchitecture()) {
+      console.error('❌ Three-database architecture not found!');
+      console.error('   Please run the scraper and processor first.');
+      process.exit(1);
+    }
+    
+    // Use three-database analyzer
+    console.log('   ✅ Using three-database ultra-enhanced analyzer');
+    analyzer = require('./ai-analyzer-ultra-enhanced-three-db.js');
+  } else {
+    // Use legacy analyzer
+    console.log('   ⚠️  Using legacy ultra-enhanced analyzer (monitor.db)');
+    analyzer = require('./ai-analyzer-ultra-enhanced.js');
+  }
+  
+  const {
+    analyzeWithEnhancedExtraction,
+    storeEnhancedAnalysis,
+    generateSmartGroupReport,
+    processRecentChanges
+  } = analyzer;
   
   try {
     switch (command) {
