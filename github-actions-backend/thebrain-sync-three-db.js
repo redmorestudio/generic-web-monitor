@@ -58,6 +58,9 @@ class TheBrainThreeDBIntegration {
   async syncToTheBrain() {
     console.log('🚀 Starting TheBrain visualization sync...');
     
+    // Ensure required tables exist
+    this.ensureTablesExist();
+    
     // 1. Create root thoughts
     const rootId = await this.createRootThought();
     
@@ -77,6 +80,64 @@ class TheBrainThreeDBIntegration {
     await this.exportToTheBrainFormat();
     
     console.log('✅ TheBrain sync complete!');
+  }
+
+  ensureTablesExist() {
+    console.log('Ensuring required tables exist...');
+    
+    // Create baseline_analysis table if it doesn't exist
+    this.intelligenceDb.exec(`
+      CREATE TABLE IF NOT EXISTS baseline_analysis (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        company_id INTEGER,
+        url_id INTEGER,
+        snapshot_id INTEGER UNIQUE,
+        entities TEXT,
+        relationships TEXT,
+        semantic_categories TEXT,
+        competitive_data TEXT,
+        smart_groups TEXT,
+        quantitative_data TEXT,
+        extracted_text TEXT,
+        full_extraction TEXT,
+        summary TEXT,
+        relevance_score INTEGER,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (company_id) REFERENCES companies(id),
+        FOREIGN KEY (url_id) REFERENCES urls(id)
+      )
+    `);
+    
+    // Create ai_analysis table if it doesn't exist (for enhanced analysis)
+    this.intelligenceDb.exec(`
+      CREATE TABLE IF NOT EXISTS ai_analysis (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        change_id INTEGER,
+        company_id INTEGER,
+        url_id INTEGER,
+        analysis_type TEXT,
+        entities TEXT,
+        summary TEXT,
+        category TEXT,
+        relevance_score INTEGER,
+        competitive_threats TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (change_id) REFERENCES changes(id),
+        FOREIGN KEY (company_id) REFERENCES companies(id),
+        FOREIGN KEY (url_id) REFERENCES urls(id)
+      )
+    `);
+    
+    // Add thebrain_thought_id column to companies if not exists
+    try {
+      this.intelligenceDb.exec(`
+        ALTER TABLE companies ADD COLUMN thebrain_thought_id TEXT;
+      `);
+    } catch (e) {
+      // Column might already exist
+    }
+    
+    console.log('✅ Tables verified/created');
   }
 
   async createRootThought() {
@@ -201,21 +262,43 @@ class TheBrainThreeDBIntegration {
     
     const companiesId = this.generateThoughtId('Monitored Companies');
     
-    // Get companies with their data
-    const companies = this.intelligenceDb.prepare(`
-      SELECT 
-        c.*,
-        COUNT(DISTINCT u.id) as url_count,
-        COUNT(DISTINCT ba.id) as analysis_count
-      FROM companies c
-      LEFT JOIN urls u ON c.id = u.company_id
-      LEFT JOIN baseline_analysis ba ON c.id = ba.company_id
-      WHERE c.enabled = 1
-      GROUP BY c.id
-      ORDER BY c.type, c.name
-    `).all();
+    // Get companies with their data - check if baseline_analysis has data
+    const hasBaselineData = this.intelligenceDb.prepare(
+      "SELECT COUNT(*) as count FROM baseline_analysis"
+    ).get().count > 0;
     
-    // Group companies by type
+    let companiesQuery;
+    if (hasBaselineData) {
+      companiesQuery = `
+        SELECT 
+          c.*,
+          COUNT(DISTINCT u.id) as url_count,
+          COUNT(DISTINCT ba.id) as analysis_count
+        FROM companies c
+        LEFT JOIN urls u ON c.id = u.company_id
+        LEFT JOIN baseline_analysis ba ON c.id = ba.company_id
+        WHERE c.enabled = 1
+        GROUP BY c.id
+        ORDER BY c.category, c.name
+      `;
+    } else {
+      // Fallback query without baseline_analysis
+      companiesQuery = `
+        SELECT 
+          c.*,
+          COUNT(DISTINCT u.id) as url_count,
+          0 as analysis_count
+        FROM companies c
+        LEFT JOIN urls u ON c.id = u.company_id
+        WHERE c.enabled = 1
+        GROUP BY c.id
+        ORDER BY c.category, c.name
+      `;
+    }
+    
+    const companies = this.intelligenceDb.prepare(companiesQuery).all();
+    
+    // Group companies by category (not type - column is called category)
     const companyTypes = {
       competitor: { name: 'Competitors', color: '#ef4444', icon: '⚔️' },
       partner: { name: 'Partners', color: '#22c55e', icon: '🤝' },
@@ -242,13 +325,13 @@ class TheBrainThreeDBIntegration {
     // Add companies to their type groups
     for (const company of companies) {
       const companyId = this.generateThoughtId(`Company-${company.name}`);
-      const groupId = typeGroups[company.type] || typeGroups.industry;
+      const groupId = typeGroups[company.category] || typeGroups.industry;
       
       await this.storeThought(companyId, {
         name: company.name,
         label: `${company.url_count} URLs | ${company.analysis_count} analyses`,
         kind: 1,
-        foregroundColor: this.getColorForType(company.type),
+        foregroundColor: this.getColorForType(company.category),
         backgroundColor: '#111827'
       }, 'company', groupId);
       
@@ -266,28 +349,58 @@ class TheBrainThreeDBIntegration {
     
     const changesId = this.generateThoughtId('Recent Changes');
     
-    // Get recent high-relevance changes
-    const changes = this.intelligenceDb.prepare(`
-      SELECT 
-        c.*,
-        u.url,
-        u.url_type,
-        comp.name as company_name,
-        comp.type as company_type,
-        comp.thebrain_thought_id as company_thought_id,
-        aa.relevance_score,
-        aa.summary,
-        aa.category,
-        aa.competitive_threats
-      FROM changes c
-      JOIN urls u ON c.url_id = u.id
-      JOIN companies comp ON u.company_id = comp.id
-      LEFT JOIN ai_analysis aa ON c.id = aa.change_id
-      WHERE c.created_at > datetime('now', '-7 days')
-      AND (aa.relevance_score >= 6 OR aa.relevance_score IS NULL)
-      ORDER BY aa.relevance_score DESC, c.created_at DESC
-      LIMIT 50
-    `).all();
+    // Get recent high-relevance changes - handle case where ai_analysis might not exist
+    const hasAiAnalysis = this.intelligenceDb.prepare(
+      "SELECT name FROM sqlite_master WHERE type='table' AND name='ai_analysis'"
+    ).get();
+    
+    let changesQuery;
+    if (hasAiAnalysis) {
+      changesQuery = `
+        SELECT 
+          c.*,
+          u.url,
+          u.url_type,
+          comp.name as company_name,
+          comp.category as company_type,
+          comp.thebrain_thought_id as company_thought_id,
+          aa.relevance_score,
+          aa.summary,
+          aa.category,
+          aa.competitive_threats
+        FROM changes c
+        JOIN urls u ON c.url_id = u.id
+        JOIN companies comp ON u.company_id = comp.id
+        LEFT JOIN ai_analysis aa ON c.id = aa.change_id
+        WHERE c.created_at > datetime('now', '-7 days')
+        AND (aa.relevance_score >= 6 OR aa.relevance_score IS NULL)
+        ORDER BY aa.relevance_score DESC, c.created_at DESC
+        LIMIT 50
+      `;
+    } else {
+      // Fallback without ai_analysis
+      changesQuery = `
+        SELECT 
+          c.*,
+          u.url,
+          u.url_type,
+          comp.name as company_name,
+          comp.category as company_type,
+          comp.thebrain_thought_id as company_thought_id,
+          NULL as relevance_score,
+          NULL as summary,
+          NULL as category,
+          NULL as competitive_threats
+        FROM changes c
+        JOIN urls u ON c.url_id = u.id
+        JOIN companies comp ON u.company_id = comp.id
+        WHERE c.created_at > datetime('now', '-7 days')
+        ORDER BY c.created_at DESC
+        LIMIT 50
+      `;
+    }
+    
+    const changes = this.intelligenceDb.prepare(changesQuery).all();
     
     // Group changes by relevance
     const relevanceGroups = {
@@ -345,97 +458,112 @@ class TheBrainThreeDBIntegration {
     
     const insightsId = this.generateThoughtId('AI Insights');
     
-    // Get top insights
-    const topThreats = this.intelligenceDb.prepare(`
-      SELECT 
-        c.name,
-        c.type,
-        c.thebrain_thought_id,
-        COUNT(DISTINCT aa.id) as threat_count,
-        AVG(aa.relevance_score) as avg_score
-      FROM companies c
-      JOIN urls u ON c.id = u.company_id
-      JOIN changes ch ON u.id = ch.url_id
-      JOIN ai_analysis aa ON ch.id = aa.change_id
-      WHERE aa.relevance_score >= 7
-      AND ch.created_at > datetime('now', '-30 days')
-      GROUP BY c.id
-      ORDER BY avg_score DESC, threat_count DESC
-      LIMIT 10
-    `).all();
+    // Check if we have ai_analysis data
+    const hasAiAnalysis = this.intelligenceDb.prepare(
+      "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='ai_analysis'"
+    ).get().count > 0;
     
-    if (topThreats.length > 0) {
-      const threatsId = this.generateThoughtId('Top Competitive Threats');
-      await this.storeThought(threatsId, {
-        name: 'Top Competitive Threats',
-        label: '⚠️',
-        kind: 2,
-        foregroundColor: '#dc2626',
-        backgroundColor: '#1a1a2e'
-      }, 'threats', insightsId);
+    if (hasAiAnalysis) {
+      // Get top insights
+      const topThreats = this.intelligenceDb.prepare(`
+        SELECT 
+          c.name,
+          c.category,
+          c.thebrain_thought_id,
+          COUNT(DISTINCT aa.id) as threat_count,
+          AVG(aa.relevance_score) as avg_score
+        FROM companies c
+        JOIN urls u ON c.id = u.company_id
+        JOIN changes ch ON u.id = ch.url_id
+        JOIN ai_analysis aa ON ch.id = aa.change_id
+        WHERE aa.relevance_score >= 7
+        AND ch.created_at > datetime('now', '-30 days')
+        GROUP BY c.id
+        ORDER BY avg_score DESC, threat_count DESC
+        LIMIT 10
+      `).all();
       
-      for (const threat of topThreats) {
-        const threatId = this.generateThoughtId(`Threat-${threat.name}`);
-        await this.storeThought(threatId, {
-          name: `${threat.name} - ${threat.threat_count} threats`,
-          label: `Avg: ${threat.avg_score.toFixed(1)}/10`,
-          kind: 1,
-          foregroundColor: '#ef4444',
-          backgroundColor: '#111827'
-        }, 'threat', threatsId);
+      if (topThreats.length > 0) {
+        const threatsId = this.generateThoughtId('Top Competitive Threats');
+        await this.storeThought(threatsId, {
+          name: 'Top Competitive Threats',
+          label: '⚠️',
+          kind: 2,
+          foregroundColor: '#dc2626',
+          backgroundColor: '#1a1a2e'
+        }, 'threats', insightsId);
         
-        // Link to company
-        if (threat.thebrain_thought_id) {
-          await this.storeLink(threat.thebrain_thought_id, threatId, 'threat', 'poses');
+        for (const threat of topThreats) {
+          const threatId = this.generateThoughtId(`Threat-${threat.name}`);
+          await this.storeThought(threatId, {
+            name: `${threat.name} - ${threat.threat_count} threats`,
+            label: `Avg: ${threat.avg_score.toFixed(1)}/10`,
+            kind: 1,
+            foregroundColor: '#ef4444',
+            backgroundColor: '#111827'
+          }, 'threat', threatsId);
+          
+          // Link to company
+          if (threat.thebrain_thought_id) {
+            await this.storeLink(threat.thebrain_thought_id, threatId, 'threat', 'poses');
+          }
         }
       }
     }
     
-    // Technology trends
-    const techTrends = this.intelligenceDb.prepare(`
-      SELECT 
-        json_extract(entities, '$.technologies') as tech_json,
-        COUNT(*) as mention_count
-      FROM baseline_analysis
-      WHERE tech_json IS NOT NULL
-      AND created_at > datetime('now', '-7 days')
-    `).all();
+    // Technology trends from baseline_analysis if it exists
+    const hasBaselineAnalysis = this.intelligenceDb.prepare(
+      "SELECT COUNT(*) as count FROM baseline_analysis"
+    ).get().count > 0;
     
-    const techMap = new Map();
-    for (const row of techTrends) {
-      try {
-        const techs = JSON.parse(row.tech_json);
-        for (const tech of techs) {
-          const count = techMap.get(tech.name) || 0;
-          techMap.set(tech.name, count + 1);
-        }
-      } catch (e) {}
-    }
-    
-    if (techMap.size > 0) {
-      const trendsId = this.generateThoughtId('Technology Trends');
-      await this.storeThought(trendsId, {
-        name: 'Technology Trends',
-        label: '📈',
-        kind: 2,
-        foregroundColor: '#10b981',
-        backgroundColor: '#1a1a2e'
-      }, 'trends', insightsId);
+    if (hasBaselineAnalysis) {
+      const techTrends = this.intelligenceDb.prepare(`
+        SELECT 
+          json_extract(entities, '$.technologies') as tech_json,
+          COUNT(*) as mention_count
+        FROM baseline_analysis
+        WHERE tech_json IS NOT NULL
+        AND created_at > datetime('now', '-7 days')
+      `).all();
       
-      // Top 10 technologies
-      const sortedTech = Array.from(techMap.entries())
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 10);
+      const techMap = new Map();
+      for (const row of techTrends) {
+        try {
+          const techs = JSON.parse(row.tech_json);
+          if (Array.isArray(techs)) {
+            for (const tech of techs) {
+              const count = techMap.get(tech.name) || 0;
+              techMap.set(tech.name, count + 1);
+            }
+          }
+        } catch (e) {}
+      }
+      
+      if (techMap.size > 0) {
+        const trendsId = this.generateThoughtId('Technology Trends');
+        await this.storeThought(trendsId, {
+          name: 'Technology Trends',
+          label: '📈',
+          kind: 2,
+          foregroundColor: '#10b981',
+          backgroundColor: '#1a1a2e'
+        }, 'trends', insightsId);
         
-      for (const [tech, count] of sortedTech) {
-        const techId = this.generateThoughtId(`Tech-${tech}`);
-        await this.storeThought(techId, {
-          name: tech,
-          label: `${count} mentions`,
-          kind: 4, // Tag
-          foregroundColor: '#3b82f6',
-          backgroundColor: '#111827'
-        }, 'technology', trendsId);
+        // Top 10 technologies
+        const sortedTech = Array.from(techMap.entries())
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 10);
+          
+        for (const [tech, count] of sortedTech) {
+          const techId = this.generateThoughtId(`Tech-${tech}`);
+          await this.storeThought(techId, {
+            name: tech,
+            label: `${count} mentions`,
+            kind: 4, // Tag
+            foregroundColor: '#3b82f6',
+            backgroundColor: '#111827'
+          }, 'technology', trendsId);
+        }
       }
     }
   }
