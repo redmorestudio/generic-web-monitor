@@ -40,8 +40,15 @@ function loadCompanyConfig() {
   }
 }
 
+// Check if companies table exists first
+const tableExists = intelligenceDb.prepare(`
+  SELECT name FROM sqlite_master 
+  WHERE type='table' AND name='companies'
+`).get();
+
 // Insert initial companies if database is empty
-const companyCount = intelligenceDb.prepare('SELECT COUNT(*) as count FROM companies').get().count;
+const companyCount = tableExists ? 
+  intelligenceDb.prepare('SELECT COUNT(*) as count FROM companies').get().count : 0;
 
 if (companyCount === 0) {
   console.log('📊 Inserting comprehensive AI landscape companies...');
@@ -326,9 +333,19 @@ if (companyCount === 0) {
 }
 
 // Display database statistics
+const companiesTableExists = intelligenceDb.prepare(`
+  SELECT name FROM sqlite_master WHERE type='table' AND name='companies'
+`).get();
+
+const urlsTableExists = intelligenceDb.prepare(`
+  SELECT name FROM sqlite_master WHERE type='table' AND name='urls'
+`).get();
+
 const stats = {
-  companies: intelligenceDb.prepare('SELECT COUNT(*) as count FROM companies').get().count,
-  urls: intelligenceDb.prepare('SELECT COUNT(*) as count FROM urls').get().count
+  companies: companiesTableExists ? 
+    intelligenceDb.prepare('SELECT COUNT(*) as count FROM companies').get().count : 0,
+  urls: urlsTableExists ? 
+    intelligenceDb.prepare('SELECT COUNT(*) as count FROM urls').get().count : 0
 };
 
 console.log('\n📊 Database Statistics:');
