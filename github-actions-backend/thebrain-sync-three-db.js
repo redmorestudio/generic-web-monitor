@@ -262,6 +262,12 @@ class TheBrainThreeDBIntegration {
     
     const companiesId = this.generateThoughtId('Monitored Companies');
     
+    // Check if 'enabled' column exists
+    const companyColumns = this.intelligenceDb.prepare(
+      "PRAGMA table_info(companies)"
+    ).all();
+    const hasEnabledColumn = companyColumns.some(col => col.name === 'enabled');
+    
     // Get companies with their data - check if baseline_analysis has data
     const hasBaselineData = this.intelligenceDb.prepare(
       "SELECT COUNT(*) as count FROM baseline_analysis"
@@ -277,7 +283,7 @@ class TheBrainThreeDBIntegration {
         FROM companies c
         LEFT JOIN urls u ON c.id = u.company_id
         LEFT JOIN baseline_analysis ba ON c.id = ba.company_id
-        WHERE c.enabled = 1
+        ${hasEnabledColumn ? 'WHERE c.enabled = 1' : ''}
         GROUP BY c.id
         ORDER BY c.category, c.name
       `;
@@ -290,7 +296,7 @@ class TheBrainThreeDBIntegration {
           0 as analysis_count
         FROM companies c
         LEFT JOIN urls u ON c.id = u.company_id
-        WHERE c.enabled = 1
+        ${hasEnabledColumn ? 'WHERE c.enabled = 1' : ''}
         GROUP BY c.id
         ORDER BY c.category, c.name
       `;
@@ -298,12 +304,16 @@ class TheBrainThreeDBIntegration {
     
     const companies = this.intelligenceDb.prepare(companiesQuery).all();
     
-    // Group companies by category (not type - column is called category)
+    // Group companies by category
     const companyTypes = {
       competitor: { name: 'Competitors', color: '#ef4444', icon: '⚔️' },
       partner: { name: 'Partners', color: '#22c55e', icon: '🤝' },
       tool: { name: 'AI Tools', color: '#f59e0b', icon: '🛠️' },
-      industry: { name: 'Industry Players', color: '#3b82f6', icon: '🏭' }
+      industry: { name: 'Industry Players', color: '#3b82f6', icon: '🏭' },
+      'llm-provider': { name: 'LLM Providers', color: '#8b5cf6', icon: '🤖' },
+      'ai-coding': { name: 'AI Coding Tools', color: '#ec4899', icon: '💻' },
+      'ai-research': { name: 'AI Research', color: '#14b8a6', icon: '🔬' },
+      'ai-infrastructure': { name: 'AI Infrastructure', color: '#f97316', icon: '🏗️' }
     };
     
     const typeGroups = {};
@@ -714,7 +724,11 @@ class TheBrainThreeDBIntegration {
       competitor: '#ef4444',
       partner: '#22c55e',
       industry: '#3b82f6',
-      tool: '#f59e0b'
+      tool: '#f59e0b',
+      'llm-provider': '#8b5cf6',
+      'ai-coding': '#ec4899',
+      'ai-research': '#14b8a6',
+      'ai-infrastructure': '#f97316'
     };
     return colors[type] || '#667eea';
   }
