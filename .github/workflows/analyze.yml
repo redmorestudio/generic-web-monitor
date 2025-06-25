@@ -129,7 +129,7 @@ jobs:
       - name: Generate static data files
         run: |
           cd github-actions-backend
-          node generate-static-data.js
+          node generate-static-data-wrapper.js
           
           # Copy to api-data
           cp -r ../api-data/* ../api-data/ 2>/dev/null || echo "Static data generated"
