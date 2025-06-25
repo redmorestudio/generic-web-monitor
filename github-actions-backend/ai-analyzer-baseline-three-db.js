@@ -136,8 +136,8 @@ async function analyzeContent(content, company, url, timestamp) {
   try {
     const prompt = `${BASELINE_EXTRACTION_PROMPT}
 
-Company: ${company.name} (${company.type})
-URL: ${url.url} (${url.type})
+Company: ${company.name} (${company.category})
+URL: ${url.url} (${url.url_type})
 Snapshot Date: ${timestamp}
 
 CURRENT CONTENT:
@@ -145,7 +145,7 @@ ${content.substring(0, 5000)}
 
 Analyze this company's current state and provide comprehensive extraction following the specified JSON structure.`;
 
-    console.log(`🧠 Analyzing ${company.name} - ${url.type} with Claude Sonnet 4...`);
+    console.log(`🧠 Analyzing ${company.name} - ${url.url_type} with Claude Sonnet 4...`);
     
     const response = await anthropic.messages.create({
       model: 'claude-sonnet-4-20250514',
@@ -233,7 +233,7 @@ async function storeBaselineAnalysis(intelligenceDb, contentId, company, url, ex
       relevanceScore
     );
 
-    console.log(`✅ Stored baseline analysis for ${company.name} - ${url.type}`);
+    console.log(`✅ Stored baseline analysis for ${company.name} - ${url.url_type}`);
     return true;
   } catch (error) {
     console.error('Error storing baseline analysis:', error);
@@ -260,10 +260,10 @@ async function processAllSnapshots() {
   console.log(`Mode: ${force ? 'FORCE (re-analyze all)' : onlyNew ? 'ONLY NEW (skip analyzed)' : 'ALL'}\n`);
 
   // Get the most recent processed content for each URL
-  // Using proper database prefixes for cross-database join
+  // Fixed: Using correct column names
   let query = `
-    SELECT mc.*, u.id as url_id, u.url, u.type as url_type, 
-           c.id as company_id, c.name as company_name, c.type as company_type
+    SELECT mc.*, u.id as url_id, u.url, u.url_type as url_type, 
+           c.id as company_id, c.name as company_name, c.category as company_category
     FROM main.markdown_content mc
     JOIN intelligence.urls u ON mc.url_id = u.id
     JOIN intelligence.companies c ON u.company_id = c.id
@@ -315,18 +315,18 @@ async function processAllSnapshots() {
       const company = {
         id: content.company_id,
         name: content.company_name,
-        type: content.company_type || 'AI'
+        category: content.company_category || 'AI'
       };
       
       const url = {
         id: content.url_id,
         url: content.url,
-        type: content.url_type
+        url_type: content.url_type
       };
 
       try {
         const extractedData = await analyzeContent(
-          content.markdown_text, // Fixed: was markdown_content
+          content.markdown_text,
           company, 
           url, 
           content.processed_at || content.converted_at
@@ -341,13 +341,13 @@ async function processAllSnapshots() {
             extractedData
           );
           if (stored) {
-            console.log(`  ✓ ${company.name} - ${url.type}`);
+            console.log(`  ✓ ${company.name} - ${url.url_type}`);
             return { success: true };
           }
         }
         return { success: false };
       } catch (error) {
-        console.error(`  ✗ ${company.name} - ${url.type}: ${error.message}`);
+        console.error(`  ✗ ${company.name} - ${url.url_type}: ${error.message}`);
         return { success: false };
       }
     });
@@ -380,8 +380,8 @@ async function processAllSnapshots() {
 
 function generateBaselineReport(intelligenceDb) {
   const analyses = intelligenceDb.prepare(`
-    SELECT ba.*, c.name as company_name, c.type as company_type,
-           u.url, u.type as url_type
+    SELECT ba.*, c.name as company_name, c.category as company_category,
+           u.url, u.url_type as url_type
     FROM baseline_analysis ba
     JOIN companies c ON ba.company_id = c.id
     JOIN urls u ON ba.url_id = u.id
