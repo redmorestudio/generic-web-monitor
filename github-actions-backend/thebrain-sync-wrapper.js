@@ -13,7 +13,8 @@ const hasThreeDB = fs.existsSync(path.join(dataDir, 'intelligence.db'));
 let TheBrainIntegration;
 if (hasThreeDB) {
   console.log('🎯 Detected three-database architecture');
-  TheBrainIntegration = require('./thebrain-sync-three-db.js');
+  // Use the enhanced version with smart groups
+  TheBrainIntegration = require('./thebrain-sync-enhanced-three-db.js');
 } else {
   // Fall back to original integration
   const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
@@ -24,7 +25,7 @@ async function main() {
   console.log('🧠 TheBrain Sync Starting...');
   console.log(`   Environment: ${process.env.GITHUB_ACTIONS === 'true' ? 'GitHub Actions' : 'Local'}`);
   console.log(`   Brain ID: ${process.env.THEBRAIN_BRAIN_ID || 'Not configured'}`);
-  console.log(`   Architecture: ${hasThreeDB ? 'Three-Database' : 'Single-Database'}`);
+  console.log(`   Architecture: ${hasThreeDB ? 'Three-Database (Enhanced)' : 'Single-Database'}`);
   
   // Check if TheBrain credentials are available
   if (!process.env.THEBRAIN_API_KEY) {
