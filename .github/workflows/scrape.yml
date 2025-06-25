@@ -35,7 +35,7 @@ env:
 jobs:
   scrape-websites:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60  # Increased from 30 to handle all 52 companies
     
     permissions:
       contents: write
@@ -97,9 +97,10 @@ jobs:
             # TODO: Add company filter support to scraper
           fi
           
-          # Run scraper with timeout protection
-          timeout 20m node scraper-wrapper.js || {
-            echo "⚠️ Scraper timeout after 20 minutes"
+          # Run scraper with timeout protection (increased to 45 minutes)
+          timeout 45m node scraper-wrapper.js || {
+            echo "⚠️ Scraper timeout after 45 minutes"
+            echo "💡 Consider running with company_filter to process in smaller batches"
             exit 1
           }
         env:
