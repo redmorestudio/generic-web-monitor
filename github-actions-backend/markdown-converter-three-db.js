@@ -33,7 +33,9 @@ class MarkdownConverterThreeDB {
   initialize() {
     // Check if three-database architecture exists
     if (!dbManager.hasThreeDbArchitecture()) {
-      throw new Error('Three-database architecture not found. Run init-db-three.js first.');
+      console.log('📊 Three-database architecture not found. Creating it now...');
+      // Run the create-three-dbs script
+      require('./scripts/create-three-dbs');
     }
     
     // Get database connections
@@ -55,13 +57,7 @@ class MarkdownConverterThreeDB {
       let markdown = turndownService.turndown(cleanedHtml);
 
       // Add metadata header
-      const header = `---
-url: ${metadata.url || 'unknown'}
-company: ${metadata.company || 'unknown'}
-scraped_at: ${metadata.scraped_at || new Date().toISOString()}
----
-
-`;
+      const header = `---\nurl: ${metadata.url || 'unknown'}\ncompany: ${metadata.company || 'unknown'}\nscraped_at: ${metadata.scraped_at || new Date().toISOString()}\n---\n\n`;
 
       markdown = header + markdown;
 
@@ -111,11 +107,11 @@ scraped_at: ${metadata.scraped_at || new Date().toISOString()}
       .update(markdown)
       .digest('hex');
 
-    // Store in processed_content database
+    // Store in processed_content database - FIXED: use markdown_text instead of markdown_content
     const stmt = this.processedDb.prepare(`
       INSERT INTO markdown_content (
         raw_html_id, url_id, company_name, url,
-        markdown_content, markdown_hash, 
+        markdown_text, markdown_hash, 
         converted_at
       ) VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
     `);
@@ -171,11 +167,7 @@ scraped_at: ${metadata.scraped_at || new Date().toISOString()}
       }
     }
 
-    console.log(`
-📊 Conversion Complete!
-✅ Success: ${successCount}
-❌ Errors: ${errorCount}
-`);
+    console.log(`\n📊 Conversion Complete!\n✅ Success: ${successCount}\n❌ Errors: ${errorCount}\n`);
 
     return { successCount, errorCount };
   }

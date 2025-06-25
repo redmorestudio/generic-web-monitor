@@ -69,6 +69,17 @@ jobs:
           name: scraper-databases-${{ inputs.run_id }}
           path: github-actions-backend/data
       
+      # NEW: Initialize three-database architecture if needed
+      - name: Initialize Three-Database Architecture
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        run: |
+          cd github-actions-backend
+          
+          echo "🔧 Ensuring three-database architecture exists..."
+          
+          # Run initialization script which creates databases if missing
+          node scripts/init-db-three.js
+      
       - name: Convert HTML to Markdown (three-db)
         if: ${{ env.USE_THREE_DB == 'true' }}
         run: |
@@ -153,8 +164,14 @@ jobs:
           git fetch origin main
           git reset --hard origin/main
           
-          # Add the databases
-          git add -f github-actions-backend/data/processed_content.db || true
+          # Add the databases if they exist
+          if [ -f "github-actions-backend/data/processed_content.db" ]; then
+            git add -f github-actions-backend/data/processed_content.db
+            echo "✅ Added processed_content.db to commit"
+          else
+            echo "⚠️  processed_content.db not found, skipping"
+          fi
+          
           git add api-data/last-process.json || true
           
           if git diff --staged --quiet; then
