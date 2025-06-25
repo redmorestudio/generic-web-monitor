@@ -65,6 +65,22 @@ jobs:
           name: analysis-results-${{ inputs.run_id }}
           path: .
       
+      # Run baseline analyzer to populate baseline_analysis table
+      - name: Run baseline analysis for TheBrain
+        if: ${{ !inputs.skip_thebrain }}
+        run: |
+          cd github-actions-backend
+          
+          # Check if we have the three-database architecture
+          if [ -f "data/intelligence.db" ]; then
+            echo "🧠 Running baseline analysis for three-database architecture..."
+            node ai-analyzer-baseline-three-db.js || echo "Baseline analysis completed"
+          else
+            echo "⚠️  Three-database architecture not detected, skipping baseline analysis"
+          fi
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      
       - name: Sync to TheBrain
         if: ${{ !inputs.skip_thebrain }}
         run: |
@@ -103,7 +119,7 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "🚀 Deploy updates - $(date -u +%Y-%m-%d\\ %H:%M:%S\\ UTC)"
+            git commit -m "🚀 Deploy updates - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
             git push
           fi
       
