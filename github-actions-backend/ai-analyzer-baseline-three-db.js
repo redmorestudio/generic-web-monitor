@@ -157,12 +157,12 @@ Analyze this company's current state and provide comprehensive extraction follow
       }]
     });
 
-    const content = response.content[0].text;
+    const responseContent = response.content[0].text;
     
     // Parse JSON response
     let extractedData;
     try {
-      const jsonMatch = content.match(/\{[\s\S]*\}/);
+      const jsonMatch = responseContent.match(/\{[\s\S]*\}/);
       if (jsonMatch) {
         extractedData = JSON.parse(jsonMatch[0]);
       } else {
@@ -271,22 +271,23 @@ async function processAllSnapshots() {
     AND LENGTH(mc.markdown_content) > 100
   `;
 
-  // Add filter for only-new mode
-  if (onlyNew && !force) {
-    query += `
-    AND NOT EXISTS (
-      SELECT 1 FROM baseline_analysis ba 
-      WHERE ba.content_id = mc.id
-    )`;
-  }
-  
-  query += `
-    ORDER BY c.name, u.type
-  `;
-
+  // For only-new mode, we need to check the intelligence database separately
   const latestContent = processedDb.prepare(query).all();
   
-  console.log(`Found ${latestContent.length} URLs to analyze for baseline intelligence\n`);
+  let contentToAnalyze = latestContent;
+  
+  if (onlyNew && !force) {
+    // Filter out already analyzed content
+    const analyzedContentIds = intelligenceDb.prepare(`
+      SELECT content_id FROM baseline_analysis
+    `).all().map(row => row.content_id);
+    
+    contentToAnalyze = latestContent.filter(content => 
+      !analyzedContentIds.includes(content.id)
+    );
+  }
+  
+  console.log(`Found ${contentToAnalyze.length} URLs to analyze for baseline intelligence\n`);
 
   let successCount = 0;
   let errorCount = 0;
@@ -294,8 +295,8 @@ async function processAllSnapshots() {
   // Process in batches of 10 to avoid overwhelming the API
   const batchSize = 10;
   const batches = [];
-  for (let i = 0; i < latestContent.length; i += batchSize) {
-    batches.push(latestContent.slice(i, i + batchSize));
+  for (let i = 0; i < contentToAnalyze.length; i += batchSize) {
+    batches.push(contentToAnalyze.slice(i, i + batchSize));
   }
 
   console.log(`Processing ${batches.length} batches of up to ${batchSize} URLs each...\n`);
