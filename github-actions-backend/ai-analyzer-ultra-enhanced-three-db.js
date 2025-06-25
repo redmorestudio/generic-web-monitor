@@ -101,8 +101,8 @@ async function analyzeWithEnhancedExtraction(change, company, url) {
   try {
     const prompt = `${EXTRACTION_PROMPT}
 
-Company: ${company.name} (${company.type})
-URL: ${url.url} (${url.type})
+Company: ${company.name} (${company.category})
+URL: ${url.url} (${url.url_type})
 Change Date: ${new Date(change.detected_at).toISOString()}
 
 PREVIOUS CONTENT:
@@ -274,9 +274,10 @@ async function generateSmartGroupReport() {
   };
 
   // Get recent changes with enhanced analysis
+  // Fixed: Using correct column names
   const changes = processedDb.prepare(`
-    SELECT cd.*, mc.markdown_text, u.url, u.type as url_type,
-           c.name as company_name, c.type as company_type
+    SELECT cd.*, mc.markdown_text, u.url, u.url_type as url_type,
+           c.name as company_name, c.category as company_category
     FROM main.change_detection cd
     JOIN main.markdown_content mc ON cd.new_content_id = mc.id
     JOIN intelligence.urls u ON cd.url_id = u.id
@@ -383,12 +384,13 @@ async function processRecentChanges() {
   processedDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
 
   // Get unanalyzed changes
+  // Fixed: Using correct column names
   const changes = processedDb.prepare(`
     SELECT cd.*, 
            mc_old.markdown_text as old_content,
            mc_new.markdown_text as new_content,
-           u.url, u.type as url_type,
-           c.id as company_id, c.name as company_name, c.type as company_type
+           u.url, u.url_type as url_type,
+           c.id as company_id, c.name as company_name, c.category as company_category
     FROM main.change_detection cd
     JOIN intelligence.urls u ON cd.url_id = u.id
     JOIN intelligence.companies c ON u.company_id = c.id
@@ -413,12 +415,12 @@ async function processRecentChanges() {
     const company = {
       id: change.company_id,
       name: change.company_name,
-      type: change.company_type || 'AI'
+      category: change.company_category || 'AI'
     };
     
     const url = {
       url: change.url,
-      type: change.url_type
+      url_type: change.url_type
     };
 
     const extractedData = await analyzeWithEnhancedExtraction(
