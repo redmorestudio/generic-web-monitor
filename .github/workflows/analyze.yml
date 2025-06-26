@@ -1,4 +1,4 @@
-name: 2. Analyze Content
+name: 3. Analyze Content
 
 on:
   # Allow manual trigger
@@ -64,19 +64,19 @@ jobs:
           # Use npm install instead of npm ci to handle package-lock.json mismatches
           npm install --omit=dev
       
-      # Download database from previous workflow if triggered by scrape
+      # FIXED: Download database from process workflow instead of scrape
       - name: Download database artifact (three-db)
-        if: ${{ inputs.trigger_source == 'scrape' && inputs.run_id != '' && env.USE_THREE_DB == 'true' }}
+        if: ${{ inputs.trigger_source == 'process' && inputs.run_id != '' && env.USE_THREE_DB == 'true' }}
         uses: actions/download-artifact@v4
         with:
-          name: scraper-databases-${{ inputs.run_id }}
+          name: processed-databases-${{ inputs.run_id }}
           path: github-actions-backend/data
       
       - name: Download database artifact (legacy)
-        if: ${{ inputs.trigger_source == 'scrape' && inputs.run_id != '' && env.USE_THREE_DB != 'true' }}
+        if: ${{ inputs.trigger_source == 'process' && inputs.run_id != '' && env.USE_THREE_DB != 'true' }}
         uses: actions/download-artifact@v4
         with:
-          name: scraper-database-${{ inputs.run_id }}
+          name: processed-database-${{ inputs.run_id }}
           path: github-actions-backend/data
       
       # Fix missing enhanced_analysis table (only for legacy)
