@@ -359,108 +359,124 @@ class TheBrainThreeDBIntegration {
     
     const changesId = this.generateThoughtId('Recent Changes');
     
-    // Get recent high-relevance changes - handle case where ai_analysis might not exist
-    const hasAiAnalysis = this.intelligenceDb.prepare(
-      "SELECT name FROM sqlite_master WHERE type='table' AND name='ai_analysis'"
-    ).get();
+    // Get recent high-relevance changes - changes table is in raw_content.db
+    // But we need to join with data from intelligence.db, so we'll use a different approach
     
-    let changesQuery;
-    if (hasAiAnalysis) {
-      changesQuery = `
-        SELECT 
-          c.*,
-          u.url,
-          u.url_type,
-          comp.name as company_name,
-          comp.category as company_type,
-          comp.thebrain_thought_id as company_thought_id,
-          aa.relevance_score,
-          aa.summary,
-          aa.category,
-          aa.competitive_threats
-        FROM changes c
-        JOIN urls u ON c.url_id = u.id
-        JOIN companies comp ON u.company_id = comp.id
-        LEFT JOIN ai_analysis aa ON c.id = aa.change_id
-        WHERE c.created_at > datetime('now', '-7 days')
-        AND (aa.relevance_score >= 6 OR aa.relevance_score IS NULL)
-        ORDER BY aa.relevance_score DESC, c.created_at DESC
-        LIMIT 50
-      `;
-    } else {
-      // Fallback without ai_analysis
-      changesQuery = `
-        SELECT 
-          c.*,
-          u.url,
-          u.url_type,
-          comp.name as company_name,
-          comp.category as company_type,
-          comp.thebrain_thought_id as company_thought_id,
-          NULL as relevance_score,
-          NULL as summary,
-          NULL as category,
-          NULL as competitive_threats
-        FROM changes c
-        JOIN urls u ON c.url_id = u.id
-        JOIN companies comp ON u.company_id = comp.id
-        WHERE c.created_at > datetime('now', '-7 days')
-        ORDER BY c.created_at DESC
-        LIMIT 50
-      `;
-    }
-    
-    const changes = this.intelligenceDb.prepare(changesQuery).all();
-    
-    // Group changes by relevance
-    const relevanceGroups = {
-      high: { name: 'High Priority Changes', min: 8, color: '#dc2626', icon: '🔴' },
-      medium: { name: 'Medium Priority Changes', min: 6, color: '#f59e0b', icon: '🟡' },
-      recent: { name: 'Unanalyzed Changes', min: 0, color: '#6b7280', icon: '⏳' }
-    };
-    
-    const groups = {};
-    
-    // Create relevance groups
-    for (const [key, info] of Object.entries(relevanceGroups)) {
-      const groupId = this.generateThoughtId(`Changes-${info.name}`);
-      groups[key] = groupId;
+    try {
+      // First check if we have ai_analysis data
+      const hasAiAnalysis = this.intelligenceDb.prepare(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='ai_analysis'"
+      ).get();
       
-      await this.storeThought(groupId, {
-        name: info.name,
-        label: info.icon,
-        kind: 2,
-        foregroundColor: info.color,
-        backgroundColor: '#1a1a2e'
-      }, 'change-group', changesId);
-    }
-    
-    // Add changes to groups
-    for (const change of changes) {
-      const score = change.relevance_score || 0;
-      let groupKey = 'recent';
-      if (score >= 8) groupKey = 'high';
-      else if (score >= 6) groupKey = 'medium';
+      let changes = [];
       
-      const changeDate = new Date(change.created_at).toLocaleDateString();
-      const changeName = `${change.company_name} - ${change.url_type} (${changeDate})`;
-      const changeId = this.generateThoughtId(`Change-${change.id}`);
-      
-      await this.storeThought(changeId, {
-        name: changeName,
-        label: `Score: ${score}/10`,
-        kind: 3, // Event
-        foregroundColor: this.getColorForRelevance(score),
-        backgroundColor: '#111827'
-      }, 'change', groups[groupKey]);
-      
-      // Link to company if exists
-      if (change.company_thought_id) {
-        await this.storeLink(change.company_thought_id, changeId, 'change', 'detected');
+      if (hasAiAnalysis) {
+        // Get changes with analysis from intelligence.db (which references change_id)
+        changes = this.intelligenceDb.prepare(`
+          SELECT 
+            aa.change_id as id,
+            aa.created_at,
+            u.url,
+            u.url_type,
+            comp.name as company_name,
+            comp.category as company_type,
+            comp.thebrain_thought_id as company_thought_id,
+            aa.relevance_score,
+            aa.summary,
+            aa.category,
+            aa.competitive_threats
+          FROM ai_analysis aa
+          JOIN urls u ON aa.url_id = u.id
+          JOIN companies comp ON u.company_id = comp.id
+          WHERE aa.created_at > datetime('now', '-7 days')
+          AND aa.relevance_score >= 6
+          ORDER BY aa.relevance_score DESC, aa.created_at DESC
+          LIMIT 50
+        `).all();
+      } else {
+        // If no ai_analysis, get recent changes from raw_content.db
+        const recentChanges = this.rawDb.prepare(`
+          SELECT * FROM changes 
+          WHERE created_at > datetime('now', '-7 days')
+          ORDER BY created_at DESC
+          LIMIT 50
+        `).all();
+        
+        // Match with company data
+        for (const change of recentChanges) {
+          const urlData = this.intelligenceDb.prepare(`
+            SELECT u.url, u.url_type, c.name as company_name, c.category as company_type, c.thebrain_thought_id as company_thought_id
+            FROM urls u
+            JOIN companies c ON u.company_id = c.id
+            WHERE u.id = ?
+          `).get(change.url_id);
+          
+          if (urlData) {
+            changes.push({
+              ...change,
+              ...urlData,
+              relevance_score: 0,
+              summary: null,
+              category: null,
+              competitive_threats: null
+            });
+          }
+        }
       }
+      
+      // Group changes by relevance
+      const relevanceGroups = {
+        high: { name: 'High Priority Changes', min: 8, color: '#dc2626', icon: '🔴' },
+        medium: { name: 'Medium Priority Changes', min: 6, color: '#f59e0b', icon: '🟡' },
+        recent: { name: 'Unanalyzed Changes', min: 0, color: '#6b7280', icon: '⏳' }
+      };
+      
+      const groups = {};
+      
+      // Create relevance groups
+      for (const [key, info] of Object.entries(relevanceGroups)) {
+        const groupId = this.generateThoughtId(`Changes-${info.name}`);
+        groups[key] = groupId;
+        
+        await this.storeThought(groupId, {
+          name: info.name,
+          label: info.icon,
+          kind: 2,
+          foregroundColor: info.color,
+          backgroundColor: '#1a1a2e'
+        }, 'change-group', changesId);
+      }
+      
+      // Add changes to groups
+      for (const change of changes) {
+        const score = change.relevance_score || 0;
+        let groupKey = 'recent';
+        if (score >= 8) groupKey = 'high';
+        else if (score >= 6) groupKey = 'medium';
+        
+        const changeDate = new Date(change.created_at).toLocaleDateString();
+        const changeName = `${change.company_name} - ${change.url_type || 'Change'} (${changeDate})`;
+        const changeId = this.generateThoughtId(`Change-${change.id}`);
+        
+        await this.storeThought(changeId, {
+          name: changeName,
+          label: `Score: ${score}/10`,
+          kind: 3, // Event
+          foregroundColor: this.getColorForRelevance(score),
+          backgroundColor: '#111827'
+        }, 'change', groups[groupKey]);
+        
+        // Link to company if exists
+        if (change.company_thought_id) {
+          await this.storeLink(change.company_thought_id, changeId, 'change', 'detected');
+        }
+      }
+      
+      console.log(`✅ Synced ${changes.length} recent changes`);
+    } catch (error) {
+      console.log(`⚠️  Error syncing changes: ${error.message}`);
+      console.log('   Continuing with other sync tasks...');
     }
-    
-    console.log(`✅ Synced ${changes.length} recent changes`);
   }
 
   async createInsightThoughts(rootId) {
@@ -473,7 +489,7 @@ class TheBrainThreeDBIntegration {
       "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='ai_analysis'"
     ).get().count > 0;
     
-    if (hasAiAnalysis) {
+    if (hasAiAnalysis && this.intelligenceDb.prepare("SELECT COUNT(*) as count FROM ai_analysis").get().count > 0) {
       // Get top insights
       const topThreats = this.intelligenceDb.prepare(`
         SELECT 
@@ -484,10 +500,9 @@ class TheBrainThreeDBIntegration {
           AVG(aa.relevance_score) as avg_score
         FROM companies c
         JOIN urls u ON c.id = u.company_id
-        JOIN changes ch ON u.id = ch.url_id
-        JOIN ai_analysis aa ON ch.id = aa.change_id
+        JOIN ai_analysis aa ON aa.company_id = c.id
         WHERE aa.relevance_score >= 7
-        AND ch.created_at > datetime('now', '-30 days')
+        AND aa.created_at > datetime('now', '-30 days')
         GROUP BY c.id
         ORDER BY avg_score DESC, threat_count DESC
         LIMIT 10
@@ -542,8 +557,11 @@ class TheBrainThreeDBIntegration {
           const techs = JSON.parse(row.tech_json);
           if (Array.isArray(techs)) {
             for (const tech of techs) {
-              const count = techMap.get(tech.name) || 0;
-              techMap.set(tech.name, count + 1);
+              const techName = typeof tech === 'string' ? tech : tech.name;
+              if (techName) {
+                const count = techMap.get(techName) || 0;
+                techMap.set(techName, count + 1);
+              }
             }
           }
         } catch (e) {}
