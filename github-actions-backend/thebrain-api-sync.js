@@ -132,7 +132,7 @@ class TheBrainAPISync {
     
     const categoryIds = {};
     
-    for (const [key, cat of Object.entries(categories)) {
+    for (const [key, cat] of Object.entries(categories)) {
       const thoughtData = {
         name: cat.name,
         label: cat.icon,
