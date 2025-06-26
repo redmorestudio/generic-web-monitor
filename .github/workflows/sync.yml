@@ -57,13 +57,12 @@ jobs:
           # Use npm install instead of npm ci to handle package-lock.json mismatches
           npm install --omit=dev
       
-      # Download analysis results if triggered by analyze
-      - name: Download analysis artifacts
-        if: ${{ inputs.trigger_source == 'analyze' && inputs.run_id != '' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: analysis-results-${{ inputs.run_id }}
-          path: .
+      # FIXED: Removed artifact download - use committed files instead
+      - name: Ensure latest files
+        run: |
+          echo "✅ Using committed files from repository"
+          ls -la api-data/*.json || true
+          ls -la github-actions-backend/data/*.db || true
       
       # Run baseline analyzer to populate baseline_analysis table
       - name: Run baseline analysis for TheBrain

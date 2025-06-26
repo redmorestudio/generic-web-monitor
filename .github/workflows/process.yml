@@ -62,12 +62,12 @@ jobs:
           cd github-actions-backend
           npm install --omit=dev
       
-      - name: Download database artifacts (if triggered by scrape)
-        if: ${{ inputs.trigger_source == 'scrape' && inputs.run_id }}
-        uses: actions/download-artifact@v4
-        with:
-          name: scraper-databases-${{ inputs.run_id }}
-          path: github-actions-backend/data
+      # FIXED: Removed artifact download - use committed files instead
+      - name: Ensure latest database files
+        run: |
+          cd github-actions-backend
+          echo "✅ Using committed database files from repository"
+          ls -la data/*.db || true
       
       # NEW: Initialize three-database architecture if needed
       - name: Initialize Three-Database Architecture

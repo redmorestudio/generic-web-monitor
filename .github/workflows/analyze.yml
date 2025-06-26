@@ -64,20 +64,13 @@ jobs:
           # Use npm install instead of npm ci to handle package-lock.json mismatches
           npm install --omit=dev
       
-      # FIXED: Download database from process workflow instead of scrape
-      - name: Download database artifact (three-db)
-        if: ${{ inputs.trigger_source == 'process' && inputs.run_id != '' && env.USE_THREE_DB == 'true' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: processed-databases-${{ inputs.run_id }}
-          path: github-actions-backend/data
-      
-      - name: Download database artifact (legacy)
-        if: ${{ inputs.trigger_source == 'process' && inputs.run_id != '' && env.USE_THREE_DB != 'true' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: processed-database-${{ inputs.run_id }}
-          path: github-actions-backend/data
+      # FIXED: Removed artifact downloads - use committed files instead
+      - name: Ensure latest database files
+        run: |
+          cd github-actions-backend
+          echo "✅ Using committed database files from repository"
+          echo "📁 Available databases:"
+          ls -la data/*.db || true
       
       # Fix missing enhanced_analysis table (only for legacy)
       - name: Fix database schema (legacy)
