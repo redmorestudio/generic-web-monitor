@@ -22,9 +22,9 @@ class TheBrainAPISync {
     this.processedDb = new Database(path.join(dataDir, 'processed_content.db'));
     this.intelligenceDb = new Database(path.join(dataDir, 'intelligence.db'));
     
-    // Initialize API client
+    // Initialize API client with correct endpoint
     this.api = axios.create({
-      baseURL: 'https://api.thebrain.com/v1',
+      baseURL: 'https://api.bra.in',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${this.apiKey}`
@@ -47,6 +47,9 @@ class TheBrainAPISync {
       return true;
     } catch (error) {
       console.error('❌ API connection failed:', error.response?.data || error.message);
+      if (error.response?.status === 401) {
+        console.error('   Authentication failed - check your API key');
+      }
       return false;
     }
   }
@@ -63,9 +66,6 @@ class TheBrainAPISync {
     }
     
     try {
-      // Clear any existing thoughts for clean sync
-      await this.clearExistingThoughts();
-      
       // 1. Create root thought
       const rootId = await this.createRootThought();
       
@@ -96,11 +96,6 @@ class TheBrainAPISync {
     }
   }
 
-  async clearExistingThoughts() {
-    // For now, we'll skip clearing to preserve existing data
-    console.log('Preserving existing thoughts...');
-  }
-
   async createRootThought() {
     console.log('Creating root thought...');
     
@@ -115,6 +110,28 @@ class TheBrainAPISync {
     
     const thoughtId = await this.createThought(rootData);
     this.thoughtCache.set('root', thoughtId);
+    
+    // Add note with system overview
+    await this.updateNote(thoughtId, `# AI Competitive Monitor
+
+## System Overview
+Real-time monitoring and analysis of 52+ companies in the AI space.
+
+### Architecture
+- **Raw Content DB**: HTML snapshots and change detection
+- **Processed Content DB**: Markdown and structured text
+- **Intelligence DB**: AI analysis and insights
+
+### Categories
+- 🤖 LLM Providers
+- 💻 AI Coding Tools
+- 🏗️ AI Infrastructure
+- 🔬 AI Research
+- ⚔️ Competitors
+- 🤝 Partners
+- 🏭 Industry Players
+
+Last sync: ${new Date().toISOString()}`);
     
     return thoughtId;
   }
@@ -186,6 +203,18 @@ class TheBrainAPISync {
       
       const dbId = await this.createThought(dbData);
       await this.createLink(archId, dbId, 1);
+      
+      // Add note with database details
+      await this.updateNote(dbId, `# ${db.name}
+
+## Purpose
+${db.desc}
+
+## Tables
+${db.tables.map(t => `- **${t}**`).join('\n')}
+
+## Location
+\`github-actions-backend/data/${db.name.toLowerCase().replace(/ /g, '_')}.db\``);
       
       // Add tables
       for (const table of db.tables) {
@@ -260,6 +289,21 @@ class TheBrainAPISync {
       const companyId = await this.createThought(companyData);
       await this.createLink(groupId, companyId, 1);
       
+      // Add company note with details
+      await this.updateNote(companyId, `# ${company.name}
+
+## Category
+${categoryMap[category]?.name || 'Industry'}
+
+## Overview
+${company.description || 'No description available'}
+
+## URLs Monitored
+${company.url_count} URLs
+
+## Key Focus Areas
+${company.tags ? company.tags.split(',').map(t => `- ${t.trim()}`).join('\n') : 'Not specified'}`);
+      
       // Store thought ID for future reference
       this.intelligenceDb.prepare(`
         UPDATE companies SET thebrain_thought_id = ? WHERE id = ?
@@ -294,7 +338,8 @@ class TheBrainAPISync {
           c.name as company_name,
           c.thebrain_thought_id as company_thought_id,
           aa.relevance_score,
-          aa.category
+          aa.category,
+          aa.key_changes
         FROM ai_analysis aa
         JOIN urls u ON aa.url_id = u.id
         JOIN companies c ON aa.company_id = c.id
@@ -346,6 +391,23 @@ class TheBrainAPISync {
         const changeId = await this.createThought(changeData);
         await this.createLink(groupId, changeId, 1);
         
+        // Add change details as note
+        if (change.key_changes) {
+          await this.updateNote(changeId, `# ${change.company_name} Update
+
+## Category
+${change.category || 'General Update'}
+
+## Relevance Score
+${change.relevance_score}/10
+
+## Key Changes
+${change.key_changes}
+
+## Detected
+${new Date(change.created_at).toLocaleString()}`);
+        }
+        
         // Link to company if available
         if (change.company_thought_id) {
           await this.createLink(change.company_thought_id, changeId, 3, 'detected');
@@ -385,12 +447,7 @@ class TheBrainAPISync {
   // API helper methods
   async createThought(data) {
     try {
-      const payload = {
-        brainId: this.brainId,
-        ...data
-      };
-      
-      const response = await this.api.post('/thoughts', payload);
+      const response = await this.api.post(`/thoughts/${this.brainId}`, data);
       return response.data.id;
       
     } catch (error) {
@@ -402,18 +459,39 @@ class TheBrainAPISync {
   async createLink(thoughtIdA, thoughtIdB, relation, name = '') {
     try {
       const payload = {
-        brainId: this.brainId,
         thoughtIdA,
         thoughtIdB,
         relation,
         name
       };
       
-      await this.api.post('/links', payload);
+      await this.api.post(`/links/${this.brainId}`, payload);
       
     } catch (error) {
       console.error(`Failed to create link:`, error.response?.data || error.message);
       // Don't throw - links are less critical
+    }
+  }
+
+  async updateNote(thoughtId, markdown) {
+    try {
+      await this.api.post(`/notes/${this.brainId}/${thoughtId}/update`, {
+        markdown
+      });
+    } catch (error) {
+      console.error(`Failed to update note for thought ${thoughtId}:`, error.response?.data || error.message);
+      // Don't throw - notes are optional
+    }
+  }
+
+  async addUrlAttachment(thoughtId, url, name) {
+    try {
+      await this.api.post(`/attachments/${this.brainId}/${thoughtId}/url`, null, {
+        params: { url, name }
+      });
+    } catch (error) {
+      console.error(`Failed to add URL attachment:`, error.response?.data || error.message);
+      // Don't throw - attachments are optional
     }
   }
 }
