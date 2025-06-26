@@ -172,7 +172,10 @@ class TheBrainThreeDBIntegration {
         kind: 2, // Type
         foregroundColor: cat.color,
         backgroundColor: '#0f0f1e'
-      }, 'category', rootId);
+      }, 'category');
+      
+      // FIXED: Create actual link from root to category
+      await this.storeLink(rootId, catId, 'child', cat.name);
     }
     
     return rootId;
@@ -213,7 +216,10 @@ class TheBrainThreeDBIntegration {
         kind: 1,
         foregroundColor: db.color,
         backgroundColor: '#1a1a2e'
-      }, 'database', archId);
+      }, 'database');
+      
+      // FIXED: Link database to System Architecture
+      await this.storeLink(archId, dbId, 'child', db.desc);
       
       // Add table thoughts
       for (const table of db.tables) {
@@ -224,7 +230,10 @@ class TheBrainThreeDBIntegration {
           kind: 1,
           foregroundColor: '#6b7280',
           backgroundColor: '#111827'
-        }, 'table', dbId);
+        }, 'table');
+        
+        // FIXED: Link table to database
+        await this.storeLink(dbId, tableId, 'child', 'contains');
       }
     }
     
@@ -243,7 +252,10 @@ class TheBrainThreeDBIntegration {
       kind: 2,
       foregroundColor: '#8b5cf6',
       backgroundColor: '#1a1a2e'
-    }, 'workflows', archId);
+    }, 'workflows');
+    
+    // FIXED: Link workflows group to System Architecture
+    await this.storeLink(archId, workflowsId, 'child', 'runs');
     
     for (const wf of workflows) {
       const wfId = this.generateThoughtId(wf.name);
@@ -253,7 +265,10 @@ class TheBrainThreeDBIntegration {
         kind: 1,
         foregroundColor: wf.color,
         backgroundColor: '#111827'
-      }, 'workflow', workflowsId);
+      }, 'workflow');
+      
+      // FIXED: Link workflow to workflows group
+      await this.storeLink(workflowsId, wfId, 'child', wf.desc);
     }
   }
 
@@ -268,7 +283,7 @@ class TheBrainThreeDBIntegration {
     ).all();
     const hasEnabledColumn = companyColumns.some(col => col.name === 'enabled');
     
-    // Get companies with their data - check if baseline_analysis has data
+    // Get companies with their data
     const hasBaselineData = this.intelligenceDb.prepare(
       "SELECT COUNT(*) as count FROM baseline_analysis"
     ).get().count > 0;
@@ -288,7 +303,6 @@ class TheBrainThreeDBIntegration {
         ORDER BY c.category, c.name
       `;
     } else {
-      // Fallback query without baseline_analysis
       companiesQuery = `
         SELECT 
           c.*,
@@ -329,7 +343,10 @@ class TheBrainThreeDBIntegration {
         kind: 2,
         foregroundColor: info.color,
         backgroundColor: '#1a1a2e'
-      }, 'company-type', companiesId);
+      }, 'company-type');
+      
+      // FIXED: Link type group to Monitored Companies
+      await this.storeLink(companiesId, groupId, 'child', info.name);
     }
     
     // Add companies to their type groups
@@ -343,7 +360,10 @@ class TheBrainThreeDBIntegration {
         kind: 1,
         foregroundColor: this.getColorForType(company.category),
         backgroundColor: '#111827'
-      }, 'company', groupId);
+      }, 'company');
+      
+      // FIXED: Link company to its type group
+      await this.storeLink(groupId, companyId, 'child', 'member');
       
       // Store mapping for later use
       this.intelligenceDb.prepare(`
@@ -359,9 +379,6 @@ class TheBrainThreeDBIntegration {
     
     const changesId = this.generateThoughtId('Recent Changes');
     
-    // Get recent high-relevance changes - changes table is in raw_content.db
-    // But we need to join with data from intelligence.db, so we'll use a different approach
-    
     try {
       // First check if we have ai_analysis data
       const hasAiAnalysis = this.intelligenceDb.prepare(
@@ -371,7 +388,7 @@ class TheBrainThreeDBIntegration {
       let changes = [];
       
       if (hasAiAnalysis) {
-        // Get changes with analysis from intelligence.db (which references change_id)
+        // Get changes with analysis from intelligence.db
         changes = this.intelligenceDb.prepare(`
           SELECT 
             aa.change_id as id,
@@ -444,7 +461,10 @@ class TheBrainThreeDBIntegration {
           kind: 2,
           foregroundColor: info.color,
           backgroundColor: '#1a1a2e'
-        }, 'change-group', changesId);
+        }, 'change-group');
+        
+        // FIXED: Link change group to Recent Changes
+        await this.storeLink(changesId, groupId, 'child', info.name);
       }
       
       // Add changes to groups
@@ -464,11 +484,14 @@ class TheBrainThreeDBIntegration {
           kind: 3, // Event
           foregroundColor: this.getColorForRelevance(score),
           backgroundColor: '#111827'
-        }, 'change', groups[groupKey]);
+        }, 'change');
+        
+        // FIXED: Link change to its group
+        await this.storeLink(groups[groupKey], changeId, 'child', 'contains');
         
         // Link to company if exists
         if (change.company_thought_id) {
-          await this.storeLink(change.company_thought_id, changeId, 'change', 'detected');
+          await this.storeLink(change.company_thought_id, changeId, 'jump', 'detected');
         }
       }
       
@@ -516,7 +539,10 @@ class TheBrainThreeDBIntegration {
           kind: 2,
           foregroundColor: '#dc2626',
           backgroundColor: '#1a1a2e'
-        }, 'threats', insightsId);
+        }, 'threats');
+        
+        // FIXED: Link threats to AI Insights
+        await this.storeLink(insightsId, threatsId, 'child', 'analysis');
         
         for (const threat of topThreats) {
           const threatId = this.generateThoughtId(`Threat-${threat.name}`);
@@ -526,11 +552,14 @@ class TheBrainThreeDBIntegration {
             kind: 1,
             foregroundColor: '#ef4444',
             backgroundColor: '#111827'
-          }, 'threat', threatsId);
+          }, 'threat');
+          
+          // FIXED: Link threat to threats group
+          await this.storeLink(threatsId, threatId, 'child', 'identified');
           
           // Link to company
           if (threat.thebrain_thought_id) {
-            await this.storeLink(threat.thebrain_thought_id, threatId, 'threat', 'poses');
+            await this.storeLink(threat.thebrain_thought_id, threatId, 'jump', 'poses');
           }
         }
       }
@@ -575,7 +604,10 @@ class TheBrainThreeDBIntegration {
           kind: 2,
           foregroundColor: '#10b981',
           backgroundColor: '#1a1a2e'
-        }, 'trends', insightsId);
+        }, 'trends');
+        
+        // FIXED: Link trends to AI Insights
+        await this.storeLink(insightsId, trendsId, 'child', 'analysis');
         
         // Top 10 technologies
         const sortedTech = Array.from(techMap.entries())
@@ -590,7 +622,10 @@ class TheBrainThreeDBIntegration {
             kind: 4, // Tag
             foregroundColor: '#3b82f6',
             backgroundColor: '#111827'
-          }, 'technology', trendsId);
+          }, 'technology');
+          
+          // FIXED: Link tech to trends
+          await this.storeLink(trendsId, techId, 'child', 'trending');
         }
       }
     }
@@ -629,16 +664,6 @@ class TheBrainThreeDBIntegration {
       if (data.note) {
         exportData.notes[record.thought_id] = data.note;
       }
-      
-      // Add parent link
-      if (data.parentId) {
-        exportData.links.push({
-          thoughtIdA: data.parentId,
-          thoughtIdB: record.thought_id,
-          relation: 1, // Child
-          name: data.linkName || ''
-        });
-      }
     }
     
     // Get all stored links
@@ -661,9 +686,11 @@ class TheBrainThreeDBIntegration {
     
     console.log(`✅ Exported ${exportData.thoughts.length} thoughts with ${exportData.links.length} links`);
     console.log(`📁 Export saved to: ${exportPath}`);
+    console.log(`🧠 Using Brain ID: ${this.brainId}`);
     
     // Also create a visualization summary
     const summary = {
+      brainId: this.brainId,
       statistics: {
         totalThoughts: exportData.thoughts.length,
         totalLinks: exportData.links.length,
