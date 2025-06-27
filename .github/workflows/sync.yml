@@ -51,11 +51,19 @@ jobs:
         with:
           node-version: '20'
       
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
       - name: Install dependencies
         run: |
           cd github-actions-backend
           # Use npm install instead of npm ci to handle package-lock.json mismatches
           npm install --omit=dev
+          
+          # Install Python dependencies for TheBrain sync
+          pip install requests
       
       # FIXED: Removed artifact download - use committed files instead
       - name: Ensure latest files
@@ -80,17 +88,24 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       
-      - name: Sync to TheBrain
+      - name: Sync to TheBrain API
         if: ${{ !inputs.skip_thebrain }}
         run: |
           cd github-actions-backend
           
           # Check if credentials are available
           if [ -z "$THEBRAIN_API_KEY" ] || [ -z "$THEBRAIN_BRAIN_ID" ]; then
-            echo "⚠️  TheBrain credentials not configured, skipping sync"
+            echo "⚠️  TheBrain credentials not configured"
+            echo "   Please add the following secrets to your repository:"
+            echo "   - THEBRAIN_API_KEY"
+            echo "   - THEBRAIN_BRAIN_ID"
+            echo ""
+            echo "   Go to: Settings → Secrets and variables → Actions → New repository secret"
+            echo ""
+            echo "   Skipping TheBrain sync..."
           else
-            echo "🧠 Syncing to TheBrain..."
-            node thebrain-sync-wrapper.js full || echo "TheBrain sync completed"
+            echo "🧠 Syncing to TheBrain via API..."
+            python thebrain_api_sync.py || echo "TheBrain sync completed"
           fi
         env:
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
