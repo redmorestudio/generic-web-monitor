@@ -13,10 +13,19 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Tuple, Optional
 import time
 
-# Configuration
-BRAIN_ID = os.getenv('THEBRAIN_BRAIN_ID', 'c05c7c2d-5e9b-4b9e-99ab-539d3fe4900e')
-API_KEY = os.getenv('THEBRAIN_API_KEY', '5f38bc2613cc51a2dc44c9a89decdfdd47b2912467114670326ad792f64342cb')
+# Configuration - MUST be set via environment variables
+BRAIN_ID = os.getenv('THEBRAIN_BRAIN_ID')
+API_KEY = os.getenv('THEBRAIN_API_KEY')
 API_BASE_URL = 'https://api.thebrain.com/v1'
+
+# Validate credentials
+if not BRAIN_ID or not API_KEY:
+    print("❌ ERROR: Missing TheBrain credentials!")
+    print("   Please set the following environment variables:")
+    print("   - THEBRAIN_BRAIN_ID")
+    print("   - THEBRAIN_API_KEY")
+    print("\nFor GitHub Actions, add these as repository secrets.")
+    sys.exit(1)
 
 # Database paths
 DATA_DIR = os.path.join(os.path.dirname(__file__), 'data')
@@ -514,7 +523,7 @@ def main():
     print("TheBrain API Direct Sync")
     print("=" * 60)
     print(f"Brain ID: {BRAIN_ID}")
-    print(f"API Key: {API_KEY[:10]}...")
+    print(f"API Key: {API_KEY[:10]}..." if API_KEY else "NOT SET")
     
     # Initialize API
     api = TheBrainAPI()
