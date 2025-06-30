@@ -19,6 +19,11 @@ on:
           - analyze-only
           - generate-data-only
 
+# Prevent concurrent runs to avoid git conflicts
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 env:
   NODE_ENV: production
 
@@ -99,12 +104,8 @@ jobs:
         run: |
           cd github-actions-backend
           node generate-static-data.js
-          # Copy generated files to root for GitHub Pages
-          cp -r ../api-data/* ../api-data/ || echo "No api-data directory to copy"
           # Ensure api-data directory exists in root
           mkdir -p ../api-data
-          # Copy any new files
-          cp -f ../api-data/* ../api-data/ 2>/dev/null || echo "Static data generated"
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
@@ -126,8 +127,13 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # Add all changes in api-data directory
-          git add api-data/
+          # Ensure we're on the latest commit
+          git fetch origin main
+          git reset --hard origin/main
+          
+          # Add all changes in api-data directory and database files
+          git add api-data/ || true
+          git add github-actions-backend/data/*.db || true
           
           # Check if there are any changes to commit
           if git diff --staged --quiet; then
@@ -136,11 +142,19 @@ jobs:
             # Commit the changes
             git commit -m "🤖 Auto-update monitoring data - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
             
-            # Pull latest changes and rebase our changes on top
-            git pull --rebase https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git main
-            
-            # Push with explicit token and retry logic
-            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main
+            # Push with retry logic
+            for i in {1..3}; do
+              if git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main; then
+                echo "Successfully pushed changes"
+                break
+              else
+                echo "Push failed, attempt $i of 3"
+                if [ $i -lt 3 ]; then
+                  echo "Pulling latest changes and retrying..."
+                  git pull --no-rebase https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git main
+                fi
+              fi
+            done
           fi
       
       - name: Upload database backup
