@@ -145,22 +145,28 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # First, ensure we're on the latest version
-          git fetch origin main
-          git reset --hard origin/main
-          
-          # Add the databases and scrape status
+          # Add the databases and scrape status FIRST (before any reset)
           git add -f github-actions-backend/data/raw_content.db || true
           git add -f github-actions-backend/data/intelligence.db || true
           git add api-data/last-scrape.json || true
           
+          # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
+            # Commit the changes
             git commit -m "🕷️ Update scraped content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
             
-            # Use force push with lease to avoid conflicts
-            git push --force-with-lease origin main
+            # Pull latest changes and rebase our commit on top
+            git fetch origin main
+            git rebase origin/main || {
+              echo "Rebase failed, trying merge strategy"
+              git rebase --abort
+              git pull origin main --strategy=ours
+            }
+            
+            # Push the changes
+            git push origin main
           fi
       
       - name: Commit database changes (legacy)
@@ -169,21 +175,27 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # First, ensure we're on the latest version
-          git fetch origin main
-          git reset --hard origin/main
-          
-          # Add the database and scrape status
+          # Add the database and scrape status FIRST (before any reset)
           git add -f github-actions-backend/data/monitor.db || true
           git add api-data/last-scrape.json || true
           
+          # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
+            # Commit the changes
             git commit -m "🕷️ Update scraped content - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
             
-            # Use force push with lease to avoid conflicts
-            git push --force-with-lease origin main
+            # Pull latest changes and rebase our commit on top
+            git fetch origin main
+            git rebase origin/main || {
+              echo "Rebase failed, trying merge strategy"
+              git rebase --abort
+              git pull origin main --strategy=ours
+            }
+            
+            # Push the changes
+            git push origin main
           fi
       
       # FIXED: Trigger process workflow instead of analyze
