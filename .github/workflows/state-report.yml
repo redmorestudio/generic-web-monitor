@@ -1,0 +1,104 @@
+name: Complete State Report
+
+on:
+  # Allow manual trigger only - this is a comprehensive report
+  workflow_dispatch:
+    inputs:
+      send_email:
+        description: 'Send email report (requires SMTP configuration)'
+        required: false
+        type: boolean
+        default: true
+
+env:
+  NODE_ENV: production
+
+jobs:
+  generate-state-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Check email configuration
+        if: ${{ inputs.send_email }}
+        run: |
+          echo "📧 Checking email configuration..."
+          echo "SMTP_HOST: ${{ secrets.SMTP_HOST && '✓ Configured' || '✗ Missing' }}"
+          echo "SMTP_USER: ${{ secrets.SMTP_USER && '✓ Configured' || '✗ Missing' }}"
+          echo "SMTP_PASS: ${{ secrets.SMTP_PASS && '✓ Configured' || '✗ Missing' }}"
+          
+          if [ -z "${{ secrets.SMTP_HOST }}" ] || [ -z "${{ secrets.SMTP_USER }}" ] || [ -z "${{ secrets.SMTP_PASS }}" ]; then
+            echo ""
+            echo "⚠️  Email not configured! Please add these secrets:"
+            echo "  - SMTP_HOST (e.g., smtp.gmail.com)"
+            echo "  - SMTP_PORT (e.g., 587)"
+            echo "  - SMTP_USER (your email address)"
+            echo "  - SMTP_PASS (app password for Gmail)"
+            echo "  - NOTIFICATION_EMAIL (optional recipient)"
+            echo ""
+            echo "Go to: Settings → Secrets and variables → Actions"
+            echo ""
+            echo "Continuing without email..."
+            echo "::set-output name=email_configured::false"
+          else
+            echo "::set-output name=email_configured::true"
+          fi
+      
+      - name: Send complete state report email
+        if: ${{ inputs.send_email }}
+        run: |
+          cd github-actions-backend
+          
+          if [ ! -z "${{ secrets.SMTP_HOST }}" ]; then
+            echo "📧 Generating and sending complete state report..."
+            echo ""
+            echo "This comprehensive report includes:"
+            echo "  • All 52 companies with metadata"
+            echo "  • All 174 URLs with detailed information"
+            echo "  • Keywords extracted from each page"
+            echo "  • AI analysis patterns and insights"
+            echo "  • Recent changes and scores"
+            echo "  • Everything except full page content"
+            echo ""
+            
+            node email-notifications-enhanced.js state
+            
+            echo ""
+            echo "✅ Complete state report sent successfully!"
+          else
+            echo "📊 Email not configured - generating report summary only..."
+            node email-notifications-enhanced.js export
+          fi
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+      
+      - name: Export summary only
+        if: ${{ !inputs.send_email }}
+        run: |
+          cd github-actions-backend
+          echo "📊 Exporting state summary (no email)..."
+          node email-notifications-enhanced.js export
+          
+          echo ""
+          echo "Summary exported. To receive the full report via email,"
+          echo "configure SMTP settings and run with 'Send email report' enabled."
