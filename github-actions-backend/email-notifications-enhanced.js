@@ -22,7 +22,7 @@ class EnhancedEmailNotificationService {
     
     if (this.isConfigured) {
       // Create transporter
-      this.transporter = nodemailer.createTransport({
+      this.transporter = nodemailer.createTransporter({
         host: process.env.SMTP_HOST,
         port: process.env.SMTP_PORT || 587,
         secure: false, // Use TLS, not SSL
@@ -315,6 +315,347 @@ class EnhancedEmailNotificationService {
       return true;
     } catch (error) {
       console.error('Failed to send new company alert:', error);
+      return false;
+    }
+  }
+
+  // Send complete state email with all metadata except full page content
+  async sendCompleteState() {
+    if (!this.isConfigured) {
+      console.log('Email notifications not configured. Set SMTP_* environment variables.');
+      return false;
+    }
+
+    try {
+      // Get all companies with their metadata
+      const companies = this.db.prepare(`
+        SELECT c.*, COUNT(u.id) as url_count
+        FROM companies c
+        LEFT JOIN urls u ON c.id = u.company_id
+        WHERE c.enabled = 1
+        GROUP BY c.id
+        ORDER BY c.name
+      `).all();
+
+      // Get detailed information for each company
+      const completeState = [];
+      
+      for (const company of companies) {
+        // Get all URLs with detailed info
+        const urls = this.db.prepare(`
+          SELECT 
+            u.*,
+            cs.title,
+            cs.meta_description,
+            cs.word_count,
+            cs.full_content_hash,
+            cs.created_at as last_scraped,
+            GROUP_CONCAT(DISTINCT sk.keyword) as keywords
+          FROM urls u
+          LEFT JOIN content_snapshots cs ON u.id = cs.url_id 
+            AND cs.created_at = (
+              SELECT MAX(created_at) FROM content_snapshots WHERE url_id = u.id
+            )
+          LEFT JOIN snapshot_keywords sk ON cs.id = sk.snapshot_id
+          WHERE u.company_id = ?
+          GROUP BY u.id
+          ORDER BY u.type, u.url
+        `).all(company.id);
+
+        // Get recent changes
+        const recentChanges = this.db.prepare(`
+          SELECT 
+            c.*,
+            aa.relevance_score,
+            aa.summary,
+            aa.category,
+            aa.entities_json,
+            aa.competitive_threats,
+            aa.strategic_opportunities
+          FROM changes c
+          JOIN urls u ON c.url_id = u.id
+          LEFT JOIN ai_analysis aa ON c.id = aa.change_id
+          WHERE u.company_id = ?
+          ORDER BY c.created_at DESC
+          LIMIT 5
+        `).all(company.id);
+
+        // Get AI insights
+        const aiInsights = this.db.prepare(`
+          SELECT DISTINCT
+            aa.category,
+            aa.relevance_score,
+            aa.entities_json,
+            COUNT(*) as occurrence_count
+          FROM ai_analysis aa
+          JOIN changes c ON aa.change_id = c.id
+          JOIN urls u ON c.url_id = u.id
+          WHERE u.company_id = ?
+          GROUP BY aa.category
+          ORDER BY occurrence_count DESC
+        `).all(company.id);
+
+        completeState.push({
+          company,
+          urls,
+          recentChanges,
+          aiInsights
+        });
+      }
+
+      // Build comprehensive email
+      const subject = `AI Monitor Complete State Report - ${companies.length} Companies, ${new Date().toLocaleDateString()}`;
+      
+      let htmlContent = `
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <style>
+            body { font-family: Arial, sans-serif; color: #333; line-height: 1.6; max-width: 1200px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color: white; padding: 30px; border-radius: 10px; margin-bottom: 30px; }
+            .header h1 { margin: 0; font-size: 28px; }
+            .header p { margin: 10px 0 0 0; opacity: 0.9; }
+            .company-block { margin: 30px 0; background: #f8f9fa; padding: 20px; border-radius: 10px; border: 1px solid #e5e7eb; }
+            .company-header { background: #667eea; color: white; padding: 15px; border-radius: 8px; margin: -20px -20px 20px -20px; }
+            .company-name { font-size: 22px; font-weight: bold; }
+            .metadata-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 15px; margin: 20px 0; }
+            .metadata-card { background: white; padding: 15px; border-radius: 8px; border: 1px solid #e5e7eb; }
+            .metadata-label { font-size: 12px; color: #6b7280; text-transform: uppercase; }
+            .metadata-value { font-size: 16px; font-weight: bold; color: #1a1a2e; margin-top: 5px; }
+            .url-section { margin: 20px 0; }
+            .url-card { background: white; padding: 15px; margin: 10px 0; border-radius: 8px; border: 1px solid #e5e7eb; }
+            .url-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+            .url-link { color: #667eea; text-decoration: none; font-weight: bold; }
+            .url-type { background: #e5e7eb; padding: 3px 8px; border-radius: 12px; font-size: 11px; }
+            .url-metadata { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 10px 0; font-size: 13px; }
+            .keywords { margin: 10px 0; }
+            .keyword { background: #ddd6fe; color: #5b21b6; padding: 3px 8px; border-radius: 12px; font-size: 11px; margin: 2px; display: inline-block; }
+            .change-item { background: #fef3c7; padding: 10px; margin: 10px 0; border-radius: 5px; border-left: 4px solid #f59e0b; }
+            .ai-insight { background: #dbeafe; padding: 10px; margin: 5px 0; border-radius: 5px; }
+            .entities { margin: 10px 0; }
+            .entity { background: #dcfce7; color: #166534; padding: 3px 8px; border-radius: 12px; font-size: 11px; margin: 2px; display: inline-block; }
+            .footer { margin-top: 40px; padding: 20px; background: #f3f4f6; border-radius: 10px; text-align: center; }
+            .stats-row { display: flex; justify-content: space-around; margin: 20px 0; }
+            .stat { text-align: center; }
+            .stat-value { font-size: 24px; font-weight: bold; color: #667eea; }
+            .stat-label { font-size: 12px; color: #6b7280; }
+          </style>
+        </head>
+        <body>
+          <div class="header">
+            <h1>🔍 AI Competitive Monitor - Complete State Report</h1>
+            <p>Comprehensive snapshot of all monitored companies, URLs, keywords, and AI insights</p>
+            <p style="font-size: 14px; margin-top: 10px;">Generated: ${new Date().toLocaleString()}</p>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat">
+              <div class="stat-value">${companies.length}</div>
+              <div class="stat-label">COMPANIES</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">${completeState.reduce((sum, c) => sum + c.urls.length, 0)}</div>
+              <div class="stat-label">TOTAL URLS</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">${completeState.reduce((sum, c) => sum + c.urls.filter(u => u.enabled).length, 0)}</div>
+              <div class="stat-label">ACTIVE URLS</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value">${completeState.reduce((sum, c) => sum + c.recentChanges.length, 0)}</div>
+              <div class="stat-label">RECENT CHANGES</div>
+            </div>
+          </div>
+      `;
+
+      // Add detailed company information
+      for (const companyData of completeState) {
+        const { company, urls, recentChanges, aiInsights } = companyData;
+        const activeUrls = urls.filter(u => u.enabled);
+        
+        htmlContent += `
+          <div class="company-block">
+            <div class="company-header">
+              <div class="company-name">${company.name}</div>
+              <div style="font-size: 14px; margin-top: 5px;">
+                Type: ${company.type || 'General'} | 
+                ${activeUrls.length} active URLs | 
+                ${recentChanges.length} recent changes
+              </div>
+            </div>
+
+            <div class="metadata-grid">
+              <div class="metadata-card">
+                <div class="metadata-label">Company ID</div>
+                <div class="metadata-value">${company.id}</div>
+              </div>
+              <div class="metadata-card">
+                <div class="metadata-label">Monitoring Since</div>
+                <div class="metadata-value">${new Date(company.created_at).toLocaleDateString()}</div>
+              </div>
+              <div class="metadata-card">
+                <div class="metadata-label">Status</div>
+                <div class="metadata-value">${company.enabled ? '✅ Active' : '❌ Disabled'}</div>
+              </div>
+            </div>
+
+            <h3>Monitored URLs</h3>
+            <div class="url-section">
+        `;
+        
+        for (const url of urls) {
+          const keywords = url.keywords ? url.keywords.split(',') : [];
+          
+          htmlContent += `
+            <div class="url-card">
+              <div class="url-header">
+                <div>
+                  <a href="${url.url}" class="url-link">${url.url}</a>
+                  <span class="url-type">${url.type || 'general'}</span>
+                  ${url.enabled ? '✅' : '❌'}
+                </div>
+                <div style="font-size: 12px; color: #6b7280;">
+                  ID: ${url.id}
+                </div>
+              </div>
+              
+              <div class="url-metadata">
+                <div><strong>Last Check:</strong> ${url.last_check ? new Date(url.last_check).toLocaleString() : 'Never'}</div>
+                <div><strong>Last Scraped:</strong> ${url.last_scraped ? new Date(url.last_scraped).toLocaleString() : 'Never'}</div>
+                <div><strong>Word Count:</strong> ${url.word_count || 'N/A'}</div>
+              </div>
+              
+              ${url.title ? `
+                <div style="margin: 10px 0;">
+                  <strong>Page Title:</strong> ${url.title}
+                </div>
+              ` : ''}
+              
+              ${url.meta_description ? `
+                <div style="margin: 10px 0; font-size: 13px; color: #4b5563;">
+                  <strong>Description:</strong> ${url.meta_description}
+                </div>
+              ` : ''}
+              
+              ${keywords.length > 0 ? `
+                <div class="keywords">
+                  <strong>Keywords:</strong>
+                  ${keywords.map(k => `<span class="keyword">${k.trim()}</span>`).join('')}
+                </div>
+              ` : ''}
+              
+              <div style="margin-top: 10px; font-size: 11px; color: #9ca3af;">
+                Content Hash: ${url.full_content_hash ? url.full_content_hash.substring(0, 16) + '...' : 'N/A'}
+              </div>
+            </div>
+          `;
+        }
+
+        // Add AI insights section
+        if (aiInsights.length > 0) {
+          htmlContent += `
+            <h3>AI Analysis Patterns</h3>
+            <div style="margin: 10px 0;">
+          `;
+          
+          for (const insight of aiInsights) {
+            const entities = insight.entities_json ? JSON.parse(insight.entities_json) : [];
+            
+            htmlContent += `
+              <div class="ai-insight">
+                <strong>${insight.category || 'General'}</strong> - 
+                ${insight.occurrence_count} occurrences, 
+                Avg Score: ${(insight.relevance_score || 0).toFixed(1)}/10
+                ${entities.length > 0 ? `
+                  <div class="entities">
+                    Entities: ${entities.slice(0, 5).map(e => `<span class="entity">${e}</span>`).join('')}
+                    ${entities.length > 5 ? `<span style="font-size: 11px; color: #6b7280;">+${entities.length - 5} more</span>` : ''}
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          }
+          
+          htmlContent += '</div>';
+        }
+
+        // Add recent changes
+        if (recentChanges.length > 0) {
+          htmlContent += `
+            <h3>Recent Changes</h3>
+          `;
+          
+          for (const change of recentChanges) {
+            const entities = change.entities_json ? JSON.parse(change.entities_json) : [];
+            
+            htmlContent += `
+              <div class="change-item">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                  <strong>Score: ${change.relevance_score || 'N/A'}/10</strong>
+                  <span style="font-size: 12px;">${new Date(change.created_at).toLocaleString()}</span>
+                </div>
+                ${change.summary ? `<p style="margin: 5px 0;"><strong>Summary:</strong> ${change.summary}</p>` : ''}
+                ${change.category ? `<p style="margin: 5px 0;"><strong>Category:</strong> ${change.category}</p>` : ''}
+                ${change.competitive_threats ? `<p style="margin: 5px 0;"><strong>Threats:</strong> ${change.competitive_threats}</p>` : ''}
+                ${change.strategic_opportunities ? `<p style="margin: 5px 0;"><strong>Opportunities:</strong> ${change.strategic_opportunities}</p>` : ''}
+                ${entities.length > 0 ? `
+                  <div class="entities">
+                    <strong>Entities:</strong> ${entities.map(e => `<span class="entity">${e}</span>`).join('')}
+                  </div>
+                ` : ''}
+              </div>
+            `;
+          }
+        }
+
+        htmlContent += '</div>';
+      }
+
+      // Add footer
+      htmlContent += `
+        <div class="footer">
+          <h3>Complete State Report Summary</h3>
+          <p>This report contains the complete current state of the AI Competitive Monitor system.</p>
+          <p>
+            <strong>Included:</strong> All companies, URLs, keywords, metadata, AI insights, and recent changes<br>
+            <strong>Excluded:</strong> Full page content (available in dashboard)
+          </p>
+          <div style="margin-top: 20px;">
+            <a href="https://redmorestudio.github.io/ai-competitive-monitor" 
+               style="background: #667eea; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; margin: 5px;">
+              View Dashboard
+            </a>
+            <a href="https://github.com/redmorestudio/ai-competitive-monitor" 
+               style="background: #1a1a2e; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; display: inline-block; margin: 5px;">
+              GitHub Repository
+            </a>
+          </div>
+          <p style="margin-top: 20px; font-size: 12px; color: #6b7280;">
+            Generated by AI Competitive Monitor<br>
+            Next scheduled run: ${this.getNextRunTime()} hours
+          </p>
+        </div>
+        </body>
+        </html>
+      `;
+
+      // Send email
+      const mailOptions = {
+        from: process.env.SMTP_USER,
+        to: this.recipient,
+        subject: subject,
+        html: htmlContent
+      };
+
+      await this.transporter.sendMail(mailOptions);
+      console.log(`✅ Complete state email sent to ${this.recipient}`);
+      
+      // Log notification
+      this.logNotification('complete_state', companies.length, completeState.reduce((sum, c) => sum + c.urls.length, 0));
+      
+      return true;
+    } catch (error) {
+      console.error('Failed to send complete state email:', error);
       return false;
     }
   }
@@ -656,6 +997,15 @@ if (require.main === module) {
         await emailService.exportEmailSummary();
         break;
         
+      case 'state':
+        // Send complete state email
+        console.log('Generating complete state email...');
+        await emailService.sendCompleteState();
+        
+        // Export summary
+        await emailService.exportEmailSummary();
+        break;
+        
       case 'export':
         // Just export the summary without sending email
         console.log('Exporting email summary...');
@@ -668,6 +1018,7 @@ if (require.main === module) {
         console.log('  node email-notifications-enhanced.js test    - Send test email');
         console.log('  node email-notifications-enhanced.js check   - Check and alert on recent changes');
         console.log('  node email-notifications-enhanced.js daily   - Send daily verification email');
+        console.log('  node email-notifications-enhanced.js state   - Send complete state report');
         console.log('  node email-notifications-enhanced.js export  - Export summary for dashboard');
     }
   }
