@@ -145,7 +145,22 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # Add the databases and scrape status FIRST (before any reset)
+          # First, show current git status
+          echo "📋 Current git status:"
+          git status
+          
+          # Clean up any unwanted files (but preserve our databases)
+          echo "🧹 Cleaning up workspace..."
+          # Remove SQLite temporary files if they exist
+          find . -name "*.db-wal" -o -name "*.db-shm" | xargs rm -f || true
+          # Remove node_modules that might have been created
+          rm -rf node_modules || true
+          
+          # Stash any remaining uncommitted changes to ensure clean state
+          echo "📦 Stashing any uncommitted changes..."
+          git stash push -m "Temporary stash during workflow" || true
+          
+          # Add the databases and scrape status
           git add -f github-actions-backend/data/raw_content.db || true
           git add -f github-actions-backend/data/intelligence.db || true
           git add api-data/last-scrape.json || true
@@ -153,6 +168,7 @@ jobs:
           # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
+            git stash pop || true  # Restore stashed changes if any
           else
             # Commit the changes
             git commit -m "🕷️ Update scraped content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
@@ -167,6 +183,9 @@ jobs:
             
             # Push the changes
             git push origin main
+            
+            # Clean up stash if any
+            git stash pop || true
           fi
       
       - name: Commit database changes (legacy)
@@ -175,13 +194,29 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # Add the database and scrape status FIRST (before any reset)
+          # First, show current git status
+          echo "📋 Current git status:"
+          git status
+          
+          # Clean up any unwanted files (but preserve our databases)
+          echo "🧹 Cleaning up workspace..."
+          # Remove SQLite temporary files if they exist
+          find . -name "*.db-wal" -o -name "*.db-shm" | xargs rm -f || true
+          # Remove node_modules that might have been created
+          rm -rf node_modules || true
+          
+          # Stash any remaining uncommitted changes to ensure clean state
+          echo "📦 Stashing any uncommitted changes..."
+          git stash push -m "Temporary stash during workflow" || true
+          
+          # Add the database and scrape status
           git add -f github-actions-backend/data/monitor.db || true
           git add api-data/last-scrape.json || true
           
           # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
+            git stash pop || true  # Restore stashed changes if any
           else
             # Commit the changes
             git commit -m "🕷️ Update scraped content - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
@@ -196,6 +231,9 @@ jobs:
             
             # Push the changes
             git push origin main
+            
+            # Clean up stash if any
+            git stash pop || true
           fi
       
       # FIXED: Trigger process workflow instead of analyze
