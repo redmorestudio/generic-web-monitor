@@ -155,15 +155,24 @@ jobs:
         if: ${{ !inputs.skip_alerts }}
         id: check-changes
         run: |
+          # Check if changes.json exists
+          if [ ! -f "api-data/changes.json" ]; then
+            echo "No changes.json file found"
+            echo "high_priority_count=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          # Count high priority changes
           HIGH_PRIORITY=$(jq '[.changes[] | select(.relevance_score >= 8)] | length' api-data/changes.json 2>/dev/null || echo "0")
           echo "high_priority_count=$HIGH_PRIORITY" >> $GITHUB_OUTPUT
           
           if [ "$HIGH_PRIORITY" -gt 0 ]; then
             echo "Found $HIGH_PRIORITY high-priority changes"
-            jq -r '.changes[] | select(.relevance_score >= 8) | "- \(.company): \(.summary) (Score: \(.relevance_score)/10)"' api-data/changes.json > /tmp/changes.txt || echo "No changes file"
-            echo "changes_details<<EOF" >> $GITHUB_OUTPUT
-            cat /tmp/changes.txt >> $GITHUB_OUTPUT
-            echo "EOF" >> $GITHUB_OUTPUT
+            # Create a simple summary without special characters that could break JavaScript
+            jq -r '.changes[] | select(.relevance_score >= 8) | "- \(.company): Score \(.relevance_score)/10"' api-data/changes.json > /tmp/changes.txt || echo "No changes"
+            
+            # Save to file for next step
+            echo "CHANGES_FILE=/tmp/changes.txt" >> $GITHUB_OUTPUT
           fi
       
       - name: Create GitHub Issue for alerts
@@ -172,14 +181,15 @@ jobs:
         with:
           script: |
             const count = ${{ steps.check-changes.outputs.high_priority_count }};
-            const changes = `${{ steps.check-changes.outputs.changes_details }}`;
+            // Read changes from environment variable to avoid escaping issues
+            const changesDetails = process.env.CHANGES_DETAILS || 'See dashboard for details';
             
             const body = `# 🔴 High Priority Competitive Intelligence Alert
             
             **${count} high-priority changes detected** in competitor monitoring.
             
             ## Changes Detected:
-            ${changes}
+            ${changesDetails}
             
             ## Dashboard:
             View the [full dashboard](${{ steps.deployment.outputs.page_url }}) for detailed analysis.
@@ -195,6 +205,8 @@ jobs:
               body: body,
               labels: ['competitive-intel', 'high-priority', 'automated']
             });
+        env:
+          CHANGES_DETAILS: ${{ steps.check-changes.outputs.CHANGES_FILE && format('{0}', steps.check-changes.outputs.CHANGES_FILE) || 'See dashboard for details' }}
       
       - name: Send email notifications
         if: ${{ !inputs.skip_alerts }}
@@ -204,7 +216,17 @@ jobs:
           # Check for email configuration
           if [ -z "$SMTP_HOST" ]; then
             echo "📧 Email not configured, skipping notifications"
+            echo ""
+            echo "To enable email notifications, add these secrets:"
+            echo "  - SMTP_HOST (e.g., smtp.gmail.com)"
+            echo "  - SMTP_PORT (e.g., 587)"
+            echo "  - SMTP_USER (your email address)"
+            echo "  - SMTP_PASS (app password)"
+            echo "  - NOTIFICATION_EMAIL (recipient email)"
+            echo ""
+            echo "Go to: Settings → Secrets and variables → Actions"
           else
+            echo "📧 Checking for high-priority changes to email..."
             node email-notifications-enhanced.js check || echo "Email check completed"
           fi
         env:
