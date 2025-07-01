@@ -1,16 +1,27 @@
 name: Test Email Configuration
 
 on:
-  # Allow manual trigger only
+  # Manual trigger only
   workflow_dispatch:
+    inputs:
+      email_type:
+        description: 'Type of test email to send'
+        required: true
+        default: 'test'
+        type: choice
+        options:
+          - test
+          - daily
+          - state
+          - check
 
 env:
   NODE_ENV: production
 
 jobs:
-  send-test-email:
+  test-email:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     
     permissions:
       contents: read
@@ -29,42 +40,91 @@ jobs:
           cd github-actions-backend
           npm install --omit=dev
       
-      - name: Check email configuration
-        run: |
-          echo "📧 Checking email configuration..."
-          echo "SMTP_HOST: ${{ secrets.SMTP_HOST && '✓ Configured' || '✗ Missing' }}"
-          echo "SMTP_USER: ${{ secrets.SMTP_USER && '✓ Configured' || '✗ Missing' }}"
-          echo "SMTP_PASS: ${{ secrets.SMTP_PASS && '✓ Configured' || '✗ Missing' }}"
-          echo "SMTP_PORT: ${{ secrets.SMTP_PORT && '✓ Configured' || '✗ Missing' }}"
-          echo "NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL && '✓ Configured' || '(using default)' }}"
-          
-          if [ -z "${{ secrets.SMTP_HOST }}" ] || [ -z "${{ secrets.SMTP_USER }}" ] || [ -z "${{ secrets.SMTP_PASS }}" ]; then
-            echo ""
-            echo "⚠️  Email not configured! Please add these secrets:"
-            echo "  - SMTP_HOST (e.g., smtp.gmail.com)"
-            echo "  - SMTP_PORT (e.g., 587)"
-            echo "  - SMTP_USER (your email address)"
-            echo "  - SMTP_PASS (app password for Gmail)"
-            echo "  - NOTIFICATION_EMAIL (optional recipient)"
-            echo ""
-            echo "Go to: Settings → Secrets and variables → Actions"
-            exit 1
-          fi
-      
-      - name: Send test email
+      - name: Test Email Configuration
         run: |
           cd github-actions-backend
-          echo "📧 Sending test email..."
-          node email-notifications-enhanced.js test
+          
+          echo "📧 Testing Email Configuration"
+          echo "=============================="
+          echo ""
+          
+          # Check configuration
+          if [ -z "$SMTP_HOST" ]; then
+            echo "❌ ERROR: Email not configured!"
+            echo ""
+            echo "To enable email notifications, you MUST add these secrets:"
+            echo ""
+            echo "1. Go to: https://github.com/redmorestudio/ai-competitive-monitor/settings/secrets/actions"
+            echo ""
+            echo "2. Add these secrets:"
+            echo "   - SMTP_HOST=smtp.gmail.com"
+            echo "   - SMTP_PORT=587"
+            echo "   - SMTP_USER=your-email@gmail.com"
+            echo "   - SMTP_PASS=your-app-password (NOT your regular password!)"
+            echo "   - NOTIFICATION_EMAIL=seth@redmore.studio (or your email)"
+            echo ""
+            echo "3. For Gmail, get an app password at:"
+            echo "   https://myaccount.google.com/apppasswords"
+            echo ""
+            exit 1
+          fi
+          
+          echo "✅ Email Configuration Found!"
+          echo ""
+          echo "Settings:"
+          echo "- SMTP Host: $SMTP_HOST"
+          echo "- SMTP Port: ${SMTP_PORT:-587}"
+          echo "- SMTP User: $SMTP_USER"
+          echo "- Recipient: ${NOTIFICATION_EMAIL:-$SMTP_USER}"
+          echo "- Email Type: ${{ inputs.email_type }}"
+          echo ""
+          
+          # Send test email based on type
+          case "${{ inputs.email_type }}" in
+            "test")
+              echo "📨 Sending test company alert email..."
+              node -e "
+                const EmailService = require('./email-notifications-enhanced.js');
+                const service = new EmailService();
+                const testCompany = {
+                  name: 'Test Company - AI Monitor',
+                  type: 'Test'
+                };
+                const testUrls = [
+                  { url: 'https://example.com', type: 'homepage' },
+                  { url: 'https://example.com/blog', type: 'blog' }
+                ];
+                service.sendNewCompanyAlert(testCompany, testUrls)
+                  .then(() => console.log('✅ Test email sent successfully!'))
+                  .catch(err => {
+                    console.error('❌ Failed to send test email:', err);
+                    process.exit(1);
+                  });
+              "
+              ;;
+            
+            "daily")
+              echo "📨 Sending daily digest email..."
+              node email-notifications-enhanced.js daily
+              ;;
+            
+            "state")
+              echo "📨 Sending complete state report email..."
+              node email-notifications-enhanced.js state
+              ;;
+            
+            "check")
+              echo "📨 Checking for alerts to send..."
+              node email-notifications-enhanced.js check
+              ;;
+          esac
           
           echo ""
-          echo "✅ Test email sent successfully!"
-          echo "Check your inbox to verify email delivery."
-          echo ""
-          echo "Email sent to: ${NOTIFICATION_EMAIL:-seth@redmore.studio}"
+          echo "✅ Email test completed! Check your inbox."
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
