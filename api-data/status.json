@@ -1,29 +1,29 @@
 {
-  "generated_at": "2025-07-01T18:38:37.262Z",
+  "generated_at": "2025-07-01T21:11:31.396Z",
   "files_generated": 5,
   "architecture": "three-database",
   "database_info": {
     "architecture": "three-db",
     "databases": {
       "legacy": {
-        "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/monitor.db",
+        "path": "/Users/sethredmore/Desktop/ai-competitive-monitor-new/github-actions-backend/data/monitor.db",
         "size": "49.99 MB",
-        "modified": "2025-07-01T18:38:21.531Z"
+        "modified": "2025-07-01T18:31:40.374Z"
       },
       "raw": {
-        "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/raw_content.db",
+        "path": "/Users/sethredmore/Desktop/ai-competitive-monitor-new/github-actions-backend/data/raw_content.db",
         "size": "78.11 MB",
-        "modified": "2025-07-01T18:38:21.627Z"
+        "modified": "2025-07-01T18:31:40.494Z"
       },
       "processed": {
-        "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/processed_content.db",
-        "size": "0.03 MB",
-        "modified": "2025-07-01T18:38:21.532Z"
+        "path": "/Users/sethredmore/Desktop/ai-competitive-monitor-new/github-actions-backend/data/processed_content.db",
+        "size": "4.25 MB",
+        "modified": "2025-07-01T21:07:11.036Z"
       },
       "intelligence": {
-        "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/intelligence.db",
-        "size": "0.10 MB",
-        "modified": "2025-07-01T18:38:21.299Z"
+        "path": "/Users/sethredmore/Desktop/ai-competitive-monitor-new/github-actions-backend/data/intelligence.db",
+        "size": "0.34 MB",
+        "modified": "2025-07-01T21:05:05.645Z"
       }
     }
   },
@@ -31,6 +31,6 @@
   "version": "2.0.0",
   "ai_analysis": {
     "enabled": true,
-    "processed_items": 0
+    "processed_items": 14
   }
 }

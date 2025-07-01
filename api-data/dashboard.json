@@ -2,15 +2,15 @@
   "stats": {
     "companies": 52,
     "urls": 174,
-    "snapshots": 0,
-    "lastCheck": "2025-07-01T18:38:37.255Z"
+    "snapshots": 42,
+    "lastCheck": "2025-07-01T21:11:31.370Z"
   },
   "company_activity": [
     {
       "company": "AI21 Labs",
       "type": "LLM Providers",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-01 21:08:21",
       "urls": [
         "https://ai21.com",
         "https://ai21.com/jamba",
@@ -22,7 +22,7 @@
       "company": "AMD",
       "type": "AI Hardware",
       "url_count": 2,
-      "last_check": null,
+      "last_check": "2025-07-01 21:08:09",
       "urls": [
         "https://amd.com/en/graphics/instinct-server-accelerators",
         "https://amd.com/en/newsroom"
@@ -32,7 +32,7 @@
       "company": "Aleph Alpha",
       "type": "LLM Providers",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-01 21:08:12",
       "urls": [
         "https://aleph-alpha.com",
         "https://aleph-alpha.com/luminous",
@@ -44,7 +44,7 @@
       "company": "Amazon CodeWhisperer",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-01 21:09:24",
       "urls": [
         "https://aws.amazon.com/codewhisperer",
         "https://aws.amazon.com/codewhisperer/pricing",
@@ -56,7 +56,7 @@
       "company": "Andi",
       "type": "AI Search",
       "url_count": 1,
-      "last_check": null,
+      "last_check": "2025-07-01 21:09:02",
       "urls": [
         "https://andisearch.com"
       ]
@@ -65,7 +65,7 @@
       "company": "Anthropic",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": null,
+      "last_check": "2025-07-01 21:09:24",
       "urls": [
         "https://anthropic.com",
         "https://anthropic.com/claude",
@@ -78,7 +78,7 @@
       "company": "Anyscale",
       "type": "AI Infrastructure",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-01 21:10:21",
       "urls": [
         "https://anyscale.com",
         "https://anyscale.com/pricing",
@@ -89,7 +89,7 @@
       "company": "Cerebras",
       "type": "AI Hardware",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-01 21:10:12",
       "urls": [
         "https://cerebras.net",
         "https://cerebras.net/product-system",
@@ -100,7 +100,7 @@
       "company": "Codeium",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-01 21:10:27",
       "urls": [
         "https://codeium.com",
         "https://codeium.com/windsurf",
@@ -112,7 +112,7 @@
       "company": "Cohere",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": null,
+      "last_check": "2025-07-01 21:11:24",
       "urls": [
         "https://cohere.ai",
         "https://cohere.ai/products",
@@ -125,7 +125,7 @@
       "company": "Cursor",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-01 21:11:19",
       "urls": [
         "https://cursor.com",
         "https://cursor.com/features",
@@ -137,7 +137,7 @@
       "company": "DALL-E",
       "type": "Image Generation",
       "url_count": 2,
-      "last_check": null,
+      "last_check": "2025-07-01 21:11:09",
       "urls": [
         "https://openai.com/dall-e-3",
         "https://openai.com/pricing"
@@ -295,7 +295,7 @@
       "company": "Leonardo AI",
       "type": "Image Generation",
       "url_count": 2,
-      "last_check": null,
+      "last_check": "2025-07-01 20:42:56",
       "urls": [
         "https://leonardo.ai",
         "https://leonardo.ai/pricing"
@@ -305,7 +305,7 @@
       "company": "Luma AI",
       "type": "Video AI",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-01 20:42:38",
       "urls": [
         "https://lumalabs.ai",
         "https://lumalabs.ai/dream-machine",
@@ -597,6 +597,6 @@
       ]
     }
   ],
-  "generated_at": "2025-07-01T18:38:37.256Z",
+  "generated_at": "2025-07-01T21:11:31.378Z",
   "backend": "github-actions-static-three-db"
 }
