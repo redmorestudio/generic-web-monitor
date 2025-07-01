@@ -136,90 +136,99 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
     try {
         console.log('📄 Generating content snapshots data with AI analysis...');
         
-        // Get latest content with AI analysis data
-        const snapshots = processedDb.prepare(`
-            SELECT 
-                mc.id,
-                mc.url_id,
-                mc.processed_at as created_at,
-                mc.markdown_content,
-                u.url,
-                u.type as url_type,
-                c.name as company,
-                c.id as company_id
-            FROM markdown_content mc
-            JOIN urls u ON mc.url_id = u.id
-            JOIN companies c ON u.company_id = c.id
-            WHERE mc.id IN (
-                SELECT MAX(id) 
-                FROM markdown_content 
-                GROUP BY url_id
-            )
-            ORDER BY mc.processed_at DESC
-            LIMIT 100
-        `).all();
+        // FIXED: Attach intelligence database for cross-database queries
+        const intelligenceDbPath = path.join(DATA_DIR, 'intelligence.db');
+        processedDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
         
-        // Get AI analysis for each snapshot
-        const analysisStmt = intelligenceDb.prepare(`
-            SELECT relevance_score, summary, semantic_categories, entities
-            FROM baseline_analysis
-            WHERE content_id = ?
-        `);
-        
-        const processedSnapshots = snapshots.map(snapshot => {
-            // Get AI analysis
-            const analysis = analysisStmt.get(snapshot.id);
+        try {
+            // Get latest content with AI analysis data
+            const snapshots = processedDb.prepare(`
+                SELECT 
+                    mc.id,
+                    mc.url_id,
+                    mc.processed_at as created_at,
+                    mc.markdown_content,
+                    intelligence.urls.url,
+                    intelligence.urls.type as url_type,
+                    intelligence.companies.name as company,
+                    intelligence.companies.id as company_id
+                FROM markdown_content mc
+                JOIN intelligence.urls ON mc.url_id = intelligence.urls.id
+                JOIN intelligence.companies ON intelligence.urls.company_id = intelligence.companies.id
+                WHERE mc.id IN (
+                    SELECT MAX(id) 
+                    FROM markdown_content 
+                    GROUP BY url_id
+                )
+                ORDER BY mc.processed_at DESC
+                LIMIT 100
+            `).all();
             
-            let keywords = [];
-            let relevanceScore = 0;
-            let aiProcessed = false;
-            let category = 'uncategorized';
+            // Get AI analysis for each snapshot
+            const analysisStmt = intelligenceDb.prepare(`
+                SELECT relevance_score, summary, semantic_categories, entities
+                FROM baseline_analysis
+                WHERE content_id = ?
+            `);
             
-            if (analysis) {
-                relevanceScore = analysis.relevance_score || 0;
-                aiProcessed = true;
+            const processedSnapshots = snapshots.map(snapshot => {
+                // Get AI analysis
+                const analysis = analysisStmt.get(snapshot.id);
                 
-                try {
-                    const semanticCategories = JSON.parse(analysis.semantic_categories || '{}');
-                    category = semanticCategories.primary || 'uncategorized';
+                let keywords = [];
+                let relevanceScore = 0;
+                let aiProcessed = false;
+                let category = 'uncategorized';
+                
+                if (analysis) {
+                    relevanceScore = analysis.relevance_score || 0;
+                    aiProcessed = true;
                     
-                    const entities = JSON.parse(analysis.entities || '{}');
-                    // Extract keywords from entities
-                    if (entities.technologies) {
-                        keywords = keywords.concat(entities.technologies.map(t => t.name));
+                    try {
+                        const semanticCategories = JSON.parse(analysis.semantic_categories || '{}');
+                        category = semanticCategories.primary || 'uncategorized';
+                        
+                        const entities = JSON.parse(analysis.entities || '{}');
+                        // Extract keywords from entities
+                        if (entities.technologies) {
+                            keywords = keywords.concat(entities.technologies.map(t => t.name));
+                        }
+                        if (entities.products) {
+                            keywords = keywords.concat(entities.products.map(p => p.name));
+                        }
+                        keywords = [...new Set(keywords)].slice(0, 10); // Unique keywords, max 10
+                    } catch (e) {
+                        // Ignore parsing errors
                     }
-                    if (entities.products) {
-                        keywords = keywords.concat(entities.products.map(p => p.name));
-                    }
-                    keywords = [...new Set(keywords)].slice(0, 10); // Unique keywords, max 10
-                } catch (e) {
-                    // Ignore parsing errors
                 }
-            }
+                
+                return {
+                    id: snapshot.id,
+                    url: snapshot.url,
+                    company: snapshot.company,
+                    type: snapshot.url_type || 'general',
+                    timestamp: snapshot.created_at,
+                    content_length: snapshot.markdown_content ? snapshot.markdown_content.length : 0,
+                    extractedContent: snapshot.markdown_content ? 
+                        snapshot.markdown_content.substring(0, 500) + '...' : 'No content',
+                    relevanceScore: relevanceScore,
+                    keywords: JSON.stringify(keywords),
+                    aiProcessed: aiProcessed,
+                    category: category,
+                    summary: analysis?.summary || '',
+                    source: 'GitHub Actions Monitor'
+                };
+            });
             
             return {
-                id: snapshot.id,
-                url: snapshot.url,
-                company: snapshot.company,
-                type: snapshot.url_type || 'general',
-                timestamp: snapshot.created_at,
-                content_length: snapshot.markdown_content ? snapshot.markdown_content.length : 0,
-                extractedContent: snapshot.markdown_content ? 
-                    snapshot.markdown_content.substring(0, 500) + '...' : 'No content',
-                relevanceScore: relevanceScore,
-                keywords: JSON.stringify(keywords),
-                aiProcessed: aiProcessed,
-                category: category,
-                summary: analysis?.summary || '',
-                source: 'GitHub Actions Monitor'
+                extractedData: processedSnapshots,
+                totalUnfiltered: snapshots.length,
+                generated_at: new Date().toISOString()
             };
-        });
-        
-        return {
-            extractedData: processedSnapshots,
-            totalUnfiltered: snapshots.length,
-            generated_at: new Date().toISOString()
-        };
+        } finally {
+            // Always detach the database
+            processedDb.exec('DETACH DATABASE intelligence');
+        }
     } catch (error) {
         console.error('❌ Error generating content snapshots data:', error);
         return {
@@ -238,73 +247,82 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
     try {
         console.log('📈 Generating recent changes data with AI analysis...');
         
-        // Get recent changes
-        const recentChanges = processedDb.prepare(`
-            SELECT 
-                cd.id,
-                cd.detected_at as created_at,
-                cd.change_type,
-                cd.summary,
-                u.url,
-                c.name as company,
-                cd.new_content_id
-            FROM change_detection cd
-            JOIN urls u ON cd.url_id = u.id
-            JOIN companies c ON u.company_id = c.id
-            WHERE cd.detected_at > datetime('now', '-30 days')
-            ORDER BY cd.detected_at DESC
-            LIMIT 100
-        `).all();
+        // FIXED: Attach intelligence database for cross-database queries
+        const intelligenceDbPath = path.join(DATA_DIR, 'intelligence.db');
+        processedDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
         
-        // Get AI analysis for changes
-        const analysisStmt = intelligenceDb.prepare(`
-            SELECT relevance_score, summary, competitive_data, extracted_text
-            FROM enhanced_analysis
-            WHERE change_id = ?
-        `);
-        
-        const processedChanges = recentChanges.map(change => {
-            const analysis = analysisStmt.get(change.id);
+        try {
+            // Get recent changes
+            const recentChanges = processedDb.prepare(`
+                SELECT 
+                    cd.id,
+                    cd.detected_at as created_at,
+                    cd.change_type,
+                    cd.summary,
+                    intelligence.urls.url,
+                    intelligence.companies.name as company,
+                    cd.new_content_id
+                FROM change_detection cd
+                JOIN intelligence.urls ON cd.url_id = intelligence.urls.id
+                JOIN intelligence.companies ON intelligence.urls.company_id = intelligence.companies.id
+                WHERE cd.detected_at > datetime('now', '-30 days')
+                ORDER BY cd.detected_at DESC
+                LIMIT 100
+            `).all();
             
-            let threats = [];
-            let opportunities = [];
-            let relevanceScore = 0;
-            let aiSummary = change.summary || 'No AI analysis available';
+            // Get AI analysis for changes
+            const analysisStmt = intelligenceDb.prepare(`
+                SELECT relevance_score, summary, competitive_data, extracted_text
+                FROM enhanced_analysis
+                WHERE change_id = ?
+            `);
             
-            if (analysis) {
-                relevanceScore = analysis.relevance_score || 0;
-                aiSummary = analysis.summary || aiSummary;
+            const processedChanges = recentChanges.map(change => {
+                const analysis = analysisStmt.get(change.id);
                 
-                try {
-                    const competitiveData = JSON.parse(analysis.competitive_data || '{}');
-                    threats = competitiveData.strategic_implications || [];
-                    opportunities = competitiveData.recommended_actions || [];
-                } catch (e) {
-                    // Ignore parsing errors
+                let threats = [];
+                let opportunities = [];
+                let relevanceScore = 0;
+                let aiSummary = change.summary || 'No AI analysis available';
+                
+                if (analysis) {
+                    relevanceScore = analysis.relevance_score || 0;
+                    aiSummary = analysis.summary || aiSummary;
+                    
+                    try {
+                        const competitiveData = JSON.parse(analysis.competitive_data || '{}');
+                        threats = competitiveData.strategic_implications || [];
+                        opportunities = competitiveData.recommended_actions || [];
+                    } catch (e) {
+                        // Ignore parsing errors
+                    }
                 }
-            }
+                
+                return {
+                    id: change.id,
+                    url: change.url,
+                    company: change.company,
+                    change_percentage: 0, // Not tracked in new schema
+                    relevance_score: relevanceScore,
+                    summary: aiSummary,
+                    category: change.change_type || 'content_change',
+                    keywords_found: '[]',
+                    created_at: change.created_at,
+                    ai_processed: !!analysis,
+                    threats: threats,
+                    opportunities: opportunities
+                };
+            });
             
             return {
-                id: change.id,
-                url: change.url,
-                company: change.company,
-                change_percentage: 0, // Not tracked in new schema
-                relevance_score: relevanceScore,
-                summary: aiSummary,
-                category: change.change_type || 'content_change',
-                keywords_found: '[]',
-                created_at: change.created_at,
-                ai_processed: !!analysis,
-                threats: threats,
-                opportunities: opportunities
+                changes: processedChanges,
+                aiFiltered: true,
+                generated_at: new Date().toISOString()
             };
-        });
-        
-        return {
-            changes: processedChanges,
-            aiFiltered: true,
-            generated_at: new Date().toISOString()
-        };
+        } finally {
+            // Always detach the database
+            processedDb.exec('DETACH DATABASE intelligence');
+        }
     } catch (error) {
         console.error('❌ Error generating recent changes data:', error);
         return {
