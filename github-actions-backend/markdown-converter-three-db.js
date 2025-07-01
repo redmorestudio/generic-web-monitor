@@ -43,6 +43,12 @@ class MarkdownConverterThreeDB {
     this.processedDb = dbManager.getProcessedDb();
     
     console.log('📊 Markdown converter initialized with three-database architecture');
+    
+    // Log database stats
+    const rawCount = this.rawDb.prepare('SELECT COUNT(*) as count FROM raw_html').get().count;
+    const mdCount = this.processedDb.prepare('SELECT COUNT(*) as count FROM markdown_content').get().count;
+    console.log(`   Raw HTML records: ${rawCount}`);
+    console.log(`   Markdown records: ${mdCount}`);
   }
 
   convertHtmlToMarkdown(html, metadata = {}) {
@@ -90,6 +96,9 @@ class MarkdownConverterThreeDB {
     }
 
     console.log(`📝 Converting raw HTML ${rawHtmlId} to Markdown...`);
+    console.log(`   Company: ${rawHtml.company_name}`);
+    console.log(`   URL: ${rawHtml.url}`);
+    console.log(`   HTML size: ${rawHtml.html_content.length} chars`);
 
     const markdown = this.convertHtmlToMarkdown(rawHtml.html_content, {
       url: rawHtml.url,
@@ -98,6 +107,7 @@ class MarkdownConverterThreeDB {
     });
 
     if (!markdown) {
+      console.log('   ❌ Conversion failed - no markdown generated');
       return null;
     }
 
@@ -107,31 +117,52 @@ class MarkdownConverterThreeDB {
       .update(markdown)
       .digest('hex');
 
-    // Store in processed_content database - FIXED: use markdown_text instead of markdown_content
-    const stmt = this.processedDb.prepare(`
-      INSERT INTO markdown_content (
-        raw_html_id, url_id, company_name, url,
-        markdown_text, markdown_hash, 
-        converted_at
-      ) VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
-    `);
+    // Check if already converted
+    const existing = this.processedDb.prepare(`
+      SELECT id FROM markdown_content WHERE raw_html_id = ?
+    `).get(rawHtmlId);
+    
+    if (existing) {
+      console.log(`   ⚠️  Already converted (ID: ${existing.id})`);
+      return null;
+    }
 
-    stmt.run(
-      rawHtml.id,
-      rawHtml.url_id,
-      rawHtml.company_name,
-      rawHtml.url,
-      markdown,
-      markdownHash
-    );
+    try {
+      // Store in processed_content database
+      const stmt = this.processedDb.prepare(`
+        INSERT INTO markdown_content (
+          raw_html_id, url_id, company_name, url,
+          markdown_text, markdown_hash, 
+          processed_at
+        ) VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+      `);
 
-    console.log(`✅ Converted to Markdown (${markdown.length} chars)`);
+      const result = stmt.run(
+        rawHtml.id,
+        rawHtml.url_id,
+        rawHtml.company_name,
+        rawHtml.url,
+        markdown,
+        markdownHash
+      );
 
-    return {
-      rawHtmlId,
-      markdownLength: markdown.length,
-      markdownHash
-    };
+      console.log(`   ✅ Converted to Markdown (${markdown.length} chars)`);
+      console.log(`   ✅ Saved to database (ID: ${result.lastInsertRowid})`);
+      
+      // Verify it was saved
+      const verify = this.processedDb.prepare('SELECT COUNT(*) as count FROM markdown_content').get();
+      console.log(`   📊 Total markdown records now: ${verify.count}`);
+
+      return {
+        rawHtmlId,
+        markdownLength: markdown.length,
+        markdownHash,
+        dbId: result.lastInsertRowid
+      };
+    } catch (error) {
+      console.error(`   ❌ Database error:`, error.message);
+      throw error;
+    }
   }
 
   async processAllUnconverted() {
@@ -168,8 +199,12 @@ class MarkdownConverterThreeDB {
     }
 
     console.log(`\n📊 Conversion Complete!\n✅ Success: ${successCount}\n❌ Errors: ${errorCount}\n`);
+    
+    // Final database check
+    const finalCount = this.processedDb.prepare('SELECT COUNT(*) as count FROM markdown_content').get();
+    console.log(`📊 Total markdown records in database: ${finalCount.count}`);
 
-    return { successCount, errorCount };
+    return { successCount, errorCount, totalInDb: finalCount.count };
   }
 
   async processLatestForEachUrl() {
@@ -202,6 +237,11 @@ class MarkdownConverterThreeDB {
         console.error(`Error processing HTML ${id}:`, error.message);
       }
     }
+    
+    // Final database check
+    const finalCount = this.processedDb.prepare('SELECT COUNT(*) as count FROM markdown_content').get();
+    console.log(`\n✅ Processed ${successCount} URLs`);
+    console.log(`📊 Total markdown records in database: ${finalCount.count}`);
 
     return successCount;
   }
@@ -239,6 +279,10 @@ class MarkdownConverterThreeDB {
   }
 
   close() {
+    // Log final state before closing
+    const finalCount = this.processedDb.prepare('SELECT COUNT(*) as count FROM markdown_content').get();
+    console.log(`\n📊 Final state: ${finalCount.count} markdown records in database`);
+    
     dbManager.closeAll();
   }
 }
@@ -269,6 +313,9 @@ if (require.main === module) {
       } else {
         console.log('Usage: node markdown-converter-three-db.js [all|latest|run <runId>|<html-id>]');
       }
+    } catch (error) {
+      console.error('💥 Fatal error:', error);
+      process.exit(1);
     } finally {
       converter.close();
     }
