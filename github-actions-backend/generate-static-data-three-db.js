@@ -168,7 +168,7 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
             const analysisStmt = intelligenceDb.prepare(`
                 SELECT relevance_score, summary, semantic_categories, entities
                 FROM baseline_analysis
-                WHERE markdown_content_id = ?
+                WHERE snapshot_id = ?
             `);
             
             const processedSnapshots = snapshots.map(snapshot => {
