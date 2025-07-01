@@ -208,7 +208,8 @@ jobs:
         env:
           CHANGES_DETAILS: ${{ steps.check-changes.outputs.CHANGES_FILE && format('{0}', steps.check-changes.outputs.CHANGES_FILE) || 'See dashboard for details' }}
       
-      - name: Send email notifications
+      # FIXED EMAIL NOTIFICATIONS - Now actually sends emails!
+      - name: Send email notifications for ALL high-priority changes
         if: ${{ !inputs.skip_alerts }}
         run: |
           cd github-actions-backend
@@ -226,8 +227,89 @@ jobs:
             echo ""
             echo "Go to: Settings → Secrets and variables → Actions"
           else
-            echo "📧 Checking for high-priority changes to email..."
-            node email-notifications-enhanced.js check || echo "Email check completed"
+            echo "📧 ACTIVATING EMAIL NOTIFICATIONS!"
+            echo ""
+            echo "Configuration:"
+            echo "- Recipient: ${NOTIFICATION_EMAIL:-$SMTP_USER}"
+            echo "- Threshold: ${EMAIL_THRESHOLD:-7}/10"
+            echo ""
+            
+            # Create a custom script to send emails for ALL changes >= threshold
+            cat > send-alerts.js << 'EOF'
+            const EnhancedEmailNotificationService = require('./email-notifications-enhanced.js');
+            const Database = require('better-sqlite3');
+            const path = require('path');
+            
+            async function main() {
+              const emailService = new EnhancedEmailNotificationService();
+              if (!emailService.isConfigured) {
+                console.log('Email not configured');
+                return;
+              }
+              
+              const db = new Database(path.join(__dirname, 'data', 'monitor.db'));
+              const threshold = process.env.EMAIL_THRESHOLD || 7;
+              
+              // Get ALL changes with score >= threshold that haven't been emailed
+              const changes = db.prepare(`
+                SELECT 
+                  c.*,
+                  u.url,
+                  u.type as url_type,
+                  comp.name as company_name,
+                  aa.relevance_score,
+                  aa.summary,
+                  aa.category,
+                  aa.competitive_threats,
+                  aa.strategic_opportunities
+                FROM changes c
+                JOIN urls u ON c.url_id = u.id
+                JOIN companies comp ON u.company_id = comp.id
+                LEFT JOIN ai_analysis aa ON c.id = aa.change_id
+                WHERE aa.relevance_score >= ?
+                AND NOT EXISTS (
+                  SELECT 1 FROM email_notifications en 
+                  WHERE en.change_id = c.id
+                )
+                ORDER BY aa.relevance_score DESC, c.created_at DESC
+              `).all(threshold);
+              
+              if (changes.length > 0) {
+                console.log(`📨 Found ${changes.length} changes with score >= ${threshold} to email`);
+                
+                // Send the alert
+                const sent = await emailService.sendChangeAlert(changes);
+                
+                if (sent) {
+                  // Mark changes as notified
+                  db.exec(`
+                    CREATE TABLE IF NOT EXISTS email_notifications (
+                      id INTEGER PRIMARY KEY AUTOINCREMENT,
+                      change_id INTEGER,
+                      sent_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                    )
+                  `);
+                  
+                  const stmt = db.prepare('INSERT INTO email_notifications (change_id) VALUES (?)');
+                  changes.forEach(change => stmt.run(change.id));
+                  
+                  console.log(`✅ Email sent successfully for ${changes.length} changes!`);
+                } else {
+                  console.log('❌ Failed to send email');
+                }
+              } else {
+                console.log(`📭 No new changes with score >= ${threshold} to email`);
+              }
+              
+              // Always export summary
+              await emailService.exportEmailSummary();
+            }
+            
+            main().catch(console.error);
+            EOF
+            
+            # Run the email alert script
+            node send-alerts.js
           fi
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
@@ -236,3 +318,4 @@ jobs:
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+          EMAIL_THRESHOLD: ${{ secrets.EMAIL_THRESHOLD }}
