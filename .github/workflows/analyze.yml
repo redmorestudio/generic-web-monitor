@@ -122,10 +122,11 @@ jobs:
       - name: Generate static data files
         run: |
           cd github-actions-backend
+          echo "📊 Generating static data files..."
           node generate-static-data-wrapper.js
           
-          # Copy to api-data
-          cp -r ../api-data/* ../api-data/ 2>/dev/null || echo "Static data generated"
+          echo "📁 Generated files:"
+          ls -la ../api-data/
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       
@@ -156,9 +157,9 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # Ensure we're on the latest version
-          git fetch origin main
-          git reset --hard origin/main
+          # FIXED: Removed git reset --hard that was wiping out generated files
+          # Just pull the latest changes to avoid conflicts
+          git pull origin main --rebase || true
           
           # Add all analysis outputs
           git add api-data/ || true
@@ -167,10 +168,13 @@ jobs:
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
+            echo "📝 Changes to commit:"
+            git diff --staged --name-only
+            
             git commit -m "🧠 Update AI analysis - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
             
-            # Use force push with lease to avoid conflicts
-            git push --force-with-lease origin main
+            # Push changes
+            git push origin main
           fi
       
       # Trigger next workflow if successful
