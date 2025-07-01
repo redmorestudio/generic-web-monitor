@@ -40,13 +40,13 @@ function generateDashboardData(intelligenceDb) {
             SELECT 
                 c.id,
                 c.name as company,
-                c.type,
+                c.category,
                 COUNT(DISTINCT u.id) as url_count,
                 MAX(ba.created_at) as last_check
             FROM companies c
             LEFT JOIN urls u ON c.id = u.company_id
             LEFT JOIN baseline_analysis ba ON u.id = ba.url_id
-            GROUP BY c.id, c.name, c.type
+            GROUP BY c.id, c.name, c.category
             ORDER BY c.name
         `).all();
         
@@ -58,7 +58,7 @@ function generateDashboardData(intelligenceDb) {
             const urls = urlsStmt.all(company.id).map(row => row.url);
             return {
                 company: company.company,
-                type: company.type || 'competitor',
+                type: company.category || 'competitor',
                 url_count: company.url_count || 0,
                 last_check: company.last_check,
                 urls: urls
@@ -96,7 +96,7 @@ function generateCompaniesData(intelligenceDb) {
             SELECT 
                 c.id,
                 c.name as company,
-                c.type,
+                c.category,
                 c.created_at
             FROM companies c
             ORDER BY c.name
@@ -109,7 +109,7 @@ function generateCompaniesData(intelligenceDb) {
             const urls = urlsStmt.all(company.id).map(row => row.url);
             return {
                 company: company.company,
-                type: company.type || 'competitor',
+                type: company.category || 'competitor',
                 created_at: company.created_at,
                 urls: urls
             };
@@ -149,7 +149,7 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
                     mc.processed_at as created_at,
                     mc.markdown_content,
                     intelligence.urls.url,
-                    intelligence.urls.type as url_type,
+                    intelligence.urls.url_type as url_type,
                     intelligence.companies.name as company,
                     intelligence.companies.id as company_id
                 FROM markdown_content mc
