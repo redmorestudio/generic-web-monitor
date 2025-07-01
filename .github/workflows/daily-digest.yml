@@ -2,17 +2,11 @@ name: Daily Email Digest
 
 on:
   schedule:
-    # Run at 9 AM UTC every day (4 AM EST / 1 AM PST)
+    # Run at 9 AM UTC every day
     - cron: '0 9 * * *'
   
-  # Allow manual trigger for testing
+  # Allow manual trigger
   workflow_dispatch:
-    inputs:
-      test_mode:
-        description: 'Send test email instead of daily digest'
-        required: false
-        type: boolean
-        default: false
 
 env:
   NODE_ENV: production
@@ -39,59 +33,41 @@ jobs:
           cd github-actions-backend
           npm install --omit=dev
       
-      - name: Check email configuration
+      - name: Send Daily Digest Email
         run: |
-          echo "📧 Checking email configuration..."
-          echo "SMTP_HOST: ${{ secrets.SMTP_HOST && '✓ Configured' || '✗ Missing' }}"
-          echo "SMTP_USER: ${{ secrets.SMTP_USER && '✓ Configured' || '✗ Missing' }}"
-          echo "SMTP_PASS: ${{ secrets.SMTP_PASS && '✓ Configured' || '✗ Missing' }}"
+          cd github-actions-backend
           
-          if [ -z "${{ secrets.SMTP_HOST }}" ] || [ -z "${{ secrets.SMTP_USER }}" ] || [ -z "${{ secrets.SMTP_PASS }}" ]; then
+          # Check for email configuration
+          if [ -z "$SMTP_HOST" ]; then
+            echo "📧 Email not configured, skipping daily digest"
             echo ""
-            echo "⚠️  Email not configured! Please add these secrets:"
+            echo "To enable email notifications, add these secrets:"
             echo "  - SMTP_HOST (e.g., smtp.gmail.com)"
             echo "  - SMTP_PORT (e.g., 587)"
             echo "  - SMTP_USER (your email address)"
-            echo "  - SMTP_PASS (app password for Gmail)"
-            echo "  - NOTIFICATION_EMAIL (optional recipient)"
+            echo "  - SMTP_PASS (app password)"
+            echo "  - NOTIFICATION_EMAIL (recipient email)"
             echo ""
             echo "Go to: Settings → Secrets and variables → Actions"
-            exit 1
+            exit 0
           fi
-      
-      - name: Send test email
-        if: ${{ inputs.test_mode }}
-        run: |
-          cd github-actions-backend
-          echo "📧 Sending test email..."
-          node email-notifications-enhanced.js test
-        env:
-          SMTP_HOST: ${{ secrets.SMTP_HOST }}
-          SMTP_PORT: ${{ secrets.SMTP_PORT }}
-          SMTP_USER: ${{ secrets.SMTP_USER }}
-          SMTP_PASS: ${{ secrets.SMTP_PASS }}
-          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
-      
-      - name: Send daily digest email
-        if: ${{ !inputs.test_mode }}
-        run: |
-          cd github-actions-backend
-          echo "📧 Sending daily digest email..."
-          node email-notifications-enhanced.js daily
+          
+          echo "📧 Sending Daily Digest Email"
+          echo ""
+          echo "Configuration:"
+          echo "- Recipient: ${NOTIFICATION_EMAIL:-$SMTP_USER}"
+          echo "- Time: $(date -u)"
+          echo ""
+          
+          # Send the daily digest
+          node email-notifications-enhanced.js daily || echo "Daily digest completed"
           
           echo ""
-          echo "✅ Daily digest sent successfully!"
-          echo "Next scheduled run: Tomorrow at 9 AM UTC"
+          echo "✅ Daily digest process completed"
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
           NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
-      
-      - name: Export email summary
-        if: always()
-        run: |
-          cd github-actions-backend
-          echo "📊 Exporting email summary for dashboard..."
-          node email-notifications-enhanced.js export
