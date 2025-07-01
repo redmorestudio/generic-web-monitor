@@ -1,0 +1,147 @@
+name: Test TheBrain Sync
+
+on:
+  workflow_dispatch:
+
+env:
+  NODE_ENV: production
+
+jobs:
+  test-thebrain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          pip install requests
+      
+      - name: Test TheBrain Connection
+        run: |
+          cd github-actions-backend
+          
+          echo "🧠 Testing TheBrain Integration"
+          echo "=============================="
+          echo ""
+          
+          # Check if databases exist
+          echo "📁 Checking databases..."
+          if [ -f "data/intelligence.db" ]; then
+            echo "✅ intelligence.db exists"
+            echo "   Size: $(ls -lh data/intelligence.db | awk '{print $5}')"
+          else
+            echo "❌ intelligence.db NOT FOUND"
+            echo "   The three-database architecture may not be initialized"
+          fi
+          
+          if [ -f "data/raw_content.db" ]; then
+            echo "✅ raw_content.db exists"
+          else
+            echo "⚠️  raw_content.db not found"
+          fi
+          
+          if [ -f "data/processed_content.db" ]; then
+            echo "✅ processed_content.db exists"
+          else
+            echo "⚠️  processed_content.db not found"
+          fi
+          
+          echo ""
+          echo "🔑 Checking TheBrain credentials..."
+          if [ -z "$THEBRAIN_API_KEY" ]; then
+            echo "❌ THEBRAIN_API_KEY not set!"
+          else
+            echo "✅ THEBRAIN_API_KEY is configured"
+          fi
+          
+          if [ -z "$THEBRAIN_BRAIN_ID" ]; then
+            echo "❌ THEBRAIN_BRAIN_ID not set!"
+          else
+            echo "✅ THEBRAIN_BRAIN_ID is configured"
+          fi
+          
+          echo ""
+          echo "🧪 Testing TheBrain API connection..."
+          
+          # Create a simple test script
+          cat > test_thebrain.py << 'EOF'
+import os
+import requests
+
+API_KEY = os.getenv('THEBRAIN_API_KEY')
+BRAIN_ID = os.getenv('THEBRAIN_BRAIN_ID')
+API_BASE_URL = 'https://api.thebrain.com/v1'
+
+if not API_KEY or not BRAIN_ID:
+    print("❌ Missing credentials!")
+    exit(1)
+
+# Test connection
+session = requests.Session()
+session.headers.update({
+    'Authorization': f'Bearer {API_KEY}',
+    'Content-Type': 'application/json'
+})
+
+try:
+    response = session.get(f'{API_BASE_URL}/brains/{BRAIN_ID}')
+    if response.status_code == 200:
+        brain = response.json()
+        print(f"✅ Connected to brain: {brain.get('name', 'Unknown')}")
+        print(f"   ID: {brain.get('id', 'Unknown')}")
+    else:
+        print(f"❌ Connection failed: {response.status_code}")
+        print(f"   Response: {response.text}")
+except Exception as e:
+    print(f"❌ Error: {e}")
+EOF
+          
+          python test_thebrain.py
+          
+          echo ""
+          echo "📊 Checking for AI analysis data..."
+          
+          # Check if we have any analysis data
+          if [ -f "data/intelligence.db" ]; then
+            sqlite3 data/intelligence.db "SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='ai_analysis';" > /tmp/table_check.txt
+            if [ "$(cat /tmp/table_check.txt)" = "1" ]; then
+              echo "✅ ai_analysis table exists"
+              ANALYSIS_COUNT=$(sqlite3 data/intelligence.db "SELECT COUNT(*) FROM ai_analysis;" || echo "0")
+              echo "   Records: $ANALYSIS_COUNT"
+              
+              HIGH_SCORE=$(sqlite3 data/intelligence.db "SELECT COUNT(*) FROM ai_analysis WHERE relevance_score >= 7;" || echo "0")
+              echo "   High priority (>= 7): $HIGH_SCORE"
+            else
+              echo "⚠️  ai_analysis table doesn't exist"
+              echo "   Run the analyze workflow first"
+            fi
+          fi
+          
+          echo ""
+          echo "🚀 Ready to run full sync?"
+          if [ -f "data/intelligence.db" ] && [ ! -z "$THEBRAIN_API_KEY" ] && [ ! -z "$THEBRAIN_BRAIN_ID" ]; then
+            echo "✅ YES - All prerequisites met!"
+            echo ""
+            echo "Running TheBrain sync..."
+            python thebrain_api_sync.py || echo "Sync completed with status: $?"
+          else
+            echo "❌ NO - Missing prerequisites"
+            echo ""
+            echo "To fix:"
+            echo "1. Run the full-monitor workflow to create databases"
+            echo "2. Ensure THEBRAIN_API_KEY and THEBRAIN_BRAIN_ID secrets are set"
+          fi
+        env:
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+          THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
