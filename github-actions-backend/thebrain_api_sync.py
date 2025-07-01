@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-TheBrain API Direct Sync
+TheBrain API Direct Sync - FIXED VERSION
 Uses the TheBrain API directly to create thoughts and links
+Fixed: Enhanced error logging for link creation debugging
 """
 
 import os
@@ -115,19 +116,38 @@ class TheBrainAPI:
                 'name': name
             }
             
+            # Enhanced logging
+            print(f"   🔗 Attempting link: {thoughtA[:8]}... -> {thoughtB[:8]}... (relation: {relation}, name: '{name}')")
+            
             response = self.session.post(
                 f'{API_BASE_URL}/brains/{BRAIN_ID}/links',
                 json=payload
             )
             
             if response.status_code in [200, 201]:
+                print(f"   ✅ Link created successfully")
                 return True
             else:
-                print(f"   ⚠️  Link failed: {response.status_code}")
+                print(f"   ❌ Link failed: Status {response.status_code}")
+                print(f"   ❌ Error response: {response.text}")
+                print(f"   ❌ Request payload: {json.dumps(payload, indent=2)}")
+                
+                # Try to parse error for more details
+                try:
+                    error_data = response.json()
+                    if 'error' in error_data:
+                        print(f"   ❌ Error message: {error_data['error']}")
+                    if 'message' in error_data:
+                        print(f"   ❌ Error details: {error_data['message']}")
+                except:
+                    pass
+                
                 return False
                 
         except Exception as e:
-            print(f"   ⚠️  Link error: {e}")
+            print(f"   ❌ Link exception: {e}")
+            import traceback
+            traceback.print_exc()
             return False
     
     def add_note(self, thought_id: str, markdown: str) -> bool:
@@ -520,7 +540,7 @@ def create_all_links(api: TheBrainAPI):
 def main():
     """Main sync function"""
     print("=" * 60)
-    print("TheBrain API Direct Sync")
+    print("TheBrain API Direct Sync - FIXED VERSION")
     print("=" * 60)
     print(f"Brain ID: {BRAIN_ID}")
     print(f"API Key: {API_KEY[:10]}..." if API_KEY else "NOT SET")
