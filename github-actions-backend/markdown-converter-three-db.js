@@ -168,6 +168,9 @@ class MarkdownConverterThreeDB {
   async processAllUnconverted() {
     console.log('🔄 Processing all unconverted HTML content...');
 
+    // Need to attach processed_content database to raw database for cross-database query
+    this.rawDb.exec(`ATTACH DATABASE '${this.processedDb.name}' AS processed_content`);
+
     // Find HTML that hasn't been converted yet
     const unconverted = this.rawDb.prepare(`
       SELECT rh.id 
@@ -178,6 +181,8 @@ class MarkdownConverterThreeDB {
       AND rh.error_message IS NULL
       ORDER BY rh.scraped_at DESC
     `).all();
+
+    this.rawDb.exec('DETACH DATABASE processed_content');
 
     console.log(`Found ${unconverted.length} HTML records to convert`);
 
@@ -210,6 +215,9 @@ class MarkdownConverterThreeDB {
   async processLatestForEachUrl() {
     console.log('🔄 Processing latest HTML for each URL...');
 
+    // Need to attach processed_content database to raw database for cross-database query
+    this.rawDb.exec(`ATTACH DATABASE '${this.processedDb.name}' AS processed_content`);
+
     // Get the latest successful scrape for each URL
     const latestScrapes = this.rawDb.prepare(`
       SELECT rh.id
@@ -225,6 +233,8 @@ class MarkdownConverterThreeDB {
       LEFT JOIN processed_content.markdown_content mc ON rh.id = mc.raw_html_id
       WHERE mc.id IS NULL
     `).all();
+
+    this.rawDb.exec('DETACH DATABASE processed_content');
 
     console.log(`Found ${latestScrapes.length} latest HTML records to convert`);
 
