@@ -165,6 +165,16 @@ Provide your analysis in this JSON structure:
   }
 }`;
 
+// Timeout wrapper for AI analysis
+async function analyzeWithTimeout(snapshot, company, url, timeoutMs = 30000) {
+  return Promise.race([
+    analyzeSnapshot(snapshot, company, url),
+    new Promise((_, reject) => 
+      setTimeout(() => reject(new Error(`Timeout analyzing ${company.name} after ${timeoutMs/1000}s`)), timeoutMs)
+    )
+  ]);
+}
+
 async function analyzeSnapshot(snapshot, company, url) {
   try {
     const prompt = `${BASELINE_EXTRACTION_PROMPT}
@@ -251,9 +261,40 @@ async function storeBaselineAnalysis(snapshot, company, url, extractedData) {
   }
 }
 
+// Process with retry logic
+async function processSnapshotWithRetry(snapshot, company, url, maxRetries = 2, timeoutMs = 30000) {
+  for (let retry = 0; retry <= maxRetries; retry++) {
+    try {
+      console.log(`  🔄 Processing ${company.name} - ${url.url_type} (attempt ${retry + 1}/${maxRetries + 1})`);
+      
+      const extractedData = await analyzeWithTimeout(snapshot, company, url, timeoutMs);
+      if (extractedData) {
+        const stored = await storeBaselineAnalysis(snapshot, company, url, extractedData);
+        if (stored) {
+          console.log(`  ✓ ${company.name} - ${url.url_type} succeeded`);
+          return { success: true, company: company.name, url_type: url.url_type };
+        }
+      }
+      throw new Error('Failed to extract or store data');
+    } catch (error) {
+      if (retry === maxRetries) {
+        console.error(`  ✗ ${company.name} - ${url.url_type} failed after ${maxRetries + 1} attempts: ${error.message}`);
+        return { success: false, company: company.name, url_type: url.url_type, error: error.message };
+      }
+      console.log(`  ⚠️ Retry ${retry + 1} for ${company.name} - ${url.url_type}: ${error.message}`);
+      // Wait 2 seconds before retry
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    }
+  }
+}
+
 async function processAllSnapshots() {
   console.log('🚀 Starting BASELINE AI Analysis for Three-Database Architecture...');
-  console.log('📊 This will analyze ALL companies\' current state\n');
+  console.log('📊 This will analyze ALL companies\' current state');
+  console.log('⏱️  Implemented with timeout protection and retry logic\n');
+
+  // Track failed sites for reporting
+  const failedSites = [];
 
   // Get the most recent processed content for each URL
   const latestSnapshots = intelligenceDb.prepare(`
@@ -287,20 +328,25 @@ async function processAllSnapshots() {
   let successCount = 0;
   let errorCount = 0;
 
-  // Process in batches of 10 to avoid overwhelming the API
-  const batchSize = 10;
+  // Process in smaller batches to reduce concurrent load
+  const batchSize = 5; // Reduced from 10
   const batches = [];
   for (let i = 0; i < latestSnapshots.length; i += batchSize) {
     batches.push(latestSnapshots.slice(i, i + batchSize));
   }
 
-  console.log(`Processing ${batches.length} batches of up to ${batchSize} URLs each...\n`);
+  console.log(`Processing ${batches.length} batches of up to ${batchSize} URLs each...`);
+  console.log(`Timeout protection: 30s per URL, 2 retries\n`);
+
+  const startTime = Date.now();
 
   for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
     const batch = batches[batchIndex];
+    const batchStartTime = Date.now();
+    
     console.log(`\n📦 Batch ${batchIndex + 1}/${batches.length} (${batch.length} URLs)`);
     
-    // Process batch in parallel
+    // Process batch in parallel with timeout protection
     const batchPromises = batch.map(async (snapshot) => {
       const company = {
         id: snapshot.company_id,
@@ -314,32 +360,32 @@ async function processAllSnapshots() {
         url_type: snapshot.url_type
       };
 
-      try {
-        const extractedData = await analyzeSnapshot(snapshot, company, url);
-        if (extractedData) {
-          const stored = await storeBaselineAnalysis(snapshot, company, url, extractedData);
-          if (stored) {
-            console.log(`  ✓ ${company.name} - ${url.url_type}`);
-            return { success: true };
-          }
-        }
-        return { success: false };
-      } catch (error) {
-        console.error(`  ✗ ${company.name} - ${url.url_type}: ${error.message}`);
-        return { success: false };
-      }
+      return processSnapshotWithRetry(snapshot, company, url);
     });
 
     const results = await Promise.all(batchPromises);
-    successCount += results.filter(r => r.success).length;
-    errorCount += results.filter(r => !r.success).length;
+    
+    // Track results
+    results.forEach(result => {
+      if (result.success) {
+        successCount++;
+      } else {
+        errorCount++;
+        failedSites.push(result);
+      }
+    });
 
-    // Only add delay between batches, not individual URLs
+    const batchTime = ((Date.now() - batchStartTime) / 1000).toFixed(1);
+    console.log(`  ⏱️  Batch completed in ${batchTime}s`);
+
+    // NO DELAY between batches - removed the 3-second wait
     if (batchIndex < batches.length - 1) {
-      console.log(`  ⏳ Waiting 3 seconds before next batch...`);
-      await new Promise(resolve => setTimeout(resolve, 3000));
+      const progress = Math.round(((batchIndex + 1) / batches.length) * 100);
+      console.log(`  📊 Progress: ${progress}% complete`);
     }
   }
+
+  const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
 
   // Generate summary report
   const report = generateBaselineReport();
@@ -347,6 +393,15 @@ async function processAllSnapshots() {
   console.log('\n📊 Baseline Analysis Complete!');
   console.log(`✅ Success: ${successCount} URLs`);
   console.log(`❌ Errors: ${errorCount} URLs`);
+  console.log(`⏱️  Total time: ${totalTime}s`);
+  
+  if (failedSites.length > 0) {
+    console.log('\n❌ Failed sites:');
+    failedSites.forEach(site => {
+      console.log(`  - ${site.company} (${site.url_type}): ${site.error}`);
+    });
+  }
+  
   console.log('\n🔍 Top Insights:');
   console.log(report.summary);
 
