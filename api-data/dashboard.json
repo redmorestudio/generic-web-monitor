@@ -3,10 +3,10 @@
     "companies": 0,
     "urls": 0,
     "snapshots": 0,
-    "lastCheck": "2025-07-01T15:58:12.231Z"
+    "lastCheck": "2025-07-01T16:04:55.337Z"
   },
   "company_activity": [],
-  "generated_at": "2025-07-01T15:58:12.231Z",
+  "generated_at": "2025-07-01T16:04:55.337Z",
   "backend": "github-actions-static-three-db",
-  "error": "no such table: baseline_analysis"
+  "error": "no such column: c.type"
 }

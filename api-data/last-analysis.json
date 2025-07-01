@@ -1,9 +1,9 @@
 {
   "workflow": "analyze",
-  "run_id": "15906643196",
-  "timestamp": "2025-06-26T15:56:02.577Z",
-  "mode": "all",
-  "trigger_source": "process",
+  "run_id": "16004455087",
+  "timestamp": "2025-07-01T16:04:55.367Z",
+  "mode": "force",
+  "trigger_source": "manual-after-fix",
   "architecture": "three-db",
   "status": "completed"
 }
