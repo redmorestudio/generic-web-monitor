@@ -147,7 +147,7 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
                     mc.id,
                     mc.url_id,
                     mc.processed_at as created_at,
-                    mc.markdown_content,
+                    mc.markdown_text,
                     intelligence.urls.url,
                     intelligence.urls.url_type as url_type,
                     intelligence.companies.name as company,
@@ -203,25 +203,27 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
                 }
                 
                 return {
-                    id: snapshot.id,
+                    id: snapshot.id.toString(),
                     url: snapshot.url,
                     company: snapshot.company,
                     type: snapshot.url_type || 'general',
-                    timestamp: snapshot.created_at,
-                    content_length: snapshot.markdown_content ? snapshot.markdown_content.length : 0,
-                    extractedContent: snapshot.markdown_content ? 
-                        snapshot.markdown_content.substring(0, 500) + '...' : 'No content',
-                    relevanceScore: relevanceScore,
-                    keywords: JSON.stringify(keywords),
+                    title: snapshot.company + ' - ' + (snapshot.url_type || 'Page'),
+                    relevance_score: relevanceScore,
+                    keywords: keywords,  // Array, not JSON string
+                    summary: analysis?.summary || 'No summary available',
+                    extracted_at: snapshot.created_at,
+                    entities: {},  // Empty object for now
+                    content_length: snapshot.markdown_text ? snapshot.markdown_text.length : 0,
+                    extractedContent: snapshot.markdown_text ? 
+                        snapshot.markdown_text.substring(0, 500) + '...' : 'No content',
                     aiProcessed: aiProcessed,
                     category: category,
-                    summary: analysis?.summary || '',
                     source: 'GitHub Actions Monitor'
                 };
             });
             
             return {
-                extractedData: processedSnapshots,
+                items: processedSnapshots,
                 totalUnfiltered: snapshots.length,
                 generated_at: new Date().toISOString()
             };
@@ -232,7 +234,7 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
     } catch (error) {
         console.error('❌ Error generating content snapshots data:', error);
         return {
-            extractedData: [],
+            items: [],
             totalUnfiltered: 0,
             generated_at: new Date().toISOString(),
             error: error.message
@@ -395,7 +397,7 @@ function generateAllStaticData() {
         // Write sample files
         fs.writeFileSync(path.join(OUTPUT_DIR, 'dashboard.json'), JSON.stringify(sampleData, null, 2));
         fs.writeFileSync(path.join(OUTPUT_DIR, 'companies.json'), JSON.stringify({ companies: [] }, null, 2));
-        fs.writeFileSync(path.join(OUTPUT_DIR, 'content-snapshots.json'), JSON.stringify({ extractedData: [] }, null, 2));
+        fs.writeFileSync(path.join(OUTPUT_DIR, 'extracted-data.json'), JSON.stringify({ items: [] }, null, 2));
         fs.writeFileSync(path.join(OUTPUT_DIR, 'changes.json'), JSON.stringify({ changes: [] }, null, 2));
         fs.writeFileSync(path.join(OUTPUT_DIR, 'monitoring-runs.json'), JSON.stringify({ logs: [] }, null, 2));
         
@@ -412,7 +414,7 @@ function generateAllStaticData() {
         const files = [
             { name: 'dashboard.json', generator: () => generateDashboardData(intelligenceDb) },
             { name: 'companies.json', generator: () => generateCompaniesData(intelligenceDb) },
-            { name: 'content-snapshots.json', generator: () => generateContentSnapshotsData(processedDb, intelligenceDb) },
+            { name: 'extracted-data.json', generator: () => generateContentSnapshotsData(processedDb, intelligenceDb) },
             { name: 'changes.json', generator: () => generateRecentChangesData(processedDb, intelligenceDb) },
             { name: 'monitoring-runs.json', generator: generateMonitoringRunsData }
         ];
@@ -424,8 +426,8 @@ function generateAllStaticData() {
             const data = file.generator();
             
             // Count AI-processed items
-            if (file.name === 'content-snapshots.json') {
-                aiAnalysisCount = data.extractedData.filter(item => item.aiProcessed).length;
+            if (file.name === 'extracted-data.json') {
+                aiAnalysisCount = data.items ? data.items.filter(item => item.aiProcessed).length : 0;
             }
             
             const filePath = path.join(OUTPUT_DIR, file.name);
