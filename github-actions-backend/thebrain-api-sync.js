@@ -35,6 +35,14 @@ class TheBrainAPISync {
     // Track created thoughts to avoid duplicates
     this.thoughtCache = new Map();
     
+    // Track link creation statistics
+    this.linkStats = {
+      attempted: 0,
+      successful: 0,
+      failed: 0,
+      duplicates: 0
+    };
+    
     console.log('🧠 TheBrain API Sync initialized');
     console.log(`   Brain ID: ${this.brainId}`);
   }
@@ -86,6 +94,11 @@ class TheBrainAPISync {
       
       console.log('✅ TheBrain API sync complete!');
       console.log(`   Created/Updated ${this.thoughtCache.size} thoughts`);
+      console.log(`   Link Statistics:`);
+      console.log(`     - Attempted: ${this.linkStats.attempted}`);
+      console.log(`     - Successful: ${this.linkStats.successful}`);
+      console.log(`     - Failed: ${this.linkStats.failed}`);
+      console.log(`     - Duplicates: ${this.linkStats.duplicates}`);
       
       return true;
       
@@ -564,6 +577,8 @@ ${new Date(change.created_at).toLocaleString()}`);
   }
 
   async createLink(thoughtIdA, thoughtIdB, relation, name = '') {
+    this.linkStats.attempted++;
+    
     try {
       const payload = {
         thoughtIdA,
@@ -572,11 +587,27 @@ ${new Date(change.created_at).toLocaleString()}`);
         name
       };
       
-      await this.api.post(`/links/${this.brainId}`, payload);
+      const response = await this.api.post(`/links/${this.brainId}`, payload);
+      this.linkStats.successful++;
+      console.log(`✅ Created link: ${thoughtIdA} -> ${thoughtIdB} (${name || 'unlabeled'})`);
+      return response.data;
       
     } catch (error) {
-      console.error(`Failed to create link:`, error.response?.data || error.message);
-      // Don't throw - links are less critical
+      const errorMsg = error.response?.data?.message || error.response?.data?.error || error.message;
+      console.error(`❌ Failed to create link between ${thoughtIdA} and ${thoughtIdB}: ${errorMsg}`);
+      
+      // Check if it's a duplicate link error (common and can be ignored)
+      if (errorMsg?.toLowerCase().includes('duplicate') || 
+          errorMsg?.toLowerCase().includes('already exists') ||
+          errorMsg?.toLowerCase().includes('conflict')) {
+        console.log('   (Link already exists, continuing...)');
+        this.linkStats.duplicates++;
+        return null;
+      }
+      
+      // For other errors, increment failed count and throw
+      this.linkStats.failed++;
+      throw new Error(errorMsg);
     }
   }
 
