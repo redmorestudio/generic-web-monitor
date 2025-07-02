@@ -129,13 +129,31 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
+          # FIXED: Pull latest changes before attempting to push
+          git pull origin main --rebase
+          
           git add api-data/ || true
           
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
             git commit -m "🚀 Deploy updates - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
-            git push
+            # Use retry logic for push in case of race conditions
+            for i in 1 2 3; do
+              if git push; then
+                echo "✅ Successfully pushed changes"
+                break
+              else
+                echo "⚠️  Push failed, attempt $i/3"
+                if [ $i -lt 3 ]; then
+                  echo "Pulling latest changes and retrying..."
+                  git pull origin main --rebase
+                else
+                  echo "❌ Failed to push after 3 attempts"
+                  exit 1
+                fi
+              fi
+            done
           fi
       
       # Deploy to GitHub Pages
