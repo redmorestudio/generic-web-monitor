@@ -76,36 +76,36 @@ jobs:
           
           # Create a simple test script
           cat > test_thebrain.py << 'EOF'
-import os
-import requests
-
-API_KEY = os.getenv('THEBRAIN_API_KEY')
-BRAIN_ID = os.getenv('THEBRAIN_BRAIN_ID')
-API_BASE_URL = 'https://api.thebrain.com/v1'
-
-if not API_KEY or not BRAIN_ID:
-    print("❌ Missing credentials!")
-    exit(1)
-
-# Test connection
-session = requests.Session()
-session.headers.update({
-    'Authorization': f'Bearer {API_KEY}',
-    'Content-Type': 'application/json'
-})
-
-try:
-    response = session.get(f'{API_BASE_URL}/brains/{BRAIN_ID}')
-    if response.status_code == 200:
-        brain = response.json()
-        print(f"✅ Connected to brain: {brain.get('name', 'Unknown')}")
-        print(f"   ID: {brain.get('id', 'Unknown')}")
-    else:
-        print(f"❌ Connection failed: {response.status_code}")
-        print(f"   Response: {response.text}")
-except Exception as e:
-    print(f"❌ Error: {e}")
-EOF
+          import os
+          import requests
+          
+          API_KEY = os.getenv('THEBRAIN_API_KEY')
+          BRAIN_ID = os.getenv('THEBRAIN_BRAIN_ID')
+          API_BASE_URL = 'https://api.thebrain.com/v1'
+          
+          if not API_KEY or not BRAIN_ID:
+              print("❌ Missing credentials!")
+              exit(1)
+          
+          # Test connection
+          session = requests.Session()
+          session.headers.update({
+              'Authorization': f'Bearer {API_KEY}',
+              'Content-Type': 'application/json'
+          })
+          
+          try:
+              response = session.get(f'{API_BASE_URL}/brains/{BRAIN_ID}')
+              if response.status_code == 200:
+                  brain = response.json()
+                  print(f"✅ Connected to brain: {brain.get('name', 'Unknown')}")
+                  print(f"   ID: {brain.get('id', 'Unknown')}")
+              else:
+                  print(f"❌ Connection failed: {response.status_code}")
+                  print(f"   Response: {response.text}")
+          except Exception as e:
+              print(f"❌ Error: {e}")
+          EOF
           
           python test_thebrain.py
           
