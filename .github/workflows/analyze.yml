@@ -84,7 +84,7 @@ jobs:
         run: |
           cd github-actions-backend
           
-          echo "🧠 Running baseline analysis..."
+          echo "🚀 Running baseline analysis with Groq Llama 3.3..."
           echo "   Mode: ${{ inputs.analysis_mode }}"
           echo "   Architecture: ${{ env.USE_THREE_DB == 'true' && 'Three-Database' || 'Legacy' }}"
           
@@ -105,6 +105,7 @@ jobs:
               ;;
           esac
         env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_ACTIONS: 'true'
       
@@ -113,9 +114,10 @@ jobs:
         run: |
           cd github-actions-backend
           
-          echo "🔍 Running change detection and ultra-enhanced analysis..."
+          echo "🔍 Running change detection and ultra-enhanced analysis with Groq..."
           node ai-analyzer-ultra-wrapper.js full || echo "Change analysis completed"
         env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           GITHUB_ACTIONS: 'true'
       
@@ -140,6 +142,7 @@ jobs:
             \"mode\": \"${{ inputs.analysis_mode }}\",
             \"trigger_source\": \"${{ inputs.trigger_source }}\",
             \"architecture\": \"${{ env.USE_THREE_DB == 'true' && 'three-db' || 'legacy' }}\",
+            \"ai_model\": \"groq-llama-3.3-70b\",
             \"status\": \"completed\"
           }" > ../api-data/last-analysis.json
       
@@ -171,7 +174,7 @@ jobs:
             echo "📝 Changes to commit:"
             git diff --staged --name-only
             
-            git commit -m "🧠 Update AI analysis - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
+            git commit -m "🚀 Update AI analysis (Groq) - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
             
             # Push changes
             git push origin main

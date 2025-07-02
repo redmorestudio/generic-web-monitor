@@ -80,12 +80,13 @@ jobs:
           
           # Check if we have the three-database architecture
           if [ -f "data/intelligence.db" ]; then
-            echo "🧠 Running baseline analysis for three-database architecture..."
+            echo "🚀 Running baseline analysis for three-database architecture with Groq..."
             node ai-analyzer-baseline-three-db.js || echo "Baseline analysis completed"
           else
             echo "⚠️  Three-database architecture not detected, skipping baseline analysis"
           fi
         env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       
       - name: Sync to TheBrain API
