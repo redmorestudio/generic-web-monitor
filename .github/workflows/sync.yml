@@ -106,7 +106,7 @@ jobs:
             echo "   Skipping TheBrain sync..."
           else
             echo "🧠 Syncing to TheBrain via API..."
-            python thebrain_api_sync.py || echo "TheBrain sync completed"
+            node thebrain-api-sync.js || echo "TheBrain sync completed"
           fi
         env:
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
