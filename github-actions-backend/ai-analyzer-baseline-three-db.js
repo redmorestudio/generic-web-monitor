@@ -42,7 +42,7 @@ intelligenceDb.exec(`
   )
 `);
 
-// Baseline extraction prompt - optimized for Llama 3.3
+// Enhanced baseline extraction prompt for comprehensive AI analysis
 const BASELINE_EXTRACTION_PROMPT = `You are an AI competitive intelligence analyst. Analyze this company's current web content to extract comprehensive data with a focus on RELATIONSHIPS between entities.
 
 Extract the following information with relationship context:
@@ -70,6 +70,47 @@ Extract the following information with relationship context:
    - Infrastructure it DEPENDS_ON
    - Standards it IMPLEMENTS
 
+5. **AI/ML Concepts and Technologies** (CRITICAL FOR AI MONITOR):
+   - Machine learning models used (LLMs, computer vision, NLP, etc.)
+   - AI frameworks and libraries mentioned
+   - Training data sources and methodologies
+   - Model architectures and approaches
+   - AI capabilities and features
+   - AI performance metrics and benchmarks
+
+6. **Market Positioning and Strategy**:
+   - Target customer segments
+   - Value propositions and differentiators
+   - Go-to-market strategy
+   - Growth metrics and traction
+   - Future roadmap and vision
+
+7. **Strategic Initiatives**:
+   - Recent announcements and launches
+   - Research focus areas
+   - Investment priorities
+   - Partnership strategies
+   - Expansion plans
+
+8. **Innovation Signals**:
+   - Patents or proprietary technology
+   - Research publications
+   - Open source contributions
+   - Technical blog posts
+   - Developer tools and SDKs
+
+9. **Industry Trends and Insights**:
+   - Market trends they're capitalizing on
+   - Industry challenges they're addressing
+   - Future predictions they're making
+   - Ecosystem changes they're driving
+
+10. **Competitive Implications**:
+    - Direct threats to our business
+    - Opportunities for partnership
+    - Technology gaps we should address
+    - Market segments to target
+
 Provide your analysis in this JSON structure:
 {
   "entities": {
@@ -81,14 +122,23 @@ Provide your analysis in this JSON structure:
       "status": "active/beta/announced",
       "uses_technologies": [],
       "provides_integrations": [],
-      "targets_markets": []
+      "targets_markets": [],
+      "ai_capabilities": []
     }],
     "technologies": [{
       "name": "", 
-      "category": "", 
+      "category": "ai_ml/infrastructure/platform/tool", 
       "purpose": "",
       "implemented_by": [],
-      "enables_capabilities": []
+      "enables_capabilities": [],
+      "technical_details": ""
+    }],
+    "ai_ml_concepts": [{
+      "concept": "",
+      "type": "model/framework/technique/metric",
+      "description": "",
+      "applications": [],
+      "performance_metrics": {}
     }],
     "integrations": [{
       "name": "",
@@ -101,32 +151,38 @@ Provide your analysis in this JSON structure:
       "partner": "", 
       "relationship_type": "integrates_with/partners_with/depends_on/resells",
       "description": "",
-      "products_affected": []
+      "products_affected": [],
+      "strategic_value": ""
     }],
     "people": [{
       "name": "", 
       "title": "", 
       "role": "ceo/cto/founder/executive",
-      "relationship": "leads/employs"
+      "relationship": "leads/employs",
+      "background": ""
     }],
     "pricing": [{
       "tier": "", 
       "price": "", 
       "features": [],
       "includes_products": [],
-      "limitations": []
+      "limitations": [],
+      "target_segment": ""
     }],
     "markets": [{
       "segment": "", 
       "geography": "", 
       "size": "",
-      "targeted_by_products": []
+      "targeted_by_products": [],
+      "growth_rate": "",
+      "competitive_landscape": ""
     }],
     "competitors": [{
       "company": "",
       "compete_in": [],
       "our_advantages": [],
-      "their_advantages": []
+      "their_advantages": [],
+      "market_position": ""
     }]
   },
   "relationships": [
@@ -135,33 +191,42 @@ Provide your analysis in this JSON structure:
   "capabilities": {
     "integration_capabilities": [],
     "technical_capabilities": [],
-    "business_capabilities": []
+    "business_capabilities": [],
+    "ai_ml_capabilities": []
   },
   "current_state": {
     "positioning": "",
     "value_props": [],
     "core_capabilities": [],
     "business_focus": [],
-    "competitive_advantages": []
+    "competitive_advantages": [],
+    "technical_stack": [],
+    "ai_strategy": ""
   },
   "strategic_intelligence": {
     "innovation_level": 0,
     "growth_indicators": [],
     "market_opportunities": [],
+    "technology_trends": [],
+    "strategic_initiatives": [],
     "threat_assessment": {
       "level": 0,
       "areas": [],
-      "implications": []
+      "implications": [],
+      "recommended_actions": []
     }
   },
   "quantitative_data": {
-    "metrics": [{"name": "", "value": "", "context": ""}],
-    "claims": []
+    "metrics": [{"name": "", "value": "", "context": "", "trend": ""}],
+    "claims": [],
+    "benchmarks": [],
+    "kpis": []
   },
   "summary": {
     "one_line": "",
     "key_insights": [],
-    "notable_facts": []
+    "notable_facts": [],
+    "action_items": []
   }
 }`;
 
