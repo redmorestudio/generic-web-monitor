@@ -129,16 +129,26 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # FIXED: Pull latest changes before attempting to push
-          git pull origin main --rebase
-          
+          # FIXED: Stage all changes before pulling
           git add api-data/ || true
+          git add github-actions-backend/data/ || true
           
+          # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
+            # Commit changes first
             git commit -m "🚀 Deploy updates - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
-            # Use retry logic for push in case of race conditions
+            
+            # Now pull and merge/rebase
+            echo "Pulling latest changes..."
+            git pull origin main --rebase --strategy-option=theirs || {
+              echo "⚠️  Rebase failed, trying merge strategy..."
+              git rebase --abort 2>/dev/null || true
+              git pull origin main --no-rebase --strategy-option=theirs
+            }
+            
+            # Push with retry logic
             for i in 1 2 3; do
               if git push; then
                 echo "✅ Successfully pushed changes"
@@ -147,7 +157,7 @@ jobs:
                 echo "⚠️  Push failed, attempt $i/3"
                 if [ $i -lt 3 ]; then
                   echo "Pulling latest changes and retrying..."
-                  git pull origin main --rebase
+                  git pull origin main --rebase --strategy-option=theirs
                 else
                   echo "❌ Failed to push after 3 attempts"
                   exit 1
