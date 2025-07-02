@@ -1,12 +1,12 @@
-const Anthropic = require('@anthropic-ai/sdk');
+const Groq = require('groq-sdk');
 const path = require('path');
 const fs = require('fs');
 const dbManager = require('./db-manager');
 require('dotenv').config();
 
-// Initialize Anthropic client
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY
+// Initialize Groq client
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY || process.env.ANTHROPIC_API_KEY // Fallback for testing
 });
 
 // Enhanced extraction prompt
@@ -113,19 +113,21 @@ ${change.new_content ? change.new_content.substring(0, 3000) : '[No new content]
 
 Analyze the changes and provide comprehensive extraction following the specified JSON structure. Focus on what's NEW or CHANGED.`;
 
-    console.log('🧠 Using Claude Sonnet 4 for sophisticated entity extraction...');
+    console.log('🚀 Using Groq Llama 3.3 for fast entity extraction...');
     
-    const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',  // Claude Sonnet 4 for efficiency
-      max_tokens: 4000,
-      temperature: 0.3,
+    const response = await groq.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
       messages: [{
         role: 'user',
         content: prompt
-      }]
+      }],
+      temperature: 0.5,
+      max_completion_tokens: 10000,
+      top_p: 1,
+      stream: false
     });
 
-    const content = response.content[0].text;
+    const content = response.choices[0].message.content;
     
     // Parse JSON response
     let extractedData;
@@ -230,7 +232,7 @@ async function storeEnhancedAnalysis(intelligenceDb, changeId, extractedData) {
       }
     }
 
-    console.log(`✅ Stored enhanced analysis for change ${changeId} using Claude Sonnet 4`);
+    console.log(`✅ Stored enhanced analysis for change ${changeId} using Groq Llama 3.3`);
   } catch (error) {
     console.error('Error storing enhanced analysis:', error);
   }
@@ -261,7 +263,7 @@ async function generateSmartGroupReport() {
 
   const report = {
     timestamp: new Date().toISOString(),
-    model: 'Claude Sonnet 4',
+    model: 'Groq Llama 3.3 70B',
     groups: {},
     entities: {
       products: new Set(),
@@ -373,7 +375,8 @@ async function generateSmartGroupReport() {
 }
 
 async function processRecentChanges() {
-  console.log('🔍 Starting enhanced AI analysis with Claude Sonnet 4...');
+  console.log('🔍 Starting enhanced AI analysis with Groq Llama 3.3...');
+  console.log('⚡ Ultra-fast inference for entity extraction');
   console.log('📊 Using three-database architecture for optimal performance');
 
   const processedDb = dbManager.getProcessedDb();
@@ -407,7 +410,7 @@ async function processRecentChanges() {
   // Detach after query
   processedDb.exec('DETACH DATABASE intelligence');
 
-  console.log(`Found ${changes.length} changes to analyze with Claude Sonnet 4`);
+  console.log(`Found ${changes.length} changes to analyze with Groq Llama 3.3`);
 
   for (const change of changes) {
     console.log(`\n🎯 Analyzing change for ${change.company_name} - ${change.url_type}`);
@@ -466,8 +469,8 @@ async function processRecentChanges() {
       );
     }
 
-    // Rate limiting
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    // Rate limiting - shorter delay with Groq
+    await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
   // Generate smart group report
@@ -477,7 +480,7 @@ async function processRecentChanges() {
   const reportPath = path.join(__dirname, 'data', 'smart-groups-report.json');
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
   
-  console.log('\n📊 Smart Groups Report (Generated with Claude Sonnet 4):');
+  console.log('\n📊 Smart Groups Report (Generated with Groq Llama 3.3):');
   console.log(`- Total entities found: ${Object.values(report.entities).reduce((sum, arr) => sum + arr.length, 0)}`);
   console.log(`- Suggested groups: ${Object.keys(report.groups).length}`);
   console.log(`- Top themes: ${Object.keys(report.themes).slice(0, 5).join(', ')}`);
@@ -494,8 +497,9 @@ module.exports = {
 
 // Run if called directly
 if (require.main === module) {
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error('❌ Error: ANTHROPIC_API_KEY environment variable is required');
+  if (!process.env.GROQ_API_KEY && !process.env.ANTHROPIC_API_KEY) {
+    console.error('❌ Error: GROQ_API_KEY environment variable is required');
+    console.error('Please add it to your GitHub secrets or .env file');
     process.exit(1);
   }
 
@@ -507,7 +511,7 @@ if (require.main === module) {
 
   processRecentChanges()
     .then(() => {
-      console.log('\n✅ Enhanced analysis with Claude Sonnet 4 complete!');
+      console.log('\n✅ Enhanced analysis with Groq Llama 3.3 complete!');
       process.exit(0);
     })
     .catch(error => {
