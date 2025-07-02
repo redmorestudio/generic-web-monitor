@@ -1,12 +1,12 @@
-const Anthropic = require('@anthropic-ai/sdk');
+const Groq = require('groq-sdk');
 const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
 
-// Initialize Anthropic client
-const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY
+// Initialize Groq client
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY || process.env.ANTHROPIC_API_KEY // Fallback for testing
 });
 
 // Three-database architecture
@@ -42,7 +42,7 @@ intelligenceDb.exec(`
   )
 `);
 
-// Baseline extraction prompt
+// Baseline extraction prompt - optimized for Llama 3.3
 const BASELINE_EXTRACTION_PROMPT = `You are an AI competitive intelligence analyst. Analyze this company's current web content to extract comprehensive data with a focus on RELATIONSHIPS between entities.
 
 Extract the following information with relationship context:
@@ -188,19 +188,21 @@ ${snapshot.markdown_text.substring(0, 5000)}
 
 Analyze this company's current state and provide comprehensive extraction following the specified JSON structure.`;
 
-    console.log(`🧠 Analyzing ${company.name} - ${url.url_type} with Claude Sonnet 4...`);
+    console.log(`🚀 Analyzing ${company.name} - ${url.url_type} with Groq Llama 3.3...`);
     
-    const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-20250514',
-      max_tokens: 4000,
-      temperature: 0.3,
+    const response = await groq.chat.completions.create({
+      model: 'llama-3.3-70b-versatile',
       messages: [{
         role: 'user',
         content: prompt
-      }]
+      }],
+      temperature: 0.5,
+      max_completion_tokens: 10000,
+      top_p: 1,
+      stream: false
     });
 
-    const content = response.content[0].text;
+    const content = response.choices[0].message.content;
     
     // Parse JSON response
     let extractedData;
@@ -289,8 +291,9 @@ async function processSnapshotWithRetry(snapshot, company, url, maxRetries = 2, 
 }
 
 async function processAllSnapshots() {
-  console.log('🚀 Starting BASELINE AI Analysis for Three-Database Architecture...');
+  console.log('🚀 Starting BASELINE AI Analysis with Groq Llama 3.3...');
   console.log('📊 This will analyze ALL companies\' current state');
+  console.log('⚡ Using Groq for faster inference with Llama 3.3 70B');
   console.log('⏱️  Implemented with timeout protection and retry logic\n');
 
   // Track failed sites for reporting
@@ -480,9 +483,9 @@ module.exports = {
 
 // Run if called directly
 if (require.main === module) {
-  if (!process.env.ANTHROPIC_API_KEY) {
-    console.error('❌ Error: ANTHROPIC_API_KEY environment variable is required');
-    console.error('Please add it to your .env file');
+  if (!process.env.GROQ_API_KEY && !process.env.ANTHROPIC_API_KEY) {
+    console.error('❌ Error: GROQ_API_KEY environment variable is required');
+    console.error('Please add it to your GitHub secrets or .env file');
     process.exit(1);
   }
 
