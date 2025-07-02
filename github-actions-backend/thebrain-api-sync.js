@@ -85,7 +85,7 @@ class TheBrainAPISync {
       await this.createInsights(categories.insights);
       
       console.log('✅ TheBrain API sync complete!');
-      console.log(`   Created ${this.thoughtCache.size} thoughts`);
+      console.log(`   Created/Updated ${this.thoughtCache.size} thoughts`);
       
       return true;
       
@@ -99,6 +99,9 @@ class TheBrainAPISync {
   async createRootThought() {
     console.log('Creating root thought...');
     
+    // Check if we have a stored root thought
+    const existingRoot = this.getMapping('root', 'system');
+    
     const rootData = {
       name: 'AI Competitive Monitor',
       label: 'SYSTEM',
@@ -108,7 +111,15 @@ class TheBrainAPISync {
       backgroundColor: '#1a1a2e'
     };
     
-    const thoughtId = await this.createThought(rootData);
+    let thoughtId;
+    if (existingRoot) {
+      thoughtId = existingRoot;
+      await this.updateThought(thoughtId, rootData);
+    } else {
+      thoughtId = await this.createThought(rootData);
+      await this.storeMapping('root', 'system', thoughtId);
+    }
+    
     this.thoughtCache.set('root', thoughtId);
     
     // Add note with system overview
@@ -150,6 +161,9 @@ Last sync: ${new Date().toISOString()}`);
     const categoryIds = {};
     
     for (const [key, cat] of Object.entries(categories)) {
+      // Check for existing category
+      const existingId = this.getMapping('category', key);
+      
       const thoughtData = {
         name: cat.name,
         label: cat.icon,
@@ -158,8 +172,15 @@ Last sync: ${new Date().toISOString()}`);
         backgroundColor: '#0f0f1e'
       };
       
-      const catId = await this.createThought(thoughtData);
-      await this.createLink(rootId, catId, 1); // Child link
+      let catId;
+      if (existingId) {
+        catId = existingId;
+        await this.updateThought(catId, thoughtData);
+      } else {
+        catId = await this.createThought(thoughtData);
+        await this.createLink(rootId, catId, 1); // Child link
+        await this.storeMapping('category', key, catId);
+      }
       
       categoryIds[key] = catId;
       this.thoughtCache.set(cat.name, catId);
@@ -193,6 +214,8 @@ Last sync: ${new Date().toISOString()}`);
     ];
     
     for (const db of databases) {
+      const existingDbId = this.getMapping('database', db.name);
+      
       const dbData = {
         name: db.name,
         label: db.desc,
@@ -201,8 +224,15 @@ Last sync: ${new Date().toISOString()}`);
         backgroundColor: '#1a1a2e'
       };
       
-      const dbId = await this.createThought(dbData);
-      await this.createLink(archId, dbId, 1);
+      let dbId;
+      if (existingDbId) {
+        dbId = existingDbId;
+        await this.updateThought(dbId, dbData);
+      } else {
+        dbId = await this.createThought(dbData);
+        await this.createLink(archId, dbId, 1);
+        await this.storeMapping('database', db.name, dbId);
+      }
       
       // Add note with database details
       await this.updateNote(dbId, `# ${db.name}
@@ -218,6 +248,8 @@ ${db.tables.map(t => `- **${t}**`).join('\n')}
       
       // Add tables
       for (const table of db.tables) {
+        const existingTableId = this.getMapping('table', `${db.name}:${table}`);
+        
         const tableData = {
           name: table,
           label: 'TABLE',
@@ -226,8 +258,11 @@ ${db.tables.map(t => `- **${t}**`).join('\n')}
           backgroundColor: '#111827'
         };
         
-        const tableId = await this.createThought(tableData);
-        await this.createLink(dbId, tableId, 1);
+        if (!existingTableId) {
+          const tableId = await this.createThought(tableData);
+          await this.createLink(dbId, tableId, 1);
+          await this.storeMapping('table', `${db.name}:${table}`, tableId);
+        }
       }
     }
   }
@@ -259,6 +294,8 @@ ${db.tables.map(t => `- **${t}**`).join('\n')}
     
     // Create category groups
     for (const [key, info] of Object.entries(categoryMap)) {
+      const existingGroupId = this.getMapping('company-category', key);
+      
       const groupData = {
         name: info.name,
         label: info.icon,
@@ -267,30 +304,72 @@ ${db.tables.map(t => `- **${t}**`).join('\n')}
         backgroundColor: '#1a1a2e'
       };
       
-      const groupId = await this.createThought(groupData);
-      await this.createLink(companiesId, groupId, 1);
+      let groupId;
+      if (existingGroupId) {
+        groupId = existingGroupId;
+        await this.updateThought(groupId, groupData);
+      } else {
+        groupId = await this.createThought(groupData);
+        await this.createLink(companiesId, groupId, 1);
+        await this.storeMapping('company-category', key, groupId);
+      }
+      
       categoryGroups[key] = groupId;
     }
     
     // Add companies
     let companyCount = 0;
+    let updatedCount = 0;
+    
     for (const company of companies) {
       const category = company.category || 'industry';
       const groupId = categoryGroups[category] || categoryGroups.industry;
       
-      const companyData = {
-        name: company.name,
-        label: `${company.url_count} URLs`,
-        kind: 1,
-        foregroundColor: categoryMap[category]?.color || '#667eea',
-        backgroundColor: '#111827'
-      };
+      let companyThoughtId;
       
-      const companyId = await this.createThought(companyData);
-      await this.createLink(groupId, companyId, 1);
+      // Check if we already have a thought ID for this company
+      if (company.thebrain_thought_id) {
+        // Update existing thought
+        companyThoughtId = company.thebrain_thought_id;
+        
+        const updateData = {
+          name: company.name,
+          label: `${company.url_count} URLs`,
+          kind: 1,
+          foregroundColor: categoryMap[category]?.color || '#667eea',
+          backgroundColor: '#111827'
+        };
+        
+        try {
+          await this.updateThought(companyThoughtId, updateData);
+          updatedCount++;
+        } catch (error) {
+          console.log(`Failed to update thought for ${company.name}, creating new one`);
+          // If update fails (thought was deleted), create a new one
+          companyThoughtId = await this.createThought(updateData);
+          await this.createLink(groupId, companyThoughtId, 1);
+        }
+      } else {
+        // Create new thought
+        const companyData = {
+          name: company.name,
+          label: `${company.url_count} URLs`,
+          kind: 1,
+          foregroundColor: categoryMap[category]?.color || '#667eea',
+          backgroundColor: '#111827'
+        };
+        
+        companyThoughtId = await this.createThought(companyData);
+        await this.createLink(groupId, companyThoughtId, 1);
+        
+        // Store thought ID in database
+        this.intelligenceDb.prepare(`
+          UPDATE companies SET thebrain_thought_id = ? WHERE id = ?
+        `).run(companyThoughtId, company.id);
+      }
       
-      // Add company note with details
-      await this.updateNote(companyId, `# ${company.name}
+      // Update company note
+      await this.updateNote(companyThoughtId, `# ${company.name}
 
 ## Category
 ${categoryMap[category]?.name || 'Industry'}
@@ -302,17 +381,18 @@ ${company.description || 'No description available'}
 ${company.url_count} URLs
 
 ## Key Focus Areas
-${company.tags ? company.tags.split(',').map(t => `- ${t.trim()}`).join('\n') : 'Not specified'}`);
+${company.tags ? company.tags.split(',').map(t => `- ${t.trim()}`).join('\n') : 'Not specified'}
+
+## Last Updated
+${new Date().toISOString()}`);
       
-      // Store thought ID for future reference
-      this.intelligenceDb.prepare(`
-        UPDATE companies SET thebrain_thought_id = ? WHERE id = ?
-      `).run(companyId, company.id);
+      // Store in cache for this session
+      this.thoughtCache.set(`company_${company.id}`, companyThoughtId);
       
       companyCount++;
     }
     
-    console.log(`✅ Synced ${companyCount} companies`);
+    console.log(`✅ Synced ${companyCount} companies (${updatedCount} updated, ${companyCount - updatedCount} created)`);
   }
 
   async syncChanges(changesId) {
@@ -329,13 +409,14 @@ ${company.tags ? company.tags.split(',').map(t => `- ${t.trim()}`).join('\n') : 
         return;
       }
       
-      // Get recent high-value changes
+      // Get recent high-value changes with company thought IDs
       const changes = this.intelligenceDb.prepare(`
         SELECT 
           aa.change_id as id,
           aa.created_at,
           u.url_type,
           c.name as company_name,
+          c.id as company_id,
           c.thebrain_thought_id as company_thought_id,
           aa.relevance_score,
           aa.category,
@@ -362,6 +443,8 @@ ${company.tags ? company.tags.split(',').map(t => `- ${t.trim()}`).join('\n') : 
       
       const groupIds = {};
       for (const [key, info] of Object.entries(groups)) {
+        const existingGroupId = this.getMapping('change-priority', key);
+        
         const groupData = {
           name: info.name,
           label: info.icon,
@@ -370,8 +453,16 @@ ${company.tags ? company.tags.split(',').map(t => `- ${t.trim()}`).join('\n') : 
           backgroundColor: '#1a1a2e'
         };
         
-        const groupId = await this.createThought(groupData);
-        await this.createLink(changesId, groupId, 1);
+        let groupId;
+        if (existingGroupId) {
+          groupId = existingGroupId;
+          await this.updateThought(groupId, groupData);
+        } else {
+          groupId = await this.createThought(groupData);
+          await this.createLink(changesId, groupId, 1);
+          await this.storeMapping('change-priority', key, groupId);
+        }
+        
         groupIds[key] = groupId;
       }
       
@@ -408,9 +499,10 @@ ${change.key_changes}
 ${new Date(change.created_at).toLocaleString()}`);
         }
         
-        // Link to company if available
-        if (change.company_thought_id) {
-          await this.createLink(change.company_thought_id, changeId, 3, 'detected');
+        // Link to company if available (use database ID or cache)
+        const companyThoughtId = change.company_thought_id || this.thoughtCache.get(`company_${change.company_id}`);
+        if (companyThoughtId) {
+          await this.createLink(companyThoughtId, changeId, 3, 'detected');
         }
       }
       
@@ -431,6 +523,8 @@ ${new Date(change.created_at).toLocaleString()}`);
     ];
     
     for (const insight of insights) {
+      const existingId = this.getMapping('insight', insight.name);
+      
       const insightData = {
         name: insight.name,
         label: insight.icon,
@@ -439,8 +533,11 @@ ${new Date(change.created_at).toLocaleString()}`);
         backgroundColor: '#1a1a2e'
       };
       
-      const insightId = await this.createThought(insightData);
-      await this.createLink(insightsId, insightId, 1);
+      if (!existingId) {
+        const insightId = await this.createThought(insightData);
+        await this.createLink(insightsId, insightId, 1);
+        await this.storeMapping('insight', insight.name, insightId);
+      }
     }
   }
 
@@ -452,6 +549,16 @@ ${new Date(change.created_at).toLocaleString()}`);
       
     } catch (error) {
       console.error(`Failed to create thought "${data.name}":`, error.response?.data || error.message);
+      throw error;
+    }
+  }
+
+  async updateThought(thoughtId, data) {
+    try {
+      const response = await this.api.put(`/thoughts/${this.brainId}/${thoughtId}`, data);
+      return response.data.id;
+    } catch (error) {
+      console.error(`Failed to update thought ${thoughtId}:`, error.response?.data || error.message);
       throw error;
     }
   }
@@ -492,6 +599,47 @@ ${new Date(change.created_at).toLocaleString()}`);
     } catch (error) {
       console.error(`Failed to add URL attachment:`, error.response?.data || error.message);
       // Don't throw - attachments are optional
+    }
+  }
+
+  // Helper methods for tracking mappings
+  storeMapping(entityType, entityId, thoughtId) {
+    try {
+      // Check if mapping table exists
+      const hasTable = this.intelligenceDb.prepare(
+        "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='thebrain_mappings'"
+      ).get().count > 0;
+      
+      if (hasTable) {
+        this.intelligenceDb.prepare(`
+          INSERT OR REPLACE INTO thebrain_mappings (entity_type, entity_id, thought_id, updated_at)
+          VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+        `).run(entityType, entityId.toString(), thoughtId);
+      }
+    } catch (error) {
+      console.log(`Note: Could not store mapping - table may not exist yet`);
+    }
+  }
+
+  getMapping(entityType, entityId) {
+    try {
+      // Check if mapping table exists
+      const hasTable = this.intelligenceDb.prepare(
+        "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='thebrain_mappings'"
+      ).get().count > 0;
+      
+      if (!hasTable) {
+        return null;
+      }
+      
+      const result = this.intelligenceDb.prepare(`
+        SELECT thought_id FROM thebrain_mappings 
+        WHERE entity_type = ? AND entity_id = ?
+      `).get(entityType, entityId.toString());
+      
+      return result?.thought_id;
+    } catch (error) {
+      return null;
     }
   }
 }
