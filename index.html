@@ -810,31 +810,39 @@
             
             let html = '<h3>📊 Monitored Companies</h3><div class="companies-grid">';
             companies.forEach(company => {
+                // Use 'company' field for name and 'type' field for category
+                const companyName = company.company || company.name || 'Unknown Company';
+                const companyType = company.type || company.category || 'competitor';
                 const urls = company.urls || [];
-                const lastChange = company.last_change ? new Date(company.last_change) : null;
-                const isRecent = lastChange && (new Date() - lastChange) < 24 * 60 * 60 * 1000;
+                const lastChange = company.last_change || company.last_check;
+                const lastChangeDate = lastChange ? new Date(lastChange) : null;
+                const isRecent = lastChangeDate && (new Date() - lastChangeDate) < 24 * 60 * 60 * 1000;
                 
                 html += `
                     <div class="company-card">
-                        <h3>${escapeHtml(company.name)}
+                        <h3>${escapeHtml(companyName)}
                             ${isRecent ? '<span class="change-indicator recent"></span>' : ''}
                         </h3>
                         <div class="status status-operational">✓ Monitoring Active</div>
                         <div style="margin: 15px 0;">
-                            <strong>URLs Monitored:</strong> ${urls.length}
+                            <strong>URLs Monitored:</strong> ${company.url_count || urls.length}
+                        </div>
+                        <div style="margin: 10px 0; font-size: 12px; color: var(--text-secondary);">
+                            <strong>Type:</strong> ${escapeHtml(companyType)}
                         </div>
                         ${urls.length > 0 ? `
                             <div style="margin: 10px 0;">
-                                ${urls.map(url => `
-                                    <a href="${escapeHtml(url.url)}" target="_blank" class="url">
-                                        ${escapeHtml(url.title || url.url)}
+                                ${urls.slice(0, 3).map(url => `
+                                    <a href="${escapeHtml(typeof url === 'string' ? url : url.url)}" target="_blank" class="url">
+                                        ${escapeHtml(typeof url === 'string' ? url : (url.title || url.url))}
                                     </a><br>
                                 `).join('')}
+                                ${urls.length > 3 ? `<span style="font-size: 12px; color: var(--text-secondary);">...and ${urls.length - 3} more</span>` : ''}
                             </div>
                         ` : ''}
-                        ${lastChange ? `
+                        ${lastChangeDate ? `
                             <div style="margin-top: 10px; font-size: 12px; color: var(--text-secondary);">
-                                Last change: ${formatTimeAgo(lastChange)}
+                                Last change: ${formatTimeAgo(lastChangeDate)}
                             </div>
                         ` : ''}
                     </div>
@@ -851,8 +859,10 @@
             
             companies.forEach(company => {
                 const option = document.createElement('option');
-                option.value = company.name;
-                option.textContent = company.name;
+                // Use 'company' field for name
+                const companyName = company.company || company.name || 'Unknown Company';
+                option.value = companyName;
+                option.textContent = companyName;
                 companyFilter.appendChild(option);
             });
         }
