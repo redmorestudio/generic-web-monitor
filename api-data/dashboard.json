@@ -2,15 +2,15 @@
   "stats": {
     "companies": 52,
     "urls": 174,
-    "snapshots": 42,
-    "lastCheck": "2025-07-01T21:11:31.370Z"
+    "snapshots": 171,
+    "lastCheck": "2025-07-02T01:59:14.080Z"
   },
   "company_activity": [
     {
       "company": "AI21 Labs",
       "type": "LLM Providers",
       "url_count": 4,
-      "last_check": "2025-07-01 21:08:21",
+      "last_check": "2025-07-02 01:53:55",
       "urls": [
         "https://ai21.com",
         "https://ai21.com/jamba",
@@ -22,7 +22,7 @@
       "company": "AMD",
       "type": "AI Hardware",
       "url_count": 2,
-      "last_check": "2025-07-01 21:08:09",
+      "last_check": "2025-07-02 01:54:01",
       "urls": [
         "https://amd.com/en/graphics/instinct-server-accelerators",
         "https://amd.com/en/newsroom"
@@ -32,7 +32,7 @@
       "company": "Aleph Alpha",
       "type": "LLM Providers",
       "url_count": 4,
-      "last_check": "2025-07-01 21:08:12",
+      "last_check": "2025-07-02 01:54:04",
       "urls": [
         "https://aleph-alpha.com",
         "https://aleph-alpha.com/luminous",
@@ -44,7 +44,7 @@
       "company": "Amazon CodeWhisperer",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": "2025-07-01 21:09:24",
+      "last_check": "2025-07-02 01:54:09",
       "urls": [
         "https://aws.amazon.com/codewhisperer",
         "https://aws.amazon.com/codewhisperer/pricing",
@@ -56,7 +56,7 @@
       "company": "Andi",
       "type": "AI Search",
       "url_count": 1,
-      "last_check": "2025-07-01 21:09:02",
+      "last_check": "2025-07-02 01:54:09",
       "urls": [
         "https://andisearch.com"
       ]
@@ -65,7 +65,7 @@
       "company": "Anthropic",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": "2025-07-01 21:09:24",
+      "last_check": "2025-07-02 01:54:15",
       "urls": [
         "https://anthropic.com",
         "https://anthropic.com/claude",
@@ -78,7 +78,7 @@
       "company": "Anyscale",
       "type": "AI Infrastructure",
       "url_count": 3,
-      "last_check": "2025-07-01 21:10:21",
+      "last_check": "2025-07-02 01:54:23",
       "urls": [
         "https://anyscale.com",
         "https://anyscale.com/pricing",
@@ -89,7 +89,7 @@
       "company": "Cerebras",
       "type": "AI Hardware",
       "url_count": 3,
-      "last_check": "2025-07-01 21:10:12",
+      "last_check": "2025-07-02 01:54:28",
       "urls": [
         "https://cerebras.net",
         "https://cerebras.net/product-system",
@@ -100,7 +100,7 @@
       "company": "Codeium",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": "2025-07-01 21:10:27",
+      "last_check": "2025-07-02 01:54:29",
       "urls": [
         "https://codeium.com",
         "https://codeium.com/windsurf",
@@ -112,7 +112,7 @@
       "company": "Cohere",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": "2025-07-01 21:11:24",
+      "last_check": "2025-07-02 01:54:39",
       "urls": [
         "https://cohere.ai",
         "https://cohere.ai/products",
@@ -125,7 +125,7 @@
       "company": "Cursor",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": "2025-07-01 21:11:19",
+      "last_check": "2025-07-02 01:54:46",
       "urls": [
         "https://cursor.com",
         "https://cursor.com/features",
@@ -137,7 +137,7 @@
       "company": "DALL-E",
       "type": "Image Generation",
       "url_count": 2,
-      "last_check": "2025-07-01 21:11:09",
+      "last_check": "2025-07-02 01:54:55",
       "urls": [
         "https://openai.com/dall-e-3",
         "https://openai.com/pricing"
@@ -147,7 +147,7 @@
       "company": "DataRobot",
       "type": "Enterprise AI",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:54:54",
       "urls": [
         "https://datarobot.com",
         "https://datarobot.com/platform",
@@ -158,7 +158,7 @@
       "company": "Descript",
       "type": "AI Voice/Audio",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:55:03",
       "urls": [
         "https://descript.com",
         "https://descript.com/overdub",
@@ -170,7 +170,7 @@
       "company": "ElevenLabs",
       "type": "AI Voice/Audio",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:55:11",
       "urls": [
         "https://elevenlabs.io",
         "https://elevenlabs.io/voice-generator",
@@ -182,7 +182,7 @@
       "company": "Flux",
       "type": "Image Generation",
       "url_count": 2,
-      "last_check": null,
+      "last_check": "2025-07-02 01:55:06",
       "urls": [
         "https://blackforestlabs.ai",
         "https://blackforestlabs.ai/our-models"
@@ -192,7 +192,7 @@
       "company": "GitHub Copilot",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:55:19",
       "urls": [
         "https://github.com/features/copilot",
         "https://github.com/pricing",
@@ -204,7 +204,7 @@
       "company": "Google DeepMind",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": null,
+      "last_check": "2025-07-02 01:55:25",
       "urls": [
         "https://deepmind.google",
         "https://ai.google/discover/gemini",
@@ -217,7 +217,7 @@
       "company": "H2O.ai",
       "type": "Enterprise AI",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:55:31",
       "urls": [
         "https://h2o.ai",
         "https://h2o.ai/platform",
@@ -228,7 +228,7 @@
       "company": "HeyGen",
       "type": "Video AI",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:55:41",
       "urls": [
         "https://heygen.com",
         "https://heygen.com/features",
@@ -240,7 +240,7 @@
       "company": "Hugging Face",
       "type": "AI Infrastructure",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:56:00",
       "urls": [
         "https://huggingface.co",
         "https://huggingface.co/pricing",
@@ -252,7 +252,7 @@
       "company": "Ideogram",
       "type": "Image Generation",
       "url_count": 2,
-      "last_check": null,
+      "last_check": "2025-07-02 01:55:47",
       "urls": [
         "https://ideogram.ai",
         "https://ideogram.ai/pricing"
@@ -262,7 +262,7 @@
       "company": "Inflection AI",
       "type": "LLM Providers",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:56:04",
       "urls": [
         "https://inflection.ai",
         "https://pi.ai",
@@ -273,7 +273,7 @@
       "company": "Intel",
       "type": "AI Hardware",
       "url_count": 2,
-      "last_check": null,
+      "last_check": "2025-07-02 01:56:07",
       "urls": [
         "https://intel.com/content/www/us/en/artificial-intelligence",
         "https://intel.com/content/www/us/en/newsroom"
@@ -283,7 +283,7 @@
       "company": "LangChain",
       "type": "AI Infrastructure",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:56:14",
       "urls": [
         "https://langchain.com",
         "https://langchain.com/langsmith",
@@ -295,7 +295,7 @@
       "company": "Leonardo AI",
       "type": "Image Generation",
       "url_count": 2,
-      "last_check": "2025-07-01 20:42:56",
+      "last_check": "2025-07-02 01:56:14",
       "urls": [
         "https://leonardo.ai",
         "https://leonardo.ai/pricing"
@@ -305,7 +305,7 @@
       "company": "Luma AI",
       "type": "Video AI",
       "url_count": 3,
-      "last_check": "2025-07-01 20:42:38",
+      "last_check": "2025-07-02 01:56:19",
       "urls": [
         "https://lumalabs.ai",
         "https://lumalabs.ai/dream-machine",
@@ -316,7 +316,7 @@
       "company": "Meta AI",
       "type": "LLM Providers",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:56:28",
       "urls": [
         "https://ai.meta.com",
         "https://ai.meta.com/llama",
@@ -328,7 +328,7 @@
       "company": "Midjourney",
       "type": "Image Generation",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:56:27",
       "urls": [
         "https://midjourney.com",
         "https://docs.midjourney.com",
@@ -339,7 +339,7 @@
       "company": "Mistral AI",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": null,
+      "last_check": "2025-07-02 01:56:42",
       "urls": [
         "https://mistral.ai",
         "https://mistral.ai/technology",
@@ -352,7 +352,7 @@
       "company": "Murf AI",
       "type": "AI Voice/Audio",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:56:57",
       "urls": [
         "https://murf.ai",
         "https://murf.ai/pricing",
@@ -363,7 +363,7 @@
       "company": "NVIDIA",
       "type": "AI Hardware",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:57:05",
       "urls": [
         "https://nvidia.com/ai",
         "https://nvidia.com/en-us/data-center/products",
@@ -375,7 +375,7 @@
       "company": "Neeva",
       "type": "AI Search",
       "url_count": 1,
-      "last_check": null,
+      "last_check": "2025-07-02 01:57:02",
       "urls": [
         "https://neeva.com"
       ]
@@ -384,7 +384,7 @@
       "company": "OpenAI",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": null,
+      "last_check": "2025-07-02 01:57:14",
       "urls": [
         "https://openai.com",
         "https://openai.com/chatgpt",
@@ -397,7 +397,7 @@
       "company": "Palantir",
       "type": "Enterprise AI",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:57:12",
       "urls": [
         "https://palantir.com",
         "https://palantir.com/platforms/aip",
@@ -408,7 +408,7 @@
       "company": "Perplexity AI",
       "type": "AI Search",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:57:21",
       "urls": [
         "https://perplexity.ai",
         "https://perplexity.ai/pro",
@@ -419,7 +419,7 @@
       "company": "Phind",
       "type": "AI Search",
       "url_count": 2,
-      "last_check": null,
+      "last_check": "2025-07-02 01:57:19",
       "urls": [
         "https://phind.com",
         "https://phind.com/search?q=pricing"
@@ -429,7 +429,7 @@
       "company": "Pieces",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:57:28",
       "urls": [
         "https://pieces.app",
         "https://pieces.app/features",
@@ -441,7 +441,7 @@
       "company": "Pika",
       "type": "Video AI",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:57:35",
       "urls": [
         "https://pika.art",
         "https://pika.art/pricing",
@@ -452,7 +452,7 @@
       "company": "Replicate",
       "type": "AI Infrastructure",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:57:34",
       "urls": [
         "https://replicate.com",
         "https://replicate.com/pricing",
@@ -463,7 +463,7 @@
       "company": "Replit",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:57:43",
       "urls": [
         "https://replit.com",
         "https://replit.com/ai",
@@ -475,7 +475,7 @@
       "company": "Resemble AI",
       "type": "AI Voice/Audio",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:58:21",
       "urls": [
         "https://resemble.ai",
         "https://resemble.ai/pricing",
@@ -486,7 +486,7 @@
       "company": "Runway",
       "type": "Video AI",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:58:22",
       "urls": [
         "https://runwayml.com",
         "https://runwayml.com/pricing",
@@ -497,7 +497,7 @@
       "company": "SambaNova",
       "type": "AI Hardware",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:58:29",
       "urls": [
         "https://sambanova.ai",
         "https://sambanova.ai/products",
@@ -508,7 +508,7 @@
       "company": "Scale AI",
       "type": "Enterprise AI",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:58:36",
       "urls": [
         "https://scale.com",
         "https://scale.com/enterprise",
@@ -519,7 +519,7 @@
       "company": "Sourcegraph",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:58:38",
       "urls": [
         "https://sourcegraph.com",
         "https://sourcegraph.com/cody",
@@ -531,7 +531,7 @@
       "company": "Stability AI",
       "type": "LLM Providers",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:58:45",
       "urls": [
         "https://stability.ai",
         "https://stability.ai/stable-diffusion",
@@ -543,7 +543,7 @@
       "company": "Synthesia",
       "type": "Video AI",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:58:53",
       "urls": [
         "https://synthesia.io",
         "https://synthesia.io/features",
@@ -555,7 +555,7 @@
       "company": "Tabnine",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": null,
+      "last_check": "2025-07-02 01:59:01",
       "urls": [
         "https://tabnine.com",
         "https://tabnine.com/pricing",
@@ -567,7 +567,7 @@
       "company": "Weights & Biases",
       "type": "AI Infrastructure",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:59:01",
       "urls": [
         "https://wandb.ai",
         "https://wandb.ai/pricing",
@@ -578,7 +578,7 @@
       "company": "WellSaid Labs",
       "type": "AI Voice/Audio",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:59:08",
       "urls": [
         "https://wellsaidlabs.com",
         "https://wellsaidlabs.com/pricing",
@@ -589,7 +589,7 @@
       "company": "You.com",
       "type": "AI Search",
       "url_count": 3,
-      "last_check": null,
+      "last_check": "2025-07-02 01:59:13",
       "urls": [
         "https://you.com",
         "https://you.com/search?q=pricing",
@@ -597,6 +597,6 @@
       ]
     }
   ],
-  "generated_at": "2025-07-01T21:11:31.378Z",
+  "generated_at": "2025-07-02T01:59:14.083Z",
   "backend": "github-actions-static-three-db"
 }
