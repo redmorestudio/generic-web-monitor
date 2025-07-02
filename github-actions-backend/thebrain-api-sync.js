@@ -304,10 +304,8 @@ ${company.url_count} URLs
 ## Key Focus Areas
 ${company.tags ? company.tags.split(',').map(t => `- ${t.trim()}`).join('\n') : 'Not specified'}`);
       
-      // Store thought ID for future reference
-      this.intelligenceDb.prepare(`
-        UPDATE companies SET thebrain_thought_id = ? WHERE id = ?
-      `).run(companyId, company.id);
+      // Store mapping in memory for later use in this sync session
+      this.thoughtCache.set(`company_${company.id}`, companyId);
       
       companyCount++;
     }
@@ -329,14 +327,14 @@ ${company.tags ? company.tags.split(',').map(t => `- ${t.trim()}`).join('\n') : 
         return;
       }
       
-      // Get recent high-value changes
+      // Get recent high-value changes (removed thebrain_thought_id reference)
       const changes = this.intelligenceDb.prepare(`
         SELECT 
           aa.change_id as id,
           aa.created_at,
           u.url_type,
           c.name as company_name,
-          c.thebrain_thought_id as company_thought_id,
+          c.id as company_id,
           aa.relevance_score,
           aa.category,
           aa.key_changes
@@ -408,9 +406,10 @@ ${change.key_changes}
 ${new Date(change.created_at).toLocaleString()}`);
         }
         
-        // Link to company if available
-        if (change.company_thought_id) {
-          await this.createLink(change.company_thought_id, changeId, 3, 'detected');
+        // Link to company if we have it in our cache from this sync session
+        const companyThoughtId = this.thoughtCache.get(`company_${change.company_id}`);
+        if (companyThoughtId) {
+          await this.createLink(companyThoughtId, changeId, 3, 'detected');
         }
       }
       
