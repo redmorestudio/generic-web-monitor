@@ -307,7 +307,7 @@ class EnhancedEmailNotificationService {
       `).get().total;
 
       const lastRun = this.db.prepare(`
-        SELECT MAX(created_at) as last_run FROM monitoring_runs
+        SELECT MAX(started_at) as last_run FROM monitoring_runs
       `).get().last_run;
 
       return {
@@ -531,19 +531,26 @@ class EnhancedEmailNotificationService {
       };
 
       // Try to get recent email activity from monitoring runs
+      // Note: monitoring_runs table doesn't have metadata column, so we'll skip this for now
+      // This could be enhanced later by adding email tracking to the database
       if (this.db) {
-        const recentActivity = this.db.prepare(`
-          SELECT * FROM monitoring_runs 
-          WHERE metadata LIKE '%email%'
-          ORDER BY created_at DESC 
-          LIMIT 5
-        `).all();
-        
-        stats.recent_emails = recentActivity.map(run => ({
-          date: run.created_at,
-          type: JSON.parse(run.metadata || '{}').email_type || 'unknown',
-          status: run.status
-        }));
+        try {
+          const recentActivity = this.db.prepare(`
+            SELECT * FROM monitoring_runs 
+            WHERE run_type LIKE '%email%' OR status LIKE '%email%'
+            ORDER BY started_at DESC 
+            LIMIT 5
+          `).all();
+          
+          stats.recent_emails = recentActivity.map(run => ({
+            date: run.started_at,
+            type: run.run_type || 'unknown',
+            status: run.status
+          }));
+        } catch (error) {
+          // If query fails, just log and continue without recent emails
+          console.log('Could not fetch recent email activity:', error.message);
+        }
       }
 
       // Write to api-data directory
