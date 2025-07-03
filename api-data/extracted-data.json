@@ -14,7 +14,7 @@
         "DataScale",
         "SambaNova Cloud"
       ],
-      "summary": "SambaNova is a leader in AI computing, providing enhanced AI capabilities and high performance computing solutions for Public Sector, AI for Science, and Sovereign AI markets.",
+      "summary": "SambaNova is a leader in AI hardware and software, providing high-performance AI processing and purpose-built AI solutions for various industries",
       "extracted_at": "2025-07-01 21:07:11",
       "entities": {},
       "content_length": 25181,
@@ -33,11 +33,12 @@
       "keywords": [
         "RDU: The GPU Alternative",
         "Composition of Experts",
+        "Agentic AI",
         "SambaNova Suite",
         "DataScale",
         "SambaNova Cloud"
       ],
-      "summary": "SambaNova is a leader in AI Hardware and Software, providing high-performance and low-power consumption solutions for various markets",
+      "summary": "SambaNova is a leader in AI hardware and software, providing purpose-built solutions for highly efficient systems",
       "extracted_at": "2025-07-01 21:07:11",
       "entities": {},
       "content_length": 18053,
@@ -52,15 +53,14 @@
       "company": "SambaNova",
       "type": "blog",
       "title": "SambaNova - blog",
-      "relevance_score": 6,
+      "relevance_score": 4,
       "keywords": [
         "RDU: The GPU Alternative",
         "Composition of Experts",
         "SambaNova Suite",
-        "DataScale",
-        "SambaNova Cloud"
+        "DataScale"
       ],
-      "summary": "SambaNova is a leader in AI Hardware and Software, providing custom models and accelerate discovery capabilities to the Public Sector, AI for Science, and Sovereign AI markets",
+      "summary": "SambaNova is a leader in AI hardware and software, providing a range of products and solutions for generative AI and agentic AI, and supporting early-stage startups in achieving breakthrough AI innovation",
       "extracted_at": "2025-07-01 21:07:11",
       "entities": {},
       "content_length": 19721,
@@ -75,13 +75,13 @@
       "company": "Leonardo AI",
       "type": "pricing",
       "title": "Leonardo AI - pricing",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
+        "AI",
         "Machine Learning",
-        "Computer Vision",
         "Leonardo AI"
       ],
-      "summary": "Leonardo AI is a leader in AI Image Generation, using Machine Learning and Computer Vision to provide high-quality image and video generation capabilities.",
+      "summary": "Leonardo AI is an AI-powered image and video generation platform that targets the marketing and graphic design industries.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 22768,
@@ -98,10 +98,10 @@
       "title": "Flux - homepage",
       "relevance_score": 6,
       "keywords": [
-        "Generative Flow Matching Models",
+        "Generative Flow Matching",
         "FLUX.1 Kontext"
       ],
-      "summary": "Black Forest Labs' FLUX.1 Kontext is an innovative image generation and editing solution utilizing advanced AI capabilities.",
+      "summary": "Flux is a new entrant in the image generation market, offering a powerful tool for in-context image generation and editing.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 14446,
@@ -117,8 +117,12 @@
       "type": "product",
       "title": "Flux - product",
       "relevance_score": 5,
-      "keywords": [],
-      "summary": "Flux, associated with Black Forest Labs, has no available information due to a 404 error on the specified URL.",
+      "keywords": [
+        "AI",
+        "ML",
+        "Flux"
+      ],
+      "summary": "Flux is an image generation model with unknown current state and capabilities due to lack of available information.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 173,
@@ -135,14 +139,15 @@
       "title": "Palantir - homepage",
       "relevance_score": 6,
       "keywords": [
-        "Machine learning",
-        "Data analytics",
+        "AI",
+        "Data Integration",
         "AIP",
         "Foundry",
         "Gotham",
-        "Apollo"
+        "Apollo",
+        "TITAN"
       ],
-      "summary": "Palantir is a leader in data integration and analytics, using machine learning and AI to provide predictive analytics and automated decision-making",
+      "summary": "Palantir is an enterprise AI company that provides AI-powered automation and data integration solutions to various industries.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 41235,
@@ -159,10 +164,10 @@
       "title": "Palantir - product",
       "relevance_score": 6,
       "keywords": [
-        "AI",
+        "Machine Learning",
         "AIP"
       ],
-      "summary": "Palantir is a leader in AI-powered enterprise software, with a strong focus on integrating AI into operational decision making",
+      "summary": "Palantir is a leader in AI-powered enterprise software, with a focus on developing innovative products and expanding into new markets.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 16427,
@@ -177,12 +182,12 @@
       "company": "Palantir",
       "type": "blog",
       "title": "Palantir - blog",
-      "relevance_score": 6,
+      "relevance_score": 4,
       "keywords": [
         "AI",
-        "Palantir"
+        "Palantir Platform"
       ],
-      "summary": "Palantir is an Enterprise AI company that provides data integration and analytics solutions to the US Government and large enterprises",
+      "summary": "Palantir is a leading provider of enterprise data integration and analytics solutions, leveraging AI for enhanced decision-making capabilities.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 17306,
@@ -201,14 +206,13 @@
       "keywords": [
         "AI",
         "ML",
-        "Generative AI",
-        "Agentic AI",
+        "RLHF",
         "Scale Data Engine",
-        "Scale GenAl Platform",
-        "Scale Donovan",
+        "Scale GenAI Data Engine",
+        "Scale GenAI Platform",
         "Scale Evaluation"
       ],
-      "summary": "Scale AI is a leader in AI solutions for Enterprise and Government, with a strong focus on custom AI solutions and enterprise-focused capabilities.",
+      "summary": "Scale AI is an enterprise AI solutions provider that develops and provides custom AI solutions to enterprise companies and government agencies",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 31873,
@@ -232,7 +236,7 @@
         "Scale Donovan",
         "Scale Evaluation"
       ],
-      "summary": "Scale AI is a leader in AI solutions for enterprise and government, with a strong focus on customizable AI solutions and government partnerships.",
+      "summary": "Scale AI is a leader in specialized AI solutions, with a strong focus on enterprise and government customers",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 10630,
@@ -247,15 +251,16 @@
       "company": "Scale AI",
       "type": "blog",
       "title": "Scale AI - blog",
-      "relevance_score": 5,
+      "relevance_score": 6,
       "keywords": [
-        "AI",
-        "ML",
+        "Generative AI",
+        "Agentic AI",
         "Scale Data Engine",
-        "Scale GenAl Platform",
+        "Scale GenAI Platform",
+        "Scale Donovan",
         "Scale Evaluation"
       ],
-      "summary": "Scale AI is an Enterprise AI company providing data annotation, model training, and generative AI capabilities to the enterprise and government sectors.",
+      "summary": "Scale AI is a specialized AI solutions provider for enterprise and government",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 17838,
@@ -278,7 +283,7 @@
         "AI Apps & Agents",
         "Agentic AI Platform"
       ],
-      "summary": "DataRobot is a leader in AI solutions, providing innovative and scalable AI apps and platforms to drive business growth and innovation.",
+      "summary": "DataRobot is a leader in AI software and platform, offering a range of solutions for enterprise customers",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 26516,
@@ -300,7 +305,7 @@
         "Agentic AI Platform",
         "AI Apps & Agents"
       ],
-      "summary": "DataRobot is a leader in AI Platform and AI Apps & Agents, providing solutions to its customers through its Agentic AI Platform and AI Apps & Agents.",
+      "summary": "DataRobot is a leader in AI platform and AI apps & agents, with a focus on predictive and generative AI",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 19839,
@@ -315,14 +320,14 @@
       "company": "DataRobot",
       "type": "blog",
       "title": "DataRobot - blog",
-      "relevance_score": 5,
+      "relevance_score": 4,
       "keywords": [
         "Agentic AI",
-        "Covalent",
+        "Generative AI",
         "AI Apps & Agents",
         "Agentic AI Platform"
       ],
-      "summary": "DataRobot is an Enterprise AI Suite company that provides AI Apps & Agents and Agentic AI Platform to drive innovation and deliver meaningful impact across departments and industries",
+      "summary": "DataRobot is an enterprise AI suite that provides AI apps and agents, and an agentic AI platform to drive innovation, scale effortlessly, and deliver meaningful impact across departments and industries",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 21747,
@@ -341,12 +346,16 @@
       "keywords": [
         "Machine Learning",
         "Deep Learning",
-        "Natural Language Processing",
-        "H2O.ai Platform",
+        "Distributed Computing",
+        "LLMs",
         "H2O Driverless AI",
-        "H2O LLM Studio"
+        "H2O-3",
+        "H2O Document AI",
+        "H2O Hydrogen Torch",
+        "H2O Wave",
+        "H2O Label Genie"
       ],
-      "summary": "H2O.ai is a leader in Automated Machine Learning and No-code Fine-tuning, with a strong focus on scalable deployment and customizable models.",
+      "summary": "H2O.ai is a leader in Automated Machine Learning and Predictive Modeling, providing a range of AI-powered products and solutions to various industries",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 43098,
@@ -363,18 +372,13 @@
       "title": "H2O.ai - product",
       "relevance_score": 6,
       "keywords": [
-        "Machine Learning",
-        "Deep Learning",
-        "Natural Language Processing",
-        "Computer Vision",
+        "LLMs",
+        "K8s",
         "H2O AI Cloud",
         "H2O Driverless AI",
-        "H2O-3",
-        "H2O Document AI",
-        "H2O Hydrogen Torch",
-        "H2O Wave"
+        "H2O GPT"
       ],
-      "summary": "H2O.ai is a leader in AI solutions, providing a range of products and services that enable businesses to leverage the power of AI",
+      "summary": "H2O.ai is an Enterprise AI Platform that provides customizable and scalable AI solutions for large enterprises",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 27087,
@@ -391,18 +395,18 @@
       "title": "H2O.ai - blog",
       "relevance_score": 6,
       "keywords": [
-        "Machine Learning",
-        "Deep Learning",
-        "Natural Language Processing",
-        "Computer Vision",
+        "H2O-3",
+        "H2O Hydrogen Torch",
         "H2O.ai Platform",
         "H2O Driverless AI",
-        "H2O-3",
-        "H2O Document AI",
-        "H2O Hydrogen Torch",
-        "H2O Wave"
+        "H2O Wave",
+        "H2O Label Genie",
+        "H2O AI Feature Store",
+        "H2O MLOps",
+        "H2O AI AppStore",
+        "GenAI App Store"
       ],
-      "summary": "H2O.ai is a leader in the AI Cloud Platform market, offering a range of products and services for building and deploying AI-powered applications.",
+      "summary": "H2O.ai is a leader in the AI Cloud Platform market, providing predictive and generative AI solutions to a wide range of industries.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 500416,
@@ -419,14 +423,14 @@
       "title": "Hugging Face - homepage",
       "relevance_score": 6,
       "keywords": [
-        "Transformers",
-        "PyTorch",
-        "TensorFlow",
+        "Machine learning",
+        "Deep learning",
+        "Cloud computing",
         "Hugging Face Hub",
         "Hugging Face Compute",
         "Hugging Face Enterprise"
       ],
-      "summary": "Hugging Face is a leader in machine learning and AI, providing a platform for collaboration, model training, and model deployment.",
+      "summary": "Hugging Face is a community-driven machine learning platform with a focus on collaboration and open-source technology.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 8521,
@@ -446,10 +450,13 @@
         "Machine Learning",
         "Git",
         "Hugging Face Hub",
-        "Inference Endpoints",
-        "Spaces"
+        "PRO Account",
+        "Team",
+        "Enterprise",
+        "Spaces",
+        "Inference Endpoints"
       ],
-      "summary": "Hugging Face is a leader in the Machine Learning platform market, offering a range of products and services for individual developers, growing teams, and enterprises",
+      "summary": "Hugging Face is a leading ML platform for developers and researchers, providing a collaborative environment for building and deploying ML models",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 7786,
@@ -469,10 +476,9 @@
         "Transformers",
         "PyTorch",
         "Hugging Face Models",
-        "Hugging Face Datasets",
-        "Hugging Face Spaces"
+        "Hugging Face Datasets"
       ],
-      "summary": "Hugging Face is a leader in AI models and datasets, with a strong focus on research and enterprise applications",
+      "summary": "Hugging Face is a leader in AI infrastructure, providing a platform for AI models and datasets, and partnering with companies like Ginkgo for AI-powered drug discovery.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 14772,
@@ -489,10 +495,12 @@
       "title": "Hugging Face - docs",
       "relevance_score": 6,
       "keywords": [
-        "Transformers",
-        "Hugging Face Hub"
+        "PyTorch",
+        "Git",
+        "Hugging Face Hub",
+        "Transformers"
       ],
-      "summary": "Hugging Face is a leading AI company providing state-of-the-art models, a large model hub, and a strong community-driven approach.",
+      "summary": "Hugging Face is a leading platform for AI model deployment and collaboration, offering a wide range of pre-trained models and a strong focus on community and ease of use.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 4122,
@@ -509,12 +517,11 @@
       "title": "Weights & Biases - homepage",
       "relevance_score": 6,
       "keywords": [
-        "Machine learning",
-        "Deep learning",
-        "Weights & Biases",
-        "Weave: LLMOps"
+        "LLMOps",
+        "MLOps",
+        "Weights & Biases Platform"
       ],
-      "summary": "Weights & Biases is a leader in AI developer platforms, providing improved model deployment and management capabilities to customers",
+      "summary": "Weights & Biases is a leader in AI and ML operations, providing a high-quality platform and strong partnerships to enterprise customers",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 39974,
@@ -531,11 +538,11 @@
       "title": "Weights & Biases - pricing",
       "relevance_score": 6,
       "keywords": [
-        "Machine learning",
-        "Deep learning",
-        "Weights & Biases"
+        "Machine Learning",
+        "Deep Learning",
+        "Weights & Biases Platform"
       ],
-      "summary": "Weights & Biases is an AI infrastructure platform that provides a range of tools and features for machine learning model development, deployment, and management.",
+      "summary": "Weights & Biases is an AI infrastructure company providing a scalable platform for machine learning model development and deployment",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 35733,
@@ -550,13 +557,13 @@
       "company": "Weights & Biases",
       "type": "blog",
       "title": "Weights & Biases - blog",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
         "CoreWeave",
         "W&B Weave Online Evaluations",
         "W&B Inference"
       ],
-      "summary": "Weights & Biases is a leader in AI cloud software, offering products such as W&B Weave Online Evaluations and W&B Inference, with a strong partnership with CoreWeave.",
+      "summary": "W&B is a comprehensive AI model development and deployment platform that partners with CoreWeave to provide infrastructure for AI model development and deployment",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 28571,
@@ -574,13 +581,12 @@
       "relevance_score": 6,
       "keywords": [
         "AI",
-        "Machine Learning",
-        "LangGraph",
+        "Graph",
         "LangChain",
-        "LangSmith",
-        "LangGraph Platform"
+        "LangGraph",
+        "LangSmith"
       ],
-      "summary": "LangChain is a leader in AI-powered application development and reliable agent development, with a strong focus on scalability and ease of use.",
+      "summary": "LangChain is an AI infrastructure company providing specialized AI infrastructure for reliable agents",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 23565,
@@ -601,7 +607,7 @@
         "LangSmith",
         "LangGraph"
       ],
-      "summary": "LangChain is an AI infrastructure company that provides a unified observability and evals platform for AI app performance",
+      "summary": "LangChain is a leader in AI app development, focusing on AI app performance monitoring and AI graph building",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 16231,
@@ -623,7 +629,7 @@
         "LangGraph Platform",
         "LangSmith"
       ],
-      "summary": "LangChain is a leader in AI infrastructure for investment research and customer support, with a strong focus on agent deployment and stateful agent management",
+      "summary": "LangChain is a leader in AI infrastructure for agent deployment and management, with a strong focus on investment research and customer support",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 7809,
@@ -640,14 +646,13 @@
       "title": "LangChain - docs",
       "relevance_score": 6,
       "keywords": [
-        "LLMs",
-        "Graph Databases",
-        "Vector Stores",
+        "Python",
+        "Graph Database",
         "LangChain",
         "LangSmith",
         "LangGraph"
       ],
-      "summary": "LangChain is a platform for building and deploying AI applications, focusing on specialized AI infrastructure and ease of use",
+      "summary": "LangChain is a platform for building AI applications with improved model training and deployment capabilities",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 26486,
@@ -662,12 +667,12 @@
       "company": "Anyscale",
       "type": "homepage",
       "title": "Anyscale - homepage",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
-        "RayTurbo",
-        "Anyscale Platform"
+        "Ray",
+        "Anyscale"
       ],
-      "summary": "Anyscale is a leader in AI Infrastructure, providing enhanced AI capabilities through its RayTurbo technology and Any cloud, any accelerator, any stack integration.",
+      "summary": "Anyscale is an AI infrastructure company that provides a platform for businesses to build, deploy, and manage AI models at scale.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 24186,
@@ -685,10 +690,10 @@
       "relevance_score": 6,
       "keywords": [
         "Ray",
-        "RayTurbo",
-        "Anyscale AI Compute Platform"
+        "NVIDIA",
+        "Anyscale"
       ],
-      "summary": "Anyscale is a leader in AI infrastructure, providing scalable distributed programs and LLM pipelines to AI pioneers and industry experts.",
+      "summary": "Anyscale is a leader in the AI compute platform market, offering scalable AI workloads and faster iteration through its implementation of Ray and integration with NVIDIA",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 10682,
@@ -705,12 +710,11 @@
       "title": "Anyscale - blog",
       "relevance_score": 6,
       "keywords": [
-        "Kubernetes",
-        "PyTorch",
         "Ray",
-        "RayTurbo"
+        "Kubernetes",
+        "Anyscale Platform"
       ],
-      "summary": "Anyscale is a leader in AI infrastructure, providing scalable and high-performance AI solutions for developers and data scientists",
+      "summary": "Anyscale is a leading provider of AI infrastructure for scalable and real-time AI applications, with a strong focus on cloud integrations and enterprise adoption.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 8430,
@@ -731,7 +735,7 @@
         "Python",
         "Replicate API"
       ],
-      "summary": "Replicate is an AI Infrastructure company that provides an API for running and fine-tuning machine learning models",
+      "summary": "Replicate provides AI infrastructure for developers to run AI with an API",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 38817,
@@ -748,11 +752,11 @@
       "title": "Replicate - pricing",
       "relevance_score": 6,
       "keywords": [
-        "Machine learning",
-        "Deep learning",
+        "Machine Learning",
+        "Deep Learning",
         "Replicate"
       ],
-      "summary": "Replicate is an AI infrastructure platform that provides usage-based pricing and model integration for AI researchers, developers, and businesses",
+      "summary": "Replicate is an AI infrastructure platform that provides expanded AI capabilities and usage-based pricing to developers, researchers, and businesses.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 9932,
@@ -773,7 +777,7 @@
         "Google Veo 3",
         "Replicate"
       ],
-      "summary": "Replicate is an AI infrastructure platform that provides better performance and lower costs for AI model deployment",
+      "summary": "Replicate is an AI infrastructure company that provides high-performance computing and model deployment capabilities for AI researchers and developers",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 31158,
@@ -792,16 +796,16 @@
       "keywords": [
         "AI",
         "Cloud",
+        "Generative AI",
+        "Simulation",
         "GPU",
-        "BioNeMo",
-        "DGX Cloud",
-        "NeMo",
-        "Omniverse Cloud",
-        "Private Registry",
-        "NVIDIA NGC",
-        "DGX Platform"
+        "Containerization",
+        "Data center infrastructure",
+        "Autonomous machines",
+        "Medical devices",
+        "Graphics cards"
       ],
-      "summary": "NVIDIA is a leader in AI computing, with a strong focus on developing and deploying AI models, and a growing presence in the enterprise market.",
+      "summary": "NVIDIA is a leader in AI computing, with a strong portfolio of products and services that drive business growth",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 124808,
@@ -818,15 +822,12 @@
       "title": "NVIDIA - product",
       "relevance_score": 6,
       "keywords": [
-        "AI",
-        "Cloud computing",
+        "NVIDIA GPUs",
+        "CUDA",
         "DGX Cloud",
-        "DGX Platform",
-        "GeForce",
-        "Jetson",
-        "NeMo"
+        "NVIDIA NGC"
       ],
-      "summary": "NVIDIA is a leader in AI computing, providing scalable and on-demand computing resources for various applications",
+      "summary": "NVIDIA is a leader in AI computing hardware and software, with a strong focus on deep learning and GPU acceleration.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 108476,
@@ -841,14 +842,14 @@
       "company": "NVIDIA",
       "type": "blog",
       "title": "NVIDIA - blog",
-      "relevance_score": 6,
+      "relevance_score": 2,
       "keywords": [
-        "NVIDIA graphics cards",
-        "AI algorithms",
-        "GeForce NOW",
-        "NVIDIA AI Factory"
+        "AI",
+        "HPE",
+        "NVIDIA AI Factory",
+        "GeForce NOW"
       ],
-      "summary": "NVIDIA is a leader in AI computing and gaming, with a strong portfolio of products and technologies",
+      "summary": "NVIDIA is a leader in AI hardware, with a strong focus on industrial AI and cloud gaming.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 15077,
@@ -868,9 +869,10 @@
         "CUDA",
         "Nsight",
         "CUDA Toolkit",
-        "NVIDIA DGX Cloud"
+        "NVIDIA DGX Cloud",
+        "Omniverse"
       ],
-      "summary": "NVIDIA is a leader in AI and HPC, with a strong focus on GPU acceleration and cloud services.",
+      "summary": "NVIDIA is a leader in the AI and HPC markets, with a strong market position and wide adoption of its products.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 33058,
@@ -887,13 +889,13 @@
       "title": "AMD - homepage",
       "relevance_score": 6,
       "keywords": [
-        "AMD RDNA architecture",
-        "AMD Zen architecture",
+        "GPU architecture",
+        "CPU architecture",
         "Instinct Accelerators",
         "EPYC Servers",
-        "Radeon PRO"
+        "Ryzen PRO Laptops"
       ],
-      "summary": "AMD is a leader in data center and cloud computing solutions, with a strong focus on high-performance computing and AI acceleration",
+      "summary": "AMD is a leader in the data center and cloud markets, with a strong focus on high-performance computing, AI acceleration, and security.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 35965,
@@ -910,12 +912,13 @@
       "title": "AMD - news",
       "relevance_score": 6,
       "keywords": [
-        "AMD Architecture",
+        "x86-64 architecture",
+        "GPU architecture",
         "EPYC Servers",
         "Ryzen PRO Laptops",
         "Instinct Accelerators"
       ],
-      "summary": "AMD is a leader in the data center and AI markets, with a strong focus on high-performance processing and AI-optimized performance.",
+      "summary": "AMD is a leader in the data center and AI markets, with a strong portfolio of products and technologies.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 35936,
@@ -932,11 +935,13 @@
       "title": "Intel - homepage",
       "relevance_score": 6,
       "keywords": [
-        "Deep Learning",
+        "AI",
+        "Machine Learning",
         "Intel Core Ultra Processors",
+        "Intel Xeon Processors",
         "Intel Gaudi AI Accelerators"
       ],
-      "summary": "Intel is a leader in AI hardware, offering high-performance AI solutions and continuing to innovate and expand its product portfolio.",
+      "summary": "Intel is a leader in AI and machine learning, with a strong portfolio of products and technologies",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 30803,
@@ -951,16 +956,13 @@
       "company": "Intel",
       "type": "news",
       "title": "Intel - news",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
-        "Artificial Intelligence",
-        "Intel software ecosystem",
+        "AI software ecosystem",
         "Intel Core Ultra processors",
-        "HP EliteBook X",
-        "HP EliteBook Ultra",
-        "Lenovo ThinkBook Plus Gen 6"
+        "HP EliteBook X and EliteBook Ultra"
       ],
-      "summary": "Intel is a leader in AI-powered client computing, with a strong focus on innovation and collaboration with key partners.",
+      "summary": "Intel is a leader in AI hardware, with a strong focus on developing AI capabilities for Client Computing",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 30717,
@@ -977,10 +979,11 @@
       "title": "Cerebras - homepage",
       "relevance_score": 6,
       "keywords": [
-        "AI Algorithms",
+        "AI",
+        "Machine Learning",
         "Cerebras AI Hardware"
       ],
-      "summary": "Cerebras is a leader in AI hardware for high-performance computing, with strategic partnerships and continuous innovation in AI technology.",
+      "summary": "Cerebras is a leader in AI computing and high-performance computing, with a focus on developing AI-optimized hardware for high-performance computing.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 16238,
@@ -1000,7 +1003,7 @@
         "Wafer packaging solution",
         "CS-3 System"
       ],
-      "summary": "Cerebras is a leader in AI hardware, delivering unmatched speed and efficiency for large-scale AI workloads",
+      "summary": "Cerebras is a leader in AI hardware, providing high-performance and scalable solutions for large-scale AI workloads.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 4825,
@@ -1015,13 +1018,13 @@
       "company": "Cerebras",
       "type": "blog",
       "title": "Cerebras - blog",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
         "Qwen3-32B",
         "Llama 4",
         "Cerebras Inference"
       ],
-      "summary": "Cerebras is a leader in AI hardware, providing an AI inference platform with realtime reasoning and fast inference capabilities.",
+      "summary": "Cerebras is a leader in AI hardware, focusing on real-time reasoning and fast inference for enterprise AI applications.",
       "extracted_at": "2025-07-01 21:07:10",
       "entities": {},
       "content_length": 18675,
@@ -1036,12 +1039,14 @@
       "company": "ElevenLabs",
       "type": "pricing",
       "title": "ElevenLabs - pricing",
-      "relevance_score": 6,
+      "relevance_score": 4,
       "keywords": [
         "AI",
-        "Eleven v3"
+        "Machine Learning",
+        "Eleven v3",
+        "ElevenStudios"
       ],
-      "summary": "ElevenLabs is an advanced AI audio platform that provides high-quality audio capabilities to creators, businesses, and enterprises",
+      "summary": "ElevenLabs is a leading provider of AI voice and audio models, targeting creators, businesses, and enterprises with its advanced AI capabilities and customizable solutions",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 11279,
@@ -1056,15 +1061,15 @@
       "company": "ElevenLabs",
       "type": "blog",
       "title": "ElevenLabs - blog",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
         "AI",
-        "Conversational AI",
+        "Machine Learning",
         "Eleven v3",
         "11.ai",
-        "ElevenLabs app"
+        "ElevenLabs App"
       ],
-      "summary": "ElevenLabs is a leader in voice AI, developing and integrating AI voice tools and Conversational AI for enterprise and consumer markets.",
+      "summary": "ElevenLabs is a leader in conversational AI and text-to-speech, with a strong focus on innovation and partnerships.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 13395,
@@ -1085,7 +1090,7 @@
         "Machine Learning",
         "Descript"
       ],
-      "summary": "Descript is an AI-powered video editing and audio editing platform that enables users to create high-quality video and audio content",
+      "summary": "Descript is an AI-powered video editing and podcasting platform that targets marketing, sales, and sales enablement teams.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 32109,
@@ -1106,7 +1111,7 @@
         "Machine learning",
         "Descript"
       ],
-      "summary": "Descript is an AI-powered video and audio editing platform that uses machine learning to enhance editing features",
+      "summary": "Descript is a video editing platform that uses AI to make editing easier and more efficient",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 16944,
@@ -1127,7 +1132,7 @@
         "Machine Learning",
         "Descript"
       ],
-      "summary": "Descript is an AI-powered video and audio editing platform that utilizes AI to enhance video and audio editing features",
+      "summary": "Descript is an AI-powered video and audio editing platform that is revolutionizing the way content creators and marketing teams work",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 62914,
@@ -1145,11 +1150,11 @@
       "relevance_score": 6,
       "keywords": [
         "AI",
-        "Machine Learning",
+        "Machine learning",
         "Descript",
         "Underlord"
       ],
-      "summary": "Descript is an AI-powered video and audio editing platform that provides a range of features and capabilities for creators, teams, and enterprises",
+      "summary": "Descript is an AI-powered video and audio editing platform that provides user-friendly editing capabilities and integrates with ChatGPT for generating video content",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 37704,
@@ -1171,7 +1176,7 @@
         "AI Voice Generator",
         "Deepfake Detection"
       ],
-      "summary": "Resemble AI is a leader in AI voice/audio solutions, providing customizable AI voices and advanced deepfake detection to enterprise and education segments.",
+      "summary": "Resemble AI is a leader in AI voice generation and deepfake detection, offering customizable voices and real-time deepfake detection to Enterprise and Education customers.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 27006,
@@ -1189,11 +1194,11 @@
       "relevance_score": 6,
       "keywords": [
         "Generative AI",
-        "Machine Learning",
+        "Deep Learning",
         "AI Voice Generator",
         "Detect"
       ],
-      "summary": "Resemble AI is a leader in AI Voice/Audio and Deepfake Detection, offering high-quality audio and realtime deepfake detection solutions",
+      "summary": "Resemble AI is a leader in the AI Voice Generator market, offering more accurate and customizable voice cloning solutions.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 27576,
@@ -1211,11 +1216,11 @@
       "relevance_score": 6,
       "keywords": [
         "Generative AI",
-        "Deep Learning",
+        "Machine Learning",
         "AI Voice Generator",
         "Detect"
       ],
-      "summary": "Resemble AI is a leader in AI voice generation and deepfake detection, offering high-quality voice synthesis and real-time deepfake detection capabilities",
+      "summary": "Resemble AI is a leader in AI voice technology and deepfake detection, offering high-quality AI voices and realtime deepfake detection capabilities",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 33421,
@@ -1230,7 +1235,7 @@
       "company": "Murf AI",
       "type": "homepage",
       "title": "Murf AI - homepage",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
         "AI",
         "ML",
@@ -1238,7 +1243,7 @@
         "Murf API",
         "Murf Voices Installer"
       ],
-      "summary": "Murf AI is a versatile AI voice generator for creating realistic voiceovers",
+      "summary": "Murf AI is a leader in the AI voice generator market, offering realistic voice quality and easy integration",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 81433,
@@ -1258,7 +1263,7 @@
         "AI",
         "Murf AI"
       ],
-      "summary": "Murf AI is a growing text-to-speech platform with high-quality AI voices and easy integration with popular platforms.",
+      "summary": "Murf AI is a text-to-speech platform that provides high-quality voice generation and user-friendly interface for individuals, freelancers, and businesses.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 25697,
@@ -1275,13 +1280,13 @@
       "title": "Murf AI - blog",
       "relevance_score": 6,
       "keywords": [
-        "AI",
-        "ML",
+        "Machine Learning",
+        "Deep Learning",
         "AI Voice Generator",
         "Text to Speech",
         "Murf Text to Speech API"
       ],
-      "summary": "Murf AI is a provider of AI voice generation and text-to-speech solutions, with a strong focus on E-Learning and Advertisements.",
+      "summary": "Murf AI is an AI-powered text-to-speech solution provider that offers customizable accents and unlimited voices for various industries.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 9278,
@@ -1306,7 +1311,7 @@
         "Team",
         "Security"
       ],
-      "summary": "WellSaid Labs is a leader in AI voice generation, offering customizable AI voices for various industries",
+      "summary": "WellSaid Labs is a provider of AI voice solutions for various markets, with a strong focus on innovation and growth",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 23249,
@@ -1324,14 +1329,13 @@
       "relevance_score": 6,
       "keywords": [
         "AI",
-        "Machine Learning",
         "Studio",
         "API",
         "Voices",
         "Team",
         "Security"
       ],
-      "summary": "WellSaid Labs is a leading provider of AI-powered voice solutions for enterprises and developers.",
+      "summary": "WellSaid Labs is a leader in AI voice generation, providing high-quality voice generation capabilities to enterprise customers",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 26326,
@@ -1346,7 +1350,7 @@
       "company": "WellSaid Labs",
       "type": "blog",
       "title": "WellSaid Labs - blog",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
         "AI",
         "Machine Learning",
@@ -1356,7 +1360,7 @@
         "Team",
         "Security"
       ],
-      "summary": "WellSaid Labs is an AI-powered voice generation company that provides custom integrations for corporate training, marketing, advertising, and video production.",
+      "summary": "WellSaid Labs is a leader in AI voice generation and voiceover creation, with a strong focus on innovation and expansion into new markets.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 21594,
@@ -1371,13 +1375,13 @@
       "company": "Synthesia",
       "type": "homepage",
       "title": "Synthesia - homepage",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
         "AI",
         "Machine Learning",
-        "Synthesia"
+        "Synthesia Video AI"
       ],
-      "summary": "Synthesia is a video AI platform that uses AI and machine learning to generate high-quality videos",
+      "summary": "Synthesia is a leader in AI video generation and translation, utilizing AI and machine learning to provide fast and accurate video generation and translation services.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 38270,
@@ -1392,12 +1396,12 @@
       "company": "Synthesia",
       "type": "features",
       "title": "Synthesia - features",
-      "relevance_score": 6,
+      "relevance_score": 4,
       "keywords": [
         "AI",
         "Synthesia"
       ],
-      "summary": "Synthesia is an innovator in the video AI platform market, using advanced AI capabilities to generate AI-generated videos",
+      "summary": "Synthesia is a Video AI platform utilizing AI and ML for video, avatar, and voice generation, targeting industries like Learning & Development, Sales Enablement, Marketing, and Business Operations.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 39597,
@@ -1412,12 +1416,13 @@
       "company": "Synthesia",
       "type": "pricing",
       "title": "Synthesia - pricing",
-      "relevance_score": 6,
+      "relevance_score": 4,
       "keywords": [
         "AI",
+        "Machine Learning",
         "Synthesia"
       ],
-      "summary": "Synthesia is a video AI platform that uses AI to generate high-quality videos",
+      "summary": "Synthesia is an innovator in the video generation market, offering AI-generated videos and AI-powered video editing tools.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 105609,
@@ -1432,13 +1437,12 @@
       "company": "Synthesia",
       "type": "blog",
       "title": "Synthesia - blog",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
         "AI",
-        "Machine Learning",
         "Synthesia"
       ],
-      "summary": "Synthesia is a video AI platform that uses AI and Machine Learning to generate and edit videos",
+      "summary": "Synthesia is an innovative video creation platform that uses AI to create, edit, and localize videos",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 36209,
@@ -1453,20 +1457,14 @@
       "company": "HeyGen",
       "type": "homepage",
       "title": "HeyGen - homepage",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
         "AI",
+        "Machine Learning",
         "AI Studio",
-        "Video Avatars",
-        "Avatar IV",
-        "Photo Avatars",
-        "Generative Avatars",
-        "UGC Avatars",
-        "Avatar Looks",
-        "Video Translation",
-        "Localization"
+        "Video Avatars"
       ],
-      "summary": "HeyGen is a leader in AI video generation and AI-powered video avatars, with a strong focus on innovation and growth",
+      "summary": "HeyGen is a leader in AI video generation and avatar creation, utilizing machine learning models to provide high-quality video generation and realistic avatars.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 65036,
@@ -1481,12 +1479,12 @@
       "company": "HeyGen",
       "type": "features",
       "title": "HeyGen - features",
-      "relevance_score": 6,
+      "relevance_score": 4,
       "keywords": [
         "AI",
         "HeyGen Video AI"
       ],
-      "summary": "HeyGen is an innovator in the video AI space, leveraging AI and ML to offer unique video solutions.",
+      "summary": "HeyGen is an innovator in Video AI, providing automated video content creation solutions using deep learning technology.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 399,
@@ -1504,17 +1502,12 @@
       "relevance_score": 6,
       "keywords": [
         "AI",
-        "ML",
+        "Machine Learning",
         "AI Studio",
         "Video Avatars",
-        "Avatar IV",
-        "Photo Avatars",
-        "Generative Avatars",
-        "UGC Avatars",
-        "Avatar Looks",
-        "Video Translation"
+        "Avatar IV"
       ],
-      "summary": "HeyGen is a video AI platform that provides AI-powered video generation and avatar creation capabilities",
+      "summary": "HeyGen is a leader in AI-powered video creation and avatar generation, with a strong focus on marketing and learning & development.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 45705,
@@ -1532,12 +1525,17 @@
       "relevance_score": 6,
       "keywords": [
         "AI",
-        "Machine Learning",
+        "ML",
         "AI Studio",
         "Video Avatars",
-        "Avatar IV"
+        "Avatar IV",
+        "Photo Avatars",
+        "Generative Avatars",
+        "UGC Avatars",
+        "Avatar Looks",
+        "Video Translation"
       ],
-      "summary": "HeyGen is a leader in AI video generation and avatar creation, offering customizable solutions for various industries",
+      "summary": "HeyGen is a leader in AI-powered video generation and avatar creation, providing scalable and flexible solutions for agencies and e-learning platforms",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 39092,
@@ -1555,10 +1553,10 @@
       "relevance_score": 6,
       "keywords": [
         "AI",
-        "ML",
+        "Machine Learning",
         "Pikapocalypse"
       ],
-      "summary": "Pika is a video AI effects platform that offers unique and easy-to-use effects for social media and gaming applications.",
+      "summary": "Pika is a company that offers a video AI effects product called Pikapocalypse, which utilizes AI and machine learning for video editing and reality modification",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 1175,
@@ -1576,10 +1574,10 @@
       "relevance_score": 6,
       "keywords": [
         "AI",
-        "Machine Learning",
+        "Machine learning",
         "Pika"
       ],
-      "summary": "Pika is a video AI platform that uses AI and Machine Learning to power video creation and editing",
+      "summary": "Pika is a video AI platform that uses AI and machine learning to generate videos, targeting creatives and businesses.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 8202,
@@ -1594,13 +1592,13 @@
       "company": "Pika",
       "type": "blog",
       "title": "Pika - blog",
-      "relevance_score": 6,
+      "relevance_score": 4,
       "keywords": [
-        "Machine learning",
-        "Computer vision",
+        "AI",
+        "Machine Learning",
         "Pika Video AI"
       ],
-      "summary": "Pika is a leader in AI-powered video creation, using machine learning and computer vision to enable video creation and editing",
+      "summary": "Pika is an AI-powered video creation platform that has raised $80M in Series B funding to accelerate its progress in building the best video foundation model.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 2732,
@@ -1615,14 +1613,14 @@
       "company": "Runway",
       "type": "homepage",
       "title": "Runway - homepage",
-      "relevance_score": 6,
+      "relevance_score": 2,
       "keywords": [
         "AI",
         "Machine Learning",
         "Runway Gen-4",
         "Runway Studios"
       ],
-      "summary": "Runway is a leader in AI-powered entertainment and media production, with a focus on developing general-purpose multimodal simulators of the world",
+      "summary": "Runway is an AI research and technology company building foundational AI research models and tools for entertainment and film production",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 7077,
@@ -1637,13 +1635,13 @@
       "company": "Runway",
       "type": "pricing",
       "title": "Runway - pricing",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
-        "Gen-4",
-        "Gen-3 Alpha",
+        "Gen-4 Turbo",
+        "Gen-3 Alpha Turbo",
         "Runway"
       ],
-      "summary": "Runway is a leader in video AI and generative models, providing high-quality video and image generation and a user-friendly interface",
+      "summary": "Runway is a video AI platform that uses AI-powered video generation and customization options to target individuals, small teams, and large teams and organizations",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 5130,
@@ -1665,7 +1663,7 @@
         "Runway Gen-4",
         "Runway API for Gen-3 Alpha Turbo"
       ],
-      "summary": "Runway is a leader in AI video generation, using machine learning and computer vision to generate high-quality videos",
+      "summary": "Runway is a leader in AI video generation, with established partnerships and a strong technical stack.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 8633,
@@ -1680,11 +1678,10 @@
       "company": "Luma AI",
       "type": "homepage",
       "title": "Luma AI - homepage",
-      "relevance_score": 6,
+      "relevance_score": 4,
       "keywords": [
         "Ray2",
-        "Text-to-Video",
-        "Image-to-Video",
+        "AI",
         "Dream Machine",
         "Photon"
       ],
@@ -1703,13 +1700,13 @@
       "company": "Luma AI",
       "type": "product",
       "title": "Luma AI - product",
-      "relevance_score": 6,
+      "relevance_score": 2,
       "keywords": [
         "Image AI models",
         "Video AI models",
         "Luma Dream Machine"
       ],
-      "summary": "Luma AI is a video AI company that provides a platform for creative professionals and content creators to ideate, visualize, create videos, and share their dreams",
+      "summary": "Luma AI provides a platform for ideating, visualizing, creating videos, and sharing dreams using image and video AI models",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 33409,
@@ -1724,18 +1721,16 @@
       "company": "Luma AI",
       "type": "pricing",
       "title": "Luma AI - pricing",
-      "relevance_score": 3,
+      "relevance_score": 5,
       "keywords": [
         "AI",
         "Video Processing",
         "Dream Machine",
         "Genie",
         "App",
-        "Flythroughs",
-        "Web",
-        "API"
+        "Flythroughs"
       ],
-      "summary": "Luma AI is a company focusing on AI solutions for video creation and other applications, with a range of products and services integrating AI technology.",
+      "summary": "Luma AI is a company providing AI-powered video solutions, including video generation and natural language understanding capabilities.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 1652,
@@ -1750,13 +1745,13 @@
       "company": "Midjourney",
       "type": "docs",
       "title": "Midjourney - docs",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
-        "AI",
+        "Artificial Intelligence",
         "Machine Learning",
         "Midjourney"
       ],
-      "summary": "Midjourney is an AI-powered image generation platform targeting creative professionals and artists.",
+      "summary": "Midjourney is a user-friendly image generation platform that utilizes AI and machine learning to provide high-quality images and community features.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 1800,
@@ -1773,10 +1768,11 @@
       "title": "Midjourney - pricing",
       "relevance_score": 6,
       "keywords": [
+        "AI",
         "GPU",
         "Midjourney"
       ],
-      "summary": "Midjourney is a platform for generating high-quality images and videos using AI and GPU acceleration",
+      "summary": "Midjourney is a leader in AI-powered image generation, offering a range of subscription-based plans with varying levels of GPU time and features.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 17323,
@@ -1798,7 +1794,7 @@
         "DALL-E 3",
         "ChatGPT"
       ],
-      "summary": "DALL-E 3 is a leader in image generation and conversational AI, with a strong focus on safety and security.",
+      "summary": "DALL-E 3 is a leader in image generation and text understanding, with a strong focus on safety and security.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 11298,
@@ -1822,7 +1818,7 @@
         "Sora",
         "API Platform"
       ],
-      "summary": "OpenAI is a leader in AI-powered chatbots and video generation, with a strong focus on innovation and customer support.",
+      "summary": "OpenAI is a leader in Conversational AI, with advanced models and a strong user experience, and is well-positioned for growth and expansion into new markets.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 29517,
@@ -1837,13 +1833,13 @@
       "company": "Ideogram",
       "type": "homepage",
       "title": "Ideogram - homepage",
-      "relevance_score": 6,
+      "relevance_score": 2,
       "keywords": [
         "AI",
-        "Machine Learning",
+        "ML",
         "Ideogram"
       ],
-      "summary": "Ideogram is an image generation platform that uses AI and machine learning to generate images",
+      "summary": "Ideogram is an AI/ML-based image generation platform targeting creative professionals and general users.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 4437,
@@ -1858,13 +1854,13 @@
       "company": "Ideogram",
       "type": "pricing",
       "title": "Ideogram - pricing",
-      "relevance_score": 6,
+      "relevance_score": 2,
       "keywords": [
         "AI",
         "Machine Learning",
         "Ideogram"
       ],
-      "summary": "Ideogram is an AI-powered image generation platform that offers priority credits, slow credits, private generations, and unlimited canvas to creative professionals and businesses.",
+      "summary": "Ideogram is an AI-powered image generation platform offering priority credits, slow credits, and private generations for personal and business use.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 6529,
@@ -1882,9 +1878,9 @@
       "relevance_score": 6,
       "keywords": [
         "AI",
-        "Leonardo AI Image Generator"
+        "Leonardo AI"
       ],
-      "summary": "Leonardo AI is an AI-powered Image Generation platform that provides easy-to-use tools for marketing, graphic design, and other industries.",
+      "summary": "Leonardo AI is an AI-powered Image Generation Platform that uses Machine Learning to generate high-quality images and videos.",
       "extracted_at": "2025-07-01 21:07:09",
       "entities": {},
       "content_length": 76206,
@@ -1899,13 +1895,12 @@
       "company": "Amazon CodeWhisperer",
       "type": "pricing",
       "title": "Amazon CodeWhisperer - pricing",
-      "relevance_score": 6,
+      "relevance_score": 4,
       "keywords": [
-        "Machine learning",
-        "Natural language processing",
+        "Generative AI",
         "Amazon CodeWhisperer"
       ],
-      "summary": "Amazon CodeWhisperer is an AI-powered code assistant that integrates with AWS services and third-party tools to improve code quality and increase developer productivity.",
+      "summary": "Amazon CodeWhisperer is a leading AI coding assistant that integrates with AWS for enhanced software development experience.",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 21706,
@@ -1923,10 +1918,9 @@
       "relevance_score": 6,
       "keywords": [
         "Machine Learning",
-        "Natural Language Processing",
         "Amazon CodeWhisperer"
       ],
-      "summary": "Amazon CodeWhisperer is an AI-powered coding tool that integrates with AWS services to enhance developer productivity",
+      "summary": "Amazon CodeWhisperer is an AI-powered coding tool that provides intelligent code suggestions and completions, tightly integrated with AWS services.",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 159021,
@@ -1941,12 +1935,12 @@
       "company": "Amazon CodeWhisperer",
       "type": "docs",
       "title": "Amazon CodeWhisperer - docs",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
         "Machine Learning",
         "Amazon CodeWhisperer"
       ],
-      "summary": "Amazon CodeWhisperer is an AI-powered coding service that improves developer productivity with code recommendations",
+      "summary": "Amazon CodeWhisperer is an AI-powered coding assistant that generates code recommendations to improve developer productivity.",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 4376,
@@ -1969,7 +1963,7 @@
         "Code Search",
         "Amp"
       ],
-      "summary": "Sourcegraph is a leader in AI-powered software development, with a strong focus on integration with GitHub and GitLab, and a growing user base and revenue.",
+      "summary": "Sourcegraph is a leader in AI-powered coding assistance and code analysis, providing comprehensive code management and collaboration capabilities to software development teams and engineering teams.",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 13826,
@@ -1991,7 +1985,7 @@
         "Cody",
         "Code Search"
       ],
-      "summary": "Sourcegraph is a leader in AI-powered coding assistants, providing improved coding efficiency and enhanced code quality to enterprises.",
+      "summary": "Sourcegraph is an enterprise AI code assistant that provides deeper codebase context and more accurate predictions",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 18247,
@@ -2006,13 +2000,14 @@
       "company": "Sourcegraph",
       "type": "pricing",
       "title": "Sourcegraph - pricing",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
         "LLMs",
+        "code search algorithms",
         "Cody",
         "Code Search"
       ],
-      "summary": "Sourcegraph provides AI coding assistant and code search capabilities",
+      "summary": "Sourcegraph is an AI coding assistant and code search platform that helps developers increase productivity and improve code quality",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 21826,
@@ -2035,7 +2030,7 @@
         "Code Search",
         "Amp"
       ],
-      "summary": "Sourcegraph is a leader in code search and batch changes, with a strong focus on AI and machine learning",
+      "summary": "Sourcegraph is an AI-powered coding assistant that integrates with GitHub and GitLab",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 15655,
@@ -2052,11 +2047,11 @@
       "title": "Pieces - homepage",
       "relevance_score": 6,
       "keywords": [
-        "LLMs",
-        "On-device processing",
+        "Machine Learning",
+        "Natural Language Processing",
         "Pieces"
       ],
-      "summary": "Pieces is an AI coding assistant with a long-term memory agent, providing improved productivity and enhanced coding experience for developers",
+      "summary": "Pieces is an AI-powered coding assistant that enhances developer productivity and code quality through its long-term memory engine and on-device processing capabilities.",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 7748,
@@ -2071,13 +2066,13 @@
       "company": "Pieces",
       "type": "features",
       "title": "Pieces - features",
-      "relevance_score": 6,
+      "relevance_score": 4,
       "keywords": [
         "LLMs",
-        "On-device AI",
+        "AI",
         "Pieces"
       ],
-      "summary": "Pieces is an AI coding assistant that uses LLMs and on-device AI to provide context awareness and long-term memory for software development teams",
+      "summary": "Pieces is an AI-powered coding assistant that leverages LLMs for code generation and understanding, targeting software development teams with seamless IDE integration and advanced AI capabilities.",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 7206,
@@ -2094,11 +2089,10 @@
       "title": "Pieces - pricing",
       "relevance_score": 6,
       "keywords": [
-        "Long-Term Memory",
-        "LLMs (OpenAI, Anthropic, Ollama)",
+        "Long-Term Memory technology",
         "Pieces"
       ],
-      "summary": "Pieces is an AI coding assistant that leverages Long-Term Memory technology to enhance developer productivity.",
+      "summary": " Pieces is an AI-powered coding assistant that uses Long-Term Memory technology to help developers stay focused and productive",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 4100,
@@ -2115,11 +2109,11 @@
       "title": "Pieces - blog",
       "relevance_score": 6,
       "keywords": [
-        "LLMs",
-        "AI Agents",
+        "LLMs (Large Language Models)",
+        "Model Context Protocol (MCP)",
         "Pieces"
       ],
-      "summary": "Pieces is an innovative AI-powered coding tool for developers and teams, offering streamlined workflows, enhanced collaboration, and cost-effective solutions.",
+      "summary": "Pieces is an AI-powered coding tool for developers and teams, offering ease of use, cost-effectiveness, and improved code quality",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 6521,
@@ -2136,10 +2130,11 @@
       "title": "Perplexity AI - homepage",
       "relevance_score": 6,
       "keywords": [
-        "Natural Language Processing",
+        "AI",
+        "ML",
         "Perplexity AI Search"
       ],
-      "summary": "Perplexity AI is an AI-powered search engine for various domains, leveraging natural language processing and machine learning to improve search capabilities and user experience",
+      "summary": "Perplexity AI is an AI-powered search engine offering personalized search results and analysis capabilities.",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 573,
@@ -2154,13 +2149,13 @@
       "company": "Perplexity AI",
       "type": "product",
       "title": "Perplexity AI - product",
-      "relevance_score": 4,
+      "relevance_score": 6,
       "keywords": [
         "AI models",
         "Perplexity Pro",
         "Perplexity Free"
       ],
-      "summary": "Perplexity is a powerful AI search platform that offers both free and paid features, with a strong focus on innovation and growth",
+      "summary": "Perplexity is an AI-powered search platform that offers unlimited Pro Search, upgraded AI models, and more",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 931,
@@ -2178,12 +2173,12 @@
       "relevance_score": 6,
       "keywords": [
         "Deep Learning",
-        "Natural Language Processing",
-        "Perplexity AI",
+        "NLP",
+        "Perplexity AI Search",
         "Perplexity Enterprise Pro",
         "Perplexity Sonar"
       ],
-      "summary": "Perplexity AI is a leader in AI-powered search, with a strong focus on enterprise sales and partnerships",
+      "summary": "Perplexity AI is an AI-powered search engine providing accurate and relevant results",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 12537,
@@ -2205,7 +2200,7 @@
         "ARI",
         "Agents"
       ],
-      "summary": "You.com is an AI-powered research and productivity enhancement platform that provides more accurate results and faster response times",
+      "summary": "You.com is an AI-powered search and automation platform that provides customizable agents and deep research capabilities to enterprises and media companies.",
       "extracted_at": "2025-07-01 21:07:08",
       "entities": {},
       "content_length": 3879,
@@ -2216,5 +2211,5 @@
     }
   ],
   "totalUnfiltered": 100,
-  "generated_at": "2025-07-03T06:46:28.444Z"
+  "generated_at": "2025-07-03T12:57:19.871Z"
 }
