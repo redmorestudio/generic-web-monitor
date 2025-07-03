@@ -18,6 +18,7 @@ class IntelligentScraperThreeDB {
     this.runId = null;
     this.rawDb = null;
     this.intelligenceDb = null;
+    this.processedDb = null;
     this.startTime = null;
   }
 
@@ -34,6 +35,7 @@ class IntelligentScraperThreeDB {
     // Get database connections
     this.rawDb = dbManager.getRawDb();
     this.intelligenceDb = dbManager.getIntelligenceDb();
+    this.processedDb = dbManager.getProcessedDb();
     
     // Launch Puppeteer with optimized settings
     this.browser = await puppeteer.launch({
@@ -265,6 +267,39 @@ class IntelligentScraperThreeDB {
       
       if (hasChanged) {
         console.log(`      ✨ Change detected!`);
+        
+        // Get the ID of the row we just inserted
+        const newContentId = this.rawDb.prepare('SELECT last_insert_rowid() as id').get().id;
+        
+        // Get the previous content ID if it exists
+        const oldContentId = latest ? this.rawDb.prepare(`
+          SELECT id FROM raw_html 
+          WHERE url_id = ? AND content_hash = ?
+          ORDER BY scraped_at DESC
+          LIMIT 1
+        `).get(urlConfig.id, latest.content_hash)?.id : null;
+        
+        // Insert change detection record
+        const changeStmt = this.processedDb.prepare(`
+          INSERT INTO change_detection (
+            url_id, 
+            change_type, 
+            summary, 
+            old_content_id, 
+            new_content_id,
+            relevance_score,
+            detected_at
+          ) VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+        `);
+        
+        changeStmt.run(
+          urlConfig.id,
+          'content_update',
+          `Content changed for ${companyName} - ${urlConfig.url}`,
+          oldContentId,
+          newContentId,
+          5 // Default relevance score, will be updated by AI analysis
+        );
       }
       
       await page.close();
