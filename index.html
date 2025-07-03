@@ -310,11 +310,13 @@
             border-radius: 12px;
             padding: 20px;
             transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .company-card:hover {
             border-color: var(--primary-color);
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
         }
 
         .company-card h3 {
@@ -364,6 +366,96 @@
             max-width: 800px;
             max-height: 80vh;
             overflow-y: auto;
+        }
+
+        /* Company Detail Modal Styles */
+        .company-detail-modal {
+            background-color: #1a1a1a;
+            margin: 3% auto;
+            padding: 30px;
+            border: 1px solid #444;
+            width: 90%;
+            max-width: 1400px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 8px;
+            color: #e0e0e0;
+        }
+
+        .company-detail-section {
+            margin-bottom: 30px;
+            background: #2a2a2a;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #3a3a3a;
+        }
+
+        .company-detail-section h3 {
+            color: #4CAF50;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+
+        .entity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .entity-card {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #444;
+        }
+
+        .entity-card h4 {
+            color: #76ff03;
+            margin-bottom: 10px;
+        }
+
+        .threat-level {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .threat-high { 
+            background: #e74c3c; 
+            color: white;
+        }
+        .threat-medium { 
+            background: #f39c12; 
+            color: black;
+        }
+        .threat-low { 
+            background: #3498db; 
+            color: white;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #76ff03;
+        }
+
+        .relationship-item {
+            background: #1a1a1a;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 4px;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .empty-state {
+            color: #666;
+            font-style: italic;
+            padding: 20px;
+            text-align: center;
         }
 
         .modal-header {
@@ -468,8 +560,6 @@
             background: rgba(255, 68, 68, 0.2);
             color: var(--error-color);
         }
-
-
 
         @media (max-width: 768px) {
             .tabs {
@@ -636,8 +726,6 @@
                     <div class="loading">TheBrain integration ready...</div>
                 </div>
             </div>
-
-
         </div>
 
         <!-- Error Display -->
@@ -657,6 +745,16 @@
         </div>
     </div>
 
+    <!-- Company Detail Modal -->
+    <div id="companyDetailModal" class="modal">
+        <div class="modal-content company-detail-modal">
+            <span class="close">&times;</span>
+            <div id="companyDetailContent">
+                <!-- Dynamic content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
     <script>
         // GitHub Actions Static Data Configuration
         const CONFIG = {
@@ -665,7 +763,6 @@
             version: '1.0.0',
             backend: 'github-actions-static',
             thebrain: {
-                // API key is stored in GitHub secrets, not exposed in frontend
                 brainId: '134f1325-4a8d-46d7-a078-5386c8ab3542'
             }
         };
@@ -676,6 +773,7 @@
         let systemStatus = {};
         let extractedDataCache = [];
         let changesCache = [];
+        let companyDetailsData = {};
 
         // Static Data API - reads JSON files instead of making API calls
         async function loadStaticData(filename) {
@@ -707,6 +805,139 @@
             }
         }
 
+        // Load company details data
+        async function loadCompanyDetails() {
+            try {
+                const response = await fetch(`${CONFIG.dataUrl}/company-details.json`);
+                const data = await response.json();
+                companyDetailsData = data.companies || {};
+                console.log('Company details loaded:', Object.keys(companyDetailsData).length);
+            } catch (error) {
+                console.error('Error loading company details:', error);
+            }
+        }
+
+        // Make company boxes clickable
+        function makeCompaniesClickable() {
+            setTimeout(() => {
+                document.querySelectorAll('.company-card').forEach(box => {
+                    box.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const companyName = box.querySelector('h3')?.textContent || 
+                                          box.textContent.trim();
+                        showCompanyDetail(companyName);
+                    });
+                });
+            }, 1000);
+        }
+
+        // Find company ID by name
+        function findCompanyIdByName(companyName) {
+            for (const [id, details] of Object.entries(companyDetailsData)) {
+                if (details.company_name === companyName) {
+                    return id;
+                }
+            }
+            return null;
+        }
+
+        // Get threat level class
+        function getThreatLevel(score) {
+            if (score >= 8) return 'high';
+            if (score >= 6) return 'medium';
+            return 'low';
+        }
+
+        // Show company detail modal
+        function showCompanyDetail(companyName) {
+            const companyId = findCompanyIdByName(companyName);
+            if (!companyId || !companyDetailsData[companyId]) {
+                alert('No detailed data available for ' + companyName);
+                return;
+            }
+            
+            const details = companyDetailsData[companyId];
+            const modal = document.getElementById('companyDetailModal');
+            const content = document.getElementById('companyDetailContent');
+            
+            // Build the detailed view HTML
+            content.innerHTML = `
+                <h2>${details.company_name} - Competitive Intelligence Report</h2>
+                <p style="color: #888;">Category: ${details.company_category || 'Unknown'} | 
+                   URLs Analyzed: ${details.urls_analyzed || 0} | 
+                   Last Updated: ${details.last_analyzed ? new Date(details.last_analyzed).toLocaleDateString() : 'Never'}</p>
+                
+                <!-- Executive Summary -->
+                <div class="company-detail-section">
+                    <h3>Executive Summary</h3>
+                    <p class="threat-level threat-${getThreatLevel(details.relevance_score)}">
+                        Threat Level: ${details.relevance_score}/10
+                    </p>
+                    <p><strong>${details.summary?.one_line || 'No executive summary available'}</strong></p>
+                    ${details.summary?.key_insights && details.summary.key_insights.length > 0 ? `
+                        <h4>Key Insights:</h4>
+                        <ul>
+                            ${details.summary.key_insights.map(insight => `<li>${insight}</li>`).join('')}
+                        </ul>
+                    ` : ''}
+                    ${details.summary?.notable_facts && details.summary.notable_facts.length > 0 ? `
+                        <h4>Notable Facts:</h4>
+                        <ul>
+                            ${details.summary.notable_facts.map(fact => `<li>${fact}</li>`).join('')}
+                        </ul>
+                    ` : ''}
+                </div>
+                
+                <!-- Products & AI Capabilities -->
+                ${details.products && details.products.length > 0 ? `
+                <div class="company-detail-section">
+                    <h3>Products & Services (${details.products.length})</h3>
+                    <div class="entity-grid">
+                        ${details.products.map(product => `
+                            <div class="entity-card">
+                                <h4>${product.name}</h4>
+                                <p>${product.description || 'No description available'}</p>
+                                <small><strong>Status:</strong> ${product.status || 'active'}</small>
+                                ${product.features && product.features.length > 0 ? 
+                                    `<p><strong>Features:</strong> ${product.features.join(', ')}</p>` : ''}
+                                ${product.ai_capabilities && product.ai_capabilities.length > 0 ? 
+                                    `<p><strong>AI Features:</strong> ${product.ai_capabilities.join(', ')}</p>` : ''}
+                                ${product.uses_technologies && product.uses_technologies.length > 0 ? 
+                                    `<p><strong>Uses:</strong> ${product.uses_technologies.join(', ')}</p>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+                
+                <!-- AI/ML Technologies -->
+                ${details.ai_ml_concepts && details.ai_ml_concepts.length > 0 ? `
+                <div class="company-detail-section">
+                    <h3>AI/ML Technologies (${details.ai_ml_concepts.length})</h3>
+                    <div class="entity-grid">
+                        ${details.ai_ml_concepts.map(concept => `
+                            <div class="entity-card">
+                                <h4>${concept.concept}</h4>
+                                <p><strong>Type:</strong> ${concept.type || 'Unknown'}</p>
+                                <p>${concept.description || 'No description available'}</p>
+                                ${concept.applications && concept.applications.length > 0 ? 
+                                    `<p><strong>Applications:</strong> ${concept.applications.join(', ')}</p>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                ` : ''}
+                
+                <!-- Empty State Messages -->
+                ${(!details.products || details.products.length === 0) && 
+                  (!details.technologies || details.technologies.length === 0) &&
+                  (!details.integrations || details.integrations.length === 0) ? 
+                  '<div class="empty-state">No detailed entity data available yet. Run the AI analyzer to populate this information.</div>' : ''}
+            `;
+            
+            modal.style.display = 'block';
+        }
+
         // Initialize the application
         function init() {
             console.log('🚀 AI Competitive Monitor - GitHub Actions Powered');
@@ -715,11 +946,30 @@
             // Load initial status
             refreshStatus();
             
+            // Load company details when page loads
+            loadCompanyDetails().then(() => {
+                makeCompaniesClickable();
+            });
+            
             // Set up modal close handlers
             window.onclick = function(event) {
                 const modal = document.getElementById('detailModal');
+                const companyModal = document.getElementById('companyDetailModal');
                 if (event.target == modal) {
                     closeModal();
+                }
+                if (event.target == companyModal) {
+                    companyModal.style.display = 'none';
+                }
+            }
+
+            // Close modal functionality for company detail modal
+            const companyModal = document.getElementById('companyDetailModal');
+            const span = companyModal.getElementsByClassName('close')[0];
+
+            if (span) {
+                span.onclick = function() {
+                    companyModal.style.display = 'none';
                 }
             }
         }
@@ -810,7 +1060,6 @@
             
             let html = '<h3>📊 Monitored Companies</h3><div class="companies-grid">';
             companies.forEach(company => {
-                // Use 'company' field for name and 'type' field for category
                 const companyName = company.company || company.name || 'Unknown Company';
                 const companyType = company.type || company.category || 'competitor';
                 const urls = company.urls || [];
@@ -851,6 +1100,7 @@
             html += '</div>';
             
             companiesDisplay.innerHTML = html;
+            makeCompaniesClickable();
         }
 
         function updateCompanyFilter() {
@@ -859,7 +1109,6 @@
             
             companies.forEach(company => {
                 const option = document.createElement('option');
-                // Use 'company' field for name
                 const companyName = company.company || company.name || 'Unknown Company';
                 option.value = companyName;
                 option.textContent = companyName;
@@ -874,7 +1123,6 @@
                 event.stopPropagation();
             }
             
-            // Update tab buttons
             document.querySelectorAll('.tab').forEach(tab => {
                 tab.classList.remove('active');
             });
@@ -882,7 +1130,6 @@
                 event.target.classList.add('active');
             }
             
-            // Update tab content
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.remove('active');
             });
@@ -890,8 +1137,6 @@
             
             currentTab = tabName;
         }
-
-        // GitHub Actions Integration
 
         async function checkWorkflowStatus(event) {
             if (event) {
@@ -901,8 +1146,6 @@
             
             window.open(`${CONFIG.repoUrl}/actions`, '_blank');
         }
-
-
 
         // Data Loading Functions
         async function loadExtractedData(event) {
@@ -925,7 +1168,6 @@
                 return;
             }
             
-            // Apply filters
             let filteredData = extractedData.items || [];
             const companyFilter = document.getElementById('companyFilter').value;
             const typeFilter = document.getElementById('typeFilter').value;
@@ -1098,7 +1340,6 @@
             const contentDiv = document.getElementById('systemLogsContent');
             contentDiv.innerHTML = '<div class="loading">Loading system logs...</div>';
             
-            // For GitHub Actions, we'll show workflow run information
             contentDiv.innerHTML = `
                 <div class="config-section">
                     <h4>📊 GitHub Actions Workflow Status</h4>
@@ -1147,10 +1388,8 @@
             
             statusSpan.innerHTML = '⏳ Testing connection...';
             
-            // Simulate connection test
             setTimeout(() => {
-                // In real implementation, this would check the actual API
-                const connected = Math.random() > 0.3; // 70% success rate for demo
+                const connected = Math.random() > 0.3;
                 
                 if (connected) {
                     statusSpan.innerHTML = '<span style="color: var(--accent-color);">✅ Connected</span>';
@@ -1170,7 +1409,6 @@
                 event.stopPropagation();
             }
             
-            // Open the sync workflow page directly in GitHub Actions
             window.open(`${CONFIG.repoUrl}/actions/workflows/sync.yml`, '_blank');
             showSuccess('Opening TheBrain sync workflow in GitHub Actions. Click "Run workflow" to sync.');
         }
