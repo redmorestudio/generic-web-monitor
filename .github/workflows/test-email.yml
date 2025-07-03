@@ -40,6 +40,31 @@ jobs:
           cd github-actions-backend
           npm install --omit=dev
       
+      - name: Debug nodemailer
+        run: |
+          cd github-actions-backend
+          echo "🔍 Debugging nodemailer installation..."
+          echo ""
+          
+          # Check if nodemailer is in node_modules
+          if [ -d "node_modules/nodemailer" ]; then
+            echo "✅ nodemailer directory exists"
+          else
+            echo "❌ nodemailer directory NOT found!"
+          fi
+          
+          # List package.json to verify it's there
+          echo ""
+          echo "📦 Dependencies in package.json:"
+          grep nodemailer package.json || echo "nodemailer not in package.json!"
+          
+          # Test nodemailer import
+          echo ""
+          echo "🧪 Testing nodemailer import:"
+          node test-nodemailer.js || true
+          
+          echo ""
+      
       - name: Test Email Configuration
         run: |
           cd github-actions-backend
