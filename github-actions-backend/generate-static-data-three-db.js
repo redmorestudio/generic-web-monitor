@@ -31,10 +31,106 @@ function deduplicateByName(arr) {
     });
 }
 
+// Helper function to get top entities for a company
+function getTopEntities(intelligenceDb, companyId, entityType, limit = 3) {
+    try {
+        // Get latest analysis for company
+        const analyses = intelligenceDb.prepare(`
+            SELECT ba.entities
+            FROM baseline_analysis ba
+            JOIN urls u ON ba.url_id = u.id
+            WHERE u.company_id = ?
+            ORDER BY ba.created_at DESC
+            LIMIT 5
+        `).all(companyId);
+        
+        const allEntities = [];
+        for (const analysis of analyses) {
+            try {
+                const entities = JSON.parse(analysis.entities || '{}');
+                if (entities[entityType]) {
+                    allEntities.push(...entities[entityType]);
+                }
+            } catch (e) {
+                // Skip parse errors
+            }
+        }
+        
+        // Deduplicate and return top N
+        const unique = deduplicateByName(allEntities);
+        return unique.slice(0, limit).map(e => e.name || e.concept || e.partner_name || 'Unknown');
+    } catch (error) {
+        return [];
+    }
+}
+
+// Helper function to get latest change for a company
+function getLatestChange(processedDb, intelligenceDb, companyId) {
+    try {
+        // Attach intelligence database
+        const intelligenceDbPath = path.join(DATA_DIR, 'intelligence.db');
+        processedDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
+        
+        const change = processedDb.prepare(`
+            SELECT 
+                cd.detected_at,
+                cd.summary,
+                cd.relevance_score
+            FROM change_detection cd
+            JOIN intelligence.urls u ON cd.url_id = u.id
+            WHERE u.company_id = ?
+            ORDER BY cd.detected_at DESC
+            LIMIT 1
+        `).get(companyId);
+        
+        processedDb.exec('DETACH DATABASE intelligence');
+        
+        if (change) {
+            return {
+                summary: change.summary,
+                time_ago: getRelativeTime(change.detected_at),
+                relevance_score: change.relevance_score
+            };
+        }
+        return null;
+    } catch (error) {
+        return null;
+    }
+}
+
+// Helper function to get max threat level
+function getMaxThreatLevel(intelligenceDb, companyId) {
+    try {
+        const result = intelligenceDb.prepare(`
+            SELECT MAX(ba.relevance_score) as max_score
+            FROM baseline_analysis ba
+            JOIN urls u ON ba.url_id = u.id
+            WHERE u.company_id = ?
+        `).get(companyId);
+        
+        return result?.max_score || 0;
+    } catch (error) {
+        return 0;
+    }
+}
+
+// Helper function to format relative time
+function getRelativeTime(dateString) {
+    const date = new Date(dateString);
+    const now = new Date();
+    const seconds = Math.floor((now - date) / 1000);
+    
+    if (seconds < 60) return 'just now';
+    if (seconds < 3600) return Math.floor(seconds / 60) + ' min ago';
+    if (seconds < 86400) return Math.floor(seconds / 3600) + ' hours ago';
+    if (seconds < 604800) return Math.floor(seconds / 86400) + ' days ago';
+    return date.toLocaleDateString();
+}
+
 /**
  * Generate dashboard data
  */
-function generateDashboardData(intelligenceDb) {
+function generateDashboardData(intelligenceDb, processedDb) {
     try {
         console.log('📊 Generating dashboard data...');
         
@@ -64,15 +160,38 @@ function generateDashboardData(intelligenceDb) {
         // Get URLs for each company
         const urlsStmt = intelligenceDb.prepare('SELECT url FROM urls WHERE company_id = ?');
         
-        // Process company data
+        // Process company data with enhanced intelligence
         const processedCompanies = companyActivity.map(company => {
             const urls = urlsStmt.all(company.id).map(row => row.url);
+            
+            // Get top entities
+            const topProducts = getTopEntities(intelligenceDb, company.id, 'products', 3);
+            const topTechnologies = getTopEntities(intelligenceDb, company.id, 'technologies', 3);
+            const topAiConcepts = getTopEntities(intelligenceDb, company.id, 'ai_ml_concepts', 3);
+            const topPartners = getTopEntities(intelligenceDb, company.id, 'partnerships', 2);
+            
+            // Get latest change
+            const latestChange = getLatestChange(processedDb, intelligenceDb, company.id);
+            
+            // Get threat level
+            const threatLevel = getMaxThreatLevel(intelligenceDb, company.id);
+            
             return {
                 company: company.company,
                 type: company.category || 'competitor',
                 url_count: company.url_count || 0,
                 last_check: company.last_check,
-                urls: urls
+                urls: urls,
+                // Enhanced intelligence data
+                intelligence: {
+                    products: topProducts,
+                    technologies: topTechnologies,
+                    ai_ml_concepts: topAiConcepts,
+                    partners: topPartners,
+                    threat_level: threatLevel,
+                    threat_category: threatLevel >= 8 ? 'high' : threatLevel >= 5 ? 'medium' : 'low'
+                },
+                latest_change: latestChange
             };
         });
         
@@ -448,9 +567,13 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                     cd.detected_at as created_at,
                     cd.change_type,
                     cd.summary,
+                    cd.relevance_score,
                     intelligence.urls.url,
+                    intelligence.urls.url_type,
                     intelligence.companies.name as company,
-                    cd.new_content_id
+                    intelligence.companies.category as company_category,
+                    cd.new_content_id,
+                    cd.old_content_id
                 FROM change_detection cd
                 JOIN intelligence.urls ON cd.url_id = intelligence.urls.id
                 JOIN intelligence.companies ON intelligence.urls.company_id = intelligence.companies.id
@@ -460,22 +583,19 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
             `).all();
             
             // Get AI analysis for changes
-            const analysisStmt = intelligenceDb.prepare(`
-                SELECT relevance_score, summary, competitive_data, extracted_text
-                FROM enhanced_analysis
-                WHERE change_id = ?
-            `);
+            // Note: enhanced_analysis table doesn't exist yet, so we'll skip this for now
+            const analysisStmt = null;
             
             const processedChanges = recentChanges.map(change => {
-                const analysis = analysisStmt.get(change.id);
+                const analysis = analysisStmt ? analysisStmt.get(change.id) : null;
                 
                 let threats = [];
                 let opportunities = [];
-                let relevanceScore = 0;
-                let aiSummary = change.summary || 'No AI analysis available';
+                let aiSummary = change.summary || 'Content change detected';
+                let aiProcessed = false;
                 
                 if (analysis) {
-                    relevanceScore = analysis.relevance_score || 0;
+                    aiProcessed = true;
                     aiSummary = analysis.summary || aiSummary;
                     
                     try {
@@ -487,19 +607,39 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                     }
                 }
                 
+                // Build a more descriptive summary if AI hasn't analyzed it yet
+                if (!aiProcessed) {
+                    aiSummary = `${change.change_type === 'content_update' ? 'Content updated' : 'Change detected'} on ${change.company}'s ${change.url_type || 'page'}`;
+                }
+                
+                // Determine change emoji based on relevance score
+                let emoji = '📊';
+                if (change.relevance_score >= 8) emoji = '🚨';
+                else if (change.relevance_score >= 6) emoji = '⚡';
+                else if (change.relevance_score >= 4) emoji = '🔔';
+                
                 return {
                     id: change.id,
                     url: change.url,
                     company: change.company,
+                    company_category: change.company_category || 'competitor',
+                    url_type: change.url_type || 'general',
                     change_percentage: 0, // Not tracked in new schema
-                    relevance_score: relevanceScore,
+                    relevance_score: change.relevance_score || 5,
                     summary: aiSummary,
                     category: change.change_type || 'content_change',
                     keywords_found: '[]',
                     created_at: change.created_at,
-                    ai_processed: !!analysis,
+                    time_ago: getRelativeTime(change.created_at),
+                    emoji: emoji,
+                    impact_level: change.relevance_score >= 8 ? 'high' : change.relevance_score >= 5 ? 'medium' : 'low',
+                    ai_processed: aiProcessed,
                     threats: threats,
-                    opportunities: opportunities
+                    opportunities: opportunities,
+                    content_ids: {
+                        old: change.old_content_id,
+                        new: change.new_content_id
+                    }
                 };
             });
             
@@ -600,7 +740,7 @@ function generateAllStaticData() {
         
         // Generate each data file
         const files = [
-            { name: 'dashboard.json', generator: () => generateDashboardData(intelligenceDb) },
+            { name: 'dashboard.json', generator: () => generateDashboardData(intelligenceDb, processedDb) },
             { name: 'companies.json', generator: () => generateCompaniesData(intelligenceDb) },
             { name: 'extracted-data.json', generator: () => generateContentSnapshotsData(processedDb, intelligenceDb) },
             { name: 'changes.json', generator: () => generateRecentChangesData(processedDb, intelligenceDb) },
