@@ -82,25 +82,8 @@ jobs:
           # Send test email based on type
           case "${{ inputs.email_type }}" in
             "test")
-              echo "📨 Sending test company alert email..."
-              node -e "
-                const EmailService = require('./email-notifications-enhanced.js');
-                const service = new EmailService();
-                const testCompany = {
-                  name: 'Test Company - AI Monitor',
-                  type: 'Test'
-                };
-                const testUrls = [
-                  { url: 'https://example.com', type: 'homepage' },
-                  { url: 'https://example.com/blog', type: 'blog' }
-                ];
-                service.sendNewCompanyAlert(testCompany, testUrls)
-                  .then(() => console.log('✅ Test email sent successfully!'))
-                  .catch(err => {
-                    console.error('❌ Failed to send test email:', err);
-                    process.exit(1);
-                  });
-              "
+              echo "📨 Sending test email..."
+              node email-notifications-enhanced.js test || exit 1
               ;;
             
             "daily")
@@ -119,8 +102,14 @@ jobs:
               ;;
           esac
           
-          echo ""
-          echo "✅ Email test completed! Check your inbox."
+          if [ $? -eq 0 ]; then
+            echo ""
+            echo "✅ Email test completed! Check your inbox."
+          else
+            echo ""
+            echo "❌ Email test failed! Check the error messages above."
+            exit 1
+          fi
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
           SMTP_PORT: ${{ secrets.SMTP_PORT }}
