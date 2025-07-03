@@ -1,9 +1,19 @@
-name: AI Competitive Intelligence Monitor
+# DEPRECATED: This monolithic workflow is replaced by the modular 3DB architecture.
+# Use the "Full Monitor Pipeline" workflow instead, which runs:
+# 1. Scrape Websites
+# 2. Process Content
+# 3. Analyze Content
+# 4. Sync & Deploy
+#
+# DO NOT USE THIS WORKFLOW - it doesn't follow the 3-database architecture
+# and will cause issues like detecting changes for everything.
+
+name: AI Competitive Intelligence Monitor [DEPRECATED]
 
 on:
-  # Run every 6 hours
-  schedule:
-    - cron: '0 */6 * * *'
+  # DISABLED - Do not run on schedule
+  # schedule:
+  #   - cron: '0 */6 * * *'
   
   # Allow manual trigger
   workflow_dispatch:
