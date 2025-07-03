@@ -7,7 +7,7 @@ try {
   console.log('Available methods:', Object.keys(nodemailer));
   
   // Try to create a transporter
-  const transporter = nodemailer.createTransporter({
+  const transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 587,
     secure: false,
