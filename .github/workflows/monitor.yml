@@ -222,7 +222,9 @@ jobs:
       - name: Install dependencies for email
         run: |
           cd github-actions-backend
-          npm install nodemailer better-sqlite3 dotenv
+          # FIXED: Do a full npm install to ensure all dependencies are available
+          # The email script needs the full environment, not just the email packages
+          npm install --omit=dev
       
       - name: Check for high-priority changes
         id: check-changes
