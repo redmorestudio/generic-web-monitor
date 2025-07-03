@@ -342,6 +342,7 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
                 let relevanceScore = 0;
                 let aiProcessed = false;
                 let category = 'uncategorized';
+                let extractedEntities = {};
                 
                 if (analysis) {
                     relevanceScore = analysis.relevance_score || 0;
@@ -352,16 +353,31 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
                         category = semanticCategories.primary || 'uncategorized';
                         
                         const entities = JSON.parse(analysis.entities || '{}');
-                        // Extract keywords from entities
-                        if (entities.technologies) {
-                            keywords = keywords.concat(entities.technologies.map(t => t.name));
-                        }
+                        extractedEntities = entities;
+                        
+                        // Create rich keywords from all entity types
+                        const keywordSources = [];
+                        
                         if (entities.products) {
-                            keywords = keywords.concat(entities.products.map(p => p.name));
+                            keywordSources.push(...entities.products.map(p => p.name));
                         }
-                        keywords = [...new Set(keywords)].slice(0, 10); // Unique keywords, max 10
+                        if (entities.technologies) {
+                            keywordSources.push(...entities.technologies.map(t => t.name));
+                        }
+                        if (entities.ai_ml_concepts) {
+                            keywordSources.push(...entities.ai_ml_concepts.map(c => c.concept));
+                        }
+                        if (entities.partnerships) {
+                            keywordSources.push(...entities.partnerships.map(p => p.partner_name));
+                        }
+                        if (entities.integrations) {
+                            keywordSources.push(...entities.integrations.map(i => i.integration_name));
+                        }
+                        
+                        // Get unique keywords, prioritize AI/ML concepts
+                        keywords = [...new Set(keywordSources)].slice(0, 15); // More keywords
                     } catch (e) {
-                        // Ignore parsing errors
+                        console.error('Error parsing entities:', e);
                     }
                 }
                 
@@ -375,13 +391,21 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
                     keywords: keywords,  // Array, not JSON string
                     summary: analysis?.summary || 'No summary available',
                     extracted_at: snapshot.created_at,
-                    entities: {},  // Empty object for now
+                    entities: extractedEntities,  // Full entity data
                     content_length: snapshot.markdown_text ? snapshot.markdown_text.length : 0,
                     extractedContent: snapshot.markdown_text ? 
                         snapshot.markdown_text.substring(0, 500) + '...' : 'No content',
                     aiProcessed: aiProcessed,
                     category: category,
-                    source: 'GitHub Actions Monitor'
+                    source: 'GitHub Actions Monitor',
+                    // Add entity counts for quick reference
+                    entity_counts: {
+                        products: extractedEntities.products?.length || 0,
+                        technologies: extractedEntities.technologies?.length || 0,
+                        ai_ml_concepts: extractedEntities.ai_ml_concepts?.length || 0,
+                        partnerships: extractedEntities.partnerships?.length || 0,
+                        integrations: extractedEntities.integrations?.length || 0
+                    }
                 };
             });
             

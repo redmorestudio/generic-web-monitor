@@ -639,6 +639,16 @@
             <div id="dashboardTab" class="tab-content active">
                 <h2>🎯 AI Intelligence Dashboard</h2>
                 
+                <!-- Changes Summary Section -->
+                <div id="changesSummary" style="margin-bottom: 30px;">
+                    <h3>🔄 Recent Changes Summary</h3>
+                    <div class="config-section">
+                        <div id="changesSummaryContent">
+                            <div class="loading">Loading changes summary...</div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div id="companiesDisplay">
                     <h3>📊 Monitored Companies</h3>
                     <div class="loading">Loading company data from GitHub Actions...</div>
@@ -831,10 +841,25 @@
             }, 1000);
         }
 
-        // Find company ID by name
+        // Find company ID by name (case-insensitive)
         function findCompanyIdByName(companyName) {
+            // First try exact match
             for (const [id, details] of Object.entries(companyDetailsData)) {
                 if (details.company_name === companyName) {
+                    return id;
+                }
+            }
+            // Then try case-insensitive match
+            const lowerName = companyName.toLowerCase();
+            for (const [id, details] of Object.entries(companyDetailsData)) {
+                if (details.company_name.toLowerCase() === lowerName) {
+                    return id;
+                }
+            }
+            // Finally try partial match
+            for (const [id, details] of Object.entries(companyDetailsData)) {
+                if (details.company_name.toLowerCase().includes(lowerName) || 
+                    lowerName.includes(details.company_name.toLowerCase())) {
                     return id;
                 }
             }
@@ -946,6 +971,9 @@
             // Load initial status
             refreshStatus();
             
+            // Load changes summary
+            loadChangesSummary();
+            
             // Load company details when page loads
             loadCompanyDetails().then(() => {
                 makeCompaniesClickable();
@@ -972,6 +1000,97 @@
                     companyModal.style.display = 'none';
                 }
             }
+        }
+        
+        // Load and display changes summary
+        async function loadChangesSummary() {
+            const summaryDiv = document.getElementById('changesSummaryContent');
+            
+            try {
+                // Load multiple data sources to create a comprehensive summary
+                const [dashboardData, extractedData, statusData] = await Promise.all([
+                    loadStaticData('dashboard.json'),
+                    loadStaticData('extracted-data.json'),
+                    loadStaticData('status.json')
+                ]);
+                
+                // Get last run information
+                const lastRun = statusData.generated_at ? new Date(statusData.generated_at) : null;
+                const lastRunAgo = lastRun ? formatTimeAgo(lastRun) : 'Never';
+                
+                // Count recent items (last 24 hours)
+                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+                const recentItems = extractedData.items ? 
+                    extractedData.items.filter(item => new Date(item.extracted_at) > oneDayAgo) : [];
+                
+                // Group by company
+                const companyChanges = {};
+                if (recentItems.length > 0) {
+                    recentItems.forEach(item => {
+                        if (!companyChanges[item.company]) {
+                            companyChanges[item.company] = [];
+                        }
+                        companyChanges[item.company].push(item);
+                    });
+                }
+                
+                // Create summary HTML
+                let html = `
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                        <div>
+                            <strong>Last Check:</strong> ${lastRunAgo}
+                        </div>
+                        <div>
+                            <strong>Recent Updates:</strong> ${recentItems.length} pages
+                        </div>
+                        <div>
+                            <strong>Companies with Updates:</strong> ${Object.keys(companyChanges).length}
+                        </div>
+                    </div>
+                `;
+                
+                if (Object.keys(companyChanges).length > 0) {
+                    html += '<h4>Companies with Recent Activity:</h4>';
+                    html += '<div style="display: flex; flex-wrap: wrap; gap: 10px;">';
+                    
+                    Object.entries(companyChanges).forEach(([company, items]) => {
+                        const highRelevance = items.some(item => item.relevance_score >= 7);
+                        html += `
+                            <div class="keywords-chip" style="cursor: pointer; ${highRelevance ? 'background: rgba(255, 167, 38, 0.2); color: var(--warning-color);' : ''}" 
+                                 onclick="filterByCompany('${escapeHtml(company)}')"
+                                 title="${items.length} updates">
+                                ${escapeHtml(company)} (${items.length})
+                            </div>
+                        `;
+                    });
+                    
+                    html += '</div>';
+                    html += '<p style="margin-top: 10px; font-size: 12px; color: var(--text-secondary);">Click a company to view its updates in the Extracted Data tab</p>';
+                } else {
+                    html += '<p>No recent updates in the last 24 hours. The system checks for changes every 6 hours.</p>';
+                }
+                
+                // Add action buttons
+                html += `
+                    <div class="action-buttons" style="margin-top: 20px;">
+                        <button type="button" class="button button-secondary" onclick="showTab(null, 'changes')">View Full Change History</button>
+                        <button type="button" class="button button-secondary" onclick="showTab(null, 'extracted')">View All Extracted Data</button>
+                    </div>
+                `;
+                
+                summaryDiv.innerHTML = html;
+                
+            } catch (error) {
+                console.error('Error loading changes summary:', error);
+                summaryDiv.innerHTML = '<div class="error-message">Unable to load changes summary</div>';
+            }
+        }
+        
+        // Helper function to filter by company and switch to extracted data tab
+        function filterByCompany(companyName) {
+            document.getElementById('companyFilter').value = companyName;
+            showTab(null, 'extracted');
+            setTimeout(() => loadExtractedData(), 100);
         }
 
         // Status Management
@@ -1219,8 +1338,7 @@
                             <th>Company</th>
                             <th>Type</th>
                             <th>Title</th>
-                            <th>Relevance</th>
-                            <th>Keywords</th>
+                            <th>Entities Found</th>
                             <th>Extracted</th>
                         </tr>
                     </thead>
@@ -1228,8 +1346,6 @@
             `;
             
             data.forEach(item => {
-                const relevanceClass = item.relevance_score >= 8 ? 'relevance-high' : 
-                                     item.relevance_score >= 5 ? 'relevance-medium' : 'relevance-low';
                 const extractedDate = new Date(item.extracted_at);
                 
                 html += `
@@ -1238,14 +1354,24 @@
                         <td>${escapeHtml(item.type)}</td>
                         <td>${escapeHtml(item.title)}</td>
                         <td>
-                            <span class="relevance-score ${relevanceClass}">
-                                ${item.relevance_score}/10
-                            </span>
-                        </td>
-                        <td>
-                            ${(item.keywords || []).slice(0, 3).map(kw => 
-                                `<span class="keywords-chip">${escapeHtml(kw)}</span>`
-                            ).join('')}
+                            ${(() => {
+                                // Show entity counts if available
+                                if (item.entity_counts) {
+                                    const counts = [];
+                                    if (item.entity_counts.products > 0) counts.push(`${item.entity_counts.products} products`);
+                                    if (item.entity_counts.technologies > 0) counts.push(`${item.entity_counts.technologies} tech`);
+                                    if (item.entity_counts.ai_ml_concepts > 0) counts.push(`${item.entity_counts.ai_ml_concepts} AI/ML`);
+                                    if (item.entity_counts.partnerships > 0) counts.push(`${item.entity_counts.partnerships} partners`);
+                                    if (item.entity_counts.integrations > 0) counts.push(`${item.entity_counts.integrations} integrations`);
+                                    if (counts.length > 0) {
+                                        return counts.map(c => `<span class="keywords-chip">${c}</span>`).join('');
+                                    }
+                                }
+                                // Fall back to keywords
+                                return (item.keywords || []).slice(0, 3).map(kw => 
+                                    `<span class="keywords-chip">${escapeHtml(kw)}</span>`
+                                ).join('');
+                            })()}
                         </td>
                         <td>${formatTimeAgo(extractedDate)}</td>
                     </tr>
@@ -1450,9 +1576,47 @@
                 ${item.entities && Object.keys(item.entities).length > 0 ? `
                     <div class="config-section">
                         <h4>🔍 Extracted Entities</h4>
-                        ${Object.entries(item.entities).map(([type, values]) => `
-                            <p><strong>${escapeHtml(type)}:</strong> ${values.map(v => escapeHtml(v)).join(', ')}</p>
-                        `).join('')}
+                        ${(() => {
+                            let html = '';
+                            
+                            // Products
+                            if (item.entities.products && item.entities.products.length > 0) {
+                                html += '<h5>Products & Services:</h5><ul>';
+                                item.entities.products.forEach(p => {
+                                    html += `<li><strong>${escapeHtml(p.name)}</strong>${p.description ? `: ${escapeHtml(p.description)}` : ''}</li>`;
+                                });
+                                html += '</ul>';
+                            }
+                            
+                            // Technologies
+                            if (item.entities.technologies && item.entities.technologies.length > 0) {
+                                html += '<h5>Technologies:</h5><ul>';
+                                item.entities.technologies.forEach(t => {
+                                    html += `<li><strong>${escapeHtml(t.name)}</strong>${t.purpose ? ` - ${escapeHtml(t.purpose)}` : ''}</li>`;
+                                });
+                                html += '</ul>';
+                            }
+                            
+                            // AI/ML Concepts
+                            if (item.entities.ai_ml_concepts && item.entities.ai_ml_concepts.length > 0) {
+                                html += '<h5>AI/ML Capabilities:</h5><ul>';
+                                item.entities.ai_ml_concepts.forEach(c => {
+                                    html += `<li><strong>${escapeHtml(c.concept)}</strong>${c.type ? ` (${escapeHtml(c.type)})` : ''}</li>`;
+                                });
+                                html += '</ul>';
+                            }
+                            
+                            // Partnerships
+                            if (item.entities.partnerships && item.entities.partnerships.length > 0) {
+                                html += '<h5>Partnerships:</h5><ul>';
+                                item.entities.partnerships.forEach(p => {
+                                    html += `<li><strong>${escapeHtml(p.partner_name)}</strong>${p.partnership_type ? ` - ${escapeHtml(p.partnership_type)}` : ''}</li>`;
+                                });
+                                html += '</ul>';
+                            }
+                            
+                            return html || '<p>No structured entities found</p>';
+                        })()}
                     </div>
                 ` : ''}
             `;
