@@ -20,6 +20,17 @@ if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
 
+// Helper function to deduplicate arrays by name property
+function deduplicateByName(arr) {
+    const seen = new Set();
+    return arr.filter(item => {
+        const key = item.name || JSON.stringify(item);
+        if (seen.has(key)) return false;
+        seen.add(key);
+        return true;
+    });
+}
+
 /**
  * Generate dashboard data
  */
@@ -123,6 +134,158 @@ function generateCompaniesData(intelligenceDb) {
         console.error('❌ Error generating companies data:', error);
         return {
             companies: [],
+            generated_at: new Date().toISOString(),
+            error: error.message
+        };
+    }
+}
+
+/**
+ * Generate company details data with full AI analysis
+ */
+function generateCompanyDetailsData(intelligenceDb) {
+    try {
+        console.log('🏢 Generating detailed company intelligence data...');
+        
+        const companies = intelligenceDb.prepare('SELECT id, name, category FROM companies').all();
+        const companyDetails = {};
+        
+        for (const company of companies) {
+            // Get latest baseline analysis for all company URLs
+            const analyses = intelligenceDb.prepare(`
+                SELECT 
+                    ba.*,
+                    u.url,
+                    u.url_type
+                FROM baseline_analysis ba
+                JOIN urls u ON ba.url_id = u.id
+                WHERE u.company_id = ?
+                ORDER BY ba.created_at DESC
+            `).all(company.id);
+            
+            // Initialize aggregated data structure
+            const aggregated = {
+                company_name: company.name,
+                company_id: company.id,
+                company_category: company.category,
+                last_analyzed: analyses[0]?.created_at || null,
+                urls_analyzed: analyses.length,
+                
+                // Core Entities
+                products: [],
+                technologies: [],
+                integrations: [],
+                partnerships: [],
+                people: [],
+                pricing: [],
+                markets: [],
+                competitors: [],
+                
+                // AI/ML Capabilities
+                ai_ml_concepts: [],
+                
+                // Relationships
+                relationships: [],
+                
+                // Strategic Intelligence
+                current_state: {},
+                strategic_intelligence: {},
+                capabilities: {},
+                
+                // Quantitative Data
+                metrics: [],
+                benchmarks: [],
+                kpis: [],
+                claims: [],
+                
+                // Summary
+                summary: {},
+                relevance_score: 0
+            };
+            
+            // Merge data from all URL analyses
+            for (const analysis of analyses) {
+                try {
+                    const entities = JSON.parse(analysis.entities || '{}');
+                    const relationships = JSON.parse(analysis.relationships || '[]');
+                    const strategicIntel = JSON.parse(analysis.competitive_data || '{}');
+                    const currentState = JSON.parse(analysis.semantic_categories || '{}');
+                    const quantData = JSON.parse(analysis.quantitative_data || '{}');
+                    const fullExtraction = JSON.parse(analysis.full_extraction || '{}');
+                    
+                    // Aggregate entities (arrays will be deduplicated later)
+                    if (entities.products) aggregated.products.push(...entities.products);
+                    if (entities.technologies) aggregated.technologies.push(...entities.technologies);
+                    if (entities.integrations) aggregated.integrations.push(...entities.integrations);
+                    if (entities.partnerships) aggregated.partnerships.push(...entities.partnerships);
+                    if (entities.people) aggregated.people.push(...entities.people);
+                    if (entities.pricing) aggregated.pricing.push(...entities.pricing);
+                    if (entities.markets) aggregated.markets.push(...entities.markets);
+                    if (entities.competitors) aggregated.competitors.push(...entities.competitors);
+                    if (entities.ai_ml_concepts) aggregated.ai_ml_concepts.push(...entities.ai_ml_concepts);
+                    
+                    // Aggregate relationships
+                    aggregated.relationships.push(...relationships);
+                    
+                    // Use highest relevance score
+                    aggregated.relevance_score = Math.max(aggregated.relevance_score, analysis.relevance_score || 0);
+                    
+                    // Merge strategic intelligence (use latest/most complete)
+                    if (strategicIntel && Object.keys(strategicIntel).length > 0) {
+                        aggregated.strategic_intelligence = strategicIntel;
+                    }
+                    
+                    // Merge current state and capabilities
+                    aggregated.current_state = fullExtraction.current_state || currentState || aggregated.current_state;
+                    aggregated.capabilities = fullExtraction.capabilities || aggregated.capabilities;
+                    
+                    // Aggregate quantitative data
+                    if (quantData.metrics) aggregated.metrics.push(...quantData.metrics);
+                    if (quantData.benchmarks) aggregated.benchmarks.push(...quantData.benchmarks);
+                    if (quantData.kpis) aggregated.kpis.push(...quantData.kpis);
+                    if (quantData.claims) aggregated.claims.push(...quantData.claims);
+                    
+                    // Use latest/best summary
+                    if (fullExtraction.summary && Object.keys(fullExtraction.summary).length > 0) {
+                        aggregated.summary = fullExtraction.summary;
+                    }
+                } catch (e) {
+                    console.error(`Error parsing analysis for ${company.name}:`, e.message);
+                }
+            }
+            
+            // De-duplicate all arrays
+            aggregated.products = deduplicateByName(aggregated.products);
+            aggregated.technologies = deduplicateByName(aggregated.technologies);
+            aggregated.integrations = deduplicateByName(aggregated.integrations);
+            aggregated.partnerships = deduplicateByName(aggregated.partnerships);
+            aggregated.people = deduplicateByName(aggregated.people);
+            aggregated.pricing = deduplicateByName(aggregated.pricing);
+            aggregated.markets = deduplicateByName(aggregated.markets);
+            aggregated.competitors = deduplicateByName(aggregated.competitors);
+            aggregated.ai_ml_concepts = deduplicateByName(aggregated.ai_ml_concepts);
+            
+            // De-duplicate relationships (by combination of from/to/type)
+            const relSeen = new Set();
+            aggregated.relationships = aggregated.relationships.filter(rel => {
+                const key = `${rel.from}-${rel.to}-${rel.type}`;
+                if (relSeen.has(key)) return false;
+                relSeen.add(key);
+                return true;
+            });
+            
+            companyDetails[company.id] = aggregated;
+        }
+        
+        return {
+            companies: companyDetails,
+            generated_at: new Date().toISOString(),
+            total_companies: Object.keys(companyDetails).length
+        };
+    } catch (error) {
+        console.error('❌ Error generating company details data:', error);
+        return {
+            companies: {},
             generated_at: new Date().toISOString(),
             error: error.message
         };
@@ -400,6 +563,7 @@ function generateAllStaticData() {
         fs.writeFileSync(path.join(OUTPUT_DIR, 'extracted-data.json'), JSON.stringify({ items: [] }, null, 2));
         fs.writeFileSync(path.join(OUTPUT_DIR, 'changes.json'), JSON.stringify({ changes: [] }, null, 2));
         fs.writeFileSync(path.join(OUTPUT_DIR, 'monitoring-runs.json'), JSON.stringify({ logs: [] }, null, 2));
+        fs.writeFileSync(path.join(OUTPUT_DIR, 'company-details.json'), JSON.stringify({ companies: {} }, null, 2));
         
         console.log('✅ Sample data files created');
         return;
@@ -416,7 +580,8 @@ function generateAllStaticData() {
             { name: 'companies.json', generator: () => generateCompaniesData(intelligenceDb) },
             { name: 'extracted-data.json', generator: () => generateContentSnapshotsData(processedDb, intelligenceDb) },
             { name: 'changes.json', generator: () => generateRecentChangesData(processedDb, intelligenceDb) },
-            { name: 'monitoring-runs.json', generator: generateMonitoringRunsData }
+            { name: 'monitoring-runs.json', generator: generateMonitoringRunsData },
+            { name: 'company-details.json', generator: () => generateCompanyDetailsData(intelligenceDb) }
         ];
         
         let aiAnalysisCount = 0;
