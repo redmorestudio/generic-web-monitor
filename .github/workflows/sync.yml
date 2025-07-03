@@ -1,4 +1,4 @@
-name: 3. Sync & Deploy
+name: 4. Sync & Deploy
 
 on:
   # Allow manual trigger
@@ -80,24 +80,13 @@ jobs:
           
           # Check if we have the three-database architecture
           if [ -f "data/intelligence.db" ]; then
-            echo "🚀 Running baseline analysis for three-database architecture with Groq..."
+            echo "🧠 Running baseline analysis for three-database architecture..."
             node ai-analyzer-baseline-three-db.js || echo "Baseline analysis completed"
           else
             echo "⚠️  Three-database architecture not detected, skipping baseline analysis"
           fi
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-      
-      # NEW: Migrate database for TheBrain tracking
-      - name: Migrate database for TheBrain tracking
-        if: ${{ !inputs.skip_thebrain }}
-        run: |
-          cd github-actions-backend
-          
-          # Run database migration to add TheBrain tracking columns
-          echo "🔧 Running database migration..."
-          node migrate-thebrain-db.js || echo "Migration completed"
       
       - name: Sync to TheBrain API
         if: ${{ !inputs.skip_thebrain }}
@@ -116,7 +105,7 @@ jobs:
             echo "   Skipping TheBrain sync..."
           else
             echo "🧠 Syncing to TheBrain via API..."
-            node thebrain-api-sync.js || echo "TheBrain sync completed"
+            python thebrain_api_sync.py || echo "TheBrain sync completed"
           fi
         env:
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
@@ -139,41 +128,13 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # FIXED: Stage all changes before pulling
           git add api-data/ || true
-          git add github-actions-backend/data/ || true
           
-          # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
-            # Commit changes first
             git commit -m "🚀 Deploy updates - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
-            
-            # Now pull and merge/rebase
-            echo "Pulling latest changes..."
-            git pull origin main --rebase --strategy-option=theirs || {
-              echo "⚠️  Rebase failed, trying merge strategy..."
-              git rebase --abort 2>/dev/null || true
-              git pull origin main --no-rebase --strategy-option=theirs
-            }
-            
-            # Push with retry logic
-            for i in 1 2 3; do
-              if git push; then
-                echo "✅ Successfully pushed changes"
-                break
-              else
-                echo "⚠️  Push failed, attempt $i/3"
-                if [ $i -lt 3 ]; then
-                  echo "Pulling latest changes and retrying..."
-                  git pull origin main --rebase --strategy-option=theirs
-                else
-                  echo "❌ Failed to push after 3 attempts"
-                  exit 1
-                fi
-              fi
-            done
+            git push
           fi
       
       # Deploy to GitHub Pages
