@@ -38,6 +38,9 @@ jobs:
   scrape:
     if: ${{ !inputs.skip_scrape }}
     uses: ./.github/workflows/scrape.yml
+    permissions:
+      contents: write
+      actions: read
     secrets: inherit
   
   # Job 2: Process content
@@ -45,6 +48,9 @@ jobs:
     needs: [scrape]
     if: always() && (needs.scrape.result == 'success' || inputs.skip_scrape)
     uses: ./.github/workflows/process.yml
+    permissions:
+      contents: write
+      actions: read
     with:
       trigger_source: ${{ inputs.skip_scrape && 'manual' || 'scrape' }}
       run_id: ${{ needs.scrape.outputs.run_id || github.run_id }}
@@ -55,6 +61,9 @@ jobs:
     needs: [process]
     if: always() && (needs.process.result == 'success' || inputs.skip_process)
     uses: ./.github/workflows/analyze.yml
+    permissions:
+      contents: write
+      actions: read
     with:
       trigger_source: ${{ inputs.skip_process && 'manual' || 'process' }}
       run_id: ${{ needs.process.outputs.run_id || github.run_id }}
@@ -66,6 +75,12 @@ jobs:
     needs: [analyze]
     if: always() && needs.analyze.result == 'success'
     uses: ./.github/workflows/sync.yml
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+      issues: write
+      actions: read
     with:
       trigger_source: 'analyze'
       run_id: ${{ needs.analyze.outputs.run_id || github.run_id }}
