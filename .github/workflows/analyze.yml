@@ -93,20 +93,20 @@ jobs:
       - name: Ensure latest database files
         run: |
           cd github-actions-backend
-          echo "✅ Checking for database files..."
-          
-          # Initialize three-database architecture if not present
-          if [ ! -f data/intelligence.db ] || [ ! -f data/raw_content.db ] || [ ! -f data/processed_content.db ]; then
-            echo "📊 Initializing three-database architecture..."
-            mkdir -p data
-            node scripts/init-db-three.js
-            echo "✅ Databases initialized"
-          else
-            echo "✅ Three-database architecture found"
-          fi
-          
-          echo "📁 Available databases:"
+          echo "✅ Using committed database files from repository"
           ls -la data/*.db || true
+          
+          # raw_content.db is gitignored due to size, create empty one for analyzer check
+          if [ ! -f data/raw_content.db ]; then
+            echo "📄 Creating empty raw_content.db (gitignored, not needed for analysis)"
+            # Create with proper schema so analyzer doesn't fail
+            node -e "
+              const Database = require('better-sqlite3');
+              const db = new Database('data/raw_content.db');
+              db.exec('CREATE TABLE IF NOT EXISTS raw_content (id INTEGER PRIMARY KEY, url_id INTEGER, content TEXT, scraped_at DATETIME)');
+              db.close();
+            "
+          fi
       
       # Fix missing enhanced_analysis table (only for legacy)
       - name: Fix database schema (legacy)
