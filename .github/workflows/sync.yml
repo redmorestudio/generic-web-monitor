@@ -91,7 +91,21 @@ jobs:
       # FIXED: Removed artifact download - use committed files instead
       - name: Ensure latest files
         run: |
-          echo "✅ Using committed files from repository"
+          echo "✅ Checking for required files..."
+          
+          # Initialize three-database architecture if not present
+          cd github-actions-backend
+          if [ ! -f data/intelligence.db ] || [ ! -f data/raw_content.db ] || [ ! -f data/processed_content.db ]; then
+            echo "📊 Initializing three-database architecture..."
+            mkdir -p data
+            node scripts/init-db-three.js
+            echo "✅ Databases initialized"
+          else
+            echo "✅ Three-database architecture found"
+          fi
+          cd ..
+          
+          echo "📁 Available files:"
           ls -la api-data/*.json || true
           ls -la github-actions-backend/data/*.db || true
       
