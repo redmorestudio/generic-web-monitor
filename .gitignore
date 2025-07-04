@@ -1,0 +1,27 @@
+# Database files that are too large
+github-actions-backend/data/raw_content.db
+
+# Node modules
+node_modules/
+
+# Environment variables
+.env
+.env.local
+
+# Test output
+github-actions-backend/test-emails/
+
+# Mac system files
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp

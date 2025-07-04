@@ -233,11 +233,11 @@ jobs:
             echo "- Recipient: ${NOTIFICATION_EMAIL:-$SMTP_USER}"
             echo ""
             
-            # Use the existing check command which already handles everything
-            node email-notifications-enhanced.js check || echo "Email notification completed"
+            # Install nodemailer if not already installed
+            npm list nodemailer || npm install nodemailer
             
-            # Always export summary even if no emails sent
-            node email-notifications-enhanced.js export || true
+            # Use the wrapper script which will use the three-db version
+            node email-notifications-wrapper.js check || echo "Email notification completed"
           fi
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
@@ -245,5 +245,7 @@ jobs:
           SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
           EMAIL_THRESHOLD: ${{ secrets.EMAIL_THRESHOLD }}
