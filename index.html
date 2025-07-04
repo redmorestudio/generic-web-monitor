@@ -902,6 +902,7 @@
                         <div class="action-buttons">
                             <button type="button" class="button button-primary" onclick="sendEmailReport(event)">📧 Send Email</button>
                             <button type="button" class="button button-secondary" onclick="testEmailConfig(event)">🧪 Test Configuration</button>
+                            <button type="button" class="button button-warning" onclick="clearStoredToken(event)" title="Clear saved token">🔒 Clear Token</button>
                         </div>
                     </div>
                     
@@ -1999,13 +2000,30 @@
                 
             } catch (error) {
                 console.error('Email send error:', error);
-                statusDiv.innerHTML = `
-                    <div class="error-box">
-                        <h4>❌ Failed to Start Email Workflow</h4>
-                        <p>${error.message}</p>
-                        <p>Make sure your GitHub token has 'repo' and 'workflow' permissions.</p>
-                    </div>
-                `;
+                
+                // Check if it's an authentication error
+                if (error.message.includes('401')) {
+                    statusDiv.innerHTML = `
+                        <div class="error-box">
+                            <h4>❌ GitHub Token Expired or Invalid</h4>
+                            <p>Your GitHub Personal Access Token has expired or is invalid.</p>
+                            <p>Please enter a new token in the field above and try again.</p>
+                            <button type="button" class="button button-secondary" onclick="document.getElementById('githubToken').focus(); document.getElementById('githubToken').select();">Enter New Token</button>
+                        </div>
+                    `;
+                    // Clear the invalid token from storage
+                    localStorage.removeItem('aiMonitorGithubToken');
+                    githubToken = '';
+                    document.getElementById('githubToken').value = '';
+                } else {
+                    statusDiv.innerHTML = `
+                        <div class="error-box">
+                            <h4>❌ Failed to Start Email Workflow</h4>
+                            <p>${error.message}</p>
+                            <p>Make sure your GitHub token has 'repo' and 'workflow' permissions.</p>
+                        </div>
+                    `;
+                }
             }
         }
 
@@ -2072,6 +2090,28 @@
                     <p>${message}</p>
                 </div>
             `;
+        }
+        
+        function clearStoredToken(event) {
+            if (event) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            
+            if (confirm('Are you sure you want to clear the stored GitHub token?')) {
+                localStorage.removeItem('aiMonitorGithubToken');
+                githubToken = '';
+                document.getElementById('githubToken').value = '';
+                
+                const statusDiv = document.getElementById('emailStatus');
+                statusDiv.innerHTML = `
+                    <div class="info-box">
+                        <h4>✅ Token Cleared</h4>
+                        <p>Your GitHub token has been removed from browser storage.</p>
+                        <p>You'll need to enter it again next time you send an email.</p>
+                    </div>
+                `;
+            }
         }
 
         // Initialize on page load
