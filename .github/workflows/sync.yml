@@ -110,6 +110,7 @@ jobs:
         env:
           THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
           THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
+          THEBRAIN_CENTRAL_THOUGHT_ID: ${{ secrets.THEBRAIN_CENTRAL_THOUGHT_ID }}
           GITHUB_ACTIONS: 'true'
       
       - name: Update workflow status

@@ -17,6 +17,7 @@ import time
 # Configuration - MUST be set via environment variables
 BRAIN_ID = os.getenv('THEBRAIN_BRAIN_ID')
 API_KEY = os.getenv('THEBRAIN_API_KEY')
+CENTRAL_THOUGHT_ID = os.getenv('THEBRAIN_CENTRAL_THOUGHT_ID')  # Brain's central thought
 API_BASE_URL = 'https://api.thebrain.com/v1'
 
 # Validate credentials
@@ -200,6 +201,13 @@ Real-time monitoring and analysis of 52+ companies in the AI space.
     
     if not root_id:
         raise Exception("Failed to create root thought")
+    
+    # CRITICAL: Connect to brain's central thought if configured
+    if CENTRAL_THOUGHT_ID:
+        print(f"   🔗 Connecting to brain's central thought: {CENTRAL_THOUGHT_ID}")
+        links_to_create.append((CENTRAL_THOUGHT_ID, root_id, 1, 'AI Monitor System'))
+    else:
+        print("   ⚠️  No THEBRAIN_CENTRAL_THOUGHT_ID configured - root will be orphaned!")
     
     # Create main categories
     categories = {
