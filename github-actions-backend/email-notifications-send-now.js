@@ -405,27 +405,89 @@ class SendNowEmailService {
           }
 
           if (includeKeywords) {
-            // Get keywords from current_intelligence
-            const intelligence = this.intelligenceDb.prepare(`
+            // Get keywords from baseline_analysis
+            const analysis = this.intelligenceDb.prepare(`
               SELECT 
-                key_topics,
-                key_technologies,
-                extracted_entities
-              FROM current_intelligence
-              WHERE company_name = ?
-              ORDER BY last_analyzed DESC
+                ba.entities,
+                ba.semantic_categories,
+                ba.competitive_data
+              FROM baseline_analysis ba
+              JOIN urls u ON ba.url_id = u.id
+              WHERE u.company_id = ?
+              ORDER BY ba.created_at DESC
               LIMIT 1
-            `).get(company.name);
+            `).get(company.id);
             
-            if (intelligence) {
-              if (intelligence.key_topics) {
-                content += `<p><strong>Key Topics:</strong> ${intelligence.key_topics}</p>`;
-              }
-              if (intelligence.key_technologies) {
-                content += `<p><strong>Key Technologies:</strong> ${intelligence.key_technologies}</p>`;
-              }
-              if (intelligence.extracted_entities) {
-                content += `<p><strong>Entities:</strong> ${intelligence.extracted_entities}</p>`;
+            if (analysis) {
+              try {
+                // Extract key information from JSON
+                let keywords = new Set();
+                let technologies = new Set();
+                let topics = new Set();
+                
+                if (analysis.entities) {
+                  const entities = JSON.parse(analysis.entities);
+                  
+                  // Extract products
+                  if (entities.products) {
+                    entities.products.forEach(p => {
+                      keywords.add(p.name);
+                      if (p.ai_capabilities) {
+                        p.ai_capabilities.forEach(cap => keywords.add(cap));
+                      }
+                    });
+                  }
+                  
+                  // Extract technologies
+                  if (entities.technologies) {
+                    entities.technologies.forEach(t => {
+                      technologies.add(t.name);
+                      keywords.add(t.name);
+                    });
+                  }
+                  
+                  // Extract AI/ML concepts
+                  if (entities.ai_ml_concepts) {
+                    entities.ai_ml_concepts.forEach(c => {
+                      topics.add(c.concept);
+                      keywords.add(c.concept);
+                    });
+                  }
+                  
+                  // Extract people
+                  if (entities.people) {
+                    entities.people.forEach(p => {
+                      keywords.add(p.name);
+                      if (p.role) keywords.add(p.role);
+                    });
+                  }
+                }
+                
+                if (analysis.semantic_categories) {
+                  const categories = JSON.parse(analysis.semantic_categories);
+                  if (categories.core_capabilities) {
+                    categories.core_capabilities.forEach(cap => topics.add(cap));
+                  }
+                  if (categories.business_focus) {
+                    categories.business_focus.forEach(focus => topics.add(focus));
+                  }
+                  if (categories.value_props) {
+                    categories.value_props.forEach(prop => keywords.add(prop));
+                  }
+                }
+                
+                // Display the extracted information
+                if (keywords.size > 0) {
+                  content += `<p><strong>Keywords:</strong> ${Array.from(keywords).slice(0, 10).join(', ')}</p>`;
+                }
+                if (technologies.size > 0) {
+                  content += `<p><strong>Technologies:</strong> ${Array.from(technologies).join(', ')}</p>`;
+                }
+                if (topics.size > 0) {
+                  content += `<p><strong>Key Topics:</strong> ${Array.from(topics).join(', ')}</p>`;
+                }
+              } catch (e) {
+                console.error('Error parsing JSON data for', company.name, e);
               }
             }
           }
