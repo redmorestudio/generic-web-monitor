@@ -82,24 +82,27 @@ jobs:
           cd github-actions-backend
           npm install --omit=dev
       
-      # FIXED: Removed artifact download - use committed files instead
+      # Download raw_content.db artifact from scrape workflow
+      - name: Download raw content database
+        if: ${{ inputs.trigger_source == 'scrape' && inputs.run_id }}
+        uses: actions/download-artifact@v4
+        with:
+          name: scraper-databases-${{ inputs.run_id }}
+          path: github-actions-backend/data
+      
+      # Ensure all database files exist
       - name: Ensure latest database files
         run: |
           cd github-actions-backend
-          echo "✅ Checking for database files..."
-          
-          # Initialize three-database architecture if not present
-          if [ ! -f data/intelligence.db ] || [ ! -f data/raw_content.db ] || [ ! -f data/processed_content.db ]; then
-            echo "📊 Initializing three-database architecture..."
-            mkdir -p data
-            node scripts/init-db-three.js
-            echo "✅ Databases initialized"
-          else
-            echo "✅ Three-database architecture found"
-          fi
-          
-          echo "📁 Available databases:"
+          echo "✅ Checking database files..."
           ls -la data/*.db || true
+          
+          # If raw_content.db still doesn't exist, we have a problem
+          if [ ! -f data/raw_content.db ]; then
+            echo "❌ ERROR: raw_content.db not found!"
+            echo "This workflow needs to be triggered by scrape workflow or run scrape first."
+            exit 1
+          fi
       
       # NEW: Initialize three-database architecture if needed
       - name: Initialize Three-Database Architecture
