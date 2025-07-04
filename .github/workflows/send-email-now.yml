@@ -1,0 +1,171 @@
+name: Send Email Now
+
+on:
+  # Manual trigger only
+  workflow_dispatch:
+    inputs:
+      email_type:
+        description: 'Type of email to send'
+        required: true
+        default: 'changes'
+        type: choice
+        options:
+          - test
+          - changes
+          - state
+      
+      hours:
+        description: 'For changes: Hours to look back (default: 24)'
+        required: false
+        default: '24'
+        type: string
+      
+      company:
+        description: 'Filter by company name (optional, partial match)'
+        required: false
+        type: string
+      
+      min_score:
+        description: 'For changes: Minimum relevance score 0-10 (default: 0)'
+        required: false
+        default: '0'
+        type: string
+      
+      include_options:
+        description: 'Include options (comma-separated: urls,keywords,ai)'
+        required: false
+        default: 'urls,keywords,ai'
+        type: string
+
+env:
+  NODE_ENV: production
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install
+      
+      - name: Build command
+        id: build_command
+        run: |
+          cd github-actions-backend
+          
+          # Base command
+          COMMAND="node email-notifications-send-now.js ${{ inputs.email_type }}"
+          
+          # Add options based on email type
+          if [ "${{ inputs.email_type }}" = "changes" ]; then
+            if [ -n "${{ inputs.hours }}" ]; then
+              COMMAND="$COMMAND --hours ${{ inputs.hours }}"
+            fi
+            if [ -n "${{ inputs.min_score }}" ]; then
+              COMMAND="$COMMAND --min-score ${{ inputs.min_score }}"
+            fi
+            if [[ ! "${{ inputs.include_options }}" =~ "ai" ]]; then
+              COMMAND="$COMMAND --no-ai"
+            fi
+          fi
+          
+          if [ "${{ inputs.email_type }}" = "state" ]; then
+            if [[ ! "${{ inputs.include_options }}" =~ "urls" ]]; then
+              COMMAND="$COMMAND --no-urls"
+            fi
+            if [[ ! "${{ inputs.include_options }}" =~ "keywords" ]]; then
+              COMMAND="$COMMAND --no-keywords"
+            fi
+          fi
+          
+          # Add company filter if specified
+          if [ -n "${{ inputs.company }}" ]; then
+            COMMAND="$COMMAND --company \"${{ inputs.company }}\""
+          fi
+          
+          echo "command=$COMMAND" >> $GITHUB_OUTPUT
+          echo "📧 Command: $COMMAND"
+      
+      - name: Send Email
+        run: |
+          cd github-actions-backend
+          
+          echo "📧 Sending Email"
+          echo "================"
+          echo ""
+          
+          # Check configuration
+          if [ -z "$SMTP_HOST" ]; then
+            echo "⚠️  WARNING: Email not configured!"
+            echo ""
+            echo "Running in TEST MODE - email will be saved to file"
+            echo ""
+            
+            # Run in test mode
+            ${{ steps.build_command.outputs.command }} --test-mode
+            
+            # Show test email location
+            echo ""
+            echo "📁 Test email saved to: github-actions-backend/test-emails/"
+            echo ""
+            echo "To enable real email sending:"
+            echo "1. Go to: Settings > Secrets > Actions"
+            echo "2. Add these secrets:"
+            echo "   - SMTP_HOST (e.g., smtp.gmail.com)"
+            echo "   - SMTP_PORT (e.g., 587)"
+            echo "   - SMTP_USER (your email)"
+            echo "   - SMTP_PASS (app password)"
+            echo "   - EMAIL_TO (recipient email)"
+          else
+            echo "✅ Email Configuration Found!"
+            echo ""
+            echo "Settings:"
+            echo "- Type: ${{ inputs.email_type }}"
+            echo "- Hours: ${{ inputs.hours }}"
+            echo "- Company: ${{ inputs.company || 'All companies' }}"
+            echo "- Min Score: ${{ inputs.min_score }}"
+            echo "- Options: ${{ inputs.include_options }}"
+            echo ""
+            
+            # Send real email
+            ${{ steps.build_command.outputs.command }}
+            
+            if [ $? -eq 0 ]; then
+              echo ""
+              echo "✅ Email sent successfully!"
+            else
+              echo ""
+              echo "❌ Failed to send email. Check the error messages above."
+              exit 1
+            fi
+          fi
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO || secrets.NOTIFICATION_EMAIL }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM || secrets.SMTP_USER }}
+      
+      - name: Upload test emails (if any)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-emails
+          path: github-actions-backend/test-emails/
+          if-no-files-found: ignore
+          retention-days: 7
