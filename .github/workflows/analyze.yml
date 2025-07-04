@@ -28,6 +28,28 @@ on:
         required: false
         type: string
         default: 'true'
+  
+  # Allow being called by other workflows
+  workflow_call:
+    inputs:
+      trigger_source:
+        description: 'What triggered this workflow'
+        required: false
+        type: string
+        default: 'manual'
+      run_id:
+        description: 'Previous workflow run ID'
+        required: false
+        type: string
+      analysis_mode:
+        description: 'Analysis mode'
+        required: false
+        type: string
+        default: 'all'
+    outputs:
+      run_id:
+        description: 'The workflow run ID'
+        value: ${{ jobs.analyze-content.outputs.run_id }}
 
 # Prevent concurrent runs
 concurrency:
@@ -42,6 +64,9 @@ jobs:
   analyze-content:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    
+    outputs:
+      run_id: ${{ github.run_id }}
     
     permissions:
       contents: write
