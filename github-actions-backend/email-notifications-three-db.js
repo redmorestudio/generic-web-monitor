@@ -581,6 +581,261 @@ class ThreeDBEmailNotificationService {
     }
   }
 
+  // Send complete state report
+  async sendCompleteState() {
+    try {
+      // Get all companies with stats
+      const companies = this.intelligenceDb.prepare(`
+        SELECT 
+          c.*,
+          COUNT(DISTINCT u.id) as url_count
+        FROM companies c
+        LEFT JOIN urls u ON c.id = u.company_id
+        GROUP BY c.id
+        ORDER BY c.name
+      `).all();
+
+      // Get all URLs grouped by company
+      const allUrls = this.intelligenceDb.prepare(`
+        SELECT 
+          c.id as company_id,
+          c.name as company_name,
+          u.id as url_id,
+          u.url,
+          u.url_type
+        FROM companies c
+        LEFT JOIN urls u ON c.id = u.company_id
+        ORDER BY c.name, u.url_type
+      `).all();
+
+      // Group URLs by company
+      const urlsByCompany = {};
+      allUrls.forEach(row => {
+        if (!urlsByCompany[row.company_id]) {
+          urlsByCompany[row.company_id] = [];
+        }
+        if (row.url) {
+          urlsByCompany[row.company_id].push({
+            url: row.url,
+            type: row.url_type,
+            id: row.url_id
+          });
+        }
+      });
+
+      // Get baseline analysis for keywords
+      const baselineData = this.intelligenceDb.prepare(`
+        SELECT 
+          ba.company_id,
+          ba.url_id,
+          ba.entities,
+          ba.semantic_categories,
+          ba.competitive_data,
+          ba.quantitative_data,
+          ba.summary
+        FROM baseline_analysis ba
+        WHERE ba.id IN (
+          SELECT MAX(id) 
+          FROM baseline_analysis 
+          GROUP BY company_id, url_id
+        )
+      `).all();
+
+      // Group baseline data by company
+      const keywordsByCompany = {};
+      baselineData.forEach(row => {
+        if (!keywordsByCompany[row.company_id]) {
+          keywordsByCompany[row.company_id] = new Set();
+        }
+        
+        // Extract keywords from different fields
+        try {
+          if (row.entities) {
+            const entities = JSON.parse(row.entities);
+            Object.keys(entities).forEach(category => {
+              if (Array.isArray(entities[category])) {
+                entities[category].forEach(item => {
+                  if (typeof item === 'string') {
+                    keywordsByCompany[row.company_id].add(item);
+                  } else if (item.name) {
+                    keywordsByCompany[row.company_id].add(item.name);
+                  }
+                });
+              }
+            });
+          }
+          
+          if (row.semantic_categories) {
+            const categories = JSON.parse(row.semantic_categories);
+            if (Array.isArray(categories)) {
+              categories.forEach(cat => keywordsByCompany[row.company_id].add(cat));
+            }
+          }
+        } catch (e) {
+          // Skip if JSON parsing fails
+        }
+      });
+
+      // Get monitoring statistics
+      const stats = {
+        totalCompanies: this.intelligenceDb.prepare('SELECT COUNT(*) as count FROM companies').get().count,
+        totalUrls: this.intelligenceDb.prepare('SELECT COUNT(*) as count FROM urls').get().count,
+        totalSnapshots: this.processedDb.prepare('SELECT COUNT(*) as count FROM markdown_content').get().count,
+        totalChanges: this.processedDb.prepare('SELECT COUNT(*) as count FROM change_detection').get().count,
+        totalBaselines: this.intelligenceDb.prepare('SELECT COUNT(*) as count FROM baseline_analysis').get().count
+      };
+
+      // Build email
+      let html = `
+        <h2>🔍 AI Monitor Complete State Report</h2>
+        <p>Generated: ${new Date().toLocaleString()}</p>
+        
+        <h3>📊 System Overview</h3>
+        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
+          <span class="metric">🏢 ${stats.totalCompanies} Companies</span>
+          <span class="metric">🔗 ${stats.totalUrls} URLs</span>
+          <span class="metric">📸 ${stats.totalSnapshots} Snapshots</span>
+          <span class="metric">🔄 ${stats.totalChanges} Total Changes</span>
+          <span class="metric">🧠 ${stats.totalBaselines} AI Analyses</span>
+        </div>
+        
+        <h3>🏢 All Monitored Companies - URLs & Keywords</h3>
+      `;
+
+      // Create detailed company cards
+      for (const company of companies) {
+        const urls = urlsByCompany[company.id] || [];
+        const keywords = keywordsByCompany[company.id] ? 
+          Array.from(keywordsByCompany[company.id]).slice(0, 20) : [];
+
+        html += `
+          <div style="border: 1px solid #ddd; padding: 15px; margin: 10px 0; border-radius: 5px;">
+            <h4 style="margin-top: 0; color: #0056b3;">${company.name}</h4>
+            <p style="margin: 5px 0; color: #666;">
+              <strong>Category:</strong> ${company.category || 'Uncategorized'} | 
+              <strong>URLs:</strong> ${company.url_count}
+            </p>
+            
+            <div style="margin: 10px 0;">
+              <strong>Monitored URLs:</strong>
+              <ul style="margin: 5px 0; font-size: 0.9em;">
+        `;
+        
+        if (urls.length > 0) {
+          urls.forEach(u => {
+            html += `<li><a href="${u.url}">${u.url}</a> <em>(${u.type || 'general'})</em></li>`;
+          });
+        } else {
+          html += `<li style="color: #999;">No URLs configured</li>`;
+        }
+        
+        html += `
+              </ul>
+            </div>
+            
+            <div style="margin: 10px 0;">
+              <strong>Extracted Keywords/Entities:</strong>
+              <div style="margin: 5px 0;">
+        `;
+        
+        if (keywords.length > 0) {
+          keywords.forEach(keyword => {
+            html += `<span style="background: #e9ecef; padding: 2px 8px; margin: 2px; border-radius: 3px; font-size: 0.85em; display: inline-block;">${keyword}</span>`;
+          });
+          if (keywordsByCompany[company.id] && keywordsByCompany[company.id].size > 20) {
+            html += `<span style="color: #666; font-size: 0.85em;"> +${keywordsByCompany[company.id].size - 20} more</span>`;
+          }
+        } else {
+          html += `<span style="color: #999; font-size: 0.9em;">No keywords extracted yet</span>`;
+        }
+        
+        html += `
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Get recent changes if any
+      const recentChanges = this.processedDb.prepare(`
+        SELECT 
+          cd.*,
+          cd.detected_at as created_at,
+          cd.relevance_score as interest_level,
+          cd.summary as change_summary,
+          cc.url,
+          cc.company_name
+        FROM change_detection cd
+        JOIN content_changes cc ON cd.url_id = cc.url_id 
+          AND cd.detected_at = cc.detected_at
+        WHERE cd.detected_at > datetime('now', '-7 days')
+        AND cd.relevance_score >= 7
+        ORDER BY cd.relevance_score DESC
+        LIMIT 10
+      `).all();
+
+      if (recentChanges.length > 0) {
+        html += `
+          <h3>🚨 Recent High-Priority Changes (Last 7 Days)</h3>
+          <table>
+            <tr>
+              <th>Date</th>
+              <th>Company</th>
+              <th>Score</th>
+              <th>Summary</th>
+            </tr>
+        `;
+
+        for (const change of recentChanges) {
+          html += `
+            <tr>
+              <td>${new Date(change.created_at).toLocaleDateString()}</td>
+              <td>${change.company_name}</td>
+              <td class="score">${change.interest_level}/10</td>
+              <td>${change.change_summary || 'Change detected'}</td>
+            </tr>
+          `;
+        }
+
+        html += `</table>`;
+      }
+
+      // System health
+      const dbPath = path.join(__dirname, 'data', 'intelligence.db');
+      const dbSize = fs.existsSync(dbPath) ? 
+        `${(fs.statSync(dbPath).size / 1024 / 1024).toFixed(2)} MB` : 'Unknown';
+
+      html += `
+        <h3>💚 System Health</h3>
+        <ul>
+          <li>Intelligence DB Size: ${dbSize}</li>
+          <li>Email Configuration: ${this.isConfigured ? '✅ Live' : '🧪 Test Mode'}</li>
+          <li>Three-Database Architecture: ✅ Active</li>
+          <li>Generated at: ${new Date().toISOString()}</li>
+        </ul>
+        
+        <hr>
+        <p style="font-size: 0.9em; color: #666; text-align: center;">
+          This email confirms that all systems are operational.<br>
+          <a href="https://redmorestudio.github.io/ai-competitive-monitor/">View Dashboard</a> |
+          <a href="https://github.com/redmorestudio/ai-competitive-monitor">GitHub Repository</a>
+        </p>
+      `;
+
+      await this.sendEmail({
+        from: `"AI Monitor" <${this.fromEmail}>`,
+        to: this.recipient,
+        subject: `📊 AI Monitor Complete State Report - ${stats.totalCompanies} companies monitored`,
+        html: html
+      });
+
+      return true;
+    } catch (error) {
+      console.error('Failed to send complete state report:', error);
+      return false;
+    }
+  }
+
   // Check for recent changes and send alerts
   async checkAndAlert() {
     try {
@@ -683,11 +938,17 @@ if (require.main === module) {
         await emailService.sendHighPriorityAlert(demoChanges);
         break;
         
+      case 'state':
+        console.log('Generating complete state report...');
+        await emailService.sendCompleteState();
+        break;
+        
       default:
         console.log('\nUsage:');
         console.log('  node email-notifications-three-db.js test     - Send test email');
         console.log('  node email-notifications-three-db.js check    - Check and alert on recent changes');
         console.log('  node email-notifications-three-db.js daily    - Send daily digest');
+        console.log('  node email-notifications-three-db.js state    - Send complete state report');
         console.log('  node email-notifications-three-db.js demo     - Create demo email with sample data');
         console.log('\nOptions:');
         console.log('  --test-mode    Save emails to files instead of sending');
