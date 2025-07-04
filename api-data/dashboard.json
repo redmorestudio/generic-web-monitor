@@ -3,14 +3,14 @@
     "companies": 52,
     "urls": 174,
     "snapshots": 171,
-    "lastCheck": "2025-07-04T13:00:55.523Z"
+    "lastCheck": "2025-07-04T18:18:06.761Z"
   },
   "company_activity": [
     {
       "company": "AI21 Labs",
       "type": "LLM Providers",
       "url_count": 4,
-      "last_check": "2025-07-04 12:55:33",
+      "last_check": "2025-07-03 14:55:46",
       "urls": [
         "https://ai21.com",
         "https://ai21.com/jamba",
@@ -21,17 +21,17 @@
         "products": [
           "Jamba models",
           "Maestro",
-          "Jamba"
+          "AI21 Studio"
         ],
         "technologies": [
-          "RAG-powered conversational AI",
+          "Token-based input/output",
           "Mamba-Transformer MoE architecture",
-          "Foundation Models"
+          "RAG-powered conversational AI"
         ],
         "ai_ml_concepts": [
-          "Natural Language Processing (NLP)",
-          "Long context question answering",
-          "RAG"
+          "Instruct",
+          "Chat",
+          "Long context tasks"
         ],
         "partners": [
           "Unknown",
@@ -46,7 +46,7 @@
       "company": "AMD",
       "type": "AI Hardware",
       "url_count": 2,
-      "last_check": "2025-07-04 12:55:39",
+      "last_check": "2025-07-03 14:55:53",
       "urls": [
         "https://amd.com/en/graphics/instinct-server-accelerators",
         "https://amd.com/en/newsroom"
@@ -58,12 +58,12 @@
           "Instinct Accelerators"
         ],
         "technologies": [
-          "x86 Architecture",
-          "GPU Architecture",
-          "AMD Radeon PRO"
+          "x86-64 architecture",
+          "GPU architecture",
+          "AMD RDNA architecture"
         ],
         "ai_ml_concepts": [
-          "Machine Learning",
+          "Deep learning",
           "AI acceleration"
         ],
         "partners": [
@@ -79,7 +79,7 @@
       "company": "Aleph Alpha",
       "type": "LLM Providers",
       "url_count": 4,
-      "last_check": "2025-07-04 12:55:40",
+      "last_check": "2025-07-03 14:55:54",
       "urls": [
         "https://aleph-alpha.com",
         "https://aleph-alpha.com/luminous",
@@ -89,18 +89,18 @@
       "intelligence": {
         "products": [
           "Luminous",
-          "DORA Contract Compliance",
-          "Public Government Assistant"
+          "PhariaAI",
+          "DORA Contract Compliance"
         ],
         "technologies": [
-          "T-Free: Hierarchical Autoregressive Transformers for Language Fairness and Sovereignty",
           "T-Free: Hierarchical Autoregressive Transformers",
-          "Large Language Models"
+          "AI-driven Automation",
+          "T-Free"
         ],
         "ai_ml_concepts": [
-          "T-Free: Hierarchical Autoregressive Transformers for Language Fairness and Sovereignty",
+          "Language Fairness and Sovereignty",
           "T-Free: Hierarchical Autoregressive Transformers",
-          "Large Language Models"
+          "T-Free"
         ],
         "partners": [
           "Unknown",
@@ -115,7 +115,7 @@
       "company": "Amazon CodeWhisperer",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": "2025-07-04 12:55:47",
+      "last_check": "2025-07-03 14:56:00",
       "urls": [
         "https://aws.amazon.com/codewhisperer",
         "https://aws.amazon.com/codewhisperer/pricing",
@@ -124,18 +124,17 @@
       ],
       "intelligence": {
         "products": [
-          "Amazon CodeWhisperer",
-          "Amazon Q Developer"
+          "Amazon CodeWhisperer"
         ],
         "technologies": [
-          "AI",
-          "Machine Learning",
-          "Generative AI"
-        ],
-        "ai_ml_concepts": [
           "Generative AI",
           "Machine Learning",
-          "Code Completion"
+          "Natural Language Processing"
+        ],
+        "ai_ml_concepts": [
+          "Machine Learning",
+          "Natural Language Processing",
+          "Generative AI"
         ],
         "partners": [
           "Unknown",
@@ -150,7 +149,7 @@
       "company": "Andi",
       "type": "AI Search",
       "url_count": 1,
-      "last_check": "2025-07-04 12:55:46",
+      "last_check": "2025-07-03 14:56:00",
       "urls": [
         "https://andisearch.com"
       ],
@@ -159,16 +158,15 @@
           "Andi"
         ],
         "technologies": [
-          "Machine Learning",
-          "Natural Language Processing"
+          "AI"
         ],
         "ai_ml_concepts": [
-          "LLM (Large Language Model)"
+          "Natural Language Processing (NLP)"
         ],
         "partners": [
           "Unknown"
         ],
-        "threat_level": 5,
+        "threat_level": 6,
         "threat_category": "medium"
       },
       "latest_change": null
@@ -177,7 +175,7 @@
       "company": "Anthropic",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": "2025-07-04 12:55:56",
+      "last_check": "2025-07-03 14:56:08",
       "urls": [
         "https://anthropic.com",
         "https://anthropic.com/claude",
@@ -188,17 +186,18 @@
       "intelligence": {
         "products": [
           "Claude",
-          "Anthropic API"
+          "Claude Opus 4",
+          "Claude Sonnet 4"
         ],
         "technologies": [
           "AI",
           "ML",
-          "API"
+          "Machine Learning"
         ],
         "ai_ml_concepts": [
-          "Conversational AI",
           "Text generation",
-          "Natural Language Processing"
+          "Conversational AI",
+          "Conversational AI"
         ],
         "partners": [
           "Unknown",
@@ -213,7 +212,7 @@
       "company": "Anyscale",
       "type": "AI Infrastructure",
       "url_count": 3,
-      "last_check": "2025-07-04 12:56:04",
+      "last_check": "2025-07-03 14:56:23",
       "urls": [
         "https://anyscale.com",
         "https://anyscale.com/pricing",
@@ -221,19 +220,19 @@
       ],
       "intelligence": {
         "products": [
+          "Anyscale",
           "Ray",
-          "RayTurbo",
-          "Anyscale Platform"
-        ],
-        "technologies": [
-          "Kubernetes",
-          "PyTorch",
           "RayTurbo"
         ],
-        "ai_ml_concepts": [
-          "distributed AI computing",
+        "technologies": [
+          "Ray",
           "RayTurbo",
-          "Scalable distributed programs"
+          "Kubernetes"
+        ],
+        "ai_ml_concepts": [
+          "LLM",
+          "machine learning",
+          "deep learning"
         ],
         "partners": [
           "Unknown",
@@ -248,7 +247,7 @@
       "company": "Cerebras",
       "type": "AI Hardware",
       "url_count": 3,
-      "last_check": "2025-07-04 12:56:11",
+      "last_check": "2025-07-03 14:56:29",
       "urls": [
         "https://cerebras.net",
         "https://cerebras.net/product-system",
@@ -262,13 +261,13 @@
         ],
         "technologies": [
           "Wafer packaging solution",
-          "Engine block",
-          "Qwen3-32B"
+          "Qwen3-32B",
+          "Llama 4"
         ],
         "ai_ml_concepts": [
           "Large-scale AI workloads",
           "realtime reasoning",
-          "Llama 4 Maverick"
+          "LLama 4 Maverick"
         ],
         "partners": [
           "Unknown",
@@ -283,7 +282,7 @@
       "company": "Codeium",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": "2025-07-04 12:56:12",
+      "last_check": "2025-07-03 14:56:31",
       "urls": [
         "https://codeium.com",
         "https://codeium.com/windsurf",
@@ -293,7 +292,6 @@
       "intelligence": {
         "products": [
           "Windsurf Editor",
-          "Windsurf Reviews",
           "Cascade"
         ],
         "technologies": [
@@ -303,8 +301,8 @@
         ],
         "ai_ml_concepts": [
           "Code completion",
-          "Code review",
-          "GenAI"
+          "Code generation",
+          "Machine Learning"
         ],
         "partners": [
           "Unknown",
@@ -319,7 +317,7 @@
       "company": "Cohere",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": "2025-07-04 12:56:22",
+      "last_check": "2025-07-03 14:56:43",
       "urls": [
         "https://cohere.ai",
         "https://cohere.ai/products",
@@ -334,14 +332,14 @@
           "Embed"
         ],
         "technologies": [
+          "LLM",
           "AI",
-          "ML",
-          "LLM"
+          "ML"
         ],
         "ai_ml_concepts": [
           "Language Understanding",
           "Text Generation",
-          "LLM"
+          "Language Understanding"
         ],
         "partners": [
           "Unknown",
@@ -356,7 +354,7 @@
       "company": "Cursor",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": "2025-07-04 12:56:32",
+      "last_check": "2025-07-03 14:56:52",
       "urls": [
         "https://cursor.com",
         "https://cursor.com/features",
@@ -373,9 +371,9 @@
           "API models"
         ],
         "ai_ml_concepts": [
-          "Autocomplete",
-          "Code suggestions",
-          "Code generation"
+          "Code completion",
+          "Code generation",
+          "Code review"
         ],
         "partners": [
           "Unknown",
@@ -390,7 +388,7 @@
       "company": "DALL-E",
       "type": "Image Generation",
       "url_count": 2,
-      "last_check": "2025-07-04 12:56:41",
+      "last_check": "2025-07-03 14:56:58",
       "urls": [
         "https://openai.com/dall-e-3",
         "https://openai.com/pricing"
@@ -398,8 +396,8 @@
       "intelligence": {
         "products": [
           "ChatGPT",
-          "Sora",
-          "API Platform"
+          "DALL-E",
+          "Sora"
         ],
         "technologies": [
           "GPT-4.1 mini",
@@ -407,9 +405,9 @@
           "AI"
         ],
         "ai_ml_concepts": [
-          "Conversational AI",
-          "Video Generation",
-          "Image Generation"
+          "GPT-4.1 mini",
+          "Image generation",
+          "Conversational dialogue"
         ],
         "partners": [
           "Unknown",
@@ -424,7 +422,7 @@
       "company": "DataRobot",
       "type": "Enterprise AI",
       "url_count": 3,
-      "last_check": "2025-07-04 12:56:41",
+      "last_check": "2025-07-03 14:57:00",
       "urls": [
         "https://datarobot.com",
         "https://datarobot.com/platform",
@@ -432,18 +430,18 @@
       ],
       "intelligence": {
         "products": [
-          "Agentic AI Platform",
-          "AI Apps & Agents"
+          "AI Apps & Agents",
+          "Agentic AI Platform"
         ],
         "technologies": [
-          "Machine Learning",
-          "Deep Learning",
-          "Agentic AI"
+          "Agentic AI",
+          "Generative AI",
+          "Predictive AI"
         ],
         "ai_ml_concepts": [
-          "Predictive Modeling",
-          "Generative Modeling",
-          "Machine Learning"
+          "AI Governance",
+          "AI Observability",
+          "AI Foundation"
         ],
         "partners": [
           "Unknown",
@@ -458,7 +456,7 @@
       "company": "Descript",
       "type": "AI Voice/Audio",
       "url_count": 4,
-      "last_check": "2025-07-04 12:56:49",
+      "last_check": "2025-07-03 14:57:08",
       "urls": [
         "https://descript.com",
         "https://descript.com/overdub",
@@ -471,13 +469,12 @@
         ],
         "technologies": [
           "AI",
-          "Machine Learning",
-          "Machine learning"
+          "Machine Learning"
         ],
         "ai_ml_concepts": [
           "AI avatars",
           "Transcription",
-          "AI Avatars"
+          "Machine Learning"
         ],
         "partners": [
           "Unknown",
@@ -492,7 +489,7 @@
       "company": "ElevenLabs",
       "type": "AI Voice/Audio",
       "url_count": 4,
-      "last_check": "2025-07-04 12:57:01",
+      "last_check": "2025-07-03 14:57:18",
       "urls": [
         "https://elevenlabs.io",
         "https://elevenlabs.io/voice-generator",
@@ -501,19 +498,18 @@
       ],
       "intelligence": {
         "products": [
-          "ElevenLabs",
           "Eleven v3",
-          "11.ai"
+          "11.ai",
+          "ElevenLabs App"
         ],
         "technologies": [
           "AI",
-          "Conversational AI",
           "Machine Learning"
         ],
         "ai_ml_concepts": [
-          "Text to Speech",
-          "Text to Speech",
-          "Conversational AI"
+          "Text-to-Speech",
+          "Conversational AI",
+          "Text-to-Speech"
         ],
         "partners": [
           "Unknown",
@@ -528,7 +524,7 @@
       "company": "Flux",
       "type": "Image Generation",
       "url_count": 2,
-      "last_check": "2025-07-04 12:57:01",
+      "last_check": "2025-07-03 14:57:16",
       "urls": [
         "https://blackforestlabs.ai",
         "https://blackforestlabs.ai/our-models"
@@ -539,15 +535,13 @@
           "Flux"
         ],
         "technologies": [
-          "Generative flow matching models",
-          "Machine Learning"
+          "Generative Flow Matching Models"
         ],
         "ai_ml_concepts": [
-          "Generative flow matching models",
-          "Deep Learning"
+          "Generative Flow Matching"
         ],
         "partners": [],
-        "threat_level": 6,
+        "threat_level": 5,
         "threat_category": "medium"
       },
       "latest_change": null
@@ -556,7 +550,7 @@
       "company": "GitHub Copilot",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": "2025-07-04 12:57:09",
+      "last_check": "2025-07-03 14:57:26",
       "urls": [
         "https://github.com/features/copilot",
         "https://github.com/pricing",
@@ -566,17 +560,18 @@
       "intelligence": {
         "products": [
           "GitHub Copilot",
-          "GitHub Models"
+          "GitHub Models",
+          "GitHub Advanced Security"
         ],
         "technologies": [
           "Machine Learning",
           "Natural Language Processing",
-          "LLMs"
+          "AI"
         ],
         "ai_ml_concepts": [
           "Deep Learning",
-          "Natural Language Processing",
-          "Generative AI"
+          "Anomaly Detection",
+          "Code generation"
         ],
         "partners": [
           "Unknown",
@@ -591,7 +586,7 @@
       "company": "Google DeepMind",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": "2025-07-04 12:57:17",
+      "last_check": "2025-07-03 14:57:34",
       "urls": [
         "https://deepmind.google",
         "https://ai.google/discover/gemini",
@@ -606,14 +601,14 @@
           "Flow"
         ],
         "technologies": [
-          "Natural Language Processing",
-          "Machine Learning",
-          "Transformers"
+          "LLM",
+          "NLP",
+          "Machine Learning"
         ],
         "ai_ml_concepts": [
           "Conversational AI",
-          "Large Language Models",
-          "Text-to-Image Synthesis"
+          "Natural Language Processing",
+          "Natural Language Processing"
         ],
         "partners": [
           "Unknown",
@@ -628,7 +623,7 @@
       "company": "H2O.ai",
       "type": "Enterprise AI",
       "url_count": 3,
-      "last_check": "2025-07-04 12:57:31",
+      "last_check": "2025-07-03 14:57:43",
       "urls": [
         "https://h2o.ai",
         "https://h2o.ai/platform",
@@ -641,14 +636,14 @@
           "H2O-3"
         ],
         "technologies": [
-          "Machine Learning",
-          "Deep Learning",
-          "Natural Language Processing"
+          "LLMs",
+          "K8s",
+          "SLMs"
         ],
         "ai_ml_concepts": [
-          "Automated Machine Learning",
-          "No-Code Deep Learning",
-          "Document AI"
+          "Generative AI",
+          "No-Code Fine-Tuning",
+          "Predictive Analytics"
         ],
         "partners": [
           "Unknown",
@@ -663,7 +658,7 @@
       "company": "HeyGen",
       "type": "Video AI",
       "url_count": 4,
-      "last_check": "2025-07-04 12:57:43",
+      "last_check": "2025-07-03 14:57:54",
       "urls": [
         "https://heygen.com",
         "https://heygen.com/features",
@@ -682,14 +677,14 @@
         ],
         "ai_ml_concepts": [
           "Video Generation",
-          "Avatar Creation",
-          "Video Translation"
+          "Avatar Generation",
+          "Video Generation"
         ],
         "partners": [
           "Unknown",
           "Unknown"
         ],
-        "threat_level": 5,
+        "threat_level": 6,
         "threat_category": "medium"
       },
       "latest_change": null
@@ -698,7 +693,7 @@
       "company": "Hugging Face",
       "type": "AI Infrastructure",
       "url_count": 4,
-      "last_check": "2025-07-04 12:57:52",
+      "last_check": "2025-07-03 14:58:03",
       "urls": [
         "https://huggingface.co",
         "https://huggingface.co/pricing",
@@ -708,18 +703,18 @@
       "intelligence": {
         "products": [
           "Hugging Face Hub",
-          "Hugging Face Compute",
-          "Hugging Face Enterprise"
+          "PRO Account",
+          "Team"
         ],
         "technologies": [
-          "Transformers",
-          "PyTorch",
-          "TensorFlow"
+          "Machine Learning",
+          "ZeroGPU",
+          "Inference Providers"
         ],
         "ai_ml_concepts": [
-          "Model Training",
-          "Model Deployment",
-          "Model Evaluation"
+          "model eval",
+          "dataset viewer",
+          "Model Training"
         ],
         "partners": [
           "Unknown",
@@ -734,7 +729,7 @@
       "company": "Ideogram",
       "type": "Image Generation",
       "url_count": 2,
-      "last_check": "2025-07-04 12:57:51",
+      "last_check": "2025-07-03 14:58:01",
       "urls": [
         "https://ideogram.ai",
         "https://ideogram.ai/pricing"
@@ -745,7 +740,8 @@
         ],
         "technologies": [
           "AI",
-          "Machine Learning"
+          "Machine Learning",
+          "ML"
         ],
         "ai_ml_concepts": [
           "Image generation",
@@ -762,7 +758,7 @@
       "company": "Inflection AI",
       "type": "LLM Providers",
       "url_count": 3,
-      "last_check": "2025-07-04 12:57:58",
+      "last_check": "2025-07-03 14:58:11",
       "urls": [
         "https://inflection.ai",
         "https://pi.ai",
@@ -777,11 +773,11 @@
         "technologies": [
           "Conversational Intelligence",
           "Machine Learning",
-          "LLM (Large Language Model)"
+          "LLM"
         ],
         "ai_ml_concepts": [
-          "Natural Language Processing",
-          "Proactive and collaborative AI",
+          "Conversational Intelligence",
+          "Predictive Analytics",
           "Emotional Intelligence"
         ],
         "partners": [
@@ -797,25 +793,26 @@
       "company": "Intel",
       "type": "AI Hardware",
       "url_count": 2,
-      "last_check": "2025-07-04 12:57:59",
+      "last_check": "2025-07-03 14:58:11",
       "urls": [
         "https://intel.com/content/www/us/en/artificial-intelligence",
         "https://intel.com/content/www/us/en/newsroom"
       ],
       "intelligence": {
         "products": [
-          "Intel Core Ultra processors",
-          "HP EliteBook X",
-          "Lenovo ThinkBook Plus Gen 6"
+          "Intel Core Ultra Processors",
+          "Intel Xeon Processors",
+          "Intel Gaudi AI Accelerators"
         ],
         "technologies": [
-          "AI software ecosystem",
-          "Intel Core Ultra processors",
-          "AI"
+          "AI",
+          "Machine Learning",
+          "Artificial Intelligence"
         ],
         "ai_ml_concepts": [
-          "AI assistants",
-          "Deep Learning"
+          "AI acceleration",
+          "Machine learning inference",
+          "AI acceleration"
         ],
         "partners": [
           "Unknown",
@@ -830,7 +827,7 @@
       "company": "LangChain",
       "type": "AI Infrastructure",
       "url_count": 4,
-      "last_check": "2025-07-04 12:58:07",
+      "last_check": "2025-07-03 14:58:21",
       "urls": [
         "https://langchain.com",
         "https://langchain.com/langsmith",
@@ -844,14 +841,14 @@
           "LangGraph"
         ],
         "technologies": [
-          "LLMs",
-          "Graph Database",
-          "Vectorstore"
+          "AI models",
+          "Programming languages",
+          "Python"
         ],
         "ai_ml_concepts": [
           "Natural Language Processing",
-          "Graph-based reasoning",
-          "reliable agents"
+          "Machine Learning",
+          "Agent development"
         ],
         "partners": [
           "Unknown",
@@ -866,23 +863,24 @@
       "company": "Leonardo AI",
       "type": "Image Generation",
       "url_count": 2,
-      "last_check": "2025-07-04 12:58:05",
+      "last_check": "2025-07-03 14:58:17",
       "urls": [
         "https://leonardo.ai",
         "https://leonardo.ai/pricing"
       ],
       "intelligence": {
         "products": [
-          "Leonardo AI Image Generator",
           "Leonardo AI"
         ],
         "technologies": [
           "AI",
-          "Machine Learning"
+          "Machine Learning",
+          "Computer Vision"
         ],
         "ai_ml_concepts": [
           "Image Generation",
-          "Machine Learning"
+          "Video Generation",
+          "Phoenix"
         ],
         "partners": [],
         "threat_level": 6,
@@ -894,7 +892,7 @@
       "company": "Luma AI",
       "type": "Video AI",
       "url_count": 3,
-      "last_check": "2025-07-04 12:58:14",
+      "last_check": "2025-07-03 14:58:32",
       "urls": [
         "https://lumalabs.ai",
         "https://lumalabs.ai/dream-machine",
@@ -902,19 +900,19 @@
       ],
       "intelligence": {
         "products": [
+          "Luma Dream Machine",
           "Dream Machine",
-          "Ray2",
-          "Photon"
+          "Ray2"
         ],
         "technologies": [
-          "Ray2",
-          "AI",
-          "Machine Learning"
+          "Image AI models",
+          "Video AI models",
+          "Ray2"
         ],
         "ai_ml_concepts": [
-          "Video Generation",
-          "Text-to-Video",
-          "Image-to-Video"
+          "Deep Learning",
+          "Multimodal General Intelligence",
+          "Video Generation"
         ],
         "partners": [],
         "threat_level": 6,
@@ -926,7 +924,7 @@
       "company": "Meta AI",
       "type": "LLM Providers",
       "url_count": 4,
-      "last_check": "2025-07-04 12:58:26",
+      "last_check": "2025-07-03 14:58:41",
       "urls": [
         "https://ai.meta.com",
         "https://ai.meta.com/llama",
@@ -935,19 +933,19 @@
       ],
       "intelligence": {
         "products": [
+          "Meta AI App",
           "Llama 4",
-          "Llama API",
-          "Llama 4 Scout"
+          "Meta AI Studio"
         ],
         "technologies": [
-          "Mixture-of-Experts Models",
-          "Advanced Reasoning",
-          "Mixture-of-Experts Architecture"
+          "LLaMA 4",
+          "Mixture-of-experts architecture",
+          "Mixture-of-experts models"
         ],
         "ai_ml_concepts": [
-          "Multimodal Intelligence",
-          "Mixture-of-Experts Models",
-          "Natural Language Processing"
+          "Conversational AI",
+          "Mixture-of-experts architecture",
+          "Natively Multimodal"
         ],
         "partners": [
           "Unknown",
@@ -962,7 +960,7 @@
       "company": "Midjourney",
       "type": "Image Generation",
       "url_count": 3,
-      "last_check": "2025-07-04 12:58:25",
+      "last_check": "2025-07-03 14:58:40",
       "urls": [
         "https://midjourney.com",
         "https://docs.midjourney.com",
@@ -974,6 +972,7 @@
         ],
         "technologies": [
           "AI",
+          "GPU",
           "Machine Learning"
         ],
         "ai_ml_concepts": [
@@ -982,7 +981,6 @@
           "Image Generation"
         ],
         "partners": [
-          "Unknown",
           "Unknown"
         ],
         "threat_level": 6,
@@ -994,7 +992,7 @@
       "company": "Mistral AI",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": "2025-07-04 12:58:43",
+      "last_check": "2025-07-03 14:58:56",
       "urls": [
         "https://mistral.ai",
         "https://mistral.ai/technology",
@@ -1005,13 +1003,13 @@
       "intelligence": {
         "products": [
           "Le Chat",
-          "Mistral Medium 3",
+          "Mistral Code",
           "Le Chat Enterprise"
         ],
         "technologies": [
           "LLM",
           "AI",
-          "ML"
+          "NLP"
         ],
         "ai_ml_concepts": [
           "Text generation",
@@ -1031,7 +1029,7 @@
       "company": "Murf AI",
       "type": "AI Voice/Audio",
       "url_count": 3,
-      "last_check": "2025-07-04 12:58:52",
+      "last_check": "2025-07-03 14:59:02",
       "urls": [
         "https://murf.ai",
         "https://murf.ai/pricing",
@@ -1045,8 +1043,7 @@
         ],
         "technologies": [
           "AI",
-          "ML",
-          "Machine Learning"
+          "ML"
         ],
         "ai_ml_concepts": [
           "Text-to-speech",
@@ -1066,7 +1063,7 @@
       "company": "NVIDIA",
       "type": "AI Hardware",
       "url_count": 4,
-      "last_check": "2025-07-04 12:59:06",
+      "last_check": "2025-07-03 14:59:17",
       "urls": [
         "https://nvidia.com/ai",
         "https://nvidia.com/en-us/data-center/products",
@@ -1075,19 +1072,19 @@
       ],
       "intelligence": {
         "products": [
-          "BioNeMo",
           "DGX Cloud",
-          "NeMo"
+          "DGX Platform",
+          "GeForce"
         ],
         "technologies": [
-          "AI",
-          "Cloud",
-          "GPU"
+          "NVIDIA GPU",
+          "NVIDIA AI Software",
+          "AI"
         ],
         "ai_ml_concepts": [
-          "AI-driven platform",
-          "Multimodal generative AI",
-          "Simulation and AI integration"
+          "AI Model Development",
+          "AI Deployment",
+          "Generative AI"
         ],
         "partners": [
           "Unknown",
@@ -1102,22 +1099,24 @@
       "company": "Neeva",
       "type": "AI Search",
       "url_count": 1,
-      "last_check": "2025-07-04 12:58:57",
+      "last_check": "2025-07-03 14:59:15",
       "urls": [
         "https://neeva.com"
       ],
       "intelligence": {
         "products": [
-          "Neeva AI Search"
+          "Neeva Search"
         ],
         "technologies": [
-          "AI",
-          "Machine Learning"
+          "Artificial Intelligence",
+          "Natural Language Processing"
         ],
         "ai_ml_concepts": [
-          "Natural Language Processing (NLP)"
+          "Machine Learning Models"
         ],
-        "partners": [],
+        "partners": [
+          "Unknown"
+        ],
         "threat_level": 6,
         "threat_category": "medium"
       },
@@ -1127,7 +1126,7 @@
       "company": "OpenAI",
       "type": "LLM Providers",
       "url_count": 5,
-      "last_check": "2025-07-04 12:59:13",
+      "last_check": "2025-07-03 14:59:26",
       "urls": [
         "https://openai.com",
         "https://openai.com/chatgpt",
@@ -1143,13 +1142,13 @@
         ],
         "technologies": [
           "GPT-4.1 mini",
-          "OpenAI o4-mini",
-          "LLMs (Large Language Models)"
+          "GPT-4o",
+          "OpenAI o4-mini"
         ],
         "ai_ml_concepts": [
-          "GPT-4.5",
-          "Conversational Understanding",
-          "Text generation"
+          "Natural Language Processing",
+          "Machine Learning",
+          "LLM"
         ],
         "partners": [
           "Unknown",
@@ -1158,13 +1157,17 @@
         "threat_level": 6,
         "threat_category": "medium"
       },
-      "latest_change": null
+      "latest_change": {
+        "summary": "Content changed for OpenAI - https://openai.com",
+        "time_ago": "just now",
+        "relevance_score": 5
+      }
     },
     {
       "company": "Palantir",
       "type": "Enterprise AI",
       "url_count": 3,
-      "last_check": "2025-07-04 12:59:14",
+      "last_check": "2025-07-03 14:59:26",
       "urls": [
         "https://palantir.com",
         "https://palantir.com/platforms/aip",
@@ -1172,17 +1175,18 @@
       ],
       "intelligence": {
         "products": [
-          "AIP",
-          "Foundry",
-          "Gotham"
+          "Palantir Foundry",
+          "Palantir Gotham",
+          "AIP"
         ],
         "technologies": [
-          "AI",
-          "Data Integration"
+          "Artificial Intelligence (AI)",
+          "Machine Learning (ML)",
+          "AI"
         ],
         "ai_ml_concepts": [
-          "Machine Learning",
-          "Machine Learning",
+          "Predictive Analytics",
+          "Data Science",
           "Machine Learning"
         ],
         "partners": [
@@ -1198,7 +1202,7 @@
       "company": "Perplexity AI",
       "type": "AI Search",
       "url_count": 3,
-      "last_check": "2025-07-04 12:59:22",
+      "last_check": "2025-07-03 14:59:33",
       "urls": [
         "https://perplexity.ai",
         "https://perplexity.ai/pro",
@@ -1206,19 +1210,19 @@
       ],
       "intelligence": {
         "products": [
-          "Perplexity AI Search",
-          "Perplexity Enterprise Pro",
-          "Perplexity Pro"
+          "Perplexity Pro",
+          "Perplexity Free",
+          "Perplexity AI"
         ],
         "technologies": [
-          "Machine Learning",
+          "AI models",
           "Natural Language Processing",
-          "AI models"
+          "Machine Learning"
         ],
         "ai_ml_concepts": [
-          "Question Answering",
-          "Text Analysis",
-          "Natural Language Processing"
+          "Natural Language Processing",
+          "Computer Vision",
+          "Question Answering"
         ],
         "partners": [
           "Unknown",
@@ -1233,24 +1237,24 @@
       "company": "Phind",
       "type": "AI Search",
       "url_count": 2,
-      "last_check": "2025-07-04 12:59:20",
+      "last_check": "2025-07-03 14:59:31",
       "urls": [
         "https://phind.com",
         "https://phind.com/search?q=pricing"
       ],
       "intelligence": {
         "products": [
-          "Phind-70B",
-          "Phind"
+          "Phind",
+          "Phind-70B"
         ],
         "technologies": [
-          "Natural Language Processing",
+          "AI",
           "Machine Learning",
-          "Natural Language Processing (NLP)"
+          "ML"
         ],
         "ai_ml_concepts": [
-          "Large Language Model",
-          "Large Language Models (LLMs)"
+          "Natural Language Processing",
+          "Machine Learning Models"
         ],
         "partners": [
           "Unknown",
@@ -1265,7 +1269,7 @@
       "company": "Pieces",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": "2025-07-04 12:59:30",
+      "last_check": "2025-07-03 14:59:41",
       "urls": [
         "https://pieces.app",
         "https://pieces.app/features",
@@ -1278,13 +1282,13 @@
         ],
         "technologies": [
           "Long-Term Memory technology",
-          "LLMs (OpenAI, Anthropic, Ollama etc.)",
+          "LLMs (OpenAI, Anthropic, Ollama)",
           "LLMs"
         ],
         "ai_ml_concepts": [
-          "Long-Term Memory technology",
-          "LLMs (OpenAI, Anthropic, Ollama etc.)",
-          "Nano models"
+          "Long-Term Memory",
+          "Nano Models",
+          "Constitutional AI"
         ],
         "partners": [
           "Unknown",
@@ -1299,7 +1303,7 @@
       "company": "Pika",
       "type": "Video AI",
       "url_count": 3,
-      "last_check": "2025-07-04 12:59:38",
+      "last_check": "2025-07-03 14:59:48",
       "urls": [
         "https://pika.art",
         "https://pika.art/pricing",
@@ -1308,17 +1312,17 @@
       "intelligence": {
         "products": [
           "Pika",
-          "Pikapocalypse"
+          "Pikapocalypse",
+          "Pika Video AI"
         ],
         "technologies": [
           "AI",
-          "Machine learning",
           "Machine Learning"
         ],
         "ai_ml_concepts": [
-          "Image and text-to-video",
-          "Video effects",
-          "Video Generation"
+          "Image-to-Video",
+          "Text-to-Video",
+          "Video processing"
         ],
         "partners": [
           "Unknown",
@@ -1333,7 +1337,7 @@
       "company": "Replicate",
       "type": "AI Infrastructure",
       "url_count": 3,
-      "last_check": "2025-07-04 12:59:37",
+      "last_check": "2025-07-03 14:59:49",
       "urls": [
         "https://replicate.com",
         "https://replicate.com/pricing",
@@ -1367,7 +1371,7 @@
       "company": "Replit",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": "2025-07-04 12:59:46",
+      "last_check": "2025-07-03 14:59:59",
       "urls": [
         "https://replit.com",
         "https://replit.com/ai",
@@ -1377,18 +1381,18 @@
       "intelligence": {
         "products": [
           "Replit",
-          "Replit Agent",
-          "Replit AI"
+          "Replit AI",
+          "Replit Agent"
         ],
         "technologies": [
-          "AI",
-          "Machine Learning",
-          "Replit AI"
+          "Replit AI",
+          "Cloud Infrastructure",
+          "AI"
         ],
         "ai_ml_concepts": [
-          "Natural Language Processing",
           "Machine Learning",
-          "Machine Learning"
+          "Natural Language Processing",
+          "Code Completion"
         ],
         "partners": [
           "Unknown",
@@ -1403,7 +1407,7 @@
       "company": "Resemble AI",
       "type": "AI Voice/Audio",
       "url_count": 3,
-      "last_check": "2025-07-04 12:59:54",
+      "last_check": "2025-07-03 15:00:07",
       "urls": [
         "https://resemble.ai",
         "https://resemble.ai/pricing",
@@ -1412,8 +1416,8 @@
       "intelligence": {
         "products": [
           "AI Voice Generator",
-          "Deepfake Detection",
-          "Detect"
+          "Detect",
+          "Deepfake Detection"
         ],
         "technologies": [
           "Generative AI",
@@ -1423,7 +1427,7 @@
         "ai_ml_concepts": [
           "Voice Cloning",
           "Deepfake Detection",
-          "Voice Synthesis"
+          "Machine Learning Models"
         ],
         "partners": [
           "Unknown",
@@ -1438,7 +1442,7 @@
       "company": "Runway",
       "type": "Video AI",
       "url_count": 3,
-      "last_check": "2025-07-04 12:59:54",
+      "last_check": "2025-07-03 15:00:08",
       "urls": [
         "https://runwayml.com",
         "https://runwayml.com/pricing",
@@ -1456,9 +1460,9 @@
           "AI"
         ],
         "ai_ml_concepts": [
-          "Generative Video",
+          "Deep Learning",
           "Text-to-Image",
-          "Image-to-Image"
+          "Text-to-Video"
         ],
         "partners": [
           "Unknown",
@@ -1473,7 +1477,7 @@
       "company": "SambaNova",
       "type": "AI Hardware",
       "url_count": 3,
-      "last_check": "2025-07-04 13:00:02",
+      "last_check": "2025-07-03 15:00:14",
       "urls": [
         "https://sambanova.ai",
         "https://sambanova.ai/products",
@@ -1482,12 +1486,45 @@
       "intelligence": {
         "products": [
           "SambaNova Suite",
-          "DataScale",
-          "SambaNova Cloud"
+          "DataScale"
         ],
         "technologies": [
           "RDU: The GPU Alternative",
           "Composition of Experts"
+        ],
+        "ai_ml_concepts": [
+          "Generative AI",
+          "Agentic AI",
+          "Generative AI"
+        ],
+        "partners": [
+          "Unknown"
+        ],
+        "threat_level": 6,
+        "threat_category": "medium"
+      },
+      "latest_change": null
+    },
+    {
+      "company": "Scale AI",
+      "type": "Enterprise AI",
+      "url_count": 3,
+      "last_check": "2025-07-03 15:00:21",
+      "urls": [
+        "https://scale.com",
+        "https://scale.com/enterprise",
+        "https://scale.com/blog"
+      ],
+      "intelligence": {
+        "products": [
+          "Scale Data Engine",
+          "Scale GenAI Platform",
+          "Scale Donovan"
+        ],
+        "technologies": [
+          "Generative AI",
+          "Agentic AI",
+          "AI"
         ],
         "ai_ml_concepts": [
           "Generative AI",
@@ -1504,45 +1541,10 @@
       "latest_change": null
     },
     {
-      "company": "Scale AI",
-      "type": "Enterprise AI",
-      "url_count": 3,
-      "last_check": "2025-07-04 13:00:10",
-      "urls": [
-        "https://scale.com",
-        "https://scale.com/enterprise",
-        "https://scale.com/blog"
-      ],
-      "intelligence": {
-        "products": [
-          "Scale Data Engine",
-          "Scale GenAI Platform",
-          "Scale Evaluation"
-        ],
-        "technologies": [
-          "Generative AI",
-          "Data Labeling",
-          "AI"
-        ],
-        "ai_ml_concepts": [
-          "Generative AI",
-          "Model Fine-tuning",
-          "Data labeling"
-        ],
-        "partners": [
-          "Unknown",
-          "Unknown"
-        ],
-        "threat_level": 6,
-        "threat_category": "medium"
-      },
-      "latest_change": null
-    },
-    {
       "company": "Sourcegraph",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": "2025-07-04 13:00:11",
+      "last_check": "2025-07-03 15:00:24",
       "urls": [
         "https://sourcegraph.com",
         "https://sourcegraph.com/cody",
@@ -1553,17 +1555,17 @@
         "products": [
           "Cody",
           "Code Search",
-          "Amp"
+          "Batch Changes"
         ],
         "technologies": [
-          "AI",
-          "search algorithms",
-          "machine learning"
+          "LLMs",
+          "Search algorithms",
+          "AI"
         ],
         "ai_ml_concepts": [
-          "machine learning models",
-          "code completion",
-          "code review"
+          "LLMs",
+          "machine learning",
+          "code completion"
         ],
         "partners": [
           "Unknown",
@@ -1578,7 +1580,7 @@
       "company": "Stability AI",
       "type": "LLM Providers",
       "url_count": 4,
-      "last_check": "2025-07-04 13:00:22",
+      "last_check": "2025-07-03 15:00:34",
       "urls": [
         "https://stability.ai",
         "https://stability.ai/stable-diffusion",
@@ -1592,14 +1594,14 @@
           "Stable Audio"
         ],
         "technologies": [
-          "AI",
-          "Machine Learning",
-          "ML"
+          "Stable Diffusion",
+          "Stable LM",
+          "AI"
         ],
         "ai_ml_concepts": [
-          "Image Generation",
-          "Video Generation",
-          "Audio Generation"
+          "Computer Vision",
+          "Generative Models",
+          "Image Generation"
         ],
         "partners": [
           "Unknown",
@@ -1614,7 +1616,7 @@
       "company": "Synthesia",
       "type": "Video AI",
       "url_count": 4,
-      "last_check": "2025-07-04 13:00:30",
+      "last_check": "2025-07-03 15:00:43",
       "urls": [
         "https://synthesia.io",
         "https://synthesia.io/features",
@@ -1623,15 +1625,16 @@
       ],
       "intelligence": {
         "products": [
-          "Synthesia"
+          "Synthesia",
+          "Synthesia Video AI"
         ],
         "technologies": [
           "AI",
           "Machine Learning"
         ],
         "ai_ml_concepts": [
-          "AI Screen Recorder",
-          "AI Video Editor",
+          "AI Video Generation",
+          "AI Dubbing",
           "Machine Learning"
         ],
         "partners": [
@@ -1647,7 +1650,7 @@
       "company": "Tabnine",
       "type": "AI Coding",
       "url_count": 4,
-      "last_check": "2025-07-04 13:00:37",
+      "last_check": "2025-07-03 15:00:50",
       "urls": [
         "https://tabnine.com",
         "https://tabnine.com/pricing",
@@ -1657,7 +1660,8 @@
       "intelligence": {
         "products": [
           "Tabnine",
-          "Tabnine AI Code Assistant"
+          "Tabnine AI Code Assistant",
+          "Tabnine AI Chat"
         ],
         "technologies": [
           "Machine learning",
@@ -1665,7 +1669,7 @@
           "Machine Learning"
         ],
         "ai_ml_concepts": [
-          "Code completion",
+          "Context-aware coding assistance",
           "Code completion",
           "Code review"
         ],
@@ -1682,7 +1686,7 @@
       "company": "Weights & Biases",
       "type": "AI Infrastructure",
       "url_count": 3,
-      "last_check": "2025-07-04 13:00:40",
+      "last_check": "2025-07-03 15:00:53",
       "urls": [
         "https://wandb.ai",
         "https://wandb.ai/pricing",
@@ -1695,14 +1699,14 @@
           "Weights & Biases"
         ],
         "technologies": [
-          "Machine Learning",
-          "Large Language Models",
-          "LLMOps"
+          "Machine learning",
+          "Large language models",
+          "Deep learning"
         ],
         "ai_ml_concepts": [
-          "Model Training",
-          "Model Fine-tuning",
-          "LLM"
+          "LLM training",
+          "LLM fine-tuning",
+          "Large language models"
         ],
         "partners": [
           "Unknown",
@@ -1717,7 +1721,7 @@
       "company": "WellSaid Labs",
       "type": "AI Voice/Audio",
       "url_count": 3,
-      "last_check": "2025-07-04 13:00:49",
+      "last_check": "2025-07-03 15:01:03",
       "urls": [
         "https://wellsaidlabs.com",
         "https://wellsaidlabs.com/pricing",
@@ -1734,9 +1738,9 @@
           "Machine Learning"
         ],
         "ai_ml_concepts": [
-          "Text-to-speech",
-          "Voice customization",
-          "Text-to-Speech"
+          "text-to-speech",
+          "voice synthesis",
+          "text-to-speech"
         ],
         "partners": [
           "Unknown",
@@ -1751,7 +1755,7 @@
       "company": "You.com",
       "type": "AI Search",
       "url_count": 3,
-      "last_check": "2025-07-04 13:00:55",
+      "last_check": "2025-07-03 15:01:11",
       "urls": [
         "https://you.com",
         "https://you.com/search?q=pricing",
@@ -1769,9 +1773,9 @@
           "Machine learning"
         ],
         "ai_ml_concepts": [
-          "Natural Language Processing (NLP)",
-          "Deep research",
-          "Natural Language Processing (NLP)"
+          "Natural Language Processing",
+          "Computer Vision",
+          "Deep research"
         ],
         "partners": [
           "Unknown",
@@ -1783,6 +1787,6 @@
       "latest_change": null
     }
   ],
-  "generated_at": "2025-07-04T13:00:55.566Z",
+  "generated_at": "2025-07-04T18:18:06.798Z",
   "backend": "github-actions-static-three-db"
 }

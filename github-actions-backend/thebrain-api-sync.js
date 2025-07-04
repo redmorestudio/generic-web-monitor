@@ -112,6 +112,9 @@ class TheBrainAPISync {
   async createRootThought() {
     console.log('Creating root thought...');
     
+    // CRITICAL: Connect to the brain's central thought
+    const BRAIN_CENTRAL_THOUGHT_ID = process.env.THEBRAIN_CENTRAL_THOUGHT_ID || 'db45db5e-da4c-45a3-97a0-31abd02a5a3f';
+    
     // Check if we have a stored root thought
     const existingRoot = this.getMapping('root', 'system');
     
@@ -131,6 +134,22 @@ class TheBrainAPISync {
     } else {
       thoughtId = await this.createThought(rootData);
       await this.storeMapping('root', 'system', thoughtId);
+      
+      // CRITICAL: Link to brain's central thought
+      console.log('Linking to brain\'s central thought...');
+      try {
+        await this.createLink(BRAIN_CENTRAL_THOUGHT_ID, thoughtId, 1); // Child link from brain central
+        console.log('✅ Successfully linked to brain\'s central thought');
+      } catch (error) {
+        console.error('⚠️  Failed to link to central thought:', error.message);
+        // Try reverse link if forward link fails
+        try {
+          await this.createLink(thoughtId, BRAIN_CENTRAL_THOUGHT_ID, 2); // Parent link to brain central
+          console.log('✅ Successfully created parent link to brain\'s central thought');
+        } catch (reverseError) {
+          console.error('⚠️  Failed to create reverse link:', reverseError.message);
+        }
+      }
     }
     
     this.thoughtCache.set('root', thoughtId);

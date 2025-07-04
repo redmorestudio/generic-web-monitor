@@ -1,29 +1,29 @@
 {
-  "generated_at": "2025-07-04T13:00:55.606Z",
+  "generated_at": "2025-07-04T18:18:06.848Z",
   "files_generated": 6,
   "architecture": "three-database",
   "database_info": {
     "architecture": "three-db",
     "databases": {
       "legacy": {
-        "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/monitor.db",
+        "path": "/Users/sethredmore/ai-competitive-monitor/github-actions-backend/data/monitor.db",
         "size": "49.99 MB",
-        "modified": "2025-07-04T12:55:16.422Z"
+        "modified": "2025-07-03T20:29:17.063Z"
       },
       "raw": {
-        "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/raw_content.db",
-        "size": "78.11 MB",
-        "modified": "2025-07-04T12:55:16.500Z"
+        "path": "/Users/sethredmore/ai-competitive-monitor/github-actions-backend/data/raw_content.db",
+        "size": "321.69 MB",
+        "modified": "2025-07-04T18:17:08.810Z"
       },
       "processed": {
-        "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/processed_content.db",
-        "size": "4.25 MB",
-        "modified": "2025-07-04T12:55:16.434Z"
+        "path": "/Users/sethredmore/ai-competitive-monitor/github-actions-backend/data/processed_content.db",
+        "size": "8.76 MB",
+        "modified": "2025-07-04T18:17:39.996Z"
       },
       "intelligence": {
-        "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/intelligence.db",
+        "path": "/Users/sethredmore/ai-competitive-monitor/github-actions-backend/data/intelligence.db",
         "size": "2.25 MB",
-        "modified": "2025-07-04T12:58:43.557Z"
+        "modified": "2025-07-03T20:29:16.953Z"
       }
     }
   },
