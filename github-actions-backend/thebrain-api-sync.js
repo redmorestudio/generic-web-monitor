@@ -130,7 +130,17 @@ class TheBrainAPISync {
     let thoughtId;
     if (existingRoot) {
       thoughtId = existingRoot;
-      await this.updateThought(thoughtId, rootData);
+      try {
+        await this.updateThought(thoughtId, rootData);
+      } catch (error) {
+        if (error.response?.status === 404) {
+          console.log(`Root thought ${thoughtId} not found in brain, creating new one`);
+          thoughtId = await this.createThought(rootData);
+          await this.storeMapping('root', 'system', thoughtId);
+        } else {
+          throw error;
+        }
+      }
     } else {
       thoughtId = await this.createThought(rootData);
       await this.storeMapping('root', 'system', thoughtId);
@@ -207,7 +217,18 @@ Last sync: ${new Date().toISOString()}`);
       let catId;
       if (existingId) {
         catId = existingId;
-        await this.updateThought(catId, thoughtData);
+        try {
+          await this.updateThought(catId, thoughtData);
+        } catch (error) {
+          if (error.response?.status === 404) {
+            console.log(`Category thought ${catId} not found in brain, creating new one`);
+            catId = await this.createThought(thoughtData);
+            await this.createLink(rootId, catId, 1); // Child link
+            await this.storeMapping('category', key, catId);
+          } else {
+            throw error;
+          }
+        }
       } else {
         catId = await this.createThought(thoughtData);
         await this.createLink(rootId, catId, 1); // Child link
@@ -259,7 +280,18 @@ Last sync: ${new Date().toISOString()}`);
       let dbId;
       if (existingDbId) {
         dbId = existingDbId;
-        await this.updateThought(dbId, dbData);
+        try {
+          await this.updateThought(dbId, dbData);
+        } catch (error) {
+          if (error.response?.status === 404) {
+            console.log(`Database thought ${dbId} not found in brain, creating new one`);
+            dbId = await this.createThought(dbData);
+            await this.createLink(archId, dbId, 1);
+            await this.storeMapping('database', db.name, dbId);
+          } else {
+            throw error;
+          }
+        }
       } else {
         dbId = await this.createThought(dbData);
         await this.createLink(archId, dbId, 1);
@@ -339,7 +371,18 @@ ${db.tables.map(t => `- **${t}**`).join('\n')}
       let groupId;
       if (existingGroupId) {
         groupId = existingGroupId;
-        await this.updateThought(groupId, groupData);
+        try {
+          await this.updateThought(groupId, groupData);
+        } catch (error) {
+          if (error.response?.status === 404) {
+            console.log(`Company category thought ${groupId} not found in brain, creating new one`);
+            groupId = await this.createThought(groupData);
+            await this.createLink(companiesId, groupId, 1);
+            await this.storeMapping('company-category', key, groupId);
+          } else {
+            throw error;
+          }
+        }
       } else {
         groupId = await this.createThought(groupData);
         await this.createLink(companiesId, groupId, 1);
@@ -376,10 +419,17 @@ ${db.tables.map(t => `- **${t}**`).join('\n')}
           await this.updateThought(companyThoughtId, updateData);
           updatedCount++;
         } catch (error) {
-          console.log(`Failed to update thought for ${company.name}, creating new one`);
-          // If update fails (thought was deleted), create a new one
-          companyThoughtId = await this.createThought(updateData);
-          await this.createLink(groupId, companyThoughtId, 1);
+          if (error.response?.status === 404) {
+            console.log(`Company thought ${companyThoughtId} not found, creating new one for ${company.name}`);
+            companyThoughtId = await this.createThought(updateData);
+            await this.createLink(groupId, companyThoughtId, 1);
+            // Update the database with the new thought ID
+            this.intelligenceDb.prepare(`
+              UPDATE companies SET thebrain_thought_id = ? WHERE id = ?
+            `).run(companyThoughtId, company.id);
+          } else {
+            throw error;
+          }
         }
       } else {
         // Create new thought
@@ -488,7 +538,18 @@ ${new Date().toISOString()}`);
         let groupId;
         if (existingGroupId) {
           groupId = existingGroupId;
-          await this.updateThought(groupId, groupData);
+          try {
+            await this.updateThought(groupId, groupData);
+          } catch (error) {
+            if (error.response?.status === 404) {
+              console.log(`Change priority thought ${groupId} not found in brain, creating new one`);
+              groupId = await this.createThought(groupData);
+              await this.createLink(changesId, groupId, 1);
+              await this.storeMapping('change-priority', key, groupId);
+            } else {
+              throw error;
+            }
+          }
         } else {
           groupId = await this.createThought(groupData);
           await this.createLink(changesId, groupId, 1);
