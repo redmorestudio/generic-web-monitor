@@ -18,14 +18,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: '3.10'
+          node-version: '20'
       
       - name: Install dependencies
         run: |
-          pip install requests
+          cd github-actions-backend
+          npm install --omit=dev
       
       - name: Test TheBrain Connection
         run: |
@@ -81,7 +82,7 @@ jobs:
           
           API_KEY = os.getenv('THEBRAIN_API_KEY')
           BRAIN_ID = os.getenv('THEBRAIN_BRAIN_ID')
-          API_BASE_URL = 'https://api.thebrain.com/v1'
+          API_BASE_URL = 'https://api.bra.in'
           
           if not API_KEY or not BRAIN_ID:
               print("❌ Missing credentials!")
@@ -134,7 +135,7 @@ jobs:
             echo "✅ YES - All prerequisites met!"
             echo ""
             echo "Running TheBrain sync..."
-            python thebrain_api_sync.py || echo "Sync completed with status: $?"
+            node thebrain-api-sync.js || echo "Sync completed with status: $?"
           else
             echo "❌ NO - Missing prerequisites"
             echo ""
