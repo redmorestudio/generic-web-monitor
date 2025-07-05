@@ -183,16 +183,59 @@ jobs:
             # Commit the changes
             git commit -m "🕷️ Update scraped content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
             
-            # Pull latest changes and rebase our commit on top
-            git fetch origin main
-            git rebase origin/main || {
-              echo "Rebase failed, trying merge strategy"
-              git rebase --abort
-              git pull origin main --strategy=ours
+            # Function to retry git push with exponential backoff
+            push_with_retry() {
+              local max_attempts=5
+              local attempt=1
+              local wait_time=1
+              
+              while [ $attempt -le $max_attempts ]; do
+                echo "🔄 Attempt $attempt/$max_attempts to push changes..."
+                
+                # Pull latest changes and rebase our commit on top
+                git fetch origin main
+                git rebase origin/main || {
+                  echo "❌ Rebase failed, trying merge strategy..."
+                  git rebase --abort 2>/dev/null || true
+                  git pull origin main --no-rebase --strategy=ours || {
+                    echo "❌ Merge failed, resetting and retrying"
+                    git reset --hard HEAD~1
+                    git pull origin main
+                    # Re-add and commit our changes
+                    git add -f github-actions-backend/data/raw_content.db || true
+                    git add -f github-actions-backend/data/intelligence.db || true
+                    git add api-data/last-scrape.json || true
+                    git commit -m "🕷️ Update scraped content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+                  }
+                }
+                
+                # Try to push
+                if git push origin main; then
+                  echo "✅ Successfully pushed changes!"
+                  return 0
+                else
+                  echo "❌ Push failed"
+                  
+                  if [ $attempt -lt $max_attempts ]; then
+                    echo "⏳ Waiting ${wait_time}s before retry..."
+                    sleep $wait_time
+                    wait_time=$((wait_time * 2))
+                    attempt=$((attempt + 1))
+                  else
+                    echo "❌ All push attempts failed"
+                    return 1
+                  fi
+                fi
+              done
             }
             
-            # Push the changes
-            git push origin main
+            # Push the changes with retry
+            push_with_retry || {
+              echo "⚠️  Failed to push changes after multiple attempts"
+              echo "⚠️  Scraping completed but changes couldn't be pushed"
+              echo "⚠️  Manual intervention may be required"
+              exit 1  # Fail since scraping data is critical
+            }
             
             # Clean up stash if any
             git stash pop || true
@@ -231,16 +274,58 @@ jobs:
             # Commit the changes
             git commit -m "🕷️ Update scraped content - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
             
-            # Pull latest changes and rebase our commit on top
-            git fetch origin main
-            git rebase origin/main || {
-              echo "Rebase failed, trying merge strategy"
-              git rebase --abort
-              git pull origin main --strategy=ours
+            # Function to retry git push with exponential backoff
+            push_with_retry() {
+              local max_attempts=5
+              local attempt=1
+              local wait_time=1
+              
+              while [ $attempt -le $max_attempts ]; do
+                echo "🔄 Attempt $attempt/$max_attempts to push changes..."
+                
+                # Pull latest changes and rebase our commit on top
+                git fetch origin main
+                git rebase origin/main || {
+                  echo "❌ Rebase failed, trying merge strategy..."
+                  git rebase --abort 2>/dev/null || true
+                  git pull origin main --no-rebase --strategy=ours || {
+                    echo "❌ Merge failed, resetting and retrying"
+                    git reset --hard HEAD~1
+                    git pull origin main
+                    # Re-add and commit our changes
+                    git add -f github-actions-backend/data/monitor.db || true
+                    git add api-data/last-scrape.json || true
+                    git commit -m "🕷️ Update scraped content - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+                  }
+                }
+                
+                # Try to push
+                if git push origin main; then
+                  echo "✅ Successfully pushed changes!"
+                  return 0
+                else
+                  echo "❌ Push failed"
+                  
+                  if [ $attempt -lt $max_attempts ]; then
+                    echo "⏳ Waiting ${wait_time}s before retry..."
+                    sleep $wait_time
+                    wait_time=$((wait_time * 2))
+                    attempt=$((attempt + 1))
+                  else
+                    echo "❌ All push attempts failed"
+                    return 1
+                  fi
+                fi
+              done
             }
             
-            # Push the changes
-            git push origin main
+            # Push the changes with retry
+            push_with_retry || {
+              echo "⚠️  Failed to push changes after multiple attempts"
+              echo "⚠️  Scraping completed but changes couldn't be pushed"
+              echo "⚠️  Manual intervention may be required"
+              exit 1  # Fail since scraping data is critical
+            }
             
             # Clean up stash if any
             git stash pop || true

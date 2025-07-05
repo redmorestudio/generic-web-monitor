@@ -195,6 +195,46 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
+          # Function to retry git push with exponential backoff
+          push_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            local wait_time=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔄 Attempt $attempt/$max_attempts to push changes..."
+              
+              # Try force-with-lease first
+              if git push --force-with-lease origin main; then
+                echo "✅ Successfully pushed changes!"
+                return 0
+              fi
+              
+              echo "❌ Force-with-lease failed, pulling latest changes..."
+              
+              # Pull latest changes and try to rebase
+              git fetch origin main
+              git rebase origin/main || {
+                echo "❌ Rebase failed, trying merge strategy..."
+                git rebase --abort 2>/dev/null || true
+                git merge origin/main --strategy=ours || {
+                  echo "❌ Merge failed, will retry from fresh state"
+                  return 1
+                }
+              }
+              
+              if [ $attempt -lt $max_attempts ]; then
+                echo "⏳ Waiting ${wait_time}s before retry..."
+                sleep $wait_time
+                wait_time=$((wait_time * 2))
+                attempt=$((attempt + 1))
+              else
+                echo "❌ All push attempts failed"
+                return 1
+              fi
+            done
+          }
+          
           # Ensure we're on the latest version
           git fetch origin main
           git reset --hard origin/main
@@ -213,7 +253,13 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "🔄 Update processed content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
-            git push --force-with-lease origin main
+            
+            # Push with retry logic
+            push_with_retry || {
+              echo "⚠️  Failed to push changes after multiple attempts"
+              echo "⚠️  Changes will be included in next workflow run"
+              exit 0
+            }
           fi
       
       - name: Commit processed data (legacy)
@@ -221,6 +267,46 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          
+          # Function to retry git push with exponential backoff
+          push_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            local wait_time=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔄 Attempt $attempt/$max_attempts to push changes..."
+              
+              # Try force-with-lease first
+              if git push --force-with-lease origin main; then
+                echo "✅ Successfully pushed changes!"
+                return 0
+              fi
+              
+              echo "❌ Force-with-lease failed, pulling latest changes..."
+              
+              # Pull latest changes and try to rebase
+              git fetch origin main
+              git rebase origin/main || {
+                echo "❌ Rebase failed, trying merge strategy..."
+                git rebase --abort 2>/dev/null || true
+                git merge origin/main --strategy=ours || {
+                  echo "❌ Merge failed, will retry from fresh state"
+                  return 1
+                }
+              }
+              
+              if [ $attempt -lt $max_attempts ]; then
+                echo "⏳ Waiting ${wait_time}s before retry..."
+                sleep $wait_time
+                wait_time=$((wait_time * 2))
+                attempt=$((attempt + 1))
+              else
+                echo "❌ All push attempts failed"
+                return 1
+              fi
+            done
+          }
           
           # Ensure we're on the latest version
           git fetch origin main
@@ -234,7 +320,13 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "🔄 Update processed content - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
-            git push --force-with-lease origin main
+            
+            # Push with retry logic
+            push_with_retry || {
+              echo "⚠️  Failed to push changes after multiple attempts"
+              echo "⚠️  Changes will be included in next workflow run"
+              exit 0
+            }
           fi
       
       # Trigger next workflow if successful

@@ -3,6 +3,11 @@ name: Initialize Database
 on:
   workflow_dispatch:
 
+# Prevent concurrent runs
+concurrency:
+  group: init-database
+  cancel-in-progress: false
+
 jobs:
   init-database:
     runs-on: ubuntu-latest

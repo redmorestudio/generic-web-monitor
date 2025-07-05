@@ -3,6 +3,11 @@ name: Bootstrap Database
 on:
   workflow_dispatch:
 
+# Prevent concurrent runs
+concurrency:
+  group: bootstrap-database
+  cancel-in-progress: false
+
 jobs:
   bootstrap:
     runs-on: ubuntu-latest

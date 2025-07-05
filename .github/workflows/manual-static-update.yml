@@ -3,6 +3,11 @@ name: Manual Static Data Update
 on:
   workflow_dispatch:
 
+# Prevent concurrent runs
+concurrency:
+  group: manual-static-update
+  cancel-in-progress: false
+
 jobs:
   update-static-data:
     runs-on: ubuntu-latest
