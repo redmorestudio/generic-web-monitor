@@ -34,8 +34,9 @@ class MarkdownConverterThreeDB {
     // Check if three-database architecture exists
     if (!dbManager.hasThreeDbArchitecture()) {
       console.log('📊 Three-database architecture not found. Creating it now...');
-      // Run the create-three-dbs script
-      require('./scripts/create-three-dbs');
+      // Run the init-db-three script
+      const { execSync } = require('child_process');
+      execSync('node scripts/init-db-three.js', { stdio: 'inherit' });
     }
     
     // Get database connections
