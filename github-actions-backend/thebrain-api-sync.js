@@ -587,8 +587,25 @@ ${new Date(change.created_at).toLocaleString()}`);
 
   async updateThought(thoughtId, data) {
     try {
-      const response = await this.api.put(`/thoughts/${this.brainId}/${thoughtId}`, data);
-      return response.data.id;
+      // Use PATCH with JSON Patch format instead of PUT
+      const patchData = [];
+      
+      // Convert data to JSON Patch operations
+      for (const [key, value] of Object.entries(data)) {
+        patchData.push({
+          op: 'replace',
+          path: `/${key}`,
+          value: value
+        });
+      }
+      
+      await this.api.patch(`/thoughts/${this.brainId}/${thoughtId}`, patchData, {
+        headers: {
+          'Content-Type': 'application/json-patch+json'
+        }
+      });
+      
+      return thoughtId;
     } catch (error) {
       console.error(`Failed to update thought ${thoughtId}:`, error.response?.data || error.message);
       throw error;
