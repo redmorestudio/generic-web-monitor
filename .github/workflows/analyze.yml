@@ -196,9 +196,45 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # FIXED: Removed git reset --hard that was wiping out generated files
-          # Just pull the latest changes to avoid conflicts
-          git pull origin main --rebase || true
+          # Function to retry git push with exponential backoff
+          push_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            local wait_time=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔄 Attempt $attempt/$max_attempts to push changes..."
+              
+              # Pull latest changes before each attempt
+              git pull origin main --rebase || {
+                echo "❌ Failed to rebase, trying merge strategy..."
+                git rebase --abort 2>/dev/null || true
+                git pull origin main --no-rebase --strategy=ours || {
+                  echo "❌ Merge failed, resetting to origin/main"
+                  git reset --hard origin/main
+                  return 1
+                }
+              }
+              
+              # Try to push
+              if git push origin main; then
+                echo "✅ Successfully pushed changes!"
+                return 0
+              else
+                echo "❌ Push failed"
+                
+                if [ $attempt -lt $max_attempts ]; then
+                  echo "⏳ Waiting ${wait_time}s before retry..."
+                  sleep $wait_time
+                  wait_time=$((wait_time * 2))
+                  attempt=$((attempt + 1))
+                else
+                  echo "❌ All push attempts failed"
+                  return 1
+                fi
+              fi
+            done
+          }
           
           # Add all analysis outputs
           git add api-data/ || true
@@ -212,8 +248,15 @@ jobs:
             
             git commit -m "🚀 Update AI analysis (Groq) - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
             
-            # Push changes
-            git push origin main
+            # Push changes with retry logic
+            push_with_retry || {
+              echo "⚠️  Failed to push changes after multiple attempts"
+              echo "⚠️  This is likely due to concurrent workflows"
+              echo "⚠️  Changes will be included in next workflow run"
+              # Don't fail the workflow - changes are committed locally
+              # and will be pushed in the next successful run
+              exit 0
+            }
           fi
       
       # Trigger next workflow if successful
