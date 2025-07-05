@@ -148,9 +148,9 @@ jobs:
           else
             echo "🧠 Syncing to TheBrain via API..."
             
-            # CRITICAL FIX: Remove error masking
-            # Run the Python script and let it fail properly if there's an error
-            python thebrain_api_sync.py
+            # Use the JavaScript version which has been fixed
+            echo "Using JavaScript version of TheBrain sync..."
+            node thebrain-api-sync.js
             
             # Check the exit code
             if [ $? -eq 0 ]; then

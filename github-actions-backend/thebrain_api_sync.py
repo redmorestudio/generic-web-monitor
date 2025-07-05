@@ -18,7 +18,7 @@ import time
 BRAIN_ID = os.getenv('THEBRAIN_BRAIN_ID')
 API_KEY = os.getenv('THEBRAIN_API_KEY')
 CENTRAL_THOUGHT_ID = os.getenv('THEBRAIN_CENTRAL_THOUGHT_ID')  # Brain's central thought
-API_BASE_URL = 'https://api.thebrain.com/v1'
+API_BASE_URL = 'https://api.bra.in'
 
 # Validate credentials
 if not BRAIN_ID or not API_KEY:
