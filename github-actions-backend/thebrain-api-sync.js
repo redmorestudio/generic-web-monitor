@@ -119,12 +119,12 @@ class TheBrainAPISync {
     const existingRoot = this.getMapping('root', 'system');
     
     const rootData = {
-      name: 'AI Competitive Monitor',
+      name: '🎯 AI Competitive Monitor',
       label: 'SYSTEM',
       kind: 2, // Type
       acType: 0, // Public
-      foregroundColor: '#667eea',
-      backgroundColor: '#1a1a2e'
+      foregroundColor: '#ffffff',
+      backgroundColor: '#4c1d95'
     };
     
     let thoughtId;
@@ -193,11 +193,11 @@ Last sync: ${new Date().toISOString()}`);
     console.log('Creating main categories...');
     
     const categories = {
-      companies: { name: 'Monitored Companies', color: '#ef4444', icon: '🏢' },
-      changes: { name: 'Recent Changes', color: '#f59e0b', icon: '🔄' },
-      architecture: { name: 'System Architecture', color: '#3b82f6', icon: '🏗️' },
-      insights: { name: 'AI Insights', color: '#22c55e', icon: '🧠' },
-      threats: { name: 'Competitive Intelligence', color: '#dc2626', icon: '⚔️' }
+      companies: { name: '🏢 Monitored Companies', color: '#ffffff', bgColor: '#dc2626', icon: '🏢' },
+      changes: { name: '🔄 Recent Changes', color: '#ffffff', bgColor: '#d97706', icon: '🔄' },
+      architecture: { name: '🏗️ System Architecture', color: '#ffffff', bgColor: '#2563eb', icon: '🏗️' },
+      insights: { name: '🧠 AI Insights', color: '#ffffff', bgColor: '#059669', icon: '🧠' },
+      threats: { name: '⚔️ Competitive Intelligence', color: '#ffffff', bgColor: '#7c2d12', icon: '⚔️' }
     };
     
     const categoryIds = {};
@@ -211,7 +211,7 @@ Last sync: ${new Date().toISOString()}`);
         label: cat.icon,
         kind: 2, // Type
         foregroundColor: cat.color,
-        backgroundColor: '#0f0f1e'
+        backgroundColor: cat.bgColor
       };
       
       let catId;
@@ -247,21 +247,24 @@ Last sync: ${new Date().toISOString()}`);
     
     const databases = [
       {
-        name: 'Raw Content DB',
+        name: '🗜️ Raw Content DB',
         desc: 'HTML & Changes',
-        color: '#dc2626',
+        color: '#ffffff',
+        bgColor: '#991b1b',
         tables: ['content_snapshots', 'changes']
       },
       {
-        name: 'Processed Content DB',
+        name: '📄 Processed Content DB',
         desc: 'Markdown & Text',
-        color: '#f59e0b',
+        color: '#ffffff',
+        bgColor: '#d97706',
         tables: ['processed_content', 'markdown_content']
       },
       {
-        name: 'Intelligence DB',
+        name: '🧠 Intelligence DB',
         desc: 'Analysis & Insights',
-        color: '#22c55e',
+        color: '#ffffff',
+        bgColor: '#059669',
         tables: ['companies', 'urls', 'baseline_analysis', 'ai_analysis']
       }
     ];
@@ -274,7 +277,7 @@ Last sync: ${new Date().toISOString()}`);
         label: db.desc,
         kind: 1, // Normal
         foregroundColor: db.color,
-        backgroundColor: '#1a1a2e'
+        backgroundColor: db.bgColor
       };
       
       let dbId;
@@ -315,11 +318,11 @@ ${db.tables.map(t => `- **${t}**`).join('\n')}
         const existingTableId = this.getMapping('table', `${db.name}:${table}`);
         
         const tableData = {
-          name: table,
+          name: `📊 ${table}`,
           label: 'TABLE',
           kind: 1,
-          foregroundColor: '#6b7280',
-          backgroundColor: '#111827'
+          foregroundColor: '#ffffff',
+          backgroundColor: '#6b7280'
         };
         
         if (!existingTableId) {
@@ -345,13 +348,13 @@ ${db.tables.map(t => `- **${t}**`).join('\n')}
     
     // Category mapping
     const categoryMap = {
-      'llm-provider': { name: 'LLM Providers', color: '#8b5cf6', icon: '🤖' },
-      'ai-coding': { name: 'AI Coding Tools', color: '#ec4899', icon: '💻' },
-      'ai-infrastructure': { name: 'AI Infrastructure', color: '#f97316', icon: '🏗️' },
-      'ai-research': { name: 'AI Research', color: '#14b8a6', icon: '🔬' },
-      'competitor': { name: 'Competitors', color: '#ef4444', icon: '⚔️' },
-      'partner': { name: 'Partners', color: '#22c55e', icon: '🤝' },
-      'industry': { name: 'Industry Players', color: '#3b82f6', icon: '🏭' }
+      'llm-provider': { name: '🤖 LLM Providers', color: '#ffffff', bgColor: '#7c3aed', icon: '🤖' },
+      'ai-coding': { name: '💻 AI Coding Tools', color: '#ffffff', bgColor: '#db2777', icon: '💻' },
+      'ai-infrastructure': { name: '🏗️ AI Infrastructure', color: '#ffffff', bgColor: '#ea580c', icon: '🏗️' },
+      'ai-research': { name: '🔬 AI Research', color: '#ffffff', bgColor: '#0891b2', icon: '🔬' },
+      'competitor': { name: '⚔️ Competitors', color: '#ffffff', bgColor: '#dc2626', icon: '⚔️' },
+      'partner': { name: '🤝 Partners', color: '#ffffff', bgColor: '#16a34a', icon: '🤝' },
+      'industry': { name: '🏭 Industry Players', color: '#ffffff', bgColor: '#2563eb', icon: '🏭' }
     };
     
     const categoryGroups = {};
@@ -365,7 +368,7 @@ ${db.tables.map(t => `- **${t}**`).join('\n')}
         label: info.icon,
         kind: 2, // Type
         foregroundColor: info.color,
-        backgroundColor: '#1a1a2e'
+        backgroundColor: info.bgColor
       };
       
       let groupId;
@@ -411,8 +414,8 @@ ${db.tables.map(t => `- **${t}**`).join('\n')}
           name: company.name,
           label: `${company.url_count} URLs`,
           kind: 1,
-          foregroundColor: categoryMap[category]?.color || '#667eea',
-          backgroundColor: '#111827'
+          foregroundColor: '#ffffff',
+          backgroundColor: categoryMap[category]?.bgColor || '#4b5563'
         };
         
         try {
@@ -437,8 +440,8 @@ ${db.tables.map(t => `- **${t}**`).join('\n')}
           name: company.name,
           label: `${company.url_count} URLs`,
           kind: 1,
-          foregroundColor: categoryMap[category]?.color || '#667eea',
-          backgroundColor: '#111827'
+          foregroundColor: '#ffffff',
+          backgroundColor: categoryMap[category]?.bgColor || '#4b5563'
         };
         
         companyThoughtId = await this.createThought(companyData);
@@ -519,8 +522,8 @@ ${new Date().toISOString()}`);
       
       // Create priority groups
       const groups = {
-        high: { name: 'High Priority', color: '#dc2626', icon: '🔴', min: 8 },
-        medium: { name: 'Medium Priority', color: '#f59e0b', icon: '🟡', min: 6 }
+        high: { name: '🔴 High Priority', color: '#ffffff', bgColor: '#b91c1c', icon: '🔴', min: 8 },
+        medium: { name: '🟡 Medium Priority', color: '#ffffff', bgColor: '#d97706', icon: '🟡', min: 6 }
       };
       
       const groupIds = {};
@@ -532,7 +535,7 @@ ${new Date().toISOString()}`);
           label: info.icon,
           kind: 2,
           foregroundColor: info.color,
-          backgroundColor: '#1a1a2e'
+          backgroundColor: info.bgColor
         };
         
         let groupId;
@@ -569,7 +572,7 @@ ${new Date().toISOString()}`);
           label: `Score: ${change.relevance_score}/10`,
           kind: 3, // Event
           foregroundColor: groups[priority].color,
-          backgroundColor: '#111827'
+          backgroundColor: groups[priority].bgColor
         };
         
         const changeId = await this.createThought(changeData);
@@ -610,9 +613,9 @@ ${new Date(change.created_at).toLocaleString()}`);
     console.log('Creating AI insights...');
     
     const insights = [
-      { name: 'Technology Trends', icon: '📈', color: '#10b981' },
-      { name: 'Competitive Threats', icon: '⚠️', color: '#ef4444' },
-      { name: 'Market Opportunities', icon: '💡', color: '#f59e0b' }
+      { name: '📈 Technology Trends', icon: '📈', color: '#ffffff', bgColor: '#047857' },
+      { name: '⚠️ Competitive Threats', icon: '⚠️', color: '#ffffff', bgColor: '#dc2626' },
+      { name: '💡 Market Opportunities', icon: '💡', color: '#ffffff', bgColor: '#d97706' }
     ];
     
     for (const insight of insights) {
@@ -623,7 +626,7 @@ ${new Date(change.created_at).toLocaleString()}`);
         label: insight.icon,
         kind: 2,
         foregroundColor: insight.color,
-        backgroundColor: '#1a1a2e'
+        backgroundColor: insight.bgColor
       };
       
       if (!existingId) {
