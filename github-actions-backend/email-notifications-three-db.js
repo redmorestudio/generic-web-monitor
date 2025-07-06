@@ -89,16 +89,25 @@ class ThreeDBEmailNotificationService {
   }
 
   // Send or save email based on mode
+  // Send or save email based on mode with proper error handling
   async sendEmail(mailOptions) {
-    if (this.testMode) {
-      return await this.saveTestEmail(mailOptions.subject, mailOptions.html);
-    } else if (this.isConfigured) {
-      const info = await this.transporter.sendMail(mailOptions);
-      console.log('Email sent:', info.messageId);
-      return info;
-    } else {
-      console.log('Email not configured and not in test mode. Skipping.');
-      return null;
+    try {
+      if (this.testMode) {
+        const result = await this.saveTestEmail(mailOptions.subject, mailOptions.html);
+        console.log('✅ Test email saved successfully');
+        return result;
+      } else if (this.isConfigured) {
+        const info = await this.transporter.sendMail(mailOptions);
+        console.log('✅ Email sent:', info.messageId);
+        return info;
+      } else {
+        const error = new Error('Email not configured and not in test mode');
+        console.error('❌', error.message);
+        throw error;
+      }
+    } catch (error) {
+      console.error('❌ Failed to send email:', error.message);
+      throw error; // Re-throw to be handled by caller
     }
   }
 
@@ -876,6 +885,7 @@ if (require.main === module) {
   async function main() {
     const command = process.argv[2];
     const emailService = new ThreeDBEmailNotificationService();
+    let success = false;
     
     console.log('\n📧 Three-DB Email Notification Service');
     console.log('=====================================');
@@ -898,69 +908,92 @@ if (require.main === module) {
       console.log('\n🧪 Running in TEST MODE - emails will be saved to files\n');
     }
 
-    switch (command) {
-      case 'test':
-        console.log('Sending test email...');
-        await emailService.sendTestEmail();
-        break;
-        
-      case 'check':
-        console.log('Checking for recent high-priority changes...');
-        await emailService.checkAndAlert();
-        break;
-        
-      case 'daily':
-        console.log('Generating daily digest...');
-        await emailService.sendDailyDigest();
-        break;
-        
-      case 'demo':
-        console.log('Creating demo email with sample data...');
-        // Create some fake changes for demo
-        const demoChanges = [
-          {
-            id: 1,
-            url: 'https://openai.com/blog',
-            change_type: 'New Content',
-            change_summary: 'OpenAI announces GPT-5 with breakthrough reasoning capabilities',
-            interest_level: 9,
-            created_at: new Date().toISOString()
-          },
-          {
-            id: 2,
-            url: 'https://anthropic.com/news',
-            change_type: 'Product Launch',
-            change_summary: 'Anthropic releases Claude 4 with 1M token context window',
-            interest_level: 8,
-            created_at: new Date().toISOString()
-          }
-        ];
-        await emailService.sendHighPriorityAlert(demoChanges);
-        break;
-        
-      case 'state':
-        console.log('Generating complete state report...');
-        await emailService.sendCompleteState();
-        break;
-        
-      default:
-        console.log('\nUsage:');
-        console.log('  node email-notifications-three-db.js test     - Send test email');
-        console.log('  node email-notifications-three-db.js check    - Check and alert on recent changes');
-        console.log('  node email-notifications-three-db.js daily    - Send daily digest');
-        console.log('  node email-notifications-three-db.js state    - Send complete state report');
-        console.log('  node email-notifications-three-db.js demo     - Create demo email with sample data');
-        console.log('\nOptions:');
-        console.log('  --test-mode    Save emails to files instead of sending');
+    try {
+      switch (command) {
+        case 'test':
+          console.log('Sending test email...');
+          await emailService.sendTestEmail();
+          success = true;
+          break;
+          
+        case 'check':
+          console.log('Checking for recent high-priority changes...');
+          success = await emailService.checkAndAlert();
+          break;
+          
+        case 'daily':
+          console.log('Generating daily digest...');
+          await emailService.sendDailyDigest();
+          success = true;
+          break;
+          
+        case 'demo':
+          console.log('Creating demo email with sample data...');
+          // Create some fake changes for demo
+          const demoChanges = [
+            {
+              id: 1,
+              url: 'https://openai.com/blog',
+              change_type: 'New Content',
+              change_summary: 'OpenAI announces GPT-5 with breakthrough reasoning capabilities',
+              interest_level: 9,
+              created_at: new Date().toISOString()
+            },
+            {
+              id: 2,
+              url: 'https://anthropic.com/news',
+              change_type: 'Product Launch',
+              change_summary: 'Anthropic releases Claude 4 with 1M token context window',
+              interest_level: 8,
+              created_at: new Date().toISOString()
+            }
+          ];
+          await emailService.sendHighPriorityAlert(demoChanges);
+          success = true;
+          break;
+          
+        case 'state':
+          console.log('Generating complete state report...');
+          await emailService.sendCompleteState();
+          success = true;
+          break;
+          
+        default:
+          console.log('\nUsage:');
+          console.log('  node email-notifications-three-db.js test     - Send test email');
+          console.log('  node email-notifications-three-db.js check    - Check and alert on recent changes');
+          console.log('  node email-notifications-three-db.js daily    - Send daily digest');
+          console.log('  node email-notifications-three-db.js state    - Send complete state report');
+          console.log('  node email-notifications-three-db.js demo     - Create demo email with sample data');
+          console.log('\nOptions:');
+          console.log('  --test-mode    Save emails to files instead of sending');
+          process.exit(0);
+      }
+    } catch (error) {
+      console.error('\n❌ Email operation failed:', error.message);
+      if (error.code === 'EAUTH') {
+        console.error('   Authentication failed - check SMTP credentials');
+      } else if (error.code === 'ECONNECTION') {
+        console.error('   Connection failed - check SMTP host and port');
+      } else if (error.code === 'ESOCKET') {
+        console.error('   Network error - check internet connection');
+      }
+      success = false;
+    } finally {
+      // Close databases
+      emailService.intelligenceDb.close();
+      emailService.processedDb.close();
+      emailService.rawDb.close();
     }
-
-    // Close databases
-    emailService.intelligenceDb.close();
-    emailService.processedDb.close();
-    emailService.rawDb.close();
+    
+    // Exit with proper code
+    process.exit(success ? 0 : 1);
   }
   
-  main().catch(console.error);
+  main().catch(error => {
+    console.error('\n❌ Fatal error:', error);
+    process.exit(1);
+  });
 }
 
 module.exports = ThreeDBEmailNotificationService;
