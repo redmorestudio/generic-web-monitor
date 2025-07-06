@@ -85,23 +85,49 @@ jobs:
       # Download raw_content.db artifact from scrape workflow
       - name: Download raw content database
         if: ${{ inputs.trigger_source == 'scrape' && inputs.run_id }}
+        id: download-artifact
         uses: actions/download-artifact@v4
         with:
           name: scraper-databases-${{ inputs.run_id }}
           path: github-actions-backend/data
+        continue-on-error: true
       
       # Ensure all database files exist
       - name: Ensure latest database files
         run: |
           cd github-actions-backend
           echo "✅ Checking database files..."
-          ls -la data/*.db || true
           
-          # If raw_content.db still doesn't exist, we have a problem
+          # Check if artifact download was attempted but failed
+          if [ "${{ inputs.trigger_source }}" = "scrape" ] && [ -n "${{ inputs.run_id }}" ] && [ "${{ steps.download-artifact.outcome }}" = "failure" ]; then
+            echo "⚠️  Artifact download failed for run_id: ${{ inputs.run_id }}"
+            echo "📥 Attempting to use databases from repository..."
+          fi
+          
+          # List current database files
+          echo "📁 Current database files:"
+          ls -la data/*.db 2>/dev/null || echo "No database files found yet"
+          
+          # If raw_content.db doesn't exist, try to get it from the repository
+          if [ ! -f data/raw_content.db ]; then
+            echo "📥 Pulling latest from repository to get databases..."
+            git fetch origin main
+            git checkout origin/main -- github-actions-backend/data/raw_content.db 2>/dev/null || true
+            git checkout origin/main -- github-actions-backend/data/intelligence.db 2>/dev/null || true
+            git checkout origin/main -- github-actions-backend/data/processed_content.db 2>/dev/null || true
+          fi
+          
+          # Final check
           if [ ! -f data/raw_content.db ]; then
             echo "❌ ERROR: raw_content.db not found!"
-            echo "This workflow needs to be triggered by scrape workflow or run scrape first."
+            echo "💡 This workflow needs either:"
+            echo "   1. To be triggered by the scrape workflow (automatic)"
+            echo "   2. To have raw_content.db already in the repository"
+            echo "   3. Run the scrape workflow first"
             exit 1
+          else
+            echo "✅ Found raw_content.db"
+            ls -lh data/*.db
           fi
       
       # NEW: Initialize three-database architecture if needed
