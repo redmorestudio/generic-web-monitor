@@ -403,7 +403,7 @@ async function processAllSnapshots() {
       u.url_type,
       c.id as company_id, 
       c.name as company_name, 
-      c.type as company_type
+      c.category as company_type
     FROM processed.markdown_content mc
     JOIN processed.urls u ON mc.url_id = u.id
     JOIN companies c ON u.company_id = c.id
@@ -531,11 +531,11 @@ async function generateBaselineReport() {
     SELECT DISTINCT
       c.id,
       c.name,
-      c.type,
+      c.category as type,
       COUNT(ba.id) as url_count
     FROM companies c
     JOIN baseline_analysis ba ON c.id = ba.company_id
-    GROUP BY c.id, c.name, c.type
+    GROUP BY c.id, c.name, c.category
     ORDER BY c.name
   `).all();
 
