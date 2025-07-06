@@ -28,6 +28,36 @@ class MarkdownConverterThreeDB {
   constructor() {
     this.rawDb = null;
     this.processedDb = null;
+    this.hasErrors = false;
+    this.errorCount = 0;
+  }
+
+  verifyDatabaseSchema() {
+    console.log('🔍 Verifying database schema...');
+    
+    // Check raw_content.db tables
+    const rawTables = this.rawDb.prepare("SELECT name FROM sqlite_master WHERE type='table'").all();
+    const rawTableNames = rawTables.map(t => t.name);
+    const requiredRawTables = ['raw_html', 'scrape_runs'];
+    const missingRaw = requiredRawTables.filter(t => !rawTableNames.includes(t));
+    
+    if (missingRaw.length > 0) {
+      throw new Error(`Missing required tables in raw_content.db: ${missingRaw.join(', ')}`);
+    }
+    
+    // Check processed_content.db tables
+    const processedTables = this.processedDb.prepare("SELECT name FROM sqlite_master WHERE type='table'").all();
+    const processedTableNames = processedTables.map(t => t.name);
+    const requiredProcessedTables = ['markdown_content', 'processing_runs', 'change_detection', 'content_changes'];
+    const missingProcessed = requiredProcessedTables.filter(t => !processedTableNames.includes(t));
+    
+    if (missingProcessed.length > 0) {
+      throw new Error(`Missing required tables in processed_content.db: ${missingProcessed.join(', ')}`);
+    }
+    
+    console.log('✅ Database schema verified successfully');
+    console.log(`   Raw tables: ${rawTableNames.join(', ')}`);
+    console.log(`   Processed tables: ${processedTableNames.join(', ')}`);
   }
 
   initialize() {
@@ -44,6 +74,15 @@ class MarkdownConverterThreeDB {
     this.processedDb = dbManager.getProcessedDb();
     
     console.log('📊 Markdown converter initialized with three-database architecture');
+    
+    // Verify schema before proceeding
+    try {
+      this.verifyDatabaseSchema();
+    } catch (error) {
+      console.error('❌ DATABASE SCHEMA ERROR:', error.message);
+      console.error('❌ Cannot proceed with invalid database schema');
+      throw error;
+    }
     
     // Log database stats
     const rawCount = this.rawDb.prepare('SELECT COUNT(*) as count FROM raw_html').get().count;
@@ -161,8 +200,11 @@ class MarkdownConverterThreeDB {
         dbId: result.lastInsertRowid
       };
     } catch (error) {
-      console.error(`   ❌ Database error:`, error.message);
-      throw error;
+      console.error(`   ❌ CRITICAL DATABASE ERROR:`, error.message);
+      console.error(`   Stack trace:`, error.stack);
+      this.hasErrors = true;
+      this.errorCount++;
+      throw error;  // Propagate error up the chain
     }
   }
 
@@ -199,8 +241,14 @@ class MarkdownConverterThreeDB {
           errorCount++;
         }
       } catch (error) {
-        console.error(`Error processing HTML ${id}:`, error.message);
+        console.error(`❌ Error processing HTML ${id}:`, error.message);
         errorCount++;
+        this.hasErrors = true;
+        // Don't continue if we have database errors
+        if (error.message.includes('database') || error.message.includes('table')) {
+          console.error('❌ FATAL: Database error detected, stopping processing');
+          throw error;
+        }
       }
     }
 
@@ -245,7 +293,14 @@ class MarkdownConverterThreeDB {
         const result = await this.processRawHtml(id);
         if (result) successCount++;
       } catch (error) {
-        console.error(`Error processing HTML ${id}:`, error.message);
+        console.error(`❌ Error processing HTML ${id}:`, error.message);
+        this.hasErrors = true;
+        this.errorCount++;
+        // Don't continue if we have database errors
+        if (error.message.includes('database') || error.message.includes('table')) {
+          console.error('❌ FATAL: Database error detected, stopping processing');
+          throw error;
+        }
       }
     }
     
@@ -282,7 +337,14 @@ class MarkdownConverterThreeDB {
         const result = await this.processRawHtml(id);
         if (result) successCount++;
       } catch (error) {
-        console.error(`Error processing HTML ${id}:`, error.message);
+        console.error(`❌ Error processing HTML ${id}:`, error.message);
+        this.hasErrors = true;
+        this.errorCount++;
+        // Don't continue if we have database errors  
+        if (error.message.includes('database') || error.message.includes('table')) {
+          console.error('❌ FATAL: Database error detected, stopping processing');
+          throw error;
+        }
       }
     }
 
@@ -324,8 +386,18 @@ if (require.main === module) {
       } else {
         console.log('Usage: node markdown-converter-three-db.js [all|latest|run <runId>|<html-id>]');
       }
+      
+      // Check if we had any errors
+      if (converter.hasErrors) {
+        console.error(`\n❌ Process completed with ${converter.errorCount} errors`);
+        console.error('❌ Exiting with error code 1');
+        process.exit(1);
+      } else {
+        console.log('\n✅ Process completed successfully with no errors');
+      }
     } catch (error) {
-      console.error('💥 Fatal error:', error);
+      console.error('\n💥 FATAL ERROR:', error.message);
+      console.error('Stack trace:', error.stack);
       process.exit(1);
     } finally {
       converter.close();
