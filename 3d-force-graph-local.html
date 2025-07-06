@@ -940,11 +940,16 @@
         document.getElementById('nodeSimple').classList.add('active');
         document.getElementById('nodeRich').classList.remove('active');
         
-        // Refresh all nodes
+        // Rebuild the graph with new node type
         if (Graph) {
-            graphData.nodes.forEach(node => {
-                Graph.nodeThreeObject(node, createNodeObject(node));
-            });
+            // Preserve current camera position
+            const cameraPos = Graph.cameraPosition();
+            
+            // Rebuild graph data to force node recreation
+            Graph.graphData(graphData);
+            
+            // Restore camera position
+            Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
         }
     });
     
@@ -953,11 +958,16 @@
         document.getElementById('nodeRich').classList.add('active');
         document.getElementById('nodeSimple').classList.remove('active');
         
-        // Refresh all nodes
+        // Rebuild the graph with new node type
         if (Graph) {
-            graphData.nodes.forEach(node => {
-                Graph.nodeThreeObject(node, createNodeObject(node));
-            });
+            // Preserve current camera position
+            const cameraPos = Graph.cameraPosition();
+            
+            // Rebuild graph data to force node recreation
+            Graph.graphData(graphData);
+            
+            // Restore camera position
+            Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
         }
     });
     
