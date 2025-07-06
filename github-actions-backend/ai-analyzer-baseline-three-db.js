@@ -4,10 +4,30 @@ const path = require('path');
 const fs = require('fs');
 require('dotenv').config();
 
-// Initialize Groq client
-const groq = new Groq({
-  apiKey: process.env.GROQ_API_KEY || process.env.ANTHROPIC_API_KEY // Fallback for testing
-});
+// FIXED: Validate API key before proceeding
+if (!process.env.GROQ_API_KEY) {
+  console.error('❌ Error: GROQ_API_KEY environment variable is required');
+  console.error('   Please add it to your GitHub secrets or .env file');
+  console.error('');
+  console.error('   For GitHub Actions:');
+  console.error('   1. Go to Settings → Secrets and variables → Actions');
+  console.error('   2. Click "New repository secret"');
+  console.error('   3. Name: GROQ_API_KEY');
+  console.error('   4. Value: Your Groq API key from https://console.groq.com/keys');
+  console.error('');
+  process.exit(1);
+}
+
+// Initialize Groq client with validation
+let groq;
+try {
+  groq = new Groq({
+    apiKey: process.env.GROQ_API_KEY
+  });
+} catch (error) {
+  console.error('❌ Failed to initialize Groq client:', error.message);
+  process.exit(1);
+}
 
 // Three-database architecture
 const dataDir = path.join(__dirname, 'data');
@@ -198,10 +218,8 @@ Provide your analysis in this JSON structure:
     "positioning": "",
     "value_props": [],
     "core_capabilities": [],
-    "business_focus": [],
-    "competitive_advantages": [],
-    "technical_stack": [],
-    "ai_strategy": ""
+    "recent_updates": [],
+    "momentum_indicators": []
   },
   "strategic_intelligence": {
     "innovation_level": 0,
@@ -228,65 +246,66 @@ Provide your analysis in this JSON structure:
     "notable_facts": [],
     "action_items": []
   }
-}`;
-
-// Timeout wrapper for AI analysis
-async function analyzeWithTimeout(snapshot, company, url, timeoutMs = 30000) {
-  return Promise.race([
-    analyzeSnapshot(snapshot, company, url),
-    new Promise((_, reject) => 
-      setTimeout(() => reject(new Error(`Timeout analyzing ${company.name} after ${timeoutMs/1000}s`)), timeoutMs)
-    )
-  ]);
 }
 
-async function analyzeSnapshot(snapshot, company, url) {
-  try {
-    const prompt = `${BASELINE_EXTRACTION_PROMPT}
+Focus on extracting ALL entities and their relationships. Be comprehensive and detailed.`;
 
-Company: ${company.name} (${company.category})
-URL: ${url.url} (${url.url_type})
-Snapshot Date: ${new Date(snapshot.processed_at).toISOString()}
-
-CURRENT CONTENT:
-${snapshot.markdown_text.substring(0, 5000)}
-
-Analyze this company's current state and provide comprehensive extraction following the specified JSON structure.`;
-
-    console.log(`🚀 Analyzing ${company.name} - ${url.url_type} with Groq Llama 3.3...`);
-    
-    const response = await groq.chat.completions.create({
-      model: 'llama-3.3-70b-versatile',
-      messages: [{
-        role: 'user',
-        content: prompt
-      }],
-      temperature: 0.5,
-      max_completion_tokens: 10000,
-      top_p: 1,
-      stream: false
-    });
-
-    const content = response.choices[0].message.content;
-    
-    // Parse JSON response
-    let extractedData;
+async function analyzeWithGroq(content, company, url) {
+  const maxRetries = 3;
+  const baseDelay = 5000; // 5 seconds
+  
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
     try {
-      const jsonMatch = content.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        extractedData = JSON.parse(jsonMatch[0]);
-      } else {
-        throw new Error('No JSON found in response');
-      }
-    } catch (parseError) {
-      console.error('Failed to parse AI response:', parseError);
-      return null;
-    }
+      const completion = await groq.chat.completions.create({
+        messages: [
+          {
+            role: "system",
+            content: "You are an AI competitive intelligence analyst. Always respond with valid JSON only, no markdown formatting."
+          },
+          {
+            role: "user",
+            content: `${BASELINE_EXTRACTION_PROMPT}\n\nCompany: ${company.name}\nURL: ${url}\n\nContent to analyze:\n${content}`
+          }
+        ],
+        model: "llama-3.3-70b-versatile",
+        temperature: 0.1,
+        max_tokens: 8000,
+        response_format: { type: "json_object" }
+      });
 
-    return extractedData;
-  } catch (error) {
-    console.error('Baseline extraction error:', error);
-    return null;
+      const response = completion.choices[0]?.message?.content;
+      if (!response) {
+        throw new Error('Empty response from Groq');
+      }
+
+      // Parse and validate JSON
+      const parsed = JSON.parse(response);
+      return parsed;
+    } catch (error) {
+      const isRateLimitError = error.status === 429 || 
+                              error.message?.includes('rate limit') ||
+                              error.message?.includes('Rate limit');
+      
+      if (isRateLimitError && attempt < maxRetries) {
+        const delay = baseDelay * Math.pow(2, attempt - 1); // Exponential backoff
+        console.log(`   ⏳ Rate limited. Waiting ${delay/1000}s before retry ${attempt}/${maxRetries}...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        continue;
+      }
+      
+      // Check for invalid API key error
+      if (error.status === 401 || error.message?.includes('Invalid API Key')) {
+        console.error('❌ Invalid GROQ_API_KEY. Please check your API key.');
+        throw new Error('Invalid API key');
+      }
+      
+      if (attempt === maxRetries) {
+        console.error(`   ❌ Failed after ${maxRetries} attempts:`, error.message);
+        throw error;
+      }
+      
+      console.error(`   ⚠️  Attempt ${attempt} failed:`, error.message);
+    }
   }
 }
 
@@ -310,48 +329,27 @@ async function storeBaselineAnalysis(snapshot, company, url, extractedData) {
       snapshot.id,
       JSON.stringify(extractedData.entities || {}),
       JSON.stringify(extractedData.relationships || []),
-      JSON.stringify(extractedData.current_state || {}),
+      JSON.stringify(extractedData.capabilities || {}),
       JSON.stringify(extractedData.strategic_intelligence || {}),
-      JSON.stringify(extractedData.smart_groups || {}),
+      JSON.stringify({
+        integration_partners: extractedData.entities?.partnerships || [],
+        technology_stack: extractedData.entities?.technologies || [],
+        market_segments: extractedData.entities?.markets || []
+      }),
       JSON.stringify(extractedData.quantitative_data || {}),
-      JSON.stringify(extractedData.summary || {}),
+      JSON.stringify({
+        key_facts: extractedData.summary?.notable_facts || [],
+        value_props: extractedData.current_state?.value_props || []
+      }),
       JSON.stringify(extractedData),
       summary,
       relevanceScore
     );
 
-    console.log(`✅ Stored baseline analysis for ${company.name} - ${url.url_type}`);
-    return true;
+    console.log(`   ✅ Stored baseline analysis (relevance: ${relevanceScore}/10)`);
   } catch (error) {
-    console.error('Error storing baseline analysis:', error);
-    return false;
-  }
-}
-
-// Process with retry logic
-async function processSnapshotWithRetry(snapshot, company, url, maxRetries = 2, timeoutMs = 30000) {
-  for (let retry = 0; retry <= maxRetries; retry++) {
-    try {
-      console.log(`  🔄 Processing ${company.name} - ${url.url_type} (attempt ${retry + 1}/${maxRetries + 1})`);
-      
-      const extractedData = await analyzeWithTimeout(snapshot, company, url, timeoutMs);
-      if (extractedData) {
-        const stored = await storeBaselineAnalysis(snapshot, company, url, extractedData);
-        if (stored) {
-          console.log(`  ✓ ${company.name} - ${url.url_type} succeeded`);
-          return { success: true, company: company.name, url_type: url.url_type };
-        }
-      }
-      throw new Error('Failed to extract or store data');
-    } catch (error) {
-      if (retry === maxRetries) {
-        console.error(`  ✗ ${company.name} - ${url.url_type} failed after ${maxRetries + 1} attempts: ${error.message}`);
-        return { success: false, company: company.name, url_type: url.url_type, error: error.message };
-      }
-      console.log(`  ⚠️ Retry ${retry + 1} for ${company.name} - ${url.url_type}: ${error.message}`);
-      // Wait 2 seconds before retry
-      await new Promise(resolve => setTimeout(resolve, 2000));
-    }
+    console.error(`   ❌ Failed to store analysis:`, error.message);
+    throw error;
   }
 }
 
@@ -360,6 +358,34 @@ async function processAllSnapshots() {
   console.log('📊 This will analyze ALL companies\' current state');
   console.log('⚡ Using Groq for faster inference with Llama 3.3 70B');
   console.log('⏱️  Implemented with timeout protection and retry logic\n');
+
+  // FIXED: Check if baseline analysis already exists
+  const existingCount = intelligenceDb.prepare('SELECT COUNT(*) as count FROM baseline_analysis').get();
+  if (existingCount.count > 0) {
+    console.log(`⚠️  Found existing baseline analysis (${existingCount.count} records)`);
+    console.log('   Use --force flag to re-analyze all content');
+    
+    // Check for --force flag
+    const forceReanalyze = process.argv.includes('--force');
+    if (!forceReanalyze) {
+      console.log('✅ Skipping duplicate analysis to save API costs');
+      console.log('   Baseline analysis is already complete');
+      return generateBaselineReport();
+    }
+    
+    console.log('🔄 Force flag detected - re-analyzing all content');
+  }
+
+  // Validate API key with a test call
+  try {
+    console.log('🔑 Validating Groq API key...');
+    await groq.models.list();
+    console.log('✅ API key validated successfully\n');
+  } catch (error) {
+    console.error('❌ Failed to validate GROQ_API_KEY:', error.message);
+    console.error('   Please check your API key at https://console.groq.com/keys');
+    process.exit(1);
+  }
 
   // Track failed sites for reporting
   const failedSites = [];
@@ -377,170 +403,241 @@ async function processAllSnapshots() {
       u.url_type,
       c.id as company_id, 
       c.name as company_name, 
-      c.category as company_type
+      c.type as company_type
     FROM processed.markdown_content mc
-    JOIN urls u ON mc.url_id = u.id
-    JOIN companies c ON u.company_id = c.id
+    JOIN processed.urls u ON mc.url_id = u.id
+    JOIN processed.companies c ON u.company_id = c.id
     WHERE mc.id IN (
       SELECT MAX(id) 
       FROM processed.markdown_content 
       GROUP BY url_id
     )
-    AND mc.markdown_text IS NOT NULL
-    AND LENGTH(mc.markdown_text) > 100
-    ORDER BY c.name, u.url_type
+    ORDER BY c.name, u.url
   `).all();
 
-  console.log(`Found ${latestSnapshots.length} URLs to analyze for baseline intelligence\n`);
+  console.log(`📋 Found ${latestSnapshots.length} URLs to analyze\n`);
 
-  let successCount = 0;
-  let errorCount = 0;
-
-  // Process in smaller batches to reduce concurrent load
-  const batchSize = 5; // Reduced from 10
-  const batches = [];
-  for (let i = 0; i < latestSnapshots.length; i += batchSize) {
-    batches.push(latestSnapshots.slice(i, i + batchSize));
-  }
-
-  console.log(`Processing ${batches.length} batches of up to ${batchSize} URLs each...`);
-  console.log(`Timeout protection: 30s per URL, 2 retries\n`);
-
+  let processed = 0;
+  let failed = 0;
   const startTime = Date.now();
 
-  for (let batchIndex = 0; batchIndex < batches.length; batchIndex++) {
-    const batch = batches[batchIndex];
-    const batchStartTime = Date.now();
+  for (const snapshot of latestSnapshots) {
+    processed++;
+    const progress = Math.round((processed / latestSnapshots.length) * 100);
     
-    console.log(`\n📦 Batch ${batchIndex + 1}/${batches.length} (${batch.length} URLs)`);
+    console.log(`\n[${processed}/${latestSnapshots.length}] (${progress}%) Analyzing ${snapshot.company_name}`);
+    console.log(`   📍 ${snapshot.url}`);
     
-    // Process batch in parallel with timeout protection
-    const batchPromises = batch.map(async (snapshot) => {
-      const company = {
-        id: snapshot.company_id,
-        name: snapshot.company_name,
-        category: snapshot.company_type
-      };
-      
-      const url = {
-        id: snapshot.url_id,
-        url: snapshot.url,
-        url_type: snapshot.url_type
-      };
-
-      return processSnapshotWithRetry(snapshot, company, url);
-    });
-
-    const results = await Promise.all(batchPromises);
-    
-    // Track results
-    results.forEach(result => {
-      if (result.success) {
-        successCount++;
-      } else {
-        errorCount++;
-        failedSites.push(result);
+    try {
+      // Skip if content is too small or empty
+      if (!snapshot.markdown_text || snapshot.markdown_text.length < 100) {
+        console.log('   ⚠️  Skipping - content too small');
+        continue;
       }
-    });
 
-    const batchTime = ((Date.now() - batchStartTime) / 1000).toFixed(1);
-    console.log(`  ⏱️  Batch completed in ${batchTime}s`);
+      // Analyze with Groq
+      console.log('   🧠 Extracting intelligence with Groq...');
+      const extractedData = await analyzeWithGroq(
+        snapshot.markdown_text.substring(0, 30000), // Limit content size
+        { id: snapshot.company_id, name: snapshot.company_name },
+        snapshot.url
+      );
 
-    // NO DELAY between batches - removed the 3-second wait
-    if (batchIndex < batches.length - 1) {
-      const progress = Math.round(((batchIndex + 1) / batches.length) * 100);
-      console.log(`  📊 Progress: ${progress}% complete`);
+      // Store in database
+      await storeBaselineAnalysis(snapshot, 
+        { id: snapshot.company_id, name: snapshot.company_name },
+        { id: snapshot.url_id, url: snapshot.url },
+        extractedData
+      );
+
+      // Log key findings
+      const productCount = extractedData.entities?.products?.length || 0;
+      const techCount = extractedData.entities?.technologies?.length || 0;
+      const partnerCount = extractedData.entities?.partnerships?.length || 0;
+      console.log(`   📊 Extracted: ${productCount} products, ${techCount} technologies, ${partnerCount} partnerships`);
+      
+    } catch (error) {
+      failed++;
+      console.error(`   ❌ Analysis failed:`, error.message);
+      failedSites.push({
+        company: snapshot.company_name,
+        url: snapshot.url,
+        error: error.message
+      });
+      
+      // Stop processing if API key is invalid
+      if (error.message === 'Invalid API key') {
+        console.error('\n❌ Stopping due to invalid API key');
+        process.exit(1);
+      }
+    }
+
+    // Show progress stats every 10 sites
+    if (processed % 10 === 0) {
+      const elapsed = (Date.now() - startTime) / 1000;
+      const rate = processed / elapsed;
+      const remaining = (latestSnapshots.length - processed) / rate;
+      console.log(`\n⏱️  Progress: ${processed}/${latestSnapshots.length} (${failed} failed)`);
+      console.log(`   Rate: ${rate.toFixed(1)} sites/sec`);
+      console.log(`   ETA: ${Math.ceil(remaining / 60)} minutes`);
     }
   }
 
-  const totalTime = ((Date.now() - startTime) / 1000).toFixed(1);
+  const totalTime = (Date.now() - startTime) / 1000;
+  console.log('\n' + '='.repeat(50));
+  console.log('✅ BASELINE ANALYSIS COMPLETE');
+  console.log('='.repeat(50));
+  console.log(`📊 Processed: ${processed} sites`);
+  console.log(`❌ Failed: ${failed} sites`);
+  console.log(`⏱️  Total time: ${Math.round(totalTime / 60)} minutes`);
+  console.log(`⚡ Average: ${(totalTime / processed).toFixed(1)}s per site`);
 
-  // Generate summary report
-  const report = generateBaselineReport();
-  
-  console.log('\n📊 Baseline Analysis Complete!');
-  console.log(`✅ Success: ${successCount} URLs`);
-  console.log(`❌ Errors: ${errorCount} URLs`);
-  console.log(`⏱️  Total time: ${totalTime}s`);
-  
   if (failedSites.length > 0) {
     console.log('\n❌ Failed sites:');
     failedSites.forEach(site => {
-      console.log(`  - ${site.company} (${site.url_type}): ${site.error}`);
+      console.log(`   - ${site.company}: ${site.url}`);
+      console.log(`     Error: ${site.error}`);
     });
   }
-  
-  console.log('\n🔍 Top Insights:');
-  console.log(report.summary);
 
-  return report;
+  // Generate comprehensive report
+  return generateBaselineReport();
 }
 
-function generateBaselineReport() {
-  const analyses = intelligenceDb.prepare(`
-    SELECT ba.*, c.name as company_name, c.category as company_type,
-           u.url, u.url_type
-    FROM baseline_analysis ba
-    JOIN companies c ON ba.company_id = c.id
-    JOIN urls u ON ba.url_id = u.id
-    ORDER BY ba.relevance_score DESC
-  `).all();
+async function generateBaselineReport() {
+  console.log('\n📊 Generating baseline intelligence report...');
 
   const report = {
-    timestamp: new Date().toISOString(),
-    total_companies: new Set(),
-    total_products: 0,
-    total_technologies: 0,
-    high_threat_companies: [],
+    generated_at: new Date().toISOString(),
+    statistics: {
+      companies: intelligenceDb.prepare('SELECT COUNT(DISTINCT company_id) as count FROM baseline_analysis').get()?.count || 0,
+      urls_analyzed: intelligenceDb.prepare('SELECT COUNT(*) as count FROM baseline_analysis').get()?.count || 0,
+      total_products: 0,
+      total_technologies: 0,
+      total_partnerships: 0,
+      total_integrations: 0
+    },
+    companies: [],
     key_insights: [],
-    technology_landscape: {},
-    competitive_landscape: {}
+    competitive_landscape: {
+      threat_levels: {},
+      market_segments: {},
+      technology_adoption: {}
+    }
   };
 
-  for (const analysis of analyses) {
-    try {
-      const entities = JSON.parse(analysis.entities);
-      const strategic = JSON.parse(analysis.competitive_data);
-      
-      report.total_companies.add(analysis.company_name);
-      
-      if (entities.products) {
-        report.total_products += entities.products.length;
-      }
-      
-      if (entities.technologies) {
-        report.total_technologies += entities.technologies.length;
-        entities.technologies.forEach(tech => {
-          report.technology_landscape[tech.category] = 
-            (report.technology_landscape[tech.category] || 0) + 1;
+  // Get all companies with their baseline analysis
+  const companies = intelligenceDb.prepare(`
+    SELECT DISTINCT
+      c.id,
+      c.name,
+      c.type,
+      COUNT(ba.id) as url_count
+    FROM processed.companies c
+    JOIN baseline_analysis ba ON c.id = ba.company_id
+    GROUP BY c.id, c.name, c.type
+    ORDER BY c.name
+  `).all();
+
+  for (const company of companies) {
+    // Get all baseline analyses for this company
+    const analyses = intelligenceDb.prepare(`
+      SELECT 
+        ba.*,
+        u.url
+      FROM baseline_analysis ba
+      JOIN processed.urls u ON ba.url_id = u.id
+      WHERE ba.company_id = ?
+    `).all(company.id);
+
+    // Aggregate data across all URLs for this company
+    const aggregated = {
+      id: company.id,
+      name: company.name,
+      type: company.type,
+      urls_analyzed: analyses.length,
+      entities: {
+        products: [],
+        technologies: [],
+        partnerships: [],
+        integrations: [],
+        people: [],
+        markets: []
+      },
+      relationships: [],
+      threat_level: 0,
+      key_insights: []
+    };
+
+    // Merge data from all URLs
+    for (const analysis of analyses) {
+      try {
+        const fullExtraction = JSON.parse(analysis.full_extraction);
+        const entities = fullExtraction.entities || {};
+        
+        // Merge entities (deduplicate by name)
+        ['products', 'technologies', 'partnerships', 'integrations', 'people', 'markets'].forEach(type => {
+          if (entities[type]) {
+            entities[type].forEach(item => {
+              if (!aggregated.entities[type].find(e => e.name === item.name)) {
+                aggregated.entities[type].push(item);
+              }
+            });
+          }
         });
+
+        // Merge relationships
+        if (fullExtraction.relationships) {
+          aggregated.relationships.push(...fullExtraction.relationships);
+        }
+
+        // Update threat level (take maximum)
+        const threatLevel = fullExtraction.strategic_intelligence?.threat_assessment?.level || 0;
+        aggregated.threat_level = Math.max(aggregated.threat_level, threatLevel);
+
+        // Collect insights
+        if (fullExtraction.summary?.key_insights) {
+          aggregated.key_insights.push(...fullExtraction.summary.key_insights);
+        }
+      } catch (e) {
+        console.error(`Error parsing analysis for ${company.name}:`, e.message);
       }
-      
-      if (strategic.threat_assessment?.level >= 8) {
-        report.high_threat_companies.push({
-          company: analysis.company_name,
-          threat_level: strategic.threat_assessment.level,
-          areas: strategic.threat_assessment.areas
-        });
-      }
-    } catch (e) {
-      // Skip invalid entries
     }
+
+    // Update statistics
+    report.statistics.total_products += aggregated.entities.products.length;
+    report.statistics.total_technologies += aggregated.entities.technologies.length;
+    report.statistics.total_partnerships += aggregated.entities.partnerships.length;
+    report.statistics.total_integrations += aggregated.entities.integrations.length;
+
+    // Add to report
+    report.companies.push(aggregated);
+
+    // Update competitive landscape
+    const threatCategory = aggregated.threat_level >= 8 ? 'high' : 
+                          aggregated.threat_level >= 5 ? 'medium' : 'low';
+    report.competitive_landscape.threat_levels[threatCategory] = 
+      (report.competitive_landscape.threat_levels[threatCategory] || 0) + 1;
   }
 
-  report.total_companies = report.total_companies.size;
-  report.summary = `Analyzed ${report.total_companies} companies, found ${report.total_products} products and ${report.total_technologies} technologies. ${report.high_threat_companies.length} high-priority competitive threats identified.`;
-
   // Save report
-  const reportPath = path.join(__dirname, 'data', 'baseline-intelligence-report.json');
+  const reportPath = path.join(dataDir, 'baseline-intelligence-report.json');
   fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
+
+  console.log('✅ Report generated:', reportPath);
+  console.log('\n📊 Summary:');
+  console.log(`   - Companies: ${report.statistics.companies}`);
+  console.log(`   - Products: ${report.statistics.total_products}`);
+  console.log(`   - Technologies: ${report.statistics.total_technologies}`);
+  console.log(`   - Partnerships: ${report.statistics.total_partnerships}`);
+  console.log(`   - Integrations: ${report.statistics.total_integrations}`);
 
   return report;
 }
 
-// Export for use in other modules
+// Export functions for use in other modules
 module.exports = {
-  analyzeSnapshot,
+  analyzeWithGroq,
   storeBaselineAnalysis,
   processAllSnapshots,
   generateBaselineReport
@@ -548,12 +645,6 @@ module.exports = {
 
 // Run if called directly
 if (require.main === module) {
-  if (!process.env.GROQ_API_KEY && !process.env.ANTHROPIC_API_KEY) {
-    console.error('❌ Error: GROQ_API_KEY environment variable is required');
-    console.error('Please add it to your GitHub secrets or .env file');
-    process.exit(1);
-  }
-
   processAllSnapshots()
     .then((report) => {
       console.log('\n✅ Baseline intelligence analysis complete!');

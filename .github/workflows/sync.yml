@@ -114,20 +114,67 @@ jobs:
           ls -la api-data/*.json || true
           ls -la github-actions-backend/data/*.db || true
       
-      # Run baseline analyzer to populate baseline_analysis table
-      - name: Run baseline analysis for TheBrain
+      # FIX: Check if baseline analysis already exists before running
+      - name: Check baseline analysis status
         if: ${{ !inputs.skip_thebrain }}
+        id: check_baseline
         run: |
           cd github-actions-backend
           
-          # Check if we have the three-database architecture
-          if [ -f "data/intelligence.db" ]; then
-            echo "🧠 Running baseline analysis for three-database architecture..."
-            node ai-analyzer-baseline-three-db.js || echo "Baseline analysis completed"
+          # Check if we have baseline analysis data
+          BASELINE_COUNT=$(node -e "
+            const Database = require('better-sqlite3');
+            const db = new Database('data/intelligence.db');
+            const result = db.prepare('SELECT COUNT(*) as count FROM baseline_analysis').get();
+            console.log(result.count);
+            db.close();
+          " 2>/dev/null || echo "0")
+          
+          echo "baseline_count=$BASELINE_COUNT" >> $GITHUB_OUTPUT
+          
+          if [ "$BASELINE_COUNT" -gt 0 ]; then
+            echo "✅ Baseline analysis already exists ($BASELINE_COUNT records)"
+            echo "🔄 Skipping duplicate analysis to save Groq API costs"
+            
+            # Get timestamp of existing analysis
+            LAST_ANALYSIS=$(node -e "
+              const Database = require('better-sqlite3');
+              const db = new Database('data/intelligence.db');
+              const result = db.prepare('SELECT MAX(created_at) as latest FROM baseline_analysis').get();
+              console.log(result.latest || 'unknown');
+              db.close();
+            " 2>/dev/null || echo "unknown")
+            
+            echo "📅 Last analysis: $LAST_ANALYSIS"
           else
-            echo "⚠️  Three-database architecture not detected, skipping baseline analysis"
+            echo "⚠️  No baseline analysis found"
           fi
+      
+      # FIXED: Only run baseline analysis if it doesn't exist
+      - name: Run baseline analysis for TheBrain (if needed)
+        if: ${{ !inputs.skip_thebrain && steps.check_baseline.outputs.baseline_count == '0' }}
+        run: |
+          cd github-actions-backend
+          
+          echo "🧠 Running baseline analysis for three-database architecture..."
+          echo "💰 This will use Groq API credits"
+          
+          # Validate API key before running
+          if [ -z "$GROQ_API_KEY" ]; then
+            echo "❌ Error: GROQ_API_KEY is not set"
+            echo "   Please add it to your GitHub secrets"
+            exit 1
+          fi
+          
+          # Run with proper error handling
+          if ! node ai-analyzer-baseline-three-db.js; then
+            echo "❌ Baseline analysis failed"
+            exit 1
+          fi
+          
+          echo "✅ Baseline analysis completed successfully"
         env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
       
       - name: Sync to TheBrain API
@@ -350,7 +397,13 @@ jobs:
             npm list nodemailer || npm install nodemailer
             
             # Use the wrapper script which will use the three-db version
-            node email-notifications-wrapper.js check || echo "Email notification completed"
+            # Use proper error handling
+            if ! node email-notifications-wrapper.js check; then
+              echo "❌ Email notification failed"
+              echo "   Check SMTP configuration and credentials"
+            else
+              echo "✅ Email notification sent successfully"
+            fi
           fi
         env:
           SMTP_HOST: ${{ secrets.SMTP_HOST }}
