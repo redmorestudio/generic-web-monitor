@@ -1,0 +1,1031 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Competitive Monitor - 3D Force Graph (Local)</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #eee;
+            overflow: hidden;
+        }
+        
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            max-width: 350px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        #info h3 {
+            margin: 0 0 10px 0;
+            color: #00ff88;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        #controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            z-index: 100;
+            width: 280px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .control-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            color: #aaa;
+            font-size: 12px;
+        }
+        
+        .label-value {
+            color: #00ff88;
+            font-weight: bold;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        
+        select, button {
+            width: 100%;
+            padding: 8px;
+            background: #1a1a2e;
+            color: #eee;
+            border: 1px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        button {
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #2a2a3e;
+            border-color: #00ff88;
+            transform: translateY(-1px);
+        }
+        
+        button.active {
+            background: #00ff88;
+            color: #0a0a0f;
+            font-weight: bold;
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: #00ff88;
+            text-align: center;
+        }
+        
+        .loading-spinner {
+            border: 3px solid rgba(0, 255, 136, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #00ff88;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        #stats {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            font-size: 12px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        #legend {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            font-size: 11px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .help-text {
+            font-size: 11px;
+            color: #888;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .toggle-group {
+            display: flex;
+            gap: 5px;
+            margin-top: 5px;
+        }
+        
+        .toggle-btn {
+            flex: 1;
+            padding: 5px;
+            font-size: 11px;
+        }
+        
+        /* Custom node styles */
+        .node-html {
+            background: rgba(20, 20, 30, 0.9);
+            border: 2px solid;
+            border-radius: 8px;
+            padding: 8px;
+            text-align: center;
+            font-size: 11px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .node-html:hover {
+            transform: scale(1.1);
+            z-index: 1000;
+        }
+        
+        .node-title {
+            font-weight: bold;
+            margin-bottom: 4px;
+        }
+        
+        .node-content {
+            font-size: 9px;
+            color: #aaa;
+            max-width: 150px;
+        }
+        
+        .node-threat {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 9px;
+            margin-top: 4px;
+            font-weight: bold;
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: rgba(20, 20, 30, 0.95);
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+</head>
+<body>
+    <div id="loading">
+        <div>Loading AI Competitive Intelligence Graph...</div>
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <div id="info" style="display: none;">
+        <h3>
+            <span>🧠</span>
+            AI Competitive Monitor
+        </h3>
+        <div id="node-info">Hover over nodes for details</div>
+    </div>
+    
+    <div id="controls" style="display: none;">
+        <div class="control-group">
+            <label>
+                Force Strength:
+                <span class="label-value" id="forceValue">-100</span>
+            </label>
+            <input type="range" id="forceSlider" min="-300" max="-30" value="-100" step="10">
+            <div class="help-text">Adjust spacing between nodes</div>
+        </div>
+        
+        <div class="control-group">
+            <label>
+                Link Distance:
+                <span class="label-value" id="linkDistanceValue">30</span>
+            </label>
+            <input type="range" id="linkDistanceSlider" min="10" max="200" value="30" step="10">
+            <div class="help-text">Control link lengths</div>
+        </div>
+        
+        <div class="control-group">
+            <label>View Mode:</label>
+            <select id="viewMode">
+                <option value="companies">Company Network</option>
+                <option value="technologies">Technology Landscape</option>
+                <option value="concepts">AI/ML Concepts</option>
+                <option value="partners">Partner Network</option>
+                <option value="threats">Threat Analysis</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label>Filter by Type:</label>
+            <select id="filterType">
+                <option value="all">All Companies</option>
+                <option value="LLM Providers">LLM Providers</option>
+                <option value="AI Hardware">AI Hardware</option>
+                <option value="AI Frameworks">AI Frameworks</option>
+                <option value="Cloud Providers">Cloud Providers</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <label>Node Display:</label>
+            <div class="toggle-group">
+                <button id="nodeSimple" class="toggle-btn active">Simple</button>
+                <button id="nodeRich" class="toggle-btn">Rich Content</button>
+            </div>
+            <div class="help-text">Toggle between simple labels and rich content boxes</div>
+        </div>
+        
+        <div class="control-group">
+            <label>Visual Effects:</label>
+            <button id="toggleParticles">Toggle Flow Particles</button>
+            <div class="help-text">Particles show data flow direction</div>
+            <button id="toggleLabels" style="margin-top: 5px;">Toggle All Labels</button>
+            <button id="toggleLinks" style="margin-top: 5px;">Toggle Links</button>
+            <button id="toggleGlow" style="margin-top: 5px;">Toggle Node Glow</button>
+        </div>
+    </div>
+    
+    <div id="stats" style="display: none;">
+        <div id="statsContent"></div>
+    </div>
+    
+    <div id="legend" style="display: none;">
+        <strong>Legend:</strong>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff6b6b;"></div>
+            <span>LLM Providers</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #4ecdc4;"></div>
+            <span>AI Hardware</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #45b7d1;"></div>
+            <span>AI Frameworks</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #96ceb4;"></div>
+            <span>Cloud Providers</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #00ff88;"></div>
+            <span>AI Concepts</span>
+        </div>
+        <hr style="border-color: #333; margin: 8px 0;">
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ff4444;"></div>
+            <span>High Threat</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #ffa726;"></div>
+            <span>Medium Threat</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background: #66bb6a;"></div>
+            <span>Low Threat</span>
+        </div>
+    </div>
+    
+    <div id="3d-graph"></div>
+
+    <script>
+    // Enhanced Configuration
+    const CONFIG = {
+        nodeColors: {
+            'LLM Providers': '#ff6b6b',
+            'AI Hardware': '#4ecdc4',
+            'AI Frameworks': '#45b7d1',
+            'Cloud Providers': '#96ceb4',
+            'AI Applications': '#f7b731',
+            'AI Research': '#5f27cd',
+            'default': '#667eea'
+        },
+        threatColors: {
+            'high': '#ff4444',
+            'medium': '#ffa726',
+            'low': '#66bb6a',
+            'unknown': '#666666'
+        },
+        particleSpeed: 0.003,
+        linkOpacity: 0.3,
+        linkWidth: 0.5,
+        nodeRelSize: 4,
+        forceStrength: -100,
+        linkDistance: 30
+    };
+
+    let Graph;
+    let graphData = { nodes: [], links: [] };
+    let rawData = {};
+    let particlesEnabled = true;
+    let labelsEnabled = true;
+    let linksEnabled = true;
+    let glowEnabled = true;
+    let autoRotateEnabled = false;
+    let currentView = 'companies';
+    let nodeDisplayMode = 'simple'; // 'simple' or 'rich'
+
+    // Initialize the enhanced graph
+    async function initGraph() {
+        try {
+            console.log('Starting graph initialization...');
+            
+            // Determine base URL
+            const isLocal = window.location.hostname === 'localhost' || 
+                          window.location.hostname === '127.0.0.1' || 
+                          window.location.hostname === '';
+            
+            const baseUrl = isLocal ? '/api-data' : 'https://redmorestudio.github.io/ai-competitive-monitor/api-data';
+            
+            console.log('Loading from:', baseUrl);
+            
+            // Fetch data
+            console.log('Fetching dashboard data...');
+            const dashboardResponse = await fetch(`${baseUrl}/dashboard.json`);
+            if (!dashboardResponse.ok) {
+                throw new Error(`Failed to fetch dashboard: ${dashboardResponse.status} ${dashboardResponse.statusText}`);
+            }
+            
+            console.log('Parsing dashboard data...');
+            rawData.dashboard = await dashboardResponse.json();
+            
+            console.log('Dashboard data loaded:', {
+                hasData: !!rawData.dashboard,
+                hasCompanyActivity: !!rawData.dashboard.company_activity,
+                companyCount: rawData.dashboard.company_activity?.length || 0,
+                stats: rawData.dashboard.stats
+            });
+            
+            // Validate data structure
+            if (!rawData.dashboard.company_activity || rawData.dashboard.company_activity.length === 0) {
+                throw new Error('No company activity data found');
+            }
+            
+            // Build initial graph data
+            console.log('Building company network...');
+            buildCompanyNetwork();
+            
+            // Hide loading, show controls
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('info').style.display = 'block';
+            document.getElementById('controls').style.display = 'block';
+            document.getElementById('stats').style.display = 'block';
+            document.getElementById('legend').style.display = 'block';
+            
+            // Create the enhanced graph
+            console.log('Creating 3D graph...');
+            Graph = ForceGraph3D()
+                (document.getElementById('3d-graph'))
+                .graphData(graphData)
+                .nodeLabel(node => '')
+                .nodeAutoColorBy('group')
+                .nodeRelSize(CONFIG.nodeRelSize)
+                .nodeVal(node => node.val || 10)
+                .nodeThreeObject(node => createNodeObject(node))
+                .nodeThreeObjectExtend(false)
+                .linkWidth(link => linksEnabled ? (link.width || CONFIG.linkWidth) : 0)
+                .linkOpacity(linksEnabled ? CONFIG.linkOpacity : 0)
+                .linkDirectionalParticles(link => particlesEnabled ? (link.particles || 2) : 0)
+                .linkDirectionalParticleSpeed(CONFIG.particleSpeed)
+                .linkDirectionalParticleWidth(2)
+                .linkDirectionalParticleColor(link => link.color || '#ffffff')
+                .linkLabel(link => link.label || '')
+                .onNodeHover(handleNodeHover)
+                .onNodeClick(handleNodeClick)
+                .onBackgroundClick(() => {
+                    document.getElementById('node-info').innerHTML = 'Click on nodes to explore';
+                });
+            
+            // Set forces
+            Graph.d3Force('charge').strength(CONFIG.forceStrength);
+            Graph.d3Force('link').distance(link => link.distance || CONFIG.linkDistance);
+            
+            // Set initial camera position
+            Graph.cameraPosition({ x: 0, y: 0, z: 500 });
+            
+            updateStats();
+            console.log('Graph initialized successfully!');
+            
+        } catch (error) {
+            console.error('Error loading data:', error);
+            document.getElementById('loading').innerHTML = `
+                <div style="color: #ff6b6b; text-align: center;">
+                    <h3>Error Loading Data</h3>
+                    <p>${error.message}</p>
+                    <p style="font-size: 14px; color: #aaa;">
+                        Make sure you're running a local server:<br>
+                        <code>python -m http.server 8000</code><br>
+                        Then visit: http://localhost:8000/3d-force-graph-local.html
+                    </p>
+                </div>
+            `;
+        }
+    }
+
+    // Create node object based on display mode
+    function createNodeObject(node) {
+        if (nodeDisplayMode === 'rich') {
+            return createRichNode(node);
+        } else {
+            return createSimpleNode(node);
+        }
+    }
+
+    // Create simple text sprite node
+    function createSimpleNode(node) {
+        const sprite = new SpriteText(node.name);
+        sprite.material.depthWrite = false;
+        sprite.color = node.color || '#ffffff';
+        sprite.textHeight = 8;
+        sprite.visible = labelsEnabled;
+        
+        return sprite;
+    }
+
+    // Create rich content node
+    function createRichNode(node) {
+        const group = new THREE.Group();
+        
+        // Create a sphere for the node
+        const geometry = new THREE.SphereGeometry(5, 32, 32);
+        const material = new THREE.MeshBasicMaterial({
+            color: node.color,
+            transparent: true,
+            opacity: 0.8
+        });
+        const sphere = new THREE.Mesh(geometry, material);
+        group.add(sphere);
+        
+        // Add text label
+        const sprite = new SpriteText(node.name);
+        sprite.material.depthWrite = false;
+        sprite.color = '#ffffff';
+        sprite.textHeight = 6;
+        sprite.position.y = 10;
+        sprite.visible = labelsEnabled;
+        group.add(sprite);
+        
+        // Add threat level indicator
+        if (node.threatLevel && node.threatLevel > 5) {
+            const threatGeometry = new THREE.RingGeometry(7, 9, 32);
+            const threatMaterial = new THREE.MeshBasicMaterial({
+                color: CONFIG.threatColors[node.threatLevel > 7 ? 'high' : 'medium'],
+                transparent: true,
+                opacity: 0.6,
+                side: THREE.DoubleSide
+            });
+            const ring = new THREE.Mesh(threatGeometry, threatMaterial);
+            group.add(ring);
+        }
+        
+        return group;
+    }
+
+    // Build company network view with enhanced data
+    function buildCompanyNetwork() {
+        try {
+            console.log('Starting buildCompanyNetwork...');
+            graphData.nodes = [];
+            graphData.links = [];
+            const nodeMap = new Map();
+            
+            // Create enhanced company nodes
+            console.log('Creating company nodes...');
+            rawData.dashboard.company_activity.forEach((company, index) => {
+                const node = {
+                    id: company.company,
+                    name: company.company,
+                    group: company.type,
+                    color: CONFIG.nodeColors[company.type] || CONFIG.nodeColors.default,
+                    description: `URLs: ${company.url_count}<br/>Threat: ${company.intelligence?.threat_category || 'unknown'}`,
+                    shortDescription: `${company.type} • ${company.url_count} URLs`,
+                    val: company.url_count * 5,
+                    threatLevel: company.intelligence?.threat_level || 0,
+                    entityCount: company.url_count,
+                    // Rich data for display
+                    products: company.intelligence?.products?.slice(0, 3) || [],
+                    technologies: company.intelligence?.technologies?.slice(0, 3) || [],
+                    concepts: company.intelligence?.ai_ml_concepts?.slice(0, 3) || [],
+                    partners: company.intelligence?.partners?.slice(0, 2) || []
+                };
+                graphData.nodes.push(node);
+                nodeMap.set(company.company, node);
+            });
+            
+            console.log(`Created ${graphData.nodes.length} company nodes`);
+            
+            // Create technology connections
+            const techConnections = new Map();
+            
+            rawData.dashboard.company_activity.forEach(company => {
+                if (company.intelligence?.technologies) {
+                    company.intelligence.technologies.forEach(tech => {
+                        if (!techConnections.has(tech)) {
+                            techConnections.set(tech, []);
+                        }
+                        techConnections.get(tech).push(company.company);
+                    });
+                }
+            });
+            
+            // Create links between companies sharing technologies
+            techConnections.forEach((companies, tech) => {
+                if (companies.length > 1) {
+                    for (let i = 0; i < companies.length - 1; i++) {
+                        for (let j = i + 1; j < companies.length; j++) {
+                            graphData.links.push({
+                                source: companies[i],
+                                target: companies[j],
+                                label: tech,
+                                color: '#666',
+                                particles: 1,
+                                width: 0.5,
+                                distance: CONFIG.linkDistance
+                            });
+                        }
+                    }
+                }
+            });
+            
+            // Add AI concept hub nodes for major concepts
+            const conceptConnections = new Map();
+            rawData.dashboard.company_activity.forEach(company => {
+                if (company.intelligence?.ai_ml_concepts) {
+                    company.intelligence.ai_ml_concepts.forEach(concept => {
+                        if (!conceptConnections.has(concept)) {
+                            conceptConnections.set(concept, []);
+                        }
+                        conceptConnections.get(concept).push(company.company);
+                    });
+                }
+            });
+            
+            // Only create concept nodes for concepts shared by 3+ companies
+            conceptConnections.forEach((companies, concept) => {
+                if (companies.length >= 3) {
+                    const conceptNode = {
+                        id: `concept-${concept}`,
+                        name: concept,
+                        group: 'AI Concept',
+                        color: '#00ff88',
+                        val: companies.length * 4,
+                        description: `Shared by ${companies.length} companies`,
+                        shortDescription: `AI/ML Concept`,
+                        companies: companies
+                    };
+                    graphData.nodes.push(conceptNode);
+                    
+                    companies.forEach(company => {
+                        graphData.links.push({
+                            source: company,
+                            target: conceptNode.id,
+                            color: '#00ff88',
+                            particles: 2,
+                            width: 1,
+                            distance: CONFIG.linkDistance * 0.8
+                        });
+                    });
+                }
+            });
+            
+            console.log(`Graph built with ${graphData.nodes.length} nodes and ${graphData.links.length} links`);
+            
+        } catch (error) {
+            console.error('Error in buildCompanyNetwork:', error);
+            throw error;
+        }
+    }
+
+    // Build technology view
+    function buildTechnologyView() {
+        graphData.nodes = [];
+        graphData.links = [];
+        
+        const techNodes = new Map();
+        
+        rawData.dashboard.company_activity.forEach(company => {
+            if (company.intelligence?.technologies) {
+                company.intelligence.technologies.forEach(tech => {
+                    if (!techNodes.has(tech)) {
+                        techNodes.set(tech, {
+                            id: `tech-${tech}`,
+                            name: tech,
+                            group: 'Technology',
+                            color: '#4ecdc4',
+                            companies: [],
+                            val: 10,
+                            shortDescription: 'Technology Stack'
+                        });
+                    }
+                    techNodes.get(tech).companies.push(company.company);
+                    techNodes.get(tech).val += 5;
+                });
+            }
+        });
+        
+        techNodes.forEach(node => {
+            node.description = `Used by ${node.companies.length} companies`;
+            graphData.nodes.push(node);
+        });
+        
+        rawData.dashboard.company_activity.forEach(company => {
+            graphData.nodes.push({
+                id: company.company,
+                name: company.company,
+                group: company.type,
+                color: CONFIG.nodeColors[company.type] || CONFIG.nodeColors.default,
+                val: 5,
+                shortDescription: company.type
+            });
+        });
+        
+        techNodes.forEach((techNode, tech) => {
+            techNode.companies.forEach(company => {
+                graphData.links.push({
+                    source: techNode.id,
+                    target: company,
+                    particles: 2,
+                    color: '#4ecdc4'
+                });
+            });
+        });
+    }
+
+    // Build threat analysis view
+    function buildThreatView() {
+        graphData.nodes = [];
+        graphData.links = [];
+        
+        // Create threat level nodes
+        const threatLevels = ['high', 'medium', 'low'];
+        const threatNodes = {};
+        
+        threatLevels.forEach(level => {
+            const node = {
+                id: `threat-${level}`,
+                name: `${level.toUpperCase()} THREAT`,
+                group: 'Threat Level',
+                color: CONFIG.threatColors[level],
+                val: 30,
+                shortDescription: 'Threat Category'
+            };
+            graphData.nodes.push(node);
+            threatNodes[level] = node;
+        });
+        
+        // Add companies connected to their threat levels
+        rawData.dashboard.company_activity.forEach(company => {
+            const threatCategory = company.intelligence?.threat_category || 'low';
+            const threatLevel = company.intelligence?.threat_level || 0;
+            
+            graphData.nodes.push({
+                id: company.company,
+                name: company.company,
+                group: company.type,
+                color: CONFIG.threatColors[threatCategory],
+                val: threatLevel * 3,
+                threatLevel: threatLevel,
+                shortDescription: `Threat Score: ${threatLevel}/10`
+            });
+            
+            graphData.links.push({
+                source: `threat-${threatCategory}`,
+                target: company.company,
+                color: CONFIG.threatColors[threatCategory],
+                particles: threatLevel > 5 ? 4 : 2,
+                width: threatLevel / 5
+            });
+        });
+    }
+
+    // Handle node hover with rich information
+    function handleNodeHover(node) {
+        if (!node) {
+            document.getElementById('node-info').innerHTML = 'Hover over nodes for details';
+            return;
+        }
+        
+        let infoHtml = `<strong style="color: ${node.color}">${node.name}</strong><br/>`;
+        infoHtml += `Type: ${node.group}<br/>`;
+        
+        if (node.threatLevel) {
+            const threatClass = node.threatLevel > 7 ? 'high' : 
+                               node.threatLevel > 4 ? 'medium' : 'low';
+            infoHtml += `Threat Level: <span style="color: ${CONFIG.threatColors[threatClass]}">${node.threatLevel}/10 (${threatClass})</span><br/>`;
+        }
+        
+        if (node.products && node.products.length > 0) {
+            infoHtml += `<br/><strong>Products:</strong><br/>`;
+            infoHtml += node.products.map(p => `• ${p}`).join('<br/>');
+        }
+        
+        if (node.technologies && node.technologies.length > 0) {
+            infoHtml += `<br/><strong>Technologies:</strong><br/>`;
+            infoHtml += node.technologies.map(t => `• ${t}`).join('<br/>');
+        }
+        
+        if (node.concepts && node.concepts.length > 0) {
+            infoHtml += `<br/><strong>AI/ML Focus:</strong><br/>`;
+            infoHtml += node.concepts.map(c => `• ${c}`).join('<br/>');
+        }
+        
+        if (node.companies) {
+            infoHtml += `<br/><strong>Related Companies:</strong><br/>`;
+            infoHtml += node.companies.slice(0, 5).map(c => `• ${c}`).join('<br/>');
+            if (node.companies.length > 5) {
+                infoHtml += `<br/>... and ${node.companies.length - 5} more`;
+            }
+        }
+        
+        document.getElementById('node-info').innerHTML = infoHtml;
+    }
+
+    // Handle node click - focus and zoom
+    function handleNodeClick(node) {
+        const distance = 200;
+        const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+        
+        Graph.cameraPosition(
+            { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
+            node,
+            3000
+        );
+        
+        // Highlight connected nodes
+        const highlightNodes = new Set();
+        const highlightLinks = new Set();
+        
+        if (node) {
+            highlightNodes.add(node);
+            graphData.links.forEach(link => {
+                if (link.source.id === node.id || link.target.id === node.id) {
+                    highlightLinks.add(link);
+                    highlightNodes.add(link.source);
+                    highlightNodes.add(link.target);
+                }
+            });
+        }
+        
+        // Update node colors based on highlight
+        graphData.nodes.forEach(n => {
+            if (highlightNodes.has(n)) {
+                n.__originalColor = n.color;
+                n.color = '#00ff88';
+            } else if (n.__originalColor) {
+                n.color = n.__originalColor;
+                delete n.__originalColor;
+            }
+        });
+        
+        Graph.nodeColor(Graph.nodeColor());
+    }
+
+    // Update statistics
+    function updateStats() {
+        if (!rawData.dashboard) return;
+        
+        const stats = rawData.dashboard.stats;
+        const avgThreat = rawData.dashboard.company_activity.reduce((sum, c) => 
+            sum + (c.intelligence?.threat_level || 0), 0) / rawData.dashboard.company_activity.length;
+        
+        document.getElementById('statsContent').innerHTML = `
+            <strong>Monitoring Stats:</strong><br/>
+            Companies: ${stats.companies}<br/>
+            URLs: ${stats.urls}<br/>
+            Snapshots: ${stats.snapshots}<br/>
+            Graph Nodes: ${graphData.nodes.length}<br/>
+            Graph Links: ${graphData.links.length}<br/>
+            Avg Threat Level: ${avgThreat.toFixed(1)}/10
+        `;
+    }
+
+    // Event handlers for enhanced controls
+    
+    // Force strength slider
+    document.getElementById('forceSlider').addEventListener('input', (e) => {
+        const value = parseInt(e.target.value);
+        document.getElementById('forceValue').textContent = value;
+        if (Graph) {
+            Graph.d3Force('charge').strength(value);
+            Graph.d3ReheatSimulation();
+        }
+    });
+    
+    // Link distance slider
+    document.getElementById('linkDistanceSlider').addEventListener('input', (e) => {
+        const value = parseInt(e.target.value);
+        document.getElementById('linkDistanceValue').textContent = value;
+        if (Graph) {
+            Graph.d3Force('link').distance(value);
+            Graph.d3ReheatSimulation();
+        }
+    });
+    
+    // View mode selector
+    document.getElementById('viewMode').addEventListener('change', (e) => {
+        currentView = e.target.value;
+        switch(currentView) {
+            case 'technologies':
+                buildTechnologyView();
+                break;
+            case 'threats':
+                buildThreatView();
+                break;
+            case 'companies':
+            default:
+                buildCompanyNetwork();
+                break;
+        }
+        if (Graph) {
+            Graph.graphData(graphData);
+            updateStats();
+        }
+    });
+    
+    // Filter type selector
+    document.getElementById('filterType').addEventListener('change', (e) => {
+        const filterType = e.target.value;
+        if (filterType === 'all') {
+            buildCompanyNetwork();
+        } else {
+            const filteredNodes = graphData.nodes.filter(node => 
+                node.group === filterType || node.group === 'AI Concept'
+            );
+            const nodeIds = new Set(filteredNodes.map(n => n.id));
+            const filteredLinks = graphData.links.filter(link =>
+                nodeIds.has(link.source.id || link.source) && 
+                nodeIds.has(link.target.id || link.target)
+            );
+            
+            Graph.graphData({ nodes: filteredNodes, links: filteredLinks });
+        }
+        updateStats();
+    });
+    
+    // Node display mode toggles
+    document.getElementById('nodeSimple').addEventListener('click', () => {
+        nodeDisplayMode = 'simple';
+        document.getElementById('nodeSimple').classList.add('active');
+        document.getElementById('nodeRich').classList.remove('active');
+        
+        // Refresh all nodes
+        if (Graph) {
+            graphData.nodes.forEach(node => {
+                Graph.nodeThreeObject(node, createNodeObject(node));
+            });
+        }
+    });
+    
+    document.getElementById('nodeRich').addEventListener('click', () => {
+        nodeDisplayMode = 'rich';
+        document.getElementById('nodeRich').classList.add('active');
+        document.getElementById('nodeSimple').classList.remove('active');
+        
+        // Refresh all nodes
+        if (Graph) {
+            graphData.nodes.forEach(node => {
+                Graph.nodeThreeObject(node, createNodeObject(node));
+            });
+        }
+    });
+    
+    // Toggle particles
+    document.getElementById('toggleParticles').addEventListener('click', function() {
+        particlesEnabled = !particlesEnabled;
+        this.classList.toggle('active');
+        
+        if (Graph) {
+            graphData.links.forEach(link => {
+                Graph.linkDirectionalParticles(link, particlesEnabled ? link.particles || 2 : 0);
+            });
+        }
+    });
+    
+    // Toggle labels
+    document.getElementById('toggleLabels').addEventListener('click', function() {
+        labelsEnabled = !labelsEnabled;
+        this.classList.toggle('active');
+        
+        // Update node visibility
+        if (Graph) {
+            graphData.nodes.forEach(node => {
+                const obj = Graph.nodeThreeObject(node);
+                if (obj) {
+                    if (nodeDisplayMode === 'simple' && obj.visible !== undefined) {
+                        obj.visible = labelsEnabled;
+                    } else if (nodeDisplayMode === 'rich' && obj.children) {
+                        obj.children.forEach(child => {
+                            if (child.isSprite) {
+                                child.visible = labelsEnabled;
+                            }
+                        });
+                    }
+                }
+            });
+        }
+    });
+    
+    // Toggle links
+    document.getElementById('toggleLinks').addEventListener('click', function() {
+        linksEnabled = !linksEnabled;
+        this.classList.toggle('active');
+        
+        if (Graph) {
+            Graph.linkOpacity(linksEnabled ? CONFIG.linkOpacity : 0);
+            Graph.linkWidth(link => linksEnabled ? (link.width || CONFIG.linkWidth) : 0);
+        }
+    });
+    
+    // Toggle glow
+    document.getElementById('toggleGlow').addEventListener('click', function() {
+        glowEnabled = !glowEnabled;
+        this.classList.toggle('active');
+        
+        // Recreate nodes with/without glow
+        if (Graph) {
+            graphData.nodes.forEach(node => {
+                Graph.nodeThreeObject(node, createNodeObject(node));
+            });
+        }
+    });
+    
+    // Initialize on load
+    window.addEventListener('load', () => {
+        console.log('Page loaded, initializing graph...');
+        initGraph();
+    });
+    </script>
+</body>
+</html>
