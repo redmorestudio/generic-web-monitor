@@ -530,7 +530,7 @@
             <div class="node-title" style="color: ${node.color}">${node.name}</div>
             <div class="node-content">
                 ${node.shortDescription || node.group || ''}
-                ${node.entityCount ? `<br>Entities: ${node.entityCount}` : ''}
+                ${node.products && node.products.length > 0 ? `<br>Products: ${node.products.length}` : ''}
             </div>
             ${threatBadge}
         `;
@@ -573,7 +573,7 @@
                 shortDescription: `${company.type} • ${company.url_count} URLs`,
                 val: company.url_count * 5,
                 threatLevel: company.intelligence.threat_level,
-                entityCount: company.entities.total,
+                entityCount: company.entities?.total || company.url_count,
                 // Rich data for display
                 products: company.intelligence.products.slice(0, 3),
                 technologies: company.intelligence.technologies.slice(0, 3),
