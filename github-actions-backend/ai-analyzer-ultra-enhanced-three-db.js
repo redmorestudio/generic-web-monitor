@@ -9,6 +9,51 @@ const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY || process.env.ANTHROPIC_API_KEY // Fallback for testing
 });
 
+// Error tracking class
+class AnalysisErrorTracker {
+  constructor() {
+    this.errors = [];
+    this.failedSites = [];
+    this.criticalErrors = 0;
+    this.successCount = 0;
+  }
+  
+  addError(site, error, critical = false) {
+    this.errors.push({ 
+      site: site.company_name || site, 
+      url: site.url || 'unknown',
+      error: error.message, 
+      timestamp: new Date().toISOString() 
+    });
+    this.failedSites.push(site.company_name || site);
+    if (critical) this.criticalErrors++;
+  }
+  
+  addSuccess() {
+    this.successCount++;
+  }
+  
+  hasErrors() {
+    return this.errors.length > 0;
+  }
+  
+  shouldAbort() {
+    // Abort if any critical errors or >50% failed (with min threshold)
+    return this.criticalErrors > 0 || 
+           (this.errors.length > 10 && this.errors.length > this.successCount / 2);
+  }
+  
+  getReport() {
+    return {
+      totalProcessed: this.successCount + this.errors.length,
+      successful: this.successCount,
+      failed: this.errors.length,
+      criticalErrors: this.criticalErrors,
+      errors: this.errors
+    };
+  }
+}
+
 // Enhanced extraction prompt
 const EXTRACTION_PROMPT = `You are an AI competitive intelligence analyst specializing in deep content extraction and analysis. Your goal is to extract comprehensive, structured data from web content changes to populate a knowledge graph and enable smart grouping.
 
@@ -362,8 +407,37 @@ async function processRecentChanges() {
   console.log('⚡ Ultra-fast inference for entity extraction');
   console.log('📊 Using three-database architecture for optimal performance');
 
+  // Initialize error tracker
+  const errorTracker = new AnalysisErrorTracker();
+
   const processedDb = dbManager.getProcessedDb();
   const intelligenceDb = dbManager.getIntelligenceDb();
+  
+  // Verify enhanced_analysis table exists
+  try {
+    intelligenceDb.exec(`
+      CREATE TABLE IF NOT EXISTS enhanced_analysis (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        change_id INTEGER UNIQUE,
+        entities TEXT,
+        relationships TEXT,
+        semantic_categories TEXT,
+        competitive_data TEXT,
+        smart_groups TEXT,
+        quantitative_data TEXT,
+        extracted_text TEXT,
+        full_extraction TEXT,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+      );
+      
+      CREATE INDEX IF NOT EXISTS idx_enhanced_change ON enhanced_analysis(change_id);
+    `);
+    console.log('✅ Database schema verified');
+  } catch (error) {
+    console.error('❌ Database schema verification failed:', error.message);
+    errorTracker.addError({ company_name: 'Schema Verification' }, error, true);
+    throw error;
+  }
 
   // Attach intelligence database for cross-database queries
   const intelligenceDbPath = path.join(__dirname, 'data', 'intelligence.db');
@@ -398,25 +472,26 @@ async function processRecentChanges() {
   for (const change of changes) {
     console.log(`\n🎯 Analyzing change for ${change.company_name} - ${change.url_type}`);
     
-    const company = {
-      id: change.company_id,
-      name: change.company_name,
-      category: change.company_category || 'AI'
-    };
-    
-    const url = {
-      url: change.url,
-      url_type: change.url_type
-    };
+    try {
+      const company = {
+        id: change.company_id,
+        name: change.company_name,
+        category: change.company_category || 'AI'
+      };
+      
+      const url = {
+        url: change.url,
+        url_type: change.url_type
+      };
 
-    const extractedData = await analyzeWithEnhancedExtraction(
-      change,
-      company,
-      url
-    );
+      const extractedData = await analyzeWithEnhancedExtraction(
+        change,
+        company,
+        url
+      );
 
-    if (extractedData && !extractedData.error) {
-      await storeEnhancedAnalysis(intelligenceDb, change.id, extractedData);
+      if (extractedData && !extractedData.error) {
+        await storeEnhancedAnalysis(intelligenceDb, change.id, extractedData);
       
       // Also update the regular AI analysis for compatibility
       intelligenceDb.exec(`
@@ -450,24 +525,73 @@ async function processRecentChanges() {
         JSON.stringify(extractedData.competitive_intelligence?.strategic_implications || []),
         JSON.stringify(extractedData.competitive_intelligence?.recommended_actions || [])
       );
+        
+        // Mark as successful
+        errorTracker.addSuccess();
+      } else {
+        throw new Error('Failed to extract data or extraction returned error');
+      }
+      
+    } catch (error) {
+      console.error(`   ❌ Analysis failed:`, error.message);
+      
+      // Track the error
+      const isCritical = error.message.includes('Database') ||
+                        error.message.includes('SQLITE') ||
+                        error.message.includes('Invalid API');
+      
+      errorTracker.addError(change, error, isCritical);
+      
+      // Check if we should abort
+      if (errorTracker.shouldAbort()) {
+        console.error('\n❌ Too many failures or critical error, aborting analysis');
+        console.error(`   Failed: ${errorTracker.errors.length} changes`);
+        console.error(`   Critical errors: ${errorTracker.criticalErrors}`);
+        break; // Exit the loop
+      }
     }
 
     // Rate limiting - shorter delay with Groq
     await new Promise(resolve => setTimeout(resolve, 1000));
   }
 
+  // Report errors if any
+  const errorReport = errorTracker.getReport();
+  if (errorTracker.hasErrors()) {
+    console.log('\n⚠️  ANALYSIS COMPLETED WITH ERRORS');
+    console.log(`📊 Total processed: ${errorReport.totalProcessed} changes`);
+    console.log(`✅ Successful: ${errorReport.successful} changes`);
+    console.log(`❌ Failed: ${errorReport.failed} changes`);
+    console.log(`🔥 Critical errors: ${errorReport.criticalErrors}`);
+    
+    // Write error report
+    const errorReportPath = path.join(__dirname, 'data', 'ultra-analysis-errors.json');
+    fs.writeFileSync(errorReportPath, JSON.stringify(errorReport, null, 2));
+    console.log(`\n📝 Error report saved to: ${errorReportPath}`);
+  }
+
   // Generate smart group report
-  const report = await generateSmartGroupReport();
+  try {
+    const report = await generateSmartGroupReport();
+    
+    // Save report
+    const reportPath = path.join(__dirname, 'data', 'smart-groups-report.json');
+    fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
+    
+    console.log('\n📊 Smart Groups Report (Generated with Groq Llama 3.3):');
+    console.log(`- Total entities found: ${Object.values(report.entities).reduce((sum, arr) => sum + arr.length, 0)}`);
+    console.log(`- Suggested groups: ${Object.keys(report.groups).length}`);
+    console.log(`- Top themes: ${Object.keys(report.themes).slice(0, 5).join(', ')}`);
+    console.log(`\nReport saved to: ${reportPath}`);
+  } catch (reportError) {
+    console.error('\n❌ Failed to generate report:', reportError.message);
+    errorTracker.addError({ company_name: 'Report Generation' }, reportError, true);
+  }
   
-  // Save report
-  const reportPath = path.join(__dirname, 'data', 'smart-groups-report.json');
-  fs.writeFileSync(reportPath, JSON.stringify(report, null, 2));
-  
-  console.log('\n📊 Smart Groups Report (Generated with Groq Llama 3.3):');
-  console.log(`- Total entities found: ${Object.values(report.entities).reduce((sum, arr) => sum + arr.length, 0)}`);
-  console.log(`- Suggested groups: ${Object.keys(report.groups).length}`);
-  console.log(`- Top themes: ${Object.keys(report.themes).slice(0, 5).join(', ')}`);
-  console.log(`\nReport saved to: ${reportPath}`);
+  // Throw error if there were failures
+  if (errorTracker.hasErrors()) {
+    throw new Error(`Ultra analysis completed with ${errorReport.failed} failures`);
+  }
 }
 
 // Export for use in other modules

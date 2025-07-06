@@ -29,6 +29,51 @@ try {
   process.exit(1);
 }
 
+// Error tracking class
+class AnalysisErrorTracker {
+  constructor() {
+    this.errors = [];
+    this.failedSites = [];
+    this.criticalErrors = 0;
+    this.successCount = 0;
+  }
+  
+  addError(site, error, critical = false) {
+    this.errors.push({ 
+      site: site.company_name || site, 
+      url: site.url || 'unknown',
+      error: error.message, 
+      timestamp: new Date().toISOString() 
+    });
+    this.failedSites.push(site.company_name || site);
+    if (critical) this.criticalErrors++;
+  }
+  
+  addSuccess() {
+    this.successCount++;
+  }
+  
+  hasErrors() {
+    return this.errors.length > 0;
+  }
+  
+  shouldAbort() {
+    // Abort if any critical errors or >50% failed (with min threshold)
+    return this.criticalErrors > 0 || 
+           (this.errors.length > 10 && this.errors.length > this.successCount / 2);
+  }
+  
+  getReport() {
+    return {
+      totalProcessed: this.successCount + this.errors.length,
+      successful: this.successCount,
+      failed: this.errors.length,
+      criticalErrors: this.criticalErrors,
+      errors: this.errors
+    };
+  }
+}
+
 // Three-database architecture
 const dataDir = path.join(__dirname, 'data');
 const rawDb = new Database(path.join(dataDir, 'raw_content.db'));
@@ -39,9 +84,14 @@ const intelligenceDb = new Database(path.join(dataDir, 'intelligence.db'));
 intelligenceDb.exec(`ATTACH DATABASE '${path.join(dataDir, 'processed_content.db')}' AS processed`);
 intelligenceDb.exec(`ATTACH DATABASE '${path.join(dataDir, 'raw_content.db')}' AS raw`);
 
-// Create baseline_analysis table in intelligence.db
-intelligenceDb.exec(`
-  CREATE TABLE IF NOT EXISTS baseline_analysis (
+// Verify database schema
+function verifyDatabaseSchema() {
+  try {
+    console.log('🔧 Verifying database schema...');
+    
+    // Create baseline_analysis table if it doesn't exist
+    intelligenceDb.exec(`
+      CREATE TABLE IF NOT EXISTS baseline_analysis (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     company_id INTEGER,
     url_id INTEGER,
@@ -60,7 +110,27 @@ intelligenceDb.exec(`
     FOREIGN KEY (company_id) REFERENCES companies(id),
     FOREIGN KEY (url_id) REFERENCES urls(id)
   )
-`);
+    `);
+    
+    // Verify the table was created
+    const tableCheck = intelligenceDb.prepare(`
+      SELECT name FROM sqlite_master 
+      WHERE type='table' AND name='baseline_analysis'
+    `).get();
+    
+    if (!tableCheck) {
+      throw new Error('Failed to create baseline_analysis table');
+    }
+    
+    console.log('✅ Database schema verified');
+  } catch (error) {
+    console.error('❌ Database schema verification failed:', error.message);
+    throw error;
+  }
+}
+
+// Initialize schema
+verifyDatabaseSchema();
 
 // Enhanced baseline extraction prompt for comprehensive AI analysis
 const BASELINE_EXTRACTION_PROMPT = `You are an AI competitive intelligence analyst. Analyze this company's current web content to extract comprehensive data with a focus on RELATIONSHIPS between entities.
@@ -359,6 +429,9 @@ async function processAllSnapshots() {
   console.log('⚡ Using Groq for faster inference with Llama 3.3 70B');
   console.log('⏱️  Implemented with timeout protection and retry logic\n');
 
+  // Initialize error tracker
+  const errorTracker = new AnalysisErrorTracker();
+
   // FIXED: Check if baseline analysis already exists
   const existingCount = intelligenceDb.prepare('SELECT COUNT(*) as count FROM baseline_analysis').get();
   if (existingCount.count > 0) {
@@ -384,11 +457,10 @@ async function processAllSnapshots() {
   } catch (error) {
     console.error('❌ Failed to validate GROQ_API_KEY:', error.message);
     console.error('   Please check your API key at https://console.groq.com/keys');
+    // This is a critical error
+    errorTracker.addError({ company_name: 'API Validation' }, error, true);
     process.exit(1);
   }
-
-  // Track failed sites for reporting
-  const failedSites = [];
 
   // Get the most recent processed content for each URL
   const latestSnapshots = intelligenceDb.prepare(`
@@ -418,7 +490,6 @@ async function processAllSnapshots() {
   console.log(`📋 Found ${latestSnapshots.length} URLs to analyze\n`);
 
   let processed = 0;
-  let failed = 0;
   const startTime = Date.now();
 
   for (const snapshot of latestSnapshots) {
@@ -456,19 +527,25 @@ async function processAllSnapshots() {
       const partnerCount = extractedData.entities?.partnerships?.length || 0;
       console.log(`   📊 Extracted: ${productCount} products, ${techCount} technologies, ${partnerCount} partnerships`);
       
-    } catch (error) {
-      failed++;
-      console.error(`   ❌ Analysis failed:`, error.message);
-      failedSites.push({
-        company: snapshot.company_name,
-        url: snapshot.url,
-        error: error.message
-      });
+      // Mark as successful
+      errorTracker.addSuccess();
       
-      // Stop processing if API key is invalid
-      if (error.message === 'Invalid API key') {
-        console.error('\n❌ Stopping due to invalid API key');
-        process.exit(1);
+    } catch (error) {
+      console.error(`   ❌ Analysis failed:`, error.message);
+      
+      // Track the error
+      const isCritical = error.message === 'Invalid API key' || 
+                        error.message.includes('Database') ||
+                        error.message.includes('SQLITE');
+      
+      errorTracker.addError(snapshot, error, isCritical);
+      
+      // Check if we should abort
+      if (errorTracker.shouldAbort()) {
+        console.error('\n❌ Too many failures or critical error, aborting analysis');
+        console.error(`   Failed: ${errorTracker.errors.length} sites`);
+        console.error(`   Critical errors: ${errorTracker.criticalErrors}`);
+        break; // Exit the loop
       }
     }
 
@@ -484,24 +561,46 @@ async function processAllSnapshots() {
   }
 
   const totalTime = (Date.now() - startTime) / 1000;
+  const report = errorTracker.getReport();
+  
   console.log('\n' + '='.repeat(50));
-  console.log('✅ BASELINE ANALYSIS COMPLETE');
+  console.log(errorTracker.hasErrors() ? '⚠️  BASELINE ANALYSIS COMPLETED WITH ERRORS' : '✅ BASELINE ANALYSIS COMPLETE');
   console.log('='.repeat(50));
-  console.log(`📊 Processed: ${processed} sites`);
-  console.log(`❌ Failed: ${failed} sites`);
+  console.log(`📊 Total processed: ${report.totalProcessed} sites`);
+  console.log(`✅ Successful: ${report.successful} sites`);
+  console.log(`❌ Failed: ${report.failed} sites`);
+  console.log(`🔥 Critical errors: ${report.criticalErrors}`);
   console.log(`⏱️  Total time: ${Math.round(totalTime / 60)} minutes`);
   console.log(`⚡ Average: ${(totalTime / processed).toFixed(1)}s per site`);
 
-  if (failedSites.length > 0) {
+  if (errorTracker.hasErrors()) {
     console.log('\n❌ Failed sites:');
-    failedSites.forEach(site => {
-      console.log(`   - ${site.company}: ${site.url}`);
-      console.log(`     Error: ${site.error}`);
+    report.errors.forEach(error => {
+      console.log(`   - ${error.site} (${error.url})`);
+      console.log(`     Error: ${error.error}`);
+      console.log(`     Time: ${error.timestamp}`);
     });
+    
+    // Write error report to file for debugging
+    const errorReportPath = path.join(dataDir, 'baseline-analysis-errors.json');
+    fs.writeFileSync(errorReportPath, JSON.stringify(report, null, 2));
+    console.log(`\n📝 Error report saved to: ${errorReportPath}`);
   }
 
-  // Generate comprehensive report
-  return generateBaselineReport();
+  // Generate comprehensive report even if there were errors
+  try {
+    await generateBaselineReport();
+  } catch (reportError) {
+    console.error('\n❌ Failed to generate report:', reportError.message);
+    errorTracker.addError({ company_name: 'Report Generation' }, reportError, true);
+  }
+  
+  // Return error status
+  if (errorTracker.hasErrors()) {
+    throw new Error(`Analysis completed with ${report.failed} failures`);
+  }
+  
+  return report;
 }
 
 async function generateBaselineReport() {
@@ -652,16 +751,33 @@ if (require.main === module) {
       console.log('\n🎯 Next step: Run TheBrain sync to visualize all this intelligence');
       
       // Clean up database connections
-      intelligenceDb.exec('DETACH DATABASE processed');
-      intelligenceDb.exec('DETACH DATABASE raw');
-      intelligenceDb.close();
-      processedDb.close();
-      rawDb.close();
+      try {
+        intelligenceDb.exec('DETACH DATABASE processed');
+        intelligenceDb.exec('DETACH DATABASE raw');
+        intelligenceDb.close();
+        processedDb.close();
+        rawDb.close();
+      } catch (closeError) {
+        console.error('⚠️  Error closing databases:', closeError.message);
+      }
       
       process.exit(0);
     })
     .catch(error => {
-      console.error('❌ Analysis failed:', error);
+      console.error('\n❌ Analysis failed:', error.message);
+      
+      // Clean up database connections even on error
+      try {
+        intelligenceDb.exec('DETACH DATABASE processed');
+        intelligenceDb.exec('DETACH DATABASE raw');
+        intelligenceDb.close();
+        processedDb.close();
+        rawDb.close();
+      } catch (closeError) {
+        console.error('⚠️  Error closing databases:', closeError.message);
+      }
+      
+      // Exit with error code
       process.exit(1);
     });
 }
