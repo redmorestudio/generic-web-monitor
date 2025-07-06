@@ -414,20 +414,45 @@
     // Initialize the enhanced graph
     async function initGraph() {
         try {
+            console.log('Starting graph initialization...');
+            
             // Fetch data
             // Use absolute paths for GitHub Pages
             const baseUrl = window.location.hostname === 'localhost' ? '.' : 'https://redmorestudio.github.io/ai-competitive-monitor';
-            const dashboardResponse = await fetch(`${baseUrl}/api-data/dashboard.json`);
-            const companiesResponse = await fetch(`${baseUrl}/api-data/companies.json`);
-            const changesResponse = await fetch(`${baseUrl}/api-data/changes.json`);
             
+            console.log('Fetching dashboard data...');
+            const dashboardResponse = await fetch(`${baseUrl}/api-data/dashboard.json`);
+            if (!dashboardResponse.ok) throw new Error(`Failed to fetch dashboard: ${dashboardResponse.status}`);
+            
+            console.log('Fetching companies data...');
+            const companiesResponse = await fetch(`${baseUrl}/api-data/companies.json`);
+            if (!companiesResponse.ok) throw new Error(`Failed to fetch companies: ${companiesResponse.status}`);
+            
+            console.log('Fetching changes data...');
+            const changesResponse = await fetch(`${baseUrl}/api-data/changes.json`);
+            if (!changesResponse.ok) throw new Error(`Failed to fetch changes: ${changesResponse.status}`);
+            
+            console.log('Parsing JSON data...');
             rawData = {
                 dashboard: await dashboardResponse.json(),
                 companies: await companiesResponse.json(),
                 changes: await changesResponse.json()
             };
             
+            console.log('Data loaded successfully:', {
+                dashboard: rawData.dashboard,
+                hasCompanyActivity: !!rawData.dashboard.company_activity,
+                companies: rawData.dashboard.company_activity?.length || 0,
+                stats: rawData.dashboard.stats
+            });
+            
+            // Validate data structure
+            if (!rawData.dashboard.company_activity) {
+                throw new Error('Missing company_activity in dashboard data');
+            }
+            
             // Build initial graph data
+            console.log('Building company network...');
             buildCompanyNetwork();
             
             // Hide loading, show controls
@@ -558,31 +583,39 @@
 
     // Build company network view with enhanced data
     function buildCompanyNetwork() {
-        graphData.nodes = [];
-        graphData.links = [];
-        const nodeMap = new Map();
-        
-        // Create enhanced company nodes
-        rawData.dashboard.company_activity.forEach(company => {
-            const node = {
-                id: company.company,
-                name: company.company,
-                group: company.type,
-                color: CONFIG.nodeColors[company.type] || CONFIG.nodeColors.default,
-                description: `URLs: ${company.url_count}<br/>Threat: ${company.intelligence?.threat_category || 'unknown'}`,
-                shortDescription: `${company.type} • ${company.url_count} URLs`,
-                val: company.url_count * 5,
-                threatLevel: company.intelligence?.threat_level || 0,
-                entityCount: company.entities?.total || company.url_count,
-                // Rich data for display
-                products: company.intelligence?.products?.slice(0, 3) || [],
-                technologies: company.intelligence?.technologies?.slice(0, 3) || [],
-                concepts: company.intelligence?.ai_ml_concepts?.slice(0, 3) || [],
-                partners: company.intelligence?.partners?.slice(0, 2) || []
-            };
-            graphData.nodes.push(node);
-            nodeMap.set(company.company, node);
-        });
+        try {
+            console.log('Starting buildCompanyNetwork...');
+            graphData.nodes = [];
+            graphData.links = [];
+            const nodeMap = new Map();
+            
+            // Create enhanced company nodes
+            console.log('Creating company nodes...');
+            rawData.dashboard.company_activity.forEach((company, index) => {
+                try {
+                    const node = {
+                        id: company.company,
+                        name: company.company,
+                        group: company.type,
+                        color: CONFIG.nodeColors[company.type] || CONFIG.nodeColors.default,
+                        description: `URLs: ${company.url_count}<br/>Threat: ${company.intelligence?.threat_category || 'unknown'}`,
+                        shortDescription: `${company.type} • ${company.url_count} URLs`,
+                        val: company.url_count * 5,
+                        threatLevel: company.intelligence?.threat_level || 0,
+                        entityCount: company.entities?.total || company.url_count,
+                        // Rich data for display
+                        products: company.intelligence?.products?.slice(0, 3) || [],
+                        technologies: company.intelligence?.technologies?.slice(0, 3) || [],
+                        concepts: company.intelligence?.ai_ml_concepts?.slice(0, 3) || [],
+                        partners: company.intelligence?.partners?.slice(0, 2) || []
+                    };
+                    graphData.nodes.push(node);
+                    nodeMap.set(company.company, node);
+                } catch (nodeError) {
+                    console.error(`Error creating node for company ${index}:`, company, nodeError);
+                    throw nodeError;
+                }
+            });
         
         // Create technology connections with varying strengths
         const techConnections = new Map();
@@ -657,6 +690,10 @@
                 });
             }
         });
+        } catch (error) {
+            console.error('Error in buildCompanyNetwork:', error);
+            throw error;
+        }
     }
 
     // Build other view modes
