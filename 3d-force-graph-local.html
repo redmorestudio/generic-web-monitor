@@ -295,6 +295,7 @@
                 <option value="AI Hardware">AI Hardware</option>
                 <option value="AI Frameworks">AI Frameworks</option>
                 <option value="Cloud Providers">Cloud Providers</option>
+                <option value="none">No Companies (Concepts Only)</option>
             </select>
         </div>
         
@@ -919,6 +920,14 @@
         const filterType = e.target.value;
         if (filterType === 'all') {
             buildCompanyNetwork();
+        } else if (filterType === 'none') {
+            // Show only AI concept nodes (no companies)
+            const conceptNodes = graphData.nodes.filter(node => 
+                node.group === 'AI Concept'
+            );
+            // Since concept nodes are hub nodes, we don't show links between them
+            // This creates a clean view of just the concepts
+            Graph.graphData({ nodes: conceptNodes, links: [] });
         } else {
             const filteredNodes = graphData.nodes.filter(node => 
                 node.group === filterType || node.group === 'AI Concept'
