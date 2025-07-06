@@ -406,7 +406,7 @@ async function processAllSnapshots() {
       c.type as company_type
     FROM processed.markdown_content mc
     JOIN processed.urls u ON mc.url_id = u.id
-    JOIN processed.companies c ON u.company_id = c.id
+    JOIN companies c ON u.company_id = c.id
     WHERE mc.id IN (
       SELECT MAX(id) 
       FROM processed.markdown_content 
@@ -533,7 +533,7 @@ async function generateBaselineReport() {
       c.name,
       c.type,
       COUNT(ba.id) as url_count
-    FROM processed.companies c
+    FROM companies c
     JOIN baseline_analysis ba ON c.id = ba.company_id
     GROUP BY c.id, c.name, c.type
     ORDER BY c.name
