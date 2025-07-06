@@ -46,6 +46,25 @@ const tableExists = intelligenceDb.prepare(`
   WHERE type='table' AND name='companies'
 `).get();
 
+// Also ensure enhanced_analysis table exists
+intelligenceDb.exec(`
+  CREATE TABLE IF NOT EXISTS enhanced_analysis (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    change_id INTEGER UNIQUE,
+    entities TEXT,
+    relationships TEXT,
+    semantic_categories TEXT,
+    competitive_data TEXT,
+    smart_groups TEXT,
+    quantitative_data TEXT,
+    extracted_text TEXT,
+    full_extraction TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+  
+  CREATE INDEX IF NOT EXISTS idx_enhanced_change ON enhanced_analysis(change_id);
+`);
+
 // Insert initial companies if database is empty
 const companyCount = tableExists ? 
   intelligenceDb.prepare('SELECT COUNT(*) as count FROM companies').get().count : 0;

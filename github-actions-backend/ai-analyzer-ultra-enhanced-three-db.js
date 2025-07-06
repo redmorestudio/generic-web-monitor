@@ -153,24 +153,7 @@ Analyze the changes and provide comprehensive extraction following the specified
 
 async function storeEnhancedAnalysis(intelligenceDb, changeId, extractedData) {
   try {
-    // Create enhanced_analysis table if not exists
-    intelligenceDb.exec(`
-      CREATE TABLE IF NOT EXISTS enhanced_analysis (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        change_id INTEGER UNIQUE,
-        entities TEXT,
-        relationships TEXT,
-        semantic_categories TEXT,
-        competitive_data TEXT,
-        smart_groups TEXT,
-        quantitative_data TEXT,
-        extracted_text TEXT,
-        full_extraction TEXT,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
-
-    // Store the enhanced analysis
+    // Store the enhanced analysis (table should exist in intelligence.db)
     const stmt = intelligenceDb.prepare(`
       INSERT OR REPLACE INTO enhanced_analysis 
       (change_id, entities, relationships, semantic_categories, competitive_data, 

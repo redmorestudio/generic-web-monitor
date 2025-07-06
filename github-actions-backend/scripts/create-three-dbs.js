@@ -213,6 +213,24 @@ intelligenceDb.exec(`
     alerts_created INTEGER DEFAULT 0,
     status TEXT DEFAULT 'running'
   );
+
+  -- Enhanced analysis with entity extraction
+  CREATE TABLE IF NOT EXISTS enhanced_analysis (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    change_id INTEGER UNIQUE,
+    entities TEXT,
+    relationships TEXT,
+    semantic_categories TEXT,
+    competitive_data TEXT,
+    smart_groups TEXT,
+    quantitative_data TEXT,
+    extracted_text TEXT,
+    full_extraction TEXT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+  );
+
+  -- Create index for enhanced analysis
+  CREATE INDEX IF NOT EXISTS idx_enhanced_change ON enhanced_analysis(change_id);
 `);
 
 console.log('✅ Created intelligence.db');
