@@ -513,22 +513,12 @@ Last sync: ${new Date().toISOString()}`);
       const note = `# ${company.name}
 
 **Category**: ${company.category}
-**Importance**: ${company.importance}
-**URL**: ${company.url}
-
-## Description
-${company.description || 'No description available'}
+**Description**: ${company.description || 'No description available'}
 
 ## Monitoring Details
-- Added: ${company.created_at}
-- Last Updated: ${company.updated_at || 'Never'}`;
+- Added: ${company.created_at}`;
       
       await this.updateNote(companyThoughtId, note);
-      
-      // Add URL attachment
-      if (company.url) {
-        await this.addUrlAttachment(companyThoughtId, company.url, company.name);
-      }
     }
     
     console.log(`   Created ${createdCount} new company thoughts`);
@@ -538,26 +528,25 @@ ${company.description || 'No description available'}
   async syncChanges(changesId) {
     console.log('Syncing recent changes...');
     
-    // Check if baseline_analysis table exists
+    // Check if change_intelligence table exists
     const hasTable = this.intelligenceDb.prepare(
-      "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='baseline_analysis'"
+      "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='change_intelligence'"
     ).get().count > 0;
     
     if (!hasTable) {
-      console.log('   No baseline_analysis table found, skipping changes');
+      console.log('   No change_intelligence table found, skipping changes');
       return;
     }
     
     // Get recent high-priority changes
     const recentChanges = this.intelligenceDb.prepare(`
       SELECT 
-        ba.*,
-        c.name as company_name,
-        c.url as company_url
-      FROM baseline_analysis ba
-      JOIN companies c ON ba.company_id = c.id
-      WHERE ba.relevance_score >= 7
-      ORDER BY ba.created_at DESC
+        ci.*,
+        ci.company_name,
+        ci.url as company_url
+      FROM change_intelligence ci
+      WHERE ci.relevance_score >= 7
+      ORDER BY ci.analyzed_at DESC
       LIMIT 20
     `).all();
     
@@ -623,9 +612,13 @@ ${company.description || 'No description available'}
       
       // Create individual change thoughts
       for (const change of group.changes) {
+        const changeTitle = change.change_summary ? 
+          change.change_summary.substring(0, 50) + '...' : 
+          'Change Detected';
+        
         const changeData = {
-          name: `${change.company_name}: ${change.title}`,
-          label: `Score: ${change.relevance_score}/10`,
+          name: `${change.company_name}: ${changeTitle}`,
+          label: `Score: ${Math.round(change.relevance_score)}/10`,
           kind: 1,
           acType: 0,
           foregroundColor: '#ffffff',
@@ -637,20 +630,23 @@ ${company.description || 'No description available'}
         this.errorTracker.addCreateSuccess();
         
         // Add detailed note
-        const note = `# ${change.title}
+        const note = `# ${changeTitle}
 
 **Company**: ${change.company_name}
-**Relevance Score**: ${change.relevance_score}/10
-**Detected**: ${change.created_at}
+**Relevance Score**: ${Math.round(change.relevance_score)}/10
+**Detected**: ${change.detected_at || change.analyzed_at}
 
 ## Summary
-${change.summary}
+${change.change_summary || 'No summary available'}
 
-## Key Points
-${change.key_points}
+## Key Changes
+${change.key_changes || 'No key changes identified'}
 
-## Analysis
-${change.analysis}
+## Impact Assessment
+${change.impact_assessment || 'No impact assessment available'}
+
+## Category
+${change.category || 'Uncategorized'} ${change.sub_category ? `/ ${change.sub_category}` : ''}
 
 [View on ${change.company_name}](${change.company_url})`;
         
@@ -669,14 +665,14 @@ ${change.analysis}
       highPriorityChanges: 0
     };
     
-    // Check if baseline_analysis exists before querying
-    const hasAnalysis = this.intelligenceDb.prepare(
-      "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='baseline_analysis'"
+    // Check if change_intelligence exists before querying
+    const hasChanges = this.intelligenceDb.prepare(
+      "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='change_intelligence'"
     ).get().count > 0;
     
-    if (hasAnalysis) {
-      stats.totalChanges = this.intelligenceDb.prepare('SELECT COUNT(*) as count FROM baseline_analysis').get().count;
-      stats.highPriorityChanges = this.intelligenceDb.prepare('SELECT COUNT(*) as count FROM baseline_analysis WHERE relevance_score >= 8').get().count;
+    if (hasChanges) {
+      stats.totalChanges = this.intelligenceDb.prepare('SELECT COUNT(*) as count FROM change_intelligence').get().count;
+      stats.highPriorityChanges = this.intelligenceDb.prepare('SELECT COUNT(*) as count FROM change_intelligence WHERE relevance_score >= 8').get().count;
     }
     
     // Create insights
