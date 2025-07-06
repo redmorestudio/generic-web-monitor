@@ -569,16 +569,16 @@
                 name: company.company,
                 group: company.type,
                 color: CONFIG.nodeColors[company.type] || CONFIG.nodeColors.default,
-                description: `URLs: ${company.url_count}<br/>Threat: ${company.intelligence.threat_category}`,
+                description: `URLs: ${company.url_count}<br/>Threat: ${company.intelligence?.threat_category || 'unknown'}`,
                 shortDescription: `${company.type} • ${company.url_count} URLs`,
                 val: company.url_count * 5,
-                threatLevel: company.intelligence.threat_level,
+                threatLevel: company.intelligence?.threat_level || 0,
                 entityCount: company.entities?.total || company.url_count,
                 // Rich data for display
-                products: company.intelligence.products.slice(0, 3),
-                technologies: company.intelligence.technologies.slice(0, 3),
-                concepts: company.intelligence.ai_ml_concepts.slice(0, 3),
-                partners: company.intelligence.partners.slice(0, 2)
+                products: company.intelligence?.products?.slice(0, 3) || [],
+                technologies: company.intelligence?.technologies?.slice(0, 3) || [],
+                concepts: company.intelligence?.ai_ml_concepts?.slice(0, 3) || [],
+                partners: company.intelligence?.partners?.slice(0, 2) || []
             };
             graphData.nodes.push(node);
             nodeMap.set(company.company, node);
@@ -588,12 +588,14 @@
         const techConnections = new Map();
         
         rawData.dashboard.company_activity.forEach(company => {
-            company.intelligence.technologies.forEach(tech => {
-                if (!techConnections.has(tech)) {
-                    techConnections.set(tech, []);
-                }
-                techConnections.get(tech).push(company.company);
-            });
+            if (company.intelligence?.technologies) {
+                company.intelligence.technologies.forEach(tech => {
+                    if (!techConnections.has(tech)) {
+                        techConnections.set(tech, []);
+                    }
+                    techConnections.get(tech).push(company.company);
+                });
+            }
         });
         
         // Create weighted links
@@ -619,12 +621,14 @@
         // Add AI concept hubs for major concepts
         const conceptConnections = new Map();
         rawData.dashboard.company_activity.forEach(company => {
-            company.intelligence.ai_ml_concepts.forEach(concept => {
-                if (!conceptConnections.has(concept)) {
-                    conceptConnections.set(concept, []);
-                }
-                conceptConnections.get(concept).push(company.company);
-            });
+            if (company.intelligence?.ai_ml_concepts) {
+                company.intelligence.ai_ml_concepts.forEach(concept => {
+                    if (!conceptConnections.has(concept)) {
+                        conceptConnections.set(concept, []);
+                    }
+                    conceptConnections.get(concept).push(company.company);
+                });
+            }
         });
         
         conceptConnections.forEach((companies, concept) => {
@@ -663,21 +667,23 @@
         const techNodes = new Map();
         
         rawData.dashboard.company_activity.forEach(company => {
-            company.intelligence.technologies.forEach(tech => {
-                if (!techNodes.has(tech)) {
-                    techNodes.set(tech, {
-                        id: `tech-${tech}`,
-                        name: tech,
-                        group: 'Technology',
-                        color: '#4ecdc4',
-                        companies: [],
-                        val: 10,
-                        shortDescription: 'Technology Stack'
-                    });
-                }
-                techNodes.get(tech).companies.push(company.company);
-                techNodes.get(tech).val += 5;
-            });
+            if (company.intelligence?.technologies) {
+                company.intelligence.technologies.forEach(tech => {
+                    if (!techNodes.has(tech)) {
+                        techNodes.set(tech, {
+                            id: `tech-${tech}`,
+                            name: tech,
+                            group: 'Technology',
+                            color: '#4ecdc4',
+                            companies: [],
+                            val: 10,
+                            shortDescription: 'Technology Stack'
+                        });
+                    }
+                    techNodes.get(tech).companies.push(company.company);
+                    techNodes.get(tech).val += 5;
+                });
+            }
         });
         
         techNodes.forEach(node => {
@@ -732,24 +738,25 @@
         
         // Add companies connected to their threat levels
         rawData.dashboard.company_activity.forEach(company => {
-            const threatCategory = company.intelligence.threat_category || 'low';
+            const threatCategory = company.intelligence?.threat_category || 'low';
+            const threatLevel = company.intelligence?.threat_level || 0;
             
             graphData.nodes.push({
                 id: company.company,
                 name: company.company,
                 group: company.type,
                 color: CONFIG.threatColors[threatCategory],
-                val: company.intelligence.threat_level * 3,
-                threatLevel: company.intelligence.threat_level,
-                shortDescription: `Threat Score: ${company.intelligence.threat_level}/10`
+                val: threatLevel * 3,
+                threatLevel: threatLevel,
+                shortDescription: `Threat Score: ${threatLevel}/10`
             });
             
             graphData.links.push({
                 source: `threat-${threatCategory}`,
                 target: company.company,
                 color: CONFIG.threatColors[threatCategory],
-                particles: company.intelligence.threat_level > 5 ? 4 : 2,
-                width: company.intelligence.threat_level / 5
+                particles: threatLevel > 5 ? 4 : 2,
+                width: threatLevel / 5
             });
         });
     }
@@ -860,7 +867,7 @@
     function updateStats() {
         const stats = rawData.dashboard.stats;
         const avgThreat = rawData.dashboard.company_activity.reduce((sum, c) => 
-            sum + c.intelligence.threat_level, 0) / rawData.dashboard.company_activity.length;
+            sum + (c.intelligence?.threat_level || 0), 0) / rawData.dashboard.company_activity.length;
         
         document.getElementById('statsContent').innerHTML = `
             <strong>Monitoring Stats:</strong><br/>
