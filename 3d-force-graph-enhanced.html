@@ -415,9 +415,11 @@
     async function initGraph() {
         try {
             // Fetch data
-            const dashboardResponse = await fetch('./api-data/dashboard.json');
-            const companiesResponse = await fetch('./api-data/companies.json');
-            const changesResponse = await fetch('./api-data/changes.json');
+            // Use absolute paths for GitHub Pages
+            const baseUrl = window.location.hostname === 'localhost' ? '.' : 'https://redmorestudio.github.io/ai-competitive-monitor';
+            const dashboardResponse = await fetch(`${baseUrl}/api-data/dashboard.json`);
+            const companiesResponse = await fetch(`${baseUrl}/api-data/companies.json`);
+            const changesResponse = await fetch(`${baseUrl}/api-data/changes.json`);
             
             rawData = {
                 dashboard: await dashboardResponse.json(),
@@ -472,7 +474,13 @@
             
         } catch (error) {
             console.error('Error loading data:', error);
-            document.getElementById('loading').innerHTML = 'Error loading data. Please ensure the API data is available.';
+            document.getElementById('loading').innerHTML = `
+                <div style="color: #ff6b6b; text-align: center;">
+                    <h3>Error Loading Data</h3>
+                    <p>${error.message}</p>
+                    <p style="font-size: 14px; color: #aaa;">Check browser console for details</p>
+                </div>
+            `;
         }
     }
 
