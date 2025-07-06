@@ -1,0 +1,108 @@
+{
+  "name": "Default Interest Level Configuration",
+  "description": "Standard interest level definitions for competitive monitoring",
+  "version": "1.0.0",
+  "levels": {
+    "critical": {
+      "range": [8, 10],
+      "label": "Critical Interest",
+      "color": "#9b59b6",
+      "description": "Requires immediate attention and strategic response",
+      "criteria": [
+        "Direct competitor launches product in our core market",
+        "Major funding announcement (>$100M) by competitor", 
+        "Acquisition of company in our space",
+        "Breakthrough AI model that changes the game",
+        "Pricing model that significantly undercuts market",
+        "Partnership with our key customers",
+        "Regulatory action affecting our industry",
+        "Major security incident or data breach",
+        "CEO departure or major leadership change",
+        "Strategic pivot into our exact market"
+      ]
+    },
+    "high": {
+      "range": [6, 7],
+      "label": "High Interest", 
+      "color": "#3498db",
+      "description": "Important developments worth immediate review",
+      "criteria": [
+        "New product launch in adjacent space",
+        "Significant feature we don't have",
+        "Partnership with major tech company",
+        "Funding round >$10M",
+        "Expansion to new geographic market",
+        "Open sourcing proprietary technology",
+        "Major enterprise customer win",
+        "New AI model with benchmark improvements",
+        "Developer tool or API launch",
+        "Pricing model change"
+      ]
+    },
+    "medium": {
+      "range": [4, 5],
+      "label": "Medium Interest",
+      "color": "#f39c12", 
+      "description": "Monitor when time permits",
+      "criteria": [
+        "Blog post about technical architecture",
+        "Minor feature update",
+        "Small partnership announcement",
+        "Team growth or hiring spree",
+        "New integration added",
+        "Conference speaking announcement",
+        "Research paper published",
+        "Product roadmap update",
+        "Case study published",
+        "Community initiative launch"
+      ]
+    },
+    "low": {
+      "range": [0, 3],
+      "label": "Low Interest",
+      "color": "#95a5a6",
+      "description": "Background information, minimal strategic impact",
+      "criteria": [
+        "Website design refresh",
+        "Terms of service update", 
+        "Cookie policy change",
+        "Minor bug fixes",
+        "Office location change",
+        "Team page updates",
+        "Press release rehashing old news",
+        "Social media campaign",
+        "Company values update",
+        "Diversity report published"
+      ]
+    }
+  },
+  "scoring_factors": {
+    "competitive_impact": {
+      "weight": 0.35,
+      "description": "Direct impact on our competitive position"
+    },
+    "innovation_value": {
+      "weight": 0.25,
+      "description": "Technical innovation or breakthrough"
+    },
+    "market_relevance": {
+      "weight": 0.25,
+      "description": "Relevance to our target market"
+    },
+    "timing_urgency": {
+      "weight": 0.15,
+      "description": "Time sensitivity of the information"
+    }
+  },
+  "keywords": {
+    "boost_score": [
+      "launch", "release", "announce", "partnership", "acquisition",
+      "funding", "Series A", "Series B", "IPO", "breakthrough",
+      "state-of-the-art", "benchmark", "outperforms", "beats"
+    ],
+    "reduce_score": [
+      "update", "patch", "fix", "minor", "small", "routine",
+      "maintenance", "policy", "terms", "cookie"
+    ]
+  }
+}
