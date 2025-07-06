@@ -602,7 +602,7 @@
                         shortDescription: `${company.type} • ${company.url_count} URLs`,
                         val: company.url_count * 5,
                         threatLevel: company.intelligence?.threat_level || 0,
-                        entityCount: company.entities?.total || company.url_count,
+                        entityCount: company.url_count,
                         // Rich data for display
                         products: company.intelligence?.products?.slice(0, 3) || [],
                         technologies: company.intelligence?.technologies?.slice(0, 3) || [],
