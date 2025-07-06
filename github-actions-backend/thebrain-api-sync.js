@@ -244,14 +244,19 @@ class TheBrainAPISync {
       thoughtId = await this.createThought(rootData);
       await this.storeMapping('root', 'system', thoughtId);
       this.errorTracker.addCreateSuccess();
-      
-      // CRITICAL: Link to brain's central thought
-      console.log('Linking to brain\'s central thought...');
-      try {
-        await this.createLink(BRAIN_CENTRAL_THOUGHT_ID, thoughtId, 1); // Child link from brain central
-        console.log('✅ Successfully linked to brain\'s central thought');
-        this.errorTracker.addLinkSuccess();
-      } catch (error) {
+    }
+    
+    // ALWAYS ensure link to brain's central thought exists
+    console.log('Ensuring link to brain\'s central thought...');
+    try {
+      await this.createLink(BRAIN_CENTRAL_THOUGHT_ID, thoughtId, 1); // Child link from brain central
+      console.log('✅ Successfully linked to brain\'s central thought');
+      this.errorTracker.addLinkSuccess();
+    } catch (error) {
+      if (error.message?.toLowerCase().includes('duplicate') || 
+          error.message?.toLowerCase().includes('already exists')) {
+        console.log('✅ Link to central thought already exists');
+      } else {
         console.error('⚠️  Failed to link to central thought:', error.message);
         this.errorTracker.addLinkFailure();
         // Try reverse link if forward link fails
@@ -260,8 +265,13 @@ class TheBrainAPISync {
           console.log('✅ Successfully created parent link to brain\'s central thought');
           this.errorTracker.addLinkSuccess();
         } catch (reverseError) {
-          console.error('⚠️  Failed to create reverse link:', reverseError.message);
-          this.errorTracker.addLinkFailure();
+          if (reverseError.message?.toLowerCase().includes('duplicate') || 
+              reverseError.message?.toLowerCase().includes('already exists')) {
+            console.log('✅ Reverse link to central thought already exists');
+          } else {
+            console.error('⚠️  Failed to create reverse link:', reverseError.message);
+            this.errorTracker.addLinkFailure();
+          }
         }
       }
     }
