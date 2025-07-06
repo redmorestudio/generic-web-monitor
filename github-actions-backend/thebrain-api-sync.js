@@ -402,16 +402,16 @@ Last sync: ${new Date().toISOString()}`);
     
     // Get company summary from intelligence db
     const companySummary = this.intelligenceDb.prepare(`
-      SELECT company_category, COUNT(*) as count 
+      SELECT category, COUNT(*) as count 
       FROM companies 
-      GROUP BY company_category
+      GROUP BY category
     `).all();
     
     // Create category groups
     const categoryGroups = {};
     
     for (const cat of companySummary) {
-      const key = cat.company_category || 'Other';
+      const key = cat.category || 'Other';
       const existingGroupId = this.getMapping('company-category', key);
       
       const groupData = {
@@ -456,14 +456,14 @@ Last sync: ${new Date().toISOString()}`);
         b.thought_id
       FROM companies c
       LEFT JOIN thebrain_mappings b ON b.entity_type = 'company' AND b.entity_id = c.id
-      ORDER BY c.company_category, c.name
+      ORDER BY c.category, c.name
     `).all();
     
     let createdCount = 0;
     let updatedCount = 0;
     
     for (const company of companies) {
-      const groupId = categoryGroups[company.company_category || 'Other'];
+      const groupId = categoryGroups[company.category || 'Other'];
       
       // Use existing thought_id if available
       let companyThoughtId = company.thought_id;
@@ -512,7 +512,7 @@ Last sync: ${new Date().toISOString()}`);
       // Add note with company details
       const note = `# ${company.name}
 
-**Category**: ${company.company_category}
+**Category**: ${company.category}
 **Importance**: ${company.importance}
 **URL**: ${company.url}
 
