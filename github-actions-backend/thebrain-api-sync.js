@@ -484,34 +484,24 @@ ${new Date().toISOString()}`);
     console.log('Syncing recent changes...');
     
     try {
-      // Check for ai_analysis table
-      const hasAnalysis = this.intelligenceDb.prepare(
-        "SELECT COUNT(*) as count FROM sqlite_master WHERE type='table' AND name='ai_analysis'"
-      ).get().count > 0;
-      
-      if (!hasAnalysis) {
-        console.log('⚠️  No ai_analysis table found, skipping changes');
-        return;
-      }
-      
-      // Get recent high-value changes with company thought IDs
+      // Get recent high-value changes with company thought IDs from change_intelligence table
       const changes = this.intelligenceDb.prepare(`
         SELECT 
-          aa.change_id as id,
-          aa.created_at,
+          ci.id,
+          ci.analyzed_at as created_at,
           u.url_type,
-          c.name as company_name,
+          ci.company_name,
           c.id as company_id,
           c.thebrain_thought_id as company_thought_id,
-          aa.relevance_score,
-          aa.category,
-          aa.key_changes
-        FROM ai_analysis aa
-        JOIN urls u ON aa.url_id = u.id
-        JOIN companies c ON aa.company_id = c.id
-        WHERE aa.created_at > datetime('now', '-7 days')
-        AND aa.relevance_score >= 6
-        ORDER BY aa.relevance_score DESC
+          ci.relevance_score,
+          ci.category,
+          ci.key_changes
+        FROM change_intelligence ci
+        JOIN urls u ON ci.url_id = u.id
+        JOIN companies c ON c.name = ci.company_name
+        WHERE ci.analyzed_at > datetime('now', '-7 days')
+        AND ci.relevance_score >= 6
+        ORDER BY ci.relevance_score DESC
         LIMIT 20
       `).all();
       
