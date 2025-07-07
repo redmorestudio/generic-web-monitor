@@ -27,6 +27,11 @@ on:
         required: false
         type: boolean
         default: true
+      cascade:
+        description: 'Trigger subsequent workflows'
+        required: false
+        type: boolean
+        default: true
   
   # Allow being called by other workflows
   workflow_call:
@@ -40,6 +45,11 @@ on:
         description: 'Run ID from scraping workflow'
         required: false
         type: string
+      cascade:
+        description: 'Trigger subsequent workflows'
+        required: false
+        type: boolean
+        default: false
     outputs:
       run_id:
         description: 'The workflow run ID'
@@ -355,6 +365,22 @@ jobs:
             }
           fi
       
-      # Removed automatic trigger to prevent duplicate runs
-      # The full-monitor.yml pipeline handles workflow orchestration
-      # For manual runs, use full-monitor.yml with skip flags
+      # Trigger next workflow if cascade is enabled
+      - name: Trigger analysis workflow
+        if: success() && inputs.cascade
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'analyze.yml',
+              ref: 'main',
+              inputs: {
+                trigger_source: 'process',
+                run_id: '${{ github.run_id }}',
+                use_three_db: '${{ env.USE_THREE_DB }}',
+                cascade: 'true'
+              }
+            });

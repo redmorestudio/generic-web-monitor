@@ -38,6 +38,8 @@ jobs:
   scrape:
     if: ${{ !inputs.skip_scrape }}
     uses: ./.github/workflows/scrape.yml
+    with:
+      cascade: false  # Prevent duplicate triggers
     permissions:
       contents: write
       actions: read
@@ -54,6 +56,7 @@ jobs:
     with:
       trigger_source: ${{ inputs.skip_scrape && 'manual' || 'scrape' }}
       run_id: ${{ needs.scrape.outputs.run_id || github.run_id }}
+      cascade: false  # Prevent duplicate triggers
     secrets: inherit
   
   # Job 3: Analyze content
@@ -68,6 +71,7 @@ jobs:
       trigger_source: ${{ inputs.skip_process && 'manual' || 'process' }}
       run_id: ${{ needs.process.outputs.run_id || github.run_id }}
       analysis_mode: ${{ inputs.analysis_mode }}
+      cascade: false  # Prevent duplicate triggers
     secrets: inherit
   
   # Job 4: Sync and deploy
