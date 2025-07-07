@@ -100,6 +100,30 @@ Extract the following information in a structured format:
    - Clusters (thematic groupings)
    - Hierarchies (parent-child relations)
 
+6. **Interest Level Assessment** - Rate how interesting/important this change is:
+
+Provide TWO separate scores (1-10) that will be averaged:
+
+A. TECHNICAL INNOVATION SCORE:
+   - 9-10: Breakthrough AI models, SOTA achievements, novel architectures, 10x improvements
+   - 7-8: Significant technical advances, 2-5x improvements, new capabilities
+   - 5-6: Notable optimizations, useful tools, incremental improvements
+   - 3-4: Minor updates, bug fixes, routine maintenance
+   - 1-2: No technical relevance
+
+B. BUSINESS IMPACT SCORE:
+   - 9-10: Major launches, $100M+ funding, acquisitions, market-reshaping moves
+   - 7-8: Important partnerships, $10M+ funding, market expansion
+   - 5-6: Product updates, new features, team growth
+   - 3-4: Routine updates, minor news
+   - 1-2: Trivial changes
+
+The final interest_level should be the average of these two scores.
+
+For "category", use one of: "breakthrough", "major_development", "notable_update", "routine_change", "trivial"
+
+For "impact_areas", include relevant tags like: "ai_models", "funding", "partnership", "product_launch", "technical_innovation", "market_expansion", "team", "infrastructure"
+
 Provide your analysis in the following JSON structure:
 {
   "entities": {
@@ -119,12 +143,14 @@ Provide your analysis in the following JSON structure:
   "relationships": [
     {"from": "", "to": "", "type": "", "description": ""}
   ],
-  "competitive_intelligence": {
-    "threat_level": 0,
-    "opportunity_score": 0,
-    "market_impact": "",
-    "strategic_implications": [],
-    "recommended_actions": []
+  "interest_assessment": {
+    "interest_level": 0,
+    "interest_drivers": [],
+    "category": "",
+    "impact_areas": [],
+    "technical_innovation_score": 0,
+    "business_impact_score": 0,
+    "summary": ""
   },
   "smart_groups": {
     "suggested_groups": [],
@@ -211,7 +237,7 @@ async function storeEnhancedAnalysis(intelligenceDb, changeId, extractedData) {
       JSON.stringify(extractedData.entities || {}),
       JSON.stringify(extractedData.relationships || []),
       JSON.stringify(extractedData.semantic_categories || {}),
-      JSON.stringify(extractedData.competitive_intelligence || {}),
+      JSON.stringify(extractedData.interest_assessment || {}),
       JSON.stringify(extractedData.smart_groups || {}),
       JSON.stringify(extractedData.quantitative_data || {}),
       JSON.stringify(extractedData.extracted_text || {}),
@@ -330,7 +356,7 @@ async function generateSmartGroupReport() {
       try {
         const entities = JSON.parse(analysis.entities);
         const smartGroups = JSON.parse(analysis.smart_groups);
-        const competitive = JSON.parse(analysis.competitive_data);
+        const interestData = JSON.parse(analysis.competitive_data);
 
         // Collect entities
         if (entities.products) {
@@ -362,7 +388,7 @@ async function generateSmartGroupReport() {
               company: change.company_name,
               url: change.url,
               date: change.detected_at,
-              threat_level: competitive.threat_level || 0
+              interest_level: interestData.interest_level || 0
             });
           });
         }
@@ -507,11 +533,11 @@ async function processRecentChanges() {
         )
       `);
 
-      const relevanceScore = extractedData.competitive_intelligence?.threat_level || 5;
+      const relevanceScore = extractedData.interest_assessment?.interest_level || 5;
       const summary = `Detected ${Object.keys(extractedData.entities).reduce((sum, key) => 
         sum + (extractedData.entities[key]?.length || 0), 0)} entities. ` +
         `Categories: ${extractedData.semantic_categories?.primary || 'General'}. ` +
-        (extractedData.competitive_intelligence?.market_impact || '');
+        (extractedData.interest_assessment?.summary || '');
 
       intelligenceDb.prepare(`
         INSERT OR REPLACE INTO ai_analysis 
