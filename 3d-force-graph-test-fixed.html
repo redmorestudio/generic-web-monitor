@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Force Graph Test - Fixed CDN</title>
+    <style>
+        body { margin: 0; background: #000; }
+        #info { 
+            position: absolute; 
+            top: 10px; 
+            left: 10px; 
+            color: white; 
+            background: rgba(0,0,0,0.7); 
+            padding: 10px;
+            font-family: monospace;
+            z-index: 1000;
+        }
+        #myGraph {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <!-- Use HTTPS for CDN links -->
+    <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+</head>
+<body>
+    <div id="info">Loading test...</div>
+    <div id="myGraph"></div>
+
+    <script>
+    // Simple test with minimal data
+    const testData = {
+        nodes: [
+            { id: '1', name: 'Node 1', val: 1 },
+            { id: '2', name: 'Node 2', val: 2 },
+            { id: '3', name: 'Node 3', val: 3 },
+            { id: '4', name: 'Node 4', val: 4 }
+        ],
+        links: [
+            { source: '1', target: '2' },
+            { source: '2', target: '3' },
+            { source: '3', target: '4' },
+            { source: '4', target: '1' }
+        ]
+    };
+
+    try {
+        console.log('Starting graph initialization...');
+        
+        // Create graph with simpler configuration
+        const myGraph = ForceGraph3D()
+            (document.getElementById('myGraph'))
+            .graphData(testData)
+            .nodeLabel('name')
+            .nodeAutoColorBy('id')
+            .backgroundColor('#000011');
+            
+        console.log('Graph created:', myGraph);
+        
+        // Focus on graph
+        setTimeout(() => {
+            myGraph.zoomToFit(400);
+        }, 1000);
+        
+        document.getElementById('info').textContent = 'Test graph loaded! Nodes: ' + testData.nodes.length;
+    } catch (error) {
+        document.getElementById('info').textContent = 'Error: ' + error.message;
+        console.error('Graph error:', error);
+    }
+    </script>
+</body>
+</html>

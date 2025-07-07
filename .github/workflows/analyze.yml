@@ -259,20 +259,6 @@ jobs:
             }
           fi
       
-      # Trigger next workflow if successful
-      - name: Trigger sync workflow
-        if: success()
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'sync.yml',
-              ref: 'main',
-              inputs: {
-                trigger_source: 'analyze',
-                run_id: '${{ github.run_id }}'
-              }
-            });
+      # Removed automatic trigger to prevent duplicate runs
+      # The full-monitor.yml pipeline handles workflow orchestration
+      # For manual runs, use full-monitor.yml with skip flags
