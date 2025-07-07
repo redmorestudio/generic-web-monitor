@@ -9,6 +9,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const Database = require('better-sqlite3');
 const dbManager = require('./db-manager');
 
 // Configuration
@@ -134,12 +135,41 @@ function generateDashboardData(intelligenceDb, processedDb) {
     try {
         console.log('📊 Generating dashboard data...');
         
+        // Get the actual last scrape time from raw_content.db
+        let lastCheckTime = new Date().toISOString(); // fallback
+        
+        try {
+            const rawDbPath = path.join(DATA_DIR, 'raw_content.db');
+            if (fs.existsSync(rawDbPath)) {
+                const rawDb = new Database(rawDbPath, { readonly: true });
+                const lastRun = rawDb.prepare(`
+                    SELECT completed_at 
+                    FROM scrape_runs 
+                    WHERE status = 'completed' 
+                    ORDER BY completed_at DESC 
+                    LIMIT 1
+                `).get();
+                
+                if (lastRun && lastRun.completed_at) {
+                    lastCheckTime = lastRun.completed_at;
+                    console.log(`✅ Found last scrape time: ${lastCheckTime}`);
+                } else {
+                    console.log('⚠️ No completed scrape runs found');
+                }
+                rawDb.close();
+            } else {
+                console.log('⚠️ raw_content.db not found');
+            }
+        } catch (err) {
+            console.warn('⚠️ Could not get last scrape time:', err.message);
+        }
+        
         // Get stats
         const stats = {
             companies: intelligenceDb.prepare('SELECT COUNT(*) as count FROM companies').get()?.count || 0,
             urls: intelligenceDb.prepare('SELECT COUNT(*) as count FROM urls').get()?.count || 0,
             snapshots: intelligenceDb.prepare('SELECT COUNT(*) as count FROM baseline_analysis').get()?.count || 0,
-            lastCheck: new Date().toISOString()
+            lastCheck: lastCheckTime  // Use actual scrape time
         };
         
         // Get company activity
