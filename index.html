@@ -416,27 +416,6 @@
             margin-bottom: 10px;
         }
 
-        .threat-level {
-            display: inline-block;
-            padding: 6px 16px;
-            border-radius: 4px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        .threat-high { 
-            background: #e74c3c; 
-            color: white;
-        }
-        .threat-medium { 
-            background: #f39c12; 
-            color: black;
-        }
-        .threat-low { 
-            background: #3498db; 
-            color: white;
-        }
-
         .metric-value {
             font-size: 24px;
             font-weight: bold;
@@ -1053,12 +1032,6 @@
         }
 
         // Get threat level class
-        function getThreatLevel(score) {
-            if (score >= 8) return 'high';
-            if (score >= 6) return 'medium';
-            return 'low';
-        }
-
         // Show company detail modal
         function showCompanyDetail(companyName) {
             const companyId = findCompanyIdByName(companyName);
@@ -1081,9 +1054,6 @@
                 <!-- Executive Summary -->
                 <div class="company-detail-section">
                     <h3>Executive Summary</h3>
-                    <p class="threat-level threat-${getThreatLevel(details.relevance_score)}">
-                        Threat Level: ${details.relevance_score}/10
-                    </p>
                     <p><strong>${details.summary?.one_line || 'No executive summary available'}</strong></p>
                     ${details.summary?.key_insights && details.summary.key_insights.length > 0 ? `
                         <h4>Key Insights:</h4>

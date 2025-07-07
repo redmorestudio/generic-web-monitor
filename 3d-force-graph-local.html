@@ -781,10 +781,6 @@
         let infoHtml = `<strong style="color: ${node.color}">${node.name}</strong><br/>`;
         infoHtml += `Type: ${node.group}<br/>`;
         
-        if (node.interestLevel) {
-            const interestClass = node.interestLevel > 7 ? 'high' : 
-                               node.interestLevel > 4 ? 'medium' : 'low';
-            infoHtml += `Interest Level: <span style="color: ${CONFIG.interestColors[interestClass]}">${node.interestLevel}/10 (${interestClass})</span><br/>`;
         }
         
         if (node.products && node.products.length > 0) {
@@ -858,17 +854,13 @@
         if (!rawData.dashboard) return;
         
         const stats = rawData.dashboard.stats;
-        const avgInterest = rawData.dashboard.company_activity.reduce((sum, c) => 
-            sum + (c.intelligence?.interest_level || 0), 0) / rawData.dashboard.company_activity.length;
-        
         document.getElementById('statsContent').innerHTML = `
             <strong>Monitoring Stats:</strong><br/>
             Companies: ${stats.companies}<br/>
             URLs: ${stats.urls}<br/>
             Snapshots: ${stats.snapshots}<br/>
             Graph Nodes: ${graphData.nodes.length}<br/>
-            Graph Links: ${graphData.links.length}<br/>
-            Avg Interest Level: ${avgInterest.toFixed(1)}/10
+            Graph Links: ${graphData.links.length}
         `;
     }
 
