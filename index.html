@@ -416,6 +416,16 @@
             margin-bottom: 10px;
         }
 
+        .interest-score {
+            display: inline-block;
+            padding: 8px 16px;
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.4);
+            border-radius: 8px;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+
         .metric-value {
             font-size: 24px;
             font-weight: bold;
@@ -1054,6 +1064,14 @@
                 <!-- Executive Summary -->
                 <div class="company-detail-section">
                     <h3>Executive Summary</h3>
+                    ${details.relevance_score ? `
+                        <p class="interest-score">
+                            <strong>Interest Level:</strong> ${details.relevance_score}/10
+                            ${details.relevance_score >= 8 ? '🌟 High Priority' : 
+                              details.relevance_score >= 5 ? '📌 Medium Priority' : 
+                              '📊 Low Priority'}
+                        </p>
+                    ` : ''}
                     <p><strong>${details.summary?.one_line || 'No executive summary available'}</strong></p>
                     ${details.summary?.key_insights && details.summary.key_insights.length > 0 ? `
                         <h4>Key Insights:</h4>
@@ -1711,7 +1729,7 @@
                     <p><strong>Company:</strong> ${escapeHtml(item.company)}</p>
                     <p><strong>Type:</strong> ${escapeHtml(item.type)}</p>
                     <p><strong>URL:</strong> <a href="${escapeHtml(item.url)}" target="_blank">${escapeHtml(item.url)}</a></p>
-                    <p><strong>Relevance Score:</strong> ${item.relevance_score}/10</p>
+                    <p><strong>Interest Level:</strong> ${item.interest_level || item.relevance_score}/10 ${item.interest_level >= 8 ? '🌟' : item.interest_level >= 5 ? '📌' : '📊'}</p>
                     <p><strong>Extracted:</strong> ${new Date(item.extracted_at).toLocaleString()}</p>
                 </div>
                 

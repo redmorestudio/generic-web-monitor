@@ -593,6 +593,7 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                 let opportunities = [];
                 let aiSummary = change.summary || 'Content change detected';
                 let aiProcessed = false;
+                let interestLevel = change.relevance_score || 5; // Default fallback
                 
                 if (analysis) {
                     aiProcessed = true;
@@ -602,6 +603,10 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                         const interestData = JSON.parse(analysis.competitive_data || '{}');
                         keyDevelopments = interestData.interest_drivers || [];
                         opportunities = interestData.recommended_actions || [];
+                        // Use the new interest level if available
+                        if (interestData.interest_level) {
+                            interestLevel = interestData.interest_level;
+                        }
                     } catch (e) {
                         // Ignore parsing errors
                     }
@@ -612,11 +617,11 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                     aiSummary = `${change.change_type === 'content_update' ? 'Content updated' : 'Change detected'} on ${change.company}'s ${change.url_type || 'page'}`;
                 }
                 
-                // Determine change emoji based on relevance score
+                // Determine change emoji based on interest level
                 let emoji = '📊';
-                if (change.relevance_score >= 8) emoji = '🚨';
-                else if (change.relevance_score >= 6) emoji = '⚡';
-                else if (change.relevance_score >= 4) emoji = '🔔';
+                if (interestLevel >= 8) emoji = '🌟';
+                else if (interestLevel >= 5) emoji = '📌';
+                else if (interestLevel >= 3) emoji = '📊';
                 
                 return {
                     id: change.id,
@@ -625,14 +630,15 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                     company_category: change.company_category || 'competitor',
                     url_type: change.url_type || 'general',
                     change_percentage: 0, // Not tracked in new schema
-                    relevance_score: change.relevance_score || 5,
+                    interest_level: interestLevel,
+                    relevance_score: interestLevel, // Keep for backward compatibility
                     summary: aiSummary,
                     category: change.change_type || 'content_change',
                     keywords_found: '[]',
                     created_at: change.created_at,
                     time_ago: getRelativeTime(change.created_at),
                     emoji: emoji,
-                    impact_level: change.relevance_score >= 8 ? 'high' : change.relevance_score >= 5 ? 'medium' : 'low',
+                    impact_level: interestLevel >= 8 ? 'high' : interestLevel >= 5 ? 'medium' : 'low',
                     ai_processed: aiProcessed,
                     key_developments: keyDevelopments,
                     opportunities: opportunities,
