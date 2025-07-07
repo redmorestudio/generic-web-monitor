@@ -98,8 +98,8 @@ function getLatestChange(processedDb, intelligenceDb, companyId) {
     }
 }
 
-// Helper function to get max threat level
-function getMaxThreatLevel(intelligenceDb, companyId) {
+// Helper function to get max interest level
+function getMaxInterestLevel(intelligenceDb, companyId) {
     try {
         const result = intelligenceDb.prepare(`
             SELECT MAX(ba.relevance_score) as max_score
@@ -173,8 +173,8 @@ function generateDashboardData(intelligenceDb, processedDb) {
             // Get latest change
             const latestChange = getLatestChange(processedDb, intelligenceDb, company.id);
             
-            // Get threat level
-            const threatLevel = getMaxThreatLevel(intelligenceDb, company.id);
+            // Get interest level
+            const interestLevel = getMaxInterestLevel(intelligenceDb, company.id);
             
             return {
                 company: company.company,
@@ -188,8 +188,8 @@ function generateDashboardData(intelligenceDb, processedDb) {
                     technologies: topTechnologies,
                     ai_ml_concepts: topAiConcepts,
                     partners: topPartners,
-                    threat_level: threatLevel,
-                    threat_category: threatLevel >= 8 ? 'high' : threatLevel >= 5 ? 'medium' : 'low'
+                    interest_level: interestLevel,
+                    interest_category: interestLevel >= 8 ? 'high' : interestLevel >= 5 ? 'medium' : 'low'
                 },
                 latest_change: latestChange
             };
@@ -589,7 +589,7 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
             const processedChanges = recentChanges.map(change => {
                 const analysis = analysisStmt ? analysisStmt.get(change.id) : null;
                 
-                let threats = [];
+                let keyDevelopments = [];
                 let opportunities = [];
                 let aiSummary = change.summary || 'Content change detected';
                 let aiProcessed = false;
@@ -599,9 +599,9 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                     aiSummary = analysis.summary || aiSummary;
                     
                     try {
-                        const competitiveData = JSON.parse(analysis.competitive_data || '{}');
-                        threats = competitiveData.strategic_implications || [];
-                        opportunities = competitiveData.recommended_actions || [];
+                        const interestData = JSON.parse(analysis.competitive_data || '{}');
+                        keyDevelopments = interestData.interest_drivers || [];
+                        opportunities = interestData.recommended_actions || [];
                     } catch (e) {
                         // Ignore parsing errors
                     }
@@ -634,7 +634,7 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                     emoji: emoji,
                     impact_level: change.relevance_score >= 8 ? 'high' : change.relevance_score >= 5 ? 'medium' : 'low',
                     ai_processed: aiProcessed,
-                    threats: threats,
+                    key_developments: keyDevelopments,
                     opportunities: opportunities,
                     content_ids: {
                         old: change.old_content_id,

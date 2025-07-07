@@ -103,16 +103,16 @@
             border-radius: 15px;
         }
         
-        .threat-indicator {
+        .interest-indicator {
             position: absolute;
             top: 15px;
             right: 15px;
             font-size: 1.5rem;
         }
         
-        .threat-high { color: #ff6b6b; }
-        .threat-medium { color: #ffd93d; }
-        .threat-low { color: #6bcf7f; }
+        .interest-high { color: #ff6b6b; }
+        .interest-medium { color: #ffd93d; }
+        .interest-low { color: #6bcf7f; }
         
         /* Intelligence Pills */
         .intel-section {
@@ -305,13 +305,13 @@
             const grid = document.getElementById('companiesGrid');
             
             grid.innerHTML = companies.map(company => {
-                const threatClass = company.intelligence.threat_category;
-                const threatEmoji = threatClass === 'high' ? '🚨' : 
-                                  threatClass === 'medium' ? '⚡' : '✓';
+                const interestClass = company.intelligence.interest_category;
+                const interestEmoji = interestClass === 'high' ? '🌟' : 
+                                    interestClass === 'medium' ? '📌' : '📊';
                 
                 return `
                     <div class="company-card">
-                        <div class="threat-indicator threat-${threatClass}">${threatEmoji}</div>
+                        <div class="interest-indicator interest-${interestClass}">${interestEmoji}</div>
                         <div class="company-header">
                             <div class="company-name">${company.company}</div>
                             <div class="company-type">${company.type}</div>

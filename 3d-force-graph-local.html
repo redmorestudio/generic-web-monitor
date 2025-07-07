@@ -217,7 +217,7 @@
             max-width: 150px;
         }
         
-        .node-threat {
+        .node-interest {
             display: inline-block;
             padding: 2px 6px;
             border-radius: 3px;
@@ -283,7 +283,7 @@
                 <option value="technologies">Technology Landscape</option>
                 <option value="concepts">AI/ML Concepts</option>
                 <option value="partners">Partner Network</option>
-                <option value="threats">Threat Analysis</option>
+                <option value="interests">Interest Analysis</option>
             </select>
         </div>
         
@@ -347,15 +347,15 @@
         <hr style="border-color: #333; margin: 8px 0;">
         <div class="legend-item">
             <div class="legend-color" style="background: #ff4444;"></div>
-            <span>High Threat</span>
+            <span>High Interest</span>
         </div>
         <div class="legend-item">
             <div class="legend-color" style="background: #ffa726;"></div>
-            <span>Medium Threat</span>
+            <span>Medium Interest</span>
         </div>
         <div class="legend-item">
             <div class="legend-color" style="background: #66bb6a;"></div>
-            <span>Low Threat</span>
+            <span>Low Interest</span>
         </div>
     </div>
     
@@ -373,7 +373,7 @@
             'AI Research': '#5f27cd',
             'default': '#667eea'
         },
-        threatColors: {
+        interestColors: {
             'high': '#ff4444',
             'medium': '#ffa726',
             'low': '#66bb6a',
@@ -538,16 +538,16 @@
         sprite.visible = labelsEnabled;
         group.add(sprite);
         
-        // Add threat level indicator
-        if (node.threatLevel && node.threatLevel > 5) {
-            const threatGeometry = new THREE.RingGeometry(7, 9, 32);
-            const threatMaterial = new THREE.MeshBasicMaterial({
-                color: CONFIG.threatColors[node.threatLevel > 7 ? 'high' : 'medium'],
+        // Add interest level indicator
+        if (node.interestLevel && node.interestLevel > 5) {
+            const interestGeometry = new THREE.RingGeometry(7, 9, 32);
+            const interestMaterial = new THREE.MeshBasicMaterial({
+                color: CONFIG.interestColors[node.interestLevel > 7 ? 'high' : 'medium'],
                 transparent: true,
                 opacity: 0.6,
                 side: THREE.DoubleSide
             });
-            const ring = new THREE.Mesh(threatGeometry, threatMaterial);
+            const ring = new THREE.Mesh(interestGeometry, interestMaterial);
             group.add(ring);
         }
         
@@ -570,10 +570,10 @@
                     name: company.company,
                     group: company.type,
                     color: CONFIG.nodeColors[company.type] || CONFIG.nodeColors.default,
-                    description: `URLs: ${company.url_count}<br/>Threat: ${company.intelligence?.threat_category || 'unknown'}`,
+                    description: `URLs: ${company.url_count}<br/>Interest: ${company.intelligence?.interest_category || 'unknown'}`,
                     shortDescription: `${company.type} • ${company.url_count} URLs`,
                     val: company.url_count * 5,
-                    threatLevel: company.intelligence?.threat_level || 0,
+                    interestLevel: company.intelligence?.interest_level || 0,
                     entityCount: company.url_count,
                     // Rich data for display
                     products: company.intelligence?.products?.slice(0, 3) || [],
@@ -724,49 +724,49 @@
         });
     }
 
-    // Build threat analysis view
-    function buildThreatView() {
+    // Build interest analysis view
+    function buildInterestView() {
         graphData.nodes = [];
         graphData.links = [];
         
-        // Create threat level nodes
-        const threatLevels = ['high', 'medium', 'low'];
-        const threatNodes = {};
+        // Create interest level nodes
+        const interestLevels = ['high', 'medium', 'low'];
+        const interestNodes = {};
         
-        threatLevels.forEach(level => {
+        interestLevels.forEach(level => {
             const node = {
-                id: `threat-${level}`,
-                name: `${level.toUpperCase()} THREAT`,
-                group: 'Threat Level',
-                color: CONFIG.threatColors[level],
+                id: `interest-${level}`,
+                name: `${level.toUpperCase()} INTEREST`,
+                group: 'Interest Level',
+                color: CONFIG.interestColors[level],
                 val: 30,
-                shortDescription: 'Threat Category'
+                shortDescription: 'Interest Category'
             };
             graphData.nodes.push(node);
-            threatNodes[level] = node;
+            interestNodes[level] = node;
         });
         
-        // Add companies connected to their threat levels
+        // Add companies connected to their interest levels
         rawData.dashboard.company_activity.forEach(company => {
-            const threatCategory = company.intelligence?.threat_category || 'low';
-            const threatLevel = company.intelligence?.threat_level || 0;
+            const interestCategory = company.intelligence?.interest_category || 'low';
+            const interestLevel = company.intelligence?.interest_level || 0;
             
             graphData.nodes.push({
                 id: company.company,
                 name: company.company,
                 group: company.type,
-                color: CONFIG.threatColors[threatCategory],
-                val: threatLevel * 3,
-                threatLevel: threatLevel,
-                shortDescription: `Threat Score: ${threatLevel}/10`
+                color: CONFIG.interestColors[interestCategory],
+                val: interestLevel * 3,
+                interestLevel: interestLevel,
+                shortDescription: `Interest Score: ${interestLevel}/10`
             });
             
             graphData.links.push({
-                source: `threat-${threatCategory}`,
+                source: `interest-${interestCategory}`,
                 target: company.company,
-                color: CONFIG.threatColors[threatCategory],
-                particles: threatLevel > 5 ? 4 : 2,
-                width: threatLevel / 5
+                color: CONFIG.interestColors[interestCategory],
+                particles: interestLevel > 5 ? 4 : 2,
+                width: interestLevel / 5
             });
         });
     }
@@ -781,10 +781,10 @@
         let infoHtml = `<strong style="color: ${node.color}">${node.name}</strong><br/>`;
         infoHtml += `Type: ${node.group}<br/>`;
         
-        if (node.threatLevel) {
-            const threatClass = node.threatLevel > 7 ? 'high' : 
-                               node.threatLevel > 4 ? 'medium' : 'low';
-            infoHtml += `Threat Level: <span style="color: ${CONFIG.threatColors[threatClass]}">${node.threatLevel}/10 (${threatClass})</span><br/>`;
+        if (node.interestLevel) {
+            const interestClass = node.interestLevel > 7 ? 'high' : 
+                               node.interestLevel > 4 ? 'medium' : 'low';
+            infoHtml += `Interest Level: <span style="color: ${CONFIG.interestColors[interestClass]}">${node.interestLevel}/10 (${interestClass})</span><br/>`;
         }
         
         if (node.products && node.products.length > 0) {
@@ -858,8 +858,8 @@
         if (!rawData.dashboard) return;
         
         const stats = rawData.dashboard.stats;
-        const avgThreat = rawData.dashboard.company_activity.reduce((sum, c) => 
-            sum + (c.intelligence?.threat_level || 0), 0) / rawData.dashboard.company_activity.length;
+        const avgInterest = rawData.dashboard.company_activity.reduce((sum, c) => 
+            sum + (c.intelligence?.interest_level || 0), 0) / rawData.dashboard.company_activity.length;
         
         document.getElementById('statsContent').innerHTML = `
             <strong>Monitoring Stats:</strong><br/>
@@ -868,7 +868,7 @@
             Snapshots: ${stats.snapshots}<br/>
             Graph Nodes: ${graphData.nodes.length}<br/>
             Graph Links: ${graphData.links.length}<br/>
-            Avg Threat Level: ${avgThreat.toFixed(1)}/10
+            Avg Interest Level: ${avgInterest.toFixed(1)}/10
         `;
     }
 
@@ -901,8 +901,8 @@
             case 'technologies':
                 buildTechnologyView();
                 break;
-            case 'threats':
-                buildThreatView();
+            case 'interests':
+                buildInterestView();
                 break;
             case 'companies':
             default:
