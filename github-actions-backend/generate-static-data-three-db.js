@@ -9,7 +9,6 @@
 
 const fs = require('fs');
 const path = require('path');
-const Database = require('better-sqlite3');
 const dbManager = require('./db-manager');
 
 // Configuration
@@ -135,33 +134,34 @@ function generateDashboardData(intelligenceDb, processedDb) {
     try {
         console.log('📊 Generating dashboard data...');
         
-        // Get the actual last scrape time from raw_content.db
+        // Get the actual last scrape time
         let lastCheckTime = new Date().toISOString(); // fallback
         
         try {
-            const rawDbPath = path.join(DATA_DIR, 'raw_content.db');
-            if (fs.existsSync(rawDbPath)) {
-                const rawDb = new Database(rawDbPath, { readonly: true });
-                const lastRun = rawDb.prepare(`
-                    SELECT completed_at 
-                    FROM scrape_runs 
-                    WHERE status = 'completed' 
-                    ORDER BY completed_at DESC 
-                    LIMIT 1
+            // First try to get from last-scrape.json if available
+            const lastScrapePath = path.join(OUTPUT_DIR, 'last-scrape.json');
+            if (fs.existsSync(lastScrapePath)) {
+                const lastScrapeData = JSON.parse(fs.readFileSync(lastScrapePath, 'utf8'));
+                if (lastScrapeData.timestamp) {
+                    lastCheckTime = lastScrapeData.timestamp;
+                    console.log(`✅ Found last scrape time from last-scrape.json: ${lastCheckTime}`);
+                }
+            } else {
+                // Fallback: Try to get the most recent baseline analysis time
+                const lastAnalysis = intelligenceDb.prepare(`
+                    SELECT MAX(created_at) as last_time 
+                    FROM baseline_analysis
                 `).get();
                 
-                if (lastRun && lastRun.completed_at) {
-                    lastCheckTime = lastRun.completed_at;
-                    console.log(`✅ Found last scrape time: ${lastCheckTime}`);
+                if (lastAnalysis && lastAnalysis.last_time) {
+                    lastCheckTime = lastAnalysis.last_time;
+                    console.log(`✅ Using last analysis time as proxy: ${lastCheckTime}`);
                 } else {
-                    console.log('⚠️ No completed scrape runs found');
+                    console.log('⚠️ No timing data found, using current time');
                 }
-                rawDb.close();
-            } else {
-                console.log('⚠️ raw_content.db not found');
             }
         } catch (err) {
-            console.warn('⚠️ Could not get last scrape time:', err.message);
+            console.warn('⚠️ Could not determine last check time:', err.message);
         }
         
         // Get stats
