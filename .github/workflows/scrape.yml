@@ -22,9 +22,20 @@ on:
         required: false
         type: boolean
         default: true
+      cascade:
+        description: 'Trigger next workflow in chain'
+        required: false
+        type: boolean
+        default: true
   
   # Allow being called by other workflows
   workflow_call:
+    inputs:
+      cascade:
+        description: 'Trigger next workflow in chain'
+        required: false
+        type: boolean
+        default: false  # Different default for when called by full-monitor
     outputs:
       run_id:
         description: 'The workflow run ID'
@@ -331,6 +342,24 @@ jobs:
             git stash pop || true
           fi
       
-      # Removed automatic trigger to prevent duplicate runs
-      # The full-monitor.yml pipeline handles workflow orchestration
-      # For manual runs, use full-monitor.yml with skip flags
+      - name: Trigger Process workflow
+        if: inputs.cascade == true
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const result = await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'process.yml',
+              ref: 'main',
+              inputs: {
+                trigger_source: 'scrape-cascade',
+                run_id: '${{ github.run_id }}',
+                cascade: 'true'  // Pass cascade through
+              }
+            });
+            console.log(`✅ Triggered Process workflow`);
+      
+      # Cascade parameter system implemented
+      # Manual runs (cascade: true) trigger the next workflow
+      # Full-monitor runs (cascade: false) prevent duplicates

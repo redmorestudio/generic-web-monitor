@@ -23,6 +23,11 @@ on:
         required: false
         type: boolean
         default: false
+      cascade:
+        description: 'Trigger next workflow in chain (no effect - sync is final stage)'
+        required: false
+        type: boolean
+        default: true
   
   # Allow being called by other workflows
   workflow_call:
@@ -43,6 +48,11 @@ on:
         default: false
       skip_alerts:
         description: 'Skip creating alerts'
+        required: false
+        type: boolean
+        default: false
+      cascade:
+        description: 'Trigger next workflow in chain (no effect - sync is final stage)'
         required: false
         type: boolean
         default: false
