@@ -1,8 +1,8 @@
 {
   "workflow": "analyze",
-  "run_id": "16121043901",
-  "timestamp": "2025-07-07T15:21:30.557Z",
-  "mode": "only-new",
+  "run_id": "16122433242",
+  "timestamp": "2025-07-07T16:24:31.839Z",
+  "mode": "all",
   "trigger_source": "manual",
   "architecture": "three-db",
   "ai_model": "groq-llama-3.3-70b",
