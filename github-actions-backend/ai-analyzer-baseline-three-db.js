@@ -554,7 +554,7 @@ async function processAllSnapshots() {
       const elapsed = (Date.now() - startTime) / 1000;
       const rate = processed / elapsed;
       const remaining = (latestSnapshots.length - processed) / rate;
-      console.log(`\n⏱️  Progress: ${processed}/${latestSnapshots.length} (${failed} failed)`);
+      console.log(`\n⏱️  Progress: ${processed}/${latestSnapshots.length} (${errorTracker.errors.length} failed)`);
       console.log(`   Rate: ${rate.toFixed(1)} sites/sec`);
       console.log(`   ETA: ${Math.ceil(remaining / 60)} minutes`);
     }

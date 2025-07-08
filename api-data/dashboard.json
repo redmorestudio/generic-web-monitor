@@ -3,7 +3,7 @@
     "companies": 52,
     "urls": 174,
     "snapshots": 345,
-    "lastCheck": "2025-06-24T23:17:15.496Z"
+    "lastCheck": "2025-07-08T18:54:48.296Z"
   },
   "company_activity": [
     {
@@ -37,7 +37,7 @@
           "Unknown",
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -106,7 +106,7 @@
           "Unknown",
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -140,7 +140,7 @@
           "Unknown",
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -241,7 +241,7 @@
           "Unknown",
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -276,7 +276,7 @@
           "Unknown",
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -383,7 +383,7 @@
           "Unknown",
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -550,7 +550,7 @@
           "Generative Flow Matching"
         ],
         "partners": [],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -867,7 +867,7 @@
           "Unknown",
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -930,8 +930,8 @@
           "Image-to-Video"
         ],
         "partners": [],
-        "interest_level": 6,
-        "interest_category": "medium"
+        "interest_level": 4,
+        "interest_category": "low"
       },
       "latest_change": null
     },
@@ -999,7 +999,7 @@
         "partners": [
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -1071,7 +1071,7 @@
           "Unknown",
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -1179,7 +1179,7 @@
       },
       "latest_change": {
         "summary": "Major GPT-5 announcement detected",
-        "time_ago": "2 hours ago",
+        "time_ago": "just now",
         "relevance_score": 9
       }
     },
@@ -1350,7 +1350,7 @@
           "Unknown",
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -1490,7 +1490,7 @@
           "Unknown",
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -1664,7 +1664,7 @@
           "Unknown",
           "Unknown"
         ],
-        "interest_level": 6,
+        "interest_level": 5,
         "interest_category": "medium"
       },
       "latest_change": null
@@ -1810,6 +1810,6 @@
       "latest_change": null
     }
   ],
-  "generated_at": "2025-07-08T21:22:00.104Z",
+  "generated_at": "2025-07-08T23:29:44.105Z",
   "backend": "github-actions-static-three-db"
 }

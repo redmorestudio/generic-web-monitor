@@ -519,38 +519,42 @@ async function processRecentChanges() {
       if (extractedData && !extractedData.error) {
         await storeEnhancedAnalysis(intelligenceDb, change.id, extractedData);
       
-      // Also update the regular AI analysis for compatibility
-      intelligenceDb.exec(`
-        CREATE TABLE IF NOT EXISTS ai_analysis (
-          id INTEGER PRIMARY KEY AUTOINCREMENT,
-          change_id INTEGER UNIQUE,
-          relevance_score INTEGER,
-          summary TEXT,
-          category TEXT,
-          competitive_threats TEXT,
-          strategic_opportunities TEXT,
-          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-        )
-      `);
-
+      // Store change intelligence for compatibility with the view
       const relevanceScore = extractedData.interest_assessment?.interest_level || 5;
       const summary = `Detected ${Object.keys(extractedData.entities).reduce((sum, key) => 
         sum + (extractedData.entities[key]?.length || 0), 0)} entities. ` +
         `Categories: ${extractedData.semantic_categories?.primary || 'General'}. ` +
         (extractedData.interest_assessment?.summary || '');
 
-      intelligenceDb.prepare(`
-        INSERT OR REPLACE INTO ai_analysis 
-        (change_id, relevance_score, summary, category, competitive_threats, strategic_opportunities)
-        VALUES (?, ?, ?, ?, ?, ?)
-      `).run(
-        change.id,
-        relevanceScore,
-        summary,
-        extractedData.semantic_categories?.primary || 'General',
-        JSON.stringify(extractedData.competitive_intelligence?.strategic_implications || []),
-        JSON.stringify(extractedData.competitive_intelligence?.recommended_actions || [])
-      );
+      // Get company_id from the change's URL
+      const companyInfo = intelligenceDb.prepare(`
+        SELECT c.id as company_id
+        FROM urls u
+        JOIN companies c ON u.company_id = c.id
+        WHERE u.id = ?
+      `).get(change.url_id);
+
+      if (companyInfo) {
+        // Store in change_intelligence table
+        intelligenceDb.prepare(`
+          INSERT INTO change_intelligence 
+          (company_id, change_summary, created_at)
+          VALUES (?, ?, datetime('now'))
+        `).run(
+          companyInfo.company_id,
+          JSON.stringify({
+            change_id: change.id,
+            url_id: change.url_id,
+            relevance_score: relevanceScore,
+            summary: summary,
+            category: extractedData.semantic_categories?.primary || 'General',
+            interest_assessment: extractedData.interest_assessment || {},
+            entities: extractedData.entities || {},
+            strategic_implications: extractedData.competitive_intelligence?.strategic_implications || [],
+            recommended_actions: extractedData.competitive_intelligence?.recommended_actions || []
+          })
+        );
+      }
         
         // Mark as successful
         errorTracker.addSuccess();

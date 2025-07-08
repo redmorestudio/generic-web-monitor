@@ -98,17 +98,41 @@ function getLatestChange(processedDb, intelligenceDb, companyId) {
     }
 }
 
-// Helper function to get max interest level
+// Helper function to get average interest level (or max if new data available)
 function getMaxInterestLevel(intelligenceDb, companyId) {
     try {
+        // First check if we have new interest_assessment data
+        const newDataCheck = intelligenceDb.prepare(`
+            SELECT ba.competitive_data
+            FROM baseline_analysis ba
+            JOIN urls u ON ba.url_id = u.id
+            WHERE u.company_id = ?
+            AND ba.competitive_data IS NOT NULL
+            AND ba.competitive_data LIKE '%interest_level%'
+            ORDER BY ba.created_at DESC
+            LIMIT 1
+        `).get(companyId);
+        
+        if (newDataCheck?.competitive_data) {
+            try {
+                const data = JSON.parse(newDataCheck.competitive_data);
+                if (data.interest_level) {
+                    return data.interest_level;
+                }
+            } catch (e) {
+                // Fall through to old method
+            }
+        }
+        
+        // Fall back to averaging relevance scores for better distribution
         const result = intelligenceDb.prepare(`
-            SELECT MAX(ba.relevance_score) as max_score
+            SELECT AVG(ba.relevance_score) as avg_score
             FROM baseline_analysis ba
             JOIN urls u ON ba.url_id = u.id
             WHERE u.company_id = ?
         `).get(companyId);
         
-        return result?.max_score || 0;
+        return Math.round(result?.avg_score || 0);
     } catch (error) {
         return 0;
     }
@@ -134,31 +158,50 @@ function generateDashboardData(intelligenceDb, processedDb) {
     try {
         console.log('📊 Generating dashboard data...');
         
-        // Get the actual last scrape time
+        // Get the actual last check time from various sources
         let lastCheckTime = new Date().toISOString(); // fallback
         
         try {
-            // First try to get from last-scrape.json if available
+            // Collect times from various sources
+            const timeSources = [];
+            
+            // 1. Check workflow-status.json
+            const workflowStatusPath = path.join(OUTPUT_DIR, 'workflow-status.json');
+            if (fs.existsSync(workflowStatusPath)) {
+                const workflowData = JSON.parse(fs.readFileSync(workflowStatusPath, 'utf8'));
+                if (workflowData.last_run) {
+                    timeSources.push({ source: 'workflow-status', time: new Date(workflowData.last_run) });
+                }
+            }
+            
+            // 2. Check baseline analysis
+            const lastAnalysis = intelligenceDb.prepare(`
+                SELECT MAX(created_at) as last_time 
+                FROM baseline_analysis
+            `).get();
+            
+            if (lastAnalysis && lastAnalysis.last_time) {
+                timeSources.push({ source: 'baseline-analysis', time: new Date(lastAnalysis.last_time) });
+            }
+            
+            // 3. Check last-scrape.json (kept for compatibility but given lower priority)
             const lastScrapePath = path.join(OUTPUT_DIR, 'last-scrape.json');
             if (fs.existsSync(lastScrapePath)) {
                 const lastScrapeData = JSON.parse(fs.readFileSync(lastScrapePath, 'utf8'));
                 if (lastScrapeData.timestamp) {
-                    lastCheckTime = lastScrapeData.timestamp;
-                    console.log(`✅ Found last scrape time from last-scrape.json: ${lastCheckTime}`);
+                    timeSources.push({ source: 'last-scrape', time: new Date(lastScrapeData.timestamp) });
                 }
+            }
+            
+            // Use the most recent time
+            if (timeSources.length > 0) {
+                const mostRecent = timeSources.reduce((latest, current) => 
+                    current.time > latest.time ? current : latest
+                );
+                lastCheckTime = mostRecent.time.toISOString();
+                console.log(`✅ Using most recent time from ${mostRecent.source}: ${lastCheckTime}`);
             } else {
-                // Fallback: Try to get the most recent baseline analysis time
-                const lastAnalysis = intelligenceDb.prepare(`
-                    SELECT MAX(created_at) as last_time 
-                    FROM baseline_analysis
-                `).get();
-                
-                if (lastAnalysis && lastAnalysis.last_time) {
-                    lastCheckTime = lastAnalysis.last_time;
-                    console.log(`✅ Using last analysis time as proxy: ${lastCheckTime}`);
-                } else {
-                    console.log('⚠️ No timing data found, using current time');
-                }
+                console.log('⚠️ No timing data found, using current time');
             }
         } catch (err) {
             console.warn('⚠️ Could not determine last check time:', err.message);
