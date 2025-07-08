@@ -802,6 +802,7 @@
 
         // Global state
         let companies = [];
+        let workflowStatus = null;
         let currentFilter = 'all';
         let dashboardData = null;
 
@@ -910,6 +911,7 @@
 
             const dashboardData = await loadStaticData('dashboard.json');
             const changesData = await loadStaticData('changes.json');
+            const workflowStatusData = await loadStaticData('workflow-status.json');
 
             if (dashboardData.error) {
                 updateStatusDisplay({
@@ -924,7 +926,9 @@
             window.dashboardData = dashboardData;
             window.changesData = changesData;
             
-            // Update status display with both dashboard and changes data
+            workflowStatus = workflowStatusData;
+        
+        // Update status display with both dashboard and changes data
             updateStatusDisplay(dashboardData, changesData);
             
             // Update companies data
@@ -939,7 +943,7 @@
         // Update status display
         function updateStatusDisplay(data, changesData) {
             const stats = data.stats || {};
-            const lastCheck = stats.lastCheck ? new Date(stats.lastCheck) : new Date(data.generated_at);
+            const lastCheck = workflowStatus ? new Date(workflowStatus.last_run) : (stats.lastCheck ? new Date(stats.lastCheck) : new Date(data.generated_at));
             const timeAgo = formatTimeAgo(lastCheck);
 
             // Update header stats bar
@@ -1308,7 +1312,7 @@
             }
 
             const recentChanges = data.changes.slice(0, 3); // Show top 3
-            let html = `<h3 style="margin: 0 0 15px 0; color: var(--primary-color);">📈 Recent Changes</h3>`;
+            let html = ``;
 
             recentChanges.forEach((change, index) => {
                 const changeId = `change-${index}`;
