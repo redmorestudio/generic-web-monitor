@@ -8,6 +8,8 @@ Real-time competitive intelligence for AI companies. Monitor 16+ competitors, ge
 
 - **Automated Monitoring**: Checks competitor websites every 6 hours
 - **AI-Powered Analysis**: Sentiment analysis, categorization, and relevance scoring
+- **Change Intelligence**: See what changed with before/after content snippets
+- **Smart Explanations**: AI explains changes in plain English with business context
 - **Smart Alerts**: Get notified only about what matters
 - **Beautiful Dashboard**: Real-time visualization of competitor activity
 - **Email Summaries**: Daily intelligence reports delivered to your inbox
@@ -115,6 +117,7 @@ We welcome contributions! Please:
 - [Configuration](docs/configuration.md) - All configuration options
 - [Private Deployment](docs/private-deployment.md) - For internal use
 - [API Reference](docs/api-reference.md) - Dashboard API endpoints
+- [AI Change Detection](docs/ai-change-detection.md) - Content snippets & AI explanations
 
 ## 🐛 Troubleshooting
 

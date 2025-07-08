@@ -18,6 +18,8 @@ A complete rewrite of the AI Monitor with a proper backend that meets ALL functi
 - Claude AI analyzes every change
 - 1-10 relevance scale
 - Works WITHOUT keywords
+- Plain English explanations of what changed
+- Business context analysis
 
 ### ✅ Complete Configuration Management
 - REST API for all operations
@@ -30,6 +32,8 @@ A complete rewrite of the AI Monitor with a proper backend that meets ALL functi
 - Strategic opportunities
 - Change categorization
 - Executive summaries
+- Content snippet display (before/after)
+- Key changes as bullet points
 
 ## 🏗️ Architecture
 
@@ -53,6 +57,7 @@ github-actions-backend/
 ├── server.js              # Express API with all endpoints
 ├── scraper.js            # Intelligent content extraction
 ├── ai-analyzer.js        # Claude AI integration
+├── ai-change-analyzer.js # Enhanced change explanations
 ├── cli.js                # Command-line management tool
 ├── .github/workflows/
 │   └── monitor.yml       # GitHub Actions automation
@@ -83,6 +88,9 @@ npm run scrape
 
 # Run AI analysis
 npm run analyze
+
+# Run enhanced change analysis (NEW!)
+node ai-change-analyzer.js
 ```
 
 ### 2. Using the CLI
@@ -138,6 +146,12 @@ ai-monitor llm:insights --company "OpenAI"
 - Summary, threats, opportunities
 - Category classification
 
+### Change Detection Table (Enhanced)
+- **AI explanation** of changes
+- **Key changes** as JSON array
+- **Business context** analysis
+- Before/after content IDs
+
 ## 🔌 API Endpoints
 
 ### Company Management
@@ -178,6 +192,13 @@ GET    /api/llm/insights           # Structured insights for LLMs
 - Every change analyzed by Claude
 - 1-10 scale based on strategic importance
 - Considers context, not just keywords
+
+### Change Explanations (NEW!)
+- **Plain English summaries** of what changed
+- **Key changes** listed as bullet points
+- **Business context** explaining why changes were made
+- **Content snippets** showing actual before/after text
+- Works with or without API keys (smart fallback)
 
 ### Intelligence Categories
 - `product_update` - New features or products
