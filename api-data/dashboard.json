@@ -1178,9 +1178,9 @@
         "interest_category": "medium"
       },
       "latest_change": {
-        "summary": "Content changed for OpenAI - https://openai.com",
-        "time_ago": "3 days ago",
-        "relevance_score": 5
+        "summary": "Major GPT-5 announcement detected",
+        "time_ago": "just now",
+        "relevance_score": 9
       }
     },
     {
@@ -1810,6 +1810,6 @@
       "latest_change": null
     }
   ],
-  "generated_at": "2025-07-08T13:02:22.732Z",
+  "generated_at": "2025-07-08T19:19:12.880Z",
   "backend": "github-actions-static-three-db"
 }

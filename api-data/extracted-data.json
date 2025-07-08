@@ -1,6 +1,315 @@
 {
   "items": [
     {
+      "id": "172",
+      "url": "https://openai.com",
+      "company": "OpenAI",
+      "type": "homepage",
+      "title": "OpenAI - homepage",
+      "relevance_score": 6,
+      "keywords": [
+        "ChatGPT",
+        "Sora",
+        "API Platform",
+        "GPT-4",
+        "GPT-4.5",
+        "Computer Vision",
+        "Natural Language Processing",
+        null
+      ],
+      "summary": "OpenAI is a leader in AI research and development, offering advanced AI models and flexible pricing to consumers and enterprises.",
+      "extracted_at": "2025-07-08 19:18:06",
+      "entities": {
+        "products": [
+          {
+            "name": "ChatGPT",
+            "type": "AI Chatbot",
+            "description": "A conversational AI chatbot",
+            "features": [
+              "text-based conversation",
+              "voice mode",
+              "search functionality"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "GPT-4",
+              "GPT-4.5"
+            ],
+            "provides_integrations": [
+              "API Platform",
+              "Sora"
+            ],
+            "targets_markets": [
+              "consumer",
+              "enterprise",
+              "education"
+            ],
+            "ai_capabilities": [
+              "natural language processing",
+              "text generation"
+            ]
+          },
+          {
+            "name": "Sora",
+            "type": "Video Generation Platform",
+            "description": "A platform for generating videos",
+            "features": [
+              "video generation",
+              "customization options"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "GPT-4",
+              "computer vision"
+            ],
+            "provides_integrations": [
+              "API Platform",
+              "ChatGPT"
+            ],
+            "targets_markets": [
+              "consumer",
+              "enterprise",
+              "education"
+            ],
+            "ai_capabilities": [
+              "computer vision",
+              "video generation"
+            ]
+          },
+          {
+            "name": "API Platform",
+            "type": "API Platform",
+            "description": "A platform for accessing OpenAI's APIs",
+            "features": [
+              "API access",
+              "documentation",
+              "developer forum"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "GPT-4",
+              "GPT-4.5"
+            ],
+            "provides_integrations": [
+              "ChatGPT",
+              "Sora"
+            ],
+            "targets_markets": [
+              "developer",
+              "enterprise"
+            ],
+            "ai_capabilities": [
+              "API access",
+              "developer tools"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "GPT-4",
+            "category": "ai_ml",
+            "purpose": "Natural language processing and text generation",
+            "implemented_by": [
+              "ChatGPT",
+              "API Platform"
+            ],
+            "enables_capabilities": [
+              "text-based conversation",
+              "text generation"
+            ],
+            "technical_details": "A large language model developed by OpenAI"
+          },
+          {
+            "name": "GPT-4.5",
+            "category": "ai_ml",
+            "purpose": "Improved natural language processing and text generation",
+            "implemented_by": [
+              "ChatGPT",
+              "API Platform"
+            ],
+            "enables_capabilities": [
+              "text-based conversation",
+              "text generation"
+            ],
+            "technical_details": "An updated version of GPT-4 with improved performance"
+          },
+          {
+            "name": "Computer Vision",
+            "category": "ai_ml",
+            "purpose": "Image and video processing",
+            "implemented_by": [
+              "Sora"
+            ],
+            "enables_capabilities": [
+              "video generation",
+              "image processing"
+            ],
+            "technical_details": "A set of techniques for processing and understanding visual data"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "Natural Language Processing",
+            "type": "model",
+            "description": "The ability of a computer to understand and generate human language",
+            "applications": [
+              "ChatGPT",
+              "API Platform"
+            ],
+            "performance_metrics": {
+              "accuracy": "high",
+              "fluency": "high"
+            }
+          },
+          {
+            "concept": "Computer Vision",
+            "type": "model",
+            "description": "The ability of a computer to process and understand visual data",
+            "applications": [
+              "Sora"
+            ],
+            "performance_metrics": {
+              "accuracy": "high",
+              "speed": "fast"
+            }
+          }
+        ],
+        "integrations": [
+          {
+            "name": "API Platform",
+            "type": "api",
+            "platform": "OpenAI",
+            "description": "A platform for accessing OpenAI's APIs",
+            "available_in_products": [
+              "ChatGPT",
+              "Sora"
+            ]
+          },
+          {
+            "name": "Sora",
+            "type": "connector",
+            "platform": "OpenAI",
+            "description": "A platform for generating videos",
+            "available_in_products": [
+              "ChatGPT",
+              "API Platform"
+            ]
+          }
+        ],
+        "partnerships": [
+          {
+            "partner": "Microsoft",
+            "relationship_type": "partners_with",
+            "description": "A partnership to integrate OpenAI's models into Microsoft's products",
+            "products_affected": [
+              "ChatGPT",
+              "API Platform"
+            ],
+            "strategic_value": "high"
+          }
+        ],
+        "people": [
+          {
+            "name": "Sam Altman",
+            "title": "CEO",
+            "role": "ceo",
+            "relationship": "leads",
+            "background": "Co-founder and CEO of OpenAI"
+          }
+        ],
+        "pricing": [
+          {
+            "tier": "Free",
+            "price": "0",
+            "features": [
+              "limited access to ChatGPT",
+              "limited access to API Platform"
+            ],
+            "includes_products": [
+              "ChatGPT",
+              "API Platform"
+            ],
+            "limitations": [
+              "limited usage",
+              "limited support"
+            ],
+            "target_segment": "consumer"
+          },
+          {
+            "tier": "Enterprise",
+            "price": "custom",
+            "features": [
+              "full access to ChatGPT",
+              "full access to API Platform",
+              "custom support"
+            ],
+            "includes_products": [
+              "ChatGPT",
+              "API Platform"
+            ],
+            "limitations": [
+              "none"
+            ],
+            "target_segment": "enterprise"
+          }
+        ],
+        "markets": [
+          {
+            "segment": "Consumer",
+            "geography": "global",
+            "size": "large",
+            "targeted_by_products": [
+              "ChatGPT",
+              "Sora"
+            ],
+            "growth_rate": "high",
+            "competitive_landscape": "highly competitive"
+          },
+          {
+            "segment": "Enterprise",
+            "geography": "global",
+            "size": "large",
+            "targeted_by_products": [
+              "ChatGPT",
+              "API Platform"
+            ],
+            "growth_rate": "high",
+            "competitive_landscape": "highly competitive"
+          }
+        ],
+        "competitors": [
+          {
+            "company": "Google",
+            "compete_in": [
+              "natural language processing",
+              "computer vision"
+            ],
+            "our_advantages": [
+              "more advanced models",
+              "more flexible pricing"
+            ],
+            "their_advantages": [
+              "more established brand",
+              "more extensive resources"
+            ],
+            "market_position": "strong"
+          }
+        ]
+      },
+      "content_length": 222,
+      "extractedContent": "OpenAI is a research organization focused on artificial intelligence.\\n\\nBREAKING: We are proud to announce GPT-5, our most advanced model yet with 10x more parameters!\\n\\nWe create AI systems that are safe and beneficial....",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 3,
+        "technologies": 3,
+        "ai_ml_concepts": 2,
+        "partnerships": 1,
+        "integrations": 2
+      }
+    },
+    {
       "id": "167",
       "url": "https://cerebras.net/blog",
       "company": "Cerebras",
@@ -24096,301 +24405,8 @@
         "partnerships": 2,
         "integrations": 1
       }
-    },
-    {
-      "id": "94",
-      "url": "https://resemble.ai/pricing",
-      "company": "Resemble AI",
-      "type": "pricing",
-      "title": "Resemble AI - pricing",
-      "relevance_score": 6,
-      "keywords": [
-        "AI Voice Generator",
-        "Detect",
-        "Generative AI",
-        "Deep Learning",
-        "Voice Cloning",
-        "Deepfake Detection",
-        null
-      ],
-      "summary": "Resemble AI is a leader in AI-powered voice solutions, providing high-quality audio and voice to various industries",
-      "extracted_at": "2025-07-06 15:53:52",
-      "entities": {
-        "products": [
-          {
-            "name": "AI Voice Generator",
-            "type": "AI Voice/Audio",
-            "description": "Generative AI for voice cloning, text to speech, and speech to speech",
-            "features": [
-              "Voice Cloning",
-              "Text to Speech",
-              "Speech to Speech",
-              "Voice Design",
-              "Multilingual",
-              "Audio Editing"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "Generative AI",
-              "Deep Learning"
-            ],
-            "provides_integrations": [
-              "API",
-              "SDK"
-            ],
-            "targets_markets": [
-              "Media",
-              "Entertainment",
-              "Education"
-            ],
-            "ai_capabilities": [
-              "Voice Cloning",
-              "Text to Speech",
-              "Speech to Speech"
-            ]
-          },
-          {
-            "name": "Detect",
-            "type": "Deepfake Detection",
-            "description": "Realtime multimodal deepfake detector",
-            "features": [
-              "Deepfake Detection",
-              "AI Watermarker"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "Deep Learning",
-              "Computer Vision"
-            ],
-            "provides_integrations": [
-              "API",
-              "SDK"
-            ],
-            "targets_markets": [
-              "Security",
-              "Media",
-              "Entertainment"
-            ],
-            "ai_capabilities": [
-              "Deepfake Detection",
-              "AI Watermarker"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "Generative AI",
-            "category": "ai_ml",
-            "purpose": "Generate high-quality audio and voice",
-            "implemented_by": [
-              "AI Voice Generator"
-            ],
-            "enables_capabilities": [
-              "Voice Cloning",
-              "Text to Speech",
-              "Speech to Speech"
-            ],
-            "technical_details": "Uses deep learning algorithms to generate audio and voice"
-          },
-          {
-            "name": "Deep Learning",
-            "category": "ai_ml",
-            "purpose": "Detect deepfakes and protect IP",
-            "implemented_by": [
-              "Detect"
-            ],
-            "enables_capabilities": [
-              "Deepfake Detection",
-              "AI Watermarker"
-            ],
-            "technical_details": "Uses convolutional neural networks to detect deepfakes"
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "Voice Cloning",
-            "type": "model",
-            "description": "Generate a synthetic voice that mimics a real person's voice",
-            "applications": [
-              "Media",
-              "Entertainment",
-              "Education"
-            ],
-            "performance_metrics": {
-              "accuracy": "95%",
-              "quality": "high"
-            }
-          },
-          {
-            "concept": "Deepfake Detection",
-            "type": "model",
-            "description": "Detect and prevent deepfakes",
-            "applications": [
-              "Security",
-              "Media",
-              "Entertainment"
-            ],
-            "performance_metrics": {
-              "accuracy": "99%",
-              "speed": "realtime"
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "API",
-            "type": "api",
-            "platform": "Resemble AI",
-            "description": "Integrate Resemble AI's AI Voice Generator and Detect into your application",
-            "available_in_products": [
-              "AI Voice Generator",
-              "Detect"
-            ]
-          },
-          {
-            "name": "SDK",
-            "type": "sdk",
-            "platform": "Resemble AI",
-            "description": "Develop custom applications using Resemble AI's AI Voice Generator and Detect",
-            "available_in_products": [
-              "AI Voice Generator",
-              "Detect"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "Zomato",
-            "relationship_type": "partners_with",
-            "description": "Partnership to provide AI-powered voice solutions for Zomato's customers",
-            "products_affected": [
-              "AI Voice Generator"
-            ],
-            "strategic_value": "Expanding Resemble AI's reach in the food delivery market"
-          },
-          {
-            "partner": "TrueFan",
-            "relationship_type": "partners_with",
-            "description": "Partnership to provide AI-powered voice solutions for TrueFan's customers",
-            "products_affected": [
-              "AI Voice Generator"
-            ],
-            "strategic_value": "Expanding Resemble AI's reach in the entertainment market"
-          }
-        ],
-        "people": [
-          {
-            "name": "Not specified",
-            "title": "CEO",
-            "role": "ceo",
-            "relationship": "leads",
-            "background": "Not specified"
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "Basic",
-            "price": "$99/month",
-            "features": [
-              "AI Voice Generator",
-              "Detect"
-            ],
-            "includes_products": [
-              "AI Voice Generator",
-              "Detect"
-            ],
-            "limitations": [
-              "Limited usage"
-            ],
-            "target_segment": "Small businesses"
-          },
-          {
-            "tier": "Enterprise",
-            "price": "Custom",
-            "features": [
-              "AI Voice Generator",
-              "Detect",
-              "Custom support"
-            ],
-            "includes_products": [
-              "AI Voice Generator",
-              "Detect"
-            ],
-            "limitations": [
-              "None"
-            ],
-            "target_segment": "Large enterprises"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "Media",
-            "geography": "Global",
-            "size": "Large",
-            "targeted_by_products": [
-              "AI Voice Generator"
-            ],
-            "growth_rate": "High",
-            "competitive_landscape": "Competitive"
-          },
-          {
-            "segment": "Security",
-            "geography": "Global",
-            "size": "Medium",
-            "targeted_by_products": [
-              "Detect"
-            ],
-            "growth_rate": "High",
-            "competitive_landscape": "Competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Google",
-            "compete_in": [
-              "AI Voice Generator"
-            ],
-            "our_advantages": [
-              "Customization",
-              "Pricing"
-            ],
-            "their_advantages": [
-              "Brand recognition",
-              "Resources"
-            ],
-            "market_position": "Leader"
-          },
-          {
-            "company": "Amazon",
-            "compete_in": [
-              "AI Voice Generator"
-            ],
-            "our_advantages": [
-              "Customization",
-              "Pricing"
-            ],
-            "their_advantages": [
-              "Brand recognition",
-              "Resources"
-            ],
-            "market_position": "Leader"
-          }
-        ]
-      },
-      "content_length": 23832,
-      "extractedContent": "---\nurl: https://resemble.ai/pricing\ncompany: Resemble AI\nscraped_at: 2025-07-04 20:19:41\n---\n\nPricing | Resemble AI\n\n\n\n [![Resemble AI - AI Voice Generator](data:image/svg+xml;nitro-empty-id=NDc3OjE3OA==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNzI0IDk5IiB3aWR0aD0iNzI0IiBoZWlnaHQ9Ijk5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==) ![Resemble AI - AI Voice Generator](data:image/svg+xml;nitro-empty-id=NDc4OjE3OQ==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTI4MCAyNjkiIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjI2...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 2,
-        "technologies": 2,
-        "ai_ml_concepts": 2,
-        "partnerships": 2,
-        "integrations": 2
-      }
     }
   ],
   "totalUnfiltered": 100,
-  "generated_at": "2025-07-08T13:02:22.756Z"
+  "generated_at": "2025-07-08T19:19:12.911Z"
 }

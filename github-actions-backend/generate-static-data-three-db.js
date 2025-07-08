@@ -667,6 +667,9 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                     cd.change_type,
                     cd.summary,
                     cd.relevance_score,
+                    cd.ai_explanation,
+                    cd.ai_key_changes,
+                    cd.ai_business_context,
                     intelligence.urls.url,
                     intelligence.urls.url_type,
                     intelligence.companies.name as company,
@@ -935,4 +938,4 @@ if (require.main === module) {
     generateAllStaticData();
 }
 
-module.exports = { generateAllStaticData };
+module.exports = { generateAllStaticData, extractContentSnippets };
