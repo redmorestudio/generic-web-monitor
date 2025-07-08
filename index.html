@@ -37,21 +37,45 @@
         .header {
             text-align: center;
             margin-bottom: 30px;
-            padding: 20px;
+            padding: 30px;
             background: linear-gradient(135deg, var(--primary-color) 0%, #764ba2 100%);
-            border-radius: 12px;
+            border-radius: 15px;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
 
         .header h1 {
             margin: 0;
             font-size: 2.5rem;
             color: white;
+            margin-bottom: 10px;
         }
 
         .header p {
             margin: 10px 0 0 0;
             opacity: 0.9;
+            color: white;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            color: white;
+        }
+        
+        .stat-item strong {
+            font-size: 1.5rem;
+            color: #ffd93d;
         }
 
         .ai-badge {
@@ -297,31 +321,154 @@
             color: var(--text-secondary);
         }
 
+        /* Navigation Section */
+        .navigation-section {
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        
+        .nav-header {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #a5b4fc;
+        }
+        
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .nav-button.brain {
+            background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+        }
+        
+        .nav-icon {
+            font-size: 1.3rem;
+        }
+        
+        .nav-text {
+            font-size: 0.95rem;
+        }
+
         .companies-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 20px;
             margin: 20px 0;
         }
 
         .company-card {
-            background: var(--accent-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
+            background: #1a1f3a;
+            border: 2px solid transparent;
+            border-radius: 15px;
             padding: 20px;
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
         .company-card:hover {
             border-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
         }
 
         .company-card h3 {
-            margin: 0 0 15px 0;
-            color: var(--primary-color);
+            margin: 0;
+            color: #fff;
+            font-size: 1.3rem;
+        }
+        
+        .company-type {
+            font-size: 0.85rem;
+            color: #a78bfa;
+            background: rgba(167, 139, 250, 0.2);
+            padding: 3px 10px;
+            border-radius: 15px;
+        }
+        
+        .interest-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .interest-high { color: #ff6b6b; }
+        .interest-medium { color: #ffd93d; }
+        .interest-low { color: #6bcf7f; }
+        
+        /* Intelligence Pills */
+        .intel-section {
+            margin: 10px 0;
+        }
+        
+        .intel-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .entity-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .entity-pill {
+            background: rgba(102, 126, 234, 0.2);
+            color: #a5b4fc;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        .tech-pill {
+            background: rgba(236, 72, 153, 0.2);
+            color: #f9a8d4;
+            border-color: rgba(236, 72, 153, 0.3);
+        }
+        
+        .ai-pill {
+            background: rgba(250, 204, 21, 0.2);
+            color: #fde047;
+            border-color: rgba(250, 204, 21, 0.3);
         }
 
         .company-card .url {
@@ -667,9 +814,26 @@
     <div class="container">
         <div class="header">
             <div class="ai-badge">🤖 GitHub Actions Powered</div>
-            <h1>AI Competitor Monitor</h1>
-            <p>Advanced Intelligence & Real-time Competitive Analysis powered by GitHub Actions</p>
-            <span id="thebrainStatus" class="thebrain-status thebrain-disconnected">🧠 TheBrain: Disconnected</span>
+            <h1>🚀 AI Competitive Intelligence Monitor</h1>
+            <p>Real-time monitoring of AI industry players, technologies, and strategic movements</p>
+            <div class="stats-bar" id="statsBar">
+                <div class="stat-item">Loading stats...</div>
+            </div>
+        </div>
+        
+        <!-- Navigation Section -->
+        <div class="navigation-section">
+            <div class="nav-header">🧭 Quick Navigation</div>
+            <div class="nav-buttons">
+                <a href="3d-force-graph-local.html" target="_blank" class="nav-button">
+                    <span class="nav-icon">🌐</span>
+                    <span class="nav-text">3D Force Graph</span>
+                </a>
+                <a href="https://bra.in/4q5wWV" target="_blank" class="nav-button brain">
+                    <span class="nav-icon">🧠</span>
+                    <span class="nav-text">TheBrain View</span>
+                </a>
+            </div>
         </div>
 
         <!-- Navigation Tabs -->
@@ -734,6 +898,14 @@
                         <div id="changesSummaryContent">
                             <div class="loading">Loading changes summary...</div>
                         </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Changes Section -->
+                <div class="config-section" style="margin-bottom: 30px;">
+                    <h3>⚡ Recent Changes</h3>
+                    <div id="recentChangesList">
+                        <div class="loading">Loading recent changes...</div>
                     </div>
                 </div>
                 
@@ -1148,6 +1320,9 @@
             // Load changes summary
             loadChangesSummary();
             
+            // Load recent changes for dashboard
+            loadRecentChanges();
+            
             // Load company details when page loads
             loadCompanyDetails().then(() => {
                 makeCompaniesClickable();
@@ -1174,6 +1349,105 @@
                     companyModal.style.display = 'none';
                 }
             }
+        }
+        
+        // Load and display recent changes on dashboard
+        async function loadRecentChanges() {
+            const changesDiv = document.getElementById('recentChangesList');
+            
+            try {
+                const changesData = await loadStaticData('changes.json');
+                
+                if (!changesData.changes || changesData.changes.length === 0) {
+                    changesDiv.innerHTML = '<div style="text-align: center; color: var(--text-secondary); padding: 20px;">No recent changes detected. Websites are being monitored every 6 hours.</div>';
+                    return;
+                }
+                
+                // Take the most recent 10 changes
+                const recentChanges = changesData.changes.slice(0, 10);
+                
+                changesDiv.innerHTML = recentChanges.map(change => {
+                    const changeId = change.id || Math.random().toString(36).substr(2, 9);
+                    return `
+                        <div class="change-item" style="background: rgba(59, 130, 246, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid #3b82f6; cursor: pointer;" 
+                             onclick="showChangeDetail('${changeId}')" data-change='${JSON.stringify(change).replace(/'/g, "&apos;")}'>
+                            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                                <span style="font-size: 1.5rem;">${change.emoji || '📊'}</span>
+                                <span style="font-weight: bold; color: #93c5fd;">${escapeHtml(change.company)}</span>
+                                <span style="color: #6b7280; font-size: 0.85rem;">${change.time_ago}</span>
+                            </div>
+                            <div>${escapeHtml(change.summary)}</div>
+                            <div style="margin-top: 5px; font-size: 0.85rem; color: var(--primary-color);">
+                                Click to view details →
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                
+                changesDiv.innerHTML += `
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button type="button" class="button button-secondary" onclick="showTab(null, 'changes')">
+                            View All Changes History
+                        </button>
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('Error loading recent changes:', error);
+                changesDiv.innerHTML = '<div class="error-message">Unable to load recent changes</div>';
+            }
+        }
+        
+        // Show change detail in modal
+        function showChangeDetail(changeId) {
+            const changeElement = event.currentTarget;
+            const changeData = JSON.parse(changeElement.getAttribute('data-change').replace(/&apos;/g, "'"));
+            
+            const modal = document.getElementById('detailModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalTitle.textContent = `Change Details: ${changeData.company}`;
+            modalContent.innerHTML = `
+                <div class="config-section">
+                    <h4>📊 Change Information</h4>
+                    <p><strong>Company:</strong> ${escapeHtml(changeData.company)}</p>
+                    <p><strong>URL:</strong> <a href="${escapeHtml(changeData.url)}" target="_blank">${escapeHtml(changeData.url)}</a></p>
+                    <p><strong>Type:</strong> ${escapeHtml(changeData.change_type || 'Content Update')}</p>
+                    <p><strong>Time:</strong> ${changeData.time_ago} (${new Date(changeData.created_at).toLocaleString()})</p>
+                </div>
+                
+                <div class="config-section">
+                    <h4>🤖 AI Analysis</h4>
+                    <p>${escapeHtml(changeData.ai_summary || changeData.summary)}</p>
+                    ${changeData.interest_level ? `<p><strong>Interest Level:</strong> ${changeData.interest_level}/10</p>` : ''}
+                </div>
+                
+                ${changeData.before_content || changeData.after_content ? `
+                <div class="config-section">
+                    <h4>🔄 Content Changes</h4>
+                    ${changeData.before_content ? `
+                        <h5>Before:</h5>
+                        <div style="background: rgba(255, 68, 68, 0.1); padding: 10px; border-radius: 5px; margin-bottom: 10px; max-height: 200px; overflow-y: auto;">
+                            <pre style="white-space: pre-wrap; margin: 0;">${escapeHtml(changeData.before_content)}</pre>
+                        </div>
+                    ` : ''}
+                    ${changeData.after_content ? `
+                        <h5>After:</h5>
+                        <div style="background: rgba(0, 255, 136, 0.1); padding: 10px; border-radius: 5px; max-height: 200px; overflow-y: auto;">
+                            <pre style="white-space: pre-wrap; margin: 0;">${escapeHtml(changeData.after_content)}</pre>
+                        </div>
+                    ` : ''}
+                </div>
+                ` : ''}
+                
+                <div class="action-buttons">
+                    <a href="${escapeHtml(changeData.url)}" target="_blank" class="button button-primary">View Current Page</a>
+                    <button type="button" class="button button-secondary" onclick="closeModal()">Close</button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
         }
         
         // Load and display changes summary
@@ -1315,6 +1589,20 @@
             document.getElementById('companiesCount').textContent = stats.companies || '--';
             document.getElementById('urlsCount').textContent = stats.urls || '--';
             
+            // Update header stats bar
+            const statsBar = document.getElementById('statsBar');
+            if (statsBar) {
+                const lastCheck = stats.lastCheck ? new Date(stats.lastCheck) : new Date(dashboardData.generated_at);
+                const timeAgo = formatTimeAgo(lastCheck);
+                
+                statsBar.innerHTML = `
+                    <div class="stat-item">🏢 <strong>${stats.companies || '0'}</strong> Companies</div>
+                    <div class="stat-item">🔍 <strong>${stats.urls || '0'}</strong> URLs Monitored</div>
+                    <div class="stat-item">📊 <strong>${stats.snapshots || '0'}</strong> Analyses</div>
+                    <div class="stat-item">⏰ Last Check: <strong>${timeAgo}</strong><br><small style="color: rgba(255,255,255,0.7); font-size: 0.75rem;">${lastCheck.toLocaleString()}</small></div>
+                `;
+            }
+            
             // Format last check time
             if (dashboardData.generated_at) {
                 const lastCheck = new Date(dashboardData.generated_at);
@@ -1362,33 +1650,80 @@
                 const lastChangeDate = lastChange ? new Date(lastChange) : null;
                 const isRecent = lastChangeDate && (new Date() - lastChangeDate) < 24 * 60 * 60 * 1000;
                 
+                // Get intelligence data
+                const intelligence = company.intelligence || {};
+                const interestLevel = intelligence.interest_level || 5;
+                const interestCategory = intelligence.interest_category || 
+                    (interestLevel >= 8 ? 'high' : interestLevel >= 5 ? 'medium' : 'low');
+                const interestEmoji = interestCategory === 'high' ? '🌟' : 
+                                    interestCategory === 'medium' ? '📌' : '📊';
+                
+                const products = intelligence.products || [];
+                const technologies = intelligence.technologies || [];
+                const aiConcepts = intelligence.ai_ml_concepts || [];
+                
                 html += `
                     <div class="company-card">
-                        <h3>${escapeHtml(companyName)}
-                            ${isRecent ? '<span class="change-indicator recent"></span>' : ''}
-                        </h3>
-                        <div class="status status-operational">✓ Monitoring Active</div>
+                        <div class="interest-indicator interest-${interestCategory}">${interestEmoji} ${interestLevel}/10</div>
+                        <div class="company-header">
+                            <h3>${escapeHtml(companyName)}
+                                ${isRecent ? '<span class="change-indicator recent"></span>' : ''}
+                            </h3>
+                            <div class="company-type">${escapeHtml(companyType)}</div>
+                        </div>
+                        
+                        ${products.length > 0 ? `
+                        <div class="intel-section">
+                            <div class="intel-label">Products</div>
+                            <div class="entity-pills">
+                                ${products.map(p => 
+                                    `<span class="entity-pill">${escapeHtml(p)}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${technologies.length > 0 ? `
+                        <div class="intel-section">
+                            <div class="intel-label">Technologies</div>
+                            <div class="entity-pills">
+                                ${technologies.map(t => 
+                                    `<span class="entity-pill tech-pill">${escapeHtml(t)}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${aiConcepts.length > 0 ? `
+                        <div class="intel-section">
+                            <div class="intel-label">AI/ML Focus</div>
+                            <div class="entity-pills">
+                                ${aiConcepts.map(c => 
+                                    `<span class="entity-pill ai-pill">${escapeHtml(c)}</span>`
+                                ).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
                         <div style="margin: 15px 0;">
                             <strong>URLs Monitored:</strong> ${company.url_count || urls.length}
+                            ${urls.length > 0 ? `<a href="#" onclick="showCompanyUrls('${escapeHtml(companyName)}'); return false;" style="color: var(--primary-color); margin-left: 10px; font-size: 0.85rem;">View URLs</a>` : ''}
                         </div>
-                        <div style="margin: 10px 0; font-size: 12px; color: var(--text-secondary);">
-                            <strong>Type:</strong> ${escapeHtml(companyType)}
+                        
+                        ${company.latest_change ? `
+                        <div style="background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6; padding: 10px; border-radius: 5px; margin-top: 15px; font-size: 0.9rem;">
+                            <div>${escapeHtml(company.latest_change.summary)}</div>
+                            <div style="color: #93c5fd; font-size: 0.8rem; margin-top: 5px;">${company.latest_change.time_ago}</div>
                         </div>
-                        ${urls.length > 0 ? `
-                            <div style="margin: 10px 0;">
-                                ${urls.slice(0, 3).map(url => `
-                                    <a href="${escapeHtml(typeof url === 'string' ? url : url.url)}" target="_blank" class="url">
-                                        ${escapeHtml(typeof url === 'string' ? url : (url.title || url.url))}
-                                    </a><br>
-                                `).join('')}
-                                ${urls.length > 3 ? `<span style="font-size: 12px; color: var(--text-secondary);">...and ${urls.length - 3} more</span>` : ''}
-                            </div>
-                        ` : ''}
-                        ${lastChangeDate ? `
+                        ` : lastChangeDate ? `
                             <div style="margin-top: 10px; font-size: 12px; color: var(--text-secondary);">
                                 Last change: ${formatTimeAgo(lastChangeDate)}
                             </div>
                         ` : ''}
+                        
+                        <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--border-color); text-align: center; font-size: 0.85rem; color: var(--primary-color); cursor: pointer;">
+                            Click for Full Intelligence Report →
+                        </div>
                     </div>
                 `;
             });
@@ -1396,6 +1731,19 @@
             
             companiesDisplay.innerHTML = html;
             makeCompaniesClickable();
+        }
+        
+        // Show company URLs in a modal or alert
+        function showCompanyUrls(companyName) {
+            const company = companies.find(c => (c.company || c.name) === companyName);
+            if (!company) return;
+            
+            const urls = company.urls || [];
+            let urlList = urls.map((url, idx) => 
+                `${idx + 1}. ${typeof url === 'string' ? url : url.url}`
+            ).join('\n');
+            
+            alert(`URLs monitored for ${companyName}:\n\n${urlList}`);
         }
 
         function updateCompanyFilter() {
