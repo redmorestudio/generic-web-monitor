@@ -65,13 +65,13 @@ function getTopEntities(intelligenceDb, companyId, entityType, limit = 3) {
 }
 
 // Helper function to get latest change for a company
-function getLatestChange(processedDb, intelligenceDb, companyId) {
+function getLatestChange(processedContentDb, intelligenceDb, companyId) {
     try {
         // Attach intelligence database
         const intelligenceDbPath = path.join(DATA_DIR, 'intelligence.db');
-        processedDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
+        processedContentDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
         
-        const change = processedDb.prepare(`
+        const change = processedContentDb.prepare(`
             SELECT 
                 cd.detected_at,
                 cd.summary,
@@ -83,7 +83,7 @@ function getLatestChange(processedDb, intelligenceDb, companyId) {
             LIMIT 1
         `).get(companyId);
         
-        processedDb.exec('DETACH DATABASE intelligence');
+        processedContentDb.exec('DETACH DATABASE intelligence');
         
         if (change) {
             return {
@@ -130,7 +130,7 @@ function getRelativeTime(dateString) {
 /**
  * Generate dashboard data
  */
-function generateDashboardData(intelligenceDb, processedDb) {
+function generateDashboardData(intelligenceDb, processedContentDb) {
     try {
         console.log('📊 Generating dashboard data...');
         
@@ -201,7 +201,7 @@ function generateDashboardData(intelligenceDb, processedDb) {
             const topPartners = getTopEntities(intelligenceDb, company.id, 'partnerships', 2);
             
             // Get latest change
-            const latestChange = getLatestChange(processedDb, intelligenceDb, company.id);
+            const latestChange = getLatestChange(processedContentDb, intelligenceDb, company.id);
             
             // Get interest level
             const interestLevel = getMaxInterestLevel(intelligenceDb, company.id);
@@ -444,17 +444,17 @@ function generateCompanyDetailsData(intelligenceDb) {
 /**
  * Generate content snapshots data with AI analysis
  */
-function generateContentSnapshotsData(processedDb, intelligenceDb) {
+function generateContentSnapshotsData(processedContentDb, intelligenceDb) {
     try {
         console.log('📄 Generating content snapshots data with AI analysis...');
         
         // FIXED: Attach intelligence database for cross-database queries
         const intelligenceDbPath = path.join(DATA_DIR, 'intelligence.db');
-        processedDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
+        processedContentDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
         
         try {
             // Get latest content with AI analysis data
-            const snapshots = processedDb.prepare(`
+            const snapshots = processedContentDb.prepare(`
                 SELECT 
                     mc.id,
                     mc.url_id,
@@ -565,7 +565,7 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
             };
         } finally {
             // Always detach the database
-            processedDb.exec('DETACH DATABASE intelligence');
+            processedContentDb.exec('DETACH DATABASE intelligence');
         }
     } catch (error) {
         console.error('❌ Error generating content snapshots data:', error);
@@ -579,19 +579,88 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
 }
 
 /**
+ * Extract relevant snippet from content showing the change
+ * @param {string} oldContent - The old markdown content
+ * @param {string} newContent - The new markdown content
+ * @param {number} contextLength - Characters to show around change (default 300)
+ * @returns {object} Object with before and after snippets
+ */
+function extractContentSnippets(oldContent, newContent, contextLength = 300) {
+    try {
+        // Handle null/undefined content
+        if (!oldContent || !newContent) {
+            return {
+                before: oldContent ? oldContent.substring(0, contextLength) + '...' : 'No previous content',
+                after: newContent ? newContent.substring(0, contextLength) + '...' : 'No new content'
+            };
+        }
+
+        // Split content into lines for comparison
+        const oldLines = oldContent.split('\n');
+        const newLines = newContent.split('\n');
+        
+        // Find first significant difference
+        let diffIndex = -1;
+        for (let i = 0; i < Math.max(oldLines.length, newLines.length); i++) {
+            const oldLine = oldLines[i] || '';
+            const newLine = newLines[i] || '';
+            
+            // Skip empty lines and minor changes
+            if (oldLine.trim() !== newLine.trim() && (oldLine.trim().length > 10 || newLine.trim().length > 10)) {
+                diffIndex = i;
+                break;
+            }
+        }
+        
+        // If no significant difference found, just show the beginning
+        if (diffIndex === -1) {
+            return {
+                before: oldContent.substring(0, contextLength) + '...',
+                after: newContent.substring(0, contextLength) + '...'
+            };
+        }
+        
+        // Extract context around the change
+        const contextLines = 3; // Lines before and after the change
+        const startLine = Math.max(0, diffIndex - contextLines);
+        const endLine = Math.min(Math.max(oldLines.length, newLines.length), diffIndex + contextLines + 1);
+        
+        const beforeSnippet = oldLines.slice(startLine, endLine).join('\n');
+        const afterSnippet = newLines.slice(startLine, endLine).join('\n');
+        
+        // Trim to max length if needed
+        const trimmedBefore = beforeSnippet.length > contextLength ? 
+            beforeSnippet.substring(0, contextLength) + '...' : beforeSnippet;
+        const trimmedAfter = afterSnippet.length > contextLength ? 
+            afterSnippet.substring(0, contextLength) + '...' : afterSnippet;
+        
+        return {
+            before: trimmedBefore || 'No previous content',
+            after: trimmedAfter || 'No new content'
+        };
+    } catch (error) {
+        console.error('Error extracting content snippets:', error);
+        return {
+            before: 'Error extracting content',
+            after: 'Error extracting content'
+        };
+    }
+}
+
+/**
  * Generate recent changes data with enhanced AI analysis
  */
-function generateRecentChangesData(processedDb, intelligenceDb) {
+function generateRecentChangesData(processedContentDb, intelligenceDb) {
     try {
         console.log('📈 Generating recent changes data with AI analysis...');
         
         // FIXED: Attach intelligence database for cross-database queries
         const intelligenceDbPath = path.join(DATA_DIR, 'intelligence.db');
-        processedDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
+        processedContentDb.exec(`ATTACH DATABASE '${intelligenceDbPath}' AS intelligence`);
         
         try {
             // Get recent changes
-            const recentChanges = processedDb.prepare(`
+            const recentChanges = processedContentDb.prepare(`
                 SELECT 
                     cd.id,
                     cd.detected_at as created_at,
@@ -611,6 +680,13 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                 ORDER BY cd.detected_at DESC
                 LIMIT 100
             `).all();
+            
+            // Prepare statement to fetch markdown content
+            const contentStmt = processedContentDb.prepare(`
+                SELECT id, markdown_text 
+                FROM markdown_content 
+                WHERE id = ?
+            `);
             
             // Get AI analysis for changes
             // Note: enhanced_analysis table doesn't exist yet, so we'll skip this for now
@@ -653,6 +729,28 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                 else if (interestLevel >= 5) emoji = '📌';
                 else if (interestLevel >= 3) emoji = '📊';
                 
+                // Fetch actual content for before/after display
+                let beforeContent = null;
+                let afterContent = null;
+                let contentSnippets = { before: null, after: null };
+                
+                if (change.old_content_id && change.new_content_id) {
+                    try {
+                        const oldRecord = contentStmt.get(change.old_content_id);
+                        const newRecord = contentStmt.get(change.new_content_id);
+                        
+                        if (oldRecord && newRecord) {
+                            beforeContent = oldRecord.markdown_text;
+                            afterContent = newRecord.markdown_text;
+                            
+                            // Extract relevant snippets showing the change
+                            contentSnippets = extractContentSnippets(beforeContent, afterContent);
+                        }
+                    } catch (err) {
+                        console.warn(`Could not fetch content for change ${change.id}:`, err.message);
+                    }
+                }
+                
                 return {
                     id: change.id,
                     url: change.url,
@@ -675,7 +773,10 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                     content_ids: {
                         old: change.old_content_id,
                         new: change.new_content_id
-                    }
+                    },
+                    // Add actual content snippets for display
+                    before_content: contentSnippets.before,
+                    after_content: contentSnippets.after
                 };
             });
             
@@ -686,7 +787,7 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
             };
         } finally {
             // Always detach the database
-            processedDb.exec('DETACH DATABASE intelligence');
+            processedContentDb.exec('DETACH DATABASE intelligence');
         }
     } catch (error) {
         console.error('❌ Error generating recent changes data:', error);
@@ -771,15 +872,15 @@ function generateAllStaticData() {
     
     try {
         // Get database connections
-        const processedDb = dbManager.getProcessedDb();
+        const processedContentDb = dbManager.getProcessedDb(); // This actually returns processed_content.db
         const intelligenceDb = dbManager.getIntelligenceDb();
         
         // Generate each data file
         const files = [
-            { name: 'dashboard.json', generator: () => generateDashboardData(intelligenceDb, processedDb) },
+            { name: 'dashboard.json', generator: () => generateDashboardData(intelligenceDb, processedContentDb) },
             { name: 'companies.json', generator: () => generateCompaniesData(intelligenceDb) },
-            { name: 'extracted-data.json', generator: () => generateContentSnapshotsData(processedDb, intelligenceDb) },
-            { name: 'changes.json', generator: () => generateRecentChangesData(processedDb, intelligenceDb) },
+            { name: 'extracted-data.json', generator: () => generateContentSnapshotsData(processedContentDb, intelligenceDb) },
+            { name: 'changes.json', generator: () => generateRecentChangesData(processedContentDb, intelligenceDb) },
             { name: 'monitoring-runs.json', generator: generateMonitoringRunsData },
             { name: 'company-details.json', generator: () => generateCompanyDetailsData(intelligenceDb) }
         ];

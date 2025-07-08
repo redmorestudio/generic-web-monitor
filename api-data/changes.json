@@ -1,30 +1,58 @@
 {
   "changes": [
     {
+      "id": 2,
+      "url": "https://openai.com",
+      "company": "OpenAI",
+      "company_category": "LLM Providers",
+      "url_type": "homepage",
+      "change_percentage": 0,
+      "interest_level": 8,
+      "relevance_score": 8,
+      "summary": "Content updated on OpenAI's homepage",
+      "category": "content_update",
+      "keywords_found": "[]",
+      "created_at": "2025-07-08 18:44:22",
+      "time_ago": "just now",
+      "emoji": "🌟",
+      "impact_level": "high",
+      "ai_processed": false,
+      "key_developments": [],
+      "opportunities": [],
+      "content_ids": {
+        "old": 1233,
+        "new": 1234
+      },
+      "before_content": null,
+      "after_content": null
+    },
+    {
       "id": 1,
       "url": "https://openai.com",
       "company": "OpenAI",
       "company_category": "LLM Providers",
       "url_type": "homepage",
       "change_percentage": 0,
-      "interest_level": 5,
-      "relevance_score": 5,
+      "interest_level": 10,
+      "relevance_score": 10,
       "summary": "Content updated on OpenAI's homepage",
       "category": "content_update",
       "keywords_found": "[]",
       "created_at": "2025-07-04 18:17:08",
       "time_ago": "3 days ago",
-      "emoji": "📌",
-      "impact_level": "medium",
+      "emoji": "🌟",
+      "impact_level": "high",
       "ai_processed": false,
       "key_developments": [],
       "opportunities": [],
       "content_ids": {
-        "old": null,
-        "new": 1233
-      }
+        "old": 1,
+        "new": 171
+      },
+      "before_content": "---\nurl: https://openai.com\ncompany: OpenAI\nscraped_at: 2025-07-04 20:17:45",
+      "after_content": "---\\nurl: https://openai.com\\ncompany: OpenAI\\nscraped_at: 2025-07-08 20:17:45\\n---\\n\\nOpenAI - NEW UPDATED CONTENT\\n\\n[Skip to main content](#main)\\n\\nLog in\\n\\n[\\n\\n](/)\\n\\nSwitch to\\n\\n*   [ChatGPT(opens in a new window)](https://chatgpt.com/)\\n*   [Sora(opens in a new window)](https://sora.com/)..."
     }
   ],
   "aiFiltered": true,
-  "generated_at": "2025-07-08T13:02:22.768Z"
+  "generated_at": "2025-07-08T18:45:36.496Z"
 }

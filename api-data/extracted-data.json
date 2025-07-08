@@ -1,6 +1,187 @@
 {
   "items": [
     {
+      "id": "171",
+      "url": "https://openai.com",
+      "company": "OpenAI",
+      "type": "homepage",
+      "title": "OpenAI - homepage",
+      "relevance_score": 4,
+      "keywords": [
+        "SambaNova Suite",
+        "DataScale",
+        "RDU: The GPU Alternative",
+        "Composition of Experts",
+        "Generative AI",
+        "Agentic AI",
+        null
+      ],
+      "summary": "SambaNova is a leader in AI hardware and software, providing innovative solutions for generative and agentic AI",
+      "extracted_at": "2025-07-08 18:45:13",
+      "entities": {
+        "products": [
+          {
+            "name": "SambaNova Suite",
+            "type": "Enterprise AI Platform",
+            "description": "The only, enterprise grade full stack platform, purpose built for generative AI",
+            "features": [
+              "Generative AI",
+              "Deep Learning"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "RDU: The GPU Alternative",
+              "Composition of Experts"
+            ],
+            "provides_integrations": [
+              "SambaNova Cloud"
+            ],
+            "targets_markets": [
+              "Public Sector",
+              "AI for Science",
+              "Sovereign AI"
+            ],
+            "ai_capabilities": [
+              "Generative AI",
+              "Agentic AI"
+            ]
+          },
+          {
+            "name": "DataScale",
+            "type": "AI Development and Innovation Platform",
+            "description": "The platform for generative AI development and innovation",
+            "features": [
+              "Generative AI",
+              "Agentic AI"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "RDU: The GPU Alternative",
+              "Composition of Experts"
+            ],
+            "provides_integrations": [
+              "SambaNova Cloud"
+            ],
+            "targets_markets": [
+              "Public Sector",
+              "AI for Science",
+              "Sovereign AI"
+            ],
+            "ai_capabilities": [
+              "Generative AI",
+              "Agentic AI"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "RDU: The GPU Alternative",
+            "category": "AI Hardware",
+            "purpose": "Power the most demanding generative and agentic AI workloads",
+            "implemented_by": [
+              "SambaNova Suite",
+              "DataScale"
+            ],
+            "enables_capabilities": [
+              "Generative AI",
+              "Agentic AI"
+            ],
+            "technical_details": "Purpose-built for AI"
+          },
+          {
+            "name": "Composition of Experts",
+            "category": "AI Software",
+            "purpose": "Easily run custom models, accelerate discovery, and power the next generation of high performance computing",
+            "implemented_by": [
+              "SambaNova Suite",
+              "DataScale"
+            ],
+            "enables_capabilities": [
+              "Generative AI",
+              "Agentic AI"
+            ],
+            "technical_details": "Accelerate discovery and power high performance computing"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "Generative AI",
+            "type": "Model",
+            "description": "AI that generates new content, such as images or text",
+            "applications": [
+              "Public Sector",
+              "AI for Science",
+              "Sovereign AI"
+            ],
+            "performance_metrics": {}
+          },
+          {
+            "concept": "Agentic AI",
+            "type": "Model",
+            "description": "AI that can run multiple models on a single system with lighting fast inference",
+            "applications": [
+              "Public Sector",
+              "AI for Science",
+              "Sovereign AI"
+            ],
+            "performance_metrics": {}
+          }
+        ],
+        "integrations": [
+          {
+            "name": "SambaNova Cloud",
+            "type": "Cloud Platform",
+            "platform": "SambaNova",
+            "description": "Supercharge your AI-powered applications across Llama 3 8B, 70B, & 405B models",
+            "available_in_products": [
+              "SambaNova Suite",
+              "DataScale"
+            ]
+          }
+        ],
+        "partnerships": [],
+        "people": [],
+        "pricing": [],
+        "markets": [
+          {
+            "segment": "Public Sector",
+            "geography": "Global",
+            "size": "Large",
+            "targeted_by_products": [
+              "SambaNova Suite",
+              "DataScale"
+            ],
+            "growth_rate": "High",
+            "competitive_landscape": "Competitive"
+          },
+          {
+            "segment": "AI for Science",
+            "geography": "Global",
+            "size": "Medium",
+            "targeted_by_products": [
+              "SambaNova Suite",
+              "DataScale"
+            ],
+            "growth_rate": "Medium",
+            "competitive_landscape": "Moderately Competitive"
+          }
+        ],
+        "competitors": []
+      },
+      "content_length": 739,
+      "extractedContent": "---\\nurl: https://openai.com\\ncompany: OpenAI\\nscraped_at: 2025-07-08 20:17:45\\n---\\n\\nOpenAI - NEW UPDATED CONTENT\\n\\n[Skip to main content](#main)\\n\\nLog in\\n\\n[\\n\\n](/)\\n\\nSwitch to\\n\\n*   [ChatGPT(opens in a new window)](https://chatgpt.com/)\\n*   [Sora(opens in a new window)](https://sora.com/)\\n*   [API Platform(opens in a new window)](https://platform.openai.com/)\\n\\n## MAJOR ANNOUNCEMENT: GPT-5 Coming Soon!\\n\\nWe are excited to announce that GPT-5 is in development and will revolutionize...",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 2,
+        "technologies": 2,
+        "ai_ml_concepts": 2,
+        "partnerships": 0,
+        "integrations": 1
+      }
+    },
+    {
       "id": "167",
       "url": "https://cerebras.net/blog",
       "company": "Cerebras",
@@ -24096,301 +24277,8 @@
         "partnerships": 2,
         "integrations": 1
       }
-    },
-    {
-      "id": "94",
-      "url": "https://resemble.ai/pricing",
-      "company": "Resemble AI",
-      "type": "pricing",
-      "title": "Resemble AI - pricing",
-      "relevance_score": 6,
-      "keywords": [
-        "AI Voice Generator",
-        "Detect",
-        "Generative AI",
-        "Deep Learning",
-        "Voice Cloning",
-        "Deepfake Detection",
-        null
-      ],
-      "summary": "Resemble AI is a leader in AI-powered voice solutions, providing high-quality audio and voice to various industries",
-      "extracted_at": "2025-07-06 15:53:52",
-      "entities": {
-        "products": [
-          {
-            "name": "AI Voice Generator",
-            "type": "AI Voice/Audio",
-            "description": "Generative AI for voice cloning, text to speech, and speech to speech",
-            "features": [
-              "Voice Cloning",
-              "Text to Speech",
-              "Speech to Speech",
-              "Voice Design",
-              "Multilingual",
-              "Audio Editing"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "Generative AI",
-              "Deep Learning"
-            ],
-            "provides_integrations": [
-              "API",
-              "SDK"
-            ],
-            "targets_markets": [
-              "Media",
-              "Entertainment",
-              "Education"
-            ],
-            "ai_capabilities": [
-              "Voice Cloning",
-              "Text to Speech",
-              "Speech to Speech"
-            ]
-          },
-          {
-            "name": "Detect",
-            "type": "Deepfake Detection",
-            "description": "Realtime multimodal deepfake detector",
-            "features": [
-              "Deepfake Detection",
-              "AI Watermarker"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "Deep Learning",
-              "Computer Vision"
-            ],
-            "provides_integrations": [
-              "API",
-              "SDK"
-            ],
-            "targets_markets": [
-              "Security",
-              "Media",
-              "Entertainment"
-            ],
-            "ai_capabilities": [
-              "Deepfake Detection",
-              "AI Watermarker"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "Generative AI",
-            "category": "ai_ml",
-            "purpose": "Generate high-quality audio and voice",
-            "implemented_by": [
-              "AI Voice Generator"
-            ],
-            "enables_capabilities": [
-              "Voice Cloning",
-              "Text to Speech",
-              "Speech to Speech"
-            ],
-            "technical_details": "Uses deep learning algorithms to generate audio and voice"
-          },
-          {
-            "name": "Deep Learning",
-            "category": "ai_ml",
-            "purpose": "Detect deepfakes and protect IP",
-            "implemented_by": [
-              "Detect"
-            ],
-            "enables_capabilities": [
-              "Deepfake Detection",
-              "AI Watermarker"
-            ],
-            "technical_details": "Uses convolutional neural networks to detect deepfakes"
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "Voice Cloning",
-            "type": "model",
-            "description": "Generate a synthetic voice that mimics a real person's voice",
-            "applications": [
-              "Media",
-              "Entertainment",
-              "Education"
-            ],
-            "performance_metrics": {
-              "accuracy": "95%",
-              "quality": "high"
-            }
-          },
-          {
-            "concept": "Deepfake Detection",
-            "type": "model",
-            "description": "Detect and prevent deepfakes",
-            "applications": [
-              "Security",
-              "Media",
-              "Entertainment"
-            ],
-            "performance_metrics": {
-              "accuracy": "99%",
-              "speed": "realtime"
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "API",
-            "type": "api",
-            "platform": "Resemble AI",
-            "description": "Integrate Resemble AI's AI Voice Generator and Detect into your application",
-            "available_in_products": [
-              "AI Voice Generator",
-              "Detect"
-            ]
-          },
-          {
-            "name": "SDK",
-            "type": "sdk",
-            "platform": "Resemble AI",
-            "description": "Develop custom applications using Resemble AI's AI Voice Generator and Detect",
-            "available_in_products": [
-              "AI Voice Generator",
-              "Detect"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "Zomato",
-            "relationship_type": "partners_with",
-            "description": "Partnership to provide AI-powered voice solutions for Zomato's customers",
-            "products_affected": [
-              "AI Voice Generator"
-            ],
-            "strategic_value": "Expanding Resemble AI's reach in the food delivery market"
-          },
-          {
-            "partner": "TrueFan",
-            "relationship_type": "partners_with",
-            "description": "Partnership to provide AI-powered voice solutions for TrueFan's customers",
-            "products_affected": [
-              "AI Voice Generator"
-            ],
-            "strategic_value": "Expanding Resemble AI's reach in the entertainment market"
-          }
-        ],
-        "people": [
-          {
-            "name": "Not specified",
-            "title": "CEO",
-            "role": "ceo",
-            "relationship": "leads",
-            "background": "Not specified"
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "Basic",
-            "price": "$99/month",
-            "features": [
-              "AI Voice Generator",
-              "Detect"
-            ],
-            "includes_products": [
-              "AI Voice Generator",
-              "Detect"
-            ],
-            "limitations": [
-              "Limited usage"
-            ],
-            "target_segment": "Small businesses"
-          },
-          {
-            "tier": "Enterprise",
-            "price": "Custom",
-            "features": [
-              "AI Voice Generator",
-              "Detect",
-              "Custom support"
-            ],
-            "includes_products": [
-              "AI Voice Generator",
-              "Detect"
-            ],
-            "limitations": [
-              "None"
-            ],
-            "target_segment": "Large enterprises"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "Media",
-            "geography": "Global",
-            "size": "Large",
-            "targeted_by_products": [
-              "AI Voice Generator"
-            ],
-            "growth_rate": "High",
-            "competitive_landscape": "Competitive"
-          },
-          {
-            "segment": "Security",
-            "geography": "Global",
-            "size": "Medium",
-            "targeted_by_products": [
-              "Detect"
-            ],
-            "growth_rate": "High",
-            "competitive_landscape": "Competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Google",
-            "compete_in": [
-              "AI Voice Generator"
-            ],
-            "our_advantages": [
-              "Customization",
-              "Pricing"
-            ],
-            "their_advantages": [
-              "Brand recognition",
-              "Resources"
-            ],
-            "market_position": "Leader"
-          },
-          {
-            "company": "Amazon",
-            "compete_in": [
-              "AI Voice Generator"
-            ],
-            "our_advantages": [
-              "Customization",
-              "Pricing"
-            ],
-            "their_advantages": [
-              "Brand recognition",
-              "Resources"
-            ],
-            "market_position": "Leader"
-          }
-        ]
-      },
-      "content_length": 23832,
-      "extractedContent": "---\nurl: https://resemble.ai/pricing\ncompany: Resemble AI\nscraped_at: 2025-07-04 20:19:41\n---\n\nPricing | Resemble AI\n\n\n\n [![Resemble AI - AI Voice Generator](data:image/svg+xml;nitro-empty-id=NDc3OjE3OA==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNzI0IDk5IiB3aWR0aD0iNzI0IiBoZWlnaHQ9Ijk5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==) ![Resemble AI - AI Voice Generator](data:image/svg+xml;nitro-empty-id=NDc4OjE3OQ==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTI4MCAyNjkiIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjI2...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 2,
-        "technologies": 2,
-        "ai_ml_concepts": 2,
-        "partnerships": 2,
-        "integrations": 2
-      }
     }
   ],
   "totalUnfiltered": 100,
-  "generated_at": "2025-07-08T13:02:22.756Z"
+  "generated_at": "2025-07-08T18:45:36.490Z"
 }
