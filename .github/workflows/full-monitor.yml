@@ -74,21 +74,285 @@ jobs:
       cascade: false  # Prevent cascading
     secrets: inherit
   
-  # Job 4: Sync and deploy
-  sync:
+  # Job 4: Sync and deploy - INLINED to avoid workflow nesting limit
+  sync-and-deploy:
     needs: [analyze]
     if: always() && needs.analyze.result == 'success'
-    uses: ./.github/workflows/sync.yml
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
     permissions:
       contents: write
       pages: write
       id-token: write
       issues: write
-      actions: read
-    with:
-      trigger_source: 'analyze'
-      run_id: ${{ needs.analyze.outputs.run_id || github.run_id }}
-      skip_thebrain: ${{ inputs.skip_thebrain }}
-      skip_alerts: false
-      cascade: false  # Prevent cascading (though sync doesn't cascade anyway)
-    secrets: inherit
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    env:
+      NODE_ENV: production
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+          pip install requests
+      
+      - name: Ensure latest files
+        run: |
+          echo "✅ Checking for required files..."
+          
+          cd github-actions-backend
+          if [ ! -f data/intelligence.db ] || [ ! -f data/raw_content.db ] || [ ! -f data/processed_content.db ]; then
+            echo "📊 Initializing three-database architecture..."
+            mkdir -p data
+            node scripts/init-db-three.js
+            echo "✅ Databases initialized"
+          else
+            echo "✅ Three-database architecture found"
+          fi
+          cd ..
+          
+          echo "📁 Available files:"
+          ls -la api-data/*.json || true
+          ls -la github-actions-backend/data/*.db || true
+      
+      - name: Check baseline analysis status
+        if: ${{ !inputs.skip_thebrain }}
+        id: check_baseline
+        run: |
+          cd github-actions-backend
+          
+          BASELINE_COUNT=$(node -e "
+            const Database = require('better-sqlite3');
+            const db = new Database('data/intelligence.db');
+            const result = db.prepare('SELECT COUNT(*) as count FROM baseline_analysis').get();
+            console.log(result.count);
+            db.close();
+          " 2>/dev/null || echo "0")
+          
+          echo "baseline_count=$BASELINE_COUNT" >> $GITHUB_OUTPUT
+          
+          if [ "$BASELINE_COUNT" -gt 0 ]; then
+            echo "✅ Baseline analysis already exists ($BASELINE_COUNT records)"
+            echo "🔄 Skipping duplicate analysis to save Groq API costs"
+          else
+            echo "⚠️  No baseline analysis found"
+          fi
+      
+      - name: Run baseline analysis for TheBrain (if needed)
+        if: ${{ !inputs.skip_thebrain && steps.check_baseline.outputs.baseline_count == '0' }}
+        run: |
+          cd github-actions-backend
+          
+          echo "🧠 Running baseline analysis for three-database architecture..."
+          echo "💰 This will use Groq API credits"
+          
+          if [ -z "$GROQ_API_KEY" ]; then
+            echo "❌ Error: GROQ_API_KEY is not set"
+            exit 1
+          fi
+          
+          if ! node ai-analyzer-baseline-three-db.js; then
+            echo "❌ Baseline analysis failed"
+            exit 1
+          fi
+          
+          echo "✅ Baseline analysis completed successfully"
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      
+      - name: Sync to TheBrain API
+        if: ${{ !inputs.skip_thebrain }}
+        run: |
+          cd github-actions-backend
+          
+          if [ -z "$THEBRAIN_API_KEY" ] || [ -z "$THEBRAIN_BRAIN_ID" ]; then
+            echo "⚠️  TheBrain credentials not configured"
+            echo "   Skipping TheBrain sync..."
+          else
+            echo "🧠 Syncing to TheBrain via API..."
+            node thebrain-api-sync.js || {
+              echo "⚠️  TheBrain sync failed (known issue)"
+              exit 0
+            }
+          fi
+        env:
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+          THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
+          THEBRAIN_CENTRAL_THOUGHT_ID: ${{ secrets.THEBRAIN_CENTRAL_THOUGHT_ID }}
+          GITHUB_ACTIONS: 'true'
+      
+      - name: Update workflow status
+        run: |
+          cd github-actions-backend
+          echo "{
+            \"last_run\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"status\": \"success\",
+            \"workflow_run_id\": \"${{ github.run_id }}\",
+            \"trigger_source\": \"full-monitor\",
+            \"backend\": \"github-actions\"
+          }" > ../api-data/workflow-status.json
+      
+      - name: Commit final updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          push_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            local wait_time=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔄 Attempt $attempt/$max_attempts to push changes..."
+              
+              git pull origin main --rebase || {
+                echo "❌ Failed to rebase, trying merge strategy..."
+                git rebase --abort 2>/dev/null || true
+                git pull origin main --no-rebase --strategy=ours || {
+                  echo "❌ Merge failed, resetting to origin/main"
+                  git reset --hard origin/main
+                  return 1
+                }
+              }
+              
+              if git push origin main; then
+                echo "✅ Successfully pushed changes!"
+                return 0
+              else
+                echo "❌ Push failed"
+                
+                if [ $attempt -lt $max_attempts ]; then
+                  echo "⏳ Waiting ${wait_time}s before retry..."
+                  sleep $wait_time
+                  wait_time=$((wait_time * 2))
+                  attempt=$((attempt + 1))
+                else
+                  echo "❌ All push attempts failed"
+                  return 1
+                fi
+              fi
+            done
+          }
+          
+          git add api-data/ || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🚀 Deploy updates - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+            push_with_retry || {
+              echo "⚠️  Failed to push changes after multiple attempts"
+              exit 0
+            }
+          fi
+      
+      # Deploy to GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      
+      # Create alerts
+      - name: Check for high-priority changes
+        id: check-changes
+        run: |
+          if [ ! -f "api-data/changes.json" ]; then
+            echo "No changes.json file found"
+            echo "high_priority_count=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          HIGH_PRIORITY=$(jq '[.changes[] | select(.relevance_score >= 8)] | length' api-data/changes.json 2>/dev/null || echo "0")
+          echo "high_priority_count=$HIGH_PRIORITY" >> $GITHUB_OUTPUT
+          
+          if [ "$HIGH_PRIORITY" -gt 0 ]; then
+            echo "Found $HIGH_PRIORITY high-priority changes"
+            jq -r '.changes[] | select(.relevance_score >= 8) | "- \(.company): Score \(.relevance_score)/10"' api-data/changes.json > /tmp/changes.txt || echo "No changes"
+            echo "CHANGES_FILE=/tmp/changes.txt" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create GitHub Issue for alerts
+        if: steps.check-changes.outputs.high_priority_count > 0
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const count = ${{ steps.check-changes.outputs.high_priority_count }};
+            const changesDetails = process.env.CHANGES_DETAILS || 'See dashboard for details';
+            
+            const body = `# 🔴 High Priority Competitive Intelligence Alert
+            
+            **${count} high-priority changes detected** in competitor monitoring.
+            
+            ## Changes Detected:
+            ${changesDetails}
+            
+            ## Dashboard:
+            View the [full dashboard](${{ steps.deployment.outputs.page_url }}) for detailed analysis.
+            
+            ---
+            *Automated alert from AI Competitive Intelligence Monitor*
+            *Generated: ${new Date().toISOString()}*`;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔴 ${count} High Priority Alert${count > 1 ? 's' : ''}`,
+              body: body,
+              labels: ['competitive-intel', 'high-priority', 'automated']
+            });
+        env:
+          CHANGES_DETAILS: ${{ steps.check-changes.outputs.CHANGES_FILE && format('{0}', steps.check-changes.outputs.CHANGES_FILE) || 'See dashboard for details' }}
+      
+      # Email notifications
+      - name: Send email notifications
+        run: |
+          cd github-actions-backend
+          
+          if [ -z "$SMTP_HOST" ]; then
+            echo "📧 Email not configured, skipping notifications"
+          else
+            echo "📧 Sending email notifications..."
+            npm list nodemailer || npm install nodemailer
+            
+            if node email-notifications-wrapper.js check; then
+              echo "✅ Email notification sent successfully"
+            else
+              echo "⚠️  Email notification failed (non-critical)"
+            fi
+          fi
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+          EMAIL_THRESHOLD: ${{ secrets.EMAIL_THRESHOLD }}
