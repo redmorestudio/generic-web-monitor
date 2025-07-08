@@ -1318,7 +1318,9 @@
             // Format last check time
             if (dashboardData.generated_at) {
                 const lastCheck = new Date(dashboardData.generated_at);
-                document.getElementById('lastCheck').textContent = formatTimeAgo(lastCheck);
+                const relativeTime = formatTimeAgo(lastCheck);
+                const absoluteTime = lastCheck.toLocaleString();
+                document.getElementById('lastCheck').innerHTML = `${relativeTime}<br><small style="font-size: 0.7em; opacity: 0.7;">${absoluteTime}</small>`;
             } else {
                 document.getElementById('lastCheck').textContent = '--';
             }
