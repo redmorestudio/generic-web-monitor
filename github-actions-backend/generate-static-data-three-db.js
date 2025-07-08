@@ -579,6 +579,75 @@ function generateContentSnapshotsData(processedDb, intelligenceDb) {
 }
 
 /**
+ * Extract relevant snippet from content showing the change
+ * @param {string} oldContent - The old markdown content
+ * @param {string} newContent - The new markdown content
+ * @param {number} contextLength - Characters to show around change (default 300)
+ * @returns {object} Object with before and after snippets
+ */
+function extractContentSnippets(oldContent, newContent, contextLength = 300) {
+    try {
+        // Handle null/undefined content
+        if (!oldContent || !newContent) {
+            return {
+                before: oldContent ? oldContent.substring(0, contextLength) + '...' : 'No previous content',
+                after: newContent ? newContent.substring(0, contextLength) + '...' : 'No new content'
+            };
+        }
+
+        // Split content into lines for comparison
+        const oldLines = oldContent.split('\n');
+        const newLines = newContent.split('\n');
+        
+        // Find first significant difference
+        let diffIndex = -1;
+        for (let i = 0; i < Math.max(oldLines.length, newLines.length); i++) {
+            const oldLine = oldLines[i] || '';
+            const newLine = newLines[i] || '';
+            
+            // Skip empty lines and minor changes
+            if (oldLine.trim() !== newLine.trim() && (oldLine.trim().length > 10 || newLine.trim().length > 10)) {
+                diffIndex = i;
+                break;
+            }
+        }
+        
+        // If no significant difference found, just show the beginning
+        if (diffIndex === -1) {
+            return {
+                before: oldContent.substring(0, contextLength) + '...',
+                after: newContent.substring(0, contextLength) + '...'
+            };
+        }
+        
+        // Extract context around the change
+        const contextLines = 3; // Lines before and after the change
+        const startLine = Math.max(0, diffIndex - contextLines);
+        const endLine = Math.min(Math.max(oldLines.length, newLines.length), diffIndex + contextLines + 1);
+        
+        const beforeSnippet = oldLines.slice(startLine, endLine).join('\n');
+        const afterSnippet = newLines.slice(startLine, endLine).join('\n');
+        
+        // Trim to max length if needed
+        const trimmedBefore = beforeSnippet.length > contextLength ? 
+            beforeSnippet.substring(0, contextLength) + '...' : beforeSnippet;
+        const trimmedAfter = afterSnippet.length > contextLength ? 
+            afterSnippet.substring(0, contextLength) + '...' : afterSnippet;
+        
+        return {
+            before: trimmedBefore || 'No previous content',
+            after: trimmedAfter || 'No new content'
+        };
+    } catch (error) {
+        console.error('Error extracting content snippets:', error);
+        return {
+            before: 'Error extracting content',
+            after: 'Error extracting content'
+        };
+    }
+}
+
+/**
  * Generate recent changes data with enhanced AI analysis
  */
 function generateRecentChangesData(processedDb, intelligenceDb) {
@@ -611,6 +680,13 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                 ORDER BY cd.detected_at DESC
                 LIMIT 100
             `).all();
+            
+            // Prepare statement to fetch markdown content
+            const contentStmt = processedDb.prepare(`
+                SELECT id, markdown_text 
+                FROM markdown_content 
+                WHERE id = ?
+            `);
             
             // Get AI analysis for changes
             // Note: enhanced_analysis table doesn't exist yet, so we'll skip this for now
@@ -653,6 +729,28 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                 else if (interestLevel >= 5) emoji = '📌';
                 else if (interestLevel >= 3) emoji = '📊';
                 
+                // Fetch actual content for before/after display
+                let beforeContent = null;
+                let afterContent = null;
+                let contentSnippets = { before: null, after: null };
+                
+                if (change.old_content_id && change.new_content_id) {
+                    try {
+                        const oldRecord = contentStmt.get(change.old_content_id);
+                        const newRecord = contentStmt.get(change.new_content_id);
+                        
+                        if (oldRecord && newRecord) {
+                            beforeContent = oldRecord.markdown_text;
+                            afterContent = newRecord.markdown_text;
+                            
+                            // Extract relevant snippets showing the change
+                            contentSnippets = extractContentSnippets(beforeContent, afterContent);
+                        }
+                    } catch (err) {
+                        console.warn(`Could not fetch content for change ${change.id}:`, err.message);
+                    }
+                }
+                
                 return {
                     id: change.id,
                     url: change.url,
@@ -675,7 +773,13 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                     content_ids: {
                         old: change.old_content_id,
                         new: change.new_content_id
-                    }
+                    },
+                    // Add actual content snippets for display
+                    before_content: contentSnippets.before,
+                    after_content: contentSnippets.after,
+                    // Add AI-generated insights if available
+                    ai_explanation: change.ai_explanation || null,
+                    ai_business_context: change.ai_business_context || null
                 };
             });
             

@@ -1419,8 +1419,20 @@
                 
                 <div class="config-section">
                     <h4>🤖 AI Analysis</h4>
-                    <p>${escapeHtml(changeData.ai_summary || changeData.summary)}</p>
+                    <p>${escapeHtml(changeData.ai_explanation || changeData.ai_summary || changeData.summary)}</p>
                     ${changeData.interest_level ? `<p><strong>Interest Level:</strong> ${changeData.interest_level}/10</p>` : ''}
+                    
+                    ${changeData.key_developments && changeData.key_developments.length > 0 ? `
+                        <h5>Key Changes:</h5>
+                        <ul>
+                            ${changeData.key_developments.map(change => `<li>${escapeHtml(change)}</li>`).join('')}
+                        </ul>
+                    ` : ''}
+                    
+                    ${changeData.ai_business_context ? `
+                        <h5>Business Context:</h5>
+                        <p style="font-style: italic;">${escapeHtml(changeData.ai_business_context)}</p>
+                    ` : ''}
                 </div>
                 
                 ${changeData.before_content || changeData.after_content ? `
