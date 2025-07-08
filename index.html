@@ -297,6 +297,17 @@
             margin-top: 5px;
         }
 
+        .company-summary {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-color);
+        }
+
         .company-card .url {
             color: #87CEEB;
             text-decoration: none;
@@ -1075,6 +1086,7 @@
             companies.forEach(company => {
                 const companyName = company.company || company.name || 'Unknown Company';
                 const companyType = company.type || company.category || 'competitor';
+                const companyDescription = company.description || '';
                 
                 // Get intelligence data
                 const intelligence = company.intelligence || {};
@@ -1097,6 +1109,12 @@
                             </h3>
                             <div class="company-type">${escapeHtml(companyType)}</div>
                         </div>
+                        
+                        ${companyDescription && companyDescription !== `${companyType} company` && companyDescription !== `Leading ${companyType} company` ? `
+                            <div class="company-summary">
+                                ${escapeHtml(companyDescription)}
+                            </div>
+                        ` : ''}
                         
                         ${products.length > 0 ? `
                             <div class="intel-section">

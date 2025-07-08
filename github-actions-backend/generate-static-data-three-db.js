@@ -178,6 +178,7 @@ function generateDashboardData(intelligenceDb, processedDb) {
                 c.id,
                 c.name as company,
                 c.category,
+                c.description,
                 COUNT(DISTINCT u.id) as url_count,
                 MAX(ba.created_at) as last_check
             FROM companies c
