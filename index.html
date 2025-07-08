@@ -729,40 +729,6 @@
                 <button type="button" class="button button-warning" onclick="checkWorkflowStatus(event)">📊 Check Workflow Status</button>
             </div>
 
-            <!-- System Status -->
-            <div class="status-grid" id="statusGrid">
-                <div class="status-card">
-                    <h3>System Status</h3>
-                    <div class="value" id="systemStatus">Loading...</div>
-                    <div class="label">STATUS</div>
-                </div>
-                <div class="status-card">
-                    <h3>Companies Monitored</h3>
-                    <div class="value" id="companiesCount">--</div>
-                    <div class="label">COMPANIES</div>
-                </div>
-                <div class="status-card">
-                    <h3>URLs Tracked</h3>
-                    <div class="value" id="urlsCount">--</div>
-                    <div class="label">URLS TRACKED</div>
-                </div>
-                <div class="status-card">
-                    <h3>Last Check</h3>
-                    <div class="value" id="lastCheck">--</div>
-                    <div class="label">LAST CHECK</div>
-                </div>
-                <div class="status-card">
-                    <h3>Backend Type</h3>
-                    <div class="value">🎬</div>
-                    <div class="label">GITHUB ACTIONS</div>
-                </div>
-                <div class="status-card">
-                    <h3>Changes Today</h3>
-                    <div class="value" id="changesToday">--</div>
-                    <div class="label">24H CHANGES</div>
-                </div>
-            </div>
-
             <div id="companiesDisplay">
                 <h3>📊 Monitored Companies</h3>
                 <div class="loading">Loading company data from GitHub Actions...</div>
@@ -934,12 +900,16 @@
                     stats: { companies: 0, urls: 0, snapshots: 0, lastCheck: 'No data yet' },
                     company_activity: [],
                     error: dashboardData.error
-                });
+                }, {});
                 return;
             }
 
             // Store for global access
             window.dashboardData = dashboardData;
+            window.changesData = changesData;
+            
+            // Update status display with both dashboard and changes data
+            updateStatusDisplay(dashboardData, changesData);
             
             // Update companies data
             if (dashboardData.company_activity) {
@@ -951,17 +921,29 @@
         }
 
         // Update status display
-        function updateStatusDisplay(data) {
+        function updateStatusDisplay(data, changesData) {
             const stats = data.stats || {};
-            const lastCheck = stats.lastCheck ? new Date(stats.lastCheck) : new Date(dashboardData.generated_at);
+            const lastCheck = stats.lastCheck ? new Date(stats.lastCheck) : new Date(data.generated_at);
             const timeAgo = formatTimeAgo(lastCheck);
 
             // Update header stats bar
             const statsBar = document.getElementById('statsBar');
+            
+            // Count changes in last 24 hours
+            let todayChanges = 0;
+            if (changesData && changesData.changes) {
+                const now = new Date();
+                const dayAgo = new Date(now - 24 * 60 * 60 * 1000);
+                todayChanges = changesData.changes.filter(change => 
+                    new Date(change.created_at) > dayAgo
+                ).length;
+            }
+            
             statsBar.innerHTML = `
                 <div class="stat-item">🏢 <strong>${stats.companies || '0'}</strong> Companies</div>
                 <div class="stat-item">🔍 <strong>${stats.urls || '0'}</strong> URLs Monitored</div>
                 <div class="stat-item">📊 <strong>${stats.snapshots || '0'}</strong> Analyses</div>
+                <div class="stat-item">🔄 <strong>${todayChanges}</strong> Changes Today</div>
                 <div class="stat-item">⏰ Last Check: <strong>${timeAgo}</strong><br><small style="color: rgba(255,255,255,0.7); font-size: 0.75rem;">${lastCheck.toLocaleString()}</small></div>
             `;
         }
@@ -1076,7 +1058,7 @@
             companiesDisplay.innerHTML = html;
 
             // Update status display using the loaded data
-            updateStatusDisplay(window.dashboardData || {});
+            updateStatusDisplay(window.dashboardData || {}, window.changesData || {});
         }
 
         // Show company details in modal
