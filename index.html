@@ -1013,7 +1013,7 @@
                         <div class="interest-indicator interest-${interestCategory}">${interestEmoji} ${interestLevel}/10</div>
                         <div class="company-header">
                             <h3>${escapeHtml(companyName)}
-                                ${isRecent ? '<span class="change-indicator recent"></span>' : ''}
+                                ${company.latest_change ? '<span class="change-indicator recent"></span>' : ''}
                             </h3>
                             <div class="company-type">${escapeHtml(companyType)}</div>
                         </div>
@@ -1050,7 +1050,7 @@
                         
                         <div class="config-row">
                             <span class="config-label">URLs Monitored:</span>
-                            <span class="config-value">${company.url_count || urls.length}</span>
+                            <span class="config-value">${company.url_count || 0}</span>
                         </div>
                         
                         <div class="config-row">
@@ -1245,7 +1245,7 @@
                 return;
             }
 
-            const changes = data.items || [];
+            const changes = data.changes || [];
             if (changes.length === 0) {
                 contentDiv.innerHTML = '<div class="error-message">No changes detected yet.</div>';
                 return;
@@ -1299,7 +1299,7 @@
             const data = await loadStaticData('changes.json');
             const changesDiv = document.getElementById('recentChanges');
 
-            if (data.error || !data.items || data.items.length === 0) {
+            if (data.error || !data.changes || data.changes.length === 0) {
                 changesDiv.innerHTML = `
                     <h3 style="margin: 0 0 15px 0; color: var(--primary-color);">📈 Recent Changes</h3>
                     <div class="error-message">No recent changes detected.</div>
@@ -1307,7 +1307,7 @@
                 return;
             }
 
-            const recentChanges = data.items.slice(0, 3); // Show top 3
+            const recentChanges = data.changes.slice(0, 3); // Show top 3
             let html = `<h3 style="margin: 0 0 15px 0; color: var(--primary-color);">📈 Recent Changes</h3>`;
 
             recentChanges.forEach((change, index) => {
