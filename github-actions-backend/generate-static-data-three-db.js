@@ -10,6 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 const dbManager = require('./db-manager');
+const { deduplicatePreservingCase } = require('./normalize-keywords');
 
 // Configuration
 const DATA_DIR = path.join(__dirname, 'data');
@@ -58,7 +59,9 @@ function getTopEntities(intelligenceDb, companyId, entityType, limit = 3) {
         
         // Deduplicate and return top N
         const unique = deduplicateByName(allEntities);
-        return unique.slice(0, limit).map(e => e.name || e.concept || e.partner_name || 'Unknown');
+        const stringEntities = unique.map(e => e.name || e.concept || e.partner_name || 'Unknown');
+        // Apply case-insensitive deduplication to the string array
+        return deduplicatePreservingCase(stringEntities).slice(0, limit);
     } catch (error) {
         return [];
     }
@@ -238,7 +241,7 @@ function generateDashboardData(intelligenceDb, processedDb) {
         const processedCompanies = companyActivity.map(company => {
             const urls = urlsStmt.all(company.id).map(row => row.url);
             
-            // Get top entities
+            // Get top entities (now includes normalization)
             const topProducts = getTopEntities(intelligenceDb, company.id, 'products', 3);
             const topTechnologies = getTopEntities(intelligenceDb, company.id, 'technologies', 3);
             const topAiConcepts = getTopEntities(intelligenceDb, company.id, 'ai_ml_concepts', 3);
