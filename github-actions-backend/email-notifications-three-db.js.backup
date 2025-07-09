@@ -847,114 +847,6 @@ class ThreeDBEmailNotificationService {
     }
   }
 
-  // Send "no changes" confirmation email
-  async sendNoChangesEmail() {
-    try {
-      // Get monitoring statistics
-      const stats = {
-        totalCompanies: this.intelligenceDb.prepare('SELECT COUNT(*) as count FROM companies').get().count,
-        totalUrls: this.intelligenceDb.prepare('SELECT COUNT(*) as count FROM urls').get().count,
-        lastRun: new Date().toLocaleString(),
-        nextRun: new Date(Date.now() + 6 * 60 * 60 * 1000).toLocaleString() // 6 hours later
-      };
-
-      // Get list of monitored companies
-      const companies = this.intelligenceDb.prepare(`
-        SELECT name, category FROM companies ORDER BY name
-      `).all();
-
-      // Check if there were ANY changes (not just high-priority)
-      const recentChanges = this.processedDb.prepare(`
-        SELECT COUNT(*) as count
-        FROM change_detection 
-        WHERE detected_at > datetime('now', '-6 hours')
-      `).get().count;
-
-      let html = `
-        <h2>✅ AI Monitor: No Changes Detected</h2>
-        <p><strong>${new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</strong></p>
-        
-        <div style="background-color: #d4edda; border: 1px solid #c3e6cb; padding: 15px; border-radius: 5px; margin: 20px 0;">
-          <p style="margin: 0; color: #155724;">
-            <strong>All Clear!</strong> Your AI Competitive Monitor ran successfully and found no new changes across the monitored websites.
-          </p>
-        </div>
-        
-        <h3>📊 Monitoring Summary</h3>
-        <div style="background-color: #f8f9fa; padding: 15px; border-radius: 5px;">
-          <p style="margin: 5px 0;">🏢 <strong>${stats.totalCompanies} Companies</strong> monitored</p>
-          <p style="margin: 5px 0;">🔗 <strong>${stats.totalUrls} URLs</strong> checked</p>
-          <p style="margin: 5px 0;">🔄 <strong>${recentChanges} changes</strong> detected (all low priority)</p>
-          <p style="margin: 5px 0;">⏰ <strong>Last check:</strong> ${stats.lastRun}</p>
-          <p style="margin: 5px 0;">⏰ <strong>Next check:</strong> ${stats.nextRun}</p>
-        </div>
-        
-        <h3>🏢 Monitored Companies</h3>
-        <div style="columns: 2; column-gap: 20px;">
-      `;
-
-      // Group companies by category
-      const companiesByCategory = {};
-      companies.forEach(company => {
-        const category = company.category || 'Other';
-        if (!companiesByCategory[category]) {
-          companiesByCategory[category] = [];
-        }
-        companiesByCategory[category].push(company.name);
-      });
-
-      // Display companies by category
-      Object.entries(companiesByCategory).forEach(([category, names]) => {
-        html += `
-          <div style="break-inside: avoid; margin-bottom: 15px;">
-            <strong>${category}:</strong>
-            <ul style="margin: 5px 0; padding-left: 20px;">
-        `;
-        names.forEach(name => {
-          html += `<li>${name}</li>`;
-        });
-        html += `</ul></div>`;
-      });
-
-      html += `
-        </div>
-        
-        <div style="background-color: #f0f0f0; padding: 15px; border-radius: 5px; margin: 20px 0;">
-          <p style="margin: 0;">
-            <em>Everything is stable - no significant updates detected in this monitoring cycle.</em>
-          </p>
-        </div>
-        
-        <hr>
-        <p style="text-align: center; margin-top: 30px;">
-          <a href="https://redmorestudio.github.io/ai-competitive-monitor/" 
-             style="background-color: #28a745; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
-            View Dashboard
-          </a>
-        </p>
-        
-        <p style="font-size: 0.9em; color: #666; text-align: center;">
-          Stay tuned for the next update!<br>
-          AI Competitive Intelligence Monitor<br>
-          <a href="https://github.com/redmorestudio/ai-competitive-monitor">GitHub Repository</a>
-        </p>
-      `;
-
-      // Send email
-      await this.sendEmail({
-        from: `"AI Monitor" <${this.fromEmail}>`,
-        to: this.recipient,
-        subject: `✅ AI Monitor: No Changes Detected - ${new Date().toLocaleDateString()}`,
-        html: html
-      });
-
-      return true;
-    } catch (error) {
-      console.error('Failed to send no changes email:', error);
-      return false;
-    }
-  }
-
   // Check for recent changes and send alerts
   async checkAndAlert() {
     try {
@@ -979,19 +871,7 @@ class ThreeDBEmailNotificationService {
         console.log(`Found ${recentHighPriorityChanges.length} high-priority changes`);
         await this.sendHighPriorityAlert(recentHighPriorityChanges);
       } else {
-        // Check if there were ANY changes at all in the monitoring period
-        const anyChanges = this.processedDb.prepare(`
-          SELECT COUNT(*) as count
-          FROM change_detection 
-          WHERE detected_at > datetime('now', '-1 hour')
-        `).get().count;
-
-        if (anyChanges === 0) {
-          console.log('No changes detected - sending confirmation email');
-          await this.sendNoChangesEmail();
-        } else {
-          console.log(`${anyChanges} low-priority changes detected (no email needed)`);
-        }
+        console.log('No high-priority changes in the last hour');
       }
 
       return true;
@@ -1080,20 +960,13 @@ if (require.main === module) {
           success = true;
           break;
           
-        case 'nochanges':
-          console.log('Sending no-changes notification...');
-          await emailService.sendNoChangesEmail();
-          success = true;
-          break;
-          
         default:
           console.log('\nUsage:');
-          console.log('  node email-notifications-three-db.js test        - Send test email');
-          console.log('  node email-notifications-three-db.js check       - Check and alert on recent changes');
-          console.log('  node email-notifications-three-db.js daily       - Send daily digest');
-          console.log('  node email-notifications-three-db.js state       - Send complete state report');
-          console.log('  node email-notifications-three-db.js nochanges   - Send no-changes notification');
-          console.log('  node email-notifications-three-db.js demo        - Create demo email with sample data');
+          console.log('  node email-notifications-three-db.js test     - Send test email');
+          console.log('  node email-notifications-three-db.js check    - Check and alert on recent changes');
+          console.log('  node email-notifications-three-db.js daily    - Send daily digest');
+          console.log('  node email-notifications-three-db.js state    - Send complete state report');
+          console.log('  node email-notifications-three-db.js demo     - Create demo email with sample data');
           console.log('\nOptions:');
           console.log('  --test-mode    Save emails to files instead of sending');
           process.exit(0);
