@@ -1,0 +1,36 @@
+1605-
+1606-            modal.style.display = 'block';
+1607-        }
+1608-
+1609-        // Test TheBrain connection
+1610:        function openTheBrainTest() {
+1611-            const modal = document.getElementById('companyModal');
+1612-            const modalTitle = document.getElementById('modalTitle');
+1613-            const modalContent = document.getElementById('modalContent');
+1614-
+1615-            modalTitle.textContent = 'TheBrain Integration Test';
+1616-            modalContent.innerHTML = `
+1617-                <div class="config-section">
+1618-                    <h4>🧠 TheBrain Connection</h4>
+1619-                    <p>Testing connection to TheBrain for knowledge graph integration...</p>
+1620-                    <div id="brainTestResults">
+1621-                        <div class="loading">Running connection test...</div>
+1622-                    </div>
+1623-                </div>
+1624-            `;
+1625-
+1626-            modal.style.display = 'block';
+1627-
+1628-            // Simulate a test (in real implementation, this would call the API)
+1629-            setTimeout(() => {
+1630-                document.getElementById('brainTestResults').innerHTML = `
+1631-                    <div class="error-message">
+1632-                        ⚠️ TheBrain connection not configured yet.<br>
+1633-                        Please set up the API credentials in the backend configuration.
+1634-                    </div>
+1635-                    <div class="action-buttons" style="margin-top: 15px;">
+1636-                        <a href="${CONFIG.repoUrl}/blob/main/THEBRAIN_INTEGRATION.md" 
+1637-                           target="_blank" 
+1638-                           class="button button-primary">
+1639-                            📖 Setup Guide
+1640-                        </a>

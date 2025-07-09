@@ -1615,60 +1615,27 @@
             modalTitle.textContent = 'TheBrain Integration Test';
             modalContent.innerHTML = `
                 <div class="config-section">
-                    <h4>🧠 TheBrain Connection Test</h4>
-                    <p>This test verifies that TheBrain API integration is properly configured.</p>
-                    
-                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
-                        <h5 style="margin-top: 0;">📋 Configuration Requirements:</h5>
-                        <ul style="margin: 10px 0;">
-                            <li><strong>THEBRAIN_API_KEY</strong> - Your TheBrain API key</li>
-                            <li><strong>THEBRAIN_BRAIN_ID</strong> - The ID of your brain</li>
-                            <li><strong>THEBRAIN_CENTRAL_THOUGHT_ID</strong> - Root thought for connections (optional)</li>
-                        </ul>
-                        <p style="margin-bottom: 0; font-size: 14px; color: #666;">
-                            These should be configured in GitHub Secrets or your local .env file.
-                        </p>
-                    </div>
-                    
+                    <h4>🧠 TheBrain Connection</h4>
+                    <p>Testing connection to TheBrain for knowledge graph integration...</p>
                     <div id="brainTestResults">
-                        <div class="loading">Checking configuration...</div>
+                        <div class="loading">Running connection test...</div>
                     </div>
                 </div>
             `;
 
             modal.style.display = 'block';
 
-            // Show test results with helpful information
+            // Simulate a test (in real implementation, this would call the API)
             setTimeout(() => {
                 document.getElementById('brainTestResults').innerHTML = `
-                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; padding: 15px; border-radius: 8px; margin-top: 15px;">
-                        <h5 style="margin-top: 0;">⚠️ Web-based Test Not Available</h5>
-                        <p>TheBrain API credentials cannot be exposed in the browser for security reasons.</p>
-                        <p style="margin-bottom: 0;">To test the connection, you can:</p>
+                    <div class="error-message">
+                        ⚠️ TheBrain connection not configured yet.<br>
+                        Please set up the API credentials in the backend configuration.
                     </div>
-                    
-                    <div style="margin-top: 15px;">
-                        <h5>Option 1: Run Test Script</h5>
-                        <pre style="background: #f8f9fa; padding: 10px; border-radius: 5px; overflow-x: auto;">cd github-actions-backend
-node test-thebrain-connection.js</pre>
-                        
-                        <h5>Option 2: Check GitHub Actions</h5>
-                        <p>The sync workflow will show connection status in its logs.</p>
-                        
-                        <h5>Option 3: Manual Test</h5>
-                        <p>Run the full sync workflow and check for errors.</p>
-                    </div>
-                    
-                    <div class="action-buttons" style="margin-top: 20px;">
-                        <a href="${CONFIG.repoUrl}/actions/workflows/sync.yml" 
+                    <div class="action-buttons" style="margin-top: 15px;">
+                        <a href="${CONFIG.repoUrl}/blob/main/THEBRAIN_INTEGRATION.md" 
                            target="_blank" 
                            class="button button-primary">
-                            🔄 View Sync Workflow
-                        </a>
-                        <a href="${CONFIG.repoUrl}/blob/main/github-actions-backend/THEBRAIN_API_SETUP.md" 
-                           target="_blank" 
-                           class="button button-secondary" 
-                           style="margin-left: 10px;">
                             📖 Setup Guide
                         </a>
                     </div>

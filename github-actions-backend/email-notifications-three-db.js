@@ -206,7 +206,7 @@ class ThreeDBEmailNotificationService {
 
         // Critical changes (9-10)
         if (criticalChanges.length > 0) {
-          html += `
+          html += '<p style="color: #d9534f; font-weight: bold; margin: 15px 0;">🚨 GitHub issues have been automatically created for these critical changes.</p>';          html += `
             <div class="alert">
               <h3>🚨 Critical Changes Requiring Immediate Attention</h3>
               <p>The following changes have been identified as critically important to your competitive position:</p>
@@ -491,12 +491,14 @@ class ThreeDBEmailNotificationService {
         subject: `🚨 URGENT: ${enrichedChanges.length} High-Priority Competitive Changes (Level ${Math.max(...enrichedChanges.map(c => c.interest_level))})`,
         html: html
       });
-
-      // Also create a GitHub issue if score is 9 or 10
-      const criticalChanges = enrichedChanges.filter(c => c.interest_level >= 9);
-      if (criticalChanges.length > 0 && process.env.GITHUB_TOKEN) {
-        await this.createGitHubIssue(criticalChanges);
-      }
+      // GitHub issues are now created directly by the sync.yml workflow
+      // This avoids token redundancy and prevents duplicate issues
+      // The workflow uses actions/github-script which has automatic token access
+//       // Also create a GitHub issue if score is 9 or 10
+//       const criticalChanges = enrichedChanges.filter(c => c.interest_level >= 9);
+//       if (criticalChanges.length > 0 && process.env.GITHUB_TOKEN) {
+//         await this.createGitHubIssue(criticalChanges);
+//       }
 
       return true;
     } catch (error) {
