@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Monitor - Health Check</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .status-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            background: #fafafa;
+        }
+        .status-card h3 {
+            margin: 0 0 15px 0;
+            color: #555;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        .status-healthy { background: #4caf50; }
+        .status-warning { background: #ff9800; }
+        .status-error { background: #f44336; }
+        .status-unknown { background: #9e9e9e; }
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .metric:last-child {
+            border-bottom: none;
+        }
+        .metric-label {
+            color: #666;
+        }
+        .metric-value {
+            font-weight: 500;
+        }
+        .refresh-button {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .refresh-button:hover {
+            background: #1976D2;
+        }
+        .refresh-button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .last-updated {
+            color: #666;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 AI Monitor System Health</h1>
+        
+        <div id="loading" class="loading">
+            Loading health status...
+        </div>
+        
+        <div id="content" style="display: none;">
+            <div id="error-container"></div>
+            
+            <div class="status-grid" id="status-grid">
+                <!-- Status cards will be inserted here -->
+            </div>
+            
+            <button class="refresh-button" onclick="checkHealth()">Refresh Status</button>
+            
+            <div class="last-updated" id="last-updated"></div>
+            
+            <details style="margin-top: 30px;">
+                <summary style="cursor: pointer; padding: 10px; background: #f5f5f5;">Raw Health Check Data</summary>
+                <pre id="raw-data"></pre>
+            </details>
+        </div>
+    </div>
+
+    <script>
+        // Mock health check data for local testing
+        const mockHealthData = {
+            status: 'healthy',
+            timestamp: new Date().toISOString(),
+            summary: {
+                errors: 0,
+                warnings: 0,
+                message: 'All systems operational'
+            },
+            checks: {
+                databases: {
+                    intelligence: {
+                        status: 'healthy',
+                        message: 'All tables present',
+                        size: '4.52 MB',
+                        tables: { companies: 52, urls: 174, baseline_analysis: 345 }
+                    },
+                    processed: {
+                        status: 'healthy',
+                        message: 'All tables present',
+                        size: '8.76 MB',
+                        tables: { markdown_content: 172, change_detection: 2, content_changes: 0 }
+                    },
+                    raw: {
+                        status: 'healthy',
+                        message: 'All tables present',
+                        size: '84.14 MB',
+                        tables: { raw_html: 184, scrape_runs: 1 }
+                    }
+                },
+                workflow: {
+                    status: 'healthy',
+                    message: 'Workflows running normally',
+                    last_run: new Date(Date.now() - 2.5 * 60 * 60 * 1000).toISOString(),
+                    hours_since_run: '2.5',
+                    workflow_status: 'success'
+                },
+                data_freshness: {
+                    last_change: {
+                        status: 'healthy',
+                        message: 'Recent changes detected',
+                        timestamp: new Date(Date.now() - 14 * 60 * 60 * 1000).toISOString(),
+                        days_ago: '0.6'
+                    },
+                    last_snapshot: {
+                        status: 'healthy',
+                        message: 'Recent snapshots captured',
+                        timestamp: new Date(Date.now() - 13 * 60 * 60 * 1000).toISOString(),
+                        hours_ago: '13.0'
+                    }
+                },
+                file_system: {
+                    status: 'healthy',
+                    message: 'All paths accessible'
+                }
+            }
+        };
+
+        function getStatusIcon(status) {
+            return `<span class="status-indicator status-${status}"></span>`;
+        }
+
+        function formatTimestamp(timestamp) {
+            return new Date(timestamp).toLocaleString();
+        }
+
+        function renderHealthStatus(data) {
+            const container = document.getElementById('status-grid');
+            container.innerHTML = '';
+
+            // Overall status
+            const overallCard = document.createElement('div');
+            overallCard.className = 'status-card';
+            overallCard.innerHTML = `
+                <h3>${getStatusIcon(data.status)} Overall System Status</h3>
+                <div class="metric">
+                    <span class="metric-label">Status</span>
+                    <span class="metric-value">${data.summary.message}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Errors</span>
+                    <span class="metric-value">${data.summary.errors}</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Warnings</span>
+                    <span class="metric-value">${data.summary.warnings}</span>
+                </div>
+            `;
+            container.appendChild(overallCard);
+
+            // Database status
+            if (data.checks.databases) {
+                const dbCard = document.createElement('div');
+                dbCard.className = 'status-card';
+                dbCard.innerHTML = '<h3>📊 Databases</h3>';
+                
+                Object.entries(data.checks.databases).forEach(([name, db]) => {
+                    const metric = document.createElement('div');
+                    metric.className = 'metric';
+                    metric.innerHTML = `
+                        <span class="metric-label">${getStatusIcon(db.status)} ${name}</span>
+                        <span class="metric-value">${db.size || 'N/A'}</span>
+                    `;
+                    dbCard.appendChild(metric);
+                });
+                
+                container.appendChild(dbCard);
+            }
+
+            // Workflow status
+            if (data.checks.workflow) {
+                const workflowCard = document.createElement('div');
+                workflowCard.className = 'status-card';
+                const workflow = data.checks.workflow;
+                workflowCard.innerHTML = `
+                    <h3>${getStatusIcon(workflow.status)} Workflow Status</h3>
+                    <div class="metric">
+                        <span class="metric-label">Message</span>
+                        <span class="metric-value">${workflow.message}</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Last Run</span>
+                        <span class="metric-value">${workflow.hours_since_run} hours ago</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Status</span>
+                        <span class="metric-value">${workflow.workflow_status || 'unknown'}</span>
+                    </div>
+                `;
+                container.appendChild(workflowCard);
+            }
+
+            // Data freshness
+            if (data.checks.data_freshness) {
+                const freshnessCard = document.createElement('div');
+                freshnessCard.className = 'status-card';
+                freshnessCard.innerHTML = '<h3>🕒 Data Freshness</h3>';
+                
+                if (data.checks.data_freshness.last_change) {
+                    const change = data.checks.data_freshness.last_change;
+                    const metric = document.createElement('div');
+                    metric.className = 'metric';
+                    metric.innerHTML = `
+                        <span class="metric-label">${getStatusIcon(change.status)} Last Change</span>
+                        <span class="metric-value">${change.days_ago} days ago</span>
+                    `;
+                    freshnessCard.appendChild(metric);
+                }
+                
+                if (data.checks.data_freshness.last_snapshot) {
+                    const snapshot = data.checks.data_freshness.last_snapshot;
+                    const metric = document.createElement('div');
+                    metric.className = 'metric';
+                    metric.innerHTML = `
+                        <span class="metric-label">${getStatusIcon(snapshot.status)} Last Snapshot</span>
+                        <span class="metric-value">${snapshot.hours_ago} hours ago</span>
+                    `;
+                    freshnessCard.appendChild(metric);
+                }
+                
+                container.appendChild(freshnessCard);
+            }
+
+            // Update last updated time
+            document.getElementById('last-updated').textContent = 
+                `Last checked: ${formatTimestamp(data.timestamp)}`;
+
+            // Update raw data
+            document.getElementById('raw-data').textContent = 
+                JSON.stringify(data, null, 2);
+        }
+
+        async function checkHealth() {
+            const button = document.querySelector('.refresh-button');
+            button.disabled = true;
+            button.textContent = 'Checking...';
+
+            try {
+                // Try to fetch from local health check endpoint
+                // In production, this would be the actual endpoint
+                const response = await fetch('http://localhost:3000/health');
+                
+                if (!response.ok) {
+                    throw new Error(`Health check returned ${response.status}`);
+                }
+                
+                const data = await response.json();
+                renderHealthStatus(data);
+                document.getElementById('error-container').innerHTML = '';
+                
+            } catch (error) {
+                // If local endpoint fails, use mock data
+                console.log('Using mock data:', error.message);
+                renderHealthStatus(mockHealthData);
+                
+                document.getElementById('error-container').innerHTML = `
+                    <div class="error-message">
+                        ⚠️ Unable to connect to health check endpoint. Showing mock data.
+                        <br>
+                        <small>To see real data, run: <code>cd github-actions-backend && node health-check.js serve</code></small>
+                    </div>
+                `;
+            } finally {
+                button.disabled = false;
+                button.textContent = 'Refresh Status';
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('content').style.display = 'block';
+            }
+        }
+
+        // Check health on page load
+        checkHealth();
+
+        // Auto-refresh every 30 seconds
+        setInterval(checkHealth, 30000);
+    </script>
+</body>
+</html>
