@@ -1,0 +1,145 @@
+                        const distance = Math.sqrt(camera.position.x ** 2 + camera.position.z ** 2);
+                        const angle = Math.atan2(camera.position.z, camera.position.x) + 0.01;
+                        Graph.cameraPosition({
+                            x: distance * Math.cos(angle),
+                            y: camera.position.y,
+                            z: distance * Math.sin(angle)
+                        }, null, 0);
+                    }, 50);
+                } else {
+                    clearInterval(autoRotateInterval);
+                }
+                this.classList.toggle('active');
+            });
+
+            document.getElementById('resetView').addEventListener('click', function() {
+                Graph.cameraPosition({ x: 0, y: 0, z: 1000 }, null, 2000);
+                Graph.d3ReheatSimulation();
+            });
+
+            document.getElementById('exportView').addEventListener('click', function() {
+                const canvas = Graph.renderer().domElement;
+                const link = document.createElement('a');
+                link.download = 'ai-competitive-monitor-3d.png';
+                link.href = canvas.toDataURL();
+                link.click();
+            });
+
+            document.getElementById('refreshData').addEventListener('click', function() {
+                showLoading();
+                loadData().then(() => {
+                    graphData = JSON.parse(JSON.stringify(originalData));
+                    filterNodes();
+                    updateStats();
+                    hideLoading();
+                });
+            });
+        }
+
+        function updateView() {
+            if (currentView === 'interest') {
+                // Interest analysis view - color by interest level, hide links
+                Graph.linkOpacity(0.1);
+                Graph.graphData({
+                    nodes: graphData.nodes,
+                    links: []
+                });
+            } else {
+                // Other views - show full network
+                Graph.linkOpacity(0.6);
+                Graph.graphData(graphData);
+            }
+            
+            // Update colors
+            Graph.nodeColor(node => {
+                if (currentView === 'interest') {
+                    const level = node.interest_level || 0;
+                    if (level >= 8) return COLOR_SCHEMES.interestLevels.high;
+                    if (level >= 6) return COLOR_SCHEMES.interestLevels.mediumHigh;
+                    if (level >= 4) return COLOR_SCHEMES.interestLevels.medium;
+                    if (level >= 2) return COLOR_SCHEMES.interestLevels.lowMedium;
+                    return COLOR_SCHEMES.interestLevels.low;
+                }
+                return COLOR_SCHEMES.companyTypes[node.type] || COLOR_SCHEMES.companyTypes.Other;
+            });
+        }
+
+        function filterNodes() {
+            let filteredData = JSON.parse(JSON.stringify(originalData));
+            
+            if (currentFilter !== 'all') {
+                filteredData.nodes = filteredData.nodes.filter(node => node.type === currentFilter);
+                const nodeIds = new Set(filteredData.nodes.map(node => node.id));
+                filteredData.links = filteredData.links.filter(link => 
+                    nodeIds.has(link.source) && nodeIds.has(link.target)
+                );
+            }
+            
+            graphData = filteredData;
+            updateView();
+            updateStats();
+        }
+
+        function focusOnNode(node) {
+            // Move camera to focus on the node
+            const distance = 400;
+            const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+            
+            Graph.cameraPosition(
+                { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
+                node,
+                3000
+            );
+        }
+
+        function updateStats() {
+            document.getElementById('nodeCount').textContent = graphData.nodes.length;
+            document.getElementById('linkCount').textContent = graphData.links.length;
+            
+            const avgInterest = graphData.nodes.reduce((sum, node) => sum + (node.interest_level || 0), 0) / graphData.nodes.length;
+            
+            document.getElementById('statsContent').innerHTML = `
+                <h4 style="margin: 0 0 10px 0; color: #00ff88;">Statistics</h4>
+                <div style="font-size: 12px;">
+                    <div>Companies: ${graphData.nodes.length}</div>
+                    <div>Connections: ${graphData.links.length}</div>
+                    <div>Avg Interest: ${avgInterest.toFixed(1)}/10</div>
+                    <div>View: ${currentView}</div>
+                    <div>Filter: ${currentFilter}</div>
+                </div>
+            `;
+        }
+
+        function toggleControls() {
+            const controls = document.getElementById('controls');
+            const legend = document.getElementById('legend');
+            const stats = document.getElementById('stats');
+            
+            if (controls.style.display === 'none') {
+                controls.style.display = 'block';
+                legend.style.display = 'block';
+                stats.style.display = 'block';
+            } else {
+                controls.style.display = 'none';
+                legend.style.display = 'none';
+                stats.style.display = 'none';
+            }
+        }
+
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+
+        function hideLoading() {
+            document.getElementById('loading').style.display = 'none';
+        }
+
+        function showInfo() {
+            document.getElementById('info').style.display = 'block';
+        }
+
+        // Start the application
+        init();
+    </script>
+</body>
+</html>
