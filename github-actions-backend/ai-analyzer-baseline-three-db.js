@@ -613,7 +613,7 @@ async function processAllSnapshots() {
   
   // Return error status
   if (errorTracker.hasErrors()) {
-    throw new Error(`Analysis completed with ${report.failed} failures`);
+    throw new Error(`Analysis completed with ${errorTracker.errors.length} failures`);
   }
   
   return report;

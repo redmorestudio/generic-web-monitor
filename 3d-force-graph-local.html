@@ -406,9 +406,10 @@
             // Determine base URL
             const isLocal = window.location.hostname === 'localhost' || 
                           window.location.hostname === '127.0.0.1' || 
-                          window.location.hostname === '';
+                          window.location.hostname === '' ||
+                          window.location.protocol === 'file:';
             
-            const baseUrl = isLocal ? '/api-data' : 'https://redmorestudio.github.io/ai-competitive-monitor/api-data';
+            const baseUrl = isLocal ? './api-data' : 'https://redmorestudio.github.io/ai-competitive-monitor/api-data';
             
             console.log('Loading from:', baseUrl);
             
