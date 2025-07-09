@@ -1562,19 +1562,29 @@
                     <h4>📊 GitHub Actions Workflow Status</h4>
                     <p>View detailed logs and workflow runs in GitHub:</p>
                     <div class="action-buttons">
-                        <a href="${CONFIG.repoUrl}/actions/workflows/monitor.yml" 
+                        <a href="${CONFIG.repoUrl}/actions/workflows/full-monitor.yml" 
                            target="_blank" 
-                           class="button button-secondary">
-                            📊 Monitor Workflow
+                           class="button button-primary">
+                            🔄 Full Monitor Pipeline
                         </a>
-                        <a href="${CONFIG.repoUrl}/actions/workflows/process.yml" 
+                        <a href="${CONFIG.repoUrl}/actions/workflows/scrape.yml" 
                            target="_blank" 
                            class="button button-secondary">
-                            🔄 Process Workflow
+                            🌐 Scrape Websites
+                        </a>
+                        <a href="${CONFIG.repoUrl}/actions/workflows/analyze.yml" 
+                           target="_blank" 
+                           class="button button-secondary">
+                            🤖 Analyze Content
+                        </a>
+                        <a href="${CONFIG.repoUrl}/actions/workflows/sync.yml" 
+                           target="_blank" 
+                           class="button button-secondary">
+                            📊 Sync & Deploy
                         </a>
                         <a href="${CONFIG.repoUrl}/actions" 
                            target="_blank" 
-                           class="button button-primary">
+                           class="button button-warning">
                             🎬 All Workflows
                         </a>
                     </div>
