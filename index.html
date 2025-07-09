@@ -85,6 +85,7 @@
             color: white;
             flex: 1;
             min-width: 150px;
+            cursor: default; /* Not clickable */
         }
 
         .stat-item strong {
@@ -206,6 +207,7 @@
             border-radius: 12px;
             padding: 20px;
             text-align: center;
+            cursor: default; /* Not clickable */
         }
 
         .status-card h3 {
@@ -242,6 +244,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            cursor: pointer; /* Make it clear this is clickable */
         }
 
         .company-card:hover {
@@ -777,7 +780,7 @@
         <div class="quick-nav">
             <h3 style="margin: 0 0 15px 0; color: var(--primary-color);">🚀 Quick Navigation</h3>
             <div class="nav-buttons">
-                <a href="3d-force-graph.html" class="nav-button" target="_blank">
+                <a href="3d-force-graph-complete.html" class="nav-button" target="_blank">
                     <span class="icon">🌐</span>
                     <span>3D Company Graph</span>
                 </a>
@@ -1101,7 +1104,7 @@
                 const aiConcepts = intelligence.ai_ml_concepts || [];
                 
                 html += `
-                    <div class="company-card">
+                    <div class="company-card" onclick="showCompanyDetails('${escapeHtml(companyName)}')">
                         <div class="interest-indicator interest-${interestCategory}">${interestEmoji} ${interestLevel}/10</div>
                         <div class="company-header">
                             <h3>${escapeHtml(companyName)}
@@ -1156,11 +1159,11 @@
                             <span class="config-value">${formatTimeAgo(new Date(company.last_check))}</span>
                         </div>
                         
-                        <div class="action-buttons" style="margin-top: 15px;">
-                            <button type="button" class="button button-primary" onclick="showCompanyDetails('${escapeHtml(companyName)}')">
+                        <div class="action-buttons" style="margin-top: 15px; position: relative; z-index: 10;">
+                            <button type="button" class="button button-primary" onclick="event.stopPropagation(); showCompanyDetails('${escapeHtml(companyName)}')">
                                 View Details
                             </button>
-                            <button type="button" class="button button-secondary" onclick="showCompanyUrls('${escapeHtml(companyName)}')">
+                            <button type="button" class="button button-secondary" onclick="event.stopPropagation(); showCompanyUrls('${escapeHtml(companyName)}')">
                                 View URLs
                             </button>
                         </div>
