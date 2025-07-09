@@ -116,8 +116,8 @@ function getMaxInterestLevel(intelligenceDb, companyId) {
         if (newDataCheck?.competitive_data) {
             try {
                 const data = JSON.parse(newDataCheck.competitive_data);
-                if (data.interest_level) {
-                    return data.interest_level;
+                if (data.interest_assessment?.interest_level) {
+                    return data.interest_assessment.interest_level;
                 }
             } catch (e) {
                 // Fall through to old method

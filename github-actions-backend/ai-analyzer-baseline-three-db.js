@@ -195,11 +195,24 @@ Extract the following information with relationship context:
    - Future predictions they're making
    - Ecosystem changes they're driving
 
-10. **Competitive Implications**:
-    - Direct threats to our business
-    - Opportunities for partnership
-    - Technology gaps we should address
-    - Market segments to target
+10. **Interest Assessment** (CRITICAL - Dual Scoring System):
+    - **Technical Innovation Score (1-10)**:
+      * 9-10: Breakthrough AI models, SOTA achievements, novel architectures, 10x improvements
+      * 7-8: Significant technical advances, 2-5x improvements, new capabilities
+      * 5-6: Notable optimizations, useful tools, incremental improvements
+      * 3-4: Minor updates, bug fixes, routine maintenance
+      * 1-2: No technical relevance
+    
+    - **Business Impact Score (1-10)**:
+      * 9-10: Major launches, $100M+ funding, acquisitions, market-reshaping moves
+      * 7-8: Important partnerships, $10M+ funding, market expansion
+      * 5-6: Product updates, new features, team growth
+      * 3-4: Routine updates, minor news
+      * 1-2: Trivial changes
+    
+    - **Final Interest Level**: Average of technical and business scores
+    - **Category**: "breakthrough", "major_development", "notable_update", "routine_change", "trivial"
+    - **Impact Areas**: "ai_models", "funding", "partnership", "product_launch", "technical_innovation", "market_expansion", "team", "infrastructure"
 
 Provide your analysis in this JSON structure:
 {
@@ -297,11 +310,14 @@ Provide your analysis in this JSON structure:
     "market_opportunities": [],
     "technology_trends": [],
     "strategic_initiatives": [],
-    "threat_assessment": {
-      "level": 0,
-      "areas": [],
-      "implications": [],
-      "recommended_actions": []
+    "interest_assessment": {
+      "interest_level": 0,
+      "interest_drivers": [],
+      "category": "",
+      "impact_areas": [],
+      "technical_innovation_score": 0,
+      "business_impact_score": 0,
+      "summary": ""
     }
   },
   "quantitative_data": {
@@ -381,7 +397,7 @@ async function analyzeWithGroq(content, company, url) {
 
 async function storeBaselineAnalysis(snapshot, company, url, extractedData) {
   try {
-    const relevanceScore = extractedData.strategic_intelligence?.threat_assessment?.level || 5;
+    const relevanceScore = extractedData.strategic_intelligence?.interest_assessment?.interest_level || 5;
     const summary = extractedData.summary?.one_line || 
       `${company.name}: ${extractedData.current_state?.positioning || 'AI company'}`;
 
@@ -619,7 +635,7 @@ async function generateBaselineReport() {
     companies: [],
     key_insights: [],
     competitive_landscape: {
-      threat_levels: {},
+      interest_levels: {},
       market_segments: {},
       technology_adoption: {}
     }
@@ -664,7 +680,7 @@ async function generateBaselineReport() {
         markets: []
       },
       relationships: [],
-      threat_level: 0,
+      interest_level: 0,
       key_insights: []
     };
 
@@ -690,9 +706,9 @@ async function generateBaselineReport() {
           aggregated.relationships.push(...fullExtraction.relationships);
         }
 
-        // Update threat level (take maximum)
-        const threatLevel = fullExtraction.strategic_intelligence?.threat_assessment?.level || 0;
-        aggregated.threat_level = Math.max(aggregated.threat_level, threatLevel);
+        // Update interest level (take maximum)
+        const interestLevel = fullExtraction.strategic_intelligence?.interest_assessment?.interest_level || 0;
+        aggregated.interest_level = Math.max(aggregated.interest_level, interestLevel);
 
         // Collect insights
         if (fullExtraction.summary?.key_insights) {
@@ -713,10 +729,10 @@ async function generateBaselineReport() {
     report.companies.push(aggregated);
 
     // Update competitive landscape
-    const threatCategory = aggregated.threat_level >= 8 ? 'high' : 
-                          aggregated.threat_level >= 5 ? 'medium' : 'low';
-    report.competitive_landscape.threat_levels[threatCategory] = 
-      (report.competitive_landscape.threat_levels[threatCategory] || 0) + 1;
+    const interestCategory = aggregated.interest_level >= 8 ? 'high' : 
+                            aggregated.interest_level >= 5 ? 'medium' : 'low';
+    report.competitive_landscape.interest_levels[interestCategory] = 
+      (report.competitive_landscape.interest_levels[interestCategory] || 0) + 1;
   }
 
   // Save report
