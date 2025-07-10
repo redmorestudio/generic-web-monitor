@@ -3,7 +3,7 @@
     "companies": 52,
     "urls": 174,
     "snapshots": 345,
-    "lastCheck": "2025-07-10T13:03:55.796Z"
+    "lastCheck": "2025-07-10T17:32:50.881Z"
   },
   "recent_changes_summary": {
     "last_5_changes": [
@@ -22,7 +22,7 @@
         "url": "https://openai.com",
         "summary": "Content changed for OpenAI - https://openai.com",
         "interest_level": 5,
-        "time_ago": "5 days ago",
+        "time_ago": "6 days ago",
         "detected_at": "2025-07-04 18:17:08"
       }
     ],
@@ -2050,6 +2050,6 @@
       }
     }
   ],
-  "generated_at": "2025-07-10T16:34:42.783Z",
+  "generated_at": "2025-07-10T18:51:12.742Z",
   "backend": "github-actions-static-three-db"
 }
