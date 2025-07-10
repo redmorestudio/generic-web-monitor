@@ -35,6 +35,7 @@ jobs:
         if: failure()
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.HEALTH_MONITORING_SECRETS }}
           script: |
             const title = `🚨 System Health Check Failed`;
             const body = `The automated health check detected issues with the AI Monitor system.
