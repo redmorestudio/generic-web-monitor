@@ -812,35 +812,55 @@ ${techs ? `Tech: ${techs}` : ''}`;
 
     // Setup event handlers
     function setupEventHandlers() {
-        // Force controls
-        document.getElementById('forceSlider').addEventListener('input', (e) => {
+        // Force controls - Fixed to prevent stack overflow
+        const forceSlider = document.getElementById('forceSlider');
+        const forceValue = document.getElementById('forceValue');
+        
+        forceSlider.addEventListener('input', function(e) {
             const value = parseInt(e.target.value);
-            document.getElementById('forceValue').textContent = value;
-            if (Graph) {
-                Graph.d3Force('charge').strength(value);
-                Graph.d3ReheatSimulation();
+            forceValue.textContent = value;
+            if (Graph && Graph.d3Force) {
+                try {
+                    Graph.d3Force('charge').strength(value);
+                    Graph.d3ReheatSimulation();
+                } catch (err) {
+                    console.error('Error updating force:', err);
+                }
             }
         });
         
-        document.getElementById('linkDistanceSlider').addEventListener('input', (e) => {
+        const linkDistanceSlider = document.getElementById('linkDistanceSlider');
+        const linkDistanceValue = document.getElementById('linkDistanceValue');
+        
+        linkDistanceSlider.addEventListener('input', function(e) {
             const value = parseInt(e.target.value);
-            document.getElementById('linkDistanceValue').textContent = value;
-            if (Graph) {
-                Graph.d3Force('link').distance(value);
-                Graph.d3ReheatSimulation();
+            linkDistanceValue.textContent = value;
+            if (Graph && Graph.d3Force) {
+                try {
+                    Graph.d3Force('link').distance(value);
+                    Graph.d3ReheatSimulation();
+                } catch (err) {
+                    console.error('Error updating link distance:', err);
+                }
             }
         });
         
         // Animation speed
-        document.getElementById('animationSpeed').addEventListener('input', (e) => {
+        const animationSpeedSlider = document.getElementById('animationSpeed');
+        animationSpeedSlider.addEventListener('input', function(e) {
             animationSpeed = parseInt(e.target.value);
             if (Graph) {
-                Graph.linkDirectionalParticleSpeed(d => CONFIG.particleSpeed * (animationSpeed / 50));
+                try {
+                    Graph.linkDirectionalParticleSpeed(d => CONFIG.particleSpeed * (animationSpeed / 50));
+                } catch (err) {
+                    console.error('Error updating animation speed:', err);
+                }
             }
         });
         
         // View mode
-        document.getElementById('viewMode').addEventListener('change', (e) => {
+        const viewModeSelect = document.getElementById('viewMode');
+        viewModeSelect.addEventListener('change', function(e) {
             currentView = e.target.value;
             switch(currentView) {
                 case 'interests':
@@ -858,7 +878,8 @@ ${techs ? `Tech: ${techs}` : ''}`;
         });
         
         // Filter type
-        document.getElementById('filterType').addEventListener('change', (e) => {
+        const filterTypeSelect = document.getElementById('filterType');
+        filterTypeSelect.addEventListener('change', function(e) {
             const filterType = e.target.value;
             if (filterType === 'all') {
                 buildCompanyNetwork();
@@ -877,7 +898,7 @@ ${techs ? `Tech: ${techs}` : ''}`;
             updateStats();
         });
         
-        // Toggle buttons
+        // Toggle buttons - Fixed to use direct updates
         document.querySelectorAll('.toggle-btn[data-toggle]').forEach(btn => {
             btn.addEventListener('click', function() {
                 const toggle = this.dataset.toggle;
@@ -887,35 +908,29 @@ ${techs ? `Tech: ${techs}` : ''}`;
                 switch(toggle) {
                     case 'particles':
                         if (Graph) {
-                            graphData.links.forEach(link => {
-                                Graph.linkDirectionalParticles(link, toggleStates.particles ? calculateParticles(link) : 0);
-                            });
+                            // Update particle visibility
+                            Graph.linkDirectionalParticles(toggleStates.particles ? calculateParticles : 0);
                         }
                         break;
                     
                     case 'labels':
                         if (Graph) {
-                            graphData.nodes.forEach(node => {
-                                const obj = Graph.nodeThreeObject(node);
-                                if (obj && obj.visible !== undefined) {
-                                    obj.visible = toggleStates.labels;
-                                }
-                            });
+                            // Re-create all node objects with updated visibility
+                            Graph.nodeThreeObject(node => createNodeObject(node));
                         }
                         break;
                     
                     case 'links':
                         if (Graph) {
                             Graph.linkOpacity(toggleStates.links ? CONFIG.linkOpacity : 0);
-                            Graph.linkWidth(link => toggleStates.links ? calculateLinkWidth(link) : 0);
+                            Graph.linkWidth(toggleStates.links ? calculateLinkWidth : 0);
                         }
                         break;
                     
                     case 'glow':
                         if (Graph) {
-                            graphData.nodes.forEach(node => {
-                                Graph.nodeThreeObject(node, createNodeObject(node));
-                            });
+                            // Re-create all node objects with updated glow
+                            Graph.nodeThreeObject(node => createNodeObject(node));
                         }
                         break;
                     
@@ -951,28 +966,27 @@ ${techs ? `Tech: ${techs}` : ''}`;
                 nodeDisplayMode = this.dataset.node;
                 
                 if (Graph) {
-                    graphData.nodes.forEach(node => {
-                        Graph.nodeThreeObject(node, createNodeObject(node));
-                    });
+                    // Re-create all node objects with new display mode
+                    Graph.nodeThreeObject(node => createNodeObject(node));
                 }
             });
         });
         
         // Reset view
-        document.getElementById('resetViewBtn').addEventListener('click', () => {
+        document.getElementById('resetViewBtn').addEventListener('click', function() {
             if (Graph) {
                 Graph.cameraPosition({ x: 0, y: 0, z: 800 }, { x: 0, y: 0, z: 0 }, 2000);
             }
         });
         
         // Refresh data
-        document.getElementById('refreshData').addEventListener('click', async () => {
+        document.getElementById('refreshData').addEventListener('click', async function() {
             document.getElementById('loading').style.display = 'block';
             await initGraph();
         });
         
         // Export view
-        document.getElementById('exportView').addEventListener('click', () => {
+        document.getElementById('exportView').addEventListener('click', function() {
             const canvas = document.querySelector('canvas');
             const link = document.createElement('a');
             link.download = `ai-monitor-graph-${new Date().toISOString().slice(0, 10)}.png`;
@@ -981,7 +995,7 @@ ${techs ? `Tech: ${techs}` : ''}`;
         });
         
         // Handle window resize
-        window.addEventListener('resize', () => {
+        window.addEventListener('resize', function() {
             // Adjust legend position on small screens
             const legend = document.getElementById('legend');
             if (window.innerWidth < 768) {
