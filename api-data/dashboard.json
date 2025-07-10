@@ -3,7 +3,32 @@
     "companies": 52,
     "urls": 174,
     "snapshots": 345,
-    "lastCheck": "2025-07-09T13:05:48.887Z"
+    "lastCheck": "2025-07-10T13:03:55.796Z"
+  },
+  "recent_changes_summary": {
+    "last_5_changes": [
+      {
+        "id": 2,
+        "company": "OpenAI",
+        "url": "https://openai.com",
+        "summary": "Major GPT-5 announcement detected",
+        "interest_level": 9,
+        "time_ago": "1 days ago",
+        "detected_at": "2025-07-08 19:18:06"
+      },
+      {
+        "id": 1,
+        "company": "OpenAI",
+        "url": "https://openai.com",
+        "summary": "Content changed for OpenAI - https://openai.com",
+        "interest_level": 5,
+        "time_ago": "5 days ago",
+        "detected_at": "2025-07-04 18:17:08"
+      }
+    ],
+    "last_24h_count": 0,
+    "last_7d_count": 2,
+    "high_priority_last_7d": 1
   },
   "company_activity": [
     {
@@ -39,7 +64,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "AMD",
@@ -72,7 +102,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Aleph Alpha",
@@ -107,7 +142,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Amazon CodeWhisperer",
@@ -142,7 +182,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Andi",
@@ -172,7 +217,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Anthropic",
@@ -208,7 +258,12 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Anyscale",
@@ -241,7 +296,12 @@
         "interest_level": 5,
         "interest_category": "medium"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Cerebras",
@@ -275,7 +335,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Codeium",
@@ -309,7 +374,12 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Cohere",
@@ -345,7 +415,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Cursor",
@@ -379,7 +454,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "DALL-E",
@@ -412,7 +492,12 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "DataRobot",
@@ -446,7 +531,12 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Descript",
@@ -478,7 +568,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "ElevenLabs",
@@ -513,7 +608,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Flux",
@@ -543,7 +643,12 @@
         "interest_level": 6,
         "interest_category": "medium"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "GitHub Copilot",
@@ -578,7 +683,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Google DeepMind",
@@ -614,7 +724,12 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "H2O.ai",
@@ -648,7 +763,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "HeyGen",
@@ -682,7 +802,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Hugging Face",
@@ -717,7 +842,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Ideogram",
@@ -748,7 +878,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Inflection AI",
@@ -782,7 +917,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Intel",
@@ -815,7 +955,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "LangChain",
@@ -850,7 +995,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Leonardo AI",
@@ -883,7 +1033,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Luma AI",
@@ -917,7 +1072,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Meta AI",
@@ -952,7 +1112,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Midjourney",
@@ -984,7 +1149,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Mistral AI",
@@ -1020,7 +1190,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Murf AI",
@@ -1054,7 +1229,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "NVIDIA",
@@ -1089,7 +1269,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Neeva",
@@ -1115,7 +1300,12 @@
         "interest_level": 6,
         "interest_category": "medium"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "OpenAI",
@@ -1153,8 +1343,13 @@
       },
       "latest_change": {
         "summary": "Major GPT-5 announcement detected",
-        "time_ago": "13 hours ago",
+        "time_ago": "1 days ago",
         "relevance_score": 9
+      },
+      "recent_activity": {
+        "change_count_7d": 2,
+        "last_change": "1 days ago",
+        "highest_recent_score": 9
       }
     },
     {
@@ -1189,7 +1384,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Perplexity AI",
@@ -1223,7 +1423,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Phind",
@@ -1255,7 +1460,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Pieces",
@@ -1288,7 +1498,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Pika",
@@ -1322,7 +1537,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Replicate",
@@ -1356,7 +1576,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Replit",
@@ -1390,7 +1615,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Resemble AI",
@@ -1424,7 +1654,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Runway",
@@ -1458,7 +1693,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "SambaNova",
@@ -1491,7 +1731,12 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Scale AI",
@@ -1525,7 +1770,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Sourcegraph",
@@ -1560,7 +1810,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Stability AI",
@@ -1595,7 +1850,12 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Synthesia",
@@ -1627,7 +1887,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Tabnine",
@@ -1662,7 +1927,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "Weights & Biases",
@@ -1696,7 +1966,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "WellSaid Labs",
@@ -1729,7 +2004,12 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     },
     {
       "company": "You.com",
@@ -1762,9 +2042,14 @@
         "interest_level": 4,
         "interest_category": "low"
       },
-      "latest_change": null
+      "latest_change": null,
+      "recent_activity": {
+        "change_count_7d": 0,
+        "last_change": "No recent changes",
+        "highest_recent_score": 0
+      }
     }
   ],
-  "generated_at": "2025-07-09T15:51:32.252Z",
+  "generated_at": "2025-07-10T16:34:42.783Z",
   "backend": "github-actions-static-three-db"
 }

@@ -272,111 +272,14 @@ function generateDashboardData(intelligenceDb, processedDb) {
             };
         });
         
-        // Generate recent changes summary
-        console.log('📊 Generating recent changes summary...');
+        const dashboardData = {
+            stats,
+            company_activity: processedCompanies,
+            generated_at: new Date().toISOString(),
+            backend: 'github-actions-static-three-db'
+        };
         
-        // Attach databases for cross-database queries
-        const rawDbPath = path.join(DATA_DIR, 'raw_content.db');
-        processedDb.exec(`ATTACH DATABASE '${path.join(DATA_DIR, 'intelligence.db')}' AS intelligence`);
-        
-        try {
-            // Get last 5 changes
-            const last5Changes = processedDb.prepare(`
-                SELECT 
-                    cd.id,
-                    cd.detected_at,
-                    cd.summary,
-                    cd.relevance_score as interest_level,
-                    intelligence.companies.name as company,
-                    intelligence.urls.url
-                FROM change_detection cd
-                JOIN intelligence.urls ON cd.url_id = intelligence.urls.id
-                JOIN intelligence.companies ON intelligence.urls.company_id = intelligence.companies.id
-                WHERE cd.detected_at > datetime('now', '-30 days')
-                ORDER BY cd.detected_at DESC
-                LIMIT 5
-            `).all();
-            
-            // Count changes in different time periods
-            const last24hCount = processedDb.prepare(`
-                SELECT COUNT(*) as count
-                FROM change_detection cd
-                WHERE cd.detected_at > datetime('now', '-24 hours')
-            `).get()?.count || 0;
-            
-            const last7dCount = processedDb.prepare(`
-                SELECT COUNT(*) as count
-                FROM change_detection cd
-                WHERE cd.detected_at > datetime('now', '-7 days')
-            `).get()?.count || 0;
-            
-            // Count high priority changes in last 7 days
-            const highPriorityLast7d = processedDb.prepare(`
-                SELECT COUNT(*) as count
-                FROM change_detection cd
-                WHERE cd.detected_at > datetime('now', '-7 days')
-                AND cd.relevance_score >= 8
-            `).get()?.count || 0;
-            
-            // Get change counts per company for last 7 days
-            const changeCountsStmt = processedDb.prepare(`
-                SELECT 
-                    intelligence.companies.id as company_id,
-                    COUNT(*) as change_count
-                FROM change_detection cd
-                JOIN intelligence.urls ON cd.url_id = intelligence.urls.id
-                JOIN intelligence.companies ON intelligence.urls.company_id = intelligence.companies.id
-                WHERE cd.detected_at > datetime('now', '-7 days')
-                GROUP BY intelligence.companies.id
-            `);
-            
-            const changeCounts = {};
-            for (const row of changeCountsStmt.all()) {
-                changeCounts[row.company_id] = row.change_count;
-            }
-            
-            // Add change counts to processed companies
-            const processedCompaniesWithChanges = processedCompanies.map(company => {
-                // Find company ID from original data
-                const companyRecord = companyActivity.find(c => c.company === company.company);
-                const changeCount7d = companyRecord ? (changeCounts[companyRecord.id] || 0) : 0;
-                
-                return {
-                    ...company,
-                    recent_activity: {
-                        change_count_7d: changeCount7d,
-                        last_change: company.latest_change ? company.latest_change.time_ago : 'No recent changes',
-                        highest_recent_score: company.latest_change ? company.latest_change.relevance_score : 0
-                    }
-                };
-            });
-            
-            const dashboardData = {
-                stats,
-                recent_changes_summary: {
-                    last_5_changes: last5Changes.map(change => ({
-                        id: change.id,
-                        company: change.company,
-                        url: change.url,
-                        summary: change.summary || 'Content updated',
-                        interest_level: change.interest_level || 5,
-                        time_ago: getRelativeTime(change.detected_at),
-                        detected_at: change.detected_at
-                    })),
-                    last_24h_count: last24hCount,
-                    last_7d_count: last7dCount,
-                    high_priority_last_7d: highPriorityLast7d
-                },
-                company_activity: processedCompaniesWithChanges,
-                generated_at: new Date().toISOString(),
-                backend: 'github-actions-static-three-db'
-            };
-            
-            return dashboardData;
-        } finally {
-            // Always detach the database
-            processedDb.exec('DETACH DATABASE intelligence');
-        }
+        return dashboardData;
     } catch (error) {
         console.error('❌ Error generating dashboard data:', error);
         return {
@@ -825,7 +728,7 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                 JOIN intelligence.companies ON intelligence.urls.company_id = intelligence.companies.id
                 WHERE cd.detected_at > datetime('now', '-30 days')
                 ORDER BY cd.detected_at DESC
-                LIMIT 200
+                LIMIT 100
             `).all();
             
             // Prepare statement to fetch markdown content
