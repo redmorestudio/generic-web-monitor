@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Debug 3D Graph Controls</title>
+    <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div id="3d-graph" style="width: 100%; height: 400px;"></div>
+    <button id="testBtn">Test Toggle</button>
+    <input type="range" id="forceSlider" min="-500" max="0" value="-200">
+    <span id="forceValue">-200</span>
+    
+    <script>
+    // Simple test data
+    const testData = {
+        nodes: [
+            { id: 'A', name: 'Node A', val: 10 },
+            { id: 'B', name: 'Node B', val: 10 },
+            { id: 'C', name: 'Node C', val: 10 }
+        ],
+        links: [
+            { source: 'A', target: 'B' },
+            { source: 'B', target: 'C' }
+        ]
+    };
+    
+    // Initialize graph
+    const Graph = ForceGraph3D()
+        (document.getElementById('3d-graph'))
+        .graphData(testData)
+        .nodeLabel('name');
+    
+    // Test if we can update the graph
+    document.getElementById('testBtn').addEventListener('click', function() {
+        console.log('Button clicked');
+        console.log('Graph object:', Graph);
+        console.log('Graph.d3Force:', Graph.d3Force);
+        
+        try {
+            // Test updating force
+            Graph.d3Force('charge').strength(-100);
+            Graph.d3ReheatSimulation();
+            console.log('Force updated successfully');
+        } catch (err) {
+            console.error('Error:', err);
+        }
+    });
+    
+    document.getElementById('forceSlider').addEventListener('input', function(e) {
+        const value = parseInt(e.target.value);
+        document.getElementById('forceValue').textContent = value;
+        console.log('Slider value:', value);
+        
+        try {
+            Graph.d3Force('charge').strength(value);
+            Graph.d3ReheatSimulation();
+            console.log('Slider update successful');
+        } catch (err) {
+            console.error('Slider error:', err);
+        }
+    });
+    </script>
+</body>
+</html>
