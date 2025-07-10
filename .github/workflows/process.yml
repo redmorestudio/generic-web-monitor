@@ -225,6 +225,13 @@ jobs:
             \"use_three_db\": ${{ env.USE_THREE_DB }}
           }" > ../api-data/last-process.json
       
+      - name: Checkpoint databases before commit
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        run: |
+          cd github-actions-backend
+          echo "🔄 Checkpointing SQLite databases to ensure WAL changes are persisted..."
+          node scripts/checkpoint-databases.js
+      
       - name: Commit processed data (three-db)
         if: ${{ env.USE_THREE_DB == 'true' }}
         run: |
