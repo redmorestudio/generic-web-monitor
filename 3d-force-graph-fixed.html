@@ -212,6 +212,28 @@
             background: rgba(0, 255, 136, 0.2);
         }
         
+        /* Rich node content styles */
+        .node-content {
+            background: rgba(20, 20, 30, 0.95);
+            border: 2px solid;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 11px;
+            max-width: 250px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .node-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+        
+        .node-detail {
+            margin: 3px 0;
+            color: #aaa;
+        }
+        
         .entity-link {
             color: #00ff88;
             cursor: pointer;
@@ -222,6 +244,27 @@
         .entity-link:hover {
             color: #66ffbb;
             text-decoration: underline;
+        }
+        
+        .change-indicator {
+            display: inline-block;
+            margin-left: 5px;
+            font-size: 10px;
+        }
+        
+        /* Tooltip */
+        .tooltip {
+            position: absolute;
+            background: rgba(20, 20, 30, 0.95);
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            padding: 10px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+            max-width: 300px;
+            backdrop-filter: blur(10px);
+            display: none;
         }
     </style>
     <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
@@ -246,18 +289,18 @@
         <div class="control-group">
             <label>
                 Force Strength:
-                <span class="label-value" id="forceValue">-200</span>
+                <span class="label-value" id="forceValue">-100</span>
             </label>
-            <input type="range" id="forceSlider" min="-500" max="-30" value="-200" step="10">
+            <input type="range" id="forceSlider" min="-300" max="-30" value="-100" step="10">
             <div class="help-text">Adjust spacing between nodes</div>
         </div>
         
         <div class="control-group">
             <label>
                 Link Distance:
-                <span class="label-value" id="linkDistanceValue">80</span>
+                <span class="label-value" id="linkDistanceValue">30</span>
             </label>
-            <input type="range" id="linkDistanceSlider" min="10" max="300" value="80" step="10">
+            <input type="range" id="linkDistanceSlider" min="10" max="200" value="30" step="10">
             <div class="help-text">Control link lengths</div>
         </div>
         
@@ -303,23 +346,12 @@
         </div>
         
         <div class="control-group">
-            <label>Camera Controls:</label>
-            <div class="toggle-group">
-                <button id="autoRotate" class="toggle-btn">Auto-Rotate</button>
-                <button id="resetView" class="toggle-btn">Reset View</button>
-            </div>
-            <button id="exportView" style="margin-top: 5px;">Export as PNG</button>
-            <div class="help-text">Camera and export options</div>
-        </div>
-        
-        <div class="control-group">
             <label>Visual Effects:</label>
             <button id="toggleParticles">Toggle Flow Particles</button>
             <div class="help-text">Particles show data flow direction</div>
             <button id="toggleLabels" style="margin-top: 5px;">Toggle All Labels</button>
             <button id="toggleLinks" style="margin-top: 5px;">Toggle Links</button>
             <button id="toggleChangeRings" style="margin-top: 5px;">Toggle Change Indicators</button>
-            <button id="refreshData" style="margin-top: 5px;">Refresh Data</button>
             <div class="help-text">Change rings show recent activity level</div>
         </div>
     </div>
@@ -370,8 +402,11 @@
         <div class="context-menu-item" id="focusSubgraph">Focus on Connected Subgraph</div>
         <div class="context-menu-item" id="showAllConnections">Show All Connections</div>
         <div class="context-menu-item" id="hideNode">Hide This Node</div>
-        <div class="context-menu-item" id="resetViewContext">Reset View</div>
+        <div class="context-menu-item" id="resetView">Reset View</div>
     </div>
+    
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip"></div>
     
     <div id="3d-graph"></div>
 
@@ -397,39 +432,42 @@
         linkOpacity: 0.3,
         linkWidth: 0.5,
         nodeRelSize: 4,
-        forceStrength: -200,
-        linkDistance: 80,
-        collisionRadius: 15,
+        forceStrength: -100,
+        linkDistance: 30,
         fontSize: 12
     };
 
     let Graph;
     let graphData = { nodes: [], links: [] };
-    let originalGraphData = { nodes: [], links: [] };
+    let fullGraphData = { nodes: [], links: [] }; // Store full graph for resetting
     let rawData = {};
     let particlesEnabled = true;
     let labelsEnabled = true;
     let linksEnabled = true;
     let changeRingsEnabled = true;
     let autoRotateEnabled = false;
-    let autoRotateInterval = null;
     let currentView = 'companies';
     let nodeDisplayMode = 'rich'; // Default to rich view
     let selectedNode = null;
     let hiddenNodes = new Set();
-    let throttleTimer = null;
 
-    // Load and display data
-    async function loadData() {
+    // Initialize the enhanced graph
+    async function initGraph() {
         try {
-            console.log('Loading dashboard data...');
+            console.log('Starting graph initialization...');
             
-            // Always use GitHub Pages for production
-            const baseUrl = 'https://redmorestudio.github.io/ai-competitive-monitor/api-data';
+            // Determine base URL
+            const isLocal = window.location.hostname === 'localhost' || 
+                          window.location.hostname === '127.0.0.1' || 
+                          window.location.hostname === '' ||
+                          window.location.protocol === 'file:';
+            
+            const baseUrl = isLocal ? './api-data' : 'https://redmorestudio.github.io/ai-competitive-monitor/api-data';
             
             console.log('Loading from:', baseUrl);
             
-            // Fetch dashboard data
+            // Fetch data
+            console.log('Fetching dashboard data...');
             const dashboardResponse = await fetch(`${baseUrl}/dashboard.json`);
             if (!dashboardResponse.ok) {
                 throw new Error(`Failed to fetch dashboard: ${dashboardResponse.status} ${dashboardResponse.statusText}`);
@@ -438,7 +476,8 @@
             console.log('Parsing dashboard data...');
             rawData.dashboard = await dashboardResponse.json();
             
-            // Try to fetch recent changes data
+            // Fetch recent changes data
+            console.log('Fetching recent changes...');
             try {
                 const changesResponse = await fetch(`${baseUrl}/changes.json`);
                 if (changesResponse.ok) {
@@ -461,28 +500,16 @@
                 throw new Error('No company activity data found');
             }
             
-            return true;
-            
-        } catch (error) {
-            console.error('Error loading data:', error);
-            throw error;
-        }
-    }
-
-    // Initialize the enhanced graph
-    async function initGraph() {
-        try {
-            console.log('Starting graph initialization...');
-            
-            // Load data
-            await loadData();
-            
             // Build initial graph data
             console.log('Building company network...');
             buildCompanyNetwork();
             
             // Hide loading, show controls
-            hideLoading();
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('info').style.display = 'block';
+            document.getElementById('controls').style.display = 'block';
+            document.getElementById('stats').style.display = 'block';
+            document.getElementById('legend').style.display = 'block';
             
             // Create the enhanced graph
             console.log('Creating 3D graph...');
@@ -514,18 +541,12 @@
                     hideContextMenu();
                 });
             
-            // Set forces with collision detection for better spacing
+            // Set forces
             Graph.d3Force('charge').strength(CONFIG.forceStrength);
             Graph.d3Force('link').distance(link => link.distance || CONFIG.linkDistance);
             
-            // Add collision force to prevent overlap
-            Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
-            
-            // Add centering force to keep graph centered
-            Graph.d3Force('center', d3.forceCenter());
-            
-            // Set initial camera position further back for better view
-            Graph.cameraPosition({ x: 0, y: 0, z: 800 });
+            // Set initial camera position
+            Graph.cameraPosition({ x: 0, y: 0, z: 500 });
             
             updateStats();
             console.log('Graph initialized successfully!');
@@ -537,52 +558,13 @@
                     <h3>Error Loading Data</h3>
                     <p>${error.message}</p>
                     <p style="font-size: 14px; color: #aaa;">
-                        Loading from GitHub Pages...<br>
-                        If this persists, check the API data status.
+                        Make sure you're running a local server:<br>
+                        <code>python -m http.server 8000</code><br>
+                        Then visit: http://localhost:8000/3d-force-graph-local.html
                     </p>
                 </div>
             `;
         }
-    }
-
-    function showLoading() {
-        document.getElementById('loading').style.display = 'block';
-        document.getElementById('info').style.display = 'none';
-        document.getElementById('controls').style.display = 'none';
-        document.getElementById('stats').style.display = 'none';
-        document.getElementById('legend').style.display = 'none';
-    }
-
-    function hideLoading() {
-        document.getElementById('loading').style.display = 'none';
-        document.getElementById('info').style.display = 'block';
-        document.getElementById('controls').style.display = 'block';
-        document.getElementById('stats').style.display = 'block';
-        document.getElementById('legend').style.display = 'block';
-    }
-
-    // Get color based on change level
-    function getChangeColor(changeLevel) {
-        if (changeLevel >= 8) return CONFIG.interestColors.high;
-        if (changeLevel >= 5) return CONFIG.interestColors.medium;
-        if (changeLevel >= 1) return CONFIG.interestColors.low;
-        return CONFIG.interestColors.unknown;
-    }
-
-    // Calculate change level for a company based on recent changes
-    function getCompanyChangeLevel(companyName) {
-        if (!rawData.changes || !rawData.changes.changes) return 0;
-        
-        // Look for recent changes for this company
-        const recentChanges = rawData.changes.changes.filter(change => 
-            change.company === companyName && 
-            change.interest_level !== undefined
-        );
-        
-        if (recentChanges.length === 0) return 0;
-        
-        // Return the highest interest level from recent changes
-        return Math.max(...recentChanges.map(c => c.interest_level || 0));
     }
 
     // Create node object based on display mode
@@ -624,7 +606,6 @@
                 side: THREE.DoubleSide
             });
             const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-            ring.rotation.x = Math.PI / 2;
             group.add(ring);
         }
         
@@ -636,9 +617,7 @@
         const group = new THREE.Group();
         
         // Create a sphere for the node
-        const baseSize = 5;
-        const sizeMultiplier = node.interestLevel ? 1 + (node.interestLevel / 20) : 1;
-        const geometry = new THREE.SphereGeometry(baseSize * sizeMultiplier, 32, 32);
+        const geometry = new THREE.SphereGeometry(5, 32, 32);
         const material = new THREE.MeshBasicMaterial({
             color: node.color,
             transparent: true,
@@ -660,7 +639,7 @@
         }
         
         sprite.textHeight = CONFIG.fontSize - 2;
-        sprite.position.y = baseSize * sizeMultiplier + 5;
+        sprite.position.y = 10;
         sprite.visible = labelsEnabled;
         group.add(sprite);
         
@@ -674,7 +653,6 @@
                 side: THREE.DoubleSide
             });
             const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-            ring.rotation.x = Math.PI / 2;
             
             // Animate the ring
             ring.userData.update = () => {
@@ -685,6 +663,30 @@
         }
         
         return group;
+    }
+
+    // Get color based on change level
+    function getChangeColor(changeLevel) {
+        if (changeLevel >= 8) return CONFIG.interestColors.high;
+        if (changeLevel >= 5) return CONFIG.interestColors.medium;
+        if (changeLevel >= 1) return CONFIG.interestColors.low;
+        return CONFIG.interestColors.unknown;
+    }
+
+    // Calculate change level for a company based on recent changes
+    function getCompanyChangeLevel(companyName) {
+        if (!rawData.changes || !rawData.changes.changes) return 0;
+        
+        // Look for recent changes for this company
+        const recentChanges = rawData.changes.changes.filter(change => 
+            change.company === companyName && 
+            change.interest_level !== undefined
+        );
+        
+        if (recentChanges.length === 0) return 0;
+        
+        // Return the highest interest level from recent changes
+        return Math.max(...recentChanges.map(c => c.interest_level || 0));
     }
 
     // Build company network view with enhanced data
@@ -737,35 +739,22 @@
                 }
             });
             
-            // Create technology hub nodes for major technologies
+            // Create links between companies sharing technologies
             techConnections.forEach((companies, tech) => {
-                if (companies.length >= 2) {
-                    // Create a technology hub node
-                    const techNode = {
-                        id: `tech-${tech}`,
-                        name: tech,
-                        group: 'Technology',
-                        color: '#4ecdc4',
-                        val: companies.length * 3,
-                        description: `Shared by ${companies.length} companies`,
-                        shortDescription: `Technology`,
-                        companies: companies,
-                        changeLevel: 0
-                    };
-                    graphData.nodes.push(techNode);
-                    
-                    // Connect companies to the tech hub instead of to each other
-                    companies.forEach(company => {
-                        graphData.links.push({
-                            source: company,
-                            target: techNode.id,
-                            label: tech,
-                            color: '#4ecdc4',
-                            particles: 1,
-                            width: 0.5,
-                            distance: CONFIG.linkDistance * 0.7
-                        });
-                    });
+                if (companies.length > 1) {
+                    for (let i = 0; i < companies.length - 1; i++) {
+                        for (let j = i + 1; j < companies.length; j++) {
+                            graphData.links.push({
+                                source: companies[i],
+                                target: companies[j],
+                                label: tech,
+                                color: '#666',
+                                particles: 1,
+                                width: 0.5,
+                                distance: CONFIG.linkDistance
+                            });
+                        }
+                    }
                 }
             });
             
@@ -811,9 +800,16 @@
                 }
             });
             
-            // Store original data for reset
-            originalGraphData.nodes = [...graphData.nodes];
-            originalGraphData.links = [...graphData.links];
+            // Store full graph data for resetting
+            // Create a proper deep copy without circular references
+            fullGraphData = {
+                nodes: graphData.nodes.map(node => ({ ...node })),
+                links: graphData.links.map(link => ({
+                    ...link,
+                    source: typeof link.source === 'object' ? link.source.id : link.source,
+                    target: typeof link.target === 'object' ? link.target.id : link.target
+                }))
+            };
             
             console.log(`Graph built with ${graphData.nodes.length} nodes and ${graphData.links.length} links`);
             
@@ -1122,25 +1118,10 @@
     }
 
     // Reset view to full graph
-    function resetViewContext() {
+    function resetView() {
         hiddenNodes.clear();
-        
-        // Rebuild the current view
-        switch(currentView) {
-            case 'technologies':
-                buildTechnologyView();
-                break;
-            case 'interests':
-                buildInterestView();
-                break;
-            case 'companies':
-            default:
-                buildCompanyNetwork();
-                break;
-        }
-        
-        Graph.graphData(graphData);
-        Graph.cameraPosition({ x: 0, y: 0, z: 800 });
+        Graph.graphData(fullGraphData);
+        Graph.cameraPosition({ x: 0, y: 0, z: 500 });
         hideContextMenu();
     }
 
@@ -1185,34 +1166,24 @@
 
     // Event handlers for enhanced controls
     
-    // Force strength slider with throttling
+    // Force strength slider
     document.getElementById('forceSlider').addEventListener('input', (e) => {
         const value = parseInt(e.target.value);
         document.getElementById('forceValue').textContent = value;
-        
-        // Throttle the force update
-        if (throttleTimer) clearTimeout(throttleTimer);
-        throttleTimer = setTimeout(() => {
-            if (Graph) {
-                Graph.d3Force('charge').strength(value);
-                Graph.d3ReheatSimulation();
-            }
-        }, 100);
+        if (Graph) {
+            Graph.d3Force('charge').strength(value);
+            Graph.d3ReheatSimulation();
+        }
     });
     
-    // Link distance slider with throttling
+    // Link distance slider
     document.getElementById('linkDistanceSlider').addEventListener('input', (e) => {
         const value = parseInt(e.target.value);
         document.getElementById('linkDistanceValue').textContent = value;
-        
-        // Throttle the distance update
-        if (throttleTimer) clearTimeout(throttleTimer);
-        throttleTimer = setTimeout(() => {
-            if (Graph) {
-                Graph.d3Force('link').distance(value);
-                Graph.d3ReheatSimulation();
-            }
-        }, 100);
+        if (Graph) {
+            Graph.d3Force('link').distance(value);
+            Graph.d3ReheatSimulation();
+        }
     });
     
     // Font size slider
@@ -1291,13 +1262,8 @@
         
         // Rebuild the graph with new node type
         if (Graph) {
-            // Preserve current camera position
             const cameraPos = Graph.cameraPosition();
-            
-            // Rebuild graph data to force node recreation
             Graph.graphData(graphData);
-            
-            // Restore camera position
             Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
         }
     });
@@ -1309,80 +1275,10 @@
         
         // Rebuild the graph with new node type
         if (Graph) {
-            // Preserve current camera position
             const cameraPos = Graph.cameraPosition();
-            
-            // Rebuild graph data to force node recreation
             Graph.graphData(graphData);
-            
-            // Restore camera position
             Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
         }
-    });
-
-    // Auto-rotate control
-    document.getElementById('autoRotate').addEventListener('click', function() {
-        autoRotateEnabled = !autoRotateEnabled;
-        
-        if (autoRotateEnabled) {
-            autoRotateInterval = setInterval(() => {
-                if (Graph) {
-                    const camera = Graph.camera();
-                    if (camera && camera.position) {
-                        const distance = Math.sqrt(camera.position.x ** 2 + camera.position.z ** 2);
-                        const angle = Math.atan2(camera.position.z, camera.position.x) + 0.01;
-                        Graph.cameraPosition({
-                            x: distance * Math.cos(angle),
-                            y: camera.position.y,
-                            z: distance * Math.sin(angle)
-                        }, null, 0);
-                    }
-                }
-            }, 50);
-        } else {
-            clearInterval(autoRotateInterval);
-        }
-        this.classList.toggle('active');
-    });
-
-    document.getElementById('resetView').addEventListener('click', function() {
-        Graph.cameraPosition({ x: 0, y: 0, z: 1000 }, null, 2000);
-        Graph.d3ReheatSimulation();
-    });
-
-    document.getElementById('exportView').addEventListener('click', function() {
-        const canvas = Graph.renderer().domElement;
-        const link = document.createElement('a');
-        link.download = 'ai-competitive-monitor-3d.png';
-        link.href = canvas.toDataURL();
-        link.click();
-    });
-
-    document.getElementById('refreshData').addEventListener('click', function() {
-        showLoading();
-        loadData().then(() => {
-            // Rebuild current view
-            switch(currentView) {
-                case 'technologies':
-                    buildTechnologyView();
-                    break;
-                case 'interests':
-                    buildInterestView();
-                    break;
-                case 'companies':
-                default:
-                    buildCompanyNetwork();
-                    break;
-            }
-            if (Graph) {
-                Graph.graphData(graphData);
-                updateStats();
-            }
-            hideLoading();
-        }).catch(error => {
-            console.error('Failed to refresh data:', error);
-            hideLoading();
-        });
     });
     
     // Toggle particles
@@ -1445,7 +1341,7 @@
     document.getElementById('focusSubgraph').addEventListener('click', focusOnSubgraph);
     document.getElementById('showAllConnections').addEventListener('click', showAllConnections);
     document.getElementById('hideNode').addEventListener('click', hideNode);
-    document.getElementById('resetViewContext').addEventListener('click', resetViewContext);
+    document.getElementById('resetView').addEventListener('click', resetView);
     
     // Hide context menu on click outside
     document.addEventListener('click', (e) => {
@@ -1464,7 +1360,7 @@
     function animate() {
         requestAnimationFrame(animate);
         
-        if (Graph && nodeDisplayMode === 'rich') {
+        if (Graph) {
             graphData.nodes.forEach(node => {
                 const obj = Graph.nodeThreeObject(node);
                 if (obj && obj.children) {
