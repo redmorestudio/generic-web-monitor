@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Competitive Monitor - GitHub Actions Powered</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             box-sizing: border-box;
@@ -22,6 +23,9 @@
             --border-color: #3a3a5e;
             --changed-color: #ffd700;
             --new-color: #00ff88;
+            --high-interest: #FFD700;
+            --medium-interest: #87CEEB;
+            --low-interest: #6bcf7f;
         }
 
         html {
@@ -670,6 +674,198 @@
             transform: translateX(5px);
         }
 
+        /* View Mode Selector */
+        .view-mode-selector {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .view-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--border-color);
+            background: var(--secondary-bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-btn:hover {
+            background: var(--accent-bg);
+            color: var(--text-primary);
+            border-color: var(--primary-color);
+        }
+
+        .view-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* View Panels */
+        .view-panel {
+            display: none;
+        }
+
+        .view-panel.active {
+            display: block;
+        }
+
+        /* Change Cards */
+        .change-card {
+            display: flex;
+            align-items: center;
+            background: var(--accent-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .change-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .change-card.high-interest {
+            border-left-color: var(--high-interest);
+            background: linear-gradient(135deg, var(--accent-bg) 0%, rgba(255, 215, 0, 0.05) 100%);
+        }
+
+        .change-card.medium-interest {
+            border-left-color: var(--medium-interest);
+            background: linear-gradient(135deg, var(--accent-bg) 0%, rgba(135, 206, 235, 0.05) 100%);
+        }
+
+        .change-card.low-interest {
+            border-left-color: var(--low-interest);
+        }
+
+        .change-card .interest-indicator {
+            min-width: 80px;
+            text-align: center;
+            margin-right: 20px;
+        }
+
+        .change-card .interest-indicator .score {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .change-card .interest-indicator .emoji {
+            display: block;
+            font-size: 28px;
+            margin-top: 5px;
+        }
+
+        .change-content {
+            flex: 1;
+        }
+
+        .change-content h3 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+        }
+
+        .change-content p {
+            margin: 0 0 10px 0;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .change-content .time {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Timeline View */
+        .timeline-container {
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .timeline-filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .timeline-filters select,
+        .timeline-filters input {
+            padding: 8px 12px;
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 6px;
+        }
+
+        .date-group {
+            margin-bottom: 30px;
+        }
+
+        .date-group h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .timeline-item {
+            background: var(--accent-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-left-color: var(--primary-color);
+        }
+
+        /* Summary Stats */
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .summary-stat {
+            background: var(--accent-bg);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .summary-stat .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .summary-stat .label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
         /* Responsive Design */
         @media (max-width: 1200px) {
             .companies-grid {
@@ -823,9 +1019,67 @@
                 <button type="button" class="button button-warning" onclick="checkWorkflowStatus(event)">📊 Check Workflow Status</button>
             </div>
 
-            <div id="companiesDisplay">
-                <h3>📊 Monitored Companies</h3>
-                <div class="loading">Loading company data from GitHub Actions...</div>
+            <!-- View Mode Selector -->
+            <div class="view-mode-selector">
+                <button class="view-btn active" data-view="recent-changes" onclick="switchView('recent-changes')">
+                    <i class="fas fa-clock"></i> Recent Changes
+                </button>
+                <button class="view-btn" data-view="timeline" onclick="switchView('timeline')">
+                    <i class="fas fa-history"></i> Timeline
+                </button>
+                <button class="view-btn" data-view="company-grid" onclick="switchView('company-grid')">
+                    <i class="fas fa-th"></i> Company Grid
+                </button>
+            </div>
+
+            <!-- Recent Changes View -->
+            <div id="recent-changes-view" class="view-panel active">
+                <div class="summary-stats" id="changeSummaryStats">
+                    <div class="summary-stat">
+                        <div class="number">--</div>
+                        <div class="label">Changes Today</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="number">--</div>
+                        <div class="label">Last 7 Days</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="number">--</div>
+                        <div class="label">High Priority</div>
+                    </div>
+                </div>
+                <h3>🌟 Recent Changes by Interest Score</h3>
+                <div id="recentChangesCards" class="changes-list">
+                    <div class="loading">Loading recent changes...</div>
+                </div>
+            </div>
+
+            <!-- Timeline View -->
+            <div id="timeline-view" class="view-panel">
+                <div class="timeline-filters">
+                    <select id="companyFilter" onchange="filterTimeline()">
+                        <option value="">All Companies</option>
+                    </select>
+                    <select id="interestFilter" onchange="filterTimeline()">
+                        <option value="">All Interest Levels</option>
+                        <option value="high">High (8-10)</option>
+                        <option value="medium">Medium (5-7)</option>
+                        <option value="low">Low (1-4)</option>
+                    </select>
+                    <input type="date" id="dateFrom" onchange="filterTimeline()" />
+                    <input type="date" id="dateTo" onchange="filterTimeline()" />
+                </div>
+                <div class="timeline-container" id="timelineContainer">
+                    <div class="loading">Loading timeline...</div>
+                </div>
+            </div>
+
+            <!-- Company Grid View -->
+            <div id="company-grid-view" class="view-panel">
+                <div id="companiesDisplay">
+                    <h3>📊 Monitored Companies</h3>
+                    <div class="loading">Loading company data from GitHub Actions...</div>
+                </div>
             </div>
         </div>
 
@@ -1028,9 +1282,236 @@
             if (dashboardData.company_activity) {
                 companies = dashboardData.company_activity;
                 updateCompaniesDisplay();
-                updateCompanyFilter();
+                // updateCompanyFilter(); // Not needed for new view system
                 console.log(`📊 Loaded ${companies.length} companies from GitHub Actions data`);
             }
+            
+            // Load the current view
+            const activeView = document.querySelector('.view-btn.active');
+            if (activeView) {
+                const viewName = activeView.getAttribute('data-view');
+                if (viewName === 'recent-changes') {
+                    loadRecentChangesView();
+                } else if (viewName === 'timeline') {
+                    loadTimelineView();
+                }
+            } else {
+                // Default to recent changes view
+                loadRecentChangesView();
+            }
+        }
+
+        // View switching function
+        function switchView(viewName) {
+            // Update button states
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-view') === viewName) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update panel visibility
+            document.querySelectorAll('.view-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById(viewName + '-view').classList.add('active');
+            
+            // Load appropriate data
+            if (viewName === 'recent-changes') {
+                loadRecentChangesView();
+            } else if (viewName === 'timeline') {
+                loadTimelineView();
+            } else if (viewName === 'company-grid') {
+                // Company grid is already loaded by updateCompaniesDisplay()
+            }
+        }
+
+        // Load recent changes view
+        function loadRecentChangesView() {
+            if (!window.dashboardData || !window.dashboardData.recent_changes_summary) {
+                document.getElementById('recentChangesCards').innerHTML = 
+                    '<div class="error-message">No recent changes data available</div>';
+                return;
+            }
+            
+            const summary = window.dashboardData.recent_changes_summary;
+            
+            // Update summary stats
+            const statsContainer = document.getElementById('changeSummaryStats');
+            statsContainer.innerHTML = `
+                <div class="summary-stat">
+                    <div class="number">${summary.last_24h_count || 0}</div>
+                    <div class="label">Changes Today</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">${summary.last_7d_count || 0}</div>
+                    <div class="label">Last 7 Days</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">${summary.high_priority_last_7d || 0}</div>
+                    <div class="label">High Priority</div>
+                </div>
+            `;
+            
+            // Display recent changes
+            const changesContainer = document.getElementById('recentChangesCards');
+            if (!summary.last_5_changes || summary.last_5_changes.length === 0) {
+                changesContainer.innerHTML = '<div class="error-message">No recent changes detected</div>';
+                return;
+            }
+            
+            changesContainer.innerHTML = summary.last_5_changes.map(change => {
+                const interestLevel = change.interest_level || 5;
+                const interestClass = interestLevel >= 8 ? 'high-interest' : 
+                                    interestLevel >= 5 ? 'medium-interest' : 'low-interest';
+                const emoji = interestLevel >= 8 ? '🌟' : 
+                            interestLevel >= 5 ? '📌' : '📊';
+                
+                return `
+                    <div class="change-card ${interestClass}" onclick="showRecentChangeDetail(${change.id})">
+                        <div class="interest-indicator">
+                            <span class="score">${interestLevel}/10</span>
+                            <span class="emoji">${emoji}</span>
+                        </div>
+                        <div class="change-content">
+                            <h3>${escapeHtml(change.company)}</h3>
+                            <p>${escapeHtml(change.summary || 'Content updated')}</p>
+                            <span class="time">${change.time_ago}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Load timeline view
+        function loadTimelineView() {
+            const timelineContainer = document.getElementById('timelineContainer');
+            
+            // Load full changes data
+            if (!window.changesData || !window.changesData.changes) {
+                timelineContainer.innerHTML = '<div class="error-message">No timeline data available</div>';
+                return;
+            }
+            
+            // Populate company filter
+            const companyFilter = document.getElementById('companyFilter');
+            const companies = [...new Set(window.changesData.changes.map(c => c.company))].sort();
+            companyFilter.innerHTML = '<option value="">All Companies</option>' + 
+                companies.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+            
+            // Display timeline
+            filterTimeline();
+        }
+
+        // Filter timeline based on selections
+        function filterTimeline() {
+            const companyFilter = document.getElementById('companyFilter').value;
+            const interestFilter = document.getElementById('interestFilter').value;
+            const dateFrom = document.getElementById('dateFrom').value;
+            const dateTo = document.getElementById('dateTo').value;
+            
+            if (!window.changesData || !window.changesData.changes) return;
+            
+            let filteredChanges = window.changesData.changes;
+            
+            // Apply filters
+            if (companyFilter) {
+                filteredChanges = filteredChanges.filter(c => c.company === companyFilter);
+            }
+            
+            if (interestFilter) {
+                filteredChanges = filteredChanges.filter(c => {
+                    const level = c.interest_level || c.relevance_score || 5;
+                    if (interestFilter === 'high') return level >= 8;
+                    if (interestFilter === 'medium') return level >= 5 && level < 8;
+                    if (interestFilter === 'low') return level < 5;
+                    return true;
+                });
+            }
+            
+            if (dateFrom) {
+                filteredChanges = filteredChanges.filter(c => 
+                    new Date(c.created_at) >= new Date(dateFrom)
+                );
+            }
+            
+            if (dateTo) {
+                filteredChanges = filteredChanges.filter(c => 
+                    new Date(c.created_at) <= new Date(dateTo + 'T23:59:59')
+                );
+            }
+            
+            // Group by date
+            const grouped = {};
+            filteredChanges.forEach(change => {
+                const date = new Date(change.created_at).toLocaleDateString();
+                if (!grouped[date]) grouped[date] = [];
+                grouped[date].push(change);
+            });
+            
+            // Render timeline
+            const timelineContainer = document.getElementById('timelineContainer');
+            if (Object.keys(grouped).length === 0) {
+                timelineContainer.innerHTML = '<div class="error-message">No changes match the selected filters</div>';
+                return;
+            }
+            
+            timelineContainer.innerHTML = Object.entries(grouped)
+                .sort((a, b) => new Date(b[0]) - new Date(a[0]))
+                .map(([date, changes]) => `
+                    <div class="date-group">
+                        <h3>${date}</h3>
+                        <div class="day-changes">
+                            ${changes.map(change => {
+                                const level = change.interest_level || change.relevance_score || 5;
+                                return `
+                                    <div class="timeline-item" onclick="showChangeDetail('${change.id}')">
+                                        <strong>${escapeHtml(change.company)}</strong> - 
+                                        ${escapeHtml(change.summary || 'Content updated')}
+                                        <span style="float: right; color: var(--primary-color);">
+                                            ${level}/10 ${level >= 8 ? '🌟' : level >= 5 ? '📌' : '📊'}
+                                        </span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `).join('');
+        }
+
+        // Show recent change detail
+        function showRecentChangeDetail(changeId) {
+            const change = window.dashboardData.recent_changes_summary.last_5_changes.find(c => c.id === changeId);
+            if (!change) return;
+            
+            const modal = document.getElementById('companyModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalTitle.textContent = `Change Details: ${change.company}`;
+            modalContent.innerHTML = `
+                <div class="config-section">
+                    <h4>📊 Change Information</h4>
+                    <p><strong>Company:</strong> ${escapeHtml(change.company)}</p>
+                    <p><strong>URL:</strong> <a href="${escapeHtml(change.url)}" target="_blank">${escapeHtml(change.url)}</a></p>
+                    <p><strong>Interest Level:</strong> ${change.interest_level || 5}/10</p>
+                    <p><strong>Time:</strong> ${change.time_ago}</p>
+                    <p><strong>Detected:</strong> ${new Date(change.detected_at).toLocaleString()}</p>
+                </div>
+                
+                <div class="config-section">
+                    <h4>📝 Summary</h4>
+                    <p>${escapeHtml(change.summary || 'No summary available')}</p>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="${escapeHtml(change.url)}" target="_blank" class="button button-primary">View Current Page</a>
+                    <button type="button" class="button button-secondary" onclick="closeModal()">Close</button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
         }
 
         // Update status display
