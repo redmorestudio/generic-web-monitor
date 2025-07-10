@@ -338,11 +338,13 @@ jobs:
           
           if [ "$HIGH_PRIORITY" -gt 0 ]; then
             echo "Found $HIGH_PRIORITY high-priority changes"
-            # Create a simple summary without special characters that could break JavaScript
-            jq -r '.changes[] | select(.relevance_score >= 8) | "- \(.company): Score \(.relevance_score)/10"' api-data/changes.json > /tmp/changes.txt || echo "No changes"
+            # Create a detailed summary with company, summary, and interest level
+            CHANGES_SUMMARY=$(jq -r '.changes[] | select(.relevance_score >= 8) | "- \(.company): \(.summary) (Interest Level: \(.interest_level)/10)"' api-data/changes.json 2>/dev/null || echo "No high priority changes detected")
             
-            # Save to file for next step
-            echo "CHANGES_FILE=/tmp/changes.txt" >> $GITHUB_OUTPUT
+            # Save content to GITHUB_OUTPUT using multiline format
+            echo "changes_summary<<EOF" >> $GITHUB_OUTPUT
+            echo "$CHANGES_SUMMARY" >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
           fi
       
       - name: Create GitHub Issue for alerts
@@ -351,8 +353,8 @@ jobs:
         with:
           script: |
             const count = ${{ steps.check-changes.outputs.high_priority_count }};
-            // Read changes from environment variable to avoid escaping issues
-            const changesDetails = process.env.CHANGES_DETAILS || 'See dashboard for details';
+            // Use the changes summary from the previous step
+            const changesDetails = `${{ steps.check-changes.outputs.changes_summary }}` || 'See dashboard for details';
             
             const body = `# 🔴 High Priority Competitive Intelligence Alert
             
@@ -375,8 +377,6 @@ jobs:
               body: body,
               labels: ['competitive-intel', 'high-priority', 'automated']
             });
-        env:
-          CHANGES_DETAILS: ${{ steps.check-changes.outputs.CHANGES_FILE && format('{0}', steps.check-changes.outputs.CHANGES_FILE) || 'See dashboard for details' }}
       
       # SIMPLIFIED EMAIL NOTIFICATIONS - Use the existing check command
       - name: Send email notifications
