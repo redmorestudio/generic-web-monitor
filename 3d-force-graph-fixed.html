@@ -816,33 +816,45 @@ ${techs ? `Tech: ${techs}` : ''}`;
         const forceSlider = document.getElementById('forceSlider');
         const forceValue = document.getElementById('forceValue');
         
+        let forceUpdateTimeout;
         forceSlider.addEventListener('input', function(e) {
             const value = parseInt(e.target.value);
             forceValue.textContent = value;
-            if (Graph && Graph.d3Force) {
-                try {
-                    Graph.d3Force('charge').strength(value);
-                    Graph.d3ReheatSimulation();
-                } catch (err) {
-                    console.error('Error updating force:', err);
+            
+            // Throttle updates to prevent stack overflow
+            clearTimeout(forceUpdateTimeout);
+            forceUpdateTimeout = setTimeout(() => {
+                if (Graph && Graph.d3Force) {
+                    try {
+                        Graph.d3Force('charge').strength(value);
+                        Graph.d3ReheatSimulation();
+                    } catch (err) {
+                        console.error('Error updating force:', err);
+                    }
                 }
-            }
+            }, 100);
         });
         
         const linkDistanceSlider = document.getElementById('linkDistanceSlider');
         const linkDistanceValue = document.getElementById('linkDistanceValue');
         
+        let linkUpdateTimeout;
         linkDistanceSlider.addEventListener('input', function(e) {
             const value = parseInt(e.target.value);
             linkDistanceValue.textContent = value;
-            if (Graph && Graph.d3Force) {
-                try {
-                    Graph.d3Force('link').distance(value);
-                    Graph.d3ReheatSimulation();
-                } catch (err) {
-                    console.error('Error updating link distance:', err);
+            
+            // Throttle updates to prevent stack overflow
+            clearTimeout(linkUpdateTimeout);
+            linkUpdateTimeout = setTimeout(() => {
+                if (Graph && Graph.d3Force) {
+                    try {
+                        Graph.d3Force('link').distance(value);
+                        Graph.d3ReheatSimulation();
+                    } catch (err) {
+                        console.error('Error updating link distance:', err);
+                    }
                 }
-            }
+            }, 100);
         });
         
         // Animation speed
@@ -909,7 +921,7 @@ ${techs ? `Tech: ${techs}` : ''}`;
                     case 'particles':
                         if (Graph) {
                             // Update particle visibility
-                            Graph.linkDirectionalParticles(toggleStates.particles ? calculateParticles : 0);
+                            Graph.linkDirectionalParticles(link => toggleStates.particles ? calculateParticles(link) : 0);
                         }
                         break;
                     
@@ -923,7 +935,7 @@ ${techs ? `Tech: ${techs}` : ''}`;
                     case 'links':
                         if (Graph) {
                             Graph.linkOpacity(toggleStates.links ? CONFIG.linkOpacity : 0);
-                            Graph.linkWidth(toggleStates.links ? calculateLinkWidth : 0);
+                            Graph.linkWidth(link => toggleStates.links ? calculateLinkWidth(link) : 0);
                         }
                         break;
                     
