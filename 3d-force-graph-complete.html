@@ -261,18 +261,18 @@
         <div class="control-group">
             <label>
                 Force Strength:
-                <span class="label-value" id="forceValue">-100</span>
+                <span class="label-value" id="forceValue">-200</span>
             </label>
-            <input type="range" id="forceSlider" min="-300" max="-30" value="-100" step="10">
+            <input type="range" id="forceSlider" min="-500" max="-30" value="-200" step="10">
             <div class="help-text">Adjust spacing between nodes</div>
         </div>
         
         <div class="control-group">
             <label>
                 Link Distance:
-                <span class="label-value" id="linkDistanceValue">30</span>
+                <span class="label-value" id="linkDistanceValue">80</span>
             </label>
-            <input type="range" id="linkDistanceSlider" min="10" max="200" value="30" step="10">
+            <input type="range" id="linkDistanceSlider" min="10" max="300" value="80" step="10">
             <div class="help-text">Control link lengths</div>
         </div>
         
@@ -394,8 +394,9 @@
         linkOpacity: 0.3,
         linkWidth: 0.5,
         nodeRelSize: 4,
-        forceStrength: -100,
-        linkDistance: 30
+        forceStrength: -200,
+        linkDistance: 80,
+        collisionRadius: 15
     };
 
     let Graph;
@@ -488,12 +489,18 @@
                     document.getElementById('node-info').innerHTML = 'Click on nodes to explore';
                 });
             
-            // Set forces
+            // Set forces with collision detection for better spacing
             Graph.d3Force('charge').strength(CONFIG.forceStrength);
             Graph.d3Force('link').distance(link => link.distance || CONFIG.linkDistance);
             
-            // Set initial camera position
-            Graph.cameraPosition({ x: 0, y: 0, z: 500 });
+            // Add collision force to prevent overlap
+            Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
+            
+            // Add centering force to keep graph centered
+            Graph.d3Force('center', d3.forceCenter());
+            
+            // Set initial camera position further back for better view
+            Graph.cameraPosition({ x: 0, y: 0, z: 800 });
             
             updateStats();
             console.log('Graph initialized successfully!');
@@ -554,7 +561,9 @@
         const group = new THREE.Group();
         
         // Create a sphere for the node
-        const geometry = new THREE.SphereGeometry(5, 32, 32);
+        const baseSize = 5;
+        const sizeMultiplier = node.interestLevel ? 1 + (node.interestLevel / 20) : 1;
+        const geometry = new THREE.SphereGeometry(baseSize * sizeMultiplier, 32, 32);
         const material = new THREE.MeshBasicMaterial({
             color: node.color,
             transparent: true,
@@ -568,21 +577,44 @@
         sprite.material.depthWrite = false;
         sprite.color = '#ffffff';
         sprite.textHeight = 6;
-        sprite.position.y = 10;
+        sprite.position.y = baseSize * sizeMultiplier + 5;
         sprite.visible = labelsEnabled;
         group.add(sprite);
         
-        // Add interest level indicator
-        if (node.interestLevel && node.interestLevel > 5) {
-            const interestGeometry = new THREE.RingGeometry(7, 9, 32);
-            const interestMaterial = new THREE.MeshBasicMaterial({
-                color: CONFIG.interestColors[node.interestLevel > 7 ? 'high' : 'medium'],
+        // Add interest level indicator rings
+        if (node.interestLevel) {
+            // Create multiple rings for high interest levels
+            const ringCount = Math.floor(node.interestLevel / 3);
+            for (let i = 0; i < ringCount; i++) {
+                const innerRadius = (baseSize * sizeMultiplier) + 2 + (i * 3);
+                const outerRadius = innerRadius + 2;
+                const interestGeometry = new THREE.RingGeometry(innerRadius, outerRadius, 32);
+                const interestColor = node.interestLevel >= 8 ? CONFIG.interestColors.high :
+                                    node.interestLevel >= 5 ? CONFIG.interestColors.medium :
+                                    CONFIG.interestColors.low;
+                const interestMaterial = new THREE.MeshBasicMaterial({
+                    color: interestColor,
+                    transparent: true,
+                    opacity: 0.6 - (i * 0.1),
+                    side: THREE.DoubleSide
+                });
+                const ring = new THREE.Mesh(interestGeometry, interestMaterial);
+                ring.rotation.x = Math.PI / 2; // Make rings face camera
+                group.add(ring);
+            }
+        }
+        
+        // Add glow effect for high interest nodes
+        if (glowEnabled && node.interestLevel >= 7) {
+            const glowGeometry = new THREE.SphereGeometry(baseSize * sizeMultiplier * 1.5, 16, 16);
+            const glowMaterial = new THREE.MeshBasicMaterial({
+                color: CONFIG.interestColors.high,
                 transparent: true,
-                opacity: 0.6,
-                side: THREE.DoubleSide
+                opacity: 0.2,
+                side: THREE.BackSide
             });
-            const ring = new THREE.Mesh(interestGeometry, interestMaterial);
-            group.add(ring);
+            const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+            group.add(glow);
         }
         
         return group;
@@ -635,22 +667,34 @@
                 }
             });
             
-            // Create links between companies sharing technologies
+            // Create technology hub nodes for major technologies
             techConnections.forEach((companies, tech) => {
-                if (companies.length > 1) {
-                    for (let i = 0; i < companies.length - 1; i++) {
-                        for (let j = i + 1; j < companies.length; j++) {
-                            graphData.links.push({
-                                source: companies[i],
-                                target: companies[j],
-                                label: tech,
-                                color: '#666',
-                                particles: 1,
-                                width: 0.5,
-                                distance: CONFIG.linkDistance
-                            });
-                        }
-                    }
+                if (companies.length >= 2) {
+                    // Create a technology hub node
+                    const techNode = {
+                        id: `tech-${tech}`,
+                        name: tech,
+                        group: 'Technology',
+                        color: '#4ecdc4',
+                        val: companies.length * 3,
+                        description: `Shared by ${companies.length} companies`,
+                        shortDescription: `Technology`,
+                        companies: companies
+                    };
+                    graphData.nodes.push(techNode);
+                    
+                    // Connect companies to the tech hub instead of to each other
+                    companies.forEach(company => {
+                        graphData.links.push({
+                            source: company,
+                            target: techNode.id,
+                            label: tech,
+                            color: '#4ecdc4',
+                            particles: 1,
+                            width: 0.5,
+                            distance: CONFIG.linkDistance * 0.7
+                        });
+                    });
                 }
             });
             
