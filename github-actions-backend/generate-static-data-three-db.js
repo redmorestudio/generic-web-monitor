@@ -187,7 +187,7 @@ function generateDashboardData(intelligenceDb, processedDb) {
                 timeSources.push({ source: 'baseline-analysis', time: new Date(lastAnalysis.last_time) });
             }
             
-            // 3. Check last-scrape.json (kept for compatibility but given lower priority)
+            // 3. Check last-scrape.json (kept for compatibility but given lowest priority)
             const lastScrapePath = path.join(OUTPUT_DIR, 'last-scrape.json');
             if (fs.existsSync(lastScrapePath)) {
                 const lastScrapeData = JSON.parse(fs.readFileSync(lastScrapePath, 'utf8'));
