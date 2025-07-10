@@ -247,23 +247,18 @@ jobs:
             while [ $attempt -le $max_attempts ]; do
               echo "🔄 Attempt $attempt/$max_attempts to push changes..."
               
-              # Try force-with-lease first
-              if git push --force-with-lease origin main; then
+              # Try to push
+              if git push origin main; then
                 echo "✅ Successfully pushed changes!"
                 return 0
               fi
               
-              echo "❌ Force-with-lease failed, pulling latest changes..."
+              echo "❌ Push failed, pulling latest changes..."
               
-              # Pull latest changes and try to rebase
-              git fetch origin main
-              git rebase origin/main || {
-                echo "❌ Rebase failed, trying merge strategy..."
-                git rebase --abort 2>/dev/null || true
-                git merge origin/main --strategy=ours || {
-                  echo "❌ Merge failed, will retry from fresh state"
-                  return 1
-                }
+              # Pull latest changes and try to merge
+              git pull origin main --no-rebase || {
+                echo "❌ Pull failed"
+                return 1
               }
               
               if [ $attempt -lt $max_attempts ]; then
@@ -278,9 +273,8 @@ jobs:
             done
           }
           
-          # Ensure we're on the latest version
-          git fetch origin main
-          git reset --hard origin/main
+          # DON'T reset to origin/main - that deletes our changes!
+          # Just add the files we want to commit
           
           # Add the databases if they exist
           if [ -f "github-actions-backend/data/processed_content.db" ]; then
@@ -320,23 +314,18 @@ jobs:
             while [ $attempt -le $max_attempts ]; do
               echo "🔄 Attempt $attempt/$max_attempts to push changes..."
               
-              # Try force-with-lease first
-              if git push --force-with-lease origin main; then
+              # Try to push
+              if git push origin main; then
                 echo "✅ Successfully pushed changes!"
                 return 0
               fi
               
-              echo "❌ Force-with-lease failed, pulling latest changes..."
+              echo "❌ Push failed, pulling latest changes..."
               
-              # Pull latest changes and try to rebase
-              git fetch origin main
-              git rebase origin/main || {
-                echo "❌ Rebase failed, trying merge strategy..."
-                git rebase --abort 2>/dev/null || true
-                git merge origin/main --strategy=ours || {
-                  echo "❌ Merge failed, will retry from fresh state"
-                  return 1
-                }
+              # Pull latest changes and try to merge
+              git pull origin main --no-rebase || {
+                echo "❌ Pull failed"
+                return 1
               }
               
               if [ $attempt -lt $max_attempts ]; then
@@ -351,9 +340,8 @@ jobs:
             done
           }
           
-          # Ensure we're on the latest version
-          git fetch origin main
-          git reset --hard origin/main
+          # DON'T reset to origin/main - that deletes our changes!
+          # Just add the files we want to commit
           
           # Add the database
           git add -f github-actions-backend/data/monitor.db || true

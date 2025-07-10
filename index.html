@@ -1589,7 +1589,6 @@
                 
                 html += `
                     <div class="company-card" onclick="showCompanyDetails('${escapeHtml(companyName)}')">
-                        <div class="interest-indicator interest-${interestCategory}">${interestEmoji} ${interestLevel}/10</div>
                         <div class="company-header">
                             <h3>${escapeHtml(companyName)}
                                 ${company.latest_change ? '<span class="change-indicator recent"></span>' : ''}
@@ -1691,14 +1690,6 @@
                     </div>
                 </div>
 
-                ${details.relevance_score ? `
-                    <div class="interest-score">
-                        <strong>Interest Level:</strong> ${details.relevance_score}/10
-                        ${details.relevance_score >= 8 ? '🌟 High Priority' : 
-                          details.relevance_score >= 5 ? '📌 Medium Priority' : 
-                          '📊 Low Priority'}
-                    </div>
-                ` : ''}
                 <p><strong>${details.summary?.one_line || 'No executive summary available'}</strong></p>
 
                 ${intelligence.products?.length ? `
