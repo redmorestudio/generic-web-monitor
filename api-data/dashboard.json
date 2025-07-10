@@ -3,7 +3,7 @@
     "companies": 52,
     "urls": 174,
     "snapshots": 345,
-    "lastCheck": "2025-07-09T13:05:48.887Z"
+    "lastCheck": "2025-07-10T06:52:35.585Z"
   },
   "company_activity": [
     {
@@ -1153,7 +1153,7 @@
       },
       "latest_change": {
         "summary": "Major GPT-5 announcement detected",
-        "time_ago": "13 hours ago",
+        "time_ago": "1 days ago",
         "relevance_score": 9
       }
     },
@@ -1765,6 +1765,6 @@
       "latest_change": null
     }
   ],
-  "generated_at": "2025-07-09T15:51:32.252Z",
+  "generated_at": "2025-07-10T13:03:02.306Z",
   "backend": "github-actions-static-three-db"
 }
