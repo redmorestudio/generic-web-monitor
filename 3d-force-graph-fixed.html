@@ -180,7 +180,7 @@
         .legend-item {
             display: flex;
             align-items: center;
-            margin: 2px 0;
+            margin: 5px 0;
         }
         
         .legend-color {
@@ -484,7 +484,6 @@
     let nodeDisplayMode = 'rich'; // Default to rich view
     let selectedNode = null;
     let hiddenNodes = new Set();
-    let currentFilteredNodes = null;
 
     // Initialize the enhanced graph
     async function initGraph() {
@@ -705,22 +704,6 @@
         return CONFIG.interestColors.unknown;
     }
 
-    // Calculate change level for a company based on recent changes
-    function getCompanyChangeLevel(companyName) {
-        if (!rawData.changes || !rawData.changes.changes) return 0;
-        
-        // Look for recent changes for this company
-        const recentChanges = rawData.changes.changes.filter(change => 
-            change.company === companyName && 
-            change.interest_level !== undefined
-        );
-        
-        if (recentChanges.length === 0) return 0;
-        
-        // Return the highest interest level from recent changes
-        return Math.max(...recentChanges.map(c => c.interest_level || 0));
-    }
-
     // Apply node limit based on importance
     function applyNodeLimit(nodes, links, maxNodes) {
         if (nodes.length <= maxNodes) {
@@ -753,6 +736,22 @@
         });
         
         return { nodes: limitedNodes, links: limitedLinks };
+    }
+
+    // Calculate change level for a company based on recent changes
+    function getCompanyChangeLevel(companyName) {
+        if (!rawData.changes || !rawData.changes.changes) return 0;
+        
+        // Look for recent changes for this company
+        const recentChanges = rawData.changes.changes.filter(change => 
+            change.company === companyName && 
+            change.interest_level !== undefined
+        );
+        
+        if (recentChanges.length === 0) return 0;
+        
+        // Return the highest interest level from recent changes
+        return Math.max(...recentChanges.map(c => c.interest_level || 0));
     }
 
     // Build company network view with enhanced data
@@ -866,7 +865,7 @@
                 }
             });
             
-            // Store full graph data for resetting (before applying limits)
+            // Store full graph data for resetting
             fullGraphData = {
                 nodes: graphData.nodes.map(node => ({ ...node })),
                 links: graphData.links.map(link => ({
@@ -1308,7 +1307,7 @@
         }
     });
     
-    // Font size slider - Fixed implementation
+    // Font size slider
     document.getElementById('fontSizeSlider').addEventListener('input', (e) => {
         const value = parseInt(e.target.value);
         document.getElementById('fontSizeValue').textContent = value;
@@ -1316,14 +1315,10 @@
         
         // Force recreation of all nodes to update font size
         if (Graph) {
-            const cameraPos = Graph.cameraPosition();
             const currentGraphData = Graph.graphData();
-            
-            // Trigger a re-render by setting graph data again
             Graph.graphData({ nodes: [], links: [] });
             setTimeout(() => {
                 Graph.graphData(currentGraphData);
-                Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
             }, 0);
         }
     });
@@ -1419,18 +1414,13 @@
         labelsEnabled = !labelsEnabled;
         this.classList.toggle('active');
         
-        // Update node visibility
+        // Force re-render to update label visibility
         if (Graph) {
-            graphData.nodes.forEach(node => {
-                const obj = Graph.nodeThreeObject(node);
-                if (obj && obj.children) {
-                    obj.children.forEach(child => {
-                        if (child.isSprite) {
-                            child.visible = labelsEnabled;
-                        }
-                    });
-                }
-            });
+            const currentGraphData = Graph.graphData();
+            Graph.graphData({ nodes: [], links: [] });
+            setTimeout(() => {
+                Graph.graphData(currentGraphData);
+            }, 0);
         }
     });
     
