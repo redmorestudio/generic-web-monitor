@@ -45,6 +45,8 @@
             z-index: 100;
             width: 280px;
             backdrop-filter: blur(10px);
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         .control-group {
@@ -146,21 +148,39 @@
         
         #legend {
             position: absolute;
-            bottom: 10px;
-            right: 10px;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(20, 20, 30, 0.95);
-            padding: 10px;
+            padding: 10px 20px;
             border-radius: 8px;
             border: 1px solid #333;
             font-size: 11px;
             z-index: 100;
             backdrop-filter: blur(10px);
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            max-width: 90%;
+            justify-content: center;
+        }
+        
+        .legend-section {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .legend-section-title {
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 5px;
         }
         
         .legend-item {
             display: flex;
             align-items: center;
-            margin: 5px 0;
+            margin: 2px 0;
         }
         
         .legend-color {
@@ -288,6 +308,15 @@
     <div id="controls" style="display: none;">
         <div class="control-group">
             <label>
+                Max Nodes:
+                <span class="label-value" id="maxNodesValue">50</span>
+            </label>
+            <input type="range" id="maxNodesSlider" min="10" max="100" value="50" step="5">
+            <div class="help-text">Limit number of displayed nodes</div>
+        </div>
+        
+        <div class="control-group">
+            <label>
                 Force Strength:
                 <span class="label-value" id="forceValue">-100</span>
             </label>
@@ -361,39 +390,43 @@
     </div>
     
     <div id="legend" style="display: none;">
-        <strong>Legend:</strong>
-        <div class="legend-item">
-            <div class="legend-color" style="background: #ff6b6b;"></div>
-            <span>LLM Providers</span>
+        <div class="legend-section">
+            <div class="legend-section-title">Company Types</div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ff6b6b;"></div>
+                <span>LLM Providers</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #4ecdc4;"></div>
+                <span>AI Hardware</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #45b7d1;"></div>
+                <span>AI Frameworks</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #96ceb4;"></div>
+                <span>Cloud Providers</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #00ff88;"></div>
+                <span>AI Concepts</span>
+            </div>
         </div>
-        <div class="legend-item">
-            <div class="legend-color" style="background: #4ecdc4;"></div>
-            <span>AI Hardware</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color" style="background: #45b7d1;"></div>
-            <span>AI Frameworks</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color" style="background: #96ceb4;"></div>
-            <span>Cloud Providers</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color" style="background: #00ff88;"></div>
-            <span>AI Concepts</span>
-        </div>
-        <hr style="border-color: #333; margin: 8px 0;">
-        <div class="legend-item">
-            <div class="legend-color" style="background: #ff4444;"></div>
-            <span>High Changes (8-10)</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color" style="background: #ffa726;"></div>
-            <span>Medium Changes (5-7)</span>
-        </div>
-        <div class="legend-item">
-            <div class="legend-color" style="background: #66bb6a;"></div>
-            <span>Low Changes (1-4)</span>
+        <div class="legend-section">
+            <div class="legend-section-title">Change Levels</div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ff4444;"></div>
+                <span>High (8-10)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ffa726;"></div>
+                <span>Medium (5-7)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #66bb6a;"></div>
+                <span>Low (1-4)</span>
+            </div>
         </div>
     </div>
     
@@ -434,7 +467,8 @@
         nodeRelSize: 4,
         forceStrength: -100,
         linkDistance: 30,
-        fontSize: 12
+        fontSize: 12,
+        maxNodes: 50
     };
 
     let Graph;
@@ -450,6 +484,7 @@
     let nodeDisplayMode = 'rich'; // Default to rich view
     let selectedNode = null;
     let hiddenNodes = new Set();
+    let currentFilteredNodes = null;
 
     // Initialize the enhanced graph
     async function initGraph() {
@@ -583,6 +618,7 @@
         // Create text sprite with better color contrast
         const sprite = new SpriteText(node.name);
         sprite.material.depthWrite = false;
+        sprite.isSprite = true; // Mark as sprite for font size updates
         
         // Use yellow for blue-ish colors to improve contrast
         const blueishColors = ['#45b7d1', '#4ecdc4', '#66bb6a', '#667eea'];
@@ -629,6 +665,7 @@
         // Add text label with better color contrast
         const sprite = new SpriteText(node.name);
         sprite.material.depthWrite = false;
+        sprite.isSprite = true; // Mark as sprite for font size updates
         
         // Use yellow for blue-ish colors to improve contrast
         const blueishColors = ['#45b7d1', '#4ecdc4', '#66bb6a', '#667eea'];
@@ -682,6 +719,40 @@
         
         // Return the highest interest level from recent changes
         return Math.max(...recentChanges.map(c => c.interest_level || 0));
+    }
+
+    // Apply node limit based on importance
+    function applyNodeLimit(nodes, links, maxNodes) {
+        if (nodes.length <= maxNodes) {
+            return { nodes, links };
+        }
+        
+        // Sort nodes by importance (change level, interest level, entity count)
+        const sortedNodes = [...nodes].sort((a, b) => {
+            // First by change level
+            if (a.changeLevel !== b.changeLevel) {
+                return b.changeLevel - a.changeLevel;
+            }
+            // Then by interest level
+            if (a.interestLevel !== b.interestLevel) {
+                return b.interestLevel - a.interestLevel;
+            }
+            // Finally by entity count
+            return (b.entityCount || 0) - (a.entityCount || 0);
+        });
+        
+        // Keep top N nodes
+        const limitedNodes = sortedNodes.slice(0, maxNodes);
+        const nodeIds = new Set(limitedNodes.map(n => n.id));
+        
+        // Filter links to only include those between remaining nodes
+        const limitedLinks = links.filter(link => {
+            const sourceId = link.source.id || link.source;
+            const targetId = link.target.id || link.target;
+            return nodeIds.has(sourceId) && nodeIds.has(targetId);
+        });
+        
+        return { nodes: limitedNodes, links: limitedLinks };
     }
 
     // Build company network view with enhanced data
@@ -795,12 +866,20 @@
                 }
             });
             
-            // Store full graph data for resetting
-            // We need to store the data NOW before 3D Force Graph modifies it
+            // Store full graph data for resetting (before applying limits)
             fullGraphData = {
-                nodes: graphData.nodes.slice(),
-                links: graphData.links.slice()
+                nodes: graphData.nodes.map(node => ({ ...node })),
+                links: graphData.links.map(link => ({
+                    ...link,
+                    source: typeof link.source === 'object' ? link.source.id : link.source,
+                    target: typeof link.target === 'object' ? link.target.id : link.target
+                }))
             };
+            
+            // Apply node limit
+            const limited = applyNodeLimit(graphData.nodes, graphData.links, CONFIG.maxNodes);
+            graphData.nodes = limited.nodes;
+            graphData.links = limited.links;
             
             console.log(`Graph built with ${graphData.nodes.length} nodes and ${graphData.links.length} links`);
             
@@ -866,6 +945,11 @@
                 });
             });
         });
+        
+        // Apply node limit
+        const limited = applyNodeLimit(graphData.nodes, graphData.links, CONFIG.maxNodes);
+        graphData.nodes = limited.nodes;
+        graphData.links = limited.links;
     }
 
     // Build interest analysis view
@@ -916,6 +1000,11 @@
                 width: interestLevel / 5
             });
         });
+        
+        // Apply node limit
+        const limited = applyNodeLimit(graphData.nodes, graphData.links, CONFIG.maxNodes);
+        graphData.nodes = limited.nodes;
+        graphData.links = limited.links;
     }
 
     // Handle node hover with rich information
@@ -1111,8 +1200,24 @@
     // Reset view to full graph
     function resetView() {
         hiddenNodes.clear();
-        Graph.graphData(fullGraphData);
-        Graph.cameraPosition({ x: 0, y: 0, z: 500 });
+        // Rebuild based on current view
+        switch(currentView) {
+            case 'technologies':
+                buildTechnologyView();
+                break;
+            case 'interests':
+                buildInterestView();
+                break;
+            case 'companies':
+            default:
+                buildCompanyNetwork();
+                break;
+        }
+        
+        if (Graph) {
+            Graph.graphData(graphData);
+            Graph.cameraPosition({ x: 0, y: 0, z: 500 });
+        }
         hideContextMenu();
     }
 
@@ -1157,6 +1262,32 @@
 
     // Event handlers for enhanced controls
     
+    // Max nodes slider
+    document.getElementById('maxNodesSlider').addEventListener('input', (e) => {
+        const value = parseInt(e.target.value);
+        document.getElementById('maxNodesValue').textContent = value;
+        CONFIG.maxNodes = value;
+        
+        // Rebuild current view with new limit
+        switch(currentView) {
+            case 'technologies':
+                buildTechnologyView();
+                break;
+            case 'interests':
+                buildInterestView();
+                break;
+            case 'companies':
+            default:
+                buildCompanyNetwork();
+                break;
+        }
+        
+        if (Graph) {
+            Graph.graphData(graphData);
+            updateStats();
+        }
+    });
+    
     // Force strength slider
     document.getElementById('forceSlider').addEventListener('input', (e) => {
         const value = parseInt(e.target.value);
@@ -1177,24 +1308,23 @@
         }
     });
     
-    // Font size slider
+    // Font size slider - Fixed implementation
     document.getElementById('fontSizeSlider').addEventListener('input', (e) => {
         const value = parseInt(e.target.value);
         document.getElementById('fontSizeValue').textContent = value;
         CONFIG.fontSize = value;
         
-        // Update all text sprites
+        // Force recreation of all nodes to update font size
         if (Graph) {
-            graphData.nodes.forEach(node => {
-                const obj = Graph.nodeThreeObject(node);
-                if (obj && obj.children) {
-                    obj.children.forEach(child => {
-                        if (child.isSprite) {
-                            child.textHeight = CONFIG.fontSize;
-                        }
-                    });
-                }
-            });
+            const cameraPos = Graph.cameraPosition();
+            const currentGraphData = Graph.graphData();
+            
+            // Trigger a re-render by setting graph data again
+            Graph.graphData({ nodes: [], links: [] });
+            setTimeout(() => {
+                Graph.graphData(currentGraphData);
+                Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
+            }, 0);
         }
     });
     
