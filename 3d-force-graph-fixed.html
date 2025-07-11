@@ -148,21 +148,18 @@
         
         #legend {
             position: absolute;
-            top: 10px;
-            left: 50%;
-            transform: translateX(-50%);
+            bottom: 60px;
+            left: 10px;
             background: rgba(20, 20, 30, 0.95);
-            padding: 10px 20px;
+            padding: 10px 15px;
             border-radius: 8px;
             border: 1px solid #333;
             font-size: 11px;
             z-index: 100;
             backdrop-filter: blur(10px);
             display: flex;
-            gap: 20px;
+            gap: 30px;
             flex-wrap: wrap;
-            max-width: 90%;
-            justify-content: center;
         }
         
         .legend-section {
@@ -180,7 +177,7 @@
         .legend-item {
             display: flex;
             align-items: center;
-            margin: 5px 0;
+            margin: 2px 0;
         }
         
         .legend-color {
@@ -484,6 +481,7 @@
     let nodeDisplayMode = 'rich'; // Default to rich view
     let selectedNode = null;
     let hiddenNodes = new Set();
+    let currentFilteredNodes = null;
 
     // Initialize the enhanced graph
     async function initGraph() {
@@ -1403,9 +1401,9 @@
         this.classList.toggle('active');
         
         if (Graph) {
-            graphData.links.forEach(link => {
-                Graph.linkDirectionalParticles(link, particlesEnabled ? link.particles || 2 : 0);
-            });
+            // Update particle count for all links
+            const graphData = Graph.graphData();
+            Graph.linkDirectionalParticles(particlesEnabled ? 2 : 0);
         }
     });
     
