@@ -451,6 +451,37 @@
     let selectedNode = null;
     let hiddenNodes = new Set();
 
+    // Helper function to create clean graph data for 3D Force Graph
+    function createCleanGraphData(data) {
+        return {
+            nodes: data.nodes.map(node => {
+                // Create a clean copy without any potential circular references
+                const cleanNode = {};
+                for (const key in node) {
+                    if (node.hasOwnProperty(key) && typeof node[key] !== 'object') {
+                        cleanNode[key] = node[key];
+                    } else if (key === 'color' || key === 'name' || key === 'id' || key === 'group' || key === 'description' || key === 'shortDescription') {
+                        cleanNode[key] = node[key];
+                    } else if (key === 'val' || key === 'interestLevel' || key === 'changeLevel' || key === 'entityCount') {
+                        cleanNode[key] = node[key];
+                    } else if (Array.isArray(node[key])) {
+                        cleanNode[key] = [...node[key]];
+                    }
+                }
+                return cleanNode;
+            }),
+            links: data.links.map(link => ({
+                source: typeof link.source === 'object' ? link.source.id : link.source,
+                target: typeof link.target === 'object' ? link.target.id : link.target,
+                color: link.color,
+                particles: link.particles,
+                width: link.width,
+                distance: link.distance,
+                label: link.label
+            }))
+        };
+    }
+
     // Initialize the enhanced graph
     async function initGraph() {
         try {
@@ -515,7 +546,7 @@
             console.log('Creating 3D graph...');
             Graph = ForceGraph3D()
                 (document.getElementById('3d-graph'))
-                .graphData(graphData)
+                .graphData(createCleanGraphData(graphData))
                 .nodeLabel(node => '')
                 .nodeAutoColorBy('group')
                 .nodeRelSize(CONFIG.nodeRelSize)
@@ -1055,7 +1086,7 @@
         const filteredNodes = Array.from(connectedNodes);
         
         // Update the graph
-        Graph.graphData({ nodes: filteredNodes, links: connectedLinks });
+        Graph.graphData(createCleanGraphData({ nodes: filteredNodes, links: connectedLinks }));
         
         hideContextMenu();
     }
@@ -1095,7 +1126,7 @@
         
         // Update the graph
         const filteredNodes = Array.from(connectedNodes);
-        Graph.graphData({ nodes: filteredNodes, links: connectedLinks });
+        Graph.graphData(createCleanGraphData({ nodes: filteredNodes, links: connectedLinks }));
         
         hideContextMenu();
     }
@@ -1112,7 +1143,7 @@
             !hiddenNodes.has(l.target.id || l.target)
         );
         
-        Graph.graphData({ nodes: filteredNodes, links: filteredLinks });
+        Graph.graphData(createCleanGraphData({ nodes: filteredNodes, links: filteredLinks }));
         
         hideContextMenu();
     }
@@ -1120,7 +1151,7 @@
     // Reset view to full graph
     function resetView() {
         hiddenNodes.clear();
-        Graph.graphData(fullGraphData);
+        Graph.graphData(createCleanGraphData(fullGraphData));
         Graph.cameraPosition({ x: 0, y: 0, z: 500 });
         hideContextMenu();
     }
@@ -1223,7 +1254,7 @@
                 break;
         }
         if (Graph) {
-            Graph.graphData(graphData);
+            Graph.graphData(createCleanGraphData(graphData));
             updateStats();
         }
     });
@@ -1238,7 +1269,7 @@
             const conceptNodes = graphData.nodes.filter(node => 
                 node.group === 'AI Concept'
             );
-            Graph.graphData({ nodes: conceptNodes, links: [] });
+            Graph.graphData(createCleanGraphData({ nodes: conceptNodes, links: [] }));
         } else {
             const filteredNodes = graphData.nodes.filter(node => 
                 node.group === filterType || node.group === 'AI Concept'
@@ -1249,7 +1280,7 @@
                 nodeIds.has(link.target.id || link.target)
             );
             
-            Graph.graphData({ nodes: filteredNodes, links: filteredLinks });
+            Graph.graphData(createCleanGraphData({ nodes: filteredNodes, links: filteredLinks }));
         }
         updateStats();
     });
@@ -1263,7 +1294,7 @@
         // Rebuild the graph with new node type
         if (Graph) {
             const cameraPos = Graph.cameraPosition();
-            Graph.graphData(graphData);
+            Graph.graphData(createCleanGraphData(graphData));
             Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
         }
     });
@@ -1276,7 +1307,7 @@
         // Rebuild the graph with new node type
         if (Graph) {
             const cameraPos = Graph.cameraPosition();
-            Graph.graphData(graphData);
+            Graph.graphData(createCleanGraphData(graphData));
             Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
         }
     });
@@ -1332,7 +1363,7 @@
         // Recreate nodes with/without change rings
         if (Graph) {
             const cameraPos = Graph.cameraPosition();
-            Graph.graphData(graphData);
+            Graph.graphData(createCleanGraphData(graphData));
             Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
         }
     });
