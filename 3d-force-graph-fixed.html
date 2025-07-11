@@ -654,11 +654,6 @@
             });
             const ring = new THREE.Mesh(ringGeometry, ringMaterial);
             
-            // Animate the ring
-            ring.userData.update = () => {
-                ring.rotation.z += 0.01;
-            };
-            
             group.add(ring);
         }
         
@@ -1352,24 +1347,9 @@
         initGraph();
     });
     
-    // Animation loop for rotating elements
-    function animate() {
-        requestAnimationFrame(animate);
-        
-        if (Graph) {
-            graphData.nodes.forEach(node => {
-                const obj = Graph.nodeThreeObject(node);
-                if (obj && obj.children) {
-                    obj.children.forEach(child => {
-                        if (child.userData.update) {
-                            child.userData.update();
-                        }
-                    });
-                }
-            });
-        }
-    }
-    animate();
+    // Animation loop removed - was causing clone errors
+    // The 3D Force Graph library handles its own animations
+    
     </script>
 </body>
 </html>
