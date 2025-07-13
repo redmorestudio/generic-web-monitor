@@ -24,6 +24,29 @@
             max-width: 350px;
             z-index: 100;
             backdrop-filter: blur(10px);
+            pointer-events: none;
+        }
+        
+        #node-info {
+            pointer-events: none;
+        }
+        
+        #hover-info {
+            position: absolute;
+            background: rgba(20, 20, 30, 0.98);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #00ff88;
+            max-width: 300px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            display: none;
+            pointer-events: all;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+        }
+        
+        #hover-info.active {
+            display: block;
         }
         
         #info h3 {
@@ -298,8 +321,11 @@
             <span>🧠</span>
             AI Competitive Monitor
         </h3>
-        <div id="node-info">Right-click on nodes to focus on subgraph</div>
+        <div id="node-info">Left-click and drag to pan • Right-click nodes for menu</div>
     </div>
+    
+    <!-- Hover Information Box -->
+    <div id="hover-info"></div>
     
     <div id="controls" style="display: none;">
         <div class="control-group">
@@ -563,7 +589,7 @@
                     .onNodeClick(handleNodeClick)
                     .onNodeRightClick(handleNodeRightClick)
                     .onBackgroundClick(() => {
-                        document.getElementById('node-info').innerHTML = 'Right-click on nodes to focus on subgraph';
+                        document.getElementById('node-info').innerHTML = 'Left-click and drag to pan • Right-click nodes for menu';
                         hideContextMenu();
                     })
                     .onBackgroundRightClick((event) => {
@@ -713,13 +739,18 @@
                     if (companies.length > 1) {
                         for (let i = 0; i < companies.length - 1; i++) {
                             for (let j = i + 1; j < companies.length; j++) {
+                                // Get interest levels of both companies
+                                const company1 = nodeMap.get(companies[i]);
+                                const company2 = nodeMap.get(companies[j]);
+                                const avgInterest = (company1.interestLevel + company2.interestLevel) / 2;
+                                
                                 graphData.links.push({
                                     source: companies[i],
                                     target: companies[j],
                                     label: tech,
                                     color: '#444444',
                                     particles: 1,
-                                    width: 0.3 + (companies.length * 0.05), // Subtle scaling based on shared count
+                                    width: 0.2 + (avgInterest * 0.08), // Width based on average interest level
                                     distance: CONFIG.linkDistance
                                 });
                             }
@@ -757,12 +788,16 @@
                         graphData.nodes.push(conceptNode);
                         
                         companies.forEach(company => {
+                            // Get company's interest level for link width
+                            const companyNode = nodeMap.get(company);
+                            const interestWidth = companyNode ? (companyNode.interestLevel * 0.1) : 0.3;
+                            
                             graphData.links.push({
                                 source: company,
                                 target: conceptNode.id,
                                 color: '#00ff88',
                                 particles: 2,
-                                width: 0.4 + (companies.length * 0.03), // Thinner lines with subtle scaling
+                                width: 0.2 + interestWidth, // Width based on company's interest level
                                 distance: CONFIG.linkDistance * 0.8
                             });
                         });
@@ -874,12 +909,16 @@
             
             techNodes.forEach((techNode, tech) => {
                 techNode.companies.forEach(company => {
+                    // Get company's change level for link width
+                    const companyNode = graphData.nodes.find(n => n.id === company);
+                    const changeWidth = companyNode ? (companyNode.changeLevel * 0.08) : 0.3;
+                    
                     graphData.links.push({
                         source: techNode.id,
                         target: company,
                         particles: 2,
                         color: '#4ecdc4',
-                        width: 0.3 + (techNode.companies.length * 0.04) // Thinner technology connections
+                        width: 0.2 + changeWidth // Width based on company's recent change level
                     });
                 });
             });
@@ -966,14 +1005,32 @@
         }
 
         // Handle node hover with rich information
-        function handleNodeHover(node) {
+        let hoveredNode = null;
+        let hoverTimeout = null;
+        
+        function handleNodeHover(node, event) {
+            // Clear any existing timeout
+            if (hoverTimeout) {
+                clearTimeout(hoverTimeout);
+                hoverTimeout = null;
+            }
+            
             if (!node) {
-                document.getElementById('node-info').innerHTML = 'Right-click on nodes to focus on subgraph';
+                // Delay hiding to allow mouse to move to hover box
+                hoverTimeout = setTimeout(() => {
+                    const hoverBox = document.getElementById('hover-info');
+                    if (!hoverBox.matches(':hover')) {
+                        hoverBox.classList.remove('active');
+                        hoveredNode = null;
+                    }
+                }, 300);
                 return;
             }
             
+            hoveredNode = node;
+            
             let infoHtml = `<strong style="color: ${node.color}">${node.name}</strong><br/>`;
-            infoHtml += `Type: ${node.group}<br/>`;
+            infoHtml += `<span style="color: #888; font-size: 0.9em">${node.group}</span><br/>`;
             
             if (node.changeLevel > 0) {
                 const changeColor = getChangeColor(node.changeLevel);
@@ -1011,7 +1068,23 @@
                 }
             }
             
-            document.getElementById('node-info').innerHTML = infoHtml;
+            // Update hover box content and position
+            const hoverBox = document.getElementById('hover-info');
+            hoverBox.innerHTML = infoHtml;
+            hoverBox.classList.add('active');
+            
+            // Position near the cursor
+            if (event) {
+                const x = event.clientX + 20;
+                const y = event.clientY - 50;
+                
+                // Keep box on screen
+                const maxX = window.innerWidth - 320;
+                const maxY = window.innerHeight - 200;
+                
+                hoverBox.style.left = Math.min(x, maxX) + 'px';
+                hoverBox.style.top = Math.min(y, maxY) + 'px';
+            }
         }
 
         // Handle node click - focus and zoom
@@ -1685,6 +1758,22 @@
                 }
             });
         }
+        
+        // Keep hover box visible when mouse is over it
+        document.getElementById('hover-info').addEventListener('mouseenter', () => {
+            if (hoverTimeout) {
+                clearTimeout(hoverTimeout);
+                hoverTimeout = null;
+            }
+        });
+        
+        document.getElementById('hover-info').addEventListener('mouseleave', () => {
+            // Hide the hover box after a delay
+            hoverTimeout = setTimeout(() => {
+                document.getElementById('hover-info').classList.remove('active');
+                hoveredNode = null;
+            }, 300);
+        });
         
         // Initialize on load
         window.addEventListener('load', () => {
