@@ -420,6 +420,20 @@
                 'Search & Discovery': '#f39c12',
                 'Social Platforms': '#34495e',
                 'Automotive AI': '#16a085',
+                'Conversational AI': '#ff9ff3',
+                'Computer Vision': '#54a0ff',
+                'AI Chips': '#48dbfb',
+                'Edge AI': '#0abde3',
+                'MLOps': '#00d2d3',
+                'AI Security': '#ee5a6f',
+                'Healthcare AI': '#10ac84',
+                'Robotics': '#f368e0',
+                'NLP': '#ff6b9d',
+                'AI Ethics': '#c44569',
+                'Quantum AI': '#786fa6',
+                'AI Concept': '#00ff88',
+                'Technology': '#4ecdc4',
+                'Interest Level': '#ffd93d',
                 'default': '#667eea'
             },
             interestColors: {
@@ -429,11 +443,12 @@
                 'unknown': '#666666'
             },
             particleSpeed: 0.003,
-            linkOpacity: 0.5,
-            linkWidth: 0.5,
+            linkOpacity: 0.3,
+            linkWidth: 0.3,
             nodeRelSize: 4,
             forceStrength: -100,
             linkDistance: 30,
+            collisionRadius: 10,
             fontSize: 12,
             maxNodes: 50
         };
@@ -531,8 +546,12 @@
                     .nodeThreeObjectExtend(false)
                     .linkWidth(link => {
                         if (!linksEnabled) return 0;
-                        const baseWidth = link.width || CONFIG.linkWidth;
-                        return Math.max(0.3, Math.min(baseWidth * 1.5, 4));
+                        // Use thinner lines for better visual clarity
+                        if (link.width) {
+                            // Scale down custom widths
+                            return Math.min(link.width * 0.4, 1.5);
+                        }
+                        return CONFIG.linkWidth; // Use thin default
                     })
                     .linkOpacity(linksEnabled ? CONFIG.linkOpacity : 0)
                     .linkDirectionalParticles(link => particlesEnabled ? (link.particles || 2) : 0)
@@ -556,6 +575,8 @@
                 Graph.d3Force('charge').strength(CONFIG.forceStrength);
                 Graph.d3Force('link').distance(link => link.distance || CONFIG.linkDistance);
                 Graph.d3Force('center', d3.forceCenter());
+                // Add collision detection to prevent overlapping nodes
+                Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
                 
                 // Set initial camera position
                 Graph.cameraPosition({ x: 0, y: 0, z: 500 });
@@ -589,8 +610,8 @@
             sprite.material.depthWrite = false;
             sprite.isSprite = true;
             
-            // Use bright cyan for all text for better readability
-            sprite.color = '#00ffff';
+            // Use color based on node type for variety
+            sprite.color = node.color || CONFIG.nodeColors[node.group] || CONFIG.nodeColors.default;
             
             sprite.textHeight = CONFIG.fontSize;
             sprite.text = node.name;
@@ -698,7 +719,7 @@
                                     label: tech,
                                     color: '#444444',
                                     particles: 1,
-                                    width: Math.min(companies.length / 10, 2),
+                                    width: 0.3 + (companies.length * 0.05), // Subtle scaling based on shared count
                                     distance: CONFIG.linkDistance
                                 });
                             }
@@ -741,7 +762,7 @@
                                 target: conceptNode.id,
                                 color: '#00ff88',
                                 particles: 2,
-                                width: Math.min(companies.length / 8, 3),
+                                width: 0.4 + (companies.length * 0.03), // Thinner lines with subtle scaling
                                 distance: CONFIG.linkDistance * 0.8
                             });
                         });
@@ -858,7 +879,7 @@
                         target: company,
                         particles: 2,
                         color: '#4ecdc4',
-                        width: Math.min(techNode.companies.length / 5, 2.5)
+                        width: 0.3 + (techNode.companies.length * 0.04) // Thinner technology connections
                     });
                 });
             });
@@ -924,7 +945,7 @@
                     target: company.company,
                     color: CONFIG.interestColors[interestCategory],
                     particles: interestLevel > 5 ? 4 : 2,
-                    width: Math.max(0.5, interestLevel / 5)
+                    width: 0.2 + (interestLevel * 0.08) // Thinner lines, max ~1.0 for level 10
                 });
             });
             
@@ -1314,7 +1335,14 @@
             
             if (Graph) {
                 Graph.graphData(graphData);
+                // Re-apply forces to prevent nodes from flying away
+                Graph.d3Force('charge').strength(CONFIG.forceStrength);
+                Graph.d3Force('link').distance(link => link.distance || CONFIG.linkDistance);
+                Graph.d3Force('center', d3.forceCenter());
+                Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
+                Graph.d3ReheatSimulation();
                 updateStats();
+                updateLegend();
             }
         });
         
@@ -1325,9 +1353,9 @@
             CONFIG.forceStrength = value;
             if (Graph) {
                 Graph.d3Force('charge').strength(value);
-                if (!Graph.d3Force('center')) {
-                    Graph.d3Force('center', d3.forceCenter());
-                }
+                // Ensure center and collision forces remain
+                Graph.d3Force('center', d3.forceCenter());
+                Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
                 Graph.d3ReheatSimulation();
             }
         });
@@ -1338,7 +1366,12 @@
             document.getElementById('linkDistanceValue').textContent = value;
             CONFIG.linkDistance = value;
             if (Graph) {
+                // Update link distance and ensure simulation runs
                 Graph.d3Force('link').distance(link => link.distance || value);
+                // Re-apply all forces to ensure consistency
+                Graph.d3Force('charge').strength(CONFIG.forceStrength);
+                Graph.d3Force('center', d3.forceCenter());
+                Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
                 Graph.d3ReheatSimulation();
             }
         });
@@ -1598,11 +1631,14 @@
             this.classList.toggle('active', linksEnabled);
             
             if (Graph) {
-                Graph.linkOpacity(linksEnabled ? 0.5 : 0);
+                Graph.linkOpacity(linksEnabled ? CONFIG.linkOpacity : 0);
                 Graph.linkWidth(link => {
                     if (!linksEnabled) return 0;
-                    const baseWidth = link.width || CONFIG.linkWidth;
-                    return Math.max(0.3, Math.min(baseWidth * 1.5, 4));
+                    // Use same logic as initial setup
+                    if (link.width) {
+                        return Math.min(link.width * 0.4, 1.5);
+                    }
+                    return CONFIG.linkWidth;
                 });
             }
         });
