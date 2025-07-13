@@ -492,6 +492,8 @@
         let hiddenNodes = new Set();
         let showChangesOnly = false;
         let searchTerm = '';
+        let hoveredNode = null;
+        let hoverTimeout = null;
 
         // Initialize the enhanced graph
         async function initGraph() {
@@ -585,7 +587,17 @@
                     .linkDirectionalParticleWidth(1.5)
                     .linkDirectionalParticleColor(() => '#00ff88')
                     .linkLabel(link => link.label || '')
-                    .onNodeHover(handleNodeHover)
+                    .onNodeHover((node) => {
+                        try {
+                            handleNodeHover(node, d3.event || window.event);
+                        } catch (e) {
+                            console.error('Hover error:', e);
+                            // Fallback to simple hover
+                            if (node) {
+                                document.getElementById('node-info').innerHTML = `${node.name} (${node.group})`;
+                            }
+                        }
+                    })
                     .onNodeClick(handleNodeClick)
                     .onNodeRightClick(handleNodeRightClick)
                     .onBackgroundClick(() => {
@@ -1005,8 +1017,6 @@
         }
 
         // Handle node hover with rich information
-        let hoveredNode = null;
-        let hoverTimeout = null;
         
         function handleNodeHover(node, event) {
             // Clear any existing timeout
@@ -1074,7 +1084,7 @@
             hoverBox.classList.add('active');
             
             // Position near the cursor
-            if (event) {
+            if (event && event.clientX !== undefined) {
                 const x = event.clientX + 20;
                 const y = event.clientY - 50;
                 
@@ -1084,6 +1094,10 @@
                 
                 hoverBox.style.left = Math.min(x, maxX) + 'px';
                 hoverBox.style.top = Math.min(y, maxY) + 'px';
+            } else {
+                // Fallback positioning
+                hoverBox.style.left = '50px';
+                hoverBox.style.top = '100px';
             }
         }
 
