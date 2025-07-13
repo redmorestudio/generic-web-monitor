@@ -1,4 +1,112 @@
-<!DOCTYPE html>
+    // Reset button
+    document.getElementById('resetButton').addEventListener('click', resetView);            <button id="resetButton" style="margin-top: 10px; background: #e74c3c;">Reset View</button>    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', (e) => {
+        searchTerm = e.target.value.toLowerCase().trim();
+        
+        if (!searchTerm) {
+            // Reset to current view
+            resetView();
+            return;
+        }
+        
+        // Search in full graph data
+        const matchingNodes = fullGraphData.nodes.filter(node => {
+            const nodeName = node.name.toLowerCase();
+            const nodeType = node.group.toLowerCase();
+            return nodeName.includes(searchTerm) || nodeType.includes(searchTerm);
+        });
+        
+        if (matchingNodes.length === 0) {
+            // Show message in node info
+            document.getElementById('node-info').innerHTML = `<span style="color: #ff6b6b;">No matches found for "${searchTerm}"</span>`;
+            return;
+        }
+        
+        // Get all related nodes and links
+        const nodeIds = new Set(matchingNodes.map(n => n.id));
+        const relatedNodes = new Set(matchingNodes);
+        const relatedLinks = [];
+        
+        // Include nodes connected to matches
+        fullGraphData.links.forEach(link => {
+            const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+            const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+            
+            if (nodeIds.has(sourceId) || nodeIds.has(targetId)) {
+                relatedLinks.push(link);
+                // Add connected nodes
+                const sourceNode = fullGraphData.nodes.find(n => n.id === sourceId);
+                const targetNode = fullGraphData.nodes.find(n => n.id === targetId);
+                if (sourceNode) relatedNodes.add(sourceNode);
+                if (targetNode) relatedNodes.add(targetNode);
+            }
+        });
+        
+        // Update graph with search results
+        if (Graph) {
+            Graph.graphData({
+                nodes: Array.from(relatedNodes),
+                links: relatedLinks
+            });
+            
+            // Zoom to fit results
+            setTimeout(() => {
+                Graph.zoomToFit(400);
+                updateStats();
+                updateLegend();
+            }, 100);
+            
+            // Update info
+            document.getElementById('node-info').innerHTML = `Found ${matchingNodes.length} matches for "${searchTerm}"`;
+        }
+    });
+    
+    // Toggle changes only
+    document.getElementById('toggleChangesOnly').addEventListener('click', function() {
+        showChangesOnly = !showChangesOnly;
+        this.classList.toggle('active', showChangesOnly);
+        
+        if (showChangesOnly) {
+            // Filter to show only nodes with changes
+            const changedNodes = fullGraphData.nodes.filter(node => node.changeLevel > 0);
+            
+            if (changedNodes.length === 0) {
+                document.getElementById('node-info').innerHTML = '<span style="color: #ff6b6b;">No recent changes found</span>';
+                return;
+            }
+            
+            // Get all links between changed nodes
+            const nodeIds = new Set(changedNodes.map(n => n.id));
+            const changedLinks = fullGraphData.links.filter(link => {
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                return nodeIds.has(sourceId) && nodeIds.has(targetId);
+            });
+            
+            if (Graph) {
+                Graph.graphData({
+                    nodes: changedNodes,
+                    links: changedLinks
+                });
+                
+                setTimeout(() => {
+                    Graph.zoomToFit(400);
+                    updateStats();
+                    updateLegend();
+                }, 100);
+                
+                document.getElementById('node-info').innerHTML = `Showing ${changedNodes.length} nodes with recent changes`;
+            }
+        } else {
+            // Reset to full view
+            resetView();
+        }
+    });    let showChangesOnly = false;
+    let searchTerm = '';        <div class="control-group">
+            <label>Show Only:</label>
+            <button id="toggleChangesOnly" style="margin-bottom: 5px;">Recent Changes Only</button>
+            <div class="help-text">Show only nodes with recent activity</div>
+        </div><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -148,8 +256,9 @@
         
         #legend {
             position: absolute;
-            bottom: 60px;
-            left: 10px;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
             background: rgba(20, 20, 30, 0.95);
             padding: 10px 15px;
             border-radius: 8px;
@@ -157,15 +266,54 @@
             font-size: 11px;
             z-index: 100;
             backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            max-width: 90%;
+        }
+        
+        #legend.collapsed {
+            padding: 8px 12px;
+        }
+        
+        #legend-content {
             display: flex;
             gap: 30px;
             flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        #legend.collapsed #legend-content {
+            display: none;
+        }
+        
+        #legend-toggle {
+            cursor: pointer;
+            user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #00ff88;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        #legend.collapsed #legend-toggle {
+            margin-bottom: 0;
+        }
+        
+        #legend-toggle::before {
+            content: '▼';
+            transition: transform 0.3s;
+        }
+        
+        #legend.collapsed #legend-toggle::before {
+            transform: rotate(-90deg);
         }
         
         .legend-section {
             display: flex;
-            flex-direction: column;
-            gap: 5px;
+            flex-direction: row;
+            gap: 15px;
+            align-items: center;
         }
         
         .legend-section-title {
@@ -287,6 +435,7 @@
     <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
     <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
     <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+    <script src="https://unpkg.com/d3-force-3d@3"></script>
 </head>
 <body>
     <div id="loading">
@@ -317,7 +466,7 @@
                 Force Strength:
                 <span class="label-value" id="forceValue">-100</span>
             </label>
-            <input type="range" id="forceSlider" min="-300" max="-30" value="-100" step="10">
+            <input type="range" id="forceSlider" min="-500" max="100" value="-100" step="10">
             <div class="help-text">Adjust spacing between nodes</div>
         </div>
         
@@ -326,7 +475,7 @@
                 Link Distance:
                 <span class="label-value" id="linkDistanceValue">30</span>
             </label>
-            <input type="range" id="linkDistanceSlider" min="10" max="200" value="30" step="10">
+            <input type="range" id="linkDistanceSlider" min="5" max="200" value="30" step="5">
             <div class="help-text">Control link lengths</div>
         </div>
         
@@ -351,33 +500,35 @@
         </div>
         
         <div class="control-group">
+            <label>Search Entities:</label>
+            <input type="text" id="searchInput" placeholder="Type to search nodes..." style="
+                width: 100%;
+                padding: 8px;
+                background: #1a1a2e;
+                color: #eee;
+                border: 1px solid #333;
+                border-radius: 4px;
+                font-size: 12px;
+            ">
+            <div class="help-text">Search companies, concepts, or technologies</div>
+        </div>
+        
+        <div class="control-group">
             <label>Filter by Type:</label>
             <select id="filterType">
-                <option value="all">All Companies</option>
-                <option value="LLM Providers">LLM Providers</option>
-                <option value="AI Hardware">AI Hardware</option>
-                <option value="AI Frameworks">AI Frameworks</option>
-                <option value="Cloud Providers">Cloud Providers</option>
-                <option value="none">No Companies (Concepts Only)</option>
+                <option value="all">All Types</option>
             </select>
         </div>
         
-        <div class="control-group">
-            <label>Node Display:</label>
-            <div class="toggle-group">
-                <button id="nodeSimple" class="toggle-btn">Simple</button>
-                <button id="nodeRich" class="toggle-btn active">Rich Content</button>
-            </div>
-            <div class="help-text">Toggle between simple labels and rich content boxes</div>
-        </div>
+
         
         <div class="control-group">
             <label>Visual Effects:</label>
-            <button id="toggleParticles">Toggle Flow Particles</button>
+            <button id="toggleParticles" class="active">Toggle Flow Particles</button>
             <div class="help-text">Particles show data flow direction</div>
-            <button id="toggleLabels" style="margin-top: 5px;">Toggle All Labels</button>
-            <button id="toggleLinks" style="margin-top: 5px;">Toggle Links</button>
-            <button id="toggleChangeRings" style="margin-top: 5px;">Toggle Change Indicators</button>
+            <button id="toggleLabels" class="active" style="margin-top: 5px;">Toggle All Labels</button>
+            <button id="toggleLinks" class="active" style="margin-top: 5px;">Toggle Links</button>
+            <button id="toggleChangeRings" class="active" style="margin-top: 5px;">Toggle Change Indicators</button>
             <div class="help-text">Change rings show recent activity level</div>
         </div>
     </div>
@@ -386,44 +537,10 @@
         <div id="statsContent"></div>
     </div>
     
-    <div id="legend" style="display: none;">
-        <div class="legend-section">
-            <div class="legend-section-title">Company Types</div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #ff6b6b;"></div>
-                <span>LLM Providers</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #4ecdc4;"></div>
-                <span>AI Hardware</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #45b7d1;"></div>
-                <span>AI Frameworks</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #96ceb4;"></div>
-                <span>Cloud Providers</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #00ff88;"></div>
-                <span>AI Concepts</span>
-            </div>
-        </div>
-        <div class="legend-section">
-            <div class="legend-section-title">Change Levels</div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #ff4444;"></div>
-                <span>High (8-10)</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #ffa726;"></div>
-                <span>Medium (5-7)</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-color" style="background: #66bb6a;"></div>
-                <span>Low (1-4)</span>
-            </div>
+    <div id="legend" class="collapsed" style="display: none;">
+        <div id="legend-toggle">Legend</div>
+        <div id="legend-content">
+            <!-- Dynamically populated -->
         </div>
     </div>
     
@@ -450,6 +567,13 @@
             'Cloud Providers': '#96ceb4',
             'AI Applications': '#f7b731',
             'AI Research': '#5f27cd',
+            'Enterprise AI': '#e74c3c',
+            'AI Infrastructure': '#9b59b6',
+            'Data Analytics': '#3498db',
+            'AI Tools': '#1abc9c',
+            'Search & Discovery': '#f39c12',
+            'Social Platforms': '#34495e',
+            'Automotive AI': '#16a085',
             'default': '#667eea'
         },
         interestColors: {
@@ -459,7 +583,7 @@
             'unknown': '#666666'
         },
         particleSpeed: 0.003,
-        linkOpacity: 0.3,
+        linkOpacity: 0.5,
         linkWidth: 0.5,
         nodeRelSize: 4,
         forceStrength: -100,
@@ -478,7 +602,7 @@
     let changeRingsEnabled = true;
     let autoRotateEnabled = false;
     let currentView = 'companies';
-    let nodeDisplayMode = 'rich'; // Default to rich view
+    let nodeDisplayMode = 'rich'; // Always use rich view
     let selectedNode = null;
     let hiddenNodes = new Set();
     let currentFilteredNodes = null;
@@ -536,6 +660,12 @@
             console.log('Building company network...');
             buildCompanyNetwork();
             
+            // Initialize filter options with actual data types
+            initializeFilterOptions();
+            
+            // Update legend with actual types
+            updateLegend();
+            
             // Hide loading, show controls
             document.getElementById('loading').style.display = 'none';
             document.getElementById('info').style.display = 'block';
@@ -550,16 +680,21 @@
                 .graphData(graphData)
                 .nodeLabel(node => '')
                 .nodeAutoColorBy('group')
-                .nodeRelSize(CONFIG.nodeRelSize)
-                .nodeVal(node => node.val || 10)
+                .nodeRelSize(1)
+                .nodeVal(node => 1)
                 .nodeThreeObject(node => createNodeObject(node))
                 .nodeThreeObjectExtend(false)
-                .linkWidth(link => linksEnabled ? (link.width || CONFIG.linkWidth) : 0)
-                .linkOpacity(linksEnabled ? CONFIG.linkOpacity : 0)
+                .linkWidth(link => {
+                    if (!linksEnabled) return 0;
+                    // Variable width based on connection strength
+                    const baseWidth = link.width || CONFIG.linkWidth;
+                    return Math.max(0.3, Math.min(baseWidth * 1.5, 4));
+                })
+                .linkOpacity(linksEnabled ? 0.5 : 0)
                 .linkDirectionalParticles(link => particlesEnabled ? (link.particles || 2) : 0)
                 .linkDirectionalParticleSpeed(CONFIG.particleSpeed)
-                .linkDirectionalParticleWidth(2)
-                .linkDirectionalParticleColor(link => link.color || '#ffffff')
+                .linkDirectionalParticleWidth(1.5)
+                .linkDirectionalParticleColor(() => '#00ff88')
                 .linkLabel(link => link.label || '')
                 .onNodeHover(handleNodeHover)
                 .onNodeClick(handleNodeClick)
@@ -573,14 +708,16 @@
                     hideContextMenu();
                 });
             
-            // Set forces
+            // Set forces with center force to prevent explosion
             Graph.d3Force('charge').strength(CONFIG.forceStrength);
             Graph.d3Force('link').distance(link => link.distance || CONFIG.linkDistance);
+            Graph.d3Force('center', d3.forceCenter());
             
             // Set initial camera position
             Graph.cameraPosition({ x: 0, y: 0, z: 500 });
             
             updateStats();
+            updateLegend();
             console.log('Graph initialized successfully!');
             
         } catch (error) {
@@ -599,95 +736,40 @@
         }
     }
 
-    // Create node object based on display mode
+    // Create node object - minimal style with just labels
     function createNodeObject(node) {
-        if (nodeDisplayMode === 'rich') {
-            return createRichNode(node);
-        } else {
-            return createSimpleNode(node);
-        }
+        return createMinimalNode(node);
     }
 
-    // Create simple text sprite node
-    function createSimpleNode(node) {
+
+
+    // Create minimal node with just text label
+    function createMinimalNode(node) {
         const group = new THREE.Group();
         
-        // Create text sprite with better color contrast
+        // Create text sprite with high contrast
         const sprite = new SpriteText(node.name);
         sprite.material.depthWrite = false;
-        sprite.isSprite = true; // Mark as sprite for font size updates
+        sprite.isSprite = true;
         
-        // Use yellow for blue-ish colors to improve contrast
-        const blueishColors = ['#45b7d1', '#4ecdc4', '#66bb6a', '#667eea'];
-        if (blueishColors.includes(node.color)) {
-            sprite.color = '#ffeb3b'; // Yellow
-        } else {
-            sprite.color = '#ffffff'; // White for others
-        }
+        // Use bright cyan/white for all text for better readability
+        sprite.color = '#00ffff'; // Bright cyan like in the screenshot
         
         sprite.textHeight = CONFIG.fontSize;
+        sprite.text = node.name;
         sprite.visible = labelsEnabled;
         group.add(sprite);
         
-        // Add change indicator ring if enabled
+        // Add change indicator ring ONLY if there's a change
         if (changeRingsEnabled && node.changeLevel > 0) {
             const ringGeometry = new THREE.RingGeometry(8, 10, 32);
             const ringMaterial = new THREE.MeshBasicMaterial({
                 color: getChangeColor(node.changeLevel),
                 transparent: true,
-                opacity: 0.6,
+                opacity: 0.8,
                 side: THREE.DoubleSide
             });
             const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-            group.add(ring);
-        }
-        
-        return group;
-    }
-
-    // Create rich content node
-    function createRichNode(node) {
-        const group = new THREE.Group();
-        
-        // Create a sphere for the node
-        const geometry = new THREE.SphereGeometry(5, 32, 32);
-        const material = new THREE.MeshBasicMaterial({
-            color: node.color,
-            transparent: true,
-            opacity: 0.8
-        });
-        const sphere = new THREE.Mesh(geometry, material);
-        group.add(sphere);
-        
-        // Add text label with better color contrast
-        const sprite = new SpriteText(node.name);
-        sprite.material.depthWrite = false;
-        sprite.isSprite = true; // Mark as sprite for font size updates
-        
-        // Use yellow for blue-ish colors to improve contrast
-        const blueishColors = ['#45b7d1', '#4ecdc4', '#66bb6a', '#667eea'];
-        if (blueishColors.includes(node.color)) {
-            sprite.color = '#ffeb3b'; // Yellow
-        } else {
-            sprite.color = '#ffffff'; // White for others
-        }
-        
-        sprite.textHeight = CONFIG.fontSize - 2;
-        sprite.position.y = 10;
-        sprite.visible = labelsEnabled;
-        group.add(sprite);
-        
-        // Add change level indicator ring
-        if (changeRingsEnabled && node.changeLevel > 0) {
-            const ringGeometry = new THREE.RingGeometry(7, 9, 32);
-            const ringMaterial = new THREE.MeshBasicMaterial({
-                color: getChangeColor(node.changeLevel),
-                transparent: true,
-                opacity: 0.7,
-                side: THREE.DoubleSide
-            });
-            const ring = new THREE.Mesh(ringGeometry, ringMaterial);
-            
             group.add(ring);
         }
         
@@ -811,9 +893,9 @@
                                 source: companies[i],
                                 target: companies[j],
                                 label: tech,
-                                color: '#666',
+                                color: '#444444',
                                 particles: 1,
-                                width: 0.5,
+                                width: Math.min(companies.length / 10, 2), // Dynamic width based on sharing
                                 distance: CONFIG.linkDistance
                             });
                         }
@@ -856,7 +938,7 @@
                             target: conceptNode.id,
                             color: '#00ff88',
                             particles: 2,
-                            width: 1,
+                            width: Math.min(companies.length / 8, 3), // Dynamic width
                             distance: CONFIG.linkDistance * 0.8
                         });
                     });
@@ -938,7 +1020,8 @@
                     source: techNode.id,
                     target: company,
                     particles: 2,
-                    color: '#4ecdc4'
+                    color: '#4ecdc4',
+                    width: Math.min(techNode.companies.length / 5, 2.5) // Dynamic width
                 });
             });
         });
@@ -994,7 +1077,7 @@
                 target: company.company,
                 color: CONFIG.interestColors[interestCategory],
                 particles: interestLevel > 5 ? 4 : 2,
-                width: interestLevel / 5
+                width: Math.max(0.5, interestLevel / 5) // Ensure minimum width
             });
         });
         
@@ -1197,6 +1280,11 @@
     // Reset view to full graph
     function resetView() {
         hiddenNodes.clear();
+        searchTerm = '';
+        document.getElementById('searchInput').value = '';
+        showChangesOnly = false;
+        document.getElementById('toggleChangesOnly').classList.remove('active');
+        
         // Rebuild based on current view
         switch(currentView) {
             case 'technologies':
@@ -1214,6 +1302,8 @@
         if (Graph) {
             Graph.graphData(graphData);
             Graph.cameraPosition({ x: 0, y: 0, z: 500 });
+            updateStats();
+            updateLegend();
         }
         hideContextMenu();
     }
@@ -1246,14 +1336,18 @@
         const stats = rawData.dashboard.stats;
         const recentChanges = rawData.changes?.changes?.length || 0;
         
+        // Get current graph data from Graph instance if available
+        const currentNodes = Graph ? Graph.graphData().nodes.length : graphData.nodes.length;
+        const currentLinks = Graph ? Graph.graphData().links.length : graphData.links.length;
+        
         document.getElementById('statsContent').innerHTML = `
             <strong>Monitoring Stats:</strong><br/>
             Companies: ${stats.companies}<br/>
             URLs: ${stats.urls}<br/>
             Snapshots: ${stats.snapshots}<br/>
             Recent Changes: ${recentChanges}<br/>
-            Graph Nodes: ${graphData.nodes.length}<br/>
-            Graph Links: ${graphData.links.length}
+            <strong style="color: #00ff88;">Graph Nodes: ${currentNodes}</strong><br/>
+            <strong style="color: #00ff88;">Graph Links: ${currentLinks}</strong>
         `;
     }
 
@@ -1285,12 +1379,17 @@
         }
     });
     
-    // Force strength slider
+    // Force strength slider - with better control
     document.getElementById('forceSlider').addEventListener('input', (e) => {
         const value = parseInt(e.target.value);
         document.getElementById('forceValue').textContent = value;
+        CONFIG.forceStrength = value;
         if (Graph) {
             Graph.d3Force('charge').strength(value);
+            // Add center force to prevent explosion
+            if (!Graph.d3Force('center')) {
+                Graph.d3Force('center', d3.forceCenter());
+            }
             Graph.d3ReheatSimulation();
         }
     });
@@ -1299,25 +1398,44 @@
     document.getElementById('linkDistanceSlider').addEventListener('input', (e) => {
         const value = parseInt(e.target.value);
         document.getElementById('linkDistanceValue').textContent = value;
+        CONFIG.linkDistance = value;
         if (Graph) {
-            Graph.d3Force('link').distance(value);
+            Graph.d3Force('link').distance(link => link.distance || value);
             Graph.d3ReheatSimulation();
         }
     });
     
-    // Font size slider
+    // Font size slider - properly update all text sprites
     document.getElementById('fontSizeSlider').addEventListener('input', (e) => {
         const value = parseInt(e.target.value);
         document.getElementById('fontSizeValue').textContent = value;
         CONFIG.fontSize = value;
         
-        // Force recreation of all nodes to update font size
-        if (Graph) {
-            const currentGraphData = Graph.graphData();
-            Graph.graphData({ nodes: [], links: [] });
-            setTimeout(() => {
-                Graph.graphData(currentGraphData);
-            }, 0);
+        // Update font size for all existing sprites
+        if (Graph && Graph.scene()) {
+            const scene = Graph.scene();
+            scene.traverse(obj => {
+                if (obj.isSprite && obj.material && obj.material.map) {
+                    // Update the text height for sprite text objects
+                    obj.textHeight = value;
+                    // Force sprite to update
+                    if (obj.parent) {
+                        const parent = obj.parent;
+                        parent.remove(obj);
+                        
+                        // Create new sprite with updated size
+                        const newSprite = new SpriteText(obj.text || '');
+                        newSprite.material.depthWrite = false;
+                        newSprite.color = obj.color;
+                        newSprite.textHeight = value;
+                        newSprite.position.copy(obj.position);
+                        newSprite.visible = labelsEnabled;
+                        newSprite.isSprite = true;
+                        
+                        parent.add(newSprite);
+                    }
+                }
+            });
         }
     });
     
@@ -1342,107 +1460,208 @@
         }
     });
     
-    // Filter type selector
+    // Filter type selector - with camera reset
     document.getElementById('filterType').addEventListener('change', (e) => {
         const filterType = e.target.value;
+        let filteredData = { nodes: [], links: [] };
+        
         if (filterType === 'all') {
-            buildCompanyNetwork();
-        } else if (filterType === 'none') {
-            // Show only AI concept nodes (no companies)
-            const conceptNodes = graphData.nodes.filter(node => 
+            // Rebuild full graph
+            switch(currentView) {
+                case 'technologies':
+                    buildTechnologyView();
+                    break;
+                case 'interests':
+                    buildInterestView();
+                    break;
+                case 'companies':
+                default:
+                    buildCompanyNetwork();
+                    break;
+            }
+            filteredData = graphData;
+        } else if (filterType === 'concepts') {
+            // Show only AI concept nodes with their connections
+            const conceptNodes = fullGraphData.nodes.filter(node => 
                 node.group === 'AI Concept'
             );
-            Graph.graphData({ nodes: conceptNodes, links: [] });
+            const nodeIds = new Set(conceptNodes.map(n => n.id));
+            const conceptLinks = fullGraphData.links.filter(link => {
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                return nodeIds.has(sourceId) || nodeIds.has(targetId);
+            });
+            filteredData = { nodes: conceptNodes, links: conceptLinks };
+        } else if (filterType === 'none') {
+            // Hide all companies, show nothing
+            filteredData = { nodes: [], links: [] };
         } else {
-            const filteredNodes = graphData.nodes.filter(node => 
+            // Filter by specific type
+            const filteredNodes = fullGraphData.nodes.filter(node => 
                 node.group === filterType || node.group === 'AI Concept'
             );
             const nodeIds = new Set(filteredNodes.map(n => n.id));
-            const filteredLinks = graphData.links.filter(link =>
-                nodeIds.has(link.source.id || link.source) && 
-                nodeIds.has(link.target.id || link.target)
-            );
+            const filteredLinks = fullGraphData.links.filter(link => {
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                return nodeIds.has(sourceId) && nodeIds.has(targetId);
+            });
             
-            Graph.graphData({ nodes: filteredNodes, links: filteredLinks });
+            filteredData = { nodes: filteredNodes, links: filteredLinks };
         }
-        updateStats();
-    });
-    
-    // Node display mode toggles
-    document.getElementById('nodeSimple').addEventListener('click', () => {
-        nodeDisplayMode = 'simple';
-        document.getElementById('nodeSimple').classList.add('active');
-        document.getElementById('nodeRich').classList.remove('active');
         
-        // Rebuild the graph with new node type
         if (Graph) {
-            const cameraPos = Graph.cameraPosition();
-            Graph.graphData(graphData);
-            Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
+            Graph.graphData(filteredData);
+            // Reset camera to center on filtered data
+            setTimeout(() => {
+                if (filteredData.nodes.length > 0) {
+                    Graph.zoomToFit(400);
+                } else {
+                    Graph.cameraPosition({ x: 0, y: 0, z: 500 });
+                }
+                updateStats();
+                updateLegend();
+            }, 100);
         }
     });
     
-    document.getElementById('nodeRich').addEventListener('click', () => {
-        nodeDisplayMode = 'rich';
-        document.getElementById('nodeRich').classList.add('active');
-        document.getElementById('nodeSimple').classList.remove('active');
+    // Initialize filter options after data loads
+    function initializeFilterOptions() {
+        const filterSelect = document.getElementById('filterType');
+        filterSelect.innerHTML = '<option value="all">All Types</option>';
         
-        // Rebuild the graph with new node type
-        if (Graph) {
-            const cameraPos = Graph.cameraPosition();
-            Graph.graphData(graphData);
-            Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
-        }
-    });
+        // Collect all unique types from the data
+        const types = new Set();
+        fullGraphData.nodes.forEach(node => {
+            if (node.group && node.group !== 'AI Concept' && node.group !== 'Interest Level') {
+                types.add(node.group);
+            }
+        });
+        
+        // Sort types and add to filter
+        Array.from(types).sort().forEach(type => {
+            const option = document.createElement('option');
+            option.value = type;
+            option.textContent = type;
+            filterSelect.appendChild(option);
+        });
+        
+        // Add special filters at the end
+        filterSelect.innerHTML += '<option value="concepts">AI Concepts Only</option>';
+        filterSelect.innerHTML += '<option value="none">Hide All Companies</option>';
+    }
     
-    // Toggle particles
+    // Update legend based on current graph data
+    function updateLegend() {
+        const legendContent = document.getElementById('legend-content');
+        if (!legendContent) return;
+        
+        // Collect visible types from current graph
+        const visibleTypes = new Map();
+        const currentData = Graph ? Graph.graphData() : graphData;
+        
+        currentData.nodes.forEach(node => {
+            if (node.group && !visibleTypes.has(node.group)) {
+                visibleTypes.set(node.group, node.color || CONFIG.nodeColors[node.group] || CONFIG.nodeColors.default);
+            }
+        });
+        
+        // Build legend HTML
+        let html = '';
+        
+        // Company/Node types section
+        if (visibleTypes.size > 0) {
+            html += '<div class="legend-section"><div class="legend-section-title">Node Types</div>';
+            
+            // Sort types and add to legend
+            Array.from(visibleTypes.entries()).sort((a, b) => a[0].localeCompare(b[0])).forEach(([type, color]) => {
+                html += `<div class="legend-item">
+                    <div class="legend-color" style="background: ${color};"></div>
+                    <span>${type}</span>
+                </div>`;
+            });
+            
+            html += '</div>';
+        }
+        
+        // Change levels section (if any nodes have change levels)
+        const hasChangeNodes = currentData.nodes.some(n => n.changeLevel > 0);
+        if (hasChangeNodes && changeRingsEnabled) {
+            html += `<div class="legend-section">
+                <div class="legend-section-title">Change Levels</div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ff4444;"></div>
+                    <span>High (8-10)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #ffa726;"></div>
+                    <span>Medium (5-7)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background: #66bb6a;"></div>
+                    <span>Low (1-4)</span>
+                </div>
+            </div>`;
+        }
+        
+        legendContent.innerHTML = html;
+    }
+    
+    // Toggle particles - fixed to properly update
     document.getElementById('toggleParticles').addEventListener('click', function() {
         particlesEnabled = !particlesEnabled;
-        this.classList.toggle('active');
+        this.classList.toggle('active', particlesEnabled);
         
         if (Graph) {
-            // Update particle count for all links
-            const graphData = Graph.graphData();
-            Graph.linkDirectionalParticles(particlesEnabled ? 2 : 0);
+            // Update particle rendering
+            Graph.linkDirectionalParticles(link => particlesEnabled ? (link.particles || 2) : 0);
         }
     });
     
-    // Toggle labels
+    // Toggle labels - fixed to properly update visibility
     document.getElementById('toggleLabels').addEventListener('click', function() {
         labelsEnabled = !labelsEnabled;
-        this.classList.toggle('active');
+        this.classList.toggle('active', labelsEnabled);
         
-        // Force re-render to update label visibility
-        if (Graph) {
-            const currentGraphData = Graph.graphData();
-            Graph.graphData({ nodes: [], links: [] });
-            setTimeout(() => {
-                Graph.graphData(currentGraphData);
-            }, 0);
+        // Update label visibility for all nodes
+        if (Graph && Graph.scene()) {
+            const scene = Graph.scene();
+            scene.traverse(obj => {
+                if (obj.isSprite && obj.material) {
+                    obj.visible = labelsEnabled;
+                }
+            });
         }
     });
     
     // Toggle links
     document.getElementById('toggleLinks').addEventListener('click', function() {
         linksEnabled = !linksEnabled;
-        this.classList.toggle('active');
+        this.classList.toggle('active', linksEnabled);
         
         if (Graph) {
-            Graph.linkOpacity(linksEnabled ? CONFIG.linkOpacity : 0);
-            Graph.linkWidth(link => linksEnabled ? (link.width || CONFIG.linkWidth) : 0);
+            Graph.linkOpacity(linksEnabled ? 0.5 : 0);
+            Graph.linkWidth(link => {
+                if (!linksEnabled) return 0;
+                const baseWidth = link.width || CONFIG.linkWidth;
+                return Math.max(0.3, Math.min(baseWidth * 1.5, 4));
+            });
         }
     });
     
     // Toggle change rings
     document.getElementById('toggleChangeRings').addEventListener('click', function() {
         changeRingsEnabled = !changeRingsEnabled;
-        this.classList.toggle('active');
+        this.classList.toggle('active', changeRingsEnabled);
         
         // Recreate nodes with/without change rings
         if (Graph) {
-            const cameraPos = Graph.cameraPosition();
-            Graph.graphData(graphData);
-            Graph.cameraPosition(cameraPos, { x: 0, y: 0, z: 0 });
+            const currentData = Graph.graphData();
+            // Force rebuild of nodes
+            Graph.graphData({ nodes: [], links: [] });
+            setTimeout(() => {
+                Graph.graphData(currentData);
+            }, 10);
         }
     });
     
@@ -1459,10 +1678,25 @@
         }
     });
     
+
+    
     // Initialize on load
     window.addEventListener('load', () => {
         console.log('Page loaded, initializing graph...');
         initGraph();
+        
+        // Setup legend toggle after DOM is ready
+        const legendToggle = document.getElementById('legend-toggle');
+        if (legendToggle) {
+            legendToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                const legend = document.getElementById('legend');
+                if (legend) {
+                    legend.classList.toggle('collapsed');
+                }
+            });
+        }
     });
     
     // Animation loop removed - was causing clone errors
