@@ -321,7 +321,7 @@
             <span>🧠</span>
             AI Competitive Monitor
         </h3>
-        <div id="node-info">Left-click and drag to pan • Right-click nodes for menu</div>
+        <div id="node-info">Left-click and drag to rotate • Scroll to zoom • Right-click nodes for menu</div>
     </div>
     
     <!-- Hover Information Box -->
@@ -547,6 +547,7 @@
                 // Build initial graph data
                 console.log('Building company network...');
                 buildCompanyNetwork();
+                console.log('Graph data after build:', graphData);
                 
                 // Initialize filter options with actual data types
                 initializeFilterOptions();
@@ -563,6 +564,11 @@
                 
                 // Create the enhanced graph
                 console.log('Creating 3D graph...');
+                console.log('Graph data before creation:', {
+                    nodes: graphData.nodes.length,
+                    links: graphData.links.length,
+                    firstNode: graphData.nodes[0]
+                });
                 Graph = ForceGraph3D()
                     (document.getElementById('3d-graph'))
                     .graphData(graphData)
@@ -601,7 +607,7 @@
                     .onNodeClick(handleNodeClick)
                     .onNodeRightClick(handleNodeRightClick)
                     .onBackgroundClick(() => {
-                        document.getElementById('node-info').innerHTML = 'Left-click and drag to pan • Right-click nodes for menu';
+                        document.getElementById('node-info').innerHTML = 'Left-click and drag to rotate • Scroll to zoom • Right-click nodes for menu';
                         hideContextMenu();
                     })
                     .onBackgroundRightClick((event) => {
@@ -754,7 +760,7 @@
                                 // Get interest levels of both companies
                                 const company1 = nodeMap.get(companies[i]);
                                 const company2 = nodeMap.get(companies[j]);
-                                const avgInterest = (company1.interestLevel + company2.interestLevel) / 2;
+                                const avgInterest = ((company1?.interestLevel || 0) + (company2?.interestLevel || 0)) / 2;
                                 
                                 graphData.links.push({
                                     source: companies[i],
@@ -802,7 +808,7 @@
                         companies.forEach(company => {
                             // Get company's interest level for link width
                             const companyNode = nodeMap.get(company);
-                            const interestWidth = companyNode ? (companyNode.interestLevel * 0.1) : 0.3;
+                            const interestWidth = companyNode ? (companyNode.interestLevel || 0) * 0.1 : 0;
                             
                             graphData.links.push({
                                 source: company,
