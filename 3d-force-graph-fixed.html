@@ -826,16 +826,20 @@
                 fullGraphData = {
                     nodes: graphData.nodes.map(node => ({ ...node })),
                     links: graphData.links.map(link => ({
-                        ...link,
-                        source: typeof link.source === 'object' ? link.source.id : link.source,
-                        target: typeof link.target === 'object' ? link.target.id : link.target
+                        source: link.source,
+                        target: link.target,
+                        label: link.label,
+                        color: link.color,
+                        particles: link.particles,
+                        width: link.width,
+                        distance: link.distance
                     }))
                 };
                 
                 // Apply node limit
-                const limited = applyNodeLimit(graphData.nodes, graphData.links, CONFIG.maxNodes);
-                graphData.nodes = limited.nodes;
-                graphData.links = limited.links;
+                const limited = applyNodeLimit(graphData.nodes, graphData.links || [], CONFIG.maxNodes);
+                graphData.nodes = limited.nodes || [];
+                graphData.links = limited.links || [];
                 
                 console.log(`Graph built with ${graphData.nodes.length} nodes and ${graphData.links.length} links`);
                 
@@ -847,8 +851,12 @@
 
         // Apply node limit based on importance
         function applyNodeLimit(nodes, links, maxNodes) {
+            if (!nodes || nodes.length === 0) {
+                return { nodes: [], links: [] };
+            }
+            
             if (nodes.length <= maxNodes) {
-                return { nodes, links };
+                return { nodes: nodes, links: links || [] };
             }
             
             // Sort nodes by importance (change level, interest level, entity count)
@@ -945,9 +953,12 @@
             fullGraphData = {
                 nodes: graphData.nodes.map(node => ({ ...node })),
                 links: graphData.links.map(link => ({
-                    ...link,
-                    source: typeof link.source === 'object' ? link.source.id : link.source,
-                    target: typeof link.target === 'object' ? link.target.id : link.target
+                    source: link.source,
+                    target: link.target,
+                    particles: link.particles,
+                    color: link.color,
+                    width: link.width,
+                    distance: link.distance
                 }))
             };
             
@@ -1010,9 +1021,12 @@
             fullGraphData = {
                 nodes: graphData.nodes.map(node => ({ ...node })),
                 links: graphData.links.map(link => ({
-                    ...link,
-                    source: typeof link.source === 'object' ? link.source.id : link.source,
-                    target: typeof link.target === 'object' ? link.target.id : link.target
+                    source: link.source,
+                    target: link.target,
+                    color: link.color,
+                    particles: link.particles,
+                    width: link.width,
+                    distance: link.distance
                 }))
             };
             
