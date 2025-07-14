@@ -645,7 +645,7 @@
                     .linkLabel(link => link.label || '')
                     .onNodeHover((node) => {
                         try {
-                            handleNodeHover(node, d3.event || window.event);
+                            handleNodeHover(node, window.event);
                         } catch (e) {
                             console.error('Hover error:', e);
                             // Fallback to simple hover
@@ -665,12 +665,11 @@
                         hideContextMenu();
                     });
                 
-                // Set forces with center force to prevent explosion
+                // Set forces - commenting out problematic ones for now
                 Graph.d3Force('charge').strength(CONFIG.forceStrength);
                 Graph.d3Force('link').distance(link => link.distance || CONFIG.linkDistance);
-                Graph.d3Force('center', d3.forceCenter());
-                // Add collision detection to prevent overlapping nodes
-                Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
+                // Graph.d3Force('center', d3.forceCenter());
+                // Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
                 
                 // Set initial camera position
                 Graph.cameraPosition({ x: 0, y: 0, z: 500 });
@@ -1495,8 +1494,8 @@
                 // Re-apply forces to prevent nodes from flying away
                 Graph.d3Force('charge').strength(CONFIG.forceStrength);
                 Graph.d3Force('link').distance(link => link.distance || CONFIG.linkDistance);
-                Graph.d3Force('center', d3.forceCenter());
-                Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
+                // Graph.d3Force('center', d3.forceCenter());
+                // Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
                 Graph.d3ReheatSimulation();
                 updateStats();
                 updateLegend();
@@ -1511,8 +1510,8 @@
             if (Graph) {
                 Graph.d3Force('charge').strength(value);
                 // Ensure center and collision forces remain
-                Graph.d3Force('center', d3.forceCenter());
-                Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
+                // Graph.d3Force('center', d3.forceCenter());
+                // Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
                 Graph.d3ReheatSimulation();
             }
         });
@@ -1527,8 +1526,8 @@
                 Graph.d3Force('link').distance(link => link.distance || value);
                 // Re-apply all forces to ensure consistency
                 Graph.d3Force('charge').strength(CONFIG.forceStrength);
-                Graph.d3Force('center', d3.forceCenter());
-                Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
+                // Graph.d3Force('center', d3.forceCenter());
+                // Graph.d3Force('collide', d3.forceCollide(CONFIG.collisionRadius));
                 Graph.d3ReheatSimulation();
             }
         });
