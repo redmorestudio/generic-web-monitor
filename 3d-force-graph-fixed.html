@@ -567,11 +567,23 @@
                 console.log('Graph data before creation:', {
                     nodes: graphData.nodes.length,
                     links: graphData.links.length,
-                    firstNode: graphData.nodes[0]
+                    firstNode: graphData.nodes[0],
+                    firstLink: graphData.links[0]
                 });
                 Graph = ForceGraph3D()
-                    (document.getElementById('3d-graph'))
-                    .graphData(graphData)
+                    (document.getElementById('3d-graph'));
+                
+                // Set the graph data
+                try {
+                    Graph.graphData(graphData);
+                } catch (e) {
+                    console.error('Error setting graph data:', e);
+                    // Try with empty links as fallback
+                    Graph.graphData({ nodes: graphData.nodes, links: [] });
+                }
+                
+                // Configure the graph
+                Graph
                     .nodeLabel(node => '')
                     .nodeAutoColorBy('group')
                     .nodeRelSize(1)
@@ -879,8 +891,8 @@
             
             // Filter links to only include those between remaining nodes
             const limitedLinks = links.filter(link => {
-                const sourceId = link.source.id || link.source;
-                const targetId = link.target.id || link.target;
+                const sourceId = link.source;
+                const targetId = link.target;
                 return nodeIds.has(sourceId) && nodeIds.has(targetId);
             });
             
@@ -1140,7 +1152,7 @@
             if (node) {
                 highlightNodes.add(node);
                 graphData.links.forEach(link => {
-                    if (link.source.id === node.id || link.target.id === node.id) {
+                    if ((link.source.id || link.source) === node.id || (link.target.id || link.target) === node.id) {
                         highlightLinks.add(link);
                         highlightNodes.add(link.source);
                         highlightNodes.add(link.target);
@@ -1189,7 +1201,7 @@
             connectedNodes.add(selectedNode);
             
             graphData.links.forEach(link => {
-                if (link.source.id === selectedNode.id || link.target.id === selectedNode.id) {
+                if ((link.source.id || link.source) === selectedNode.id || (link.target.id || link.target) === selectedNode.id) {
                     connectedNodes.add(link.source);
                     connectedNodes.add(link.target);
                     connectedLinks.push(link);
@@ -1218,7 +1230,7 @@
             const firstLevel = new Set();
             
             graphData.links.forEach(link => {
-                if (link.source.id === selectedNode.id || link.target.id === selectedNode.id) {
+                if ((link.source.id || link.source) === selectedNode.id || (link.target.id || link.target) === selectedNode.id) {
                     connectedNodes.add(link.source);
                     connectedNodes.add(link.target);
                     firstLevel.add(link.source);
@@ -1230,7 +1242,7 @@
             // Second level connections
             firstLevel.forEach(node => {
                 graphData.links.forEach(link => {
-                    if (link.source.id === node.id || link.target.id === node.id) {
+                    if ((link.source.id || link.source) === node.id || (link.target.id || link.target) === node.id) {
                         connectedNodes.add(link.source);
                         connectedNodes.add(link.target);
                         connectedLinks.push(link);
