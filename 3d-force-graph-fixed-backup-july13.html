@@ -570,53 +570,16 @@
                     firstNode: graphData.nodes[0],
                     firstLink: graphData.links[0]
                 });
-                // Clean the data to ensure no functions or complex objects
-                const cleanGraphData = {
-                    nodes: graphData.nodes.map(node => ({
-                        id: String(node.id),
-                        name: String(node.name),
-                        group: String(node.group),
-                        color: node.color,
-                        val: Number(node.val) || 1,
-                        description: node.description,
-                        shortDescription: node.shortDescription,
-                        changeLevel: Number(node.changeLevel) || 0,
-                        interestLevel: Number(node.interestLevel) || 0,
-                        entityCount: Number(node.entityCount) || 0,
-                        products: node.products || [],
-                        technologies: node.technologies || [],
-                        concepts: node.concepts || [],
-                        partners: node.partners || []
-                    })),
-                    links: graphData.links.map(link => ({
-                        source: String(link.source),
-                        target: String(link.target),
-                        label: link.label || '',
-                        color: link.color || '#444444',
-                        particles: Number(link.particles) || 1,
-                        width: Number(link.width) || 0.3,
-                        distance: Number(link.distance) || 30
-                    }))
-                };
+                Graph = ForceGraph3D()
+                    (document.getElementById('3d-graph'));
                 
-                console.log('Cleaned graph data:', {
-                    nodes: cleanGraphData.nodes.length,
-                    links: cleanGraphData.links.length,
-                    firstNode: cleanGraphData.nodes[0],
-                    firstLink: cleanGraphData.links[0]
-                });
-                
-                // Initialize graph
-                Graph = ForceGraph3D()(document.getElementById('3d-graph'));
-                
-                // Set the cleaned graph data
+                // Set the graph data
                 try {
-                    Graph.graphData(cleanGraphData);
+                    Graph.graphData(graphData);
                 } catch (e) {
                     console.error('Error setting graph data:', e);
-                    console.error('Stack:', e.stack);
                     // Try with empty links as fallback
-                    Graph.graphData({ nodes: cleanGraphData.nodes, links: [] });
+                    Graph.graphData({ nodes: graphData.nodes, links: [] });
                 }
                 
                 // Configure the graph
@@ -875,13 +838,13 @@
                 fullGraphData = {
                     nodes: graphData.nodes.map(node => ({ ...node })),
                     links: graphData.links.map(link => ({
-                        source: String(link.source),
-                        target: String(link.target),
-                        label: link.label || '',
-                        color: link.color || '#444444',
-                        particles: Number(link.particles) || 1,
-                        width: Number(link.width) || 0.3,
-                        distance: Number(link.distance) || 30
+                        source: link.source,
+                        target: link.target,
+                        label: link.label,
+                        color: link.color,
+                        particles: link.particles,
+                        width: link.width,
+                        distance: link.distance
                     }))
                 };
                 

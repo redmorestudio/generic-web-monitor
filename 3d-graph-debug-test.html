@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Force Graph Debug Test</title>
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+        #3d-graph {
+            width: 100vw;
+            height: 100vh;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+</head>
+<body>
+    <div id="info">
+        <h3>Debug Test</h3>
+        <div id="status">Loading data...</div>
+        <div id="count"></div>
+    </div>
+    <div id="3d-graph"></div>
+
+    <script>
+        console.log('Starting debug test...');
+        
+        // Load the actual data
+        fetch('https://redmorestudio.github.io/ai-competitive-monitor/api-data')
+            .then(response => response.json())
+            .then(rawData => {
+                console.log('Raw data loaded:', rawData);
+                
+                if (!rawData.dashboard?.company_activity) {
+                    throw new Error('Invalid data structure');
+                }
+                
+                // Build simple nodes
+                const nodes = [];
+                const nodeMap = new Map();
+                
+                rawData.dashboard.company_activity.forEach((company, index) => {
+                    const node = {
+                        id: company.company,
+                        name: company.company,
+                        group: 'Company'
+                    };
+                    nodes.push(node);
+                    nodeMap.set(company.company, node);
+                });
+                
+                console.log(`Created ${nodes.length} nodes`);
+                
+                // Build simple links
+                const links = [];
+                const techConnections = new Map();
+                
+                rawData.dashboard.company_activity.forEach(company => {
+                    if (company.intelligence?.ai_technologies) {
+                        company.intelligence.ai_technologies.forEach(tech => {
+                            if (!techConnections.has(tech)) {
+                                techConnections.set(tech, []);
+                            }
+                            techConnections.get(tech).push(company.company);
+                        });
+                    }
+                });
+                
+                // Create links between companies that share technologies
+                techConnections.forEach((companies, tech) => {
+                    if (companies.length > 1) {
+                        for (let i = 0; i < companies.length - 1; i++) {
+                            for (let j = i + 1; j < companies.length; j++) {
+                                links.push({
+                                    source: companies[i],
+                                    target: companies[j]
+                                });
+                            }
+                        }
+                    }
+                });
+                
+                console.log(`Created ${links.length} links`);
+                
+                // Create minimal graph data
+                const graphData = {
+                    nodes: nodes,
+                    links: links
+                };
+                
+                // Log data structure
+                console.log('Graph data:', graphData);
+                console.log('First node:', graphData.nodes[0]);
+                console.log('First link:', graphData.links[0]);
+                
+                try {
+                    // Create graph with minimal configuration
+                    const Graph = ForceGraph3D()
+                        (document.getElementById('3d-graph'))
+                        .graphData(graphData)
+                        .nodeLabel('name')
+                        .nodeAutoColorBy('group');
+                    
+                    document.getElementById('status').textContent = 'Graph loaded successfully!';
+                    document.getElementById('count').textContent = `Nodes: ${nodes.length}, Links: ${links.length}`;
+                    
+                } catch (error) {
+                    console.error('Graph error:', error);
+                    console.error('Stack:', error.stack);
+                    document.getElementById('status').textContent = 'Error: ' + error.message;
+                }
+                
+            })
+            .catch(error => {
+                console.error('Load error:', error);
+                document.getElementById('status').textContent = 'Failed to load data: ' + error.message;
+            });
+    </script>
+</body>
+</html>
