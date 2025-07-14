@@ -3,7 +3,7 @@
     "companies": 52,
     "urls": 174,
     "snapshots": 345,
-    "lastCheck": "2025-07-10T13:03:55.796Z"
+    "lastCheck": "2025-07-13T18:47:38.544Z"
   },
   "recent_changes_summary": {
     "last_5_changes": [
@@ -13,7 +13,7 @@
         "url": "https://openai.com",
         "summary": "Major GPT-5 announcement detected",
         "interest_level": 9,
-        "time_ago": "1 days ago",
+        "time_ago": "5 days ago",
         "detected_at": "2025-07-08 19:18:06"
       },
       {
@@ -22,12 +22,12 @@
         "url": "https://openai.com",
         "summary": "Content changed for OpenAI - https://openai.com",
         "interest_level": 5,
-        "time_ago": "5 days ago",
+        "time_ago": "7/4/2025",
         "detected_at": "2025-07-04 18:17:08"
       }
     ],
     "last_24h_count": 0,
-    "last_7d_count": 2,
+    "last_7d_count": 1,
     "high_priority_last_7d": 1
   },
   "company_activity": [
@@ -1343,12 +1343,12 @@
       },
       "latest_change": {
         "summary": "Major GPT-5 announcement detected",
-        "time_ago": "1 days ago",
+        "time_ago": "5 days ago",
         "relevance_score": 9
       },
       "recent_activity": {
-        "change_count_7d": 2,
-        "last_change": "1 days ago",
+        "change_count_7d": 1,
+        "last_change": "5 days ago",
         "highest_recent_score": 9
       }
     },
@@ -2050,6 +2050,6 @@
       }
     }
   ],
-  "generated_at": "2025-07-10T16:34:42.783Z",
+  "generated_at": "2025-07-14T02:08:03.751Z",
   "backend": "github-actions-static-three-db"
 }
