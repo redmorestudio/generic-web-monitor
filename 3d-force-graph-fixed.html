@@ -396,7 +396,7 @@
         
         <div class="control-group">
             <label>Visual Effects:</label>
-            <button id="toggleParticles" class="active">Toggle Flow Particles</button>
+            <button id="toggleParticles">Toggle Flow Particles</button>
             <div class="help-text">Particles show data flow direction</div>
             <button id="toggleLabels" class="active" style="margin-top: 5px;">Toggle All Labels</button>
             <button id="toggleLinks" class="active" style="margin-top: 5px;">Toggle Links</button>
@@ -470,8 +470,8 @@
                 'unknown': '#666666'
             },
             particleSpeed: 0.003,
-            linkOpacity: 0.3,
-            linkWidth: 0.3,
+            linkOpacity: 0.4,
+            linkWidth: 0.5,
             nodeRelSize: 4,
             forceStrength: -100,
             linkDistance: 30,
@@ -484,7 +484,7 @@
         let graphData = { nodes: [], links: [] };
         let fullGraphData = { nodes: [], links: [] }; // Store full graph for resetting
         let rawData = {};
-        let particlesEnabled = true;
+        let particlesEnabled = false;
         let labelsEnabled = true;
         let linksEnabled = true;
         let changeRingsEnabled = true;
