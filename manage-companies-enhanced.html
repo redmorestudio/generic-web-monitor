@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Management - AI Competitive Monitor</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #2a2a3e;
+            --accent-bg: #1e1e3e;
+            --primary-color: #667eea;
+            --accent-color: #00ff88;
+            --error-color: #ff4444;
+            --warning-color: #ffa726;
+            --text-primary: #eee;
+            --text-secondary: #bbb;
+            --border-color: #3a3a5e;
+            --hover-bg: #3a3a5e;
+            --link-color: #87CEEB;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+            color: var(--text-primary);
+        }
+
+        .back-link {
+            color: var(--link-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: var(--accent-color);
+        }
+
+        .controls {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .btn-primary {
+            padding: 12px 24px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary:hover {
+            background: #5469d4;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-danger {
+            background: var(--error-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .btn-danger:hover {
+            background: #cc0000;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .company-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .company-card {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+        }
+
+        .company-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+
+        .company-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .company-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .company-category {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .url-list {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .url-list h4 {
+            margin: 0 0 10px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .url-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            margin-bottom: 5px;
+            background: var(--accent-bg);
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .url-item a {
+            color: var(--link-color);
+            text-decoration: none;
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .url-item a:hover {
+            color: var(--accent-color);
+        }
+
+        .btn-icon {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px 8px;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .btn-icon:hover {
+            color: var(--error-color);
+        }
+
+        .add-url-form {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .add-url-form input {
+            flex: 1;
+            padding: 8px 12px;
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 1.4rem;
+            margin: 0;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 15px;
+            background: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 30px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px;
+            color: var(--text-secondary);
+        }
+
+        .empty-state h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .info-box {
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-box h3 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+        }
+
+        .info-box p {
+            margin: 0;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .script-section {
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .script-section h3 {
+            margin: 0 0 15px 0;
+            color: var(--warning-color);
+        }
+
+        .script-code {
+            background: var(--primary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin-bottom: 15px;
+        }
+
+        .script-instructions {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .company-stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Company Management</h1>
+            <a href="index.html" class="back-link">
+                ← Back to Dashboard
+            </a>
+        </div>
+
+        <div class="info-box">
+            <h3>⚠️ Database Management Interface</h3>
+            <p>This interface displays your current companies and URLs. To add, edit, or delete companies, use the database management scripts below. Changes will be reflected after the next GitHub Actions workflow run.</p>
+        </div>
+
+        <div class="controls">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search companies...">
+            </div>
+            <button class="btn-primary" onclick="showAddCompanyModal()">
+                + Add New Company
+            </button>
+        </div>
+
+        <div id="loadingState" class="loading">Loading companies...</div>
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <h3>No companies found</h3>
+            <p>Add your first company to start monitoring</p>
+        </div>
+        
+        <div class="company-grid" id="companyGrid"></div>
+
+        <!-- Database Management Scripts -->
+        <div class="script-section">
+            <h3>🛠️ Database Management Scripts</h3>
+            <p class="script-instructions">Run these commands in your terminal from the <code>github-actions-backend</code> directory:</p>
+            
+            <h4>Add a New Company:</h4>
+            <div class="script-code">
+# Add a company
+sqlite3 data/intelligence.db "INSERT INTO companies (name, category, enabled) VALUES ('Company Name', 'AI Infrastructure', 1);"
+
+# Add URLs for the company
+sqlite3 data/intelligence.db "INSERT INTO urls (company_id, url, url_type, enabled) VALUES ((SELECT id FROM companies WHERE name='Company Name'), 'https://example.com', 'homepage', 1);"
+            </div>
+
+            <h4>Delete a Company:</h4>
+            <div class="script-code">
+# Delete a company and all its URLs
+sqlite3 data/intelligence.db "DELETE FROM companies WHERE name='Company Name';"
+            </div>
+
+            <h4>List All Companies:</h4>
+            <div class="script-code">
+# List all companies with their URLs
+sqlite3 data/intelligence.db -header -column "SELECT c.id, c.name, c.category, COUNT(u.id) as url_count FROM companies c LEFT JOIN urls u ON c.id = u.company_id GROUP BY c.id ORDER BY c.name;"
+            </div>
+
+            <h4>Add URL to Existing Company:</h4>
+            <div class="script-code">
+# Add URL to company by name
+sqlite3 data/intelligence.db "INSERT INTO urls (company_id, url, url_type, enabled) VALUES ((SELECT id FROM companies WHERE name='Company Name'), 'https://newurl.com', 'blog', 1);"
+            </div>
+
+            <h4>Delete a URL:</h4>
+            <div class="script-code">
+# Delete a specific URL
+sqlite3 data/intelligence.db "DELETE FROM urls WHERE url='https://example.com';"
+            </div>
+
+            <p class="script-instructions">
+                <strong>Note:</strong> After making changes, the next GitHub Actions workflow run will pick up the new configuration. You can manually trigger a workflow run from the GitHub Actions page.
+            </p>
+        </div>
+    </div>
+
+    <!-- Add Company Modal -->
+    <div class="modal" id="addCompanyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Company</h2>
+                <button class="modal-close" onclick="closeModal('addCompanyModal')">×</button>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Company Name</label>
+                <input type="text" class="form-input" id="companyName" placeholder="e.g., OpenAI">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Category</label>
+                <input type="text" class="form-input" id="companyCategory" placeholder="e.g., LLM Providers">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Primary URL</label>
+                <input type="text" class="form-input" id="companyUrl" placeholder="https://example.com">
+            </div>
+            <div class="script-code" style="margin-top: 20px;">
+                <strong>Generated Command:</strong><br>
+                <span id="generatedCommand">Commands will appear here...</span>
+            </div>
+            <div class="form-buttons">
+                <button class="btn-secondary" onclick="closeModal('addCompanyModal')">Cancel</button>
+                <button class="btn-primary" onclick="copyCommand()">Copy Command</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // State management
+        let companies = [];
+        let currentFilter = '';
+
+        // DOM elements
+        const searchInput = document.getElementById('searchInput');
+        const companyGrid = document.getElementById('companyGrid');
+        const loadingState = document.getElementById('loadingState');
+        const emptyState = document.getElementById('emptyState');
+
+        // Load data
+        async function loadData() {
+            try {
+                const [dashboardResponse, companiesResponse] = await Promise.all([
+                    fetch('api-data/dashboard.json'),
+                    fetch('api-data/companies.json').catch(() => ({ ok: false }))
+                ]);
+
+                const dashboardData = await dashboardResponse.json();
+                
+                // Get companies from dashboard data
+                companies = dashboardData.company_activity || [];
+                
+                // Try to merge with companies.json if available
+                if (companiesResponse.ok) {
+                    const companiesData = await companiesResponse.json();
+                    companies = companies.map(company => {
+                        const companyInfo = companiesData.companies?.find(c => c.company === company.company) || {};
+                        return {
+                            ...company,
+                            ...companyInfo,
+                            id: company.company.toLowerCase().replace(/\s+/g, '-')
+                        };
+                    });
+                }
+                
+                renderCompanies();
+                loadingState.style.display = 'none';
+            } catch (error) {
+                console.error('Error loading data:', error);
+                loadingState.innerHTML = 'Error loading data. Please refresh the page.';
+            }
+        }
+
+        // Render companies
+        function renderCompanies() {
+            const filteredCompanies = companies.filter(company => {
+                const matchesSearch = !currentFilter || 
+                    company.company.toLowerCase().includes(currentFilter.toLowerCase()) ||
+                    (company.urls || []).some(url => 
+                        url.toLowerCase().includes(currentFilter.toLowerCase())
+                    );
+                
+                return matchesSearch;
+            });
+
+            if (filteredCompanies.length === 0) {
+                companyGrid.style.display = 'none';
+                emptyState.style.display = 'block';
+            } else {
+                companyGrid.style.display = 'grid';
+                emptyState.style.display = 'none';
+            }
+
+            companyGrid.innerHTML = filteredCompanies.map(company => {
+                const urls = company.urls || [];
+                const urlCount = company.url_count || urls.length || 0;
+                
+                return `
+                    <div class="company-card">
+                        <div class="company-header">
+                            <div>
+                                <h3 class="company-name">${escapeHtml(company.company)}</h3>
+                                <div class="company-category">${escapeHtml(company.type || company.category || 'Uncategorized')}</div>
+                            </div>
+                            <div class="company-actions">
+                                <button class="btn-danger" onclick="showDeleteCommand('${escapeHtml(company.company)}')">Delete</button>
+                            </div>
+                        </div>
+                        
+                        <div class="company-stats">
+                            <div class="stat-item">
+                                <span>📊</span> ${urlCount} URLs
+                            </div>
+                            <div class="stat-item">
+                                <span>🔍</span> Interest: ${company.intelligence?.interest_level || 'N/A'}/10
+                            </div>
+                            <div class="stat-item">
+                                <span>📅</span> ${formatTimeAgo(new Date(company.last_check))}
+                            </div>
+                        </div>
+                        
+                        ${urls.length > 0 ? `
+                            <div class="url-list">
+                                <h4>Monitored URLs:</h4>
+                                ${urls.map(url => `
+                                    <div class="url-item">
+                                        <a href="${escapeHtml(typeof url === 'string' ? url : url.url)}" target="_blank">
+                                            ${escapeHtml(typeof url === 'string' ? url : url.url)}
+                                        </a>
+                                        <button class="btn-icon" onclick="showDeleteUrlCommand('${escapeHtml(typeof url === 'string' ? url : url.url)}')" title="Delete URL">🗑️</button>
+                                    </div>
+                                `).join('')}
+                                <div class="add-url-form">
+                                    <input type="text" placeholder="Add new URL..." id="newUrl-${company.id}">
+                                    <button class="btn-secondary" onclick="showAddUrlCommand('${escapeHtml(company.company)}', '${company.id}')">Add</button>
+                                </div>
+                            </div>
+                        ` : `
+                            <div class="url-list">
+                                <h4>No URLs configured</h4>
+                                <div class="add-url-form">
+                                    <input type="text" placeholder="Add first URL..." id="newUrl-${company.id}">
+                                    <button class="btn-secondary" onclick="showAddUrlCommand('${escapeHtml(company.company)}', '${company.id}')">Add</button>
+                                </div>
+                            </div>
+                        `}
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Show add company modal
+        function showAddCompanyModal() {
+            document.getElementById('addCompanyModal').classList.add('show');
+            updateGeneratedCommand();
+        }
+
+        // Update generated command
+        function updateGeneratedCommand() {
+            const name = document.getElementById('companyName').value || 'Company Name';
+            const category = document.getElementById('companyCategory').value || 'Category';
+            const url = document.getElementById('companyUrl').value || 'https://example.com';
+            
+            const command = `# Add company\nsqlite3 data/intelligence.db "INSERT INTO companies (name, category, enabled) VALUES ('${name}', '${category}', 1);"\n\n# Add URL\nsqlite3 data/intelligence.db "INSERT INTO urls (company_id, url, url_type, enabled) VALUES ((SELECT id FROM companies WHERE name='${name}'), '${url}', 'homepage', 1);"`;
+            
+            document.getElementById('generatedCommand').textContent = command;
+        }
+
+        // Copy command to clipboard
+        function copyCommand() {
+            const command = document.getElementById('generatedCommand').textContent;
+            navigator.clipboard.writeText(command).then(() => {
+                alert('Command copied to clipboard! Run it in the github-actions-backend directory.');
+                closeModal('addCompanyModal');
+            });
+        }
+
+        // Show delete command
+        function showDeleteCommand(companyName) {
+            const command = `sqlite3 data/intelligence.db "DELETE FROM companies WHERE name='${companyName}';"`;
+            if (confirm(`Delete ${companyName}?\n\nRun this command:\n${command}`)) {
+                navigator.clipboard.writeText(command).then(() => {
+                    alert('Delete command copied to clipboard!');
+                });
+            }
+        }
+
+        // Show delete URL command
+        function showDeleteUrlCommand(url) {
+            const command = `sqlite3 data/intelligence.db "DELETE FROM urls WHERE url='${url}';"`;
+            if (confirm(`Delete this URL?\n\nRun this command:\n${command}`)) {
+                navigator.clipboard.writeText(command).then(() => {
+                    alert('Delete command copied to clipboard!');
+                });
+            }
+        }
+
+        // Show add URL command
+        function showAddUrlCommand(companyName, companyId) {
+            const input = document.getElementById(`newUrl-${companyId}`);
+            const url = input.value.trim();
+            
+            if (!url) {
+                alert('Please enter a URL');
+                return;
+            }
+            
+            const command = `sqlite3 data/intelligence.db "INSERT INTO urls (company_id, url, url_type, enabled) VALUES ((SELECT id FROM companies WHERE name='${companyName}'), '${url}', 'general', 1);"`;
+            
+            navigator.clipboard.writeText(command).then(() => {
+                alert('Add URL command copied to clipboard!');
+                input.value = '';
+            });
+        }
+
+        // Close modal
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('show');
+        }
+
+        // Event listeners
+        searchInput.addEventListener('input', (e) => {
+            currentFilter = e.target.value;
+            renderCompanies();
+        });
+
+        // Update command when inputs change
+        document.getElementById('companyName').addEventListener('input', updateGeneratedCommand);
+        document.getElementById('companyCategory').addEventListener('input', updateGeneratedCommand);
+        document.getElementById('companyUrl').addEventListener('input', updateGeneratedCommand);
+
+        // Utility functions
+        function escapeHtml(text) {
+            if (typeof text !== 'string') return text;
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatTimeAgo(date) {
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+
+            if (days > 0) return `${days}d ago`;
+            if (hours > 0) return `${hours}h ago`;
+            if (minutes > 0) return `${minutes}m ago`;
+            return 'just now';
+        }
+
+        // Initialize
+        loadData();
+    </script>
+</body>
+</html>
