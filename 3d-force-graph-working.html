@@ -13,19 +13,21 @@
             overflow: hidden;
         }
         
+        /* Mobile controls styling */
         #toggle-controls {
             display: none;
-            position: absolute;
-            top: 10px;
-            right: 10px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
             background: rgba(20, 20, 30, 0.95);
-            padding: 8px 12px;
-            border-radius: 8px;
+            padding: 12px 16px;
+            border-radius: 25px;
             border: 1px solid #333;
             cursor: pointer;
             z-index: 101;
             color: #00ff88;
             font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
         
         @media (max-width: 768px) {
@@ -34,12 +36,30 @@
             }
             
             #controls {
-                transform: translateX(100%);
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                transform: translateY(100%);
                 transition: transform 0.3s ease;
+                border-radius: 20px 20px 0 0;
+                max-height: 60vh;
+                width: auto;
+                margin: 0;
             }
             
             #controls.open {
-                transform: translateX(0);
+                transform: translateY(0);
+            }
+            
+            #legend {
+                display: none !important;
+            }
+            
+            #info {
+                font-size: 12px;
+                padding: 10px;
+                max-width: 250px;
             }
         }
         
@@ -89,11 +109,15 @@
             border-bottom: 1px solid #333;
         }
         
+        .control-group:last-child {
+            border-bottom: none;
+        }
+        
         label {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             color: #aaa;
             font-size: 12px;
         }
@@ -101,6 +125,12 @@
         h3 {
             margin: 0 0 10px 0;
             color: #00ff88;
+        }
+        
+        h4 {
+            margin: 0 0 10px 0;
+            color: #00ff88;
+            font-size: 14px;
         }
         
         .green { color: #00ff88; }
@@ -117,12 +147,6 @@
             backdrop-filter: blur(10px);
             max-width: 200px;
             font-size: 12px;
-        }
-        
-        #legend h4 {
-            margin: 0 0 10px 0;
-            color: #00ff88;
-            font-size: 14px;
         }
         
         .legend-item {
@@ -153,6 +177,40 @@
             font-size: 18px;
             z-index: 1000;
         }
+        
+        .slider-value {
+            font-weight: bold;
+            color: #00ff88;
+            min-width: 45px;
+            text-align: right;
+        }
+        
+        select {
+            background: rgba(0, 0, 0, 0.5);
+            color: #eee;
+            border: 1px solid #333;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        input[type="text"] {
+            background: rgba(0, 0, 0, 0.5);
+            color: #eee;
+            border: 1px solid #333;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            width: 100%;
+            margin-top: 5px;
+        }
+        
+        .info-text {
+            font-size: 11px;
+            color: #888;
+            margin-top: 5px;
+            font-style: italic;
+        }
     </style>
     <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
     <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
@@ -163,7 +221,13 @@
     
     <div id="info" style="display: none;">
         <h3>🧠 AI Competitive Monitor</h3>
-        <div id="node-info">Left-click and drag to rotate • Scroll to zoom</div>
+        <div id="node-info">
+            <strong>Controls:</strong><br>
+            • Left-click + drag = Rotate view<br>
+            • Right-click + drag = Pan view<br>
+            • Scroll = Zoom in/out<br>
+            • Click node = Center camera
+        </div>
     </div>
     
     <div id="stats" style="display: none;">
@@ -174,13 +238,33 @@
     </div>
     
     <div id="legend" style="display: none;">
-        <h4>Legend</h4>
+        <h4>▼ Legend</h4>
+        <div class="info-text">Node Types</div>
         <div id="legend-content"></div>
     </div>
     
     <div id="controls" style="display: none;">
         <h4>Controls</h4>
+        
         <div class="control-group">
+            <h4 style="font-size: 12px; margin-bottom: 8px;">View Mode</h4>
+            <label>
+                Interest Analysis
+                <select id="view-mode">
+                    <option value="interest">Interest Analysis</option>
+                    <option value="entity-type">Entity Type</option>
+                    <option value="activity">Activity Level</option>
+                </select>
+            </label>
+            <div class="info-text">
+                • Interest: Colors by strategic interest<br>
+                • Entity Type: Colors by company type<br>
+                • Activity: Colors by URL count
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <h4 style="font-size: 12px; margin-bottom: 8px;">Visual Settings</h4>
             <label>
                 Show Links
                 <input type="checkbox" id="toggle-links" checked>
@@ -194,12 +278,31 @@
                 <input type="checkbox" id="toggle-particles" checked>
             </label>
         </div>
+        
         <div class="control-group">
+            <h4 style="font-size: 12px; margin-bottom: 8px;">Graph Physics</h4>
             <label>
                 Force Strength
                 <input type="range" id="force-strength" min="-1000" max="-50" value="-300" step="50">
-                <span id="force-value">-300</span>
+                <span class="slider-value" id="force-value">-300</span>
             </label>
+            <label>
+                Link Distance
+                <input type="range" id="link-distance" min="10" max="200" value="30" step="10">
+                <span class="slider-value" id="distance-value">30</span>
+            </label>
+        </div>
+        
+        <div class="control-group">
+            <h4 style="font-size: 12px; margin-bottom: 8px;">Filter by Type</h4>
+            <select id="type-filter">
+                <option value="all">All Types</option>
+            </select>
+        </div>
+        
+        <div class="control-group">
+            <h4 style="font-size: 12px; margin-bottom: 8px;">Search</h4>
+            <input type="text" id="search-input" placeholder="Search companies...">
         </div>
     </div>
     
@@ -213,24 +316,27 @@
             
             let Graph;
             let graphData = { nodes: [], links: [] };
+            let filteredData = { nodes: [], links: [] };
             let rawData = null;
             let linksEnabled = true;
             let labelsEnabled = true;
             let particlesEnabled = true;
+            let currentViewMode = 'entity-type';
+            let currentTypeFilter = 'all';
             
             // Configuration
             const CONFIG = {
                 linkDistance: 30,
-                linkWidth: 0.5,
-                linkOpacity: 0.3,
+                linkOpacity: 0.5, // 50% transparent as requested
                 forceStrength: -300,
+                fontWeight: 200, // Very thin font as requested
                 nodeColors: {
                     'AI Coding': '#ffeb3b',
                     'AI Hardware': '#4caf50',
                     'AI Infrastructure': '#9c27b0',
-                    'AI Search': '#2196f3',
+                    'AI Search': '#f44336', // Saturated red as in legend
                     'AI Voice/Audio': '#ff9800',
-                    'Enterprise AI': '#f44336',
+                    'Enterprise AI': '#d32f2f',
                     'Image Generation': '#e91e63',
                     'LLM Providers': '#ff5722',
                     'Video AI': '#3f51b5',
@@ -242,6 +348,26 @@
                     'AI Platform': '#ff69b4',
                     'Company': '#6fbf6f',
                     'default': '#888888'
+                },
+                // Interest level colors
+                interestColors: {
+                    10: '#ff0000',  // Red - Highest interest
+                    9: '#ff3300',
+                    8: '#ff6600',
+                    7: '#ff9900',
+                    6: '#ffcc00',
+                    5: '#ffff00',   // Yellow - Medium interest
+                    4: '#ccff00',
+                    3: '#99ff00',
+                    2: '#66ff00',
+                    1: '#33ff00',
+                    0: '#00ff00'    // Green - Low interest
+                },
+                // Activity level colors
+                activityColors: {
+                    high: '#ff0000',    // Red - Many URLs
+                    medium: '#ffff00',  // Yellow - Some URLs
+                    low: '#00ff00'      // Green - Few URLs
                 }
             };
             
@@ -249,12 +375,32 @@
             function createNodeObject(node) {
                 const sprite = new SpriteText(node.name);
                 sprite.material.depthWrite = false;
-                sprite.color = node.color || CONFIG.nodeColors[node.group] || CONFIG.nodeColors.default;
+                sprite.color = node.currentColor || node.color || CONFIG.nodeColors[node.group] || CONFIG.nodeColors.default;
                 sprite.textHeight = 8;
-                sprite.fontWeight = 400; // Make font less bold
+                sprite.fontWeight = CONFIG.fontWeight; // Use thin font weight
                 sprite.backgroundColor = false; // No background
                 return sprite;
             }
+            
+            // Calculate link width based on relationship
+            function getLinkWidth(link) {
+                // Base width for all links
+                let width = 0.3;
+                
+                // Thicker for concept links
+                if (link.label && link.label.includes('concept')) {
+                    width = 0.8;
+                }
+                // Medium for technology links
+                else if (link.label && techTerms.some(term => link.label.toLowerCase().includes(term))) {
+                    width = 0.5;
+                }
+                
+                return width;
+            }
+            
+            // Common tech terms for identifying technology links
+            const techTerms = ['api', 'sdk', 'framework', 'model', 'platform', 'engine', 'tool'];
             
             // Load and process data
             async function loadData() {
@@ -331,6 +477,7 @@
                     document.getElementById('controls').style.display = 'block';
                     
                     buildGraph();
+                    populateTypeFilter();
                     
                 } catch (error) {
                     console.error('Error loading data:', error);
@@ -358,7 +505,8 @@
                         group: nodeType,
                         color: CONFIG.nodeColors[nodeType] || CONFIG.nodeColors.default,
                         val: company.url_count || 1,
-                        interestLevel: company.intelligence?.interest_level || 0
+                        interestLevel: company.intelligence?.interest_level || 0,
+                        urlCount: company.url_count || 0
                     };
                     graphData.nodes.push(node);
                     nodeMap.set(company.company, node);
@@ -416,7 +564,9 @@
                             name: concept,
                             group: 'AI Concept',
                             color: CONFIG.nodeColors['AI Concept'],
-                            val: companies.length * 4
+                            val: companies.length * 4,
+                            interestLevel: 5,
+                            urlCount: 0
                         };
                         graphData.nodes.push(conceptNode);
                         
@@ -438,6 +588,9 @@
                 document.getElementById('node-count').textContent = graphData.nodes.length;
                 document.getElementById('link-count').textContent = graphData.links.length;
                 
+                // Set initial filtered data
+                applyFilters();
+                
                 // Initialize the graph
                 initializeGraph();
                 
@@ -445,13 +598,93 @@
                 updateLegend();
             }
             
+            function populateTypeFilter() {
+                const types = new Set();
+                graphData.nodes.forEach(node => {
+                    types.add(node.group);
+                });
+                
+                const select = document.getElementById('type-filter');
+                select.innerHTML = '<option value="all">All Types</option>';
+                
+                Array.from(types).sort().forEach(type => {
+                    const option = document.createElement('option');
+                    option.value = type;
+                    option.textContent = type;
+                    select.appendChild(option);
+                });
+            }
+            
+            function applyFilters() {
+                const searchTerm = document.getElementById('search-input')?.value.toLowerCase() || '';
+                
+                // Filter nodes
+                filteredData.nodes = graphData.nodes.filter(node => {
+                    // Type filter
+                    if (currentTypeFilter !== 'all' && node.group !== currentTypeFilter) {
+                        return false;
+                    }
+                    
+                    // Search filter
+                    if (searchTerm && !node.name.toLowerCase().includes(searchTerm)) {
+                        return false;
+                    }
+                    
+                    return true;
+                });
+                
+                // Get filtered node IDs
+                const filteredNodeIds = new Set(filteredData.nodes.map(n => n.id));
+                
+                // Filter links to only include those between filtered nodes
+                filteredData.links = graphData.links.filter(link => {
+                    return filteredNodeIds.has(link.source.id || link.source) && 
+                           filteredNodeIds.has(link.target.id || link.target);
+                });
+                
+                // Apply view mode colors
+                filteredData.nodes = filteredData.nodes.map(node => {
+                    const newNode = {...node};
+                    
+                    if (currentViewMode === 'interest') {
+                        newNode.currentColor = CONFIG.interestColors[node.interestLevel] || CONFIG.interestColors[5];
+                    } else if (currentViewMode === 'activity') {
+                        if (node.urlCount >= 10) {
+                            newNode.currentColor = CONFIG.activityColors.high;
+                        } else if (node.urlCount >= 5) {
+                            newNode.currentColor = CONFIG.activityColors.medium;
+                        } else {
+                            newNode.currentColor = CONFIG.activityColors.low;
+                        }
+                    } else {
+                        // Entity type view - use original colors
+                        newNode.currentColor = node.color;
+                    }
+                    
+                    return newNode;
+                });
+                
+                // Update graph with filtered data
+                if (Graph) {
+                    Graph.graphData({
+                        nodes: filteredData.nodes.map(n => ({...n})),
+                        links: filteredData.links.map(l => ({...l}))
+                    });
+                }
+                
+                // Update legend based on filtered data
+                updateLegend();
+            }
+            
             function updateLegend() {
                 const nodeTypes = new Map();
-                graphData.nodes.forEach(node => {
+                const dataToUse = filteredData.nodes.length > 0 ? filteredData : graphData;
+                
+                dataToUse.nodes.forEach(node => {
                     const type = node.group;
                     if (!nodeTypes.has(type)) {
                         nodeTypes.set(type, {
-                            color: CONFIG.nodeColors[type] || CONFIG.nodeColors.default,
+                            color: node.currentColor || CONFIG.nodeColors[type] || CONFIG.nodeColors.default,
                             count: 0
                         });
                     }
@@ -487,13 +720,13 @@
                     
                     // Set clean data
                     const cleanData = {
-                        nodes: graphData.nodes.map(n => ({...n})),
-                        links: graphData.links.map(l => ({...l}))
+                        nodes: filteredData.nodes.map(n => ({...n})),
+                        links: filteredData.links.map(l => ({...l}))
                     };
                     
                     Graph
                         .graphData(cleanData)
-                        .nodeLabel('name')
+                        .nodeLabel(node => `${node.name}\n${node.group}\nInterest: ${node.interestLevel}/10\nURLs: ${node.urlCount}`)
                         .nodeAutoColorBy('group')
                         .nodeVal('val')
                         .nodeThreeObject(node => {
@@ -501,23 +734,16 @@
                             return createNodeObject(node);
                         })
                         .nodeThreeObjectExtend(false)
-                        .linkWidth(link => {
-                            // Vary width based on relationship strength
-                            const baseWidth = CONFIG.linkWidth;
-                            if (link.label && link.label.includes('concept')) {
-                                return baseWidth * 1.5;
-                            }
-                            return baseWidth;
-                        })
-                        .linkColor(() => '#666666')
+                        .linkWidth(link => getLinkWidth(link))
+                        .linkColor(() => 'rgba(150, 150, 150, 0.5)') // Light grey with 50% transparency
                         .linkOpacity(CONFIG.linkOpacity)
                         .linkDirectionalParticles(2)
                         .linkDirectionalParticleSpeed(0.006)
                         .linkDirectionalParticleColor(() => '#00ff88')
                         .onNodeHover(node => {
-                            document.getElementById('node-info').textContent = node ? 
-                                `${node.name} (${node.group})` : 
-                                'Left-click and drag to rotate • Scroll to zoom';
+                            document.getElementById('node-info').innerHTML = node ? 
+                                `<strong>${node.name}</strong><br>Type: ${node.group}<br>Interest Level: ${node.interestLevel}/10<br>URLs: ${node.urlCount}` : 
+                                '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera';
                         })
                         .onNodeClick(node => {
                             // Center camera on node
@@ -528,7 +754,9 @@
                                 node,
                                 3000
                             );
-                        });
+                        })
+                        .enablePointerInteraction(true)
+                        .enableNodeDrag(true);
                     
                     // Set basic forces
                     Graph.d3Force('charge').strength(CONFIG.forceStrength);
@@ -579,6 +807,30 @@
                     Graph.d3Force('charge').strength(value);
                     Graph.d3ReheatSimulation();
                 }
+            });
+            
+            document.getElementById('link-distance').addEventListener('input', (e) => {
+                const value = parseInt(e.target.value);
+                document.getElementById('distance-value').textContent = value;
+                CONFIG.linkDistance = value;
+                if (Graph) {
+                    Graph.d3Force('link').distance(value);
+                    Graph.d3ReheatSimulation();
+                }
+            });
+            
+            document.getElementById('view-mode').addEventListener('change', (e) => {
+                currentViewMode = e.target.value;
+                applyFilters();
+            });
+            
+            document.getElementById('type-filter').addEventListener('change', (e) => {
+                currentTypeFilter = e.target.value;
+                applyFilters();
+            });
+            
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                applyFilters();
             });
             
             // Toggle controls on mobile
