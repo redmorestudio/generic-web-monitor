@@ -483,8 +483,20 @@
             
             filterSelect.innerHTML = '<option value="">All Categories</option>' + categoryOptions;
             
-            // Update company category select
-            companySelect.innerHTML = categoryOptions + '<option value="Other">Other</option>';
+            // Update company category select - keep the current value if it exists
+            const currentValue = companySelect.value;
+            companySelect.innerHTML = categoryOptions;
+            
+            // Add "Other" option at the end
+            const otherOption = document.createElement('option');
+            otherOption.value = 'Other';
+            otherOption.textContent = 'Other';
+            companySelect.appendChild(otherOption);
+            
+            // Restore the previous selection if it still exists
+            if (currentValue && Array.from(companySelect.options).some(opt => opt.value === currentValue)) {
+                companySelect.value = currentValue;
+            }
         }
 
         // Filter by category
@@ -503,10 +515,14 @@
         function showAddCategoryDialog() {
             const newCategory = prompt('Enter new category name:');
             if (newCategory && newCategory.trim()) {
-                // For now, just add to local list - would need backend update
-                categories.add(newCategory.trim());
+                const trimmedCategory = newCategory.trim();
+                // Add to categories set
+                categories.add(trimmedCategory);
+                // Update all dropdowns
                 updateCategorySelects();
-                showStatus('Category added locally. Add a company with this category to persist it.', 'info');
+                // Select the new category in the Add Company dropdown
+                document.getElementById('companyCategory').value = trimmedCategory;
+                showStatus('Category added! You can now add companies to this category.', 'success');
             }
         }
 
