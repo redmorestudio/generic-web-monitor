@@ -566,18 +566,17 @@
             // Calculate link width based on connection strength
             function getLinkWidth(link) {
                 // Base width
-                let width = 0.2;
+                let width = 0.3;
                 
                 // Calculate strength based on shared properties
                 let strength = 0;
                 
-                // Shared concepts = strongest
+                // Shared concepts = strongest (thick cyan lines to concept nodes)
                 if (link.label && link.label.includes('concept')) {
-                    strength += 3;
+                    strength += 4;
                 }
-                
                 // Shared technologies = medium
-                if (link.label && link.label !== 'uses concept') {
+                else if (link.label && link.label !== 'uses concept') {
                     strength += 2;
                 }
                 
@@ -587,8 +586,10 @@
                 }
                 
                 // Calculate final width
-                width = 0.2 + (strength * 0.2);
-                return Math.min(width, 1.2); // Cap at 1.2
+                width = width + (strength * 0.3);
+                
+                // Cap at reasonable maximum
+                return Math.min(width, 2.0);
             }
             
             // Load and process data
@@ -921,11 +922,16 @@
                         links: filteredData.links.map(l => ({ 
                             source: l.source.id || l.source,
                             target: l.target.id || l.target,
+                            label: l.label,
+                            connectionCount: l.connectionCount,
                             ...l 
                         }))
                     };
                     
                     Graph.graphData(freshData);
+                    
+                    // Re-apply link width function after data update
+                    Graph.linkWidth(link => getLinkWidth(link));
                 }
                 
                 updateLegend();
