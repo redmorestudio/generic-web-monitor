@@ -5,12 +5,50 @@ const puppeteer = require('puppeteer');
 const crypto = require('crypto');
 const path = require('path');
 const dbManager = require('./db-manager');
+const Groq = require('groq-sdk');
+
+// Initialize Groq client for change analysis
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY || process.env.ANTHROPIC_API_KEY
+});
 
 // Configuration
 const BATCH_SIZE = 5; // Process 5 URLs concurrently
 const PAGE_TIMEOUT = 30000; // 30 seconds per page
 const RATE_LIMIT_DELAY = 500; // 500ms between batch starts
 const MAX_RETRIES = 2; // Retry failed URLs
+
+// Interest level assessment prompt
+const CHANGE_ANALYSIS_PROMPT = `You are an AI competitive intelligence analyst. Analyze this web content change and assess its importance.
+
+Provide TWO separate scores (1-10) that will be averaged:
+
+A. TECHNICAL INNOVATION SCORE:
+   - 9-10: Breakthrough AI models, SOTA achievements, novel architectures, 10x improvements
+   - 7-8: Significant technical advances, 2-5x improvements, new capabilities
+   - 5-6: Notable optimizations, useful tools, incremental improvements
+   - 3-4: Minor updates, bug fixes, routine maintenance
+   - 1-2: No technical relevance
+
+B. BUSINESS IMPACT SCORE:
+   - 9-10: Major launches, $100M+ funding, acquisitions, market-reshaping moves
+   - 7-8: Important partnerships, $10M+ funding, market expansion
+   - 5-6: Product updates, new features, team growth
+   - 3-4: Routine updates, minor news
+   - 1-2: Trivial changes
+
+Provide your analysis in this JSON structure:
+{
+  "interest_assessment": {
+    "technical_innovation_score": 0,
+    "business_impact_score": 0,
+    "interest_level": 0,
+    "interest_drivers": [],
+    "category": "",
+    "impact_areas": [],
+    "summary": ""
+  }
+}`;
 
 class IntelligentScraperThreeDB {
   constructor() {
@@ -23,7 +61,7 @@ class IntelligentScraperThreeDB {
   }
 
   async initialize() {
-    console.log('🚀 Starting Intelligent Scraper (Three-Database Architecture)...');
+    console.log('🚀 Starting Intelligent Scraper with Change Analysis...');
     this.startTime = Date.now();
     
     // Check if three-database architecture exists
@@ -84,6 +122,82 @@ class IntelligentScraperThreeDB {
     console.log(`✅ Scraper shutdown complete (took ${duration} minutes)`);
   }
 
+  async analyzeChange(oldContent, newContent, company, url) {
+    try {
+      console.log(`      🧠 Analyzing change with AI...`);
+      
+      // Extract text content from HTML
+      const oldText = oldContent ? this.extractTextFromHtml(oldContent).substring(0, 2000) : '[No previous content]';
+      const newText = newContent ? this.extractTextFromHtml(newContent).substring(0, 2000) : '[No new content]';
+      
+      const prompt = `${CHANGE_ANALYSIS_PROMPT}
+
+Company: ${company} - ${url.url}
+URL Type: ${url.url_type}
+
+PREVIOUS CONTENT:
+${oldText}
+
+CURRENT CONTENT:
+${newText}
+
+Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT.`;
+
+      const response = await groq.chat.completions.create({
+        model: 'llama-3.3-70b-versatile',
+        messages: [{
+          role: 'user',
+          content: prompt
+        }],
+        temperature: 0.5,
+        max_completion_tokens: 1000,
+        top_p: 1,
+        stream: false
+      });
+
+      const result = JSON.parse(response.choices[0].message.content);
+      const assessment = result.interest_assessment;
+      
+      // Calculate average interest level
+      assessment.interest_level = Math.round(
+        (assessment.technical_innovation_score + assessment.business_impact_score) / 2
+      );
+      
+      // Determine category based on interest level
+      if (assessment.interest_level >= 8) assessment.category = 'breakthrough';
+      else if (assessment.interest_level >= 6) assessment.category = 'major_development';
+      else if (assessment.interest_level >= 4) assessment.category = 'notable_update';
+      else if (assessment.interest_level >= 2) assessment.category = 'routine_change';
+      else assessment.category = 'trivial';
+      
+      console.log(`      ✨ Interest Level: ${assessment.interest_level}/10 (${assessment.category})`);
+      
+      return assessment;
+    } catch (error) {
+      console.error(`      ❌ AI analysis failed: ${error.message}`);
+      // Return default assessment on error
+      return {
+        interest_level: 5,
+        technical_innovation_score: 5,
+        business_impact_score: 5,
+        interest_drivers: ['Unable to analyze - using default'],
+        category: 'notable_update',
+        impact_areas: ['unknown'],
+        summary: 'Change detected but analysis failed'
+      };
+    }
+  }
+
+  extractTextFromHtml(html) {
+    // Simple HTML to text extraction
+    return html
+      .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+      .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+
   async scrapeAll() {
     try {
       // Get all companies and their URLs from intelligence database
@@ -118,6 +232,7 @@ class IntelligentScraperThreeDB {
       
       let processedUrls = 0;
       let changesDetected = 0;
+      let changesAnalyzed = 0;
       let errors = 0;
       
       // Process URLs in batches
@@ -139,6 +254,9 @@ class IntelligentScraperThreeDB {
             processedUrls++;
             if (result.changed) {
               changesDetected++;
+              if (result.analyzed) {
+                changesAnalyzed++;
+              }
             }
           } else {
             errors++;
@@ -167,6 +285,7 @@ class IntelligentScraperThreeDB {
       console.log(`   Total URLs: ${allUrls.length}`);
       console.log(`   Processed: ${processedUrls}`);
       console.log(`   Changes Detected: ${changesDetected}`);
+      console.log(`   Changes Analyzed: ${changesAnalyzed}`);
       console.log(`   Errors: ${errors}`);
       console.log(`   Success Rate: ${((processedUrls / allUrls.length) * 100).toFixed(1)}%`);
       
@@ -199,6 +318,7 @@ class IntelligentScraperThreeDB {
       return {
         success: false,
         changed: false,
+        analyzed: false,
         url: urlConfig.url,
         error: error.message
       };
@@ -225,7 +345,7 @@ class IntelligentScraperThreeDB {
       
       const statusCode = response.status();
       
-      // Wait a bit for dynamic content (reduced from 2000ms)
+      // Wait a bit for dynamic content
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Get full HTML content
@@ -239,7 +359,7 @@ class IntelligentScraperThreeDB {
       
       // Check if content has changed
       const latestStmt = this.rawDb.prepare(`
-        SELECT content_hash FROM raw_html
+        SELECT id, content_hash, html_content FROM raw_html
         WHERE url_id = ?
         ORDER BY scraped_at DESC
         LIMIT 1
@@ -248,7 +368,7 @@ class IntelligentScraperThreeDB {
       
       const hasChanged = !latest || latest.content_hash !== contentHash;
       
-      // Always store the raw HTML (even if unchanged, for completeness)
+      // Always store the raw HTML
       const insertStmt = this.rawDb.prepare(`
         INSERT INTO raw_html (
           url_id, company_name, url, content_hash, html_content,
@@ -265,21 +385,20 @@ class IntelligentScraperThreeDB {
         statusCode
       );
       
+      let analyzed = false;
+      
       if (hasChanged) {
         console.log(`      ✨ Change detected!`);
         
         // Get the ID of the row we just inserted
         const newContentId = this.rawDb.prepare('SELECT last_insert_rowid() as id').get().id;
         
-        // Get the previous content ID if it exists
-        const oldContentId = latest ? this.rawDb.prepare(`
-          SELECT id FROM raw_html 
-          WHERE url_id = ? AND content_hash = ?
-          ORDER BY scraped_at DESC
-          LIMIT 1
-        `).get(urlConfig.id, latest.content_hash)?.id : null;
+        // Analyze the change with AI
+        const oldContent = latest ? latest.html_content : null;
+        const assessment = await this.analyzeChange(oldContent, htmlContent, companyName, urlConfig);
+        analyzed = true;
         
-        // Insert change detection record
+        // Insert change detection record with proper interest level
         const changeStmt = this.processedDb.prepare(`
           INSERT INTO change_detection (
             url_id, 
@@ -288,18 +407,30 @@ class IntelligentScraperThreeDB {
             old_content_id, 
             new_content_id,
             relevance_score,
+            interest_level,
+            interest_data,
             detected_at
-          ) VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
         `);
         
         changeStmt.run(
           urlConfig.id,
           'content_update',
-          `Content changed for ${companyName} - ${urlConfig.url}`,
-          oldContentId,
+          assessment.summary || `Content changed for ${companyName} - ${urlConfig.url}`,
+          latest?.id || null,
           newContentId,
-          5 // Default relevance score, will be updated by AI analysis
+          assessment.interest_level, // For backward compatibility
+          assessment.interest_level, // New field
+          JSON.stringify(assessment), // Store full assessment data
         );
+        
+        // Update last_scraped timestamp
+        const updateUrlStmt = this.intelligenceDb.prepare(`
+          UPDATE urls SET last_scraped = datetime('now') WHERE id = ?
+        `);
+        updateUrlStmt.run(urlConfig.id);
+      } else {
+        console.log(`      ✓ No changes`);
       }
       
       await page.close();
@@ -307,120 +438,38 @@ class IntelligentScraperThreeDB {
       return {
         success: true,
         changed: hasChanged,
+        analyzed: analyzed,
         url: urlConfig.url
       };
       
     } catch (error) {
-      console.error(`      ❌ Error: ${error.message.split('\n')[0]}`);
-      
-      // Store error in database
-      const errorStmt = this.rawDb.prepare(`
-        INSERT INTO raw_html (
-          url_id, company_name, url, status_code, error_message,
-          scraped_at
-        ) VALUES (?, ?, ?, ?, ?, datetime('now'))
-      `);
-      
-      errorStmt.run(
-        urlConfig.id,
-        companyName,
-        urlConfig.url,
-        0,
-        error.message
-      );
+      console.error(`      ❌ Error scraping ${urlConfig.url}:`, error.message);
       
       await page.close();
       
       throw error;
     }
   }
+}
 
-  async scrapeSingle(urlId) {
-    try {
-      // Get URL details from intelligence database
-      const urlStmt = this.intelligenceDb.prepare(`
-        SELECT u.*, c.name as company_name
-        FROM urls u
-        JOIN companies c ON u.company_id = c.id
-        WHERE u.id = ?
-      `);
-      const urlConfig = urlStmt.get(urlId);
-      
-      if (!urlConfig) {
-        throw new Error(`URL with ID ${urlId} not found`);
-      }
-      
-      console.log(`🎯 Scraping single URL: ${urlConfig.url}`);
-      const result = await this.scrapeUrlWithRetry(urlConfig, urlConfig.company_name);
-      
-      // Update scraping run stats
-      if (this.runId) {
-        const updateStmt = this.rawDb.prepare(`
-          UPDATE scrape_runs 
-          SET urls_processed = 1, 
-              urls_changed = ?,
-              errors_count = ?
-          WHERE id = ?
-        `);
-        updateStmt.run(
-          result.changed ? 1 : 0,
-          result.success ? 0 : 1,
-          this.runId
-        );
-      }
-      
-      return result;
-    } catch (error) {
-      console.error('❌ Error in single scrape:', error.message);
-      return {
-        success: false,
-        error: error.message
-      };
-    }
+// Main execution
+async function main() {
+  const scraper = new IntelligentScraperThreeDB();
+  
+  try {
+    await scraper.initialize();
+    await scraper.scrapeAll();
+  } catch (error) {
+    console.error('Fatal error:', error);
+    process.exit(1);
+  } finally {
+    await scraper.shutdown();
   }
 }
 
-// Export the class
-module.exports = IntelligentScraperThreeDB;
-
-// Main execution if run directly
+// Run if called directly
 if (require.main === module) {
-  async function main() {
-    const scraper = new IntelligentScraperThreeDB();
-    
-    try {
-      await scraper.initialize();
-      
-      // Check if specific URL ID was provided
-      const urlId = process.argv[2];
-      
-      if (urlId) {
-        // Scrape single URL
-        await scraper.scrapeSingle(urlId);
-      } else {
-        // Scrape all URLs
-        await scraper.scrapeAll();
-      }
-      
-    } catch (error) {
-      console.error('❌ Fatal error:', error);
-      process.exit(1);
-    } finally {
-      await scraper.shutdown();
-    }
-  }
-
-  // Handle process termination
-  process.on('SIGINT', async () => {
-    console.log('\n🛑 Received SIGINT, shutting down gracefully...');
-    process.exit(0);
-  });
-
-  process.on('SIGTERM', async () => {
-    console.log('\n🛑 Received SIGTERM, shutting down gracefully...');
-    process.exit(0);
-  });
-
-  // Run the scraper
-  main();
+  main().catch(console.error);
 }
+
+module.exports = IntelligentScraperThreeDB;

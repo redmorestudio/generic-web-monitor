@@ -7,12 +7,18 @@ const fs = require('fs');
 // Load environment variables
 require('dotenv').config();
 
+// Import route modules
+const changeDetailsRouter = require('./routes/change-details');
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
+
+// Mount API routes
+app.use('/api', changeDetailsRouter);
 
 // Database connection
 const dbPath = path.join(__dirname, 'data', 'monitor.db');

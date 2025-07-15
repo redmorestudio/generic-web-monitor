@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Competitive Monitor - 3D Force Graph</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #eee;
+            overflow: hidden;
+        }
+        
+        /* Mobile controls styling */
+        #toggle-controls {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 12px 16px;
+            border-radius: 25px;
+            border: 1px solid #333;
+            cursor: pointer;
+            z-index: 101;
+            color: #00ff88;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Desktop collapse button */
+        .collapse-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: #00ff88;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        .collapse-btn:hover {
+            opacity: 1;
+        }
+        
+        /* Show mobile toggle on small screens */
+        @media (max-width: 768px) {
+            #toggle-controls {
+                display: block;
+            }
+            
+            #controls {
+                position: fixed;
+                top: 0;
+                right: -350px;
+                height: 100%;
+                transition: right 0.3s ease;
+                max-height: 100vh;
+                border-radius: 0;
+                border-left: 1px solid #333;
+            }
+            
+            #controls.open {
+                right: 0;
+            }
+            
+            #legend {
+                left: 10px;
+                bottom: 60px;
+            }
+            
+            .collapse-btn {
+                display: none;
+            }
+        }
+        
+        #3d-graph {
+            width: 100vw;
+            height: 100vh;
+        }
+        
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            max-width: 350px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        #controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            z-index: 100;
+            width: 320px;
+            backdrop-filter: blur(10px);
+            max-height: 90vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #00ff88 #1a1a2e;
+        }
+        
+        #controls::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        #controls::-webkit-scrollbar-track {
+            background: #1a1a2e;
+            border-radius: 4px;
+        }
+        
+        #controls::-webkit-scrollbar-thumb {
+            background: #00ff88;
+            border-radius: 4px;
+        }
+        
+        #controls::-webkit-scrollbar-thumb:hover {
+            background: #00cc66;
+        }
+        
+        #controls.collapsed {
+            width: auto;
+            padding: 10px;
+            overflow: hidden;
+        }
+        
+        #controls.collapsed .control-content {
+            display: none;
+        }
+        
+        #controls.collapsed .collapse-btn::after {
+            content: '◀';
+        }
+        
+        .collapse-btn::after {
+            content: '▶';
+        }
+        
+        .control-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .control-group:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .control-group h4 {
+            margin: 0 0 10px 0;
+            color: #00ff88;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            color: #aaa;
+            font-size: 12px;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            margin: 5px 0;
+            cursor: pointer;
+        }
+        
+        input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            background: #1a1a2e;
+            color: #eee;
+            border: 1px solid #333;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+        
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #1a1a2e;
+            color: #eee;
+            border: 1px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s ease;
+        }
+        
+        button:hover {
+            background: #2a2a3e;
+            border-color: #00ff88;
+            transform: translateY(-1px);
+        }
+        
+        button.active {
+            background: #00ff88;
+            color: #0a0a0f;
+            font-weight: bold;
+        }
+        
+        .reset-button {
+            background: #e74c3c;
+            margin-top: 10px;
+        }
+        
+        .reset-button:hover {
+            background: #c0392b;
+            border-color: #e74c3c;
+        }
+        
+        #node-info {
+            font-size: 12px;
+            color: #aaa;
+            margin-top: 10px;
+        }
+        
+        #stats {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #00ff88;
+            font-size: 12px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        #legend {
+            position: absolute;
+            bottom: 20px;
+            right: 360px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #00ff88;
+            font-size: 11px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            max-width: 200px;
+        }
+        
+        #legend h4 {
+            margin: 0 0 10px 0;
+            color: #00ff88;
+            font-size: 12px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: #00ff88;
+            text-align: center;
+        }
+        
+        .loading-spinner {
+            border: 3px solid rgba(0, 255, 136, 0.3);
+            border-radius: 50%;
+            border-top: 3px solid #00ff88;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Context menu styles */
+        #contextMenu {
+            position: absolute;
+            background: rgba(20, 20, 30, 0.95);
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            padding: 5px 0;
+            display: none;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .context-menu-item {
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+        
+        .context-menu-item:hover {
+            background: rgba(0, 255, 136, 0.2);
+        }
+        
+        .context-menu-separator {
+            height: 1px;
+            background: #333;
+            margin: 5px 0;
+        }
+        
+        /* Hover tooltip */
+        #hover-info {
+            position: absolute;
+            background: rgba(20, 20, 30, 0.98);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #00ff88;
+            font-size: 12px;
+            max-width: 250px;
+            display: none;
+            z-index: 1000;
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        
+        #hover-info.active {
+            display: block;
+        }
+        
+        #hover-info h4 {
+            margin: 0 0 8px 0;
+            color: #00ff88;
+            font-size: 14px;
+        }
+        
+        #hover-info .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 4px 0;
+            font-size: 11px;
+        }
+        
+        #hover-info .info-label {
+            color: #888;
+        }
+        
+        #hover-info .info-value {
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .help-text {
+            font-size: 10px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        /* Range input value display */
+        .range-value {
+            color: #00ff88;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/d3@7"></script>
+    <script src="https://unpkg.com/d3-force-3d@3"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+</head>
+<body>
+    <div id="loading">
+        <div>Loading AI Competitive Intelligence Graph...</div>
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <div id="3d-graph"></div>
+    
+    <div id="info" style="display: none;">
+        <h3>🧠 AI Competitive Monitor</h3>
+        <div id="node-info">Left-click and drag to rotate • Scroll to zoom • Right-click nodes for menu</div>
+    </div>
+    
+    <div id="hover-info"></div>
+    
+    <div id="controls" style="display: none;">
+        <button class="collapse-btn" onclick="this.parentElement.classList.toggle('collapsed')"></button>
+        <div class="control-content">
+            <div class="control-group">
+                <h4>Graph Physics</h4>
+                <label>
+                    Force Strength: <span class="range-value" id="force-value">-100</span>
+                </label>
+                <input type="range" id="force-strength" min="-500" max="100" value="-100" step="10">
+                <div class="help-text">Negative values repel nodes, positive attract</div>
+                
+                <label style="margin-top: 10px;">
+                    Link Distance: <span class="range-value" id="distance-value">30</span>
+                </label>
+                <input type="range" id="link-distance" min="5" max="200" value="30" step="5">
+                <div class="help-text">Distance between connected nodes</div>
+            </div>
+            
+            <div class="control-group">
+                <h4>View Options</h4>
+                <label>View Mode:</label>
+                <select id="view-mode">
+                    <option value="all">All Companies</option>
+                    <option value="high-interest">High Interest Only</option>
+                    <option value="recent-changes">Recent Changes</option>
+                    <option value="by-type">Group by Type</option>
+                </select>
+                
+                <label style="margin-top: 10px;">Search:</label>
+                <input type="text" id="search-input" placeholder="Search companies...">
+            </div>
+            
+            <div class="control-group">
+                <h4>Display Settings</h4>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="toggle-links" checked>
+                    <label for="toggle-links">Show Links</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="toggle-labels" checked>
+                    <label for="toggle-labels">Show Labels</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="toggle-particles">
+                    <label for="toggle-particles">Show Particles</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="toggle-thin-lines" checked>
+                    <label for="toggle-thin-lines">Thin Lines</label>
+                </div>
+            </div>
+            
+            <button class="reset-button" onclick="resetView()">Reset View</button>
+        </div>
+    </div>
+    
+    <div id="stats" style="display: none;">
+        <strong>Graph Stats:</strong><br>
+        Nodes: <span id="node-count">0</span><br>
+        Links: <span id="link-count">0</span><br>
+        Types: <span id="type-count">0</span>
+    </div>
+    
+    <div id="legend" style="display: none;">
+        <h4>Legend</h4>
+        <div id="legend-content"></div>
+    </div>
+    
+    <button id="toggle-controls">☰ Controls</button>
+    
+    <!-- Context Menu -->
+    <div id="contextMenu">
+        <div class="context-menu-item" onclick="focusOnConnected()">Focus on Connected</div>
+        <div class="context-menu-item" onclick="hideNode()">Hide Node</div>
+        <div class="context-menu-item" onclick="showNodeInfo()">Show Details</div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" onclick="expandNode()">Expand Connections</div>
+        <div class="context-menu-item" onclick="showAllNodes()">Show All Nodes</div>
+    </div>
+    
+    <script>
+        // Main graph logic
+        (function() {
+            const CONFIG = {
+                nodeColors: {
+                    'LLM Providers': '#ff6b6b',
+                    'AI Hardware': '#4ecdc4',
+                    'AI Frameworks': '#45b7d1',
+                    'Cloud Providers': '#96ceb4',
+                    'AI Applications': '#f7b731',
+                    'AI Research': '#5f27cd',
+                    'Enterprise AI': '#e74c3c',
+                    'AI Infrastructure': '#9b59b6',
+                    'Data Analytics': '#3498db',
+                    'AI Tools': '#1abc9c',
+                    'Search & Discovery': '#f39c12',
+                    'Social Platforms': '#34495e',
+                    'Automotive AI': '#16a085',
+                    'Conversational AI': '#ff9ff3',
+                    'Computer Vision': '#54a0ff',
+                    'AI Chips': '#48dbfb',
+                    'Edge AI': '#0abde3',
+                    'MLOps': '#00d2d3',
+                    'AI Security': '#ee5a6f',
+                    'Healthcare AI': '#10ac84',
+                    'Robotics': '#f368e0',
+                    'NLP': '#ff6b9d',
+                    'AI Ethics': '#c44569',
+                    'Quantum AI': '#786fa6',
+                    'AI Coding': '#feca57',
+                    'AI Search': '#ff9ff3',
+                    'Image Generation': '#f368e0',
+                    'AI Voice/Audio': '#ee5a6f',
+                    'Video AI': '#48dbfb',
+                    'default': '#667eea'
+                },
+                interestColors: {
+                    'high': '#ff4444',
+                    'medium': '#ffa726',
+                    'low': '#66bb6a',
+                    'unknown': '#666666'
+                },
+                linkOpacity: 0.3,
+                linkWidth: 0.5,
+                nodeRelSize: 4,
+                forceStrength: -100,
+                linkDistance: 30,
+                particleSpeed: 0.003
+            };
+            
+            let Graph;
+            let graphData = { nodes: [], links: [] };
+            let fullGraphData = { nodes: [], links: [] };
+            let rawData = {};
+            let selectedNode = null;
+            let hoveredNode = null;
+            let hiddenNodes = new Set();
+            
+            // UI state
+            let particlesEnabled = false;
+            let labelsEnabled = true;
+            let linksEnabled = true;
+            let thinLinesEnabled = true;
+            let currentViewMode = 'all';
+            
+            // Initialize the graph
+            async function initGraph() {
+                try {
+                    console.log('Starting graph initialization...');
+                    
+                    // Determine base URL
+                    const isLocal = window.location.hostname === 'localhost' || 
+                                  window.location.hostname === '127.0.0.1' || 
+                                  window.location.hostname === '' ||
+                                  window.location.protocol === 'file:';
+                    
+                    const baseUrl = isLocal ? './api-data' : 'https://redmorestudio.github.io/ai-competitive-monitor/api-data';
+                    
+                    console.log('Loading from:', baseUrl);
+                    
+                    // Fetch data
+                    console.log('Fetching dashboard data...');
+                    const dashboardResponse = await fetch(`${baseUrl}/dashboard.json`);
+                    if (!dashboardResponse.ok) {
+                        throw new Error(`Failed to fetch dashboard: ${dashboardResponse.status} ${dashboardResponse.statusText}`);
+                    }
+                    
+                    console.log('Parsing dashboard data...');
+                    rawData.dashboard = await dashboardResponse.json();
+                    
+                    // Fetch recent changes data
+                    console.log('Fetching recent changes...');
+                    try {
+                        const changesResponse = await fetch(`${baseUrl}/changes.json`);
+                        if (changesResponse.ok) {
+                            rawData.changes = await changesResponse.json();
+                            console.log('Recent changes loaded:', rawData.changes.changes?.length || 0);
+                        }
+                    } catch (e) {
+                        console.log('Could not load changes data:', e);
+                    }
+                    
+                    console.log('Dashboard data loaded:', {
+                        hasData: !!rawData.dashboard,
+                        hasCompanyActivity: !!rawData.dashboard.company_activity,
+                        companyCount: rawData.dashboard.company_activity?.length || 0,
+                        stats: rawData.dashboard.stats
+                    });
+                    
+                    // Validate data structure
+                    if (!rawData.dashboard.company_activity || rawData.dashboard.company_activity.length === 0) {
+                        throw new Error('No company activity data found');
+                    }
+                    
+                    // Build initial graph data
+                    console.log('Building company network...');
+                    buildCompanyNetwork();
+                    console.log('Graph data after build:', graphData);
+                    
+                    // Update legend
+                    updateLegend();
+                    
+                    // Hide loading, show controls
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('info').style.display = 'block';
+                    document.getElementById('controls').style.display = 'block';
+                    document.getElementById('stats').style.display = 'block';
+                    document.getElementById('legend').style.display = 'block';
+                    
+                    // Initialize the 3D graph
+                    Graph = ForceGraph3D()(document.getElementById('3d-graph'))
+                        .graphData(graphData)
+                        .nodeLabel(() => '') // Disable default labels
+                        .nodeAutoColorBy('group')
+                        .nodeThreeObject(node => createNodeObject(node))
+                        .nodeThreeObjectExtend(false)
+                        .linkWidth(link => getLinkWidth(link))
+                        .linkOpacity(CONFIG.linkOpacity)
+                        .linkDirectionalParticles(0)
+                        .linkDirectionalParticleSpeed(CONFIG.particleSpeed)
+                        .linkDirectionalParticleWidth(1.5)
+                        .linkDirectionalParticleColor(() => '#00ff88')
+                        .onNodeHover(handleNodeHover)
+                        .onNodeClick(handleNodeClick)
+                        .onNodeRightClick((node, event) => {
+                            event.preventDefault();
+                            selectedNode = node;
+                            
+                            const menu = document.getElementById('contextMenu');
+                            menu.style.display = 'block';
+                            menu.style.left = event.clientX + 'px';
+                            menu.style.top = event.clientY + 'px';
+                            
+                            // Keep menu on screen
+                            const rect = menu.getBoundingClientRect();
+                            if (rect.right > window.innerWidth) {
+                                menu.style.left = (event.clientX - rect.width) + 'px';
+                            }
+                            if (rect.bottom > window.innerHeight) {
+                                menu.style.top = (event.clientY - rect.height) + 'px';
+                            }
+                            
+                            return false; // Prevent default browser context menu
+                        })
+                        .enablePointerInteraction(true)
+                        .enableNodeDrag(true);
+                    
+                    Graph.d3Force('charge').strength(CONFIG.forceStrength);
+                    Graph.d3Force('link').distance(CONFIG.linkDistance);
+                    
+                    Graph.cameraPosition({ x: 0, y: 0, z: 500 });
+                    
+                    updateStats();
+                    console.log('Graph initialized successfully!');
+                    
+                } catch (error) {
+                    console.error('Error initializing graph:', error);
+                    document.getElementById('loading').innerHTML = `
+                        <div style="color: #ff6b6b; text-align: center;">
+                            <h3>Error Loading Data</h3>
+                            <p>${error.message}</p>
+                            <p style="font-size: 14px; color: #aaa;">
+                                Make sure you're running a local server:<br>
+                                <code>python -m http.server 8000</code><br>
+                                Then visit: http://localhost:8000/3d-force-graph-fixed.html
+                            </p>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Build company network from data
+            function buildCompanyNetwork() {
+                graphData.nodes = [];
+                graphData.links = [];
+                const nodeMap = new Map();
+                
+                // Create company nodes
+                rawData.dashboard.company_activity.forEach((company) => {
+                    const node = {
+                        id: company.company,
+                        name: company.company,
+                        group: company.type,
+                        color: CONFIG.nodeColors[company.type] || CONFIG.nodeColors.default,
+                        interestLevel: company.intelligence?.interest_level || 0,
+                        interestCategory: company.intelligence?.interest_category || 'unknown',
+                        urlCount: company.url_count,
+                        val: Math.max(company.url_count * 3, 5),
+                        // Store additional data for hover/click
+                        products: company.intelligence?.products || [],
+                        technologies: company.intelligence?.technologies || [],
+                        concepts: company.intelligence?.ai_ml_concepts || [],
+                        partners: company.intelligence?.partners || []
+                    };
+                    
+                    graphData.nodes.push(node);
+                    nodeMap.set(company.company, node);
+                });
+                
+                // Create technology/concept connections
+                const techConnections = new Map();
+                const conceptConnections = new Map();
+                
+                rawData.dashboard.company_activity.forEach(company => {
+                    // Technology connections
+                    if (company.intelligence?.technologies) {
+                        company.intelligence.technologies.forEach(tech => {
+                            if (!techConnections.has(tech)) {
+                                techConnections.set(tech, []);
+                            }
+                            techConnections.get(tech).push(company.company);
+                        });
+                    }
+                    
+                    // AI/ML concept connections
+                    if (company.intelligence?.ai_ml_concepts) {
+                        company.intelligence.ai_ml_concepts.forEach(concept => {
+                            if (!conceptConnections.has(concept)) {
+                                conceptConnections.set(concept, []);
+                            }
+                            conceptConnections.get(concept).push(company.company);
+                        });
+                    }
+                });
+                
+                // Create links between companies sharing technologies
+                techConnections.forEach((companies, tech) => {
+                    if (companies.length > 1) {
+                        for (let i = 0; i < companies.length - 1; i++) {
+                            for (let j = i + 1; j < companies.length; j++) {
+                                graphData.links.push({
+                                    source: companies[i],
+                                    target: companies[j],
+                                    type: 'technology',
+                                    label: tech,
+                                    color: '#4ecdc4',
+                                    width: 0.5
+                                });
+                            }
+                        }
+                    }
+                });
+                
+                // Store full graph for filtering
+                fullGraphData = {
+                    nodes: [...graphData.nodes],
+                    links: [...graphData.links]
+                };
+            }
+            
+            // Create 3D node object
+            function createNodeObject(node) {
+                const group = new THREE.Group();
+                
+                // Create text sprite with proper sizing
+                if (labelsEnabled) {
+                    const sprite = new SpriteText(node.name);
+                    sprite.material.depthWrite = false;
+                    sprite.color = node.color;
+                    sprite.textHeight = 8;
+                    group.add(sprite);
+                }
+                
+                // Add interest level indicator
+                if (node.interestLevel > 7) {
+                    const ringGeometry = new THREE.RingGeometry(6, 8, 32);
+                    const ringMaterial = new THREE.MeshBasicMaterial({
+                        color: CONFIG.interestColors[node.interestCategory],
+                        transparent: true,
+                        opacity: 0.6,
+                        side: THREE.DoubleSide
+                    });
+                    const ring = new THREE.Mesh(ringGeometry, ringMaterial);
+                    group.add(ring);
+                }
+                
+                return group;
+            }
+            
+            // Get link width based on settings
+            function getLinkWidth(link) {
+                if (!linksEnabled) return 0;
+                const baseWidth = link.width || CONFIG.linkWidth;
+                return thinLinesEnabled ? baseWidth * 0.5 : baseWidth;
+            }
+            
+            // Handle node hover
+            function handleNodeHover(node) {
+                hoveredNode = node;
+                
+                if (!node) {
+                    document.getElementById('hover-info').classList.remove('active');
+                    return;
+                }
+                
+                // Build hover info
+                let infoHtml = `<h4>${node.name}</h4>`;
+                infoHtml += `<div class="info-row"><span class="info-label">Type:</span><span class="info-value">${node.group}</span></div>`;
+                infoHtml += `<div class="info-row"><span class="info-label">Interest:</span><span class="info-value">${node.interestCategory} (${node.interestLevel}/10)</span></div>`;
+                infoHtml += `<div class="info-row"><span class="info-label">URLs:</span><span class="info-value">${node.urlCount}</span></div>`;
+                
+                if (node.products.length > 0) {
+                    infoHtml += `<div class="info-row"><span class="info-label">Products:</span><span class="info-value">${node.products.slice(0, 3).join(', ')}</span></div>`;
+                }
+                
+                const hoverBox = document.getElementById('hover-info');
+                hoverBox.innerHTML = infoHtml;
+                hoverBox.classList.add('active');
+                
+                // Position near cursor
+                const coords = Graph.graph2ScreenCoords(node.x, node.y, node.z);
+                hoverBox.style.left = (coords.x + 20) + 'px';
+                hoverBox.style.top = (coords.y - 50) + 'px';
+            }
+            
+            // Handle node click
+            function handleNodeClick(node) {
+                selectedNode = node;
+                
+                // Focus camera on node
+                const distance = 150;
+                const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+                
+                Graph.cameraPosition(
+                    { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
+                    node,
+                    3000
+                );
+                
+                // Update node info
+                updateNodeInfo(node);
+            }
+            
+            // Update node info display
+            function updateNodeInfo(node) {
+                let info = `Selected: ${node.name} (${node.group})`;
+                if (node.technologies.length > 0) {
+                    info += `<br>Tech: ${node.technologies.join(', ')}`;
+                }
+                if (node.concepts.length > 0) {
+                    info += `<br>Focus: ${node.concepts.join(', ')}`;
+                }
+                document.getElementById('node-info').innerHTML = info;
+            }
+            
+            // Update stats
+            function updateStats() {
+                const nodeCount = graphData.nodes.length;
+                const linkCount = graphData.links.length;
+                const types = new Set(graphData.nodes.map(n => n.group)).size;
+                
+                document.getElementById('node-count').textContent = nodeCount;
+                document.getElementById('link-count').textContent = linkCount;
+                document.getElementById('type-count').textContent = types;
+            }
+            
+            // Update legend
+            function updateLegend() {
+                const types = new Set();
+                graphData.nodes.forEach(node => types.add(node.group));
+                
+                let legendHtml = '';
+                Array.from(types).sort().forEach(type => {
+                    const color = CONFIG.nodeColors[type] || CONFIG.nodeColors.default;
+                    legendHtml += `
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: ${color}"></div>
+                            <span>${type}</span>
+                        </div>
+                    `;
+                });
+                
+                document.getElementById('legend-content').innerHTML = legendHtml;
+            }
+            
+            // Apply filters
+            function applyFilters() {
+                const searchTerm = document.getElementById('search-input').value.toLowerCase();
+                let filteredNodes = [...fullGraphData.nodes];
+                let filteredLinks = [...fullGraphData.links];
+                
+                // Apply view mode filter
+                switch (currentViewMode) {
+                    case 'high-interest':
+                        filteredNodes = filteredNodes.filter(n => n.interestLevel >= 7);
+                        break;
+                    case 'recent-changes':
+                        // Filter based on recent activity if we have that data
+                        break;
+                    case 'by-type':
+                        // Group by type logic
+                        break;
+                }
+                
+                // Apply search filter
+                if (searchTerm) {
+                    filteredNodes = filteredNodes.filter(n => 
+                        n.name.toLowerCase().includes(searchTerm) ||
+                        n.group.toLowerCase().includes(searchTerm)
+                    );
+                }
+                
+                // Filter out hidden nodes
+                filteredNodes = filteredNodes.filter(n => !hiddenNodes.has(n.id));
+                
+                // Update links to only include visible nodes
+                const visibleIds = new Set(filteredNodes.map(n => n.id));
+                filteredLinks = filteredLinks.filter(l => 
+                    visibleIds.has(l.source.id || l.source) && 
+                    visibleIds.has(l.target.id || l.target)
+                );
+                
+                // Update graph
+                graphData = { nodes: filteredNodes, links: filteredLinks };
+                if (Graph) {
+                    Graph.graphData(graphData);
+                    updateStats();
+                    updateLegend();
+                }
+            }
+            
+            // Context menu functions
+            window.focusOnConnected = function() {
+                if (!selectedNode) return;
+                
+                const connectedNodes = new Set([selectedNode]);
+                const connectedLinks = [];
+                
+                fullGraphData.links.forEach(link => {
+                    if (link.source === selectedNode.id || link.target === selectedNode.id ||
+                        link.source.id === selectedNode.id || link.target.id === selectedNode.id) {
+                        connectedLinks.push(link);
+                        // Add connected nodes
+                        const sourceNode = fullGraphData.nodes.find(n => n.id === (link.source.id || link.source));
+                        const targetNode = fullGraphData.nodes.find(n => n.id === (link.target.id || link.target));
+                        if (sourceNode) connectedNodes.add(sourceNode);
+                        if (targetNode) connectedNodes.add(targetNode);
+                    }
+                });
+                
+                graphData = {
+                    nodes: Array.from(connectedNodes),
+                    links: connectedLinks
+                };
+                
+                Graph.graphData(graphData);
+                setTimeout(() => Graph.zoomToFit(400), 100);
+                updateStats();
+                updateLegend();
+                
+                document.getElementById('contextMenu').style.display = 'none';
+            };
+            
+            window.hideNode = function() {
+                if (!selectedNode) return;
+                hiddenNodes.add(selectedNode.id);
+                applyFilters();
+                document.getElementById('contextMenu').style.display = 'none';
+            };
+            
+            window.showNodeInfo = function() {
+                if (!selectedNode) return;
+                updateNodeInfo(selectedNode);
+                document.getElementById('contextMenu').style.display = 'none';
+            };
+            
+            window.expandNode = function() {
+                // Implement expand logic
+                document.getElementById('contextMenu').style.display = 'none';
+            };
+            
+            window.showAllNodes = function() {
+                hiddenNodes.clear();
+                graphData = {
+                    nodes: [...fullGraphData.nodes],
+                    links: [...fullGraphData.links]
+                };
+                Graph.graphData(graphData);
+                updateStats();
+                updateLegend();
+                document.getElementById('contextMenu').style.display = 'none';
+            };
+            
+            window.resetView = function() {
+                // Reset all filters and view
+                hiddenNodes.clear();
+                document.getElementById('search-input').value = '';
+                document.getElementById('view-mode').value = 'all';
+                currentViewMode = 'all';
+                
+                graphData = {
+                    nodes: [...fullGraphData.nodes],
+                    links: [...fullGraphData.links]
+                };
+                
+                if (Graph) {
+                    Graph.graphData(graphData);
+                    Graph.cameraPosition({ x: 0, y: 0, z: 500 });
+                    updateStats();
+                    updateLegend();
+                }
+            };
+            
+            // Event handlers
+            document.getElementById('toggle-links').addEventListener('change', (e) => {
+                linksEnabled = e.target.checked;
+                if (Graph) {
+                    Graph.linkOpacity(linksEnabled ? CONFIG.linkOpacity : 0);
+                }
+            });
+            
+            document.getElementById('toggle-labels').addEventListener('change', (e) => {
+                labelsEnabled = e.target.checked;
+                if (Graph) {
+                    Graph.nodeThreeObject(node => {
+                        if (!labelsEnabled) return new THREE.Mesh();
+                        return createNodeObject(node);
+                    });
+                }
+            });
+            
+            document.getElementById('toggle-particles').addEventListener('change', (e) => {
+                particlesEnabled = e.target.checked;
+                if (Graph) {
+                    Graph.linkDirectionalParticles(particlesEnabled ? 2 : 0);
+                }
+            });
+            
+            document.getElementById('toggle-thin-lines').addEventListener('change', (e) => {
+                thinLinesEnabled = e.target.checked;
+                if (Graph) {
+                    Graph.linkWidth(link => getLinkWidth(link));
+                }
+            });
+            
+            document.getElementById('force-strength').addEventListener('input', (e) => {
+                const value = parseInt(e.target.value);
+                document.getElementById('force-value').textContent = value;
+                CONFIG.forceStrength = value;
+                if (Graph) {
+                    Graph.d3Force('charge').strength(value);
+                    Graph.d3ReheatSimulation();
+                }
+            });
+            
+            document.getElementById('link-distance').addEventListener('input', (e) => {
+                const value = parseInt(e.target.value);
+                document.getElementById('distance-value').textContent = value;
+                CONFIG.linkDistance = value;
+                if (Graph) {
+                    Graph.d3Force('link').distance(value);
+                    Graph.d3ReheatSimulation();
+                }
+            });
+            
+            document.getElementById('view-mode').addEventListener('change', (e) => {
+                currentViewMode = e.target.value;
+                applyFilters();
+            });
+            
+            document.getElementById('search-input').addEventListener('input', (e) => {
+                applyFilters();
+            });
+            
+            // Toggle controls on mobile
+            document.getElementById('toggle-controls').addEventListener('click', () => {
+                document.getElementById('controls').classList.toggle('open');
+            });
+            
+            // Hide context menu on click outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('#contextMenu')) {
+                    document.getElementById('contextMenu').style.display = 'none';
+                }
+            });
+            
+            // Start loading
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initGraph);
+            } else {
+                initGraph();
+            }
+        })();
+    </script>
+</body>
+</html>
