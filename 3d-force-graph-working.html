@@ -795,8 +795,8 @@
                 
                 // Filter nodes
                 filteredData.nodes = graphData.nodes.filter(node => {
-                    // Type filter
-                    if (!selectedTypes.has(node.group)) {
+                    // Type filter - if no types selected, show all
+                    if (selectedTypes.size > 0 && !selectedTypes.has(node.group)) {
                         return false;
                     }
                     
@@ -863,7 +863,8 @@
             
             function updateLegend() {
                 const nodeTypes = new Map();
-                const dataToUse = filteredData.nodes.length > 0 ? filteredData : graphData;
+                // If no filters selected or no filtered nodes, use all graph data
+                const dataToUse = (selectedTypes.size === 0 || filteredData.nodes.length === 0) ? graphData : filteredData;
                 
                 dataToUse.nodes.forEach(node => {
                     const type = node.group;
