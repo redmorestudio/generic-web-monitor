@@ -30,6 +30,24 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
         
+        /* Desktop collapse button */
+        .collapse-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            color: #00ff88;
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+        }
+        
+        .collapse-btn:hover {
+            color: #00ff88;
+            opacity: 0.8;
+        }
+        
         @media (max-width: 768px) {
             #toggle-controls {
                 display: block;
@@ -53,13 +71,28 @@
             }
             
             #legend {
-                display: none !important;
+                top: 60px !important;
+                right: 10px !important;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            #controls.collapsed {
+                width: auto;
+                padding: 10px;
             }
             
-            #info {
-                font-size: 12px;
-                padding: 10px;
-                max-width: 250px;
+            #controls.collapsed .control-content {
+                display: none;
+            }
+            
+            #controls.collapsed h4 {
+                margin: 0;
+                display: inline-block;
+            }
+            
+            #legend.shifted {
+                right: 50px !important;
             }
         }
         
@@ -101,6 +134,7 @@
             backdrop-filter: blur(10px);
             max-height: 90vh;
             overflow-y: auto;
+            transition: all 0.3s ease;
         }
         
         .control-group {
@@ -147,6 +181,7 @@
             backdrop-filter: blur(10px);
             max-width: 200px;
             font-size: 12px;
+            transition: right 0.3s ease;
         }
         
         .legend-item {
@@ -164,7 +199,8 @@
         
         @media (max-width: 1200px) {
             #legend {
-                display: none;
+                max-width: 150px;
+                font-size: 11px;
             }
         }
         
@@ -211,6 +247,58 @@
             margin-top: 5px;
             font-style: italic;
         }
+        
+        .checkbox-group {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 8px;
+            margin-top: 8px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin: 4px 0;
+            font-size: 12px;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 8px;
+        }
+        
+        .checkbox-item span {
+            flex: 1;
+        }
+        
+        .checkbox-count {
+            color: #666;
+            font-size: 10px;
+            margin-left: 4px;
+        }
+        
+        .select-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+        
+        .select-buttons button {
+            flex: 1;
+            padding: 4px 8px;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            color: #00ff88;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+        }
+        
+        .select-buttons button:hover {
+            background: rgba(0, 255, 136, 0.2);
+        }
     </style>
     <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
     <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
@@ -244,65 +332,74 @@
     </div>
     
     <div id="controls" style="display: none;">
+        <button class="collapse-btn" onclick="toggleControlsCollapse()">◀</button>
         <h4>Controls</h4>
         
-        <div class="control-group">
-            <h4 style="font-size: 12px; margin-bottom: 8px;">View Mode</h4>
-            <label>
-                Interest Analysis
-                <select id="view-mode">
-                    <option value="interest">Interest Analysis</option>
-                    <option value="entity-type">Entity Type</option>
-                    <option value="activity">Activity Level</option>
-                </select>
-            </label>
-            <div class="info-text">
-                • Interest: Colors by strategic interest<br>
-                • Entity Type: Colors by company type<br>
-                • Activity: Colors by URL count
+        <div class="control-content">
+            <div class="control-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">View Mode</h4>
+                <label>
+                    Color By
+                    <select id="view-mode">
+                        <option value="entity-type">Entity Type</option>
+                        <option value="interest">Interest Analysis</option>
+                        <option value="activity">Activity Level</option>
+                        <option value="connections">Connection Strength</option>
+                    </select>
+                </label>
+                <div class="info-text">
+                    • Entity Type: Colors by company type<br>
+                    • Interest: Strategic importance (red=high)<br>
+                    • Activity: URL count (red=many)<br>
+                    • Connections: Node connectivity
+                </div>
             </div>
-        </div>
-        
-        <div class="control-group">
-            <h4 style="font-size: 12px; margin-bottom: 8px;">Visual Settings</h4>
-            <label>
-                Show Links
-                <input type="checkbox" id="toggle-links" checked>
-            </label>
-            <label>
-                Show Labels
-                <input type="checkbox" id="toggle-labels" checked>
-            </label>
-            <label>
-                Show Particles
-                <input type="checkbox" id="toggle-particles" checked>
-            </label>
-        </div>
-        
-        <div class="control-group">
-            <h4 style="font-size: 12px; margin-bottom: 8px;">Graph Physics</h4>
-            <label>
-                Force Strength
-                <input type="range" id="force-strength" min="-1000" max="-50" value="-300" step="50">
-                <span class="slider-value" id="force-value">-300</span>
-            </label>
-            <label>
-                Link Distance
-                <input type="range" id="link-distance" min="10" max="200" value="30" step="10">
-                <span class="slider-value" id="distance-value">30</span>
-            </label>
-        </div>
-        
-        <div class="control-group">
-            <h4 style="font-size: 12px; margin-bottom: 8px;">Filter by Type</h4>
-            <select id="type-filter">
-                <option value="all">All Types</option>
-            </select>
-        </div>
-        
-        <div class="control-group">
-            <h4 style="font-size: 12px; margin-bottom: 8px;">Search</h4>
-            <input type="text" id="search-input" placeholder="Search companies...">
+            
+            <div class="control-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Visual Settings</h4>
+                <label>
+                    Show Links
+                    <input type="checkbox" id="toggle-links" checked>
+                </label>
+                <label>
+                    Show Labels
+                    <input type="checkbox" id="toggle-labels" checked>
+                </label>
+                <label>
+                    Show Particles
+                    <input type="checkbox" id="toggle-particles" checked>
+                </label>
+            </div>
+            
+            <div class="control-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Graph Physics</h4>
+                <label>
+                    Force Strength
+                    <input type="range" id="force-strength" min="-1000" max="-50" value="-300" step="50">
+                    <span class="slider-value" id="force-value">-300</span>
+                </label>
+                <label>
+                    Link Distance
+                    <input type="range" id="link-distance" min="10" max="200" value="30" step="10">
+                    <span class="slider-value" id="distance-value">30</span>
+                </label>
+            </div>
+            
+            <div class="control-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Filter by Type</h4>
+                <div class="select-buttons">
+                    <button onclick="selectAllTypes()">Select All</button>
+                    <button onclick="selectNoneTypes()">Select None</button>
+                </div>
+                <div class="checkbox-group" id="type-filters">
+                    <!-- Checkboxes will be populated here -->
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Search</h4>
+                <input type="text" id="search-input" placeholder="Search companies...">
+            </div>
         </div>
     </div>
     
@@ -310,7 +407,33 @@
     <div id="3d-graph"></div>
 
     <script>
-        // Wrap everything in an IIFE to avoid scope issues
+        // Global functions for UI
+        function toggleControlsCollapse() {
+            const controls = document.getElementById('controls');
+            const legend = document.getElementById('legend');
+            const btn = controls.querySelector('.collapse-btn');
+            
+            controls.classList.toggle('collapsed');
+            legend.classList.toggle('shifted');
+            
+            btn.textContent = controls.classList.contains('collapsed') ? '▶' : '◀';
+        }
+        
+        function selectAllTypes() {
+            document.querySelectorAll('#type-filters input[type="checkbox"]').forEach(cb => {
+                cb.checked = true;
+            });
+            if (window.applyFilters) window.applyFilters();
+        }
+        
+        function selectNoneTypes() {
+            document.querySelectorAll('#type-filters input[type="checkbox"]').forEach(cb => {
+                cb.checked = false;
+            });
+            if (window.applyFilters) window.applyFilters();
+        }
+        
+        // Wrap main code in IIFE
         (function() {
             console.log('Initializing AI Competitive Monitor 3D Force Graph...');
             
@@ -322,19 +445,22 @@
             let labelsEnabled = true;
             let particlesEnabled = true;
             let currentViewMode = 'entity-type';
-            let currentTypeFilter = 'all';
+            let selectedTypes = new Set();
+            
+            // Make applyFilters global for button access
+            window.applyFilters = null;
             
             // Configuration
             const CONFIG = {
                 linkDistance: 30,
-                linkOpacity: 0.5, // 50% transparent as requested
+                linkOpacity: 0.5,
                 forceStrength: -300,
-                fontWeight: 200, // Very thin font as requested
+                fontWeight: 200,
                 nodeColors: {
                     'AI Coding': '#ffeb3b',
                     'AI Hardware': '#4caf50',
                     'AI Infrastructure': '#9c27b0',
-                    'AI Search': '#f44336', // Saturated red as in legend
+                    'AI Search': '#f44336',
                     'AI Voice/Audio': '#ff9800',
                     'Enterprise AI': '#d32f2f',
                     'Image Generation': '#e91e63',
@@ -349,65 +475,75 @@
                     'Company': '#6fbf6f',
                     'default': '#888888'
                 },
-                // Interest level colors
                 interestColors: {
-                    10: '#ff0000',  // Red - Highest interest
+                    10: '#ff0000',
                     9: '#ff3300',
                     8: '#ff6600',
                     7: '#ff9900',
                     6: '#ffcc00',
-                    5: '#ffff00',   // Yellow - Medium interest
+                    5: '#ffff00',
                     4: '#ccff00',
                     3: '#99ff00',
                     2: '#66ff00',
                     1: '#33ff00',
-                    0: '#00ff00'    // Green - Low interest
+                    0: '#00ff00'
                 },
-                // Activity level colors
                 activityColors: {
-                    high: '#ff0000',    // Red - Many URLs
-                    medium: '#ffff00',  // Yellow - Some URLs
-                    low: '#00ff00'      // Green - Few URLs
+                    high: '#ff0000',
+                    medium: '#ffff00',
+                    low: '#00ff00'
+                },
+                connectionColors: {
+                    high: '#ff0000',
+                    medium: '#ffff00',
+                    low: '#00ff00'
                 }
             };
             
-            // Create simple text label for nodes
+            // Create text label for nodes
             function createNodeObject(node) {
                 const sprite = new SpriteText(node.name);
                 sprite.material.depthWrite = false;
                 sprite.color = node.currentColor || node.color || CONFIG.nodeColors[node.group] || CONFIG.nodeColors.default;
                 sprite.textHeight = 8;
-                sprite.fontWeight = CONFIG.fontWeight; // Use thin font weight
-                sprite.backgroundColor = false; // No background
+                sprite.fontWeight = CONFIG.fontWeight;
+                sprite.backgroundColor = false;
                 return sprite;
             }
             
-            // Calculate link width based on relationship
+            // Calculate link width based on connection strength
             function getLinkWidth(link) {
-                // Base width for all links
-                let width = 0.3;
+                // Base width
+                let width = 0.2;
                 
-                // Thicker for concept links
+                // Calculate strength based on shared properties
+                let strength = 0;
+                
+                // Shared concepts = strongest
                 if (link.label && link.label.includes('concept')) {
-                    width = 0.8;
-                }
-                // Medium for technology links
-                else if (link.label && techTerms.some(term => link.label.toLowerCase().includes(term))) {
-                    width = 0.5;
+                    strength += 3;
                 }
                 
-                return width;
+                // Shared technologies = medium
+                if (link.label && link.label !== 'uses concept') {
+                    strength += 2;
+                }
+                
+                // More connections = stronger
+                if (link.connectionCount) {
+                    strength += Math.min(link.connectionCount / 5, 2);
+                }
+                
+                // Calculate final width
+                width = 0.2 + (strength * 0.2);
+                return Math.min(width, 1.2); // Cap at 1.2
             }
-            
-            // Common tech terms for identifying technology links
-            const techTerms = ['api', 'sdk', 'framework', 'model', 'platform', 'engine', 'tool'];
             
             // Load and process data
             async function loadData() {
                 try {
                     console.log('Loading data...');
                     
-                    // Load multiple data files
                     const [companiesResponse, detailsResponse] = await Promise.all([
                         fetch('https://redmorestudio.github.io/ai-competitive-monitor/api-data/companies.json'),
                         fetch('https://redmorestudio.github.io/ai-competitive-monitor/api-data/company-details.json')
@@ -420,26 +556,20 @@
                     const companiesData = await companiesResponse.json();
                     const detailsData = await detailsResponse.json();
                     
-                    console.log('Companies data:', companiesData);
-                    console.log('Details data:', detailsData);
-                    
-                    // Transform data into expected format
                     rawData = {
                         dashboard: {
                             company_activity: []
                         }
                     };
                     
-                    // Combine companies with their details
                     companiesData.companies.forEach(company => {
                         const companyName = company.company;
-                        // Find matching details
                         const details = Object.values(detailsData.companies).find(d => d.company_name === companyName);
                         
                         const companyEntry = {
                             company: companyName,
                             type: company.type,
-                            entity_type: company.type, // Use type as entity_type
+                            entity_type: company.type,
                             url_count: company.urls.length,
                             intelligence: {
                                 interest_level: details?.interest_level || 5,
@@ -448,7 +578,6 @@
                             }
                         };
                         
-                        // Extract technologies and concepts from products
                         if (details?.products) {
                             details.products.forEach(product => {
                                 if (product.uses_technologies) {
@@ -459,16 +588,12 @@
                                 }
                             });
                             
-                            // Remove duplicates
                             companyEntry.intelligence.ai_technologies = [...new Set(companyEntry.intelligence.ai_technologies)];
                             companyEntry.intelligence.ai_ml_concepts = [...new Set(companyEntry.intelligence.ai_ml_concepts)];
                         }
                         
                         rawData.dashboard.company_activity.push(companyEntry);
                     });
-                    
-                    console.log('Transformed data:', rawData);
-                    console.log('Company count:', rawData.dashboard.company_activity.length);
                     
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('info').style.display = 'block';
@@ -477,7 +602,7 @@
                     document.getElementById('controls').style.display = 'block';
                     
                     buildGraph();
-                    populateTypeFilter();
+                    populateTypeFilters();
                     
                 } catch (error) {
                     console.error('Error loading data:', error);
@@ -488,16 +613,16 @@
             function buildGraph() {
                 console.log('Building graph...');
                 
-                // Clear existing data
                 graphData.nodes = [];
                 graphData.links = [];
                 
-                // Create nodes
                 const nodeMap = new Map();
                 let totalUrls = 0;
                 
+                // Track connections per node
+                const connectionCounts = new Map();
+                
                 rawData.dashboard.company_activity.forEach(company => {
-                    // Use entity_type if available, otherwise fall back to type
                     const nodeType = company.entity_type || company.type || 'Company';
                     const node = {
                         id: company.company,
@@ -506,17 +631,19 @@
                         color: CONFIG.nodeColors[nodeType] || CONFIG.nodeColors.default,
                         val: company.url_count || 1,
                         interestLevel: company.intelligence?.interest_level || 0,
-                        urlCount: company.url_count || 0
+                        urlCount: company.url_count || 0,
+                        connectionCount: 0
                     };
                     graphData.nodes.push(node);
                     nodeMap.set(company.company, node);
                     totalUrls += company.url_count || 0;
+                    connectionCounts.set(company.company, 0);
                 });
                 
-                console.log(`Created ${graphData.nodes.length} nodes`);
-                
-                // Create links based on shared technologies
+                // Create technology links
                 const techMap = new Map();
+                const linkMap = new Map(); // Track link counts between nodes
+                
                 rawData.dashboard.company_activity.forEach(company => {
                     if (company.intelligence?.ai_technologies) {
                         company.intelligence.ai_technologies.forEach(tech => {
@@ -533,17 +660,29 @@
                     if (companies.length > 1) {
                         for (let i = 0; i < companies.length - 1; i++) {
                             for (let j = i + 1; j < companies.length; j++) {
-                                graphData.links.push({
-                                    source: companies[i],
-                                    target: companies[j],
-                                    label: tech
-                                });
+                                const key = [companies[i], companies[j]].sort().join('|');
+                                
+                                if (!linkMap.has(key)) {
+                                    linkMap.set(key, {
+                                        source: companies[i],
+                                        target: companies[j],
+                                        labels: [],
+                                        count: 0
+                                    });
+                                }
+                                
+                                linkMap.get(key).labels.push(tech);
+                                linkMap.get(key).count++;
+                                
+                                // Update connection counts
+                                connectionCounts.set(companies[i], connectionCounts.get(companies[i]) + 1);
+                                connectionCounts.set(companies[j], connectionCounts.get(companies[j]) + 1);
                             }
                         }
                     }
                 });
                 
-                // Add AI concept nodes
+                // Create concept nodes and links
                 const conceptMap = new Map();
                 rawData.dashboard.company_activity.forEach(company => {
                     if (company.intelligence?.ai_ml_concepts) {
@@ -556,7 +695,6 @@
                     }
                 });
                 
-                // Create concept nodes for concepts shared by 3+ companies
                 conceptMap.forEach((companies, concept) => {
                     if (companies.length >= 3) {
                         const conceptNode = {
@@ -566,7 +704,8 @@
                             color: CONFIG.nodeColors['AI Concept'],
                             val: companies.length * 4,
                             interestLevel: 5,
-                            urlCount: 0
+                            urlCount: 0,
+                            connectionCount: companies.length
                         };
                         graphData.nodes.push(conceptNode);
                         
@@ -574,13 +713,31 @@
                             graphData.links.push({
                                 source: company,
                                 target: conceptNode.id,
-                                label: 'uses concept'
+                                label: 'uses concept',
+                                connectionCount: companies.length
                             });
+                            
+                            connectionCounts.set(company, connectionCounts.get(company) + 1);
                         });
                     }
                 });
                 
-                console.log(`Created ${graphData.links.length} links`);
+                // Convert linkMap to links array
+                linkMap.forEach((linkData, key) => {
+                    graphData.links.push({
+                        source: linkData.source,
+                        target: linkData.target,
+                        label: linkData.labels[0], // Use first label
+                        connectionCount: linkData.count
+                    });
+                });
+                
+                // Update node connection counts
+                graphData.nodes.forEach(node => {
+                    if (connectionCounts.has(node.id)) {
+                        node.connectionCount = connectionCounts.get(node.id);
+                    }
+                });
                 
                 // Update stats
                 document.getElementById('company-count').textContent = rawData.dashboard.company_activity.length;
@@ -588,31 +745,49 @@
                 document.getElementById('node-count').textContent = graphData.nodes.length;
                 document.getElementById('link-count').textContent = graphData.links.length;
                 
-                // Set initial filtered data
                 applyFilters();
-                
-                // Initialize the graph
                 initializeGraph();
-                
-                // Update legend
                 updateLegend();
             }
             
-            function populateTypeFilter() {
-                const types = new Set();
+            function populateTypeFilters() {
+                const typeStats = new Map();
                 graphData.nodes.forEach(node => {
-                    types.add(node.group);
+                    if (!typeStats.has(node.group)) {
+                        typeStats.set(node.group, 0);
+                    }
+                    typeStats.set(node.group, typeStats.get(node.group) + 1);
                 });
                 
-                const select = document.getElementById('type-filter');
-                select.innerHTML = '<option value="all">All Types</option>';
+                const container = document.getElementById('type-filters');
+                container.innerHTML = '';
                 
-                Array.from(types).sort().forEach(type => {
-                    const option = document.createElement('option');
-                    option.value = type;
-                    option.textContent = type;
-                    select.appendChild(option);
-                });
+                Array.from(typeStats.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .forEach(([type, count]) => {
+                        selectedTypes.add(type); // Initially all selected
+                        
+                        const item = document.createElement('div');
+                        item.className = 'checkbox-item';
+                        item.innerHTML = `
+                            <input type="checkbox" id="type-${type.replace(/\s+/g, '-')}" value="${type}" checked>
+                            <label for="type-${type.replace(/\s+/g, '-')}">
+                                <span>${type}</span>
+                                <span class="checkbox-count">(${count})</span>
+                            </label>
+                        `;
+                        
+                        item.querySelector('input').addEventListener('change', (e) => {
+                            if (e.target.checked) {
+                                selectedTypes.add(type);
+                            } else {
+                                selectedTypes.delete(type);
+                            }
+                            applyFilters();
+                        });
+                        
+                        container.appendChild(item);
+                    });
             }
             
             function applyFilters() {
@@ -621,7 +796,7 @@
                 // Filter nodes
                 filteredData.nodes = graphData.nodes.filter(node => {
                     // Type filter
-                    if (currentTypeFilter !== 'all' && node.group !== currentTypeFilter) {
+                    if (!selectedTypes.has(node.group)) {
                         return false;
                     }
                     
@@ -636,7 +811,7 @@
                 // Get filtered node IDs
                 const filteredNodeIds = new Set(filteredData.nodes.map(n => n.id));
                 
-                // Filter links to only include those between filtered nodes
+                // Filter links
                 filteredData.links = graphData.links.filter(link => {
                     return filteredNodeIds.has(link.source.id || link.source) && 
                            filteredNodeIds.has(link.target.id || link.target);
@@ -656,15 +831,23 @@
                         } else {
                             newNode.currentColor = CONFIG.activityColors.low;
                         }
+                    } else if (currentViewMode === 'connections') {
+                        if (node.connectionCount >= 10) {
+                            newNode.currentColor = CONFIG.connectionColors.high;
+                        } else if (node.connectionCount >= 5) {
+                            newNode.currentColor = CONFIG.connectionColors.medium;
+                        } else {
+                            newNode.currentColor = CONFIG.connectionColors.low;
+                        }
                     } else {
-                        // Entity type view - use original colors
+                        // Entity type view
                         newNode.currentColor = node.color;
                     }
                     
                     return newNode;
                 });
                 
-                // Update graph with filtered data
+                // Update graph
                 if (Graph) {
                     Graph.graphData({
                         nodes: filteredData.nodes.map(n => ({...n})),
@@ -672,9 +855,11 @@
                     });
                 }
                 
-                // Update legend based on filtered data
                 updateLegend();
             }
+            
+            // Make applyFilters available globally
+            window.applyFilters = applyFilters;
             
             function updateLegend() {
                 const nodeTypes = new Map();
@@ -684,7 +869,9 @@
                     const type = node.group;
                     if (!nodeTypes.has(type)) {
                         nodeTypes.set(type, {
-                            color: node.currentColor || CONFIG.nodeColors[type] || CONFIG.nodeColors.default,
+                            color: currentViewMode === 'entity-type' ? 
+                                (CONFIG.nodeColors[type] || CONFIG.nodeColors.default) : 
+                                node.currentColor,
                             count: 0
                         });
                     }
@@ -694,11 +881,10 @@
                 const legendContent = document.getElementById('legend-content');
                 legendContent.innerHTML = '';
                 
-                // Sort by count and limit to types that exist
                 const sortedTypes = Array.from(nodeTypes.entries())
                     .filter(([type, data]) => data.count > 0)
                     .sort((a, b) => b[1].count - a[1].count)
-                    .slice(0, 10); // Show top 10 types
+                    .slice(0, 10);
                 
                 sortedTypes.forEach(([type, data]) => {
                     const item = document.createElement('div');
@@ -715,10 +901,8 @@
                 console.log('Initializing 3D graph...');
                 
                 try {
-                    // Create graph instance
                     Graph = ForceGraph3D()(document.getElementById('3d-graph'));
                     
-                    // Set clean data
                     const cleanData = {
                         nodes: filteredData.nodes.map(n => ({...n})),
                         links: filteredData.links.map(l => ({...l}))
@@ -726,7 +910,7 @@
                     
                     Graph
                         .graphData(cleanData)
-                        .nodeLabel(node => `${node.name}\n${node.group}\nInterest: ${node.interestLevel}/10\nURLs: ${node.urlCount}`)
+                        .nodeLabel(node => `${node.name}\n${node.group}\nInterest: ${node.interestLevel}/10\nURLs: ${node.urlCount}\nConnections: ${node.connectionCount}`)
                         .nodeAutoColorBy('group')
                         .nodeVal('val')
                         .nodeThreeObject(node => {
@@ -735,18 +919,17 @@
                         })
                         .nodeThreeObjectExtend(false)
                         .linkWidth(link => getLinkWidth(link))
-                        .linkColor(() => 'rgba(150, 150, 150, 0.5)') // Light grey with 50% transparency
+                        .linkColor(() => 'rgba(150, 150, 150, 0.5)')
                         .linkOpacity(CONFIG.linkOpacity)
                         .linkDirectionalParticles(2)
                         .linkDirectionalParticleSpeed(0.006)
                         .linkDirectionalParticleColor(() => '#00ff88')
                         .onNodeHover(node => {
                             document.getElementById('node-info').innerHTML = node ? 
-                                `<strong>${node.name}</strong><br>Type: ${node.group}<br>Interest Level: ${node.interestLevel}/10<br>URLs: ${node.urlCount}` : 
+                                `<strong>${node.name}</strong><br>Type: ${node.group}<br>Interest Level: ${node.interestLevel}/10<br>URLs: ${node.urlCount}<br>Connections: ${node.connectionCount}` : 
                                 '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera';
                         })
                         .onNodeClick(node => {
-                            // Center camera on node
                             const distance = 300;
                             const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
                             Graph.cameraPosition(
@@ -758,18 +941,15 @@
                         .enablePointerInteraction(true)
                         .enableNodeDrag(true);
                     
-                    // Set basic forces
                     Graph.d3Force('charge').strength(CONFIG.forceStrength);
                     Graph.d3Force('link').distance(CONFIG.linkDistance);
                     
-                    // Set initial camera position
                     Graph.cameraPosition({ x: 0, y: 0, z: 500 });
                     
                     console.log('Graph initialized successfully!');
                     
                 } catch (error) {
                     console.error('Error initializing graph:', error);
-                    console.error('Stack:', error.stack);
                     document.getElementById('node-info').textContent = 'Error: ' + error.message;
                 }
             }
@@ -824,11 +1004,6 @@
                 applyFilters();
             });
             
-            document.getElementById('type-filter').addEventListener('change', (e) => {
-                currentTypeFilter = e.target.value;
-                applyFilters();
-            });
-            
             document.getElementById('search-input').addEventListener('input', (e) => {
                 applyFilters();
             });
@@ -838,7 +1013,7 @@
                 document.getElementById('controls').classList.toggle('open');
             });
             
-            // Start loading data when DOM is ready
+            // Start loading
             if (document.readyState === 'loading') {
                 document.addEventListener('DOMContentLoaded', loadData);
             } else {
