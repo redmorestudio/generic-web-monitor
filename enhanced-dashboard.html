@@ -930,5 +930,507 @@
             console.log('Loading more history...');
         }
     </script>
+
+    <!-- Change Detail Modal -->
+    <div id="changeDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Change Details</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <!-- Loading state -->
+                <div id="modalLoading" class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading change details...</p>
+                </div>
+                
+                <!-- Content will be populated dynamically -->
+                <div id="modalContent" style="display: none;">
+                    <!-- Change metadata -->
+                    <div class="change-meta-section">
+                        <div class="company-info">
+                            <h3 id="modalCompanyName"></h3>
+                            <a id="modalUrl" href="#" target="_blank">View Page</a>
+                        </div>
+                        <div class="interest-section">
+                            <div class="interest-score" id="modalInterestScore"></div>
+                            <div class="interest-category" id="modalInterestCategory"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Interest explanation -->
+                    <div class="interest-explanation">
+                        <h4>Why This Matters</h4>
+                        <p id="modalInterestExplanation"></p>
+                        <div class="interest-drivers" id="modalInterestDrivers"></div>
+                    </div>
+                    
+                    <!-- Content comparison -->
+                    <div class="content-comparison">
+                        <div class="comparison-controls">
+                            <button class="active" data-view="unified" onclick="switchComparisonView('unified')">Unified</button>
+                            <button data-view="side-by-side" onclick="switchComparisonView('side-by-side')">Side by Side</button>
+                            <button data-view="keywords" onclick="switchComparisonView('keywords')">Keywords</button>
+                        </div>
+                        
+                        <div class="comparison-view active" id="unifiedView">
+                            <div id="unifiedDiff"></div>
+                        </div>
+                        
+                        <div class="comparison-view" id="sideBySideView">
+                            <div class="before-content">
+                                <h4>Before</h4>
+                                <div class="content-markdown" id="beforeContent"></div>
+                            </div>
+                            <div class="after-content">
+                                <h4>After</h4>
+                                <div class="content-markdown" id="afterContent"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="comparison-view" id="keywordsView">
+                            <div class="new-keywords">
+                                <h4>New Keywords</h4>
+                                <div class="keyword-list" id="newKeywordsList"></div>
+                            </div>
+                            <div class="keyword-changes">
+                                <h4>Frequency Changes</h4>
+                                <div class="frequency-chart" id="frequencyChart"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-header {
+            padding: 20px;
+            background: var(--accent-bg);
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: var(--text-primary);
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 28px;
+            cursor: pointer;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .close-modal:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .change-meta-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 20px;
+            background: var(--accent-bg);
+            border-radius: 12px;
+        }
+
+        .company-info h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.5rem;
+        }
+
+        .company-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .company-info a:hover {
+            text-decoration: underline;
+        }
+
+        .interest-section {
+            text-align: center;
+        }
+
+        .interest-section .interest-score {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .interest-section .interest-category {
+            text-transform: capitalize;
+            color: var(--text-secondary);
+        }
+
+        .interest-explanation {
+            margin-bottom: 20px;
+            padding: 20px;
+            background: var(--accent-bg);
+            border-radius: 12px;
+        }
+
+        .interest-explanation h4 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+        }
+
+        .interest-drivers {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .interest-drivers .driver {
+            padding: 5px 15px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .content-comparison {
+            background: var(--accent-bg);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .comparison-controls {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .comparison-controls button {
+            padding: 8px 20px;
+            background: var(--secondary-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .comparison-controls button.active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+        }
+
+        .comparison-view {
+            display: none;
+        }
+
+        .comparison-view.active {
+            display: block;
+        }
+
+        #sideBySideView {
+            display: none;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        #sideBySideView.active {
+            display: grid;
+        }
+
+        .before-content,
+        .after-content {
+            background: var(--secondary-bg);
+            padding: 20px;
+            border-radius: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .before-content h4,
+        .after-content h4 {
+            margin: 0 0 15px 0;
+            color: var(--text-secondary);
+        }
+
+        .content-markdown {
+            white-space: pre-wrap;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .keyword-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .keyword-item {
+            padding: 5px 15px;
+            background: var(--secondary-bg);
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        .keyword-item .freq {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        .diff-added {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--new-color);
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .diff-removed {
+            background: rgba(255, 68, 68, 0.2);
+            color: var(--error-color);
+            text-decoration: line-through;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+    </style>
+
+    <script>
+        // Add click handlers for change cards
+        function addChangeClickHandlers() {
+            document.querySelectorAll('.change-card').forEach((card, index) => {
+                card.style.cursor = 'pointer';
+                card.addEventListener('click', function() {
+                    // For now, use the index to get the change data
+                    // In production, you'd add data-change-id to each card
+                    if (dashboardData && dashboardData.recent_changes_summary) {
+                        const change = dashboardData.recent_changes_summary.last_5_changes[index];
+                        if (change && change.change_id) {
+                            showChangeDetails(change.change_id);
+                        }
+                    }
+                });
+            });
+        }
+
+        // Show change details modal
+        async function showChangeDetails(changeId) {
+            const modal = document.getElementById('changeDetailModal');
+            const loading = document.getElementById('modalLoading');
+            const content = document.getElementById('modalContent');
+            
+            // Show modal with loading state
+            modal.classList.add('active');
+            loading.style.display = 'block';
+            content.style.display = 'none';
+            
+            try {
+                // Fetch change details from API
+                const response = await fetch(`/api/changes/${changeId}`);
+                if (!response.ok) throw new Error('Failed to fetch change details');
+                
+                const data = await response.json();
+                
+                // Populate modal content
+                populateChangeModal(data);
+                
+                // Show content, hide loading
+                loading.style.display = 'none';
+                content.style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error loading change details:', error);
+                modal.classList.remove('active');
+                alert('Failed to load change details');
+            }
+        }
+
+        // Populate modal with change data
+        function populateChangeModal(data) {
+            // Company info
+            document.getElementById('modalCompanyName').textContent = data.company;
+            document.getElementById('modalUrl').href = data.url;
+            document.getElementById('modalUrl').textContent = new URL(data.url).hostname;
+            
+            // Interest info
+            document.getElementById('modalInterestScore').textContent = data.interest_level + '/10';
+            document.getElementById('modalInterestCategory').textContent = data.interest_category.replace('_', ' ');
+            document.getElementById('modalInterestExplanation').textContent = data.interest_explanation;
+            
+            // Interest drivers
+            const driversContainer = document.getElementById('modalInterestDrivers');
+            driversContainer.innerHTML = data.interest_drivers.map(driver => 
+                `<span class="driver">${driver}</span>`
+            ).join('');
+            
+            // Content comparison
+            if (data.before && data.after) {
+                // Unified diff view
+                const unifiedDiff = createUnifiedDiff(data.diff);
+                document.getElementById('unifiedDiff').innerHTML = unifiedDiff;
+                
+                // Side by side view
+                document.getElementById('beforeContent').textContent = data.before.markdown || 'No previous content';
+                document.getElementById('afterContent').textContent = data.after.markdown || 'No new content';
+                
+                // Keywords view
+                populateKeywordsView(data.keywords);
+            }
+        }
+
+        // Create unified diff view
+        function createUnifiedDiff(diff) {
+            if (!diff) return 'No changes detected';
+            
+            let html = '<div class="diff-summary">' + diff.summary + '</div>';
+            
+            if (diff.key_changes && diff.key_changes.length > 0) {
+                html += '<h5>Key Changes:</h5><ul>';
+                diff.key_changes.forEach(change => {
+                    html += `<li>${change}</li>`;
+                });
+                html += '</ul>';
+            }
+            
+            if (diff.added_sentences && diff.added_sentences.length > 0) {
+                html += '<h5>Added:</h5>';
+                diff.added_sentences.forEach(sentence => {
+                    html += `<p class="diff-added">${sentence}</p>`;
+                });
+            }
+            
+            if (diff.removed_sentences && diff.removed_sentences.length > 0) {
+                html += '<h5>Removed:</h5>';
+                diff.removed_sentences.forEach(sentence => {
+                    html += `<p class="diff-removed">${sentence}</p>`;
+                });
+            }
+            
+            return html;
+        }
+
+        // Populate keywords view
+        function populateKeywordsView(keywords) {
+            if (!keywords) return;
+            
+            // New keywords
+            const newKeywordsList = document.getElementById('newKeywordsList');
+            if (keywords.new_keywords && keywords.new_keywords.length > 0) {
+                newKeywordsList.innerHTML = keywords.new_keywords.map(kw => 
+                    `<div class="keyword-item">${kw.word}<span class="freq">(${kw.frequency})</span></div>`
+                ).join('');
+            } else {
+                newKeywordsList.innerHTML = '<p>No new keywords detected</p>';
+            }
+            
+            // Frequency changes
+            const frequencyChart = document.getElementById('frequencyChart');
+            if (keywords.frequency_changes && Object.keys(keywords.frequency_changes).length > 0) {
+                let html = '<table style="width: 100%;">';
+                html += '<tr><th>Keyword</th><th>Before</th><th>After</th><th>Change</th></tr>';
+                
+                Object.entries(keywords.frequency_changes).forEach(([word, data]) => {
+                    html += `<tr>
+                        <td>${word}</td>
+                        <td>${data.before}</td>
+                        <td>${data.after}</td>
+                        <td style="color: var(--accent-color);">+${data.change}</td>
+                    </tr>`;
+                });
+                
+                html += '</table>';
+                frequencyChart.innerHTML = html;
+            } else {
+                frequencyChart.innerHTML = '<p>No significant frequency changes</p>';
+            }
+        }
+
+        // Switch comparison view
+        function switchComparisonView(view) {
+            // Update button states
+            document.querySelectorAll('.comparison-controls button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.view === view);
+            });
+            
+            // Update view visibility
+            document.querySelectorAll('.comparison-view').forEach(v => {
+                v.classList.remove('active');
+            });
+            
+            document.getElementById(view + 'View').classList.add('active');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('changeDetailModal').classList.remove('active');
+        }
+
+        // Close modal on outside click
+        document.getElementById('changeDetailModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // Update renderRecentChanges to add click handlers
+        const originalRenderRecentChanges = renderRecentChanges;
+        renderRecentChanges = function() {
+            originalRenderRecentChanges();
+            // Add click handlers after rendering
+            setTimeout(addChangeClickHandlers, 100);
+        };
+    </script>
 </body>
 </html>
