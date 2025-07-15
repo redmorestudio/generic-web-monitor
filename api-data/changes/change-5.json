@@ -14,7 +14,11 @@
   "ai_business_context": null,
   "has_content": false,
   "content_preview": {
+<<<<<<< HEAD
     "before": "OpenAI is a research organization focused on artificial intelligence.\\n\\nBREAKING: We are proud to announce GPT-5, our most advanced model yet with 10x more parameters!\\n\\nWe create AI systems that are safe and beneficial....",
+=======
+    "before": "---\nurl: https://sourcegraph.com/cody\ncompany: Sourcegraph\nscraped_at: 2025-07-04 20:20:32\n---\n\nCody | AI coding assistant from Sourcegraph\n\n[UX Design & Webflow Agency NYC | Composite Global](https://www.composite.global/ \"Site built by Composite – Webflow Agency NYC & UX Design Agency NYC\")\n\nIMPORTANT: There are changes to Cody Free, Cody Pro, and Enterprise Starter plans. Learn more\n\n![](https://cdn.prod.website-files.com/673f71b4ebbb99190437de75/685af602e682ec33431e8f0f_icon-chevron_up.svg)\n...",
+>>>>>>> cd9954430f8883fb0723e231885b854addd2c55d
     "after": null
   },
   "diff": {
