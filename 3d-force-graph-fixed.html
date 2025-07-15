@@ -320,7 +320,6 @@
             border: 1px solid #00ff88;
             max-width: 300px;
             z-index: 1000;
-            pointer-events: none;
             backdrop-filter: blur(10px);
             font-size: 12px;
         }
@@ -763,7 +762,7 @@
                 sprite.material.depthWrite = false;
                 sprite.color = node.currentColor || node.color || CONFIG.nodeColors[node.group] || CONFIG.nodeColors.default;
                 sprite.textHeight = 8;
-                sprite.fontWeight = CONFIG.fontWeight;
+                sprite.fontWeight = node.isRecentChange ? 700 : CONFIG.fontWeight;
                 sprite.backgroundColor = false;
                 return sprite;
             }
@@ -1310,6 +1309,7 @@
                                 // Make them bigger and red
                                 node.val = (node.urlCount || 1) * 3;
                                 node.currentColor = '#ff0000'; // Red for recent changes
+                                node.isRecentChange = true; // Mark for bold text
                             } else {
                                 // Push other nodes to the periphery
                                 const angle = Math.random() * 2 * Math.PI;
@@ -1323,6 +1323,7 @@
                                 // Make them smaller and dimmer
                                 node.val = (node.urlCount || 1) * 0.5;
                                 node.currentColor = '#444444'; // Gray for no recent changes
+                                node.isRecentChange = false;
                             }
                         });
                         
@@ -1459,6 +1460,31 @@
                 // If no filters selected or no filtered nodes, use all graph data
                 const dataToUse = (selectedTypes.size === 0 || filteredData.nodes.length === 0) ? graphData : filteredData;
                 
+                // Check if we're in recent changes mode
+                if (currentDrawMode.startsWith('recent-changes-')) {
+                    const legendContent = document.getElementById('legend-content');
+                    legendContent.innerHTML = '';
+                    
+                    // Add recent changes legend
+                    const recentItem = document.createElement('div');
+                    recentItem.className = 'legend-item';
+                    recentItem.innerHTML = `
+                        <div class="legend-color" style="background-color: #ff0000"></div>
+                        <span>Recent Changes (Bold)</span>
+                    `;
+                    legendContent.appendChild(recentItem);
+                    
+                    const noChangeItem = document.createElement('div');
+                    noChangeItem.className = 'legend-item';
+                    noChangeItem.innerHTML = `
+                        <div class="legend-color" style="background-color: #444444"></div>
+                        <span>No Recent Changes</span>
+                    `;
+                    legendContent.appendChild(noChangeItem);
+                    
+                    return;
+                }
+                
                 dataToUse.nodes.forEach(node => {
                     const type = node.group;
                     if (!nodeTypes.has(type)) {
@@ -1558,10 +1584,26 @@
                                     }
                                 }
                                 
+                                // Check for recent changes
+                                if (node.isRecentChange && recentChangesData) {
+                                    const change = recentChangesData.changes.find(c => c.company === node.id);
+                                    if (change) {
+                                        content += '<br><br><strong style="color: #ff0000;">Recent Change:</strong><br>';
+                                        content += `<em>${change.summary}</em><br>`;
+                                        content += `<small>${change.time_ago}</small><br>`;
+                                        if (change.ai_explanation) {
+                                            content += `<br><small style="color: #aaa;">${change.ai_explanation}</small>`;
+                                        }
+                                    }
+                                }
+                                
                                 tooltip.innerHTML = content;
                                 tooltip.style.display = 'block';
                             } else {
-                                tooltip.style.display = 'none';
+                                // Add delay before hiding to allow mouse to reach tooltip
+                                tooltipTimeout = setTimeout(() => {
+                                    tooltip.style.display = 'none';
+                                }, 300);
                             }
                             
                             // Update the static info panel
@@ -1732,6 +1774,8 @@
             });
             
             // Track mouse movement for tooltip
+            let tooltipTimeout;
+            
             document.addEventListener('mousemove', (e) => {
                 const tooltip = document.getElementById('entity-tooltip');
                 if (tooltip.style.display === 'block') {
@@ -1753,6 +1797,15 @@
                         tooltip.style.top = y + 'px';
                     }
                 }
+            });
+            
+            // Keep tooltip visible when hovering over it
+            document.getElementById('entity-tooltip').addEventListener('mouseenter', () => {
+                clearTimeout(tooltipTimeout);
+            });
+            
+            document.getElementById('entity-tooltip').addEventListener('mouseleave', () => {
+                document.getElementById('entity-tooltip').style.display = 'none';
             });
             
             // Start loading
