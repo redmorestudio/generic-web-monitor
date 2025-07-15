@@ -283,7 +283,14 @@
                     `https://redmorestudio.github.io/ai-competitive-monitor/api-data/companies.json`
                 );
                 const data = await response.json();
-                companiesData = data.companies;
+                // Normalize the data structure
+                companiesData = data.companies.map(c => ({
+                    name: c.company || c.name,
+                    category: c.type || c.category,
+                    urls: c.urls || [],
+                    urls_count: c.urls ? c.urls.length : 0,
+                    created_at: c.created_at
+                }));
                 displayCompanies();
                 updateSelects();
             } catch (error) {
@@ -313,16 +320,16 @@
                     <tbody>
                         ${companiesData.map(company => `
                             <tr>
-                                <td><strong>${company.company || company.name}</strong></td>
-                                <td>${company.type || company.category}</td>
-                                <td>${company.urls ? company.urls.length : (company.urls_count || 0)}</td>
+                                <td><strong>${company.name}</strong></td>
+                                <td>${company.category}</td>
+                                <td>${company.urls_count}</td>
                                 <td>
                                     ${company.urls && company.urls.length > 0 ? `
                                         <div class="url-list">
                                             ${company.urls.map((url, idx) => `
                                                 <div class="url-item">
-                                                    <span>${typeof url === 'string' ? url : `${url.url_type}: ${url.url}`}</span>
-                                                    <button class="delete-url-btn" onclick="deleteUrl('${typeof url === 'string' ? url : url.url}')">Delete</button>
+                                                    <span style="font-size: 0.85em; word-break: break-all;">${url}</span>
+                                                    <button class="delete-url-btn" onclick="deleteUrl('${url}')">Delete</button>
                                                 </div>
                                             `).join('')}
                                         </div>
@@ -342,7 +349,7 @@
             const deleteSelect = document.getElementById('deleteCompanySelect');
             
             const options = companiesData.map(c => 
-                `<option value="${c.company || c.name}">${c.company || c.name}</option>`
+                `<option value="${c.name}">${c.name}</option>`
             ).join('');
             
             urlSelect.innerHTML = '<option value="">Select a company...</option>' + options;
