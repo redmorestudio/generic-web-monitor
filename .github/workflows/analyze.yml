@@ -177,6 +177,15 @@ jobs:
           ls -la ../api-data/
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          
+      - name: Generate change detail files
+        run: |
+          cd github-actions-backend
+          echo "📝 Generating change detail files..."
+          node generate-change-details.js
+          
+          echo "📁 Generated change files:"
+          ls -la ../api-data/changes/ | head -20
       
       - name: Create analysis summary
         run: |

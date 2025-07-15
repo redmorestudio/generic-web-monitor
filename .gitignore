@@ -25,3 +25,9 @@ npm-debug.log*
 # Temporary files
 *.tmp
 *.temp
+-e 
+# Database files
+*.db
+*.db-shm
+*.db-wal
+scraper-artifact.zip

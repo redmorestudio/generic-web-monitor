@@ -1197,11 +1197,12 @@
             
             modal.style.display = 'block';
             
-            // Try to fetch detailed change information from the backend API
+            // Try to fetch detailed change information from static JSON file
             try {
-                const response = await fetch(`${CONFIG.backendUrl}/api/changes/${changeData.id || changeData.change_id}`);
+                const changeId = changeData.id || changeData.change_id;
+                const response = await fetch(`${CONFIG.apiBaseUrl}/changes/change-${changeId}.json?t=${Date.now()}`);
                 if (!response.ok) {
-                    throw new Error('API request failed');
+                    throw new Error('Change detail file not found');
                 }
                 
                 const detailData = await response.json();

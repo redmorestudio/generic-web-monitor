@@ -485,6 +485,7 @@
         <div class="context-menu-item" id="focusSubgraph">Focus on Connected Subgraph</div>
         <div class="context-menu-item" id="showAllConnections">Show All Connections</div>
         <div class="context-menu-item" id="hideNode">Hide This Node</div>
+        <div class="context-menu-item" id="restorePrevious" style="display: none;">Restore Previous View</div>
         <div class="context-menu-item" id="showAll">Show All Nodes</div>
         <div class="context-menu-item" id="resetViewContext">Reset View</div>
     </div>
@@ -554,6 +555,8 @@
         let searchTerm = '';
         let hoveredNode = null;
         let hoverTimeout = null;
+        let isFocusedMode = false;
+        let previousGraphState = null;
 
         // Initialize the enhanced graph
         async function initGraph() {
@@ -1292,6 +1295,18 @@
             menu.style.left = event.pageX + 'px';
             menu.style.top = event.pageY + 'px';
             
+            // Update menu items based on state
+            const focusItem = document.getElementById('focusSubgraph');
+            const restoreItem = document.getElementById('restorePrevious');
+            
+            if (isFocusedMode) {
+                focusItem.textContent = 'Focus on Different Subgraph';
+                restoreItem.style.display = 'block';
+            } else {
+                focusItem.textContent = 'Focus on Connected Subgraph';
+                restoreItem.style.display = 'none';
+            }
+            
             console.log('Context menu shown, selectedNode set to:', selectedNode);
         }
 
@@ -1306,6 +1321,19 @@
             if (!selectedNode) {
                 console.log('No selected node');
                 return;
+            }
+            
+            // Save current state before focusing
+            if (!isFocusedMode) {
+                const currentData = Graph.graphData();
+                previousGraphState = {
+                    nodes: currentData.nodes.map(n => ({ ...n })),
+                    links: currentData.links.map(l => ({
+                        source: typeof l.source === 'object' ? l.source.id : l.source,
+                        target: typeof l.target === 'object' ? l.target.id : l.target,
+                        ...l
+                    }))
+                };
             }
             
             const connectedNodes = new Set();
@@ -1353,6 +1381,12 @@
             
             // Update the graph
             Graph.graphData({ nodes: filteredNodes, links: connectedLinks });
+            
+            // Mark that we're in focused mode
+            isFocusedMode = true;
+            
+            // Update info to show focused state
+            document.getElementById('node-info').innerHTML = `<span style="color: #00ff88;">Focused on ${selectedNode.name} and connections</span> • Right-click for options`;
             
             // Zoom to fit the subgraph
             setTimeout(() => {
@@ -1457,10 +1491,30 @@
             hideContextMenu();
         }
 
+        // Restore previous view state
+        function restorePreviousView() {
+            console.log('Restoring previous view');
+            if (previousGraphState && Graph) {
+                Graph.graphData(previousGraphState);
+                isFocusedMode = false;
+                previousGraphState = null;
+                
+                document.getElementById('node-info').innerHTML = 'View restored • Left-click and drag to rotate • Scroll to zoom';
+                
+                setTimeout(() => {
+                    updateStats();
+                    updateLegend();
+                }, 100);
+            }
+            hideContextMenu();
+        }
+        
         // Show all nodes (back to full view)
         function showAllNodes() {
             console.log('Show all nodes called');
             hiddenNodes.clear();
+            isFocusedMode = false;
+            previousGraphState = null;
             
             // Restore the current view mode with all nodes
             switch(currentView) {
@@ -1495,6 +1549,8 @@
             document.getElementById('searchInput').value = '';
             showChangesOnly = false;
             document.getElementById('toggleChangesOnly').classList.remove('active');
+            isFocusedMode = false;
+            previousGraphState = null;
             
             // Rebuild based on current view
             switch(currentView) {
@@ -2013,6 +2069,10 @@
         document.getElementById('showAll').addEventListener('click', (e) => {
             console.log('Show all clicked');
             showAllNodes();
+        });
+        document.getElementById('restorePrevious').addEventListener('click', (e) => {
+            console.log('Restore previous clicked');
+            restorePreviousView();
         });
         document.getElementById('resetViewContext').addEventListener('click', resetView);
         
