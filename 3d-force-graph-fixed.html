@@ -416,6 +416,18 @@
             </div>
             
             <div class="control-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Number of Entities</h4>
+                <label>
+                    Entity Count Limit
+                    <input type="range" id="entity-limit" min="10" max="200" value="200" step="10">
+                    <span class="slider-value" id="entity-value">200</span>
+                </label>
+                <div class="info-text">
+                    Limit the number of entities displayed
+                </div>
+            </div>
+            
+            <div class="control-group">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Filter by Type</h4>
                 <div class="select-buttons">
                     <button onclick="selectAllTypes()">Select All</button>
@@ -564,6 +576,7 @@
             let thinLinesEnabled = false;
             let currentViewMode = 'entity-type';
             let currentDrawMode = 'normal';
+            let entityLimit = 200;
             
             // Make applyFilters and Graph global for button access
             window.applyFilters = null;
@@ -943,8 +956,8 @@
                 console.log('Applying filters. Selected types:', Array.from(selectedTypes));
                 console.log('Total nodes before filter:', graphData.nodes.length);
                 
-                // Filter nodes
-                filteredData.nodes = graphData.nodes.filter(node => {
+                // First filter by type and search
+                let tempFilteredNodes = graphData.nodes.filter(node => {
                     // Type filter - if types are selected, only show matching types
                     if (selectedTypes.size > 0 && !selectedTypes.has(node.group)) {
                         return false;
@@ -961,6 +974,28 @@
                     
                     return true;
                 });
+                
+                // Apply entity limit
+                if (entityLimit < tempFilteredNodes.length) {
+                    // Sort by importance (interest level, then connection count, then URL count)
+                    tempFilteredNodes.sort((a, b) => {
+                        // First by interest level (higher is better)
+                        if (a.interestLevel !== b.interestLevel) {
+                            return b.interestLevel - a.interestLevel;
+                        }
+                        // Then by connection count
+                        if (a.connectionCount !== b.connectionCount) {
+                            return b.connectionCount - a.connectionCount;
+                        }
+                        // Finally by URL count
+                        return b.urlCount - a.urlCount;
+                    });
+                    
+                    // Take only the top N entities
+                    filteredData.nodes = tempFilteredNodes.slice(0, entityLimit);
+                } else {
+                    filteredData.nodes = tempFilteredNodes;
+                }
                 
                 console.log('Nodes after filter:', filteredData.nodes.length);
                 
@@ -1138,7 +1173,9 @@
                         
                         // Update node visuals
                         Graph.nodeThreeObject(node => {
-                            if (!labelsEnabled) return new THREE.Mesh();
+                            if (!labelsEnabled) {
+                                return null;
+                            }
                             return createNodeObject(node);
                         });
                         break;
@@ -1316,7 +1353,10 @@
                         .nodeAutoColorBy('group')
                         .nodeVal('val')
                         .nodeThreeObject(node => {
-                            if (!labelsEnabled) return new THREE.Mesh();
+                            if (!labelsEnabled) {
+                                // Return null to use default sphere
+                                return null;
+                            }
                             return createNodeObject(node);
                         })
                         .nodeThreeObjectExtend(false)
@@ -1393,7 +1433,9 @@
                 labelsEnabled = e.target.checked;
                 if (Graph) {
                     Graph.nodeThreeObject(node => {
-                        if (!labelsEnabled) return new THREE.Mesh();
+                        if (!labelsEnabled) {
+                            return null;
+                        }
                         return createNodeObject(node);
                     });
                 }
@@ -1451,6 +1493,13 @@
             document.getElementById('draw-by-mode').addEventListener('change', (e) => {
                 currentDrawMode = e.target.value;
                 applyDrawMode();
+            });
+            
+            document.getElementById('entity-limit').addEventListener('input', (e) => {
+                const value = parseInt(e.target.value);
+                document.getElementById('entity-value').textContent = value;
+                entityLimit = value;
+                applyFilters();
             });
             
             // Toggle controls on mobile
