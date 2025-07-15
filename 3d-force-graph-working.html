@@ -372,6 +372,11 @@
             </div>
             
             <div class="control-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Camera Controls</h4>
+                <button onclick="centerView()" style="width: 100%; padding: 8px; background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; color: #00ff88; border-radius: 4px; cursor: pointer; margin-bottom: 10px;">Center View</button>
+            </div>
+            
+            <div class="control-group">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Graph Physics</h4>
                 <label>
                     Force Strength
@@ -438,6 +443,48 @@
             if (window.applyFilters) window.applyFilters();
         }
         
+        function centerView() {
+            if (window.Graph) {
+                // Calculate bounding box of all visible nodes
+                const nodes = window.Graph.graphData().nodes;
+                if (nodes.length === 0) return;
+                
+                let minX = Infinity, maxX = -Infinity;
+                let minY = Infinity, maxY = -Infinity;
+                let minZ = Infinity, maxZ = -Infinity;
+                
+                nodes.forEach(node => {
+                    if (node.x !== undefined) {
+                        minX = Math.min(minX, node.x);
+                        maxX = Math.max(maxX, node.x);
+                        minY = Math.min(minY, node.y);
+                        maxY = Math.max(maxY, node.y);
+                        minZ = Math.min(minZ, node.z);
+                        maxZ = Math.max(maxZ, node.z);
+                    }
+                });
+                
+                // Calculate center and distance
+                const centerX = (minX + maxX) / 2;
+                const centerY = (minY + maxY) / 2;
+                const centerZ = (minZ + maxZ) / 2;
+                
+                const maxDist = Math.max(
+                    maxX - minX,
+                    maxY - minY,
+                    maxZ - minZ
+                );
+                
+                // Position camera to see all nodes
+                const distance = maxDist * 1.5;
+                window.Graph.cameraPosition(
+                    { x: centerX, y: centerY, z: centerZ + distance },
+                    { x: centerX, y: centerY, z: centerZ },
+                    1000
+                );
+            }
+        }
+        
         // Wrap main code in IIFE
         (function() {
             console.log('Initializing AI Competitive Monitor 3D Force Graph...');
@@ -451,8 +498,9 @@
             let particlesEnabled = true;
             let currentViewMode = 'entity-type';
             
-            // Make applyFilters global for button access
+            // Make applyFilters and Graph global for button access
             window.applyFilters = null;
+            window.Graph = null;
             
             // Configuration
             const CONFIG = {
@@ -805,8 +853,12 @@
                 
                 // Filter nodes
                 filteredData.nodes = graphData.nodes.filter(node => {
-                    // Type filter - if no types selected, show all
+                    // Type filter - if types are selected, only show matching types
                     if (selectedTypes.size > 0 && !selectedTypes.has(node.group)) {
+                        return false;
+                    }
+                    // If no types selected via "Select None", show nothing
+                    if (selectedTypes.size === 0 && document.querySelectorAll('#type-filters input[type="checkbox"]').length > 0) {
                         return false;
                     }
                     
@@ -926,6 +978,7 @@
                     // Only create new instance if it doesn't exist
                     if (!Graph) {
                         Graph = ForceGraph3D()(document.getElementById('3d-graph'));
+                        window.Graph = Graph; // Make it globally accessible
                     }
                     
                     // Use full graph data for initial setup
