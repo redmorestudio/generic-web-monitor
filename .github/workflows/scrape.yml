@@ -84,14 +84,32 @@ jobs:
           cd github-actions-backend
           npx puppeteer browsers install chrome
       
+      # NEW STEP: Download previous database artifact to maintain historical data
+      - name: Download previous database artifact
+        id: download-artifact
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          workflow: scrape.yml
+          workflow_conclusion: success
+          name: scraper-databases-*
+          path: github-actions-backend/data
+          if_no_artifact_found: warn
+        continue-on-error: true
+      
       - name: Initialize database (three-db architecture)
         if: ${{ env.USE_THREE_DB == 'true' }}
         run: |
           cd github-actions-backend
           
-          # Run the three-database initialization
-          echo "📊 Initializing three-database architecture..."
-          node scripts/init-db-three.js
+          # Check if we have existing databases from artifact
+          if [ -f data/raw_content.db ] && [ -f data/intelligence.db ]; then
+            echo "✅ Using existing databases from previous run"
+            echo "📊 Database sizes:"
+            ls -lh data/*.db
+          else
+            echo "📊 No previous databases found, initializing fresh..."
+            node scripts/init-db-three.js
+          fi
       
       - name: Initialize database (legacy)
         if: ${{ env.USE_THREE_DB != 'true' }}
@@ -181,8 +199,8 @@ jobs:
           echo "📦 Stashing any uncommitted changes..."
           git stash push -m "Temporary stash during workflow" || true
           
-          # Add the databases and scrape status
-          git add -f github-actions-backend/data/raw_content.db || true
+          # NOTE: raw_content.db is gitignored, so we don't try to add it
+          # Only add files that are actually tracked by git
           git add -f github-actions-backend/data/intelligence.db || true
           git add api-data/last-scrape.json || true
           
@@ -213,7 +231,6 @@ jobs:
                     git reset --hard HEAD~1
                     git pull origin main
                     # Re-add and commit our changes
-                    git add -f github-actions-backend/data/raw_content.db || true
                     git add -f github-actions-backend/data/intelligence.db || true
                     git add api-data/last-scrape.json || true
                     git commit -m "🕷️ Update scraped content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
