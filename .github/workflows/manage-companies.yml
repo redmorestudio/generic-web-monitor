@@ -57,6 +57,17 @@ jobs:
           cd github-actions-backend
           npm install --omit=dev
       
+      - name: Ensure database exists
+        run: |
+          cd github-actions-backend
+          if [ ! -f data/intelligence.db ]; then
+            echo "Database not found, initializing..."
+            node scripts/init-db-three.js
+          fi
+          
+          # Make the script executable
+          chmod +x manage-companies.sh
+      
       - name: Execute company management
         run: |
           cd github-actions-backend

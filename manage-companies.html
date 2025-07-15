@@ -313,16 +313,16 @@
                     <tbody>
                         ${companiesData.map(company => `
                             <tr>
-                                <td><strong>${company.name}</strong></td>
-                                <td>${company.category}</td>
-                                <td>${company.urls_count || 0}</td>
+                                <td><strong>${company.company || company.name}</strong></td>
+                                <td>${company.type || company.category}</td>
+                                <td>${company.urls ? company.urls.length : (company.urls_count || 0)}</td>
                                 <td>
                                     ${company.urls && company.urls.length > 0 ? `
                                         <div class="url-list">
-                                            ${company.urls.map(url => `
+                                            ${company.urls.map((url, idx) => `
                                                 <div class="url-item">
-                                                    <span>${url.url_type}: ${url.url}</span>
-                                                    <button class="delete-url-btn" onclick="deleteUrl('${url.url}')">Delete</button>
+                                                    <span>${typeof url === 'string' ? url : `${url.url_type}: ${url.url}`}</span>
+                                                    <button class="delete-url-btn" onclick="deleteUrl('${typeof url === 'string' ? url : url.url}')">Delete</button>
                                                 </div>
                                             `).join('')}
                                         </div>
@@ -342,7 +342,7 @@
             const deleteSelect = document.getElementById('deleteCompanySelect');
             
             const options = companiesData.map(c => 
-                `<option value="${c.name}">${c.name}</option>`
+                `<option value="${c.company || c.name}">${c.company || c.name}</option>`
             ).join('');
             
             urlSelect.innerHTML = '<option value="">Select a company...</option>' + options;
