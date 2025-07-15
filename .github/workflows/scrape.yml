@@ -106,6 +106,12 @@ jobs:
             echo "✅ Using existing databases from previous run"
             echo "📊 Database sizes:"
             ls -lh data/*.db
+            
+            # Run migration script to ensure schema is up to date
+            echo "🔧 Running database migration..."
+            if [ -f add-last-scraped-column.js ]; then
+              node add-last-scraped-column.js || echo "Migration already applied or not needed"
+            fi
           else
             echo "📊 No previous databases found, initializing fresh..."
             node scripts/init-db-three.js
