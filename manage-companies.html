@@ -251,6 +251,7 @@
         let companiesData = [];
         let allCompaniesData = []; // Store unfiltered data
         let categories = new Set();
+        let isAddingCategory = false; // Flag to prevent refresh during category add
 
         // Get GitHub token
         function getToken() {
@@ -315,6 +316,9 @@
 
         // Load companies from API
         async function loadCompanies() {
+            // Don't refresh if we're in the middle of adding a category
+            if (isAddingCategory) return;
+            
             try {
                 const response = await fetch(
                     `https://redmorestudio.github.io/ai-competitive-monitor/api-data/companies.json`
@@ -330,8 +334,10 @@
                 }));
                 companiesData = [...allCompaniesData];
                 
-                // Extract categories
-                categories = new Set(allCompaniesData.map(c => c.category));
+                // Extract categories from existing companies
+                const dataCategories = new Set(allCompaniesData.map(c => c.category));
+                // Merge with any locally added categories
+                categories = new Set([...dataCategories, ...categories]);
                 updateCategorySelects();
                 
                 displayCompanies();
@@ -513,17 +519,28 @@
 
         // Category management functions
         function showAddCategoryDialog() {
+            isAddingCategory = true;
             const newCategory = prompt('Enter new category name:');
             if (newCategory && newCategory.trim()) {
                 const trimmedCategory = newCategory.trim();
+                // Check if category already exists
+                if (categories.has(trimmedCategory)) {
+                    showStatus('Category already exists!', 'error');
+                    isAddingCategory = false;
+                    return;
+                }
                 // Add to categories set
                 categories.add(trimmedCategory);
                 // Update all dropdowns
                 updateCategorySelects();
                 // Select the new category in the Add Company dropdown
-                document.getElementById('companyCategory').value = trimmedCategory;
+                const companySelect = document.getElementById('companyCategory');
+                companySelect.value = trimmedCategory;
+                // Force the dropdown to update its display
+                companySelect.dispatchEvent(new Event('change'));
                 showStatus('Category added! You can now add companies to this category.', 'success');
             }
+            isAddingCategory = false;
         }
 
         function showRenameCategoryDialog() {
