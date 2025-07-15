@@ -260,22 +260,70 @@
             async function loadData() {
                 try {
                     console.log('Loading data...');
-                    const response = await fetch('https://redmorestudio.github.io/ai-competitive-monitor/api-data/dashboard.json');
                     
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
+                    // Load multiple data files
+                    const [companiesResponse, detailsResponse] = await Promise.all([
+                        fetch('https://redmorestudio.github.io/ai-competitive-monitor/api-data/companies.json'),
+                        fetch('https://redmorestudio.github.io/ai-competitive-monitor/api-data/company-details.json')
+                    ]);
+                    
+                    if (!companiesResponse.ok || !detailsResponse.ok) {
+                        throw new Error('Failed to load data files');
                     }
                     
-                    const text = await response.text();
-                    console.log('Raw response:', text.substring(0, 100) + '...');
+                    const companiesData = await companiesResponse.json();
+                    const detailsData = await detailsResponse.json();
                     
-                    rawData = JSON.parse(text);
+                    console.log('Companies data:', companiesData);
+                    console.log('Details data:', detailsData);
                     
-                    if (!rawData.dashboard?.company_activity) {
-                        throw new Error('Invalid data structure');
-                    }
+                    // Transform data into expected format
+                    rawData = {
+                        dashboard: {
+                            company_activity: []
+                        }
+                    };
                     
-                    console.log('Data loaded successfully');
+                    // Combine companies with their details
+                    companiesData.companies.forEach(company => {
+                        const companyName = company.company;
+                        // Find matching details
+                        const details = Object.values(detailsData.companies).find(d => d.company_name === companyName);
+                        
+                        const companyEntry = {
+                            company: companyName,
+                            type: company.type,
+                            entity_type: company.type, // Use type as entity_type
+                            url_count: company.urls.length,
+                            intelligence: {
+                                interest_level: details?.interest_level || 5,
+                                ai_technologies: [],
+                                ai_ml_concepts: []
+                            }
+                        };
+                        
+                        // Extract technologies and concepts from products
+                        if (details?.products) {
+                            details.products.forEach(product => {
+                                if (product.uses_technologies) {
+                                    companyEntry.intelligence.ai_technologies.push(...product.uses_technologies);
+                                }
+                                if (product.ai_capabilities) {
+                                    companyEntry.intelligence.ai_ml_concepts.push(...product.ai_capabilities);
+                                }
+                            });
+                            
+                            // Remove duplicates
+                            companyEntry.intelligence.ai_technologies = [...new Set(companyEntry.intelligence.ai_technologies)];
+                            companyEntry.intelligence.ai_ml_concepts = [...new Set(companyEntry.intelligence.ai_ml_concepts)];
+                        }
+                        
+                        rawData.dashboard.company_activity.push(companyEntry);
+                    });
+                    
+                    console.log('Transformed data:', rawData);
+                    console.log('Company count:', rawData.dashboard.company_activity.length);
+                    
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('info').style.display = 'block';
                     document.getElementById('stats').style.display = 'block';
