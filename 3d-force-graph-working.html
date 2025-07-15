@@ -369,6 +369,10 @@
                     Show Particles
                     <input type="checkbox" id="toggle-particles" checked>
                 </label>
+                <label>
+                    Thin Lines Mode
+                    <input type="checkbox" id="toggle-thin-lines">
+                </label>
             </div>
             
             <div class="control-group">
@@ -496,6 +500,7 @@
             let linksEnabled = true;
             let labelsEnabled = true;
             let particlesEnabled = true;
+            let thinLinesEnabled = false;
             let currentViewMode = 'entity-type';
             
             // Make applyFilters and Graph global for button access
@@ -565,6 +570,11 @@
             
             // Calculate link width based on connection strength
             function getLinkWidth(link) {
+                // If thin lines mode is enabled, return minimal width
+                if (thinLinesEnabled) {
+                    return 0.1;
+                }
+                
                 // Start with very thin base width
                 let width = 0.1;
                 
@@ -573,25 +583,25 @@
                 
                 // Shared concepts = strongest (thick cyan lines to concept nodes)
                 if (link.label && link.label.includes('concept')) {
-                    strength += 5;  // Make concept links really stand out
+                    strength += 6;  // Increased for thicker concept links
                 }
                 // Shared technologies = medium
                 else if (link.label && link.label !== 'uses concept') {
-                    strength += 2;
+                    strength += 3;  // Increased for more visible tech links
                 }
                 
                 // More connections = stronger
                 if (link.connectionCount && link.connectionCount > 1) {
-                    strength += Math.min(link.connectionCount / 4, 3);
+                    strength += Math.min(link.connectionCount / 3, 4);
                 }
                 
                 // Calculate final width - exponential scaling for more dramatic differences
                 if (strength > 0) {
-                    width = 0.1 + (strength * strength * 0.05);
+                    width = 0.1 + (strength * strength * 0.06);
                 }
                 
                 // Cap at reasonable maximum
-                return Math.min(width, 2.5);
+                return Math.min(width, 3.0);
             }
             
             // Load and process data
@@ -636,10 +646,28 @@
                         if (details?.products) {
                             details.products.forEach(product => {
                                 if (product.uses_technologies) {
-                                    companyEntry.intelligence.ai_technologies.push(...product.uses_technologies);
+                                    // Normalize technology names to avoid duplicates
+                                    const normalizedTechs = product.uses_technologies.map(tech => {
+                                        // Convert to lowercase and trim
+                                        const normalized = tech.trim().toLowerCase();
+                                        // Capitalize first letter of each word
+                                        return normalized.split(' ').map(word => 
+                                            word.charAt(0).toUpperCase() + word.slice(1)
+                                        ).join(' ');
+                                    });
+                                    companyEntry.intelligence.ai_technologies.push(...normalizedTechs);
                                 }
                                 if (product.ai_capabilities) {
-                                    companyEntry.intelligence.ai_ml_concepts.push(...product.ai_capabilities);
+                                    // Normalize concept names to avoid duplicates
+                                    const normalizedConcepts = product.ai_capabilities.map(concept => {
+                                        // Convert to lowercase and trim
+                                        const normalized = concept.trim().toLowerCase();
+                                        // Capitalize first letter of each word
+                                        return normalized.split(' ').map(word => 
+                                            word.charAt(0).toUpperCase() + word.slice(1)
+                                        ).join(' ');
+                                    });
+                                    companyEntry.intelligence.ai_ml_concepts.push(...normalizedConcepts);
                                 }
                             });
                             
@@ -1063,6 +1091,14 @@
                 particlesEnabled = e.target.checked;
                 if (Graph) {
                     Graph.linkDirectionalParticles(particlesEnabled ? 2 : 0);
+                }
+            });
+            
+            document.getElementById('toggle-thin-lines').addEventListener('change', (e) => {
+                thinLinesEnabled = e.target.checked;
+                if (Graph) {
+                    // Re-apply link width function
+                    Graph.linkWidth(link => getLinkWidth(link));
                 }
             });
             
