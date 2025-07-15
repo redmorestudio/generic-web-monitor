@@ -565,15 +565,15 @@
             
             // Calculate link width based on connection strength
             function getLinkWidth(link) {
-                // Base width
-                let width = 0.3;
+                // Start with very thin base width
+                let width = 0.1;
                 
                 // Calculate strength based on shared properties
                 let strength = 0;
                 
                 // Shared concepts = strongest (thick cyan lines to concept nodes)
                 if (link.label && link.label.includes('concept')) {
-                    strength += 4;
+                    strength += 5;  // Make concept links really stand out
                 }
                 // Shared technologies = medium
                 else if (link.label && link.label !== 'uses concept') {
@@ -581,15 +581,17 @@
                 }
                 
                 // More connections = stronger
-                if (link.connectionCount) {
-                    strength += Math.min(link.connectionCount / 5, 2);
+                if (link.connectionCount && link.connectionCount > 1) {
+                    strength += Math.min(link.connectionCount / 4, 3);
                 }
                 
-                // Calculate final width
-                width = width + (strength * 0.3);
+                // Calculate final width - exponential scaling for more dramatic differences
+                if (strength > 0) {
+                    width = 0.1 + (strength * strength * 0.05);
+                }
                 
                 // Cap at reasonable maximum
-                return Math.min(width, 2.0);
+                return Math.min(width, 2.5);
             }
             
             // Load and process data
