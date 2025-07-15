@@ -654,9 +654,9 @@
             
             // Calculate link width based on connection strength
             function getLinkWidth(link) {
-                // If thin lines mode is enabled, return minimal width
+                // If thin lines mode is enabled, return minimal but visible width
                 if (thinLinesEnabled) {
-                    return 0.1;
+                    return 0.2;  // Increased from 0.1 to be barely visible
                 }
                 
                 // Start with very thin base width
