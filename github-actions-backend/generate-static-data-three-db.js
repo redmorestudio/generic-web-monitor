@@ -911,6 +911,7 @@ function generateRecentChangesData(processedDb, intelligenceDb) {
                     category: change.change_type || 'content_change',
                     keywords_found: '[]',
                     created_at: change.created_at,
+                    detected_at: change.created_at, // Add detected_at field
                     time_ago: getRelativeTime(change.created_at),
                     emoji: emoji,
                     impact_level: interestLevel >= 8 ? 'high' : interestLevel >= 5 ? 'medium' : 'low',
