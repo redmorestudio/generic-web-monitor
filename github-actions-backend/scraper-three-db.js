@@ -427,12 +427,15 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
           ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
         `);
         
+        // CRITICAL FIX: Ensure we use the correct content IDs, not URL IDs
+        const oldContentId = latest ? latest.id : null;
+        
         changeStmt.run(
           urlConfig.id,
           'content_update',
           assessment.summary || `Content changed for ${companyName} - ${urlConfig.url}`,
-          latest?.id || null,
-          newContentId,
+          oldContentId,  // Use the actual raw_html.id from previous snapshot
+          newContentId,  // Use the newly inserted raw_html.id
           assessment.interest_level, // For backward compatibility
           assessment.interest_level, // New field
           JSON.stringify(assessment), // Store full assessment data

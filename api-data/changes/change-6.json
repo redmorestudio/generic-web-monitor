@@ -1,0 +1,35 @@
+{
+  "change_id": 6,
+  "url": "https://aws.amazon.com/codewhisperer",
+  "company": "Amazon CodeWhisperer",
+  "company_category": "AI Coding",
+  "detected_at": "2025-07-04 20:11:15",
+  "interest_level": 5,
+  "interest_category": "routine_change",
+  "interest_explanation": "Content changed for Amazon CodeWhisperer - https://aws.amazon.com/codewhisperer",
+  "interest_drivers": [],
+  "technical_innovation_score": 5,
+  "business_impact_score": 5,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": false,
+  "content_preview": {
+    "before": null,
+    "after": "---\nurl: https://docs.github.com/en/copilot\ncompany: GitHub Copilot\nscraped_at: 2025-07-04 20:15:05\n---\n\nGitHub Copilot documentation - GitHub Docs\n\n[Skip to main content](#main-content)\n\n[GitHub Docs](/en)\n\nVersion: Free, Pro, & Team\n\n![The Copilot Icon in front of an explosion of color.](/assets/images/search/copilot-action.png)\n\n## Get quick answers!\n\nAsk Copilot your question.\n\nDismissAsk Copilot\n\nSearch or ask Copilot\n\nSearch or askCopilot\n\nSelect language: current language is English\n\n![Th..."
+  },
+  "diff": {
+    "added_sentences": [],
+    "removed_sentences": [],
+    "key_changes": [],
+    "change_percentage": 0,
+    "summary": "No diff available"
+  },
+  "keywords": {
+    "new_keywords": [],
+    "removed_keywords": [],
+    "frequency_changes": {},
+    "significant_phrases": []
+  },
+  "entities": null,
+  "key_phrases": []
+}

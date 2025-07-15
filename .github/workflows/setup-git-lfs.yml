@@ -1,0 +1,42 @@
+name: Setup Git LFS for Databases
+
+on:
+  workflow_dispatch:
+
+jobs:
+  setup-lfs:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Git LFS
+        run: |
+          # Git LFS is pre-installed on GitHub runners
+          git lfs install
+          
+      - name: Configure LFS tracking
+        run: |
+          # Track all database files
+          git lfs track "*.db"
+          git lfs track "*.db-shm"
+          git lfs track "*.db-wal"
+          
+          # Remove database files from .gitignore
+          sed -i '/\*.db/d' .gitignore
+          sed -i '/\*.db-shm/d' .gitignore
+          sed -i '/\*.db-wal/d' .gitignore
+          
+          # Commit the changes
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          git add .gitattributes .gitignore
+          git commit -m "Configure Git LFS for database files" || echo "No changes to commit"
+          
+      - name: Push changes
+        run: |
+          git push origin main

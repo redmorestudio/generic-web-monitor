@@ -60,6 +60,18 @@ changes.forEach((change, index) => {
     let afterContent = null;
     
     if (change.old_content_id) {
+      // VALIDATION: Check if the content matches the expected URL
+      const contentUrlCheck = processedDb.prepare(`
+        SELECT url, url_id FROM raw.raw_html WHERE id = ?
+      `).get(change.old_content_id);
+      
+      if (contentUrlCheck && contentUrlCheck.url !== change.url) {
+        console.error(`⚠️  CONTENT MISMATCH for change ${change.id}!`);
+        console.error(`   Expected URL: ${change.url} (url_id: ${change.url_id})`);
+        console.error(`   Got content from: ${contentUrlCheck.url} (url_id: ${contentUrlCheck.url_id})`);
+        console.error(`   old_content_id: ${change.old_content_id}`);
+      }
+      
       // Try to get markdown content first
       const oldMarkdownQuery = processedDb.prepare(`
         SELECT markdown_text, processed_at
@@ -91,6 +103,18 @@ changes.forEach((change, index) => {
     }
     
     if (change.new_content_id) {
+      // VALIDATION: Check if the content matches the expected URL
+      const contentUrlCheck = processedDb.prepare(`
+        SELECT url, url_id FROM raw.raw_html WHERE id = ?
+      `).get(change.new_content_id);
+      
+      if (contentUrlCheck && contentUrlCheck.url !== change.url) {
+        console.error(`⚠️  CONTENT MISMATCH for change ${change.id}!`);
+        console.error(`   Expected URL: ${change.url} (url_id: ${change.url_id})`);
+        console.error(`   Got content from: ${contentUrlCheck.url} (url_id: ${contentUrlCheck.url_id})`);
+        console.error(`   new_content_id: ${change.new_content_id}`);
+      }
+      
       // Try to get markdown content first
       const newMarkdownQuery = processedDb.prepare(`
         SELECT markdown_text, processed_at

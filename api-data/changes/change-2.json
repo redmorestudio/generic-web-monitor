@@ -1,0 +1,318 @@
+{
+  "change_id": 2,
+  "url": "https://openai.com",
+  "company": "OpenAI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-08 19:18:06",
+  "interest_level": 9,
+  "interest_category": "routine_change",
+  "interest_explanation": "Significant updates detected on OpenAI's page including new gpt-5 model announcement detected.",
+  "interest_drivers": [],
+  "technical_innovation_score": 5,
+  "business_impact_score": 5,
+  "ai_key_changes": "[\"New GPT-5 model announcement detected\",\"Product launch or announcement detected\"]",
+  "ai_business_context": "Updates may indicate competitive positioning in the AI market or response to industry developments.",
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://openai.com\ncompany: OpenAI\nscraped_at: 2025-07-04 20:17:45\n---\n\nOpenAI\n\n[Skip to main content](#main)\n\nLog in\n\n[\n\n](/)\n\nSwitch to\n\n*   [ChatGPT(opens in a new window)](https://chatgpt.com/)\n*   [Sora(opens in a new window)](https://sora.com/)\n*   [API Platform(opens in a new window)](https://platform.openai.com/)\n\n*   [Research](/research/index/)\n\n*   [Safety](/safety/)\n\n*   [For Business](/business/)\n\n*   [ChatGPT](/chatgpt/overview/)\n\n*   [Sora](/sora/)\n\n*   [API Platform](/ap...",
+    "after": "---\nurl: https://docs.tabnine.com\ncompany: Tabnine\nscraped_at: 2025-07-04 20:20:49\n---\n\nOverview | Tabnine Docs\n\n[![Logo](https://docs.tabnine.com/main/~gitbook/image?url=https%3A%2F%2F3436682446-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FY2qxVf5VTm3fmwP4B4Gx%252Flogo%252FDE39Qebjhe02mwMFtlIx%252FGroup%25201405.png%3Falt%3Dmedia%26token%3Da9ef71bb-8b78-410f-bff7-a8adac0010df&width=260&dpr=4&quality=100&sign=41fa86aa&sv=2)![Logo](https://docs.tabnine.com..."
+  },
+  "diff": {
+    "added_sentences": [
+      "---\nurl: https://docs.",
+      "tabnine.",
+      "com\ncompany: Tabnine\nscraped_at: 2025-07-04 20:20:49\n---\n\nOverview | Tabnine Docs\n\n[!",
+      "[Logo](https://docs.",
+      "tabnine.",
+      "com/main/~gitbook/image?",
+      "url=https%3A%2F%2F3436682446-files.",
+      "gitbook.",
+      "io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.",
+      "appspot."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://openai.",
+      "com\ncompany: OpenAI\nscraped_at: 2025-07-04 20:17:45\n---\n\nOpenAI\n\n[Skip to main content](#main)\n\nLog in\n\n[\n\n](/)\n\nSwitch to\n\n*   [ChatGPT(opens in a new window)](https://chatgpt.",
+      "com/)\n*   [Sora(opens in a new window)](https://sora.",
+      "com/)\n*   [API Platform(opens in a new window)](https://platform.",
+      "openai.",
+      "com/)\n\n*   [Research](/research/index/)\n\n*   [Safety](/safety/)\n\n*   [For Business](/business/)\n\n*   [ChatGPT](/chatgpt/overview/)\n\n*   [Sora](/sora/)\n\n*   [API Platform](/api/)\n\n*   [Stories](/stories/)\n\n*   [Company](/about/)\n\n*   [News](/news/)\n\n\n*   Research\n\n    Back to main menu\n\n    *   [Research Index](/research/index/)\n    *   [Research Overview](/research/)\n    *   [Research Residency](/residency/)\n    *   Latest Advancements\n    *   [OpenAI o3 and o4-mini](/index/introducing-o3-and-o4-mini/)\n    *   [GPT-4.",
+      "5](/index/introducing-gpt-4-5/)\n    *   [OpenAI o1](/o1/)\n    *   [GPT-4o](/index/gpt-4o-system-card/)\n    *   [Sora](/index/sora-system-card/)\n\n*   Safety\n\n    Back to main menu\n\n    *   [Safety Approach](/safety/)\n    *   [Security & Privacy](/security-and-privacy/)\n\n*   [For Business](/business/)\n\n    Back to main menu\n\n    *   [Business Overview](/business/)\n    *   [Solutions](/solutions/)\n    *   [Contact Sales](/contact-sales/)\n\n*   ChatGPT\n\n    Back to main menu\n\n    *   [Explore ChatGPT](/chatgpt/overview/)\n    *   [Team](/chatgpt/team/)\n    *   [Enterprise](/chatgpt/enterprise/)\n    *   [Education](/chatgpt/education/)\n    *   [Pricing](/chatgpt/pricing/)\n    *   [Download](/chatgpt/download/)\n\n*   Sora\n\n    Back to main menu\n\n    *   [Sora Overview](/sora/)\n    *   [Features](/sora/#features)\n    *   [Pricing](/sora/#pricing)\n    *   [Help Center(opens in a new window)](https://help.",
+      "openai.",
+      "com/en/articles/9957612-generating-videos-on-sora)\n    *   [Sora Log in(opens in a new window)](https://sora.",
+      "com/)\n\n*   API Platform\n\n    Back to main menu\n\n    *   [Platform Overview](/api/)\n    *   [Pricing](/api/pricing/)\n    *   [API Log in(opens in a new window)](https://platform."
+    ],
+    "key_changes": [
+      "New version: version 5, 7.0",
+      "New model mentioned",
+      "New release mentioned",
+      "New launch mentioned",
+      "New update mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 189,
+    "summary": "189% content changed (125 additions, 130 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "tabnine",
+        "frequency": 84
+      },
+      {
+        "word": "getting-started",
+        "frequency": 47
+      },
+      {
+        "word": "welcome",
+        "frequency": 45
+      },
+      {
+        "word": "administering-tabnine",
+        "frequency": 45
+      },
+      {
+        "word": "readme",
+        "frequency": 41
+      },
+      {
+        "word": "private-installation",
+        "frequency": 38
+      },
+      {
+        "word": "software-development-with-tabnine",
+        "frequency": 23
+      },
+      {
+        "word": "managing-your-team",
+        "frequency": 23
+      },
+      {
+        "word": "getting-the-most-from-tabnine-chat",
+        "frequency": 20
+      },
+      {
+        "word": "you",
+        "frequency": 16
+      },
+      {
+        "word": "chat",
+        "frequency": 15
+      },
+      {
+        "word": "gitbook",
+        "frequency": 14
+      },
+      {
+        "word": "install",
+        "frequency": 14
+      },
+      {
+        "word": "private",
+        "frequency": 13
+      },
+      {
+        "word": "installation",
+        "frequency": 12
+      },
+      {
+        "word": "guide",
+        "frequency": 12
+      },
+      {
+        "word": "reporting",
+        "frequency": 11
+      },
+      {
+        "word": "personalization",
+        "frequency": 10
+      },
+      {
+        "word": "quickstart",
+        "frequency": 10
+      },
+      {
+        "word": "settings",
+        "frequency": 10
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "index",
+        "frequency": 34
+      },
+      {
+        "word": "openai",
+        "frequency": 32
+      },
+      {
+        "word": "chatgpt",
+        "frequency": 29
+      },
+      {
+        "word": "new",
+        "frequency": 24
+      },
+      {
+        "word": "sora",
+        "frequency": 23
+      },
+      {
+        "word": "opens",
+        "frequency": 20
+      },
+      {
+        "word": "window",
+        "frequency": 20
+      },
+      {
+        "word": "research",
+        "frequency": 18
+      },
+      {
+        "word": "images",
+        "frequency": 16
+      },
+      {
+        "word": "3840",
+        "frequency": 15
+      },
+      {
+        "word": "ctfassets",
+        "frequency": 15
+      },
+      {
+        "word": "net",
+        "frequency": 15
+      },
+      {
+        "word": "kftzwdyauwt9",
+        "frequency": 15
+      },
+      {
+        "word": "webp",
+        "frequency": 15
+      },
+      {
+        "word": "stories",
+        "frequency": 13
+      },
+      {
+        "word": "platform",
+        "frequency": 11
+      },
+      {
+        "word": "business",
+        "frequency": 11
+      },
+      {
+        "word": "news",
+        "frequency": 9
+      },
+      {
+        "word": "oai",
+        "frequency": 9
+      },
+      {
+        "word": "2025",
+        "frequency": 8
+      }
+    ],
+    "frequency_changes": {
+      "main": {
+        "before": 9,
+        "after": 166,
+        "change": 157
+      },
+      "code": {
+        "before": 2,
+        "after": 20,
+        "change": 18
+      },
+      "docs": {
+        "before": 2,
+        "after": 18,
+        "change": 16
+      },
+      "team": {
+        "before": 5,
+        "after": 15,
+        "change": 10
+      },
+      "use": {
+        "before": 1,
+        "after": 9,
+        "change": 8
+      },
+      "url": {
+        "before": 1,
+        "after": 7,
+        "change": 6
+      },
+      "privacy": {
+        "before": 4,
+        "after": 8,
+        "change": 4
+      },
+      "enterprise": {
+        "before": 4,
+        "after": 8,
+        "change": 4
+      },
+      "your": {
+        "before": 5,
+        "after": 9,
+        "change": 4
+      },
+      "how": {
+        "before": 1,
+        "after": 5,
+        "change": 4
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "main getting-started",
+        "count": 47
+      },
+      {
+        "phrase": "main administering-tabnine",
+        "count": 45
+      },
+      {
+        "phrase": "main welcome",
+        "count": 43
+      },
+      {
+        "phrase": "welcome readme",
+        "count": 41
+      },
+      {
+        "phrase": "administering-tabnine private-installation",
+        "count": 38
+      },
+      {
+        "phrase": "main software-development-with-tabnine",
+        "count": 23
+      },
+      {
+        "phrase": "private-installation managing-your-team",
+        "count": 23
+      },
+      {
+        "phrase": "getting-started getting-the-most-from-tabnine-chat",
+        "count": 20
+      },
+      {
+        "phrase": "tabnine com",
+        "count": 19
+      },
+      {
+        "phrase": "https docs",
+        "count": 13
+      }
+    ]
+  },
+  "entities": null,
+  "key_phrases": []
+}

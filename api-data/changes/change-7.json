@@ -1,0 +1,35 @@
+{
+  "change_id": 7,
+  "url": "https://docs.aleph-alpha.com",
+  "company": "Aleph Alpha",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-15 18:51:04",
+  "interest_level": 5,
+  "interest_category": "routine_change",
+  "interest_explanation": "Content changed for Aleph Alpha - https://docs.aleph-alpha.com",
+  "interest_drivers": [],
+  "technical_innovation_score": 5,
+  "business_impact_score": 5,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": false,
+  "content_preview": {
+    "before": "---\nurl: https://docs.aleph-alpha.com\ncompany: Aleph Alpha\nscraped_at: 2025-07-04 20:10:17\n---\n\n  Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs\n\n[Skip to main content](#__docusaurus_skipToContent_fallback)\n\n[\n\n![Aleph Alpha Logo](/img/logo.svg)\n\n**Aleph Alpha Docs**](/)[PhariaAI](/products/pharia-ai/overview/)[Verticals](/products/verticals/overview/)[Pharia LLM](/products/pharia-1-llm/overview/)[APIs](/products/apis/overview/)\n\n*   [Welcome](/docs/introduction/)\n*   [Glossary](/d...",
+    "after": null
+  },
+  "diff": {
+    "added_sentences": [],
+    "removed_sentences": [],
+    "key_changes": [],
+    "change_percentage": 0,
+    "summary": "No diff available"
+  },
+  "keywords": {
+    "new_keywords": [],
+    "removed_keywords": [],
+    "frequency_changes": {},
+    "significant_phrases": []
+  },
+  "entities": null,
+  "key_phrases": []
+}

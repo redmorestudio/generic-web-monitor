@@ -1245,6 +1245,13 @@
             padding: 2px 4px;
             border-radius: 3px;
         }
+
+        .no-content {
+            color: var(--text-secondary);
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+        }
     </style>
 
     <script>
@@ -1278,7 +1285,7 @@
             
             try {
                 // Fetch change details from API
-                const response = await fetch(`/api/changes/${changeId}`);
+                const response = await fetch(`/api-data/changes/change-${changeId}.json`);
                 if (!response.ok) throw new Error('Failed to fetch change details');
                 
                 const data = await response.json();
@@ -1316,17 +1323,22 @@
             ).join('');
             
             // Content comparison
-            if (data.before && data.after) {
+            if (data.has_content && data.content_preview) {
                 // Unified diff view
                 const unifiedDiff = createUnifiedDiff(data.diff);
                 document.getElementById('unifiedDiff').innerHTML = unifiedDiff;
                 
                 // Side by side view
-                document.getElementById('beforeContent').textContent = data.before.markdown || 'No previous content';
-                document.getElementById('afterContent').textContent = data.after.markdown || 'No new content';
+                document.getElementById('beforeContent').textContent = data.content_preview.before || 'No previous content';
+                document.getElementById('afterContent').textContent = data.content_preview.after || 'No new content';
                 
                 // Keywords view
                 populateKeywordsView(data.keywords);
+            } else {
+                // No content available
+                document.getElementById('unifiedDiff').innerHTML = '<p class="no-content">Content comparison not available</p>';
+                document.getElementById('beforeContent').textContent = 'No content available';
+                document.getElementById('afterContent').textContent = 'No content available';
             }
         }
 
