@@ -130,8 +130,9 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
-          # Add the intelligence database
-          git add github-actions-backend/data/intelligence.db
+          # Force add the intelligence database (it's gitignored)
+          git add -f github-actions-backend/data/intelligence.db
+          git add -f github-actions-backend/data/processed_content.db || true
           
           if git diff --staged --quiet; then
             echo "No changes to commit"
