@@ -584,7 +584,7 @@
                 
                 // Only make concept links thick - these are the most important
                 if (link.label && link.label === 'uses concept') {
-                    strength += 8;  // Make only concept links really stand out
+                    strength += 12;  // Much thicker for better visual impact
                 }
                 // Make technology links only slightly thicker if they have many connections
                 else if (link.label && link.connectionCount && link.connectionCount > 3) {
@@ -596,13 +596,13 @@
                     strength += 1;
                 }
                 
-                // Calculate final width - keep most lines very thin
+                // Calculate final width - more dramatic range
                 if (strength > 0) {
-                    width = 0.1 + (strength * 0.15);
+                    width = 0.1 + (strength * 0.2);
                 }
                 
-                // Cap at reasonable maximum
-                return Math.min(width, 1.5);
+                // Cap at reasonable maximum but allow thicker lines
+                return Math.min(width, 2.5);
             }
             
             // Load and process data
