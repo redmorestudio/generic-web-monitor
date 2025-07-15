@@ -299,6 +299,47 @@
         .select-buttons button:hover {
             background: rgba(0, 255, 136, 0.2);
         }
+        
+        /* Context menu styling */
+        #context-menu {
+            display: none;
+            position: fixed;
+            background: rgba(20, 20, 30, 0.95);
+            border: 1px solid #00ff88;
+            border-radius: 8px;
+            padding: 8px 0;
+            min-width: 200px;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .context-menu-item {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: #eee;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .context-menu-item:hover {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        
+        .context-menu-separator {
+            height: 1px;
+            background: #333;
+            margin: 5px 0;
+        }
+        
+        .context-menu-header {
+            padding: 10px 20px;
+            color: #00ff88;
+            font-weight: bold;
+            border-bottom: 1px solid #333;
+            margin-bottom: 5px;
+        }
     </style>
     <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
     <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
@@ -315,7 +356,7 @@
             • Right-click + drag = Pan view<br>
             • Scroll = Zoom in/out<br>
             • Click node = Center camera<br>
-            • Right-click node = Focus on connections
+            • Right-click node = Show context menu
         </div>
     </div>
     
@@ -415,10 +456,52 @@
     
     <button id="toggle-controls">☰ Controls</button>
     <div id="3d-graph"></div>
+    
+    <!-- Context Menu -->
+    <div id="context-menu">
+        <div class="context-menu-header" id="context-menu-title">Node Name</div>
+        <div class="context-menu-item" onclick="focusOnContextNode()">Show Only This & Connected</div>
+        <div class="context-menu-item" onclick="centerOnContextNode()">Center Camera Here</div>
+        <div class="context-menu-separator"></div>
+        <div class="context-menu-item" onclick="hideContextMenu()">Cancel</div>
+    </div>
 
     <script>
         // Global variables and functions for UI
         let selectedTypes = new Set();
+        let contextMenuNode = null;
+        
+        function hideContextMenu() {
+            document.getElementById('context-menu').style.display = 'none';
+            contextMenuNode = null;
+        }
+        
+        function focusOnContextNode() {
+            if (contextMenuNode && window.focusOnNode) {
+                window.focusOnNode(contextMenuNode);
+            }
+            hideContextMenu();
+        }
+        
+        function centerOnContextNode() {
+            if (contextMenuNode && window.Graph) {
+                const distance = 300;
+                const distRatio = 1 + distance/Math.hypot(contextMenuNode.x, contextMenuNode.y, contextMenuNode.z);
+                window.Graph.cameraPosition(
+                    { x: contextMenuNode.x * distRatio, y: contextMenuNode.y * distRatio, z: contextMenuNode.z * distRatio },
+                    contextMenuNode,
+                    1000
+                );
+            }
+            hideContextMenu();
+        }
+        
+        // Hide context menu when clicking elsewhere
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#context-menu')) {
+                hideContextMenu();
+            }
+        });
         
         function toggleControlsCollapse() {
             const controls = document.getElementById('controls');
@@ -970,6 +1053,7 @@
             
             // Make applyFilters available globally
             window.applyFilters = applyFilters;
+            window.focusOnNode = null; // Will be set later
             
             // Focus on a specific node and its connections
             function focusOnNode(targetNode) {
@@ -1077,6 +1161,9 @@
                     <em>Click "Select All" in filters to show all nodes again</em>`;
             }
             
+            // Make focusOnNode globally available
+            window.focusOnNode = focusOnNode;
+            
             function updateLegend() {
                 const nodeTypes = new Map();
                 // If no filters selected or no filtered nodes, use all graph data
@@ -1149,7 +1236,7 @@
                         .onNodeHover(node => {
                             document.getElementById('node-info').innerHTML = node ? 
                                 `<strong>${node.name}</strong><br>Type: ${node.group}<br>Interest Level: ${node.interestLevel}/10<br>URLs: ${node.urlCount}<br>Connections: ${node.connectionCount}` : 
-                                '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Focus on connections';
+                                '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
                         })
                         .onNodeClick(node => {
                             const distance = 300;
@@ -1160,9 +1247,30 @@
                                 3000
                             );
                         })
-                        .onNodeRightClick(node => {
-                            // Focus on this node and its connections
-                            focusOnNode(node);
+                        .onNodeRightClick((node, event) => {
+                            // Show context menu
+                            event.preventDefault();
+                            const menu = document.getElementById('context-menu');
+                            const title = document.getElementById('context-menu-title');
+                            
+                            contextMenuNode = node;
+                            title.textContent = node.name;
+                            
+                            // Position menu at cursor
+                            menu.style.left = event.clientX + 'px';
+                            menu.style.top = event.clientY + 'px';
+                            menu.style.display = 'block';
+                            
+                            // Prevent menu from going off screen
+                            const rect = menu.getBoundingClientRect();
+                            if (rect.right > window.innerWidth) {
+                                menu.style.left = (event.clientX - rect.width) + 'px';
+                            }
+                            if (rect.bottom > window.innerHeight) {
+                                menu.style.top = (event.clientY - rect.height) + 'px';
+                            }
+                            
+                            return false; // Prevent default browser context menu
                         })
                         .enablePointerInteraction(true)
                         .enableNodeDrag(true);
