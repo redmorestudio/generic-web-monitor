@@ -1,0 +1,35 @@
+{
+  "change_id": 8,
+  "url": "https://aleph-alpha.com/pricing",
+  "company": "Aleph Alpha",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-15 18:51:06",
+  "interest_level": 5,
+  "interest_category": "routine_change",
+  "interest_explanation": "Content changed for Aleph Alpha - https://aleph-alpha.com/pricing",
+  "interest_drivers": [],
+  "technical_innovation_score": 5,
+  "business_impact_score": 5,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": false,
+  "content_preview": {
+    "before": "---\nurl: https://cursor.com/features\ncompany: Cursor\nscraped_at: 2025-07-04 20:11:46\n---\n\nFeatures | Cursor - The AI Code Editor\n\n[\n\n![](/_next/static/media/placeholder-logo.737626f1.webp)\n\n](/home)\n\n*   [Pricing](/pricing)\n*   [Features](/features)\n*   [Enterprise](/enterprise)\n*   [Blog](/blog)\n*   [Forum](https://forum.cursor.com)\n*   [Careers](https://anysphere.inc/)\n\n[Sign in](/api/auth/login) Download\n\n# Features\n\nBuild software faster\n\n## Tab\n\nPowered by proprietary models, Cursor include...",
+    "after": null
+  },
+  "diff": {
+    "added_sentences": [],
+    "removed_sentences": [],
+    "key_changes": [],
+    "change_percentage": 0,
+    "summary": "No diff available"
+  },
+  "keywords": {
+    "new_keywords": [],
+    "removed_keywords": [],
+    "frequency_changes": {},
+    "significant_phrases": []
+  },
+  "entities": null,
+  "key_phrases": []
+}

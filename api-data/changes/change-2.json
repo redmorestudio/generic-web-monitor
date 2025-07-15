@@ -1,0 +1,359 @@
+{
+  "change_id": 2,
+  "url": "https://openai.com",
+  "company": "OpenAI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-08 19:18:06",
+  "interest_level": 9,
+  "interest_category": "major_development",
+  "interest_explanation": "Significant updates detected on OpenAI's page including new gpt-5 model announcement detected.",
+  "interest_drivers": [
+    "10x more parameters",
+    "most advanced model yet"
+  ],
+  "technical_innovation_score": 9,
+  "business_impact_score": 8,
+  "ai_key_changes": "[\"New GPT-5 model announcement detected\",\"Product launch or announcement detected\"]",
+  "ai_business_context": "Updates may indicate competitive positioning in the AI market or response to industry developments.",
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://synthesia.io/blog\ncompany: Synthesia\nscraped_at: 2025-07-04 20:20:47\n---\n\nSynthesia Blog | How-to guides, Case Studies, and more\n\n[![Synthesia Logo](https://cdn.prod.website-files.com/65e89895c5a4b8d764c0d710/65eae689ace95f5017dc17a0_Logo-main.svg)](/?r=0)\n\n[![Synthesia-logo](https://cdn.prod.website-files.com/65e89895c5a4b8d764c0d710/65eae6894e82dff052cd139f_Logo-white.svg)](/?r=0)\n\nPlatform\n\nAll Features\n\nTemplates\n\n[\n\nIntegrations\n\n](https://docs.synthesia.io/docs/synthesia-i...",
+    "after": "---\nurl: https://docs.tabnine.com\ncompany: Tabnine\nscraped_at: 2025-07-04 20:20:49\n---\n\nOverview | Tabnine Docs\n\n[![Logo](https://docs.tabnine.com/main/~gitbook/image?url=https%3A%2F%2F3436682446-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FY2qxVf5VTm3fmwP4B4Gx%252Flogo%252FDE39Qebjhe02mwMFtlIx%252FGroup%25201405.png%3Falt%3Dmedia%26token%3Da9ef71bb-8b78-410f-bff7-a8adac0010df&width=260&dpr=4&quality=100&sign=41fa86aa&sv=2)![Logo](https://docs.tabnine.com..."
+  },
+  "diff": {
+    "added_sentences": [
+      "---\nurl: https://docs.",
+      "tabnine.",
+      "com\ncompany: Tabnine\nscraped_at: 2025-07-04 20:20:49\n---\n\nOverview | Tabnine Docs\n\n[!",
+      "[Logo](https://docs.",
+      "tabnine.",
+      "com/main/~gitbook/image?",
+      "url=https%3A%2F%2F3436682446-files.",
+      "gitbook.",
+      "io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.",
+      "appspot."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://synthesia.",
+      "io/blog\ncompany: Synthesia\nscraped_at: 2025-07-04 20:20:47\n---\n\nSynthesia Blog | How-to guides, Case Studies, and more\n\n[!",
+      "[Synthesia Logo](https://cdn.",
+      "prod.",
+      "website-files.",
+      "com/65e89895c5a4b8d764c0d710/65eae689ace95f5017dc17a0_Logo-main.",
+      "svg)](/?",
+      "r=0)\n\n[!",
+      "[Synthesia-logo](https://cdn.",
+      "prod."
+    ],
+    "key_changes": [
+      "New version: version 5, 7.0",
+      "New model mentioned",
+      "New release mentioned"
+    ],
+    "change_percentage": 119,
+    "summary": "119% content changed (127 additions, 683 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "main",
+        "frequency": 166
+      },
+      {
+        "word": "tabnine",
+        "frequency": 84
+      },
+      {
+        "word": "getting-started",
+        "frequency": 47
+      },
+      {
+        "word": "administering-tabnine",
+        "frequency": 45
+      },
+      {
+        "word": "readme",
+        "frequency": 41
+      },
+      {
+        "word": "private-installation",
+        "frequency": 38
+      },
+      {
+        "word": "software-development-with-tabnine",
+        "frequency": 23
+      },
+      {
+        "word": "managing-your-team",
+        "frequency": 23
+      },
+      {
+        "word": "code",
+        "frequency": 20
+      },
+      {
+        "word": "getting-the-most-from-tabnine-chat",
+        "frequency": 20
+      },
+      {
+        "word": "chat",
+        "frequency": 15
+      },
+      {
+        "word": "gitbook",
+        "frequency": 14
+      },
+      {
+        "word": "install",
+        "frequency": 14
+      },
+      {
+        "word": "private",
+        "frequency": 13
+      },
+      {
+        "word": "installation",
+        "frequency": 12
+      },
+      {
+        "word": "reporting",
+        "frequency": 11
+      },
+      {
+        "word": "personalization",
+        "frequency": 10
+      },
+      {
+        "word": "quickstart",
+        "frequency": 10
+      },
+      {
+        "word": "settings",
+        "frequency": 10
+      },
+      {
+        "word": "utm",
+        "frequency": 9
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "video",
+        "frequency": 119
+      },
+      {
+        "word": "cdn",
+        "frequency": 99
+      },
+      {
+        "word": "prod",
+        "frequency": 99
+      },
+      {
+        "word": "website-files",
+        "frequency": 99
+      },
+      {
+        "word": "webp",
+        "frequency": 72
+      },
+      {
+        "word": "synthesia",
+        "frequency": 65
+      },
+      {
+        "word": "65e89895c5a4b8d764c0d70e",
+        "frequency": 53
+      },
+      {
+        "word": "65e89895c5a4b8d764c0d710",
+        "frequency": 47
+      },
+      {
+        "word": "features",
+        "frequency": 43
+      },
+      {
+        "word": "post",
+        "frequency": 39
+      },
+      {
+        "word": "training",
+        "frequency": 38
+      },
+      {
+        "word": "videos",
+        "frequency": 38
+      },
+      {
+        "word": "blog",
+        "frequency": 35
+      },
+      {
+        "word": "discover",
+        "frequency": 22
+      },
+      {
+        "word": "resources",
+        "frequency": 20
+      },
+      {
+        "word": "category",
+        "frequency": 20
+      },
+      {
+        "word": "ideas",
+        "frequency": 19
+      },
+      {
+        "word": "guides",
+        "frequency": 17
+      },
+      {
+        "word": "svg",
+        "frequency": 17
+      },
+      {
+        "word": "all",
+        "frequency": 17
+      }
+    ],
+    "frequency_changes": {
+      "welcome": {
+        "before": 1,
+        "after": 45,
+        "change": 44
+      },
+      "docs": {
+        "before": 7,
+        "after": 18,
+        "change": 11
+      },
+      "team": {
+        "before": 5,
+        "after": 15,
+        "change": 10
+      },
+      "architecture": {
+        "before": 1,
+        "after": 9,
+        "change": 8
+      },
+      "guide": {
+        "before": 4,
+        "after": 12,
+        "change": 8
+      },
+      "overview": {
+        "before": 1,
+        "after": 8,
+        "change": 7
+      },
+      "url": {
+        "before": 1,
+        "after": 7,
+        "change": 6
+      },
+      "models": {
+        "before": 1,
+        "after": 7,
+        "change": 6
+      },
+      "start": {
+        "before": 1,
+        "after": 7,
+        "change": 6
+      },
+      "quality": {
+        "before": 2,
+        "after": 7,
+        "change": 5
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "main getting-started",
+        "count": 47
+      },
+      {
+        "phrase": "main administering-tabnine",
+        "count": 45
+      },
+      {
+        "phrase": "main welcome",
+        "count": 43
+      },
+      {
+        "phrase": "welcome readme",
+        "count": 41
+      },
+      {
+        "phrase": "administering-tabnine private-installation",
+        "count": 38
+      },
+      {
+        "phrase": "main software-development-with-tabnine",
+        "count": 23
+      },
+      {
+        "phrase": "private-installation managing-your-team",
+        "count": 23
+      },
+      {
+        "phrase": "getting-started getting-the-most-from-tabnine-chat",
+        "count": 20
+      },
+      {
+        "phrase": "tabnine com",
+        "count": 19
+      },
+      {
+        "phrase": "https docs",
+        "count": 13
+      }
+    ]
+  },
+  "entities": {
+    "products": [
+      {
+        "name": "GPT-5",
+        "type": "AI model",
+        "description": "The most advanced model yet with 10x more parameters",
+        "features": [
+          "10x more parameters"
+        ],
+        "metadata": {}
+      }
+    ],
+    "technologies": [
+      {
+        "name": "GPT-5",
+        "category": "AI model",
+        "purpose": "Advanced language processing",
+        "related_products": []
+      }
+    ],
+    "companies": [
+      {
+        "name": "OpenAI",
+        "role": "Research organization",
+        "relationship": "Developer of GPT-5"
+      }
+    ],
+    "people": [],
+    "pricing": [],
+    "dates": [
+      {
+        "date": "2025-07-08T19:18:06.000Z",
+        "event": "GPT-5 announcement",
+        "significance": "Major update"
+      }
+    ],
+    "locations": []
+  },
+  "key_phrases": [
+    "GPT-5",
+    "10x more parameters",
+    "most advanced model yet"
+  ]
+}

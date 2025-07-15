@@ -1,0 +1,86 @@
+{
+  "change_id": 6,
+  "url": "https://aws.amazon.com/codewhisperer",
+  "company": "Amazon CodeWhisperer",
+  "company_category": "AI Coding",
+  "detected_at": "2025-07-04 20:11:15",
+  "interest_level": 5,
+  "interest_category": "major_development",
+  "interest_explanation": "Amazon launches Amazon CodeWhisperer, a generative AI assistant for software development, marking a significant development in the field of AI-powered coding tools.",
+  "interest_drivers": [
+    "New product launch",
+    "AI-powered technology"
+  ],
+  "technical_innovation_score": 8,
+  "business_impact_score": 7,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": false,
+  "content_preview": {
+    "before": null,
+    "after": "---\nurl: https://docs.github.com/en/copilot\ncompany: GitHub Copilot\nscraped_at: 2025-07-04 20:15:05\n---\n\nGitHub Copilot documentation - GitHub Docs\n\n[Skip to main content](#main-content)\n\n[GitHub Docs](/en)\n\nVersion: Free, Pro, & Team\n\n![The Copilot Icon in front of an explosion of color.](/assets/images/search/copilot-action.png)\n\n## Get quick answers!\n\nAsk Copilot your question.\n\nDismissAsk Copilot\n\nSearch or ask Copilot\n\nSearch or askCopilot\n\nSelect language: current language is English\n\n![Th..."
+  },
+  "diff": {
+    "added_sentences": [],
+    "removed_sentences": [],
+    "key_changes": [],
+    "change_percentage": 0,
+    "summary": "No diff available"
+  },
+  "keywords": {
+    "new_keywords": [],
+    "removed_keywords": [],
+    "frequency_changes": {},
+    "significant_phrases": []
+  },
+  "entities": {
+    "products": [
+      {
+        "name": "Amazon CodeWhisperer",
+        "type": "AI Coding Assistant",
+        "description": "Generative AI Assistant for Software Development",
+        "features": [
+          "AI-powered coding suggestions",
+          "Code completion",
+          "Code review"
+        ],
+        "metadata": {
+          "url": "https://aws.amazon.com/codewhisperer",
+          "company": "Amazon"
+        }
+      }
+    ],
+    "technologies": [
+      {
+        "name": "Generative AI",
+        "category": "Artificial Intelligence",
+        "purpose": "Software development assistance",
+        "related_products": [
+          "Amazon CodeWhisperer"
+        ]
+      }
+    ],
+    "companies": [
+      {
+        "name": "Amazon",
+        "role": "Developer of Amazon CodeWhisperer",
+        "relationship": "Parent company"
+      }
+    ],
+    "people": [],
+    "pricing": [],
+    "dates": [
+      {
+        "date": "2025-07-04T20:11:15.000Z",
+        "event": "Launch of Amazon CodeWhisperer",
+        "significance": "New product launch"
+      }
+    ],
+    "locations": []
+  },
+  "key_phrases": [
+    "Generative AI Assistant",
+    "Software development",
+    "AI-powered coding suggestions"
+  ]
+}

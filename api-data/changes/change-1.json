@@ -1,0 +1,35 @@
+{
+  "change_id": 1,
+  "url": "https://openai.com",
+  "company": "OpenAI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-04 18:17:08",
+  "interest_level": 5,
+  "interest_category": "routine_change",
+  "interest_explanation": "Initial content capture - no previous version to compare.",
+  "interest_drivers": [],
+  "technical_innovation_score": 5,
+  "business_impact_score": 5,
+  "ai_key_changes": "[]",
+  "ai_business_context": null,
+  "has_content": false,
+  "content_preview": {
+    "before": null,
+    "after": null
+  },
+  "diff": {
+    "added_sentences": [],
+    "removed_sentences": [],
+    "key_changes": [],
+    "change_percentage": 0,
+    "summary": "No diff available"
+  },
+  "keywords": {
+    "new_keywords": [],
+    "removed_keywords": [],
+    "frequency_changes": {},
+    "significant_phrases": []
+  },
+  "entities": null,
+  "key_phrases": []
+}
