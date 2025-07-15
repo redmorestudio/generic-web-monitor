@@ -749,8 +749,11 @@
                 document.getElementById('node-count').textContent = graphData.nodes.length;
                 document.getElementById('link-count').textContent = graphData.links.length;
                 
-                applyFilters();
+                // Initialize graph only once
                 initializeGraph();
+                
+                // Apply initial filters
+                applyFilters();
                 updateLegend();
             }
             
@@ -858,10 +861,19 @@
                 
                 // Update graph
                 if (Graph) {
-                    Graph.graphData({
-                        nodes: filteredData.nodes.map(n => ({...n})),
-                        links: filteredData.links.map(l => ({...l}))
-                    });
+                    console.log('Updating graph with filtered data:', filteredData.nodes.length, 'nodes,', filteredData.links.length, 'links');
+                    
+                    // Need to create completely fresh objects to avoid reference issues
+                    const freshData = {
+                        nodes: filteredData.nodes.map(n => ({ ...n })),
+                        links: filteredData.links.map(l => ({ 
+                            source: l.source.id || l.source,
+                            target: l.target.id || l.target,
+                            ...l 
+                        }))
+                    };
+                    
+                    Graph.graphData(freshData);
                 }
                 
                 updateLegend();
@@ -911,15 +923,19 @@
                 console.log('Initializing 3D graph...');
                 
                 try {
-                    Graph = ForceGraph3D()(document.getElementById('3d-graph'));
+                    // Only create new instance if it doesn't exist
+                    if (!Graph) {
+                        Graph = ForceGraph3D()(document.getElementById('3d-graph'));
+                    }
                     
-                    const cleanData = {
-                        nodes: filteredData.nodes.map(n => ({...n})),
-                        links: filteredData.links.map(l => ({...l}))
+                    // Use full graph data for initial setup
+                    const initialData = {
+                        nodes: graphData.nodes.map(n => ({...n})),
+                        links: graphData.links.map(l => ({...l}))
                     };
                     
                     Graph
-                        .graphData(cleanData)
+                        .graphData(initialData)
                         .nodeLabel(node => `${node.name}\n${node.group}\nInterest: ${node.interestLevel}/10\nURLs: ${node.urlCount}\nConnections: ${node.connectionCount}`)
                         .nodeAutoColorBy('group')
                         .nodeVal('val')
