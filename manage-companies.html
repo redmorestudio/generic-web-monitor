@@ -238,7 +238,9 @@
         </div>
 
         <div class="companies-list">
-            <h2>📊 Current Companies</h2>
+            <h2>📊 Current Companies 
+                <button onclick="loadCompanies()" style="float: right; font-size: 14px; padding: 5px 10px;">Refresh 🔄</button>
+            </h2>
             <div id="companiesTable" class="loading">Loading companies...</div>
         </div>
     </div>
@@ -268,8 +270,8 @@
             if (type === 'success') {
                 setTimeout(() => {
                     status.style.display = 'none';
-                    loadCompanies(); // Reload after success
-                }, 3000);
+                    // Don't auto-reload after success - let user control it
+                }, 5000);
             }
         }
 
@@ -416,16 +418,29 @@
                 return;
             }
 
-            await triggerWorkflow({
+            showStatus('🔄 Adding company to GitHub... This may take 30-60 seconds', 'info');
+            
+            const success = await triggerWorkflow({
                 action: 'add-company',
                 company_name: name,
                 company_category: category,
                 url: url || ''
             });
 
-            // Clear inputs
-            document.getElementById('companyName').value = '';
-            document.getElementById('companyUrl').value = '';
+            if (success) {
+                // Clear inputs
+                document.getElementById('companyName').value = '';
+                document.getElementById('companyUrl').value = '';
+                
+                // Show additional instructions
+                showStatus('✅ Company added! The system is processing... Click "Refresh" in 30 seconds to see your new company.', 'success');
+                
+                // Set a timer to auto-refresh
+                setTimeout(() => {
+                    showStatus('🔄 Refreshing company list...', 'info');
+                    loadCompanies();
+                }, 30000);
+            }
         }
 
         async function addUrl() {
