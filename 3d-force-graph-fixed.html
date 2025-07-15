@@ -226,9 +226,9 @@
         }
         
         #legend {
-            position: fixed;
-            bottom: 50px;
-            right: 50px;
+            position: absolute;
+            bottom: 20px;
+            right: 310px; /* Position left of controls */
             background: rgba(20, 20, 30, 0.95);
             padding: 10px 15px;
             border-radius: 8px;
@@ -237,9 +237,19 @@
             z-index: 10000;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
-            max-width: 300px;
+            max-width: 250px;
             box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
             pointer-events: all;
+        }
+        
+        /* On smaller screens, move legend to top */
+        @media (max-width: 1200px) {
+            #legend {
+                right: auto;
+                left: 20px;
+                top: 100px; /* Below info panel */
+                bottom: auto;
+            }
         }
         
         #legend.collapsed {
@@ -1272,6 +1282,7 @@
 
         // Handle right click - show context menu
         function handleNodeRightClick(node, event) {
+            console.log('Right click on node:', node);
             event.preventDefault();
             selectedNode = node;
             
@@ -1279,6 +1290,8 @@
             menu.style.display = 'block';
             menu.style.left = event.pageX + 'px';
             menu.style.top = event.pageY + 'px';
+            
+            console.log('Context menu shown, selectedNode set to:', selectedNode);
         }
 
         // Hide context menu
@@ -1288,22 +1301,29 @@
 
         // Focus on subgraph
         function focusOnSubgraph() {
-            if (!selectedNode) return;
+            console.log('focusOnSubgraph called', selectedNode);
+            if (!selectedNode) {
+                console.log('No selected node');
+                return;
+            }
             
             const connectedNodes = new Set();
             const connectedLinks = [];
             
             // Get current graph data from Graph instance
             const currentData = Graph.graphData();
+            console.log('Current graph has', currentData.nodes.length, 'nodes and', currentData.links.length, 'links');
             
             // Find all connected nodes
             connectedNodes.add(selectedNode);
+            let connectionsFound = 0;
             
             currentData.links.forEach(link => {
                 const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
                 const targetId = typeof link.target === 'object' ? link.target.id : link.target;
                 
                 if (sourceId === selectedNode.id || targetId === selectedNode.id) {
+                    connectionsFound++;
                     // Add the actual node objects
                     const sourceNode = currentData.nodes.find(n => n.id === sourceId);
                     const targetNode = currentData.nodes.find(n => n.id === targetId);
@@ -1312,6 +1332,8 @@
                     connectedLinks.push(link);
                 }
             });
+            
+            console.log('Found', connectionsFound, 'connections,', connectedNodes.size, 'nodes');
             
             // Create filtered graph data
             const filteredNodes = Array.from(connectedNodes);
@@ -1932,9 +1954,18 @@
         document.getElementById('resetButton').addEventListener('click', resetView);
         
         // Context menu handlers
-        document.getElementById('focusSubgraph').addEventListener('click', focusOnSubgraph);
-        document.getElementById('showAllConnections').addEventListener('click', showAllConnections);
-        document.getElementById('hideNode').addEventListener('click', hideNode);
+        document.getElementById('focusSubgraph').addEventListener('click', (e) => {
+            console.log('Focus subgraph clicked');
+            focusOnSubgraph();
+        });
+        document.getElementById('showAllConnections').addEventListener('click', (e) => {
+            console.log('Show all connections clicked');
+            showAllConnections();
+        });
+        document.getElementById('hideNode').addEventListener('click', (e) => {
+            console.log('Hide node clicked');
+            hideNode();
+        });
         document.getElementById('resetViewContext').addEventListener('click', resetView);
         
         // Hide context menu on click outside
