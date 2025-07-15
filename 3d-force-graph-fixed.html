@@ -1058,9 +1058,6 @@
                     
                     // Re-apply link width function after data update
                     Graph.linkWidth(link => getLinkWidth(link));
-                    
-                    // Apply current draw mode
-                    applyDrawMode();
                 }
                 
                 updateLegend();
@@ -1072,7 +1069,7 @@
             
             // Apply different draw modes
             function applyDrawMode() {
-                if (!Graph) return;
+                if (!Graph || !filteredData.nodes) return;
                 
                 switch (currentDrawMode) {
                     case 'normal':
@@ -1080,26 +1077,26 @@
                         Graph.d3Force('charge').strength(CONFIG.forceStrength);
                         Graph.d3Force('link').distance(CONFIG.linkDistance);
                         
-                        // Remove any custom forces
-                        Graph.d3Force('radial', null);
-                        Graph.d3Force('collide', null);
-                        Graph.d3Force('grouping', null);
-                        
-                        // Reset node positions
-                        filteredData.nodes.forEach(node => {
+                        // Reset node positions - need to update the actual graph data
+                        const currentData = Graph.graphData();
+                        currentData.nodes.forEach(node => {
                             delete node.fx;
                             delete node.fy;
                             delete node.fz;
                         });
+                        
+                        // Re-apply the data to trigger update
+                        Graph.graphData(currentData);
                         break;
                         
                     case 'group-by-type':
                         // Group nodes by their type in spherical clusters
+                        const currentDataGrouped = Graph.graphData();
                         const typeGroups = new Map();
                         let typeIndex = 0;
                         
                         // Map each type to an index
-                        filteredData.nodes.forEach(node => {
+                        currentDataGrouped.nodes.forEach(node => {
                             if (!typeGroups.has(node.group)) {
                                 typeGroups.set(node.group, typeIndex++);
                             }
@@ -1109,7 +1106,7 @@
                         const numGroups = typeGroups.size;
                         const radius = 200;
                         
-                        filteredData.nodes.forEach(node => {
+                        currentDataGrouped.nodes.forEach(node => {
                             const groupIndex = typeGroups.get(node.group);
                             const angle = (2 * Math.PI * groupIndex) / numGroups;
                             const phi = Math.acos(1 - 2 * (groupIndex + 0.5) / numGroups);
@@ -1119,22 +1116,15 @@
                             const targetY = radius * Math.sin(phi) * Math.sin(angle);
                             const targetZ = radius * Math.cos(phi);
                             
-                            // Use custom node property to store target position
-                            node.targetX = targetX;
-                            node.targetY = targetY;
-                            node.targetZ = targetZ;
-                        });
-                        
-                        // Apply a custom positioning force
-                        // Note: 3d-force-graph doesn't support custom 3D forces directly
-                        // So we'll use fixed positions with some flexibility
-                        filteredData.nodes.forEach(node => {
                             // Add some randomness to prevent perfect alignment
                             const jitter = 50;
-                            node.fx = node.targetX + (Math.random() - 0.5) * jitter;
-                            node.fy = node.targetY + (Math.random() - 0.5) * jitter;
-                            node.fz = node.targetZ + (Math.random() - 0.5) * jitter;
+                            node.fx = targetX + (Math.random() - 0.5) * jitter;
+                            node.fy = targetY + (Math.random() - 0.5) * jitter;
+                            node.fz = targetZ + (Math.random() - 0.5) * jitter;
                         });
+                        
+                        // Re-apply the data to trigger update
+                        Graph.graphData(currentDataGrouped);
                         
                         // Weaken the charge force for tighter grouping
                         Graph.d3Force('charge').strength(CONFIG.forceStrength / 3);
@@ -1144,8 +1134,9 @@
                         // Highlight nodes with recent changes
                         // For demo purposes, we'll simulate this by looking at high activity nodes
                         const activityThreshold = 5; // URLs count threshold for "recent activity"
+                        const currentDataRecent = Graph.graphData();
                         
-                        filteredData.nodes.forEach(node => {
+                        currentDataRecent.nodes.forEach(node => {
                             if (node.urlCount >= activityThreshold) {
                                 // Position active nodes in the center
                                 node.fx = (Math.random() - 0.5) * 100;
@@ -1153,7 +1144,7 @@
                                 node.fz = (Math.random() - 0.5) * 100;
                                 
                                 // Make them bigger and brighter
-                                node.val = node.val * 2;
+                                node.val = (node.urlCount || 1) * 2;
                                 node.currentColor = '#ff0000'; // Red for high activity
                             } else {
                                 // Push less active nodes to the periphery
@@ -1166,10 +1157,13 @@
                                 node.fz = distance * Math.cos(phi);
                                 
                                 // Make them smaller and dimmer
-                                node.val = node.val * 0.5;
+                                node.val = (node.urlCount || 1) * 0.5;
                                 node.currentColor = '#444444'; // Gray for low activity
                             }
                         });
+                        
+                        // Re-apply the data to trigger update
+                        Graph.graphData(currentDataRecent);
                         
                         // Update node visuals
                         Graph.nodeThreeObject(node => {
@@ -1412,6 +1406,13 @@
                     Graph.d3Force('link').distance(CONFIG.linkDistance);
                     
                     Graph.cameraPosition({ x: 0, y: 0, z: 500 });
+                    
+                    // Wait a bit for graph to stabilize before applying draw mode
+                    setTimeout(() => {
+                        if (currentDrawMode !== 'normal') {
+                            applyDrawMode();
+                        }
+                    }, 500);
                     
                     console.log('Graph initialized successfully!');
                     
