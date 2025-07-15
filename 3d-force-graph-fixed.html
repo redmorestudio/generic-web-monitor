@@ -192,18 +192,19 @@
         }
         
         #legend {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
             background: rgba(20, 20, 30, 0.95);
             padding: 10px 15px;
             border-radius: 8px;
-            border: 1px solid #333;
+            border: 1px solid #00ff88;
             font-size: 11px;
             z-index: 10000;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
-            max-width: 90%;
+            max-width: 300px;
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
         }
         
         #legend.collapsed {
@@ -421,10 +422,11 @@
         <div id="statsContent"></div>
     </div>
     
-    <div id="legend" style="display: none;">
+    <div id="legend" style="display: none; background: red !important;">
         <div id="legend-toggle">Legend</div>
         <div id="legend-content">
             <!-- Dynamically populated -->
+            <div style="color: white;">TEST LEGEND</div>
         </div>
     </div>
     
@@ -570,6 +572,9 @@
                 document.getElementById('controls').style.display = 'block';
                 document.getElementById('stats').style.display = 'block';
                 document.getElementById('legend').style.display = 'block';
+                console.log('Legend should be visible now');
+                console.log('Legend element:', document.getElementById('legend'));
+                updateLegend();
                 
                 // Create the enhanced graph
                 console.log('Creating 3D graph...');
@@ -1421,8 +1426,12 @@
 
         // Update legend based on current graph data
         function updateLegend() {
+            console.log('updateLegend called');
             const legendContent = document.getElementById('legend-content');
-            if (!legendContent) return;
+            if (!legendContent) {
+                console.log('No legend-content element found');
+                return;
+            }
             
             // Collect visible types from current graph
             const visibleTypes = new Map();
