@@ -1293,13 +1293,22 @@
             const connectedNodes = new Set();
             const connectedLinks = [];
             
+            // Get current graph data from Graph instance
+            const currentData = Graph.graphData();
+            
             // Find all connected nodes
             connectedNodes.add(selectedNode);
             
-            graphData.links.forEach(link => {
-                if ((link.source.id || link.source) === selectedNode.id || (link.target.id || link.target) === selectedNode.id) {
-                    connectedNodes.add(link.source);
-                    connectedNodes.add(link.target);
+            currentData.links.forEach(link => {
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                
+                if (sourceId === selectedNode.id || targetId === selectedNode.id) {
+                    // Add the actual node objects
+                    const sourceNode = currentData.nodes.find(n => n.id === sourceId);
+                    const targetNode = currentData.nodes.find(n => n.id === targetId);
+                    if (sourceNode) connectedNodes.add(sourceNode);
+                    if (targetNode) connectedNodes.add(targetNode);
                     connectedLinks.push(link);
                 }
             });
@@ -1310,6 +1319,13 @@
             // Update the graph
             Graph.graphData({ nodes: filteredNodes, links: connectedLinks });
             
+            // Zoom to fit the subgraph
+            setTimeout(() => {
+                Graph.zoomToFit(400);
+                updateStats();
+                updateLegend();
+            }, 100);
+            
             hideContextMenu();
         }
 
@@ -1319,36 +1335,64 @@
             
             // Find all nodes connected through secondary connections
             const connectedNodes = new Set();
-            const connectedLinks = [];
+            const connectedLinks = new Set();
+            
+            // Use full graph data for complete connectivity
+            const allNodes = fullGraphData.nodes;
+            const allLinks = fullGraphData.links;
             
             // First level connections
             connectedNodes.add(selectedNode);
             const firstLevel = new Set();
             
-            graphData.links.forEach(link => {
-                if ((link.source.id || link.source) === selectedNode.id || (link.target.id || link.target) === selectedNode.id) {
-                    connectedNodes.add(link.source);
-                    connectedNodes.add(link.target);
-                    firstLevel.add(link.source);
-                    firstLevel.add(link.target);
-                    connectedLinks.push(link);
+            allLinks.forEach(link => {
+                const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                
+                if (sourceId === selectedNode.id || targetId === selectedNode.id) {
+                    const sourceNode = allNodes.find(n => n.id === sourceId);
+                    const targetNode = allNodes.find(n => n.id === targetId);
+                    
+                    if (sourceNode) {
+                        connectedNodes.add(sourceNode);
+                        firstLevel.add(sourceNode);
+                    }
+                    if (targetNode) {
+                        connectedNodes.add(targetNode);
+                        firstLevel.add(targetNode);
+                    }
+                    connectedLinks.add(link);
                 }
             });
             
             // Second level connections
             firstLevel.forEach(node => {
-                graphData.links.forEach(link => {
-                    if ((link.source.id || link.source) === node.id || (link.target.id || link.target) === node.id) {
-                        connectedNodes.add(link.source);
-                        connectedNodes.add(link.target);
-                        connectedLinks.push(link);
+                allLinks.forEach(link => {
+                    const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
+                    const targetId = typeof link.target === 'object' ? link.target.id : link.target;
+                    
+                    if (sourceId === node.id || targetId === node.id) {
+                        const sourceNode = allNodes.find(n => n.id === sourceId);
+                        const targetNode = allNodes.find(n => n.id === targetId);
+                        
+                        if (sourceNode) connectedNodes.add(sourceNode);
+                        if (targetNode) connectedNodes.add(targetNode);
+                        connectedLinks.add(link);
                     }
                 });
             });
             
             // Update the graph
             const filteredNodes = Array.from(connectedNodes);
-            Graph.graphData({ nodes: filteredNodes, links: connectedLinks });
+            const filteredLinks = Array.from(connectedLinks);
+            Graph.graphData({ nodes: filteredNodes, links: filteredLinks });
+            
+            // Zoom to fit
+            setTimeout(() => {
+                Graph.zoomToFit(400);
+                updateStats();
+                updateLegend();
+            }, 100);
             
             hideContextMenu();
         }
@@ -1359,13 +1403,21 @@
             
             hiddenNodes.add(selectedNode.id);
             
-            const filteredNodes = graphData.nodes.filter(n => !hiddenNodes.has(n.id));
-            const filteredLinks = graphData.links.filter(l => 
-                !hiddenNodes.has(l.source.id || l.source) && 
-                !hiddenNodes.has(l.target.id || l.target)
-            );
+            // Get current graph data
+            const currentData = Graph.graphData();
+            
+            const filteredNodes = currentData.nodes.filter(n => !hiddenNodes.has(n.id));
+            const filteredLinks = currentData.links.filter(l => {
+                const sourceId = typeof l.source === 'object' ? l.source.id : l.source;
+                const targetId = typeof l.target === 'object' ? l.target.id : l.target;
+                return !hiddenNodes.has(sourceId) && !hiddenNodes.has(targetId);
+            });
             
             Graph.graphData({ nodes: filteredNodes, links: filteredLinks });
+            
+            // Update stats and legend
+            updateStats();
+            updateLegend();
             
             hideContextMenu();
         }
