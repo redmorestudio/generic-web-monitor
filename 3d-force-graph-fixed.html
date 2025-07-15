@@ -309,6 +309,40 @@
             height: 100%;
             overflow: hidden;
         }
+        
+        /* Floating tooltip */
+        #entity-tooltip {
+            display: none;
+            position: fixed;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #00ff88;
+            max-width: 300px;
+            z-index: 1000;
+            pointer-events: none;
+            backdrop-filter: blur(10px);
+            font-size: 12px;
+        }
+        
+        #entity-tooltip strong {
+            color: #00ff88;
+        }
+        
+        #entity-tooltip .clickable-tag {
+            display: inline-block;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid #00ff88;
+            padding: 2px 6px;
+            margin: 2px;
+            border-radius: 4px;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+        
+        #entity-tooltip .clickable-tag:hover {
+            background: rgba(0, 255, 136, 0.3);
+        }
     </style>
     <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
     <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
@@ -410,6 +444,10 @@
                     Thin Lines Mode
                     <input type="checkbox" id="toggle-thin-lines">
                 </label>
+                <label>
+                    Floating Tooltip
+                    <input type="checkbox" id="toggle-floating-tooltip" checked>
+                </label>
             </div>
             
             <div class="control-group advanced-group" style="display: none;">
@@ -463,6 +501,9 @@
     
     <button id="toggle-controls">⚙️ Config</button>
     <div id="3d-graph"></div>
+    
+    <!-- Floating Tooltip -->
+    <div id="entity-tooltip"></div>
     
     <!-- Context Menu -->
     <div id="context-menu">
@@ -597,6 +638,52 @@
             }
         }
         
+        // Filter by a specific technology or concept
+        window.filterByTag = function(tag) {
+            console.log('Filtering by tag:', tag);
+            
+            // Find all companies that have this technology or concept
+            const matchingCompanies = new Set();
+            
+            rawData.dashboard.company_activity.forEach(company => {
+                if (company.intelligence?.ai_technologies?.includes(tag) ||
+                    company.intelligence?.ai_ml_concepts?.includes(tag)) {
+                    matchingCompanies.add(company.company);
+                }
+            });
+            
+            // Also find concept nodes
+            const conceptNodeId = `concept-${tag}`;
+            const hasConceptNode = graphData.nodes.some(n => n.id === conceptNodeId);
+            if (hasConceptNode) {
+                matchingCompanies.add(conceptNodeId);
+            }
+            
+            console.log('Matching companies:', Array.from(matchingCompanies));
+            
+            // Clear search and update selected types to show all
+            document.getElementById('search-input').value = '';
+            selectAllTypes();
+            
+            // Apply custom filter
+            window.customTagFilter = matchingCompanies;
+            applyFilters();
+            
+            // Show a clear filter button in the info panel
+            const infoPanel = document.getElementById('node-info');
+            infoPanel.innerHTML = `<strong>Filtered by: ${tag}</strong><br>
+                Showing ${matchingCompanies.size} nodes<br>
+                <button onclick="clearTagFilter()" style="margin-top: 5px; padding: 4px 8px; background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; color: #00ff88; border-radius: 4px; cursor: pointer;">
+                    Clear Filter
+                </button>`;
+        };
+        
+        window.clearTagFilter = function() {
+            window.customTagFilter = null;
+            applyFilters();
+            document.getElementById('node-info').innerHTML = '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
+        };
+        
         // Wrap main code in IIFE
         (function() {
             console.log('Initializing AI Competitive Monitor 3D Force Graph...');
@@ -613,6 +700,8 @@
             let currentDrawMode = 'normal';
             let entityLimit = 200;
             let recentChangesData = null;
+            let floatingTooltipEnabled = true;
+            let hoveredNode = null;
             
             // Make applyFilters and Graph global for button access
             window.applyFilters = null;
@@ -1003,6 +1092,13 @@
                 
                 // First filter by type and search
                 let tempFilteredNodes = graphData.nodes.filter(node => {
+                    // Custom tag filter takes precedence
+                    if (window.customTagFilter && window.customTagFilter.size > 0) {
+                        if (!window.customTagFilter.has(node.id)) {
+                            return false;
+                        }
+                    }
+                    
                     // Type filter - if types are selected, only show matching types
                     if (selectedTypes.size > 0 && !selectedTypes.has(node.group)) {
                         return false;
@@ -1432,7 +1528,42 @@
                         .linkDirectionalParticles(2)
                         .linkDirectionalParticleSpeed(0.001) // Much slower - was 0.006
                         .linkDirectionalParticleColor(() => '#00ff88')
-                        .onNodeHover(node => {
+                        .onNodeHover((node, prevNode) => {
+                            hoveredNode = node;
+                            const tooltip = document.getElementById('entity-tooltip');
+                            
+                            if (node && floatingTooltipEnabled) {
+                                // Build tooltip content with clickable tags
+                                let content = `<strong>${node.name}</strong><br>`;
+                                content += `Type: ${node.group}<br>`;
+                                content += `Interest Level: ${node.interestLevel}/10<br>`;
+                                content += `URLs: ${node.urlCount}<br>`;
+                                content += `Connections: ${node.connectionCount}<br>`;
+                                
+                                // Find the company data to get technologies and concepts
+                                const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
+                                if (companyData) {
+                                    if (companyData.intelligence?.ai_technologies?.length > 0) {
+                                        content += '<br><strong>Technologies:</strong><br>';
+                                        companyData.intelligence.ai_technologies.forEach(tech => {
+                                            content += `<span class="clickable-tag" onclick="filterByTag('${tech}')">${tech}</span>`;
+                                        });
+                                    }
+                                    if (companyData.intelligence?.ai_ml_concepts?.length > 0) {
+                                        content += '<br><strong>AI Concepts:</strong><br>';
+                                        companyData.intelligence.ai_ml_concepts.forEach(concept => {
+                                            content += `<span class="clickable-tag" onclick="filterByTag('${concept}')">${concept}</span>`;
+                                        });
+                                    }
+                                }
+                                
+                                tooltip.innerHTML = content;
+                                tooltip.style.display = 'block';
+                            } else {
+                                tooltip.style.display = 'none';
+                            }
+                            
+                            // Update the static info panel
                             document.getElementById('node-info').innerHTML = node ? 
                                 `<strong>${node.name}</strong><br>Type: ${node.group}<br>Interest Level: ${node.interestLevel}/10<br>URLs: ${node.urlCount}<br>Connections: ${node.connectionCount}` : 
                                 '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
@@ -1529,6 +1660,13 @@
                 }
             });
             
+            document.getElementById('toggle-floating-tooltip').addEventListener('change', (e) => {
+                floatingTooltipEnabled = e.target.checked;
+                if (!floatingTooltipEnabled) {
+                    document.getElementById('entity-tooltip').style.display = 'none';
+                }
+            });
+            
             document.getElementById('force-strength').addEventListener('input', (e) => {
                 const value = parseInt(e.target.value);
                 document.getElementById('force-value').textContent = value;
@@ -1589,6 +1727,30 @@
                     Graph.renderer().setSize(container.clientWidth, container.clientHeight);
                     Graph.camera().aspect = container.clientWidth / container.clientHeight;
                     Graph.camera().updateProjectionMatrix();
+                }
+            });
+            
+            // Track mouse movement for tooltip
+            document.addEventListener('mousemove', (e) => {
+                const tooltip = document.getElementById('entity-tooltip');
+                if (tooltip.style.display === 'block') {
+                    // Position tooltip near cursor
+                    const x = e.clientX + 15;
+                    const y = e.clientY + 15;
+                    
+                    // Keep tooltip on screen
+                    const rect = tooltip.getBoundingClientRect();
+                    if (x + rect.width > window.innerWidth) {
+                        tooltip.style.left = (e.clientX - rect.width - 15) + 'px';
+                    } else {
+                        tooltip.style.left = x + 'px';
+                    }
+                    
+                    if (y + rect.height > window.innerHeight) {
+                        tooltip.style.top = (e.clientY - rect.height - 15) + 'px';
+                    } else {
+                        tooltip.style.top = y + 'px';
+                    }
                 }
             });
             
