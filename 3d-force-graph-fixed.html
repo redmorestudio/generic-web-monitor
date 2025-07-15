@@ -350,13 +350,13 @@
                     <select id="draw-by-mode">
                         <option value="normal">Normal</option>
                         <option value="group-by-type">Group by Type</option>
-                        <option value="recent-changes">Recent Changes</option>
+                        <option value="recent-changes">High Activity Focus</option>
                     </select>
                 </label>
                 <div class="info-text">
                     • Normal: Standard force-directed layout<br>
                     • Group by Type: Cluster by entity type<br>
-                    • Recent Changes: Highlight recent activity
+                    • High Activity Focus: Centers nodes with many URLs
                 </div>
             </div>
             
@@ -379,16 +379,14 @@
                     Color By
                     <select id="view-mode">
                         <option value="entity-type">Entity Type</option>
-                        <option value="interest">Interest Analysis</option>
-                        <option value="activity">Activity Level</option>
-                        <option value="connections">Connection Strength</option>
+                        <option value="interest">Interest Level</option>
+                        <option value="connections">Number of Connections</option>
                     </select>
                 </label>
                 <div class="info-text">
                     • Entity Type: Colors by company type<br>
-                    • Interest: Strategic importance (red=high)<br>
-                    • Activity: URL count (red=many)<br>
-                    • Connections: Node connectivity
+                    • Interest Level: Strategic importance (1-10)<br>
+                    • Number of Connections: How many other nodes connected
                 </div>
             </div>
             
@@ -443,7 +441,7 @@
                 </div>
             </div>
             
-            <div class="control-group advanced-group" style="display: none;">
+            <div class="control-group simple-group">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Filter by Type</h4>
                 <div class="select-buttons">
                     <button onclick="selectAllTypes()">Select All</button>
@@ -1049,14 +1047,6 @@
                     
                     if (currentViewMode === 'interest') {
                         newNode.currentColor = CONFIG.interestColors[node.interestLevel] || CONFIG.interestColors[5];
-                    } else if (currentViewMode === 'activity') {
-                        if (node.urlCount >= 10) {
-                            newNode.currentColor = CONFIG.activityColors.high;
-                        } else if (node.urlCount >= 5) {
-                            newNode.currentColor = CONFIG.activityColors.medium;
-                        } else {
-                            newNode.currentColor = CONFIG.activityColors.low;
-                        }
                     } else if (currentViewMode === 'connections') {
                         if (node.connectionCount >= 10) {
                             newNode.currentColor = CONFIG.connectionColors.high;
@@ -1269,14 +1259,6 @@
                     
                     if (currentViewMode === 'interest') {
                         newNode.currentColor = CONFIG.interestColors[node.interestLevel] || CONFIG.interestColors[5];
-                    } else if (currentViewMode === 'activity') {
-                        if (node.urlCount >= 10) {
-                            newNode.currentColor = CONFIG.activityColors.high;
-                        } else if (node.urlCount >= 5) {
-                            newNode.currentColor = CONFIG.activityColors.medium;
-                        } else {
-                            newNode.currentColor = CONFIG.activityColors.low;
-                        }
                     } else if (currentViewMode === 'connections') {
                         if (node.connectionCount >= 10) {
                             newNode.currentColor = CONFIG.connectionColors.high;
