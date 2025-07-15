@@ -337,6 +337,13 @@
         
         <div class="control-content">
             <div class="control-group">
+                <label style="justify-content: center; margin-bottom: 10px;">
+                    <button id="simple-mode-btn" onclick="setConfigMode('simple')" style="flex: 1; padding: 6px; background: rgba(0, 255, 136, 0.2); border: 1px solid #00ff88; color: #00ff88; border-radius: 4px 0 0 4px; cursor: pointer;">Simple</button>
+                    <button id="advanced-mode-btn" onclick="setConfigMode('advanced')" style="flex: 1; padding: 6px; background: transparent; border: 1px solid #00ff88; color: #00ff88; border-radius: 0 4px 4px 0; cursor: pointer; border-left: none;">Advanced</button>
+                </label>
+            </div>
+            
+            <div class="control-group simple-group">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Draw By</h4>
                 <label>
                     Layout Mode
@@ -353,7 +360,7 @@
                 </div>
             </div>
             
-            <div class="control-group">
+            <div class="control-group advanced-group" style="display: none;">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Stats</h4>
                 <div class="stat-item">Monitoring: <span id="company-count" class="green">--</span> companies</div>
                 <div class="stat-item">URLs: <span id="url-count" class="green">--</span></div>
@@ -361,12 +368,12 @@
                 <div class="stat-item">Links: <span id="link-count" class="green">--</span></div>
             </div>
             
-            <div class="control-group">
+            <div class="control-group advanced-group" style="display: none;">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Legend</h4>
                 <div id="legend-content"></div>
             </div>
             
-            <div class="control-group">
+            <div class="control-group simple-group">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">View Mode</h4>
                 <label>
                     Color By
@@ -385,7 +392,7 @@
                 </div>
             </div>
             
-            <div class="control-group">
+            <div class="control-group advanced-group" style="display: none;">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Visual Settings</h4>
                 <label>
                     Show Links
@@ -405,12 +412,12 @@
                 </label>
             </div>
             
-            <div class="control-group">
+            <div class="control-group advanced-group" style="display: none;">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Camera Controls</h4>
                 <button onclick="centerView()" style="width: 100%; padding: 8px; background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; color: #00ff88; border-radius: 4px; cursor: pointer; margin-bottom: 10px;">Center View</button>
             </div>
             
-            <div class="control-group">
+            <div class="control-group advanced-group" style="display: none;">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Graph Physics</h4>
                 <label>
                     Force Strength
@@ -424,7 +431,7 @@
                 </label>
             </div>
             
-            <div class="control-group">
+            <div class="control-group simple-group">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Number of Entities</h4>
                 <label>
                     Entity Count Limit
@@ -436,7 +443,7 @@
                 </div>
             </div>
             
-            <div class="control-group">
+            <div class="control-group advanced-group" style="display: none;">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Filter by Type</h4>
                 <div class="select-buttons">
                     <button onclick="selectAllTypes()">Select All</button>
@@ -447,7 +454,7 @@
                 </div>
             </div>
             
-            <div class="control-group">
+            <div class="control-group simple-group">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Search</h4>
                 <input type="text" id="search-input" placeholder="Search companies...">
             </div>
@@ -510,6 +517,25 @@
             controls.classList.toggle('collapsed');
             
             btn.textContent = controls.classList.contains('collapsed') ? '▶' : '◀';
+        }
+        
+        function setConfigMode(mode) {
+            const simpleBtn = document.getElementById('simple-mode-btn');
+            const advancedBtn = document.getElementById('advanced-mode-btn');
+            const simpleGroups = document.querySelectorAll('.simple-group');
+            const advancedGroups = document.querySelectorAll('.advanced-group');
+            
+            if (mode === 'simple') {
+                simpleBtn.style.background = 'rgba(0, 255, 136, 0.2)';
+                advancedBtn.style.background = 'transparent';
+                simpleGroups.forEach(g => g.style.display = 'block');
+                advancedGroups.forEach(g => g.style.display = 'none');
+            } else {
+                simpleBtn.style.background = 'transparent';
+                advancedBtn.style.background = 'rgba(0, 255, 136, 0.2)';
+                simpleGroups.forEach(g => g.style.display = 'block');
+                advancedGroups.forEach(g => g.style.display = 'block');
+            }
         }
         
         function selectAllTypes() {
@@ -1067,6 +1093,13 @@
                     
                     // Re-apply link width function after data update
                     Graph.linkWidth(link => getLinkWidth(link));
+                    
+                    // Re-apply draw mode if not normal
+                    if (currentDrawMode && currentDrawMode !== 'normal') {
+                        setTimeout(() => {
+                            applyDrawMode();
+                        }, 100);
+                    }
                 }
                 
                 updateLegend();
@@ -1380,7 +1413,7 @@
                         .linkColor(() => 'rgba(150, 150, 150, 0.5)')
                         .linkOpacity(CONFIG.linkOpacity)
                         .linkDirectionalParticles(2)
-                        .linkDirectionalParticleSpeed(0.006)
+                        .linkDirectionalParticleSpeed(0.001) // Much slower - was 0.006
                         .linkDirectionalParticleColor(() => '#00ff88')
                         .onNodeHover(node => {
                             document.getElementById('node-info').innerHTML = node ? 
