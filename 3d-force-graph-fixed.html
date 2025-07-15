@@ -701,6 +701,8 @@
             let recentChangesData = null;
             let floatingTooltipEnabled = true;
             let hoveredNode = null;
+            let tooltipTimeout;
+            let tooltipFixed = false;
             
             // Make applyFilters and Graph global for button access
             window.applyFilters = null;
@@ -1599,6 +1601,7 @@
                                 
                                 tooltip.innerHTML = content;
                                 tooltip.style.display = 'block';
+                                tooltipFixed = false; // Reset position lock for new tooltip
                             } else {
                                 // Add delay before hiding to allow mouse to reach tooltip
                                 tooltipTimeout = setTimeout(() => {
@@ -1773,13 +1776,11 @@
                 }
             });
             
-            // Track mouse movement for tooltip
-            let tooltipTimeout;
-            
+            // Track mouse movement for tooltip positioning only on initial show
             document.addEventListener('mousemove', (e) => {
                 const tooltip = document.getElementById('entity-tooltip');
-                if (tooltip.style.display === 'block') {
-                    // Position tooltip near cursor
+                if (tooltip.style.display === 'block' && !tooltipFixed) {
+                    // Only position tooltip on initial show, then fix it
                     const x = e.clientX + 15;
                     const y = e.clientY + 15;
                     
@@ -1796,6 +1797,9 @@
                     } else {
                         tooltip.style.top = y + 'px';
                     }
+                    
+                    // Fix the position after initial placement
+                    tooltipFixed = true;
                 }
             });
             
