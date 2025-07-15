@@ -812,7 +812,7 @@
                     const [companiesResponse, detailsResponse, changesResponse] = await Promise.all([
                         fetch('https://redmorestudio.github.io/ai-competitive-monitor/api-data/companies.json'),
                         fetch('https://redmorestudio.github.io/ai-competitive-monitor/api-data/company-details.json'),
-                        fetch('https://redmorestudio.github.io/ai-competitive-monitor/api-data/recent-changes.json').catch(() => ({ ok: false }))
+                        fetch('https://redmorestudio.github.io/ai-competitive-monitor/api-data/changes.json').catch(() => ({ ok: false }))
                     ]);
                     
                     if (!companiesResponse.ok || !detailsResponse.ok) {
@@ -1290,7 +1290,8 @@
                             }
                             
                             recentChangesData.changes.forEach(change => {
-                                const changeTime = new Date(change.timestamp).getTime();
+                                // Parse the date format "2025-07-08 19:18:06"
+                                const changeTime = new Date(change.created_at.replace(' ', 'T')).getTime();
                                 if (now - changeTime <= timeThreshold) {
                                     changedCompanies.add(change.company);
                                 }
