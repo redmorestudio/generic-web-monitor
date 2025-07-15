@@ -300,6 +300,15 @@
             border-bottom: 1px solid #333;
             margin-bottom: 5px;
         }
+        
+        #3d-graph {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
     </style>
     <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
     <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
@@ -1177,6 +1186,16 @@
                 
                 // Reheat the simulation to apply changes
                 Graph.d3ReheatSimulation();
+                
+                // Force a resize to fix any rendering issues
+                if (Graph.renderer()) {
+                    const container = document.getElementById('3d-graph');
+                    Graph.width(container.clientWidth);
+                    Graph.height(container.clientHeight);
+                    Graph.renderer().setSize(container.clientWidth, container.clientHeight);
+                    Graph.camera().aspect = container.clientWidth / container.clientHeight;
+                    Graph.camera().updateProjectionMatrix();
+                }
             }
             
             // Focus on a specific node and its connections
@@ -1331,7 +1350,10 @@
                 try {
                     // Only create new instance if it doesn't exist
                     if (!Graph) {
-                        Graph = ForceGraph3D()(document.getElementById('3d-graph'));
+                        const container = document.getElementById('3d-graph');
+                        Graph = ForceGraph3D()(container)
+                            .width(container.clientWidth)
+                            .height(container.clientHeight);
                         window.Graph = Graph; // Make it globally accessible
                     }
                     
@@ -1506,6 +1528,18 @@
             // Toggle controls on mobile
             document.getElementById('toggle-controls').addEventListener('click', () => {
                 document.getElementById('controls').classList.toggle('open');
+            });
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (Graph && Graph.renderer()) {
+                    const container = document.getElementById('3d-graph');
+                    Graph.width(container.clientWidth);
+                    Graph.height(container.clientHeight);
+                    Graph.renderer().setSize(container.clientWidth, container.clientHeight);
+                    Graph.camera().aspect = container.clientWidth / container.clientHeight;
+                    Graph.camera().updateProjectionMatrix();
+                }
             });
             
             // Start loading
