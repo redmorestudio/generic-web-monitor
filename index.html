@@ -1952,7 +1952,8 @@
 
                 html += `
                     <tr class="clickable-row ${isNew ? 'new-company' : isRecent ? 'recent-change' : ''}"
-                        onclick="showChangeDetail('${change.id}')">
+                        data-change='${JSON.stringify(change).replace(/'/g, "&#39;")}'
+                        onclick="showChangeDetail.call(this, '${change.id || change.change_id}', event)">
                         <td>${formatTimeAgo(changeDate)}</td>
                         <td>${escapeHtml(change.company)}</td>
                         <td>
