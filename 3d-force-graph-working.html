@@ -314,7 +314,8 @@
             • Left-click + drag = Rotate view<br>
             • Right-click + drag = Pan view<br>
             • Scroll = Zoom in/out<br>
-            • Click node = Center camera
+            • Click node = Center camera<br>
+            • Right-click node = Focus on connections
         </div>
     </div>
     
@@ -970,6 +971,112 @@
             // Make applyFilters available globally
             window.applyFilters = applyFilters;
             
+            // Focus on a specific node and its connections
+            function focusOnNode(targetNode) {
+                if (!targetNode) return;
+                
+                // Get all connected nodes
+                const connectedNodeIds = new Set([targetNode.id]);
+                
+                // Find all links connected to this node
+                graphData.links.forEach(link => {
+                    const sourceId = link.source.id || link.source;
+                    const targetId = link.target.id || link.target;
+                    
+                    if (sourceId === targetNode.id) {
+                        connectedNodeIds.add(targetId);
+                    }
+                    if (targetId === targetNode.id) {
+                        connectedNodeIds.add(sourceId);
+                    }
+                });
+                
+                // Filter to show only connected nodes
+                filteredData.nodes = graphData.nodes.filter(node => 
+                    connectedNodeIds.has(node.id)
+                );
+                
+                // Filter links to only show connections between visible nodes
+                filteredData.links = graphData.links.filter(link => {
+                    const sourceId = link.source.id || link.source;
+                    const targetId = link.target.id || link.target;
+                    return connectedNodeIds.has(sourceId) && connectedNodeIds.has(targetId);
+                });
+                
+                // Apply view mode colors
+                filteredData.nodes = filteredData.nodes.map(node => {
+                    const newNode = {...node};
+                    
+                    if (currentViewMode === 'interest') {
+                        newNode.currentColor = CONFIG.interestColors[node.interestLevel] || CONFIG.interestColors[5];
+                    } else if (currentViewMode === 'activity') {
+                        if (node.urlCount >= 10) {
+                            newNode.currentColor = CONFIG.activityColors.high;
+                        } else if (node.urlCount >= 5) {
+                            newNode.currentColor = CONFIG.activityColors.medium;
+                        } else {
+                            newNode.currentColor = CONFIG.activityColors.low;
+                        }
+                    } else if (currentViewMode === 'connections') {
+                        if (node.connectionCount >= 10) {
+                            newNode.currentColor = CONFIG.connectionColors.high;
+                        } else if (node.connectionCount >= 5) {
+                            newNode.currentColor = CONFIG.connectionColors.medium;
+                        } else {
+                            newNode.currentColor = CONFIG.connectionColors.low;
+                        }
+                    } else {
+                        // Entity type view
+                        newNode.currentColor = node.color;
+                    }
+                    
+                    // Highlight the focused node
+                    if (node.id === targetNode.id) {
+                        newNode.currentColor = '#00ff88'; // Bright green for focused node
+                    }
+                    
+                    return newNode;
+                });
+                
+                // Update graph
+                if (Graph) {
+                    const freshData = {
+                        nodes: filteredData.nodes.map(n => ({ ...n })),
+                        links: filteredData.links.map(l => ({ 
+                            source: l.source.id || l.source,
+                            target: l.target.id || l.target,
+                            label: l.label,
+                            connectionCount: l.connectionCount,
+                            ...l 
+                        }))
+                    };
+                    
+                    Graph.graphData(freshData);
+                    Graph.linkWidth(link => getLinkWidth(link));
+                    
+                    // Center camera on the focused node
+                    setTimeout(() => {
+                        const distance = 300;
+                        const distRatio = 1 + distance/Math.hypot(targetNode.x, targetNode.y, targetNode.z);
+                        Graph.cameraPosition(
+                            { x: targetNode.x * distRatio, y: targetNode.y * distRatio, z: targetNode.z * distRatio },
+                            targetNode,
+                            1000
+                        );
+                    }, 100);
+                }
+                
+                // Update legend
+                updateLegend();
+                
+                // Update info panel
+                document.getElementById('node-info').innerHTML = 
+                    `<strong>Focused on: ${targetNode.name}</strong><br>
+                    Type: ${targetNode.group}<br>
+                    Connected nodes: ${connectedNodeIds.size - 1}<br>
+                    <em>Click "Select All" in filters to show all nodes again</em>`;
+            }
+            
             function updateLegend() {
                 const nodeTypes = new Map();
                 // If no filters selected or no filtered nodes, use all graph data
@@ -1042,7 +1149,7 @@
                         .onNodeHover(node => {
                             document.getElementById('node-info').innerHTML = node ? 
                                 `<strong>${node.name}</strong><br>Type: ${node.group}<br>Interest Level: ${node.interestLevel}/10<br>URLs: ${node.urlCount}<br>Connections: ${node.connectionCount}` : 
-                                '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera';
+                                '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Focus on connections';
                         })
                         .onNodeClick(node => {
                             const distance = 300;
@@ -1052,6 +1159,10 @@
                                 node,
                                 3000
                             );
+                        })
+                        .onNodeRightClick(node => {
+                            // Focus on this node and its connections
+                            focusOnNode(node);
                         })
                         .enablePointerInteraction(true)
                         .enableNodeDrag(true);
