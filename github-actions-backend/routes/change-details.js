@@ -15,7 +15,7 @@ const turndownService = new TurndownService({
 /**
  * GET /api/changes/:changeId
  * Get detailed information about a specific change including before/after content
- * Enhanced version with interest analysis, keyword extraction, and proper markdown conversion
+ * FIXED VERSION - Corrected column names and queries
  */
 router.get('/changes/:changeId', async (req, res) => {
   try {
@@ -60,63 +60,64 @@ router.get('/changes/:changeId', async (req, res) => {
     let beforeContent = null;
     let afterContent = null;
     
-    // First try to get markdown content from processed_content.db
-    if (change.old_hash) {
+    // Get OLD content
+    if (change.old_content_id) {
+      // First try to get markdown content
       const oldMarkdownQuery = processedDb.prepare(`
-        SELECT mc.content_markdown, mc.processed_at
-        FROM markdown_content mc
-        JOIN raw.raw_html rh ON mc.raw_html_id = rh.id
-        WHERE rh.content_hash = ?
-        ORDER BY mc.processed_at DESC
+        SELECT markdown_text, processed_at
+        FROM markdown_content
+        WHERE raw_html_id = ?
+        ORDER BY processed_at DESC
         LIMIT 1
       `);
-      const oldMarkdown = oldMarkdownQuery.get(change.old_hash);
+      const oldMarkdown = oldMarkdownQuery.get(change.old_content_id);
       
-      if (oldMarkdown) {
+      if (oldMarkdown && oldMarkdown.markdown_text) {
         beforeContent = {
-          markdown: oldMarkdown.content_markdown,
+          markdown: oldMarkdown.markdown_text,
           captured_at: oldMarkdown.processed_at
         };
-      } else if (change.old_content_id) {
+      } else {
         // Fallback to HTML conversion
         const oldContentQuery = processedDb.prepare(`
           SELECT html_content, scraped_at FROM raw.raw_html WHERE id = ?
         `);
         const oldRaw = oldContentQuery.get(change.old_content_id);
-        if (oldRaw) {
+        if (oldRaw && oldRaw.html_content) {
           beforeContent = {
-            markdown: turndownService.turndown(oldRaw.html_content || ''),
+            markdown: turndownService.turndown(oldRaw.html_content),
             captured_at: oldRaw.scraped_at
           };
         }
       }
     }
     
-    if (change.new_hash) {
+    // Get NEW content
+    if (change.new_content_id) {
+      // First try to get markdown content
       const newMarkdownQuery = processedDb.prepare(`
-        SELECT mc.content_markdown, mc.processed_at
-        FROM markdown_content mc
-        JOIN raw.raw_html rh ON mc.raw_html_id = rh.id
-        WHERE rh.content_hash = ?
-        ORDER BY mc.processed_at DESC
+        SELECT markdown_text, processed_at
+        FROM markdown_content
+        WHERE raw_html_id = ?
+        ORDER BY processed_at DESC
         LIMIT 1
       `);
-      const newMarkdown = newMarkdownQuery.get(change.new_hash);
+      const newMarkdown = newMarkdownQuery.get(change.new_content_id);
       
-      if (newMarkdown) {
+      if (newMarkdown && newMarkdown.markdown_text) {
         afterContent = {
-          markdown: newMarkdown.content_markdown,
+          markdown: newMarkdown.markdown_text,
           captured_at: newMarkdown.processed_at
         };
-      } else if (change.new_content_id) {
+      } else {
         // Fallback to HTML conversion
         const newContentQuery = processedDb.prepare(`
           SELECT html_content, scraped_at FROM raw.raw_html WHERE id = ?
         `);
         const newRaw = newContentQuery.get(change.new_content_id);
-        if (newRaw) {
+        if (newRaw && newRaw.html_content) {
           afterContent = {
-            markdown: turndownService.turndown(newRaw.html_content || ''),
+            markdown: turndownService.turndown(newRaw.html_content),
             captured_at: newRaw.scraped_at
           };
         }
@@ -128,12 +129,14 @@ router.get('/changes/:changeId', async (req, res) => {
     let entities = null;
     let extractedText = null;
     
-    if (change.competitive_data) {
+    // Try both interest_data (new) and competitive_data (old) fields
+    const interestDataSource = change.interest_data || change.competitive_data;
+    if (interestDataSource) {
       try {
-        const competitiveData = JSON.parse(change.competitive_data);
-        interestData = competitiveData.interest_assessment || competitiveData;
+        const parsedData = JSON.parse(interestDataSource);
+        interestData = parsedData.interest_assessment || parsedData;
       } catch (e) {
-        console.error('Failed to parse competitive_data:', e);
+        console.error('Failed to parse interest data:', e);
       }
     }
     
@@ -157,7 +160,7 @@ router.get('/changes/:changeId', async (req, res) => {
     let keywordAnalysis = null;
     let contentDiff = null;
     
-    if (beforeContent && afterContent) {
+    if (beforeContent && afterContent && beforeContent.markdown && afterContent.markdown) {
       keywordAnalysis = extractKeywords(beforeContent.markdown, afterContent.markdown);
       contentDiff = createEnhancedDiff(beforeContent.markdown, afterContent.markdown);
     }
@@ -174,13 +177,17 @@ router.get('/changes/:changeId', async (req, res) => {
       company_category: change.company_category,
       detected_at: change.detected_at,
       
-      // Interest analysis
-      interest_level: interestData?.interest_level || change.interest_level || change.relevance_score || 5,
+      // Interest analysis - handle multiple possible fields
+      interest_level: change.interest_level || interestData?.interest_level || change.relevance_score || 5,
       interest_category: interestData?.category || 'routine_change',
-      interest_explanation: interestData?.summary || change.summary || 'Change detected',
+      interest_explanation: change.ai_explanation || interestData?.summary || change.summary || 'Change detected',
       interest_drivers: interestData?.interest_drivers || [],
       technical_innovation_score: interestData?.technical_innovation_score || 5,
       business_impact_score: interestData?.business_impact_score || 5,
+      
+      // AI analysis fields
+      ai_key_changes: change.ai_key_changes,
+      ai_business_context: change.ai_business_context,
       
       // Content comparison
       before: beforeContent,
@@ -188,17 +195,19 @@ router.get('/changes/:changeId', async (req, res) => {
       
       // Diff analysis
       diff: contentDiff || {
-        added_keywords: [],
-        removed_keywords: [],
+        added_sentences: [],
+        removed_sentences: [],
         key_changes: [],
-        change_percentage: 0
+        change_percentage: 0,
+        summary: 'No diff available'
       },
       
       // Keyword analysis
       keywords: keywordAnalysis || {
         new_keywords: [],
         removed_keywords: [],
-        frequency_changes: {}
+        frequency_changes: {},
+        significant_phrases: []
       },
       
       // Extracted entities and text
@@ -210,7 +219,11 @@ router.get('/changes/:changeId', async (req, res) => {
     
   } catch (error) {
     console.error('Error fetching change details:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    res.status(500).json({ 
+      error: 'Internal server error',
+      message: error.message,
+      stack: process.env.NODE_ENV === 'development' ? error.stack : undefined
+    });
   }
 });
 
@@ -224,28 +237,51 @@ router.get('/changes/:changeId/diff', async (req, res) => {
     
     // Get database connections
     const processedDb = dbManager.getProcessedDb();
-    const rawDb = dbManager.getRawDb();
     
-    // Get markdown content from processed_content.db
-    const markdownQuery = processedDb.prepare(`
+    // Attach databases
+    processedDb.exec(`ATTACH DATABASE '${path.join(__dirname, '..', 'data', 'raw_content.db')}' AS raw`);
+    
+    // Get change with markdown content
+    const changeQuery = processedDb.prepare(`
       SELECT 
         cd.*,
-        mc_old.content_markdown as old_markdown,
-        mc_new.content_markdown as new_markdown
+        mc_old.markdown_text as old_markdown,
+        mc_new.markdown_text as new_markdown
       FROM change_detection cd
-      LEFT JOIN markdown_content mc_old ON cd.old_content_id = mc_old.id
-      LEFT JOIN markdown_content mc_new ON cd.new_content_id = mc_new.id
+      LEFT JOIN markdown_content mc_old ON cd.old_content_id = mc_old.raw_html_id
+      LEFT JOIN markdown_content mc_new ON cd.new_content_id = mc_new.raw_html_id
       WHERE cd.id = ?
     `);
     
-    const change = markdownQuery.get(changeId);
+    const change = changeQuery.get(changeId);
     
     if (!change) {
       return res.status(404).json({ error: 'Change not found' });
     }
     
-    // Create diff sections
-    const diff = createDiff(change.old_markdown || '', change.new_markdown || '');
+    // If no markdown, try to get HTML and convert
+    let oldText = change.old_markdown || '';
+    let newText = change.new_markdown || '';
+    
+    if (!oldText && change.old_content_id) {
+      const oldHtml = processedDb.prepare('SELECT html_content FROM raw.raw_html WHERE id = ?').get(change.old_content_id);
+      if (oldHtml) {
+        oldText = turndownService.turndown(oldHtml.html_content || '');
+      }
+    }
+    
+    if (!newText && change.new_content_id) {
+      const newHtml = processedDb.prepare('SELECT html_content FROM raw.raw_html WHERE id = ?').get(change.new_content_id);
+      if (newHtml) {
+        newText = turndownService.turndown(newHtml.html_content || '');
+      }
+    }
+    
+    // Detach database
+    processedDb.exec('DETACH DATABASE raw');
+    
+    // Create diff
+    const diff = createEnhancedDiff(oldText, newText);
     
     res.json({
       id: change.id,
@@ -354,7 +390,15 @@ function extractKeywords(beforeText, afterText) {
 
 // Helper function to create enhanced diff with key change detection
 function createEnhancedDiff(oldText, newText) {
-  if (!oldText || !newText) return null;
+  if (!oldText || !newText) {
+    return {
+      added_sentences: [],
+      removed_sentences: [],
+      key_changes: ['Content comparison not available'],
+      change_percentage: 0,
+      summary: 'Unable to create diff - missing content'
+    };
+  }
   
   // Split into sentences for better granularity
   const splitSentences = (text) => {
@@ -430,7 +474,7 @@ function createEnhancedDiff(oldText, newText) {
   ];
   
   aiTerms.forEach(term => {
-    const termRegex = new RegExp(`\b${term}s?\b`, 'gi');
+    const termRegex = new RegExp(`\\b${term}s?\\b`, 'gi');
     const oldCount = (oldText.match(termRegex) || []).length;
     const newCount = (newText.match(termRegex) || []).length;
     
