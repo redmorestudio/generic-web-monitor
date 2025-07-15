@@ -407,7 +407,9 @@
     <div id="3d-graph"></div>
 
     <script>
-        // Global functions for UI
+        // Global variables and functions for UI
+        let selectedTypes = new Set();
+        
         function toggleControlsCollapse() {
             const controls = document.getElementById('controls');
             const legend = document.getElementById('legend');
@@ -420,13 +422,16 @@
         }
         
         function selectAllTypes() {
+            selectedTypes.clear();
             document.querySelectorAll('#type-filters input[type="checkbox"]').forEach(cb => {
                 cb.checked = true;
+                selectedTypes.add(cb.value);
             });
             if (window.applyFilters) window.applyFilters();
         }
         
         function selectNoneTypes() {
+            selectedTypes.clear();
             document.querySelectorAll('#type-filters input[type="checkbox"]').forEach(cb => {
                 cb.checked = false;
             });
@@ -445,7 +450,6 @@
             let labelsEnabled = true;
             let particlesEnabled = true;
             let currentViewMode = 'entity-type';
-            let selectedTypes = new Set();
             
             // Make applyFilters global for button access
             window.applyFilters = null;
@@ -793,6 +797,9 @@
             function applyFilters() {
                 const searchTerm = document.getElementById('search-input')?.value.toLowerCase() || '';
                 
+                console.log('Applying filters. Selected types:', Array.from(selectedTypes));
+                console.log('Total nodes before filter:', graphData.nodes.length);
+                
                 // Filter nodes
                 filteredData.nodes = graphData.nodes.filter(node => {
                     // Type filter - if no types selected, show all
@@ -807,6 +814,8 @@
                     
                     return true;
                 });
+                
+                console.log('Nodes after filter:', filteredData.nodes.length);
                 
                 // Get filtered node IDs
                 const filteredNodeIds = new Set(filteredData.nodes.map(n => n.id));
