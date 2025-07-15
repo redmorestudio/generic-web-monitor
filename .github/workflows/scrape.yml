@@ -370,6 +370,7 @@ jobs:
         if: inputs.cascade == true
         uses: actions/github-script@v7
         with:
+          github-token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
           script: |
             const result = await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
