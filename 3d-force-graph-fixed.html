@@ -89,7 +89,9 @@
             width: 280px;
             backdrop-filter: blur(10px);
             max-height: 85vh;
-            overflow-y: scroll; /* Force scrollbar */
+            overflow-y: scroll !important;
+            scrollbar-width: thin;
+            scrollbar-color: #00ff88 rgba(255, 255, 255, 0.1);
         }
         
         /* Custom scrollbar styling */
@@ -354,6 +356,12 @@
     <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
 </head>
 <body>
+    <!-- Container for 3D graph -->
+    <div id="graph-container" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 1;">
+        <div id="3d-graph"></div>
+    </div>
+    
+    <!-- UI Layer -->
     <div id="loading">
         <div>Loading AI Competitive Intelligence Graph...</div>
         <div class="loading-spinner"></div>
@@ -469,8 +477,6 @@
         <div class="context-menu-item" id="hideNode">Hide This Node</div>
         <div class="context-menu-item" id="resetViewContext">Reset View</div>
     </div>
-    
-    <div id="3d-graph"></div>
 
     <script>
         // Enhanced Configuration
@@ -607,6 +613,12 @@
                 console.log('Legend should be visible now');
                 console.log('Legend element:', document.getElementById('legend'));
                 updateLegend();
+                
+                // Debug controls panel
+                const controlsEl = document.getElementById('controls');
+                console.log('Controls height:', controlsEl.offsetHeight);
+                console.log('Controls scrollHeight:', controlsEl.scrollHeight);
+                console.log('Controls children:', controlsEl.children.length);
                 
                 // Create the enhanced graph
                 console.log('Creating 3D graph...');
