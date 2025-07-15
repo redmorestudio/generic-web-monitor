@@ -65,6 +65,12 @@
         .delete-btn:hover {
             background: #c82333;
         }
+        .success-btn {
+            background: #28a745;
+        }
+        .success-btn:hover {
+            background: #218838;
+        }
         .status {
             margin-top: 20px;
             padding: 15px;
@@ -167,6 +173,16 @@
 
         <div class="actions">
             <div class="action-card">
+                <h3>📁 Manage Categories</h3>
+                <select id="categoryFilter" onchange="filterByCategory()">
+                    <option value="">All Categories</option>
+                </select>
+                <button onclick="showAddCategoryDialog()">Add New Category</button>
+                <button onclick="showRenameCategoryDialog()" class="success-btn">Rename Category</button>
+                <button onclick="showDeleteCategoryDialog()" class="delete-btn">Delete Category</button>
+            </div>
+
+            <div class="action-card">
                 <h3>➕ Add Company</h3>
                 <input type="text" id="companyName" placeholder="Company Name">
                 <select id="companyCategory">
@@ -222,6 +238,8 @@
         const WORKFLOW_FILE = 'manage-companies.yml';
 
         let companiesData = [];
+        let allCompaniesData = []; // Store unfiltered data
+        let categories = new Set();
 
         // Get GitHub token
         function getToken() {
@@ -292,13 +310,19 @@
                 );
                 const data = await response.json();
                 // Normalize the data structure
-                companiesData = data.companies.map(c => ({
+                allCompaniesData = data.companies.map(c => ({
                     name: c.company || c.name,
                     category: c.type || c.category,
                     urls: c.urls || [],
                     urls_count: c.urls ? c.urls.length : 0,
                     created_at: c.created_at
                 }));
+                companiesData = [...allCompaniesData];
+                
+                // Extract categories
+                categories = new Set(allCompaniesData.map(c => c.category));
+                updateCategorySelects();
+                
                 displayCompanies();
                 updateSelects();
             } catch (error) {
@@ -435,6 +459,78 @@
                 action: 'delete-url',
                 url: url
             });
+        }
+
+        // Update category selects
+        function updateCategorySelects() {
+            const filterSelect = document.getElementById('categoryFilter');
+            const companySelect = document.getElementById('companyCategory');
+            
+            const categoryOptions = Array.from(categories).sort().map(cat => 
+                `<option value="${cat}">${cat}</option>`
+            ).join('');
+            
+            filterSelect.innerHTML = '<option value="">All Categories</option>' + categoryOptions;
+            
+            // Update company category select
+            companySelect.innerHTML = categoryOptions + '<option value="Other">Other</option>';
+        }
+
+        // Filter by category
+        function filterByCategory() {
+            const selectedCategory = document.getElementById('categoryFilter').value;
+            if (selectedCategory === '') {
+                companiesData = [...allCompaniesData];
+            } else {
+                companiesData = allCompaniesData.filter(c => c.category === selectedCategory);
+            }
+            displayCompanies();
+            updateSelects();
+        }
+
+        // Category management functions
+        function showAddCategoryDialog() {
+            const newCategory = prompt('Enter new category name:');
+            if (newCategory && newCategory.trim()) {
+                // For now, just add to local list - would need backend update
+                categories.add(newCategory.trim());
+                updateCategorySelects();
+                showStatus('Category added locally. Add a company with this category to persist it.', 'info');
+            }
+        }
+
+        function showRenameCategoryDialog() {
+            const oldCategory = prompt('Enter the category to rename:');
+            if (!oldCategory || !categories.has(oldCategory)) {
+                showStatus('Category not found', 'error');
+                return;
+            }
+            
+            const newCategory = prompt(`Enter new name for "${oldCategory}":`);
+            if (newCategory && newCategory.trim()) {
+                // This would need a backend workflow to update all companies
+                showStatus('Category rename requires updating all companies. This feature is coming soon.', 'info');
+            }
+        }
+
+        function showDeleteCategoryDialog() {
+            const categoryToDelete = prompt('Enter the category to delete:');
+            if (!categoryToDelete || !categories.has(categoryToDelete)) {
+                showStatus('Category not found', 'error');
+                return;
+            }
+            
+            const companiesInCategory = allCompaniesData.filter(c => c.category === categoryToDelete).length;
+            if (companiesInCategory > 0) {
+                showStatus(`Cannot delete category with ${companiesInCategory} companies. Remove companies first.`, 'error');
+                return;
+            }
+            
+            if (confirm(`Delete category "${categoryToDelete}"?`)) {
+                categories.delete(categoryToDelete);
+                updateCategorySelects();
+                showStatus('Category removed locally', 'success');
+            }
         }
 
         // Load companies on page load
