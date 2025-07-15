@@ -20,6 +20,13 @@
             width: 100%;
             height: 100%;
             z-index: 1;
+            pointer-events: auto;
+        }
+        
+        #3d-graph canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important;
         }
         
         #info {
@@ -179,7 +186,7 @@
         }
         
         #stats {
-            position: absolute;
+            position: fixed;
             bottom: 10px;
             left: 10px;
             background: rgba(20, 20, 30, 0.95);
@@ -189,6 +196,7 @@
             font-size: 12px;
             z-index: 10000;
             backdrop-filter: blur(10px);
+            pointer-events: all;
         }
         
         #legend {
@@ -205,6 +213,7 @@
             transition: all 0.3s ease;
             max-width: 300px;
             box-shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+            pointer-events: all;
         }
         
         #legend.collapsed {
@@ -422,11 +431,10 @@
         <div id="statsContent"></div>
     </div>
     
-    <div id="legend" style="display: none; background: red !important;">
+    <div id="legend" style="display: none;">
         <div id="legend-toggle">Legend</div>
         <div id="legend-content">
             <!-- Dynamically populated -->
-            <div style="color: white;">TEST LEGEND</div>
         </div>
     </div>
     
@@ -621,7 +629,9 @@
                 });
                 
                 // Initialize graph
-                Graph = ForceGraph3D()(document.getElementById('3d-graph'));
+                Graph = ForceGraph3D()(document.getElementById('3d-graph'))
+                    .width(window.innerWidth)
+                    .height(window.innerHeight);
                 
                 // Set the cleaned graph data
                 try {
@@ -1879,6 +1889,13 @@
         window.addEventListener('load', () => {
             console.log('Page loaded, initializing graph...');
             initGraph();
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (Graph) {
+                Graph.width(window.innerWidth).height(window.innerHeight);
+            }
         });
     </script>
 </body>
