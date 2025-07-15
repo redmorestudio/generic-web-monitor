@@ -152,10 +152,24 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
         temperature: 0.5,
         max_completion_tokens: 1000,
         top_p: 1,
-        stream: false
+        stream: false,
+        response_format: { type: "json_object" }  // Enforce JSON output
       });
 
-      const result = JSON.parse(response.choices[0].message.content);
+      let result;
+      try {
+        result = JSON.parse(response.choices[0].message.content);
+      } catch (parseError) {
+        console.error('      ⚠️ Failed to parse AI response as JSON, attempting to extract...');
+        // Try to extract JSON from text response
+        const content = response.choices[0].message.content;
+        const jsonMatch = content.match(/{[\s\S]*}/); 
+        if (jsonMatch) {
+          result = JSON.parse(jsonMatch[0]);
+        } else {
+          throw new Error('Could not extract JSON from AI response');
+        }
+      }
       const assessment = result.interest_assessment;
       
       // Calculate average interest level

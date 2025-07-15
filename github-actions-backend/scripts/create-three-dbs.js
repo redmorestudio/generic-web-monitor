@@ -136,6 +136,7 @@ intelligenceDb.exec(`
     url_type TEXT,
     selector_config TEXT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    last_scraped DATETIME,
     FOREIGN KEY (company_id) REFERENCES companies(id)
   );
 
