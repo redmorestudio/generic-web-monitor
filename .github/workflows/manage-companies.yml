@@ -1,0 +1,147 @@
+name: Manage Companies
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        type: choice
+        options:
+          - add-company
+          - add-url
+          - delete-company
+          - delete-url
+          - enable-company
+          - disable-company
+          - list-companies
+      company_name:
+        description: 'Company name'
+        required: false
+        type: string
+      company_category:
+        description: 'Company category (for add-company)'
+        required: false
+        type: string
+        default: 'AI Tools'
+      url:
+        description: 'URL to add/delete'
+        required: false
+        type: string
+      url_type:
+        description: 'URL type (homepage/blog/docs/api)'
+        required: false
+        type: string
+        default: 'homepage'
+
+jobs:
+  manage-companies:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Execute company management
+        run: |
+          cd github-actions-backend
+          
+          case "${{ inputs.action }}" in
+            "list-companies")
+              echo "📋 Listing all companies..."
+              ./manage-companies.sh list
+              ;;
+              
+            "add-company")
+              echo "➕ Adding company: ${{ inputs.company_name }}"
+              ./manage-companies.sh add-company "${{ inputs.company_name }}" "${{ inputs.company_category }}"
+              
+              # Also add the homepage URL if provided
+              if [ -n "${{ inputs.url }}" ]; then
+                echo "🔗 Adding homepage URL: ${{ inputs.url }}"
+                ./manage-companies.sh add-url "${{ inputs.company_name }}" "${{ inputs.url }}" "homepage"
+              fi
+              ;;
+              
+            "add-url")
+              echo "🔗 Adding URL to ${{ inputs.company_name }}"
+              ./manage-companies.sh add-url "${{ inputs.company_name }}" "${{ inputs.url }}" "${{ inputs.url_type }}"
+              ;;
+              
+            "delete-company")
+              echo "❌ Deleting company: ${{ inputs.company_name }}"
+              # Auto-confirm for workflow
+              echo "y" | ./manage-companies.sh delete-company "${{ inputs.company_name }}"
+              ;;
+              
+            "delete-url")
+              echo "❌ Deleting URL: ${{ inputs.url }}"
+              ./manage-companies.sh delete-url "${{ inputs.url }}"
+              ;;
+              
+            "enable-company")
+              echo "✅ Enabling company: ${{ inputs.company_name }}"
+              ./manage-companies.sh enable "${{ inputs.company_name }}"
+              ;;
+              
+            "disable-company")
+              echo "⏸️ Disabling company: ${{ inputs.company_name }}"
+              ./manage-companies.sh disable "${{ inputs.company_name }}"
+              ;;
+              
+            *)
+              echo "❌ Unknown action: ${{ inputs.action }}"
+              exit 1
+              ;;
+          esac
+          
+          # Show current state
+          echo -e "\n📊 Current companies:"
+          ./manage-companies.sh list
+      
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Add the intelligence database
+          git add github-actions-backend/data/intelligence.db
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🏢 Company management: ${{ inputs.action }} ${{ inputs.company_name || inputs.url || '' }}"
+            git push origin main
+          fi
+      
+      - name: Trigger scraper
+        if: startsWith(inputs.action, 'add-') || inputs.action == 'enable-company'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            console.log('🚀 Triggering scraper to pick up changes...');
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'scrape.yml',
+              ref: 'main',
+              inputs: {
+                cascade: 'true'
+              }
+            });
+            console.log('✅ Scraper triggered - full pipeline will run');
