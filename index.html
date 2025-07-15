@@ -1179,36 +1179,120 @@
         }
 
         // Show change details in modal
-        function showChangeDetail(changeId) {
-            const changeData = JSON.parse(document.querySelector(`[data-change]`).getAttribute('data-change'));
+        async function showChangeDetail(changeId, event) {
+            // Get the clicked change element to extract the change data
+            const clickedElement = this;
+            const changeData = JSON.parse(clickedElement.getAttribute('data-change'));
             
             const modal = document.getElementById('companyModal');
             const modalTitle = document.getElementById('modalTitle');
             const modalContent = document.getElementById('modalContent');
             
             modalTitle.textContent = `Change Details: ${changeData.company}`;
+            
+            // Show loading state
             modalContent.innerHTML = `
-                <div class="config-section">
-                    <h4>📊 Change Information</h4>
-                    <p><strong>Company:</strong> ${escapeHtml(changeData.company)}</p>
-                    <p><strong>URL:</strong> <a href="${escapeHtml(changeData.url)}" target="_blank">${escapeHtml(changeData.url)}</a></p>
-                    <p><strong>Type:</strong> ${escapeHtml(changeData.change_type || 'Content Update')}</p>
-                    <p><strong>Time:</strong> ${changeData.time_ago}</p>
-                    ${changeData.relevance_score ? `<p><strong>Relevance Score:</strong> ${changeData.relevance_score}/10</p>` : ''}
-                </div>
-                
-                <div class="config-section">
-                    <h4>📝 Summary</h4>
-                    <p>${escapeHtml(changeData.summary || 'No summary available')}</p>
-                </div>
-                
-                <div class="action-buttons">
-                    <a href="${escapeHtml(changeData.url)}" target="_blank" class="button button-primary">View Current Page</a>
-                    <button type="button" class="button button-secondary" onclick="closeModal()">Close</button>
-                </div>
+                <div class="loading">Loading change details...</div>
             `;
             
             modal.style.display = 'block';
+            
+            // Try to fetch detailed change information from the backend API
+            try {
+                const response = await fetch(`${CONFIG.backendUrl}/api/changes/${changeData.id || changeData.change_id}`);
+                if (!response.ok) {
+                    throw new Error('API request failed');
+                }
+                
+                const detailData = await response.json();
+                
+                // Create tabbed interface for the detailed view
+                modalContent.innerHTML = `
+                    <div class="config-section">
+                        <h4>📊 Change Information</h4>
+                        <p><strong>Company:</strong> ${escapeHtml(detailData.company || changeData.company)}</p>
+                        <p><strong>URL:</strong> <a href="${escapeHtml(detailData.url || changeData.url)}" target="_blank">${escapeHtml(detailData.url || changeData.url)}</a></p>
+                        <p><strong>Detected:</strong> ${new Date(detailData.detected_at || changeData.detected_at).toLocaleString()}</p>
+                        ${detailData.interest_level ? `
+                            <p><strong>Interest Level:</strong> ${detailData.interest_level}/10
+                            ${detailData.interest_category ? ` (${detailData.interest_category})` : ''}</p>
+                        ` : ''}
+                    </div>
+                    
+                    ${detailData.interest_explanation ? `
+                        <div class="config-section">
+                            <h4>🎯 Why This Matters</h4>
+                            <p>${escapeHtml(detailData.interest_explanation)}</p>
+                            ${detailData.interest_drivers && detailData.interest_drivers.length > 0 ? `
+                                <div style="margin-top: 10px;">
+                                    ${detailData.interest_drivers.map(driver => `
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 4px 12px; border-radius: 16px; font-size: 0.85rem; margin-right: 8px; display: inline-block; margin-bottom: 5px;">
+                                            ${escapeHtml(driver)}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    ` : ''}
+                    
+                    ${detailData.diff && detailData.diff.key_changes && detailData.diff.key_changes.length > 0 ? `
+                        <div class="config-section">
+                            <h4>🔍 Key Changes</h4>
+                            <ul style="margin: 0; padding-left: 20px;">
+                                ${detailData.diff.key_changes.map(change => `<li>${escapeHtml(change)}</li>`).join('')}
+                            </ul>
+                            ${detailData.diff.summary ? `<p style="margin-top: 10px; font-size: 0.9rem; color: #888;">${escapeHtml(detailData.diff.summary)}</p>` : ''}
+                        </div>
+                    ` : ''}
+                    
+                    ${detailData.keywords && detailData.keywords.new_keywords && detailData.keywords.new_keywords.length > 0 ? `
+                        <div class="config-section">
+                            <h4>🆕 New Keywords</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                ${detailData.keywords.new_keywords.slice(0, 15).map(kw => `
+                                    <span style="background: #1e293b; color: #e2e8f0; padding: 4px 12px; border-radius: 16px; font-size: 0.85rem;">
+                                        ${escapeHtml(kw.word)} <span style="opacity: 0.7;">(${kw.frequency})</span>
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="action-buttons" style="margin-top: 20px;">
+                        <a href="${escapeHtml(detailData.url || changeData.url)}" target="_blank" class="button button-primary">View Current Page</a>
+                        <button type="button" class="button button-secondary" onclick="closeModal()">Close</button>
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('Failed to fetch detailed change data:', error);
+                
+                // Fall back to basic information
+                modalContent.innerHTML = `
+                    <div class="config-section">
+                        <h4>📊 Change Information</h4>
+                        <p><strong>Company:</strong> ${escapeHtml(changeData.company)}</p>
+                        <p><strong>URL:</strong> <a href="${escapeHtml(changeData.url)}" target="_blank">${escapeHtml(changeData.url)}</a></p>
+                        <p><strong>Type:</strong> ${escapeHtml(changeData.change_type || 'Content Update')}</p>
+                        <p><strong>Time:</strong> ${changeData.time_ago}</p>
+                        ${changeData.relevance_score ? `<p><strong>Relevance Score:</strong> ${changeData.relevance_score}/10</p>` : ''}
+                    </div>
+                    
+                    <div class="config-section">
+                        <h4>📝 Summary</h4>
+                        <p>${escapeHtml(changeData.summary || 'No summary available')}</p>
+                    </div>
+                    
+                    <div class="error-message" style="margin: 15px 0;">
+                        <p>⚠️ Detailed change analysis not available. The backend API may be offline.</p>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <a href="${escapeHtml(changeData.url)}" target="_blank" class="button button-primary">View Current Page</a>
+                        <button type="button" class="button button-secondary" onclick="closeModal()">Close</button>
+                    </div>
+                `;
+            }
         }
 
         // Load static data with error handling
@@ -1890,7 +1974,7 @@
                 const changeId = `change-${index}`;
                 html += `
                     <div class="change-item" style="background: rgba(59, 130, 246, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid #3b82f6; cursor: pointer;" 
-                         onclick="showChangeDetail('${changeId}')" data-change='${JSON.stringify(change).replace(/'/g, "&apos;")}'>
+                         onclick="showChangeDetail.call(this, '${changeId}', event)" data-change='${JSON.stringify(change).replace(/'/g, "&apos;")}'>
                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
                             <span style="font-size: 1.5rem;">${change.emoji || '📊'}</span>
                             <span style="font-weight: bold; color: #93c5fd;">${escapeHtml(change.company)}</span>
@@ -1899,10 +1983,10 @@
                         <div style="color: #d1d5db; font-size: 0.9rem;">
                             ${escapeHtml((change.summary || '').substring(0, 120))}${change.summary?.length > 120 ? '...' : ''}
                         </div>
-                        ${change.relevance_score ? `
+                        ${change.relevance_score || change.interest_level ? `
                             <div style="margin-top: 8px;">
                                 <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;">
-                                    Relevance: ${change.relevance_score}/10
+                                    Interest: ${change.interest_level || change.relevance_score}/10
                                 </span>
                             </div>
                         ` : ''}
