@@ -22,17 +22,34 @@ fi
 # Function to list all companies
 list_companies() {
     echo -e "${GREEN}Companies in the monitor:${NC}"
-    sqlite3 "$DB_PATH" -header -column "
-        SELECT 
-            c.id, 
-            c.name, 
-            c.category, 
-            c.enabled,
-            COUNT(u.id) as url_count 
-        FROM companies c 
-        LEFT JOIN urls u ON c.id = u.company_id 
-        GROUP BY c.id 
-        ORDER BY c.name;"
+    
+    # Check if enabled column exists
+    local has_enabled=$(sqlite3 "$DB_PATH" "PRAGMA table_info(companies);" | grep -c "enabled" || true)
+    
+    if [ "$has_enabled" -gt 0 ]; then
+        sqlite3 "$DB_PATH" -header -column "
+            SELECT 
+                c.id, 
+                c.name, 
+                c.category, 
+                c.enabled,
+                COUNT(u.id) as url_count 
+            FROM companies c 
+            LEFT JOIN urls u ON c.id = u.company_id 
+            GROUP BY c.id 
+            ORDER BY c.name;"
+    else
+        sqlite3 "$DB_PATH" -header -column "
+            SELECT 
+                c.id, 
+                c.name, 
+                c.category, 
+                COUNT(u.id) as url_count 
+            FROM companies c 
+            LEFT JOIN urls u ON c.id = u.company_id 
+            GROUP BY c.id 
+            ORDER BY c.name;"
+    fi
 }
 
 # Function to list URLs for a company
@@ -63,7 +80,14 @@ add_company() {
         return 1
     fi
     
-    sqlite3 "$DB_PATH" "INSERT INTO companies (name, category, enabled) VALUES ('$name', '$category', 1);"
+    # Check if enabled column exists
+    local has_enabled=$(sqlite3 "$DB_PATH" "PRAGMA table_info(companies);" | grep -c "enabled" || true)
+    
+    if [ "$has_enabled" -gt 0 ]; then
+        sqlite3 "$DB_PATH" "INSERT INTO companies (name, category, enabled) VALUES ('$name', '$category', 1);"
+    else
+        sqlite3 "$DB_PATH" "INSERT INTO companies (name, category) VALUES ('$name', '$category');"
+    fi
     echo -e "${GREEN}✓ Added company: $name ($category)${NC}"
 }
 
