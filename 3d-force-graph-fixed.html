@@ -485,6 +485,7 @@
         <div class="context-menu-item" id="focusSubgraph">Focus on Connected Subgraph</div>
         <div class="context-menu-item" id="showAllConnections">Show All Connections</div>
         <div class="context-menu-item" id="hideNode">Hide This Node</div>
+        <div class="context-menu-item" id="showAll">Show All Nodes</div>
         <div class="context-menu-item" id="resetViewContext">Reset View</div>
     </div>
 
@@ -1322,13 +1323,25 @@
                 const sourceId = typeof link.source === 'object' ? link.source.id : link.source;
                 const targetId = typeof link.target === 'object' ? link.target.id : link.target;
                 
+                // Debug: log the first few links to see ID format
+                if (connectionsFound < 3) {
+                    console.log('Link:', sourceId, '->', targetId, 'comparing with', selectedNode.id);
+                }
+                
                 if (sourceId === selectedNode.id || targetId === selectedNode.id) {
                     connectionsFound++;
+                    console.log('Found connection:', sourceId, '->', targetId);
                     // Add the actual node objects
                     const sourceNode = currentData.nodes.find(n => n.id === sourceId);
                     const targetNode = currentData.nodes.find(n => n.id === targetId);
-                    if (sourceNode) connectedNodes.add(sourceNode);
-                    if (targetNode) connectedNodes.add(targetNode);
+                    if (sourceNode) {
+                        console.log('Adding source node:', sourceNode.id);
+                        connectedNodes.add(sourceNode);
+                    }
+                    if (targetNode) {
+                        console.log('Adding target node:', targetNode.id);
+                        connectedNodes.add(targetNode);
+                    }
                     connectedLinks.push(link);
                 }
             });
@@ -1440,6 +1453,37 @@
             // Update stats and legend
             updateStats();
             updateLegend();
+            
+            hideContextMenu();
+        }
+
+        // Show all nodes (back to full view)
+        function showAllNodes() {
+            console.log('Show all nodes called');
+            hiddenNodes.clear();
+            
+            // Restore the current view mode with all nodes
+            switch(currentView) {
+                case 'technologies':
+                    buildTechnologyView();
+                    break;
+                case 'interests':
+                    buildInterestView();
+                    break;
+                case 'companies':
+                default:
+                    buildCompanyNetwork();
+                    break;
+            }
+            
+            if (Graph) {
+                Graph.graphData(graphData);
+                setTimeout(() => {
+                    Graph.zoomToFit(400);
+                    updateStats();
+                    updateLegend();
+                }, 100);
+            }
             
             hideContextMenu();
         }
@@ -1965,6 +2009,10 @@
         document.getElementById('hideNode').addEventListener('click', (e) => {
             console.log('Hide node clicked');
             hideNode();
+        });
+        document.getElementById('showAll').addEventListener('click', (e) => {
+            console.log('Show all clicked');
+            showAllNodes();
         });
         document.getElementById('resetViewContext').addEventListener('click', resetView);
         
