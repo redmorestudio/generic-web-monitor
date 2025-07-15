@@ -582,27 +582,27 @@
                 // Calculate strength based on shared properties
                 let strength = 0;
                 
-                // Shared concepts = strongest (thick cyan lines to concept nodes)
-                if (link.label && link.label.includes('concept')) {
-                    strength += 6;  // Increased for thicker concept links
+                // Only make concept links thick - these are the most important
+                if (link.label && link.label === 'uses concept') {
+                    strength += 8;  // Make only concept links really stand out
                 }
-                // Shared technologies = medium
-                else if (link.label && link.label !== 'uses concept') {
-                    strength += 3;  // Increased for more visible tech links
-                }
-                
-                // More connections = stronger
-                if (link.connectionCount && link.connectionCount > 1) {
-                    strength += Math.min(link.connectionCount / 3, 4);
+                // Make technology links only slightly thicker if they have many connections
+                else if (link.label && link.connectionCount && link.connectionCount > 3) {
+                    strength += 1;  // Just barely visible increase
                 }
                 
-                // Calculate final width - exponential scaling for more dramatic differences
+                // Only add thickness for very high connection counts
+                if (link.connectionCount && link.connectionCount > 5) {
+                    strength += 1;
+                }
+                
+                // Calculate final width - keep most lines very thin
                 if (strength > 0) {
-                    width = 0.1 + (strength * strength * 0.06);
+                    width = 0.1 + (strength * 0.15);
                 }
                 
                 // Cap at reasonable maximum
-                return Math.min(width, 3.0);
+                return Math.min(width, 1.5);
             }
             
             // Load and process data
