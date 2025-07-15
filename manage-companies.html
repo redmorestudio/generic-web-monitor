@@ -116,10 +116,18 @@
             background: #dc3545;
             color: white;
             border: none;
-            padding: 2px 8px;
+            padding: 0 5px;
             border-radius: 3px;
             cursor: pointer;
-            font-size: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-left: 8px;
+            white-space: nowrap;
+            line-height: 1.2;
+            min-width: 20px;
+        }
+        .delete-url-btn:hover {
+            background: #c82333;
         }
         .loading {
             text-align: center;
@@ -329,7 +337,7 @@
                                             ${company.urls.map((url, idx) => `
                                                 <div class="url-item">
                                                     <span style="font-size: 0.85em; word-break: break-all;">${url}</span>
-                                                    <button class="delete-url-btn" onclick="deleteUrl('${url}')">Delete</button>
+                                                    <button class="delete-url-btn" onclick="deleteUrl('${url}')" title="Delete URL">×</button>
                                                 </div>
                                             `).join('')}
                                         </div>
