@@ -69,11 +69,7 @@
             #controls.open {
                 transform: translateY(0);
             }
-            
-            #legend {
-                top: 60px !important;
-                right: 10px !important;
-            }
+
         }
         
         @media (min-width: 769px) {
@@ -90,10 +86,7 @@
                 margin: 0;
                 display: inline-block;
             }
-            
-            #legend.shifted {
-                right: 50px !important;
-            }
+
         }
         
         #info {
@@ -106,18 +99,6 @@
             border: 1px solid #333;
             max-width: 350px;
             z-index: 100;
-            backdrop-filter: blur(10px);
-        }
-        
-        #stats {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background: rgba(20, 20, 30, 0.95);
-            padding: 10px 15px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            font-size: 12px;
             backdrop-filter: blur(10px);
         }
         
@@ -168,21 +149,7 @@
         }
         
         .green { color: #00ff88; }
-        .stat-item { margin: 5px 0; }
-        
-        #legend {
-            position: absolute;
-            top: 10px;
-            right: 310px;
-            background: rgba(20, 20, 30, 0.95);
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            backdrop-filter: blur(10px);
-            max-width: 200px;
-            font-size: 12px;
-            transition: right 0.3s ease;
-        }
+        .stat-item { margin: 5px 0; font-size: 12px; }
         
         .legend-item {
             display: flex;
@@ -195,13 +162,6 @@
             height: 12px;
             border-radius: 50%;
             margin-right: 8px;
-        }
-        
-        @media (max-width: 1200px) {
-            #legend {
-                max-width: 150px;
-                font-size: 11px;
-            }
         }
         
         #loading {
@@ -360,24 +320,43 @@
         </div>
     </div>
     
-    <div id="stats" style="display: none;">
-        <div class="stat-item">Monitoring: <span id="company-count" class="green">--</span> companies</div>
-        <div class="stat-item">URLs: <span id="url-count" class="green">--</span></div>
-        <div class="stat-item">Nodes: <span id="node-count" class="green">--</span></div>
-        <div class="stat-item">Links: <span id="link-count" class="green">--</span></div>
-    </div>
-    
-    <div id="legend" style="display: none;">
-        <h4>▼ Legend</h4>
-        <div class="info-text">Node Types</div>
-        <div id="legend-content"></div>
-    </div>
+
     
     <div id="controls" style="display: none;">
         <button class="collapse-btn" onclick="toggleControlsCollapse()">◀</button>
-        <h4>Controls</h4>
+        <h4>Configuration</h4>
         
         <div class="control-content">
+            <div class="control-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Draw By</h4>
+                <label>
+                    Layout Mode
+                    <select id="draw-by-mode">
+                        <option value="normal">Normal</option>
+                        <option value="group-by-type">Group by Type</option>
+                        <option value="recent-changes">Recent Changes</option>
+                    </select>
+                </label>
+                <div class="info-text">
+                    • Normal: Standard force-directed layout<br>
+                    • Group by Type: Cluster by entity type<br>
+                    • Recent Changes: Highlight recent activity
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Stats</h4>
+                <div class="stat-item">Monitoring: <span id="company-count" class="green">--</span> companies</div>
+                <div class="stat-item">URLs: <span id="url-count" class="green">--</span></div>
+                <div class="stat-item">Nodes: <span id="node-count" class="green">--</span></div>
+                <div class="stat-item">Links: <span id="link-count" class="green">--</span></div>
+            </div>
+            
+            <div class="control-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Legend</h4>
+                <div id="legend-content"></div>
+            </div>
+            
             <div class="control-group">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">View Mode</h4>
                 <label>
@@ -454,7 +433,7 @@
         </div>
     </div>
     
-    <button id="toggle-controls">☰ Controls</button>
+    <button id="toggle-controls">⚙️ Config</button>
     <div id="3d-graph"></div>
     
     <!-- Context Menu -->
@@ -505,11 +484,9 @@
         
         function toggleControlsCollapse() {
             const controls = document.getElementById('controls');
-            const legend = document.getElementById('legend');
             const btn = controls.querySelector('.collapse-btn');
             
             controls.classList.toggle('collapsed');
-            legend.classList.toggle('shifted');
             
             btn.textContent = controls.classList.contains('collapsed') ? '▶' : '◀';
         }
@@ -586,6 +563,7 @@
             let particlesEnabled = true;
             let thinLinesEnabled = false;
             let currentViewMode = 'entity-type';
+            let currentDrawMode = 'normal';
             
             // Make applyFilters and Graph global for button access
             window.applyFilters = null;
@@ -764,8 +742,7 @@
                     
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('info').style.display = 'block';
-                    document.getElementById('stats').style.display = 'block';
-                    document.getElementById('legend').style.display = 'block';
+
                     document.getElementById('controls').style.display = 'block';
                     
                     buildGraph();
@@ -1046,6 +1023,9 @@
                     
                     // Re-apply link width function after data update
                     Graph.linkWidth(link => getLinkWidth(link));
+                    
+                    // Apply current draw mode
+                    applyDrawMode();
                 }
                 
                 updateLegend();
@@ -1054,6 +1034,119 @@
             // Make applyFilters available globally
             window.applyFilters = applyFilters;
             window.focusOnNode = null; // Will be set later
+            
+            // Apply different draw modes
+            function applyDrawMode() {
+                if (!Graph) return;
+                
+                switch (currentDrawMode) {
+                    case 'normal':
+                        // Standard force-directed layout
+                        Graph.d3Force('charge').strength(CONFIG.forceStrength);
+                        Graph.d3Force('link').distance(CONFIG.linkDistance);
+                        
+                        // Remove any custom forces
+                        Graph.d3Force('radial', null);
+                        Graph.d3Force('collide', null);
+                        Graph.d3Force('grouping', null);
+                        
+                        // Reset node positions
+                        filteredData.nodes.forEach(node => {
+                            delete node.fx;
+                            delete node.fy;
+                            delete node.fz;
+                        });
+                        break;
+                        
+                    case 'group-by-type':
+                        // Group nodes by their type in spherical clusters
+                        const typeGroups = new Map();
+                        let typeIndex = 0;
+                        
+                        // Map each type to an index
+                        filteredData.nodes.forEach(node => {
+                            if (!typeGroups.has(node.group)) {
+                                typeGroups.set(node.group, typeIndex++);
+                            }
+                        });
+                        
+                        // Calculate positions for each type group
+                        const numGroups = typeGroups.size;
+                        const radius = 200;
+                        
+                        filteredData.nodes.forEach(node => {
+                            const groupIndex = typeGroups.get(node.group);
+                            const angle = (2 * Math.PI * groupIndex) / numGroups;
+                            const phi = Math.acos(1 - 2 * (groupIndex + 0.5) / numGroups);
+                            
+                            // Create a radial force for each group
+                            const targetX = radius * Math.sin(phi) * Math.cos(angle);
+                            const targetY = radius * Math.sin(phi) * Math.sin(angle);
+                            const targetZ = radius * Math.cos(phi);
+                            
+                            // Use custom node property to store target position
+                            node.targetX = targetX;
+                            node.targetY = targetY;
+                            node.targetZ = targetZ;
+                        });
+                        
+                        // Apply a custom positioning force
+                        // Note: 3d-force-graph doesn't support custom 3D forces directly
+                        // So we'll use fixed positions with some flexibility
+                        filteredData.nodes.forEach(node => {
+                            // Add some randomness to prevent perfect alignment
+                            const jitter = 50;
+                            node.fx = node.targetX + (Math.random() - 0.5) * jitter;
+                            node.fy = node.targetY + (Math.random() - 0.5) * jitter;
+                            node.fz = node.targetZ + (Math.random() - 0.5) * jitter;
+                        });
+                        
+                        // Weaken the charge force for tighter grouping
+                        Graph.d3Force('charge').strength(CONFIG.forceStrength / 3);
+                        break;
+                        
+                    case 'recent-changes':
+                        // Highlight nodes with recent changes
+                        // For demo purposes, we'll simulate this by looking at high activity nodes
+                        const activityThreshold = 5; // URLs count threshold for "recent activity"
+                        
+                        filteredData.nodes.forEach(node => {
+                            if (node.urlCount >= activityThreshold) {
+                                // Position active nodes in the center
+                                node.fx = (Math.random() - 0.5) * 100;
+                                node.fy = (Math.random() - 0.5) * 100;
+                                node.fz = (Math.random() - 0.5) * 100;
+                                
+                                // Make them bigger and brighter
+                                node.val = node.val * 2;
+                                node.currentColor = '#ff0000'; // Red for high activity
+                            } else {
+                                // Push less active nodes to the periphery
+                                const angle = Math.random() * 2 * Math.PI;
+                                const phi = Math.random() * Math.PI;
+                                const distance = 300 + Math.random() * 200;
+                                
+                                node.fx = distance * Math.sin(phi) * Math.cos(angle);
+                                node.fy = distance * Math.sin(phi) * Math.sin(angle);
+                                node.fz = distance * Math.cos(phi);
+                                
+                                // Make them smaller and dimmer
+                                node.val = node.val * 0.5;
+                                node.currentColor = '#444444'; // Gray for low activity
+                            }
+                        });
+                        
+                        // Update node visuals
+                        Graph.nodeThreeObject(node => {
+                            if (!labelsEnabled) return new THREE.Mesh();
+                            return createNodeObject(node);
+                        });
+                        break;
+                }
+                
+                // Reheat the simulation to apply changes
+                Graph.d3ReheatSimulation();
+            }
             
             // Focus on a specific node and its connections
             function focusOnNode(targetNode) {
@@ -1326,7 +1419,12 @@
                 document.getElementById('force-value').textContent = value;
                 CONFIG.forceStrength = value;
                 if (Graph) {
-                    Graph.d3Force('charge').strength(value);
+                    // Apply based on current draw mode
+                    if (currentDrawMode === 'group-by-type') {
+                        Graph.d3Force('charge').strength(value / 3);
+                    } else if (currentDrawMode === 'normal') {
+                        Graph.d3Force('charge').strength(value);
+                    }
                     Graph.d3ReheatSimulation();
                 }
             });
@@ -1335,7 +1433,7 @@
                 const value = parseInt(e.target.value);
                 document.getElementById('distance-value').textContent = value;
                 CONFIG.linkDistance = value;
-                if (Graph) {
+                if (Graph && currentDrawMode === 'normal') {
                     Graph.d3Force('link').distance(value);
                     Graph.d3ReheatSimulation();
                 }
@@ -1348,6 +1446,11 @@
             
             document.getElementById('search-input').addEventListener('input', (e) => {
                 applyFilters();
+            });
+            
+            document.getElementById('draw-by-mode').addEventListener('change', (e) => {
+                currentDrawMode = e.target.value;
+                applyDrawMode();
             });
             
             // Toggle controls on mobile
