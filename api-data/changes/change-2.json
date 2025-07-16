@@ -330,10 +330,12 @@
     ],
     "technologies": [
       {
-        "name": "GPT-5",
-        "category": "AI model",
-        "purpose": "Safe and beneficial AI systems",
-        "related_products": []
+        "name": "Artificial Intelligence",
+        "category": "Research",
+        "purpose": "Create safe and beneficial AI systems",
+        "related_products": [
+          "GPT-5"
+        ]
       }
     ],
     "companies": [

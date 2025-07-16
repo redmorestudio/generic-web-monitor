@@ -6,13 +6,13 @@
   "detected_at": "2025-07-04 20:20:18",
   "interest_level": 5,
   "interest_category": "major_development",
-  "interest_explanation": "SambaNova launched new AI products and technologies, including the SambaNova Suite and DataScale, which can significantly impact the AI industry",
+  "interest_explanation": "SambaNova has launched new AI products and technologies, including the SambaNova Suite and DataScale, which showcase advanced technical capabilities and have significant business impact",
   "interest_drivers": [
     "New AI products",
-    "Advanced AI technologies"
+    "Advanced technologies"
   ],
   "technical_innovation_score": 8,
-  "business_impact_score": 7,
+  "business_impact_score": 8,
   "ai_key_changes": null,
   "ai_business_context": null,
   "has_content": false,
@@ -37,45 +37,40 @@
     "products": [
       {
         "name": "SambaNova Suite",
-        "type": "AI platform",
-        "description": "Enterprise grade full stack platform, purpose built for generative AI",
+        "type": "Enterprise AI Platform",
+        "description": "The only, enterprise grade full stack platform, purpose built for generative AI",
         "features": [
-          "state-of-the-art AI",
-          "deep learning capabilities"
+          "State-of-the-art AI",
+          "Deep learning capabilities"
         ],
-        "metadata": {
-          "url": "/products/enterprise-ai-platform-sambanova-suite/"
-        }
+        "metadata": {}
       },
       {
         "name": "DataScale",
-        "type": "AI development platform",
-        "description": "Platform for generative AI development and innovation",
+        "type": "Platform for Generative AI Development",
+        "description": "The platform for generative AI development and innovation",
         "features": [
-          "generative AI development",
-          "innovation"
+          "Generative AI development",
+          "Innovation"
         ],
-        "metadata": {
-          "url": "/products/datascale/"
-        }
+        "metadata": {}
       },
       {
         "name": "SambaNova Cloud",
-        "type": "Cloud platform",
-        "description": "Supercharge your AI-powered applications",
+        "type": "Cloud Platform",
+        "description": "Supercharge your AI-powered applications across Llama 3 8B, 70B, & 405B models",
         "features": [
-          "Llama 3 8B, 70B, & 405B models",
-          "free"
+          "Llama 3 8B",
+          "Llama 3 70B",
+          "Llama 3 405B"
         ],
-        "metadata": {
-          "url": "https://cloud.sambanova.ai/"
-        }
+        "metadata": {}
       }
     ],
     "technologies": [
       {
         "name": "RDU: The GPU Alternative",
-        "category": "AI chip",
+        "category": "AI Chip",
         "purpose": "Power the most demanding generative and agentic AI workloads",
         "related_products": [
           "SambaNova Suite",
@@ -84,7 +79,7 @@
       },
       {
         "name": "Composition of Experts",
-        "category": "AI technology",
+        "category": "AI Technology",
         "purpose": "Easily run your custom models, accelerate discovery, & power the next generation of high performance computing",
         "related_products": [
           "SambaNova Suite",
@@ -93,7 +88,7 @@
       },
       {
         "name": "Agentic AI",
-        "category": "AI technology",
+        "category": "AI Technology",
         "purpose": "Unlock the power of agentic AI with the only platform that can run multiple models on a single, highly efficient system with lighting fast inference",
         "related_products": [
           "SambaNova Suite",
@@ -104,8 +99,8 @@
     "companies": [
       {
         "name": "SambaNova",
-        "role": "AI hardware company",
-        "relationship": "Developer of SambaNova Suite, DataScale, and SambaNova Cloud"
+        "role": "AI Hardware Company",
+        "relationship": "Provider of AI solutions"
       }
     ],
     "people": [],
@@ -121,7 +116,7 @@
   },
   "key_phrases": [
     "Generative AI",
-    "Near Real-Time Operations Augmentation",
-    "State-of-the-art AI"
+    "Agentic AI",
+    "AI Innovation"
   ]
 }
