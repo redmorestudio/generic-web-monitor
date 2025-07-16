@@ -157,6 +157,7 @@ jobs:
           cd github-actions-backend
           
           echo "📝 Converting HTML to Markdown..."
+          echo "🚨 Note: Enhanced converter will ensure all change detection content has markdown"
           
           # Determine mode
           if [ "${{ inputs.mode }}" = "run" ] && [ -n "${{ inputs.run_id }}" ]; then
@@ -164,6 +165,8 @@ jobs:
           elif [ "${{ inputs.mode }}" = "all" ]; then
             node markdown-converter-three-db.js all
           else
+            # Default mode (latest) - the converter will automatically
+            # process change detection content first
             node markdown-converter-three-db.js latest
           fi
       
