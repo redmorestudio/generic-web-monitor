@@ -1179,10 +1179,53 @@
         }
 
         // Show change details in modal
-        async function showChangeDetail(changeId, event) {
-            // Get the clicked change element to extract the change data
-            const clickedElement = this;
-            const changeData = JSON.parse(clickedElement.getAttribute('data-change'));
+        async function showChangeDetail(changeIdOrElement, event) {
+            let changeData;
+            
+            // Handle different calling patterns
+            if (typeof changeIdOrElement === 'string' || typeof changeIdOrElement === 'number') {
+                // Called with just an ID (from timeline or other views)
+                // We need to find the change data from our loaded data
+                const changeId = changeIdOrElement;
+                
+                // Try to find the change in recent changes
+                if (window.dashboardData && window.dashboardData.changes) {
+                    changeData = window.dashboardData.changes.find(c => 
+                        (c.id == changeId || c.change_id == changeId)
+                    );
+                }
+                
+                // If not found in dashboard data, try changes.json
+                if (!changeData && window.changesData && window.changesData.changes) {
+                    changeData = window.changesData.changes.find(c => 
+                        (c.id == changeId || c.change_id == changeId)
+                    );
+                }
+                
+                // If still not found, create minimal data
+                if (!changeData) {
+                    changeData = {
+                        id: changeId,
+                        change_id: changeId,
+                        company: 'Loading...',
+                        url: '#'
+                    };
+                }
+            } else {
+                // Called with element context (from Change History)
+                const clickedElement = this || changeIdOrElement;
+                const dataAttr = clickedElement.getAttribute('data-change');
+                if (dataAttr) {
+                    changeData = JSON.parse(dataAttr);
+                } else {
+                    console.error('No data-change attribute found');
+                    return;
+                }
+            }
+            
+            if (event) {
+                event.stopPropagation();
+            }
             
             const modal = document.getElementById('companyModal');
             const modalTitle = document.getElementById('modalTitle');
@@ -1918,6 +1961,9 @@
         async function loadChangesData() {
             const data = await loadStaticData('changes.json');
             const contentDiv = document.getElementById('changesContent');
+            
+            // Store data globally for modal access
+            window.changesData = data;
 
             if (data.error) {
                 contentDiv.innerHTML = `<div class="error-message">Error: ${data.error}</div>`;
