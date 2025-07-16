@@ -252,9 +252,18 @@ class MarkdownConverterThreeDB {
 
     let successCount = 0;
     let errorCount = 0;
+    let notFoundCount = 0;
 
     for (const { content_id } of missingContent) {
       try {
+        // First check if the raw HTML actually exists
+        const exists = this.rawDb.prepare('SELECT id FROM raw_html WHERE id = ?').get(content_id);
+        if (!exists) {
+          console.log(`   ⚠️  Content ID ${content_id} referenced in change_detection but not found in raw_html`);
+          notFoundCount++;
+          continue; // Skip to next ID instead of throwing error
+        }
+        
         const result = await this.processRawHtml(content_id, true); // Force conversion
         if (result) {
           successCount++;
@@ -264,15 +273,19 @@ class MarkdownConverterThreeDB {
       } catch (error) {
         console.error(`❌ Error processing content ${content_id}:`, error.message);
         errorCount++;
-        this.hasErrors = true;
+        // Don't mark as critical error - continue processing
       }
     }
 
     console.log(`\n📊 Change Content Conversion Complete!`);
     console.log(`✅ Success: ${successCount}`);
-    console.log(`❌ Errors: ${errorCount}\n`);
+    console.log(`❌ Errors: ${errorCount}`);
+    if (notFoundCount > 0) {
+      console.log(`⚠️  Not Found: ${notFoundCount} (orphaned references in change_detection)`);
+    }
+    console.log('');
 
-    return { successCount, errorCount };
+    return { successCount, errorCount, notFoundCount };
   }
 
   async processAllUnconverted() {
@@ -443,7 +456,14 @@ if (require.main === module) {
       
       // ALWAYS process change detection content first
       console.log('🚨 Ensuring all change detection content has markdown...');
-      await converter.processChangeDetectionContent();
+      const changeResult = await converter.processChangeDetectionContent();
+      
+      // Don't treat orphaned references as critical errors
+      if (changeResult.errorCount > 0 && changeResult.notFoundCount < changeResult.errorCount) {
+        // We have real errors, not just orphaned references
+        converter.hasErrors = true;
+        converter.errorCount = changeResult.errorCount;
+      }
       
       // Then process based on mode
       if (mode === 'all') {
