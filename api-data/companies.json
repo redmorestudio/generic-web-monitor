@@ -404,16 +404,13 @@
       ]
     },
     {
-      "company": "Redmore Consulting",
-      "type": "AI Consulting and Education",
-      "created_at": "2025-07-15 17:58:42",
-      "urls": []
-    },
-    {
       "company": "Redmore Studio",
       "type": "AI Consulting and Education",
       "created_at": "2025-07-15 18:02:37",
-      "urls": []
+      "urls": [
+        "https://redmore.studio",
+        "https://redmore.studio/blog"
+      ]
     },
     {
       "company": "Replicate",
@@ -551,5 +548,5 @@
       ]
     }
   ],
-  "generated_at": "2025-07-15T22:56:43.999Z"
+  "generated_at": "2025-07-16T17:21:15.281Z"
 }

@@ -1,6 +1,2440 @@
 {
   "items": [
     {
+      "id": "174",
+      "url": "https://ai21.com",
+      "company": "AI21 Labs",
+      "type": "homepage",
+      "title": "AI21 Labs - homepage",
+      "relevance_score": 6,
+      "keywords": [
+        "ChatGPT",
+        "Sora",
+        "API Platform",
+        "GPT-4.1 mini",
+        "OpenAI o4-mini",
+        "Natural Language Processing",
+        null
+      ],
+      "summary": "OpenAI is a leader in AI research and development, with a strong focus on natural language processing and machine learning.",
+      "extracted_at": "2025-07-16 15:45:20",
+      "entities": {
+        "products": [
+          {
+            "name": "ChatGPT",
+            "type": "AI Chatbot",
+            "description": "AI-powered chatbot for everyday tasks",
+            "features": [
+              "Access to GPT-4.1 mini",
+              "Real-time data from the web with search",
+              "Limited access to GPT-4o, OpenAI o4-mini, and deep research"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "GPT-4.1 mini",
+              "GPT-4o",
+              "OpenAI o4-mini"
+            ],
+            "provides_integrations": [
+              "Search",
+              "File uploads",
+              "Data analysis",
+              "Image generation",
+              "Voice mode"
+            ],
+            "targets_markets": [
+              "Individuals",
+              "Teams",
+              "Enterprises"
+            ],
+            "ai_capabilities": [
+              "Natural Language Processing",
+              "Machine Learning"
+            ]
+          },
+          {
+            "name": "Sora",
+            "type": "Video Generation Platform",
+            "description": "AI-powered video generation platform",
+            "features": [
+              "Video generation",
+              "Image generation"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "OpenAI o3",
+              "OpenAI o4-mini"
+            ],
+            "provides_integrations": [
+              "Video generation",
+              "Image generation"
+            ],
+            "targets_markets": [
+              "Individuals",
+              "Teams",
+              "Enterprises"
+            ],
+            "ai_capabilities": [
+              "Computer Vision",
+              "Machine Learning"
+            ]
+          },
+          {
+            "name": "API Platform",
+            "type": "API Platform",
+            "description": "API platform for developers",
+            "features": [
+              "API access",
+              "Documentation",
+              "Developer Forum"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "OpenAI o3",
+              "OpenAI o4-mini"
+            ],
+            "provides_integrations": [
+              "API access"
+            ],
+            "targets_markets": [
+              "Developers"
+            ],
+            "ai_capabilities": [
+              "Natural Language Processing",
+              "Machine Learning"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "GPT-4.1 mini",
+            "category": "ai_ml",
+            "purpose": "Natural Language Processing",
+            "implemented_by": [
+              "ChatGPT"
+            ],
+            "enables_capabilities": [
+              "Text generation",
+              "Conversational AI"
+            ],
+            "technical_details": "GPT-4.1 mini is a smaller version of the GPT-4 model"
+          },
+          {
+            "name": "OpenAI o4-mini",
+            "category": "ai_ml",
+            "purpose": "Natural Language Processing",
+            "implemented_by": [
+              "ChatGPT",
+              "Sora"
+            ],
+            "enables_capabilities": [
+              "Text generation",
+              "Conversational AI"
+            ],
+            "technical_details": "OpenAI o4-mini is a smaller version of the OpenAI o4 model"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "Natural Language Processing",
+            "type": "model",
+            "description": "The ability of a computer to understand and generate human language",
+            "applications": [
+              "ChatGPT",
+              "Sora"
+            ],
+            "performance_metrics": {
+              "accuracy": "high",
+              "fluency": "high"
+            }
+          }
+        ],
+        "integrations": [
+          {
+            "name": "Search",
+            "type": "api",
+            "platform": "ChatGPT",
+            "description": "Real-time data from the web with search",
+            "available_in_products": [
+              "ChatGPT"
+            ]
+          }
+        ],
+        "partnerships": [
+          {
+            "partner": "Microsoft",
+            "relationship_type": "partners_with",
+            "description": "Partnership for AI research and development",
+            "products_affected": [
+              "ChatGPT",
+              "Sora"
+            ],
+            "strategic_value": "Access to Microsoft's AI expertise and resources"
+          }
+        ],
+        "people": [
+          {
+            "name": "Sam Altman",
+            "title": "CEO",
+            "role": "ceo",
+            "relationship": "leads",
+            "background": "Co-founder of OpenAI"
+          }
+        ],
+        "pricing": [
+          {
+            "tier": "Free",
+            "price": "$0/month",
+            "features": [
+              "Access to GPT-4.1 mini",
+              "Real-time data from the web with search"
+            ],
+            "includes_products": [
+              "ChatGPT"
+            ],
+            "limitations": [
+              "Limited access to GPT-4o, OpenAI o4-mini, and deep research"
+            ],
+            "target_segment": "Individuals"
+          },
+          {
+            "tier": "Plus",
+            "price": "$20/month",
+            "features": [
+              "Everything in Free",
+              "Extended limits on messaging, file uploads, data analysis, and image generation"
+            ],
+            "includes_products": [
+              "ChatGPT"
+            ],
+            "limitations": [
+              "Limited access to GPT-4o, OpenAI o4-mini, and deep research"
+            ],
+            "target_segment": "Individuals"
+          }
+        ],
+        "markets": [
+          {
+            "segment": "Individuals",
+            "geography": "Global",
+            "size": "Large",
+            "targeted_by_products": [
+              "ChatGPT",
+              "Sora"
+            ],
+            "growth_rate": "High",
+            "competitive_landscape": "Highly competitive"
+          }
+        ],
+        "competitors": [
+          {
+            "company": "Google",
+            "compete_in": [
+              "AI research",
+              "Natural Language Processing"
+            ],
+            "our_advantages": [
+              "Specialized AI models",
+              "Strong partnerships"
+            ],
+            "their_advantages": [
+              "Large-scale AI research",
+              "Established brand"
+            ],
+            "market_position": "Leader"
+          }
+        ]
+      },
+      "content_length": 8010,
+      "extractedContent": "---\nurl: https://ai21.com\ncompany: AI21 Labs\nscraped_at: 2025-07-15 18:50:59\n---\n\n AI21 Labs | AI Systems Built for the Enterprise\n\n*   [Skip to Main Menu](#site-navigation)\n*   [Skip to Main Content](#content)\n*   [Skip to Footer](#colophon)\n\nWe use cookies to enhance your browsing experience, analyze site traffic, and personalize content. Some are essential for the website to function, while others help us improve your experience. For more information, please see our [Privacy Policy](https://w...",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 3,
+        "technologies": 2,
+        "ai_ml_concepts": 1,
+        "partnerships": 1,
+        "integrations": 1
+      }
+    },
+    {
+      "id": "175",
+      "url": "https://ai21.com/jamba",
+      "company": "AI21 Labs",
+      "type": "product",
+      "title": "AI21 Labs - product",
+      "relevance_score": 6,
+      "keywords": [
+        "ChatGPT",
+        "Sora",
+        "API Platform",
+        "GPT-4",
+        "GPT-4.1",
+        "4o Image Generation",
+        "Natural Language Understanding",
+        "Text Generation",
+        null
+      ],
+      "summary": "OpenAI is a leader in AI research and development, with a strong focus on natural language understanding and text generation",
+      "extracted_at": "2025-07-16 15:45:20",
+      "entities": {
+        "products": [
+          {
+            "name": "ChatGPT",
+            "type": "AI Chatbot",
+            "description": "A conversational AI model that can understand and respond to human input",
+            "features": [
+              "conversational interface",
+              "natural language understanding",
+              "text generation"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "GPT-4",
+              "GPT-4.1"
+            ],
+            "provides_integrations": [
+              "API integration",
+              "SDK"
+            ],
+            "targets_markets": [
+              "enterprise",
+              "education"
+            ],
+            "ai_capabilities": [
+              "natural language understanding",
+              "text generation"
+            ]
+          },
+          {
+            "name": "Sora",
+            "type": "AI Video Generation",
+            "description": "An AI model that can generate videos based on text input",
+            "features": [
+              "video generation",
+              "text-to-video"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "GPT-4",
+              "4o Image Generation"
+            ],
+            "provides_integrations": [
+              "API integration"
+            ],
+            "targets_markets": [
+              "enterprise",
+              "media"
+            ],
+            "ai_capabilities": [
+              "video generation",
+              "text-to-video"
+            ]
+          },
+          {
+            "name": "API Platform",
+            "type": "AI API",
+            "description": "A platform that provides access to OpenAI's AI models through APIs",
+            "features": [
+              "API access",
+              "model deployment"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "GPT-4",
+              "GPT-4.1"
+            ],
+            "provides_integrations": [
+              "API integration",
+              "SDK"
+            ],
+            "targets_markets": [
+              "enterprise",
+              "developer"
+            ],
+            "ai_capabilities": [
+              "natural language understanding",
+              "text generation"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "GPT-4",
+            "category": "ai_ml",
+            "purpose": "Natural language understanding and text generation",
+            "implemented_by": [
+              "ChatGPT",
+              "API Platform"
+            ],
+            "enables_capabilities": [
+              "natural language understanding",
+              "text generation"
+            ],
+            "technical_details": "A large language model trained on a massive dataset of text"
+          },
+          {
+            "name": "GPT-4.1",
+            "category": "ai_ml",
+            "purpose": "Improved natural language understanding and text generation",
+            "implemented_by": [
+              "ChatGPT",
+              "API Platform"
+            ],
+            "enables_capabilities": [
+              "natural language understanding",
+              "text generation"
+            ],
+            "technical_details": "An updated version of GPT-4 with improved performance and capabilities"
+          },
+          {
+            "name": "4o Image Generation",
+            "category": "ai_ml",
+            "purpose": "Image generation based on text input",
+            "implemented_by": [
+              "Sora"
+            ],
+            "enables_capabilities": [
+              "image generation",
+              "text-to-image"
+            ],
+            "technical_details": "A model that can generate images based on text input"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "Natural Language Understanding",
+            "type": "model",
+            "description": "The ability of a model to understand and interpret human language",
+            "applications": [
+              "chatbots",
+              "language translation"
+            ],
+            "performance_metrics": {
+              "accuracy": "high",
+              "fluency": "high"
+            }
+          },
+          {
+            "concept": "Text Generation",
+            "type": "model",
+            "description": "The ability of a model to generate human-like text",
+            "applications": [
+              "content creation",
+              "language translation"
+            ],
+            "performance_metrics": {
+              "accuracy": "high",
+              "fluency": "high"
+            }
+          }
+        ],
+        "integrations": [
+          {
+            "name": "API Integration",
+            "type": "api",
+            "platform": "API Platform",
+            "description": "Integration with OpenAI's API platform",
+            "available_in_products": [
+              "ChatGPT",
+              "Sora",
+              "API Platform"
+            ]
+          },
+          {
+            "name": "SDK",
+            "type": "sdk",
+            "platform": "API Platform",
+            "description": "Software development kit for integrating with OpenAI's API platform",
+            "available_in_products": [
+              "ChatGPT",
+              "API Platform"
+            ]
+          }
+        ],
+        "partnerships": [
+          {
+            "partner": "Mattel",
+            "relationship_type": "partners_with",
+            "description": "Partnership to bring AI to Mattel's iconic brands",
+            "products_affected": [
+              "ChatGPT",
+              "Sora"
+            ],
+            "strategic_value": "Expansion into new markets and industries"
+          }
+        ],
+        "people": [
+          {
+            "name": "Sam Altman",
+            "title": "CEO",
+            "role": "ceo",
+            "relationship": "leads",
+            "background": "Co-founder and CEO of OpenAI"
+          }
+        ],
+        "pricing": [
+          {
+            "tier": "Enterprise",
+            "price": "custom",
+            "features": [
+              "priority support",
+              "custom integration"
+            ],
+            "includes_products": [
+              "ChatGPT",
+              "Sora",
+              "API Platform"
+            ],
+            "limitations": [
+              "usage limits"
+            ],
+            "target_segment": "enterprise"
+          }
+        ],
+        "markets": [
+          {
+            "segment": "Enterprise",
+            "geography": "global",
+            "size": "large",
+            "targeted_by_products": [
+              "ChatGPT",
+              "Sora",
+              "API Platform"
+            ],
+            "growth_rate": "high",
+            "competitive_landscape": "competitive"
+          }
+        ],
+        "competitors": [
+          {
+            "company": "Google",
+            "compete_in": [
+              "natural language understanding",
+              "text generation"
+            ],
+            "our_advantages": [
+              "specialization in AI",
+              "strong research focus"
+            ],
+            "their_advantages": [
+              "large resources",
+              "established brand"
+            ],
+            "market_position": "leader"
+          }
+        ]
+      },
+      "content_length": 8450,
+      "extractedContent": "---\nurl: https://ai21.com/jamba\ncompany: AI21 Labs\nscraped_at: 2025-07-15 18:50:59\n---\n\n Jamba 1.6: The Best Open Model for Enterprise Deployment | AI21\n\n*   [Skip to Main Menu](#site-navigation)\n*   [Skip to Main Content](#content)\n*   [Skip to Footer](#colophon)\n\nWe use cookies to enhance your browsing experience, analyze site traffic, and personalize content. Some are essential for the website to function, while others help us improve your experience. For more information, please see our [Pri...",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 3,
+        "technologies": 3,
+        "ai_ml_concepts": 2,
+        "partnerships": 1,
+        "integrations": 2
+      }
+    },
+    {
+      "id": "176",
+      "url": "https://ai21.com/pricing",
+      "company": "AI21 Labs",
+      "type": "pricing",
+      "title": "AI21 Labs - pricing",
+      "relevance_score": 6,
+      "keywords": [
+        "OpenAI API",
+        "Codex",
+        "LLMs",
+        "Computer vision",
+        null
+      ],
+      "summary": "OpenAI is a leader in AI-powered applications, offering specialized AI models and partnerships to developers and enterprises.",
+      "extracted_at": "2025-07-16 15:45:20",
+      "entities": {
+        "products": [
+          {
+            "name": "OpenAI API",
+            "type": "API",
+            "description": "A developer platform for building AI-powered applications",
+            "features": [
+              "Text and prompting",
+              "Images and vision",
+              "Audio and speech",
+              "Structured Outputs",
+              "Function calling"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "LLMs",
+              "Computer vision",
+              "NLP"
+            ],
+            "provides_integrations": [
+              "API",
+              "SDKs"
+            ],
+            "targets_markets": [
+              "Developers",
+              "Enterprises"
+            ],
+            "ai_capabilities": [
+              "Text generation",
+              "Image generation",
+              "Speech recognition"
+            ]
+          },
+          {
+            "name": "Codex",
+            "type": "AI model",
+            "description": "A code generation model",
+            "features": [
+              "Code generation",
+              "Code completion"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "LLMs",
+              "Computer vision"
+            ],
+            "provides_integrations": [
+              "API",
+              "CLI"
+            ],
+            "targets_markets": [
+              "Developers"
+            ],
+            "ai_capabilities": [
+              "Code generation",
+              "Code completion"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "LLMs",
+            "category": "ai_ml",
+            "purpose": "Text generation",
+            "implemented_by": [
+              "OpenAI API",
+              "Codex"
+            ],
+            "enables_capabilities": [
+              "Text generation",
+              "Image generation"
+            ],
+            "technical_details": "Large language models for text generation"
+          },
+          {
+            "name": "Computer vision",
+            "category": "ai_ml",
+            "purpose": "Image recognition",
+            "implemented_by": [
+              "OpenAI API",
+              "Codex"
+            ],
+            "enables_capabilities": [
+              "Image recognition",
+              "Image generation"
+            ],
+            "technical_details": "Computer vision for image recognition and generation"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "LLMs",
+            "type": "model",
+            "description": "Large language models for text generation",
+            "applications": [
+              "Text generation",
+              "Image generation"
+            ],
+            "performance_metrics": {
+              "accuracy": "high",
+              "speed": "fast"
+            }
+          },
+          {
+            "concept": "Computer vision",
+            "type": "technique",
+            "description": "Computer vision for image recognition and generation",
+            "applications": [
+              "Image recognition",
+              "Image generation"
+            ],
+            "performance_metrics": {
+              "accuracy": "high",
+              "speed": "fast"
+            }
+          }
+        ],
+        "integrations": [
+          {
+            "name": "API",
+            "type": "api",
+            "platform": "OpenAI API",
+            "description": "API for building AI-powered applications",
+            "available_in_products": [
+              "OpenAI API"
+            ]
+          },
+          {
+            "name": "SDKs",
+            "type": "sdk",
+            "platform": "OpenAI API",
+            "description": "Software development kits for building AI-powered applications",
+            "available_in_products": [
+              "OpenAI API"
+            ]
+          }
+        ],
+        "partnerships": [
+          {
+            "partner": "Microsoft",
+            "relationship_type": "partners_with",
+            "description": "Partnership for developing AI-powered applications",
+            "products_affected": [
+              "OpenAI API"
+            ],
+            "strategic_value": "High"
+          }
+        ],
+        "people": [
+          {
+            "name": "Sam Altman",
+            "title": "CEO",
+            "role": "ceo",
+            "relationship": "leads",
+            "background": "Entrepreneur and investor"
+          }
+        ],
+        "pricing": [
+          {
+            "tier": "Free",
+            "price": "0",
+            "features": [
+              "Limited API calls"
+            ],
+            "includes_products": [
+              "OpenAI API"
+            ],
+            "limitations": [
+              "Limited API calls"
+            ],
+            "target_segment": "Developers"
+          },
+          {
+            "tier": "Paid",
+            "price": "variable",
+            "features": [
+              "Unlimited API calls"
+            ],
+            "includes_products": [
+              "OpenAI API"
+            ],
+            "limitations": [],
+            "target_segment": "Enterprises"
+          }
+        ],
+        "markets": [
+          {
+            "segment": "Developers",
+            "geography": "Global",
+            "size": "Large",
+            "targeted_by_products": [
+              "OpenAI API"
+            ],
+            "growth_rate": "High",
+            "competitive_landscape": "Highly competitive"
+          },
+          {
+            "segment": "Enterprises",
+            "geography": "Global",
+            "size": "Large",
+            "targeted_by_products": [
+              "OpenAI API"
+            ],
+            "growth_rate": "High",
+            "competitive_landscape": "Highly competitive"
+          }
+        ],
+        "competitors": [
+          {
+            "company": "Google",
+            "compete_in": [
+              "AI-powered applications"
+            ],
+            "our_advantages": [
+              "Specialized AI models"
+            ],
+            "their_advantages": [
+              "Large market share"
+            ],
+            "market_position": "Leader"
+          }
+        ]
+      },
+      "content_length": 5814,
+      "extractedContent": "---\nurl: https://ai21.com/pricing\ncompany: AI21 Labs\nscraped_at: 2025-07-15 18:50:59\n---\n\n Pricing - Cost-Effective, Transparent Pricing for AI Products | AI21\n\n*   [Skip to Main Menu](#site-navigation)\n*   [Skip to Main Content](#content)\n*   [Skip to Footer](#colophon)\n\nWe use cookies to enhance your browsing experience, analyze site traffic, and personalize content. Some are essential for the website to function, while others help us improve your experience. For more information, please see o...",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 2,
+        "technologies": 2,
+        "ai_ml_concepts": 2,
+        "partnerships": 1,
+        "integrations": 2
+      }
+    },
+    {
+      "id": "177",
+      "url": "https://ai21.com/blog",
+      "company": "AI21 Labs",
+      "type": "blog",
+      "title": "AI21 Labs - blog",
+      "relevance_score": 6,
+      "keywords": [
+        "Claude",
+        "Machine Learning",
+        "Conversational AI",
+        null
+      ],
+      "summary": "Anthropic is a leader in conversational AI, providing high-accuracy and fast-response-time capabilities to various markets",
+      "extracted_at": "2025-07-16 15:45:20",
+      "entities": {
+        "products": [
+          {
+            "name": "Claude",
+            "type": "LLM",
+            "description": "A conversational AI model",
+            "features": [
+              "chat",
+              "coding",
+              "customer support"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "machine learning",
+              "natural language processing"
+            ],
+            "provides_integrations": [
+              "API",
+              "console"
+            ],
+            "targets_markets": [
+              "enterprise",
+              "education"
+            ],
+            "ai_capabilities": [
+              "conversational AI",
+              "coding assistance"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Machine Learning",
+            "category": "ai_ml",
+            "purpose": "Enable conversational AI capabilities",
+            "implemented_by": [
+              "Claude"
+            ],
+            "enables_capabilities": [
+              "conversational AI",
+              "coding assistance"
+            ],
+            "technical_details": "Uses natural language processing to understand and respond to user input"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "Conversational AI",
+            "type": "model",
+            "description": "A type of AI that enables human-like conversation",
+            "applications": [
+              "customer support",
+              "coding assistance"
+            ],
+            "performance_metrics": {
+              "accuracy": "high",
+              "response_time": "fast"
+            }
+          }
+        ],
+        "integrations": [
+          {
+            "name": "API",
+            "type": "api",
+            "platform": "Claude",
+            "description": "Allows developers to integrate Claude into their applications",
+            "available_in_products": [
+              "Claude"
+            ]
+          }
+        ],
+        "partnerships": [
+          {
+            "partner": "Unknown",
+            "relationship_type": "integrates_with",
+            "description": "Integrates with unknown partners to provide additional capabilities",
+            "products_affected": [
+              "Claude"
+            ],
+            "strategic_value": "Enhances Claude's capabilities and reach"
+          }
+        ],
+        "people": [
+          {
+            "name": "Unknown",
+            "title": "Founder/CEO",
+            "role": "founder",
+            "relationship": "leads",
+            "background": "Unknown"
+          }
+        ],
+        "pricing": [
+          {
+            "tier": "Max",
+            "price": "Unknown",
+            "features": [
+              "chat",
+              "coding"
+            ],
+            "includes_products": [
+              "Claude"
+            ],
+            "limitations": "Unknown",
+            "target_segment": "enterprise"
+          },
+          {
+            "tier": "Team",
+            "price": "Unknown",
+            "features": [
+              "chat",
+              "coding"
+            ],
+            "includes_products": [
+              "Claude"
+            ],
+            "limitations": "Unknown",
+            "target_segment": "team"
+          },
+          {
+            "tier": "Enterprise",
+            "price": "Unknown",
+            "features": [
+              "chat",
+              "coding",
+              "customer support"
+            ],
+            "includes_products": [
+              "Claude"
+            ],
+            "limitations": "Unknown",
+            "target_segment": "enterprise"
+          },
+          {
+            "tier": "Education",
+            "price": "Unknown",
+            "features": [
+              "chat",
+              "coding"
+            ],
+            "includes_products": [
+              "Claude"
+            ],
+            "limitations": "Unknown",
+            "target_segment": "education"
+          }
+        ],
+        "markets": [
+          {
+            "segment": "Enterprise",
+            "geography": "Global",
+            "size": "Large",
+            "targeted_by_products": [
+              "Claude"
+            ],
+            "growth_rate": "High",
+            "competitive_landscape": "Competitive"
+          },
+          {
+            "segment": "Education",
+            "geography": "Global",
+            "size": "Medium",
+            "targeted_by_products": [
+              "Claude"
+            ],
+            "growth_rate": "Medium",
+            "competitive_landscape": "Less competitive"
+          }
+        ],
+        "competitors": [
+          {
+            "company": "Unknown",
+            "compete_in": [
+              "conversational AI",
+              "coding assistance"
+            ],
+            "our_advantages": [
+              "high accuracy",
+              "fast response time"
+            ],
+            "their_advantages": [
+              "unknown"
+            ],
+            "market_position": "Leader"
+          }
+        ]
+      },
+      "content_length": 9545,
+      "extractedContent": "---\nurl: https://ai21.com/blog\ncompany: AI21 Labs\nscraped_at: 2025-07-15 18:51:00\n---\n\n Blog | AI21\n\n*   [Skip to Main Menu](#site-navigation)\n*   [Skip to Main Content](#content)\n*   [Skip to Footer](#colophon)\n\nWe use cookies to enhance your browsing experience, analyze site traffic, and personalize content. Some are essential for the website to function, while others help us improve your experience. For more information, please see our [Privacy Policy](https://www.ai21.com/privacy-policy/).\n\n...",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 1,
+        "technologies": 1,
+        "ai_ml_concepts": 1,
+        "partnerships": 1,
+        "integrations": 1
+      }
+    },
+    {
+      "id": "178",
+      "url": "https://aleph-alpha.com",
+      "company": "Aleph Alpha",
+      "type": "homepage",
+      "title": "Aleph Alpha - homepage",
+      "relevance_score": 6,
+      "keywords": [
+        "Claude",
+        "Machine Learning",
+        "Conversational AI",
+        null
+      ],
+      "summary": "Anthropic is a new entrant in the LLM market, focusing on conversational AI and language understanding",
+      "extracted_at": "2025-07-16 15:45:20",
+      "entities": {
+        "products": [
+          {
+            "name": "Claude",
+            "type": "LLM",
+            "description": "A conversational AI model",
+            "features": [
+              "chat",
+              "API",
+              "developer docs"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "machine learning",
+              "natural language processing"
+            ],
+            "provides_integrations": [
+              "API",
+              "console"
+            ],
+            "targets_markets": [
+              "enterprise",
+              "education"
+            ],
+            "ai_capabilities": [
+              "conversational AI",
+              "language understanding"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Machine Learning",
+            "category": "ai_ml",
+            "purpose": "Enable conversational AI",
+            "implemented_by": [
+              "Claude"
+            ],
+            "enables_capabilities": [
+              "conversational AI",
+              "language understanding"
+            ],
+            "technical_details": "Uses neural networks and deep learning"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "Conversational AI",
+            "type": "model",
+            "description": "AI that can engage in human-like conversations",
+            "applications": [
+              "customer support",
+              "chatbots"
+            ],
+            "performance_metrics": {
+              "accuracy": "high",
+              "response_time": "fast"
+            }
+          }
+        ],
+        "integrations": [
+          {
+            "name": "API",
+            "type": "api",
+            "platform": "Claude",
+            "description": "Allows developers to build with Claude",
+            "available_in_products": [
+              "Claude"
+            ]
+          }
+        ],
+        "partnerships": [
+          {
+            "partner": "Unknown",
+            "relationship_type": "integrates_with",
+            "description": "No explicit partnerships mentioned",
+            "products_affected": [],
+            "strategic_value": "None"
+          }
+        ],
+        "people": [
+          {
+            "name": "Unknown",
+            "title": "CEO",
+            "role": "ceo",
+            "relationship": "leads",
+            "background": "No information available"
+          }
+        ],
+        "pricing": [
+          {
+            "tier": "Max plan",
+            "price": "Unknown",
+            "features": [
+              "chat",
+              "API"
+            ],
+            "includes_products": [
+              "Claude"
+            ],
+            "limitations": [
+              "Unknown"
+            ],
+            "target_segment": "enterprise"
+          }
+        ],
+        "markets": [
+          {
+            "segment": "Enterprise",
+            "geography": "Global",
+            "size": "Large",
+            "targeted_by_products": [
+              "Claude"
+            ],
+            "growth_rate": "High",
+            "competitive_landscape": "Competitive"
+          }
+        ],
+        "competitors": [
+          {
+            "company": "Other LLM providers",
+            "compete_in": [
+              "conversational AI"
+            ],
+            "our_advantages": [
+              "high accuracy",
+              "fast response time"
+            ],
+            "their_advantages": [
+              "established brand",
+              "large customer base"
+            ],
+            "market_position": "New entrant"
+          }
+        ]
+      },
+      "content_length": 24096,
+      "extractedContent": "---\nurl: https://aleph-alpha.com\ncompany: Aleph Alpha\nscraped_at: 2025-07-15 18:51:09\n---\n\nSovereign AI Solutions for Enterprises | ALEPH ALPHA\n\n[](https://aleph-alpha.com)\n\n*   [Solutions](#)\n\n    #### By Vertical\n\n    *   ![](https://aleph-alpha.com/wp-content/uploads/2025/03/Idea_Innovation-1.svg)\n\n        [Public Sector](https://aleph-alpha.com/public-sector/)\n\n        AI solutions for government and administration\n\n    *   ![](https://aleph-alpha.com/wp-content/uploads/2025/03/Automotive-1....",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 1,
+        "technologies": 1,
+        "ai_ml_concepts": 1,
+        "partnerships": 1,
+        "integrations": 1
+      }
+    },
+    {
+      "id": "179",
+      "url": "https://aleph-alpha.com/luminous",
+      "company": "Aleph Alpha",
+      "type": "product",
+      "title": "Aleph Alpha - product",
+      "relevance_score": 6,
+      "keywords": [
+        "Claude",
+        "NLP",
+        "Machine Learning",
+        "Conversational AI",
+        null
+      ],
+      "summary": "Anthropic is a conversational AI platform that uses NLP and machine learning to provide highly accurate and easy-to-use conversational AI capabilities.",
+      "extracted_at": "2025-07-16 15:45:20",
+      "entities": {
+        "products": [
+          {
+            "name": "Claude",
+            "type": "AI Model",
+            "description": "A conversational AI model",
+            "features": [
+              "Chat",
+              "API"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "NLP",
+              "Machine Learning"
+            ],
+            "provides_integrations": [
+              "API",
+              "Console"
+            ],
+            "targets_markets": [
+              "Customer Support",
+              "Coding"
+            ],
+            "ai_capabilities": [
+              "Conversational AI",
+              "Text Generation"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "NLP",
+            "category": "ai_ml",
+            "purpose": "Natural Language Processing",
+            "implemented_by": [
+              "Claude"
+            ],
+            "enables_capabilities": [
+              "Conversational AI",
+              "Text Generation"
+            ],
+            "technical_details": "Uses machine learning models to process and generate human-like text"
+          },
+          {
+            "name": "Machine Learning",
+            "category": "ai_ml",
+            "purpose": "Machine Learning",
+            "implemented_by": [
+              "Claude"
+            ],
+            "enables_capabilities": [
+              "Predictive Modeling",
+              "Pattern Recognition"
+            ],
+            "technical_details": "Uses algorithms to train models on large datasets"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "Conversational AI",
+            "type": "model",
+            "description": "A type of AI that can engage in conversation with humans",
+            "applications": [
+              "Customer Support",
+              "Chatbots"
+            ],
+            "performance_metrics": {
+              "accuracy": "90%",
+              "response_time": "1s"
+            }
+          }
+        ],
+        "integrations": [
+          {
+            "name": "API",
+            "type": "api",
+            "platform": "Claude",
+            "description": "A programmatic interface for interacting with Claude",
+            "available_in_products": [
+              "Claude"
+            ]
+          },
+          {
+            "name": "Console",
+            "type": "console",
+            "platform": "Claude",
+            "description": "A web-based interface for interacting with Claude",
+            "available_in_products": [
+              "Claude"
+            ]
+          }
+        ],
+        "partnerships": [
+          {
+            "partner": "Unknown",
+            "relationship_type": "integrates_with",
+            "description": "Integrates with various third-party services",
+            "products_affected": [
+              "Claude"
+            ],
+            "strategic_value": "Expands the capabilities of Claude"
+          }
+        ],
+        "people": [
+          {
+            "name": "Unknown",
+            "title": "Founder",
+            "role": "founder",
+            "relationship": "founded",
+            "background": "Unknown"
+          }
+        ],
+        "pricing": [
+          {
+            "tier": "Max",
+            "price": "Unknown",
+            "features": [
+              "Chat",
+              "API"
+            ],
+            "includes_products": [
+              "Claude"
+            ],
+            "limitations": [
+              "Unknown"
+            ],
+            "target_segment": "Individuals"
+          },
+          {
+            "tier": "Team",
+            "price": "Unknown",
+            "features": [
+              "Chat",
+              "API",
+              "Console"
+            ],
+            "includes_products": [
+              "Claude"
+            ],
+            "limitations": [
+              "Unknown"
+            ],
+            "target_segment": "Teams"
+          }
+        ],
+        "markets": [
+          {
+            "segment": "Customer Support",
+            "geography": "Global",
+            "size": "Unknown",
+            "targeted_by_products": [
+              "Claude"
+            ],
+            "growth_rate": "Unknown",
+            "competitive_landscape": "Highly competitive"
+          },
+          {
+            "segment": "Coding",
+            "geography": "Global",
+            "size": "Unknown",
+            "targeted_by_products": [
+              "Claude"
+            ],
+            "growth_rate": "Unknown",
+            "competitive_landscape": "Moderately competitive"
+          }
+        ],
+        "competitors": [
+          {
+            "company": "Unknown",
+            "compete_in": [
+              "Conversational AI",
+              "Customer Support"
+            ],
+            "our_advantages": [
+              "Unknown"
+            ],
+            "their_advantages": [
+              "Unknown"
+            ],
+            "market_position": "Unknown"
+          }
+        ]
+      },
+      "content_length": 11241,
+      "extractedContent": "---\nurl: https://aleph-alpha.com/luminous\ncompany: Aleph Alpha\nscraped_at: 2025-07-15 18:51:06\n---\n\nLuminous: European AI closes gap to world leaders - ALEPH ALPHA\n\n[](https://aleph-alpha.com)\n\n*   [Solutions](#)\n\n    #### By Vertical\n\n    *   ![](https://aleph-alpha.com/wp-content/uploads/2025/03/Idea_Innovation-1.svg)\n\n        [Public Sector](https://aleph-alpha.com/public-sector/)\n\n        AI solutions for government and administration\n\n    *   ![](https://aleph-alpha.com/wp-content/uploads/2...",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 1,
+        "technologies": 2,
+        "ai_ml_concepts": 1,
+        "partnerships": 1,
+        "integrations": 2
+      }
+    },
+    {
+      "id": "180",
+      "url": "https://aleph-alpha.com/pricing",
+      "company": "Aleph Alpha",
+      "type": "pricing",
+      "title": "Aleph Alpha - pricing",
+      "relevance_score": 6,
+      "keywords": [
+        "Claude",
+        "Claude Code",
+        "AI",
+        "ML",
+        "Conversational AI",
+        "App building",
+        null
+      ],
+      "summary": "Anthropic is a leader in conversational AI and app building, with a strong focus on AI research and development and a growing customer base.",
+      "extracted_at": "2025-07-16 15:45:20",
+      "entities": {
+        "products": [
+          {
+            "name": "Claude",
+            "type": "LLM",
+            "description": "AI-powered language model",
+            "features": [
+              "support",
+              "advice",
+              "companionship",
+              "build and share AI-powered apps"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "AI",
+              "ML"
+            ],
+            "provides_integrations": [
+              "API",
+              "Amazon Bedrock"
+            ],
+            "targets_markets": [
+              "U.S. National Security Customers",
+              "general audience"
+            ],
+            "ai_capabilities": [
+              "conversational AI",
+              "app building"
+            ]
+          },
+          {
+            "name": "Claude Code",
+            "type": "Development tool",
+            "description": "Tool for building and sharing AI-powered apps",
+            "features": [
+              "remote MCP support"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "AI",
+              "ML"
+            ],
+            "provides_integrations": [
+              "API"
+            ],
+            "targets_markets": [
+              "developers"
+            ],
+            "ai_capabilities": [
+              "app building"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "AI",
+            "category": "ai_ml",
+            "purpose": "powering language models and apps",
+            "implemented_by": [
+              "Claude",
+              "Claude Code"
+            ],
+            "enables_capabilities": [
+              "conversational AI",
+              "app building"
+            ],
+            "technical_details": "machine learning models"
+          },
+          {
+            "name": "ML",
+            "category": "ai_ml",
+            "purpose": "improving language models and apps",
+            "implemented_by": [
+              "Claude",
+              "Claude Code"
+            ],
+            "enables_capabilities": [
+              "conversational AI",
+              "app building"
+            ],
+            "technical_details": "deep learning algorithms"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "Conversational AI",
+            "type": "model",
+            "description": "AI-powered conversation",
+            "applications": [
+              "customer support",
+              "advice",
+              "companionship"
+            ],
+            "performance_metrics": {
+              "accuracy": "high",
+              "response_time": "fast"
+            }
+          },
+          {
+            "concept": "App building",
+            "type": "framework",
+            "description": "building and sharing AI-powered apps",
+            "applications": [
+              "development",
+              "productivity"
+            ],
+            "performance_metrics": {
+              "ease_of_use": "high",
+              "customizability": "high"
+            }
+          }
+        ],
+        "integrations": [
+          {
+            "name": "API",
+            "type": "api",
+            "platform": "Claude",
+            "description": "API for accessing Claude's capabilities",
+            "available_in_products": [
+              "Claude",
+              "Claude Code"
+            ]
+          },
+          {
+            "name": "Amazon Bedrock",
+            "type": "platform",
+            "platform": "Amazon",
+            "description": "integration with Amazon Bedrock for FedRAMP High and DoD IL4/5 workloads",
+            "available_in_products": [
+              "Claude"
+            ]
+          }
+        ],
+        "partnerships": [
+          {
+            "partner": "Amazon",
+            "relationship_type": "integrates_with",
+            "description": "integration with Amazon Bedrock",
+            "products_affected": [
+              "Claude"
+            ],
+            "strategic_value": "expanded reach and security"
+          }
+        ],
+        "people": [
+          {
+            "name": "Richard Fontaine",
+            "title": "National Security Expert",
+            "role": "board member",
+            "relationship": "appointed to Anthropic's Long-Term Benefit Trust",
+            "background": "national security"
+          },
+          {
+            "name": "Reed Hastings",
+            "title": "Board Member",
+            "role": "board member",
+            "relationship": "appointed to Anthropic's board of directors",
+            "background": "entrepreneurship"
+          }
+        ],
+        "pricing": [
+          {
+            "tier": "Basic",
+            "price": "not specified",
+            "features": [
+              "access to Claude's capabilities"
+            ],
+            "includes_products": [
+              "Claude"
+            ],
+            "limitations": [
+              "not specified"
+            ],
+            "target_segment": "general audience"
+          }
+        ],
+        "markets": [
+          {
+            "segment": "U.S. National Security Customers",
+            "geography": "United States",
+            "size": "not specified",
+            "targeted_by_products": [
+              "Claude"
+            ],
+            "growth_rate": "not specified",
+            "competitive_landscape": "highly competitive"
+          },
+          {
+            "segment": "general audience",
+            "geography": "global",
+            "size": "not specified",
+            "targeted_by_products": [
+              "Claude"
+            ],
+            "growth_rate": "not specified",
+            "competitive_landscape": "highly competitive"
+          }
+        ],
+        "competitors": [
+          {
+            "company": "not specified",
+            "compete_in": [
+              "conversational AI",
+              "app building"
+            ],
+            "our_advantages": [
+              "high accuracy",
+              "fast response time"
+            ],
+            "their_advantages": [
+              "not specified"
+            ],
+            "market_position": "leader"
+          }
+        ]
+      },
+      "content_length": 7812,
+      "extractedContent": "---\nurl: https://aleph-alpha.com/pricing\ncompany: Aleph Alpha\nscraped_at: 2025-07-15 18:51:06\n---\n\nPage not found - ALEPH ALPHA\n\n[](https://aleph-alpha.com)\n\n*   [Solutions](#)\n\n    #### By Vertical\n\n    *   ![](https://aleph-alpha.com/wp-content/uploads/2025/03/Idea_Innovation-1.svg)\n\n        [Public Sector](https://aleph-alpha.com/public-sector/)\n\n        AI solutions for government and administration\n\n    *   ![](https://aleph-alpha.com/wp-content/uploads/2025/03/Automotive-1.svg)\n\n        [I...",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 2,
+        "technologies": 2,
+        "ai_ml_concepts": 2,
+        "partnerships": 1,
+        "integrations": 2
+      }
+    },
+    {
+      "id": "181",
+      "url": "https://docs.aleph-alpha.com",
+      "company": "Aleph Alpha",
+      "type": "docs",
+      "title": "Aleph Alpha - docs",
+      "relevance_score": 6,
+      "keywords": [
+        "Claude",
+        "Anthropic API",
+        "Machine learning",
+        "Natural Language Processing",
+        "Large Language Models",
+        null
+      ],
+      "summary": "Anthropic is a competitive LLM provider with high accuracy and fluency, using machine learning and natural language processing to enable text generation and conversational AI.",
+      "extracted_at": "2025-07-16 15:45:20",
+      "entities": {
+        "products": [
+          {
+            "name": "Claude",
+            "type": "LLM",
+            "description": "A large language model developed by Anthropic",
+            "features": [
+              "API",
+              "SDKs",
+              "Console",
+              "Prompt crafting and testing"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "Machine learning",
+              "Natural Language Processing"
+            ],
+            "provides_integrations": [
+              "API",
+              "SDKs"
+            ],
+            "targets_markets": [
+              "Developers",
+              "Businesses"
+            ],
+            "ai_capabilities": [
+              "Text generation",
+              "Conversational AI"
+            ]
+          },
+          {
+            "name": "Anthropic API",
+            "type": "API",
+            "description": "An API for integrating Claude into applications",
+            "features": [
+              "API endpoints",
+              "SDKs"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "Machine learning",
+              "Natural Language Processing"
+            ],
+            "provides_integrations": [
+              "API",
+              "SDKs"
+            ],
+            "targets_markets": [
+              "Developers",
+              "Businesses"
+            ],
+            "ai_capabilities": [
+              "Text generation",
+              "Conversational AI"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Machine learning",
+            "category": "ai_ml",
+            "purpose": "Enabling AI capabilities",
+            "implemented_by": [
+              "Claude",
+              "Anthropic API"
+            ],
+            "enables_capabilities": [
+              "Text generation",
+              "Conversational AI"
+            ],
+            "technical_details": "Using large language models and natural language processing"
+          },
+          {
+            "name": "Natural Language Processing",
+            "category": "ai_ml",
+            "purpose": "Enabling text generation and conversational AI",
+            "implemented_by": [
+              "Claude",
+              "Anthropic API"
+            ],
+            "enables_capabilities": [
+              "Text generation",
+              "Conversational AI"
+            ],
+            "technical_details": "Using machine learning and deep learning techniques"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "Large Language Models",
+            "type": "model",
+            "description": "A type of machine learning model for natural language processing",
+            "applications": [
+              "Text generation",
+              "Conversational AI"
+            ],
+            "performance_metrics": {
+              "accuracy": "High",
+              "fluency": "High"
+            }
+          }
+        ],
+        "integrations": [
+          {
+            "name": "API",
+            "type": "api",
+            "platform": "Anthropic API",
+            "description": "An API for integrating Claude into applications",
+            "available_in_products": [
+              "Claude",
+              "Anthropic API"
+            ]
+          },
+          {
+            "name": "SDKs",
+            "type": "sdk",
+            "platform": "Anthropic API",
+            "description": "Software development kits for integrating Claude into applications",
+            "available_in_products": [
+              "Claude",
+              "Anthropic API"
+            ]
+          }
+        ],
+        "partnerships": [],
+        "people": [],
+        "pricing": [],
+        "markets": [
+          {
+            "segment": "Developers",
+            "geography": "Global",
+            "size": "Large",
+            "targeted_by_products": [
+              "Claude",
+              "Anthropic API"
+            ],
+            "growth_rate": "High",
+            "competitive_landscape": "Competitive"
+          },
+          {
+            "segment": "Businesses",
+            "geography": "Global",
+            "size": "Large",
+            "targeted_by_products": [
+              "Claude",
+              "Anthropic API"
+            ],
+            "growth_rate": "High",
+            "competitive_landscape": "Competitive"
+          }
+        ],
+        "competitors": [
+          {
+            "company": "Other LLM providers",
+            "compete_in": [
+              "Text generation",
+              "Conversational AI"
+            ],
+            "our_advantages": [
+              "High accuracy",
+              "High fluency"
+            ],
+            "their_advantages": [
+              "Established brand",
+              "Large customer base"
+            ],
+            "market_position": "Competitive"
+          }
+        ]
+      },
+      "content_length": 2811,
+      "extractedContent": "---\nurl: https://docs.aleph-alpha.com\ncompany: Aleph Alpha\nscraped_at: 2025-07-15 18:51:04\n---\n\n  Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs\n\n[Skip to main content](#__docusaurus_skipToContent_fallback)\n\n[\n\n![Aleph Alpha Logo](/img/logo_white.svg)\n\n**Aleph Alpha Docs**](/)[PhariaAI](/products/pharia-ai/overview/)[Verticals](/products/verticals/overview/)[Pharia LLM](/products/pharia-1-llm/overview/)[APIs](/products/apis/overview/)\n\n*   [Welcome](/docs/introduction/)\n*   [Glossa...",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 2,
+        "technologies": 2,
+        "ai_ml_concepts": 1,
+        "partnerships": 0,
+        "integrations": 2
+      }
+    },
+    {
+      "id": "182",
+      "url": "https://amd.com/en/graphics/instinct-server-accelerators",
+      "company": "AMD",
+      "type": "homepage",
+      "title": "AMD - homepage",
+      "relevance_score": 6,
+      "keywords": [
+        "Gemini",
+        "Gemma",
+        "Imagen",
+        "Lyria",
+        "Veo",
+        "AI",
+        "ML",
+        "Natural Language Processing",
+        "Computer Vision",
+        null
+      ],
+      "summary": "Google DeepMind is a leader in AI research and development, providing advanced AI models integrated with Google Cloud",
+      "extracted_at": "2025-07-16 15:45:20",
+      "entities": {
+        "products": [
+          {
+            "name": "Gemini",
+            "type": "AI model",
+            "description": "Next-generation AI models",
+            "features": [
+              "2.5 Pro",
+              "2.5 Flash",
+              "2.5 Flash-Lite"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "AI",
+              "ML"
+            ],
+            "provides_integrations": [
+              "APIs",
+              "connectors"
+            ],
+            "targets_markets": [
+              "research",
+              "industry"
+            ],
+            "ai_capabilities": [
+              "natural language processing",
+              "computer vision"
+            ]
+          },
+          {
+            "name": "Gemma",
+            "type": "AI model",
+            "description": "Lightweight, state-of-the-art open models",
+            "features": [
+              "Gemma 3",
+              "Gemma 3n",
+              "ShieldGemma 2"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "AI",
+              "ML"
+            ],
+            "provides_integrations": [
+              "APIs",
+              "connectors"
+            ],
+            "targets_markets": [
+              "research",
+              "industry"
+            ],
+            "ai_capabilities": [
+              "natural language processing",
+              "computer vision"
+            ]
+          },
+          {
+            "name": "Imagen",
+            "type": "Generative model",
+            "description": "Image generation model",
+            "features": [],
+            "status": "active",
+            "uses_technologies": [
+              "AI",
+              "ML"
+            ],
+            "provides_integrations": [
+              "APIs",
+              "connectors"
+            ],
+            "targets_markets": [
+              "research",
+              "industry"
+            ],
+            "ai_capabilities": [
+              "image generation"
+            ]
+          },
+          {
+            "name": "Lyria",
+            "type": "Generative model",
+            "description": "Music generation model",
+            "features": [],
+            "status": "active",
+            "uses_technologies": [
+              "AI",
+              "ML"
+            ],
+            "provides_integrations": [
+              "APIs",
+              "connectors"
+            ],
+            "targets_markets": [
+              "research",
+              "industry"
+            ],
+            "ai_capabilities": [
+              "music generation"
+            ]
+          },
+          {
+            "name": "Veo",
+            "type": "Generative model",
+            "description": "Video generation model",
+            "features": [],
+            "status": "active",
+            "uses_technologies": [
+              "AI",
+              "ML"
+            ],
+            "provides_integrations": [
+              "APIs",
+              "connectors"
+            ],
+            "targets_markets": [
+              "research",
+              "industry"
+            ],
+            "ai_capabilities": [
+              "video generation"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "AI",
+            "category": "ai_ml",
+            "purpose": "Machine learning and artificial intelligence",
+            "implemented_by": [
+              "Gemini",
+              "Gemma",
+              "Imagen",
+              "Lyria",
+              "Veo"
+            ],
+            "enables_capabilities": [
+              "natural language processing",
+              "computer vision",
+              "image generation",
+              "music generation",
+              "video generation"
+            ],
+            "technical_details": "Google DeepMind's AI technology is based on machine learning and deep learning algorithms"
+          },
+          {
+            "name": "ML",
+            "category": "ai_ml",
+            "purpose": "Machine learning",
+            "implemented_by": [
+              "Gemini",
+              "Gemma",
+              "Imagen",
+              "Lyria",
+              "Veo"
+            ],
+            "enables_capabilities": [
+              "natural language processing",
+              "computer vision",
+              "image generation",
+              "music generation",
+              "video generation"
+            ],
+            "technical_details": "Google DeepMind's ML technology is based on deep learning algorithms"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "Natural Language Processing",
+            "type": "model",
+            "description": "The ability of a computer to understand and generate human language",
+            "applications": [
+              "Gemini",
+              "Gemma"
+            ],
+            "performance_metrics": {
+              "accuracy": "95%",
+              "f1_score": "0.9"
+            }
+          },
+          {
+            "concept": "Computer Vision",
+            "type": "model",
+            "description": "The ability of a computer to interpret and understand visual data",
+            "applications": [
+              "Gemini",
+              "Gemma"
+            ],
+            "performance_metrics": {
+              "accuracy": "90%",
+              "f1_score": "0.8"
+            }
+          }
+        ],
+        "integrations": [
+          {
+            "name": "APIs",
+            "type": "api",
+            "platform": "Google Cloud",
+            "description": "Application Programming Interfaces for Google DeepMind's AI models",
+            "available_in_products": [
+              "Gemini",
+              "Gemma",
+              "Imagen",
+              "Lyria",
+              "Veo"
+            ]
+          },
+          {
+            "name": "Connectors",
+            "type": "connector",
+            "platform": "Google Cloud",
+            "description": "Pre-built connectors for Google DeepMind's AI models",
+            "available_in_products": [
+              "Gemini",
+              "Gemma",
+              "Imagen",
+              "Lyria",
+              "Veo"
+            ]
+          }
+        ],
+        "partnerships": [
+          {
+            "partner": "Google Cloud",
+            "relationship_type": "integrates_with",
+            "description": "Google DeepMind's AI models are integrated with Google Cloud",
+            "products_affected": [
+              "Gemini",
+              "Gemma",
+              "Imagen",
+              "Lyria",
+              "Veo"
+            ],
+            "strategic_value": "Increased accessibility and scalability of Google DeepMind's AI models"
+          }
+        ],
+        "people": [
+          {
+            "name": "Demis Hassabis",
+            "title": "CEO",
+            "role": "ceo",
+            "relationship": "leads",
+            "background": "Co-founder and CEO of Google DeepMind"
+          }
+        ],
+        "pricing": [
+          {
+            "tier": "Free",
+            "price": "0",
+            "features": [
+              "Limited access to AI models"
+            ],
+            "includes_products": [
+              "Gemini",
+              "Gemma"
+            ],
+            "limitations": [
+              "Limited usage"
+            ],
+            "target_segment": "Research and development"
+          },
+          {
+            "tier": "Paid",
+            "price": "Custom",
+            "features": [
+              "Full access to AI models"
+            ],
+            "includes_products": [
+              "Gemini",
+              "Gemma",
+              "Imagen",
+              "Lyria",
+              "Veo"
+            ],
+            "limitations": [
+              "None"
+            ],
+            "target_segment": "Enterprise"
+          }
+        ],
+        "markets": [
+          {
+            "segment": "Research and development",
+            "geography": "Global",
+            "size": "Large",
+            "targeted_by_products": [
+              "Gemini",
+              "Gemma"
+            ],
+            "growth_rate": "High",
+            "competitive_landscape": "Highly competitive"
+          },
+          {
+            "segment": "Enterprise",
+            "geography": "Global",
+            "size": "Large",
+            "targeted_by_products": [
+              "Gemini",
+              "Gemma",
+              "Imagen",
+              "Lyria",
+              "Veo"
+            ],
+            "growth_rate": "High",
+            "competitive_landscape": "Highly competitive"
+          }
+        ],
+        "competitors": [
+          {
+            "company": "Microsoft",
+            "compete_in": [
+              "AI",
+              "ML"
+            ],
+            "our_advantages": [
+              "More advanced AI models"
+            ],
+            "their_advantages": [
+              "More established brand"
+            ],
+            "market_position": "Leader"
+          },
+          {
+            "company": "Amazon",
+            "compete_in": [
+              "AI",
+              "ML"
+            ],
+            "our_advantages": [
+              "More advanced AI models"
+            ],
+            "their_advantages": [
+              "More established brand"
+            ],
+            "market_position": "Leader"
+          }
+        ]
+      },
+      "content_length": 36023,
+      "extractedContent": "---\nurl: https://amd.com/en/graphics/instinct-server-accelerators\ncompany: AMD\nscraped_at: 2025-07-15 18:50:56\n---\n\n  404\n\nSkip to main contentEnable accessibility for low visionOpen the accessibility menu\n\n![Spinner: White decorative](https://cdn.userway.org/widgetapp/images/spin_wh.svg)\n\n![](https://cdn.userway.org/widgetapp/images/body_wh.svg)\n\n![Spinner: White decorative](https://cdn.userway.org/widgetapp/images/spin_wh.svg)\n\n[Skip to main content](#)\n\n[AMD Website Accessibility Statement](/...",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 5,
+        "technologies": 2,
+        "ai_ml_concepts": 2,
+        "partnerships": 1,
+        "integrations": 2
+      }
+    },
+    {
+      "id": "183",
+      "url": "https://amd.com/en/newsroom",
+      "company": "AMD",
+      "type": "news",
+      "title": "AMD - news",
+      "relevance_score": 6,
+      "keywords": [
+        "Gemini",
+        "NotebookLM",
+        "Flow",
+        "Machine Learning",
+        "Natural Language Processing",
+        "Conversational AI",
+        null
+      ],
+      "summary": "Google DeepMind is a leader in Conversational AI, with a strong focus on integrating AI capabilities into its products and services.",
+      "extracted_at": "2025-07-16 15:45:20",
+      "entities": {
+        "products": [
+          {
+            "name": "Gemini",
+            "type": "AI Assistant",
+            "description": "A personal, proactive AI assistant",
+            "features": [
+              "Conversational AI",
+              "Integration with Google Services"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "Machine Learning",
+              "Natural Language Processing"
+            ],
+            "provides_integrations": [
+              "Google Maps",
+              "Google Photos",
+              "Gmail",
+              "Docs"
+            ],
+            "targets_markets": [
+              "Consumer",
+              "Enterprise"
+            ],
+            "ai_capabilities": [
+              "Conversational AI",
+              "Personalized Recommendations"
+            ]
+          },
+          {
+            "name": "NotebookLM",
+            "type": "Tool",
+            "description": "The ultimate tool for understanding",
+            "features": [
+              "AI-powered analysis"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "Machine Learning"
+            ],
+            "provides_integrations": [],
+            "targets_markets": [
+              "Researchers",
+              "Developers"
+            ],
+            "ai_capabilities": [
+              "AI-powered analysis"
+            ]
+          },
+          {
+            "name": "Flow",
+            "type": "Tool",
+            "description": "An AI filmmaking tool for creatives",
+            "features": [
+              "AI-powered video editing"
+            ],
+            "status": "active",
+            "uses_technologies": [
+              "Machine Learning",
+              "Computer Vision"
+            ],
+            "provides_integrations": [],
+            "targets_markets": [
+              "Creatives",
+              "Filmmakers"
+            ],
+            "ai_capabilities": [
+              "AI-powered video editing"
+            ]
+          }
+        ],
+        "technologies": [
+          {
+            "name": "Machine Learning",
+            "category": "ai_ml",
+            "purpose": "Enable AI capabilities",
+            "implemented_by": [
+              "Gemini",
+              "NotebookLM",
+              "Flow"
+            ],
+            "enables_capabilities": [
+              "Conversational AI",
+              "AI-powered analysis",
+              "AI-powered video editing"
+            ],
+            "technical_details": "Uses deep learning models to enable AI capabilities"
+          },
+          {
+            "name": "Natural Language Processing",
+            "category": "ai_ml",
+            "purpose": "Enable conversational AI",
+            "implemented_by": [
+              "Gemini"
+            ],
+            "enables_capabilities": [
+              "Conversational AI"
+            ],
+            "technical_details": "Uses NLP to understand and generate human-like text"
+          }
+        ],
+        "ai_ml_concepts": [
+          {
+            "concept": "Conversational AI",
+            "type": "model",
+            "description": "Enable human-like conversations",
+            "applications": [
+              "Gemini",
+              "Google Maps",
+              "Gmail"
+            ],
+            "performance_metrics": {
+              "accuracy": "high",
+              "response_time": "low"
+            }
+          }
+        ],
+        "integrations": [
+          {
+            "name": "Google Maps",
+            "type": "api",
+            "platform": "Google",
+            "description": "Integrate Gemini with Google Maps",
+            "available_in_products": [
+              "Gemini"
+            ]
+          },
+          {
+            "name": "Google Photos",
+            "type": "api",
+            "platform": "Google",
+            "description": "Integrate Gemini with Google Photos",
+            "available_in_products": [
+              "Gemini"
+            ]
+          }
+        ],
+        "partnerships": [
+          {
+            "partner": "Google",
+            "relationship_type": "integrates_with",
+            "description": "Integrate Gemini with Google services",
+            "products_affected": [
+              "Gemini"
+            ],
+            "strategic_value": "Enhance Gemini capabilities"
+          }
+        ],
+        "people": [
+          {
+            "name": "Not specified",
+            "title": "Not specified",
+            "role": "Not specified",
+            "relationship": "Not specified",
+            "background": "Not specified"
+          }
+        ],
+        "pricing": [
+          {
+            "tier": "Free",
+            "price": "0",
+            "features": [
+              "Limited features"
+            ],
+            "includes_products": [
+              "Gemini"
+            ],
+            "limitations": [
+              "Limited usage"
+            ],
+            "target_segment": "Consumer"
+          }
+        ],
+        "markets": [
+          {
+            "segment": "Consumer",
+            "geography": "Global",
+            "size": "Large",
+            "targeted_by_products": [
+              "Gemini"
+            ],
+            "growth_rate": "High",
+            "competitive_landscape": "Competitive"
+          }
+        ],
+        "competitors": [
+          {
+            "company": "Amazon",
+            "compete_in": [
+              "Conversational AI"
+            ],
+            "our_advantages": [
+              "Integration with Google services"
+            ],
+            "their_advantages": [
+              "Large user base"
+            ],
+            "market_position": "Competitor"
+          }
+        ]
+      },
+      "content_length": 35994,
+      "extractedContent": "---\nurl: https://amd.com/en/newsroom\ncompany: AMD\nscraped_at: 2025-07-15 18:51:06\n---\n\n  404\n\nSkip to main contentEnable accessibility for low visionOpen the accessibility menu\n\n![Spinner: White decorative](https://cdn.userway.org/widgetapp/images/spin_wh.svg)\n\n![](https://cdn.userway.org/widgetapp/images/body_wh.svg)\n\n![Spinner: White decorative](https://cdn.userway.org/widgetapp/images/spin_wh.svg)\n\n[Skip to main content](#)\n\n[AMD Website Accessibility Statement](/en/site-notifications/accessi...",
+      "aiProcessed": true,
+      "category": "uncategorized",
+      "source": "GitHub Actions Monitor",
+      "entity_counts": {
+        "products": 3,
+        "technologies": 2,
+        "ai_ml_concepts": 1,
+        "partnerships": 1,
+        "integrations": 2
+      }
+    },
+    {
       "id": "172",
       "url": "https://openai.com",
       "company": "OpenAI",
@@ -10482,513 +12916,6 @@
         "products": 2,
         "technologies": 2,
         "ai_ml_concepts": 2,
-        "partnerships": 1,
-        "integrations": 2
-      }
-    },
-    {
-      "id": "161",
-      "url": "https://amd.com/en/graphics/instinct-server-accelerators",
-      "company": "AMD",
-      "type": "homepage",
-      "title": "AMD - homepage",
-      "relevance_score": 9,
-      "keywords": [
-        "EPYC Servers",
-        "Ryzen PRO Laptops",
-        "Instinct Accelerators",
-        "Zen Architecture",
-        "ROCm",
-        "Machine Learning",
-        null
-      ],
-      "summary": "AMD is a leader in the data center market, with a strong portfolio of products and a growing presence in the cloud computing market.",
-      "extracted_at": "2025-07-06 15:53:54",
-      "entities": {
-        "products": [
-          {
-            "name": "EPYC Servers",
-            "type": "Server Processors",
-            "description": "Data Center Processors",
-            "features": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "Zen Architecture"
-            ],
-            "provides_integrations": [
-              "PCIe"
-            ],
-            "targets_markets": [
-              "Data Center"
-            ],
-            "ai_capabilities": [
-              "AI Acceleration"
-            ]
-          },
-          {
-            "name": "Ryzen PRO Laptops",
-            "type": "Mobile Processors",
-            "description": "Business Laptops",
-            "features": [
-              "High Performance",
-              "Long Battery Life"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "Zen Architecture"
-            ],
-            "provides_integrations": [
-              "USB"
-            ],
-            "targets_markets": [
-              "Business"
-            ],
-            "ai_capabilities": [
-              "AI-Enhanced Performance"
-            ]
-          },
-          {
-            "name": "Instinct Accelerators",
-            "type": "GPU Accelerators",
-            "description": "Data Center Accelerators",
-            "features": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "ROCm"
-            ],
-            "provides_integrations": [
-              "PCIe"
-            ],
-            "targets_markets": [
-              "Data Center"
-            ],
-            "ai_capabilities": [
-              "AI Acceleration"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "Zen Architecture",
-            "category": "CPU Architecture",
-            "purpose": "High Performance Computing",
-            "implemented_by": [
-              "EPYC Servers",
-              "Ryzen PRO Laptops"
-            ],
-            "enables_capabilities": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "technical_details": "x86-64 Instruction Set"
-          },
-          {
-            "name": "ROCm",
-            "category": "GPU Computing Platform",
-            "purpose": "AI Acceleration",
-            "implemented_by": [
-              "Instinct Accelerators"
-            ],
-            "enables_capabilities": [
-              "AI Acceleration",
-              "Machine Learning"
-            ],
-            "technical_details": "Heterogeneous Compute Platform"
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "Machine Learning",
-            "type": "AI Technique",
-            "description": "Supervised Learning",
-            "applications": [
-              "Image Recognition",
-              "Natural Language Processing"
-            ],
-            "performance_metrics": {
-              "accuracy": 0.9,
-              "precision": 0.8,
-              "recall": 0.7
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "PCIe",
-            "type": "Interface",
-            "platform": "EPYC Servers",
-            "description": "High-Speed Interface",
-            "available_in_products": [
-              "EPYC Servers",
-              "Instinct Accelerators"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "Microsoft",
-            "relationship_type": "partners_with",
-            "description": "Cloud Computing Partnership",
-            "products_affected": [
-              "EPYC Servers"
-            ],
-            "strategic_value": "Cloud Infrastructure"
-          }
-        ],
-        "people": [
-          {
-            "name": "Lisa Su",
-            "title": "CEO",
-            "role": "ceo",
-            "relationship": "leads",
-            "background": "Electrical Engineering"
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "Basic",
-            "price": 999,
-            "features": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "includes_products": [
-              "EPYC Servers"
-            ],
-            "limitations": [
-              "Limited Support"
-            ],
-            "target_segment": "Small Business"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "Data Center",
-            "geography": "Global",
-            "size": "Large",
-            "targeted_by_products": [
-              "EPYC Servers",
-              "Instinct Accelerators"
-            ],
-            "growth_rate": "High",
-            "competitive_landscape": "Highly Competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Intel",
-            "compete_in": [
-              "Data Center"
-            ],
-            "our_advantages": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "their_advantages": [
-              "Established Brand",
-              "Wide Range of Products"
-            ],
-            "market_position": "Leader"
-          }
-        ]
-      },
-      "content_length": 36023,
-      "extractedContent": "---\nurl: https://amd.com/en/graphics/instinct-server-accelerators\ncompany: AMD\nscraped_at: 2025-07-04 20:10:10\n---\n\n  404\n\nSkip to main contentEnable accessibility for low visionOpen the accessibility menu\n\n![Spinner: White decorative](https://cdn.userway.org/widgetapp/images/spin_wh.svg)\n\n![](https://cdn.userway.org/widgetapp/images/body_wh.svg)\n\n![Spinner: White decorative](https://cdn.userway.org/widgetapp/images/spin_wh.svg)\n\n[Skip to main content](#)\n\n[AMD Website Accessibility Statement](/...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 3,
-        "technologies": 2,
-        "ai_ml_concepts": 1,
-        "partnerships": 1,
-        "integrations": 1
-      }
-    },
-    {
-      "id": "162",
-      "url": "https://amd.com/en/newsroom",
-      "company": "AMD",
-      "type": "news",
-      "title": "AMD - news",
-      "relevance_score": 8,
-      "keywords": [
-        "EPYC",
-        "Ryzen",
-        "Radeon",
-        "Instinct",
-        "Zen Architecture",
-        "RDNA Architecture",
-        "ROCm",
-        "AI Acceleration",
-        null
-      ],
-      "summary": "AMD is a leader in high performance computing with a strong portfolio of products and technologies, including EPYC, Ryzen, Radeon, and Instinct.",
-      "extracted_at": "2025-07-06 15:53:54",
-      "entities": {
-        "products": [
-          {
-            "name": "EPYC",
-            "type": "Processor",
-            "description": "Server Processor",
-            "features": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "Zen Architecture"
-            ],
-            "provides_integrations": [
-              "PCIe",
-              "SATA"
-            ],
-            "targets_markets": [
-              "Data Center",
-              "Cloud Computing"
-            ],
-            "ai_capabilities": [
-              "AI Acceleration"
-            ]
-          },
-          {
-            "name": "Ryzen",
-            "type": "Processor",
-            "description": "Client Processor",
-            "features": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "Zen Architecture"
-            ],
-            "provides_integrations": [
-              "PCIe",
-              "SATA"
-            ],
-            "targets_markets": [
-              "Gaming",
-              "Personal Computing"
-            ],
-            "ai_capabilities": [
-              "AI Acceleration"
-            ]
-          },
-          {
-            "name": "Radeon",
-            "type": "Graphics Card",
-            "description": "Graphics Processing Unit",
-            "features": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "RDNA Architecture"
-            ],
-            "provides_integrations": [
-              "PCIe",
-              "DisplayPort"
-            ],
-            "targets_markets": [
-              "Gaming",
-              "Professional Graphics"
-            ],
-            "ai_capabilities": [
-              "AI Acceleration"
-            ]
-          },
-          {
-            "name": "Instinct",
-            "type": "Accelerator",
-            "description": "AI Accelerator",
-            "features": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "ROCm"
-            ],
-            "provides_integrations": [
-              "PCIe"
-            ],
-            "targets_markets": [
-              "Data Center",
-              "Cloud Computing"
-            ],
-            "ai_capabilities": [
-              "AI Acceleration"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "Zen Architecture",
-            "category": "Processor Architecture",
-            "purpose": "High Performance and Power Efficiency",
-            "implemented_by": [
-              "EPYC",
-              "Ryzen"
-            ],
-            "enables_capabilities": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "technical_details": "x86-64 Instruction Set Architecture"
-          },
-          {
-            "name": "RDNA Architecture",
-            "category": "Graphics Architecture",
-            "purpose": "High Performance and Power Efficiency",
-            "implemented_by": [
-              "Radeon"
-            ],
-            "enables_capabilities": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "technical_details": "Graphics Processing Unit Architecture"
-          },
-          {
-            "name": "ROCm",
-            "category": "AI Framework",
-            "purpose": "AI Acceleration",
-            "implemented_by": [
-              "Instinct"
-            ],
-            "enables_capabilities": [
-              "AI Acceleration"
-            ],
-            "technical_details": "Open-Source AI Framework"
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "AI Acceleration",
-            "type": "Model",
-            "description": "Accelerating AI Workloads",
-            "applications": [
-              "Data Center",
-              "Cloud Computing"
-            ],
-            "performance_metrics": {
-              "throughput": "High",
-              "latency": "Low"
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "PCIe",
-            "type": "Interface",
-            "platform": "x86-64",
-            "description": "Peripheral Component Interconnect Express",
-            "available_in_products": [
-              "EPYC",
-              "Ryzen",
-              "Radeon",
-              "Instinct"
-            ]
-          },
-          {
-            "name": "SATA",
-            "type": "Interface",
-            "platform": "x86-64",
-            "description": "Serial Advanced Technology Attachment",
-            "available_in_products": [
-              "EPYC",
-              "Ryzen"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "Microsoft",
-            "relationship_type": "partners_with",
-            "description": "Partnership for AI Acceleration",
-            "products_affected": [
-              "Instinct"
-            ],
-            "strategic_value": "AI Acceleration"
-          }
-        ],
-        "people": [
-          {
-            "name": "Lisa Su",
-            "title": "CEO",
-            "role": "leads",
-            "relationship": "leads",
-            "background": "Engineering and Business"
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "Enterprise",
-            "price": "High",
-            "features": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "includes_products": [
-              "EPYC",
-              "Ryzen",
-              "Radeon"
-            ],
-            "limitations": [
-              "Limited Support"
-            ],
-            "target_segment": "Enterprise"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "Data Center",
-            "geography": "Global",
-            "size": "Large",
-            "targeted_by_products": [
-              "EPYC",
-              "Instinct"
-            ],
-            "growth_rate": "High",
-            "competitive_landscape": "Highly Competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Intel",
-            "compete_in": [
-              "Data Center",
-              "Client Computing"
-            ],
-            "our_advantages": [
-              "High Performance",
-              "Power Efficiency"
-            ],
-            "their_advantages": [
-              "Established Brand",
-              "Wide Range of Products"
-            ],
-            "market_position": "Leader"
-          }
-        ]
-      },
-      "content_length": 35994,
-      "extractedContent": "---\nurl: https://amd.com/en/newsroom\ncompany: AMD\nscraped_at: 2025-07-04 20:10:19\n---\n\n  404\n\nSkip to main contentEnable accessibility for low visionOpen the accessibility menu\n\n![Spinner: White decorative](https://cdn.userway.org/widgetapp/images/spin_wh.svg)\n\n![](https://cdn.userway.org/widgetapp/images/body_wh.svg)\n\n![Spinner: White decorative](https://cdn.userway.org/widgetapp/images/spin_wh.svg)\n\n[Skip to main content](#)\n\n[AMD Website Accessibility Statement](/en/site-notifications/accessi...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 4,
-        "technologies": 3,
-        "ai_ml_concepts": 1,
         "partnerships": 1,
         "integrations": 2
       }
@@ -22396,1631 +24323,8 @@
         "partnerships": 0,
         "integrations": 0
       }
-    },
-    {
-      "id": "86",
-      "url": "https://elevenlabs.io",
-      "company": "ElevenLabs",
-      "type": "homepage",
-      "title": "ElevenLabs - homepage",
-      "relevance_score": 8,
-      "keywords": [
-        "ElevenLabs",
-        "AI",
-        "ML",
-        "voice generation",
-        "speech recognition",
-        null
-      ],
-      "summary": "ElevenLabs is a leader in AI audio models, with high-quality models and a strong partnership with Perplexity.",
-      "extracted_at": "2025-07-06 15:53:52",
-      "entities": {
-        "products": [
-          {
-            "name": "ElevenLabs",
-            "type": "AI audio platform",
-            "description": "AI voice models and products for developers, creators, and enterprises",
-            "features": [
-              "Text to Speech",
-              "Speech to Text",
-              "Conversational AI",
-              "Voice Changer",
-              "Dubbing Studio"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "AI",
-              "ML"
-            ],
-            "provides_integrations": [
-              "API",
-              "SDK"
-            ],
-            "targets_markets": [
-              "developers",
-              "creators",
-              "enterprises"
-            ],
-            "ai_capabilities": [
-              "voice generation",
-              "speech recognition"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "AI",
-            "category": "ai_ml",
-            "purpose": "powering AI audio models",
-            "implemented_by": [
-              "ElevenLabs"
-            ],
-            "enables_capabilities": [
-              "voice generation",
-              "speech recognition"
-            ],
-            "technical_details": "utilizes machine learning models for audio processing"
-          },
-          {
-            "name": "ML",
-            "category": "ai_ml",
-            "purpose": "improving AI audio models",
-            "implemented_by": [
-              "ElevenLabs"
-            ],
-            "enables_capabilities": [
-              "voice generation",
-              "speech recognition"
-            ],
-            "technical_details": "utilizes deep learning techniques for audio processing"
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "voice generation",
-            "type": "model",
-            "description": "generating human-like voices using AI",
-            "applications": [
-              "text to speech",
-              "voice assistants"
-            ],
-            "performance_metrics": {
-              "accuracy": "high"
-            }
-          },
-          {
-            "concept": "speech recognition",
-            "type": "model",
-            "description": "recognizing spoken words using AI",
-            "applications": [
-              "voice assistants",
-              "transcription"
-            ],
-            "performance_metrics": {
-              "accuracy": "high"
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "API",
-            "type": "api",
-            "platform": "ElevenLabs",
-            "description": "provides access to AI audio models",
-            "available_in_products": [
-              "ElevenLabs"
-            ]
-          },
-          {
-            "name": "SDK",
-            "type": "sdk",
-            "platform": "ElevenLabs",
-            "description": "provides tools for integrating AI audio models",
-            "available_in_products": [
-              "ElevenLabs"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "Perplexity",
-            "relationship_type": "partners_with",
-            "description": "partnership for conversational AI",
-            "products_affected": [
-              "ElevenLabs"
-            ],
-            "strategic_value": "enhances conversational AI capabilities"
-          }
-        ],
-        "people": [
-          {
-            "name": "Mati Staniszewski",
-            "title": "Researcher",
-            "role": "researcher",
-            "relationship": "employs",
-            "background": "research background"
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "free",
-            "price": "0",
-            "features": [
-              "limited access to AI audio models"
-            ],
-            "includes_products": [
-              "ElevenLabs"
-            ],
-            "limitations": [
-              "limited usage"
-            ],
-            "target_segment": "individuals"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "developers",
-            "geography": "global",
-            "size": "large",
-            "targeted_by_products": [
-              "ElevenLabs"
-            ],
-            "growth_rate": "high",
-            "competitive_landscape": "competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Google",
-            "compete_in": [
-              "AI audio models"
-            ],
-            "our_advantages": [
-              "specialized in AI audio"
-            ],
-            "their_advantages": [
-              "established brand"
-            ],
-            "market_position": "leader"
-          }
-        ]
-      },
-      "content_length": 24827,
-      "extractedContent": "---\nurl: https://elevenlabs.io\ncompany: ElevenLabs\nscraped_at: 2025-07-04 20:12:02\n---\n\nFree Text to Speech & AI Voice Generator | ElevenLabs\n\n[\n\n](/)\n\n[Skip to content](#content)\n\n*   Platform\n\n*   Solutions\n\n*   API\n\n*   Resources\n\n*   [Docs](/docs/overview)\n*   [Enterprise](/enterprise)\n*   [Pricing](/pricing)\n\n[Log in](/app/sign-in)[Sign up](/app/sign-up)\n\n[\n\n](/)\n\n*   [Sign up](/app/sign-up)\n\n# The most realistic voice AI platform\n\nAI voice models and products powering millions of developer...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 1,
-        "technologies": 2,
-        "ai_ml_concepts": 2,
-        "partnerships": 1,
-        "integrations": 2
-      }
-    },
-    {
-      "id": "87",
-      "url": "https://elevenlabs.io/pricing",
-      "company": "ElevenLabs",
-      "type": "pricing",
-      "title": "ElevenLabs - pricing",
-      "relevance_score": 8,
-      "keywords": [
-        "ElevenLabs",
-        "AI",
-        "ML",
-        "Text to Speech",
-        "Speech to Text",
-        null
-      ],
-      "summary": "ElevenLabs is an AI audio platform with a strong focus on partnerships and pricing.",
-      "extracted_at": "2025-07-06 15:53:52",
-      "entities": {
-        "products": [
-          {
-            "name": "ElevenLabs",
-            "type": "AI Audio Platform",
-            "description": "AI audio platform for creators and businesses",
-            "features": [
-              "Text to Speech",
-              "Speech to Text",
-              "Conversational AI",
-              "Studio",
-              "Automated Dubbing",
-              "API access"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "AI",
-              "ML"
-            ],
-            "provides_integrations": [
-              "API"
-            ],
-            "targets_markets": [
-              "Creators",
-              "Businesses"
-            ],
-            "ai_capabilities": [
-              "Text to Speech",
-              "Speech to Text",
-              "Conversational AI"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "AI",
-            "category": "ai_ml",
-            "purpose": "Enable AI audio capabilities",
-            "implemented_by": [
-              "ElevenLabs"
-            ],
-            "enables_capabilities": [
-              "Text to Speech",
-              "Speech to Text",
-              "Conversational AI"
-            ],
-            "technical_details": "Machine learning models for AI audio"
-          },
-          {
-            "name": "ML",
-            "category": "ai_ml",
-            "purpose": "Improve AI audio capabilities",
-            "implemented_by": [
-              "ElevenLabs"
-            ],
-            "enables_capabilities": [
-              "Text to Speech",
-              "Speech to Text",
-              "Conversational AI"
-            ],
-            "technical_details": "Deep learning models for AI audio"
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "Text to Speech",
-            "type": "model",
-            "description": "Convert text to speech",
-            "applications": [
-              "AI audio"
-            ],
-            "performance_metrics": {
-              "accuracy": "high"
-            }
-          },
-          {
-            "concept": "Speech to Text",
-            "type": "model",
-            "description": "Convert speech to text",
-            "applications": [
-              "AI audio"
-            ],
-            "performance_metrics": {
-              "accuracy": "high"
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "API",
-            "type": "api",
-            "platform": "ElevenLabs",
-            "description": "Access to AI audio capabilities",
-            "available_in_products": [
-              "ElevenLabs"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "Startup Grants",
-            "relationship_type": "partners_with",
-            "description": "Partnership for startup grants",
-            "products_affected": [
-              "ElevenLabs"
-            ],
-            "strategic_value": "Support for startups"
-          }
-        ],
-        "people": [
-          {
-            "name": "ElevenLabs Team",
-            "title": "Founders",
-            "role": "founder",
-            "relationship": "leads",
-            "background": "AI audio experts"
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "Free",
-            "price": "$0",
-            "features": [
-              "Text to Speech",
-              "Speech to Text",
-              "Conversational AI"
-            ],
-            "includes_products": [
-              "ElevenLabs"
-            ],
-            "limitations": [
-              "Limited credits"
-            ],
-            "target_segment": "Individuals"
-          },
-          {
-            "tier": "Starter",
-            "price": "$5",
-            "features": [
-              "Text to Speech",
-              "Speech to Text",
-              "Conversational AI",
-              "Commercial license"
-            ],
-            "includes_products": [
-              "ElevenLabs"
-            ],
-            "limitations": [
-              "Limited credits"
-            ],
-            "target_segment": "Hobbyists"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "Creators",
-            "geography": "Global",
-            "size": "Large",
-            "targeted_by_products": [
-              "ElevenLabs"
-            ],
-            "growth_rate": "High",
-            "competitive_landscape": "Competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Competitor 1",
-            "compete_in": [
-              "AI audio"
-            ],
-            "our_advantages": [
-              "Better AI capabilities"
-            ],
-            "their_advantages": [
-              "Established brand"
-            ],
-            "market_position": "Leader"
-          }
-        ]
-      },
-      "content_length": 11167,
-      "extractedContent": "---\nurl: https://elevenlabs.io/pricing\ncompany: ElevenLabs\nscraped_at: 2025-07-04 20:13:32\n---\n\nElevenLabs Pricing for Creators & Businesses of All Sizes\n\n[\n\n](/)\n\n[Skip to content](#content)\n\n*   Platform\n\n*   Solutions\n\n*   API\n\n*   Resources\n\n*   [Docs](/docs/overview)\n*   [Enterprise](/enterprise)\n*   [Pricing](/pricing)\n\n[Log in](/app/sign-in)[Sign up](/app/sign-up)\n\n[\n\n](/)\n\n*   [Sign up](/app/sign-up)\n\n# Pricing\n\nPlans built for creators and business of all sizes\n\nAnnual billing\n\n2 months...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 1,
-        "technologies": 2,
-        "ai_ml_concepts": 2,
-        "partnerships": 1,
-        "integrations": 1
-      }
-    },
-    {
-      "id": "88",
-      "url": "https://elevenlabs.io/blog",
-      "company": "ElevenLabs",
-      "type": "blog",
-      "title": "ElevenLabs - blog",
-      "relevance_score": 8,
-      "keywords": [
-        "Eleven v3",
-        "11ai",
-        "ElevenLabs app",
-        "Conversational AI",
-        "Text to Speech",
-        "Machine learning models",
-        null
-      ],
-      "summary": "ElevenLabs is a leader in AI audio research and product deployment, with a strong focus on innovation and partnerships.",
-      "extracted_at": "2025-07-06 15:53:52",
-      "entities": {
-        "products": [
-          {
-            "name": "Eleven v3",
-            "type": "Text to Speech model",
-            "description": "The most expressive Text to Speech model",
-            "features": [
-              "expressive",
-              "alpha version"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "AI",
-              "Conversational AI"
-            ],
-            "provides_integrations": [
-              "API",
-              "Conversational AI"
-            ],
-            "targets_markets": [
-              "Enterprise",
-              "Teams",
-              "Creators"
-            ],
-            "ai_capabilities": [
-              "Text to Speech",
-              "Speech to Text"
-            ]
-          },
-          {
-            "name": "11ai",
-            "type": "Voice-first AI assistant",
-            "description": "A voice assistant built to explore the potential of ElevenLabs Conversational AI technology",
-            "features": [
-              "voice-first",
-              "alpha version"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "AI",
-              "Conversational AI"
-            ],
-            "provides_integrations": [
-              "API",
-              "Conversational AI"
-            ],
-            "targets_markets": [
-              "Enterprise",
-              "Teams",
-              "Creators"
-            ],
-            "ai_capabilities": [
-              "Text to Speech",
-              "Speech to Text"
-            ]
-          },
-          {
-            "name": "ElevenLabs app",
-            "type": "Mobile app",
-            "description": "The most powerful AI voice tools are now available for iOS and Android",
-            "features": [
-              "AI voice tools",
-              "iOS and Android support"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "AI",
-              "Mobile app development"
-            ],
-            "provides_integrations": [
-              "API",
-              "Mobile app"
-            ],
-            "targets_markets": [
-              "Enterprise",
-              "Teams",
-              "Creators"
-            ],
-            "ai_capabilities": [
-              "Text to Speech",
-              "Speech to Text"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "Conversational AI",
-            "category": "AI",
-            "purpose": "Enable natural language interactions",
-            "implemented_by": [
-              "Eleven v3",
-              "11ai",
-              "ElevenLabs app"
-            ],
-            "enables_capabilities": [
-              "Text to Speech",
-              "Speech to Text"
-            ],
-            "technical_details": "Uses machine learning models to understand and respond to user input"
-          },
-          {
-            "name": "Text to Speech",
-            "category": "AI",
-            "purpose": "Convert text into spoken language",
-            "implemented_by": [
-              "Eleven v3",
-              "11ai",
-              "ElevenLabs app"
-            ],
-            "enables_capabilities": [
-              "voice synthesis"
-            ],
-            "technical_details": "Uses machine learning models to generate natural-sounding speech"
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "Machine learning models",
-            "type": "model",
-            "description": "Algorithms used to train AI systems",
-            "applications": [
-              "Text to Speech",
-              "Speech to Text"
-            ],
-            "performance_metrics": {
-              "accuracy": "high",
-              "speed": "fast"
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "API",
-            "type": "API",
-            "platform": "ElevenLabs",
-            "description": "Allows developers to integrate ElevenLabs technology into their applications",
-            "available_in_products": [
-              "Eleven v3",
-              "11ai",
-              "ElevenLabs app"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "Cisco",
-            "relationship_type": "partners_with",
-            "description": "Partnership to bring voice AI to the enterprise",
-            "products_affected": [
-              "Eleven v3",
-              "11ai"
-            ],
-            "strategic_value": "Expands ElevenLabs reach into the enterprise market"
-          }
-        ],
-        "people": [
-          {
-            "name": "Dustin Blank",
-            "title": "Partnerships",
-            "role": "leads",
-            "relationship": "employs",
-            "background": "Experience in partnerships and business development"
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "Free",
-            "price": "0",
-            "features": [
-              "Limited access to AI voice tools"
-            ],
-            "includes_products": [
-              "ElevenLabs app"
-            ],
-            "limitations": [
-              "Limited usage"
-            ],
-            "target_segment": "Individuals"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "Enterprise",
-            "geography": "Global",
-            "size": "Large",
-            "targeted_by_products": [
-              "Eleven v3",
-              "11ai"
-            ],
-            "growth_rate": "High",
-            "competitive_landscape": "Competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Google",
-            "compete_in": [
-              "Text to Speech",
-              "Speech to Text"
-            ],
-            "our_advantages": [
-              "More expressive Text to Speech model"
-            ],
-            "their_advantages": [
-              "More established brand"
-            ],
-            "market_position": "Leader"
-          }
-        ]
-      },
-      "content_length": 13589,
-      "extractedContent": "---\nurl: https://elevenlabs.io/blog\ncompany: ElevenLabs\nscraped_at: 2025-07-04 20:13:33\n---\n\nAI audio research, product deployment, and company updates | ElevenLabs\n\n[\n\n](/)\n\n*   [Sign up](/app/sign-up)\n\n[\n\n](/)\n\n[Skip to content](#content)\n\n*   Platform\n\n*   Solutions\n\n*   API\n\n*   Resources\n\n*   [Docs](/docs/overview)\n*   [Enterprise](/enterprise)\n*   [Pricing](/pricing)\n\n[Log in](/app/sign-in)[Sign up](/app/sign-up)\n\n# Blog\n\n## Introducing Eleven v3 (alpha) — the most expressive Text to Speec...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 3,
-        "technologies": 2,
-        "ai_ml_concepts": 1,
-        "partnerships": 1,
-        "integrations": 1
-      }
-    },
-    {
-      "id": "89",
-      "url": "https://descript.com",
-      "company": "Descript",
-      "type": "homepage",
-      "title": "Descript - homepage",
-      "relevance_score": 8,
-      "keywords": [
-        "Descript",
-        "AI",
-        "Machine Learning",
-        null
-      ],
-      "summary": "Descript is an all-in-one platform for video editing, podcasting, and screen recording with AI-powered features.",
-      "extracted_at": "2025-07-06 15:53:52",
-      "entities": {
-        "products": [
-          {
-            "name": "Descript",
-            "type": "Video Editing and Podcasting Platform",
-            "description": "An all-in-one platform for video editing, podcasting, and screen recording with AI-powered features.",
-            "features": [
-              "Video Editing",
-              "Podcasting",
-              "Screen Recording",
-              "Transcription",
-              "AI-powered features like Eye Contact, Studio Sound, and Regenerate"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "AI",
-              "Machine Learning"
-            ],
-            "provides_integrations": [
-              "API",
-              "Connector",
-              "Plugin"
-            ],
-            "targets_markets": [
-              "Marketing",
-              "Sales",
-              "Learning and Development",
-              "Customer Support"
-            ],
-            "ai_capabilities": [
-              "Text-to-Speech",
-              "Speech Recognition",
-              "Natural Language Processing"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "AI",
-            "category": "Artificial Intelligence",
-            "purpose": "To enable automated features like transcription, translation, and speech recognition.",
-            "implemented_by": [
-              "Descript"
-            ],
-            "enables_capabilities": [
-              "Automated Transcription",
-              "Translation",
-              "Speech Recognition"
-            ],
-            "technical_details": "Uses machine learning models to analyze audio and video files."
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "Machine Learning",
-            "type": "Model",
-            "description": "A type of artificial intelligence that enables systems to learn from data without being explicitly programmed.",
-            "applications": [
-              "Speech Recognition",
-              "Natural Language Processing",
-              "Image Recognition"
-            ],
-            "performance_metrics": {
-              "accuracy": "90%",
-              "precision": "85%",
-              "recall": "90%"
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "API",
-            "type": "Application Programming Interface",
-            "platform": "Descript",
-            "description": "Allows developers to integrate Descript's features into their own applications.",
-            "available_in_products": [
-              "Descript"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "Amazon",
-            "relationship_type": "Integration",
-            "description": "Descript integrates with Amazon's services to enable seamless video editing and hosting.",
-            "products_affected": [
-              "Descript"
-            ],
-            "strategic_value": "Enhanced video editing capabilities"
-          }
-        ],
-        "people": [
-          {
-            "name": "Sam Brace",
-            "title": "Senior Director of Customer Education and Community",
-            "role": "Executive",
-            "relationship": "Employed by Descript",
-            "background": "Experience in customer education and community building."
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "Free",
-            "price": "$0",
-            "features": [
-              "1 transcription hour/month",
-              "Export 720p, with watermarks"
-            ],
-            "includes_products": [
-              "Descript"
-            ],
-            "limitations": [
-              "Limited trial of Basic AI Actions"
-            ],
-            "target_segment": "Individuals and small businesses"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "Marketing",
-            "geography": "Global",
-            "size": "Large",
-            "targeted_by_products": [
-              "Descript"
-            ],
-            "growth_rate": "High",
-            "competitive_landscape": "Highly competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Adobe",
-            "compete_in": [
-              "Video Editing"
-            ],
-            "our_advantages": [
-              "AI-powered features"
-            ],
-            "their_advantages": [
-              "Established brand"
-            ],
-            "market_position": "Leader"
-          }
-        ]
-      },
-      "content_length": 32065,
-      "extractedContent": "---\nurl: https://descript.com\ncompany: Descript\nscraped_at: 2025-07-04 20:11:55\n---\n\nDescript: Edit Videos & Podcasts Like a Doc | AI Video Editor\n\n*   [![descript logo](https://descript-website.vercel.app/images/descript-logo.svg)](/?redirect=false)\n*   Features![chevron icon](https://descript-website.vercel.app/images/chevron-down.svg)\n\n    Features\n\n    *   [\n\n        ![Video editing icon](https://descript-website.vercel.app/images/nav-icons/video-editing.svg)\n\n        Video editing\n\n        ...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 1,
-        "technologies": 1,
-        "ai_ml_concepts": 1,
-        "partnerships": 1,
-        "integrations": 1
-      }
-    },
-    {
-      "id": "90",
-      "url": "https://descript.com/overdub",
-      "company": "Descript",
-      "type": "product",
-      "title": "Descript - product",
-      "relevance_score": 8,
-      "keywords": [
-        "Descript",
-        "AI",
-        "Audio regeneration",
-        null
-      ],
-      "summary": "Descript is a leader in AI-powered audio editing, with a strong focus on innovation and growth.",
-      "extracted_at": "2025-07-06 15:53:52",
-      "entities": {
-        "products": [
-          {
-            "name": "Descript",
-            "type": "AI-powered audio editing software",
-            "description": "AI-powered audio repair and editing tool",
-            "features": [
-              "AI-powered audio repair",
-              "Regenerate audio",
-              "Remove background noise",
-              "Edit for clarity",
-              "Studio sound"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "AI",
-              "Machine learning"
-            ],
-            "provides_integrations": [
-              "API",
-              "Connector"
-            ],
-            "targets_markets": [
-              "Podcasting",
-              "Video editing",
-              "Screen recording"
-            ],
-            "ai_capabilities": [
-              "Audio regeneration",
-              "Noise removal",
-              "Clarity editing"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "AI",
-            "category": "ai_ml",
-            "purpose": "Audio repair and editing",
-            "implemented_by": [
-              "Descript"
-            ],
-            "enables_capabilities": [
-              "Audio regeneration",
-              "Noise removal",
-              "Clarity editing"
-            ],
-            "technical_details": "Machine learning models for audio processing"
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "Audio regeneration",
-            "type": "model",
-            "description": "AI-powered audio regeneration",
-            "applications": [
-              "Podcasting",
-              "Video editing"
-            ],
-            "performance_metrics": {
-              "accuracy": "high"
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "API",
-            "type": "api",
-            "platform": "Descript",
-            "description": "API for integrating Descript with other tools",
-            "available_in_products": [
-              "Descript"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "Amazon",
-            "relationship_type": "integrates_with",
-            "description": "Descript integrates with Amazon services",
-            "products_affected": [
-              "Descript"
-            ],
-            "strategic_value": "expanded reach"
-          }
-        ],
-        "people": [
-          {
-            "name": "Descript Team",
-            "title": "Founder",
-            "role": "founder",
-            "relationship": "leads",
-            "background": "AI and audio editing expertise"
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "Free",
-            "price": "0",
-            "features": [
-              "AI-powered audio repair",
-              "Regenerate audio"
-            ],
-            "includes_products": [
-              "Descript"
-            ],
-            "limitations": [
-              "Limited features"
-            ],
-            "target_segment": "individuals"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "Podcasting",
-            "geography": "global",
-            "size": "large",
-            "targeted_by_products": [
-              "Descript"
-            ],
-            "growth_rate": "high",
-            "competitive_landscape": "competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Adobe",
-            "compete_in": [
-              "Audio editing"
-            ],
-            "our_advantages": [
-              "AI-powered audio repair"
-            ],
-            "their_advantages": [
-              "Established brand"
-            ],
-            "market_position": "leader"
-          }
-        ]
-      },
-      "content_length": 16899,
-      "extractedContent": "---\nurl: https://descript.com/overdub\ncompany: Descript\nscraped_at: 2025-07-04 20:12:01\n---\n\nAI-powered audio repair | Regenerate audio to make impossible edits possible\n\n*   [![descript logo](https://descript-website.vercel.app/images/descript-logo.svg)](/?redirect=false)\n*   Features![chevron icon](https://descript-website.vercel.app/images/chevron-down.svg)\n\n    Features\n\n    *   [\n\n        ![Video editing icon](https://descript-website.vercel.app/images/nav-icons/video-editing.svg)\n\n        ...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 1,
-        "technologies": 1,
-        "ai_ml_concepts": 1,
-        "partnerships": 1,
-        "integrations": 1
-      }
-    },
-    {
-      "id": "91",
-      "url": "https://descript.com/pricing",
-      "company": "Descript",
-      "type": "pricing",
-      "title": "Descript - pricing",
-      "relevance_score": 8,
-      "keywords": [
-        "Descript",
-        "AI",
-        "Machine Learning",
-        null
-      ],
-      "summary": "Descript is a platform for video editing, podcasting, and screen recording with AI-powered features, offering a user-friendly interface and scalable pricing plans.",
-      "extracted_at": "2025-07-06 15:53:52",
-      "entities": {
-        "products": [
-          {
-            "name": "Descript",
-            "type": "Video Editing and Podcasting Platform",
-            "description": "A platform for video editing, podcasting, and screen recording with AI-powered features",
-            "features": [
-              "Video editing",
-              "Podcasting",
-              "Screen recording",
-              "Transcription",
-              "AI-powered features"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "AI",
-              "Machine Learning"
-            ],
-            "provides_integrations": [
-              "API",
-              "ChatGPT integration"
-            ],
-            "targets_markets": [
-              "Creators",
-              "Marketers",
-              "Sales teams",
-              "Customer support teams"
-            ],
-            "ai_capabilities": [
-              "AI speech",
-              "AI avatars",
-              "Transcription",
-              "Image generation"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "AI",
-            "category": "AI/ML",
-            "purpose": "Powering features like transcription, AI speech, and image generation",
-            "implemented_by": [
-              "Descript"
-            ],
-            "enables_capabilities": [
-              "Automated transcription",
-              "AI-powered video editing"
-            ],
-            "technical_details": "Uses machine learning models for speech recognition and image generation"
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "Machine Learning",
-            "type": "Model",
-            "description": "A type of AI that enables systems to learn from data",
-            "applications": [
-              "Transcription",
-              "Image generation"
-            ],
-            "performance_metrics": {
-              "accuracy": "High"
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "ChatGPT integration",
-            "type": "API",
-            "platform": "Descript",
-            "description": "Enables users to generate videos with AI-powered scripts and visuals",
-            "available_in_products": [
-              "Descript"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "ChatGPT",
-            "relationship_type": "integrates_with",
-            "description": "Enables users to generate videos with AI-powered scripts and visuals",
-            "products_affected": [
-              "Descript"
-            ],
-            "strategic_value": "Enhances Descript's AI capabilities"
-          }
-        ],
-        "people": [
-          {
-            "name": "Underlord",
-            "title": "AI Assistant",
-            "role": "AI-powered assistant",
-            "relationship": "employs",
-            "background": "Developed by Descript"
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "Free",
-            "price": "0",
-            "features": [
-              "Limited transcription hours",
-              "Limited AI features"
-            ],
-            "includes_products": [
-              "Descript"
-            ],
-            "limitations": [
-              "Limited features"
-            ],
-            "target_segment": "Individual creators"
-          },
-          {
-            "tier": "Hobbyist",
-            "price": "16",
-            "features": [
-              "10 transcription hours",
-              "20 uses of Basic AI Actions suite"
-            ],
-            "includes_products": [
-              "Descript"
-            ],
-            "limitations": [
-              "Limited features"
-            ],
-            "target_segment": "Small teams and hobbyists"
-          },
-          {
-            "tier": "Creator",
-            "price": "24",
-            "features": [
-              "30 transcription hours",
-              "Unlimited Basic and Advanced AI Actions suite"
-            ],
-            "includes_products": [
-              "Descript"
-            ],
-            "limitations": [
-              "Limited features"
-            ],
-            "target_segment": "Medium-sized teams and creators"
-          },
-          {
-            "tier": "Business",
-            "price": "50",
-            "features": [
-              "40 transcription hours",
-              "Unlimited Professional AI Actions suite"
-            ],
-            "includes_products": [
-              "Descript"
-            ],
-            "limitations": [
-              "Limited features"
-            ],
-            "target_segment": "Large teams and enterprises"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "Creators",
-            "geography": "Global",
-            "size": "Large",
-            "targeted_by_products": [
-              "Descript"
-            ],
-            "growth_rate": "High",
-            "competitive_landscape": "Highly competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Adobe",
-            "compete_in": [
-              "Video editing",
-              "Podcasting"
-            ],
-            "our_advantages": [
-              "AI-powered features",
-              "User-friendly interface"
-            ],
-            "their_advantages": [
-              "Established brand",
-              "Wide range of features"
-            ],
-            "market_position": "Leader"
-          }
-        ]
-      },
-      "content_length": 62870,
-      "extractedContent": "---\nurl: https://descript.com/pricing\ncompany: Descript\nscraped_at: 2025-07-04 20:12:02\n---\n\nPricing & Plans | Descript\n\n*   [![descript logo](https://descript-website.vercel.app/images/descript-logo.svg)](/?redirect=false)\n*   Features![chevron icon](https://descript-website.vercel.app/images/chevron-down.svg)\n\n    Features\n\n    *   [\n\n        ![Video editing icon](https://descript-website.vercel.app/images/nav-icons/video-editing.svg)\n\n        Video editing\n\n        Editing video in Descript i...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 1,
-        "technologies": 1,
-        "ai_ml_concepts": 1,
-        "partnerships": 1,
-        "integrations": 1
-      }
-    },
-    {
-      "id": "92",
-      "url": "https://descript.com/blog",
-      "company": "Descript",
-      "type": "blog",
-      "title": "Descript - blog",
-      "relevance_score": 8,
-      "keywords": [
-        "Descript",
-        "AI",
-        "Machine Learning",
-        "AI-powered editing",
-        "Automatic transcription",
-        null
-      ],
-      "summary": "Descript is a video editing software that uses AI to help creators make better video, with a strong focus on remote recording and editing capabilities.",
-      "extracted_at": "2025-07-06 15:53:52",
-      "entities": {
-        "products": [
-          {
-            "name": "Descript",
-            "type": "Video Editing Software",
-            "description": "A video editing software that uses AI to help creators make better video",
-            "features": [
-              "AI-powered editing assistant",
-              "Multitrack audio editing",
-              "Screen recording",
-              "Transcription",
-              "AI speech"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "AI",
-              "Machine Learning"
-            ],
-            "provides_integrations": [
-              "API",
-              "Connectors"
-            ],
-            "targets_markets": [
-              "Creators",
-              "Marketers",
-              "Businesses"
-            ],
-            "ai_capabilities": [
-              "AI-powered editing",
-              "Automatic transcription",
-              "AI speech"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "AI",
-            "category": "AI/ML",
-            "purpose": "To help creators make better video",
-            "implemented_by": [
-              "Descript"
-            ],
-            "enables_capabilities": [
-              "AI-powered editing",
-              "Automatic transcription",
-              "AI speech"
-            ],
-            "technical_details": "Uses machine learning models to analyze and edit video"
-          },
-          {
-            "name": "Machine Learning",
-            "category": "AI/ML",
-            "purpose": "To improve the accuracy of video editing",
-            "implemented_by": [
-              "Descript"
-            ],
-            "enables_capabilities": [
-              "AI-powered editing",
-              "Automatic transcription",
-              "AI speech"
-            ],
-            "technical_details": "Uses algorithms to learn from data and improve video editing"
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "AI-powered editing",
-            "type": "Model",
-            "description": "Uses AI to edit video",
-            "applications": [
-              "Video editing"
-            ],
-            "performance_metrics": {
-              "accuracy": "90%"
-            }
-          },
-          {
-            "concept": "Automatic transcription",
-            "type": "Model",
-            "description": "Uses AI to transcribe video",
-            "applications": [
-              "Video transcription"
-            ],
-            "performance_metrics": {
-              "accuracy": "95%"
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "API",
-            "type": "API",
-            "platform": "Descript",
-            "description": "Allows developers to integrate Descript with other applications",
-            "available_in_products": [
-              "Descript"
-            ]
-          },
-          {
-            "name": "Connectors",
-            "type": "Connector",
-            "platform": "Descript",
-            "description": "Allows users to connect Descript with other applications",
-            "available_in_products": [
-              "Descript"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "Squadcast",
-            "relationship_type": "Partners with",
-            "description": "Partnership to provide remote recording and editing capabilities",
-            "products_affected": [
-              "Descript"
-            ],
-            "strategic_value": "Enhances Descript's remote recording and editing capabilities"
-          }
-        ],
-        "people": [
-          {
-            "name": "Andrew Mason",
-            "title": "CEO",
-            "role": "CEO",
-            "relationship": "Leads Descript",
-            "background": "Experienced executive in the technology industry"
-          },
-          {
-            "name": "Brandon Copple",
-            "title": "Product Marketer",
-            "role": "Product Marketer",
-            "relationship": "Employs Descript",
-            "background": "Experienced marketer in the technology industry"
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "Free",
-            "price": "$0",
-            "features": [
-              "Limited video editing capabilities"
-            ],
-            "includes_products": [
-              "Descript"
-            ],
-            "limitations": [
-              "Limited video editing capabilities"
-            ],
-            "target_segment": "Individual creators"
-          },
-          {
-            "tier": "Pro",
-            "price": "$12",
-            "features": [
-              "Advanced video editing capabilities"
-            ],
-            "includes_products": [
-              "Descript"
-            ],
-            "limitations": [
-              "None"
-            ],
-            "target_segment": "Professional creators"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "Creators",
-            "geography": "Global",
-            "size": "10 million",
-            "targeted_by_products": [
-              "Descript"
-            ],
-            "growth_rate": "10%",
-            "competitive_landscape": "Highly competitive"
-          },
-          {
-            "segment": "Marketers",
-            "geography": "Global",
-            "size": "5 million",
-            "targeted_by_products": [
-              "Descript"
-            ],
-            "growth_rate": "15%",
-            "competitive_landscape": "Moderately competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Adobe Premiere Pro",
-            "compete_in": [
-              "Video editing"
-            ],
-            "our_advantages": [
-              "AI-powered editing"
-            ],
-            "their_advantages": [
-              "Established brand"
-            ],
-            "market_position": "Leader"
-          },
-          {
-            "company": "Final Cut Pro",
-            "compete_in": [
-              "Video editing"
-            ],
-            "our_advantages": [
-              "AI-powered editing"
-            ],
-            "their_advantages": [
-              "Established brand"
-            ],
-            "market_position": "Leader"
-          }
-        ]
-      },
-      "content_length": 37715,
-      "extractedContent": "---\nurl: https://descript.com/blog\ncompany: Descript\nscraped_at: 2025-07-04 20:12:01\n---\n\nDescript Blog: Make Better Video, Faster\n\n[\n\nIntroducing\n\n![](https://cdn.prod.website-files.com/634e7aa49f5b028264d9e879/665f2949456ac7fa86b4863c_Conductor-Robot.svg)\n\nUnderlord\n\nA new AI-powered editing assistant, right inside Descript\n\n![](https://cdn.prod.website-files.com/634e7aa49f5b028264d9e879/665f2949456ac7fa86b48664_arrow-right-S.svg)](https://descript.com/underlord)\n\n[![](https://cdn.prod.website...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 1,
-        "technologies": 2,
-        "ai_ml_concepts": 2,
-        "partnerships": 1,
-        "integrations": 2
-      }
-    },
-    {
-      "id": "93",
-      "url": "https://resemble.ai",
-      "company": "Resemble AI",
-      "type": "homepage",
-      "title": "Resemble AI - homepage",
-      "relevance_score": 9,
-      "keywords": [
-        "Resemble AI",
-        "AI",
-        "Generative AI",
-        null
-      ],
-      "summary": "Resemble AI is a leader in AI Voice Generation with high accuracy and high growth rate.",
-      "extracted_at": "2025-07-06 15:53:52",
-      "entities": {
-        "products": [
-          {
-            "name": "Resemble AI",
-            "type": "AI Voice Generator",
-            "description": "AI Voice Generator and Deepfake Detection for Enterprise",
-            "features": [
-              "Generative AI",
-              "Text to Speech",
-              "Speech to Speech",
-              "Voice Cloning",
-              "Deepfake Detection"
-            ],
-            "status": "active",
-            "uses_technologies": [
-              "AI",
-              "Machine Learning"
-            ],
-            "provides_integrations": [
-              "API",
-              "SDKs"
-            ],
-            "targets_markets": [
-              "Enterprise"
-            ],
-            "ai_capabilities": [
-              "Voice Cloning",
-              "Text to Speech",
-              "Speech to Speech"
-            ]
-          }
-        ],
-        "technologies": [
-          {
-            "name": "AI",
-            "category": "ai_ml",
-            "purpose": "Generative AI",
-            "implemented_by": [
-              "Resemble AI"
-            ],
-            "enables_capabilities": [
-              "Voice Cloning",
-              "Text to Speech",
-              "Speech to Speech"
-            ],
-            "technical_details": "Machine Learning"
-          }
-        ],
-        "ai_ml_concepts": [
-          {
-            "concept": "Generative AI",
-            "type": "model",
-            "description": "AI that generates human-like voices",
-            "applications": [
-              "Voice Cloning",
-              "Text to Speech",
-              "Speech to Speech"
-            ],
-            "performance_metrics": {
-              "accuracy": "high"
-            }
-          }
-        ],
-        "integrations": [
-          {
-            "name": "API",
-            "type": "api",
-            "platform": "Resemble AI",
-            "description": "Programmatically build content with synthetic voices",
-            "available_in_products": [
-              "Resemble AI"
-            ]
-          }
-        ],
-        "partnerships": [
-          {
-            "partner": "Zomato",
-            "relationship_type": "integrates_with",
-            "description": "Personalization with Zomato and TrueFan",
-            "products_affected": [
-              "Resemble AI"
-            ],
-            "strategic_value": "high"
-          }
-        ],
-        "people": [
-          {
-            "name": "Founder",
-            "title": "Founder",
-            "role": "founder",
-            "relationship": "leads",
-            "background": "AI and Machine Learning"
-          }
-        ],
-        "pricing": [
-          {
-            "tier": "Free",
-            "price": "0",
-            "features": [
-              "Limited features"
-            ],
-            "includes_products": [
-              "Resemble AI"
-            ],
-            "limitations": [
-              "Limited usage"
-            ],
-            "target_segment": "Individuals"
-          }
-        ],
-        "markets": [
-          {
-            "segment": "Enterprise",
-            "geography": "Global",
-            "size": "large",
-            "targeted_by_products": [
-              "Resemble AI"
-            ],
-            "growth_rate": "high",
-            "competitive_landscape": "competitive"
-          }
-        ],
-        "competitors": [
-          {
-            "company": "Competitor",
-            "compete_in": [
-              "AI Voice Generation"
-            ],
-            "our_advantages": [
-              "High accuracy"
-            ],
-            "their_advantages": [
-              "Established brand"
-            ],
-            "market_position": "leader"
-          }
-        ]
-      },
-      "content_length": 27006,
-      "extractedContent": "---\nurl: https://resemble.ai\ncompany: Resemble AI\nscraped_at: 2025-07-04 20:19:40\n---\n\nAI Voice Generator and Deepfake Detection for Enterprise | Resemble AI\n\n\n\n [![Resemble AI - AI Voice Generator](data:image/svg+xml;nitro-empty-id=NDc2OjE1NA==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNzI0IDk5IiB3aWR0aD0iNzI0IiBoZWlnaHQ9Ijk5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==) ![Resemble AI - AI Voice Generator](data:image/svg+xml;nitro-empty-id=NDc3OjE1Mw==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTI...",
-      "aiProcessed": true,
-      "category": "uncategorized",
-      "source": "GitHub Actions Monitor",
-      "entity_counts": {
-        "products": 1,
-        "technologies": 1,
-        "ai_ml_concepts": 1,
-        "partnerships": 1,
-        "integrations": 1
-      }
     }
   ],
   "totalUnfiltered": 100,
-  "generated_at": "2025-07-15T22:56:44.021Z"
+  "generated_at": "2025-07-16T17:21:15.305Z"
 }

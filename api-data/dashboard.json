@@ -1,9 +1,9 @@
 {
   "stats": {
-    "companies": 54,
-    "urls": 174,
+    "companies": 53,
+    "urls": 176,
     "snapshots": 345,
-    "lastCheck": "2025-07-15T20:54:18.416Z"
+    "lastCheck": "2025-07-16T13:04:00.883Z"
   },
   "recent_changes_summary": {
     "last_5_changes": [
@@ -13,7 +13,7 @@
         "url": "https://aleph-alpha.com",
         "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com",
         "interest_level": 5,
-        "time_ago": "4 hours ago",
+        "time_ago": "22 hours ago",
         "detected_at": "2025-07-15 18:51:09"
       },
       {
@@ -22,7 +22,7 @@
         "url": "https://aleph-alpha.com/luminous",
         "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com/luminous",
         "interest_level": 5,
-        "time_ago": "4 hours ago",
+        "time_ago": "22 hours ago",
         "detected_at": "2025-07-15 18:51:06"
       },
       {
@@ -31,7 +31,7 @@
         "url": "https://aleph-alpha.com/pricing",
         "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com/pricing",
         "interest_level": 5,
-        "time_ago": "4 hours ago",
+        "time_ago": "22 hours ago",
         "detected_at": "2025-07-15 18:51:06"
       },
       {
@@ -40,7 +40,7 @@
         "url": "https://amd.com/en/newsroom",
         "summary": "Content changed for AMD - https://amd.com/en/newsroom",
         "interest_level": 5,
-        "time_ago": "4 hours ago",
+        "time_ago": "22 hours ago",
         "detected_at": "2025-07-15 18:51:06"
       },
       {
@@ -49,7 +49,7 @@
         "url": "https://docs.aleph-alpha.com",
         "summary": "Content changed for Aleph Alpha - https://docs.aleph-alpha.com",
         "interest_level": 5,
-        "time_ago": "4 hours ago",
+        "time_ago": "22 hours ago",
         "detected_at": "2025-07-15 18:51:04"
       }
     ],
@@ -93,12 +93,12 @@
       },
       "latest_change": {
         "summary": "Content changed for AI21 Labs - https://ai21.com/blog",
-        "time_ago": "4 hours ago",
+        "time_ago": "22 hours ago",
         "relevance_score": 5
       },
       "recent_activity": {
         "change_count_7d": 4,
-        "last_change": "4 hours ago",
+        "last_change": "22 hours ago",
         "highest_recent_score": 5
       }
     },
@@ -135,12 +135,12 @@
       },
       "latest_change": {
         "summary": "Content changed for AMD - https://amd.com/en/newsroom",
-        "time_ago": "4 hours ago",
+        "time_ago": "22 hours ago",
         "relevance_score": 5
       },
       "recent_activity": {
         "change_count_7d": 2,
-        "last_change": "4 hours ago",
+        "last_change": "22 hours ago",
         "highest_recent_score": 5
       }
     },
@@ -179,12 +179,12 @@
       },
       "latest_change": {
         "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com",
-        "time_ago": "4 hours ago",
+        "time_ago": "22 hours ago",
         "relevance_score": 5
       },
       "recent_activity": {
         "change_count_7d": 4,
-        "last_change": "4 hours ago",
+        "last_change": "22 hours ago",
         "highest_recent_score": 5
       }
     },
@@ -1588,32 +1588,14 @@
       }
     },
     {
-      "company": "Redmore Consulting",
-      "type": "AI Consulting and Education",
-      "url_count": 0,
-      "last_check": null,
-      "urls": [],
-      "intelligence": {
-        "products": [],
-        "technologies": [],
-        "ai_ml_concepts": [],
-        "partners": [],
-        "interest_level": 0,
-        "interest_category": "low"
-      },
-      "latest_change": null,
-      "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
-      }
-    },
-    {
       "company": "Redmore Studio",
       "type": "AI Consulting and Education",
-      "url_count": 0,
+      "url_count": 2,
       "last_check": null,
-      "urls": [],
+      "urls": [
+        "https://redmore.studio",
+        "https://redmore.studio/blog"
+      ],
       "intelligence": {
         "products": [],
         "technologies": [],
@@ -2139,6 +2121,6 @@
       }
     }
   ],
-  "generated_at": "2025-07-15T22:56:43.998Z",
+  "generated_at": "2025-07-16T17:21:15.279Z",
   "backend": "github-actions-static-three-db"
 }
