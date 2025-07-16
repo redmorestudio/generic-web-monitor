@@ -1,0 +1,101 @@
+name: Refresh Dashboard Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'Reason for refresh (optional)'
+        required: false
+        type: string
+        default: 'Manual data refresh'
+
+jobs:
+  refresh-data:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Generate static data files
+        run: |
+          cd github-actions-backend
+          echo "📊 Regenerating static JSON files from database..."
+          echo "Reason: ${{ inputs.reason }}"
+          
+          # Show current stats before generation
+          echo "Current database stats:"
+          node -e "
+            const Database = require('better-sqlite3');
+            const db = new Database('data/intelligence.db');
+            const companies = db.prepare('SELECT COUNT(*) as count FROM companies').get();
+            const urls = db.prepare('SELECT COUNT(*) as count FROM urls').get();
+            console.log('Companies:', companies.count);
+            console.log('URLs:', urls.count);
+            db.close();
+          "
+          
+          # Generate the static files
+          node generate-static-data-three-db.js
+          
+          echo "✅ Static data files generated"
+      
+      - name: Commit changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Add only the JSON files
+          git add api-data/*.json
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🔄 Refresh dashboard data: ${{ inputs.reason }}"
+            git push origin main
+          fi
+      
+      # Deploy to GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      
+      - name: Summary
+        run: |
+          echo "### 🎉 Data Refresh Complete!" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Reason:** ${{ inputs.reason }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Time:** $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The dashboard data has been refreshed and deployed to GitHub Pages." >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 [View Dashboard](https://redmorestudio.github.io/ai-competitive-monitor/)" >> $GITHUB_STEP_SUMMARY
