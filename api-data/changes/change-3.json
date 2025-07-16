@@ -5,22 +5,14 @@
   "company_category": "AI Hardware",
   "detected_at": "2025-07-04 20:20:18",
   "interest_level": 5,
-<<<<<<< HEAD
-  "interest_category": "routine_change",
-  "interest_explanation": "Content changed for SambaNova - https://sambanova.ai/products",
-  "interest_drivers": [],
-  "technical_innovation_score": 5,
-  "business_impact_score": 5,
-=======
   "interest_category": "major_development",
-  "interest_explanation": "SambaNova introduced new AI products and technologies, including the SambaNova Suite and DataScale, which demonstrate significant technical innovation and business impact",
+  "interest_explanation": "SambaNova has launched new AI platforms and technologies, including the SambaNova Suite and DataScale, which provide advanced AI capabilities for enterprises.",
   "interest_drivers": [
-    "Introduction of new AI products",
-    "Technical capabilities"
+    "New AI platforms",
+    "Advanced AI technologies"
   ],
   "technical_innovation_score": 8,
-  "business_impact_score": 8,
->>>>>>> cd9954430f8883fb0723e231885b854addd2c55d
+  "business_impact_score": 7,
   "ai_key_changes": null,
   "ai_business_context": null,
   "has_content": false,
@@ -41,10 +33,6 @@
     "frequency_changes": {},
     "significant_phrases": []
   },
-<<<<<<< HEAD
-  "entities": null,
-  "key_phrases": []
-=======
   "entities": {
     "products": [
       {
@@ -52,8 +40,8 @@
         "type": "Enterprise AI Platform",
         "description": "The only, enterprise grade full stack platform, purpose built for generative AI",
         "features": [
-          "state-of-the-art AI",
-          "deep learning capabilities"
+          "State-of-the-art AI",
+          "Deep learning capabilities"
         ],
         "metadata": {}
       },
@@ -62,8 +50,8 @@
         "type": "Platform for Generative AI Development",
         "description": "The platform for generative AI development and innovation",
         "features": [
-          "generative AI development",
-          "innovation"
+          "Generative AI development",
+          "Innovation"
         ],
         "metadata": {}
       },
@@ -91,7 +79,7 @@
       },
       {
         "name": "Composition of Experts",
-        "category": "High Performance Computing",
+        "category": "AI Technology",
         "purpose": "Easily run your custom models, accelerate discovery, & power the next generation of high performance computing",
         "related_products": [
           "SambaNova Suite",
@@ -100,7 +88,7 @@
       },
       {
         "name": "Agentic AI",
-        "category": "AI Platform",
+        "category": "AI Technology",
         "purpose": "Unlock the power of agentic AI with the only platform that can run multiple models on a single, highly efficient system with lighting fast inference",
         "related_products": [
           "SambaNova Suite",
@@ -112,24 +100,23 @@
       {
         "name": "SambaNova",
         "role": "AI Hardware Company",
-        "relationship": "Developer of SambaNova Suite, DataScale, and SambaNova Cloud"
+        "relationship": "Provider of AI platforms and technologies"
       }
     ],
     "people": [],
     "pricing": [],
     "dates": [
       {
-        "date": "2025-07-04T20:20:18.000Z",
-        "event": "New Content Published",
-        "significance": "Introduction of new products and technologies"
+        "date": "2025-07-04",
+        "event": "New product page launch",
+        "significance": "Introduction of new AI platforms and technologies"
       }
     ],
     "locations": []
   },
   "key_phrases": [
     "Generative AI",
-    "AI Innovation",
-    "Cloud Computing"
+    "State-of-the-art AI",
+    "Deep learning capabilities"
   ]
->>>>>>> cd9954430f8883fb0723e231885b854addd2c55d
 }
