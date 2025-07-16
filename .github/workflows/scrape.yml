@@ -202,19 +202,26 @@ jobs:
           # Remove node_modules that might have been created
           rm -rf node_modules || true
           
-          # Stash any remaining uncommitted changes to ensure clean state
-          echo "📦 Stashing any uncommitted changes..."
-          git stash push -m "Temporary stash during workflow" || true
+          # CRITICAL FIX: Add files BEFORE stashing
+          # Force add the intelligence database (it might be gitignored)
+          echo "📂 Adding intelligence.db..."
+          git add -f github-actions-backend/data/intelligence.db || {
+            echo "⚠️ Failed to add intelligence.db, checking if it exists..."
+            ls -la github-actions-backend/data/
+            exit 1
+          }
           
-          # NOTE: raw_content.db is gitignored, so we don't try to add it
-          # Only add files that are actually tracked by git
-          git add -f github-actions-backend/data/intelligence.db || true
+          # Add the scrape summary
+          echo "📂 Adding last-scrape.json..."
           git add api-data/last-scrape.json || true
+          
+          # Show what will be committed
+          echo "📋 Files staged for commit:"
+          git diff --staged --name-only
           
           # Check if there are changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
-            git stash pop || true  # Restore stashed changes if any
           else
             # Commit the changes
             git commit -m "🕷️ Update scraped content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
@@ -271,9 +278,6 @@ jobs:
               echo "⚠️  Manual intervention may be required"
               exit 1  # Fail since scraping data is critical
             }
-            
-            # Clean up stash if any
-            git stash pop || true
           fi
       
       - name: Commit database changes (legacy)
