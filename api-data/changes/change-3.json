@@ -5,22 +5,14 @@
   "company_category": "AI Hardware",
   "detected_at": "2025-07-04 20:20:18",
   "interest_level": 5,
-<<<<<<< HEAD
-  "interest_category": "routine_change",
-  "interest_explanation": "Content changed for SambaNova - https://sambanova.ai/products",
-  "interest_drivers": [],
-  "technical_innovation_score": 5,
-  "business_impact_score": 5,
-=======
   "interest_category": "major_development",
-  "interest_explanation": "SambaNova introduced new AI products and technologies, including the SambaNova Suite and DataScale, which demonstrate significant technical innovation and business impact",
+  "interest_explanation": "SambaNova has launched new products, including SambaNova Suite and DataScale, which showcase the company's technical capabilities in AI hardware and software.",
   "interest_drivers": [
-    "Introduction of new AI products",
+    "New product launches",
     "Technical capabilities"
   ],
   "technical_innovation_score": 8,
-  "business_impact_score": 8,
->>>>>>> cd9954430f8883fb0723e231885b854addd2c55d
+  "business_impact_score": 6,
   "ai_key_changes": null,
   "ai_business_context": null,
   "has_content": false,
@@ -41,10 +33,6 @@
     "frequency_changes": {},
     "significant_phrases": []
   },
-<<<<<<< HEAD
-  "entities": null,
-  "key_phrases": []
-=======
   "entities": {
     "products": [
       {
@@ -52,8 +40,8 @@
         "type": "Enterprise AI Platform",
         "description": "The only, enterprise grade full stack platform, purpose built for generative AI",
         "features": [
-          "state-of-the-art AI",
-          "deep learning capabilities"
+          "State-of-the-art AI",
+          "Deep learning capabilities"
         ],
         "metadata": {}
       },
@@ -62,19 +50,8 @@
         "type": "Platform for Generative AI Development",
         "description": "The platform for generative AI development and innovation",
         "features": [
-          "generative AI development",
-          "innovation"
-        ],
-        "metadata": {}
-      },
-      {
-        "name": "SambaNova Cloud",
-        "type": "Cloud Platform",
-        "description": "Supercharge your AI-powered applications across Llama 3 8B, 70B, & 405B models",
-        "features": [
-          "Llama 3 8B",
-          "Llama 3 70B",
-          "Llama 3 405B"
+          "Generative AI development",
+          "Innovation"
         ],
         "metadata": {}
       }
@@ -112,7 +89,7 @@
       {
         "name": "SambaNova",
         "role": "AI Hardware Company",
-        "relationship": "Developer of SambaNova Suite, DataScale, and SambaNova Cloud"
+        "relationship": "Developer of SambaNova Suite and DataScale"
       }
     ],
     "people": [],
@@ -120,16 +97,16 @@
     "dates": [
       {
         "date": "2025-07-04T20:20:18.000Z",
-        "event": "New Content Published",
-        "significance": "Introduction of new products and technologies"
+        "event": "Website Update",
+        "significance": "New content added to the website"
       }
     ],
     "locations": []
   },
   "key_phrases": [
     "Generative AI",
-    "AI Innovation",
-    "Cloud Computing"
+    "Near Real-Time Operations Augmentation",
+    "State-of-the-art AI",
+    "Deep learning capabilities"
   ]
->>>>>>> cd9954430f8883fb0723e231885b854addd2c55d
 }
