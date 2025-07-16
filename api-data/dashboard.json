@@ -3,7 +3,7 @@
     "companies": 54,
     "urls": 174,
     "snapshots": 345,
-    "lastCheck": "2025-07-15T20:54:18.416Z"
+    "lastCheck": "2025-07-16T02:08:56.207Z"
   },
   "recent_changes_summary": {
     "last_5_changes": [
@@ -13,7 +13,7 @@
         "url": "https://aleph-alpha.com",
         "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com",
         "interest_level": 5,
-        "time_ago": "4 hours ago",
+        "time_ago": "12 hours ago",
         "detected_at": "2025-07-15 18:51:09"
       },
       {
@@ -22,7 +22,7 @@
         "url": "https://aleph-alpha.com/luminous",
         "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com/luminous",
         "interest_level": 5,
-        "time_ago": "4 hours ago",
+        "time_ago": "12 hours ago",
         "detected_at": "2025-07-15 18:51:06"
       },
       {
@@ -31,7 +31,7 @@
         "url": "https://aleph-alpha.com/pricing",
         "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com/pricing",
         "interest_level": 5,
-        "time_ago": "4 hours ago",
+        "time_ago": "12 hours ago",
         "detected_at": "2025-07-15 18:51:06"
       },
       {
@@ -40,7 +40,7 @@
         "url": "https://amd.com/en/newsroom",
         "summary": "Content changed for AMD - https://amd.com/en/newsroom",
         "interest_level": 5,
-        "time_ago": "4 hours ago",
+        "time_ago": "12 hours ago",
         "detected_at": "2025-07-15 18:51:06"
       },
       {
@@ -49,7 +49,7 @@
         "url": "https://docs.aleph-alpha.com",
         "summary": "Content changed for Aleph Alpha - https://docs.aleph-alpha.com",
         "interest_level": 5,
-        "time_ago": "4 hours ago",
+        "time_ago": "12 hours ago",
         "detected_at": "2025-07-15 18:51:04"
       }
     ],
@@ -93,12 +93,12 @@
       },
       "latest_change": {
         "summary": "Content changed for AI21 Labs - https://ai21.com/blog",
-        "time_ago": "4 hours ago",
+        "time_ago": "12 hours ago",
         "relevance_score": 5
       },
       "recent_activity": {
         "change_count_7d": 4,
-        "last_change": "4 hours ago",
+        "last_change": "12 hours ago",
         "highest_recent_score": 5
       }
     },
@@ -135,12 +135,12 @@
       },
       "latest_change": {
         "summary": "Content changed for AMD - https://amd.com/en/newsroom",
-        "time_ago": "4 hours ago",
+        "time_ago": "12 hours ago",
         "relevance_score": 5
       },
       "recent_activity": {
         "change_count_7d": 2,
-        "last_change": "4 hours ago",
+        "last_change": "12 hours ago",
         "highest_recent_score": 5
       }
     },
@@ -179,12 +179,12 @@
       },
       "latest_change": {
         "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com",
-        "time_ago": "4 hours ago",
+        "time_ago": "12 hours ago",
         "relevance_score": 5
       },
       "recent_activity": {
         "change_count_7d": 4,
-        "last_change": "4 hours ago",
+        "last_change": "12 hours ago",
         "highest_recent_score": 5
       }
     },
@@ -2139,6 +2139,6 @@
       }
     }
   ],
-  "generated_at": "2025-07-15T22:56:43.998Z",
+  "generated_at": "2025-07-16T06:51:20.929Z",
   "backend": "github-actions-static-three-db"
 }
