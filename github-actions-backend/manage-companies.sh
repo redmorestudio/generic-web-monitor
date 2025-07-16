@@ -60,8 +60,7 @@ list_urls() {
         SELECT 
             u.id,
             u.url,
-            u.url_type,
-            u.enabled
+            u.url_type
         FROM urls u
         JOIN companies c ON u.company_id = c.id
         WHERE c.name = '$company_name'
@@ -111,7 +110,7 @@ add_url() {
         return 1
     fi
     
-    sqlite3 "$DB_PATH" "INSERT INTO urls (company_id, url, url_type, enabled) VALUES ($company_id, '$url', '$url_type', 1);"
+    sqlite3 "$DB_PATH" "INSERT INTO urls (company_id, url, url_type) VALUES ($company_id, '$url', '$url_type');"
     echo -e "${GREEN}✓ Added URL: $url ($url_type) to $company_name${NC}"
 }
 
