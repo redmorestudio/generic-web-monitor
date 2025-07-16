@@ -345,6 +345,11 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
     try {
       console.log(`   📄 [${companyName}] ${urlConfig.url}`);
       
+      // Special debug logging for Redmore Studio
+      if (companyName.toLowerCase().includes('redmore')) {
+        console.log(`      🔍 DEBUG: Scraping Redmore Studio URL ID ${urlConfig.id}`);
+      }
+      
       // Set user agent to avoid bot detection
       await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
       
@@ -381,6 +386,7 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
       const latest = latestStmt.get(urlConfig.id);
       
       const hasChanged = !latest || latest.content_hash !== contentHash;
+      const isFirstScrape = !latest;
       
       // Always store the raw HTML
       const insertStmt = this.rawDb.prepare(`
@@ -390,7 +396,7 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
         ) VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
       `);
       
-      insertStmt.run(
+      const insertResult = insertStmt.run(
         urlConfig.id,
         companyName,
         urlConfig.url,
@@ -399,17 +405,36 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
         statusCode
       );
       
+      // Get the ID of the row we just inserted
+      const newContentId = insertResult.lastInsertRowid;
+      
+      // CRITICAL FIX: Always update last_scraped timestamp after successful scrape
+      const updateUrlStmt = this.intelligenceDb.prepare(`
+        UPDATE urls SET last_scraped = datetime('now') WHERE id = ?
+      `);
+      updateUrlStmt.run(urlConfig.id);
+      console.log(`      ✅ Updated last_scraped timestamp for URL ID ${urlConfig.id}`);
+      
       let analyzed = false;
       
       if (hasChanged) {
-        console.log(`      ✨ Change detected!`);
-        
-        // Get the ID of the row we just inserted
-        const newContentId = this.rawDb.prepare('SELECT last_insert_rowid() as id').get().id;
+        if (isFirstScrape) {
+          console.log(`      🆕 First time scraping this URL - treating as important change`);
+        } else {
+          console.log(`      ✨ Change detected!`);
+        }
         
         // Analyze the change with AI
         const oldContent = latest ? latest.html_content : null;
         const assessment = await this.analyzeChange(oldContent, htmlContent, companyName, urlConfig);
+        
+        // For first-time scrapes, boost the interest level slightly
+        if (isFirstScrape && assessment.interest_level < 6) {
+          assessment.interest_level = 6;
+          assessment.summary = `Initial scrape of ${companyName} - ${urlConfig.url}. ${assessment.summary || ''}`;
+          assessment.interest_drivers.unshift('First-time content capture');
+        }
+        
         analyzed = true;
         
         // Insert change detection record with proper interest level
@@ -430,10 +455,10 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
         // CRITICAL FIX: Ensure we use the correct content IDs, not URL IDs
         const oldContentId = latest ? latest.id : null;
         
-        changeStmt.run(
+        const changeResult = changeStmt.run(
           urlConfig.id,
-          'content_update',
-          assessment.summary || `Content changed for ${companyName} - ${urlConfig.url}`,
+          isFirstScrape ? 'initial_scrape' : 'content_update',
+          assessment.summary || `Content ${isFirstScrape ? 'captured' : 'changed'} for ${companyName} - ${urlConfig.url}`,
           oldContentId,  // Use the actual raw_html.id from previous snapshot
           newContentId,  // Use the newly inserted raw_html.id
           assessment.interest_level, // For backward compatibility
@@ -441,13 +466,9 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
           JSON.stringify(assessment), // Store full assessment data
         );
         
-        // Update last_scraped timestamp
-        const updateUrlStmt = this.intelligenceDb.prepare(`
-          UPDATE urls SET last_scraped = datetime('now') WHERE id = ?
-        `);
-        updateUrlStmt.run(urlConfig.id);
+        console.log(`      📝 Inserted change detection record ID ${changeResult.lastInsertRowid}`);
       } else {
-        console.log(`      ✓ No changes`);
+        console.log(`      ✓ No changes detected`);
       }
       
       await page.close();
