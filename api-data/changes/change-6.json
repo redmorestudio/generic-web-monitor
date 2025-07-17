@@ -6,12 +6,12 @@
   "detected_at": "2025-07-04 20:11:15",
   "interest_level": 5,
   "interest_category": "major_development",
-  "interest_explanation": "Amazon CodeWhisperer is a new generative AI assistant for software development, representing a significant technical innovation and potential major development in the field.",
+  "interest_explanation": "Amazon CodeWhisperer is a new AI-powered coding assistant that has the potential to significantly impact the software development industry.",
   "interest_drivers": [
-    "New AI-powered coding assistant",
-    "Potential to improve software development efficiency"
+    "New product launch",
+    "AI-powered coding assistant"
   ],
-  "technical_innovation_score": 8,
+  "technical_innovation_score": 9,
   "business_impact_score": 8,
   "ai_key_changes": null,
   "ai_business_context": null,
@@ -40,10 +40,11 @@
         "type": "AI Coding Assistant",
         "description": "Generative AI Assistant for Software Development",
         "features": [
-          "Generative AI",
-          "Software Development Assistance"
+          "AI-powered coding suggestions",
+          "Integration with AWS services"
         ],
         "metadata": {
+          "launch_date": "2025-07-04",
           "url": "https://aws.amazon.com/codewhisperer"
         }
       }
@@ -52,7 +53,7 @@
       {
         "name": "Generative AI",
         "category": "Artificial Intelligence",
-        "purpose": "Software Development Assistance",
+        "purpose": "Code suggestions and software development assistance",
         "related_products": [
           "Amazon CodeWhisperer"
         ]
@@ -63,22 +64,26 @@
         "name": "Amazon",
         "role": "Developer of Amazon CodeWhisperer",
         "relationship": "Owner"
+      },
+      {
+        "name": "AWS",
+        "role": "Provider of cloud services for Amazon CodeWhisperer",
+        "relationship": "Partner"
       }
     ],
     "people": [],
     "pricing": [],
     "dates": [
       {
-        "date": "2025-07-04T20:11:15.000Z",
-        "event": "Introduction of Amazon CodeWhisperer",
-        "significance": "New Product Launch"
+        "date": "2025-07-04",
+        "event": "Launch of Amazon CodeWhisperer",
+        "significance": "New product launch"
       }
     ],
     "locations": []
   },
   "key_phrases": [
-    "Generative AI Assistant",
-    "Software Development",
-    "Amazon CodeWhisperer"
+    "Generative AI Assistant for Software Development",
+    "AI-powered coding suggestions"
   ]
 }
