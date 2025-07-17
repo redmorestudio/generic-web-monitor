@@ -389,6 +389,7 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
       const isFirstScrape = !latest;
       
       // Always store the raw HTML
+      console.log(`      💾 Saving HTML (length: ${htmlContent.length}) for URL ID ${urlConfig.id}...`);
       const insertStmt = this.rawDb.prepare(`
         INSERT INTO raw_html (
           url_id, company_name, url, content_hash, html_content,
@@ -396,14 +397,21 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
         ) VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
       `);
       
-      const insertResult = insertStmt.run(
-        urlConfig.id,
-        companyName,
-        urlConfig.url,
-        contentHash,
-        htmlContent,
-        statusCode
-      );
+      let insertResult;
+      try {
+        insertResult = insertStmt.run(
+          urlConfig.id,
+          companyName,
+          urlConfig.url,
+          contentHash,
+          htmlContent,
+          statusCode
+        );
+        console.log(`      ✅ Saved HTML to raw_content.db (ID: ${insertResult.lastInsertRowid})`);
+      } catch (insertError) {
+        console.error(`      ❌ Failed to insert HTML for URL ID ${urlConfig.id}:`, insertError.message);
+        throw insertError; // Re-throw to maintain existing behavior
+      }
       
       // Get the ID of the row we just inserted
       const newContentId = insertResult.lastInsertRowid;
