@@ -1,0 +1,141 @@
+name: Debug Redmore Studio Scrape
+
+on:
+  workflow_dispatch:
+
+jobs:
+  debug-redmore:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm ci
+          
+      - name: Create debug script
+        run: |
+          cat > github-actions-backend/debug-redmore-cloud.js << 'EOF'
+          #!/usr/bin/env node
+          require('dotenv').config();
+          const puppeteer = require('puppeteer');
+          const dbManager = require('./db-manager');
+          
+          async function debugRedmore() {
+            console.log('🔍 Starting Redmore Studio debug in cloud environment...\n');
+            
+            const intelligenceDb = dbManager.getIntelligenceDb();
+            const rawDb = dbManager.getRawDb();
+            
+            // Check if Redmore Studio exists
+            const companyStmt = intelligenceDb.prepare("SELECT * FROM companies WHERE name LIKE '%Redmore%'");
+            const company = companyStmt.get();
+            console.log('Company:', company);
+            
+            // Get URLs
+            const urlsStmt = intelligenceDb.prepare("SELECT * FROM urls WHERE company_id = ?");
+            const urls = urlsStmt.all(company?.id || 54);
+            console.log('URLs:', urls);
+            
+            // Check current raw_html state
+            const rawCountStmt = rawDb.prepare("SELECT COUNT(*) as count FROM raw_html WHERE url_id IN (175, 176)");
+            const rawCount = rawCountStmt.get();
+            console.log('Current raw_html records:', rawCount.count);
+            
+            // Try to scrape
+            console.log('\n🌐 Attempting to scrape Redmore Studio...');
+            
+            const browser = await puppeteer.launch({
+              headless: 'new',
+              args: ['--no-sandbox', '--disable-setuid-sandbox']
+            });
+            
+            try {
+              for (const url of urls) {
+                console.log(`\nScraping ${url.url}...`);
+                const page = await browser.newPage();
+                
+                try {
+                  const response = await page.goto(url.url, {
+                    waitUntil: 'networkidle2',
+                    timeout: 30000
+                  });
+                  
+                  console.log(`Status: ${response.status()}`);
+                  console.log(`Headers:`, response.headers());
+                  
+                  const html = await page.content();
+                  console.log(`HTML length: ${html.length}`);
+                  console.log(`First 200 chars: ${html.substring(0, 200)}`);
+                  
+                  // Try to insert
+                  console.log('Attempting INSERT...');
+                  const insertStmt = rawDb.prepare(`
+                    INSERT INTO raw_html (url_id, company_name, url, content_hash, html_content, status_code, scraped_at)
+                    VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+                  `);
+                  
+                  try {
+                    const result = insertStmt.run(
+                      url.id,
+                      'Redmore Studio',
+                      url.url,
+                      'test-hash',
+                      html,
+                      response.status()
+                    );
+                    console.log('INSERT successful! ID:', result.lastInsertRowid);
+                  } catch (err) {
+                    console.error('INSERT failed:', err);
+                  }
+                  
+                } catch (err) {
+                  console.error(`Page error for ${url.url}:`, err.message);
+                } finally {
+                  await page.close();
+                }
+              }
+            } finally {
+              await browser.close();
+              dbManager.closeAll();
+            }
+            
+            // Final check
+            const finalCount = rawDb.prepare("SELECT COUNT(*) as count FROM raw_html").get();
+            console.log('\nFinal raw_html count:', finalCount.count);
+          }
+          
+          debugRedmore().catch(console.error);
+          EOF
+          
+      - name: Run debug script
+        run: |
+          cd github-actions-backend
+          node debug-redmore-cloud.js
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          
+      - name: Check databases
+        run: |
+          cd github-actions-backend
+          echo "=== Raw content database ==="
+          sqlite3 data/raw_content.db "SELECT url_id, company_name, scraped_at FROM raw_html WHERE company_name LIKE '%Redmore%'"
+          echo "=== Intelligence database ==="
+          sqlite3 data/intelligence.db "SELECT * FROM urls WHERE id IN (175, 176)"
+          
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: debug-logs-${{ github.run_id }}
+          path: |
+            github-actions-backend/data/*.db
+            github-actions-backend/*.log
