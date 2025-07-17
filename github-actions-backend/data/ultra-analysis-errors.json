@@ -1,0 +1,26 @@
+{
+  "totalProcessed": 3,
+  "successful": 0,
+  "failed": 3,
+  "criticalErrors": 0,
+  "errors": [
+    {
+      "site": "OpenAI",
+      "url": "https://openai.com",
+      "error": "table change_intelligence has no column named company_id",
+      "timestamp": "2025-07-17T18:55:28.734Z"
+    },
+    {
+      "site": "SambaNova",
+      "url": "https://sambanova.ai/products",
+      "error": "table change_intelligence has no column named company_id",
+      "timestamp": "2025-07-17T18:55:32.246Z"
+    },
+    {
+      "site": "Amazon CodeWhisperer",
+      "url": "https://aws.amazon.com/codewhisperer",
+      "error": "table change_intelligence has no column named company_id",
+      "timestamp": "2025-07-17T18:55:35.151Z"
+    }
+  ]
+}

@@ -6,10 +6,10 @@
   "detected_at": "2025-07-04 20:20:18",
   "interest_level": 5,
   "interest_category": "major_development",
-  "interest_explanation": "SambaNova has launched new AI products and technologies, showcasing significant technical innovation and potential business impact",
+  "interest_explanation": "SambaNova has launched a new product page, introducing its AI platform and related products, showcasing its technical innovation and business growth",
   "interest_drivers": [
-    "New AI products",
-    "Advanced technologies"
+    "New product launch",
+    "AI technology introduction"
   ],
   "technical_innovation_score": 8,
   "business_impact_score": 7,
@@ -40,18 +40,18 @@
         "type": "Enterprise AI Platform",
         "description": "The only, enterprise grade full stack platform, purpose built for generative AI",
         "features": [
-          "State-of-the-art AI",
-          "Deep learning capabilities"
+          "Generative AI",
+          "Full Stack Platform"
         ],
         "metadata": {}
       },
       {
         "name": "DataScale",
-        "type": "Platform for Generative AI Development",
+        "type": "AI Development Platform",
         "description": "The platform for generative AI development and innovation",
         "features": [
-          "Generative AI development",
-          "Innovation"
+          "Generative AI",
+          "Development Platform"
         ],
         "metadata": {}
       },
@@ -60,9 +60,8 @@
         "type": "Cloud Platform",
         "description": "Supercharge your AI-powered applications across Llama 3 8B, 70B, & 405B models",
         "features": [
-          "Llama 3 8B",
-          "Llama 3 70B",
-          "Llama 3 405B"
+          "Cloud Platform",
+          "Llama 3 Models"
         ],
         "metadata": {}
       }
@@ -79,7 +78,7 @@
       },
       {
         "name": "Composition of Experts",
-        "category": "AI Technology",
+        "category": "AI Acceleration",
         "purpose": "Easily run your custom models, accelerate discovery, & power the next generation of high performance computing",
         "related_products": [
           "SambaNova Suite",
@@ -88,7 +87,7 @@
       },
       {
         "name": "Agentic AI",
-        "category": "AI Technology",
+        "category": "AI Platform",
         "purpose": "Unlock the power of agentic AI with the only platform that can run multiple models on a single, highly efficient system with lighting fast inference",
         "related_products": [
           "SambaNova Suite",
@@ -100,7 +99,7 @@
       {
         "name": "SambaNova",
         "role": "AI Hardware Company",
-        "relationship": "Owner of SambaNova Suite, DataScale, and SambaNova Cloud"
+        "relationship": ""
       }
     ],
     "people": [],
@@ -108,16 +107,15 @@
     "dates": [
       {
         "date": "2025-07-04",
-        "event": "New product page launched",
-        "significance": "Introduction of new AI products and technologies"
+        "event": "New Product Page",
+        "significance": "New product page launched"
       }
     ],
     "locations": []
   },
   "key_phrases": [
     "Generative AI",
-    "AI Hardware",
-    "SambaNova Suite",
-    "DataScale"
+    "AI Platform",
+    "Cloud Computing"
   ]
 }
