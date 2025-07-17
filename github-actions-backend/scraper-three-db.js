@@ -329,6 +329,20 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
         await new Promise(resolve => setTimeout(resolve, 1000));
         return this.scrapeUrlWithRetry(urlConfig, companyName, retryCount + 1);
       }
+      
+      // CRITICAL: Update last_scraped even on failure so it doesn't show "20286d ago"
+      console.log(`      ⚠️ Failed to scrape ${urlConfig.url} after ${MAX_RETRIES + 1} attempts`);
+      console.log(`      🔧 Updating last_scraped timestamp to prevent stale display...`);
+      try {
+        const updateUrlStmt = this.intelligenceDb.prepare(`
+          UPDATE urls SET last_scraped = datetime('now') WHERE id = ?
+        `);
+        updateUrlStmt.run(urlConfig.id);
+        console.log(`      ✅ Updated last_scraped timestamp for failed URL ID ${urlConfig.id}`);
+      } catch (updateError) {
+        console.error(`      ❌ Failed to update timestamp: ${updateError.message}`);
+      }
+      
       return {
         success: false,
         changed: false,
@@ -348,6 +362,7 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
       // Special debug logging for Redmore Studio
       if (companyName.toLowerCase().includes('redmore')) {
         console.log(`      🔍 DEBUG: Scraping Redmore Studio URL ID ${urlConfig.id}`);
+        console.log(`      🔍 DEBUG: URL Type: ${urlConfig.url_type || 'unknown'}`);
       }
       
       // Set user agent to avoid bot detection
@@ -356,11 +371,27 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
       // Set viewport
       await page.setViewport({ width: 1920, height: 1080 });
       
-      // Navigate to URL with timeout
-      const response = await page.goto(urlConfig.url, {
-        waitUntil: 'networkidle2',
-        timeout: PAGE_TIMEOUT
-      });
+      // Navigate to URL with timeout - special handling for certain sites
+      let response;
+      try {
+        response = await page.goto(urlConfig.url, {
+          waitUntil: 'networkidle2',
+          timeout: PAGE_TIMEOUT
+        });
+      } catch (navError) {
+        // Try again with different wait condition for problematic sites
+        if (companyName.toLowerCase().includes('redmore')) {
+          console.log(`      ⚠️ Special handling for Redmore Studio - trying domcontentloaded...`);
+          response = await page.goto(urlConfig.url, {
+            waitUntil: 'domcontentloaded',
+            timeout: PAGE_TIMEOUT
+          });
+          // Extra wait for JS to load
+          await new Promise(resolve => setTimeout(resolve, 3000));
+        } else {
+          throw navError;
+        }
+      }
       
       const statusCode = response.status();
       

@@ -1,0 +1,14 @@
+{
+  "totalProcessed": 1,
+  "successful": 0,
+  "failed": 1,
+  "criticalErrors": 0,
+  "errors": [
+    {
+      "site": "OpenAI",
+      "url": "https://openai.com",
+      "error": "Failed to extract data or extraction returned error",
+      "timestamp": "2025-07-15T16:46:19.203Z"
+    }
+  ]
+}
