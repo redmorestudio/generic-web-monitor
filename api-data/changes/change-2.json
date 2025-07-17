@@ -5,14 +5,14 @@
   "company_category": "LLM Providers",
   "detected_at": "2025-07-08 19:18:06",
   "interest_level": 9,
-  "interest_category": "major_development",
+  "interest_category": "breakthrough",
   "interest_explanation": "Significant updates detected on OpenAI's page including new gpt-5 model announcement detected.",
   "interest_drivers": [
-    "GPT-5 announcement",
-    "10x more parameters"
+    "10x more parameters",
+    "most advanced model yet"
   ],
-  "technical_innovation_score": 9,
-  "business_impact_score": 8,
+  "technical_innovation_score": 10,
+  "business_impact_score": 9,
   "ai_key_changes": "[\"New GPT-5 model announcement detected\",\"Product launch or announcement detected\"]",
   "ai_business_context": "Updates may indicate competitive positioning in the AI market or response to industry developments.",
   "has_content": true,
@@ -325,7 +325,10 @@
         "features": [
           "10x more parameters"
         ],
-        "metadata": {}
+        "metadata": {
+          "developer": "OpenAI",
+          "release_date": "2025-07-08"
+        }
       }
     ],
     "technologies": [
@@ -354,9 +357,9 @@
     "pricing": [],
     "dates": [
       {
-        "date": "2025-07-08T19:18:06.000Z",
+        "date": "2025-07-08",
         "event": "GPT-5 announcement",
-        "significance": "New AI model release"
+        "significance": "Major AI model release"
       }
     ],
     "locations": []
@@ -364,6 +367,6 @@
   "key_phrases": [
     "GPT-5",
     "10x more parameters",
-    "safe and beneficial AI systems"
+    "most advanced model yet"
   ]
 }

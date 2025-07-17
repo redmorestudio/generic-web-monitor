@@ -6,13 +6,13 @@
   "detected_at": "2025-07-04 20:20:18",
   "interest_level": 5,
   "interest_category": "major_development",
-  "interest_explanation": "SambaNova has launched new AI products and technologies, including the SambaNova Suite and DataScale, which showcase advanced technical capabilities and have significant business impact",
+  "interest_explanation": "SambaNova has launched new AI products and technologies, showcasing significant technical innovation and potential business impact",
   "interest_drivers": [
     "New AI products",
     "Advanced technologies"
   ],
   "technical_innovation_score": 8,
-  "business_impact_score": 8,
+  "business_impact_score": 7,
   "ai_key_changes": null,
   "ai_business_context": null,
   "has_content": false,
@@ -100,7 +100,7 @@
       {
         "name": "SambaNova",
         "role": "AI Hardware Company",
-        "relationship": "Provider of AI solutions"
+        "relationship": "Owner of SambaNova Suite, DataScale, and SambaNova Cloud"
       }
     ],
     "people": [],
@@ -116,7 +116,8 @@
   },
   "key_phrases": [
     "Generative AI",
-    "Agentic AI",
-    "AI Innovation"
+    "AI Hardware",
+    "SambaNova Suite",
+    "DataScale"
   ]
 }
