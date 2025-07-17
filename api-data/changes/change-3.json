@@ -6,10 +6,10 @@
   "detected_at": "2025-07-04 20:20:18",
   "interest_level": 5,
   "interest_category": "major_development",
-  "interest_explanation": "SambaNova has launched new AI products and technologies, including the SambaNova Suite and DataScale, which showcase advanced technical capabilities and have significant business impact",
+  "interest_explanation": "SambaNova has launched new products, including SambaNova Suite, DataScale, and SambaNova Cloud, showcasing significant technical innovation and business impact",
   "interest_drivers": [
-    "New AI products",
-    "Advanced technologies"
+    "New product launches",
+    "Technical capabilities"
   ],
   "technical_innovation_score": 8,
   "business_impact_score": 8,
@@ -47,7 +47,7 @@
       },
       {
         "name": "DataScale",
-        "type": "Platform for Generative AI Development",
+        "type": "AI Development Platform",
         "description": "The platform for generative AI development and innovation",
         "features": [
           "Generative AI development",
@@ -100,7 +100,7 @@
       {
         "name": "SambaNova",
         "role": "AI Hardware Company",
-        "relationship": "Provider of AI solutions"
+        "relationship": "Developer of SambaNova Suite, DataScale, and SambaNova Cloud"
       }
     ],
     "people": [],
@@ -109,14 +109,14 @@
       {
         "date": "2025-07-04",
         "event": "New product page launched",
-        "significance": "Introduction of new AI products and technologies"
+        "significance": "Introduction of SambaNova Suite, DataScale, and SambaNova Cloud"
       }
     ],
     "locations": []
   },
   "key_phrases": [
     "Generative AI",
-    "Agentic AI",
-    "AI Innovation"
+    "Deep learning capabilities",
+    "AI innovation"
   ]
 }
