@@ -7,8 +7,9 @@ node_modules/
 .env.production
 
 # Database
-data/
-*.db
+data/intelligence.db
+data/processed_content.db
+# raw_content.db is tracked with Git LFS
 *.sqlite
 
 # Logs
