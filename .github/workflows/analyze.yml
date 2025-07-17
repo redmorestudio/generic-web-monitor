@@ -87,6 +87,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          lfs: true  # Fetch Git LFS files including raw_content.db
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
