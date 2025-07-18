@@ -6,13 +6,13 @@
   "detected_at": "2025-07-04 20:20:18",
   "interest_level": 5,
   "interest_category": "major_development",
-  "interest_explanation": "SambaNova launched a new AI platform with generative AI capabilities, which is a significant development in the AI industry.",
+  "interest_explanation": "SambaNova has updated its website with new product information and features, showcasing its advanced AI capabilities and commitment to innovation",
   "interest_drivers": [
-    "New AI platform",
-    "Generative AI capabilities"
+    "New product information",
+    "Advanced AI capabilities"
   ],
   "technical_innovation_score": 8,
-  "business_impact_score": 8,
+  "business_impact_score": 7,
   "ai_key_changes": null,
   "ai_business_context": null,
   "has_content": false,
@@ -37,38 +37,45 @@
     "products": [
       {
         "name": "SambaNova Suite",
-        "type": "AI platform",
-        "description": "Enterprise grade full stack platform, purpose built for generative AI",
+        "type": "Enterprise AI Platform",
+        "description": "The only, enterprise grade full stack platform, purpose built for generative AI",
         "features": [
-          "state-of-the-art AI",
-          "deep learning capabilities"
+          "State-of-the-art AI",
+          "Deep learning capabilities"
         ],
-        "metadata": {}
+        "metadata": {
+          "url": "/products/enterprise-ai-platform-sambanova-suite/"
+        }
       },
       {
         "name": "DataScale",
-        "type": "AI development platform",
-        "description": "Platform for generative AI development and innovation",
+        "type": "AI Development Platform",
+        "description": "The platform for generative AI development and innovation",
         "features": [
-          "generative AI development",
-          "innovation"
+          "Generative AI development",
+          "Innovation"
         ],
-        "metadata": {}
+        "metadata": {
+          "url": "/products/datascale/"
+        }
       },
       {
         "name": "SambaNova Cloud",
-        "type": "Cloud platform",
-        "description": "Supercharge your AI-powered applications",
+        "type": "Cloud Platform",
+        "description": "Supercharge your AI-powered applications across Llama 3 8B, 70B, & 405B models",
         "features": [
-          "Llama 3 8B, 70B, & 405B models"
+          "AI-powered applications",
+          "Llama 3 models"
         ],
-        "metadata": {}
+        "metadata": {
+          "url": "https://cloud.sambanova.ai/"
+        }
       }
     ],
     "technologies": [
       {
         "name": "RDU: The GPU Alternative",
-        "category": "AI chip",
+        "category": "AI Chip",
         "purpose": "Power the most demanding generative and agentic AI workloads",
         "related_products": [
           "SambaNova Suite",
@@ -77,7 +84,7 @@
       },
       {
         "name": "Composition of Experts",
-        "category": "AI technology",
+        "category": "AI Technology",
         "purpose": "Easily run your custom models, accelerate discovery, & power the next generation of high performance computing",
         "related_products": [
           "SambaNova Suite",
@@ -86,7 +93,7 @@
       },
       {
         "name": "Agentic AI",
-        "category": "AI technology",
+        "category": "AI Technology",
         "purpose": "Unlock the power of agentic AI with the only platform that can run multiple models on a single, highly efficient system with lighting fast inference",
         "related_products": [
           "SambaNova Suite",
@@ -97,25 +104,24 @@
     "companies": [
       {
         "name": "SambaNova",
-        "role": "AI hardware company",
-        "relationship": "Developer of SambaNova Suite, DataScale, and SambaNova Cloud"
+        "role": "AI Hardware Company",
+        "relationship": "Provider of AI solutions"
       }
     ],
     "people": [],
     "pricing": [],
     "dates": [
       {
-        "date": "2025-07-04",
-        "event": "New product page launched",
-        "significance": "Introduction of new AI platform and products"
+        "date": "2025-07-04T20:20:18.000Z",
+        "event": "Website update",
+        "significance": "New product information and features"
       }
     ],
     "locations": []
   },
   "key_phrases": [
     "Generative AI",
-    "AI platform",
-    "SambaNova Suite",
-    "DataScale"
+    "Deep learning capabilities",
+    "State-of-the-art AI"
   ]
 }
