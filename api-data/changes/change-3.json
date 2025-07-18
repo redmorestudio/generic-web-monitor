@@ -6,13 +6,13 @@
   "detected_at": "2025-07-04 20:20:18",
   "interest_level": 5,
   "interest_category": "major_development",
-  "interest_explanation": "SambaNova has updated its website with new content, including announcements of its SambaNova Suite and DataScale products, showcasing its technical capabilities in the AI hardware space.",
+  "interest_explanation": "SambaNova launched new products, including the SambaNova Suite and DataScale platform, showcasing innovative AI technology and potential for significant business impact",
   "interest_drivers": [
-    "New product announcements",
-    "Technical capabilities"
+    "New product launch",
+    "Innovative AI technology"
   ],
   "technical_innovation_score": 8,
-  "business_impact_score": 6,
+  "business_impact_score": 7,
   "ai_key_changes": null,
   "ai_business_context": null,
   "has_content": false,
@@ -40,25 +40,20 @@
         "type": "Enterprise AI Platform",
         "description": "The only, enterprise grade full stack platform, purpose built for generative AI",
         "features": [
-          "Generative AI",
-          "Deep Learning"
+          "State-of-the-art AI",
+          "Deep learning capabilities"
         ],
-        "metadata": {
-          "url": "/products/enterprise-ai-platform-sambanova-suite/"
-        }
+        "metadata": {}
       },
       {
         "name": "DataScale",
         "type": "Platform for Generative AI Development",
         "description": "The platform for generative AI development and innovation",
         "features": [
-          "Generative AI",
-          "Development",
+          "Generative AI development",
           "Innovation"
         ],
-        "metadata": {
-          "url": "/products/datascale/"
-        }
+        "metadata": {}
       }
     ],
     "technologies": [
@@ -74,7 +69,7 @@
       {
         "name": "Composition of Experts",
         "category": "High Performance Computing",
-        "purpose": "Easily run your custom models, accelerate discovery, & power the next generation of high performance computing",
+        "purpose": "Easily run custom models, accelerate discovery, and power the next generation of high performance computing",
         "related_products": [
           "SambaNova Suite",
           "DataScale"
@@ -101,17 +96,16 @@
     "pricing": [],
     "dates": [
       {
-        "date": "2025-07-04T20:20:18.000Z",
-        "event": "Website Update",
-        "significance": "New content added"
+        "date": "2025-07-04",
+        "event": "New Product Page Launched",
+        "significance": "Introduction of SambaNova Suite and DataScale"
       }
     ],
     "locations": []
   },
   "key_phrases": [
     "Generative AI",
-    "AI Hardware",
-    "SambaNova Suite",
-    "DataScale"
+    "State-of-the-art AI",
+    "Deep learning capabilities"
   ]
 }

@@ -6,10 +6,10 @@
   "detected_at": "2025-07-04 20:11:15",
   "interest_level": 5,
   "interest_category": "notable_update",
-  "interest_explanation": "Amazon CodeWhisperer is a new AI coding assistant that provides essential cookies, performance cookies, functional cookies, and advertising cookies to enhance the user experience.",
+  "interest_explanation": "Amazon introduces a new AI coding assistant, Amazon CodeWhisperer, with a focus on cookie policy and privacy notice.",
   "interest_drivers": [
-    "New AI coding assistant",
-    "Cookie preferences"
+    "New AI Coding Assistant",
+    "Cookie Policy Introduction"
   ],
   "technical_innovation_score": 7,
   "business_impact_score": 6,
@@ -40,13 +40,14 @@
         "type": "AI Coding Assistant",
         "description": "Generative AI Assistant for Software Development",
         "features": [
-          "Essential cookies",
-          "Performance cookies",
-          "Functional cookies",
-          "Advertising cookies"
+          "essential cookies",
+          "performance cookies",
+          "functional cookies",
+          "advertising cookies"
         ],
         "metadata": {
-          "url": "https://aws.amazon.com/codewhisperer"
+          "url": "https://aws.amazon.com/codewhisperer",
+          "company": "Amazon"
         }
       }
     ],
@@ -54,7 +55,7 @@
       {
         "name": "Cookies",
         "category": "Web Technology",
-        "purpose": "Provide site features, remember preferences, display relevant content, and deliver marketing content",
+        "purpose": "Tracking and Personalization",
         "related_products": [
           "Amazon CodeWhisperer"
         ]
@@ -63,13 +64,13 @@
     "companies": [
       {
         "name": "Amazon",
-        "role": "Developer of Amazon CodeWhisperer",
-        "relationship": "Owner"
+        "role": "Developer",
+        "relationship": "Owner of Amazon CodeWhisperer"
       },
       {
         "name": "AWS",
-        "role": "Provider of Amazon CodeWhisperer",
-        "relationship": "Affiliate"
+        "role": "Cloud Service Provider",
+        "relationship": "Part of Amazon"
       }
     ],
     "people": [],
@@ -78,7 +79,7 @@
       {
         "date": "2025-07-04T20:11:15.000Z",
         "event": "Change Date",
-        "significance": "New content available"
+        "significance": "New Content Published"
       }
     ],
     "locations": []
@@ -86,6 +87,7 @@
   "key_phrases": [
     "Amazon CodeWhisperer",
     "AI Coding Assistant",
-    "Cookie preferences"
+    "Cookie Policy",
+    "Privacy Notice"
   ]
 }

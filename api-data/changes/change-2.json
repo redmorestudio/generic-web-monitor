@@ -8,7 +8,7 @@
   "interest_category": "major_development",
   "interest_explanation": "Significant updates detected on OpenAI's page including new gpt-5 model announcement detected.",
   "interest_drivers": [
-    "GPT-5 announcement",
+    "GPT-5 release",
     "10x more parameters"
   ],
   "technical_innovation_score": 9,
@@ -347,7 +347,7 @@
       {
         "name": "Midjourney",
         "role": "Previous content owner",
-        "relationship": "Unrelated to OpenAI"
+        "relationship": "Unrelated to GPT-5"
       }
     ],
     "people": [],
@@ -356,7 +356,7 @@
       {
         "date": "2025-07-08T19:18:06.000Z",
         "event": "GPT-5 announcement",
-        "significance": "Breaking news"
+        "significance": "New AI model release"
       }
     ],
     "locations": []

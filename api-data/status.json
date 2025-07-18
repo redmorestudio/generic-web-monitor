@@ -1,5 +1,5 @@
 {
-  "generated_at": "2025-07-18T18:08:20.290Z",
+  "generated_at": "2025-07-18T18:49:55.486Z",
   "files_generated": 6,
   "architecture": "three-database",
   "database_info": {
@@ -8,22 +8,22 @@
       "legacy": {
         "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/monitor.db",
         "size": "49.99 MB",
-        "modified": "2025-07-18T18:08:00.253Z"
+        "modified": "2025-07-18T18:49:32.817Z"
       },
       "raw": {
         "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/raw_content.db",
         "size": "85.59 MB",
-        "modified": "2025-07-18T18:08:00.616Z"
+        "modified": "2025-07-18T18:49:33.174Z"
       },
       "processed": {
         "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/processed_content.db",
         "size": "8.76 MB",
-        "modified": "2025-07-18T18:08:00.442Z"
+        "modified": "2025-07-18T18:49:33.004Z"
       },
       "intelligence": {
         "path": "/home/runner/work/ai-competitive-monitor/ai-competitive-monitor/github-actions-backend/data/intelligence.db",
         "size": "4.69 MB",
-        "modified": "2025-07-18T18:08:00.002Z"
+        "modified": "2025-07-18T18:49:32.562Z"
       }
     }
   },
