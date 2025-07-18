@@ -6,10 +6,10 @@
   "detected_at": "2025-07-04 20:20:18",
   "interest_level": 5,
   "interest_category": "major_development",
-  "interest_explanation": "SambaNova has updated its website with new product information and features, showcasing its advanced AI capabilities and commitment to innovation",
+  "interest_explanation": "SambaNova launched new AI products and technologies, showcasing advanced capabilities and innovations in the field",
   "interest_drivers": [
-    "New product information",
-    "Advanced AI capabilities"
+    "New AI products",
+    "Advanced technologies"
   ],
   "technical_innovation_score": 8,
   "business_impact_score": 7,
@@ -40,36 +40,30 @@
         "type": "Enterprise AI Platform",
         "description": "The only, enterprise grade full stack platform, purpose built for generative AI",
         "features": [
-          "State-of-the-art AI",
-          "Deep learning capabilities"
+          "Generative AI",
+          "Full Stack Platform"
         ],
-        "metadata": {
-          "url": "/products/enterprise-ai-platform-sambanova-suite/"
-        }
+        "metadata": {}
       },
       {
         "name": "DataScale",
         "type": "AI Development Platform",
         "description": "The platform for generative AI development and innovation",
         "features": [
-          "Generative AI development",
-          "Innovation"
+          "Generative AI",
+          "Development Platform"
         ],
-        "metadata": {
-          "url": "/products/datascale/"
-        }
+        "metadata": {}
       },
       {
         "name": "SambaNova Cloud",
         "type": "Cloud Platform",
         "description": "Supercharge your AI-powered applications across Llama 3 8B, 70B, & 405B models",
         "features": [
-          "AI-powered applications",
-          "Llama 3 models"
+          "Cloud Platform",
+          "AI-powered Applications"
         ],
-        "metadata": {
-          "url": "https://cloud.sambanova.ai/"
-        }
+        "metadata": {}
       }
     ],
     "technologies": [
@@ -112,16 +106,16 @@
     "pricing": [],
     "dates": [
       {
-        "date": "2025-07-04T20:20:18.000Z",
-        "event": "Website update",
-        "significance": "New product information and features"
+        "date": "2025-07-04",
+        "event": "New Product Page Launched",
+        "significance": "Introduction of new AI products and technologies"
       }
     ],
     "locations": []
   },
   "key_phrases": [
     "Generative AI",
-    "Deep learning capabilities",
-    "State-of-the-art AI"
+    "AI Platform",
+    "RDU: The GPU Alternative"
   ]
 }
