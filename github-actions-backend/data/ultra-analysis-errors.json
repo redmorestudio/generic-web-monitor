@@ -1,14 +1,26 @@
 {
-  "totalProcessed": 1,
+  "totalProcessed": 3,
   "successful": 0,
-  "failed": 1,
+  "failed": 3,
   "criticalErrors": 0,
   "errors": [
     {
       "site": "OpenAI",
       "url": "https://openai.com",
-      "error": "Failed to extract data or extraction returned error",
-      "timestamp": "2025-07-15T16:46:19.203Z"
+      "error": "table change_intelligence has no column named company_id",
+      "timestamp": "2025-07-18T16:04:00.373Z"
+    },
+    {
+      "site": "SambaNova",
+      "url": "https://sambanova.ai/products",
+      "error": "table change_intelligence has no column named company_id",
+      "timestamp": "2025-07-18T16:04:04.414Z"
+    },
+    {
+      "site": "Amazon CodeWhisperer",
+      "url": "https://aws.amazon.com/codewhisperer",
+      "error": "table change_intelligence has no column named company_id",
+      "timestamp": "2025-07-18T16:04:07.411Z"
     }
   ]
 }

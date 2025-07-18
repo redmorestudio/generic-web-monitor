@@ -9,7 +9,7 @@
   "interest_explanation": "Amazon CodeWhisperer is a new AI-powered coding assistant that has the potential to significantly impact the software development industry.",
   "interest_drivers": [
     "New product launch",
-    "AI technology"
+    "AI-powered technology"
   ],
   "technical_innovation_score": 8,
   "business_impact_score": 7,
@@ -40,13 +40,12 @@
         "type": "AI Coding Assistant",
         "description": "Generative AI Assistant for Software Development",
         "features": [
+          "AI-powered coding suggestions",
           "Code completion",
-          "Code review",
-          "Code optimization"
+          "Code review"
         ],
         "metadata": {
-          "developer": "Amazon",
-          "platform": "AWS"
+          "url": "https://aws.amazon.com/codewhisperer"
         }
       }
     ],
@@ -63,13 +62,8 @@
     "companies": [
       {
         "name": "Amazon",
-        "role": "Developer",
-        "relationship": "Owner of Amazon CodeWhisperer"
-      },
-      {
-        "name": "AWS",
-        "role": "Platform",
-        "relationship": "Host of Amazon CodeWhisperer"
+        "role": "Developer of Amazon CodeWhisperer",
+        "relationship": "Parent company"
       }
     ],
     "people": [],
@@ -77,15 +71,15 @@
     "dates": [
       {
         "date": "2025-07-04T20:11:15.000Z",
-        "event": "Launch of Amazon CodeWhisperer",
-        "significance": "New product launch"
+        "event": "Initial content scraping",
+        "significance": "Initial content availability"
       }
     ],
     "locations": []
   },
   "key_phrases": [
     "Generative AI Assistant",
-    "Software Development",
-    "Amazon CodeWhisperer"
+    "Software development",
+    "AI-powered coding suggestions"
   ]
 }
