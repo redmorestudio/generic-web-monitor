@@ -303,6 +303,33 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
       console.log(`   Errors: ${errors}`);
       console.log(`   Success Rate: ${((processedUrls / allUrls.length) * 100).toFixed(1)}%`);
       
+      // Validate that changes were saved to database
+      console.log(`\n🔍 Validating database saves...`);
+      const recentChanges = this.processedDb.prepare(`
+        SELECT COUNT(*) as count 
+        FROM change_detection 
+        WHERE detected_at > datetime('now', '-1 hour')
+      `).get();
+      
+      const recentAnalyses = this.intelligenceDb.prepare(`
+        SELECT COUNT(*) as count 
+        FROM enhanced_analysis 
+        WHERE created_at > datetime('now', '-1 hour')
+      `).get();
+      
+      console.log(`   Changes saved to DB in last hour: ${recentChanges.count}`);
+      console.log(`   Enhanced analyses saved in last hour: ${recentAnalyses.count}`);
+      
+      if (recentChanges.count === 0 && changesDetected > 0) {
+        console.error(`\n❌ CRITICAL: Detected ${changesDetected} changes but none were saved to database!`);
+        console.error(`   This suggests a database write issue. Check logs above for error messages.`);
+      } else if (recentChanges.count < changesDetected) {
+        console.warn(`\n⚠️ WARNING: Only ${recentChanges.count} of ${changesDetected} detected changes were saved to database.`);
+        console.warn(`   Some INSERTs may have failed. Check logs above for error messages.`);
+      } else {
+        console.log(`\n✅ Database validation passed!`);
+      }
+      
     } catch (error) {
       console.error('❌ Scraping error:', error.message);
       
@@ -477,35 +504,75 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
         analyzed = true;
         
         // Insert change detection record with proper interest level
-        const changeStmt = this.processedDb.prepare(`
-          INSERT INTO change_detection (
-            url_id, 
-            change_type, 
-            summary, 
-            old_content_id, 
-            new_content_id,
-            relevance_score,
-            interest_level,
-            interest_data,
-            detected_at
-          ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
-        `);
-        
-        // CRITICAL FIX: Ensure we use the correct content IDs, not URL IDs
-        const oldContentId = latest ? latest.id : null;
-        
-        const changeResult = changeStmt.run(
-          urlConfig.id,
-          isFirstScrape ? 'initial_scrape' : 'content_update',
-          assessment.summary || `Content ${isFirstScrape ? 'captured' : 'changed'} for ${companyName} - ${urlConfig.url}`,
-          oldContentId,  // Use the actual raw_html.id from previous snapshot
-          newContentId,  // Use the newly inserted raw_html.id
-          assessment.interest_level, // For backward compatibility
-          assessment.interest_level, // New field
-          JSON.stringify(assessment), // Store full assessment data
-        );
-        
-        console.log(`      📝 Inserted change detection record ID ${changeResult.lastInsertRowid}`);
+        try {
+          const changeStmt = this.processedDb.prepare(`
+            INSERT INTO change_detection (
+              url_id, 
+              change_type, 
+              summary, 
+              old_content_id, 
+              new_content_id,
+              relevance_score,
+              interest_level,
+              interest_data,
+              detected_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+          `);
+          
+          // CRITICAL FIX: Ensure we use the correct content IDs, not URL IDs
+          const oldContentId = latest ? latest.id : null;
+          
+          const changeResult = changeStmt.run(
+            urlConfig.id,
+            isFirstScrape ? 'initial_scrape' : 'content_update',
+            assessment.summary || `Content ${isFirstScrape ? 'captured' : 'changed'} for ${companyName} - ${urlConfig.url}`,
+            oldContentId,  // Use the actual raw_html.id from previous snapshot
+            newContentId,  // Use the newly inserted raw_html.id
+            assessment.interest_level, // For backward compatibility
+            assessment.interest_level, // New field
+            JSON.stringify(assessment) // Store full assessment data - NO TRAILING COMMA
+          );
+          
+          console.log(`      📝 Inserted change detection record ID ${changeResult.lastInsertRowid}`);
+          
+          // Also try to save enhanced analysis for cross-reference
+          if (!isFirstScrape && assessment) {
+            try {
+              const enhancedStmt = this.intelligenceDb.prepare(`
+                INSERT INTO enhanced_analysis (
+                  change_id,
+                  entities,
+                  relationships,
+                  competitive_data,
+                  full_extraction,
+                  created_at
+                ) VALUES (?, ?, ?, ?, ?, datetime('now'))
+              `);
+              
+              enhancedStmt.run(
+                changeResult.lastInsertRowid,
+                JSON.stringify(assessment.entities || {}),
+                JSON.stringify(assessment.relationships || []),
+                JSON.stringify({ interest_assessment: assessment }),
+                JSON.stringify(assessment)
+              );
+              console.log(`      ✅ Enhanced analysis saved`);
+            } catch (enhancedError) {
+              console.error(`      ⚠️ Failed to save enhanced analysis:`, enhancedError.message);
+              // Don't fail the whole process
+            }
+          }
+        } catch (changeError) {
+          console.error(`      ❌ Failed to save change detection:`, changeError.message);
+          console.error(`      📊 Debug info:`, {
+            url_id: urlConfig.id,
+            change_type: isFirstScrape ? 'initial_scrape' : 'content_update',
+            old_content_id: latest ? latest.id : null,
+            new_content_id: newContentId,
+            interest_level: assessment?.interest_level
+          });
+          // Don't throw - continue processing other URLs
+        }
       } else {
         console.log(`      ✓ No changes detected`);
       }
