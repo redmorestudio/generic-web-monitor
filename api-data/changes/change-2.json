@@ -5,14 +5,14 @@
   "company_category": "LLM Providers",
   "detected_at": "2025-07-08 19:18:06",
   "interest_level": 9,
-  "interest_category": "breakthrough",
+  "interest_category": "major_development",
   "interest_explanation": "Significant updates detected on OpenAI's page including new gpt-5 model announcement detected.",
   "interest_drivers": [
-    "10x more parameters",
-    "Major breakthrough in AI research"
+    "GPT-5 announcement",
+    "10x more parameters"
   ],
   "technical_innovation_score": 9,
-  "business_impact_score": 9,
+  "business_impact_score": 8,
   "ai_key_changes": "[\"New GPT-5 model announcement detected\",\"Product launch or announcement detected\"]",
   "ai_business_context": "Updates may indicate competitive positioning in the AI market or response to industry developments.",
   "has_content": true,
@@ -330,12 +330,11 @@
     ],
     "technologies": [
       {
-        "name": "GPT-5",
-        "category": "AI model",
-        "purpose": "Research and development",
+        "name": "Artificial Intelligence",
+        "category": "Research",
+        "purpose": "Create safe and beneficial AI systems",
         "related_products": [
-          "GPT-4",
-          "GPT-3"
+          "GPT-5"
         ]
       }
     ],
@@ -347,8 +346,8 @@
       },
       {
         "name": "Midjourney",
-        "role": "Competitor",
-        "relationship": "Alternative AI solution"
+        "role": "Previous content owner",
+        "relationship": "Unrelated to GPT-5"
       }
     ],
     "people": [],
@@ -357,7 +356,7 @@
       {
         "date": "2025-07-08T19:18:06.000Z",
         "event": "GPT-5 announcement",
-        "significance": "Major breakthrough in AI research"
+        "significance": "Breaking news"
       }
     ],
     "locations": []
@@ -365,6 +364,6 @@
   "key_phrases": [
     "GPT-5",
     "10x more parameters",
-    "AI research"
+    "Artificial Intelligence"
   ]
 }
