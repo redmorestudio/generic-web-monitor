@@ -1,61 +1,61 @@
 {
   "stats": {
-    "companies": 53,
-    "urls": 176,
+    "companies": 54,
+    "urls": 177,
     "snapshots": 345,
-    "lastCheck": "2025-07-19T06:51:13.431Z"
+    "lastCheck": "2025-07-19T15:59:40.126Z"
   },
   "recent_changes_summary": {
     "last_5_changes": [
       {
-        "id": 10,
-        "company": "Aleph Alpha",
-        "url": "https://aleph-alpha.com",
-        "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com",
-        "interest_level": 5,
-        "time_ago": "3 days ago",
-        "detected_at": "2025-07-15 18:51:09"
+        "id": 187,
+        "company": "You.com",
+        "url": "https://you.com/code",
+        "summary": "No noticeable changes were detected between the previous and current content of the webpage.",
+        "interest_level": 1,
+        "time_ago": "23 hours ago",
+        "detected_at": "2025-07-18 16:43:12"
       },
       {
-        "id": 9,
-        "company": "Aleph Alpha",
-        "url": "https://aleph-alpha.com/luminous",
-        "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com/luminous",
-        "interest_level": 5,
-        "time_ago": "3 days ago",
-        "detected_at": "2025-07-15 18:51:06"
+        "id": 186,
+        "company": "You.com",
+        "url": "https://you.com/search?q=pricing",
+        "summary": "You.com has introduced a new pricing page with detailed information on pricing strategies, factors influencing pricing, and objectives of pricing. The page also mentions YouPro plans and a Smart Agent feature, indicating a focus on AI-driven workplace productivity.",
+        "interest_level": 6,
+        "time_ago": "23 hours ago",
+        "detected_at": "2025-07-18 16:43:08"
       },
       {
-        "id": 8,
-        "company": "Aleph Alpha",
-        "url": "https://aleph-alpha.com/pricing",
-        "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com/pricing",
-        "interest_level": 5,
-        "time_ago": "3 days ago",
-        "detected_at": "2025-07-15 18:51:06"
+        "id": 185,
+        "company": "WellSaid Labs",
+        "url": "https://wellsaidlabs.com/pricing",
+        "summary": "WellSaid Labs has updated its pricing page with new plans, features, and terminology. The changes include a free trial with no credit card required, updated download limits, and new file formats. These changes may impact the company's revenue model, customer acquisition, and competitive positioning.",
+        "interest_level": 4,
+        "time_ago": "23 hours ago",
+        "detected_at": "2025-07-18 16:42:53"
       },
       {
-        "id": 4,
-        "company": "AMD",
-        "url": "https://amd.com/en/newsroom",
-        "summary": "Content changed for AMD - https://amd.com/en/newsroom",
-        "interest_level": 5,
-        "time_ago": "3 days ago",
-        "detected_at": "2025-07-15 18:51:06"
+        "id": 184,
+        "company": "WellSaid Labs",
+        "url": "https://wellsaidlabs.com/blog",
+        "summary": "No significant changes were detected between the previous and current content. The content appears to be identical, with no new features, updates, or announcements that would indicate technical innovation or business impact.",
+        "interest_level": 2,
+        "time_ago": "23 hours ago",
+        "detected_at": "2025-07-18 16:42:52"
       },
       {
-        "id": 7,
-        "company": "Aleph Alpha",
-        "url": "https://docs.aleph-alpha.com",
-        "summary": "Content changed for Aleph Alpha - https://docs.aleph-alpha.com",
-        "interest_level": 5,
-        "time_ago": "3 days ago",
-        "detected_at": "2025-07-15 18:51:04"
+        "id": 183,
+        "company": "WellSaid Labs",
+        "url": "https://wellsaidlabs.com",
+        "summary": "No significant changes were detected between the previous and current content of WellSaid Labs' homepage. The content remains largely the same, with no notable updates to products, features, or business information.",
+        "interest_level": 2,
+        "time_ago": "23 hours ago",
+        "detected_at": "2025-07-18 16:42:52"
       }
     ],
-    "last_24h_count": 0,
-    "last_7d_count": 10,
-    "high_priority_last_7d": 0
+    "last_24h_count": 173,
+    "last_7d_count": 183,
+    "high_priority_last_7d": 7
   },
   "company_activity": [
     {
@@ -92,14 +92,14 @@
         "interest_category": "high"
       },
       "latest_change": {
-        "summary": "Content changed for AI21 Labs - https://ai21.com/blog",
-        "time_ago": "3 days ago",
-        "relevance_score": 5
+        "summary": "The update introduces Maestro Custom AI Systems, highlighting AI21's focus on providing tailored AI solutions for enterprises, which may indicate a strategic shift towards more personalized and adaptable AI products.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 6
       },
       "recent_activity": {
-        "change_count_7d": 4,
-        "last_change": "3 days ago",
-        "highest_recent_score": 5
+        "change_count_7d": 8,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 6
       }
     },
     {
@@ -134,14 +134,14 @@
         "interest_category": "high"
       },
       "latest_change": {
-        "summary": "Content changed for AMD - https://amd.com/en/newsroom",
-        "time_ago": "3 days ago",
-        "relevance_score": 5
+        "summary": "No significant changes or updates were found between the previous and current content.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
       },
       "recent_activity": {
-        "change_count_7d": 2,
-        "last_change": "3 days ago",
-        "highest_recent_score": 5
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -178,14 +178,14 @@
         "interest_category": "high"
       },
       "latest_change": {
-        "summary": "Content changed for Aleph Alpha - https://aleph-alpha.com",
-        "time_ago": "3 days ago",
-        "relevance_score": 5
+        "summary": "No significant changes were detected between the previous and current content of the Aleph Alpha homepage.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
       },
       "recent_activity": {
-        "change_count_7d": 4,
-        "last_change": "3 days ago",
-        "highest_recent_score": 5
+        "change_count_7d": 8,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -222,14 +222,14 @@
         "interest_category": "high"
       },
       "latest_change": {
-        "summary": "Content changed for Amazon CodeWhisperer - https://aws.amazon.com/codewhisperer",
-        "time_ago": "7/4/2025",
-        "relevance_score": 5
+        "summary": "No significant changes were detected between the previous and current content of the Amazon CodeWhisperer homepage. The content remains the same, with no new features, updates, or announcements.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
       },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "7/4/2025",
-        "highest_recent_score": 5
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -260,11 +260,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The updates to Andi's homepage reflect incremental improvements to the search engine's functionality and user interface, with a focus on showcasing its capabilities and ease of use. While the changes are notable, they do not represent a significant breakthrough in technical innovation or business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 5
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 1,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 5
       }
     },
     {
@@ -301,11 +305,15 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The updates on Anthropic's news page indicate significant business developments, including new product features, partnerships, and executive appointments. While the technical innovations are notable, they are incremental and build upon existing capabilities.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 7
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 5,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 7
       }
     },
     {
@@ -339,11 +347,15 @@
         "interest_level": 5,
         "interest_category": "medium"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes were detected between the previous and current content of the Anyscale homepage, indicating a lack of technical innovation or business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -377,6 +389,33 @@
         ],
         "interest_level": 8,
         "interest_category": "high"
+      },
+      "latest_change": {
+        "summary": "The Cerebras blog website has undergone a minor update, with the addition of a 'Pricing' section to the main menu. This change suggests a focus on improving user experience and company transparency, but does not indicate any significant technical innovations or business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
+      "recent_activity": {
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
+      }
+    },
+    {
+      "company": "Cisco Systems",
+      "type": "Other",
+      "url_count": 1,
+      "last_check": null,
+      "urls": [
+        "https://www.cisco.com"
+      ],
+      "intelligence": {
+        "products": [],
+        "technologies": [],
+        "ai_ml_concepts": [],
+        "partners": [],
+        "interest_level": 0,
+        "interest_category": "low"
       },
       "latest_change": null,
       "recent_activity": {
@@ -417,11 +456,15 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The company Windsurf, formerly Codeium, has updated its homepage to announce a partnership with Cognition and the return of Claude Sonnet 4, but there are no significant technical innovations or updates to the Windsurf Editor or its features.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 5
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 5
       }
     },
     {
@@ -458,11 +501,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes detected between the previous and current content of the Cohere homepage.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 5,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -497,11 +544,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The update to Cursor's homepage content shows minor changes, with no significant technical innovations or business impact. The removal of Johnson & Johnson from the list of trusted companies is the most notable difference.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
       }
     },
     {
@@ -535,11 +586,15 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The update introduces new features and expanded access to AI models, including the ChatGPT agent and multiple reasoning models, but does not represent a significant technical breakthrough or major business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 6
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 2,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 6
       }
     },
     {
@@ -574,11 +629,15 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes were found between the previous and current content of the DataRobot homepage. The changes appear to be minor formatting or duplication of existing text, with no new features, products, or announcements introduced.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
       }
     },
     {
@@ -611,11 +670,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes were detected between the previous and current content of Descript's Overdub product page. The content remains largely the same, with no new features, technical innovations, or business impact announced.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
       }
     },
     {
@@ -651,11 +714,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The updated content features new customer stories, such as Deepak Chopra and Sam Feldt using ElevenLabs' AI voice tools, and highlights the company's partnerships and collaborations, including the launch of the ElevenLabs app on iOS and Android.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 6
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 6
       }
     },
     {
@@ -686,11 +753,15 @@
         "interest_level": 6,
         "interest_category": "medium"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The update announces the availability of a new development version of FLUX.1 Kontext and introduces a self-serve license option, indicating incremental improvements and expanded accessibility to the AI model suite.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 6
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 2,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 6
       }
     },
     {
@@ -726,11 +797,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes were detected between the previous and current content. The content appears to be identical, with no new information, features, or updates introduced.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -767,11 +842,15 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The update adds two new industry solutions for Government and Education, indicating Google Cloud's expansion into these markets. The technical innovation score is low since the update does not introduce new AI models or architectures, but the business impact score is moderate due to the potential for market expansion.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 4
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 5,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 4
       }
     },
     {
@@ -806,11 +885,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The update announces a live panel on secure, real-world GenAI in government, indicating a focus on expanding H2O.ai's presence in the public sector. No significant technical innovations were introduced.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 3
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 3
       }
     },
     {
@@ -845,11 +928,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The update primarily involves rephrased marketing content, with a focus on the AI video generator's capabilities and ease of use. While there are no significant technical innovations or major business impact changes, the update reflects HeyGen's ongoing efforts to refine its marketing strategy and improve user experience.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 5
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 5
       }
     },
     {
@@ -885,11 +972,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The Hugging Face blog has added new articles on various AI-related topics, including a primer on the Arc Virtual Cell Challenge and an article on SOTA 7B algorithms for Putnam Bench. These additions demonstrate ongoing research and development in AI, but do not represent breakthrough innovations or significant business impacts.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 6
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 6
       }
     },
     {
@@ -921,11 +1012,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes detected in the pricing page content.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 2,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -960,11 +1055,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes were detected between the previous and current content of the Inflection AI homepage.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -998,11 +1097,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "Intel introduced a new method for AI acceleration using speculative decoding, achieving up to 2.8 times faster LLM inference. Additionally, the company highlighted its progress in exascale computing with the Aurora Supercomputer and released an AI PC Global Report, emphasizing the importance of Intel-powered AI PCs in unlocking business potential.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 7
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 2,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 7
       }
     },
     {
@@ -1038,11 +1141,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes were detected between the previous and current content of the LangChain homepage. The cookie policy and website structure remain the same, indicating no new technical innovations or business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -1076,11 +1183,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "Leonardo AI introduced Veo 3, a new feature that generates video with sound from a single prompt, enhancing their AI image and video generation capabilities.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 6
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 2,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 6
       }
     },
     {
@@ -1115,11 +1226,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes detected between the previous and current content of Luma Dream Machine. The content appears to be identical, with no new features, updates, or innovations introduced.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
       }
     },
     {
@@ -1155,11 +1270,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes or updates were found between the previous and current content.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -1192,11 +1311,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes detected between the previous and current content of Midjourney's documentation page.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -1233,11 +1356,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The update to Mistral AI's documentation includes a minor addition of 'Audio & Transcription' to the capabilities section, but does not introduce any significant technical innovations or business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 5,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
       }
     },
     {
@@ -1272,11 +1399,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes detected between the previous and current content of the Murf AI homepage. The content remains largely the same, with no new features, products, or technical innovations announced.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
       }
     },
     {
@@ -1312,11 +1443,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes detected between the previous and current content of the NVIDIA AI homepage.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
       }
     },
     {
@@ -1343,11 +1478,15 @@
         "interest_level": 6,
         "interest_category": "medium"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No notable changes were detected between the previous and current content of the Neeva homepage.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 1,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -1385,14 +1524,14 @@
         "interest_category": "high"
       },
       "latest_change": {
-        "summary": "Major GPT-5 announcement detected",
-        "time_ago": "7/8/2025",
-        "relevance_score": 9
+        "summary": "OpenAI's ChatGPT has introduced new features such as 'Analyze images' and updated prompt options, enhancing user experience and expanding its capabilities.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 6
       },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "7/8/2025",
-        "highest_recent_score": 9
+        "change_count_7d": 2,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 6
       }
     },
     {
@@ -1427,11 +1566,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes were detected between the previous and current content of the Palantir Artificial Intelligence Platform webpage.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
       }
     },
     {
@@ -1466,11 +1609,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "Perplexity AI has introduced Comet, a web browser designed to revolutionize the internet browsing experience by leveraging AI capabilities, indicating significant technical innovation and potential business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 8
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 8
       }
     },
     {
@@ -1503,11 +1650,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "Phind has introduced a new capability to analyze PDFs and updated examples of its search capabilities, including coding and general knowledge questions, indicating incremental improvements in its technical capabilities and potential business impact through expanded user engagement.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 6
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 2,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 6
       }
     },
     {
@@ -1541,11 +1692,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes were made to the pricing page content, only repetitive 'Download for free' buttons were added, which does not indicate any technical innovation or business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -1580,11 +1735,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No noticeable changes were made to the content of the homepage. The previous and current content are identical, indicating no technical innovation or business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -1604,11 +1763,15 @@
         "interest_level": 0,
         "interest_category": "low"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "Initial scrape of Redmore Studio - https://redmore.studio. Redmore Studio has launched its new homepage with a cookie policy implementation, which is a standard practice but does not indicate significant technical innovation or substantial business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 6
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 2,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 6
       }
     },
     {
@@ -1643,11 +1806,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "Replicate has launched a new AI API platform, allowing users to run and fine-tune AI models with ease. The platform supports various models and tasks, including image and video generation, and provides a simple API for deployment and customization.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 7
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 7
       }
     },
     {
@@ -1682,11 +1849,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The update is a minor change in the prompt suggestion, from 'Make me a business tool for procurement teams' to 'Make me an app for people with allergies'. This change does not indicate any significant technical innovation or business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
       }
     },
     {
@@ -1721,11 +1892,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The update introduces flexible credit packages, which may impact the company's revenue model and customer acquisition strategy, but does not bring significant technical innovations.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 3
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 3
       }
     },
     {
@@ -1760,11 +1935,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes were detected between the previous and current content of the Runway homepage.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -1799,14 +1978,14 @@
         "interest_category": "high"
       },
       "latest_change": {
-        "summary": "Content changed for SambaNova - https://sambanova.ai/products",
-        "time_ago": "7/4/2025",
-        "relevance_score": 5
+        "summary": "SambaNova has introduced significant updates to its product offerings, including SambaStack, a full-stack enterprise AI platform, and a new AI inference solution for data centers. These developments demonstrate the company's focus on providing efficient, scalable, and sustainable AI infrastructure solutions, which can have a substantial impact on the adoption of AI in enterprises and data centers.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 8
       },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "7/4/2025",
-        "highest_recent_score": 5
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 8
       }
     },
     {
@@ -1841,11 +2020,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The updated blog content features new research posts discussing the impact of AI tools on developer productivity and the true value of AI in empowering new generations of developers. While the technical innovation is notable, the business impact is moderate, reflecting the ongoing conversation about AI safety and productivity.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 6
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 6
       }
     },
     {
@@ -1881,11 +2064,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The update mentions the addition of Visual Studio (experimental) to the list of supported IDEs, but the overall content remains largely unchanged, indicating a low level of technical innovation and business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
       }
     },
     {
@@ -1921,11 +2108,15 @@
         "interest_level": 9,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "The new content introduces Stability AI's mission and adds a revenue figure, indicating a potential shift in business strategy or an update in their financial situation.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 4
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 4
       }
     },
     {
@@ -1958,11 +2149,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes detected in the content. The previous and current content appear to be identical, with no new features, updates, or announcements that would indicate technical innovation or business impact.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 2
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 2
       }
     },
     {
@@ -1998,11 +2193,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes were detected between the previous and current content. The website's content remains the same, with no new features, updates, or announcements.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 4,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -2037,11 +2236,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No significant changes detected between the previous and current content of Weights & Biases pricing page.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     },
     {
@@ -2075,11 +2278,15 @@
         "interest_level": 8,
         "interest_category": "high"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "WellSaid Labs has updated its pricing page with new plans, features, and terminology. The changes include a free trial with no credit card required, updated download limits, and new file formats. These changes may impact the company's revenue model, customer acquisition, and competitive positioning.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 4
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 4
       }
     },
     {
@@ -2113,14 +2320,18 @@
         "interest_level": 4,
         "interest_category": "low"
       },
-      "latest_change": null,
+      "latest_change": {
+        "summary": "No noticeable changes were detected between the previous and current content of the webpage.",
+        "time_ago": "23 hours ago",
+        "relevance_score": 1
+      },
       "recent_activity": {
-        "change_count_7d": 0,
-        "last_change": "No recent changes",
-        "highest_recent_score": 0
+        "change_count_7d": 3,
+        "last_change": "23 hours ago",
+        "highest_recent_score": 1
       }
     }
   ],
-  "generated_at": "2025-07-19T13:02:04.923Z",
+  "generated_at": "2025-07-19T16:09:40.901Z",
   "backend": "github-actions-static-three-db"
 }
