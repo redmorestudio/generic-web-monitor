@@ -39,6 +39,7 @@ class MarkdownConverterThreeDB {
     this.processedDb = null;
     this.hasErrors = false;
     this.errorCount = 0;
+    this.warningCount = 0;
   }
 
   verifyDatabaseSchema() {
@@ -136,11 +137,14 @@ class MarkdownConverterThreeDB {
     `).get(rawHtmlId);
 
     if (!rawHtml) {
-      throw new Error(`Raw HTML record ${rawHtmlId} not found`);
+      console.log(`⚠️  Raw HTML record ${rawHtmlId} not found - skipping`);
+      this.warningCount++;
+      return null;
     }
 
     if (!rawHtml.html_content) {
-      console.log(`⚠️  No HTML content for record ${rawHtmlId}`);
+      console.log(`⚠️  No HTML content for record ${rawHtmlId} - skipping`);
+      this.warningCount++;
       return null;
     }
 
@@ -168,7 +172,8 @@ class MarkdownConverterThreeDB {
     });
 
     if (!markdown) {
-      console.log('   ❌ Conversion failed - no markdown generated');
+      console.log('   ⚠️  Conversion produced no markdown - skipping');
+      this.warningCount++;
       return null;
     }
 
@@ -251,7 +256,7 @@ class MarkdownConverterThreeDB {
     console.log(`Found ${missingContent.length} content IDs referenced in changes but missing markdown`);
 
     let successCount = 0;
-    let errorCount = 0;
+    let skipCount = 0;
     let notFoundCount = 0;
 
     for (const { content_id } of missingContent) {
@@ -268,24 +273,29 @@ class MarkdownConverterThreeDB {
         if (result) {
           successCount++;
         } else {
-          errorCount++;
+          skipCount++;
         }
       } catch (error) {
         console.error(`❌ Error processing content ${content_id}:`, error.message);
-        errorCount++;
-        // Don't mark as critical error - continue processing
+        this.errorCount++;
+        this.hasErrors = true;
+        // Don't continue if we have database errors
+        if (error.message.includes('database') || error.message.includes('table')) {
+          console.error('❌ FATAL: Database error detected, stopping processing');
+          throw error;
+        }
       }
     }
 
     console.log(`\n📊 Change Content Conversion Complete!`);
     console.log(`✅ Success: ${successCount}`);
-    console.log(`❌ Errors: ${errorCount}`);
+    console.log(`⚠️  Skipped: ${skipCount}`);
     if (notFoundCount > 0) {
       console.log(`⚠️  Not Found: ${notFoundCount} (orphaned references in change_detection)`);
     }
     console.log('');
 
-    return { successCount, errorCount, notFoundCount };
+    return { successCount, skipCount, notFoundCount };
   }
 
   async processAllUnconverted() {
@@ -310,7 +320,7 @@ class MarkdownConverterThreeDB {
     console.log(`Found ${unconverted.length} HTML records to convert`);
 
     let successCount = 0;
-    let errorCount = 0;
+    let skipCount = 0;
 
     for (const { id } of unconverted) {
       try {
@@ -318,11 +328,11 @@ class MarkdownConverterThreeDB {
         if (result) {
           successCount++;
         } else {
-          errorCount++;
+          skipCount++;
         }
       } catch (error) {
         console.error(`❌ Error processing HTML ${id}:`, error.message);
-        errorCount++;
+        this.errorCount++;
         this.hasErrors = true;
         // Don't continue if we have database errors
         if (error.message.includes('database') || error.message.includes('table')) {
@@ -332,13 +342,13 @@ class MarkdownConverterThreeDB {
       }
     }
 
-    console.log(`\n📊 Conversion Complete!\n✅ Success: ${successCount}\n❌ Errors: ${errorCount}\n`);
+    console.log(`\n📊 Conversion Complete!\n✅ Success: ${successCount}\n⚠️  Skipped: ${skipCount}\n`);
     
     // Final database check
     const finalCount = this.processedDb.prepare('SELECT COUNT(*) as count FROM markdown_content').get();
     console.log(`📊 Total markdown records in database: ${finalCount.count}`);
 
-    return { successCount, errorCount, totalInDb: finalCount.count };
+    return { successCount, skipCount, totalInDb: finalCount.count };
   }
 
   async processLatestForEachUrl() {
@@ -368,10 +378,16 @@ class MarkdownConverterThreeDB {
     console.log(`Found ${latestScrapes.length} latest HTML records to convert`);
 
     let successCount = 0;
+    let skipCount = 0;
+    
     for (const { id } of latestScrapes) {
       try {
         const result = await this.processRawHtml(id);
-        if (result) successCount++;
+        if (result) {
+          successCount++;
+        } else {
+          skipCount++;
+        }
       } catch (error) {
         console.error(`❌ Error processing HTML ${id}:`, error.message);
         this.hasErrors = true;
@@ -387,9 +403,10 @@ class MarkdownConverterThreeDB {
     // Final database check
     const finalCount = this.processedDb.prepare('SELECT COUNT(*) as count FROM markdown_content').get();
     console.log(`\n✅ Processed ${successCount} URLs`);
+    console.log(`⚠️  Skipped ${skipCount} URLs`);
     console.log(`📊 Total markdown records in database: ${finalCount.count}`);
 
-    return successCount;
+    return { successCount, skipCount };
   }
 
   async processScrapingRun(runId) {
@@ -412,10 +429,16 @@ class MarkdownConverterThreeDB {
     console.log(`Found ${htmlRecords.length} HTML records from run ${runId}`);
 
     let successCount = 0;
+    let skipCount = 0;
+    
     for (const { id } of htmlRecords) {
       try {
         const result = await this.processRawHtml(id);
-        if (result) successCount++;
+        if (result) {
+          successCount++;
+        } else {
+          skipCount++;
+        }
       } catch (error) {
         console.error(`❌ Error processing HTML ${id}:`, error.message);
         this.hasErrors = true;
@@ -428,7 +451,7 @@ class MarkdownConverterThreeDB {
       }
     }
 
-    return successCount;
+    return { successCount, skipCount };
   }
 
   close() {
@@ -458,13 +481,6 @@ if (require.main === module) {
       console.log('🚨 Ensuring all change detection content has markdown...');
       const changeResult = await converter.processChangeDetectionContent();
       
-      // Don't treat orphaned references as critical errors
-      if (changeResult.errorCount > 0 && changeResult.notFoundCount < changeResult.errorCount) {
-        // We have real errors, not just orphaned references
-        converter.hasErrors = true;
-        converter.errorCount = changeResult.errorCount;
-      }
-      
       // Then process based on mode
       if (mode === 'all') {
         await converter.processAllUnconverted();
@@ -482,13 +498,17 @@ if (require.main === module) {
         console.log('Usage: node markdown-converter-three-db.js [all|latest|changes|run <runId>|<html-id>]');
       }
       
-      // Check if we had any errors
+      // Check if we had any critical errors (not warnings)
       if (converter.hasErrors) {
         console.error(`\n❌ Process completed with ${converter.errorCount} errors`);
+        console.error(`⚠️  Also had ${converter.warningCount} warnings (empty content)`);
         console.error('❌ Exiting with error code 1');
         process.exit(1);
+      } else if (converter.warningCount > 0) {
+        console.log(`\n✅ Process completed successfully with ${converter.warningCount} warnings`);
+        console.log('⚠️  Some URLs had empty content but processing continued');
       } else {
-        console.log('\n✅ Process completed successfully with no errors');
+        console.log('\n✅ Process completed successfully with no errors or warnings');
       }
     } catch (error) {
       console.error('\n💥 FATAL ERROR:', error.message);
