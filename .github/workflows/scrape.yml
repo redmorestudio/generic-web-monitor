@@ -212,6 +212,14 @@ jobs:
             exit 1
           }
           
+          # Add raw_content.db (handled by LFS)
+          echo "📂 Adding raw_content.db via LFS..."
+          git add github-actions-backend/data/raw_content.db || {
+            echo "⚠️ Failed to add raw_content.db, checking if it exists..."
+            ls -la github-actions-backend/data/
+            echo "⚠️ Note: raw_content.db may be very large and handled by Git LFS"
+          }
+          
           # Add the scrape summary
           echo "📂 Adding last-scrape.json..."
           git add api-data/last-scrape.json || true
@@ -247,6 +255,7 @@ jobs:
                     git pull origin main
                     # Re-add and commit our changes
                     git add -f github-actions-backend/data/intelligence.db || true
+                    git add github-actions-backend/data/raw_content.db || true
                     git add api-data/last-scrape.json || true
                     git commit -m "🕷️ Update scraped content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
                   }
