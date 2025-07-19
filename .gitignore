@@ -1,5 +1,8 @@
-# Database files that are too large
-github-actions-backend/data/raw_content.db
+# Database files that are too large (handled by LFS)
+# github-actions-backend/data/raw_content.db is tracked by LFS
+
+# Old database file to ignore
+github-actions-backend/data/monitor.db
 
 # Node modules
 node_modules/
@@ -25,9 +28,6 @@ npm-debug.log*
 # Temporary files
 *.tmp
 *.temp
--e 
-# Database files
-*.db
-*.db-shm
-*.db-wal
+
+# Artifacts
 scraper-artifact.zip
