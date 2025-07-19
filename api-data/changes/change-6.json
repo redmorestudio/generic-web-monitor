@@ -5,14 +5,14 @@
   "company_category": "AI Coding",
   "detected_at": "2025-07-04 20:11:15",
   "interest_level": 5,
-  "interest_category": "notable_update",
-  "interest_explanation": "Amazon introduces a new AI coding assistant, Amazon CodeWhisperer, with a focus on cookie policy and privacy notice.",
+  "interest_category": "major_development",
+  "interest_explanation": "Amazon CodeWhisperer is a new AI coding assistant that has the potential to significantly impact the software development industry.",
   "interest_drivers": [
-    "New AI Coding Assistant",
-    "Cookie Policy Introduction"
+    "New Product Launch",
+    "AI Technology"
   ],
-  "technical_innovation_score": 7,
-  "business_impact_score": 6,
+  "technical_innovation_score": 9,
+  "business_impact_score": 8,
   "ai_key_changes": null,
   "ai_business_context": null,
   "has_content": false,
@@ -40,22 +40,17 @@
         "type": "AI Coding Assistant",
         "description": "Generative AI Assistant for Software Development",
         "features": [
-          "essential cookies",
-          "performance cookies",
-          "functional cookies",
-          "advertising cookies"
+          "Generative AI",
+          "Software Development"
         ],
-        "metadata": {
-          "url": "https://aws.amazon.com/codewhisperer",
-          "company": "Amazon"
-        }
+        "metadata": {}
       }
     ],
     "technologies": [
       {
-        "name": "Cookies",
-        "category": "Web Technology",
-        "purpose": "Tracking and Personalization",
+        "name": "AI",
+        "category": "Artificial Intelligence",
+        "purpose": "Software Development",
         "related_products": [
           "Amazon CodeWhisperer"
         ]
@@ -64,13 +59,8 @@
     "companies": [
       {
         "name": "Amazon",
-        "role": "Developer",
-        "relationship": "Owner of Amazon CodeWhisperer"
-      },
-      {
-        "name": "AWS",
-        "role": "Cloud Service Provider",
-        "relationship": "Part of Amazon"
+        "role": "Developer of Amazon CodeWhisperer",
+        "relationship": "Owner"
       }
     ],
     "people": [],
@@ -78,16 +68,15 @@
     "dates": [
       {
         "date": "2025-07-04T20:11:15.000Z",
-        "event": "Change Date",
-        "significance": "New Content Published"
+        "event": "Launch of Amazon CodeWhisperer",
+        "significance": "New Product Launch"
       }
     ],
     "locations": []
   },
   "key_phrases": [
-    "Amazon CodeWhisperer",
-    "AI Coding Assistant",
-    "Cookie Policy",
-    "Privacy Notice"
+    "Generative AI Assistant",
+    "Software Development",
+    "Amazon CodeWhisperer"
   ]
 }
