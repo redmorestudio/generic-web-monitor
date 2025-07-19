@@ -1,0 +1,322 @@
+{
+  "change_id": 122,
+  "url": "https://blogs.nvidia.com/ai",
+  "company": "NVIDIA",
+  "company_category": "AI Hardware",
+  "detected_at": "2025-07-18 16:38:29",
+  "interest_level": 7,
+  "interest_category": "major_development",
+  "interest_explanation": "The updates on NVIDIA's blog highlight significant advancements in AI computing, gaming, and energy efficiency. The introduction of Isambard-AI, a powerful AI supercomputer, and the launch of new games on GeForce NOW demonstrate the company's commitment to innovation and customer engagement. The extension of the deadline for the Project G-Assist Plug-In Hackathon also showcases NVIDIA's efforts to foster community involvement and development.",
+  "interest_drivers": [
+    "Introduction of Isambard-AI, the UK’s most powerful AI supercomputer",
+    "NVIDIA’s Plug and Play: Project G-Assist Plug-In Hackathon",
+    "Launch of RoboCop: Rogue City — Unfinished Business on GeForce NOW"
+  ],
+  "technical_innovation_score": 7,
+  "business_impact_score": 6,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://blogs.nvidia.com/ai\ncompany: NVIDIA\nscraped_at: 2025-07-04 20:17:36\n---\n\n      Page Not Found | NVIDIA Blog                          ![country_code](https://www.nvidia.com/content/dam/1x1-00000000.png)\n\n[Skip to content](#content)\n\n[\n\nArtificial Intelligence Computing Leadership from NVIDIA\n\n](https://www.nvidia.com/en-us/)\n\n*   Search for:\n\n    [Toggle Search](/?s=)\n\n*   [Home](/)\n*   [AI](https://blogs.nvidia.com/blog/category/generative-ai/)\n*   [Data Center](https://blogs.nv...",
+    "after": "#ot-pc-content #ot-pc-title, #ot-pc-hdr #ot-lst-title h3 { font-size: 16px !important; } #onetrust-pc-sdk .ot-cat-grp .ot-always-active { font-size: 14px !important; } #onetrust-pc-sdk .ot-host-expand { font-size: 12px !important; } function OptanonWrapper() { var event = new Event('bannerLoaded'); window.dispatchEvent(event); }      // Check for js support (replace no-js class on html) document.documentElement.className = document.documentElement.className.replace(/\\\\bno-js\\\\b/, '') + ' js'; //..."
+  },
+  "diff": {
+    "added_sentences": [
+      "#ot-pc-content #ot-pc-title, #ot-pc-hdr #ot-lst-title h3 { font-size: 16px !",
+      "important; } #onetrust-pc-sdk .",
+      "ot-cat-grp .",
+      "ot-always-active { font-size: 14px !",
+      "important; } #onetrust-pc-sdk .",
+      "ot-host-expand { font-size: 12px !",
+      "important; } function OptanonWrapper() { var event = new Event('bannerLoaded'); window.",
+      "dispatchEvent(event); }      // Check for js support (replace no-js class on html) document.",
+      "documentElement.",
+      "className = document."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://blogs.",
+      "com/ai\ncompany: NVIDIA\nscraped_at: 2025-07-04 20:17:36\n---\n\n      Page Not Found | NVIDIA Blog                          !",
+      "com/en-us/)\n\n*   Search for:\n\n    [Toggle Search](/?",
+      "[July games list on GeForce NOW](https://blogs.",
+      "com/wp-content/uploads/2025/07/gfn-thursday-date-nv-blog-1280x680-logo-960x510.",
+      "com/blog/geforce-now-thursday-july-2025-games/ \"GeForce NOW’s 20 July Games Bring the Heat to the Cloud\")[Gaming](https://blogs.",
+      "com/blog/category/gaming/ \"Gaming\")\n\n#### [GeForce NOW’s 20 July Games Bring the Heat to the Cloud](https://blogs.",
+      "com/blog/geforce-now-thursday-july-2025-games/)\n\nJuly 3, 2025 by [GeForce NOW Community](https://blogs.",
+      "com/blog/author/geforcenowcommunity/ \"Posts by GeForce NOW Community\")\n\nThe forecast this month is showing a 100% chance of epic gaming.",
+      "Catch the scorching lineup of 20 titles coming to the cloud, which gamers can play whether indoors or… [Read Article](https://blogs."
+    ],
+    "key_changes": [
+      "New version: 16.0.1, 6.8.2, 0.07, 0.1, 1.333, 1.125, 0.44, 0.67, 1.5, 2.25, 3.38, 5.06, 0.2, 0.4, 0.5, 1.25, 1.6, 0.7, 6.7.35, 7.0, 6.7.16, 0.65, 0.15, 1.2, 2.5, 13.3333333333, 30.6666666667, 65.3333333333, 82.6666666667, 91.3333333333, 1.3, 1.35, 1.875, 1.4, 0.85, 1.1, 7.5, 11.5, 6.5, 1.75, 1.18, 0.6, 2.0, 2.3.33",
+      "New date mentioned: July 17, 2025, July 15, 2025",
+      "New release mentioned",
+      "New performance mentioned",
+      "New feature mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 96,
+    "summary": "96% content changed (4496 additions, 53 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "onetrust-pc-sdk",
+        "frequency": 910
+      },
+      {
+        "word": "onetrust-banner-sdk",
+        "frequency": 300
+      },
+      {
+        "word": "ot-sdk-cookie-policy",
+        "frequency": 228
+      },
+      {
+        "word": "width",
+        "frequency": 182
+      },
+      {
+        "word": "none",
+        "frequency": 147
+      },
+      {
+        "word": "font-size",
+        "frequency": 139
+      },
+      {
+        "word": "display",
+        "frequency": 132
+      },
+      {
+        "word": "var",
+        "frequency": 131
+      },
+      {
+        "word": "onetrust-consent-sdk",
+        "frequency": 117
+      },
+      {
+        "word": "height",
+        "frequency": 112
+      },
+      {
+        "word": "color",
+        "frequency": 112
+      },
+      {
+        "word": "ot-acc-hdr",
+        "frequency": 112
+      },
+      {
+        "word": "tpt",
+        "frequency": 100
+      },
+      {
+        "word": "10px",
+        "frequency": 94
+      },
+      {
+        "word": "window",
+        "frequency": 93
+      },
+      {
+        "word": "position",
+        "frequency": 90
+      },
+      {
+        "word": "input",
+        "frequency": 90
+      },
+      {
+        "word": "ot-sdk-cookie-policy-v2",
+        "frequency": 86
+      },
+      {
+        "word": "background-color",
+        "frequency": 85
+      },
+      {
+        "word": "document",
+        "frequency": 84
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "a951a8441caa4f3bd01516feeedf6045",
+        "frequency": 5
+      },
+      {
+        "word": "flux",
+        "frequency": 4
+      },
+      {
+        "word": "geforce-now-thursday-july-2025-games",
+        "frequency": 3
+      },
+      {
+        "word": "rtx-ai-garage-flux-kontext-nim-tensorrt",
+        "frequency": 3
+      },
+      {
+        "word": "ai-factories-flexible-power-use",
+        "frequency": 3
+      },
+      {
+        "word": "factories",
+        "frequency": 3
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "bring",
+        "frequency": 2
+      },
+      {
+        "word": "heat",
+        "frequency": 2
+      },
+      {
+        "word": "accelerates",
+        "frequency": 2
+      },
+      {
+        "word": "kontext",
+        "frequency": 2
+      },
+      {
+        "word": "available",
+        "frequency": 2
+      },
+      {
+        "word": "download",
+        "frequency": 2
+      },
+      {
+        "word": "michael",
+        "frequency": 2
+      },
+      {
+        "word": "fukuyama",
+        "frequency": 2
+      },
+      {
+        "word": "labs",
+        "frequency": 2
+      },
+      {
+        "word": "world",
+        "frequency": 2
+      },
+      {
+        "word": "relieve",
+        "frequency": 2
+      },
+      {
+        "word": "stress",
+        "frequency": 2
+      },
+      {
+        "word": "marc",
+        "frequency": 2
+      }
+    ],
+    "frequency_changes": {
+      "100": {
+        "before": 1,
+        "after": 133,
+        "change": 132
+      },
+      "important": {
+        "before": 2,
+        "after": 147,
+        "change": 145
+      },
+      "button": {
+        "before": 1,
+        "after": 122,
+        "change": 121
+      },
+      "function": {
+        "before": 2,
+        "after": 117,
+        "change": 115
+      },
+      "not": {
+        "before": 4,
+        "after": 111,
+        "change": 107
+      },
+      "auto": {
+        "before": 1,
+        "after": 92,
+        "change": 91
+      },
+      "type": {
+        "before": 2,
+        "after": 90,
+        "change": 88
+      },
+      "right": {
+        "before": 1,
+        "after": 70,
+        "change": 69
+      },
+      "label": {
+        "before": 8,
+        "after": 72,
+        "change": 64
+      },
+      "text": {
+        "before": 4,
+        "after": 59,
+        "change": 55
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "nvidia com",
+        "count": 105
+      },
+      {
+        "phrase": "ot-sdk-cookie-policy-v2 ot-sdk-cookie-policy",
+        "count": 71
+      },
+      {
+        "phrase": "onetrust-pc-sdk ot-accordion-layout",
+        "count": 64
+      },
+      {
+        "phrase": "onetrust-consent-sdk onetrust-pc-sdk",
+        "count": 62
+      },
+      {
+        "phrase": "1px solid",
+        "count": 53
+      },
+      {
+        "phrase": "https www",
+        "count": 50
+      },
+      {
+        "phrase": "width 100",
+        "count": 49
+      },
+      {
+        "phrase": "position relative",
+        "count": 48
+      },
+      {
+        "phrase": "display inline-block",
+        "count": 47
+      },
+      {
+        "phrase": "input type",
+        "count": 46
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

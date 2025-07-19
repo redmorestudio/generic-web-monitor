@@ -1,0 +1,249 @@
+{
+  "change_id": 93,
+  "url": "https://inflection.ai",
+  "company": "Inflection AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:37:28",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes were detected between the previous and current content of the Inflection AI homepage.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://inflection.ai\ncompany: Inflection AI\nscraped_at: 2025-07-04 20:15:35\n---\n\n   Inflection AI\n\n[\n\n](./)\n\n[\n\nGet in touch\n\nGet in touch\n\n\n](./get-in-touch)\n\n[\n\nTry the API\n\nTry the API\n\n\n](https://developers.inflection.ai/login)\n\n[\n\nBlog\n\nBlog\n\n\n](https://inflection.ai/blog)\n\n# _Own your edge_\n\n## It’s simple. We train and tune it. You own it. Let’s do enterprise AI right.\n\n### No one wants to be left behind.\n\nThe problem\n\nBut complexity, security concerns, and high costs are keepin...",
+    "after": "   (function(w,d,s,l,i){w\\[l\\]=w\\[l\\]||\\[\\];w\\[l\\].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)\\[0\\], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KLG9RX4J'); { \"@context\": \"https://schema.org\", \"@type\": \"Organization\", \"name\": \"Inflection AI\", \"description\": \"It's simple. We train and tune it. You own..."
+  },
+  "diff": {
+    "added_sentences": [
+      "(function(w,d,s,l,i){w\\[l\\]=w\\[l\\]||\\[\\];w\\[l\\].",
+      "push({'gtm.",
+      "start': new Date().",
+      "getTime(),event:'gtm.",
+      "js'});var f=d.",
+      "getElementsByTagName(s)\\[0\\], j=d.",
+      "createElement(s),dl=l!",
+      "='dataLayer'?",
+      "'&l='+l:'';j.",
+      "async=true;j."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://inflection.",
+      "ai\ncompany: Inflection AI\nscraped_at: 2025-07-04 20:15:35\n---\n\n   Inflection AI\n\n[\n\n](.",
+      "/)\n\n[\n\nGet in touch\n\nGet in touch\n\n\n](.",
+      "/get-in-touch)\n\n[\n\nTry the API\n\nTry the API\n\n\n](https://developers.",
+      "ai/login)\n\n[\n\nBlog\n\nBlog\n\n\n](https://inflection.",
+      "Aligns with your culture and brand\n\nTruly understands your business\n\n#### A letter from\nthe CEO\n\n!",
+      "## Let’s build a better enterprise AI\n\n[\n\nGet in touch\n\nGet in touch\n\n\n](.",
+      "/get-in-touch)\n\n[\n\nTry the API\n\nTry the API\n\n\n](https://developers.",
+      "ai/login)\n\n[\n\nBlog\n\nBlog\n\n\n](https://inflection.",
+      "/)\n\n[\n\nPartners\n\n\n](."
+    ],
+    "key_changes": [
+      "New version: 98.06, 31.38, 101.98, 93.26, 29.84, 107.23, 96.52, 30.89, 103.6, 102.29, 32.73, 97.76, 89.79, 22.36, 107.89, 1.2, 1.3, 2.25, 3.609375, 5.318749904632568, 9.975000381469727, 14.949999809265137, 21.853124618530273, 40.10625076293945, 1.7518248175182483, 1.7065637065637065, 49.962714392244614, 50.00000000000002, 49.9587798845837, 49.877149877149904, 1.3249211356466877, 1.4364640883977902, 1.4377224199288257, 1.4428571428571428, 1.4444444444444444, 2.380952380952381, 7.166666666666667, 6.842105263157895, 1.9504132231404958, 0.4, 0.2, 0.1, 1.53, 0.001, 0.3, 0.25, 0.5, 0.6",
+      "Price change: $1, $2",
+      "New api mentioned",
+      "New performance mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 99,
+    "summary": "99% content changed (2426 additions, 15 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "var",
+        "frequency": 756
+      },
+      {
+        "word": "framer-text",
+        "frequency": 236
+      },
+      {
+        "word": "none",
+        "frequency": 207
+      },
+      {
+        "word": "span",
+        "frequency": 196
+      },
+      {
+        "word": "flex",
+        "frequency": 175
+      },
+      {
+        "word": "height",
+        "frequency": 171
+      },
+      {
+        "word": "width",
+        "frequency": 169
+      },
+      {
+        "word": "normal",
+        "frequency": 165
+      },
+      {
+        "word": "grenette",
+        "frequency": 158
+      },
+      {
+        "word": "pro",
+        "frequency": 158
+      },
+      {
+        "word": "position",
+        "frequency": 153
+      },
+      {
+        "word": "framer-j8fyh",
+        "frequency": 150
+      },
+      {
+        "word": "inter",
+        "frequency": 145
+      },
+      {
+        "word": "data-framer-component-type",
+        "frequency": 142
+      },
+      {
+        "word": "center",
+        "frequency": 136
+      },
+      {
+        "word": "sans-serif",
+        "frequency": 123
+      },
+      {
+        "word": "italic",
+        "frequency": 123
+      },
+      {
+        "word": "400",
+        "frequency": 121
+      },
+      {
+        "word": "placeholder",
+        "frequency": 121
+      },
+      {
+        "word": "relative",
+        "frequency": 111
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "not": {
+        "before": 1,
+        "after": 134,
+        "change": 133
+      },
+      "let": {
+        "before": 3,
+        "after": 113,
+        "change": 110
+      },
+      "https": {
+        "before": 9,
+        "after": 81,
+        "change": 72
+      },
+      "com": {
+        "before": 3,
+        "after": 73,
+        "change": 70
+      },
+      "url": {
+        "before": 1,
+        "after": 68,
+        "change": 67
+      },
+      "framerusercontent": {
+        "before": 1,
+        "after": 61,
+        "change": 60
+      },
+      "left": {
+        "before": 1,
+        "after": 57,
+        "change": 56
+      },
+      "right": {
+        "before": 2,
+        "after": 28,
+        "change": 26
+      },
+      "true": {
+        "before": 1,
+        "after": 26,
+        "change": 25
+      },
+      "get": {
+        "before": 4,
+        "after": 14,
+        "change": 10
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "grenette pro",
+        "count": 158
+      },
+      {
+        "phrase": "placeholder sans-serif",
+        "count": 116
+      },
+      {
+        "phrase": "position relative",
+        "count": 111
+      },
+      {
+        "phrase": "flex none",
+        "count": 103
+      },
+      {
+        "phrase": "relative width",
+        "count": 83
+      },
+      {
+        "phrase": "pro bold",
+        "count": 76
+      },
+      {
+        "phrase": "span framer-text",
+        "count": 72
+      },
+      {
+        "phrase": "data-framer-component-type text",
+        "count": 70
+      },
+      {
+        "phrase": "font-face font-family",
+        "count": 68
+      },
+      {
+        "phrase": "url https",
+        "count": 65
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

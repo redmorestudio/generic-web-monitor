@@ -1,0 +1,243 @@
+{
+  "change_id": 117,
+  "url": "https://murf.ai/resources/blog",
+  "company": "Murf AI",
+  "company_category": "AI Voice/Audio",
+  "detected_at": "2025-07-18 16:38:18",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes were found between the previous and current content. Both versions display a 404 error page with the same menu options and product information, indicating no technical innovation or business impact.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://murf.ai/resources/blog\ncompany: Murf AI\nscraped_at: 2025-07-04 20:17:30\n---\n\nError 404 - Murf Blog\n\n[![Murf Blog](./media/website/Murf-Logo-3.png)](./)\n\nMenu\n\n*   [Home](/)\n*   [Studio](/studio)\n*   [Pricing](/pricing)\n*   [Text to Speech](/text-to-speech \"Text to Speech\")\n*   [Voice Cloning](/voice-cloning \"Voice Cloning\")\n*   [Help Center](https://help.murf.ai)\n*   [Academy](/academy/home \"Murf Academy\")\n\nClose\n\n[](https://twitter.com/MURFAISTUDIO)[](https://www.instagram.com/...",
+    "after": "Error 404 - Murf Blog:root{--body-font:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen,Ubuntu,Cantarell,\"Fira Sans\",\"Droid Sans\",\"Helvetica Neue\",Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\";--heading-font:var(--body-font);--post-entry-font:var(--body-font);--logo-font:var(--body-font);--menu-font:var(--body-font)}{\"@context\":\"http://schema.org\",\"@type\":\"Organization\",\"name\":\"Murf Blog\",\"logo\":\"./media/website/Murf-Logo-3.png\",\"url\":\"./\",\"sameAs\":\\[\"https://t..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Error 404 - Murf Blog:root{--body-font:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Oxygen,Ubuntu,Cantarell,\"Fira Sans\",\"Droid Sans\",\"Helvetica Neue\",Arial,sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\";--heading-font:var(--body-font);--post-entry-font:var(--body-font);--logo-font:var(--body-font);--menu-font:var(--body-font)}{\"@context\":\"http://schema.",
+      "org\",\"@type\":\"Organization\",\"name\":\"Murf Blog\",\"logo\":\".",
+      "png\",\"url\":\".",
+      "/\",\"sameAs\":\\[\"https://twitter.",
+      "com/MURFAISTUDIO\",\"https://www.",
+      "com/murfaistudio/\",\"https://www.",
+      "com/company/murf-ai\",\"https://www.",
+      "com/channel/UCN4SZLCIuSKaLwQuDHR9evg\"\\]}if(window.",
+      "location.",
+      "host==='murf."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://murf.",
+      "ai/resources/blog\ncompany: Murf AI\nscraped_at: 2025-07-04 20:17:30\n---\n\nError 404 - Murf Blog\n\n[!",
+      "ai)\n\n\n[TABLE]\n\n\n**Products**\n\n[AI Voice Generator](https://murf.",
+      "ai/audio-to-text-converter \"Audio to text converter\")\n\n**Text to speech in 20+ languages**\n\n[American English](https://murf.",
+      "ai/resources/cookie_policy/\")\n\n\n[/TABLE]\n\n© Copyright 2024\n\n[](https://twitter.",
+      "com/channel/UCN4SZLCIuSKaLwQuDHR9evg)\n\n*   [Home](/)\n*   [Studio](/studio)\n*   [Pricing](/pricing)\n*   [Text to Speech](/text-to-speech \"Text to Speech\")\n*   [Voice Cloning](/voice-cloning \"Voice Cloning\")\n*   [Help Center](https://help."
+    ],
+    "key_changes": [],
+    "change_percentage": 21,
+    "summary": "21% content changed (29 additions, 6 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "var",
+        "frequency": 6
+      },
+      {
+        "word": "--body-font",
+        "frequency": 5
+      },
+      {
+        "word": "window",
+        "frequency": 5
+      },
+      {
+        "word": "images",
+        "frequency": 5
+      },
+      {
+        "word": "segoe",
+        "frequency": 3
+      },
+      {
+        "word": "datalayer",
+        "frequency": 3
+      },
+      {
+        "word": "gtag",
+        "frequency": 3
+      },
+      {
+        "word": "sans",
+        "frequency": 2
+      },
+      {
+        "word": "emoji",
+        "frequency": 2
+      },
+      {
+        "word": "function",
+        "frequency": 2
+      },
+      {
+        "word": "classlist",
+        "frequency": 2
+      },
+      {
+        "word": "add",
+        "frequency": 2
+      },
+      {
+        "word": "is-loaded",
+        "frequency": 2
+      },
+      {
+        "word": "addeventlistener",
+        "frequency": 2
+      },
+      {
+        "word": "load",
+        "frequency": 2
+      },
+      {
+        "word": "300",
+        "frequency": 1
+      },
+      {
+        "word": "500",
+        "frequency": 1
+      },
+      {
+        "word": "root",
+        "frequency": 1
+      },
+      {
+        "word": "-apple-system",
+        "frequency": 1
+      },
+      {
+        "word": "blinkmacsystemfont",
+        "frequency": 1
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "table",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "com": {
+        "before": 8,
+        "after": 12,
+        "change": 4
+      },
+      "https": {
+        "before": 114,
+        "after": 117,
+        "change": 3
+      },
+      "www": {
+        "before": 6,
+        "after": 9,
+        "change": 3
+      },
+      "murfaistudio": {
+        "before": 4,
+        "after": 6,
+        "change": 2
+      },
+      "media": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "website": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "murf-logo-3": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "png": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "twitter": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "instagram": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "https murf",
+        "count": 102
+      },
+      {
+        "phrase": "murf text-to-speech",
+        "count": 28
+      },
+      {
+        "phrase": "murf alternative",
+        "count": 22
+      },
+      {
+        "phrase": "alternative https",
+        "count": 21
+      },
+      {
+        "phrase": "murf alternatives",
+        "count": 19
+      },
+      {
+        "phrase": "text speech",
+        "count": 17
+      },
+      {
+        "phrase": "murf voiceover",
+        "count": 11
+      },
+      {
+        "phrase": "https www",
+        "count": 9
+      },
+      {
+        "phrase": "com murfaistudio",
+        "count": 6
+      },
+      {
+        "phrase": "murfaistudio https",
+        "count": 6
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

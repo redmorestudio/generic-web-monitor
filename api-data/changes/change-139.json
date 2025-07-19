@@ -1,0 +1,267 @@
+{
+  "change_id": 139,
+  "url": "https://pika.art/pricing",
+  "company": "Pika",
+  "company_category": "Video AI",
+  "detected_at": "2025-07-18 16:40:35",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes detected in the pricing page content.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://pika.art/pricing\ncompany: Pika\nscraped_at: 2025-07-04 20:18:03\n---\n\nPika\n\n[About Us](/about)[Careers](/careers)[API](/api)\n\n[Try Pika](/login)\n\n[\n\n](/home)\n\n[About Us](/about)[Careers](/careers)[API](/api)\n\n[Sign In](/login)[Try Pika](/login)\n\n# Subscription Pricing\n\nPika has four plans, so you can pick what fits your needs.\n\nYearly \\-20% offMonthly\n\n$0\n\nFree\n\nbilled yearly\n\n### Basic\n\nA perfect taste for the creatively curious\n\n* * *\n\n80 monthly video credits\n\nCost per video:\n\n...",
+    "after": "Pika(function(w,r){w.\\_rwq=r;w\\[r\\]=w\\[r\\]||function(){(w\\[r\\].q=w\\[r\\].q||\\[\\]).push(arguments)}})(window,'rewardful');self.\\_\\_wrap\\_n=self.\\_\\_wrap\\_n||(self.CSS&&CSS.supports(\"text-wrap\",\"balance\")?1:2);self.\\_\\_wrap\\_b=(n,e,a)=>{let i=(a=a||document.querySelector(\\`\\[data-br=\"${n}\"\\]\\`)).parentElement,t=n=>a.style.maxWidth=n+\"px\";a.style.maxWidth=\"\";let r=i.clientWidth,c=i.clientHeight,d=r/2-.25,b=r+.5,o;if(r){for(t(d),d=Math.max(a.scrollWidth,d);d+1<b;)t(o=Math.round((d+b)/2)),i.clientHeig..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Pika(function(w,r){w.",
+      "\\_rwq=r;w\\[r\\]=w\\[r\\]||function(){(w\\[r\\].",
+      "q=w\\[r\\].",
+      "q||\\[\\]).",
+      "push(arguments)}})(window,'rewardful');self.",
+      "\\_\\_wrap\\_n=self.",
+      "\\_\\_wrap\\_n||(self.",
+      "CSS&&CSS.",
+      "supports(\"text-wrap\",\"balance\")?",
+      "1:2);self."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://pika.",
+      "art/pricing\ncompany: Pika\nscraped_at: 2025-07-04 20:18:03\n---\n\nPika\n\n[About Us](/about)[Careers](/careers)[API](/api)\n\n[Try Pika](/login)\n\n[\n\n](/home)\n\n[About Us](/about)[Careers](/careers)[API](/api)\n\n[Sign In](/login)[Try Pika](/login)\n\n# Subscription Pricing\n\nPika has four plans, so you can pick what fits your needs.",
+      "Yearly \\-20% offMonthly\n\n$0\n\nFree\n\nbilled yearly\n\n### Basic\n\nA perfect taste for the creatively curious\n\n* * *\n\n80 monthly video credits\n\nCost per video:\n\n*   5 credits - Turbo model (image or text-to-video)\n*   10 credits - Turbo model (using Pikascenes, Pikadditions or Pikaswaps)\n*   60 credits - Turbo model (using Pikatwists)\n*   15 credits - 1.",
+      "5, Pikadditions, Pikaswaps, and Pikatwists (Turbo), Pikaffects\n\nPurchase more roll over video credits\n\nDownload videos with no watermark\n\nCommercial use\n\n$8\n\n/ month\n\nbilled yearly\n\n### Standard\n\nMore videos meets more editing features\n\n* * *\n\n700 monthly video credits\n\nCost per video:\n\n*   5 credits - Turbo model (image or text-to-video)\n*   10 credits - Turbo model (using Pikascenes, Pikadditions or Pikaswaps)\n*   60 credits - Turbo model (using Pikatwists)\n*   15 credits - 1.",
+      "2, Turbo and Pro (Pikadditions, Pikaswaps, Pikatwists), all Pikaffects\n\nFast generations\n\nPurchase more roll over video credits\n\nDownload videos with no watermark\n\nCommercial use\n\n$28\n\n/ month\n\nBest value\n\nbilled yearly\n\n### Pro\n\nMore speed, more videos, more fun\n\n* * *\n\n2300 monthly video credits\n\nCost per video:\n\n*   5 credits - Turbo model (image or text-to-video)\n*   10 credits - Turbo model (using Pikascenes, Pikadditions or Pikaswaps)\n*   60 credits - Turbo model (using Pikatwists)\n*   15 credits - 1.",
+      "2, Turbo and Pro (Pikadditions, Pikaswaps, Pikatwists), all Pikaffects\n\nFaster generations\n\nPurchase more roll over video credits\n\nDownload videos with no watermark\n\nCommercial use\n\n$76\n\n/ month\n\nbilled yearly\n\n### Fancy\n\nThe crème de la creativity\n\n* * *\n\n6000 monthly video credits\n\nCost per video:\n\n*   5 credits - Turbo model (image or text-to-video)\n*   10 credits - Turbo model (using Pikascenes, Pikadditions or Pikaswaps)\n*   60 credits - Turbo model (using Pikatwists)\n*   15 credits - 1.",
+      "2, Turbo and Pro (Pikadditions, Pikaswaps, Pikatwists), all Pikaffects\n\nFastest generations\n\nPurchase more roll over video credits\n\nDownload videos with no watermark\n\nCommercial use\n\nInfo\n\n5 credits - Turbo model (image or text-to-video)\n10 credits - Turbo model (using Pikascenes, Pikadditions or Pikaswaps)\n60 credits - Turbo model (using Pikatwists)\n15 credits - 1.",
+      "5 model\n35 credits - 2.",
+      "1 model (image or text-to-video)\n60 credits - 2.",
+      "1 model (using Pikascenes)\n20 credits - Pro model (using Pikadditions or Pikaswaps)\n30 credits - Pro model (using Selfie With Your Younger Self template)\n80 credits - Pro model (using Pikatwists)\nSubscription monthly video credits do not roll over from month to month."
+    ],
+    "key_changes": [
+      "New version: 7.5, 3.25, 5.88, 8.13, 7.25, 1.48092, 1.19984, 12.69, 22.3579, 19.585, V2.88282, 4.12946, V17.77, V4.12946, 40.9118, 2.07029, 37.0715, 27.5015, 9.44059, 24.7304, 24.7285, V10.268, 37.1604, 17.77, 41.1825, 30.8661, 9.65949, 9.95479, 2.77295, V11.4478, 16.6629, 11.4478, 17.388, 7.4445, 5.72483, 17.3861, 4.0033, 16.6609, 9.45396, 8.80985, V2.63795, 9.45589, 12.9289, 2.63795, 14.4101, 3.55993, 5.72297, 14.4081, 7.88602, 12.9269, 44.2063, 13.6368, 44.1367, V13.6702, V13.6368, 13.6053, V13.6387, V13.6053, 57.8841, 14.6701, V7.784, 3.75844, 55.347, 1.96271, 49.6561, 44.874, 42.0198, 4.09792, 7.67455, 44.816, 5.53377, 46.3088, 4.58025, 53.6995, 55.1343, 5.4707, 7.98064, 54.1462, 8.11235, 53.2083, 8.22922, 52.2918, 8.34238, 45.4193, 9.19573, 41.2715, 9.71145, 13.6609, 15.21, 41.869, 16.3082, 43.0989, 17.0168, 44.1991, 17.6513, 46.1599, 48.6196, 51.9321, 54.6896, 17.2005, 55.4805, 16.0114, 55.4089, 17.0929, 17.7644, 58.002, 57.9982, 17.7589, 16.5271, 11.4274, 13.1063, 54.5349, 14.2583, 53.3012, 14.9465, 52.1989, 15.5624, 50.5417, 15.85, 48.0898, 46.5873, 44.0676, 13.6387, 12.7, 44.7251, 12.1268, 46.3359, 11.663, 48.0724, 11.1621, 50.9904, 10.7744, 55.1363, 10.3144, V11.4274",
+      "Price change: $16, $23, $24, $2",
+      "New api mentioned"
+    ],
+    "change_percentage": 94,
+    "summary": "94% content changed (776 additions, 16 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "static",
+        "frequency": 262
+      },
+      {
+        "word": "chunks",
+        "frequency": 245
+      },
+      {
+        "word": "null",
+        "frequency": 99
+      },
+      {
+        "word": "children",
+        "frequency": 74
+      },
+      {
+        "word": "wrap",
+        "frequency": 54
+      },
+      {
+        "word": "ttq",
+        "frequency": 50
+      },
+      {
+        "word": "classname",
+        "frequency": 49
+      },
+      {
+        "word": "next",
+        "frequency": 42
+      },
+      {
+        "word": "tablet",
+        "frequency": 36
+      },
+      {
+        "word": "text-",
+        "frequency": 30
+      },
+      {
+        "word": "woff2",
+        "frequency": 26
+      },
+      {
+        "word": "font",
+        "frequency": 26
+      },
+      {
+        "word": "div",
+        "frequency": 26
+      },
+      {
+        "word": "leading-",
+        "frequency": 26
+      },
+      {
+        "word": "hover",
+        "frequency": 24
+      },
+      {
+        "word": "push",
+        "frequency": 23
+      },
+      {
+        "word": "app",
+        "frequency": 19
+      },
+      {
+        "word": "href",
+        "frequency": 18
+      },
+      {
+        "word": "2972",
+        "frequency": 17
+      },
+      {
+        "word": "2972-a09d1bb6d1390f3a",
+        "frequency": 17
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "watermark",
+        "frequency": 4
+      },
+      {
+        "word": "generations",
+        "frequency": 3
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "url",
+        "frequency": 1
+      },
+      {
+        "word": "art",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "updates",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "self": {
+        "before": 10,
+        "after": 59,
+        "change": 49
+      },
+      "type": {
+        "before": 3,
+        "after": 19,
+        "change": 16
+      },
+      "pricing": {
+        "before": 5,
+        "after": 16,
+        "change": 11
+      },
+      "https": {
+        "before": 7,
+        "after": 17,
+        "change": 10
+      },
+      "pika": {
+        "before": 17,
+        "after": 25,
+        "change": 8
+      },
+      "com": {
+        "before": 6,
+        "after": 14,
+        "change": 8
+      },
+      "twitter": {
+        "before": 1,
+        "after": 6,
+        "change": 5
+      },
+      "your": {
+        "before": 12,
+        "after": 16,
+        "change": 4
+      },
+      "image": {
+        "before": 19,
+        "after": 23,
+        "change": 4
+      },
+      "www": {
+        "before": 3,
+        "after": 7,
+        "change": 4
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "static chunks",
+        "count": 243
+      },
+      {
+        "phrase": "model using",
+        "count": 54
+      },
+      {
+        "phrase": "null classname",
+        "count": 33
+      },
+      {
+        "phrase": "credits turbo",
+        "count": 30
+      },
+      {
+        "phrase": "credits pro",
+        "count": 30
+      },
+      {
+        "phrase": "self wrap",
+        "count": 28
+      },
+      {
+        "phrase": "turbo model",
+        "count": 27
+      },
+      {
+        "phrase": "credits model",
+        "count": 27
+      },
+      {
+        "phrase": "pro model",
+        "count": 27
+      },
+      {
+        "phrase": "wrap self",
+        "count": 26
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

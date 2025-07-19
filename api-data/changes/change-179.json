@@ -1,0 +1,315 @@
+{
+  "change_id": 179,
+  "url": "https://tabnine.com/blog",
+  "company": "Tabnine",
+  "company_category": "AI Coding",
+  "detected_at": "2025-07-18 16:42:41",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes were detected between the previous and current content. The website's content remains the same, with no new features, updates, or announcements.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://tabnine.com/blog\ncompany: Tabnine\nscraped_at: 2025-07-04 20:20:51\n---\n\n   Blog | Tabnine: AI Agents that developers can trust\n\n![](https://www.tabnine.com/wp-content/uploads/2024/12/announcement-on-blue.svg)\n\nTabnine is the only AI software development platform that supports air-gapped deployments\n\n[Learn more](https://www.tabnine.com/blog/the-only-airgapped-ai-software-development-platform/)\n\n[](https://www.tabnine.com \"Tabnine\")\n\nMenu\n\n*   [![](https://www.tabnine.com/wp-conte...",
+    "after": "   img:is(\\[sizes=\"auto\" i\\], \\[sizes^=\"auto,\" i\\]) { contain-intrinsic-size: 3000px 1500px } Blog | Tabnine: AI Agents that developers can trust               {\"@context\":\"https://schema.org\",\"@graph\":\\[{\"@type\":\"WebPage\",\"@id\":\"https://www.tabnine.com/blog/\",\"url\":\"https://www.tabnine.com/blog/\",\"name\":\"Blog | Tabnine: AI Agents that developers can trust\",\"isPartOf\":{\"@id\":\"https://www.tabnine.com/#website\"},\"datePublished\":\"2025-05-28T16:57:34+00:00\",\"dateModified\":\"2025-06-11T19:41:39+00:00\"..."
+  },
+  "diff": {
+    "added_sentences": [
+      "img:is(\\[sizes=\"auto\" i\\], \\[sizes^=\"auto,\" i\\]) { contain-intrinsic-size: 3000px 1500px } Blog | Tabnine: AI Agents that developers can trust               {\"@context\":\"https://schema.",
+      "org\",\"@graph\":\\[{\"@type\":\"WebPage\",\"@id\":\"https://www.",
+      "com/blog/\",\"url\":\"https://www.",
+      "com/blog/\",\"name\":\"Blog | Tabnine: AI Agents that developers can trust\",\"isPartOf\":{\"@id\":\"https://www.",
+      "com/#website\"},\"datePublished\":\"2025-05-28T16:57:34+00:00\",\"dateModified\":\"2025-06-11T19:41:39+00:00\",\"description\":\"Get news and updates about AI, software development, and more.",
+      "\",\"breadcrumb\":{\"@id\":\"https://www.",
+      "com/blog/#breadcrumb\"},\"inLanguage\":\"en-US\",\"potentialAction\":\\[{\"@type\":\"ReadAction\",\"target\":\\[\"https://www.",
+      "com/blog/\"\\]}\\]},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://www.",
+      "com/blog/#breadcrumb\",\"itemListElement\":\\[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://www.",
+      "com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Blog\"}\\]},{\"@type\":\"WebSite\",\"@id\":\"https://www."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://tabnine.",
+      "com/blog\ncompany: Tabnine\nscraped_at: 2025-07-04 20:20:51\n---\n\n   Blog | Tabnine: AI Agents that developers can trust\n\n!",
+      "svg)Supported IDEs](/install/)\n\n    *   //Get Tabnine in your favorite IDE//\n\n\n    *   [!",
+      "webp)WebStorm](/install/webstorm/)\n\n*   [!",
+      "svg)Resources](/resources/)\n    *   //\n\n        Featured Article\n\n        //\n\n        !",
+      "png)\n\n        [Tabnine Now Supports Perforce Helix Core](https://www.",
+      "com/blog/tabnine-now-supports-perforce-helix-core/ \"Tabnine Now Supports Perforce Helix Core\")\n\n        Tabnine now brings trusted, context-aware AI to Perforce Helix Core—enabling the world’s most advanced engineering teams to move faster, stay in flow, and maintain complete control.",
+      "com/blog/tabnine-now-supports-perforce-helix-core/)\n\n        //\n\n        Featured Product News\n\n        //\n\n        [Introducing Provenance and Attribution](https://www.",
+      "com/blog/introducing-provenance-and-attribution-minimize-ip-liability-for-genai-output/ \"Introducing Provenance and Attribution: Minimize IP liability for GenAI output\")\n\n        [Unveiling Tabnine’s Code Review Agent](https://www.",
+      "com/blog/unveiling-tabnines-code-review-agent/ \"Unveiling Tabnine’s Code Review Agent: Improving quality, security, and compliance uniquely for every development team\")\n\n        [Introducing Tabnine's AI agents for Atlassian Jira](https://www."
+    ],
+    "key_changes": [
+      "New version: 0.07, 0.1, 1.333, 1.125, 0.44, 0.67, 1.5, 2.25, 3.38, 5.06, 0.2, 0.4, 0.5, 1.25, 1.6, 56.23, 0.3, v1.1, 0.24, 36.4, 22.5, 14.5, 0.12, 0.13, 0.14, 0.16, 0.18, 0.26, 0.28, 0.64, 0.56, 0.48, 0.65, 0.10, 0.08, 0.7, 0.8, 0.75, 0.006, 0.023, 2.2, 0.096, 4.8, 0.532, 15.4, 0.72, 0.793, 0.853, 26.7, 0.902, 0.941, 0.968, 36.2, 0.987, 39.7, 43.7, 1.007, 48.3, 1.009, 55.3, 1.002, 78.2, 0.022, 2.3, 0.091, 5.1, 7.6, 0.508, 16.3, 0.607, 0.691, 0.762, 0.822, 28.4, 0.872, 0.912, 35.1, 0.944, 38.9, 0.985, 47.6, 0.996, 53.1, 1.001, 58.4, 1.003, 65.1, 14.2857142857, 32.7, 33.3, 3.8.5, 1.1, 2.0.1, 1.0.1, 2.0.0",
+      "New api mentioned",
+      "New update mentioned"
+    ],
+    "change_percentage": 91,
+    "summary": "91% content changed (3783 additions, 39 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "root",
+        "frequency": 818
+      },
+      {
+        "word": "lanyard",
+        "frequency": 812
+      },
+      {
+        "word": "var",
+        "frequency": 572
+      },
+      {
+        "word": "important",
+        "frequency": 396
+      },
+      {
+        "word": "color",
+        "frequency": 127
+      },
+      {
+        "word": "none",
+        "frequency": 113
+      },
+      {
+        "word": "ubermenu",
+        "frequency": 110
+      },
+      {
+        "word": "function",
+        "frequency": 103
+      },
+      {
+        "word": "width",
+        "frequency": 96
+      },
+      {
+        "word": "100",
+        "frequency": 91
+      },
+      {
+        "word": "background-color",
+        "frequency": 89
+      },
+      {
+        "word": "display",
+        "frequency": 88
+      },
+      {
+        "word": "ketch-text-",
+        "frequency": 84
+      },
+      {
+        "word": "focus-visible",
+        "frequency": 69
+      },
+      {
+        "word": "left",
+        "frequency": 67
+      },
+      {
+        "word": "rgba",
+        "frequency": 59
+      },
+      {
+        "word": "ubermenu-responsive",
+        "frequency": 59
+      },
+      {
+        "word": "auto",
+        "frequency": 57
+      },
+      {
+        "word": "window",
+        "frequency": 57
+      },
+      {
+        "word": "ketch-bg-",
+        "frequency": 53
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "26600",
+        "frequency": 4
+      },
+      {
+        "word": "26800",
+        "frequency": 4
+      },
+      {
+        "word": "260",
+        "frequency": 2
+      },
+      {
+        "word": "264",
+        "frequency": 2
+      },
+      {
+        "word": "2624",
+        "frequency": 2
+      },
+      {
+        "word": "26255",
+        "frequency": 2
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "adsct",
+        "frequency": 2
+      },
+      {
+        "word": "bci",
+        "frequency": 2
+      },
+      {
+        "word": "utc",
+        "frequency": 2
+      },
+      {
+        "word": "26en-us",
+        "frequency": 2
+      },
+      {
+        "word": "26google",
+        "frequency": 2
+      },
+      {
+        "word": "20inc",
+        "frequency": 2
+      },
+      {
+        "word": "26linux",
+        "frequency": 2
+      },
+      {
+        "word": "20x86",
+        "frequency": 2
+      },
+      {
+        "word": "26na",
+        "frequency": 2
+      },
+      {
+        "word": "eci",
+        "frequency": 2
+      },
+      {
+        "word": "d41c03f2-d4de-45ba-b7bc-39626e59f2e4",
+        "frequency": 2
+      },
+      {
+        "word": "events",
+        "frequency": 2
+      },
+      {
+        "word": "22pageview",
+        "frequency": 2
+      }
+    ],
+    "frequency_changes": {
+      "tabnine": {
+        "before": 149,
+        "after": 212,
+        "change": 63
+      },
+      "https": {
+        "before": 117,
+        "after": 177,
+        "change": 60
+      },
+      "not": {
+        "before": 1,
+        "after": 59,
+        "change": 58
+      },
+      "com": {
+        "before": 116,
+        "after": 172,
+        "change": 56
+      },
+      "type": {
+        "before": 2,
+        "after": 53,
+        "change": 51
+      },
+      "www": {
+        "before": 111,
+        "after": 159,
+        "change": 48
+      },
+      "return": {
+        "before": 1,
+        "after": 47,
+        "change": 46
+      },
+      "document": {
+        "before": 2,
+        "after": 48,
+        "change": 46
+      },
+      "center": {
+        "before": 2,
+        "after": 35,
+        "change": 33
+      },
+      "before": {
+        "before": 2,
+        "after": 30,
+        "change": 28
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "lanyard root",
+        "count": 812
+      },
+      {
+        "phrase": "important lanyard",
+        "count": 244
+      },
+      {
+        "phrase": "tabnine com",
+        "count": 152
+      },
+      {
+        "phrase": "https www",
+        "count": 151
+      },
+      {
+        "phrase": "www tabnine",
+        "count": 145
+      },
+      {
+        "phrase": "color var",
+        "count": 96
+      },
+      {
+        "phrase": "root ketch-text-",
+        "count": 81
+      },
+      {
+        "phrase": "background-color var",
+        "count": 65
+      },
+      {
+        "phrase": "com wp-content",
+        "count": 62
+      },
+      {
+        "phrase": "com blog",
+        "count": 53
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

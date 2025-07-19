@@ -1,0 +1,255 @@
+{
+  "change_id": 143,
+  "url": "https://replicate.com/pricing",
+  "company": "Replicate",
+  "company_category": "AI Infrastructure",
+  "detected_at": "2025-07-18 16:40:42",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes detected in the pricing content, indicating no technical innovation or business impact.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://replicate.com/pricing\ncompany: Replicate\nscraped_at: 2025-07-04 20:18:15\n---\n\nPricing – Replicate\n\n[Replicate glyph](/)\n\n[Explore](/explore)[Pricing](/pricing)[Docs](/docs)[Blog](/blog)[Changelog](/changelog)[Sign in](/signin)[Try for free](/signin)\n\nMenu\n\n[Explore](/explore)[Pricing](/pricing)[Docs](/docs)[Blog](/blog)[Changelog](/changelog)[Sign in](/signin)[Try for free](/signin)\n\n* * *\n\n[Explore the new PlaygroundBeta](/playground)\n\n# Pricing\n\nYou only pay for what you use o...",
+    "after": "Pricing – Replicate (() => { const theme = window.matchMedia(\"(prefers-color-scheme: light)\").matches ? 'light' : 'dark'; const cl = document.documentElement.classList; const dataAttr = document.documentElement.dataset.theme; if (dataAttr != null) { const themeAlreadyApplied = dataAttr === 'light' || dataAttr === 'dark'; if (!themeAlreadyApplied) { document.documentElement.dataset.theme = theme; } } else { const themeAlreadyApplied = cl.contains('light') || cl.contains('dark'); if (!themeAlready..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Pricing – Replicate (() => { const theme = window.",
+      "matchMedia(\"(prefers-color-scheme: light)\").",
+      "matches ?",
+      "'light' : 'dark'; const cl = document.",
+      "documentElement.",
+      "classList; const dataAttr = document.",
+      "documentElement.",
+      "dataset.",
+      "theme; if (dataAttr !",
+      "= null) { const themeAlreadyApplied = dataAttr === 'light' || dataAttr === 'dark'; if (!"
+    ],
+    "removed_sentences": [
+      "---\nurl: https://replicate.",
+      "com/pricing\ncompany: Replicate\nscraped_at: 2025-07-04 20:18:15\n---\n\nPricing – Replicate\n\n[Replicate glyph](/)\n\n[Explore](/explore)[Pricing](/pricing)[Docs](/docs)[Blog](/blog)[Changelog](/changelog)[Sign in](/signin)[Try for free](/signin)\n\nMenu\n\n[Explore](/explore)[Pricing](/pricing)[Docs](/docs)[Blog](/blog)[Changelog](/changelog)[Sign in](/signin)[Try for free](/signin)\n\n* * *\n\n[Explore the new PlaygroundBeta](/playground)\n\n# Pricing\n\nYou only pay for what you use on Replicate.",
+      "00 / million input tokens\n\n\n](https://replicate.",
+      "04 / output image\n\n\n](https://replicate.",
+      "025 / output image\n\n\n](https://replicate.",
+      "00 / thousand output images\n\n\n](https://replicate.",
+      "75 / million input tokens\n\n\n](https://replicate.",
+      "50 / second of output video\n\n\n](https://replicate.",
+      "09 / output image\n\n\n](https://replicate.",
+      "04 / output image\n\n\n](https://replicate."
+    ],
+    "key_changes": [
+      "New version: 0.6, 0.4, 0.000025, 0.090000, 0.360000, 5.040000, 10.080000, 20.160000, 40.320000, 5.490000, 3.510000, 7.020000, 0.810000, 10.980000, 21.960000, 43.920000",
+      "New model mentioned",
+      "New benchmark mentioned"
+    ],
+    "change_percentage": 79,
+    "summary": "79% content changed (202 additions, 61 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "131",
+        "frequency": 13
+      },
+      {
+        "word": "134",
+        "frequency": 13
+      },
+      {
+        "word": "136",
+        "frequency": 13
+      },
+      {
+        "word": "opacity",
+        "frequency": 13
+      },
+      {
+        "word": "transform",
+        "frequency": 12
+      },
+      {
+        "word": "139",
+        "frequency": 11
+      },
+      {
+        "word": "138",
+        "frequency": 10
+      },
+      {
+        "word": "141",
+        "frequency": 10
+      },
+      {
+        "word": "142",
+        "frequency": 10
+      },
+      {
+        "word": "theme",
+        "frequency": 8
+      },
+      {
+        "word": "window",
+        "frequency": 8
+      },
+      {
+        "word": "rotate",
+        "frequency": 8
+      },
+      {
+        "word": "light",
+        "frequency": 7
+      },
+      {
+        "word": "keyframes",
+        "frequency": 7
+      },
+      {
+        "word": "const",
+        "frequency": 6
+      },
+      {
+        "word": "dark",
+        "frequency": 6
+      },
+      {
+        "word": "document",
+        "frequency": 6
+      },
+      {
+        "word": "140",
+        "frequency": 5
+      },
+      {
+        "word": "meta",
+        "frequency": 5
+      },
+      {
+        "word": "dataattr",
+        "frequency": 4
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "table",
+        "frequency": 2
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "models": {
+        "before": 38,
+        "after": 60,
+        "change": 22
+      },
+      "image": {
+        "before": 19,
+        "after": 36,
+        "change": 17
+      },
+      "gpu": {
+        "before": 43,
+        "after": 58,
+        "change": 15
+      },
+      "nvidia": {
+        "before": 22,
+        "after": 33,
+        "change": 11
+      },
+      "replicate": {
+        "before": 40,
+        "after": 50,
+        "change": 10
+      },
+      "scale": {
+        "before": 1,
+        "after": 11,
+        "change": 10
+      },
+      "tjzk": {
+        "before": 10,
+        "after": 20,
+        "change": 10
+      },
+      "delivery": {
+        "before": 10,
+        "after": 20,
+        "change": 10
+      },
+      "featured": {
+        "before": 10,
+        "after": 20,
+        "change": 10
+      },
+      "webp": {
+        "before": 10,
+        "after": 20,
+        "change": 10
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "https tjzk",
+        "count": 20
+      },
+      {
+        "phrase": "tjzk replicate",
+        "count": 20
+      },
+      {
+        "phrase": "replicate delivery",
+        "count": 20
+      },
+      {
+        "phrase": "delivery models",
+        "count": 20
+      },
+      {
+        "phrase": "models models",
+        "count": 20
+      },
+      {
+        "phrase": "models featured",
+        "count": 20
+      },
+      {
+        "phrase": "featured image",
+        "count": 20
+      },
+      {
+        "phrase": "replicate com",
+        "count": 20
+      },
+      {
+        "phrase": "https replicate",
+        "count": 18
+      },
+      {
+        "phrase": "gpu cpu",
+        "count": 12
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

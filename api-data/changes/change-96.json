@@ -1,0 +1,314 @@
+{
+  "change_id": 96,
+  "url": "https://blog.langchain.dev",
+  "company": "LangChain",
+  "company_category": "AI Infrastructure",
+  "detected_at": "2025-07-18 16:37:38",
+  "interest_level": 6,
+  "interest_category": "major_development",
+  "interest_explanation": "LangChain has made its LangSmith and LangGraph Platform available in AWS Marketplace, and published new blog posts on deep research and building agents, indicating a significant expansion of its offerings and expertise in the AI and machine learning space.",
+  "interest_drivers": [
+    "Availability of LangSmith and LangGraph Platform in AWS Marketplace",
+    "New blog posts on deep research and building agents"
+  ],
+  "technical_innovation_score": 5,
+  "business_impact_score": 7,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://blog.langchain.dev\ncompany: LangChain\nscraped_at: 2025-07-04 20:15:38\n---\n\nLangChain Blog                             [Skip to content](#main)\n\n[![LangChain Blog](https://blog.langchain.com/content/images/2024/03/LangChain-logo.png)](https://blog.langchain.com)\n\n*   [Case Studies](https://blog.langchain.com/tag/case-studies/)\n*   [In the Loop](https://blog.langchain.com/tag/in-the-loop/)\n*   [LangChain](https://www.langchain.com/)\n*   [Docs](https://python.langchain.com/docs/get...",
+    "after": "LangChain Blog   document.documentElement.classList.replace('no-js','js'); if (window.localStorage.getItem('kutak-prefers-color-scheme') && !document.documentElement.hasAttribute('data-prefers-color-scheme')) { document.documentElement.setAttribute('data-prefers-color-scheme', window.localStorage.getItem('kutak-prefers-color-scheme')); }    @font-face { font-family: 'Source Sans Pro'; font-style: normal; font-weight: 400; font-display: swap; src: url('https://blog.langchain.com/assets/fonts/sour..."
+  },
+  "diff": {
+    "added_sentences": [
+      "LangChain Blog   document.",
+      "documentElement.",
+      "classList.",
+      "replace('no-js','js'); if (window.",
+      "localStorage.",
+      "getItem('kutak-prefers-color-scheme') && !",
+      "document.",
+      "documentElement.",
+      "hasAttribute('data-prefers-color-scheme')) { document.",
+      "documentElement."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://blog.",
+      "dev\ncompany: LangChain\nscraped_at: 2025-07-04 20:15:38\n---\n\nLangChain Blog                             [Skip to content](#main)\n\n[!",
+      "Context engineering is the art and science of filling the context window with just the right information\n\n](/context-engineering-for-agents/)\n\n11 min read\n\n### Featured\n\n [!",
+      "](/customers-webtoon/)\n\n[Case Studies](/tag/case-studies/) 4 min read\n\n [!",
+      "[Recap of Interrupt 2025: The AI Agent Conference by LangChain](/content/images/size/w760/format/webp/2025/05/Interrupt_Twitter_1200x675_V1.",
+      "png)](/interrupt-2025-recap/)\n\n[\n\n## Recap of Interrupt 2025: The AI Agent Conference by LangChain\n\nHear more about the product launches, keynote themes, and exciting news from our first-ever conference.",
+      "](/interrupt-2025-recap/)\n\n4 min read\n\n [!",
+      "png)](/langgraph-platform-ga/)\n\n[\n\n## LangGraph Platform is now Generally Available: Deploy & manage long-running, stateful Agents\n\nLangGraph Platform, our infrastructure for deploying and managing agents at scale, is now generally available."
+    ],
+    "key_changes": [
+      "New version: 0.2, 0.8, 0.92, 62.5, 5.2.0"
+    ],
+    "change_percentage": 72,
+    "summary": "72% content changed (156 additions, 8 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "woff2",
+        "frequency": 12
+      },
+      {
+        "word": "document",
+        "frequency": 11
+      },
+      {
+        "word": "sans",
+        "frequency": 10
+      },
+      {
+        "word": "var",
+        "frequency": 10
+      },
+      {
+        "word": "source",
+        "frequency": 9
+      },
+      {
+        "word": "pro",
+        "frequency": 9
+      },
+      {
+        "word": "src",
+        "frequency": 9
+      },
+      {
+        "word": "font-weight",
+        "frequency": 8
+      },
+      {
+        "word": "gh-post-upgrade-cta",
+        "frequency": 8
+      },
+      {
+        "word": "font-family",
+        "frequency": 7
+      },
+      {
+        "word": "function",
+        "frequency": 7
+      },
+      {
+        "word": "font-face",
+        "frequency": 6
+      },
+      {
+        "word": "font-style",
+        "frequency": 6
+      },
+      {
+        "word": "font-display",
+        "frequency": 6
+      },
+      {
+        "word": "swap",
+        "frequency": 6
+      },
+      {
+        "word": "assets",
+        "frequency": 6
+      },
+      {
+        "word": "fonts",
+        "frequency": 6
+      },
+      {
+        "word": "source-sans-pro-v21-latin-ext",
+        "frequency": 6
+      },
+      {
+        "word": "08fa2da55a",
+        "frequency": 6
+      },
+      {
+        "word": "color",
+        "frequency": 6
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "interrupt-2025-recap",
+        "frequency": 2
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "1200x675",
+        "frequency": 1
+      },
+      {
+        "word": "hear",
+        "frequency": 1
+      },
+      {
+        "word": "launches",
+        "frequency": 1
+      },
+      {
+        "word": "keynote",
+        "frequency": 1
+      },
+      {
+        "word": "themes",
+        "frequency": 1
+      },
+      {
+        "word": "exciting",
+        "frequency": 1
+      },
+      {
+        "word": "news",
+        "frequency": 1
+      },
+      {
+        "word": "first-ever",
+        "frequency": 1
+      },
+      {
+        "word": "infrastructure",
+        "frequency": 1
+      },
+      {
+        "word": "managing",
+        "frequency": 1
+      },
+      {
+        "word": "incident",
+        "frequency": 1
+      },
+      {
+        "word": "requests",
+        "frequency": 1
+      },
+      {
+        "word": "api",
+        "frequency": 1
+      },
+      {
+        "word": "application",
+        "frequency": 1
+      },
+      {
+        "word": "sdks",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "https": {
+        "before": 8,
+        "after": 21,
+        "change": 13
+      },
+      "com": {
+        "before": 7,
+        "after": 19,
+        "change": 12
+      },
+      "blog": {
+        "before": 11,
+        "after": 22,
+        "change": 11
+      },
+      "window": {
+        "before": 1,
+        "after": 10,
+        "change": 9
+      },
+      "langchain": {
+        "before": 17,
+        "after": 25,
+        "change": 8
+      },
+      "url": {
+        "before": 1,
+        "after": 9,
+        "change": 8
+      },
+      "format": {
+        "before": 17,
+        "after": 24,
+        "change": 7
+      },
+      "research": {
+        "before": 7,
+        "after": 11,
+        "change": 4
+      },
+      "build": {
+        "before": 4,
+        "after": 7,
+        "change": 3
+      },
+      "page": {
+        "before": 2,
+        "after": 5,
+        "change": 3
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "content images",
+        "count": 19
+      },
+      {
+        "phrase": "langchain com",
+        "count": 17
+      },
+      {
+        "phrase": "images size",
+        "count": 17
+      },
+      {
+        "phrase": "size w760",
+        "count": 17
+      },
+      {
+        "phrase": "w760 format",
+        "count": 17
+      },
+      {
+        "phrase": "format webp",
+        "count": 17
+      },
+      {
+        "phrase": "webp 2025",
+        "count": 17
+      },
+      {
+        "phrase": "min read",
+        "count": 17
+      },
+      {
+        "phrase": "https blog",
+        "count": 14
+      },
+      {
+        "phrase": "blog langchain",
+        "count": 14
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

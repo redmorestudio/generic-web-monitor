@@ -1,0 +1,257 @@
+{
+  "change_id": 130,
+  "url": "https://perplexity.ai",
+  "company": "Perplexity AI",
+  "company_category": "AI Search",
+  "detected_at": "2025-07-18 16:40:14",
+  "interest_level": 3,
+  "interest_category": "routine_change",
+  "interest_explanation": "Perplexity AI's homepage update introduces new features such as Parenting, Learn, and Fact Check, indicating an expansion of content offerings and a slight improvement in user experience, but no significant technical innovation or major business impact.",
+  "interest_drivers": [
+    "new feature: Parenting",
+    "new feature: Learn",
+    "new feature: Fact Check"
+  ],
+  "technical_innovation_score": 2,
+  "business_impact_score": 4,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://perplexity.ai\ncompany: Perplexity AI\nscraped_at: 2025-07-04 20:17:52\n---\n\nPerplexity\n\nHome\n\n[\n\nFinance\n\n\n](/finance)[\n\nTravel\n\n\n](/travel)[\n\nShopping\n\n\n](/shopping)[\n\nAcademic\n\n\n](/academic)\n\n[\n\nLibrary\n\n](/library)\n\n[\n\nCreate a Thread\n\n\n](/)\n\n[\n\n](/)\n\n[\n\nHome\n\n](/)[\n\nDiscover\n\n](/discover/)[\n\nSpaces\n\n](/spaces/templates/)\n\n\n\nAsk anything…\n\nTroubleshoot\n\nHealth\n\nSummarize\n\nPlan\n\nLocal\n\nSign in or create an account\n\nUnlock Pro Search and History\n\nContinue with Google\n\nContinue wi...",
+    "after": " window.\\_\\_PPL\\_CONFIG\\_\\_={\"env\":\"beta\",\"version\":\"d8d7077\"}; const isComet = document.cookie.includes('comet\\_browser='); let erp; if (window.location.pathname.startsWith('/sidecar')) { erp = 'sidecar'; } else if (isComet) { erp = 'tab'; } if (erp) { window.\\_\\_PPL\\_CONFIG\\_\\_.erp = erp; document.documentElement.dataset.erp = erp; if (erp === 'sidecar') { document.head.insertAdjacentHTML('beforeend', '<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, use..."
+  },
+  "diff": {
+    "added_sentences": [
+      "window.",
+      "\\_\\_PPL\\_CONFIG\\_\\_={\"env\":\"beta\",\"version\":\"d8d7077\"}; const isComet = document.",
+      "cookie.",
+      "includes('comet\\_browser='); let erp; if (window.",
+      "location.",
+      "pathname.",
+      "startsWith('/sidecar')) { erp = 'sidecar'; } else if (isComet) { erp = 'tab'; } if (erp) { window.",
+      "\\_\\_PPL\\_CONFIG\\_\\_.",
+      "erp = erp; document.",
+      "documentElement."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://perplexity."
+    ],
+    "key_changes": [
+      "New version: 1.0, 0.25, 0.3, 5.0, 537.36, 120.0.0",
+      "Price change: $1, $13, $15, $17"
+    ],
+    "change_percentage": 100,
+    "summary": "100% content changed (630 additions, 1 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "static",
+        "frequency": 263
+      },
+      {
+        "word": "chunks",
+        "frequency": 247
+      },
+      {
+        "word": "null",
+        "frequency": 62
+      },
+      {
+        "word": "nsm7bb-hzv7m-lgbsse",
+        "frequency": 57
+      },
+      {
+        "word": "undefined",
+        "frequency": 57
+      },
+      {
+        "word": "children",
+        "frequency": 40
+      },
+      {
+        "word": "next",
+        "frequency": 38
+      },
+      {
+        "word": "css",
+        "frequency": 28
+      },
+      {
+        "word": "width",
+        "frequency": 23
+      },
+      {
+        "word": "false",
+        "frequency": 21
+      },
+      {
+        "word": "meta",
+        "frequency": 19
+      },
+      {
+        "word": "content",
+        "frequency": 19
+      },
+      {
+        "word": "height",
+        "frequency": 19
+      },
+      {
+        "word": "document",
+        "frequency": 18
+      },
+      {
+        "word": "erp",
+        "frequency": 18
+      },
+      {
+        "word": "none",
+        "frequency": 17
+      },
+      {
+        "word": "display",
+        "frequency": 17
+      },
+      {
+        "word": "self",
+        "frequency": 14
+      },
+      {
+        "word": "pplx-next-static-public",
+        "frequency": 14
+      },
+      {
+        "word": "name",
+        "frequency": 13
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "summarize",
+        "frequency": 1
+      },
+      {
+        "word": "plan",
+        "frequency": 1
+      },
+      {
+        "word": "local",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "perplexity": {
+        "before": 3,
+        "after": 28,
+        "change": 25
+      },
+      "https": {
+        "before": 1,
+        "after": 20,
+        "change": 19
+      },
+      "google": {
+        "before": 1,
+        "after": 4,
+        "change": 3
+      },
+      "spaces": {
+        "before": 2,
+        "after": 5,
+        "change": 3
+      },
+      "search": {
+        "before": 1,
+        "after": 3,
+        "change": 2
+      },
+      "home": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "travel": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "academic": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "library": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "discover": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "static chunks",
+        "count": 247
+      },
+      {
+        "phrase": "self next",
+        "count": 14
+      },
+      {
+        "phrase": "https pplx-next-static-public",
+        "count": 14
+      },
+      {
+        "phrase": "pplx-next-static-public perplexity",
+        "count": 14
+      },
+      {
+        "phrase": "perplexity next",
+        "count": 14
+      },
+      {
+        "phrase": "next static",
+        "count": 14
+      },
+      {
+        "phrase": "static css",
+        "count": 14
+      },
+      {
+        "phrase": "null children",
+        "count": 14
+      },
+      {
+        "phrase": "next push",
+        "count": 13
+      },
+      {
+        "phrase": "18096 static",
+        "count": 12
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

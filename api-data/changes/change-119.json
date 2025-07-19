@@ -1,0 +1,243 @@
+{
+  "change_id": 119,
+  "url": "https://murf.ai",
+  "company": "Murf AI",
+  "company_category": "AI Voice/Audio",
+  "detected_at": "2025-07-18 16:38:19",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "No significant changes detected between the previous and current content of the Murf AI homepage. The content remains largely the same, with no new features, products, or technical innovations announced.",
+  "interest_drivers": [],
+  "technical_innovation_score": 2,
+  "business_impact_score": 2,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://murf.ai\ncompany: Murf AI\nscraped_at: 2025-07-04 20:17:30\n---\n\nFree AI Voice Generator & Text to Speech Software | Murf AI\n\n[![Versatile AI voice generator & Text to Speech software](https://cdn.prod.website-files.com/66b3765153a8a0c399c70981/66bb1f44d832debb33fe65c3_Logo.svg)](/)\n\nProducts\n\n![](https://cdn.prod.website-files.com/66b3765153a8a0c399c70981/66fbbe46caaf98fe47c4f18f_Hover.webp)\n\n[![back](https://cdn.prod.website-files.com/66b3765153a8a0c399c70981/66f06f9b2f8b433bf859...",
+    "after": ".wf-force-outline-none\\[tabindex=\"-1\"\\]:focus{outline:none;}Free AI Voice Generator & Text to Speech Software | Murf AIWebFont.load({ google: { families: \\[\"Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic\"\\] }});!function(o,c){var n=c.documentElement,t=\" w-mod-\";n.className+=t+\"js\",(\"ontouchstart\"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+\"touch\")}(window,document); (()=>{class e{con..."
+  },
+  "diff": {
+    "added_sentences": [
+      "wf-force-outline-none\\[tabindex=\"-1\"\\]:focus{outline:none;}Free AI Voice Generator & Text to Speech Software | Murf AIWebFont.",
+      "load({ google: { families: \\[\"Montserrat:100,100italic,200,200italic,300,300italic,400,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic\"\\] }});!",
+      "function(o,c){var n=c.",
+      "documentElement,t=\" w-mod-\";n.",
+      "className+=t+\"js\",(\"ontouchstart\"in o||o.",
+      "DocumentTouch&&c instanceof DocumentTouch)&&(n.",
+      "className+=t+\"touch\")}(window,document); (()=>{class e{constructor(){this.",
+      "currentPlayer=null,this.",
+      "players=new Set}init(){document.",
+      "querySelectorAll(\"audio, video\")."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://murf.",
+      "ai\ncompany: Murf AI\nscraped_at: 2025-07-04 20:17:30\n---\n\nFree AI Voice Generator & Text to Speech Software | Murf AI\n\n[!",
+      "svg)\n\nText to Speech\n\nTurn text into lifelike voiceovers in various languages\n\n\n](/text-to-speech)\n\n!",
+      "svg)\n\nVoice Cloning\n\nEnterprise\n\nEthically crafted and realistic voice twins\n\n\n](/voice-cloning)\n\n!",
+      "svg)\n\nAI Dubbing\n\nFor global business in 30+ languages\n\n\n](/ai-dubbing)\n\n!",
+      "svg)\n\nVoice Changer\n\nChoose from 200+ voices for changing your voice\n\n\n](/voice-changer)\n\n!",
+      "svg)\n\nMurf Text to Speech API\n\nDeploy high quality voices for your apps\n\n\n](/api)\n\n!",
+      "svg)\n\nMurf Voices Installer\n\nMurf brings voice variety to Windows\n\n\n](/murf-voices-for-windows-apps)\n\nIntegrations\n\n!",
+      "svg)\n\nCanva\n\n\n](/integrations/canva)\n\n!",
+      "svg)\n\nGoogle Slides\n\n\n](/integrations/google-slides)\n\n!"
+    ],
+    "key_changes": [
+      "New version: 0.25, 0.3, 4.25, 0.5, 0.125, 0.2, 1.5, 18.75, 0.005, 0.0001, 0.1",
+      "New api mentioned",
+      "New update mentioned"
+    ],
+    "change_percentage": 59,
+    "summary": "59% content changed (2271 additions, 34 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "const",
+        "frequency": 204
+      },
+      {
+        "word": "document",
+        "frequency": 121
+      },
+      {
+        "word": "display",
+        "frequency": 89
+      },
+      {
+        "word": "function",
+        "frequency": 77
+      },
+      {
+        "word": "addeventlistener",
+        "frequency": 61
+      },
+      {
+        "word": "window",
+        "frequency": 59
+      },
+      {
+        "word": "queryselector",
+        "frequency": 59
+      },
+      {
+        "word": "none",
+        "frequency": 57
+      },
+      {
+        "word": "nsm7bb-hzv7m-lgbsse",
+        "frequency": 57
+      },
+      {
+        "word": "getelementbyid",
+        "frequency": 54
+      },
+      {
+        "word": "width",
+        "frequency": 53
+      },
+      {
+        "word": "value",
+        "frequency": 45
+      },
+      {
+        "word": "height",
+        "frequency": 43
+      },
+      {
+        "word": "0rem",
+        "frequency": 39
+      },
+      {
+        "word": "player",
+        "frequency": 36
+      },
+      {
+        "word": "null",
+        "frequency": 35
+      },
+      {
+        "word": "classlist",
+        "frequency": 35
+      },
+      {
+        "word": "foreach",
+        "frequency": 34
+      },
+      {
+        "word": "queryselectorall",
+        "frequency": 33
+      },
+      {
+        "word": "return",
+        "frequency": 31
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "important": {
+        "before": 3,
+        "after": 81,
+        "change": 78
+      },
+      "style": {
+        "before": 3,
+        "after": 71,
+        "change": 68
+      },
+      "com": {
+        "before": 252,
+        "after": 311,
+        "change": 59
+      },
+      "let": {
+        "before": 3,
+        "after": 46,
+        "change": 43
+      },
+      "true": {
+        "before": 1,
+        "after": 42,
+        "change": 41
+      },
+      "https": {
+        "before": 279,
+        "after": 313,
+        "change": 34
+      },
+      "click": {
+        "before": 1,
+        "after": 29,
+        "change": 28
+      },
+      "name": {
+        "before": 26,
+        "after": 48,
+        "change": 22
+      },
+      "script": {
+        "before": 2,
+        "after": 24,
+        "change": 22
+      },
+      "murf": {
+        "before": 192,
+        "after": 212,
+        "change": 20
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "website-files com",
+        "count": 250
+      },
+      {
+        "phrase": "https cdn",
+        "count": 248
+      },
+      {
+        "phrase": "cdn prod",
+        "count": 248
+      },
+      {
+        "phrase": "prod website-files",
+        "count": 248
+      },
+      {
+        "phrase": "com 66b3765153a8a0c399c70981",
+        "count": 135
+      },
+      {
+        "phrase": "com 66bbe17b9639de563ee20c7a",
+        "count": 103
+      },
+      {
+        "phrase": "document getelementbyid",
+        "count": 54
+      },
+      {
+        "phrase": "voice generator",
+        "count": 49
+      },
+      {
+        "phrase": "style display",
+        "count": 43
+      },
+      {
+        "phrase": "0rem important",
+        "count": 38
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

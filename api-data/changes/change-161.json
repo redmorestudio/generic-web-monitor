@@ -1,0 +1,320 @@
+{
+  "change_id": 161,
+  "url": "https://sambanova.ai/products",
+  "company": "SambaNova",
+  "company_category": "AI Hardware",
+  "detected_at": "2025-07-18 16:41:37",
+  "interest_level": 8,
+  "interest_category": "breakthrough",
+  "interest_explanation": "SambaNova has introduced significant updates to its product offerings, including SambaStack, a full-stack enterprise AI platform, and a new AI inference solution for data centers. These developments demonstrate the company's focus on providing efficient, scalable, and sustainable AI infrastructure solutions, which can have a substantial impact on the adoption of AI in enterprises and data centers.",
+  "interest_drivers": [
+    "Introduction of SambaStack, a full-stack enterprise AI platform",
+    "New AI inference solution for data centers deployable in 90 days",
+    "SambaManaged, a turnkey path to AI for data centers",
+    "Emphasis on dedicated AI infrastructure and chip-to-model intelligence"
+  ],
+  "technical_innovation_score": 7,
+  "business_impact_score": 8,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://sambanova.ai/products\ncompany: SambaNova\nscraped_at: 2025-07-04 20:20:18\n---\n\n     Generative AI for Near Real-Time Operations Augmentation | SambaNova\n\n[Support](/support/)\n\n [![header search](https://sambanova.ai/hubfs/header-search-icon.svg.svg) ![header search](https://sambanova.ai/hubfs/header-search-icon-hover.svg)](/hs-search-results/)\n\n![header lang](https://sambanova.ai/hubfs/global-dark.svg) ![header lang](https://sambanova.ai/hubfs/global-dark-hover.svg) EN\n\n*   [Japa...",
+    "after": " SambaStack | Full-Stack Enterprise AI Platform   var act = {}; act.xs = 479; act.sm = 767; act.md = 1139; act.scroll\\_offset = { sm: 66, md: 66, lg: 66, get: function() { if(window.matchMedia('(max-width: 767px)').matches) return act.scroll\\_offset.sm; if(window.matchMedia('(min-width: 1140px)').matches) return act.scroll\\_offset.lg; return act.scroll\\_offset.md; }, set: function(sm, md, lg){ act.scroll\\_offset.sm = sm; act.scroll\\_offset.md = md; act.scroll\\_offset.lg = lg; } };      a.cta\\_bu..."
+  },
+  "diff": {
+    "added_sentences": [
+      "SambaStack | Full-Stack Enterprise AI Platform   var act = {}; act.",
+      "xs = 479; act.",
+      "sm = 767; act.",
+      "md = 1139; act.",
+      "scroll\\_offset = { sm: 66, md: 66, lg: 66, get: function() { if(window.",
+      "matchMedia('(max-width: 767px)').",
+      "matches) return act.",
+      "scroll\\_offset.",
+      "sm; if(window.",
+      "matchMedia('(min-width: 1140px)')."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://sambanova.",
+      "ai/products\ncompany: SambaNova\nscraped_at: 2025-07-04 20:20:18\n---\n\n     Generative AI for Near Real-Time Operations Augmentation | SambaNova\n\n[Support](/support/)\n\n [!",
+      "[header search](https://sambanova.",
+      "ai/hubfs/header-search-icon.",
+      "svg.",
+      "svg) !",
+      "[header search](https://sambanova.",
+      "ai/hubfs/header-search-icon-hover.",
+      "svg)](/hs-search-results/)\n\n!",
+      "[header lang](https://sambanova."
+    ],
+    "key_changes": [
+      "New version: 0.4, 0.7, 0.8, 0.75, 0.006, 0.023, 2.2, 0.096, 4.8, 0.532, 15.4, 0.72, 0.793, 0.853, 26.7, 0.902, 0.941, 0.968, 36.2, 0.987, 39.7, 43.7, 1.007, 48.3, 1.009, 55.3, 1.002, 78.2, 0.3, 0.022, 2.3, 0.091, 5.1, 0.18, 7.6, 0.508, 16.3, 0.607, 0.691, 0.762, 0.822, 28.4, 0.872, 0.912, 35.1, 0.944, 38.9, 0.985, 47.6, 0.996, 53.1, 1.001, 58.4, 1.003, 65.1, 0.60, 2.0, 0.01, 0.2, 0.6, 1.07, 58.910, 1.1",
+      "New date mentioned: July 7, 2025, April 10, 2025, March 5, 2025",
+      "New integration mentioned"
+    ],
+    "change_percentage": 110,
+    "summary": "110% content changed (872 additions, 165 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "important",
+        "frequency": 128
+      },
+      {
+        "word": "display",
+        "frequency": 51
+      },
+      {
+        "word": "color",
+        "frequency": 41
+      },
+      {
+        "word": "woff2",
+        "frequency": 32
+      },
+      {
+        "word": "0px",
+        "frequency": 30
+      },
+      {
+        "word": "ff5cd1",
+        "frequency": 30
+      },
+      {
+        "word": "none",
+        "frequency": 29
+      },
+      {
+        "word": "function",
+        "frequency": 25
+      },
+      {
+        "word": "format",
+        "frequency": 25
+      },
+      {
+        "word": "hover",
+        "frequency": 25
+      },
+      {
+        "word": "var",
+        "frequency": 24
+      },
+      {
+        "word": "rgba",
+        "frequency": 23
+      },
+      {
+        "word": "ffffff",
+        "frequency": 23
+      },
+      {
+        "word": "window",
+        "frequency": 22
+      },
+      {
+        "word": "src",
+        "frequency": 21
+      },
+      {
+        "word": "background-color",
+        "frequency": 21
+      },
+      {
+        "word": "sambastack",
+        "frequency": 20
+      },
+      {
+        "word": "max-width",
+        "frequency": 20
+      },
+      {
+        "word": "not",
+        "frequency": 20
+      },
+      {
+        "word": "content",
+        "frequency": 19
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "model",
+        "frequency": 13
+      },
+      {
+        "word": "power",
+        "frequency": 12
+      },
+      {
+        "word": "generative",
+        "frequency": 10
+      },
+      {
+        "word": "next",
+        "frequency": 9
+      },
+      {
+        "word": "suite",
+        "frequency": 9
+      },
+      {
+        "word": "accuracy",
+        "frequency": 9
+      },
+      {
+        "word": "customers",
+        "frequency": 8
+      },
+      {
+        "word": "datascale",
+        "frequency": 8
+      },
+      {
+        "word": "agentic",
+        "frequency": 8
+      },
+      {
+        "word": "experts",
+        "frequency": 7
+      },
+      {
+        "word": "investors",
+        "frequency": 7
+      },
+      {
+        "word": "world",
+        "frequency": 7
+      },
+      {
+        "word": "quickly",
+        "frequency": 6
+      },
+      {
+        "word": "capabilities",
+        "frequency": 6
+      },
+      {
+        "word": "industries",
+        "frequency": 6
+      },
+      {
+        "word": "generation",
+        "frequency": 6
+      },
+      {
+        "word": "latest",
+        "frequency": 6
+      },
+      {
+        "word": "900x600",
+        "frequency": 6
+      },
+      {
+        "word": "144dpi",
+        "frequency": 6
+      },
+      {
+        "word": "sambanova-logo-black",
+        "frequency": 5
+      }
+    ],
+    "frequency_changes": {
+      "100": {
+        "before": 2,
+        "after": 20,
+        "change": 18
+      },
+      "23945802": {
+        "before": 1,
+        "after": 13,
+        "change": 12
+      },
+      "https": {
+        "before": 50,
+        "after": 122,
+        "change": 72
+      },
+      "center": {
+        "before": 2,
+        "after": 34,
+        "change": 32
+      },
+      "sambanova": {
+        "before": 72,
+        "after": 103,
+        "change": 31
+      },
+      "url": {
+        "before": 2,
+        "after": 32,
+        "change": 30
+      },
+      "width": {
+        "before": 3,
+        "after": 31,
+        "change": 28
+      },
+      "javascript": {
+        "before": 2,
+        "after": 17,
+        "change": 15
+      },
+      "header": {
+        "before": 6,
+        "after": 20,
+        "change": 14
+      },
+      "top": {
+        "before": 1,
+        "after": 13,
+        "change": 12
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "https sambanova",
+        "count": 76
+      },
+      {
+        "phrase": "url hcms",
+        "count": 18
+      },
+      {
+        "phrase": "hcms googlefonts",
+        "count": 18
+      },
+      {
+        "phrase": "color ffffff",
+        "count": 17
+      },
+      {
+        "phrase": "font-face font-family",
+        "count": 16
+      },
+      {
+        "phrase": "font-style normal",
+        "count": 16
+      },
+      {
+        "phrase": "normal font-display",
+        "count": 16
+      },
+      {
+        "phrase": "font-display swap",
+        "count": 16
+      },
+      {
+        "phrase": "src url",
+        "count": 16
+      },
+      {
+        "phrase": "woff2 format",
+        "count": 16
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

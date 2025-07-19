@@ -1,0 +1,251 @@
+{
+  "change_id": 126,
+  "url": "https://openai.com/chatgpt",
+  "company": "OpenAI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:38:39",
+  "interest_level": 6,
+  "interest_category": "major_development",
+  "interest_explanation": "OpenAI's ChatGPT has introduced new features such as 'Analyze images' and updated prompt options, enhancing user experience and expanding its capabilities.",
+  "interest_drivers": [
+    "New feature: 'Analyze images'",
+    "Updated prompt options: 'Help me write Code', 'Get advice'"
+  ],
+  "technical_innovation_score": 5,
+  "business_impact_score": 6,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://openai.com/chatgpt\ncompany: OpenAI\nscraped_at: 2025-07-04 20:17:45\n---\n\nChatGPT[Skip to content](#main)\n\n[](/)\n\nChatGPT\n\nLog in\n\nChatGPT\n\nLog in\n\nSign up for free\n\n# ChatGPT\n\n# Temporary Chat\n\nThis chat won't appear in history or be used to train our models. For safety purposes, we may keep a copy of this chat for up to 30 days.\n\n# ChatGPT\n\n# Temporary Chat\n\nThis chat won't appear in history or be used to train our models. For safety purposes, we may keep a copy of this chat for...",
+    "after": "ChatGPT!function initScrollTimelineInline(){try{if(CSS.supports(\"animation-timeline: --works\"))return;var t=new Map;document.addEventListener(\"animationstart\",(n=>{if(!(n.target instanceof HTMLElement))return;const e=n.target.getAnimations().filter((t=>t.animationName===n.animationName));t.set(n.target,e)})),document.addEventListener(\"scrolltimelineload\",(n=>{t.forEach(((t,e)=>{t.forEach((t=>{n.detail.upgradeAnimation(t,e)}))})),t.clear()}),{once:!0})}catch{}}();!function(){try{var d=document.do..."
+  },
+  "diff": {
+    "added_sentences": [
+      "ChatGPT!",
+      "function initScrollTimelineInline(){try{if(CSS.",
+      "supports(\"animation-timeline: --works\"))return;var t=new Map;document.",
+      "addEventListener(\"animationstart\",(n=>{if(!",
+      "(n.",
+      "target instanceof HTMLElement))return;const e=n.",
+      "target.",
+      "getAnimations().",
+      "filter((t=>t.",
+      "animationName===n."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://openai.",
+      "com/chatgpt\ncompany: OpenAI\nscraped_at: 2025-07-04 20:17:45\n---\n\nChatGPT[Skip to content](#main)\n\n[](/)\n\nChatGPT\n\nLog in\n\nChatGPT\n\nLog in\n\nSign up for free\n\n# ChatGPT\n\n# Temporary Chat\n\nThis chat won't appear in history or be used to train our models.",
+      "*   Summarize text\n*   Make a plan\n*   Surprise me\n*   Brainstorm\n\nMore\n\n\n\nAttach\n\nSearch\n\nVoice\n\n*   Summarize text\n*   Make a plan\n*   Surprise me\n*   Brainstorm\n\nMore\n\nBy messaging ChatGPT, you agree to our [Terms](https://openai."
+    ],
+    "key_changes": [
+      "New version: 5.0, 537.36, 120.0.0, 100.00, 0.00, 95.00, 10.00, 1.00, 50.00, 20.00, 99.00, 0.2, 5.00, 2.00, 6.4.1, 37.33939, 121.89496, 4.1, 3.5",
+      "New model mentioned",
+      "New release mentioned",
+      "New launch mentioned",
+      "New performance mentioned",
+      "New capability mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 99,
+    "summary": "99% content changed (392 additions, 3 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "116",
+        "frequency": 306
+      },
+      {
+        "word": "870",
+        "frequency": 155
+      },
+      {
+        "word": "872",
+        "frequency": 154
+      },
+      {
+        "word": "907",
+        "frequency": 111
+      },
+      {
+        "word": "1316",
+        "frequency": 106
+      },
+      {
+        "word": "enabled",
+        "frequency": 75
+      },
+      {
+        "word": "874",
+        "frequency": 60
+      },
+      {
+        "word": "875",
+        "frequency": 60
+      },
+      {
+        "word": "100",
+        "frequency": 59
+      },
+      {
+        "word": "show",
+        "frequency": 49
+      },
+      {
+        "word": "2538",
+        "frequency": 48
+      },
+      {
+        "word": "2540",
+        "frequency": 46
+      },
+      {
+        "word": "image",
+        "frequency": 41
+      },
+      {
+        "word": "help",
+        "frequency": 39
+      },
+      {
+        "word": "899",
+        "frequency": 36
+      },
+      {
+        "word": "1314",
+        "frequency": 36
+      },
+      {
+        "word": "enable",
+        "frequency": 35
+      },
+      {
+        "word": "2542",
+        "frequency": 32
+      },
+      {
+        "word": "2544",
+        "frequency": 32
+      },
+      {
+        "word": "2546",
+        "frequency": 32
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "text": {
+        "before": 2,
+        "after": 70,
+        "change": 68
+      },
+      "you": {
+        "before": 1,
+        "after": 41,
+        "change": 40
+      },
+      "com": {
+        "before": 3,
+        "after": 16,
+        "change": 13
+      },
+      "more": {
+        "before": 2,
+        "after": 14,
+        "change": 12
+      },
+      "https": {
+        "before": 3,
+        "after": 14,
+        "change": 11
+      },
+      "search": {
+        "before": 1,
+        "after": 11,
+        "change": 10
+      },
+      "free": {
+        "before": 1,
+        "after": 10,
+        "change": 9
+      },
+      "summarize": {
+        "before": 2,
+        "after": 10,
+        "change": 8
+      },
+      "chat": {
+        "before": 6,
+        "after": 13,
+        "change": 7
+      },
+      "brainstorm": {
+        "before": 2,
+        "after": 9,
+        "change": 7
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "870 872",
+        "count": 94
+      },
+      {
+        "phrase": "872 116",
+        "count": 36
+      },
+      {
+        "phrase": "874 1316",
+        "count": 26
+      },
+      {
+        "phrase": "875 116",
+        "count": 24
+      },
+      {
+        "phrase": "874 875",
+        "count": 21
+      },
+      {
+        "phrase": "875 874",
+        "count": 20
+      },
+      {
+        "phrase": "116 874",
+        "count": 16
+      },
+      {
+        "phrase": "899 922",
+        "count": 15
+      },
+      {
+        "phrase": "help write",
+        "count": 14
+      },
+      {
+        "phrase": "874 116",
+        "count": 13
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

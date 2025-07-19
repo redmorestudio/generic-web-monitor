@@ -1,0 +1,320 @@
+{
+  "change_id": 110,
+  "url": "https://mistral.ai/pricing",
+  "company": "Mistral AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:38:10",
+  "interest_level": 6,
+  "interest_category": "major_development",
+  "interest_explanation": "Mistral AI has updated its pricing page with new features and increased limits on certain features, indicating a focus on enhancing customer experience and competitiveness in the market.",
+  "interest_drivers": [
+    "New features added to the free and pro plans",
+    "Introduction of voice mode and think mode",
+    "Increased limits on certain features"
+  ],
+  "technical_innovation_score": 5,
+  "business_impact_score": 6,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://mistral.ai/pricing\ncompany: Mistral AI\nscraped_at: 2025-07-04 20:17:24\n---\n\nPricing | Mistral AI\n\n[\n\n](/)\n\n*   Products\n*   Solutions\n*   Research\n*   Resources\n*   [Pricing](/pricing)\n*   Company\n\n[Try the API\n\n](https://console.mistral.ai/)[Talk to sales\n\n](/contact)\n\n[\n\n](/)\n\n![Hero Pricing](/_next/image?url=%2Fimg%2Fbg-pricing.svg&w=3840&q=75)\n\n# Pricing\n\nLe Chat\n\nAPI pricing\n\nMistral Code\n\nEnterprise deployments\n\nUSD ($)\n\nEUR (€)\n\n### Free\n\nYour personal AI assistant for li...",
+    "after": "Pricing | Mistral AIdocument.querySelectorAll('body link\\[rel=\"icon\"\\], body link\\[rel=\"apple-touch-icon\"\\]').forEach(el => document.head.appendChild(el)).magnifier { position: relative; display: inline-block; line-height: 0; } .magnifier-image { cursor: none; } .magnifying-glass { position: absolute; z-index: 1; background: #e5e5e5 no-repeat; border: solid #ebebeb; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); opacity: 0; transition: opacity 0.3s; pointer-events: none; } .magnifying-glass.circle ..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Pricing | Mistral AIdocument.",
+      "querySelectorAll('body link\\[rel=\"icon\"\\], body link\\[rel=\"apple-touch-icon\"\\]').",
+      "forEach(el => document.",
+      "head.",
+      "appendChild(el)).",
+      "magnifier { position: relative; display: inline-block; line-height: 0; } .",
+      "magnifier-image { cursor: none; } .",
+      "magnifying-glass { position: absolute; z-index: 1; background: #e5e5e5 no-repeat; border: solid #ebebeb; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.",
+      "3); opacity: 0; transition: opacity 0.",
+      "3s; pointer-events: none; } ."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://mistral.",
+      "ai/pricing\ncompany: Mistral AI\nscraped_at: 2025-07-04 20:17:24\n---\n\nPricing | Mistral AI\n\n[\n\n](/)\n\n*   Products\n*   Solutions\n*   Research\n*   Resources\n*   [Pricing](/pricing)\n*   Company\n\n[Try the API\n\n](https://console.",
+      "Custom\n\n[\n\nContact us\n\n](/contact)\n\n### Features\n\nMessages\n\nUp to 6x Free\n\nUp to 6x Free\n\nCustom\n\nWeb searches\n\nUp to 5x Free\n\nUp to 5x Free\n\nCustom\n\nImage generation\n\nUp to 40x Free\n\nUp to 40x Free\n\nCustom\n\nFlash answers\n\nUp to 150 / day\n\nUp to 200 / day\n\nCustom\n\nVerified news\n\nCustom\n\nAgents\n\nCustom\n\nCanvas mode\n\nCustom\n\nCode interpreter\n\nUp to 5x Free\n\nUp to 5x Free\n\nCustom\n\nDocument upload\n\nUp to 20x Free\n\nUp to 20x Free\n\nCustom\n\nLibraries\n\nLimited\n\nUp to 15GB\n\nUp to 30GB / user\n\nCustom\n\nConnections\n\nGmail, Google Calendar\n\nGmail, Google Calendar\n\nGmail, Google Calendar, Google Drive, SharePoint\n\nCustom\n\nChat-sharing\n\nCustom\n\n### Customer service\n\nHelp center\n\nCustom\n\nKnowledge base\n\nCustom\n\nChatbot\n\n\\-\n\nCustom\n\n### Team and enterprise features\n\nDomain name verification\n\n\\-\n\n\\-\n\nCustom\n\nSCIM provisioning\n\n\\-\n\n\\-\n\nCustom\n\nData export\n\n\\-\n\n\\-\n\nCustom\n\nCustom connectors (beta)\n\n\\-\n\n\\-\n\n\\-\n\nCustom\n\nAudit logs\n\n\\-\n\n\\-\n\n\\-\n\nCustom\n\nSAML SSO\n\n\\-\n\n\\-\n\n\\-\n\nCustom\n\nWhite label\n\n\\-\n\n\\-\n\n\\-\n\nCustom\n\n\\* Excluding taxes\n\n### Free\n\n$0/mo\n\nYour personal AI assistant for life and work.",
+      "ai/)\n\n## Features\n\nMessages\n\n✓\n\nWeb searches\n\n✓\n\nImage generation\n\n✓\n\nFlash answers\n\n✓\n\nVerified news\n\n✓\n\nAgents\n\n✓\n\nCanvas mode\n\n✓\n\nCode interpreter\n\n✓\n\nDocument upload\n\n✓\n\nLibraries\n\nLimited\n\nConnections\n\nGmail, Google Calendar\n\nChat-sharing\n\n✓\n\n## Customer service\n\nHelp center\n\n✓\n\nKnowledge base\n\n✓\n\nChatbot\n\n\\-\n\n## Team and enterprise features\n\nDomain name verification\n\n\\-\n\nSCIM provisioning\n\n\\-\n\nData export\n\n\\-\n\nCustom connectors (beta)\n\n\\-\n\nAudit logs\n\n\\-\n\nSAML SSO\n\n\\-\n\nWhite label\n\n\\-\n\nPopular\n\n### Pro\n\n$14.",
+      "ai/)\n\n## Features\n\nMessages\n\nUp to 6x Free\n\nWeb searches\n\nUp to 5x Free\n\nImage generation\n\nUp to 40x Free\n\nFlash answers\n\nUp to 150 / day\n\nVerified news\n\n✓\n\nAgents\n\n✓\n\nCanvas mode\n\n✓\n\nCode interpreter\n\nUp to 5x Free\n\nDocument upload\n\nUp to 20x Free\n\nLibraries\n\nUp to 15GB\n\nConnections\n\nGmail, Google Calendar\n\nChat-sharing\n\n✓\n\n## Customer service\n\nHelp center\n\n✓\n\nKnowledge base\n\n✓\n\nChatbot\n\n✓\n\n## Team and enterprise features\n\nDomain name verification\n\n\\-\n\nSCIM provisioning\n\n\\-\n\nData export\n\n\\-\n\nCustom connectors (beta)\n\n\\-\n\nAudit logs\n\n\\-\n\nSAML SSO\n\n\\-\n\nWhite label\n\n\\-\n\n### Team\n\n$50 /2 users/mo\\*\n\nEmpower your team with a secure, collaborative, AI-powered workspace.",
+      "ai/)\n\n## Features\n\nMessages\n\nUp to 6x Free\n\nWeb searches\n\nUp to 5x Free\n\nImage generation\n\nUp to 40x Free\n\nFlash answers\n\nUp to 200 / day\n\nVerified news\n\n✓\n\nAgents\n\n✓\n\nCanvas mode\n\n✓\n\nCode interpreter\n\nUp to 5x Free\n\nDocument upload\n\nUp to 20x Free\n\nLibraries\n\nUp to 30GB / user\n\nConnections\n\nGmail, Google Calendar, Google Drive, SharePoint\n\nChat-sharing\n\n✓\n\n## Customer service\n\nHelp center\n\n✓\n\nKnowledge base\n\n✓\n\nChatbot\n\n✓\n\n## Team and enterprise features\n\nDomain name verification\n\n✓\n\nSCIM provisioning\n\n✓\n\nData export\n\n✓\n\nCustom connectors (beta)\n\n\\-\n\nAudit logs\n\n\\-\n\nSAML SSO\n\n\\-\n\nWhite label\n\n\\-\n\n### Enterprise\n\nCustom\n\nPrivate deployments powered by custom models, UI, and tools.",
+      "[Contact us](/contact)\n\n## Features\n\nMessages\n\nCustom\n\nWeb searches\n\nCustom\n\nImage generation\n\nCustom\n\nFlash answers\n\nCustom\n\nVerified news\n\nCustom\n\nAgents\n\nCustom\n\nCanvas mode\n\nCustom\n\nCode interpreter\n\nCustom\n\nDocument upload\n\nCustom\n\nLibraries\n\nCustom\n\nConnections\n\nCustom\n\nChat-sharing\n\nCustom\n\n## Customer service\n\nHelp center\n\nCustom\n\nKnowledge base\n\nCustom\n\nChatbot\n\nCustom\n\n## Team and enterprise features\n\nDomain name verification\n\nCustom\n\nSCIM provisioning\n\nCustom\n\nData export\n\nCustom\n\nCustom connectors (beta)\n\nCustom\n\nAudit logs\n\nCustom\n\nSAML SSO\n\nCustom\n\nWhite label\n\nCustom\n\nFAQs\n\n### Does Mistral have a free plan?",
+      "ai%2Fassets%2Ff45ae4b7-3e46-4f61-9df2-c3583c1b0792&w=128&q=75)\n\n### Mistral Small 3.",
+      "1\n\nOutput (/M tokens)\n\n$0.",
+      "Premier modelsOpen modelsFine-tunable modelsTools\n\n### Premier models\n\nUSD ($)\n\nEUR (€)\n\n!"
+    ],
+    "key_changes": [
+      "New version: 0.004, 0.002, 0.001, 11.7053, 5.85156, V5.79928, 35.1272, 29.2734, 17.559, 5.79883, V11.5981, V5.79883, 35.1293, 23.4219, 35.1239, 11.5977, V17.3969, V11.5977, 17.3984, V23.1977, V17.3984, 23.4162, 17.5625, 17.5648, 23.2012, V29.0005, V23.2012, 40.9867, 11.7072, 5.85352, 35.1252, 29.2715, 17.561, 35.1254, 23.418, 35.1258, 40.9828, 5.79932, V11.5986, V5.79932, 11.5986, V17.3979, 17.3979, V23.1972, 23.2007, V23.2007, 7.39166, 4.93066, 4.92969, V7.39936, V4.93066, 4.92681, 2.46875, 2.46484, V4.93744, V2.46875, 2.46197, V2.46869, 7.39941, V9.86811, V7.39941, 9.86133, V12.33, V9.86133, 0.890625, 24.8906, 9.5, 17.5, 5.94555, 3.43549, V2.48671, 15.9874, 13.4773, 8.45561, 2.48694, V4.97365, V2.48694, 15.9889, 10.9688, 4.97305, V7.45977, V4.97305, 7.46002, V9.94673, V7.46002, 10.9674, 8.45734, 8.45771, 9.94849, 0.925964, V12.4352, V9.94849, 18.5005, 6.92993, 17.778, 4.78741, V17.778, 11.215, 9.07245, 13.3575, 15.5561, V15.5561, 4.78742, 2.6449, 13.3341, V13.3341, 11.1097, V11.1097, V2.22195, 2.22195, V4.4439, 15.5, 8.88782, V11.1098, V8.88782, 4.44391, V6.66586, V4.44391, 6.66586, V8.88781, 2.64488, 74.0019, 32.0012, 65.9969, V8.00545, 57.9991, V16.004, 50.0009, 42.0028, 34.0049, V32.0012, V24.0027, 8.24071, 0.307373, V7.93334, 16.175, 7.93356, 8.2417, V15.8669, V7.93356, 24.1094, 15.8667, 16.176, V23.8, V15.8667, 23.8002, V31.7336, V23.8002, 31.7331, V39.6664, V31.7331, 11.9279, 9.0708, V2.85714, 17.6423, V11.4283, 14.7851, V17.1429, 11.928, V11.4286, 9.07085, 6.21371, 3.35657, 9.07089, 2.85684, 6.21375, V5.71399, V2.85684, 5.71399, V8.57113, 14.7852, 3.35653, 8.57114, 0.49939, V8.57114, 20.4995, 5.99, 21.628, 49.577, 21.654, 11.321, 21.691, 11.327, 1.8, 5.4, 0.13, 8.2, 0.14, 3.8, 2.7, 0.18, 0.54, 0.09, 0.65, 1.9, 5.6, 24.5, 2.5",
+      "Price change: $0.00, $10, $11, $5.99, $39",
+      "New model mentioned",
+      "New api mentioned",
+      "New performance mentioned",
+      "New capability mentioned",
+      "New feature mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 90,
+    "summary": "90% content changed (2226 additions, 89 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "u003e",
+        "frequency": 684
+      },
+      {
+        "word": "dpl",
+        "frequency": 552
+      },
+      {
+        "word": "null",
+        "frequency": 526
+      },
+      {
+        "word": "u003c",
+        "frequency": 431
+      },
+      {
+        "word": "locale",
+        "frequency": 391
+      },
+      {
+        "word": "u003cp",
+        "frequency": 362
+      },
+      {
+        "word": "children",
+        "frequency": 293
+      },
+      {
+        "word": "static",
+        "frequency": 280
+      },
+      {
+        "word": "doppxp9fgttpv2c7eoewgupnnop3",
+        "frequency": 274
+      },
+      {
+        "word": "chunks",
+        "frequency": 268
+      },
+      {
+        "word": "type",
+        "frequency": 238
+      },
+      {
+        "word": "value",
+        "frequency": 225
+      },
+      {
+        "word": "currentcolor",
+        "frequency": 150
+      },
+      {
+        "word": "false",
+        "frequency": 146
+      },
+      {
+        "word": "u003cpath",
+        "frequency": 130
+      },
+      {
+        "word": "icon",
+        "frequency": 126
+      },
+      {
+        "word": "sort",
+        "frequency": 117
+      },
+      {
+        "word": "page",
+        "frequency": 110
+      },
+      {
+        "word": "button",
+        "frequency": 109
+      },
+      {
+        "word": "dollar",
+        "frequency": 97
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "chat-sharing",
+        "frequency": 5
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "089953a1-5000-4f28-8b41-2a51489697d6",
+        "frequency": 2
+      },
+      {
+        "word": "2f089953a1-5000-4f28-8b41-2a51489697d6",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "modelsopen",
+        "frequency": 1
+      },
+      {
+        "word": "modelsfine-tunable",
+        "frequency": 1
+      },
+      {
+        "word": "modelstools",
+        "frequency": 1
+      },
+      {
+        "word": "preview",
+        "frequency": 1
+      },
+      {
+        "word": "73c1b72d-b8a1-49e0-ad99-3fdf0e68c4e4",
+        "frequency": 1
+      },
+      {
+        "word": "2f73c1b72d-b8a1-49e0-ad99-3fdf0e68c4e4",
+        "frequency": 1
+      },
+      {
+        "word": "fine-tunable",
+        "frequency": 1
+      },
+      {
+        "word": "4d57d414-ee42-4af5-99d4-32e58b6a6f75",
+        "frequency": 1
+      },
+      {
+        "word": "2f4d57d414-ee42-4af5-99d4-32e58b6a6f75",
+        "frequency": 1
+      },
+      {
+        "word": "972f50d3-37ce-415a-8f62-47c65516b210",
+        "frequency": 1
+      },
+      {
+        "word": "2f972f50d3-37ce-415a-8f62-47c65516b210",
+        "frequency": 1
+      },
+      {
+        "word": "4f6d86b0-fca7-403c-8bd0-7443de921428",
+        "frequency": 1
+      },
+      {
+        "word": "2f4f6d86b0-fca7-403c-8bd0-7443de921428",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "name": {
+        "before": 11,
+        "after": 282,
+        "change": 271
+      },
+      "price": {
+        "before": 8,
+        "after": 252,
+        "change": 244
+      },
+      "fill": {
+        "before": 1,
+        "after": 190,
+        "change": 189
+      },
+      "features": {
+        "before": 12,
+        "after": 142,
+        "change": 130
+      },
+      "api": {
+        "before": 19,
+        "after": 141,
+        "change": 122
+      },
+      "url": {
+        "before": 48,
+        "after": 165,
+        "change": 117
+      },
+      "mistral": {
+        "before": 102,
+        "after": 203,
+        "change": 101
+      },
+      "model": {
+        "before": 26,
+        "after": 124,
+        "change": 98
+      },
+      "tokens": {
+        "before": 63,
+        "after": 148,
+        "change": 85
+      },
+      "open": {
+        "before": 2,
+        "after": 81,
+        "change": 79
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "u003c u003e",
+        "count": 394
+      },
+      {
+        "phrase": "dpl dpl",
+        "count": 276
+      },
+      {
+        "phrase": "dpl doppxp9fgttpv2c7eoewgupnnop3",
+        "count": 274
+      },
+      {
+        "phrase": "static chunks",
+        "count": 268
+      },
+      {
+        "phrase": "locale value",
+        "count": 167
+      },
+      {
+        "phrase": "fill currentcolor",
+        "count": 144
+      },
+      {
+        "phrase": "u003e type",
+        "count": 134
+      },
+      {
+        "phrase": "u003e u003cpath",
+        "count": 130
+      },
+      {
+        "phrase": "u003e locale",
+        "count": 109
+      },
+      {
+        "phrase": "currentcolor u003e",
+        "count": 102
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

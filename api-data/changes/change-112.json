@@ -1,0 +1,258 @@
+{
+  "change_id": 112,
+  "url": "https://mistral.ai",
+  "company": "Mistral AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:38:10",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes were detected between the previous and current content of the Mistral AI homepage. The content appears to be identical, with no new features, updates, or announcements that would indicate technical innovation or business impact.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://mistral.ai\ncompany: Mistral AI\nscraped_at: 2025-07-04 20:17:24\n---\n\nFrontier AI LLMs, assistants, agents, services | Mistral AI\n\n[\n\n](/)\n\n*   Products\n*   Solutions\n*   Research\n*   Resources\n*   [Pricing](/pricing)\n*   Company\n\n[Try the API\n\n](https://console.mistral.ai/)[Talk to sales\n\n](/contact)\n\n[\n\n](/)\n\n![Hero background](/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmistral-hero-img.e7ae5b77.webp&w=3840&q=75&dpl=dpl_9jaeGvRnPgn9KFSdgxrQdZRC1t8t)\n\n#\n\nFrontier AI. In Your Ha...",
+    "after": "Frontier AI LLMs, assistants, agents, services | Mistral AIdocument.querySelectorAll('body link\\[rel=\"icon\"\\], body link\\[rel=\"apple-touch-icon\"\\]').forEach(el => document.head.appendChild(el)).magnifier { position: relative; display: inline-block; line-height: 0; } .magnifier-image { cursor: none; } .magnifying-glass { position: absolute; z-index: 1; background: #e5e5e5 no-repeat; border: solid #ebebeb; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); opacity: 0; transition: opacity 0.3s; pointer-ev..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Frontier AI LLMs, assistants, agents, services | Mistral AIdocument.",
+      "querySelectorAll('body link\\[rel=\"icon\"\\], body link\\[rel=\"apple-touch-icon\"\\]').",
+      "forEach(el => document.",
+      "head.",
+      "appendChild(el)).",
+      "magnifier { position: relative; display: inline-block; line-height: 0; } .",
+      "magnifier-image { cursor: none; } .",
+      "magnifying-glass { position: absolute; z-index: 1; background: #e5e5e5 no-repeat; border: solid #ebebeb; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.",
+      "3); opacity: 0; transition: opacity 0.",
+      "3s; pointer-events: none; } ."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://mistral.",
+      "ai\ncompany: Mistral AI\nscraped_at: 2025-07-04 20:17:24\n---\n\nFrontier AI LLMs, assistants, agents, services | Mistral AI\n\n[\n\n](/)\n\n*   Products\n*   Solutions\n*   Research\n*   Resources\n*   [Pricing](/pricing)\n*   Company\n\n[Try the API\n\n](https://console.",
+      "webp&w=3840&q=75&dpl=dpl_9jaeGvRnPgn9KFSdgxrQdZRC1t8t)\n\n#\n\nFrontier AI.",
+      "ai%2Fassets%2Fc7627522-667c-4bb5-a16c-4580f3767b64&w=3840&q=75)\n\n###\n\nYour AI future belongs in your hands.",
+      "width=null&height=null)\n\n####\n\nFrontier intelligence, tailored to You.",
+      "####\n\nEnterprise-grade.",
+      "####\n\nPrivacy-first.",
+      "####\n\nDeeply engaged solutioning and value delivery.",
+      "png%3Fwidth%3D1376%26amp%3Bheight%3D1376&w=128&q=75)\n\n###\n\nUnified AI for all your work.",
+      "ai%2Fassets%2F0b84416f-94dd-4de1-97fa-557421fc8d36&w=3840&q=75)\n\n###\n\nBuild, customize, and deploy AI anywhere."
+    ],
+    "key_changes": [
+      "New version: 0.3, 1.5, 11.7053, 5.85156, V5.79928, 35.1272, 29.2734, 17.559, 5.79883, V11.5981, V5.79883, 35.1293, 23.4219, 35.1239, 11.5977, V17.3969, V11.5977, 17.3984, V23.1977, V17.3984, 23.4162, 17.5625, 17.5648, 23.2012, V29.0005, V23.2012, 40.9867, 11.7072, 5.85352, 35.1252, 29.2715, 17.561, 35.1254, 23.418, 35.1258, 40.9828, 5.79932, V11.5986, V5.79932, 11.5986, V17.3979, 17.3979, V23.1972, 23.2007, V23.2007, 7.39166, 4.93066, 4.92969, V7.39936, V4.93066, 4.92681, 2.46875, 2.46484, V4.93744, V2.46875, 2.46197, V2.46869, 7.39941, V9.86811, V7.39941, 9.86133, V12.33, V9.86133, 0.890625, 24.8906, 9.5, 17.5, 34.5, 45.6, 21.6, 16.040, 56.124, 13.303, 56.131, 0.02, 16.143, 48.815, 16.157, 56.205, 03.376, 38.459, 16.170, 56.219, 46.904, 59.053, 44.546, 35.216, 31.293, 35.220, 0.5, 21.0039, 10.9983, 8.00293, 18.0086, 18.0117, 7.99143, 4.99609, 15.0164, 15.0117, 4.99583, 2.00049, 12.0164, 4.99582, 13.9934, 10.998, 15.0039, 0.00382328, 0.00382315, 17.0002, 14.0049, 09.247, 20.536, 73.6, 70.7, 83.3, 2506.10910, 2.0, 1.04907, 4.80044, 7.20044, 2.4, 4.80078, 19.2008, 2.39844, 7.20059, 9.60059, 4.79844, 2.40054, 4.80054, 0.000390768, 2.40039, 7.20078, 0.000390663, 9.60049, 12.0005, 19.2, 53.132, 35.325, 44.338, 52.986, 59.759, 32.957, 17.166, 35.770, 24.5, 2.5",
+      "Price change: $1, $10, $11, $21, $26, $27, $23, $24, $34, $35, $36, $37, $38, $39, $3",
+      "New model mentioned",
+      "New api mentioned",
+      "New release mentioned",
+      "New launch mentioned",
+      "New announcement mentioned",
+      "New performance mentioned",
+      "New capability mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 86,
+    "summary": "86% content changed (2814 additions, 19 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "u003e",
+        "frequency": 704
+      },
+      {
+        "word": "children",
+        "frequency": 427
+      },
+      {
+        "word": "fill",
+        "frequency": 330
+      },
+      {
+        "word": "u003c",
+        "frequency": 315
+      },
+      {
+        "word": "u003cpath",
+        "frequency": 270
+      },
+      {
+        "word": "currentcolor",
+        "frequency": 248
+      },
+      {
+        "word": "static",
+        "frequency": 229
+      },
+      {
+        "word": "doppxp9fgttpv2c7eoewgupnnop3",
+        "frequency": 227
+      },
+      {
+        "word": "chunks",
+        "frequency": 220
+      },
+      {
+        "word": "locale",
+        "frequency": 191
+      },
+      {
+        "word": "name",
+        "frequency": 189
+      },
+      {
+        "word": "classname",
+        "frequency": 182
+      },
+      {
+        "word": "u003cp",
+        "frequency": 163
+      },
+      {
+        "word": "props",
+        "frequency": 158
+      },
+      {
+        "word": "button",
+        "frequency": 147
+      },
+      {
+        "word": "dir",
+        "frequency": 146
+      },
+      {
+        "word": "ltr",
+        "frequency": 146
+      },
+      {
+        "word": "false",
+        "frequency": 130
+      },
+      {
+        "word": "page",
+        "frequency": 125
+      },
+      {
+        "word": "div",
+        "frequency": 121
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "9jaegvrnpgn9kfsdgxrqdzrc1t8t",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "null": {
+        "before": 4,
+        "after": 629,
+        "change": 625
+      },
+      "dpl": {
+        "before": 2,
+        "after": 458,
+        "change": 456
+      },
+      "mistral": {
+        "before": 111,
+        "after": 249,
+        "change": 138
+      },
+      "svg": {
+        "before": 6,
+        "after": 141,
+        "change": 135
+      },
+      "url": {
+        "before": 87,
+        "after": 220,
+        "change": 133
+      },
+      "open": {
+        "before": 2,
+        "after": 94,
+        "change": 92
+      },
+      "https": {
+        "before": 94,
+        "after": 177,
+        "change": 83
+      },
+      "image": {
+        "before": 86,
+        "after": 163,
+        "change": 77
+      },
+      "width": {
+        "before": 2,
+        "after": 66,
+        "change": 64
+      },
+      "height": {
+        "before": 2,
+        "after": 65,
+        "change": 63
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "u003e u003cpath",
+        "count": 270
+      },
+      {
+        "phrase": "u003c u003e",
+        "count": 251
+      },
+      {
+        "phrase": "fill currentcolor",
+        "count": 242
+      },
+      {
+        "phrase": "currentcolor u003e",
+        "count": 242
+      },
+      {
+        "phrase": "dpl dpl",
+        "count": 229
+      },
+      {
+        "phrase": "dpl doppxp9fgttpv2c7eoewgupnnop3",
+        "count": 227
+      },
+      {
+        "phrase": "static chunks",
+        "count": 220
+      },
+      {
+        "phrase": "dir ltr",
+        "count": 146
+      },
+      {
+        "phrase": "props children",
+        "count": 128
+      },
+      {
+        "phrase": "children props",
+        "count": 128
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

@@ -1,0 +1,279 @@
+{
+  "change_id": 157,
+  "url": "https://scale.com/enterprise",
+  "company": "Scale AI",
+  "company_category": "Enterprise AI",
+  "detected_at": "2025-07-18 16:41:07",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes were detected between the previous and current content of the Scale AI website. The content appears to be identical, with no new features, products, or announcements.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://scale.com/enterprise\ncompany: Scale AI\nscraped_at: 2025-07-04 20:20:25\n---\n\n404 - Page Not Found | Scale AI\n\n[\n\n## Scale AI logo\n\n![Scale AI logo](/_next/image?url=%2Fstatic%2FScale%20AI%20logo.svg&w=128&q=75)](/)\n\n*   Products\n\n*   [Leaderboards](/leaderboard)\n*   Enterprise\n\n*   Government\n\n*   Customers\n\n*   Resources\n\n\n#### Products\n\n*   [\n\n    ![engine](/_next/image?url=%2Fstatic%2Fimages%2Fglobal%2Fheader%2Fproducts%2Fengine.png&w=96&q=75)\n\n    Scale Data EngineData for tr...",
+    "after": "404 - Page Not Found | Scale AI\n\n.new-button\\_button--primary\\_\\_EJ4AI{font-weight:500;line-height:20px;position:relative;z-index:1;text-align:center;color:#f4f0ff;border-radius:10px}@media screen and (min-width:1024px){.new-button\\_button--primary\\_\\_EJ4AI:before{opacity:.4}.new-button\\_button--primary\\_\\_EJ4AI:after{opacity:.6}.new-button\\_button--primary\\_\\_EJ4AI:hover:after{opacity:.7}.new-button\\_button--primary\\_\\_EJ4AI:hover:before{opacity:.6}}@media (min-width:1024px){.new-button\\_button..."
+  },
+  "diff": {
+    "added_sentences": [
+      "404 - Page Not Found | Scale AI\n\n.",
+      "new-button\\_button--primary\\_\\_EJ4AI{font-weight:500;line-height:20px;position:relative;z-index:1;text-align:center;color:#f4f0ff;border-radius:10px}@media screen and (min-width:1024px){.",
+      "new-button\\_button--primary\\_\\_EJ4AI:before{opacity:.",
+      "4}.",
+      "new-button\\_button--primary\\_\\_EJ4AI:after{opacity:.",
+      "6}.",
+      "new-button\\_button--primary\\_\\_EJ4AI:hover:after{opacity:.",
+      "7}.",
+      "new-button\\_button--primary\\_\\_EJ4AI:hover:before{opacity:.",
+      "6}}@media (min-width:1024px){."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://scale.",
+      "com/enterprise\ncompany: Scale AI\nscraped_at: 2025-07-04 20:20:25\n---\n\n404 - Page Not Found | Scale AI\n\n[\n\n## Scale AI logo\n\n!",
+      "svg&w=128&q=75)](/)\n\n*   Products\n\n*   [Leaderboards](/leaderboard)\n*   Enterprise\n\n*   Government\n\n*   Customers\n\n*   Resources\n\n\n#### Products\n\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    Scale Data EngineData for training models\n\n\n\n    ](/data-engine)\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    For Generative AlSupervised fine-tuning and RLHF\n\n\n\n    ](/generative-ai-data-engine)\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    For GovernmentHigh-quality data for public sector\n\n\n\n    ](/public-sector-data-engine)\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    For AutomotiveUnlock L2 to L5 autonomy\n\n\n\n    ](/automotive)\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    Scale DonovanMission-critical Agentic AI\n\n\n\n    ](/donovan)\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    Scale GenAI PlatformFull-stack Generative AI\n\n\n\n    ](/genai-platform)\n\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    Scale EvaluationEvaluation of AI models and applications\n\n\n\n    ](/evaluation/model-developers)\n*   [\n\n    !"
+    ],
+    "key_changes": [
+      "New version: 0.05, 0.5, 1.5, 33.333333, 66.666667, 1.375, 1.25, 52.07, 1.1, 1.05, 0.75, 0.7, 0.1, 0.8, 1.2, 13.3333333333, 30.6666666667, 65.3333333333, 82.6666666667, 91.3333333333, 1.3, 1.35, 1.6, 0.9, 0.01, 1.4, 1.7, 1.125, 7.5, 511.626, 511.627, 392.857, 292.354, 18.274, 2.669, 4.859.855, 6.563, 2.573, 1.718, 1.708, 3.897, v91.361, 12.563, 4.47, 23.315, 13.415, 32.262, 8.945, 19.701, 13.414, 32.264, 82.224, 12.562, 23.317, 4.469, 8.946, 13.417, 19.698, V155.31, 4.471, 23.313, 32.259, 8.947, 19.702, 13.418, 200.994, 4.859, 6.57, 2.57, 1.711, 1.713, 2.566, 3.9, 6.567, V82.221, 2.662, 4.853, 3.901, 2.568, 22.648, 42.016, 8.042, 58.102, 24.125, 113.297, 132.665, 155.313, v237.542, 22.647, 42.018, 24.123, 58.095, 16.086, 16.084, 35.454, 24.13, 237.543, 42.017, 8.046, 58.101, 16.085, 16.077, 24.127, 35.447, 91.358, 2.574, 3.903, 6.565, 506.199, 41.971, 3.617, 7.905, 5.424, 12.85, 347.171, 4.948, 9.233, 1.807, 12.847, 3.615, 5.428, 7.898, 1.811, 50.247, 50.248, 186.147, 186.151, 1.906, 1.903, 2.856, 4.093, 2.479.953, 4.668, 6.571, 32.548, 32.544, 2.852, 4.665, 186.148, 50.251, 3.614, 5.426, 1.809, 12.851, 3.616, V54.818, 4.952, 1.814, 9.232, 11.5, 6.5, 5.2.0, 2.3.33",
+      "New api mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 98,
+    "summary": "98% content changed (2506 additions, 41 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "onetrust-pc-sdk",
+        "frequency": 639
+      },
+      {
+        "word": "onetrust-banner-sdk",
+        "frequency": 263
+      },
+      {
+        "word": "form-content",
+        "frequency": 247
+      },
+      {
+        "word": "ot-sdk-cookie-policy",
+        "frequency": 224
+      },
+      {
+        "word": "hs-form",
+        "frequency": 211
+      },
+      {
+        "word": "input",
+        "frequency": 197
+      },
+      {
+        "word": "wrapper",
+        "frequency": 191
+      },
+      {
+        "word": "width",
+        "frequency": 152
+      },
+      {
+        "word": "100",
+        "frequency": 123
+      },
+      {
+        "word": "type",
+        "frequency": 114
+      },
+      {
+        "word": "none",
+        "frequency": 111
+      },
+      {
+        "word": "display",
+        "frequency": 108
+      },
+      {
+        "word": "modal",
+        "frequency": 106
+      },
+      {
+        "word": "font-size",
+        "frequency": 103
+      },
+      {
+        "word": "position",
+        "frequency": 101
+      },
+      {
+        "word": "h8j",
+        "frequency": 94
+      },
+      {
+        "word": "div",
+        "frequency": 92
+      },
+      {
+        "word": "height",
+        "frequency": 84
+      },
+      {
+        "word": "ot-sdk-cookie-policy-v2",
+        "frequency": 84
+      },
+      {
+        "word": "l65to",
+        "frequency": 83
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "microsoft",
+        "frequency": 2
+      },
+      {
+        "word": "374",
+        "frequency": 1
+      },
+      {
+        "word": "800",
+        "frequency": 1
+      },
+      {
+        "word": "732765",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "2fmicrosoft",
+        "frequency": 1
+      },
+      {
+        "word": "e969ca8a-4ffe-462d-9390-92470db57eab",
+        "frequency": 1
+      },
+      {
+        "word": "503cf160591411f0945ebdfd88eaf1e4",
+        "frequency": 1
+      },
+      {
+        "word": "503e7990591411f0ae618733b377bdd7",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "form": {
+        "before": 1,
+        "after": 399,
+        "change": 398
+      },
+      "button": {
+        "before": 1,
+        "after": 94,
+        "change": 93
+      },
+      "not": {
+        "before": 3,
+        "after": 85,
+        "change": 82
+      },
+      "right": {
+        "before": 1,
+        "after": 72,
+        "change": 71
+      },
+      "label": {
+        "before": 8,
+        "after": 76,
+        "change": 68
+      },
+      "checkbox": {
+        "before": 4,
+        "after": 45,
+        "change": 41
+      },
+      "com": {
+        "before": 12,
+        "after": 39,
+        "change": 27
+      },
+      "svg": {
+        "before": 12,
+        "after": 33,
+        "change": 21
+      },
+      "center": {
+        "before": 1,
+        "after": 21,
+        "change": 20
+      },
+      "content": {
+        "before": 3,
+        "after": 23,
+        "change": 20
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "form-content form",
+        "count": 186
+      },
+      {
+        "phrase": "form wrapper",
+        "count": 186
+      },
+      {
+        "phrase": "form hs-form",
+        "count": 171
+      },
+      {
+        "phrase": "input type",
+        "count": 101
+      },
+      {
+        "phrase": "wrapper modal",
+        "count": 95
+      },
+      {
+        "phrase": "modal h8j",
+        "count": 94
+      },
+      {
+        "phrase": "h8j form",
+        "count": 90
+      },
+      {
+        "phrase": "wrapper l65to",
+        "count": 83
+      },
+      {
+        "phrase": "l65to form",
+        "count": 81
+      },
+      {
+        "phrase": "hs-form div",
+        "count": 73
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

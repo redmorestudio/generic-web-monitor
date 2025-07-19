@@ -1,0 +1,320 @@
+{
+  "change_id": 88,
+  "url": "https://huggingface.co",
+  "company": "Hugging Face",
+  "company_category": "AI Infrastructure",
+  "detected_at": "2025-07-18 16:37:19",
+  "interest_level": 5,
+  "interest_category": "notable_update",
+  "interest_explanation": "The updates on Hugging Face's homepage reflect the continuous growth and activity within the machine learning community, with new models, datasets, and applications being added. While these updates are notable, they do not represent a significant breakthrough in technical innovation or business impact.",
+  "interest_drivers": [
+    "New models added (e.g., moonshotai/Kimi-K2-Instruct, mistralai/Voxtral-Mini-3B-2507)",
+    "Updated datasets (e.g., NousResearch/Hermes-3-Dataset, common-pile/caselaw_access_project)",
+    "Increased number of running Spaces (10.4k vs 9.22k)",
+    "New applications in Spaces (e.g., Wan2.1 Fast, ThinkSound, Grok 4 Heavy Free)"
+  ],
+  "technical_innovation_score": 5,
+  "business_impact_score": 4,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://huggingface.co\ncompany: Hugging Face\nscraped_at: 2025-07-04 20:15:28\n---\n\n                 Hugging Face – The AI community building the future.\n\n [![Hugging Face's logo](/front/assets/huggingface_logo-noborder.svg) Hugging Face](/)\n\n*   [Models](/models)\n*   [Datasets](/datasets)\n*   [Spaces](/spaces)\n*   Community\n\n*   [Docs](/docs)\n*   [Enterprise](/enterprise)\n*   [Pricing](/pricing)\n\n*   * * *\n\n*   [Log In](/login)\n*   [Sign Up](/join)\n\n![](/front/assets/huggingface_logo-nob...",
+    "after": "               \n\nconst guestTheme = document.cookie.match(/theme=(\\\\w+)/)?.\\[1\\]; document.documentElement.classList.toggle('dark', guestTheme === 'dark' || ( (!guestTheme || guestTheme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches));   Hugging Face – The AI community building the future. window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || \\[\\]).push(arguments); }; window.hubConfig = {\"features\":{\"signupDisabled\":false},\"s..."
+  },
+  "diff": {
+    "added_sentences": [
+      "const guestTheme = document.",
+      "cookie.",
+      "match(/theme=(\\\\w+)/)?.",
+      "\\[1\\]; document.",
+      "documentElement.",
+      "classList.",
+      "toggle('dark', guestTheme === 'dark' || ( (!",
+      "guestTheme || guestTheme === 'system') && window.",
+      "matchMedia('(prefers-color-scheme: dark)').",
+      "matches));   Hugging Face – The AI community building the future."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://huggingface.",
+      "co\ncompany: Hugging Face\nscraped_at: 2025-07-04 20:15:28\n---\n\n                 Hugging Face – The AI community building the future.",
+      "[!",
+      "svg) Hugging Face](/)\n\n*   [Models](/models)\n*   [Datasets](/datasets)\n*   [Spaces](/spaces)\n*   Community\n\n*   [Docs](/docs)\n*   [Enterprise](/enterprise)\n*   [Pricing](/pricing)\n\n*   * * *\n\n*   [Log In](/login)\n*   [Sign Up](/join)\n\n!",
+      "svg)this week\n\n## Models\n\n[\n\n#### black-forest-labs/FLUX.",
+      "1-Kontext-dev\n\nUpdated 7 days ago • 144k • 1.",
+      "29k\n\n\n](/black-forest-labs/FLUX.",
+      "1-Kontext-dev)\n\n[\n\n#### tencent/Hunyuan-A13B-Instruct\n\nUpdated 3 days ago • 9.",
+      "23k • 701\n\n\n](/tencent/Hunyuan-A13B-Instruct)\n\n[\n\n#### google/gemma-3n-E4B-it\n\nUpdated 1 day ago • 175k • 430\n\n\n](/google/gemma-3n-E4B-it)\n\n[\n\n#### THUDM/GLM-4.",
+      "1V-9B-Thinking\n\nUpdated 1 day ago • 4."
+    ],
+    "key_changes": [
+      "New version: 1.43, 1.72, 10.4, 1.21, 30.8, 8.39, 1.76, 3.29, 2.78, 3.63, 2.18, 6.85, 3.3, 1.04, 20.8, 2.74, 13.7",
+      "New api mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 72,
+    "summary": "72% content changed (77 additions, 42 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "window",
+        "frequency": 9
+      },
+      {
+        "word": "script",
+        "frequency": 5
+      },
+      {
+        "word": "guesttheme",
+        "frequency": 4
+      },
+      {
+        "word": "document",
+        "frequency": 4
+      },
+      {
+        "word": "plausible",
+        "frequency": 4
+      },
+      {
+        "word": "hours",
+        "frequency": 4
+      },
+      {
+        "word": "mistralai",
+        "frequency": 4
+      },
+      {
+        "word": "huggingfacetb",
+        "frequency": 4
+      },
+      {
+        "word": "dark",
+        "frequency": 3
+      },
+      {
+        "word": "113",
+        "frequency": 2
+      },
+      {
+        "word": "147",
+        "frequency": 2
+      },
+      {
+        "word": "249",
+        "frequency": 2
+      },
+      {
+        "word": "775",
+        "frequency": 2
+      },
+      {
+        "word": "909",
+        "frequency": 2
+      },
+      {
+        "word": "const",
+        "frequency": 2
+      },
+      {
+        "word": "true",
+        "frequency": 2
+      },
+      {
+        "word": "space",
+        "frequency": 2
+      },
+      {
+        "word": "moonshotai",
+        "frequency": 2
+      },
+      {
+        "word": "kimi-k2-instruct",
+        "frequency": 2
+      },
+      {
+        "word": "voxtral-mini-3b-2507",
+        "frequency": 2
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "tencent",
+        "frequency": 3
+      },
+      {
+        "word": "day",
+        "frequency": 3
+      },
+      {
+        "word": "119",
+        "frequency": 2
+      },
+      {
+        "word": "530",
+        "frequency": 2
+      },
+      {
+        "word": "620",
+        "frequency": 2
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "hunyuan-a13b-instruct",
+        "frequency": 2
+      },
+      {
+        "word": "gemma-3n-e4b-it",
+        "frequency": 2
+      },
+      {
+        "word": "thudm",
+        "frequency": 2
+      },
+      {
+        "word": "glm-4",
+        "frequency": 2
+      },
+      {
+        "word": "1v-9b-thinking",
+        "frequency": 2
+      },
+      {
+        "word": "kyutai",
+        "frequency": 2
+      },
+      {
+        "word": "tts-1",
+        "frequency": 2
+      },
+      {
+        "word": "6b-en",
+        "frequency": 2
+      },
+      {
+        "word": "22k",
+        "frequency": 2
+      },
+      {
+        "word": "03k",
+        "frequency": 2
+      },
+      {
+        "word": "sparc3d",
+        "frequency": 2
+      },
+      {
+        "word": "hunyuan3d-2",
+        "frequency": 2
+      },
+      {
+        "word": "seamless-interaction",
+        "frequency": 2
+      },
+      {
+        "word": "huggingfacefw",
+        "frequency": 2
+      }
+    ],
+    "frequency_changes": {
+      "https": {
+        "before": 18,
+        "after": 22,
+        "change": 4
+      },
+      "huggingface": {
+        "before": 25,
+        "after": 28,
+        "change": 3
+      },
+      "production": {
+        "before": 9,
+        "after": 11,
+        "change": 2
+      },
+      "access": {
+        "before": 2,
+        "after": 4,
+        "change": 2
+      },
+      "microsoft": {
+        "before": 3,
+        "after": 5,
+        "change": 2
+      },
+      "theme": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "system": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "logo": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "dev": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "front": {
+        "before": 18,
+        "after": 19,
+        "change": 1
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "front assets",
+        "count": 18
+      },
+      {
+        "phrase": "hugging face",
+        "count": 16
+      },
+      {
+        "phrase": "assets homepage",
+        "count": 15
+      },
+      {
+        "phrase": "huggingface production",
+        "count": 9
+      },
+      {
+        "phrase": "profile picture",
+        "count": 8
+      },
+      {
+        "phrase": "picture https",
+        "count": 8
+      },
+      {
+        "phrase": "https cdn-avatars",
+        "count": 8
+      },
+      {
+        "phrase": "cdn-avatars huggingface",
+        "count": 8
+      },
+      {
+        "phrase": "production uploads",
+        "count": 8
+      },
+      {
+        "phrase": "svg hugging",
+        "count": 5
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

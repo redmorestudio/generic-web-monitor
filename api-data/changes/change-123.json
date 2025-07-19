@@ -1,0 +1,199 @@
+{
+  "change_id": 123,
+  "url": "https://neeva.com",
+  "company": "Neeva",
+  "company_category": "AI Search",
+  "detected_at": "2025-07-18 16:38:32",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No notable changes were detected between the previous and current content of the Neeva homepage.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://neeva.com\ncompany: Neeva\nscraped_at: 2025-07-04 20:17:35\n---\n\n    neeva.com\n\n# neeva.com\n\nCopyright 2025 • [Privacy Policy](/privacy) • [Legal](/legal)...",
+    "after": "    neeva.com\\* { font-smoothing: antialiased; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } html, body { width: 100%; margin: 0; } html { background-color: #2B2B2B; height: 100%; } body { min-height: 90%; font-family: Arial, sans-serif; letter-spacing: 1.2px; color: #ccc; text-align: center; } /\\* App Target - This starts hidden until we apply a class to \"activate\" it \\*/ #target { opacity: 0; visibility: hidden; } /\\* Status Messages - These are displayed when we a..."
+  },
+  "diff": {
+    "added_sentences": [
+      "neeva.",
+      "com\\* { font-smoothing: antialiased; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; } html, body { width: 100%; margin: 0; } html { background-color: #2B2B2B; height: 100%; } body { min-height: 90%; font-family: Arial, sans-serif; letter-spacing: 1.",
+      "2px; color: #ccc; text-align: center; } /\\* App Target - This starts hidden until we apply a class to \"activate\" it \\*/ #target { opacity: 0; visibility: hidden; } /\\* Status Messages - These are displayed when we are not rendering ad blocks or Related Search \\*/ #pk-status-message { height: 75vh; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; } /\\* Sales Box - Default State \\*/ #sales-box { display: block; width: 100%; padding: 3px; text-align: center; text-decoration: none; color: #8EABC0; } #sales-box a { display: block; width: 100%; text-decoration: inherit; color: #8EABC0; cursor: pointer; } /\\* Sales Box - Highlighted State \\*/ #sales-box.",
+      "is-highlighted { position: relative; z-index: 1; background: #032438 linear-gradient(to top, #044368 0%, #000 100%); box-shadow: 0 0 15px 0 #000; border-bottom: 3px solid #262626; } #sales-box.",
+      "is-highlighted a { line-height: 1.",
+      "3; display: inline-block; font-size: 18px; color: #fff; text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.",
+      "5); background: none; } /\\* Ellipsis Loader \\*/ .",
+      "pk-loader { display: inline-block; position: relative; width: 80px; height: 80px; } .",
+      "pk-loader div { position: absolute; top: 33px; width: 13px; height: 13px; border-radius: 50%; background: #ccc; animation-timing-function: cubic-bezier(0, 1, 1, 0); } .",
+      "pk-loader div:nth-child(1) { left: 8px; animation: pk-anim-1 0."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://neeva.",
+      "com\ncompany: Neeva\nscraped_at: 2025-07-04 20:17:35\n---\n\n    neeva.",
+      "com\n\n# neeva."
+    ],
+    "key_changes": [
+      "New version: 1.2, 1.3, 0.5, 0.6"
+    ],
+    "change_percentage": 110,
+    "summary": "110% content changed (30 additions, 3 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "100",
+        "frequency": 15
+      },
+      {
+        "word": "width",
+        "frequency": 10
+      },
+      {
+        "word": "height",
+        "frequency": 9
+      },
+      {
+        "word": "center",
+        "frequency": 9
+      },
+      {
+        "word": "display",
+        "frequency": 8
+      },
+      {
+        "word": "color",
+        "frequency": 7
+      },
+      {
+        "word": "position",
+        "frequency": 7
+      },
+      {
+        "word": "pk-loader",
+        "frequency": 6
+      },
+      {
+        "word": "margin",
+        "frequency": 5
+      },
+      {
+        "word": "text-align",
+        "frequency": 5
+      },
+      {
+        "word": "relative",
+        "frequency": 5
+      },
+      {
+        "word": "font-size",
+        "frequency": 5
+      },
+      {
+        "word": "div",
+        "frequency": 5
+      },
+      {
+        "word": "animation",
+        "frequency": 5
+      },
+      {
+        "word": "hidden",
+        "frequency": 4
+      },
+      {
+        "word": "flex",
+        "frequency": 4
+      },
+      {
+        "word": "sales-box",
+        "frequency": 4
+      },
+      {
+        "word": "padding",
+        "frequency": 4
+      },
+      {
+        "word": "nth-child",
+        "frequency": 4
+      },
+      {
+        "word": "left",
+        "frequency": 4
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "url",
+        "frequency": 1
+      },
+      {
+        "word": "https",
+        "frequency": 1
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {},
+    "significant_phrases": [
+      {
+        "phrase": "width 100",
+        "count": 8
+      },
+      {
+        "phrase": "text-align center",
+        "count": 5
+      },
+      {
+        "phrase": "position relative",
+        "count": 5
+      },
+      {
+        "phrase": "pk-loader div",
+        "count": 5
+      },
+      {
+        "phrase": "height 100",
+        "count": 4
+      },
+      {
+        "phrase": "div nth-child",
+        "count": 4
+      },
+      {
+        "phrase": "nth-child left",
+        "count": 4
+      },
+      {
+        "phrase": "display flex",
+        "count": 3
+      },
+      {
+        "phrase": "flex-direction column",
+        "count": 3
+      },
+      {
+        "phrase": "align-items center",
+        "count": 3
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

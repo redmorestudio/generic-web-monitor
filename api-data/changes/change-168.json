@@ -1,0 +1,324 @@
+{
+  "change_id": 168,
+  "url": "https://stability.ai",
+  "company": "Stability AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:41:53",
+  "interest_level": 6,
+  "interest_category": "major_development",
+  "interest_explanation": "Stability AI's homepage update highlights their focus on enterprise-ready creative solutions, showcasing their multimodal media generation tools and a notable customer success story, indicating a strategic shift towards business growth and partnerships.",
+  "interest_drivers": [
+    "New marketing and entertainment-focused content",
+    "Emphasis on enterprise-ready creative partnership",
+    "Mention of a specific customer success story (Mercado Libre)",
+    "Introduction of a 'Let's get started' call-to-action"
+  ],
+  "technical_innovation_score": 5,
+  "business_impact_score": 7,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://stability.ai\ncompany: Stability AI\nscraped_at: 2025-07-04 20:20:34\n---\n\n    Stability AI\n\n[\n\n0\n\n](/cart)\n\n[Skip to Content](#page)\n\n [![Stability AI](//images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/6c9c4c25-5410-4547-bc26-dc621cdacb25/Stability+AI+logo.png?format=1500w)](/)\n\n [![Stability AI](//images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/330e6487-af90-43c8-a255-63b3440d0e34/StabilityAi_Logo_White-19.png?format=1500w)](/)\n\n[Models](/Models)\n\n[I...",
+    "after": "     Stability AI                          document.documentElement.classList.add('wf-loading') @keyframes fonts-loading { 0%, 99% { color: transparent; } } html.wf-loading \\* { animation: fonts-loading 3s; }   SQUARESPACE\\_ROLLUPS = {}; (function(rollups, name) { if (!rollups\\[name\\]) { rollups\\[name\\] = {}; } rollups\\[name\\].js = \\[\"//assets.squarespace.com/universal/scripts-compressed/extract-css-runtime-abcf3661bd0c9057-min.en-US.js\"\\]; })(SQUARESPACE\\_ROLLUPS, 'squarespace-extract\\_css\\_run..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Stability AI                          document.",
+      "documentElement.",
+      "classList.",
+      "add('wf-loading') @keyframes fonts-loading { 0%, 99% { color: transparent; } } html.",
+      "wf-loading \\* { animation: fonts-loading 3s; }   SQUARESPACE\\_ROLLUPS = {}; (function(rollups, name) { if (!",
+      "rollups\\[name\\]) { rollups\\[name\\] = {}; } rollups\\[name\\].",
+      "js = \\[\"//assets.",
+      "squarespace.",
+      "com/universal/scripts-compressed/extract-css-runtime-abcf3661bd0c9057-min.",
+      "en-US."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://stability.",
+      "ai\ncompany: Stability AI\nscraped_at: 2025-07-04 20:20:34\n---\n\n    Stability AI\n\n[\n\n0\n\n](/cart)\n\n[Skip to Content](#page)\n\n [!",
+      "com/content/v1/6213c340453c3f502425776e/6c9c4c25-5410-4547-bc26-dc621cdacb25/Stability+AI+logo.",
+      "com/content/v1/6213c340453c3f502425776e/330e6487-af90-43c8-a255-63b3440d0e34/StabilityAi_Logo_White-19.",
+      "ai/partners)\n\n[Company](/company)\n\n[Board of Directors](/board-of-directors)\n\n[Safety](/safety)\n\n[Partners](/partners)\n\n[Research](/research)\n\n[Careers](/careers)\n\n[News](/news)\n\n[Resources](/resources)\n\n[Learning Hub](/learning-hub)\n\n[Customer Stories](/customer-stories)\n\n[Contact Us](/contact)\n\nOpen Menu Close Menu\n\n [!",
+      "com/content/v1/6213c340453c3f502425776e/6c9c4c25-5410-4547-bc26-dc621cdacb25/Stability+AI+logo.",
+      "com/content/v1/6213c340453c3f502425776e/330e6487-af90-43c8-a255-63b3440d0e34/StabilityAi_Logo_White-19.",
+      "ai/partners)\n\n[Company](/company)\n\n[Board of Directors](/board-of-directors)\n\n[Safety](/safety)\n\n[Partners](/partners)\n\n[Research](/research)\n\n[Careers](/careers)\n\n[News](/news)\n\n[Resources](/resources)\n\n[Learning Hub](/learning-hub)\n\n[Customer Stories](/customer-stories)\n\n[Contact Us](/contact)\n\nOpen Menu Close Menu\n\n[\n\nFolder: Models\n\n](/Models)\n\n[\n\nFolder: Applications\n\n](/applications)\n\n[\n\nFolder: Deployment\n\n](/deployment)\n\n[\n\nFolder: Company\n\n](/company)\n\n[\n\nNews\n\n](/news)\n\n[\n\nFolder: Resources\n\n](/resources)\n\n[Contact Us](/contact)\n\n[Back](/)\n\n[\n\nImage\n\n](/stable-image)\n\n[\n\nVideo\n\n](/stable-video)\n\n[\n\nAudio\n\n](/stable-audio)\n\n[\n\n3D\n\n](/stable-3d)\n\n[Back](/)\n\n[\n\nStable Assistant\n\n](/stable-assistant)\n\n[Stable Audio](https://www.",
+      "ai/partners)\n\n[Back](/)\n\n[\n\nBoard of Directors\n\n](/board-of-directors)\n\n[\n\nSafety\n\n](/safety)\n\n[\n\nPartners\n\n](/partners)\n\n[\n\nResearch\n\n](/research)\n\n[\n\nCareers\n\n](/careers)\n\n[Back](/)\n\n[\n\nLearning Hub\n\n](/learning-hub)\n\n[\n\nCustomer Stories\n\n](/customer-stories)\n\n!",
+      "com/content/v1/6213c340453c3f502425776e/708ae15f-ab7e-4ebe-9cb0-9b9ba11fa02c/hp-bg-neutral."
+    ],
+    "key_changes": [
+      "New version: v6.0, 0.00, 0.6, 0.40, 1.5, 1.75, 0.5, 7.1, 0.3, 1.2, 2.5, 1.25, 1.125, 13.3333333333, 30.6666666667, 65.3333333333, 82.6666666667, 91.3333333333, 1.3, 1.35, 1.6, 1.875, 1.4, 1.1, 7.5, 11.5, 6.5, 1.18, 14.2857142857, 32.7, 33.3, 0.7, 0.8, 0.75, 0.006, 0.023, 2.2, 0.096, 4.8, 0.532, 15.4, 0.72, 0.793, 0.853, 26.7, 0.902, 0.941, 0.968, 36.2, 0.987, 39.7, 43.7, 1.007, 48.3, 1.009, 55.3, 1.002, 78.2, 0.022, 2.3, 0.091, 5.1, 0.18, 7.6, 0.508, 16.3, 0.607, 0.691, 0.762, 0.822, 28.4, 0.872, 0.912, 35.1, 0.944, 38.9, 0.985, 47.6, 0.996, 53.1, 1.001, 58.4, 1.003, 65.1, 11.0, 0.0215, 0.0, 0.9, 15.0",
+      "Price change: $1",
+      "New date mentioned: 1/1/21, 17/10/23, 2/9/10, 5/3/14, 9/2/11, 14/3/16, 2/3/10, 5/3/23, 4/3/26, 2/8/10, 6/18/12, 8/1/16, 2/6/10, 2/5/26, 6/2/20, 5/4/18, 6/2/13, 5/10/18, 13/2/19, 10/4/18, 20/2/33, 18/4/31, 20/2/27, 18/4/33, 27/2/32, 23/18/31, 2/5/10, 5/2/11, 5/5/13, 25/05/14, 2/7/10, 9/6/19, 10/8/18, 2/4/10, 5/5/10, 5/9/10, 17/6/28, 10/15/18, 9/2/18, 11/9/15, 9/6/17, 15/9/19, 18/2/24, 16/11/19, 24/2/31, 10/19/15, 28/6/36, 19/9/23, 31/2/37, 10/11/15, 38/2/40, 10/5/12, 40/2/50, 12/5/21, 51/2/53, 21/19/23, 53/2/55, 21/5/22",
+      "New release mentioned",
+      "New announcement mentioned",
+      "New performance mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 101,
+    "summary": "101% content changed (3448 additions, 162 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "onetrust-pc-sdk",
+        "frequency": 884
+      },
+      {
+        "word": "onetrust-banner-sdk",
+        "frequency": 267
+      },
+      {
+        "word": "ot-sdk-cookie-policy",
+        "frequency": 225
+      },
+      {
+        "word": "width",
+        "frequency": 201
+      },
+      {
+        "word": "none",
+        "frequency": 139
+      },
+      {
+        "word": "100",
+        "frequency": 137
+      },
+      {
+        "word": "font-size",
+        "frequency": 133
+      },
+      {
+        "word": "display",
+        "frequency": 132
+      },
+      {
+        "word": "var",
+        "frequency": 120
+      },
+      {
+        "word": "position",
+        "frequency": 118
+      },
+      {
+        "word": "ot-acc-hdr",
+        "frequency": 112
+      },
+      {
+        "word": "auto",
+        "frequency": 109
+      },
+      {
+        "word": "height",
+        "frequency": 109
+      },
+      {
+        "word": "z-index",
+        "frequency": 109
+      },
+      {
+        "word": "onetrust-consent-sdk",
+        "frequency": 104
+      },
+      {
+        "word": "10px",
+        "frequency": 101
+      },
+      {
+        "word": "input",
+        "frequency": 97
+      },
+      {
+        "word": "left",
+        "frequency": 88
+      },
+      {
+        "word": "flex-start",
+        "frequency": 87
+      },
+      {
+        "word": "color",
+        "frequency": 85
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "shaped",
+        "frequency": 9
+      },
+      {
+        "word": "reimagining",
+        "frequency": 9
+      },
+      {
+        "word": "building",
+        "frequency": 9
+      },
+      {
+        "word": "finetunes",
+        "frequency": 9
+      },
+      {
+        "word": "builders",
+        "frequency": 9
+      },
+      {
+        "word": "boundaries",
+        "frequency": 9
+      },
+      {
+        "word": "what",
+        "frequency": 9
+      },
+      {
+        "word": "possible",
+        "frequency": 9
+      },
+      {
+        "word": "standard",
+        "frequency": 9
+      },
+      {
+        "word": "prompts",
+        "frequency": 4
+      },
+      {
+        "word": "330e6487-af90-43c8-a255-63b3440d0e34",
+        "frequency": 3
+      },
+      {
+        "word": "life",
+        "frequency": 3
+      },
+      {
+        "word": "partner-microsoft-azure-logo",
+        "frequency": 3
+      },
+      {
+        "word": "apr",
+        "frequency": 3
+      },
+      {
+        "word": "clownsharkbatwing",
+        "frequency": 3
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "6c9c4c25-5410-4547-bc26-dc621cdacb25",
+        "frequency": 2
+      },
+      {
+        "word": "708ae15f-ab7e-4ebe-9cb0-9b9ba11fa02c",
+        "frequency": 2
+      },
+      {
+        "word": "hp-bg-neutral",
+        "frequency": 2
+      },
+      {
+        "word": "unsplash-image-nhfczgs6ppw",
+        "frequency": 2
+      }
+    ],
+    "frequency_changes": {
+      "button": {
+        "before": 1,
+        "after": 103,
+        "change": 102
+      },
+      "not": {
+        "before": 9,
+        "after": 107,
+        "change": 98
+      },
+      "media": {
+        "before": 9,
+        "after": 91,
+        "change": 82
+      },
+      "right": {
+        "before": 1,
+        "after": 80,
+        "change": 79
+      },
+      "label": {
+        "before": 8,
+        "after": 74,
+        "change": 66
+      },
+      "center": {
+        "before": 1,
+        "after": 55,
+        "change": 54
+      },
+      "com": {
+        "before": 52,
+        "after": 103,
+        "change": 51
+      },
+      "transform": {
+        "before": 2,
+        "after": 45,
+        "change": 43
+      },
+      "checkbox": {
+        "before": 4,
+        "after": 40,
+        "change": 36
+      },
+      "function": {
+        "before": 1,
+        "after": 28,
+        "change": 27
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "ot-sdk-cookie-policy-v2 ot-sdk-cookie-policy",
+        "count": 71
+      },
+      {
+        "phrase": "onetrust-pc-sdk ot-accordion-layout",
+        "count": 63
+      },
+      {
+        "phrase": "grid-area z-index",
+        "count": 62
+      },
+      {
+        "phrase": "sqs-block justify-content",
+        "count": 62
+      },
+      {
+        "phrase": "sqs-block-alignment-wrapper align-items",
+        "count": 62
+      },
+      {
+        "phrase": "width 100",
+        "count": 61
+      },
+      {
+        "phrase": "position relative",
+        "count": 61
+      },
+      {
+        "phrase": "squarespace com",
+        "count": 58
+      },
+      {
+        "phrase": "onetrust-consent-sdk onetrust-pc-sdk",
+        "count": 56
+      },
+      {
+        "phrase": "assets squarespace",
+        "count": 54
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

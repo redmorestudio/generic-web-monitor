@@ -1,0 +1,282 @@
+{
+  "change_id": 102,
+  "url": "https://leonardo.ai",
+  "company": "Leonardo AI",
+  "company_category": "Image Generation",
+  "detected_at": "2025-07-18 16:37:53",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes detected between the previous and current content of the Leonardo AI homepage.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://leonardo.ai\ncompany: Leonardo AI\nscraped_at: 2025-07-04 20:15:45\n---\n\n  AI Image Generator - Create Art, Images & Video | Leonardo AI\n\n\n\n\n\n[Skip to main content](#brx-content) [Skip to footer](#brx-footer)\n\n[\n\nVeo 3 is on Leo.\n\nCheck it out\n\n](https://app.leonardo.ai/image-generation/video \"Check it out\")\n\n[![AI Image Generator - Create Art, Images & More | Leonardo AI](https://leonardo.ai/wp-content/uploads/2024/11/leonardo-logo-white-fix.svg)](https://leonardo.ai)\n\n*   Feature...",
+    "after": "  var ewww\\_webp\\_supported=!1;function check\\_webp\\_feature(A,e){var w;e=void 0!==e?e:function(){},ewww\\_webp\\_supported?e(ewww\\_webp\\_supported):((w=new Image).onload=function(){ewww\\_webp\\_supported=0<w.width&&0<w.height,e&&e(ewww\\_webp\\_supported)},w.onerror=function(){e&&e(!1)},w.src=\"data:image/webp;base64,\"+{alpha:\"UklGRkoAAABXRUJQVlA4WAoAAAAQAAAAAAAAAAAAQUxQSAwAAAARBxAR/Q9ERP8DAABWUDggGAAAABQBAJ0BKgEAAQAAAP4AAA3AAP7mtQAAAA==\"}\\[A\\])}check\\_webp\\_feature(\"alpha\");var Arrive=function(c,w){..."
+  },
+  "diff": {
+    "added_sentences": [
+      "var ewww\\_webp\\_supported=!",
+      "1;function check\\_webp\\_feature(A,e){var w;e=void 0!",
+      "==e?",
+      "e:function(){},ewww\\_webp\\_supported?",
+      "e(ewww\\_webp\\_supported):((w=new Image).",
+      "onload=function(){ewww\\_webp\\_supported=0<w.",
+      "width&&0<w.",
+      "height,e&&e(ewww\\_webp\\_supported)},w.",
+      "onerror=function(){e&&e(!",
+      "1)},w."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://leonardo.",
+      "ai\ncompany: Leonardo AI\nscraped_at: 2025-07-04 20:15:45\n---\n\n  AI Image Generator - Create Art, Images & Video | Leonardo AI\n\n\n\n\n\n[Skip to main content](#brx-content) [Skip to footer](#brx-footer)\n\n[\n\nVeo 3 is on Leo.",
+      "Check it out\n\n](https://app.",
+      "ai)\n\n*   Features\n\n    *   [\n\n        !",
+      "[](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACCAQAAAADUZ8jyAAAAAnRSTlMAAHaTzTgAAAAcSURBVFjD7cEBDQAAAMKg909tDjegAAAAAIAPAxPOAAH82JXmAAAAAElFTkSuQmCC)\n\n        NEW\n\n        Discover Veo 3\n\n        Generate video, with sound.",
+      "ai/veo-3/ \"Discover Veo 3\")\n    *   [\n\n        Discover Elements\n\n        Effortlessly achieve visual consistency in your image generations with Leonardo.",
+      "ai/element-training/ \"Discover Elements\")[\n\n        Discover Flow State\n\n        With one simple prompt, Flow State delivers a stream of visual possibilities helping you get to your perfect image faster.",
+      "ai/fast-track-your-creativity-with-flow-state/ \"Discover Flow State\")[\n\n        Discover Phoenix by Leonardo.",
+      "Ai\n\n        Our first foundational model is here, changing everything you know about AI image generation.",
+      "Ai\")[\n\n        AI Art Generator\n\n        Generate art, illustrations and more with prompts."
+    ],
+    "key_changes": [
+      "New version: 4.8, 16.0.1, 6.8.2, 98.8, 66.9, 46.6, 45.5, 94.8, 32.4, 13.9, 24.5, 20.8, 0.07, 0.1, 1.333, 1.125, 0.15, 3.3.16, 2.0, 33.333333333333336, 0.7, 0.8, 0.75, 0.006, 0.023, 2.2, 0.096, 0.532, 15.4, 0.72, 0.793, 0.853, 26.7, 0.902, 0.941, 0.968, 36.2, 0.987, 39.7, 43.7, 1.007, 48.3, 1.009, 55.3, 1.002, 78.2, 0.3, 0.022, 2.3, 0.091, 5.1, 0.18, 7.6, 0.508, 16.3, 0.607, 0.691, 0.762, 0.822, 28.4, 0.872, 0.912, 35.1, 0.944, 38.9, 0.985, 47.6, 0.996, 53.1, 1.001, 58.4, 1.003, 65.1, 0.2, 1.2, 43.400000000000006, 37.599999999999994, 61.8, 45.599999999999994, 51.19999999999999, 13.200000000000003, 2.4000000000000057, 1.0989010989011234, 11.200000000000017, 0.84, 0.6, 4.1, 1.5, 2.5, 0.4, 0.35, 0.5, 0.25, 1.15, 1.02, 496.18182373046875, 5052.022659154067, 5081.907216063973, 5358.5309351531005, 5059.685366054043, 5615.231616302291, 5092.635005723939, 5587.721463318804, 5114.074427659994, 5636.04127515354, 5147.024301177147, 1.3050218585329862, 11.3.16",
+      "New date mentioned: July 11, 2025, January 1, 1970",
+      "New api mentioned",
+      "New release mentioned",
+      "New launch mentioned",
+      "New update mentioned"
+    ],
+    "change_percentage": 91,
+    "summary": "91% content changed (5021 additions, 258 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "548px",
+        "frequency": 346
+      },
+      {
+        "word": "width",
+        "frequency": 274
+      },
+      {
+        "word": "length",
+        "frequency": 270
+      },
+      {
+        "word": "height",
+        "frequency": 269
+      },
+      {
+        "word": "srcset",
+        "frequency": 251
+      },
+      {
+        "word": "title",
+        "frequency": 251
+      },
+      {
+        "word": "caption",
+        "frequency": 248
+      },
+      {
+        "word": "sizes",
+        "frequency": 247
+      },
+      {
+        "word": "description",
+        "frequency": 247
+      },
+      {
+        "word": "success",
+        "frequency": 247
+      },
+      {
+        "word": "link",
+        "frequency": 246
+      },
+      {
+        "word": "max-width",
+        "frequency": 246
+      },
+      {
+        "word": "gps",
+        "frequency": 245
+      },
+      {
+        "word": "copyright",
+        "frequency": 245
+      },
+      {
+        "word": "lens",
+        "frequency": 245
+      },
+      {
+        "word": "aperture",
+        "frequency": 245
+      },
+      {
+        "word": "focal",
+        "frequency": 245
+      },
+      {
+        "word": "iso",
+        "frequency": 245
+      },
+      {
+        "word": "shutter",
+        "frequency": 245
+      },
+      {
+        "word": "keywords",
+        "frequency": 245
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "taste",
+        "frequency": 4
+      },
+      {
+        "word": "slick",
+        "frequency": 4
+      },
+      {
+        "word": "ivborw0kggoaaaansuheugaaakaaaaawaqmaaacsz",
+        "frequency": 4
+      },
+      {
+        "word": "mtaaaaa1bmveuaaacnej3aaaaaaxrstlmaqobyzgaaabbjrefugbljgawjybsmgaaaa",
+        "frequency": 4
+      },
+      {
+        "word": "aaaeojzhyaaaaasuvork5cyii",
+        "frequency": 4
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "ivborw0kggoaaaansuheugaaaswaaacoaqmaaabg5ufmaaaaa1bmveuaaacnej3aaaaaaxrstlmaqobyzgaaab1jrefugbntwtebaaaawid7p14ll2aaaaaaaabcbbmyaag6melxaaaaaelftksuqmcc",
+        "frequency": 2
+      },
+      {
+        "word": "june",
+        "frequency": 2
+      },
+      {
+        "word": "taste-no-5-slick",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "2023": {
+        "before": 36,
+        "after": 1175,
+        "change": 1139
+      },
+      "2024": {
+        "before": 25,
+        "after": 564,
+        "change": 539
+      },
+      "https": {
+        "before": 160,
+        "after": 1942,
+        "change": 1782
+      },
+      "leonardo": {
+        "before": 197,
+        "after": 1969,
+        "change": 1772
+      },
+      "wp-content": {
+        "before": 63,
+        "after": 1818,
+        "change": 1755
+      },
+      "uploads": {
+        "before": 62,
+        "after": 1811,
+        "change": 1749
+      },
+      "jpg": {
+        "before": 20,
+        "after": 1205,
+        "change": 1185
+      },
+      "file": {
+        "before": 1,
+        "after": 738,
+        "change": 737
+      },
+      "png": {
+        "before": 233,
+        "after": 636,
+        "change": 403
+      },
+      "true": {
+        "before": 4,
+        "after": 380,
+        "change": 376
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "https leonardo",
+        "count": 1901
+      },
+      {
+        "phrase": "leonardo wp-content",
+        "count": 1813
+      },
+      {
+        "phrase": "wp-content uploads",
+        "count": 1811
+      },
+      {
+        "phrase": "uploads 2023",
+        "count": 1175
+      },
+      {
+        "phrase": "uploads 2024",
+        "count": 564
+      },
+      {
+        "phrase": "jpg data",
+        "count": 276
+      },
+      {
+        "phrase": "success true",
+        "count": 245
+      },
+      {
+        "phrase": "true file",
+        "count": 245
+      },
+      {
+        "phrase": "file https",
+        "count": 245
+      },
+      {
+        "phrase": "file srcset",
+        "count": 245
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

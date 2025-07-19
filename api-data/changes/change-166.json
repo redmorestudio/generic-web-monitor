@@ -1,0 +1,325 @@
+{
+  "change_id": 166,
+  "url": "https://scale.com/blog",
+  "company": "Scale AI",
+  "company_category": "Enterprise AI",
+  "detected_at": "2025-07-18 16:41:44",
+  "interest_level": 6,
+  "interest_category": "major_development",
+  "interest_explanation": "The updated blog content features new research posts discussing the impact of AI tools on developer productivity and the true value of AI in empowering new generations of developers. While the technical innovation is notable, the business impact is moderate, reflecting the ongoing conversation about AI safety and productivity.",
+  "interest_drivers": [
+    "New research post on AI tools' impact on developer productivity",
+    "Discussion on the true value of AI in empowering new generations of developers"
+  ],
+  "technical_innovation_score": 6,
+  "business_impact_score": 5,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://scale.com/blog\ncompany: Scale AI\nscraped_at: 2025-07-04 20:20:26\n---\n\nAI & ML Blog | Scale AI\n\n[\n\n## Scale AI logo\n\n![Scale AI logo](/_next/image?url=%2Fstatic%2FScale%20AI%20logo.svg&w=128&q=75)](/)\n\n*   Products\n\n*   [Leaderboards](/leaderboard)\n*   Enterprise\n\n*   Government\n\n*   Customers\n\n*   Resources\n\n\n#### Products\n\n*   [\n\n    ![engine](/_next/image?url=%2Fstatic%2Fimages%2Fglobal%2Fheader%2Fproducts%2Fengine.png&w=96&q=75)\n\n    Scale Data EngineData for training models\n...",
+    "after": "AI & ML Blog | Scale AI\n\n:root{--font-inter:'Inter', 'Inter Fallback';--font-aeonik:'aeonik', 'aeonik Fallback';--font-geist-mono:'geist', 'geist Fallback'}#nprogress{pointer-events:none}#nprogress .bar{background:#69ba6d;position:fixed;z-index:100002;top:0;left:0;width:100%;height:2px}#nprogress .peg{display:block;position:absolute;right:0px;width:100px;height:100%;-webkit-box-shadow:0 0 10px#29d,0 0 5px#29d;-moz-box-shadow:0 0 10px#29d,0 0 5px#29d;box-shadow:0 0 10px#29d,0 0 5px#29d;opacity:1;..."
+  },
+  "diff": {
+    "added_sentences": [
+      "AI & ML Blog | Scale AI\n\n:root{--font-inter:'Inter', 'Inter Fallback';--font-aeonik:'aeonik', 'aeonik Fallback';--font-geist-mono:'geist', 'geist Fallback'}#nprogress{pointer-events:none}#nprogress .",
+      "bar{background:#69ba6d;position:fixed;z-index:100002;top:0;left:0;width:100%;height:2px}#nprogress .",
+      "peg{display:block;position:absolute;right:0px;width:100px;height:100%;-webkit-box-shadow:0 0 10px#29d,0 0 5px#29d;-moz-box-shadow:0 0 10px#29d,0 0 5px#29d;box-shadow:0 0 10px#29d,0 0 5px#29d;opacity:1;-webkit-transform:rotate(3deg)translate(0px,-4px);-ms-transform:rotate(3deg)translate(0px,-4px);-moz-transform:rotate(3deg)translate(0px,-4px);-o-transform:rotate(3deg)translate(0px,-4px);transform:rotate(3deg)translate(0px,-4px)}#nprogress .",
+      "spinner{display:block;position:fixed;z-index:1031;top:15px;right:15px}#nprogress .",
+      "spinner-icon{width:18px;height:18px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;border:solid 2px transparent;border-top-color:#29d;border-left-color:#29d;-webkit-border-radius:50%;-moz-border-radius:50%;border-radius:50%;-webkit-animation:nprogress-spinner 400ms linear infinite;-moz-animation:nprogress-spinner 400ms linear infinite;-o-animation:nprogress-spinner 400ms linear infinite;animation:nprogress-spinner 400ms linear infinite}.",
+      "nprogress-custom-parent{overflow:hidden;position:relative}.",
+      "nprogress-custom-parent #nprogress .",
+      "spinner,.",
+      "nprogress-custom-parent #nprogress .",
+      "bar{position:absolute}@-webkit-keyframes nprogress-spinner{0%{-webkit-transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg)}}@-webkit-keyframes nprogress-spinner{0%{-webkit-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg);transform:rotate(360deg)}}@-moz-keyframes nprogress-spinner{0%{-moz-transform:rotate(0deg);transform:rotate(0deg)}100%{-moz-transform:rotate(360deg);transform:rotate(360deg)}}@-o-keyframes nprogress-spinner{0%{-o-transform:rotate(0deg);transform:rotate(0deg)}100%{-o-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes nprogress-spinner{0%{-webkit-transform:rotate(0deg);-moz-transform:rotate(0deg);-o-transform:rotate(0deg);transform:rotate(0deg)}100%{-webkit-transform:rotate(360deg);-moz-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://scale.",
+      "com/blog\ncompany: Scale AI\nscraped_at: 2025-07-04 20:20:26\n---\n\nAI & ML Blog | Scale AI\n\n[\n\n## Scale AI logo\n\n!",
+      "svg&w=128&q=75)](/)\n\n*   Products\n\n*   [Leaderboards](/leaderboard)\n*   Enterprise\n\n*   Government\n\n*   Customers\n\n*   Resources\n\n\n#### Products\n\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    Scale Data EngineData for training models\n\n\n\n    ](/data-engine)\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    For Generative AlSupervised fine-tuning and RLHF\n\n\n\n    ](/generative-ai-data-engine)\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    For GovernmentHigh-quality data for public sector\n\n\n\n    ](/public-sector-data-engine)\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    For AutomotiveUnlock L2 to L5 autonomy\n\n\n\n    ](/automotive)\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    Scale DonovanMission-critical Agentic AI\n\n\n\n    ](/donovan)\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    Scale GenAI PlatformFull-stack Generative AI\n\n\n\n    ](/genai-platform)\n\n*   [\n\n    !",
+      "png&w=96&q=75)\n\n    Scale EvaluationEvaluation of AI models and applications\n\n\n\n    ](/evaluation/model-developers)\n*   [\n\n    !"
+    ],
+    "key_changes": [
+      "New version: 1.1, 0.75, 0.7, 0.1, 0.8, 1.2, 0.5, 13.3333333333, 30.6666666667, 65.3333333333, 82.6666666667, 91.3333333333, 1.5, 1.25, 1.3, 1.35, 1.6, 0.9, 0.01, 1.4, 1.7, 1.125, 7.5, 511.626, 511.627, 392.857, 292.354, 18.274, 2.669, 4.859.855, 6.563, 2.573, 1.718, 1.708, 3.897, v91.361, 12.563, 4.47, 23.315, 13.415, 32.262, 8.945, 19.701, 13.414, 32.264, 82.224, 12.562, 23.317, 4.469, 8.946, 13.417, 19.698, V155.31, 4.471, 23.313, 32.259, 8.947, 19.702, 13.418, 200.994, 4.859, 6.57, 2.57, 1.711, 1.713, 2.566, 3.9, 6.567, V82.221, 2.662, 4.853, 3.901, 2.568, 22.648, 42.016, 8.042, 58.102, 24.125, 113.297, 132.665, 155.313, v237.542, 22.647, 42.018, 24.123, 58.095, 16.086, 16.084, 35.454, 24.13, 237.543, 42.017, 8.046, 58.101, 16.085, 16.077, 24.127, 35.447, 91.358, 2.574, 3.903, 6.565, 506.199, 41.971, 3.617, 7.905, 5.424, 12.85, 347.171, 4.948, 9.233, 1.807, 12.847, 3.615, 5.428, 7.898, 1.811, 50.247, 50.248, 186.147, 186.151, 1.906, 1.903, 2.856, 4.093, 2.479.953, 4.668, 6.571, 32.548, 32.544, 2.852, 4.665, 186.148, 50.251, 3.614, 5.426, 1.809, 12.851, 3.616, V54.818, 4.952, 1.814, 9.232, 11.5, 6.5, 1.17, 1.42, 4.5, 10.5, 13.5, 16.5, 19.5, 22.5, 25.5, 28.5, 2.5, 2.25, v1.3.7, 0.10, 398.67, 0.00, 0.04, 3.7, 1.275, 1.55, 3.5, 0.32.0, 503.0.0, 1.30.0, 0.33.0, 4.32.0, 3.29.0, 0.35.0, 3.42.0, 2.16.0, 18.20.0, 6.44.0, 0.20.0, 1.34.0, 4.10.0, 2.6.0, 0.14.0, 0.52, 0.48, 06.806, 40.510, 06.718, 12.223, 06.741, 12.261, 06.770, 12.302, 06.780, 12.320, 06.816, 12.379, 06.811, 09.515, 06.669, 12.161, 06.832, 14.836, 06.759, 56.376, 49.297, 33.323, 06.822, 12.390, 06.786, 12.327, 06.860, 01.255, 28.980, 36.233, 01.894, 25.337, 54.636, 17.177, 06.695, 10.457, 48.085, 42.416, 25.193, 19.461, 48.201, 10.863, 06.851, 19.787, 06.791, 22.301, 19.767, 58.749, 00.336, 10.828, 39.236, 54.449, 26.326, 01.837, 32.762, 00.262, 05.825, 42.730, 41.069, 40.366, 28.645, 03.303, 57.220, 22.193, 58.339, 27.432, 45.269, 04.303, 06.675, 31.685, 02.392, 14.355, 40.225, 17.516, 14.009, 41.819, 40.877, 28.600, 21.000, 20.899, 00.812, 06.000, 40.237, 59.095, 00.000, 99.8236, 3.1, 34.524, 04.147, 3.6, 0.87, 49.9118, 0.65, 59.011, 08.155, 2.0, 402.609, 16.6954, 16.5232, 81.3594, version 3, 36.9062, 62.9062, 18.4531, 43.315, 48.341, 13.700, 03.801, 2506.13923, 2506.11425, 9.4, 22.4, 27.8, 41.840, 35.488, 02.000, 25.479, 19.751, 17.000, 01.300, 35.579, 36.000, 38.081, 51.339, 52.686, 42.854, 43.115, 5.2.0",
+      "Price change: $1, $,, $,2,, $14, $29, $19",
+      "New date mentioned: July 16, 2025, July 10, 2025, July 9, 2025, July 8, 2025, June 12, 2025, July 26, 2014, 7/26/2014, 26/7/2014, 7/26/14, 26/7/14",
+      "New model mentioned",
+      "New api mentioned",
+      "New release mentioned",
+      "New announcement mentioned",
+      "New update mentioned",
+      "New performance mentioned",
+      "New benchmark mentioned"
+    ],
+    "change_percentage": 99,
+    "summary": "99% content changed (17293 additions, 76 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "u003e",
+        "frequency": 1914
+      },
+      {
+        "word": "u0026",
+        "frequency": 1726
+      },
+      {
+        "word": "false",
+        "frequency": 1270
+      },
+      {
+        "word": "var",
+        "frequency": 1215
+      },
+      {
+        "word": "u003c",
+        "frequency": 1112
+      },
+      {
+        "word": "null",
+        "frequency": 777
+      },
+      {
+        "word": "onetrust-pc-sdk",
+        "frequency": 639
+      },
+      {
+        "word": "hidden",
+        "frequency": 524
+      },
+      {
+        "word": "dir",
+        "frequency": 514
+      },
+      {
+        "word": "identifier",
+        "frequency": 508
+      },
+      {
+        "word": "ltr",
+        "frequency": 492
+      },
+      {
+        "word": "object",
+        "frequency": 479
+      },
+      {
+        "word": "ql-snow",
+        "frequency": 444
+      },
+      {
+        "word": "ql-bubble",
+        "frequency": 436
+      },
+      {
+        "word": "localized",
+        "frequency": 435
+      },
+      {
+        "word": "helpertext",
+        "frequency": 434
+      },
+      {
+        "word": "defaultvaluebylocale",
+        "frequency": 434
+      },
+      {
+        "word": "u003cp",
+        "frequency": 389
+      },
+      {
+        "word": "ql-toolbar",
+        "frequency": 382
+      },
+      {
+        "word": "void",
+        "frequency": 377
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "26600",
+        "frequency": 4
+      },
+      {
+        "word": "26800",
+        "frequency": 4
+      },
+      {
+        "word": "precog",
+        "frequency": 3
+      },
+      {
+        "word": "guardrails",
+        "frequency": 3
+      },
+      {
+        "word": "260",
+        "frequency": 2
+      },
+      {
+        "word": "2624",
+        "frequency": 2
+      },
+      {
+        "word": "26255",
+        "frequency": 2
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "microsoft",
+        "frequency": 2
+      },
+      {
+        "word": "adsct",
+        "frequency": 2
+      },
+      {
+        "word": "bci",
+        "frequency": 2
+      },
+      {
+        "word": "26en-us",
+        "frequency": 2
+      },
+      {
+        "word": "26google",
+        "frequency": 2
+      },
+      {
+        "word": "20inc",
+        "frequency": 2
+      },
+      {
+        "word": "26linux",
+        "frequency": 2
+      },
+      {
+        "word": "20x86",
+        "frequency": 2
+      },
+      {
+        "word": "26na",
+        "frequency": 2
+      },
+      {
+        "word": "eci",
+        "frequency": 2
+      },
+      {
+        "word": "985315e1-e49f-4a69-bf0f-abb7c2556399",
+        "frequency": 2
+      },
+      {
+        "word": "22pageview",
+        "frequency": 2
+      }
+    ],
+    "frequency_changes": {
+      "100": {
+        "before": 10,
+        "after": 311,
+        "change": 301
+      },
+      "return": {
+        "before": 1,
+        "after": 1215,
+        "change": 1214
+      },
+      "function": {
+        "before": 1,
+        "after": 1068,
+        "change": 1067
+      },
+      "type": {
+        "before": 2,
+        "after": 656,
+        "change": 654
+      },
+      "name": {
+        "before": 2,
+        "after": 615,
+        "change": 613
+      },
+      "label": {
+        "before": 8,
+        "after": 450,
+        "change": 442
+      },
+      "required": {
+        "before": 1,
+        "after": 443,
+        "change": 442
+      },
+      "let": {
+        "before": 1,
+        "after": 405,
+        "change": 404
+      },
+      "not": {
+        "before": 3,
+        "after": 350,
+        "change": 347
+      },
+      "button": {
+        "before": 1,
+        "after": 309,
+        "change": 308
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "u003c u003e",
+        "count": 694
+      },
+      {
+        "phrase": "u003e u003c",
+        "count": 530
+      },
+      {
+        "phrase": "u0026 u0026",
+        "count": 528
+      },
+      {
+        "phrase": "dir ltr",
+        "count": 492
+      },
+      {
+        "phrase": "name type",
+        "count": 434
+      },
+      {
+        "phrase": "localized false",
+        "count": 432
+      },
+      {
+        "phrase": "false helpertext",
+        "count": 432
+      },
+      {
+        "phrase": "hidden false",
+        "count": 425
+      },
+      {
+        "phrase": "helpertext identifier",
+        "count": 402
+      },
+      {
+        "phrase": "false required",
+        "count": 387
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

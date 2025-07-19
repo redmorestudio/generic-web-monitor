@@ -1,0 +1,248 @@
+{
+  "change_id": 125,
+  "url": "https://platform.openai.com",
+  "company": "OpenAI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:38:38",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "No significant changes detected in the OpenAI API documentation. The content appears to be nearly identical, with no new features, models, or capabilities introduced.",
+  "interest_drivers": [],
+  "technical_innovation_score": 2,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://platform.openai.com\ncompany: OpenAI\nscraped_at: 2025-07-04 20:17:44\n---\n\n         Overview - OpenAI API\n\n[](/docs/overview)\n\n[DocsDocs](/docs)[API referenceAPI](/docs/api-reference/introduction)\n\nLog in[Sign up](/signup)\n\nSearchK\n\nGet started\n\n[Overview](/docs/overview)[Quickstart](/docs/quickstart)[Models](/docs/models)[Pricing](/docs/pricing)[Libraries](/docs/libraries)\n\nCore Concepts\n\n[Text and prompting](/docs/guides/text)[Images and vision](/docs/guides/images-vision)[Audio...",
+    "after": "          Overview - OpenAI API                 import.meta.url;import(\"\\_\").catch(()=>1);(async function\\*(){})().next();if(location.protocol!=\"file:\"){window.\\_\\_vite\\_is\\_modern\\_browser=true} !function(){if(window.\\_\\_vite\\_is\\_modern\\_browser)return;console.warn(\"vite: loading legacy chunks, syntax error above and the same error below should be ignored\");var e=document.getElementById(\"vite-legacy-polyfill\"),n=document.createElement(\"script\");n.src=e.src,n.onload=function(){System.import(doc..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Overview - OpenAI API                 import.",
+      "meta.",
+      "url;import(\"\\_\").",
+      "catch(()=>1);(async function\\*(){})().",
+      "next();if(location.",
+      "protocol!",
+      "=\"file:\"){window.",
+      "\\_\\_vite\\_is\\_modern\\_browser=true} !",
+      "function(){if(window.",
+      "\\_\\_vite\\_is\\_modern\\_browser)return;console."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://platform.",
+      "com\ncompany: OpenAI\nscraped_at: 2025-07-04 20:17:44\n---\n\n         Overview - OpenAI API\n\n[](/docs/overview)\n\n[DocsDocs](/docs)[API referenceAPI](/docs/api-reference/introduction)\n\nLog in[Sign up](/signup)\n\nSearchK\n\nGet started\n\n[Overview](/docs/overview)[Quickstart](/docs/quickstart)[Models](/docs/models)[Pricing](/docs/pricing)[Libraries](/docs/libraries)\n\nCore Concepts\n\n[Text and prompting](/docs/guides/text)[Images and vision](/docs/guides/images-vision)[Audio and speech](/docs/guides/audio)[Structured Outputs](/docs/guides/structured-outputs)[Function calling](/docs/guides/function-calling)\n\nAPI guides\n\n[Conversation state](/docs/guides/conversation-state)[Streaming](/docs/guides/streaming-responses)[File inputs](/docs/guides/pdf-files)[Background mode](/docs/guides/background)[Webhooks](/docs/guides/webhooks)[Batch](/docs/guides/batch)[Reasoning](/docs/guides/reasoning)[Deep research](/docs/guides/deep-research)\n\nTools\n\n[Using tools](/docs/guides/tools)[Remote MCP](/docs/guides/tools-remote-mcp)[Web search](/docs/guides/tools-web-search)[File search](/docs/guides/tools-file-search)[Image generation](/docs/guides/tools-image-generation)[Code interpreter](/docs/guides/tools-code-interpreter)[Computer use](/docs/guides/tools-computer-use)\n\nAgents\n\n[Building agents](/docs/guides/agents)[Voice agents](/docs/guides/voice-agents)[Agents SDK Python](https://openai.",
+      "io/openai-agents-js)\n\nRealtime API\n\n[Using the Realtime API](/docs/guides/realtime)[Realtime conversations](/docs/guides/realtime-conversations)[Realtime transcription](/docs/guides/realtime-transcription)[Voice activity detection](/docs/guides/realtime-vad)\n\nModel optimization\n\n[Overview](/docs/guides/model-optimization)[Evals](/docs/guides/evals)[Supervised fine-tuning](/docs/guides/supervised-fine-tuning)[Vision fine-tuning](/docs/guides/vision-fine-tuning)[Direct preference optimization](/docs/guides/direct-preference-optimization)[Reinforcement fine-tuning](/docs/guides/reinforcement-fine-tuning)[Graders](/docs/guides/graders)[Distillation](/docs/guides/distillation)\n\nSpecialized models\n\n[Image generation](/docs/guides/image-generation)[Text to speech](/docs/guides/text-to-speech)[Speech to text](/docs/guides/speech-to-text)[Embeddings](/docs/guides/embeddings)[Moderation](/docs/guides/moderation)\n\nCodex\n\n[Codex](/docs/codex/overview)[Agent internet access](/docs/codex/agent-network)[Local shell tool](/docs/guides/tools-local-shell)[Codex CLI](https://github.",
+      "com/categories)Help\n\n# OpenAI developer platform\n\n[\n\nDeveloper quickstart\n\nMake your first API request in minutes.",
+      "5 min\n\n\n](/docs/quickstart)\n\njavascript\n\n```bash\n1\n2\n3\n4\n5\n6\n7\ncurl https://api.",
+      "output_text)\n```\n\n\n\n\nBrowse models\n\n[View all](/docs/models)\n\n[\n\nGPT-4.",
+      "1\n\nFlagship GPT model for complex tasks\n\n\n](/docs/models/gpt-4.",
+      "1)[\n\no4-mini\n\nFaster, more affordable reasoning model\n\n\n](/docs/models/o4-mini)[\n\no3\n\nOur most powerful reasoning model\n\n\n](/docs/models/o3)\n\n\n\n\n##\n\nStart building\n\n[\n\nRead and generate text\n\nUse the API to prompt a model and generate text\n\n\n](/docs/guides/text)[\n\nUse a model's vision capabilities\n\nAllow models to see and analyze images in your application\n\n\n](/docs/guides/images)[\n\nGenerate images as output\n\nCreate images with GPT Image 1\n\n\n](/docs/guides/image-generation)[\n\nBuild apps with audio\n\nAnalyze, transcribe, and generate audio with API endpoints\n\n\n](/docs/guides/audio)[\n\nBuild agentic applications\n\nUse the API to build agents that use tools and computers\n\n\n](/docs/guides/agents)[\n\nAchieve complex tasks with reasoning\n\nUse reasoning models to carry out complex tasks\n\n\n](/docs/guides/reasoning)[\n\nGet structured data from models\n\nUse Structured Outputs to get model responses that adhere to a JSON schema\n\n\n](/docs/guides/structured-outputs)[\n\nTailor to your use case\n\nAdjust our models to perform specifically for your use case with fine-tuning, evals, and distillation\n\n\n](/docs/guides/fine-tuning)\n\n[\n\nHelp center\n\nFrequently asked account and billing questions\n\n\n](https://help.",
+      "com/)[\n\nDeveloper forum\n\nDiscuss topics with other developers\n\n\n](https://community.",
+      "com/)[\n\nCookbook\n\nOpen-source collection of examples and guides\n\n\n](https://cookbook."
+    ],
+    "key_changes": [
+      "New version: 0.5, 0.16, 0.06, 0.33, 0.00, 1.00, 1.1, 0.85, 0.45, 0.2, 0.05"
+    ],
+    "change_percentage": 84,
+    "summary": "84% content changed (93 additions, 11 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "transform",
+        "frequency": 14
+      },
+      {
+        "word": "opacity",
+        "frequency": 11
+      },
+      {
+        "word": "scale",
+        "frequency": 10
+      },
+      {
+        "word": "255",
+        "frequency": 9
+      },
+      {
+        "word": "height",
+        "frequency": 9
+      },
+      {
+        "word": "width",
+        "frequency": 7
+      },
+      {
+        "word": "rgba",
+        "frequency": 7
+      },
+      {
+        "word": "document",
+        "frequency": 6
+      },
+      {
+        "word": "position",
+        "frequency": 6
+      },
+      {
+        "word": "bottom",
+        "frequency": 6
+      },
+      {
+        "word": "48px",
+        "frequency": 6
+      },
+      {
+        "word": "intercom-lightweight-app-launcher",
+        "frequency": 5
+      },
+      {
+        "word": "right",
+        "frequency": 5
+      },
+      {
+        "word": "none",
+        "frequency": 5
+      },
+      {
+        "word": "svg",
+        "frequency": 5
+      },
+      {
+        "word": "fixed",
+        "frequency": 4
+      },
+      {
+        "word": "z-index",
+        "frequency": 4
+      },
+      {
+        "word": "20px",
+        "frequency": 4
+      },
+      {
+        "word": "transition",
+        "frequency": 4
+      },
+      {
+        "word": "cubic-bezier",
+        "frequency": 4
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "searchk",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "function": {
+        "before": 1,
+        "after": 6,
+        "change": 5
+      },
+      "import": {
+        "before": 2,
+        "after": 6,
+        "change": 4
+      },
+      "background": {
+        "before": 2,
+        "after": 6,
+        "change": 4
+      },
+      "center": {
+        "before": 1,
+        "after": 3,
+        "change": 2
+      },
+      "file": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "console": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "search": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "flex": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "print": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "docs guides",
+        "count": 63
+      },
+      {
+        "phrase": "openai com",
+        "count": 9
+      },
+      {
+        "phrase": "opacity transform",
+        "count": 7
+      },
+      {
+        "phrase": "transform scale",
+        "count": 6
+      },
+      {
+        "phrase": "255 255",
+        "count": 6
+      },
+      {
+        "phrase": "docs models",
+        "count": 5
+      },
+      {
+        "phrase": "best practices",
+        "count": 5
+      },
+      {
+        "phrase": "docs assistants",
+        "count": 5
+      },
+      {
+        "phrase": "practices docs",
+        "count": 4
+      },
+      {
+        "phrase": "position fixed",
+        "count": 4
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

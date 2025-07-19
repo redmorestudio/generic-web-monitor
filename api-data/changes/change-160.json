@@ -1,0 +1,319 @@
+{
+  "change_id": 160,
+  "url": "https://sambanova.ai/blog",
+  "company": "SambaNova",
+  "company_category": "AI Hardware",
+  "detected_at": "2025-07-18 16:41:36",
+  "interest_level": 8,
+  "interest_category": "breakthrough",
+  "interest_explanation": "SambaNova introduced new solutions and updates, including a turnkey AI path for data centers, a new AI inference solution deployable in 90 days, and SambaNova 2.0, indicating significant technical advancements and business impact in the AI computing space.",
+  "interest_drivers": [
+    "New AI Inference Solution for Data Centers",
+    "SambaManaged: A Turnkey Path to AI for Data Centers",
+    "SambaNova 2.0: Build with Relentless Intelligence"
+  ],
+  "technical_innovation_score": 7,
+  "business_impact_score": 8,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://sambanova.ai/blog\ncompany: SambaNova\nscraped_at: 2025-07-04 20:20:26\n---\n\n     Resources | Blog\n\n[Support](/support/)\n\n [![header search](https://sambanova.ai/hubfs/header-search-icon.svg.svg) ![header search](https://sambanova.ai/hubfs/header-search-icon-hover.svg)](/hs-search-results/)\n\n![header lang](https://sambanova.ai/hubfs/global-dark.svg) ![header lang](https://sambanova.ai/hubfs/global-dark-hover.svg) EN\n\n*   [Japanese](/ja/resources)\n\n[![sambanova-logo-black](https://s...",
+    "after": " Resources | Blog   var act = {}; act.xs = 479; act.sm = 767; act.md = 1139; act.scroll\\_offset = { sm: 66, md: 66, lg: 66, get: function() { if(window.matchMedia('(max-width: 767px)').matches) return act.scroll\\_offset.sm; if(window.matchMedia('(min-width: 1140px)').matches) return act.scroll\\_offset.lg; return act.scroll\\_offset.md; }, set: function(sm, md, lg){ act.scroll\\_offset.sm = sm; act.scroll\\_offset.md = md; act.scroll\\_offset.lg = lg; } };      a.cta\\_button{-moz-box-sizing:content-b..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Resources | Blog   var act = {}; act.",
+      "xs = 479; act.",
+      "sm = 767; act.",
+      "md = 1139; act.",
+      "scroll\\_offset = { sm: 66, md: 66, lg: 66, get: function() { if(window.",
+      "matchMedia('(max-width: 767px)').",
+      "matches) return act.",
+      "scroll\\_offset.",
+      "sm; if(window.",
+      "matchMedia('(min-width: 1140px)')."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://sambanova.",
+      "ai/blog\ncompany: SambaNova\nscraped_at: 2025-07-04 20:20:26\n---\n\n     Resources | Blog\n\n[Support](/support/)\n\n [!",
+      "[header search](https://sambanova.",
+      "ai/hubfs/header-search-icon.",
+      "svg.",
+      "svg) !",
+      "[header search](https://sambanova.",
+      "ai/hubfs/header-search-icon-hover.",
+      "svg)](/hs-search-results/)\n\n!",
+      "[header lang](https://sambanova."
+    ],
+    "key_changes": [
+      "New version: 3.5, 991.98, 767.98, 0.7, 0.8, 0.75, 0.006, 0.023, 2.2, 0.096, 4.8, 0.532, 15.4, 0.72, 0.793, 0.853, 26.7, 0.902, 0.941, 0.968, 36.2, 0.987, 39.7, 43.7, 1.007, 48.3, 1.009, 55.3, 1.002, 78.2, 0.3, 0.022, 2.3, 0.091, 5.1, 0.18, 7.6, 0.508, 16.3, 0.607, 0.691, 0.762, 0.822, 28.4, 0.872, 0.912, 35.1, 0.944, 38.9, 0.985, 47.6, 0.996, 53.1, 1.001, 58.4, 1.003, 65.1, 1.2, 0.60, 2.0, 02.1, v3.0, v1.0, 0.01, 0.2, 0.6, 1.07, 58.910, 1.1",
+      "New date mentioned: May 14, 2025, May 2, 2025",
+      "New announcement mentioned"
+    ],
+    "change_percentage": 105,
+    "summary": "105% content changed (1210 additions, 135 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "important",
+        "frequency": 171
+      },
+      {
+        "word": "display",
+        "frequency": 65
+      },
+      {
+        "word": "color",
+        "frequency": 62
+      },
+      {
+        "word": "none",
+        "frequency": 58
+      },
+      {
+        "word": "dialog",
+        "frequency": 53
+      },
+      {
+        "word": "width",
+        "frequency": 47
+      },
+      {
+        "word": "background",
+        "frequency": 36
+      },
+      {
+        "word": "position",
+        "frequency": 35
+      },
+      {
+        "word": "function",
+        "frequency": 32
+      },
+      {
+        "word": "0px",
+        "frequency": 32
+      },
+      {
+        "word": "padding",
+        "frequency": 32
+      },
+      {
+        "word": "woff2",
+        "frequency": 32
+      },
+      {
+        "word": "1px",
+        "frequency": 29
+      },
+      {
+        "word": "in-e146f606-483d-4824-a598-79a778fddfb4-1g9isyhsf8xoomdcl0ykdu",
+        "frequency": 29
+      },
+      {
+        "word": "var",
+        "frequency": 28
+      },
+      {
+        "word": "background-color",
+        "frequency": 28
+      },
+      {
+        "word": "height",
+        "frequency": 27
+      },
+      {
+        "word": "hidden",
+        "frequency": 27
+      },
+      {
+        "word": "normal",
+        "frequency": 27
+      },
+      {
+        "word": "ff5cd1",
+        "frequency": 26
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "power",
+        "frequency": 11
+      },
+      {
+        "word": "next",
+        "frequency": 9
+      },
+      {
+        "word": "agentic",
+        "frequency": 9
+      },
+      {
+        "word": "customers",
+        "frequency": 8
+      },
+      {
+        "word": "suite",
+        "frequency": 7
+      },
+      {
+        "word": "computing",
+        "frequency": 7
+      },
+      {
+        "word": "investors",
+        "frequency": 7
+      },
+      {
+        "word": "innovation",
+        "frequency": 6
+      },
+      {
+        "word": "deploy",
+        "frequency": 6
+      },
+      {
+        "word": "generative",
+        "frequency": 6
+      },
+      {
+        "word": "datascale",
+        "frequency": 6
+      },
+      {
+        "word": "industries",
+        "frequency": 6
+      },
+      {
+        "word": "generation",
+        "frequency": 6
+      },
+      {
+        "word": "latest",
+        "frequency": 6
+      },
+      {
+        "word": "sambanova-logo-black",
+        "frequency": 5
+      },
+      {
+        "word": "backbone",
+        "frequency": 5
+      },
+      {
+        "word": "quickly",
+        "frequency": 5
+      },
+      {
+        "word": "state-of-the-art",
+        "frequency": 5
+      },
+      {
+        "word": "science",
+        "frequency": 5
+      },
+      {
+        "word": "most",
+        "frequency": 5
+      }
+    ],
+    "frequency_changes": {
+      "100": {
+        "before": 2,
+        "after": 35,
+        "change": 33
+      },
+      "https": {
+        "before": 55,
+        "after": 148,
+        "change": 93
+      },
+      "sambanova": {
+        "before": 88,
+        "after": 146,
+        "change": 58
+      },
+      "url": {
+        "before": 1,
+        "after": 38,
+        "change": 37
+      },
+      "center": {
+        "before": 2,
+        "after": 28,
+        "change": 26
+      },
+      "png": {
+        "before": 4,
+        "after": 28,
+        "change": 24
+      },
+      "not": {
+        "before": 1,
+        "after": 24,
+        "change": 23
+      },
+      "header": {
+        "before": 6,
+        "after": 29,
+        "change": 23
+      },
+      "javascript": {
+        "before": 2,
+        "after": 21,
+        "change": 19
+      },
+      "top": {
+        "before": 1,
+        "after": 19,
+        "change": 18
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "https sambanova",
+        "count": 99
+      },
+      {
+        "phrase": "resources tag",
+        "count": 30
+      },
+      {
+        "phrase": "important in-e146f606-483d-4824-a598-79a778fddfb4-1g9isyhsf8xoomdcl0ykdu",
+        "count": 25
+      },
+      {
+        "phrase": "sambanova hubfs",
+        "count": 24
+      },
+      {
+        "phrase": "display none",
+        "count": 23
+      },
+      {
+        "phrase": "sambanova cloud",
+        "count": 22
+      },
+      {
+        "phrase": "width 100",
+        "count": 20
+      },
+      {
+        "phrase": "sambanova resources",
+        "count": 20
+      },
+      {
+        "phrase": "in-e146f606-483d-4824-a598-79a778fddfb4-3nps60y-evff7g liosx2q",
+        "count": 19
+      },
+      {
+        "phrase": "font-style normal",
+        "count": 18
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

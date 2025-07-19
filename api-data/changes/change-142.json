@@ -1,0 +1,254 @@
+{
+  "change_id": 142,
+  "url": "https://replicate.com/blog",
+  "company": "Replicate",
+  "company_category": "AI Infrastructure",
+  "detected_at": "2025-07-18 16:40:41",
+  "interest_level": 8,
+  "interest_category": "breakthrough",
+  "interest_explanation": "Replicate has partnered with Bria to bring licensed, commercial-grade image generation and editing models to its platform, and has also optimized FLUX.1 Kontext using the Taylor Seer technique. These developments demonstrate Replicate's continued focus on innovation and expansion of its offerings, particularly in the enterprise space.",
+  "interest_drivers": [
+    "Partnership with Bria to bring commercial-grade image generation and editing models",
+    "Optimization of FLUX.1 Kontext using Taylor Seer technique",
+    "Comparison of AI video models"
+  ],
+  "technical_innovation_score": 7,
+  "business_impact_score": 8,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://replicate.com/blog\ncompany: Replicate\nscraped_at: 2025-07-04 20:18:14\n---\n\n Blog – Replicate\n\n[Replicate glyph](/)\n\n[Explore](/explore)[Pricing](/pricing)[Docs](/docs)[Blog](/blog)[Changelog](/changelog)[Sign in](/signin)[Try for free](/signin)\n\nMenu\n\n[Explore](/explore)[Pricing](/pricing)[Docs](/docs)[Blog](/blog)[Changelog](/changelog)[Sign in](/signin)[Try for free](/signin)\n\n* * *\n\n[Explore the new PlaygroundBeta](/playground)\n\n# Blog\n\n[RSS](/blog/rss) [Atom](/blog/atom)\n\n1....",
+    "after": " (function (w, d, s, l, i) { w\\[l\\] = w\\[l\\] || \\[\\]; w\\[l\\].push({ \"gtm.start\": new Date().getTime(), event: \"gtm.js\" }); var f = d.getElementsByTagName(s)\\[0\\], j = d.createElement(s), dl = l != \"dataLayer\" ? \"&l=\" + l : \"\"; j.async = true; j.src = \"https://www.googletagmanager.com/gtm.js?id=\" + i + dl; f.parentNode.insertBefore(j, f); })(window, document, \"script\", \"dataLayer\", \"GTM-KZDCFZR9\"); document.addEventListener(\"astro:page-load\",()=>{a()});function a(){const e=document.documentElemen..."
+  },
+  "diff": {
+    "added_sentences": [
+      "(function (w, d, s, l, i) { w\\[l\\] = w\\[l\\] || \\[\\]; w\\[l\\].",
+      "push({ \"gtm.",
+      "start\": new Date().",
+      "getTime(), event: \"gtm.",
+      "js\" }); var f = d.",
+      "getElementsByTagName(s)\\[0\\], j = d.",
+      "createElement(s), dl = l !",
+      "= \"dataLayer\" ?",
+      "\"&l=\" + l : \"\"; j.",
+      "async = true; j."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://replicate.",
+      "com/blog\ncompany: Replicate\nscraped_at: 2025-07-04 20:18:14\n---\n\n Blog – Replicate\n\n[Replicate glyph](/)\n\n[Explore](/explore)[Pricing](/pricing)[Docs](/docs)[Blog](/blog)[Changelog](/changelog)[Sign in](/signin)[Try for free](/signin)\n\nMenu\n\n[Explore](/explore)[Pricing](/pricing)[Docs](/docs)[Blog](/blog)[Changelog](/changelog)[Sign in](/signin)[Try for free](/signin)\n\n* * *\n\n[Explore the new PlaygroundBeta](/playground)\n\n# Blog\n\n[RSS](/blog/rss) [Atom](/blog/atom)\n\n1.",
+      "[\n\n    !",
+      "webp)\n\n    ## The FLUX.",
+      "1 Kontext hackathon\n\n    We hosted a hackathon with BFL for FLUX.",
+      "July 1, 2025\n\n\n\n\n\n    ](/blog/kontext-hackathon)\n2.",
+      "[\n\n    !",
+      "webp)\n\n    ## How to prompt Veo 3 for the best results\n\n    Learn expert prompting techniques to create stunning videos with Google's Veo 3.",
+      "June 10, 2025\n\n\n\n\n\n    ](/blog/using-and-prompting-veo-3)\n3.",
+      "[\n\n    !"
+    ],
+    "key_changes": [
+      "New date mentioned: July 17, 2025, July 15, 2025, July 7, 2025",
+      "New model mentioned"
+    ],
+    "change_percentage": 108,
+    "summary": "108% content changed (468 additions, 282 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "astro",
+        "frequency": 20
+      },
+      {
+        "word": "getattribute",
+        "frequency": 16
+      },
+      {
+        "word": "await",
+        "frequency": 10
+      },
+      {
+        "word": "var",
+        "frequency": 9
+      },
+      {
+        "word": "window",
+        "frequency": 9
+      },
+      {
+        "word": "document",
+        "frequency": 9
+      },
+      {
+        "word": "async",
+        "frequency": 8
+      },
+      {
+        "word": "mix-blend-mode",
+        "frequency": 8
+      },
+      {
+        "word": "keyframes",
+        "frequency": 7
+      },
+      {
+        "word": "opacity",
+        "frequency": 7
+      },
+      {
+        "word": "animation",
+        "frequency": 7
+      },
+      {
+        "word": "none",
+        "frequency": 7
+      },
+      {
+        "word": "component",
+        "frequency": 7
+      },
+      {
+        "word": "hydrate",
+        "frequency": 7
+      },
+      {
+        "word": "addeventlistener",
+        "frequency": 6
+      },
+      {
+        "word": "classlist",
+        "frequency": 6
+      },
+      {
+        "word": "data-astro-transition-scope",
+        "frequency": 6
+      },
+      {
+        "word": "self",
+        "frequency": 6
+      },
+      {
+        "word": "void",
+        "frequency": 6
+      },
+      {
+        "word": "null",
+        "frequency": 6
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "2025": {
+        "before": 18,
+        "after": 21,
+        "change": 3
+      },
+      "new": {
+        "before": 14,
+        "after": 32,
+        "change": 18
+      },
+      "let": {
+        "before": 2,
+        "after": 19,
+        "change": 17
+      },
+      "start": {
+        "before": 1,
+        "after": 5,
+        "change": 4
+      },
+      "event": {
+        "before": 1,
+        "after": 5,
+        "change": 4
+      },
+      "dark": {
+        "before": 1,
+        "after": 5,
+        "change": 4
+      },
+      "system": {
+        "before": 1,
+        "after": 4,
+        "change": 3
+      },
+      "light": {
+        "before": 1,
+        "after": 4,
+        "change": 3
+      },
+      "content": {
+        "before": 81,
+        "after": 84,
+        "change": 3
+      },
+      "assets": {
+        "before": 81,
+        "after": 84,
+        "change": 3
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "content assets",
+        "count": 84
+      },
+      {
+        "phrase": "2024 blog",
+        "count": 37
+      },
+      {
+        "phrase": "2023 blog",
+        "count": 35
+      },
+      {
+        "phrase": "stable diffusion",
+        "count": 33
+      },
+      {
+        "phrase": "assets cover",
+        "count": 26
+      },
+      {
+        "phrase": "2025 blog",
+        "count": 21
+      },
+      {
+        "phrase": "replicate logo",
+        "count": 19
+      },
+      {
+        "phrase": "your own",
+        "count": 18
+      },
+      {
+        "phrase": "how run",
+        "count": 17
+      },
+      {
+        "phrase": "webp run",
+        "count": 15
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

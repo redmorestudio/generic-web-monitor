@@ -1,0 +1,262 @@
+{
+  "change_id": 95,
+  "url": "https://docs.langchain.com",
+  "company": "LangChain",
+  "company_category": "AI Infrastructure",
+  "detected_at": "2025-07-18 16:37:38",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "No significant changes were found in the content. The introduction of the 'Building Ambient Agents with LangGraph' course is still present, and the rest of the content remains the same, with no new tutorials, guides, or features added.",
+  "interest_drivers": [],
+  "technical_innovation_score": 2,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://docs.langchain.com\ncompany: LangChain\nscraped_at: 2025-07-04 20:15:38\n---\n\n  Introduction | 🦜️🔗 LangChain\n\n[Skip to main content](#__docusaurus_skipToContent_fallback)\n\n**Our [Building Ambient Agents with LangGraph](https://academy.langchain.com/courses/ambient-agents/?utm_medium=internal&utm_source=docs&utm_campaign=q2-2025_ambient-agents_co) course is now available on LangChain Academy!**\n\n[\n\n![🦜️🔗 LangChain](/img/brand/wordmark.png)\n\n](/)[Integrations](/docs/integrations/...",
+    "after": "  Introduction | 🦜️🔗 LangChain window.dataLayer=window.dataLayer||\\[\\] !function(e,t,a,n){e\\[n\\]=e\\[n\\]||\\[\\],e\\[n\\].push({\"gtm.start\":(new Date).getTime(),event:\"gtm.js\"});var g=t.getElementsByTagName(a)\\[0\\],m=t.createElement(a);m.async=!0,m.src=\"https://www.googletagmanager.com/gtm.js?id=GTM-MH4VTX4V\",g.parentNode.insertBefore(m,g)}(window,document,\"script\",\"dataLayer\")  \n\n!function(){function t(t){document.documentElement.setAttribute(\"data-theme\",t)}var e=function(){try{return new URLSear..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Introduction | 🦜️🔗 LangChain window.",
+      "dataLayer=window.",
+      "dataLayer||\\[\\] !",
+      "function(e,t,a,n){e\\[n\\]=e\\[n\\]||\\[\\],e\\[n\\].",
+      "push({\"gtm.",
+      "start\":(new Date).",
+      "getTime(),event:\"gtm.",
+      "js\"});var g=t.",
+      "getElementsByTagName(a)\\[0\\],m=t.",
+      "createElement(a);m."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://docs.",
+      "com\ncompany: LangChain\nscraped_at: 2025-07-04 20:15:38\n---\n\n  Introduction | 🦜️🔗 LangChain\n\n[Skip to main content](#__docusaurus_skipToContent_fallback)\n\n**Our [Building Ambient Agents with LangGraph](https://academy.",
+      "[🦜️🔗 LangChain](/img/brand/wordmark.",
+      "com/api_reference/)\n\n[More](#)\n\n*   [Contributing](/docs/contributing/)\n*   [People](/docs/people/)\n*   [Error reference](/docs/troubleshooting/errors/)\n*   * * *\n\n*   [LangSmith](https://docs.",
+      "com/langchain-ai/langchain)\n\nSearchK\n\n*   [Introduction](/docs/introduction/)\n*   [Tutorials](/docs/tutorials/)\n\n    *   [Build a Question Answering application over a Graph Database](/docs/tutorials/graph/)\n    *   [Tutorials](/docs/tutorials/)\n    *   [Build a simple LLM application with chat models and prompt templates](/docs/tutorials/llm_chain/)\n    *   [Build a Chatbot](/docs/tutorials/chatbot/)\n    *   [Build a Retrieval Augmented Generation (RAG) App: Part 2](/docs/tutorials/qa_chat_history/)\n    *   [Build an Extraction Chain](/docs/tutorials/extraction/)\n    *   [Build an Agent](/docs/tutorials/agents/)\n    *   [Tagging](/docs/tutorials/classification/)\n    *   [Build a Retrieval Augmented Generation (RAG) App: Part 1](/docs/tutorials/rag/)\n    *   [Build a semantic search engine](/docs/tutorials/retrievers/)\n    *   [Build a Question/Answering system over SQL data](/docs/tutorials/sql_qa/)\n    *   [Summarize Text](/docs/tutorials/summarization/)\n*   [How-to guides](/docs/how_to/)\n\n    *   [How-to guides](/docs/how_to/)\n    *   [How to use tools in a chain](/docs/how_to/tools_chain/)\n    *   [How to use a vectorstore as a retriever](/docs/how_to/vectorstore_retriever/)\n    *   [How to add memory to chatbots](/docs/how_to/chatbots_memory/)\n    *   [How to use example selectors](/docs/how_to/example_selectors/)\n    *   [How to add a semantic layer over graph database](/docs/how_to/graph_semantic/)\n    *   [How to invoke runnables in parallel](/docs/how_to/parallel/)\n    *   [How to stream chat model responses](/docs/how_to/chat_streaming/)\n    *   [How to add default invocation args to a Runnable](/docs/how_to/binding/)\n    *   [How to add retrieval to chatbots](/docs/how_to/chatbots_retrieval/)\n    *   [How to use few shot examples in chat models](/docs/how_to/few_shot_examples_chat/)\n    *   [How to do tool/function calling](/docs/how_to/function_calling/)\n    *   [How to install LangChain packages](/docs/how_to/installation/)\n    *   [How to add examples to the prompt for query analysis](/docs/how_to/query_few_shot/)\n    *   [How to use few shot examples](/docs/how_to/few_shot_examples/)\n    *   [How to run custom functions](/docs/how_to/functions/)\n    *   [How to use output parsers to parse an LLM response into structured format](/docs/how_to/output_parser_structured/)\n    *   [How to handle cases where no queries are generated](/docs/how_to/query_no_queries/)\n    *   [How to route between sub-chains](/docs/how_to/routing/)\n    *   [How to return structured data from a model](/docs/how_to/structured_output/)\n    *   [How to summarize text through parallelization](/docs/how_to/summarize_map_reduce/)\n    *   [How to summarize text through iterative refinement](/docs/how_to/summarize_refine/)\n    *   [How to summarize text in a single LLM call](/docs/how_to/summarize_stuff/)\n    *   [How to use toolkits](/docs/how_to/toolkits/)\n    *   [How to add ad-hoc tool calling capability to LLMs and Chat Models](/docs/how_to/tools_prompting/)\n    *   [Build an Agent with AgentExecutor (Legacy)](/docs/how_to/agent_executor/)\n    *   [How to construct knowledge graphs](/docs/how_to/graph_constructing/)\n    *   [How to partially format prompt templates](/docs/how_to/prompts_partial/)\n    *   [How to handle multiple queries when doing query analysis](/docs/how_to/query_multiple_queries/)\n    *   [How to use built-in tools and toolkits](/docs/how_to/tools_builtin/)\n    *   [How to pass through arguments from one step to the next](/docs/how_to/passthrough/)\n    *   [How to compose prompts together](/docs/how_to/prompts_composition/)\n    *   [How to handle multiple retrievers when doing query analysis](/docs/how_to/query_multiple_retrievers/)\n    *   [How to add values to a chain's state](/docs/how_to/assign/)\n    *   [How to construct filters for query analysis](/docs/how_to/query_constructing_filters/)\n    *   [How to configure runtime chain internals](/docs/how_to/configure/)\n    *   [How deal with high cardinality categoricals when doing query analysis](/docs/how_to/query_high_cardinality/)\n    *   [Custom Document Loader](/docs/how_to/document_loader_custom/)\n    *   [How to use the MultiQueryRetriever](/docs/how_to/MultiQueryRetriever/)\n    *   [How to add scores to retriever results](/docs/how_to/add_scores_retriever/)\n    *   [Caching](/docs/how_to/caching_embeddings/)\n    *   [How to use callbacks in async environments](/docs/how_to/callbacks_async/)\n    *   [How to attach callbacks to a runnable](/docs/how_to/callbacks_attach/)\n    *   [How to propagate callbacks constructor](/docs/how_to/callbacks_constructor/)\n    *   [How to dispatch custom callback events](/docs/how_to/callbacks_custom_events/)\n    *   [How to pass callbacks in at runtime](/docs/how_to/callbacks_runtime/)\n    *   [How to split by character](/docs/how_to/character_text_splitter/)\n    *   [How to cache chat model responses](/docs/how_to/chat_model_caching/)\n    *   [How to handle rate limits](/docs/how_to/chat_model_rate_limiting/)\n    *   [How to init any model in one line](/docs/how_to/chat_models_universal_init/)\n    *   [How to track token usage in ChatModels](/docs/how_to/chat_token_usage_tracking/)\n    *   [How to add tools to chatbots](/docs/how_to/chatbots_tools/)\n    *   [How to split code](/docs/how_to/code_splitter/)\n    *   [How to do retrieval with contextual compression](/docs/how_to/contextual_compression/)\n    *   [How to convert Runnables to Tools](/docs/how_to/convert_runnable_to_tool/)\n    *   [How to create custom callback handlers](/docs/how_to/custom_callbacks/)\n    *   [How to create a custom chat model class](/docs/how_to/custom_chat_model/)\n    *   [Custom Embeddings](/docs/how_to/custom_embeddings/)\n    *   [How to create a custom LLM class](/docs/how_to/custom_llm/)\n    *   [Custom Retriever](/docs/how_to/custom_retriever/)\n    *   [How to create tools](/docs/how_to/custom_tools/)\n    *   [How to debug your LLM apps](/docs/how_to/debugging/)\n    *   [How to load CSVs](/docs/how_to/document_loader_csv/)\n    *   [How to load documents from a directory](/docs/how_to/document_loader_directory/)\n    *   [How to load HTML](/docs/how_to/document_loader_html/)\n    *   [How to load JSON](/docs/how_to/document_loader_json/)\n    *   [How to load Markdown](/docs/how_to/document_loader_markdown/)\n    *   [How to load Microsoft Office files](/docs/how_to/document_loader_office_file/)\n    *   [How to load PDFs](/docs/how_to/document_loader_pdf/)\n    *   [How to load web pages](/docs/how_to/document_loader_web/)\n    *   [How to create a dynamic (self-constructing) chain](/docs/how_to/dynamic_chain/)\n    *   [Text embedding models](/docs/how_to/embed_text/)\n    *   [How to combine results from multiple retrievers](/docs/how_to/ensemble_retriever/)\n    *   [How to select examples from a LangSmith dataset](/docs/how_to/example_selectors_langsmith/)\n    *   [How to select examples by length](/docs/how_to/example_selectors_length_based/)\n    *   [How to select examples by maximal marginal relevance (MMR)](/docs/how_to/example_selectors_mmr/)\n    *   [How to select examples by n-gram overlap](/docs/how_to/example_selectors_ngram/)\n    *   [How to select examples by similarity](/docs/how_to/example_selectors_similarity/)\n    *   [How to use reference examples when doing extraction](/docs/how_to/extraction_examples/)\n    *   [How to handle long text when doing extraction](/docs/how_to/extraction_long_text/)\n    *   [How to use prompting alone (no tool calling) to do extraction](/docs/how_to/extraction_parse/)\n    *   [How to add fallbacks to a runnable](/docs/how_to/fallbacks/)\n    *   [How to filter messages](/docs/how_to/filter_messages/)\n    *   [Hybrid Search](/docs/how_to/hybrid/)\n    *   [How to use the LangChain indexing API](/docs/how_to/indexing/)\n    *   [How to inspect runnables](/docs/how_to/inspect/)\n    *   [LangChain Expression Language Cheatsheet](/docs/how_to/lcel_cheatsheet/)\n    *   [How to cache LLM responses](/docs/how_to/llm_caching/)\n    *   [How to track token usage for LLMs](/docs/how_to/llm_token_usage_tracking/)\n    *   [Run models locally](/docs/how_to/local_llms/)\n    *   [How to get log probabilities](/docs/how_to/logprobs/)\n    *   [How to reorder retrieved results to mitigate the \"lost in the middle\" effect](/docs/how_to/long_context_reorder/)\n    *   [How to split Markdown by Headers](/docs/how_to/markdown_header_metadata_splitter/)\n    *   [How to merge consecutive messages of the same type](/docs/how_to/merge_message_runs/)\n    *   [How to add message history](/docs/how_to/message_history/)\n    *   [How to migrate from legacy LangChain agents to LangGraph](/docs/how_to/migrate_agent/)\n    *   [How to retrieve using multiple vectors per document](/docs/how_to/multi_vector/)\n    *   [How to pass multimodal data to models](/docs/how_to/multimodal_inputs/)\n    *   [How to use multimodal prompts](/docs/how_to/multimodal_prompts/)\n    *   [How to create a custom Output Parser](/docs/how_to/output_parser_custom/)\n    *   [How to use the output-fixing parser](/docs/how_to/output_parser_fixing/)\n    *   [How to parse JSON output](/docs/how_to/output_parser_json/)\n    *   [How to retry when a parsing error occurs](/docs/how_to/output_parser_retry/)\n    *   [How to parse text from message objects](/docs/how_to/output_parser_string/)\n    *   [How to parse XML output](/docs/how_to/output_parser_xml/)\n    *   [How to parse YAML output](/docs/how_to/output_parser_yaml/)\n    *   [How to use the Parent Document Retriever](/docs/how_to/parent_document_retriever/)\n    *   [How to use LangChain with different Pydantic versions](/docs/how_to/pydantic_compatibility/)\n    *   [How to add chat history](/docs/how_to/qa_chat_history_how_to/)\n    *   [How to get a RAG application to add citations](/docs/how_to/qa_citations/)\n    *   [How to do per-user retrieval](/docs/how_to/qa_per_user/)\n    *   [How to get your RAG application to return sources](/docs/how_to/qa_sources/)\n    *   [How to stream results from your RAG application](/docs/how_to/qa_streaming/)\n    *   [How to split JSON data](/docs/how_to/recursive_json_splitter/)\n    *   [How to recursively split text by characters](/docs/how_to/recursive_text_splitter/)\n    *   [Response metadata](/docs/how_to/response_metadata/)\n    *   [How to pass runtime secrets to runnables](/docs/how_to/runnable_runtime_secrets/)\n    *   [How to do \"self-querying\" retrieval](/docs/how_to/self_query/)\n    *   [How to split text based on semantic similarity](/docs/how_to/semantic-chunker/)\n    *   [How to chain runnables](/docs/how_to/sequence/)\n    *   [How to save and load LangChain objects](/docs/how_to/serialization/)\n    *   [How to split text by tokens](/docs/how_to/split_by_token/)\n    *   [How to split HTML](/docs/how_to/split_html/)\n    *   [How to do question answering over CSVs](/docs/how_to/sql_csv/)\n    *   [How to deal with large databases when doing SQL question-answering](/docs/how_to/sql_large_db/)\n    *   [How to better prompt when doing SQL question-answering](/docs/how_to/sql_prompting/)\n    *   [How to do query validation as part of SQL question-answering](/docs/how_to/sql_query_checking/)\n    *   [How to stream runnables](/docs/how_to/streaming/)\n    *   [How to stream responses from an LLM](/docs/how_to/streaming_llm/)\n    *   [How to use a time-weighted vector store retriever](/docs/how_to/time_weighted_vectorstore/)\n    *   [How to return artifacts from a tool](/docs/how_to/tool_artifacts/)\n    *   [How to use chat models to call tools](/docs/how_to/tool_calling/)\n    *   [How to disable parallel tool calling](/docs/how_to/tool_calling_parallel/)\n    *   [How to force models to call a tool](/docs/how_to/tool_choice/)\n    *   [How to access the RunnableConfig from a tool](/docs/how_to/tool_configure/)\n    *   [How to pass tool outputs to chat models](/docs/how_to/tool_results_pass_to_model/)\n    *   [How to pass run time values to tools](/docs/how_to/tool_runtime/)\n    *   [How to stream events from a tool](/docs/how_to/tool_stream_events/)\n    *   [How to stream tool calls](/docs/how_to/tool_streaming/)\n    *   [How to convert tools to OpenAI Functions](/docs/how_to/tools_as_openai_functions/)\n    *   [How to handle tool errors](/docs/how_to/tools_error/)\n    *   [How to use few-shot prompting with tool calling](/docs/how_to/tools_few_shot/)\n    *   [How to add a human-in-the-loop for tools](/docs/how_to/tools_human/)\n    *   [How to bind model-specific tools](/docs/how_to/tools_model_specific/)\n    *   [How to trim messages](/docs/how_to/trim_messages/)\n    *   [How to create and query vector stores](/docs/how_to/vectorstores/)\n*   [Conceptual guide](/docs/concepts/)\n\n    *   [Agents](/docs/concepts/agents/)\n    *   [Architecture](/docs/concepts/architecture/)\n    *   [Async programming with langchain](/docs/concepts/async/)\n    *   [Callbacks](/docs/concepts/callbacks/)\n    *   [Chat history](/docs/concepts/chat_history/)\n    *   [Chat models](/docs/concepts/chat_models/)\n    *   [Document loaders](/docs/concepts/document_loaders/)\n    *   [Embedding models](/docs/concepts/embedding_models/)\n    *   [Evaluation](/docs/concepts/evaluation/)\n    *   [Example selectors](/docs/concepts/example_selectors/)\n    *   [Few-shot prompting](/docs/concepts/few_shot_prompting/)\n    *   [Conceptual guide](/docs/concepts/)\n    *   [Key-value stores](/docs/concepts/key_value_stores/)\n    *   [LangChain Expression Language (LCEL)](/docs/concepts/lcel/)\n    *   [Messages](/docs/concepts/messages/)\n    *   [Multimodality](/docs/concepts/multimodality/)\n    *   [Output parsers](/docs/concepts/output_parsers/)\n    *   [Prompt Templates](/docs/concepts/prompt_templates/)\n    *   [Retrieval augmented generation (RAG)](/docs/concepts/rag/)\n    *   [Retrieval](/docs/concepts/retrieval/)\n    *   [Retrievers](/docs/concepts/retrievers/)\n    *   [Runnable interface](/docs/concepts/runnables/)\n    *   [Streaming](/docs/concepts/streaming/)\n    *   [Structured outputs](/docs/concepts/structured_outputs/)\n    *   [Testing](/docs/concepts/testing/)\n    *   [String-in, string-out llms](/docs/concepts/text_llms/)\n    *   [Text splitters](/docs/concepts/text_splitters/)\n    *   [Tokens](/docs/concepts/tokens/)\n    *   [Tool calling](/docs/concepts/tool_calling/)\n    *   [Tools](/docs/concepts/tools/)\n    *   [Tracing](/docs/concepts/tracing/)\n    *   [Vector stores](/docs/concepts/vectorstores/)\n    *   [Why LangChain?",
+      "](/docs/concepts/why_langchain/)\n*   Ecosystem\n\n    *   [🦜🛠️ LangSmith](https://docs.",
+      "io/langgraph/)\n*   Versions\n\n    *   [v0.",
+      "2](#)\n\n    *   [Pydantic compatibility](/docs/how_to/pydantic_compatibility/)\n    *   [Migrating from v0.",
+      "0 chains](/docs/versions/migrating_chains/)\n\n        *   [How to migrate from v0.",
+      "0 chains](/docs/versions/migrating_chains/)\n        *   [Migrating from ConstitutionalChain](/docs/versions/migrating_chains/constitutional_chain/)\n        *   [Migrating from ConversationalChain](/docs/versions/migrating_chains/conversation_chain/)\n        *   [Migrating from ConversationalRetrievalChain](/docs/versions/migrating_chains/conversation_retrieval_chain/)\n        *   [Migrating from LLMChain](/docs/versions/migrating_chains/llm_chain/)\n        *   [Migrating from LLMMathChain](/docs/versions/migrating_chains/llm_math_chain/)\n        *   [Migrating from LLMRouterChain](/docs/versions/migrating_chains/llm_router_chain/)\n        *   [Migrating from MapReduceDocumentsChain](/docs/versions/migrating_chains/map_reduce_chain/)\n        *   [Migrating from MapRerankDocumentsChain](/docs/versions/migrating_chains/map_rerank_docs_chain/)\n        *   [Migrating from MultiPromptChain](/docs/versions/migrating_chains/multi_prompt_chain/)\n        *   [Migrating from RefineDocumentsChain](/docs/versions/migrating_chains/refine_docs_chain/)\n        *   [Migrating from RetrievalQA](/docs/versions/migrating_chains/retrieval_qa/)\n        *   [Migrating from StuffDocumentsChain](/docs/versions/migrating_chains/stuff_docs_chain/)\n    *   [Upgrading to LangGraph memory](/docs/versions/migrating_memory/)\n\n        *   [How to migrate to LangGraph memory](/docs/versions/migrating_memory/)\n        *   [How to use BaseChatMessageHistory with LangGraph](/docs/versions/migrating_memory/chat_history/)\n        *   [Migrating off ConversationBufferMemory or ConversationStringBufferMemory](/docs/versions/migrating_memory/conversation_buffer_memory/)\n        *   [Migrating off ConversationBufferWindowMemory or ConversationTokenBufferMemory](/docs/versions/migrating_memory/conversation_buffer_window_memory/)\n        *   [Migrating off ConversationSummaryMemory or ConversationSummaryBufferMemory](/docs/versions/migrating_memory/conversation_summary_memory/)\n        *   [A Long-Term Memory Agent](/docs/versions/migrating_memory/long_term_memory_agent/)\n    *   [Release policy](/docs/versions/release_policy/)\n*   [Security Policy](/docs/security/)\n\n*   [](/)\n*   Introduction\n\nOn this page\n\n[!"
+    ],
+    "key_changes": [
+      "New version: 5.2.0",
+      "New announcement mentioned"
+    ],
+    "change_percentage": 53,
+    "summary": "53% content changed (125 additions, 12 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "var",
+        "frequency": 13
+      },
+      {
+        "word": "location",
+        "frequency": 5
+      },
+      {
+        "word": "script",
+        "frequency": 4
+      },
+      {
+        "word": "setattribute",
+        "frequency": 4
+      },
+      {
+        "word": "try",
+        "frequency": 4
+      },
+      {
+        "word": "catch",
+        "frequency": 4
+      },
+      {
+        "word": "datalayer",
+        "frequency": 3
+      },
+      {
+        "word": "push",
+        "frequency": 3
+      },
+      {
+        "word": "gtm",
+        "frequency": 3
+      },
+      {
+        "word": "new",
+        "frequency": 3
+      },
+      {
+        "word": "createelement",
+        "frequency": 3
+      },
+      {
+        "word": "src",
+        "frequency": 3
+      },
+      {
+        "word": "documentelement",
+        "frequency": 3
+      },
+      {
+        "word": "dark",
+        "frequency": 3
+      },
+      {
+        "word": "reo",
+        "frequency": 3
+      },
+      {
+        "word": "analytics",
+        "frequency": 3
+      },
+      {
+        "word": "console",
+        "frequency": 3
+      },
+      {
+        "word": "getelementsbytagname",
+        "frequency": 2
+      },
+      {
+        "word": "parentnode",
+        "frequency": 2
+      },
+      {
+        "word": "insertbefore",
+        "frequency": 2
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "url",
+        "frequency": 1
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "wordmark",
+        "frequency": 1
+      },
+      {
+        "word": "searchk",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "window": {
+        "before": 1,
+        "after": 15,
+        "change": 14
+      },
+      "function": {
+        "before": 2,
+        "after": 15,
+        "change": 13
+      },
+      "document": {
+        "before": 15,
+        "after": 26,
+        "change": 11
+      },
+      "return": {
+        "before": 3,
+        "after": 10,
+        "change": 7
+      },
+      "search": {
+        "before": 2,
+        "after": 6,
+        "change": 4
+      },
+      "https": {
+        "before": 37,
+        "after": 40,
+        "change": 3
+      },
+      "page": {
+        "before": 5,
+        "after": 8,
+        "change": 3
+      },
+      "methods": {
+        "before": 1,
+        "after": 4,
+        "change": 3
+      },
+      "async": {
+        "before": 4,
+        "after": 6,
+        "change": 2
+      },
+      "www": {
+        "before": 1,
+        "after": 3,
+        "change": 2
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "docs how",
+        "count": 152
+      },
+      {
+        "phrase": "docs concepts",
+        "count": 39
+      },
+      {
+        "phrase": "docs versions",
+        "count": 24
+      },
+      {
+        "phrase": "docs tutorials",
+        "count": 21
+      },
+      {
+        "phrase": "how use",
+        "count": 21
+      },
+      {
+        "phrase": "versions migrating",
+        "count": 21
+      },
+      {
+        "phrase": "langchain com",
+        "count": 18
+      },
+      {
+        "phrase": "migrating chains",
+        "count": 15
+      },
+      {
+        "phrase": "how add",
+        "count": 14
+      },
+      {
+        "phrase": "direct link",
+        "count": 14
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

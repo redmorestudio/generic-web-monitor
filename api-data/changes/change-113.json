@@ -1,0 +1,250 @@
+{
+  "change_id": 113,
+  "url": "https://docs.midjourney.com/docs/plans",
+  "company": "Midjourney",
+  "company_category": "Image Generation",
+  "detected_at": "2025-07-18 16:38:11",
+  "interest_level": 3,
+  "interest_category": "routine_change",
+  "interest_explanation": "The update to Midjourney's plans includes minor changes to the maximum concurrent video prompts and the introduction of a queue size limit, which may affect customer usage and experience. However, the changes do not represent significant technical innovation or substantial business impact.",
+  "interest_drivers": [
+    "Minor update to plan features",
+    "Clarification on queue size and repeat/permutation jobs"
+  ],
+  "technical_innovation_score": 2,
+  "business_impact_score": 4,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://docs.midjourney.com/docs/plans\ncompany: Midjourney\nscraped_at: 2025-07-04 20:17:24\n---\n\n Comparing Midjourney Plans – Midjourney\n\n[Skip to main content](#page-container)\n\n [![Midjourney Help Center home page](/hc/theming_assets/01J0C3W092GC3PH6ZF86C14589) Midjourney](/hc/en-us) Toggle navigation menu\n\n1.  [Midjourney](/hc/en-us)\n2.  [Billing Support](/hc/en-us/categories/16016577793421-Billing-Support)\n3.  [Plan Information](/hc/en-us/sections/28005319720845-Plan-Information)\n\n#...",
+    "after": "  Comparing Midjourney Plans – Midjourney              window.Theme = Object.assign(window.Theme || {}, { assets: {}, locale: \"en-us\", signedIn: false });    window.InkeepConfig = { apiKey: atob(\"Zjg5N2M3MjZlZGI2OGJhNDQyMjgyZmNhYmMxNDgzNjJhZTdkMjQyMzk5ZmViOWY0\"), searchApiKey: atob(\"MDI2NTUyYThjZGVkYTIxNDZlZDRmMWQ0NjRkOWNiYjM2YjdkOTU5ZGE1ZDhlYmQ4\"), integrationId: \"cm3nex1x90084fezto6s92v24\", searchIntegrationId: \"cm6gtpp7r006ss601xfguu66r\", organizationId: \"org\\_BzKnYEJv6ppLg4T8\", primaryBrandC..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Comparing Midjourney Plans – Midjourney              window.",
+      "Theme = Object.",
+      "assign(window.",
+      "Theme || {}, { assets: {}, locale: \"en-us\", signedIn: false });    window.",
+      "InkeepConfig = { apiKey: atob(\"Zjg5N2M3MjZlZGI2OGJhNDQyMjgyZmNhYmMxNDgzNjJhZTdkMjQyMzk5ZmViOWY0\"), searchApiKey: atob(\"MDI2NTUyYThjZGVkYTIxNDZlZDRmMWQ0NjRkOWNiYjM2YjdkOTU5ZGE1ZDhlYmQ4\"), integrationId: \"cm3nex1x90084fezto6s92v24\", searchIntegrationId: \"cm6gtpp7r006ss601xfguu66r\", organizationId: \"org\\_BzKnYEJv6ppLg4T8\", primaryBrandColor: \"#efc5bb\", organizationDisplayName: \"Midjourney\", botAvatarSrcUrl: \"https://midjourney.",
+      "zendesk.",
+      "com/hc/theming\\_assets/01JKCD6MRT350RFX8YKYJ3JMJN\", searchPlaceholder: \"Search\", inkeepStyles: \"/hc/theming\\_assets/01JJQ3Z0315J9TVP1BKM7GD0C9\" };   /\\*!",
+      "\\* Copyright Zendesk, Inc.",
+      "\\* \\* Use of this source code is governed under the Apache License, Version 2.",
+      "0 \\* found at http://www."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://docs.",
+      "com/docs/plans\ncompany: Midjourney\nscraped_at: 2025-07-04 20:17:24\n---\n\n Comparing Midjourney Plans – Midjourney\n\n[Skip to main content](#page-container)\n\n [!",
+      "[TABLE]\n\n\n \n\n**Basic Plan**\n\n**Standard Plan**\n\n**Pro Plan**\n\n**Mega Plan**\n\nMonthly Price\n\n$10\n\n$30\n\n$60\n\n$120\n\nAnnual Price\n\n$96\n($8 / month)\n\n$288\n($24 / month)\n\n$576\n($48 / month)\n\n$1,152\n($96 / month)\n\nFast GPU Time [!",
+      "3 hr/month\n(200 minutes)\n\n15 hr/month\n\n30 hr/month\n\n60 hr/month\n\nRelax GPU Time [!",
+      "com/hc/article_attachments/28006932579085)\n\nUnlimited Images\n\nUnlimited Images & Video\n\nUnlimited Images & Video\n\nPurchase Extra\nGPU Time\n\n$4/hr\n\n$4/hr\n\n$4/hr\n\n$4/hr\n\nWork Solo in Discord Direct Messages [!",
+      "com/hc/article_attachments/28006712962701)\n\nMaximum Concurrent Image Prompts\n\n3 Fast\n\n3 Fast or Relax\n\n12 Fast or\n3 Relax\n\n12 Fast or\n3 Relax\n\nMaximum Concurrent Video Prompts\n\n1 Fast\n\n3 Fast\n\n6 Fast or 2 Relax\n\n12 Fast or 3 Relax\n\nMaximum Repeat / Permutation Size\n\n4 jobs\n\n10 jobs\n\n40 jobs\n\n40 jobs\n\nRate Images to Earn\nFree GPU Time [!",
+      "com/hc/article_attachments/28006712962701)\n\nUsage Rights\n\nGeneral Commercial Terms\\*\n\nGeneral Commercial Terms\\*\n\nGeneral Commercial Terms\\*\n\nGeneral Commercial Terms\\*\n\n\n[/TABLE]\n\n_\\*If you have subscribed at any point, you are free to use your images/videos in just about any way you want.",
+      "com/hc/en-us/categories/32013335627533-Documentation)\n\n    *   Getting Started\n\n        *   [Getting Started Guide](https://docs.",
+      "com/hc/en-us/articles/33329261836941-Getting-Started-Guide)\n    *   Prompting Basics\n\n        *   [Prompt Basics](https://docs.",
+      "com/hc/en-us/articles/32835253061645-Art-of-Prompting)\n    *   Using Your Own Images\n\n        *   [Video](https://docs."
+    ],
+    "key_changes": [
+      "New version: Version 2, 2.0, 1.42857, 277.5, 278.5, 7.5, 12.5, 4.5, 2.5, 13.77, 7.06, 1.86, 36.7, 36.89, 6.18, 11.91, 17.33, 07.73, 44.73, 1.32, v3.5, 0.1, 12.4, 40.1, 25.8, 53.6, 40.5, 38.8, 97.5, 59.5, 74.2, 87.6, 19.5, 19.4, 18.9, 19.3, 18.4, 1.4, 4.9, 0.3, 0.2, 2.4, 1.1, 3.6, 4.6, 13.8, 35.5, 36.6, 38.1, 0.4, 39.9, 39.7, 38.7, 21.7, 21.1, 20.5",
+      "Price change: 0Usd",
+      "New feature mentioned"
+    ],
+    "change_percentage": 70,
+    "summary": "70% content changed (568 additions, 22 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "block",
+        "frequency": 83
+      },
+      {
+        "word": "class",
+        "frequency": 80
+      },
+      {
+        "word": "color",
+        "frequency": 79
+      },
+      {
+        "word": "none",
+        "frequency": 54
+      },
+      {
+        "word": "false",
+        "frequency": 46
+      },
+      {
+        "word": "div",
+        "frequency": 34
+      },
+      {
+        "word": "rcaeigx0a3kycvpssydgayoggrc5myll",
+        "frequency": 30
+      },
+      {
+        "word": "auto",
+        "frequency": 30
+      },
+      {
+        "word": "true",
+        "frequency": 30
+      },
+      {
+        "word": "width",
+        "frequency": 27
+      },
+      {
+        "word": "link",
+        "frequency": 27
+      },
+      {
+        "word": "custom",
+        "frequency": 27
+      },
+      {
+        "word": "height",
+        "frequency": 26
+      },
+      {
+        "word": "rgba",
+        "frequency": 25
+      },
+      {
+        "word": "normal",
+        "frequency": 23
+      },
+      {
+        "word": "name",
+        "frequency": 23
+      },
+      {
+        "word": "contact",
+        "frequency": 22
+      },
+      {
+        "word": "org",
+        "frequency": 21
+      },
+      {
+        "word": "description",
+        "frequency": 21
+      },
+      {
+        "word": "collapse",
+        "frequency": 21
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "url": {
+        "before": 1,
+        "after": 61,
+        "change": 60
+      },
+      "svg": {
+        "before": 18,
+        "after": 72,
+        "change": 54
+      },
+      "assets": {
+        "before": 1,
+        "after": 43,
+        "change": 42
+      },
+      "midjourney": {
+        "before": 136,
+        "after": 174,
+        "change": 38
+      },
+      "theming": {
+        "before": 1,
+        "after": 39,
+        "change": 38
+      },
+      "image": {
+        "before": 5,
+        "after": 43,
+        "change": 38
+      },
+      "https": {
+        "before": 116,
+        "after": 146,
+        "change": 30
+      },
+      "com": {
+        "before": 115,
+        "after": 145,
+        "change": 30
+      },
+      "article": {
+        "before": 31,
+        "after": 61,
+        "change": 30
+      },
+      "content": {
+        "before": 1,
+        "after": 26,
+        "change": 25
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "midjourney com",
+        "count": 132
+      },
+      {
+        "phrase": "https docs",
+        "count": 130
+      },
+      {
+        "phrase": "docs midjourney",
+        "count": 130
+      },
+      {
+        "phrase": "en-us articles",
+        "count": 120
+      },
+      {
+        "phrase": "com en-us",
+        "count": 114
+      },
+      {
+        "phrase": "theming assets",
+        "count": 36
+      },
+      {
+        "phrase": "article attachments",
+        "count": 31
+      },
+      {
+        "phrase": "url https",
+        "count": 30
+      },
+      {
+        "phrase": "attachments 28006712962701",
+        "count": 20
+      },
+      {
+        "phrase": "image theming",
+        "count": 20
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

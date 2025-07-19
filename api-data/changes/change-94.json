@@ -1,0 +1,277 @@
+{
+  "change_id": 94,
+  "url": "https://intel.com/content/www/us/en/artificial-intelligence",
+  "company": "Intel",
+  "company_category": "AI Hardware",
+  "detected_at": "2025-07-18 16:37:33",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "The changes to Intel's AI solutions homepage are minimal, with a minor reorganization of content and the addition of 'Manufacturing Accelerator Ecosystem' and 'Alliances' under the Foundry section, indicating a slight expansion of their partnerships and ecosystem development efforts.",
+  "interest_drivers": [
+    "minor reorganization of content",
+    "addition of 'Manufacturing Accelerator Ecosystem' and 'Alliances' under Foundry"
+  ],
+  "technical_innovation_score": 2,
+  "business_impact_score": 2,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://intel.com/content/www/us/en/artificial-intelligence\ncompany: Intel\nscraped_at: 2025-07-04 20:15:35\n---\n\n Explore Intel® Artificial Intelligence Solutions\n\n[Skip To Main Content](#primary-content)\n\n\n\n[![Intel logo - Return to the home page](/content/dam/logos/intel-header-logo.svg)](/content/www/us/en/homepage.html)\n\nToggle Navigation\n\n1.  Products\n\n    [Products Home](/content/www/us/en/products/overview.html)\n\n    [Processors](/content/www/us/en/products/details/processors.html...",
+    "after": " Explore Intel® Artificial Intelligence Solutions                                                                                     bazadebezolkohpepadr=\"1532680417\".feedbackTool.container #feedbackToolContainer { display:none!important; }.blade-support-feedback.text-left { display:none!important; }#feedback-1 { display:none!important; }!function(){var e=setInterval(function(){\"undefined\"!=typeof $CQ&&($CQ(function(){CQ\\_Analytics.SegmentMgr.loadSegments(\"/etc/segmentation\"),CQ\\_Analytics.Clie..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Explore Intel® Artificial Intelligence Solutions                                                                                     bazadebezolkohpepadr=\"1532680417\".",
+      "feedbackTool.",
+      "container #feedbackToolContainer { display:none!",
+      "important; }.",
+      "blade-support-feedback.",
+      "text-left { display:none!",
+      "important; }#feedback-1 { display:none!",
+      "important; }!",
+      "\")))}),clearInterval(e))},100)}();#onetrust-banner-sdk .",
+      "onetrust-vendors-list-handler{cursor:pointer;color:#1f96db;font-size:inherit;font-weight:bold;text-decoration:none;margin-left:5px}#onetrust-banner-sdk ."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://intel.",
+      "com/content/www/us/en/artificial-intelligence\ncompany: Intel\nscraped_at: 2025-07-04 20:15:35\n---\n\n Explore Intel® Artificial Intelligence Solutions\n\n[Skip To Main Content](#primary-content)\n\n\n\n[!",
+      "Products\n\n    [Products Home](/content/www/us/en/products/overview.",
+      "html)\n\n    [Processors](/content/www/us/en/products/details/processors.",
+      "html)\n\n    *   [Intel® Core™ Ultra Processors](/content/www/us/en/products/details/processors/core-ultra.",
+      "html)\n\n    [Select Systems & Devices](/content/www/us/en/products/systems-devices.",
+      "html)\n\n    *   [AI PCs Powered by Intel](/content/www/us/en/ai-pc/overview.",
+      "html)\n\n    [AI Accelerators](/content/www/us/en/products/docs/accelerator-engines/ai-engines.",
+      "html)\n\n    *   [Intel® Gaudi® AI Accelerators](/content/www/us/en/products/details/processors/ai-accelerators/gaudi.",
+      "html)\n\n    [Network to Edge](/content/www/us/en/products/details/network-io."
+    ],
+    "key_changes": [
+      "New version: 1.2, 0.5, 1.5, 2.5, 1.25, 1.125, 13.3333333333, 30.6666666667, 65.3333333333, 82.6666666667, 91.3333333333, 1.3, 1.35, 1.6, 1.4, 1.7, 1.75, 1.1, 2.4, 1.37, 7.5, 6.5, 11.5, 1.18, v2.0, Version 2, 2.0, v2.26.0, v3.0.5, 2.26.0, 0.7, 3.11, 4.90, 5.0, 5.1, 5.2, 6.0, 6.1, 8.1, 6.3, 6.2, 4.0, 3.8, 3.5, 1752856646.320978",
+      "Price change: $,, $1, $2",
+      "New model mentioned",
+      "New api mentioned",
+      "New release mentioned",
+      "New launch mentioned",
+      "New update mentioned",
+      "New performance mentioned",
+      "New benchmark mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 97,
+    "summary": "97% content changed (17978 additions, 67 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "const",
+        "frequency": 1238
+      },
+      {
+        "word": "tms",
+        "frequency": 1216
+      },
+      {
+        "word": "wap",
+        "frequency": 1145
+      },
+      {
+        "word": "utag",
+        "frequency": 901
+      },
+      {
+        "word": "onetrust-pc-sdk",
+        "frequency": 897
+      },
+      {
+        "word": "let",
+        "frequency": 373
+      },
+      {
+        "word": "onetrust-banner-sdk",
+        "frequency": 303
+      },
+      {
+        "word": "includes",
+        "frequency": 268
+      },
+      {
+        "word": "break",
+        "frequency": 258
+      },
+      {
+        "word": "ot-sdk-cookie-policy",
+        "frequency": 225
+      },
+      {
+        "word": "length",
+        "frequency": 213
+      },
+      {
+        "word": "custom",
+        "frequency": 209
+      },
+      {
+        "word": "object",
+        "frequency": 199
+      },
+      {
+        "word": "tolowercase",
+        "frequency": 193
+      },
+      {
+        "word": "width",
+        "frequency": 186
+      },
+      {
+        "word": "none",
+        "frequency": 167
+      },
+      {
+        "word": "foreach",
+        "frequency": 161
+      },
+      {
+        "word": "error",
+        "frequency": 151
+      },
+      {
+        "word": "action",
+        "frequency": 146
+      },
+      {
+        "word": "display",
+        "frequency": 144
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "250626",
+        "frequency": 6
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "submit-a-solution",
+        "frequency": 1
+      },
+      {
+        "word": "offerings",
+        "frequency": 1
+      },
+      {
+        "word": "offerings-by-category",
+        "frequency": 1
+      },
+      {
+        "word": "1751660132182",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "data": {
+        "before": 10,
+        "after": 972,
+        "change": 962
+      },
+      "return": {
+        "before": 1,
+        "after": 808,
+        "change": 807
+      },
+      "case": {
+        "before": 2,
+        "after": 511,
+        "change": 509
+      },
+      "consent": {
+        "before": 4,
+        "after": 336,
+        "change": 332
+      },
+      "type": {
+        "before": 3,
+        "after": 272,
+        "change": 269
+      },
+      "function": {
+        "before": 5,
+        "after": 251,
+        "change": 246
+      },
+      "intel": {
+        "before": 125,
+        "after": 345,
+        "change": 220
+      },
+      "name": {
+        "before": 2,
+        "after": 196,
+        "change": 194
+      },
+      "label": {
+        "before": 8,
+        "after": 201,
+        "change": 193
+      },
+      "var": {
+        "before": 1,
+        "after": 192,
+        "change": 191
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "wap tms",
+        "count": 996
+      },
+      {
+        "phrase": "utag data",
+        "count": 879
+      },
+      {
+        "phrase": "content www",
+        "count": 246
+      },
+      {
+        "phrase": "tms custom",
+        "count": 200
+      },
+      {
+        "phrase": "break case",
+        "count": 189
+      },
+      {
+        "phrase": "tms consent",
+        "count": 168
+      },
+      {
+        "phrase": "tms events",
+        "count": 145
+      },
+      {
+        "phrase": "trackgaevent hit",
+        "count": 118
+      },
+      {
+        "phrase": "intel com",
+        "count": 108
+      },
+      {
+        "phrase": "object keys",
+        "count": 93
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

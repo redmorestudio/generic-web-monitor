@@ -1,0 +1,320 @@
+{
+  "change_id": 180,
+  "url": "https://wandb.ai/fully-connected",
+  "company": "Weights & Biases",
+  "company_category": "AI Infrastructure",
+  "detected_at": "2025-07-18 16:42:41",
+  "interest_level": 6,
+  "interest_category": "major_development",
+  "interest_explanation": "The updated content highlights new technical capabilities, including the integration of the Kimi K2 open-source SOTA model, and tutorials on Google ADK and GenAI SDK, showcasing Weights & Biases' commitment to advancing AI cloud software and generative AI.",
+  "interest_drivers": [
+    "New open-source SOTA model (Kimi K2) integration",
+    "Google Agent Development Kit (ADK) tutorial and evaluation",
+    "Google GenAI SDK guide with Python tutorial"
+  ],
+  "technical_innovation_score": 7,
+  "business_impact_score": 5,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://wandb.ai/fully-connected\ncompany: Weights & Biases\nscraped_at: 2025-07-04 20:21:01\n---\n\n           Weights & Biases\n\n[Skip to main content](#main-content)\n\n[![](/logo-transparent.png)Weights & Biases](/fully-connected)\n\nProducts\n\nResources\n\n[Docs](https://docs.wandb.ai)[Pricing](https://wandb.ai/site/pricing)[Enterprise](https://wandb.ai/site/enterprise)\n\n[Log in](https://api.wandb.ai/oidc/login?)[Sign up](https://api.wandb.ai/oidc/login?signup=true)\n\n[Announcing new AI cloud so...",
+    "after": "@layer { \\[data-react-aria-pressable\\] { touch-action: pan-x pan-y pinch-zoom; } } html { background-color: #f9f9f9; } html\\[data-mode='dark'\\] { background-color: #232323; } /\\* anti-flicker snippet for Google Optimize \\*/ .async-hide { opacity: 0 !important; } const theme = localStorage.getItem('\\_\\_wb\\_theme') || 'light'; if (theme === 'dark') { document.documentElement.classList.add('night-mode'); // Used for tailwind dark mode document.documentElement.setAttribute('data-mode', 'dark'); // T..."
+  },
+  "diff": {
+    "added_sentences": [
+      "@layer { \\[data-react-aria-pressable\\] { touch-action: pan-x pan-y pinch-zoom; } } html { background-color: #f9f9f9; } html\\[data-mode='dark'\\] { background-color: #232323; } /\\* anti-flicker snippet for Google Optimize \\*/ .",
+      "async-hide { opacity: 0 !",
+      "important; } const theme = localStorage.",
+      "getItem('\\_\\_wb\\_theme') || 'light'; if (theme === 'dark') { document.",
+      "documentElement.",
+      "classList.",
+      "add('night-mode'); // Used for tailwind dark mode document.",
+      "documentElement.",
+      "setAttribute('data-mode', 'dark'); // The data attribute used by @wandb/components to toggle dark mode document.",
+      "documentElement."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://wandb.",
+      "ai/fully-connected\ncompany: Weights & Biases\nscraped_at: 2025-07-04 20:21:01\n---\n\n           Weights & Biases\n\n[Skip to main content](#main-content)\n\n[!",
+      "ai/wandb_fc/product-announcements-fc/reports/From-Online-Evaluations-to-Inference-here-s-what-we-announced-at-Fully-Connected-2025--VmlldzoxMzIzODM2Mw)\n\n!",
+      "png)\n\n[](/byyoung3/crewai_debug_agent/reports/Debugging-CrewAI-multi-agent-applications--VmlldzoxMzQyNTY5NQ)\n\n[\n\nDebugging CrewAI multi-agent applications\n\n](/byyoung3/crewai_debug_agent/reports/Debugging-CrewAI-multi-agent-applications--VmlldzoxMzQyNTY5NQ)\n\n[](/byyoung3/crewai_debug_agent/reports/Debugging-CrewAI-multi-agent-applications--VmlldzoxMzQyNTY5NQ)[Brett Young](/byyoung3)\n\nJul 03\n\nArticles, Agents, GenAI, Tutorial\n\n!",
+      "md5=52d99d075d1b9350f6de23bedee57249)\n\n[](/wandb_fc/product-announcements-fc/reports/Product-newsletter-Updates-and-new-features-for-June-2025--VmlldzoxMzQxOTg2OA)\n\n[\n\nProduct newsletter: Updates and new features for June 2025\n\n](/wandb_fc/product-announcements-fc/reports/Product-newsletter-Updates-and-new-features-for-June-2025--VmlldzoxMzQxOTg2OA)\n\n[](/wandb_fc/product-announcements-fc/reports/Product-newsletter-Updates-and-new-features-for-June-2025--VmlldzoxMzQxOTg2OA)[Kimberly Madia](/kimberly-madia)\n\nJul 01\n\nArticles, Weave, Agents, Evaluations\n\n!",
+      "png)\n\n[](/iamleonie/Articles/reports/Understanding-LLMOps-Large-Language-Model-Operations--Vmlldzo0MDgyMDc2)\n\n[\n\nUnderstanding LLMOps: Large Language Model Operations\n\n](/iamleonie/Articles/reports/Understanding-LLMOps-Large-Language-Model-Operations--Vmlldzo0MDgyMDc2)\n\n[](/iamleonie/Articles/reports/Understanding-LLMOps-Large-Language-Model-Operations--Vmlldzo0MDgyMDc2)[Leonie](/iamleonie)\n\nApr 21\n\nLLM, Articles, Beginner, GenAI, NLP, Tutorial\n\n!",
+      "md5=95c28b005d912a1b71a9f3dd86ae0c32)\n\nClear Search\n\nEnglish\n\n[](/byyoung3/ML_NEWS3/reports/Types-of-reinforcement-learning-algorithms---VmlldzoxMzI4NjgzMw)\n\n[\n\nTypes of reinforcement learning algorithms\n\n](/byyoung3/ML_NEWS3/reports/Types-of-reinforcement-learning-algorithms---VmlldzoxMzI4NjgzMw)\n\n[](/byyoung3/ML_NEWS3/reports/Types-of-reinforcement-learning-algorithms---VmlldzoxMzI4NjgzMw)[Brett Young](/byyoung3)\n\nJul 01\n\nArticles, Reinforcement Learning, Agents, GenAI\n\n!",
+      "md5=316a6609ef0104dd81590402d1599603)\n\n[](/byyoung3/pong-dqn-multi-agent/reports/Exploring-multi-agent-reinforcement-learning-MARL---VmlldzoxMjg3MjI4OA)\n\n[\n\nExploring multi-agent reinforcement learning (MARL)\n\n](/byyoung3/pong-dqn-multi-agent/reports/Exploring-multi-agent-reinforcement-learning-MARL---VmlldzoxMjg3MjI4OA)\n\n[](/byyoung3/pong-dqn-multi-agent/reports/Exploring-multi-agent-reinforcement-learning-MARL---VmlldzoxMjg3MjI4OA)[Brett Young](/byyoung3)\n\nMay 22\n\nArticles, Reinforcement Learning, Agents, Evaluations, Panels\n\n!",
+      "com/byyoung3/images/views/12872288/preview.",
+      "md5=476e6bd9a297f40cbcf183dc86d8ae58)\n\n[](/byyoung3/Generative-AI/reports/Building-and-evaluating-AI-agents-with-Azure-AI-Foundry-Agent-Service-and-W-B-Weave--VmlldzoxMjQzNTM5MA)\n\n[\n\nBuilding and evaluating AI agents with Azure AI Foundry Agent Service and W&B Weave\n\n](/byyoung3/Generative-AI/reports/Building-and-evaluating-AI-agents-with-Azure-AI-Foundry-Agent-Service-and-W-B-Weave--VmlldzoxMjQzNTM5MA)\n\n[](/byyoung3/Generative-AI/reports/Building-and-evaluating-AI-agents-with-Azure-AI-Foundry-Agent-Service-and-W-B-Weave--VmlldzoxMjQzNTM5MA)[Brett Young](/byyoung3)\n\nMay 19\n\nArticles, Weave, Agents, Tutorial, Evaluations\n\n!"
+    ],
+    "key_changes": [
+      "New version: 1.2, 0.5, 13.3333333333, 30.6666666667, 65.3333333333, 82.6666666667, 91.3333333333, 1.5, 1.25, 1.3, 1.35, 1.6, 1.4, 1.7, 1.1, 7.5, 6.5, 11.5, 1.75, 0.2",
+      "New model mentioned",
+      "New update mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 89,
+    "summary": "89% content changed (2121 additions, 24 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "onetrust-pc-sdk",
+        "frequency": 808
+      },
+      {
+        "word": "onetrust-banner-sdk",
+        "frequency": 279
+      },
+      {
+        "word": "ot-sdk-cookie-policy",
+        "frequency": 224
+      },
+      {
+        "word": "width",
+        "frequency": 178
+      },
+      {
+        "word": "font-size",
+        "frequency": 113
+      },
+      {
+        "word": "ot-acc-hdr",
+        "frequency": 113
+      },
+      {
+        "word": "100",
+        "frequency": 107
+      },
+      {
+        "word": "none",
+        "frequency": 102
+      },
+      {
+        "word": "10px",
+        "frequency": 102
+      },
+      {
+        "word": "display",
+        "frequency": 97
+      },
+      {
+        "word": "auto",
+        "frequency": 87
+      },
+      {
+        "word": "input",
+        "frequency": 86
+      },
+      {
+        "word": "position",
+        "frequency": 85
+      },
+      {
+        "word": "height",
+        "frequency": 84
+      },
+      {
+        "word": "ot-sdk-cookie-policy-v2",
+        "frequency": 84
+      },
+      {
+        "word": "onetrust-consent-sdk",
+        "frequency": 71
+      },
+      {
+        "word": "solid",
+        "frequency": 68
+      },
+      {
+        "word": "ot-vnd-item",
+        "frequency": 68
+      },
+      {
+        "word": "left",
+        "frequency": 67
+      },
+      {
+        "word": "1px",
+        "frequency": 64
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "generative-ai",
+        "frequency": 6
+      },
+      {
+        "word": "26600",
+        "frequency": 4
+      },
+      {
+        "word": "26800",
+        "frequency": 4
+      },
+      {
+        "word": "pong-dqn-multi-agent",
+        "frequency": 3
+      },
+      {
+        "word": "exploring-multi-agent-reinforcement-learning-marl---vmlldzoxmjg3mji4oa",
+        "frequency": 3
+      },
+      {
+        "word": "building-and-evaluating-ai-agents-with-azure-ai-foundry-agent-service-and-w-b-weave--vmlldzoxmjqzntm5ma",
+        "frequency": 3
+      },
+      {
+        "word": "nvidia-announcements",
+        "frequency": 3
+      },
+      {
+        "word": "accelerating-enterprise-roi-from-ai-agents-with-the-nvidia-enterprise-ai-factory-weights-biases---vmlldzoxmjc3mzywnq",
+        "frequency": 3
+      },
+      {
+        "word": "evaluating-your-mcp-and-a2a-agents-with-w-b-weave--vmlldzoxmjy5nzi1ng",
+        "frequency": 3
+      },
+      {
+        "word": "264",
+        "frequency": 2
+      },
+      {
+        "word": "2624",
+        "frequency": 2
+      },
+      {
+        "word": "26255",
+        "frequency": 2
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "utc",
+        "frequency": 2
+      },
+      {
+        "word": "26linux",
+        "frequency": 2
+      },
+      {
+        "word": "20x86",
+        "frequency": 2
+      },
+      {
+        "word": "b48725bf-7ad5-4ee9-97e5-16846e806640",
+        "frequency": 2
+      },
+      {
+        "word": "31af42e2-b78a-4a49-89ce-5025130d50ef",
+        "frequency": 2
+      },
+      {
+        "word": "800",
+        "frequency": 1
+      },
+      {
+        "word": "4582",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "button": {
+        "before": 2,
+        "after": 108,
+        "change": 106
+      },
+      "not": {
+        "before": 22,
+        "after": 96,
+        "change": 74
+      },
+      "label": {
+        "before": 16,
+        "after": 87,
+        "change": 71
+      },
+      "right": {
+        "before": 2,
+        "after": 67,
+        "change": 65
+      },
+      "type": {
+        "before": 2,
+        "after": 66,
+        "change": 64
+      },
+      "form": {
+        "before": 2,
+        "after": 48,
+        "change": 46
+      },
+      "function": {
+        "before": 4,
+        "after": 39,
+        "change": 35
+      },
+      "checkbox": {
+        "before": 8,
+        "after": 41,
+        "change": 33
+      },
+      "center": {
+        "before": 2,
+        "after": 25,
+        "change": 23
+      },
+      "true": {
+        "before": 2,
+        "after": 23,
+        "change": 21
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "ot-sdk-cookie-policy-v2 ot-sdk-cookie-policy",
+        "count": 71
+      },
+      {
+        "phrase": "onetrust-consent-sdk onetrust-pc-sdk",
+        "count": 52
+      },
+      {
+        "phrase": "input type",
+        "count": 51
+      },
+      {
+        "phrase": "1px solid",
+        "count": 50
+      },
+      {
+        "phrase": "width 100",
+        "count": 48
+      },
+      {
+        "phrase": "mkto form",
+        "count": 46
+      },
+      {
+        "phrase": "display inline-block",
+        "count": 43
+      },
+      {
+        "phrase": "position relative",
+        "count": 41
+      },
+      {
+        "phrase": "ot-vs-list ot-vnd-item",
+        "count": 37
+      },
+      {
+        "phrase": "onetrust-pc-sdk ot-accordion-layout",
+        "count": 37
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

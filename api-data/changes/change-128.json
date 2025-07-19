@@ -1,0 +1,254 @@
+{
+  "change_id": 128,
+  "url": "https://blog.palantir.com",
+  "company": "Palantir",
+  "company_category": "Enterprise AI",
+  "detected_at": "2025-07-18 16:40:14",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "No significant changes were detected between the previous and current content. The content appears to be identical, with no new or different information.",
+  "interest_drivers": [],
+  "technical_innovation_score": 2,
+  "business_impact_score": 2,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://blog.palantir.com\ncompany: Palantir\nscraped_at: 2025-07-04 20:17:50\n---\n\nPalantir Blog\n\n[Homepage](https://medium.com/)\n\n[Open in app](https://rsci.app.link/?%24canonical_url=https%3A%2F%2Fmedium.com/palantir%3F~feature=LoMobileNavBar&~channel=ShowCollectionHome&~stage=m2)\n\n[Sign in](https://medium.com/m/signin?redirect=https%3A%2F%2Fblog.palantir.com%2F&source=--------------------------nav_reg&operation=login)[Get started](https://medium.com/m/signin?redirect=https%3A%2F%2Fblog...",
+    "after": "Palantir Blog{\"@context\": \"http://schema.org\", \"@graph\": \\[{\"@type\": \"WebSite\", \"url\": \"https:\\\\/\\\\/blog.palantir.com\", \"name\": \"Palantir Blog\", \"alternateName\": \"Palantir Blog\"},{\"@type\": \"Organization\", \"url\": \"https:\\\\/\\\\/blog.palantir.com\", \"name\": \"Palantir Blog\"}\\]}!function(n,e){var t,o,i,c=\\[\\],f={passive:!0,capture:!0},r=new Date,a=\"pointerup\",u=\"pointercancel\";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.forEach(function(n){n(o,t)}),c=\\[\\])}function l(t..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Palantir Blog{\"@context\": \"http://schema.",
+      "org\", \"@graph\": \\[{\"@type\": \"WebSite\", \"url\": \"https:\\\\/\\\\/blog.",
+      "com\", \"name\": \"Palantir Blog\", \"alternateName\": \"Palantir Blog\"},{\"@type\": \"Organization\", \"url\": \"https:\\\\/\\\\/blog.",
+      "com\", \"name\": \"Palantir Blog\"}\\]}!",
+      "function(n,e){var t,o,i,c=\\[\\],f={passive:!",
+      "0,capture:!",
+      "0},r=new Date,a=\"pointerup\",u=\"pointercancel\";function p(n,c){t||(t=c,o=n,i=new Date,w(e),s())}function s(){o>=0&&o<i-r&&(c.",
+      "forEach(function(n){n(o,t)}),c=\\[\\])}function l(t){if(t.",
+      "cancelable){var o=(t.",
+      "timeStamp>1e12?"
+    ],
+    "removed_sentences": [
+      "---\nurl: https://blog.",
+      "com\ncompany: Palantir\nscraped_at: 2025-07-04 20:17:50\n---\n\nPalantir Blog\n\n[Homepage](https://medium.",
+      "source=collection_home---4------0-----------------------)\n\n[\n\n###\n\nWhy We Serve: Palantirians Reflect on Duty, Honor & Innovation\n\nAt Palantir, service and innovation go hand in hand\n\n\n](https://blog.",
+      "source=collection_home---4------1-----------------------)\n\n[\n\n###\n\nFrom R&D to Real-World Impact\n\nPalantir’s Advice for the White House OSTP’s AI R&D Plan\n\n\n](https://blog.",
+      "source=collection_home---4------2-----------------------)\n\n[\n\n###\n\nSecuring America’s Defense Industrial Base\n\nPalantir FedStart and the Path to CMMC Compliance\n\n\n](https://blog.",
+      "source=collection_home---4------3-----------------------)\n\n[\n\n###\n\nCorrecting the Record: Palantir’s Support to the US Government is Not a Political Football\n\nFor over two decades and across multiple administrations, Palantir has been helping the US government provide essential services\n\n\n](https://blog.",
+      "source=collection_home---4------4-----------------------)\n\n[\n\n###\n\nPalantir Advocates for Balanced Data Privacy Legislation in RFI Response\n\nPrivacy rights are foundational to American democracy — and to Palantir’s mission\n\n\n](https://blog.",
+      "source=collection_home---4------5-----------------------)\n\n[\n\n###\n\nCorrecting the Record: Responses to the May 30, 2025 New York Times Article on Palantir\n\nFurther clarifying what Palantir does and doesn’t do\n\n\n](https://blog.",
+      "source=collection_home---4------6-----------------------)\n\n[\n\n###\n\nPalantir Is Still Not a Data Company (Palantir Explained, #7)\n\nA refresher on the most common misconceptions about Palantir, what we do, and how we work\n\n\n](https://blog.",
+      "source=collection_home---4------7-----------------------)\n\n[\n\n###\n\nPalantir’s Blueprint for Early Career Success in Product Design\n\nIf you’re eager to make real-world impact early in your design career, consider joining us at Palantir."
+    ],
+    "key_changes": [
+      "New version: 0.24705882352941178, 0.6980392156862745, 0.8980392156862745, 0.9490196078431372, 0.8, 0.2, 0.6, 0.4, 0.2980392156862745, 0.4980392156862745, 0.09803921568627451, 0.51, 0.08, 0.003, 0.005, 0.15, 0.05, 50.00, 0.1, 9.909433962264151, 0.3, 4.373584905660378, 3.15314465408805, 17.486792452830187, 5.943396226415095, 16.656603773584905, 4.49811320754717, 6.8830188679245285, 3.3811320754716983, 7.286792452830189",
+      "Price change: $1, $2",
+      "New date mentioned: 25/04/29, 23/12/26, June 17, 2025, 25/06/06, 20/08/26, 25/04/10, 25/05/30, 24/08/17, 25/04/25, 22/02/14, 05/30/2025, 25/01/31, 25/02/06",
+      "New model mentioned",
+      "New api mentioned",
+      "New update mentioned",
+      "New performance mentioned",
+      "New feature mentioned",
+      "New partnership mentioned",
+      "New acquisition mentioned"
+    ],
+    "change_percentage": 81,
+    "summary": "81% content changed (1676 additions, 26 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "255",
+        "frequency": 340
+      },
+      {
+        "word": "false",
+        "frequency": 333
+      },
+      {
+        "word": "true",
+        "frequency": 292
+      },
+      {
+        "word": "type",
+        "frequency": 250
+      },
+      {
+        "word": "important",
+        "frequency": 225
+      },
+      {
+        "word": "rgba",
+        "frequency": 216
+      },
+      {
+        "word": "enable",
+        "frequency": 148
+      },
+      {
+        "word": "name",
+        "frequency": 147
+      },
+      {
+        "word": "color",
+        "frequency": 110
+      },
+      {
+        "word": "originalwidth",
+        "frequency": 106
+      },
+      {
+        "word": "originalheight",
+        "frequency": 106
+      },
+      {
+        "word": "u-imagespectrum",
+        "frequency": 101
+      },
+      {
+        "word": "u-resetspectrum",
+        "frequency": 92
+      },
+      {
+        "word": "postcount",
+        "frequency": 88
+      },
+      {
+        "word": "alts",
+        "frequency": 86
+      },
+      {
+        "word": "httpstatus",
+        "frequency": 86
+      },
+      {
+        "word": "text",
+        "frequency": 81
+      },
+      {
+        "word": "200",
+        "frequency": 72
+      },
+      {
+        "word": "slug",
+        "frequency": 70
+      },
+      {
+        "word": "metadata",
+        "frequency": 66
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "2025": {
+        "before": 2,
+        "after": 27,
+        "change": 25
+      },
+      "palantir": {
+        "before": 250,
+        "after": 468,
+        "change": 218
+      },
+      "https": {
+        "before": 137,
+        "after": 287,
+        "change": 150
+      },
+      "url": {
+        "before": 2,
+        "after": 140,
+        "change": 138
+      },
+      "com": {
+        "before": 137,
+        "after": 271,
+        "change": 134
+      },
+      "www": {
+        "before": 1,
+        "after": 76,
+        "change": 75
+      },
+      "medium": {
+        "before": 31,
+        "after": 101,
+        "change": 70
+      },
+      "png": {
+        "before": 23,
+        "after": 82,
+        "change": 59
+      },
+      "blog": {
+        "before": 111,
+        "after": 163,
+        "change": 52
+      },
+      "pcl": {
+        "before": 1,
+        "after": 28,
+        "change": 27
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "255 255",
+        "count": 226
+      },
+      {
+        "phrase": "palantir com",
+        "count": 174
+      },
+      {
+        "phrase": "blog palantir",
+        "count": 135
+      },
+      {
+        "phrase": "https blog",
+        "count": 129
+      },
+      {
+        "phrase": "true enable",
+        "count": 123
+      },
+      {
+        "phrase": "rgba 255",
+        "count": 113
+      },
+      {
+        "phrase": "url https",
+        "count": 105
+      },
+      {
+        "phrase": "type text",
+        "count": 76
+      },
+      {
+        "phrase": "color rgba",
+        "count": 75
+      },
+      {
+        "phrase": "httpstatus 200",
+        "count": 71
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

@@ -1,0 +1,285 @@
+{
+  "change_id": 163,
+  "url": "https://sourcegraph.com/cody",
+  "company": "Sourcegraph",
+  "company_category": "AI Coding",
+  "detected_at": "2025-07-18 16:41:44",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "The update mentions the addition of Visual Studio (experimental) to the list of supported IDEs, but the overall content remains largely unchanged, indicating a low level of technical innovation and business impact.",
+  "interest_drivers": [
+    "Minor update to IDE support"
+  ],
+  "technical_innovation_score": 2,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://sourcegraph.com/cody\ncompany: Sourcegraph\nscraped_at: 2025-07-04 20:20:32\n---\n\nCody | AI coding assistant from Sourcegraph\n\n[UX Design & Webflow Agency NYC | Composite Global](https://www.composite.global/ \"Site built by Composite – Webflow Agency NYC & UX Design Agency NYC\")\n\nIMPORTANT: There are changes to Cody Free, Cody Pro, and Enterprise Starter plans. Learn more\n\n![](https://cdn.prod.website-files.com/673f71b4ebbb99190437de75/685af602e682ec33431e8f0f_icon-chevron_up.svg)\n...",
+    "after": ".wf-force-outline-none\\[tabindex=\"-1\"\\]:focus{outline:none;}Cody | AI coding assistant from Sourcegraph!function(o,c){var n=c.documentElement,t=\" w-mod-\";n.className+=t+\"js\",(\"ontouchstart\"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+\"touch\")}(window,document);.anti-flicker, .anti-flicker \\* {visibility: hidden !important; opacity: 0 !important;}\\[data-wf-hidden-variation\\], \\[data-wf-hidden-variation\\] \\* { display: none !important; }localStorage.removeItem('intellimize\\_..."
+  },
+  "diff": {
+    "added_sentences": [
+      "wf-force-outline-none\\[tabindex=\"-1\"\\]:focus{outline:none;}Cody | AI coding assistant from Sourcegraph!",
+      "function(o,c){var n=c.",
+      "documentElement,t=\" w-mod-\";n.",
+      "className+=t+\"js\",(\"ontouchstart\"in o||o.",
+      "DocumentTouch&&c instanceof DocumentTouch)&&(n.",
+      "className+=t+\"touch\")}(window,document);.",
+      "anti-flicker, .",
+      "anti-flicker \\* {visibility: hidden !",
+      "important; opacity: 0 !",
+      "important;}\\[data-wf-hidden-variation\\], \\[data-wf-hidden-variation\\] \\* { display: none !"
+    ],
+    "removed_sentences": [
+      "---\nurl: https://sourcegraph.",
+      "com/cody\ncompany: Sourcegraph\nscraped_at: 2025-07-04 20:20:32\n---\n\nCody | AI coding assistant from Sourcegraph\n\n[UX Design & Webflow Agency NYC | Composite Global](https://www.",
+      "global/ \"Site built by Composite – Webflow Agency NYC & UX Design Agency NYC\")\n\nIMPORTANT: There are changes to Cody Free, Cody Pro, and Enterprise Starter plans.",
+      "svg)\n\nCode Search\n\nAdvanced codebase search, batch changes, and insights\n\n](/code-search)\n\n[\n\nFeatures\n\n](/features)[\n\nChangelog\n\n](/changelog)\n\nFeatures\n\n[UX Design & Webflow Agency NYC | Composite Global](https://www.",
+      "global/ \"Site built by Composite – Webflow Agency NYC & UX Design Agency NYC\")\n\n[\n\nCoding Agent\n\nAccelerate development in complex codebases\n\n\n](/amp)[\n\nCode Search\n\nFind and fix code across your entire codebase\n\n\n](/code-search)[\n\nBatch Changes\n\nAutomate large-scale code changes\n\n\n](/batch-changes)\n\nResources\n\n[\n\nDocs\n\nProduct documentation\n\n\n](https://sourcegraph.",
+      "com/docs)[\n\nSupport Forum\n\nQuestions and feedback\n\n\n](https://community.",
+      "com/)[\n\nResource Library\n\nVideos, guides, content, and more\n\n\n](/resources)[\n\nCustomer Stories\n\nSuccess stories and case studies\n\n\n](/case-studies)[\n\nChangelog\n\nLatest product updates shipped\n\n\n](/changelog)[\n\nBlog\n\nLatest posts and company updates\n\n\n](/blog)[\n\nCommunity\n\nDev community, open source\n\n\n](/community)\n\n[\n\nPricing\n\n](/pricing)[\n\nSearch public code\n\n](https://sourcegraph.",
+      "svg)](/)\n\n[\n\nBook a demo\n\n\n](/contact/request-info)[\n\nLogin\n\n](https://sourcegraph.",
+      "returnTo=/cody/manage)\n\nFeatures\n\n[\n\nCoding Agent\n\n](/amp)[\n\nCode Search\n\n](/code-search)[\n\nBatch Changes\n\n](/batch-changes)\n\n[\n\nResources\n\n\n](#)\n\n[\n\nSupport Forum\n\n](https://community.",
+      "svg)\n\nContinue With GitHub\n\n\n](https://accounts."
+    ],
+    "key_changes": [
+      "New version: 2.0, 1.5, 0.7, 32.21, 65.39, 104.43, 175.9, 31.37, 0.818127, 70.39, 0.6, 96.66, 0.2, 0.1, 0.125, 1.75, 2.25, 2.75, 4.5, 5.25, 5.5, 6.5, 6.75, 7.5, 2.375, 3.25, 3.75, 4.25, 4.75, 5.75, 14.97, 30.88, 47.49, 0.5, 0.75, 0.875, 0.25, v1.0, 1.0",
+      "New api mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 67,
+    "summary": "67% content changed (933 additions, 23 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "utm",
+        "frequency": 90
+      },
+      {
+        "word": "var",
+        "frequency": 85
+      },
+      {
+        "word": "0rem",
+        "frequency": 74
+      },
+      {
+        "word": "none",
+        "frequency": 52
+      },
+      {
+        "word": "display",
+        "frequency": 45
+      },
+      {
+        "word": "function",
+        "frequency": 44
+      },
+      {
+        "word": "5rem",
+        "frequency": 36
+      },
+      {
+        "word": "document",
+        "frequency": 34
+      },
+      {
+        "word": "inherit",
+        "frequency": 28
+      },
+      {
+        "word": "max-width",
+        "frequency": 27
+      },
+      {
+        "word": "page",
+        "frequency": 26
+      },
+      {
+        "word": "short",
+        "frequency": 25
+      },
+      {
+        "word": "long",
+        "frequency": 25
+      },
+      {
+        "word": "window",
+        "frequency": 24
+      },
+      {
+        "word": "medium",
+        "frequency": 24
+      },
+      {
+        "word": "data-background-color",
+        "frequency": 24
+      },
+      {
+        "word": "const",
+        "frequency": 23
+      },
+      {
+        "word": "padding-bottom",
+        "frequency": 22
+      },
+      {
+        "word": "element",
+        "frequency": 22
+      },
+      {
+        "word": "referrer",
+        "frequency": 22
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "sales",
+        "frequency": 3
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "800",
+        "frequency": 1
+      },
+      {
+        "word": "1617",
+        "frequency": 1
+      },
+      {
+        "word": "895534",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "6773272b08ef8981bac1fbf9",
+        "frequency": 1
+      },
+      {
+        "word": "arrow",
+        "frequency": 1
+      },
+      {
+        "word": "a3db495b-eff9-47ff-8d71-0e150c3b4eb3",
+        "frequency": 1
+      },
+      {
+        "word": "4f98bd10591411f091e501c9977405c8",
+        "frequency": 1
+      },
+      {
+        "word": "4f98ee70591411f0b61511ab6ae833aa",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "important": {
+        "before": 2,
+        "after": 119,
+        "change": 117
+      },
+      "url": {
+        "before": 1,
+        "after": 40,
+        "change": 39
+      },
+      "get": {
+        "before": 11,
+        "after": 46,
+        "change": 35
+      },
+      "source": {
+        "before": 1,
+        "after": 32,
+        "change": 31
+      },
+      "not": {
+        "before": 2,
+        "after": 31,
+        "change": 29
+      },
+      "mid": {
+        "before": 1,
+        "after": 26,
+        "change": 25
+      },
+      "content": {
+        "before": 1,
+        "after": 22,
+        "change": 21
+      },
+      "color": {
+        "before": 1,
+        "after": 19,
+        "change": 18
+      },
+      "https": {
+        "before": 118,
+        "after": 134,
+        "change": 16
+      },
+      "all": {
+        "before": 4,
+        "after": 17,
+        "change": 13
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "https cdn",
+        "count": 85
+      },
+      {
+        "phrase": "cdn prod",
+        "count": 82
+      },
+      {
+        "phrase": "prod website-files",
+        "count": 82
+      },
+      {
+        "phrase": "website-files com",
+        "count": 82
+      },
+      {
+        "phrase": "0rem important",
+        "count": 72
+      },
+      {
+        "phrase": "com 673f71b4ebbb99190437de75",
+        "count": 69
+      },
+      {
+        "phrase": "svg https",
+        "count": 34
+      },
+      {
+        "phrase": "display none",
+        "count": 30
+      },
+      {
+        "phrase": "sourcegraph com",
+        "count": 28
+      },
+      {
+        "phrase": "get utm",
+        "count": 25
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

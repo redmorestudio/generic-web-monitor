@@ -1,0 +1,250 @@
+{
+  "change_id": 132,
+  "url": "https://blog.perplexity.ai",
+  "company": "Perplexity AI",
+  "company_category": "AI Search",
+  "detected_at": "2025-07-18 16:40:30",
+  "interest_level": 8,
+  "interest_category": "breakthrough",
+  "interest_explanation": "Perplexity AI has introduced Comet, a web browser designed to revolutionize the internet browsing experience by leveraging AI capabilities, indicating significant technical innovation and potential business impact.",
+  "interest_drivers": [
+    "Introduction of Comet, a web browser built for today's internet",
+    "Emphasis on browsing at the speed of thought"
+  ],
+  "technical_innovation_score": 8,
+  "business_impact_score": 7,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://blog.perplexity.ai\ncompany: Perplexity AI\nscraped_at: 2025-07-04 20:17:57\n---\n\n   Perplexity Blog\n\n[\n\n![](https://framerusercontent.com/images/vHww1Ye1lCdzOILZcifoCCqmtKU.png)\n\n](https://perplexity.ai/)\n\n[\n\nBlog\n\n\n](./hub)\n\n[\n\nCareers\n\n\n](./hub/careers)\n\n[\n\nHelp Center\n\n\n](./hub/helpcenter)\n\n[\n\n![](https://framerusercontent.com/images/TPDRRsckgte6GnPC4QZSWbDvA.svg)\n\n# Try Perplexity\n\n\n](https://perplexity.ai)\n\n[\n\n![](https://framerusercontent.com/images/pm5nWlySoYFELMnjcmm3EVxyN...",
+    "after": "     Perplexity Blog                 window.dataLayer = window.dataLayer || \\[\\]; function gtag(){window.dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-SH9PRBQG23'); (()=>{function w(){let o=e=>{let t=new URL(e);return\\`${t.origin}${t.pathname}\\`.replace(/\\\\/$/u,\"\")},i=e=>e.split(\"-\")\\[0\\],u=window.location.hostname;function f(){let e=new Map;return document.querySelectorAll('link\\[rel=\"alternate\"\\]').forEach(t=>{let n=t.getAttribute(\"hreflang\"),r=t.getAttribute(\"href\");!n..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Perplexity Blog                 window.",
+      "dataLayer = window.",
+      "dataLayer || \\[\\]; function gtag(){window.",
+      "dataLayer.",
+      "push(arguments);} gtag('js', new Date()); gtag('config', 'G-SH9PRBQG23'); (()=>{function w(){let o=e=>{let t=new URL(e);return\\`${t.",
+      "origin}${t.",
+      "pathname}\\`.",
+      "replace(/\\\\/$/u,\"\")},i=e=>e.",
+      "split(\"-\")\\[0\\],u=window.",
+      "location."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://blog.",
+      "ai\ncompany: Perplexity AI\nscraped_at: 2025-07-04 20:17:57\n---\n\n   Perplexity Blog\n\n[\n\n!",
+      "ai/)\n\n[\n\nBlog\n\n\n](.",
+      "/hub)\n\n[\n\nCareers\n\n\n](.",
+      "/hub/careers)\n\n[\n\nHelp Center\n\n\n](.",
+      "svg)\n\n# Try Perplexity\n\n\n](https://perplexity.",
+      "/hub/blog/introducing-perplexity-max)\n\n### [Introducing Perplexity Max](.",
+      "/hub/blog/introducing-perplexity-max) \n\n[\n\nREAD MORE\n\n\n](.",
+      "jpg)\n\n#### Accelerating Sonar Through Speculation\n\nJun 10, 2025\n\n\n](.",
+      "png)\n\n#### Introducing Perplexity Labs\n\nMay 29, 2025\n\n\n](."
+    ],
+    "key_changes": [
+      "New version: 91.65, 19.67, 107.8, 95.88, 32.69, 10.9, 91.78, 72.7, 18.56, 131.49, 106.99, 36.47, 12.16, 82.25, 90.24, 30.08, 106.38, 103.83, 35.4, 11.8, 84.75, 93.79, 20.13, 105.34, 171.38, 49.27, 1.76, 56.83, 89.09, 19.12, 110.9, 113.63, 38.74, 12.91, 77.44, 88.43, 18.22, 112.52, 88.04, 29.35, 109.05, 94.08, 20.19, 105.01, 89.79, 22.36, 107.89, 98.56, 24.54, 98.29, 1.2, 1.3, 2.25, 20.5, 11.5, 4.442687747035573, 1.1, 1.5, 50.00000000000002, 9.5, 0.4, 0.8, 0.1, 0.05, 0.15",
+      "New model mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 95,
+    "summary": "95% content changed (2831 additions, 55 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "var",
+        "frequency": 692
+      },
+      {
+        "word": "font-family",
+        "frequency": 303
+      },
+      {
+        "word": "inter",
+        "frequency": 295
+      },
+      {
+        "word": "font-face",
+        "frequency": 282
+      },
+      {
+        "word": "src",
+        "frequency": 282
+      },
+      {
+        "word": "font-weight",
+        "frequency": 273
+      },
+      {
+        "word": "font-style",
+        "frequency": 272
+      },
+      {
+        "word": "font-display",
+        "frequency": 266
+      },
+      {
+        "word": "woff2",
+        "frequency": 265
+      },
+      {
+        "word": "assets",
+        "frequency": 259
+      },
+      {
+        "word": "unicode-range",
+        "frequency": 252
+      },
+      {
+        "word": "framer-text",
+        "frequency": 236
+      },
+      {
+        "word": "display",
+        "frequency": 210
+      },
+      {
+        "word": "normal",
+        "frequency": 202
+      },
+      {
+        "word": "span",
+        "frequency": 196
+      },
+      {
+        "word": "none",
+        "frequency": 192
+      },
+      {
+        "word": "swap",
+        "frequency": 182
+      },
+      {
+        "word": "width",
+        "frequency": 151
+      },
+      {
+        "word": "framer-4tlsg",
+        "frequency": 143
+      },
+      {
+        "word": "data-framer-component-type",
+        "frequency": 142
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "2024": {
+        "before": 23,
+        "after": 44,
+        "change": 21
+      },
+      "2025": {
+        "before": 22,
+        "after": 49,
+        "change": 27
+      },
+      "com": {
+        "before": 54,
+        "after": 324,
+        "change": 270
+      },
+      "url": {
+        "before": 1,
+        "after": 270,
+        "change": 269
+      },
+      "https": {
+        "before": 77,
+        "after": 346,
+        "change": 269
+      },
+      "framerusercontent": {
+        "before": 50,
+        "after": 312,
+        "change": 262
+      },
+      "center": {
+        "before": 2,
+        "after": 127,
+        "change": 125
+      },
+      "new": {
+        "before": 3,
+        "after": 23,
+        "change": 20
+      },
+      "navigator": {
+        "before": 1,
+        "after": 8,
+        "change": 7
+      },
+      "app": {
+        "before": 3,
+        "after": 10,
+        "change": 7
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "https framerusercontent",
+        "count": 312
+      },
+      {
+        "phrase": "framerusercontent com",
+        "count": 312
+      },
+      {
+        "phrase": "font-face font-family",
+        "count": 282
+      },
+      {
+        "phrase": "src url",
+        "count": 266
+      },
+      {
+        "phrase": "url https",
+        "count": 266
+      },
+      {
+        "phrase": "woff2 font-display",
+        "count": 265
+      },
+      {
+        "phrase": "com assets",
+        "count": 259
+      },
+      {
+        "phrase": "font-family inter",
+        "count": 255
+      },
+      {
+        "phrase": "font-display swap",
+        "count": 182
+      },
+      {
+        "phrase": "swap font-style",
+        "count": 168
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

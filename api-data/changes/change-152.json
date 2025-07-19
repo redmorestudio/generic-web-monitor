@@ -1,0 +1,251 @@
+{
+  "change_id": 152,
+  "url": "https://runwayml.com/pricing",
+  "company": "Runway",
+  "company_category": "Video AI",
+  "detected_at": "2025-07-18 16:40:57",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes detected in the pricing page content. The current and previous content are nearly identical, with no notable updates, additions, or removals of features, plans, or pricing information.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://runwayml.com/pricing\ncompany: Runway\nscraped_at: 2025-07-04 20:19:45\n---\n\nPricing | Runway\n\n[](/)\n\n*   [Research](/research)\n*   [Product](/product)\n*   [Studios](/studios)\n*   [Company](/about)\n\n[Get Started](https://app.runwayml.com/)\n\n# Choose the best plan for you\n\nMonthly\n\nYearly \\-20% off\n\nFree\n\nFor individuals looking to explore Runway’s AI Tools and content creation features.\n\n$0\n\nper editor per month\n\nfree forever\n\nIncludes 125 credits (one time)\n\n125 credits = 25s of G...",
+    "after": "Pricing | Runway\n\n[](/)\n\n*   [Research](/research)\n*   [Product](/product)\n*   [Studios](/studios)\n*   [Company](/about)\n\n[Get Started](https://app.runwayml.com/)\n\n# Choose the best plan for you\n\nMonthly\n\nYearly \\-20% off\n\nFree\n\nFor individuals looking to explore Runway’s AI Tools and content creation features.\n\n$0\n\nper editor per month\n\nfree forever\n\nIncludes 125 credits (one time)\n\n125 credits = 25s of Gen-4 Turbo or Gen-3 Alpha Turbo\n\n[Sign Up](https://app.runwayml.com/)\n\n*   *   Generative V..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Pricing | Runway\n\n[](/)\n\n*   [Research](/research)\n*   [Product](/product)\n*   [Studios](/studios)\n*   [Company](/about)\n\n[Get Started](https://app.",
+      "com/)\n\n*   *   Generative Video\n    *   Gen-4 Turbo (Image to Video)\n    *   Gen-3 Alpha Turbo (Image to Video)\n    \n*   *   Generative Image\n    *   Gen-4 (Text to Image, References)\n    \n*   *   3 video editor projects\n    \n*   *   5GB asset storage\n    \n*   *   No Gen-4 Video\n    \n\nStandard\n\nFor individuals and small teams looking for more access, more AI Tools and more export options.",
+      "*   *   Generative Video\n    *   Gen-4 (Image to Video)\n    *   Gen-3 Alpha (Text, Image and Video to Video)\n    \n*   *   Upscale resolution\n    *   All video models\n    \n*   *   Remove watermarks\n    *   All video models\n    \n*   *   Credits refresh monthly\n    *   No rate restrictions\n    *   Buy more credits\n    \n*   *   100GB asset storage\n    \n*   *   Unlimited video editor projects\n    \n*   *   Technical support via Runway dashboard\n    \n\nPro\n\nFor individuals and teams looking to add all of Runway’s features into their workflows.",
+      "*   *   Create Custom Voices for Lip Sync and Text to Speech\n    \n*   *   500GB asset storage\n    \n\nUnlimited\n\nAll the access of the pro plan with the flexibility of unlimited video generations.",
+      "*   *   Explore Mode\n    *   Unlimited generations of Gen-4 Turbo, Gen-4 (Image and Video), Gen-3 Alpha Turbo, Gen-3 Alpha and Act-One in Explore mode at relaxed rate\n    \n\nEnterprise\n\nFor large teams and organizations that need a custom, secure, and robust flexibility at scale.",
+      "Contact Us\n\nScalable for large organizations\n\n[Schedule a Demo](/sales)\n\n*   *   Includes all Pro Plan features, plus:\n    \n*   *   Single sign-on\n    \n*   *   Custom credit amounts\n    \n*   *   Configurable organization and team spaces to organize users and assets\n    \n*   *   Advanced security and compliance\n    \n*   *   Enterprise-wide onboarding\n    \n*   *   Ongoing success program\n    \n*   *   Priority support\n    \n*   *   Integration with internal tools\n    \n*   *   Workspace Analytics\n    \n\n[Contact us](/sales) for teams and custom solutions.",
+      "Made with Runway Gen-4\n\nProduct\n\n*   [Our Tools](/product)\n*   [API](/api)\n*   [Gen-4](/research/introducing-runway-gen-4)\n*   [Act-Two](/research/introducing-act-one)\n*   [Use Cases](/product/use-cases)\n*   [Staff Picks](/staff-picks)\n*   [General World Models](/research/introducing-general-world-models)\n*   [Worlds of Gen-4](/worlds-of-gen-4)\n\nInitiatives\n\n*   [Studios](/studios)\n*   [AI Film Festival ↗](https://aiff.",
+      "/ [Terms of Use](/terms-of-use) / [Privacy Policy](/privacy-policy) /  \n[Code of Conduct](/coc) / [System Status](https://status.",
+      "com/)\n\n(self.",
+      "\\_\\_next\\_f=self."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://runwayml.",
+      "com/pricing\ncompany: Runway\nscraped_at: 2025-07-04 20:19:45\n---\n\nPricing | Runway\n\n[](/)\n\n*   [Research](/research)\n*   [Product](/product)\n*   [Studios](/studios)\n*   [Company](/about)\n\n[Get Started](https://app.",
+      "com/)\n\n*   *   Generative Video\n    *   Gen-4 Turbo (Image to Video)\n    *   Gen-3 Alpha Turbo (Image to Video)\n\n*   *   Generative Image\n    *   Gen-4 (Text to Image, References)\n\n*   *   3 video editor projects\n\n*   *   5GB asset storage\n\n*   *   No Gen-4 Video\n\n\nStandard\n\nFor individuals and small teams looking for more access, more AI Tools and more export options.",
+      "*   *   Generative Video\n    *   Gen-4 (Image to Video)\n    *   Gen-3 Alpha (Text, Image and Video to Video)\n\n*   *   Upscale resolution\n    *   All video models\n\n*   *   Remove watermarks\n    *   All video models\n\n*   *   Credits refresh monthly\n    *   No rate restrictions\n    *   Buy more credits\n\n*   *   100GB asset storage\n\n*   *   Unlimited video editor projects\n\n*   *   Technical support via Runway dashboard\n\n\nPro\n\nFor individuals and teams looking to add all of Runway’s features into their workflows.",
+      "*   *   Create Custom Voices for Lip Sync and Text to Speech\n\n*   *   500GB asset storage\n\n\nUnlimited\n\nAll the access of the pro plan with the flexibility of unlimited video generations.",
+      "*   *   Explore Mode\n    *   Unlimited generations of Gen-4 Turbo, Gen-4 (Image and Video), Gen-3 Alpha Turbo, Gen-3 Alpha and Act-One in Explore mode at relaxed rate\n\n\nEnterprise\n\nFor large teams and organizations that need a custom, secure, and robust flexibility at scale.",
+      "Contact Us\n\nScalable for large organizations\n\n[Schedule a Demo](/sales)\n\n*   *   Includes all Pro Plan features, plus:\n\n*   *   Single sign-on\n\n*   *   Custom credit amounts\n\n*   *   Configurable organization and team spaces to organize users and assets\n\n*   *   Advanced security and compliance\n\n*   *   Enterprise-wide onboarding\n\n*   *   Ongoing success program\n\n*   *   Priority support\n\n*   *   Integration with internal tools\n\n*   *   Workspace Analytics\n\n\n[Contact us](/sales) for teams and custom solutions.",
+      "Made with Runway Gen-4\n\nProduct\n\n*   [Our Tools](/product)\n*   [API](/api)\n*   [Gen-4](/research/introducing-runway-gen-4)\n*   [Act-One](/research/introducing-act-one)\n*   [Use Cases](/product/use-cases)\n*   [Staff Picks](/staff-picks)\n*   [General World Models](/research/introducing-general-world-models)\n*   [Worlds of Gen-4](/worlds-of-gen-4)\n\nInitiatives\n\n*   [Studios](/studios)\n*   [AI Film Festival ↗](https://aiff.",
+      "/ [Terms of Use](/terms-of-use) / [Privacy Policy](/privacy-policy) /\n[Code of Conduct](/coc) / [System Status](https://status."
+    ],
+    "key_changes": [
+      "Price change: $1, $11",
+      "New model mentioned",
+      "New feature mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 78,
+    "summary": "78% content changed (203 additions, 9 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "true",
+        "frequency": 180
+      },
+      {
+        "word": "false",
+        "frequency": 168
+      },
+      {
+        "word": "static",
+        "frequency": 55
+      },
+      {
+        "word": "chunks",
+        "frequency": 49
+      },
+      {
+        "word": "value",
+        "frequency": 47
+      },
+      {
+        "word": "fragments",
+        "frequency": 37
+      },
+      {
+        "word": "publicapi",
+        "frequency": 36
+      },
+      {
+        "word": "null",
+        "frequency": 35
+      },
+      {
+        "word": "category",
+        "frequency": 35
+      },
+      {
+        "word": "undefined",
+        "frequency": 27
+      },
+      {
+        "word": "children",
+        "frequency": 25
+      },
+      {
+        "word": "infinity",
+        "frequency": 20
+      },
+      {
+        "word": "meta",
+        "frequency": 18
+      },
+      {
+        "word": "next",
+        "frequency": 16
+      },
+      {
+        "word": "name",
+        "frequency": 16
+      },
+      {
+        "word": "externaluser",
+        "frequency": 16
+      },
+      {
+        "word": "classname",
+        "frequency": 11
+      },
+      {
+        "word": "self",
+        "frequency": 10
+      },
+      {
+        "word": "indented",
+        "frequency": 10
+      },
+      {
+        "word": "push",
+        "frequency": 8
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "url",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "general": {
+        "before": 1,
+        "after": 32,
+        "change": 31
+      },
+      "image": {
+        "before": 7,
+        "after": 27,
+        "change": 20
+      },
+      "com": {
+        "before": 22,
+        "after": 40,
+        "change": 18
+      },
+      "content": {
+        "before": 1,
+        "after": 19,
+        "change": 18
+      },
+      "monthly": {
+        "before": 5,
+        "after": 22,
+        "change": 17
+      },
+      "gen-4": {
+        "before": 16,
+        "after": 32,
+        "change": 16
+      },
+      "video": {
+        "before": 14,
+        "after": 30,
+        "change": 16
+      },
+      "runwayml": {
+        "before": 21,
+        "after": 36,
+        "change": 15
+      },
+      "plan": {
+        "before": 6,
+        "after": 21,
+        "change": 15
+      },
+      "credits": {
+        "before": 9,
+        "after": 24,
+        "change": 15
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "static chunks",
+        "count": 49
+      },
+      {
+        "phrase": "fragments value",
+        "count": 37
+      },
+      {
+        "phrase": "category general",
+        "count": 31
+      },
+      {
+        "phrase": "general fragments",
+        "count": 31
+      },
+      {
+        "phrase": "runwayml com",
+        "count": 27
+      },
+      {
+        "phrase": "gen-3 alpha",
+        "count": 21
+      },
+      {
+        "phrase": "https app",
+        "count": 14
+      },
+      {
+        "phrase": "app runwayml",
+        "count": 14
+      },
+      {
+        "phrase": "false publicapi",
+        "count": 13
+      },
+      {
+        "phrase": "gen-4 turbo",
+        "count": 12
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

@@ -1,0 +1,252 @@
+{
+  "change_id": 156,
+  "url": "https://resemble.ai/pricing",
+  "company": "Resemble AI",
+  "company_category": "AI Voice/Audio",
+  "detected_at": "2025-07-18 16:41:00",
+  "interest_level": 3,
+  "interest_category": "routine_change",
+  "interest_explanation": "The update introduces flexible credit packages, which may impact the company's revenue model and customer acquisition strategy, but does not bring significant technical innovations.",
+  "interest_drivers": [
+    "Pricing update",
+    "Flexible credit packages"
+  ],
+  "technical_innovation_score": 2,
+  "business_impact_score": 4,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://resemble.ai/pricing\ncompany: Resemble AI\nscraped_at: 2025-07-04 20:19:41\n---\n\nPricing | Resemble AI\n\n\n\n [![Resemble AI - AI Voice Generator](data:image/svg+xml;nitro-empty-id=NDc3OjE3OA==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNzI0IDk5IiB3aWR0aD0iNzI0IiBoZWlnaHQ9Ijk5IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjwvc3ZnPg==) ![Resemble AI - AI Voice Generator](data:image/svg+xml;nitro-empty-id=NDc4OjE3OQ==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTI4MCAyNjkiIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjI2...",
+    "after": "if(navigator.userAgent.match(/MSIE|Internet Explorer/i)||navigator.userAgent.match(/Trident\\\\/7\\\\..\\*?rv:11/i)){let e=document.location.href;if(!e.match(/\\[?&\\]nonitro/)){if(e.indexOf(\"?\")==-1){if(e.indexOf(\"#\")==-1){document.location.href=e+\"?nonitro=1\"}else{document.location.href=e.replace(\"#\",\"?nonitro=1#\")}}else{if(e.indexOf(\"#\")==-1){document.location.href=e+\"&nonitro=1\"}else{document.location.href=e.replace(\"#\",\"&nonitro=1#\")}}}}Resemble AI Pricing: Flexible Credit Packages | Resemble AIva..."
+  },
+  "diff": {
+    "added_sentences": [
+      "if(navigator.",
+      "userAgent.",
+      "match(/MSIE|Internet Explorer/i)||navigator.",
+      "userAgent.",
+      "match(/Trident\\\\/7\\\\..",
+      "\\*?",
+      "rv:11/i)){let e=document.",
+      "location.",
+      "href;if(!",
+      "e."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://resemble.",
+      "ai/pricing\ncompany: Resemble AI\nscraped_at: 2025-07-04 20:19:41\n---\n\nPricing | Resemble AI\n\n\n\n [!",
+      "[Resemble AI - AI Voice Generator](data:image/svg+xml;nitro-empty-id=NDc4OjE3OQ==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTI4MCAyNjkiIHdpZHRoPSIxMjgwIiBoZWlnaHQ9IjI2OSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4=)](/)\n\n#### AI Voice Generator\n\n*   Generative AI\n\n    Voice Cloning, Text to Speech, Speech to Speech...",
+      "*   Product\n*   [\n\n    !",
+      "[](data:image/svg+xml;nitro-empty-id=NTEyOjE4NA==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNDQgNTYiIHdpZHRoPSI0NCIgaGVpZ2h0PSI1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4=)\n\n    Voice Cloning\n\n    Record or Upload your voice to create your AI Voice\n\n\n\n    ](/voice-cloning/)\n*   [\n\n    !",
+      "[](data:image/svg+xml;nitro-empty-id=NTI4OjE5MA==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTQgNTYiIHdpZHRoPSI1NCIgaGVpZ2h0PSI1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4=)\n\n    Text to Speech\n\n    High quality, human-like text-to-speech\n\n\n\n    ](/text-to-speech-converter/)\n*   [\n\n    !",
+      "[](data:image/svg+xml;nitro-empty-id=NTQ0OjE5NA==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNjAgNTAiIHdpZHRoPSI2MCIgaGVpZ2h0PSI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4=)\n\n    Speech to Speech\n\n    Realtime speech-to-speech voice conversion\n\n\n\n    ](/speech-to-speech/)\n*   [\n\n    !",
+      "[](data:image/svg+xml;nitro-empty-id=NTYwOjE5OQ==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTAgNTAiIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4=)\n\n    Voice Design\n\n    Prompt to Voice: create infinite AI Voices from text\n\n\n\n    ](/voice-design/)\n*   [\n\n    !",
+      "[](data:image/svg+xml;nitro-empty-id=NTc2OjE4Ng==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTQgNTQiIHdpZHRoPSI1NCIgaGVpZ2h0PSI1NCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4=)\n\n    Multilingual\n\n    Build your synthetic voices in 60+ Langauges\n\n\n\n    ](/languages/)\n*   [\n\n    !",
+      "[](data:image/svg+xml;nitro-empty-id=NTkyOjE4Nw==-1;base64,PHN2ZyB2aWV3Qm94PSIwIDAgNTYgNTYiIHdpZHRoPSI1NiIgaGVpZ2h0PSI1NiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48L3N2Zz4=)\n\n    Audio Editing\n\n    Audio Editing made simple with AI voices\n\n\n\n    ](/audio-editing)\n*   [\n\n    !"
+    ],
+    "key_changes": [
+      "New version: 1.75, 1.25, 2.375, 1.5, 2.25, 3.38, 5.06, 1.333, 1.6, 2.5, 1.2, 1.3, 1.4, 6.1.1, 2.4, 1.6.0, 3.7.1",
+      "Price change: $1",
+      "New performance mentioned",
+      "New feature mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 97,
+    "summary": "97% content changed (4815 additions, 77 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "woff2",
+        "frequency": 500
+      },
+      {
+        "word": "var",
+        "frequency": 431
+      },
+      {
+        "word": "header",
+        "frequency": 348
+      },
+      {
+        "word": "function",
+        "frequency": 333
+      },
+      {
+        "word": "font-weight",
+        "frequency": 305
+      },
+      {
+        "word": "src",
+        "frequency": 298
+      },
+      {
+        "word": "font-family",
+        "frequency": 287
+      },
+      {
+        "word": "format",
+        "frequency": 254
+      },
+      {
+        "word": "font-face",
+        "frequency": 253
+      },
+      {
+        "word": "font-display",
+        "frequency": 253
+      },
+      {
+        "word": "swap",
+        "frequency": 253
+      },
+      {
+        "word": "font-style",
+        "frequency": 251
+      },
+      {
+        "word": "fonts",
+        "frequency": 247
+      },
+      {
+        "word": "unicode-range",
+        "frequency": 245
+      },
+      {
+        "word": "gstatic",
+        "frequency": 243
+      },
+      {
+        "word": "color",
+        "frequency": 157
+      },
+      {
+        "word": "inter",
+        "frequency": 156
+      },
+      {
+        "word": "document",
+        "frequency": 149
+      },
+      {
+        "word": "important",
+        "frequency": 149
+      },
+      {
+        "word": "return",
+        "frequency": 146
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "100": {
+        "before": 1,
+        "after": 212,
+        "change": 211
+      },
+      "https": {
+        "before": 66,
+        "after": 428,
+        "change": 362
+      },
+      "url": {
+        "before": 1,
+        "after": 321,
+        "change": 320
+      },
+      "com": {
+        "before": 7,
+        "after": 302,
+        "change": 295
+      },
+      "open": {
+        "before": 3,
+        "after": 183,
+        "change": 180
+      },
+      "resemble": {
+        "before": 74,
+        "after": 179,
+        "change": 105
+      },
+      "www": {
+        "before": 50,
+        "after": 150,
+        "change": 100
+      },
+      "content": {
+        "before": 2,
+        "after": 69,
+        "change": 67
+      },
+      "text": {
+        "before": 7,
+        "after": 65,
+        "change": 58
+      },
+      "footer": {
+        "before": 1,
+        "after": 54,
+        "change": 53
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "url https",
+        "count": 305
+      },
+      {
+        "phrase": "font-face font-family",
+        "count": 253
+      },
+      {
+        "phrase": "font-display swap",
+        "count": 253
+      },
+      {
+        "phrase": "src url",
+        "count": 253
+      },
+      {
+        "phrase": "swap src",
+        "count": 250
+      },
+      {
+        "phrase": "woff2 format",
+        "count": 250
+      },
+      {
+        "phrase": "format woff2",
+        "count": 250
+      },
+      {
+        "phrase": "https fonts",
+        "count": 243
+      },
+      {
+        "phrase": "fonts gstatic",
+        "count": 243
+      },
+      {
+        "phrase": "gstatic com",
+        "count": 243
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

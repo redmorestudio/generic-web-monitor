@@ -1,0 +1,39 @@
+{
+  "change_id": 145,
+  "url": "https://redmore.studio/blog",
+  "company": "Redmore Studio",
+  "company_category": "AI Consulting and Education",
+  "detected_at": "2025-07-18 16:40:45",
+  "interest_level": 6,
+  "interest_category": "routine_change",
+  "interest_explanation": "Initial scrape of Redmore Studio - https://redmore.studio/blog. Redmore Studio has launched its website with a cookie consent management system, indicating a basic level of technical setup and compliance with privacy regulations, but lacking significant technical innovation or substantial business impact.",
+  "interest_drivers": [
+    "First-time content capture",
+    "New website launch",
+    "Cookie consent management implementation"
+  ],
+  "technical_innovation_score": 2,
+  "business_impact_score": 2,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": false,
+  "content_preview": {
+    "before": null,
+    "after": "  Page not found – Redmore Studio window.JetpackScriptData = {\"site\":{\"icon\":\"https://redmore.studio/wp-content/uploads/2025/02/cropped-yellow-coral-square.png\",\"title\":\"Redmore Studio\",\"host\":\"unknown\",\"is\\_wpcom\\_platform\":false}};  img:is(\\[sizes=\"auto\" i\\], \\[sizes^=\"auto,\" i\\]) { contain-intrinsic-size: 3000px 1500px } var \\_ckyGcm = {\"status\":true,\"default\\_settings\":\\[{\"analytics\":\"denied\",\"advertisement\":\"denied\",\"functional\":\"denied\",\"necessary\":\"granted\",\"ad\\_user\\_data\":\"denied\",\"ad\\_..."
+  },
+  "diff": {
+    "added_sentences": [],
+    "removed_sentences": [],
+    "key_changes": [],
+    "change_percentage": 0,
+    "summary": "No diff available"
+  },
+  "keywords": {
+    "new_keywords": [],
+    "removed_keywords": [],
+    "frequency_changes": {},
+    "significant_phrases": []
+  },
+  "entities": null,
+  "key_phrases": []
+}

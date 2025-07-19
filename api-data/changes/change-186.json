@@ -1,0 +1,321 @@
+{
+  "change_id": 186,
+  "url": "https://you.com/search?q=pricing",
+  "company": "You.com",
+  "company_category": "AI Search",
+  "detected_at": "2025-07-18 16:43:08",
+  "interest_level": 6,
+  "interest_category": "major_development",
+  "interest_explanation": "You.com has introduced a new pricing page with detailed information on pricing strategies, factors influencing pricing, and objectives of pricing. The page also mentions YouPro plans and a Smart Agent feature, indicating a focus on AI-driven workplace productivity.",
+  "interest_drivers": [
+    "New pricing page content",
+    "Introduction of YouPro plans",
+    "Smart Agent feature"
+  ],
+  "technical_innovation_score": 5,
+  "business_impact_score": 6,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://you.com/search?q=pricing\ncompany: You.com\nscraped_at: 2025-07-04 20:21:11\n---\n\nJust a moment...\n\n# you.com\n\nVerify you are human by completing the action below.\n\nyou.com needs to review the security of your connection before proceeding.\n\nVerification successful\n\nWaiting for you.com to respond...\n\nRay ID: `95a153ad58e6238d`\n\nPerformance & security by [Cloudflare](https://www.cloudflare.com?utm_source=challenge&utm_campaign=m)...",
+    "after": ":root{--toastify-color-light: #fff;--toastify-color-dark: #121212;--toastify-color-info: #3498db;--toastify-color-success: #07bc0c;--toastify-color-warning: #f1c40f;--toastify-color-error: hsl(6, 78%, 57%);--toastify-color-transparent: rgba(255, 255, 255, .7);--toastify-icon-color-info: var(--toastify-color-info);--toastify-icon-color-success: var(--toastify-color-success);--toastify-icon-color-warning: var(--toastify-color-warning);--toastify-icon-color-error: var(--toastify-color-error);--toas..."
+  },
+  "diff": {
+    "added_sentences": [
+      ":root{--toastify-color-light: #fff;--toastify-color-dark: #121212;--toastify-color-info: #3498db;--toastify-color-success: #07bc0c;--toastify-color-warning: #f1c40f;--toastify-color-error: hsl(6, 78%, 57%);--toastify-color-transparent: rgba(255, 255, 255, .",
+      "7);--toastify-icon-color-info: var(--toastify-color-info);--toastify-icon-color-success: var(--toastify-color-success);--toastify-icon-color-warning: var(--toastify-color-warning);--toastify-icon-color-error: var(--toastify-color-error);--toastify-container-width: fit-content;--toastify-toast-width: 320px;--toastify-toast-offset: 16px;--toastify-toast-top: max(var(--toastify-toast-offset), env(safe-area-inset-top));--toastify-toast-right: max(var(--toastify-toast-offset), env(safe-area-inset-right));--toastify-toast-left: max(var(--toastify-toast-offset), env(safe-area-inset-left));--toastify-toast-bottom: max(var(--toastify-toast-offset), env(safe-area-inset-bottom));--toastify-toast-background: #fff;--toastify-toast-padding: 14px;--toastify-toast-min-height: 64px;--toastify-toast-max-height: 800px;--toastify-toast-bd-radius: 6px;--toastify-toast-shadow: 0px 4px 12px rgba(0, 0, 0, .",
+      "1);--toastify-font-family: sans-serif;--toastify-z-index: 9999;--toastify-text-color-light: #757575;--toastify-text-color-dark: #fff;--toastify-text-color-info: #fff;--toastify-text-color-success: #fff;--toastify-text-color-warning: #fff;--toastify-text-color-error: #fff;--toastify-spinner-color: #616161;--toastify-spinner-color-empty-area: #e0e0e0;--toastify-color-progress-light: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);--toastify-color-progress-dark: #bb86fc;--toastify-color-progress-info: var(--toastify-color-info);--toastify-color-progress-success: var(--toastify-color-success);--toastify-color-progress-warning: var(--toastify-color-warning);--toastify-color-progress-error: var(--toastify-color-error);--toastify-color-progress-bgo: .",
+      "2}.",
+      "Toastify\\_\\_toast-container{z-index:var(--toastify-z-index);-webkit-transform:translate3d(0,0,var(--toastify-z-index));position:fixed;width:var(--toastify-container-width);box-sizing:border-box;color:#fff;display:flex;flex-direction:column}.",
+      "Toastify\\_\\_toast-container--top-left{top:var(--toastify-toast-top);left:var(--toastify-toast-left)}.",
+      "Toastify\\_\\_toast-container--top-center{top:var(--toastify-toast-top);left:50%;transform:translate(-50%);align-items:center}.",
+      "Toastify\\_\\_toast-container--top-right{top:var(--toastify-toast-top);right:var(--toastify-toast-right);align-items:end}.",
+      "Toastify\\_\\_toast-container--bottom-left{bottom:var(--toastify-toast-bottom);left:var(--toastify-toast-left)}.",
+      "Toastify\\_\\_toast-container--bottom-center{bottom:var(--toastify-toast-bottom);left:50%;transform:translate(-50%);align-items:center}."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://you.",
+      "com/search?",
+      "q=pricing\ncompany: You.",
+      "com\nscraped_at: 2025-07-04 20:21:11\n---\n\nJust a moment...",
+      "# you.",
+      "com\n\nVerify you are human by completing the action below.",
+      "com needs to review the security of your connection before proceeding.",
+      "Verification successful\n\nWaiting for you.",
+      "com to respond...",
+      "Ray ID: `95a153ad58e6238d`\n\nPerformance & security by [Cloudflare](https://www."
+    ],
+    "key_changes": [
+      "New version: 4.1, 3.7, 3.5, 2.5, 2.0, 3.3, 5.0, 537.36, 120.0.0, 1.1, 2.3.33",
+      "New model mentioned",
+      "New feature mentioned",
+      "New integration mentioned",
+      "New acquisition mentioned"
+    ],
+    "change_percentage": 96,
+    "summary": "96% content changed (722 additions, 12 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "assistant",
+        "frequency": 155
+      },
+      {
+        "word": "maxsize",
+        "frequency": 155
+      },
+      {
+        "word": "toastify",
+        "frequency": 149
+      },
+      {
+        "word": "application",
+        "frequency": 133
+      },
+      {
+        "word": "text",
+        "frequency": 121
+      },
+      {
+        "word": "true",
+        "frequency": 99
+      },
+      {
+        "word": "type",
+        "frequency": 96
+      },
+      {
+        "word": "mime",
+        "frequency": 91
+      },
+      {
+        "word": "octet-stream",
+        "frequency": 91
+      },
+      {
+        "word": "var",
+        "frequency": 88
+      },
+      {
+        "word": "false",
+        "frequency": 83
+      },
+      {
+        "word": "claude",
+        "frequency": 74
+      },
+      {
+        "word": "transform",
+        "frequency": 69
+      },
+      {
+        "word": "code",
+        "frequency": 58
+      },
+      {
+        "word": "openai",
+        "frequency": 54
+      },
+      {
+        "word": "translate3d",
+        "frequency": 48
+      },
+      {
+        "word": "sonnet",
+        "frequency": 45
+      },
+      {
+        "word": "shared",
+        "frequency": 40
+      },
+      {
+        "word": "cdn",
+        "frequency": 39
+      },
+      {
+        "word": "img",
+        "frequency": 39
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "security",
+        "frequency": 2
+      },
+      {
+        "word": "cloudflare",
+        "frequency": 2
+      },
+      {
+        "word": "utm",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "moment",
+        "frequency": 1
+      },
+      {
+        "word": "verify",
+        "frequency": 1
+      },
+      {
+        "word": "human",
+        "frequency": 1
+      },
+      {
+        "word": "completing",
+        "frequency": 1
+      },
+      {
+        "word": "action",
+        "frequency": 1
+      },
+      {
+        "word": "below",
+        "frequency": 1
+      },
+      {
+        "word": "connection",
+        "frequency": 1
+      },
+      {
+        "word": "proceeding",
+        "frequency": 1
+      },
+      {
+        "word": "verification",
+        "frequency": 1
+      },
+      {
+        "word": "successful",
+        "frequency": 1
+      },
+      {
+        "word": "waiting",
+        "frequency": 1
+      },
+      {
+        "word": "respond",
+        "frequency": 1
+      },
+      {
+        "word": "ray",
+        "frequency": 1
+      },
+      {
+        "word": "95a153ad58e6238d",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "https": {
+        "before": 2,
+        "after": 109,
+        "change": 107
+      },
+      "com": {
+        "before": 6,
+        "after": 106,
+        "change": 100
+      },
+      "pricing": {
+        "before": 1,
+        "after": 70,
+        "change": 69
+      },
+      "you": {
+        "before": 6,
+        "after": 54,
+        "change": 48
+      },
+      "www": {
+        "before": 1,
+        "after": 43,
+        "change": 42
+      },
+      "company": {
+        "before": 1,
+        "after": 39,
+        "change": 38
+      },
+      "your": {
+        "before": 1,
+        "after": 15,
+        "change": 14
+      },
+      "search": {
+        "before": 1,
+        "after": 12,
+        "change": 11
+      },
+      "url": {
+        "before": 1,
+        "after": 12,
+        "change": 11
+      },
+      "before": {
+        "before": 1,
+        "after": 3,
+        "change": 2
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "maxsize assistant",
+        "count": 150
+      },
+      {
+        "phrase": "mime text",
+        "count": 91
+      },
+      {
+        "phrase": "application octet-stream",
+        "count": 91
+      },
+      {
+        "phrase": "text application",
+        "count": 79
+      },
+      {
+        "phrase": "octet-stream type",
+        "count": 63
+      },
+      {
+        "phrase": "type code",
+        "count": 58
+      },
+      {
+        "phrase": "assistant claude",
+        "count": 50
+      },
+      {
+        "phrase": "transform translate3d",
+        "count": 47
+      },
+      {
+        "phrase": "you com",
+        "count": 47
+      },
+      {
+        "phrase": "claude sonnet",
+        "count": 45
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

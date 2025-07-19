@@ -1,0 +1,250 @@
+{
+  "change_id": 176,
+  "url": "https://tabnine.com",
+  "company": "Tabnine",
+  "company_category": "AI Coding",
+  "detected_at": "2025-07-18 16:42:34",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "No significant changes detected between the previous and current content of the Tabnine homepage.",
+  "interest_drivers": [],
+  "technical_innovation_score": 2,
+  "business_impact_score": 2,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://tabnine.com\ncompany: Tabnine\nscraped_at: 2025-07-04 20:20:50\n---\n\n   Tabnine AI Code Assistant | private, personalized, protected\n\n![](https://www.tabnine.com/wp-content/uploads/2024/12/announcement-on-blue.svg)\n\nTabnine is the only AI software development platform that supports air-gapped deployments\n\n[Learn more](https://www.tabnine.com/blog/the-only-airgapped-ai-software-development-platform/)\n\n[](https://www.tabnine.com \"Tabnine\")\n\nMenu\n\n*   [![](https://www.tabnine.com/wp-c...",
+    "after": "   img:is(\\[sizes=\"auto\" i\\], \\[sizes^=\"auto,\" i\\]) { contain-intrinsic-size: 3000px 1500px } Tabnine AI Code Assistant | private, personalized, protected               {\"@context\":\"https://schema.org\",\"@graph\":\\[{\"@type\":\"WebPage\",\"@id\":\"https://www.tabnine.com/\",\"url\":\"https://www.tabnine.com/\",\"name\":\"Tabnine AI Code Assistant | private, personalized, protected\",\"isPartOf\":{\"@id\":\"https://www.tabnine.com/#website\"},\"about\":{\"@id\":\"https://www.tabnine.com/#organization\"},\"datePublished\":\"2024-..."
+  },
+  "diff": {
+    "added_sentences": [
+      "img:is(\\[sizes=\"auto\" i\\], \\[sizes^=\"auto,\" i\\]) { contain-intrinsic-size: 3000px 1500px } Tabnine AI Code Assistant | private, personalized, protected               {\"@context\":\"https://schema.",
+      "org\",\"@graph\":\\[{\"@type\":\"WebPage\",\"@id\":\"https://www.",
+      "com/\",\"url\":\"https://www.",
+      "com/\",\"name\":\"Tabnine AI Code Assistant | private, personalized, protected\",\"isPartOf\":{\"@id\":\"https://www.",
+      "com/#website\"},\"about\":{\"@id\":\"https://www.",
+      "com/#organization\"},\"datePublished\":\"2024-03-13T21:20:23+00:00\",\"dateModified\":\"2025-04-17T00:17:52+00:00\",\"description\":\"Tabnine is the AI code assistant that accelerates and simplifies software development while keeping your code private, secure, and compliant.",
+      "\",\"breadcrumb\":{\"@id\":\"https://www.",
+      "com/#breadcrumb\"},\"inLanguage\":\"en-US\",\"potentialAction\":\\[{\"@type\":\"ReadAction\",\"target\":\\[\"https://www.",
+      "com/\"\\]}\\]},{\"@type\":\"BreadcrumbList\",\"@id\":\"https://www.",
+      "com/#breadcrumb\",\"itemListElement\":\\[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\"}\\]},{\"@type\":\"WebSite\",\"@id\":\"https://www."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://tabnine.",
+      "com\ncompany: Tabnine\nscraped_at: 2025-07-04 20:20:50\n---\n\n   Tabnine AI Code Assistant | private, personalized, protected\n\n!",
+      "svg)Supported IDEs](/install/)\n\n    *   //Get Tabnine in your favorite IDE//\n\n\n    *   [!",
+      "webp)WebStorm](/install/webstorm/)\n\n*   [!",
+      "svg)Resources](/resources/)\n    *   //\n\n        Featured Article\n\n        //\n\n        !",
+      "png)\n\n        [Tabnine Now Supports Perforce Helix Core](https://www.",
+      "com/blog/tabnine-now-supports-perforce-helix-core/ \"Tabnine Now Supports Perforce Helix Core\")\n\n        Tabnine now brings trusted, context-aware AI to Perforce Helix Core—enabling the world’s most advanced engineering teams to move faster, stay in flow, and maintain complete control.",
+      "com/blog/tabnine-now-supports-perforce-helix-core/)\n\n        //\n\n        Featured Product News\n\n        //\n\n        [Introducing Provenance and Attribution](https://www.",
+      "com/blog/introducing-provenance-and-attribution-minimize-ip-liability-for-genai-output/ \"Introducing Provenance and Attribution: Minimize IP liability for GenAI output\")\n\n        [Unveiling Tabnine’s Code Review Agent](https://www.",
+      "com/blog/unveiling-tabnines-code-review-agent/ \"Unveiling Tabnine’s Code Review Agent: Improving quality, security, and compliance uniquely for every development team\")\n\n        [Introducing Tabnine's AI agents for Atlassian Jira](https://www."
+    ],
+    "key_changes": [
+      "New version: 0.07, 0.1, 1.333, 1.125, 0.44, 0.67, 1.5, 2.25, 3.38, 5.06, 0.2, 0.4, 0.5, 1.25, 1.6, 56.23, 0.3, v1.1, 0.24, 36.4, 22.5, 14.5, 0.12, 0.13, 0.14, 0.16, 0.18, 0.26, 0.28, 0.64, 0.56, 0.48, 0.65, 0.10, 0.08, 0.7, 0.8, 0.75, 0.006, 0.023, 2.2, 0.096, 4.8, 0.532, 15.4, 0.72, 0.793, 0.853, 26.7, 0.902, 0.941, 0.968, 36.2, 0.987, 39.7, 43.7, 1.007, 48.3, 1.009, 55.3, 1.002, 78.2, 0.022, 2.3, 0.091, 5.1, 7.6, 0.508, 16.3, 0.607, 0.691, 0.762, 0.822, 28.4, 0.872, 0.912, 35.1, 0.944, 38.9, 0.985, 47.6, 0.996, 53.1, 1.001, 58.4, 1.003, 65.1, 3.8.5, 1.1, 2.0.1, 1.0.1, 2.0.0, 2.3.33",
+      "New model mentioned",
+      "New api mentioned",
+      "New update mentioned",
+      "New feature mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 86,
+    "summary": "86% content changed (4363 additions, 19 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "root",
+        "frequency": 818
+      },
+      {
+        "word": "lanyard",
+        "frequency": 812
+      },
+      {
+        "word": "var",
+        "frequency": 577
+      },
+      {
+        "word": "important",
+        "frequency": 388
+      },
+      {
+        "word": "color",
+        "frequency": 114
+      },
+      {
+        "word": "function",
+        "frequency": 111
+      },
+      {
+        "word": "ubermenu",
+        "frequency": 110
+      },
+      {
+        "word": "none",
+        "frequency": 103
+      },
+      {
+        "word": "star",
+        "frequency": 92
+      },
+      {
+        "word": "background-color",
+        "frequency": 87
+      },
+      {
+        "word": "ketch-text-",
+        "frequency": 84
+      },
+      {
+        "word": "100",
+        "frequency": 82
+      },
+      {
+        "word": "display",
+        "frequency": 74
+      },
+      {
+        "word": "width",
+        "frequency": 71
+      },
+      {
+        "word": "focus-visible",
+        "frequency": 69
+      },
+      {
+        "word": "span",
+        "frequency": 61
+      },
+      {
+        "word": "ubermenu-responsive",
+        "frequency": 59
+      },
+      {
+        "word": "window",
+        "frequency": 59
+      },
+      {
+        "word": "rgba",
+        "frequency": 58
+      },
+      {
+        "word": "left",
+        "frequency": 58
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "2024": {
+        "before": 65,
+        "after": 185,
+        "change": 120
+      },
+      "tabnine": {
+        "before": 117,
+        "after": 601,
+        "change": 484
+      },
+      "https": {
+        "before": 92,
+        "after": 406,
+        "change": 314
+      },
+      "com": {
+        "before": 92,
+        "after": 400,
+        "change": 308
+      },
+      "www": {
+        "before": 89,
+        "after": 377,
+        "change": 288
+      },
+      "wp-content": {
+        "before": 77,
+        "after": 307,
+        "change": 230
+      },
+      "svg": {
+        "before": 60,
+        "after": 273,
+        "change": 213
+      },
+      "uploads": {
+        "before": 70,
+        "after": 191,
+        "change": 121
+      },
+      "images": {
+        "before": 7,
+        "after": 114,
+        "change": 107
+      },
+      "code": {
+        "before": 18,
+        "after": 122,
+        "change": 104
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "lanyard root",
+        "count": 812
+      },
+      {
+        "phrase": "tabnine com",
+        "count": 379
+      },
+      {
+        "phrase": "https www",
+        "count": 376
+      },
+      {
+        "phrase": "www tabnine",
+        "count": 370
+      },
+      {
+        "phrase": "com wp-content",
+        "count": 302
+      },
+      {
+        "phrase": "important lanyard",
+        "count": 244
+      },
+      {
+        "phrase": "wp-content uploads",
+        "count": 191
+      },
+      {
+        "phrase": "uploads 2024",
+        "count": 185
+      },
+      {
+        "phrase": "wp-content themes",
+        "count": 110
+      },
+      {
+        "phrase": "themes tabnine",
+        "count": 110
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

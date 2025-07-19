@@ -1,0 +1,249 @@
+{
+  "change_id": 92,
+  "url": "https://inflection.ai/blog",
+  "company": "Inflection AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:37:28",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes detected between the previous and current content of the Inflection AI blog.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://inflection.ai/blog\ncompany: Inflection AI\nscraped_at: 2025-07-04 20:15:35\n---\n\n   Inflection AI | Blog\n\n[\n\n](./)\n\n[\n\n](./)\n\n### Blog\n\n[\n\n![](https://framerusercontent.com/images/WaEAbJFNaClkiw6tPUGkDJ02NE.png)\n\n##### Inflection Insights: a dialog with your data\n\nMar 28, 2025\n\n\n](./blog/inflection-insights-a-dialog-with-your-data)\n\n[\n\n![](https://framerusercontent.com/images/D79bGP0r27YGjyIlgriDouluxM.png)\n\n##### Porting Inflection AI’s Inference Stack to Intel Gaudi: Lessons Lea...",
+    "after": "   (function(w,d,s,l,i){w\\[l\\]=w\\[l\\]||\\[\\];w\\[l\\].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)\\[0\\], j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-KLG9RX4J'); { \"@context\": \"https://schema.org\", \"@type\": \"Blog\", \"name\": \"Inflection AI Blog\", \"url\": \"https://inflection.ai/blog\" }   Inflection AI | Blog ..."
+  },
+  "diff": {
+    "added_sentences": [
+      "(function(w,d,s,l,i){w\\[l\\]=w\\[l\\]||\\[\\];w\\[l\\].",
+      "push({'gtm.",
+      "start': new Date().",
+      "getTime(),event:'gtm.",
+      "js'});var f=d.",
+      "getElementsByTagName(s)\\[0\\], j=d.",
+      "createElement(s),dl=l!",
+      "='dataLayer'?",
+      "'&l='+l:'';j.",
+      "async=true;j."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://inflection.",
+      "ai/blog\ncompany: Inflection AI\nscraped_at: 2025-07-04 20:15:35\n---\n\n   Inflection AI | Blog\n\n[\n\n](.",
+      "png)\n\n##### Inflection Insights: a dialog with your data\n\nMar 28, 2025\n\n\n](.",
+      "png)\n\n##### Porting Inflection AI’s Inference Stack to Intel Gaudi: Lessons Learned\n\nMar 25, 2025\n\n\n](.",
+      "png)\n\n##### Little by Little, a Little Becomes a Lot\n\nMar 6, 2025\n\n\n](.",
+      "png)\n\n##### Bringing Agentic Workflows into Inflection for Enterprise\n\nOct 22, 2024\n\n\n](.",
+      "jpg)\n\n##### Introducing Inflection for Enterprise\n\nOct 7, 2024\n\n\n](.",
+      "jpg)\n\n##### The Future of Pi\n\nAug 26, 2024\n\n\n](.",
+      "jpg)\n\n##### Redefining the Future of AI\n\nMay 20, 2024\n\n\n](.",
+      "jpg)\n\n##### The new Inflection: An important change to how we’ll work\n\nMar 19, 2024\n\n\n](."
+    ],
+    "key_changes": [
+      "New version: 98.06, 31.38, 101.98, 93.26, 29.84, 107.23, 96.52, 30.89, 103.6, 102.29, 32.73, 97.76, 89.79, 22.36, 107.89, 1.2, 2.25, 49.962714392244614, 50.00000000000002, 49.9587798845837, 3.609375, 5.318749904632568, 9.975000381469727, 14.949999809265137, 21.853124618530273, 40.10625076293945, 49.877149877149904, 1.4, 2.380952380952381, 7.166666666666667, 6.842105263157895, 0.4, 0.2, 0.1, 1.53, 0.001, 0.25, 0.5, 0.3, 0.44, 0.56",
+      "Price change: $2",
+      "New api mentioned",
+      "New performance mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 98,
+    "summary": "98% content changed (2199 additions, 29 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "var",
+        "frequency": 734
+      },
+      {
+        "word": "framer-text",
+        "frequency": 236
+      },
+      {
+        "word": "span",
+        "frequency": 196
+      },
+      {
+        "word": "none",
+        "frequency": 146
+      },
+      {
+        "word": "data-framer-component-type",
+        "frequency": 142
+      },
+      {
+        "word": "inter",
+        "frequency": 124
+      },
+      {
+        "word": "not",
+        "frequency": 121
+      },
+      {
+        "word": "normal",
+        "frequency": 111
+      },
+      {
+        "word": "framer-cjxkj",
+        "frequency": 107
+      },
+      {
+        "word": "height",
+        "frequency": 105
+      },
+      {
+        "word": "width",
+        "frequency": 105
+      },
+      {
+        "word": "return",
+        "frequency": 99
+      },
+      {
+        "word": "position",
+        "frequency": 95
+      },
+      {
+        "word": "flex",
+        "frequency": 95
+      },
+      {
+        "word": "font-family",
+        "frequency": 89
+      },
+      {
+        "word": "grenette",
+        "frequency": 86
+      },
+      {
+        "word": "pro",
+        "frequency": 86
+      },
+      {
+        "word": "italic",
+        "frequency": 81
+      },
+      {
+        "word": "400",
+        "frequency": 80
+      },
+      {
+        "word": "font-weight",
+        "frequency": 80
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "2023": {
+        "before": 9,
+        "after": 17,
+        "change": 8
+      },
+      "let": {
+        "before": 1,
+        "after": 133,
+        "change": 132
+      },
+      "com": {
+        "before": 21,
+        "after": 90,
+        "change": 69
+      },
+      "https": {
+        "before": 24,
+        "after": 92,
+        "change": 68
+      },
+      "url": {
+        "before": 1,
+        "after": 67,
+        "change": 66
+      },
+      "framerusercontent": {
+        "before": 19,
+        "after": 79,
+        "change": 60
+      },
+      "background": {
+        "before": 1,
+        "after": 23,
+        "change": 22
+      },
+      "get": {
+        "before": 2,
+        "after": 16,
+        "change": 14
+      },
+      "new": {
+        "before": 1,
+        "after": 13,
+        "change": 12
+      },
+      "current": {
+        "before": 1,
+        "after": 13,
+        "change": 12
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "grenette pro",
+        "count": 86
+      },
+      {
+        "phrase": "https framerusercontent",
+        "count": 79
+      },
+      {
+        "phrase": "framerusercontent com",
+        "count": 79
+      },
+      {
+        "phrase": "span framer-text",
+        "count": 72
+      },
+      {
+        "phrase": "placeholder sans-serif",
+        "count": 71
+      },
+      {
+        "phrase": "data-framer-component-type text",
+        "count": 70
+      },
+      {
+        "phrase": "font-face font-family",
+        "count": 68
+      },
+      {
+        "phrase": "position relative",
+        "count": 68
+      },
+      {
+        "phrase": "url https",
+        "count": 64
+      },
+      {
+        "phrase": "src url",
+        "count": 63
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

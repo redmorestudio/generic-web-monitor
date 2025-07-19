@@ -1,0 +1,318 @@
+{
+  "change_id": 120,
+  "url": "https://nvidia.com/en-us/data-center/products",
+  "company": "NVIDIA",
+  "company_category": "AI Hardware",
+  "detected_at": "2025-07-18 16:38:27",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "No significant changes detected between the previous and current content. The structure, products, and services listed remain the same, indicating no new technical innovations or business impact.",
+  "interest_drivers": [],
+  "technical_innovation_score": 2,
+  "business_impact_score": 2,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://nvidia.com/en-us/data-center/products\ncompany: NVIDIA\nscraped_at: 2025-07-04 20:17:39\n---\n\n![](https://aorta.clickagy.com/pixel.gif?clkgypv=jstag&ws=1)![](https://aorta.clickagy.com/channel-sync/4?clkgypv=jstag&ws=1)![](https://aorta.clickagy.com/channel-sync/114?clkgypv=jstag&ws=1)                                                                      NVIDIA Data Center Products | NVIDIA\n\nNVIDIA Home NVIDIA Home Menu Menu icon Menu Menu icon Close Close icon Close Close icon Clos...",
+    "after": "                                                                     @media (min-width: 640px) and (max-width: 1023px) { .general-container.nv-flexbox.p-column-reverse { flex-direction: column-reverse; } } function OptanonWrapper() { var event = new Event('bannerLoaded'); window.dispatchEvent(event); } /\\* function dtm\\_track \\* @param type -- Required. The type of call. Defaults to \"view\". \\* @param obj -- Optional. An object of data elements for mapping to a tag. \\* \\* @description This functi..."
+  },
+  "diff": {
+    "added_sentences": [
+      "@media (min-width: 640px) and (max-width: 1023px) { .",
+      "general-container.",
+      "nv-flexbox.",
+      "p-column-reverse { flex-direction: column-reverse; } } function OptanonWrapper() { var event = new Event('bannerLoaded'); window.",
+      "dispatchEvent(event); } /\\* function dtm\\_track \\* @param type -- Required.",
+      "The type of call.",
+      "Defaults to \"view\".",
+      "\\* @param obj -- Optional.",
+      "An object of data elements for mapping to a tag.",
+      "\\* \\* @description This function is used for tracking some event dynamically."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://nvidia.",
+      "com/en-us/data-center/products\ncompany: NVIDIA\nscraped_at: 2025-07-04 20:17:39\n---\n\n!",
+      "[](https://aorta.",
+      "clickagy.",
+      "com/pixel.",
+      "gif?",
+      "clkgypv=jstag&ws=1)!",
+      "[](https://aorta.",
+      "clickagy.",
+      "com/channel-sync/4?"
+    ],
+    "key_changes": [
+      "New version: 0.3, 13.06, 83.94, 52.82, 0.00, 77.4, 166.7, 15.4, 56.25, 1.25, 0.2, 0.5, 0.19, 1.2, 1.5, 2.5, 1.125, 13.3333333333, 30.6666666667, 65.3333333333, 82.6666666667, 91.3333333333, 1.3, 1.35, 1.6, 1.875, 1.4, 0.85, 1.1, 7.5, 11.5, 6.5, 1.75, 1.18, 2.0, 1.0",
+      "New model mentioned",
+      "New api mentioned",
+      "New update mentioned",
+      "New performance mentioned",
+      "New benchmark mentioned"
+    ],
+    "change_percentage": 85,
+    "summary": "85% content changed (6423 additions, 548 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "onetrust-pc-sdk",
+        "frequency": 908
+      },
+      {
+        "word": "var",
+        "frequency": 310
+      },
+      {
+        "word": "onetrust-banner-sdk",
+        "frequency": 300
+      },
+      {
+        "word": "ot-sdk-cookie-policy",
+        "frequency": 228
+      },
+      {
+        "word": "width",
+        "frequency": 221
+      },
+      {
+        "word": "height",
+        "frequency": 218
+      },
+      {
+        "word": "text",
+        "frequency": 189
+      },
+      {
+        "word": "none",
+        "frequency": 178
+      },
+      {
+        "word": "max-width",
+        "frequency": 175
+      },
+      {
+        "word": "screen",
+        "frequency": 174
+      },
+      {
+        "word": "name",
+        "frequency": 173
+      },
+      {
+        "word": "indexof",
+        "frequency": 171
+      },
+      {
+        "word": "font-size",
+        "frequency": 169
+      },
+      {
+        "word": "params",
+        "frequency": 167
+      },
+      {
+        "word": "tpp",
+        "frequency": 166
+      },
+      {
+        "word": "display",
+        "frequency": 158
+      },
+      {
+        "word": "tagname",
+        "frequency": 155
+      },
+      {
+        "word": "exclusions",
+        "frequency": 155
+      },
+      {
+        "word": "getheading",
+        "frequency": 154
+      },
+      {
+        "word": "true",
+        "frequency": 140
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "26600",
+        "frequency": 68
+      },
+      {
+        "word": "26800",
+        "frequency": 68
+      },
+      {
+        "word": "260",
+        "frequency": 34
+      },
+      {
+        "word": "264",
+        "frequency": 34
+      },
+      {
+        "word": "2624",
+        "frequency": 34
+      },
+      {
+        "word": "26255",
+        "frequency": 34
+      },
+      {
+        "word": "adsct",
+        "frequency": 34
+      },
+      {
+        "word": "bci",
+        "frequency": 34
+      },
+      {
+        "word": "utc",
+        "frequency": 34
+      },
+      {
+        "word": "26en-us",
+        "frequency": 34
+      },
+      {
+        "word": "26google",
+        "frequency": 34
+      },
+      {
+        "word": "20inc",
+        "frequency": 34
+      },
+      {
+        "word": "26linux",
+        "frequency": 34
+      },
+      {
+        "word": "20x86",
+        "frequency": 34
+      },
+      {
+        "word": "26na",
+        "frequency": 34
+      },
+      {
+        "word": "eci",
+        "frequency": 34
+      },
+      {
+        "word": "integration",
+        "frequency": 34
+      },
+      {
+        "word": "advertiser",
+        "frequency": 34
+      },
+      {
+        "word": "48207a18-b046-46a6-9d9b-dd197b96a0d7",
+        "frequency": 34
+      },
+      {
+        "word": "status",
+        "frequency": 34
+      }
+    ],
+    "frequency_changes": {
+      "100": {
+        "before": 3,
+        "after": 145,
+        "change": 142
+      },
+      "function": {
+        "before": 2,
+        "after": 261,
+        "change": 259
+      },
+      "button": {
+        "before": 1,
+        "after": 211,
+        "change": 210
+      },
+      "document": {
+        "before": 34,
+        "after": 224,
+        "change": 190
+      },
+      "media": {
+        "before": 5,
+        "after": 180,
+        "change": 175
+      },
+      "important": {
+        "before": 2,
+        "after": 144,
+        "change": 142
+      },
+      "not": {
+        "before": 4,
+        "after": 129,
+        "change": 125
+      },
+      "data-center": {
+        "before": 237,
+        "after": 358,
+        "change": 121
+      },
+      "click": {
+        "before": 12,
+        "after": 132,
+        "change": 120
+      },
+      "url": {
+        "before": 1,
+        "after": 114,
+        "change": 113
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "nvidia com",
+        "count": 683
+      },
+      {
+        "phrase": "ncid no-ncid",
+        "count": 620
+      },
+      {
+        "phrase": "https www",
+        "count": 591
+      },
+      {
+        "phrase": "www nvidia",
+        "count": 582
+      },
+      {
+        "phrase": "com en-us",
+        "count": 546
+      },
+      {
+        "phrase": "en-us data-center",
+        "count": 234
+      },
+      {
+        "phrase": "tagname tpp",
+        "count": 154
+      },
+      {
+        "phrase": "screen min-width",
+        "count": 113
+      },
+      {
+        "phrase": "document url",
+        "count": 110
+      },
+      {
+        "phrase": "url indexof",
+        "count": 110
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}
