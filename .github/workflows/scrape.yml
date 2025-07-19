@@ -1,404 +1,105 @@
-name: 1. Scrape Websites
+name: Scrape Websites
 
 on:
-  # Run every 6 hours
-  schedule:
-    - cron: '0 */6 * * *'
-  
-  # Allow manual trigger
   workflow_dispatch:
     inputs:
-      company_filter:
-        description: 'Company name filter (optional)'
-        required: false
-        type: string
-      force_scrape:
-        description: 'Force re-scrape even if no changes detected'
-        required: false
-        type: boolean
-        default: false
-      use_three_db:
-        description: 'Use three-database architecture'
-        required: false
-        type: boolean
-        default: true
       cascade:
-        description: 'Trigger next workflow in chain'
+        description: 'Trigger next workflow (process)'
         required: false
-        type: boolean
-        default: true
-  
-  # Allow being called by other workflows
+        default: 'true'
+        type: choice
+        options:
+        - 'true'
+        - 'false'
   workflow_call:
     inputs:
       cascade:
-        description: 'Trigger next workflow in chain'
+        description: 'Trigger next workflow (process)'
         required: false
-        type: boolean
-        default: false  # Different default for when called by full-monitor
-    outputs:
-      run_id:
-        description: 'The workflow run ID'
-        value: ${{ jobs.scrape-websites.outputs.run_id }}
+        default: 'true'
+        type: string
 
-# Prevent concurrent runs
 concurrency:
   group: scrape-workflow
   cancel-in-progress: false
 
-env:
-  NODE_ENV: production
-  USE_THREE_DB: ${{ inputs.use_three_db || 'true' }}
-
 jobs:
-  scrape-websites:
+  scrape:
     runs-on: ubuntu-latest
-    timeout-minutes: 60  # Increased from 30 to handle all 52 companies
-    
-    outputs:
-      run_id: ${{ github.run_id }}
-    
-    permissions:
-      contents: write
-      actions: read
+    timeout-minutes: 60
     
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Fetch all history to allow proper rebasing
-          lfs: true  # Fetch Git LFS files including raw_content.db
+    - uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      
-      - name: Install dependencies
-        run: |
-          cd github-actions-backend
-          # Use npm install instead of npm ci to handle package-lock.json mismatches
-          npm install --omit=dev
-      
-      - name: Install Puppeteer browsers
-        run: |
-          cd github-actions-backend
-          npx puppeteer browsers install chrome
-      
-      # NEW STEP: Download previous database artifact to maintain historical data
-      - name: Download previous database artifact
-        id: download-artifact
-        uses: dawidd6/action-download-artifact@v2
-        with:
-          workflow: scrape.yml
-          workflow_conclusion: success
-          name: scraper-databases-*
-          path: github-actions-backend/data
-          if_no_artifact_found: warn
-        continue-on-error: true
-      
-      - name: Initialize database (three-db architecture)
-        if: ${{ env.USE_THREE_DB == 'true' }}
-        run: |
-          cd github-actions-backend
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+        
+    - name: Download previous databases
+      uses: actions/download-artifact@v4
+      with:
+        name: ai-monitor-databases
+        path: github-actions-backend/data/
+      continue-on-error: true
+        
+    - name: Initialize databases if needed
+      run: |
+        cd github-actions-backend
+        node scripts/init-db-three.js
+        
+    - name: Run intelligent scraper with captcha detection
+      env:
+        GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      run: |
+        cd github-actions-backend
+        node scraper-three-db-with-captcha-detection.js
+        
+    - name: Upload databases as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ai-monitor-databases
+        path: github-actions-backend/data/
+        retention-days: 7
+        
+    - name: Configure Git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+    - name: Commit database updates
+      run: |
+        # Add only the committed databases
+        git add github-actions-backend/data/intelligence.db
+        git add github-actions-backend/data/processed_content.db
+        
+        # Check if there are changes to commit
+        if git diff --staged --quiet; then
+          echo "No database changes to commit"
+        else
+          git commit -m "🕷️ Update databases after scraping with captcha detection"
           
-          # Check if we have existing databases from artifact
-          if [ -f data/raw_content.db ] && [ -f data/intelligence.db ]; then
-            echo "✅ Using existing databases from previous run"
-            echo "📊 Database sizes:"
-            ls -lh data/*.db
-            
-            # Run migration script to ensure schema is up to date
-            echo "🔧 Running database migration..."
-            if [ -f add-last-scraped-column.js ]; then
-              node add-last-scraped-column.js || echo "Migration already applied or not needed"
+          # Push with retry logic
+          for attempt in {1..5}; do
+            if git push; then
+              echo "Successfully pushed on attempt $attempt"
+              break
+            else
+              echo "Push failed on attempt $attempt, retrying..."
+              git pull --rebase
+              sleep $((2 ** (attempt - 1)))
             fi
-          else
-            echo "📊 No previous databases found, initializing fresh..."
-            node scripts/init-db-three.js
-          fi
-      
-      - name: Initialize database (legacy)
-        if: ${{ env.USE_THREE_DB != 'true' }}
-        run: |
-          cd github-actions-backend
-          
-          # Check if database exists in repository
-          if [ -f data/monitor.db ]; then
-            echo "✅ Database found in repository"
-          else
-            echo "📊 Database not found, initializing..."
-            mkdir -p data
-            node scripts/init-db.js
-            echo "✅ Database initialized with 52 companies"
-          fi
-      
-      - name: Run intelligent scraper
-        run: |
-          cd github-actions-backend
-          
-          # Add company filter if provided
-          if [ -n "${{ inputs.company_filter }}" ]; then
-            echo "🎯 Filtering for company: ${{ inputs.company_filter }}"
-            # TODO: Add company filter support to scraper
-          fi
-          
-          # Run scraper with timeout protection (increased to 45 minutes)
-          timeout 45m node scraper-wrapper.js || {
-            echo "⚠️ Scraper timeout after 45 minutes"
-            echo "💡 Consider running with company_filter to process in smaller batches"
-            exit 1
-          }
-        env:
-          GITHUB_ACTIONS: 'true'
-          FORCE_SCRAPE: ${{ inputs.force_scrape }}
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-      
-      # REMOVED: Markdown conversion - this belongs in process.yml
-      
-      - name: Upload database backup (three-db)
-        if: ${{ env.USE_THREE_DB == 'true' }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: scraper-databases-${{ github.run_id }}
-          path: |
-            github-actions-backend/data/raw_content.db
-            github-actions-backend/data/intelligence.db
-          retention-days: 7
-      
-      - name: Upload database backup (legacy)
-        if: ${{ env.USE_THREE_DB != 'true' }}
-        uses: actions/upload-artifact@v4
-        with:
-          name: scraper-database-${{ github.run_id }}
-          path: github-actions-backend/data/monitor.db
-          retention-days: 7
-      
-      - name: Create scrape summary
-        run: |
-          cd github-actions-backend
-          mkdir -p ../api-data
-          echo "{
-            \"workflow\": \"scrape\",
-            \"run_id\": \"${{ github.run_id }}\",
-            \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
-            \"status\": \"completed\",
-            \"use_three_db\": ${{ env.USE_THREE_DB }}
-          }" > ../api-data/last-scrape.json
-      
-      - name: Commit database changes (three-db)
-        if: ${{ env.USE_THREE_DB == 'true' }}
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          
-          # First, show current git status
-          echo "📋 Current git status:"
-          git status
-          
-          # Clean up any unwanted files (but preserve our databases)
-          echo "🧹 Cleaning up workspace..."
-          # Remove SQLite temporary files if they exist
-          find . -name "*.db-wal" -o -name "*.db-shm" | xargs rm -f || true
-          # Remove node_modules that might have been created
-          rm -rf node_modules || true
-          
-          # CRITICAL FIX: Add files BEFORE stashing
-          # Force add the intelligence database (it might be gitignored)
-          echo "📂 Adding intelligence.db..."
-          git add -f github-actions-backend/data/intelligence.db || {
-            echo "⚠️ Failed to add intelligence.db, checking if it exists..."
-            ls -la github-actions-backend/data/
-            exit 1
-          }
-          
-          # Add raw_content.db (handled by LFS)
-          echo "📂 Adding raw_content.db via LFS..."
-          git add github-actions-backend/data/raw_content.db || {
-            echo "⚠️ Failed to add raw_content.db, checking if it exists..."
-            ls -la github-actions-backend/data/
-            echo "⚠️ Note: raw_content.db may be very large and handled by Git LFS"
-          }
-          
-          # Add the scrape summary
-          echo "📂 Adding last-scrape.json..."
-          git add api-data/last-scrape.json || true
-          
-          # Show what will be committed
-          echo "📋 Files staged for commit:"
-          git diff --staged --name-only
-          
-          # Check if there are changes to commit
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            # Commit the changes
-            git commit -m "🕷️ Update scraped content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
-            
-            # Function to retry git push with exponential backoff
-            push_with_retry() {
-              local max_attempts=5
-              local attempt=1
-              local wait_time=1
-              
-              while [ $attempt -le $max_attempts ]; do
-                echo "🔄 Attempt $attempt/$max_attempts to push changes..."
-                
-                # Pull latest changes and rebase our commit on top
-                git fetch origin main
-                git rebase origin/main || {
-                  echo "❌ Rebase failed, trying merge strategy..."
-                  git rebase --abort 2>/dev/null || true
-                  git pull origin main --no-rebase --strategy=ours || {
-                    echo "❌ Merge failed, resetting and retrying"
-                    git reset --hard HEAD~1
-                    git pull origin main
-                    # Re-add and commit our changes
-                    git add -f github-actions-backend/data/intelligence.db || true
-                    git add github-actions-backend/data/raw_content.db || true
-                    git add api-data/last-scrape.json || true
-                    git commit -m "🕷️ Update scraped content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
-                  }
-                }
-                
-                # Try to push
-                if git push origin main; then
-                  echo "✅ Successfully pushed changes!"
-                  return 0
-                else
-                  echo "❌ Push failed"
-                  
-                  if [ $attempt -lt $max_attempts ]; then
-                    echo "⏳ Waiting ${wait_time}s before retry..."
-                    sleep $wait_time
-                    wait_time=$((wait_time * 2))
-                    attempt=$((attempt + 1))
-                  else
-                    echo "❌ All push attempts failed"
-                    return 1
-                  fi
-                fi
-              done
-            }
-            
-            # Push the changes with retry
-            push_with_retry || {
-              echo "⚠️  Failed to push changes after multiple attempts"
-              echo "⚠️  Scraping completed but changes couldn't be pushed"
-              echo "⚠️  Manual intervention may be required"
-              exit 1  # Fail since scraping data is critical
-            }
-          fi
-      
-      - name: Commit database changes (legacy)
-        if: ${{ env.USE_THREE_DB != 'true' }}
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          
-          # First, show current git status
-          echo "📋 Current git status:"
-          git status
-          
-          # Clean up any unwanted files (but preserve our databases)
-          echo "🧹 Cleaning up workspace..."
-          # Remove SQLite temporary files if they exist
-          find . -name "*.db-wal" -o -name "*.db-shm" | xargs rm -f || true
-          # Remove node_modules that might have been created
-          rm -rf node_modules || true
-          
-          # Stash any remaining uncommitted changes to ensure clean state
-          echo "📦 Stashing any uncommitted changes..."
-          git stash push -m "Temporary stash during workflow" || true
-          
-          # Add the database and scrape status
-          git add -f github-actions-backend/data/monitor.db || true
-          git add api-data/last-scrape.json || true
-          
-          # Check if there are changes to commit
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-            git stash pop || true  # Restore stashed changes if any
-          else
-            # Commit the changes
-            git commit -m "🕷️ Update scraped content - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
-            
-            # Function to retry git push with exponential backoff
-            push_with_retry() {
-              local max_attempts=5
-              local attempt=1
-              local wait_time=1
-              
-              while [ $attempt -le $max_attempts ]; do
-                echo "🔄 Attempt $attempt/$max_attempts to push changes..."
-                
-                # Pull latest changes and rebase our commit on top
-                git fetch origin main
-                git rebase origin/main || {
-                  echo "❌ Rebase failed, trying merge strategy..."
-                  git rebase --abort 2>/dev/null || true
-                  git pull origin main --no-rebase --strategy=ours || {
-                    echo "❌ Merge failed, resetting and retrying"
-                    git reset --hard HEAD~1
-                    git pull origin main
-                    # Re-add and commit our changes
-                    git add -f github-actions-backend/data/monitor.db || true
-                    git add api-data/last-scrape.json || true
-                    git commit -m "🕷️ Update scraped content - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
-                  }
-                }
-                
-                # Try to push
-                if git push origin main; then
-                  echo "✅ Successfully pushed changes!"
-                  return 0
-                else
-                  echo "❌ Push failed"
-                  
-                  if [ $attempt -lt $max_attempts ]; then
-                    echo "⏳ Waiting ${wait_time}s before retry..."
-                    sleep $wait_time
-                    wait_time=$((wait_time * 2))
-                    attempt=$((attempt + 1))
-                  else
-                    echo "❌ All push attempts failed"
-                    return 1
-                  fi
-                fi
-              done
-            }
-            
-            # Push the changes with retry
-            push_with_retry || {
-              echo "⚠️  Failed to push changes after multiple attempts"
-              echo "⚠️  Scraping completed but changes couldn't be pushed"
-              echo "⚠️  Manual intervention may be required"
-              exit 1  # Fail since scraping data is critical
-            }
-            
-            # Clean up stash if any
-            git stash pop || true
-          fi
-      
-      - name: Trigger Process workflow
-        if: inputs.cascade == true
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
-          script: |
-            const result = await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'process.yml',
-              ref: 'main',
-              inputs: {
-                trigger_source: 'scrape-cascade',
-                run_id: '${{ github.run_id }}',
-                cascade: 'true'  // Pass cascade through
-              }
-            });
-            console.log(`✅ Triggered Process workflow`);
-      
-      # Cascade parameter system implemented
-      # Manual runs (cascade: true) trigger the next workflow
-      # Full-monitor runs (cascade: false) prevent duplicates
+          done
+        fi
+        
+    - name: Trigger Process Workflow
+      if: ${{ inputs.cascade == 'true' || inputs.cascade == '' }}
+      uses: ./.github/workflows/process.yml
+      with:
+        cascade: ${{ inputs.cascade }}
