@@ -39,13 +39,15 @@ rawDb.exec(`
     html_content TEXT,
     status_code INTEGER,
     error_message TEXT,
-    scraped_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    scraped_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    scrape_status TEXT DEFAULT 'success'
   );
 
   -- Create indexes for performance
   CREATE INDEX IF NOT EXISTS idx_raw_html_url ON raw_html(url);
   CREATE INDEX IF NOT EXISTS idx_raw_html_hash ON raw_html(content_hash);
   CREATE INDEX IF NOT EXISTS idx_raw_html_scraped ON raw_html(scraped_at);
+  CREATE INDEX IF NOT EXISTS idx_raw_html_status ON raw_html(scrape_status);
 
   -- Scraping run metadata
   CREATE TABLE IF NOT EXISTS scrape_runs (
