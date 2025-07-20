@@ -50,6 +50,12 @@ async function initDatabase() {
       )
     `);
     
+    // Create company_urls view for backward compatibility
+    await query(`
+      CREATE OR REPLACE VIEW intelligence.company_urls AS
+      SELECT * FROM intelligence.urls
+    `);
+    
     await query(`
       CREATE TABLE IF NOT EXISTS intelligence.enhanced_analysis (
         id SERIAL PRIMARY KEY,
@@ -111,6 +117,22 @@ async function initDatabase() {
       )
     `);
     
+    // Add scraping_runs table that scraper expects
+    await query(`
+      CREATE TABLE IF NOT EXISTS intelligence.scraping_runs (
+        id SERIAL PRIMARY KEY,
+        started_at TIMESTAMP,
+        completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        urls_total INTEGER,
+        urls_succeeded INTEGER,
+        urls_failed INTEGER,
+        changes_detected INTEGER,
+        duration_seconds INTEGER,
+        errors TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    
     console.log(chalk.green('✅ Intelligence tables created\n'));
     
     // Create raw content tables
@@ -146,6 +168,21 @@ async function initDatabase() {
       )
     `);
     
+    // Add changes table for tracking detected changes
+    await query(`
+      CREATE TABLE IF NOT EXISTS processed_content.changes (
+        id SERIAL PRIMARY KEY,
+        company_id INTEGER NOT NULL,
+        url_id INTEGER NOT NULL,
+        detected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        before_content_id INTEGER,
+        after_content_id INTEGER NOT NULL,
+        change_summary TEXT,
+        interest_level INTEGER DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    
     console.log(chalk.green('✅ Processed content tables created\n'));
     
     // Create indexes
@@ -160,7 +197,9 @@ async function initDatabase() {
       'CREATE INDEX IF NOT EXISTS idx_enhanced_analysis_company_id ON intelligence.enhanced_analysis(company_id)',
       'CREATE INDEX IF NOT EXISTS idx_thebrain_sync_company_id ON intelligence.thebrain_sync(company_id)',
       'CREATE INDEX IF NOT EXISTS idx_scrape_status_url_id ON intelligence.scrape_status(url_id)',
-      'CREATE UNIQUE INDEX IF NOT EXISTS idx_urls_url_company ON intelligence.urls(url, company_id)'
+      'CREATE UNIQUE INDEX IF NOT EXISTS idx_urls_url_company ON intelligence.urls(url, company_id)',
+      'CREATE INDEX IF NOT EXISTS idx_changes_company_id ON processed_content.changes(company_id)',
+      'CREATE INDEX IF NOT EXISTS idx_changes_detected_at ON processed_content.changes(detected_at)'
     ];
     
     for (const index of indexes) {
