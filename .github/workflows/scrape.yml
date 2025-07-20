@@ -55,6 +55,12 @@ jobs:
         cd github-actions-backend
         node scripts/init-db-three.js
         
+    - name: Run database migrations
+      run: |
+        cd github-actions-backend
+        # Run migration to add scrape_status column if needed
+        node scripts/add-scrape-status-column.js || true
+        
     - name: Run intelligent scraper with captcha detection
       env:
         GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
