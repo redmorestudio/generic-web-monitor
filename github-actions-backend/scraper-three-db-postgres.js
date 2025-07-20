@@ -352,17 +352,16 @@ Focus on AI/ML relevance and competitive intelligence value.`;
       console.log('🔍 AI Competitor Monitor - Web Scraper (PostgreSQL)');
       console.log('=' .repeat(80));
       
-      // Get active companies and their URLs
+      // Get all companies and their URLs
       const companies = await db.all(
         `SELECT c.*, COUNT(u.id) as url_count
          FROM intelligence.companies c
          LEFT JOIN intelligence.company_urls u ON c.id = u.company_id
-         WHERE c.active = true
          GROUP BY c.id
          ORDER BY c.name`
       );
       
-      console.log(`📊 Found ${companies.length} active companies to monitor\n`);
+      console.log(`📊 Found ${companies.length} companies to monitor\n`);
       
       // Process each company
       for (const company of companies) {
@@ -374,7 +373,7 @@ Focus on AI/ML relevance and competitive intelligence value.`;
         // Get URLs for this company
         const urls = await db.all(
           `SELECT * FROM intelligence.company_urls 
-           WHERE company_id = $1 AND active = true 
+           WHERE company_id = $1 
            ORDER BY name`,
           [company.id]
         );
