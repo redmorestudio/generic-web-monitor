@@ -186,7 +186,7 @@ class IntelligentScraperThreeDB {
           });
           
           // Wait for potential lazy-loaded content
-          await page.waitForTimeout(3000);
+          await new Promise(resolve => setTimeout(resolve, 3000));
           
           return response;
         } catch (secondError) {
@@ -198,7 +198,7 @@ class IntelligentScraperThreeDB {
             waitUntil: 'load'
           });
           
-          await page.waitForTimeout(5000);
+          await new Promise(resolve => setTimeout(resolve, 5000));
           return response;
         }
       }
@@ -488,7 +488,7 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
 
       // Random delay to appear more human-like
       const randomDelay = 1000 + Math.floor(Math.random() * 2000);
-      await page.waitForTimeout(randomDelay);
+      await new Promise(resolve => setTimeout(resolve, randomDelay));
 
       // Get full HTML content
       const htmlContent = await page.content();

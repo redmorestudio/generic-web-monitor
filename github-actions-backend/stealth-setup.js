@@ -144,7 +144,7 @@ class StealthSetup {
       x = newX;
       y = newY;
       
-      await page.waitForTimeout(Math.random() * 200 + 100);
+      await new Promise(resolve => setTimeout(resolve, Math.random() * 200 + 100));
     }
   }
 
