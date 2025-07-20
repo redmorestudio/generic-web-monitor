@@ -42,6 +42,7 @@ jobs:
       run: |
         cd github-actions-backend
         npm install
+        npm audit fix --force || true
         
     - name: Download previous databases
       uses: actions/download-artifact@v4
