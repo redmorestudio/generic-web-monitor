@@ -148,8 +148,28 @@ class CaptchaDetector {
       return { detected: true, type: 'image' };
     }
     
-    // Custom captcha inputs
-    const customCaptcha = await page.$('input[name*="captcha"], input[placeholder*="captcha"], label:has-text("captcha"), label:has-text("security code")');
+    // Custom captcha inputs - using page.evaluate() for text content checking
+    const customCaptcha = await page.evaluate(() => {
+      // Check inputs with captcha-related attributes
+      const inputs = document.querySelectorAll('input[name*="captcha"], input[placeholder*="captcha"], input[id*="security"], input[name*="security"]');
+      if (inputs.length > 0) return true;
+      
+      // Check labels containing captcha-related text
+      const labels = Array.from(document.querySelectorAll('label'));
+      for (const label of labels) {
+        const text = label.textContent.toLowerCase();
+        if (text.includes('captcha') || text.includes('security code') || text.includes('verification')) {
+          return true;
+        }
+      }
+      
+      // Check for common captcha-related class names
+      const captchaElements = document.querySelectorAll('[class*="captcha"], [class*="security-code"], [class*="verification"]');
+      if (captchaElements.length > 0) return true;
+      
+      return false;
+    });
+    
     if (customCaptcha) {
       console.log('      🚫 Detected: Custom CAPTCHA input');
       return { detected: true, type: 'custom' };
