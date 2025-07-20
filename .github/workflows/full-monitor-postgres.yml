@@ -1,0 +1,35 @@
+name: Full Monitor Pipeline (PostgreSQL)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 */4 * * *'  # Every 4 hours
+
+concurrency:
+  group: full-monitor
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    uses: ./.github/workflows/scrape-postgres.yml
+    secrets: inherit
+    with:
+      cascade: 'true'
+  
+  process:
+    needs: scrape
+    uses: ./.github/workflows/process-postgres.yml
+    secrets: inherit
+    with:
+      cascade: 'true'
+  
+  notify:
+    needs: process
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send completion notification
+        run: |
+          echo "✅ Full PostgreSQL monitor pipeline completed successfully!"
+          echo "- Scrape: ✓"
+          echo "- Process: ✓"
+          echo "- Data is now in PostgreSQL!"
