@@ -1,0 +1,17 @@
+name: Trigger Migration
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/trigger-migration.yml'
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger metadata migration
+        run: |
+          echo "This workflow exists to trigger the migration"
+          echo "The actual migration will run via the migrate-metadata-only.yml workflow"
