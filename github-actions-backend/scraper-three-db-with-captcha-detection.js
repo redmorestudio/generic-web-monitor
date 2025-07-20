@@ -124,67 +124,84 @@ class IntelligentScraperThreeDB {
 
   /**
    * Detect if the page contains a captcha or challenge
+   * UPDATED: More precise detection to reduce false positives
    * @param {string} htmlContent - The HTML content to check
+   * @param {string} url - The URL being checked
    * @returns {boolean} - True if captcha/challenge detected
    */
-  detectChallengeOrCaptcha(htmlContent) {
-    // Common patterns for captcha/challenge pages
-    const challengePatterns = [
-      // Cloudflare patterns
-      /cf-challenge/i,
-      /challenge-form/i,
-      /cf-browser-verification/i,
-      /checking your browser/i,
-      /this process is automatic/i,
-      /will be redirected/i,
-
-      // Generic captcha patterns
-      /captcha/i,
-      /recaptcha/i,
-      /robot/i,
-      /verify you are human/i,
-      /are you human/i,
-
-      // You.com specific patterns
-      /you\.com needs to review/i,
-      /security of your connection/i,
-      /verify you are human by completing/i,
-
-      // Generic challenge patterns
-      /just a moment/i,
-      /please wait/i,
-      /verifying your browser/i,
-      /ddos protection/i,
-      /access denied/i,
-      /forbidden/i,
-
-      // Look for minimal content indicating a challenge page
-      /<body[^>]*>[\s\S]{0,500}<\/body>/i // Body with very little content
-    ];
-
-    // Check title for challenge indicators
+  detectChallengeOrCaptcha(htmlContent, url) {
+    // Check for suspiciously short content first
+    const textContent = this.extractTextFromHtml(htmlContent);
+    const hasMinimalContent = textContent.length < 100;
+    
+    // Check title for strong challenge indicators
     const titleMatch = htmlContent.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
     if (titleMatch && titleMatch[1]) {
       const title = titleMatch[1].toLowerCase();
+      
+      // Strong indicators in title
       if (title.includes('just a moment') ||
           title.includes('attention required') ||
           title.includes('security check') ||
-          title.includes('please wait')) {
+          title.includes('access denied') ||
+          title.includes('please wait') ||
+          title.includes('checking your browser')) {
+        console.log(`      🔍 Challenge detected in title: "${titleMatch[1]}"`);
         return true;
       }
     }
-
-    // Check for any of the patterns
-    for (const pattern of challengePatterns) {
-      if (pattern.test(htmlContent)) {
-        return true;
+    
+    // Only check body content if we have minimal content
+    if (hasMinimalContent) {
+      // Strong patterns that indicate challenges
+      const strongPatterns = [
+        /cf-browser-verification/i,
+        /challenge-form/i,
+        /cf-challenge/i,
+        /checking your browser/i,
+        /this process is automatic/i,
+        /you will be redirected/i,
+        /verify you are human/i,
+        /please complete the security check/i,
+        /enable javascript to continue/i,
+        /ddos protection by/i
+      ];
+      
+      for (const pattern of strongPatterns) {
+        if (pattern.test(htmlContent)) {
+          console.log(`      🔍 Challenge pattern detected: ${pattern}`);
+          return true;
+        }
       }
     }
-
-    // Check for suspiciously short content
-    const textContent = this.extractTextFromHtml(htmlContent);
-    if (textContent.length < 100 && htmlContent.includes('script')) {
-      // Very little text but has scripts - likely a challenge page
+    
+    // Check for common captcha services (but only if minimal content)
+    if (hasMinimalContent) {
+      const captchaServices = [
+        /www\.google\.com\/recaptcha/i,
+        /hcaptcha\.com/i,
+        /challenges\.cloudflare\.com/i,
+        /captcha-delivery\.com/i
+      ];
+      
+      for (const pattern of captchaServices) {
+        if (pattern.test(htmlContent)) {
+          console.log(`      🔍 Captcha service detected: ${pattern}`);
+          return true;
+        }
+      }
+    }
+    
+    // Special handling for specific sites with known patterns
+    if (url.includes('you.com') && hasMinimalContent && htmlContent.includes('security')) {
+      console.log(`      🔍 You.com security check detected`);
+      return true;
+    }
+    
+    // If very minimal content AND has suspicious scripts, likely a challenge
+    if (textContent.length < 50 && htmlContent.includes('script') && 
+        (htmlContent.includes('challenge') || htmlContent.includes('captcha'))) {
+      console.log(`      🔍 Minimal content with challenge scripts detected`);
       return true;
     }
 
@@ -503,8 +520,8 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
       // Get full HTML content
       const htmlContent = await page.content();
 
-      // Check for captcha/challenge pages
-      if (this.detectChallengeOrCaptcha(htmlContent)) {
+      // Check for captcha/challenge pages with URL context
+      if (this.detectChallengeOrCaptcha(htmlContent, urlConfig.url)) {
         console.log(`      🚫 Captcha/Challenge detected - marking as blocked`);
 
         // Store a record indicating the page was blocked
