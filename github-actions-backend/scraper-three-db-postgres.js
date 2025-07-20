@@ -160,8 +160,8 @@ Focus on AI/ML relevance and competitive intelligence value.`;
         timeout: PAGE_TIMEOUT 
       });
       
-      // Wait a bit for dynamic content
-      await page.waitForTimeout(2000);
+      // Wait a bit for dynamic content - use the correct method
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
       // Get page content
       const content = await page.evaluate(() => {
