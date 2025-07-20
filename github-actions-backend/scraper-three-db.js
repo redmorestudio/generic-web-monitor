@@ -539,7 +539,7 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
           if (!isFirstScrape && assessment) {
             try {
               const enhancedStmt = this.intelligenceDb.prepare(`
-                INSERT INTO enhanced_analysis (
+                INSERT OR REPLACE INTO enhanced_analysis (
                   change_id,
                   entities,
                   relationships,
