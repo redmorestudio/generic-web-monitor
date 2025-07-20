@@ -13,6 +13,7 @@
     "analyze": "node ai-analyzer.js analyze",
     "brief": "node ai-analyzer.js brief",
     "init-db": "node scripts/init-db.js",
+    "migrate-to-postgres": "node migrate-to-postgres.js",
     "test": "jest",
     "docker:build": "docker build -t ai-monitor-backend .",
     "docker:run": "docker run -p 3000:3000 -v $(pwd)/data:/app/data ai-monitor-backend"
@@ -31,6 +32,7 @@
     "express": "^4.18.2",
     "groq-sdk": "^0.7.0",
     "nodemailer": "^6.9.7",
+    "pg": "^8.11.3",
     "puppeteer": "^22.0.0",
     "puppeteer-extra": "^3.3.6",
     "puppeteer-extra-plugin-stealth": "^2.11.2",
