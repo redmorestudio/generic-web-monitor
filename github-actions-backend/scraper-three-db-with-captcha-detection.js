@@ -1,11 +1,17 @@
 #!/usr/bin/env node
 
 require('dotenv').config();
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const crypto = require('crypto');
 const path = require('path');
 const dbManager = require('./db-manager');
 const Groq = require('groq-sdk');
+const CaptchaDetector = require('./captcha-detector');
+const StealthSetup = require('./stealth-setup');
+
+// Use stealth plugin
+puppeteer.use(StealthPlugin());
 
 // Initialize Groq client for change analysis
 const groq = new Groq({
@@ -50,6 +56,30 @@ Provide your analysis in this JSON structure:
   }
 }`;
 
+class RequestThrottler {
+  constructor() {
+    this.domainLastRequest = new Map();
+    this.minDelayPerDomain = 2000; // 2 seconds minimum between requests to same domain
+  }
+  
+  async throttleForDomain(url) {
+    const domain = new URL(url).hostname;
+    const lastRequest = this.domainLastRequest.get(domain);
+    
+    if (lastRequest) {
+      const elapsed = Date.now() - lastRequest;
+      const delay = Math.max(0, this.minDelayPerDomain - elapsed);
+      
+      if (delay > 0) {
+        console.log(`      ⏳ Throttling ${domain} for ${delay}ms`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+    }
+    
+    this.domainLastRequest.set(domain, Date.now());
+  }
+}
+
 class IntelligentScraperThreeDB {
   constructor() {
     this.browser = null;
@@ -58,10 +88,13 @@ class IntelligentScraperThreeDB {
     this.intelligenceDb = null;
     this.processedDb = null;
     this.startTime = null;
+    this.captchaDetector = new CaptchaDetector();
+    this.stealthSetup = new StealthSetup();
+    this.throttler = new RequestThrottler();
   }
 
   async initialize() {
-    console.log('🚀 Starting Intelligent Scraper with Change Analysis...');
+    console.log('🚀 Starting Intelligent Scraper with Enhanced Stealth and Captcha Detection...');
     this.startTime = Date.now();
 
     // Check if three-database architecture exists
@@ -75,18 +108,12 @@ class IntelligentScraperThreeDB {
     this.intelligenceDb = dbManager.getIntelligenceDb();
     this.processedDb = dbManager.getProcessedDb();
 
-    // Launch Puppeteer with optimized settings
+    // Launch Puppeteer with stealth
     this.browser = await puppeteer.launch({
       headless: 'new',
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-gpu',
-        '--disable-web-security',
-        '--disable-features=IsolateOrigins,site-per-process',
-        '--disable-blink-features=AutomationControlled'
-      ]
+      args: this.stealthSetup.getBrowserArgs(),
+      defaultViewport: null,
+      ignoreDefaultArgs: ['--enable-automation']
     });
 
     // Create scraping run record
@@ -98,6 +125,7 @@ class IntelligentScraperThreeDB {
     this.runId = result.lastInsertRowid;
 
     console.log(`📊 Scrape run ID: ${this.runId}`);
+    console.log(`🥷 Stealth mode enabled with enhanced evasion techniques`);
   }
 
   async shutdown() {
@@ -115,6 +143,15 @@ class IntelligentScraperThreeDB {
       stmt.run(this.runId);
     }
 
+    // Log captcha detection stats
+    console.log('\n📊 Captcha Detection Statistics:');
+    const stats = this.captchaDetector.getStats();
+    for (const [type, count] of Object.entries(stats)) {
+      if (count > 0 && type !== 'total') {
+        console.log(`   ${type}: ${count}`);
+      }
+    }
+
     // Close database connections
     dbManager.closeAll();
 
@@ -123,89 +160,50 @@ class IntelligentScraperThreeDB {
   }
 
   /**
-   * Detect if the page contains a captcha or challenge
-   * UPDATED: More precise detection to reduce false positives
-   * @param {string} htmlContent - The HTML content to check
-   * @param {string} url - The URL being checked
-   * @returns {boolean} - True if captcha/challenge detected
+   * Navigate with retry strategy
    */
-  detectChallengeOrCaptcha(htmlContent, url) {
-    // Check for suspiciously short content first
-    const textContent = this.extractTextFromHtml(htmlContent);
-    const hasMinimalContent = textContent.length < 100;
+  async navigateWithRetry(page, url, options = {}) {
+    const defaultOptions = {
+      waitUntil: 'networkidle2',
+      timeout: PAGE_TIMEOUT
+    };
     
-    // Check title for strong challenge indicators
-    const titleMatch = htmlContent.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
-    if (titleMatch && titleMatch[1]) {
-      const title = titleMatch[1].toLowerCase();
-      
-      // Strong indicators in title
-      if (title.includes('just a moment') ||
-          title.includes('attention required') ||
-          title.includes('security check') ||
-          title.includes('access denied') ||
-          title.includes('please wait') ||
-          title.includes('checking your browser')) {
-        console.log(`      🔍 Challenge detected in title: "${titleMatch[1]}"`);
-        return true;
-      }
-    }
+    const navOptions = { ...defaultOptions, ...options };
     
-    // Only check body content if we have minimal content
-    if (hasMinimalContent) {
-      // Strong patterns that indicate challenges
-      const strongPatterns = [
-        /cf-browser-verification/i,
-        /challenge-form/i,
-        /cf-challenge/i,
-        /checking your browser/i,
-        /this process is automatic/i,
-        /you will be redirected/i,
-        /verify you are human/i,
-        /please complete the security check/i,
-        /enable javascript to continue/i,
-        /ddos protection by/i
-      ];
-      
-      for (const pattern of strongPatterns) {
-        if (pattern.test(htmlContent)) {
-          console.log(`      🔍 Challenge pattern detected: ${pattern}`);
-          return true;
+    try {
+      // First attempt with networkidle2
+      const response = await page.goto(url, navOptions);
+      return response;
+    } catch (error) {
+      if (error.message.includes('timeout')) {
+        console.log('      ⚠️ Navigation timeout, trying with domcontentloaded...');
+        
+        // Second attempt with domcontentloaded
+        try {
+          const response = await page.goto(url, {
+            ...navOptions,
+            waitUntil: 'domcontentloaded'
+          });
+          
+          // Wait for potential lazy-loaded content
+          await page.waitForTimeout(3000);
+          
+          return response;
+        } catch (secondError) {
+          console.log('      ⚠️ Second navigation attempt failed, trying load event...');
+          
+          // Final attempt with just load event
+          const response = await page.goto(url, {
+            ...navOptions,
+            waitUntil: 'load'
+          });
+          
+          await page.waitForTimeout(5000);
+          return response;
         }
       }
+      throw error;
     }
-    
-    // Check for common captcha services (but only if minimal content)
-    if (hasMinimalContent) {
-      const captchaServices = [
-        /www\.google\.com\/recaptcha/i,
-        /hcaptcha\.com/i,
-        /challenges\.cloudflare\.com/i,
-        /captcha-delivery\.com/i
-      ];
-      
-      for (const pattern of captchaServices) {
-        if (pattern.test(htmlContent)) {
-          console.log(`      🔍 Captcha service detected: ${pattern}`);
-          return true;
-        }
-      }
-    }
-    
-    // Special handling for specific sites with known patterns
-    if (url.includes('you.com') && hasMinimalContent && htmlContent.includes('security')) {
-      console.log(`      🔍 You.com security check detected`);
-      return true;
-    }
-    
-    // If very minimal content AND has suspicious scripts, likely a challenge
-    if (textContent.length < 50 && htmlContent.includes('script') && 
-        (htmlContent.includes('challenge') || htmlContent.includes('captcha'))) {
-      console.log(`      🔍 Minimal content with challenge scripts detected`);
-      return true;
-    }
-
-    return false;
   }
 
   async analyzeChange(oldContent, newContent, company, url) {
@@ -478,51 +476,28 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
     try {
       console.log(`   📄 [${companyName}] ${urlConfig.url}`);
 
-      // Special debug logging for Redmore Studio
-      if (companyName.toLowerCase().includes('redmore')) {
-        console.log(`      🔍 DEBUG: Scraping Redmore Studio URL ID ${urlConfig.id}`);
-        console.log(`      🔍 DEBUG: URL Type: ${urlConfig.url_type || 'unknown'}`);
-      }
+      // Apply stealth setup
+      await this.stealthSetup.applyStealthToPage(page);
 
-      // Set user agent to avoid bot detection
-      await page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
+      // Apply domain-specific throttling
+      await this.throttler.throttleForDomain(urlConfig.url);
 
-      // Set viewport
-      await page.setViewport({ width: 1920, height: 1080 });
-
-      // Navigate to URL with timeout - special handling for certain sites
-      let response;
-      try {
-        response = await page.goto(urlConfig.url, {
-          waitUntil: 'networkidle2',
-          timeout: PAGE_TIMEOUT
-        });
-      } catch (navError) {
-        // Try again with different wait condition for problematic sites
-        if (companyName.toLowerCase().includes('redmore')) {
-          console.log(`      ⚠️ Special handling for Redmore Studio - trying domcontentloaded...`);
-          response = await page.goto(urlConfig.url, {
-            waitUntil: 'domcontentloaded',
-            timeout: PAGE_TIMEOUT
-          });
-          // Extra wait for JS to load
-          await new Promise(resolve => setTimeout(resolve, 3000));
-        } else {
-          throw navError;
-        }
-      }
-
+      // Navigate with retry strategy
+      const response = await this.navigateWithRetry(page, urlConfig.url);
       const statusCode = response.status();
 
-      // Wait a bit for dynamic content
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Random delay to appear more human-like
+      const randomDelay = 1000 + Math.floor(Math.random() * 2000);
+      await page.waitForTimeout(randomDelay);
 
       // Get full HTML content
       const htmlContent = await page.content();
 
-      // Check for captcha/challenge pages with URL context
-      if (this.detectChallengeOrCaptcha(htmlContent, urlConfig.url)) {
-        console.log(`      🚫 Captcha/Challenge detected - marking as blocked`);
+      // Enhanced captcha detection using page object
+      const captchaResult = await this.captchaDetector.detect(page, htmlContent, urlConfig.url);
+
+      if (captchaResult.detected) {
+        console.log(`      🚫 ${captchaResult.type} detected - marking as blocked`);
 
         // Store a record indicating the page was blocked
         const insertStmt = this.rawDb.prepare(`
@@ -554,8 +529,9 @@ Analyze what changed and assess its importance. Focus on what's NEW or DIFFERENT
           changed: false,
           analyzed: false,
           blocked: true,
+          blockType: captchaResult.type,
           url: urlConfig.url,
-          error: 'Captcha or challenge page detected'
+          error: `${captchaResult.type} detected`
         };
       }
 
