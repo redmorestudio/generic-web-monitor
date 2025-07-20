@@ -7,7 +7,7 @@ on:
         description: 'Download intelligence.db from artifact first'
         required: false
         type: boolean
-        default: true
+        default: false
 
 jobs:
   migrate-metadata:
@@ -42,24 +42,11 @@ jobs:
         if [ -f data/intelligence.db ]; then
           echo "✅ Found intelligence.db in data/"
           ls -la data/intelligence.db
-        elif [ -f intelligence.db ]; then
-          echo "📁 Found intelligence.db in current directory, moving to data/"
-          mkdir -p data
-          cp intelligence.db data/
         else
           echo "❌ ERROR: intelligence.db not found!"
-          echo "Available files:"
-          ls -la
-          
-          # Try to use the committed version
-          if [ -f ../intelligence.db ]; then
-            echo "Found in parent directory, copying..."
-            mkdir -p data
-            cp ../intelligence.db data/
-          else
-            echo "Cannot find intelligence.db anywhere!"
-            exit 1
-          fi
+          echo "Available files in data/:"
+          ls -la data/
+          exit 1
         fi
     
     - name: Run metadata-only migration
