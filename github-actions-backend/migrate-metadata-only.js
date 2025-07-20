@@ -50,6 +50,12 @@ async function migrateMetadataOnly() {
     await pg.query('CREATE SCHEMA IF NOT EXISTS intelligence');
     console.log('✅ Schema created');
     
+    // Drop existing tables if they exist (to ensure correct schema)
+    console.log('\n🗑️  Dropping existing tables if they exist...');
+    await pg.query('DROP TABLE IF EXISTS intelligence.urls CASCADE');
+    await pg.query('DROP TABLE IF EXISTS intelligence.companies CASCADE');
+    console.log('✅ Tables dropped');
+    
     // Create companies table
     console.log('\n📊 Creating companies table...');
     await pg.query(`
@@ -105,9 +111,9 @@ async function migrateMetadataOnly() {
         company.id,
         company.name,
         company.category,
-        company.description,
+        company.description || null,
         company.created_at || new Date().toISOString(),
-        company.thebrain_thought_id
+        company.thebrain_thought_id || null
       ]);
     }
     console.log(`✅ ${companies.length} companies migrated`);
