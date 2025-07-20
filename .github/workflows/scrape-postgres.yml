@@ -19,6 +19,10 @@ on:
         default: 'true'
         type: string
 
+permissions:
+  contents: read
+  actions: write
+
 concurrency:
   group: scrape-workflow
   cancel-in-progress: false
