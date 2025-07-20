@@ -1,0 +1,69 @@
+name: Scrape Websites (PostgreSQL)
+
+on:
+  workflow_dispatch:
+    inputs:
+      cascade:
+        description: 'Trigger next workflow (process)'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+        - 'true'
+        - 'false'
+  workflow_call:
+    inputs:
+      cascade:
+        description: 'Trigger next workflow (process)'
+        required: false
+        default: 'true'
+        type: string
+
+concurrency:
+  group: scrape-workflow
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+        npm audit fix --force || true
+        
+    - name: Run intelligent scraper with PostgreSQL
+      env:
+        GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      run: |
+        cd github-actions-backend
+        node scraper-three-db-postgres.js
+        
+    - name: Trigger Process Workflow
+      if: ${{ inputs.cascade == 'true' || inputs.cascade == '' }}
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const result = await github.rest.actions.createWorkflowDispatch({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            workflow_id: 'process-postgres.yml',
+            ref: 'main',
+            inputs: {
+              cascade: '${{ inputs.cascade }}'
+            }
+          });
+          console.log('Triggered process workflow');
