@@ -124,14 +124,24 @@ class MarkdownConverterPostgreSQL {
         return { converted: 0, errors: 0 };
       }
       
-      // Get unprocessed pages
+      // Get unprocessed pages with proper column handling
       const unprocessedPages = await db.all(`
-        SELECT sp.*
+        SELECT 
+          sp.id,
+          sp.company_name,
+          sp.url,
+          sp.html_content,
+          sp.content_hash,
+          sp.scraped_at,
+          sp.status_code,
+          sp.error_message
         FROM raw_content.scraped_pages sp
         WHERE NOT EXISTS (
           SELECT 1 FROM processed_content.markdown_pages mp
           WHERE mp.source_hash = sp.content_hash
         )
+        AND sp.html_content IS NOT NULL
+        AND sp.content_hash IS NOT NULL
         ORDER BY sp.scraped_at DESC
       `);
       
@@ -140,8 +150,12 @@ class MarkdownConverterPostgreSQL {
       
       for (const page of unprocessedPages) {
         try {
+          // Extract title from HTML if possible
+          const titleMatch = page.html_content.match(/<title[^>]*>([^<]+)<\/title>/i);
+          const title = titleMatch ? titleMatch[1].trim() : '';
+          
           // Convert to markdown
-          const markdown = this.convertHtmlToMarkdown(page.html, page.title);
+          const markdown = this.convertHtmlToMarkdown(page.html_content, title);
           const markdownHash = this.generateContentHash(markdown);
           
           // Store markdown version
@@ -150,14 +164,15 @@ class MarkdownConverterPostgreSQL {
             (company, url, url_name, content, markdown_hash, source_hash, 
              source_type, created_at, title)
             VALUES ($1, $2, $3, $4, $5, $6, 'scraped_page', NOW(), $7)
+            ON CONFLICT (source_hash) DO NOTHING
           `, [
-            page.company,
+            page.company_name,
             page.url,
-            page.url_name,
+            new URL(page.url).pathname || '/',
             markdown,
             markdownHash,
             page.content_hash,
-            page.title
+            title
           ]);
           
           converted++;
@@ -231,6 +246,7 @@ class MarkdownConverterPostgreSQL {
             (company, url, url_name, content, markdown_hash, source_hash, 
              source_type, created_at, title)
             VALUES ($1, $2, $3, $4, $5, $6, 'baseline', NOW(), $7)
+            ON CONFLICT (source_hash) DO NOTHING
           `, [
             baseline.company,
             baseline.url,
@@ -274,13 +290,19 @@ class MarkdownConverterPostgreSQL {
           UNION
           SELECT DISTINCT new_hash as hash FROM processed_content.change_detection WHERE new_hash IS NOT NULL
         )
-        SELECT rh.hash, sp.company, sp.url, sp.url_name, sp.html, sp.title
+        SELECT 
+          rh.hash, 
+          sp.company_name as company, 
+          sp.url, 
+          sp.html_content as html,
+          sp.status_code
         FROM referenced_hashes rh
         JOIN raw_content.scraped_pages sp ON sp.content_hash = rh.hash
         WHERE NOT EXISTS (
           SELECT 1 FROM processed_content.markdown_pages mp
           WHERE mp.source_hash = rh.hash
         )
+        AND sp.html_content IS NOT NULL
         LIMIT 100
       `);
       
@@ -295,7 +317,11 @@ class MarkdownConverterPostgreSQL {
       
       for (const missing of missingMarkdown) {
         try {
-          const markdown = this.convertHtmlToMarkdown(missing.html, missing.title);
+          // Extract title from HTML
+          const titleMatch = missing.html.match(/<title[^>]*>([^<]+)<\/title>/i);
+          const title = titleMatch ? titleMatch[1].trim() : '';
+          
+          const markdown = this.convertHtmlToMarkdown(missing.html, title);
           const markdownHash = this.generateContentHash(markdown);
           
           await db.run(`
@@ -307,11 +333,11 @@ class MarkdownConverterPostgreSQL {
           `, [
             missing.company,
             missing.url,
-            missing.url_name,
+            new URL(missing.url).pathname || '/',
             markdown,
             markdownHash,
             missing.hash,
-            missing.title
+            title
           ]);
           
           converted++;
@@ -358,9 +384,9 @@ class MarkdownConverterPostgreSQL {
       // Check coverage
       const coverage = await db.get(`
         WITH all_hashes AS (
-          SELECT content_hash FROM raw_content.scraped_pages
+          SELECT content_hash FROM raw_content.scraped_pages WHERE content_hash IS NOT NULL
           UNION
-          SELECT content_hash FROM raw_content.company_pages_baseline
+          SELECT content_hash FROM raw_content.company_pages_baseline WHERE content_hash IS NOT NULL
         )
         SELECT 
           COUNT(DISTINCT ah.content_hash) as total_unique_content,
@@ -369,7 +395,9 @@ class MarkdownConverterPostgreSQL {
         LEFT JOIN processed_content.markdown_pages mp ON ah.content_hash = mp.source_hash
       `);
       
-      const coveragePercent = (coverage.markdown_coverage / coverage.total_unique_content * 100).toFixed(1);
+      const coveragePercent = coverage.total_unique_content > 0 
+        ? (coverage.markdown_coverage / coverage.total_unique_content * 100).toFixed(1)
+        : 0;
       console.log(`\n  Coverage: ${coverage.markdown_coverage}/${coverage.total_unique_content} (${coveragePercent}%)`);
       
     } catch (error) {
