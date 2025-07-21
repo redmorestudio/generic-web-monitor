@@ -1,47 +1,85 @@
 #!/usr/bin/env node
 
-// Fix missing columns in PostgreSQL schema
+/**
+ * Fix PostgreSQL Schema Issues
+ * 
+ * Addresses missing tables and columns for the scraper-three-db-postgres.js
+ */
 
 require('dotenv').config();
 const { db, end } = require('./postgres-db');
 
 async function fixSchema() {
   try {
-    console.log('🔧 Fixing PostgreSQL schema...');
+    console.log('🔧 Fixing PostgreSQL schema...\n');
     
-    // Add missing columns to scraped_pages table
-    console.log('Adding missing columns to scraped_pages...');
-    
-    // Add scrape_status column if missing
+    // 1. Create missing scraped_pages table in raw_content schema
+    console.log('📊 Creating/updating scraped_pages table...');
     await db.run(`
-      ALTER TABLE raw_content.scraped_pages 
-      ADD COLUMN IF NOT EXISTS scrape_status VARCHAR(50) DEFAULT 'success'
-    `).catch(err => {
-      if (!err.message.includes('already exists')) throw err;
-    });
-    
-    // Add captcha_type column if missing
+      CREATE TABLE IF NOT EXISTS raw_content.scraped_pages (
+        id SERIAL PRIMARY KEY,
+        company TEXT NOT NULL,
+        url TEXT NOT NULL,
+        url_name TEXT,
+        content TEXT,
+        html TEXT,
+        title TEXT,
+        content_hash TEXT,
+        scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        change_detected BOOLEAN DEFAULT false,
+        previous_hash TEXT,
+        interest_level INTEGER DEFAULT 5,
+        scrape_status TEXT DEFAULT 'pending',
+        captcha_type TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    console.log('✅ scraped_pages table ready\n');
+
+    // 2. Create company_pages_baseline table
+    console.log('📊 Creating/updating company_pages_baseline table...');
     await db.run(`
-      ALTER TABLE raw_content.scraped_pages 
-      ADD COLUMN IF NOT EXISTS captcha_type VARCHAR(50)
-    `).catch(err => {
-      if (!err.message.includes('already exists')) throw err;
-    });
-    
-    // Add missing columns to change_detection table
-    console.log('Adding missing columns to change_detection...');
-    
-    // Add url column if missing (seems to be required based on the error)
+      CREATE TABLE IF NOT EXISTS raw_content.company_pages_baseline (
+        id SERIAL PRIMARY KEY,
+        company TEXT NOT NULL,
+        url TEXT NOT NULL,
+        url_name TEXT,
+        content TEXT,
+        html TEXT,
+        title TEXT,
+        content_hash TEXT,
+        last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        update_count INTEGER DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        UNIQUE(company, url)
+      )
+    `);
+    console.log('✅ company_pages_baseline table ready\n');
+
+    // 3. Create change_detection table with correct schema
+    console.log('📊 Creating/updating change_detection table...');
     await db.run(`
-      ALTER TABLE processed_content.change_detection 
-      ADD COLUMN IF NOT EXISTS url TEXT
-    `).catch(err => {
-      if (!err.message.includes('already exists')) throw err;
-    });
+      CREATE TABLE IF NOT EXISTS processed_content.change_detection (
+        id SERIAL PRIMARY KEY,
+        company TEXT NOT NULL,
+        url TEXT NOT NULL,
+        url_name TEXT,
+        url_id INTEGER,
+        change_type TEXT,
+        old_hash TEXT,
+        new_hash TEXT,
+        detected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        interest_level INTEGER DEFAULT 5,
+        ai_analysis TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    console.log('✅ change_detection table ready\n');
+
+    // 4. Add missing columns to existing tables
+    console.log('📊 Adding missing columns to existing tables...');
     
-    // Add missing columns to scraping_runs table
-    console.log('Adding missing columns to scraping_runs...');
-    
+    // Add captchas_encountered column to scraping_runs if missing
     await db.run(`
       ALTER TABLE intelligence.scraping_runs 
       ADD COLUMN IF NOT EXISTS captchas_encountered INTEGER DEFAULT 0
@@ -49,30 +87,62 @@ async function fixSchema() {
       if (!err.message.includes('already exists')) throw err;
     });
     
-    // Create indexes for better performance
-    console.log('Creating indexes...');
-    
-    // Index on scraped_pages for faster lookups
+    // Add scrape_status column to scraped_pages if missing
     await db.run(`
-      CREATE INDEX IF NOT EXISTS idx_scraped_pages_url_scraped_at 
-      ON raw_content.scraped_pages(url, scraped_at DESC)
-    `);
+      ALTER TABLE raw_content.scraped_pages 
+      ADD COLUMN IF NOT EXISTS scrape_status VARCHAR(50) DEFAULT 'success'
+    `).catch(err => {
+      if (!err.message.includes('already exists')) throw err;
+    });
     
-    // Index on change_detection
+    // Add captcha_type column to scraped_pages if missing
     await db.run(`
-      CREATE INDEX IF NOT EXISTS idx_change_detection_detected_at 
-      ON processed_content.change_detection(detected_at DESC)
-    `);
+      ALTER TABLE raw_content.scraped_pages 
+      ADD COLUMN IF NOT EXISTS captcha_type VARCHAR(50)
+    `).catch(err => {
+      if (!err.message.includes('already exists')) throw err;
+    });
     
+    // Add url column to change_detection if missing
     await db.run(`
-      CREATE INDEX IF NOT EXISTS idx_change_detection_interest_level 
-      ON processed_content.change_detection(interest_level DESC)
-    `);
+      ALTER TABLE processed_content.change_detection 
+      ADD COLUMN IF NOT EXISTS url TEXT
+    `).catch(err => {
+      if (!err.message.includes('already exists')) throw err;
+    });
     
-    console.log('✅ Schema fixes applied successfully!');
-    
-    // Verify the columns exist
-    console.log('\nVerifying schema...');
+    console.log('✅ All columns updated\n');
+
+    // 5. Create indexes for new tables
+    console.log('🔍 Creating indexes...');
+    const indexes = [
+      'CREATE INDEX IF NOT EXISTS idx_scraped_pages_company ON raw_content.scraped_pages(company)',
+      'CREATE INDEX IF NOT EXISTS idx_scraped_pages_url ON raw_content.scraped_pages(url)',
+      'CREATE INDEX IF NOT EXISTS idx_scraped_pages_scraped_at ON raw_content.scraped_pages(scraped_at DESC)',
+      'CREATE INDEX IF NOT EXISTS idx_scraped_pages_url_scraped_at ON raw_content.scraped_pages(url, scraped_at DESC)',
+      'CREATE INDEX IF NOT EXISTS idx_company_pages_baseline_company_url ON raw_content.company_pages_baseline(company, url)',
+      'CREATE INDEX IF NOT EXISTS idx_change_detection_company ON processed_content.change_detection(company)',
+      'CREATE INDEX IF NOT EXISTS idx_change_detection_detected_at ON processed_content.change_detection(detected_at DESC)',
+      'CREATE INDEX IF NOT EXISTS idx_change_detection_interest_level ON processed_content.change_detection(interest_level DESC)'
+    ];
+
+    for (const index of indexes) {
+      await db.run(index);
+    }
+    console.log('✅ Indexes created\n');
+
+    // 6. Ensure url_id is nullable in change_detection (for the error we saw)
+    console.log('🔧 Ensuring url_id is nullable in change_detection...');
+    await db.run(`
+      ALTER TABLE processed_content.change_detection 
+      ALTER COLUMN url_id DROP NOT NULL
+    `).catch(() => {
+      // Column might already be nullable or not exist, that's fine
+    });
+    console.log('✅ Column constraints updated\n');
+
+    // 7. Verify the schema
+    console.log('🔍 Verifying schema...\n');
     
     const scraped_pages_cols = await db.all(`
       SELECT column_name, data_type 
@@ -82,7 +152,7 @@ async function fixSchema() {
       ORDER BY ordinal_position
     `);
     
-    console.log('\nscraped_pages columns:');
+    console.log('scraped_pages columns:');
     scraped_pages_cols.forEach(col => {
       console.log(`  - ${col.column_name}: ${col.data_type}`);
     });
@@ -99,6 +169,8 @@ async function fixSchema() {
     change_detection_cols.forEach(col => {
       console.log(`  - ${col.column_name}: ${col.data_type}`);
     });
+
+    console.log('\n✨ Schema fixes complete!\n');
     
   } catch (error) {
     console.error('❌ Error fixing schema:', error);
@@ -108,5 +180,11 @@ async function fixSchema() {
   }
 }
 
-// Run the migration
-fixSchema();
+// Run if called directly
+if (require.main === module) {
+  fixSchema()
+    .then(() => process.exit(0))
+    .catch(() => process.exit(1));
+}
+
+module.exports = { fixSchema };
