@@ -23,12 +23,20 @@ const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY || process.env.ANTHROPIC_API_KEY
 });
 
-// Configuration
-const BATCH_SIZE = 5; // Process 5 URLs concurrently
-const PAGE_TIMEOUT = 30000; // 30 seconds per page
-const RATE_LIMIT_DELAY = 500; // 500ms between batch starts
-const MAX_RETRIES = 2; // Retry failed URLs
-const DOMAIN_THROTTLE_MS = 2000; // Minimum 2s between requests to same domain
+// Configuration - AGGRESSIVE MODE for faster scraping
+// Allow environment variable overrides for flexibility
+const BATCH_SIZE = parseInt(process.env.SCRAPER_BATCH_SIZE) || 10; // Process 10 URLs concurrently (was 5)
+const PAGE_TIMEOUT = parseInt(process.env.SCRAPER_PAGE_TIMEOUT) || 25000; // 25 seconds per page (was 30)
+const RATE_LIMIT_DELAY = parseInt(process.env.SCRAPER_RATE_LIMIT) || 250; // 250ms between batch starts (was 500)
+const MAX_RETRIES = parseInt(process.env.SCRAPER_MAX_RETRIES) || 2; // Retry failed URLs
+const DOMAIN_THROTTLE_MS = parseInt(process.env.SCRAPER_DOMAIN_THROTTLE) || 1000; // 1s between same domain (was 2s)
+
+// Log current configuration
+console.log('🚄 Scraper Configuration:');
+console.log(`   BATCH_SIZE: ${BATCH_SIZE} URLs concurrently`);
+console.log(`   PAGE_TIMEOUT: ${PAGE_TIMEOUT}ms`);
+console.log(`   RATE_LIMIT_DELAY: ${RATE_LIMIT_DELAY}ms between batches`);
+console.log(`   DOMAIN_THROTTLE: ${DOMAIN_THROTTLE_MS}ms between same domain`);
 
 // Interest level assessment prompt
 const CHANGE_ANALYSIS_PROMPT = `You are an AI competitive intelligence analyst. Analyze this web content change and assess its importance.
@@ -506,10 +514,12 @@ Focus on AI/ML relevance and competitive intelligence value.`;
       
       // Generate summary
       const duration = Math.round((Date.now() - this.stats.startTime) / 1000);
+      const minutes = Math.floor(duration / 60);
+      const seconds = duration % 60;
       
       console.log('\n' + '=' .repeat(80));
       console.log('📈 Scraping Complete - Summary:');
-      console.log(`  ⏱️  Duration: ${duration} seconds`);
+      console.log(`  ⏱️  Duration: ${minutes}m ${seconds}s (${duration} seconds total)`);
       console.log(`  📊 Total URLs: ${this.stats.totalUrls}`);
       console.log(`  ✅ Succeeded: ${this.stats.succeeded}`);
       console.log(`  ❌ Failed: ${this.stats.failed}`);
@@ -517,6 +527,19 @@ Focus on AI/ML relevance and competitive intelligence value.`;
       console.log(`  🔄 Changed: ${this.stats.changed}`);
       console.log(`  ✨ New: ${this.stats.new}`);
       console.log(`  ➖ Unchanged: ${this.stats.unchanged}`);
+      
+      // Performance estimation
+      const urlsPerMinute = this.stats.processed / (duration / 60);
+      console.log(`\n🚀 Performance:`);
+      console.log(`  URLs/minute: ${urlsPerMinute.toFixed(1)}`);
+      console.log(`  Avg time per URL: ${(duration / this.stats.processed).toFixed(1)}s`);
+      
+      // Compare to old settings
+      const oldUrlsPerMinute = this.stats.processed / (duration / 60) * (5/BATCH_SIZE) * (500/RATE_LIMIT_DELAY);
+      const timeSaved = ((oldUrlsPerMinute - urlsPerMinute) / oldUrlsPerMinute * 100).toFixed(0);
+      if (BATCH_SIZE > 5) {
+        console.log(`  📢 Estimated time saved vs old settings: ~${Math.abs(timeSaved)}%`);
+      }
       
       // Print captcha statistics
       const captchaStats = this.captchaDetector.getStats();
