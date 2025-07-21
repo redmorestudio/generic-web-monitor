@@ -6,7 +6,7 @@ on:
     - cron: '0 */4 * * *'  # Every 4 hours
 
 permissions:
-  contents: read
+  contents: write
   actions: write
 
 concurrency:
