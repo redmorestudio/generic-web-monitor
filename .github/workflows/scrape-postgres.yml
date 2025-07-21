@@ -43,13 +43,14 @@ jobs:
         npm install
         npm audit fix --force || true
         
-    - name: Fix PostgreSQL schema
-      env:
-        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+    # REMOVED: Schema fix step - this should only run during initialization
+    # The schema should already exist from init-postgres.yml
+    # Running it every time adds unnecessary overhead
+        
+    - name: Log cascade status
       run: |
-        cd github-actions-backend
-        echo "🔧 Running schema fixes..."
-        node fix-postgres-schema.js || echo "Schema fix completed or not needed"
+        echo "🔄 Cascade parameter: ${{ inputs.cascade }}"
+        echo "📋 Will trigger next workflow: ${{ inputs.cascade == true }}"
         
     - name: Run intelligent scraper with PostgreSQL
       env:
@@ -66,6 +67,7 @@ jobs:
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         script: |
+          console.log('🚀 Triggering process-postgres workflow with cascade=true');
           const result = await github.rest.actions.createWorkflowDispatch({
             owner: context.repo.owner,
             repo: context.repo.repo,
@@ -75,4 +77,4 @@ jobs:
               cascade: 'true'
             }
           });
-          console.log('Triggered process workflow');
+          console.log('✅ Successfully triggered process workflow');
