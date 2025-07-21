@@ -21,6 +21,7 @@ on:
         options:
           - recent        # Last 24 hours only
           - full          # Analyze everything
+          - force         # Force re-analyze all
       cascade:
         description: 'Trigger next workflow in chain'
         required: false
@@ -149,20 +150,51 @@ jobs:
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
-      - name: Run PostgreSQL AI analysis
+      - name: Run baseline AI analysis (PostgreSQL)
         run: |
           cd github-actions-backend
           
-          echo "🚀 Running BASELINE AI Analysis with Groq Llama 3.3 (PostgreSQL)..."
-          echo "📊 This will analyze ALL companies' current state"
-          echo "⚡ Using Groq for faster inference with Llama 3.3 70B"
-          echo "🐘 Using PostgreSQL for data storage"
-          echo "⏱️ Implemented with timeout protection and retry logic"
+          echo "🚀 Running baseline analysis with Groq Llama 3.3 (PostgreSQL)..."
+          echo "   Mode: ${{ inputs.analysis_mode }}"
+          echo "   Database: PostgreSQL"
           
-          # Run the enhanced analyzer with the correct mode parameter
-          node ai-analyzer-ultra-three-db-postgres.js ${{ inputs.analysis_mode }}
+          # Set analysis flags based on mode
+          case "${{ inputs.analysis_mode }}" in
+            "force")
+              node ai-analyzer-baseline-three-db-postgres.js --force
+              ;;
+            "full")
+              node ai-analyzer-baseline-three-db-postgres.js
+              ;;
+            *)
+              # Skip baseline for recent mode to save API costs
+              echo "⚠️  Skipping baseline analysis for recent mode"
+              ;;
+          esac
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          GITHUB_ACTIONS: 'true'
+      
+      - name: Run change detection analysis (PostgreSQL)
+        run: |
+          cd github-actions-backend
+          
+          echo "🔍 Running PostgreSQL change detection and ultra-enhanced analysis with Groq..."
+          
+          # Map workflow modes to script modes
+          case "${{ inputs.analysis_mode }}" in
+            "full")
+              node ai-analyzer-ultra-three-db-postgres.js full
+              ;;
+            *)
+              node ai-analyzer-ultra-three-db-postgres.js recent
+              ;;
+          esac
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
           GITHUB_ACTIONS: 'true'
       
@@ -170,17 +202,21 @@ jobs:
         run: |
           cd github-actions-backend
           echo "📊 Generating static data files from PostgreSQL..."
-          
-          # Check if the postgres version exists
-          if [ -f "generate-static-data-three-db-postgres.js" ]; then
-            node generate-static-data-three-db-postgres.js
-          else
-            echo "⚠️ PostgreSQL static data generator not found, using wrapper"
-            node generate-static-data-wrapper.js
-          fi
+          node generate-static-data-three-db-postgres.js
           
           echo "📁 Generated files:"
           ls -la ../api-data/
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Generate change detail files (PostgreSQL)
+        run: |
+          cd github-actions-backend
+          echo "📝 Generating change detail files from PostgreSQL..."
+          node generate-change-details-postgres.js
+          
+          echo "📁 Generated change files:"
+          ls -la ../api-data/changes/ | head -20 || echo "No changes directory yet"
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
@@ -203,6 +239,7 @@ jobs:
         with:
           name: analysis-results-postgres-${{ github.run_id }}
           path: |
+            github-actions-backend/data/baseline-intelligence-report-postgres.json
             github-actions-backend/data/enhanced-analysis-report-postgres.json
             api-data/
           retention-days: 30
@@ -275,5 +312,41 @@ jobs:
             }
           fi
       
-      # Note: Cascade parameter for sync workflow would go here
-      # But we need to create sync-postgres.yml first
+      - name: Trigger Sync workflow (if configured)
+        if: inputs.cascade == true
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
+          script: |
+            try {
+              // Check if sync-postgres.yml exists
+              const { data: files } = await github.rest.repos.getContent({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                path: '.github/workflows'
+              });
+              
+              const syncWorkflowExists = files.some(file => 
+                file.name === 'sync-postgres.yml'
+              );
+              
+              if (syncWorkflowExists) {
+                const result = await github.rest.actions.createWorkflowDispatch({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  workflow_id: 'sync-postgres.yml',
+                  ref: 'main',
+                  inputs: {
+                    trigger_source: 'analyze-postgres-cascade',
+                    run_id: '${{ github.run_id }}'
+                  }
+                });
+                console.log(`✅ Triggered PostgreSQL Sync workflow`);
+              } else {
+                console.log(`⚠️  sync-postgres.yml not found - skipping cascade`);
+                console.log(`   This is normal - full-monitor-postgres.yml handles sync inline`);
+              }
+            } catch (error) {
+              console.log(`⚠️  Could not trigger sync workflow:`, error.message);
+              console.log(`   This is normal if sync-postgres.yml doesn't exist`);
+            }
