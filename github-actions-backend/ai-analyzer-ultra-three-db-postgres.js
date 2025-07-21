@@ -214,7 +214,7 @@ async function processRecentChanges(mode = 'recent') {
       timeFilter = "WHERE cd.detected_at > NOW() - INTERVAL '24 hours'";
     }
 
-    const changes = await db.manyOrNone(`
+    const changes = await db.all(`
       SELECT 
         cd.id,
         cd.company,
@@ -252,7 +252,7 @@ async function processRecentChanges(mode = 'recent') {
       try {
         // Skip if already has enhanced analysis (unless in full mode)
         if (mode !== 'full') {
-          const existing = await db.oneOrNone(
+          const existing = await db.get(
             'SELECT id FROM intelligence.enhanced_analysis WHERE change_id = $1',
             [change.id]
           );
@@ -267,7 +267,7 @@ async function processRecentChanges(mode = 'recent') {
         let afterContent = null;
 
         if (change.old_hash) {
-          const before = await db.oneOrNone(`
+          const before = await db.get(`
             SELECT content 
             FROM processed_content.markdown_pages 
             WHERE markdown_hash = $1
@@ -276,7 +276,7 @@ async function processRecentChanges(mode = 'recent') {
         }
 
         if (change.new_hash) {
-          const after = await db.oneOrNone(`
+          const after = await db.get(`
             SELECT content 
             FROM processed_content.markdown_pages 
             WHERE markdown_hash = $1
@@ -302,7 +302,7 @@ async function processRecentChanges(mode = 'recent') {
         const interestLevel = analysis.interest_assessment?.interest_level || change.initial_interest || 5;
         
         // First, create or update the change record in intelligence.changes
-        const changeRecord = await db.one(`
+        const changeResult = await db.run(`
           INSERT INTO intelligence.changes 
           (company, url, detected_at, change_type, before_content, after_content,
            analysis, interest_level, ai_confidence, content_hash_before, content_hash_after,
@@ -330,8 +330,14 @@ async function processRecentChanges(mode = 'recent') {
           'groq-llama-3.3-70b'
         ]);
 
+        // Get the ID from the insert/update
+        const changeRecord = await db.get(`
+          SELECT id FROM intelligence.changes
+          WHERE company = $1 AND url = $2 AND detected_at = $3
+        `, [change.company, change.url_name, change.detected_at]);
+
         // Then store the enhanced analysis
-        await db.none(`
+        await db.run(`
           INSERT INTO intelligence.enhanced_analysis
           (change_id, ultra_analysis, key_insights, business_impact, 
            competitive_implications, market_signals, risk_assessment, 
@@ -407,7 +413,7 @@ async function generateEnhancedReport() {
   console.log('\n📊 Generating enhanced analysis report...');
 
   try {
-    const summary = await db.one(`
+    const summary = await db.get(`
       SELECT 
         COUNT(*) as total_changes,
         COUNT(CASE WHEN interest_level >= 7 THEN 1 END) as high_interest,
@@ -418,7 +424,7 @@ async function generateEnhancedReport() {
       WHERE detected_at > NOW() - INTERVAL '7 days'
     `);
 
-    const topChanges = await db.manyOrNone(`
+    const topChanges = await db.all(`
       SELECT 
         c.company,
         c.url,
