@@ -5,6 +5,10 @@ on:
   schedule:
     - cron: '0 */4 * * *'  # Every 4 hours
 
+permissions:
+  contents: read
+  actions: write
+
 concurrency:
   group: full-monitor
   cancel-in-progress: false
