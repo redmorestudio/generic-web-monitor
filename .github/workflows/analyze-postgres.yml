@@ -17,12 +17,10 @@ on:
         description: 'Analysis mode'
         required: false
         type: choice
-        default: 'all'
+        default: 'recent'
         options:
-          - all           # Analyze everything
-          - only-new      # Only unanalyzed content
-          - force         # Force re-analyze all
-          - changes-only  # Only analyze detected changes
+          - recent        # Last 24 hours only
+          - full          # Analyze everything
       cascade:
         description: 'Trigger next workflow in chain'
         required: false
@@ -45,12 +43,16 @@ on:
         description: 'Analysis mode'
         required: false
         type: string
-        default: 'all'
+        default: 'recent'
       cascade:
         description: 'Trigger next workflow in chain'
         required: false
         type: boolean
         default: false  # Different default for when called by full-monitor
+    outputs:
+      run_id:
+        description: 'The workflow run ID'
+        value: ${{ jobs.analyze-content-postgres.outputs.run_id }}
 
 # Prevent concurrent runs
 concurrency:
@@ -59,10 +61,9 @@ concurrency:
 
 env:
   NODE_ENV: production
-  USE_POSTGRES: 'true'
 
 jobs:
-  analyze-content:
+  analyze-content-postgres:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     
@@ -78,7 +79,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          lfs: true
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -90,66 +90,79 @@ jobs:
           cd github-actions-backend
           npm install --omit=dev
       
-      - name: Validate PostgreSQL connection
+      - name: Verify PostgreSQL connection
         run: |
           cd github-actions-backend
-          echo "🔌 Testing PostgreSQL connection..."
+          echo "🐘 Verifying PostgreSQL connection..."
           node -e "
             const { db, end } = require('./postgres-db');
-            db.one('SELECT NOW() as current_time')
+            db.get('SELECT NOW() as time')
               .then(result => {
-                console.log('✅ PostgreSQL connection successful:', result.current_time);
-                process.exit(0);
+                console.log('✅ PostgreSQL connected:', result.time);
+                return end();
               })
-              .catch(error => {
-                console.error('❌ PostgreSQL connection failed:', error.message);
+              .catch(err => {
+                console.error('❌ PostgreSQL connection failed:', err);
                 process.exit(1);
-              })
-              .finally(() => end());
+              });
           "
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
-      - name: Run baseline AI analysis (PostgreSQL)
+      - name: Check PostgreSQL schema readiness
         run: |
           cd github-actions-backend
-          
-          echo "🚀 Running PostgreSQL baseline analysis with Groq Llama 3.3..."
-          echo "   Mode: ${{ inputs.analysis_mode }}"
-          echo "   Database: PostgreSQL"
-          
-          # Set analysis flags based on mode
-          case "${{ inputs.analysis_mode }}" in
-            "only-new")
-              node ai-analyzer-baseline-three-db-postgres.js --only-new
-              ;;
-            "force")
-              node ai-analyzer-baseline-three-db-postgres.js --force
-              ;;
-            "changes-only")
-              echo "⚠️  Changes-only mode not yet implemented"
-              node ai-analyzer-baseline-three-db-postgres.js --only-new
-              ;;
-            *)
-              node ai-analyzer-baseline-three-db-postgres.js
-              ;;
-          esac
+          echo "🔍 Checking PostgreSQL schema..."
+          node -e "
+            const { db, end } = require('./postgres-db');
+            
+            async function checkSchema() {
+              try {
+                // Check intelligence schema tables
+                const tables = await db.all(\`
+                  SELECT table_name 
+                  FROM information_schema.tables 
+                  WHERE table_schema = 'intelligence'
+                  ORDER BY table_name
+                \`);
+                
+                console.log('✅ Intelligence schema tables:', tables.map(t => t.table_name).join(', '));
+                
+                // Check for change_detection data
+                const changeCount = await db.get(\`
+                  SELECT COUNT(*) as count 
+                  FROM processed_content.change_detection
+                \`);
+                
+                console.log('📊 Changes available for analysis:', changeCount.count);
+                
+                await end();
+              } catch (error) {
+                console.error('❌ Schema check failed:', error);
+                await end();
+                process.exit(1);
+              }
+            }
+            
+            checkSchema();
+          "
         env:
-          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
-          GITHUB_ACTIONS: 'true'
       
-      - name: Run change detection analysis (PostgreSQL)
-        if: ${{ inputs.analysis_mode != 'changes-only' }}
+      - name: Run PostgreSQL AI analysis
         run: |
           cd github-actions-backend
           
-          echo "🔍 Running PostgreSQL change detection and ultra-enhanced analysis with Groq..."
-          node ai-analyzer-ultra-three-db-postgres.js full || echo "Change analysis completed"
+          echo "🚀 Running BASELINE AI Analysis with Groq Llama 3.3 (PostgreSQL)..."
+          echo "📊 This will analyze ALL companies' current state"
+          echo "⚡ Using Groq for faster inference with Llama 3.3 70B"
+          echo "🐘 Using PostgreSQL for data storage"
+          echo "⏱️ Implemented with timeout protection and retry logic"
+          
+          # Run the enhanced analyzer with the correct mode parameter
+          node ai-analyzer-ultra-three-db-postgres.js ${{ inputs.analysis_mode }}
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
           GITHUB_ACTIONS: 'true'
       
@@ -157,29 +170,17 @@ jobs:
         run: |
           cd github-actions-backend
           echo "📊 Generating static data files from PostgreSQL..."
-          node generate-static-data-three-db-postgres.js
+          
+          # Check if the postgres version exists
+          if [ -f "generate-static-data-three-db-postgres.js" ]; then
+            node generate-static-data-three-db-postgres.js
+          else
+            echo "⚠️ PostgreSQL static data generator not found, using wrapper"
+            node generate-static-data-wrapper.js
+          fi
           
           echo "📁 Generated files:"
           ls -la ../api-data/
-        env:
-          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          
-      - name: Generate change detail files (PostgreSQL)
-        run: |
-          cd github-actions-backend
-          echo "📝 Generating change detail files from PostgreSQL..."
-          
-          # Check if PostgreSQL version of generate-change-details exists
-          if [ -f "generate-change-details-postgres.js" ]; then
-            node generate-change-details-postgres.js
-          else
-            echo "⚠️  PostgreSQL version of change details generator not yet available"
-            echo "   Using fallback approach"
-          fi
-          
-          echo "📁 Generated change files:"
-          ls -la ../api-data/changes/ | head -20 || echo "No changes directory yet"
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
@@ -202,7 +203,6 @@ jobs:
         with:
           name: analysis-results-postgres-${{ github.run_id }}
           path: |
-            github-actions-backend/data/baseline-intelligence-report-postgres.json
             github-actions-backend/data/enhanced-analysis-report-postgres.json
             api-data/
           retention-days: 30
@@ -262,54 +262,18 @@ jobs:
             echo "📝 Changes to commit:"
             git diff --staged --name-only
             
-            git commit -m "🚀 Update PostgreSQL AI analysis (Groq) - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
+            git commit -m "🚀 Update PostgreSQL AI analysis - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
             
             # Push changes with retry logic
             push_with_retry || {
-              echo "⚠️  Failed to push changes after multiple attempts"
-              echo "⚠️  This is likely due to concurrent workflows"
-              echo "⚠️  Changes will be included in next workflow run"
+              echo "⚠️ Failed to push changes after multiple attempts"
+              echo "⚠️ This is likely due to concurrent workflows"
+              echo "⚠️ Changes will be included in next workflow run"
               # Don't fail the workflow - changes are committed locally
               # and will be pushed in the next successful run
               exit 0
             }
           fi
       
-      - name: Trigger Sync workflow (if configured)
-        if: inputs.cascade == true
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
-          script: |
-            try {
-              // Check if sync-postgres.yml exists
-              const { data: files } = await github.rest.repos.getContent({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                path: '.github/workflows'
-              });
-              
-              const syncWorkflowExists = files.some(file => 
-                file.name === 'sync-postgres.yml'
-              );
-              
-              if (syncWorkflowExists) {
-                const result = await github.rest.actions.createWorkflowDispatch({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  workflow_id: 'sync-postgres.yml',
-                  ref: 'main',
-                  inputs: {
-                    trigger_source: 'analyze-postgres-cascade',
-                    run_id: '${{ github.run_id }}'
-                  }
-                });
-                console.log(`✅ Triggered PostgreSQL Sync workflow`);
-              } else {
-                console.log(`⚠️  sync-postgres.yml not found - skipping cascade`);
-                console.log(`   Create sync-postgres.yml or update full-monitor-postgres.yml`);
-              }
-            } catch (error) {
-              console.log(`⚠️  Could not trigger sync workflow:`, error.message);
-              console.log(`   This is normal if sync-postgres.yml doesn't exist yet`);
-            }
+      # Note: Cascade parameter for sync workflow would go here
+      # But we need to create sync-postgres.yml first
