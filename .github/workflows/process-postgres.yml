@@ -46,6 +46,15 @@ jobs:
           cd github-actions-backend
           npm install --omit=dev
       
+      - name: Fix PostgreSQL Schema
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          cd github-actions-backend
+          
+          echo "🔧 Ensuring PostgreSQL schema is correct..."
+          node fix-postgres-schema-complete.js
+      
       - name: Convert HTML to Markdown with PostgreSQL
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
