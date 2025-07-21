@@ -124,23 +124,23 @@ class MarkdownConverterPostgreSQL {
         return { converted: 0, errors: 0 };
       }
       
-      // Get unprocessed pages with proper column handling
+      // Get unprocessed pages - FIXED: use 'company' not 'company_name'
       const unprocessedPages = await db.all(`
         SELECT 
           sp.id,
-          sp.company_name,
+          sp.company,
           sp.url,
-          sp.html_content,
+          sp.html,
           sp.content_hash,
           sp.scraped_at,
-          sp.status_code,
-          sp.error_message
+          sp.scrape_status,
+          sp.title
         FROM raw_content.scraped_pages sp
         WHERE NOT EXISTS (
           SELECT 1 FROM processed_content.markdown_pages mp
           WHERE mp.source_hash = sp.content_hash
         )
-        AND sp.html_content IS NOT NULL
+        AND sp.html IS NOT NULL
         AND sp.content_hash IS NOT NULL
         ORDER BY sp.scraped_at DESC
       `);
@@ -150,12 +150,15 @@ class MarkdownConverterPostgreSQL {
       
       for (const page of unprocessedPages) {
         try {
-          // Extract title from HTML if possible
-          const titleMatch = page.html_content.match(/<title[^>]*>([^<]+)<\/title>/i);
-          const title = titleMatch ? titleMatch[1].trim() : '';
+          // Use existing title or extract from HTML
+          let title = page.title;
+          if (!title && page.html) {
+            const titleMatch = page.html.match(/<title[^>]*>([^<]+)<\/title>/i);
+            title = titleMatch ? titleMatch[1].trim() : '';
+          }
           
           // Convert to markdown
-          const markdown = this.convertHtmlToMarkdown(page.html_content, title);
+          const markdown = this.convertHtmlToMarkdown(page.html, title);
           const markdownHash = this.generateContentHash(markdown);
           
           // Store markdown version
@@ -166,7 +169,7 @@ class MarkdownConverterPostgreSQL {
             VALUES ($1, $2, $3, $4, $5, $6, 'scraped_page', NOW(), $7)
             ON CONFLICT (source_hash) DO NOTHING
           `, [
-            page.company_name,
+            page.company,
             page.url,
             new URL(page.url).pathname || '/',
             markdown,
@@ -292,17 +295,17 @@ class MarkdownConverterPostgreSQL {
         )
         SELECT 
           rh.hash, 
-          sp.company_name as company, 
+          sp.company, 
           sp.url, 
-          sp.html_content as html,
-          sp.status_code
+          sp.html,
+          sp.title
         FROM referenced_hashes rh
         JOIN raw_content.scraped_pages sp ON sp.content_hash = rh.hash
         WHERE NOT EXISTS (
           SELECT 1 FROM processed_content.markdown_pages mp
           WHERE mp.source_hash = rh.hash
         )
-        AND sp.html_content IS NOT NULL
+        AND sp.html IS NOT NULL
         LIMIT 100
       `);
       
@@ -317,9 +320,12 @@ class MarkdownConverterPostgreSQL {
       
       for (const missing of missingMarkdown) {
         try {
-          // Extract title from HTML
-          const titleMatch = missing.html.match(/<title[^>]*>([^<]+)<\/title>/i);
-          const title = titleMatch ? titleMatch[1].trim() : '';
+          // Use existing title or extract from HTML
+          let title = missing.title;
+          if (!title && missing.html) {
+            const titleMatch = missing.html.match(/<title[^>]*>([^<]+)<\/title>/i);
+            title = titleMatch ? titleMatch[1].trim() : '';
+          }
           
           const markdown = this.convertHtmlToMarkdown(missing.html, title);
           const markdownHash = this.generateContentHash(markdown);
