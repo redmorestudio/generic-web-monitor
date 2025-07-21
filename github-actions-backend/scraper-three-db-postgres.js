@@ -356,19 +356,64 @@ Focus on AI/ML relevance and competitive intelligence value.`;
     } catch (error) {
       console.error(`    ❌ Error scraping ${url}:`, error.message);
       
+      // Special handling for navigation timeouts
+      if (error.message.includes('Navigation timeout') || error.message.includes('Target closed')) {
+        console.log(`    ⏱️ Navigation timeout detected - page may be closed`);
+      }
+      
       // Retry logic
       if (retryCount < MAX_RETRIES) {
         console.log(`    🔄 Retrying (${retryCount + 1}/${MAX_RETRIES})...`);
-        await page.close();
+        
+        // Safely close page before retry
+        try {
+          if (page && !page.isClosed()) {
+            await page.close();
+          }
+        } catch (closeError) {
+          console.warn('    ⚠️ Error closing page during retry:', closeError.message);
+        }
+        
         await new Promise(resolve => setTimeout(resolve, 2000));
         return this.scrapeUrl(url, companyName, urlName, retryCount + 1);
+      }
+      
+      // Store error in database for failed URLs
+      try {
+        await db.run(
+          `INSERT INTO raw_content.scraped_pages 
+           (company, url, url_name, content, html, title, content_hash, scraped_at, 
+            change_detected, scrape_status, error_message)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), $8, $9, $10)`,
+          [
+            companyName,
+            url,
+            urlName || url,
+            'Error: ' + error.message,
+            null,
+            'Error',
+            this.generateContentHash('error-' + error.message),
+            false,
+            'error',
+            error.message
+          ]
+        );
+      } catch (dbError) {
+        console.error('    ❌ Error storing failure in database:', dbError.message);
       }
       
       this.stats.errors.push({ url, error: error.message });
       return { success: false, url, error: error.message };
       
     } finally {
-      await page.close();
+      // Safely close page
+      try {
+        if (page && !page.isClosed()) {
+          await page.close();
+        }
+      } catch (closeError) {
+        console.warn('    ⚠️ Error closing page in finally block:', closeError.message);
+      }
     }
   }
 
@@ -387,17 +432,26 @@ Focus on AI/ML relevance and competitive intelligence value.`;
         await new Promise(resolve => setTimeout(resolve, RATE_LIMIT_DELAY));
       }
       
-      // Process batch concurrently
-      const batchResults = await Promise.all(
-        batch.map(urlInfo => 
-          this.scrapeUrl(urlInfo.url, company.name, urlInfo.name)
-        )
+      // Process batch concurrently with error isolation
+      const batchPromises = batch.map(urlInfo => 
+        this.scrapeUrl(urlInfo.url, company.name, urlInfo.name)
+          .catch(error => {
+            console.error(`    🚨 Unhandled error for ${urlInfo.url}:`, error.message);
+            return { success: false, url: urlInfo.url, error: error.message };
+          })
       );
       
-      results.push(...batchResults);
+      const batchResults = await Promise.allSettled(batchPromises);
+      
+      // Extract results from Promise.allSettled
+      const processedResults = batchResults.map(result => 
+        result.status === 'fulfilled' ? result.value : { success: false, url: 'unknown', error: result.reason }
+      );
+      
+      results.push(...processedResults);
       
       // Update stats
-      batchResults.forEach(result => {
+      processedResults.forEach(result => {
         this.stats.processed++;
         if (result.success) {
           this.stats.succeeded++;
