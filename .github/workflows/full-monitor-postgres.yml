@@ -18,14 +18,14 @@ jobs:
     uses: ./.github/workflows/scrape-postgres.yml
     secrets: inherit
     with:
-      cascade: 'true'
+      cascade: true
   
   process:
     needs: scrape
     uses: ./.github/workflows/process-postgres.yml
     secrets: inherit
     with:
-      cascade: 'true'
+      cascade: true
   
   notify:
     needs: process
