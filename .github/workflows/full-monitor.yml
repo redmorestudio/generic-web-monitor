@@ -1,11 +1,7 @@
 name: Full Monitor Pipeline
 
 on:
-  # Run every 6 hours
-  schedule:
-    - cron: '0 */6 * * *'
-  
-  # Allow manual trigger
+  # Allow manual trigger only
   workflow_dispatch:
     inputs:
       skip_scrape:
