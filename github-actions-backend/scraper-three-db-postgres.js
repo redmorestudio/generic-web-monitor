@@ -6,11 +6,17 @@ if (process.env.NODE_ENV === 'production' || process.env.POSTGRES_CONNECTION_STR
 }
 
 require('dotenv').config();
-const puppeteer = require('puppeteer');
+const puppeteer = require('puppeteer-extra');
+const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 const crypto = require('crypto');
 const path = require('path');
 const { db, end } = require('./postgres-db');
 const Groq = require('groq-sdk');
+const CaptchaDetector = require('./captcha-detector');
+const StealthSetup = require('./stealth-setup');
+
+// Add stealth plugin
+puppeteer.use(StealthPlugin());
 
 // Initialize Groq client for change analysis
 const groq = new Groq({
@@ -22,6 +28,7 @@ const BATCH_SIZE = 5; // Process 5 URLs concurrently
 const PAGE_TIMEOUT = 30000; // 30 seconds per page
 const RATE_LIMIT_DELAY = 500; // 500ms between batch starts
 const MAX_RETRIES = 2; // Retry failed URLs
+const DOMAIN_THROTTLE_MS = 2000; // Minimum 2s between requests to same domain
 
 // Interest level assessment prompt
 const CHANGE_ANALYSIS_PROMPT = `You are an AI competitive intelligence analyst. Analyze this web content change and assess its importance.
@@ -58,6 +65,9 @@ Provide your analysis in this JSON structure:
 class AICompetitorScraper {
   constructor() {
     this.browser = null;
+    this.captchaDetector = new CaptchaDetector();
+    this.stealthSetup = new StealthSetup();
+    this.domainLastRequest = new Map(); // Track last request time per domain
     this.stats = {
       startTime: Date.now(),
       totalUrls: 0,
@@ -67,25 +77,37 @@ class AICompetitorScraper {
       changed: 0,
       unchanged: 0,
       new: 0,
+      captchas: 0,
       errors: []
     };
   }
 
   async initBrowser() {
-    console.log('🚀 Launching browser...');
+    console.log('🚀 Launching browser with stealth mode...');
+    
+    // Get stealth browser args
+    const browserArgs = this.stealthSetup.getBrowserArgs();
+    
     this.browser = await puppeteer.launch({
       headless: 'new',
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-accelerated-2d-canvas',
-        '--no-first-run',
-        '--no-zygote',
-        '--single-process',
-        '--disable-gpu'
-      ]
+      args: browserArgs
     });
+  }
+
+  async throttleDomain(url) {
+    const hostname = new URL(url).hostname;
+    const lastRequest = this.domainLastRequest.get(hostname);
+    
+    if (lastRequest) {
+      const timeSinceLastRequest = Date.now() - lastRequest;
+      if (timeSinceLastRequest < DOMAIN_THROTTLE_MS) {
+        const delay = DOMAIN_THROTTLE_MS - timeSinceLastRequest;
+        console.log(`    ⏳ Throttling ${hostname} for ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+    }
+    
+    this.domainLastRequest.set(hostname, Date.now());
   }
 
   generateContentHash(content) {
@@ -116,7 +138,7 @@ Focus on AI/ML relevance and competitive intelligence value.`;
 
       const completion = await groq.chat.completions.create({
         messages: [{ role: 'user', content: prompt }],
-        model: 'llama-3.1-70b-versatile',
+        model: 'llama-3.3-70b-versatile', // Updated to current model
         temperature: 0.3,
         max_tokens: 500,
         response_format: { type: "json_object" }
@@ -151,17 +173,60 @@ Focus on AI/ML relevance and competitive intelligence value.`;
     try {
       console.log(`  📄 Scraping: ${urlName || url}`);
       
-      // Set realistic viewport
-      await page.setViewport({ width: 1920, height: 1080 });
+      // Apply domain throttling
+      await this.throttleDomain(url);
+      
+      // Apply stealth to page
+      await this.stealthSetup.applyStealthToPage(page);
+      
+      // Add random mouse movement
+      await this.stealthSetup.addMouseMovement(page);
       
       // Navigate with timeout
-      await page.goto(url, { 
+      const response = await page.goto(url, { 
         waitUntil: 'networkidle2',
         timeout: PAGE_TIMEOUT 
       });
       
-      // Wait a bit for dynamic content - use the correct method
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Get initial HTML for captcha detection
+      const initialHtml = await page.content();
+      
+      // Check for captcha/challenges
+      const captchaResult = await this.captchaDetector.detect(page, initialHtml, url);
+      
+      if (captchaResult.detected) {
+        console.log(`    🚫 Captcha/challenge detected: ${captchaResult.type}`);
+        this.stats.captchas++;
+        
+        // Store blocked attempt
+        await db.run(
+          `INSERT INTO raw_content.scraped_pages 
+           (company, url, url_name, content, html, title, content_hash, scraped_at, 
+            change_detected, scrape_status, captcha_type)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), $8, $9, $10)`,
+          [
+            companyName,
+            url,
+            urlName || url,
+            'Blocked by captcha/challenge',
+            initialHtml,
+            'Blocked',
+            this.generateContentHash('blocked'),
+            false,
+            'blocked',
+            captchaResult.type
+          ]
+        );
+        
+        return { success: false, url, error: `Blocked by ${captchaResult.type}` };
+      }
+      
+      // Wait a bit for dynamic content with human-like delay
+      const waitTime = 2000 + Math.random() * 1000;
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+      
+      // Add random scroll behavior
+      await this.stealthSetup.addScrollBehavior(page);
       
       // Get page content
       const content = await page.evaluate(() => {
@@ -223,8 +288,8 @@ Focus on AI/ML relevance and competitive intelligence value.`;
       await db.run(
         `INSERT INTO raw_content.scraped_pages 
          (company, url, url_name, content, html, title, content_hash, scraped_at, 
-          change_detected, previous_hash, interest_level)
-         VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), $8, $9, $10)`,
+          change_detected, previous_hash, interest_level, scrape_status)
+         VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), $8, $9, $10, $11)`,
         [
           companyName,
           url,
@@ -235,7 +300,8 @@ Focus on AI/ML relevance and competitive intelligence value.`;
           contentHash,
           changeDetected,
           existing?.content_hash || null,
-          interest_level
+          interest_level,
+          'success'
         ]
       );
       
@@ -268,12 +334,11 @@ Focus on AI/ML relevance and competitive intelligence value.`;
         // Record change detection with interest assessment
         await db.run(
           `INSERT INTO processed_content.change_detection 
-           (company, url, url_name, change_type, old_hash, new_hash, detected_at, 
+           (company, url_name, change_type, old_hash, new_hash, detected_at, 
             interest_level, ai_analysis)
-           VALUES ($1, $2, $3, $4, $5, $6, NOW(), $7, $8)`,
+           VALUES ($1, $2, $3, $4, $5, NOW(), $6, $7)`,
           [
             companyName,
-            url,
             urlName || url,
             changeType,
             existing?.content_hash || null,
@@ -349,7 +414,7 @@ Focus on AI/ML relevance and competitive intelligence value.`;
     try {
       await this.initBrowser();
       
-      console.log('🔍 AI Competitor Monitor - Web Scraper (PostgreSQL)');
+      console.log('🔍 AI Competitor Monitor - Web Scraper (PostgreSQL + Stealth)');
       console.log('=' .repeat(80));
       
       // Get all companies and their URLs
@@ -361,7 +426,8 @@ Focus on AI/ML relevance and competitive intelligence value.`;
          ORDER BY c.name`
       );
       
-      console.log(`📊 Found ${companies.length} companies to monitor\n`);
+      console.log(`📊 Found ${companies.length} companies to monitor`);
+      console.log(`🛡️  Stealth mode enabled with captcha detection\n`);
       
       // Process each company
       for (const company of companies) {
@@ -393,9 +459,21 @@ Focus on AI/ML relevance and competitive intelligence value.`;
       console.log(`  📊 Total URLs: ${this.stats.totalUrls}`);
       console.log(`  ✅ Succeeded: ${this.stats.succeeded}`);
       console.log(`  ❌ Failed: ${this.stats.failed}`);
+      console.log(`  🚫 Captchas: ${this.stats.captchas}`);
       console.log(`  🔄 Changed: ${this.stats.changed}`);
       console.log(`  ✨ New: ${this.stats.new}`);
       console.log(`  ➖ Unchanged: ${this.stats.unchanged}`);
+      
+      // Print captcha statistics
+      const captchaStats = this.captchaDetector.getStats();
+      if (captchaStats.total > 0) {
+        console.log('\n🚫 Captcha Detection Statistics:');
+        Object.entries(captchaStats).forEach(([type, count]) => {
+          if (count > 0 && type !== 'total') {
+            console.log(`  - ${type}: ${count}`);
+          }
+        });
+      }
       
       if (this.stats.errors.length > 0) {
         console.log('\n⚠️  Errors:');
@@ -408,8 +486,8 @@ Focus on AI/ML relevance and competitive intelligence value.`;
       await db.run(
         `INSERT INTO intelligence.scraping_runs 
          (started_at, completed_at, urls_total, urls_succeeded, urls_failed, 
-          changes_detected, duration_seconds, errors)
-         VALUES ($1, NOW(), $2, $3, $4, $5, $6, $7)`,
+          changes_detected, duration_seconds, errors, captchas_encountered)
+         VALUES ($1, NOW(), $2, $3, $4, $5, $6, $7, $8)`,
         [
           new Date(this.stats.startTime).toISOString(),
           this.stats.totalUrls,
@@ -417,7 +495,8 @@ Focus on AI/ML relevance and competitive intelligence value.`;
           this.stats.failed,
           this.stats.changed + this.stats.new,
           duration,
-          this.stats.errors.length > 0 ? JSON.stringify(this.stats.errors) : null
+          this.stats.errors.length > 0 ? JSON.stringify(this.stats.errors) : null,
+          this.stats.captchas
         ]
       );
       
