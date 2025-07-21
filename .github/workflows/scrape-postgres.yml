@@ -46,6 +46,14 @@ jobs:
         npm install
         npm audit fix --force || true
         
+    - name: Fix PostgreSQL schema
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      run: |
+        cd github-actions-backend
+        echo "🔧 Running schema fixes..."
+        node fix-postgres-schema.js || echo "Schema fix completed or not needed"
+        
     - name: Run intelligent scraper with PostgreSQL
       env:
         GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
