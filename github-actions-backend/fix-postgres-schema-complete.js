@@ -4,7 +4,7 @@
  * Complete PostgreSQL Schema Fix
  * 
  * Creates ALL necessary tables and schemas for the AI Competitive Monitor
- * including the missing processed_content.markdown_pages table
+ * including all missing tables needed by the static data generator
  */
 
 require('dotenv').config();
@@ -28,21 +28,70 @@ async function fixSchemaComplete() {
         id SERIAL PRIMARY KEY,
         name TEXT NOT NULL UNIQUE,
         category TEXT,
+        active BOOLEAN DEFAULT true,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
     
     await db.run(`
-      CREATE TABLE IF NOT EXISTS intelligence.urls (
+      CREATE TABLE IF NOT EXISTS intelligence.company_urls (
         id SERIAL PRIMARY KEY,
         company_id INTEGER REFERENCES intelligence.companies(id),
         url TEXT NOT NULL,
+        name TEXT,
         url_type TEXT,
-        is_active BOOLEAN DEFAULT true,
+        active BOOLEAN DEFAULT true,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         UNIQUE(company_id, url)
       )
     `);
+
+    // Create company_attributes table (MISSING)
+    await db.run(`
+      CREATE TABLE IF NOT EXISTS intelligence.company_attributes (
+        id SERIAL PRIMARY KEY,
+        company_id INTEGER REFERENCES intelligence.companies(id) UNIQUE,
+        industry TEXT,
+        description TEXT,
+        founded_year INTEGER,
+        headquarters TEXT,
+        website TEXT,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    // Create insights table (MISSING)
+    await db.run(`
+      CREATE TABLE IF NOT EXISTS intelligence.insights (
+        id SERIAL PRIMARY KEY,
+        company_id INTEGER REFERENCES intelligence.companies(id),
+        insight_type TEXT,
+        title TEXT,
+        content TEXT,
+        confidence_score DECIMAL(3,2),
+        source_urls TEXT[],
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    // Create scraping_runs table
+    await db.run(`
+      CREATE TABLE IF NOT EXISTS intelligence.scraping_runs (
+        id SERIAL PRIMARY KEY,
+        started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        completed_at TIMESTAMP,
+        urls_total INTEGER DEFAULT 0,
+        urls_succeeded INTEGER DEFAULT 0,
+        urls_failed INTEGER DEFAULT 0,
+        changes_detected INTEGER DEFAULT 0,
+        duration_seconds INTEGER,
+        errors JSONB,
+        captchas_encountered INTEGER DEFAULT 0,
+        status TEXT DEFAULT 'running'
+      )
+    `);
+
     console.log('✅ Intelligence tables ready\n');
 
     // 3. Create scraped_pages table in raw_content schema
@@ -50,16 +99,20 @@ async function fixSchemaComplete() {
     await db.run(`
       CREATE TABLE IF NOT EXISTS raw_content.scraped_pages (
         id SERIAL PRIMARY KEY,
-        url_id INTEGER,
-        company_name TEXT NOT NULL,
+        company TEXT NOT NULL,
         url TEXT NOT NULL,
-        html_content TEXT,
+        url_name TEXT,
+        content TEXT,
+        html TEXT,
+        title TEXT,
         content_hash TEXT,
-        status_code INTEGER,
-        error_message TEXT,
+        scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        change_detected BOOLEAN DEFAULT false,
+        previous_hash TEXT,
+        interest_level INTEGER DEFAULT 5,
         scrape_status TEXT DEFAULT 'pending',
         captcha_type TEXT,
-        scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        error_message TEXT
       )
     `);
 
@@ -80,23 +133,10 @@ async function fixSchemaComplete() {
       )
     `);
 
-    await db.run(`
-      CREATE TABLE IF NOT EXISTS raw_content.scraping_runs (
-        id SERIAL PRIMARY KEY,
-        started_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        completed_at TIMESTAMP,
-        urls_processed INTEGER DEFAULT 0,
-        urls_changed INTEGER DEFAULT 0,
-        urls_blocked INTEGER DEFAULT 0,
-        captchas_encountered INTEGER DEFAULT 0,
-        errors_count INTEGER DEFAULT 0,
-        status TEXT DEFAULT 'running'
-      )
-    `);
     console.log('✅ Raw content tables ready\n');
 
-    // 4. Create the MISSING markdown_pages table
-    console.log('📊 Creating markdown_pages table (THE MISSING ONE)...');
+    // 4. Create the markdown_pages table
+    console.log('📊 Creating processed_content tables...');
     await db.run(`
       CREATE TABLE IF NOT EXISTS processed_content.markdown_pages (
         id SERIAL PRIMARY KEY,
@@ -111,35 +151,50 @@ async function fixSchemaComplete() {
         title TEXT
       )
     `);
-    console.log('✅ markdown_pages table created!\n');
 
-    // 5. Create change_detection table
-    console.log('📊 Creating change_detection table...');
+    // Create change_detection table
     await db.run(`
       CREATE TABLE IF NOT EXISTS processed_content.change_detection (
         id SERIAL PRIMARY KEY,
-        url_id INTEGER,
+        company TEXT NOT NULL,
         url TEXT,
+        url_name TEXT,
         change_type TEXT,
-        summary TEXT,
-        old_content_id INTEGER,
-        new_content_id INTEGER,
-        interest_level INTEGER,
-        technical_innovation_score INTEGER,
-        business_impact_score INTEGER,
-        interest_category TEXT,
-        impact_areas TEXT[],
-        interest_data JSONB,
-        detected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        old_hash TEXT,
+        new_hash TEXT,
+        detected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        interest_level INTEGER DEFAULT 5,
+        ai_analysis JSONB,
+        title TEXT
       )
     `);
-    console.log('✅ change_detection table ready\n');
 
-    // 6. Create indexes
+    // Create baseline_analysis table (MISSING)
+    await db.run(`
+      CREATE TABLE IF NOT EXISTS processed_content.baseline_analysis (
+        id SERIAL PRIMARY KEY,
+        url_id INTEGER REFERENCES intelligence.company_urls(id),
+        company_id INTEGER REFERENCES intelligence.companies(id),
+        content_hash TEXT,
+        entities JSONB,
+        themes JSONB,
+        key_points JSONB,
+        technologies TEXT[],
+        products TEXT[],
+        partnerships TEXT[],
+        financial_data JSONB,
+        sentiment_score DECIMAL(3,2),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+
+    console.log('✅ Processed content tables ready\n');
+
+    // 5. Create indexes
     console.log('🔍 Creating indexes...');
     const indexes = [
       // scraped_pages indexes
-      'CREATE INDEX IF NOT EXISTS idx_scraped_pages_company ON raw_content.scraped_pages(company_name)',
+      'CREATE INDEX IF NOT EXISTS idx_scraped_pages_company ON raw_content.scraped_pages(company)',
       'CREATE INDEX IF NOT EXISTS idx_scraped_pages_url ON raw_content.scraped_pages(url)',
       'CREATE INDEX IF NOT EXISTS idx_scraped_pages_scraped_at ON raw_content.scraped_pages(scraped_at DESC)',
       'CREATE INDEX IF NOT EXISTS idx_scraped_pages_content_hash ON raw_content.scraped_pages(content_hash)',
@@ -150,14 +205,25 @@ async function fixSchemaComplete() {
       'CREATE INDEX IF NOT EXISTS idx_markdown_pages_url ON processed_content.markdown_pages(url)',
       
       // change_detection indexes
-      'CREATE INDEX IF NOT EXISTS idx_change_detection_url ON processed_content.change_detection(url)',
+      'CREATE INDEX IF NOT EXISTS idx_change_detection_company ON processed_content.change_detection(company)',
       'CREATE INDEX IF NOT EXISTS idx_change_detection_detected_at ON processed_content.change_detection(detected_at DESC)',
       'CREATE INDEX IF NOT EXISTS idx_change_detection_interest_level ON processed_content.change_detection(interest_level DESC)',
       
+      // baseline_analysis indexes
+      'CREATE INDEX IF NOT EXISTS idx_baseline_analysis_url_id ON processed_content.baseline_analysis(url_id)',
+      'CREATE INDEX IF NOT EXISTS idx_baseline_analysis_company_id ON processed_content.baseline_analysis(company_id)',
+      'CREATE INDEX IF NOT EXISTS idx_baseline_analysis_created_at ON processed_content.baseline_analysis(created_at DESC)',
+      
       // company and urls indexes
       'CREATE INDEX IF NOT EXISTS idx_companies_name ON intelligence.companies(name)',
-      'CREATE INDEX IF NOT EXISTS idx_urls_company_id ON intelligence.urls(company_id)',
-      'CREATE INDEX IF NOT EXISTS idx_urls_url ON intelligence.urls(url)'
+      'CREATE INDEX IF NOT EXISTS idx_companies_active ON intelligence.companies(active)',
+      'CREATE INDEX IF NOT EXISTS idx_company_urls_company_id ON intelligence.company_urls(company_id)',
+      'CREATE INDEX IF NOT EXISTS idx_company_urls_url ON intelligence.company_urls(url)',
+      'CREATE INDEX IF NOT EXISTS idx_company_urls_active ON intelligence.company_urls(active)',
+      
+      // insights indexes
+      'CREATE INDEX IF NOT EXISTS idx_insights_company_id ON intelligence.insights(company_id)',
+      'CREATE INDEX IF NOT EXISTS idx_insights_created_at ON intelligence.insights(created_at DESC)'
     ];
 
     for (const index of indexes) {
@@ -172,16 +238,19 @@ async function fixSchemaComplete() {
     }
     console.log('✅ Indexes created\n');
 
-    // 7. Verify all tables exist
+    // 6. Verify all tables exist
     console.log('🔍 Verifying all required tables...\n');
     const requiredTables = [
       { schema: 'raw_content', table: 'scraped_pages' },
       { schema: 'raw_content', table: 'company_pages_baseline' },
-      { schema: 'raw_content', table: 'scraping_runs' },
       { schema: 'processed_content', table: 'markdown_pages' },
       { schema: 'processed_content', table: 'change_detection' },
+      { schema: 'processed_content', table: 'baseline_analysis' },
       { schema: 'intelligence', table: 'companies' },
-      { schema: 'intelligence', table: 'urls' }
+      { schema: 'intelligence', table: 'company_urls' },
+      { schema: 'intelligence', table: 'company_attributes' },
+      { schema: 'intelligence', table: 'insights' },
+      { schema: 'intelligence', table: 'scraping_runs' }
     ];
 
     let allGood = true;
@@ -199,24 +268,6 @@ async function fixSchemaComplete() {
         console.log(`❌ ${schema}.${table} - MISSING!`);
         allGood = false;
       }
-    }
-
-    // 8. Show markdown_pages schema specifically
-    console.log('\n📋 markdown_pages table structure:');
-    const mdColumns = await db.all(`
-      SELECT column_name, data_type, is_nullable
-      FROM information_schema.columns 
-      WHERE table_schema = 'processed_content' 
-      AND table_name = 'markdown_pages'
-      ORDER BY ordinal_position
-    `);
-    
-    if (mdColumns.length > 0) {
-      mdColumns.forEach(col => {
-        console.log(`  - ${col.column_name}: ${col.data_type} ${col.is_nullable === 'NO' ? 'NOT NULL' : ''}`);
-      });
-    } else {
-      console.log('  ❌ Table not found or no columns!');
     }
 
     console.log('\n✨ Schema fix complete!');
