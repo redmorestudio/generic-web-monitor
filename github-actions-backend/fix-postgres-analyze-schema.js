@@ -21,6 +21,31 @@ async function fixAnalyzeSchema() {
             console.log(`✅ Ensured schema: ${schema}`);
         }
 
+        // Check if tables exist and what columns they have
+        const tableCheck = await client.query(`
+            SELECT 
+                table_schema,
+                table_name,
+                column_name
+            FROM information_schema.columns
+            WHERE table_schema IN ('raw_content', 'processed_content', 'intelligence')
+            AND table_name IN ('scraped_pages', 'markdown_pages', 'baseline_analysis', 'changes')
+            ORDER BY table_schema, table_name, ordinal_position
+        `);
+
+        // Check if we need to rename company_name to company
+        const hasCompanyName = tableCheck.rows.some(row => 
+            row.column_name === 'company_name' && row.table_name === 'scraped_pages'
+        );
+        const hasCompany = tableCheck.rows.some(row => 
+            row.column_name === 'company' && row.table_name === 'scraped_pages'
+        );
+
+        if (hasCompanyName && !hasCompany) {
+            console.log('🔄 Renaming company_name to company in scraped_pages...');
+            await client.query(`ALTER TABLE raw_content.scraped_pages RENAME COLUMN company_name TO company`);
+        }
+
         // Create all required tables for the analyze step
         
         // 1. Raw content tables (should already exist from scraper)
@@ -149,7 +174,7 @@ async function fixAnalyzeSchema() {
         `);
         console.log('✅ Ensured table: intelligence.summaries');
 
-        // Create indexes for performance
+        // Create indexes for performance - wrapped in try/catch for each
         const indexes = [
             'CREATE INDEX IF NOT EXISTS idx_scraped_pages_company_url ON raw_content.scraped_pages(company, url)',
             'CREATE INDEX IF NOT EXISTS idx_scraped_pages_hash ON raw_content.scraped_pages(content_hash)',
@@ -163,12 +188,16 @@ async function fixAnalyzeSchema() {
         ];
 
         for (const indexSql of indexes) {
-            await client.query(indexSql);
+            try {
+                await client.query(indexSql);
+                console.log(`✅ ${indexSql.match(/idx_\w+/)[0]}`);
+            } catch (err) {
+                console.log(`⚠️  Failed to create index: ${err.message}`);
+            }
         }
-        console.log('✅ Created all indexes');
 
         // Verify schema
-        const tableCheck = await client.query(`
+        const tableVerification = await client.query(`
             SELECT 
                 schemaname,
                 tablename
@@ -178,8 +207,25 @@ async function fixAnalyzeSchema() {
         `);
         
         console.log('\n📊 Schema verification:');
-        tableCheck.rows.forEach(row => {
+        tableVerification.rows.forEach(row => {
             console.log(`  - ${row.schemaname}.${row.tablename}`);
+        });
+
+        // Also check column names for debugging
+        const columnCheck = await client.query(`
+            SELECT 
+                table_schema,
+                table_name,
+                column_name
+            FROM information_schema.columns
+            WHERE table_schema = 'raw_content'
+            AND table_name = 'scraped_pages'
+            ORDER BY ordinal_position
+        `);
+        
+        console.log('\n📋 Columns in raw_content.scraped_pages:');
+        columnCheck.rows.forEach(row => {
+            console.log(`  - ${row.column_name}`);
         });
 
         console.log('\n✅ PostgreSQL schema is ready for analyze step!');
