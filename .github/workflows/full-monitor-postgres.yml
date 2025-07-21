@@ -1,39 +1,439 @@
 name: Full Monitor Pipeline (PostgreSQL)
 
 on:
+  # Allow manual trigger only
   workflow_dispatch:
-  schedule:
-    - cron: '0 */4 * * *'  # Every 4 hours
+    inputs:
+      skip_scrape:
+        description: 'Skip scraping (use existing data)'
+        required: false
+        type: boolean
+        default: false
+      skip_process:
+        description: 'Skip processing (use existing processed data)'
+        required: false
+        type: boolean
+        default: false
+      analysis_mode:
+        description: 'Analysis mode'
+        required: false
+        type: choice
+        default: 'only-new'
+        options:
+          - all
+          - only-new
+          - force
+      skip_thebrain:
+        description: 'Skip TheBrain sync'
+        required: false
+        type: boolean
+        default: false
+  
+  # Optionally run on schedule (disabled by default)
+  # schedule:
+  #   - cron: '0 */4 * * *'  # Every 4 hours
 
 permissions:
   contents: write
   actions: write
+  pages: write
+  id-token: write
+  issues: write
 
 concurrency:
-  group: full-monitor
+  group: full-monitor-postgres
   cancel-in-progress: false
 
+env:
+  NODE_ENV: production
+  USE_POSTGRES: 'true'
+
 jobs:
+  # Job 1: Scrape websites
   scrape:
+    if: ${{ !inputs.skip_scrape }}
     uses: ./.github/workflows/scrape-postgres.yml
-    secrets: inherit
     with:
-      cascade: true
+      cascade: false  # Prevent cascading
+    permissions:
+      contents: write
+      actions: read
+    secrets: inherit
   
+  # Job 2: Process content
   process:
-    needs: scrape
+    needs: [scrape]
+    if: always() && (needs.scrape.result == 'success' || inputs.skip_scrape)
     uses: ./.github/workflows/process-postgres.yml
-    secrets: inherit
+    permissions:
+      contents: write
+      actions: read
     with:
-      cascade: true
+      trigger_source: ${{ inputs.skip_scrape && 'manual' || 'scrape' }}
+      run_id: ${{ needs.scrape.outputs.run_id || github.run_id }}
+      cascade: false  # Prevent cascading
+    secrets: inherit
   
+  # Job 3: Analyze content
+  analyze:
+    needs: [process]
+    if: always() && (needs.process.result == 'success' || inputs.skip_process)
+    uses: ./.github/workflows/analyze-postgres.yml
+    permissions:
+      contents: write
+      actions: read
+    with:
+      trigger_source: ${{ inputs.skip_process && 'manual' || 'process' }}
+      run_id: ${{ needs.process.outputs.run_id || github.run_id }}
+      analysis_mode: ${{ inputs.analysis_mode }}
+      cascade: false  # Prevent cascading
+    secrets: inherit
+  
+  # Job 4: Sync and deploy - INLINED to avoid workflow nesting limit
+  sync-and-deploy:
+    needs: [analyze]
+    if: always() && needs.analyze.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+      issues: write
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    env:
+      NODE_ENV: production
+      USE_POSTGRES: 'true'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+          pip install requests
+      
+      - name: Validate PostgreSQL connection
+        run: |
+          cd github-actions-backend
+          echo "🔌 Testing PostgreSQL connection for sync stage..."
+          node -e "
+            const { db, end } = require('./postgres-db');
+            db.one('SELECT NOW() as current_time')
+              .then(result => {
+                console.log('✅ PostgreSQL connection successful:', result.current_time);
+                process.exit(0);
+              })
+              .catch(error => {
+                console.error('❌ PostgreSQL connection failed:', error.message);
+                process.exit(1);
+              })
+              .finally(() => end());
+          "
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Ensure latest PostgreSQL data files
+        run: |
+          echo "✅ Checking for required PostgreSQL data files..."
+          
+          echo "📁 Available files:"
+          ls -la api-data/*.json || true
+          ls -la github-actions-backend/data/*.json || true
+          
+          echo "🐘 Using PostgreSQL backend - no local SQLite files needed"
+      
+      - name: Check baseline analysis status
+        if: ${{ !inputs.skip_thebrain }}
+        id: check_baseline
+        run: |
+          cd github-actions-backend
+          
+          BASELINE_COUNT=$(node -e "
+            const { db, end } = require('./postgres-db');
+            db.one('SELECT COUNT(*) as count FROM intelligence.baseline_analysis')
+              .then(result => {
+                console.log(result.count);
+                process.exit(0);
+              })
+              .catch(error => {
+                console.log('0');
+                process.exit(0);
+              })
+              .finally(() => end());
+          " 2>/dev/null || echo "0")
+          
+          echo "baseline_count=$BASELINE_COUNT" >> $GITHUB_OUTPUT
+          
+          if [ "$BASELINE_COUNT" -gt 0 ]; then
+            echo "✅ PostgreSQL baseline analysis already exists ($BASELINE_COUNT records)"
+            echo "🔄 Skipping duplicate analysis to save Groq API costs"
+          else
+            echo "⚠️  No baseline analysis found in PostgreSQL"
+          fi
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Run baseline analysis for TheBrain (if needed)
+        if: ${{ !inputs.skip_thebrain && steps.check_baseline.outputs.baseline_count == '0' }}
+        run: |
+          cd github-actions-backend
+          
+          echo "🧠 Running PostgreSQL baseline analysis for TheBrain sync..."
+          echo "💰 This will use Groq API credits"
+          
+          if [ -z "$GROQ_API_KEY" ]; then
+            echo "❌ Error: GROQ_API_KEY is not set"
+            exit 1
+          fi
+          
+          if ! node ai-analyzer-baseline-three-db-postgres.js; then
+            echo "❌ PostgreSQL baseline analysis failed"
+            exit 1
+          fi
+          
+          echo "✅ PostgreSQL baseline analysis completed successfully"
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Sync to TheBrain API (PostgreSQL)
+        if: ${{ !inputs.skip_thebrain }}
+        run: |
+          cd github-actions-backend
+          
+          if [ -z "$THEBRAIN_API_KEY" ] || [ -z "$THEBRAIN_BRAIN_ID" ]; then
+            echo "⚠️  TheBrain credentials not configured"
+            echo "   Skipping TheBrain sync..."
+          else
+            echo "🧠 Syncing PostgreSQL data to TheBrain via API..."
+            
+            # Check if PostgreSQL version of TheBrain sync exists
+            if [ -f "thebrain-api-sync-postgres.js" ]; then
+              node thebrain-api-sync-postgres.js || {
+                echo "⚠️  PostgreSQL TheBrain sync failed (known issue)"
+                exit 0
+              }
+            else
+              echo "⚠️  PostgreSQL TheBrain sync script not yet available"
+              echo "   Using SQLite version as fallback..."
+              node thebrain-api-sync.js || {
+                echo "⚠️  TheBrain sync failed (known issue)"
+                exit 0
+              }
+            fi
+          fi
+        env:
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+          THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
+          THEBRAIN_CENTRAL_THOUGHT_ID: ${{ secrets.THEBRAIN_CENTRAL_THOUGHT_ID }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          GITHUB_ACTIONS: 'true'
+      
+      - name: Update workflow status
+        run: |
+          cd github-actions-backend
+          echo "{
+            \"last_run\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"status\": \"success\",
+            \"workflow_run_id\": \"${{ github.run_id }}\",
+            \"trigger_source\": \"full-monitor-postgres\",
+            \"backend\": \"postgresql\",
+            \"database\": \"postgresql\"
+          }" > ../api-data/workflow-status-postgres.json
+      
+      - name: Commit final updates
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          push_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            local wait_time=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔄 Attempt $attempt/$max_attempts to push changes..."
+              
+              git pull origin main --rebase || {
+                echo "❌ Failed to rebase, trying merge strategy..."
+                git rebase --abort 2>/dev/null || true
+                git pull origin main --no-rebase --strategy=ours || {
+                  echo "❌ Merge failed, resetting to origin/main"
+                  git reset --hard origin/main
+                  return 1
+                }
+              }
+              
+              if git push origin main; then
+                echo "✅ Successfully pushed changes!"
+                return 0
+              else
+                echo "❌ Push failed"
+                
+                if [ $attempt -lt $max_attempts ]; then
+                  echo "⏳ Waiting ${wait_time}s before retry..."
+                  sleep $wait_time
+                  wait_time=$((wait_time * 2))
+                  attempt=$((attempt + 1))
+                else
+                  echo "❌ All push attempts failed"
+                  return 1
+                fi
+              fi
+            done
+          }
+          
+          git add api-data/ || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🚀 Deploy PostgreSQL updates - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+            push_with_retry || {
+              echo "⚠️  Failed to push changes after multiple attempts"
+              exit 0
+            }
+          fi
+      
+      # Deploy to GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      
+      # Create alerts for PostgreSQL data
+      - name: Check for high-priority changes (PostgreSQL)
+        id: check-changes
+        run: |
+          if [ ! -f "api-data/changes.json" ]; then
+            echo "No changes.json file found"
+            echo "high_priority_count=0" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          
+          HIGH_PRIORITY=$(jq '[.changes[] | select(.relevance_score >= 8)] | length' api-data/changes.json 2>/dev/null || echo "0")
+          echo "high_priority_count=$HIGH_PRIORITY" >> $GITHUB_OUTPUT
+          
+          if [ "$HIGH_PRIORITY" -gt 0 ]; then
+            echo "Found $HIGH_PRIORITY high-priority changes in PostgreSQL data"
+            jq -r '.changes[] | select(.relevance_score >= 8) | "- \(.company): Score \(.relevance_score)/10"' api-data/changes.json > /tmp/changes.txt || echo "No changes"
+            echo "CHANGES_FILE=/tmp/changes.txt" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create GitHub Issue for PostgreSQL alerts
+        if: steps.check-changes.outputs.high_priority_count > 0
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const count = ${{ steps.check-changes.outputs.high_priority_count }};
+            const changesDetails = process.env.CHANGES_DETAILS || 'See dashboard for details';
+            
+            const body = `# 🔴 High Priority Competitive Intelligence Alert (PostgreSQL)
+            
+            **${count} high-priority changes detected** in PostgreSQL competitor monitoring.
+            
+            ## Changes Detected:
+            ${changesDetails}
+            
+            ## Dashboard:
+            View the [full dashboard](${{ steps.deployment.outputs.page_url }}) for detailed analysis.
+            
+            ---
+            *Automated alert from AI Competitive Intelligence Monitor (PostgreSQL Backend)*
+            *Generated: ${new Date().toISOString()}*`;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔴 PostgreSQL: ${count} High Priority Alert${count > 1 ? 's' : ''}`,
+              body: body,
+              labels: ['competitive-intel', 'high-priority', 'automated', 'postgresql']
+            });
+        env:
+          CHANGES_DETAILS: ${{ steps.check-changes.outputs.CHANGES_FILE && format('{0}', steps.check-changes.outputs.CHANGES_FILE) || 'See dashboard for details' }}
+      
+      # Email notifications (PostgreSQL compatible)
+      - name: Send email notifications
+        run: |
+          cd github-actions-backend
+          
+          if [ -z "$SMTP_HOST" ]; then
+            echo "📧 Email not configured, skipping notifications"
+          else
+            echo "📧 Sending email notifications for PostgreSQL data..."
+            npm list nodemailer || npm install nodemailer
+            
+            # Check if PostgreSQL version of email notifications exists
+            if [ -f "email-notifications-postgres-wrapper.js" ]; then
+              if node email-notifications-postgres-wrapper.js check; then
+                echo "✅ PostgreSQL email notification sent successfully"
+              else
+                echo "⚠️  PostgreSQL email notification failed (non-critical)"
+              fi
+            else
+              echo "⚠️  PostgreSQL email notifications not yet available"
+              echo "   Using SQLite version as fallback..."
+              if node email-notifications-wrapper.js check; then
+                echo "✅ Email notification sent successfully"
+              else
+                echo "⚠️  Email notification failed (non-critical)"
+              fi
+            fi
+          fi
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+          EMAIL_THRESHOLD: ${{ secrets.EMAIL_THRESHOLD }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+
+  # Final status notification
   notify:
-    needs: process
+    needs: [sync-and-deploy]
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Send completion notification
         run: |
-          echo "✅ Full PostgreSQL monitor pipeline completed successfully!"
-          echo "- Scrape: ✓"
-          echo "- Process: ✓"
-          echo "- Data is now in PostgreSQL!"
+          if [ "${{ needs.sync-and-deploy.result }}" = "success" ]; then
+            echo "✅ Full PostgreSQL monitor pipeline completed successfully!"
+            echo "- Scrape: ✓"
+            echo "- Process: ✓"  
+            echo "- Analyze: ✓"
+            echo "- Sync & Deploy: ✓"
+            echo "- Dashboard deployed with PostgreSQL data!"
+          else
+            echo "❌ PostgreSQL pipeline failed or was cancelled"
+            echo "Check previous job logs for details"
+          fi
