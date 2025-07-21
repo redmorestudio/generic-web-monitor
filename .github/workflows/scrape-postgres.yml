@@ -6,18 +6,15 @@ on:
       cascade:
         description: 'Trigger next workflow (process)'
         required: false
-        default: 'true'
-        type: choice
-        options:
-        - 'true'
-        - 'false'
+        default: true
+        type: boolean
   workflow_call:
     inputs:
       cascade:
         description: 'Trigger next workflow (process)'
         required: false
-        default: 'true'
-        type: string
+        default: true
+        type: boolean
 
 permissions:
   contents: read
@@ -64,7 +61,7 @@ jobs:
         node scraper-three-db-postgres.js
         
     - name: Trigger Process Workflow
-      if: ${{ inputs.cascade == 'true' || inputs.cascade == '' }}
+      if: ${{ inputs.cascade == true }}
       uses: actions/github-script@v7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -75,7 +72,7 @@ jobs:
             workflow_id: 'process-postgres.yml',
             ref: 'main',
             inputs: {
-              cascade: '${{ inputs.cascade }}'
+              cascade: 'true'
             }
           });
           console.log('Triggered process workflow');

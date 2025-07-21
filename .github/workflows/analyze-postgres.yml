@@ -1,0 +1,134 @@
+name: Analyze Content (PostgreSQL)
+
+on:
+  workflow_dispatch:
+    inputs:
+      cascade:
+        description: 'Trigger next workflow in chain'
+        required: false
+        type: boolean
+        default: true
+  workflow_call:
+    inputs:
+      cascade:
+        description: 'Trigger next workflow in chain'
+        required: false
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: analyze-workflow
+  cancel-in-progress: false
+
+env:
+  NODE_ENV: production
+
+jobs:
+  analyze-content:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Run baseline AI analysis with PostgreSQL
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          cd github-actions-backend
+          
+          echo "🚀 Running baseline analysis with PostgreSQL..."
+          node ai-analyzer-baseline-three-db-postgres.js
+      
+      - name: Run change detection analysis with PostgreSQL
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          cd github-actions-backend
+          
+          echo "🔍 Running change detection and ultra-enhanced analysis..."
+          node ai-analyzer-ultra-three-db-postgres.js full || echo "Change analysis completed"
+      
+      - name: Generate static data with PostgreSQL
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          cd github-actions-backend
+          
+          echo "📊 Generating static data files from PostgreSQL..."
+          node generate-static-data-three-db-postgres.js
+      
+      - name: Generate change detail files with PostgreSQL
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          cd github-actions-backend
+          
+          echo "📝 Generating change detail files..."
+          node generate-change-details-postgres.js || echo "Change details generation completed"
+      
+      - name: Create analysis summary
+        run: |
+          cd github-actions-backend
+          echo "{
+            \"workflow\": \"analyze-postgres\",
+            \"run_id\": \"${{ github.run_id }}\",
+            \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"trigger_source\": \"postgres-pipeline\",
+            \"architecture\": \"postgres\",
+            \"ai_model\": \"groq-llama-3.3-70b\",
+            \"status\": \"completed\"
+          }" > ../api-data/last-analysis.json
+      
+      - name: Commit analysis results
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Add all analysis outputs
+          git add api-data/ || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🚀 Update AI analysis (PostgreSQL) - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
+            
+            # Push with retry logic
+            for attempt in {1..5}; do
+              if git push; then
+                echo "Successfully pushed on attempt $attempt"
+                break
+              else
+                echo "Push failed on attempt $attempt, retrying..."
+                git pull --rebase
+                sleep $((2 ** (attempt - 1)))
+              fi
+            done
+          fi
+      
+      - name: Complete notification
+        run: |
+          echo "✅ PostgreSQL analysis pipeline completed successfully!"
+          echo "- Baseline Analysis: ✓"
+          echo "- Change Detection: ✓"
+          echo "- Static Data Generation: ✓"
+          echo "- Data is now ready in PostgreSQL!"
