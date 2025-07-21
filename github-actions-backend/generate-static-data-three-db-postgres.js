@@ -15,7 +15,6 @@ if (process.env.NODE_ENV === 'production' || process.env.POSTGRES_CONNECTION_STR
 const fs = require('fs');
 const path = require('path');
 const { db, end } = require('./postgres-db');
-const { deduplicatePreservingCase } = require('./normalize-keywords');
 
 // Configuration
 const DATA_DIR = path.join(__dirname, 'data');
@@ -34,6 +33,19 @@ function deduplicateByName(arr) {
         if (seen.has(key)) return false;
         seen.add(key);
         return true;
+    });
+}
+
+// Helper function to deduplicate preserving case
+function deduplicatePreservingCase(arr) {
+    const seen = new Map();
+    return arr.filter(item => {
+        const key = item.toLowerCase();
+        if (!seen.has(key)) {
+            seen.set(key, item);
+            return true;
+        }
+        return false;
     });
 }
 
@@ -131,22 +143,22 @@ async function generateAINews() {
 async function generateDashboard() {
     console.log('📊 Generating dashboard data...');
     
+    // Get all companies (no active column)
     const companies = await db.all(`
         SELECT c.*, ca.industry 
         FROM intelligence.companies c
         LEFT JOIN intelligence.company_attributes ca ON c.id = ca.company_id
-        WHERE c.active = true
         ORDER BY c.name
     `);
     
     const companyStats = [];
     
     for (const company of companies) {
-        // Get URL count
+        // Get URL count (no active column)
         const urlCount = await db.get(`
             SELECT COUNT(*) as count 
             FROM intelligence.company_urls 
-            WHERE company_id = $1 AND active = true
+            WHERE company_id = $1
         `, [company.id]);
         
         // Get recent changes
@@ -191,11 +203,11 @@ async function generateDashboard() {
         });
     }
     
-    // Overall statistics
+    // Overall statistics (no active columns)
     const overallStats = await db.get(`
         SELECT 
-            (SELECT COUNT(*) FROM intelligence.companies WHERE active = true) as total_companies,
-            (SELECT COUNT(*) FROM intelligence.company_urls WHERE active = true) as total_urls,
+            (SELECT COUNT(*) FROM intelligence.companies) as total_companies,
+            (SELECT COUNT(*) FROM intelligence.company_urls) as total_urls,
             (SELECT COUNT(*) FROM processed_content.change_detection WHERE detected_at > NOW() - INTERVAL '24 hours') as changes_24h,
             (SELECT COUNT(*) FROM processed_content.change_detection WHERE detected_at > NOW() - INTERVAL '7 days') as changes_7d,
             (SELECT COUNT(*) FROM processed_content.change_detection WHERE interest_level >= 7 AND detected_at > NOW() - INTERVAL '7 days') as high_interest_7d
@@ -224,10 +236,10 @@ async function generateCompanyDetails(companyName) {
         return null;
     }
     
-    // Get URLs
+    // Get URLs (no active column)
     const urls = await db.all(`
         SELECT * FROM intelligence.company_urls 
-        WHERE company_id = $1 AND active = true
+        WHERE company_id = $1
         ORDER BY name
     `, [company.id]);
     
@@ -366,7 +378,6 @@ async function generateAllData() {
         console.log('\n📁 Generating company detail files...');
         const companies = await db.all(`
             SELECT name FROM intelligence.companies 
-            WHERE active = true 
             ORDER BY name
         `);
         
