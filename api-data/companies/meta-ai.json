@@ -1,0 +1,444 @@
+{
+  "company": {
+    "id": null,
+    "name": "Meta AI",
+    "category": "LLM Providers",
+    "description": null,
+    "created_at": null,
+    "thebrain_thought_id": "115146e5-b33c-410e-b11a-e700d602e8cc",
+    "company_id": null,
+    "industry": null,
+    "founded_year": null,
+    "headquarters": null,
+    "website": null,
+    "updated_at": null,
+    "urls": []
+  },
+  "stats": {
+    "monitored_urls": "0",
+    "total_changes": "6",
+    "high_interest_changes": "5",
+    "changes_last_week": "6",
+    "avg_interest_level": "7.0000000000000000"
+  },
+  "changes": [
+    {
+      "id": 191,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:24:35.091Z",
+      "company": "Meta AI",
+      "url_name": "blog",
+      "old_hash": "ffba8e9644f73a57865086de1400ef82f777f61a2b97d7c1bc0f2433ea3edd00",
+      "new_hash": "91b2dc9217080758406618299d2fe12c3cf5b3a61faeb98e9e300147a07bdbeb",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 8,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Partnership with AWS",
+          "Llama Startup Program",
+          "Advancements in natural language processing and computer vision"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "Startups and innovation",
+          "Cloud computing and AI infrastructure",
+          "Conversational AI and natural language processing"
+        ],
+        "summary": "Meta AI's partnership with AWS to help startups build with Llama and the introduction of new programs and technologies demonstrate significant technical advances and business impact, showcasing Meta's commitment to AI innovation and ecosystem growth."
+      },
+      "url": null,
+      "title": "AI at Meta Blog",
+      "content_preview": "Title: AI at Meta Blog\n\nOur approach\nResearch\nMeta AI\nLlama\nBlog\nTry Meta AI\n\nThe latest AI news from Meta\n\nFEATURED\nOpen Source\nModeling natural conversational dynamics with Seamless Interaction\nJune 27, 2025\n\nLatest News\n\nOpen Source\nJoining forces with AWS on a new program to help startups build with Llama\nJul 16, 2025\nOpen Source\nHow Llama helps drive engineering efficiency at a major Australian bank\nJun 18, 2025\nLarge Language Model\nAnnouncing the inaugural Llama Startup Program cohort\nJun 17, 2025\nFEATURED\nOpen Source\nIntroducing the V-JEPA 2 world model and new benchmarks for physical reasoning\nJun 11, 2025\nMore from AI at Meta\nFilter:\nAll\nFeatured\nML applications\nOpen source\nResearch\nComputer vision\nHardware\nNatural language processing\nSpeech & Audio\n\nComputer Vision\n\nInside Aria Gen 2: Explore the cutting-edge tech behind the device\n\nToday, we’re excited to share more about the technology inside Aria Gen 2. This includes an in-depth overview of the form factor, audio capabilit"
+    },
+    {
+      "id": 190,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 3,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:24:18.910Z",
+      "company": "Meta AI",
+      "url_name": "product",
+      "old_hash": "4ca06d45e0c3374e1ef742b221f1cb9a7597240edafa8081ea216a12adc4a67a",
+      "new_hash": "c0be26492fb2f2e1309d43910d3122b60c17257190adc05af5af4245252ae142",
+      "ai_analysis": {
+        "technical_innovation_score": 3,
+        "business_impact_score": 2,
+        "interest_level": 3,
+        "interest_drivers": [
+          "minor update",
+          "feedback collection"
+        ],
+        "category": "AI/ML Model Updates",
+        "impact_areas": [
+          "model optimization",
+          "user engagement"
+        ],
+        "summary": "The update is primarily focused on collecting user feedback, with minimal changes to the technical content, indicating a low level of technical innovation and business impact."
+      },
+      "url": null,
+      "title": "Industry Leading, Open-Source AI | Llama by Meta",
+      "content_preview": "Title: Industry Leading, Open-Source AI | Llama by Meta\n\nSkip to main content\nModels & Products\nDocs\nCommunity\nResources\nLlama API\nDownload models\nWe'd love your feedback\nPlease provide your thoughts on Llama with two short questions.\nGive Feedback\nClose\nLlama 4: Leading intelligence.\nUnrivaled speed and efficiency.\nThe most intelligent, scalable, and convenient generation of Llama is here: natively multimodal, mixture-of-experts models, advanced reasoning, and industry-leading context windows. Build your greatest ideas and seamlessly deploy in minutes with Llama API and Llama Stack.\nDownload models\nJoin the Llama API Waitlist\nBuild with Llama 4\nWe've optimized models for easy deployment, cost efficiency, and performance that scales to billions of users. We can’t wait to see what you build.\nLlama API\nGo from ideation to app deployment in minutes. Experience a seamless and efficient way to build AI apps using Llama models. Learn more.\nJoin waitlist\nLlama 4 Scout\nClass-leading natively m"
+    },
+    {
+      "id": 106,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:17:36.021Z",
+      "company": "Meta AI",
+      "url_name": "api",
+      "old_hash": null,
+      "new_hash": "4ca06d45e0c3374e1ef742b221f1cb9a7597240edafa8081ea216a12adc4a67a",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Open-source AI model",
+          "Multimodal capabilities",
+          "Mixture-of-experts models",
+          "Advanced reasoning",
+          "Industry-leading context windows"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "AI App Development"
+        ],
+        "summary": "Meta's Llama 4 release introduces significant technical advancements in open-source AI, including multimodal models, advanced reasoning, and improved efficiency, which can impact the AI/ML landscape and drive business growth through its API and waitlist offerings."
+      },
+      "url": null,
+      "title": "Industry Leading, Open-Source AI | Llama by Meta",
+      "content_preview": "Title: Industry Leading, Open-Source AI | Llama by Meta\n\nSkip to main content\nModels & Products\nDocs\nCommunity\nResources\nLlama API\nDownload models\nLlama 4: Leading intelligence.\nUnrivaled speed and efficiency.\nThe most intelligent, scalable, and convenient generation of Llama is here: natively multimodal, mixture-of-experts models, advanced reasoning, and industry-leading context windows. Build your greatest ideas and seamlessly deploy in minutes with Llama API and Llama Stack.\nDownload models\nJoin the Llama API Waitlist\nBuild with Llama 4\nWe've optimized models for easy deployment, cost efficiency, and performance that scales to billions of users. We can’t wait to see what you build.\nLlama API\nGo from ideation to app deployment in minutes. Experience a seamless and efficient way to build AI apps using Llama models. Learn more.\nJoin waitlist\nLlama 4 Scout\nClass-leading natively multimodal model that offers superior text and visual intelligence, single H100 GPU efficiency, and a 10M con"
+    },
+    {
+      "id": 106,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:17:36.021Z",
+      "company": "Meta AI",
+      "url_name": "api",
+      "old_hash": null,
+      "new_hash": "4ca06d45e0c3374e1ef742b221f1cb9a7597240edafa8081ea216a12adc4a67a",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Open-source AI model",
+          "Multimodal capabilities",
+          "Mixture-of-experts models",
+          "Advanced reasoning",
+          "Industry-leading context windows"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "AI App Development"
+        ],
+        "summary": "Meta's Llama 4 release introduces significant technical advancements in open-source AI, including multimodal models, advanced reasoning, and improved efficiency, which can impact the AI/ML landscape and drive business growth through its API and waitlist offerings."
+      },
+      "url": null,
+      "title": "Industry Leading, Open-Source AI | Llama by Meta",
+      "content_preview": "Title: Industry Leading, Open-Source AI | Llama by Meta\n\nSkip to main content\nModels & Products\nDocs\nCommunity\nResources\nLlama API\nDownload models\nLlama 4: Leading intelligence.\nUnrivaled speed and efficiency.\nThe most intelligent, scalable, and convenient generation of Llama is here: natively multimodal, mixture-of-experts models, advanced reasoning, and industry-leading context windows. Build your greatest ideas and seamlessly deploy in minutes with Llama API and Llama Stack.\nDownload models\nJoin the Llama API Waitlist\nBuild with Llama 4\nWe've optimized models for easy deployment, cost efficiency, and performance that scales to billions of users. We can’t wait to see what you build.\nLlama API\nGo from ideation to app deployment in minutes. Experience a seamless and efficient way to build AI apps using Llama models. Learn more.\nJoin waitlist\nLlama 4 Scout\nClass-leading natively multimodal model that offers superior text and visual intelligence, single H100 GPU efficiency, and a 10M con"
+    },
+    {
+      "id": 106,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:17:36.021Z",
+      "company": "Meta AI",
+      "url_name": "api",
+      "old_hash": null,
+      "new_hash": "4ca06d45e0c3374e1ef742b221f1cb9a7597240edafa8081ea216a12adc4a67a",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Open-source AI model",
+          "Multimodal capabilities",
+          "Mixture-of-experts models",
+          "Advanced reasoning",
+          "Industry-leading context windows"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "AI App Development"
+        ],
+        "summary": "Meta's Llama 4 release introduces significant technical advancements in open-source AI, including multimodal models, advanced reasoning, and improved efficiency, which can impact the AI/ML landscape and drive business growth through its API and waitlist offerings."
+      },
+      "url": null,
+      "title": "Industry Leading, Open-Source AI | Llama by Meta",
+      "content_preview": "Title: Industry Leading, Open-Source AI | Llama by Meta\n\nSkip to main content\nModels & Products\nDocs\nCommunity\nResources\nLlama API\nDownload models\nLlama 4: Leading intelligence.\nUnrivaled speed and efficiency.\nThe most intelligent, scalable, and convenient generation of Llama is here: natively multimodal, mixture-of-experts models, advanced reasoning, and industry-leading context windows. Build your greatest ideas and seamlessly deploy in minutes with Llama API and Llama Stack.\nDownload models\nJoin the Llama API Waitlist\nBuild with Llama 4\nWe've optimized models for easy deployment, cost efficiency, and performance that scales to billions of users. We can’t wait to see what you build.\nLlama API\nGo from ideation to app deployment in minutes. Experience a seamless and efficient way to build AI apps using Llama models. Learn more.\nJoin waitlist\nLlama 4 Scout\nClass-leading natively multimodal model that offers superior text and visual intelligence, single H100 GPU efficiency, and a 10M con"
+    },
+    {
+      "id": 105,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:17:26.122Z",
+      "company": "Meta AI",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "ffba8e9644f73a57865086de1400ef82f777f61a2b97d7c1bc0f2433ea3edd00",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Llama Startup Program",
+          "Seamless Interaction",
+          "V-JEPA 2 world model",
+          "Aria Gen 2"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "Generative AI",
+          "Startup Ecosystem"
+        ],
+        "summary": "Meta AI's blog features recent advancements in AI research, including open-source models and initiatives like the Llama Startup Program, showcasing the company's commitment to innovation and community engagement."
+      },
+      "url": null,
+      "title": "AI at Meta Blog",
+      "content_preview": "Title: AI at Meta Blog\n\nOur approach\nResearch\nMeta AI\nLlama\nBlog\nTry Meta AI\n\nThe latest AI news from Meta\n\nFEATURED\nOpen Source\nModeling natural conversational dynamics with Seamless Interaction\nJune 27, 2025\n\nLatest News\n\nOpen Source\nHow Llama helps drive engineering efficiency at a major Australian bank\nJun 18, 2025\nLarge Language Model\nAnnouncing the inaugural Llama Startup Program cohort\nJun 17, 2025\nFEATURED\nOpen Source\nIntroducing the V-JEPA 2 world model and new benchmarks for physical reasoning\nJun 11, 2025\nComputer Vision\nInside Aria Gen 2: Explore the cutting-edge tech behind the device\nJun 4, 2025\nMore from AI at Meta\nFilter:\nAll\nFeatured\nML applications\nOpen source\nResearch\nComputer vision\nHardware\nNatural language processing\nSpeech & Audio\n\nOpen Source\n\nIntroducing the Llama Startup Program\n\nWe’re excited to announce the Llama Startup Program, a new initiative to empower early stage startups to innovate and build generative AI applications with Llama.\n\nMay 21, 2025\n\nOpen "
+    },
+    {
+      "id": 104,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:17:16.833Z",
+      "company": "Meta AI",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "4e2a63f234f10752d2641172c3923650164a94646de080828880a4034948d345",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Introduction of the new Meta AI app",
+          "Latest models with mixture-of-experts architecture and native multimodal capabilities",
+          "Personalized AI experience",
+          "Advanced capabilities for image and video creation"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "Conversational AI",
+          "Computer Vision",
+          "Personalized Recommendations"
+        ],
+        "summary": "Meta introduces a new AI app with personal conversational experience, advanced capabilities, and seamless access across multiple platforms, showcasing significant technical advances and notable business impact."
+      },
+      "url": null,
+      "title": "AI at Meta",
+      "content_preview": "Title: AI at Meta\n\nOur approach\nResearch\nMeta AI\nLlama\nBlog\nTry Meta AI\n\nMETA AI\n\nIntroducing the new\nMeta AI app\n\nExperience personal AI and bring your imagination to life with new ways to restyle your videos—all built with our latest models.\n\nGet Meta AI\nLearn more\n\nLATEST RELEASES\n\nMETA AI APP\n\nTalk to your personal AI\n\nOpen the new Meta AI app and start talking. It's personal, conversational experience makes it easy to get things done.\n\nADVANCED CAPABILITIES\n\nIntelligence made for you\n\nWith image and video creation tools and personalized responses, Meta AI helps boost your creativity, solve problems and explore new ideas.\n\nExplore features\n\nSEAMLESS ACCESS\n\nMeta AI everywhere\n\nEasily use Meta AI wherever you need it, from the new mobile app, to desktop web, Ray-Ban Meta glasses, and our family of apps.\n\nGet Meta AI\n\nLLAMA 4\n\nBest-in-class performance and efficiency\n\nOur latest models bring mixture-of-experts architecture, native multimodal capabilities, near limitless context windo"
+    },
+    {
+      "id": 104,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:17:16.833Z",
+      "company": "Meta AI",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "4e2a63f234f10752d2641172c3923650164a94646de080828880a4034948d345",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Introduction of the new Meta AI app",
+          "Latest models with mixture-of-experts architecture and native multimodal capabilities",
+          "Personalized AI experience",
+          "Advanced capabilities for image and video creation"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "Conversational AI",
+          "Computer Vision",
+          "Personalized Recommendations"
+        ],
+        "summary": "Meta introduces a new AI app with personal conversational experience, advanced capabilities, and seamless access across multiple platforms, showcasing significant technical advances and notable business impact."
+      },
+      "url": null,
+      "title": "AI at Meta",
+      "content_preview": "Title: AI at Meta\n\nOur approach\nResearch\nMeta AI\nLlama\nBlog\nTry Meta AI\n\nMETA AI\n\nIntroducing the new\nMeta AI app\n\nExperience personal AI and bring your imagination to life with new ways to restyle your videos—all built with our latest models.\n\nGet Meta AI\nLearn more\n\nLATEST RELEASES\n\nMETA AI APP\n\nTalk to your personal AI\n\nOpen the new Meta AI app and start talking. It's personal, conversational experience makes it easy to get things done.\n\nADVANCED CAPABILITIES\n\nIntelligence made for you\n\nWith image and video creation tools and personalized responses, Meta AI helps boost your creativity, solve problems and explore new ideas.\n\nExplore features\n\nSEAMLESS ACCESS\n\nMeta AI everywhere\n\nEasily use Meta AI wherever you need it, from the new mobile app, to desktop web, Ray-Ban Meta glasses, and our family of apps.\n\nGet Meta AI\n\nLLAMA 4\n\nBest-in-class performance and efficiency\n\nOur latest models bring mixture-of-experts architecture, native multimodal capabilities, near limitless context windo"
+    },
+    {
+      "id": 103,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:17:10.125Z",
+      "company": "Meta AI",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "4ca06d45e0c3374e1ef742b221f1cb9a7597240edafa8081ea216a12adc4a67a",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Open-source AI models",
+          "Multimodal capabilities",
+          "Advanced reasoning",
+          "Industry-leading context windows",
+          "Scalability to billions of users"
+        ],
+        "category": "AI/ML Innovation",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "AI App Development"
+        ],
+        "summary": "Meta's Llama 4 release introduces significant technical advancements in open-source AI, including multimodal models, advanced reasoning, and industry-leading context windows, with potential for substantial business impact through its API and scalability features."
+      },
+      "url": null,
+      "title": "Industry Leading, Open-Source AI | Llama by Meta",
+      "content_preview": "Title: Industry Leading, Open-Source AI | Llama by Meta\n\nSkip to main content\nModels & Products\nDocs\nCommunity\nResources\nLlama API\nDownload models\nLlama 4: Leading intelligence.\nUnrivaled speed and efficiency.\nThe most intelligent, scalable, and convenient generation of Llama is here: natively multimodal, mixture-of-experts models, advanced reasoning, and industry-leading context windows. Build your greatest ideas and seamlessly deploy in minutes with Llama API and Llama Stack.\nDownload models\nJoin the Llama API Waitlist\nBuild with Llama 4\nWe've optimized models for easy deployment, cost efficiency, and performance that scales to billions of users. We can’t wait to see what you build.\nLlama API\nGo from ideation to app deployment in minutes. Experience a seamless and efficient way to build AI apps using Llama models. Learn more.\nJoin waitlist\nLlama 4 Scout\nClass-leading natively multimodal model that offers superior text and visual intelligence, single H100 GPU efficiency, and a 10M con"
+    },
+    {
+      "id": 103,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:17:10.125Z",
+      "company": "Meta AI",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "4ca06d45e0c3374e1ef742b221f1cb9a7597240edafa8081ea216a12adc4a67a",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Open-source AI models",
+          "Multimodal capabilities",
+          "Advanced reasoning",
+          "Industry-leading context windows",
+          "Scalability to billions of users"
+        ],
+        "category": "AI/ML Innovation",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "AI App Development"
+        ],
+        "summary": "Meta's Llama 4 release introduces significant technical advancements in open-source AI, including multimodal models, advanced reasoning, and industry-leading context windows, with potential for substantial business impact through its API and scalability features."
+      },
+      "url": null,
+      "title": "Industry Leading, Open-Source AI | Llama by Meta",
+      "content_preview": "Title: Industry Leading, Open-Source AI | Llama by Meta\n\nSkip to main content\nModels & Products\nDocs\nCommunity\nResources\nLlama API\nDownload models\nLlama 4: Leading intelligence.\nUnrivaled speed and efficiency.\nThe most intelligent, scalable, and convenient generation of Llama is here: natively multimodal, mixture-of-experts models, advanced reasoning, and industry-leading context windows. Build your greatest ideas and seamlessly deploy in minutes with Llama API and Llama Stack.\nDownload models\nJoin the Llama API Waitlist\nBuild with Llama 4\nWe've optimized models for easy deployment, cost efficiency, and performance that scales to billions of users. We can’t wait to see what you build.\nLlama API\nGo from ideation to app deployment in minutes. Experience a seamless and efficient way to build AI apps using Llama models. Learn more.\nJoin waitlist\nLlama 4 Scout\nClass-leading natively multimodal model that offers superior text and visual intelligence, single H100 GPU efficiency, and a 10M con"
+    },
+    {
+      "id": 103,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:17:10.125Z",
+      "company": "Meta AI",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "4ca06d45e0c3374e1ef742b221f1cb9a7597240edafa8081ea216a12adc4a67a",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Open-source AI models",
+          "Multimodal capabilities",
+          "Advanced reasoning",
+          "Industry-leading context windows",
+          "Scalability to billions of users"
+        ],
+        "category": "AI/ML Innovation",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "AI App Development"
+        ],
+        "summary": "Meta's Llama 4 release introduces significant technical advancements in open-source AI, including multimodal models, advanced reasoning, and industry-leading context windows, with potential for substantial business impact through its API and scalability features."
+      },
+      "url": null,
+      "title": "Industry Leading, Open-Source AI | Llama by Meta",
+      "content_preview": "Title: Industry Leading, Open-Source AI | Llama by Meta\n\nSkip to main content\nModels & Products\nDocs\nCommunity\nResources\nLlama API\nDownload models\nLlama 4: Leading intelligence.\nUnrivaled speed and efficiency.\nThe most intelligent, scalable, and convenient generation of Llama is here: natively multimodal, mixture-of-experts models, advanced reasoning, and industry-leading context windows. Build your greatest ideas and seamlessly deploy in minutes with Llama API and Llama Stack.\nDownload models\nJoin the Llama API Waitlist\nBuild with Llama 4\nWe've optimized models for easy deployment, cost efficiency, and performance that scales to billions of users. We can’t wait to see what you build.\nLlama API\nGo from ideation to app deployment in minutes. Experience a seamless and efficient way to build AI apps using Llama models. Learn more.\nJoin waitlist\nLlama 4 Scout\nClass-leading natively multimodal model that offers superior text and visual intelligence, single H100 GPU efficiency, and a 10M con"
+    }
+  ],
+  "insights": [],
+  "entities": {
+    "technologies": [],
+    "products": []
+  },
+  "themes": [],
+  "key_points": [],
+  "last_updated": "2025-07-21T17:29:25.179Z"
+}

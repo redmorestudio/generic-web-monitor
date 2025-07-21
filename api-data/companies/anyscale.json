@@ -1,0 +1,466 @@
+{
+  "company": {
+    "id": null,
+    "name": "Anyscale",
+    "category": "AI Infrastructure",
+    "description": null,
+    "created_at": null,
+    "thebrain_thought_id": "70260c21-a315-45a4-8221-927a2aabe93d",
+    "company_id": null,
+    "industry": null,
+    "founded_year": null,
+    "headquarters": null,
+    "website": null,
+    "updated_at": null,
+    "urls": []
+  },
+  "stats": {
+    "monitored_urls": "0",
+    "total_changes": "6",
+    "high_interest_changes": "2",
+    "changes_last_week": "6",
+    "avg_interest_level": "4.1666666666666667"
+  },
+  "changes": [
+    {
+      "id": 177,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 1,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:14:18.467Z",
+      "company": "Anyscale",
+      "url_name": "blog",
+      "old_hash": "09275801e441b412d9fbe237678d6b2887471257af4d99defe495eb2203b8066",
+      "new_hash": "fc572300cb955bb8ecd2fbe508c463f9b57d309a43e46128276a4bbc3a4cd8d3",
+      "ai_analysis": {
+        "technical_innovation_score": 1,
+        "business_impact_score": 1,
+        "interest_level": 1,
+        "interest_drivers": [],
+        "category": "website updates",
+        "impact_areas": [],
+        "summary": "The update is related to cookie consent and privacy policy, with no significant technical innovation or business impact in the AI/ML domain."
+      },
+      "url": null,
+      "title": "Blog | Anyscale",
+      "content_preview": "Title: Blog | Anyscale\n\nConsent\nDetails\n[#IABV2SETTINGS#]\nAbout\nThis website uses cookies\nWe use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We may also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.\nConsent Selection\nNecessary\nPreferences\nStatistics\nMarketing\nShow details\nDetails\nNecessary 51\nNecessary cookies help make a website usable by enabling basic functions like page navigation and access to secure areas of the website. The website cannot function properly without these cookies.\nCalendly\n4\nLearn more about this provider\n_calendly_sessionIf consent is given by the visitor, this cookie allows the website to add events into the visitor's calendar.\nMaximum Storage Duration: 21 daysType: HTTP Cookie\nreferrer_user_idNecessary for the website's b"
+    },
+    {
+      "id": 176,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 1,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:14:10.781Z",
+      "company": "Anyscale",
+      "url_name": "homepage",
+      "old_hash": "8f158e47a48eeb393e5909fe9ad842ac78a6dab35d499ed8e8f360dc87f7b71f",
+      "new_hash": "18bb22e4da15532662f9a27edcd7a7e3ee9a083ca92bc3cc305c5967dd08b02f",
+      "ai_analysis": {
+        "technical_innovation_score": 1,
+        "business_impact_score": 1,
+        "interest_level": 1,
+        "interest_drivers": [],
+        "category": "website update",
+        "impact_areas": [],
+        "summary": "The update is related to cookie consent and does not contain any significant AI/ML technical innovations or business impact."
+      },
+      "url": null,
+      "title": "Anyscale | Supercharge your AI Platform",
+      "content_preview": "Title: Anyscale | Supercharge your AI Platform\n\nConsent\nDetails\n[#IABV2SETTINGS#]\nAbout\nThis website uses cookies\nWe use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We may also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.\nConsent Selection\nNecessary\nPreferences\nStatistics\nMarketing\nShow details\nDetails\nNecessary 51\nNecessary cookies help make a website usable by enabling basic functions like page navigation and access to secure areas of the website. The website cannot function properly without these cookies.\nCalendly\n4\nLearn more about this provider\n_calendly_sessionIf consent is given by the visitor, this cookie allows the website to add events into the visitor's calendar.\nMaximum Storage Duration: 21 daysType: HTTP Cookie\nreferrer_user_idNeces"
+    },
+    {
+      "id": 175,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:14:03.897Z",
+      "company": "Anyscale",
+      "url_name": "pricing",
+      "old_hash": "4e903c5db57a775a4124185b2eaebf87466440b2db239ce3fb1d4e89fc35ca24",
+      "new_hash": "38c6b71aa9efcb8f6a7c7df5b9e0e64ee129a2247b12ce112e91c2e5e01a7168",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 2,
+        "interest_level": 2,
+        "interest_drivers": [
+          "update in cookie policy",
+          "addition of consent selection"
+        ],
+        "category": "website updates",
+        "impact_areas": [
+          "user experience",
+          "data privacy"
+        ],
+        "summary": "The update primarily focuses on the addition of a cookie consent policy, which does not directly relate to AI/ML technical innovations or significant business impacts. The changes are more about compliance and user experience rather than introducing new AI/ML capabilities or strategic business moves."
+      },
+      "url": null,
+      "title": "Pricing",
+      "content_preview": "Title: Pricing\n\nConsent\nDetails\n[#IABV2SETTINGS#]\nAbout\nThis website uses cookies\nWe use cookies to personalise content and ads, to provide social media features and to analyse our traffic. We may also share information about your use of our site with our social media, advertising and analytics partners who may combine it with other information that you’ve provided to them or that they’ve collected from your use of their services.\nConsent Selection\nNecessary\nPreferences\nStatistics\nMarketing\nShow details\nDetails\nNecessary 51\nNecessary cookies help make a website usable by enabling basic functions like page navigation and access to secure areas of the website. The website cannot function properly without these cookies.\nCalendly\n4\nLearn more about this provider\n_calendly_sessionIf consent is given by the visitor, this cookie allows the website to add events into the visitor's calendar.\nMaximum Storage Duration: 21 daysType: HTTP Cookie\nreferrer_user_idNecessary for the website's booking f"
+    },
+    {
+      "id": 17,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:08:03.008Z",
+      "company": "Anyscale",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "09275801e441b412d9fbe237678d6b2887471257af4d99defe495eb2203b8066",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Call for Papers for the vLLM Featured Track at Ray Summit",
+          "Google Cloud integration with Anyscale's RayTurbo",
+          "Open Source RL Libraries for LLMs",
+          "Large-Scale Deployment of Ray in Tencent’s Weixin AI Infrastructure"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "AI development at scale",
+          "Distributed compute frameworks",
+          "Large Language Models (LLMs)",
+          "Reinforcement Learning (RL) libraries"
+        ],
+        "summary": "Anyscale's blog features updates on AI/ML advancements, including a call for papers, Google Cloud integration, and large-scale deployments, indicating notable technical innovations and business impact in the AI/ML space."
+      },
+      "url": null,
+      "title": "Blog | Anyscale",
+      "content_preview": "Title: Blog | Anyscale\n\nCall for Papers for the vLLM Featured Track at Ray Summit is now Open! Submit your presentation by July 30\nAnyscale\nProduct\nSolutions\nTutorials\nResources\nCompany\nPricing\nGet Started with $100 Credit\nFeatured Posts and News\n05 . 30 . 2025\nRay Summit 2025: Call for Proposals Closes on July 14th, 2025\nBy Christina Zhu\n04 . 09 . 2025\nSimplifying AI Development at Scale: Google Cloud Integrates Anyscale's RayTurbo with GKE\nBy Gabe Monroy, VP & GM Cloud Runtimes and\nBy Keerti Melkote, CEO of Anyscale\n10 . 03 . 2024\nRay Summit 2024: Breaking Through the AI Complexity Wall\nBy The Anyscale Team\nAll Types\n\n07 . 01 . 2025\n\nOpen Source RL Libraries for LLMs\nBy Tyler Griggs and \nPhilipp Moritz\n\n07 . 01 . 2025\n\nLarge-Scale Deployment of Ray in Tencent’s Weixin AI Infrastructure\nBy Weixin Astra Team\n\n06 . 24 . 2025\n\nYour Data and AI Frameworks Evolved – What About Your Distributed Compute Framework?\nBy Julian Forero\n\n06 . 12 . 2025\n\nRay on Alibaba Cloud: Building an ML Platfor"
+    },
+    {
+      "id": 17,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:08:03.008Z",
+      "company": "Anyscale",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "09275801e441b412d9fbe237678d6b2887471257af4d99defe495eb2203b8066",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Call for Papers for the vLLM Featured Track at Ray Summit",
+          "Google Cloud integration with Anyscale's RayTurbo",
+          "Open Source RL Libraries for LLMs",
+          "Large-Scale Deployment of Ray in Tencent’s Weixin AI Infrastructure"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "AI development at scale",
+          "Distributed compute frameworks",
+          "Large Language Models (LLMs)",
+          "Reinforcement Learning (RL) libraries"
+        ],
+        "summary": "Anyscale's blog features updates on AI/ML advancements, including a call for papers, Google Cloud integration, and large-scale deployments, indicating notable technical innovations and business impact in the AI/ML space."
+      },
+      "url": null,
+      "title": "Blog | Anyscale",
+      "content_preview": "Title: Blog | Anyscale\n\nCall for Papers for the vLLM Featured Track at Ray Summit is now Open! Submit your presentation by July 30\nAnyscale\nProduct\nSolutions\nTutorials\nResources\nCompany\nPricing\nGet Started with $100 Credit\nFeatured Posts and News\n05 . 30 . 2025\nRay Summit 2025: Call for Proposals Closes on July 14th, 2025\nBy Christina Zhu\n04 . 09 . 2025\nSimplifying AI Development at Scale: Google Cloud Integrates Anyscale's RayTurbo with GKE\nBy Gabe Monroy, VP & GM Cloud Runtimes and\nBy Keerti Melkote, CEO of Anyscale\n10 . 03 . 2024\nRay Summit 2024: Breaking Through the AI Complexity Wall\nBy The Anyscale Team\nAll Types\n\n07 . 01 . 2025\n\nOpen Source RL Libraries for LLMs\nBy Tyler Griggs and \nPhilipp Moritz\n\n07 . 01 . 2025\n\nLarge-Scale Deployment of Ray in Tencent’s Weixin AI Infrastructure\nBy Weixin Astra Team\n\n06 . 24 . 2025\n\nYour Data and AI Frameworks Evolved – What About Your Distributed Compute Framework?\nBy Julian Forero\n\n06 . 12 . 2025\n\nRay on Alibaba Cloud: Building an ML Platfor"
+    },
+    {
+      "id": 17,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:08:03.008Z",
+      "company": "Anyscale",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "09275801e441b412d9fbe237678d6b2887471257af4d99defe495eb2203b8066",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Call for Papers for the vLLM Featured Track at Ray Summit",
+          "Google Cloud integration with Anyscale's RayTurbo",
+          "Open Source RL Libraries for LLMs",
+          "Large-Scale Deployment of Ray in Tencent’s Weixin AI Infrastructure"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "AI development at scale",
+          "Distributed compute frameworks",
+          "Large Language Models (LLMs)",
+          "Reinforcement Learning (RL) libraries"
+        ],
+        "summary": "Anyscale's blog features updates on AI/ML advancements, including a call for papers, Google Cloud integration, and large-scale deployments, indicating notable technical innovations and business impact in the AI/ML space."
+      },
+      "url": null,
+      "title": "Blog | Anyscale",
+      "content_preview": "Title: Blog | Anyscale\n\nCall for Papers for the vLLM Featured Track at Ray Summit is now Open! Submit your presentation by July 30\nAnyscale\nProduct\nSolutions\nTutorials\nResources\nCompany\nPricing\nGet Started with $100 Credit\nFeatured Posts and News\n05 . 30 . 2025\nRay Summit 2025: Call for Proposals Closes on July 14th, 2025\nBy Christina Zhu\n04 . 09 . 2025\nSimplifying AI Development at Scale: Google Cloud Integrates Anyscale's RayTurbo with GKE\nBy Gabe Monroy, VP & GM Cloud Runtimes and\nBy Keerti Melkote, CEO of Anyscale\n10 . 03 . 2024\nRay Summit 2024: Breaking Through the AI Complexity Wall\nBy The Anyscale Team\nAll Types\n\n07 . 01 . 2025\n\nOpen Source RL Libraries for LLMs\nBy Tyler Griggs and \nPhilipp Moritz\n\n07 . 01 . 2025\n\nLarge-Scale Deployment of Ray in Tencent’s Weixin AI Infrastructure\nBy Weixin Astra Team\n\n06 . 24 . 2025\n\nYour Data and AI Frameworks Evolved – What About Your Distributed Compute Framework?\nBy Julian Forero\n\n06 . 12 . 2025\n\nRay on Alibaba Cloud: Building an ML Platfor"
+    },
+    {
+      "id": 16,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:55.278Z",
+      "company": "Anyscale",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "8f158e47a48eeb393e5909fe9ad842ac78a6dab35d499ed8e8f360dc87f7b71f",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 8,
+        "interest_level": 8,
+        "interest_drivers": [
+          "RayTurbo for GPU utilization",
+          "Governance for AI usage",
+          "World-class tooling for developers",
+          "Multi-cloud, multi-accelerator, and multi-stack support",
+          "Partnerships with Cohere and OpenAI"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Scalability",
+          "Distributed Computing",
+          "AI Model Training",
+          "Cloud Computing"
+        ],
+        "summary": "Anyscale's AI platform, powered by Ray, offers significant technical advancements in scalability, distributed computing, and AI model training, with notable business impact through partnerships with major AI companies like Cohere and OpenAI."
+      },
+      "url": null,
+      "title": "Anyscale | Supercharge your AI Platform",
+      "content_preview": "Title: Anyscale | Supercharge your AI Platform\n\nCall for Papers for the vLLM Featured Track at Ray Summit is now Open! Submit your presentation by July 30\nAnyscale\nProduct\nSolutions\nTutorials\nResources\nCompany\nPricing\nGet Started with $100 Credit\nAdvance Your AI Platform\nwith Anyscale.\n\nFully utilize every GPU with RayTurbo / Govern sprawling AI usage\nDelight developers with world-class tooling / Any cloud, any accelerator, any stack\n\nGet Started with $100 Credit\nBook Demo\nAnyscale & Ray\nChosen by the World’s Smartest AI/ML Platform Leaders\n40,000+\n\nGithub repo downloads\n\n32.5k\n\nStars by the community\n\n1,000+\n\nContributors\n\n“Ray has profoundly simplified the way we write scalable distributed programs for Cohere’s LLM pipelines.”\n\nSiddhartha Kamalakara\n\nML Engineer, Cohere\n\n\"At OpenAI, Ray allows us to iterate at scale much faster than we could before. We use Ray to train our largest models, including ChatGPT.\"\n\nGreg Brockman\n\nCo-Founder and President, OpenAI\n\n“Ray has brought significa"
+    },
+    {
+      "id": 16,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:55.278Z",
+      "company": "Anyscale",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "8f158e47a48eeb393e5909fe9ad842ac78a6dab35d499ed8e8f360dc87f7b71f",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 8,
+        "interest_level": 8,
+        "interest_drivers": [
+          "RayTurbo for GPU utilization",
+          "Governance for AI usage",
+          "World-class tooling for developers",
+          "Multi-cloud, multi-accelerator, and multi-stack support",
+          "Partnerships with Cohere and OpenAI"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Scalability",
+          "Distributed Computing",
+          "AI Model Training",
+          "Cloud Computing"
+        ],
+        "summary": "Anyscale's AI platform, powered by Ray, offers significant technical advancements in scalability, distributed computing, and AI model training, with notable business impact through partnerships with major AI companies like Cohere and OpenAI."
+      },
+      "url": null,
+      "title": "Anyscale | Supercharge your AI Platform",
+      "content_preview": "Title: Anyscale | Supercharge your AI Platform\n\nCall for Papers for the vLLM Featured Track at Ray Summit is now Open! Submit your presentation by July 30\nAnyscale\nProduct\nSolutions\nTutorials\nResources\nCompany\nPricing\nGet Started with $100 Credit\nAdvance Your AI Platform\nwith Anyscale.\n\nFully utilize every GPU with RayTurbo / Govern sprawling AI usage\nDelight developers with world-class tooling / Any cloud, any accelerator, any stack\n\nGet Started with $100 Credit\nBook Demo\nAnyscale & Ray\nChosen by the World’s Smartest AI/ML Platform Leaders\n40,000+\n\nGithub repo downloads\n\n32.5k\n\nStars by the community\n\n1,000+\n\nContributors\n\n“Ray has profoundly simplified the way we write scalable distributed programs for Cohere’s LLM pipelines.”\n\nSiddhartha Kamalakara\n\nML Engineer, Cohere\n\n\"At OpenAI, Ray allows us to iterate at scale much faster than we could before. We use Ray to train our largest models, including ChatGPT.\"\n\nGreg Brockman\n\nCo-Founder and President, OpenAI\n\n“Ray has brought significa"
+    },
+    {
+      "id": 16,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:55.278Z",
+      "company": "Anyscale",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "8f158e47a48eeb393e5909fe9ad842ac78a6dab35d499ed8e8f360dc87f7b71f",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 8,
+        "interest_level": 8,
+        "interest_drivers": [
+          "RayTurbo for GPU utilization",
+          "Governance for AI usage",
+          "World-class tooling for developers",
+          "Multi-cloud, multi-accelerator, and multi-stack support",
+          "Partnerships with Cohere and OpenAI"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Scalability",
+          "Distributed Computing",
+          "AI Model Training",
+          "Cloud Computing"
+        ],
+        "summary": "Anyscale's AI platform, powered by Ray, offers significant technical advancements in scalability, distributed computing, and AI model training, with notable business impact through partnerships with major AI companies like Cohere and OpenAI."
+      },
+      "url": null,
+      "title": "Anyscale | Supercharge your AI Platform",
+      "content_preview": "Title: Anyscale | Supercharge your AI Platform\n\nCall for Papers for the vLLM Featured Track at Ray Summit is now Open! Submit your presentation by July 30\nAnyscale\nProduct\nSolutions\nTutorials\nResources\nCompany\nPricing\nGet Started with $100 Credit\nAdvance Your AI Platform\nwith Anyscale.\n\nFully utilize every GPU with RayTurbo / Govern sprawling AI usage\nDelight developers with world-class tooling / Any cloud, any accelerator, any stack\n\nGet Started with $100 Credit\nBook Demo\nAnyscale & Ray\nChosen by the World’s Smartest AI/ML Platform Leaders\n40,000+\n\nGithub repo downloads\n\n32.5k\n\nStars by the community\n\n1,000+\n\nContributors\n\n“Ray has profoundly simplified the way we write scalable distributed programs for Cohere’s LLM pipelines.”\n\nSiddhartha Kamalakara\n\nML Engineer, Cohere\n\n\"At OpenAI, Ray allows us to iterate at scale much faster than we could before. We use Ray to train our largest models, including ChatGPT.\"\n\nGreg Brockman\n\nCo-Founder and President, OpenAI\n\n“Ray has brought significa"
+    },
+    {
+      "id": 15,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:20.594Z",
+      "company": "Anyscale",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "4e903c5db57a775a4124185b2eaebf87466440b2db239ce3fb1d4e89fc35ca24",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "New pricing model",
+          "AI Compute Platform",
+          "Flexible deployment options",
+          "Volume discounts on compute"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Cloud Computing",
+          "Artificial Intelligence",
+          "Machine Learning"
+        ],
+        "summary": "Anyscale introduces a new pricing model based on compute usage, offering flexible deployment options and volume discounts, which may attract AI/ML pioneers and industry experts."
+      },
+      "url": null,
+      "title": "Pricing",
+      "content_preview": "Title: Pricing\n\nCall for Papers for the vLLM Featured Track at Ray Summit is now Open! Submit your presentation by July 30\nAnyscale\nProduct\nSolutions\nTutorials\nResources\nCompany\nPricing\nGet Started with $100 Credit\nThe Future of AI is Right Here\n\nSay goodbye to token-based pricing. Pay only for the compute you use on the world’s only AI Compute Platform. See why cutting-edge AI pioneers and industry experts choose Anyscale.\n\nDeploy Your Way\n\nWe aren’t here to tell you how to deploy—just to help you do it the best way possible. Anyscale makes it easy—whether you want to leverage your own cloud and on-prem machines, use Anyscale’s cloud, or run a hybrid model.\n\nDeploy in Your Cloud\n\nUse your own compute, hosted in your cloud (AWS, GCP), on-prem, or in Kubernetes.\n\n\n\nGet in Touch\nBenefits\n\n Volume discounts on compute\n\n Access to RayTurbo, Anyscale’s Optimized Ray Runtime\n\n Deploy your compute next to your data\n\n Use your own infrastructure (cloud or on-prem machines)\n\n Flexible network c"
+    },
+    {
+      "id": 15,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:20.594Z",
+      "company": "Anyscale",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "4e903c5db57a775a4124185b2eaebf87466440b2db239ce3fb1d4e89fc35ca24",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "New pricing model",
+          "AI Compute Platform",
+          "Flexible deployment options",
+          "Volume discounts on compute"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Cloud Computing",
+          "Artificial Intelligence",
+          "Machine Learning"
+        ],
+        "summary": "Anyscale introduces a new pricing model based on compute usage, offering flexible deployment options and volume discounts, which may attract AI/ML pioneers and industry experts."
+      },
+      "url": null,
+      "title": "Pricing",
+      "content_preview": "Title: Pricing\n\nCall for Papers for the vLLM Featured Track at Ray Summit is now Open! Submit your presentation by July 30\nAnyscale\nProduct\nSolutions\nTutorials\nResources\nCompany\nPricing\nGet Started with $100 Credit\nThe Future of AI is Right Here\n\nSay goodbye to token-based pricing. Pay only for the compute you use on the world’s only AI Compute Platform. See why cutting-edge AI pioneers and industry experts choose Anyscale.\n\nDeploy Your Way\n\nWe aren’t here to tell you how to deploy—just to help you do it the best way possible. Anyscale makes it easy—whether you want to leverage your own cloud and on-prem machines, use Anyscale’s cloud, or run a hybrid model.\n\nDeploy in Your Cloud\n\nUse your own compute, hosted in your cloud (AWS, GCP), on-prem, or in Kubernetes.\n\n\n\nGet in Touch\nBenefits\n\n Volume discounts on compute\n\n Access to RayTurbo, Anyscale’s Optimized Ray Runtime\n\n Deploy your compute next to your data\n\n Use your own infrastructure (cloud or on-prem machines)\n\n Flexible network c"
+    },
+    {
+      "id": 15,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:20.594Z",
+      "company": "Anyscale",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "4e903c5db57a775a4124185b2eaebf87466440b2db239ce3fb1d4e89fc35ca24",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "New pricing model",
+          "AI Compute Platform",
+          "Flexible deployment options",
+          "Volume discounts on compute"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Cloud Computing",
+          "Artificial Intelligence",
+          "Machine Learning"
+        ],
+        "summary": "Anyscale introduces a new pricing model based on compute usage, offering flexible deployment options and volume discounts, which may attract AI/ML pioneers and industry experts."
+      },
+      "url": null,
+      "title": "Pricing",
+      "content_preview": "Title: Pricing\n\nCall for Papers for the vLLM Featured Track at Ray Summit is now Open! Submit your presentation by July 30\nAnyscale\nProduct\nSolutions\nTutorials\nResources\nCompany\nPricing\nGet Started with $100 Credit\nThe Future of AI is Right Here\n\nSay goodbye to token-based pricing. Pay only for the compute you use on the world’s only AI Compute Platform. See why cutting-edge AI pioneers and industry experts choose Anyscale.\n\nDeploy Your Way\n\nWe aren’t here to tell you how to deploy—just to help you do it the best way possible. Anyscale makes it easy—whether you want to leverage your own cloud and on-prem machines, use Anyscale’s cloud, or run a hybrid model.\n\nDeploy in Your Cloud\n\nUse your own compute, hosted in your cloud (AWS, GCP), on-prem, or in Kubernetes.\n\n\n\nGet in Touch\nBenefits\n\n Volume discounts on compute\n\n Access to RayTurbo, Anyscale’s Optimized Ray Runtime\n\n Deploy your compute next to your data\n\n Use your own infrastructure (cloud or on-prem machines)\n\n Flexible network c"
+    }
+  ],
+  "insights": [],
+  "entities": {
+    "technologies": [],
+    "products": []
+  },
+  "themes": [],
+  "key_points": [],
+  "last_updated": "2025-07-21T17:29:22.487Z"
+}

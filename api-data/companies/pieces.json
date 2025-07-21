@@ -1,0 +1,328 @@
+{
+  "company": {
+    "id": null,
+    "name": "Pieces",
+    "category": "AI Coding",
+    "description": null,
+    "created_at": null,
+    "thebrain_thought_id": "ffe2f400-ea6a-4757-9f8a-ec3316164168",
+    "company_id": null,
+    "industry": null,
+    "founded_year": null,
+    "headquarters": null,
+    "website": null,
+    "updated_at": null,
+    "urls": []
+  },
+  "stats": {
+    "monitored_urls": "0",
+    "total_changes": "4",
+    "high_interest_changes": "3",
+    "changes_last_week": "4",
+    "avg_interest_level": "6.7500000000000000"
+  },
+  "changes": [
+    {
+      "id": 128,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:22:36.374Z",
+      "company": "Pieces",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "8da5920886cabae51f450b45466b36f896707918583dada66011731a84efd784",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Emergence of nano models in AI",
+          "Model Context Protocol (MCP) for workflow optimization",
+          "Benchmarking of LLMs for real dev tasks"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "AI model development",
+          "Developer workflow optimization",
+          "LLM benchmarking"
+        ],
+        "summary": "The introduction of nano models and their potential impact on AI, along with the discussion of Model Context Protocol (MCP) and benchmarking of LLMs, suggests notable technical advances and useful tools in the AI/ML space, with moderate business impact through potential workflow optimizations and market expansion."
+      },
+      "url": null,
+      "title": "Blog — Pieces for Developers",
+      "content_preview": "Title: Blog — Pieces for Developers\n\nDownload for free\n\nAI & LLM\n\nDeveloper Workflow\n\nEngineering\n\nProduct Updates\n\nInsights\n\nPodcast\n\nMay 23, 2025\n\nby\n\nEllie Zubrowski\n\nWhat do nano models and penguins have in common?\n\nWhy small, specialized nano models are making a big impact in AI, and what do they have in common with penguins?\n\nEditor's picks\n\nApr 9, 2025\n\n| by\n\nJim Bennett\n\nHow MCP helped my team do more with less\n\nDiscover how Model Context Protocol (MCP) helped our team streamline workflows, reduce development time, and increase productivity, all while doing more with less\n\nApr 1, 2025\n\n| by\n\nJim Bennett\n\nIBM outperforms OpenAI? What 50 LLM tests revealed\n\n50 LLMs benchmarked for real dev tasks: see how IBM outperformed OpenAI and what it means for the future of AI tooling.\n\nJan 16, 2025\n\n| by\n\nJim Bennett\n\nEverything a dev community should know about using Pieces in Cursor\n\nCombine Pieces and Cursor for a powerful AI assistant with Long-Term Memory and agentic workflows to boos"
+    },
+    {
+      "id": 128,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:22:36.374Z",
+      "company": "Pieces",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "8da5920886cabae51f450b45466b36f896707918583dada66011731a84efd784",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Emergence of nano models in AI",
+          "Model Context Protocol (MCP) for workflow optimization",
+          "Benchmarking of LLMs for real dev tasks"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "AI model development",
+          "Developer workflow optimization",
+          "LLM benchmarking"
+        ],
+        "summary": "The introduction of nano models and their potential impact on AI, along with the discussion of Model Context Protocol (MCP) and benchmarking of LLMs, suggests notable technical advances and useful tools in the AI/ML space, with moderate business impact through potential workflow optimizations and market expansion."
+      },
+      "url": null,
+      "title": "Blog — Pieces for Developers",
+      "content_preview": "Title: Blog — Pieces for Developers\n\nDownload for free\n\nAI & LLM\n\nDeveloper Workflow\n\nEngineering\n\nProduct Updates\n\nInsights\n\nPodcast\n\nMay 23, 2025\n\nby\n\nEllie Zubrowski\n\nWhat do nano models and penguins have in common?\n\nWhy small, specialized nano models are making a big impact in AI, and what do they have in common with penguins?\n\nEditor's picks\n\nApr 9, 2025\n\n| by\n\nJim Bennett\n\nHow MCP helped my team do more with less\n\nDiscover how Model Context Protocol (MCP) helped our team streamline workflows, reduce development time, and increase productivity, all while doing more with less\n\nApr 1, 2025\n\n| by\n\nJim Bennett\n\nIBM outperforms OpenAI? What 50 LLM tests revealed\n\n50 LLMs benchmarked for real dev tasks: see how IBM outperformed OpenAI and what it means for the future of AI tooling.\n\nJan 16, 2025\n\n| by\n\nJim Bennett\n\nEverything a dev community should know about using Pieces in Cursor\n\nCombine Pieces and Cursor for a powerful AI assistant with Long-Term Memory and agentic workflows to boos"
+    },
+    {
+      "id": 127,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:22:28.553Z",
+      "company": "Pieces",
+      "url_name": "features",
+      "old_hash": null,
+      "new_hash": "43a203b156727f03af09cbce8f2ec747819ebaef7f16b45ce71ee5834ae72314",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "On-device AI",
+          "Context awareness",
+          "Long-term memory",
+          "AI copilot",
+          "Cross-platform compatibility"
+        ],
+        "category": "AI-powered productivity tools",
+        "impact_areas": [
+          "Software development teams",
+          "Productivity",
+          "AI adoption"
+        ],
+        "summary": "Pieces introduces a range of features leveraging on-device AI, context awareness, and long-term memory to enhance productivity for software development teams, showcasing notable technical innovation and potential business impact."
+      },
+      "url": null,
+      "title": "Features — Pieces for Developers",
+      "content_preview": "Title: Features — Pieces for Developers\n\nDownload for free\n\nPieces Features\n\nDiscover Pieces’ features – on-device AI with context awareness and long-term memory to streamline your work.\n\nDownload Pieces for free\n\nPieces Long-Term Memory\n\nAsk about everything you are doing on your machine with full control over privacy.\n\nLearn more\n\nPieces Copilot\n\nAI copilot that knows what you know, not just what the LLM knows\n\nLearn more\n\nPieces Drive\n\nSave and manage your workflow wherever you are, all augmented automatically by AI. Share your files and projects with your team.\n\nLearn more\n\nPieces where you are\n\nAvoid context switching by interacting with Pieces in the tools you already know and love across Windows, Linux, and macOS.\n\nLearn more\n\nTake actions with other features\n\nWith hundreds of tools competing for your attention, Pieces is the OS-level AI companion redefining productivity for software development teams.\n\nLong-Term memory\n\nAsk about everything you are doing on your machine with fu"
+    },
+    {
+      "id": 127,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:22:28.553Z",
+      "company": "Pieces",
+      "url_name": "features",
+      "old_hash": null,
+      "new_hash": "43a203b156727f03af09cbce8f2ec747819ebaef7f16b45ce71ee5834ae72314",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "On-device AI",
+          "Context awareness",
+          "Long-term memory",
+          "AI copilot",
+          "Cross-platform compatibility"
+        ],
+        "category": "AI-powered productivity tools",
+        "impact_areas": [
+          "Software development teams",
+          "Productivity",
+          "AI adoption"
+        ],
+        "summary": "Pieces introduces a range of features leveraging on-device AI, context awareness, and long-term memory to enhance productivity for software development teams, showcasing notable technical innovation and potential business impact."
+      },
+      "url": null,
+      "title": "Features — Pieces for Developers",
+      "content_preview": "Title: Features — Pieces for Developers\n\nDownload for free\n\nPieces Features\n\nDiscover Pieces’ features – on-device AI with context awareness and long-term memory to streamline your work.\n\nDownload Pieces for free\n\nPieces Long-Term Memory\n\nAsk about everything you are doing on your machine with full control over privacy.\n\nLearn more\n\nPieces Copilot\n\nAI copilot that knows what you know, not just what the LLM knows\n\nLearn more\n\nPieces Drive\n\nSave and manage your workflow wherever you are, all augmented automatically by AI. Share your files and projects with your team.\n\nLearn more\n\nPieces where you are\n\nAvoid context switching by interacting with Pieces in the tools you already know and love across Windows, Linux, and macOS.\n\nLearn more\n\nTake actions with other features\n\nWith hundreds of tools competing for your attention, Pieces is the OS-level AI companion redefining productivity for software development teams.\n\nLong-Term memory\n\nAsk about everything you are doing on your machine with fu"
+    },
+    {
+      "id": 126,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:22:21.071Z",
+      "company": "Pieces",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "0429d092c54b0b788e46a478455d08f4df874003cc6f1fafb757a5e1c3679d1b",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Automated memory capture",
+          "Contextual search",
+          "Cross-app integration",
+          "AI/ML potential for workflow optimization"
+        ],
+        "category": "Productivity Tools",
+        "impact_areas": [
+          "Developer Workflow",
+          "AI-powered Search",
+          "Cloud Storage"
+        ],
+        "summary": "Pieces for Developers introduces an innovative approach to automated memory capture and contextual search, potentially enhancing developer workflow efficiency. While not a breakthrough AI model, it demonstrates significant technical advances and notable business impact through its user base and cross-app integration capabilities."
+      },
+      "url": null,
+      "title": "Pieces for Developers — Long term memory for your developer workstream",
+      "content_preview": "Title: Pieces for Developers — Long term memory for your developer workstream\n\nThe easiest way to never forget anything\n\nWhat you did, in what app and when – saved automatically. Pieces helps you remember everything, without trying. \n\nDownload for free\n\n150,000+ high-performing developers at top companies build with Pieces\n\nIt starts with memory⸺at the OS-Level\nWe memorize everything you work on\n\nAutomatically forms memories of what matters – code, docs, chats, and more – right in your workflow, without interruption.\n\nContext you can return to\n\nEvery saved tab, message, or snippet stays linked to the bigger picture – so you can pick up right where you left off.\n\nAccess your memories when it matters\n9 months of memories\n\nUse time-based queries to find exactly what you need.\n\nSearch naturally\n\nChoose from leading cloud and local providers or use your own key.\n\nControl your memories\n\nPieces works across all the apps you are using, capturing context as you go.\n\nReal-Time Context for your f"
+    },
+    {
+      "id": 126,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:22:21.071Z",
+      "company": "Pieces",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "0429d092c54b0b788e46a478455d08f4df874003cc6f1fafb757a5e1c3679d1b",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Automated memory capture",
+          "Contextual search",
+          "Cross-app integration",
+          "AI/ML potential for workflow optimization"
+        ],
+        "category": "Productivity Tools",
+        "impact_areas": [
+          "Developer Workflow",
+          "AI-powered Search",
+          "Cloud Storage"
+        ],
+        "summary": "Pieces for Developers introduces an innovative approach to automated memory capture and contextual search, potentially enhancing developer workflow efficiency. While not a breakthrough AI model, it demonstrates significant technical advances and notable business impact through its user base and cross-app integration capabilities."
+      },
+      "url": null,
+      "title": "Pieces for Developers — Long term memory for your developer workstream",
+      "content_preview": "Title: Pieces for Developers — Long term memory for your developer workstream\n\nThe easiest way to never forget anything\n\nWhat you did, in what app and when – saved automatically. Pieces helps you remember everything, without trying. \n\nDownload for free\n\n150,000+ high-performing developers at top companies build with Pieces\n\nIt starts with memory⸺at the OS-Level\nWe memorize everything you work on\n\nAutomatically forms memories of what matters – code, docs, chats, and more – right in your workflow, without interruption.\n\nContext you can return to\n\nEvery saved tab, message, or snippet stays linked to the bigger picture – so you can pick up right where you left off.\n\nAccess your memories when it matters\n9 months of memories\n\nUse time-based queries to find exactly what you need.\n\nSearch naturally\n\nChoose from leading cloud and local providers or use your own key.\n\nControl your memories\n\nPieces works across all the apps you are using, capturing context as you go.\n\nReal-Time Context for your f"
+    },
+    {
+      "id": 125,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:22:11.849Z",
+      "company": "Pieces",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "3e016546630b9cfc56e7ca0c1c9d6238fab3110a9b3126f9d038e26700329015",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Long-Term Memory technology",
+          "Integration with multiple code editors and collaboration tools",
+          "Support for various LLMs (OpenAI, Anthropic, Ollama etc.)"
+        ],
+        "category": "AI-powered Development Tools",
+        "impact_areas": [
+          "Developer Productivity",
+          "AI-assisted Coding",
+          "Collaboration and Knowledge Sharing"
+        ],
+        "summary": "Pieces for Developers introduces a novel Long-Term Memory technology, enhancing developer workflow and productivity. The platform offers individual and team plans, with features like context tracking, Copilot assistance, and support for multiple LLMs, showcasing significant technical innovation and notable business impact."
+      },
+      "url": null,
+      "title": "Pricing — Pieces for Developers",
+      "content_preview": "Title: Pricing — Pieces for Developers\n\npricing\n\nSupercharge Your Development Workflow with Pieces\n\nBy leveraging our pioneering Long-Term Memory technology, Pieces remembers your past work, anticipates your needs, and helps you stay focused.\n\nFREE\n\nIndividual\n\nKeep track of your work across browsers, code editors, and collaboration tools.\n\n9 months of individual context\n\nBasic Copilot assistance\n\nEmail support\n\nDownload the desktop app for\n\nTeams\n\nShared Memory Across Teams: Enable your team to share insights, context, and knowledge without ever losing the thread.\n\n9 months of team context\n\nBring your own model or choose preferred LLMs (OpenAI, Anthropic, Ollama etc.)\n\nPriority support (Phone and email)\n\nContact for pricing\n\nQuestions?\nWe have the answers.\n\nIs my data secure?\n\nYes! We process data locally where possible, and will never use your data for anything. Learn more.\n\nHow can I ensure Long-Term Memory doesn’t send my private details to the cloud?\n\nCan I turn the Long-Term Memo"
+    },
+    {
+      "id": 125,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:22:11.849Z",
+      "company": "Pieces",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "3e016546630b9cfc56e7ca0c1c9d6238fab3110a9b3126f9d038e26700329015",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Long-Term Memory technology",
+          "Integration with multiple code editors and collaboration tools",
+          "Support for various LLMs (OpenAI, Anthropic, Ollama etc.)"
+        ],
+        "category": "AI-powered Development Tools",
+        "impact_areas": [
+          "Developer Productivity",
+          "AI-assisted Coding",
+          "Collaboration and Knowledge Sharing"
+        ],
+        "summary": "Pieces for Developers introduces a novel Long-Term Memory technology, enhancing developer workflow and productivity. The platform offers individual and team plans, with features like context tracking, Copilot assistance, and support for multiple LLMs, showcasing significant technical innovation and notable business impact."
+      },
+      "url": null,
+      "title": "Pricing — Pieces for Developers",
+      "content_preview": "Title: Pricing — Pieces for Developers\n\npricing\n\nSupercharge Your Development Workflow with Pieces\n\nBy leveraging our pioneering Long-Term Memory technology, Pieces remembers your past work, anticipates your needs, and helps you stay focused.\n\nFREE\n\nIndividual\n\nKeep track of your work across browsers, code editors, and collaboration tools.\n\n9 months of individual context\n\nBasic Copilot assistance\n\nEmail support\n\nDownload the desktop app for\n\nTeams\n\nShared Memory Across Teams: Enable your team to share insights, context, and knowledge without ever losing the thread.\n\n9 months of team context\n\nBring your own model or choose preferred LLMs (OpenAI, Anthropic, Ollama etc.)\n\nPriority support (Phone and email)\n\nContact for pricing\n\nQuestions?\nWe have the answers.\n\nIs my data secure?\n\nYes! We process data locally where possible, and will never use your data for anything. Learn more.\n\nHow can I ensure Long-Term Memory doesn’t send my private details to the cloud?\n\nCan I turn the Long-Term Memo"
+    }
+  ],
+  "insights": [],
+  "entities": {
+    "technologies": [],
+    "products": []
+  },
+  "themes": [],
+  "key_points": [],
+  "last_updated": "2025-07-21T17:29:26.401Z"
+}

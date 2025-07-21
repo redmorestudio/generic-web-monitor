@@ -1,0 +1,226 @@
+{
+  "version": "1.0",
+  "generated_at": "2025-07-21T17:29:28.227Z",
+  "files": {
+    "dashboard": "dashboard.json",
+    "news": "ai-news.json",
+    "companies": [
+      {
+        "name": "AI21 Labs",
+        "file": "companies/ai21-labs.json"
+      },
+      {
+        "name": "Aleph Alpha",
+        "file": "companies/aleph-alpha.json"
+      },
+      {
+        "name": "Amazon CodeWhisperer",
+        "file": "companies/amazon-codewhisperer.json"
+      },
+      {
+        "name": "AMD",
+        "file": "companies/amd.json"
+      },
+      {
+        "name": "Andi",
+        "file": "companies/andi.json"
+      },
+      {
+        "name": "Anthropic",
+        "file": "companies/anthropic.json"
+      },
+      {
+        "name": "Anyscale",
+        "file": "companies/anyscale.json"
+      },
+      {
+        "name": "Cerebras",
+        "file": "companies/cerebras.json"
+      },
+      {
+        "name": "Cisco Systems",
+        "file": "companies/cisco-systems.json"
+      },
+      {
+        "name": "Codeium",
+        "file": "companies/codeium.json"
+      },
+      {
+        "name": "Cohere",
+        "file": "companies/cohere.json"
+      },
+      {
+        "name": "Cursor",
+        "file": "companies/cursor.json"
+      },
+      {
+        "name": "DALL-E",
+        "file": "companies/dall-e.json"
+      },
+      {
+        "name": "DataRobot",
+        "file": "companies/datarobot.json"
+      },
+      {
+        "name": "Descript",
+        "file": "companies/descript.json"
+      },
+      {
+        "name": "ElevenLabs",
+        "file": "companies/elevenlabs.json"
+      },
+      {
+        "name": "Flux",
+        "file": "companies/flux.json"
+      },
+      {
+        "name": "GitHub Copilot",
+        "file": "companies/github-copilot.json"
+      },
+      {
+        "name": "Google DeepMind",
+        "file": "companies/google-deepmind.json"
+      },
+      {
+        "name": "H2O.ai",
+        "file": "companies/h2o.ai.json"
+      },
+      {
+        "name": "HeyGen",
+        "file": "companies/heygen.json"
+      },
+      {
+        "name": "Hugging Face",
+        "file": "companies/hugging-face.json"
+      },
+      {
+        "name": "Ideogram",
+        "file": "companies/ideogram.json"
+      },
+      {
+        "name": "Inflection AI",
+        "file": "companies/inflection-ai.json"
+      },
+      {
+        "name": "Intel",
+        "file": "companies/intel.json"
+      },
+      {
+        "name": "LangChain",
+        "file": "companies/langchain.json"
+      },
+      {
+        "name": "Leonardo AI",
+        "file": "companies/leonardo-ai.json"
+      },
+      {
+        "name": "Luma AI",
+        "file": "companies/luma-ai.json"
+      },
+      {
+        "name": "Meta AI",
+        "file": "companies/meta-ai.json"
+      },
+      {
+        "name": "Midjourney",
+        "file": "companies/midjourney.json"
+      },
+      {
+        "name": "Mistral AI",
+        "file": "companies/mistral-ai.json"
+      },
+      {
+        "name": "Murf AI",
+        "file": "companies/murf-ai.json"
+      },
+      {
+        "name": "Neeva",
+        "file": "companies/neeva.json"
+      },
+      {
+        "name": "NVIDIA",
+        "file": "companies/nvidia.json"
+      },
+      {
+        "name": "OpenAI",
+        "file": "companies/openai.json"
+      },
+      {
+        "name": "Palantir",
+        "file": "companies/palantir.json"
+      },
+      {
+        "name": "Perplexity AI",
+        "file": "companies/perplexity-ai.json"
+      },
+      {
+        "name": "Phind",
+        "file": "companies/phind.json"
+      },
+      {
+        "name": "Pieces",
+        "file": "companies/pieces.json"
+      },
+      {
+        "name": "Pika",
+        "file": "companies/pika.json"
+      },
+      {
+        "name": "Redmore Studio",
+        "file": "companies/redmore-studio.json"
+      },
+      {
+        "name": "Replicate",
+        "file": "companies/replicate.json"
+      },
+      {
+        "name": "Replit",
+        "file": "companies/replit.json"
+      },
+      {
+        "name": "Resemble AI",
+        "file": "companies/resemble-ai.json"
+      },
+      {
+        "name": "Runway",
+        "file": "companies/runway.json"
+      },
+      {
+        "name": "SambaNova",
+        "file": "companies/sambanova.json"
+      },
+      {
+        "name": "Scale AI",
+        "file": "companies/scale-ai.json"
+      },
+      {
+        "name": "Sourcegraph",
+        "file": "companies/sourcegraph.json"
+      },
+      {
+        "name": "Stability AI",
+        "file": "companies/stability-ai.json"
+      },
+      {
+        "name": "Synthesia",
+        "file": "companies/synthesia.json"
+      },
+      {
+        "name": "Tabnine",
+        "file": "companies/tabnine.json"
+      },
+      {
+        "name": "Weights & Biases",
+        "file": "companies/weights-&-biases.json"
+      },
+      {
+        "name": "WellSaid Labs",
+        "file": "companies/wellsaid-labs.json"
+      },
+      {
+        "name": "You.com",
+        "file": "companies/you.com.json"
+      }
+    ]
+  }
+}

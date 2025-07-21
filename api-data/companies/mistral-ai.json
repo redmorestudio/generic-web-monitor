@@ -1,0 +1,404 @@
+{
+  "company": {
+    "id": null,
+    "name": "Mistral AI",
+    "category": "LLM Providers",
+    "description": null,
+    "created_at": null,
+    "thebrain_thought_id": "a4078baf-64c0-4fc7-b559-7e917fadbe20",
+    "company_id": null,
+    "industry": null,
+    "founded_year": null,
+    "headquarters": null,
+    "website": null,
+    "updated_at": null,
+    "urls": []
+  },
+  "stats": {
+    "monitored_urls": "0",
+    "total_changes": "5",
+    "high_interest_changes": "2",
+    "changes_last_week": "5",
+    "avg_interest_level": "6.6000000000000000"
+  },
+  "changes": [
+    {
+      "id": 113,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:18:56.925Z",
+      "company": "Mistral AI",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "f110ec63a40bb346bab2c650fcee3099ca13f0195cdb59278312a6e959a6c477",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Open-source models",
+          "AI/ML capabilities",
+          "Developer platform"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "Audio Processing"
+        ],
+        "summary": "Mistral AI's documentation reveals a robust open-source platform for developers and enterprises, offering various AI/ML capabilities, including text and chat completions, vision, audio transcription, and more. While the technical innovation is significant, the business impact is moderate, indicating a notable but not groundbreaking development in the AI/ML landscape."
+      },
+      "url": null,
+      "title": "Bienvenue to Mistral AI Documentation | Mistral AI",
+      "content_preview": "Title: Bienvenue to Mistral AI Documentation | Mistral AI\n\nSkip to main content\nLe Chat\nLa Plateforme\nDocs\nAPI\nGitHub\nDiscord\nGETTING STARTED\nIntroduction\nQuickstart\nModels\nClients\nModel customization\nDeveloper examples\nChangelog\nGlossary\nCAPABILITIES\nText and Chat Completions\nVision\nAudio & Transcription\nReasoning\nDocument AI\nCode Generation\nEmbeddings\nFunction calling\nCitations and References\nStructured Output\nModeration\nFinetuning\nBatch Inference\nPredicted outputs\nAGENTS\nIntroduction\nAgents & Conversations\nConnectors\nMCP\nFunction Calling\nHandoffs\nDEPLOYMENT\nLa Plateforme\nCloud\nSelf-deployment\nGUIDES\nPrompting capabilities\nBasic RAG\nPrefix\nTokenization\nSampling\nFine-tuning\nEvaluation\nObservability\nOther resources\nHow to contribute\nIntroduction\nBienvenue to Mistral AI Documentation\n\nMistral AI is a research lab building the best open source models in the world. La Plateforme enables developers and enterprises to build new products and applications, powered by Mistral’s open source and"
+    },
+    {
+      "id": 113,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:18:56.925Z",
+      "company": "Mistral AI",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "f110ec63a40bb346bab2c650fcee3099ca13f0195cdb59278312a6e959a6c477",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Open-source models",
+          "AI/ML capabilities",
+          "Developer platform"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "Audio Processing"
+        ],
+        "summary": "Mistral AI's documentation reveals a robust open-source platform for developers and enterprises, offering various AI/ML capabilities, including text and chat completions, vision, audio transcription, and more. While the technical innovation is significant, the business impact is moderate, indicating a notable but not groundbreaking development in the AI/ML landscape."
+      },
+      "url": null,
+      "title": "Bienvenue to Mistral AI Documentation | Mistral AI",
+      "content_preview": "Title: Bienvenue to Mistral AI Documentation | Mistral AI\n\nSkip to main content\nLe Chat\nLa Plateforme\nDocs\nAPI\nGitHub\nDiscord\nGETTING STARTED\nIntroduction\nQuickstart\nModels\nClients\nModel customization\nDeveloper examples\nChangelog\nGlossary\nCAPABILITIES\nText and Chat Completions\nVision\nAudio & Transcription\nReasoning\nDocument AI\nCode Generation\nEmbeddings\nFunction calling\nCitations and References\nStructured Output\nModeration\nFinetuning\nBatch Inference\nPredicted outputs\nAGENTS\nIntroduction\nAgents & Conversations\nConnectors\nMCP\nFunction Calling\nHandoffs\nDEPLOYMENT\nLa Plateforme\nCloud\nSelf-deployment\nGUIDES\nPrompting capabilities\nBasic RAG\nPrefix\nTokenization\nSampling\nFine-tuning\nEvaluation\nObservability\nOther resources\nHow to contribute\nIntroduction\nBienvenue to Mistral AI Documentation\n\nMistral AI is a research lab building the best open source models in the world. La Plateforme enables developers and enterprises to build new products and applications, powered by Mistral’s open source and"
+    },
+    {
+      "id": 112,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:18:50.273Z",
+      "company": "Mistral AI",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "347f2d2edff57c14c28d972efc62563817ce9ff30aa9dea274a2d188c6a61bea",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Configurable AI for all builders",
+          "Train, distill, fine-tune, and build with the world’s best open source models",
+          "Enterprise-grade, agent-ready AI",
+          "Privacy-first deployment options",
+          "Unified AI for all work"
+        ],
+        "category": "AI/ML Solutions",
+        "impact_areas": [
+          "AI Model Customization",
+          "AI Deployment",
+          "AI-Powered Assistants",
+          "Data Privacy"
+        ],
+        "summary": "Mistral AI's Frontier AI platform offers configurable, enterprise-grade AI solutions with a focus on privacy, customization, and unified AI assistants, indicating significant technical innovation and notable business impact in the AI/ML industry."
+      },
+      "url": null,
+      "title": "Frontier AI LLMs, assistants, agents, services | Mistral AI",
+      "content_preview": "Title: Frontier AI LLMs, assistants, agents, services | Mistral AI\n\nProducts\nSolutions\nResearch\nResources\nPricing\nCompany\nTry the API\nTalk to sales\n\nFrontier AI. In Your Hands.\n\nConfigurable AI for all builders.\n\nGet a demo\nStart building\n\nYour AI future belongs in your hands. \n\nFrontier intelligence, tailored to You.\n\nMake your AI your own. Train, distill, fine-tune, and build with the world’s best open source models.\n\nEnterprise-grade. Agent-ready.\n\nDeploy agents that execute, adapt, and deliver real results, with powerful orchestration, tooling, and safety.\n\nPrivacy-first.\n\nDeploy and build with AI anywhere—on-premises, cloud, edge, devices, and more—while retaining full control of your data.\n\nDeeply engaged solutioning and value delivery.\n\nHands-on assistance from the world’s foremost applied AI scientists across deployment, solutioning, safety, and beyond.\n\nUnified AI for all your work.\n\nYour multilingual, multimodal AI assistant that can help with anything. Search, create, code, "
+    },
+    {
+      "id": 112,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:18:50.273Z",
+      "company": "Mistral AI",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "347f2d2edff57c14c28d972efc62563817ce9ff30aa9dea274a2d188c6a61bea",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Configurable AI for all builders",
+          "Train, distill, fine-tune, and build with the world’s best open source models",
+          "Enterprise-grade, agent-ready AI",
+          "Privacy-first deployment options",
+          "Unified AI for all work"
+        ],
+        "category": "AI/ML Solutions",
+        "impact_areas": [
+          "AI Model Customization",
+          "AI Deployment",
+          "AI-Powered Assistants",
+          "Data Privacy"
+        ],
+        "summary": "Mistral AI's Frontier AI platform offers configurable, enterprise-grade AI solutions with a focus on privacy, customization, and unified AI assistants, indicating significant technical innovation and notable business impact in the AI/ML industry."
+      },
+      "url": null,
+      "title": "Frontier AI LLMs, assistants, agents, services | Mistral AI",
+      "content_preview": "Title: Frontier AI LLMs, assistants, agents, services | Mistral AI\n\nProducts\nSolutions\nResearch\nResources\nPricing\nCompany\nTry the API\nTalk to sales\n\nFrontier AI. In Your Hands.\n\nConfigurable AI for all builders.\n\nGet a demo\nStart building\n\nYour AI future belongs in your hands. \n\nFrontier intelligence, tailored to You.\n\nMake your AI your own. Train, distill, fine-tune, and build with the world’s best open source models.\n\nEnterprise-grade. Agent-ready.\n\nDeploy agents that execute, adapt, and deliver real results, with powerful orchestration, tooling, and safety.\n\nPrivacy-first.\n\nDeploy and build with AI anywhere—on-premises, cloud, edge, devices, and more—while retaining full control of your data.\n\nDeeply engaged solutioning and value delivery.\n\nHands-on assistance from the world’s foremost applied AI scientists across deployment, solutioning, safety, and beyond.\n\nUnified AI for all your work.\n\nYour multilingual, multimodal AI assistant that can help with anything. Search, create, code, "
+    },
+    {
+      "id": 111,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:18:44.478Z",
+      "company": "Mistral AI",
+      "url_name": "news",
+      "old_hash": null,
+      "new_hash": "202eaf74cdb3fd6e23659f9cf8945503b28adefaa4d0393bfb991190a74a82d7",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of Deep Research (Preview)",
+          "Audio-in and Projects updates",
+          "Open source speech understanding models (Voxtral)",
+          "Upgrading agentic coding capabilities with Devstral models"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Speech Recognition",
+          "AI Infrastructure"
+        ],
+        "summary": "Mistral AI has introduced several updates, including Deep Research (Preview), Audio-in, and Projects, showcasing notable technical advances in AI/ML research and development. The introduction of open source speech understanding models (Voxtral) and upgraded agentic coding capabilities with Devstral models demonstrate significant technical innovation. However, the business impact is moderate, with product updates and new features, but no major launches or significant funding announcements."
+      },
+      "url": null,
+      "title": "Latest news | Mistral AI",
+      "content_preview": "Title: Latest news | Mistral AI\n\nProducts\nSolutions\nResearch\nResources\nPricing\nCompany\nTry the API\nTalk to sales\n\nLatest updates from Mistral AI.\n\nLe Chat dives deep.\n\nIntroducing Deep Research (Preview), plus Audio-in, Projects, and other updates.\n\nLearn more\nProduct\nJul 17, 2025\n|\nMistral AI\nBy category:\nAll news\nCompany\nProduct\nResearch\nSolutions\nProduct\nLe Chat dives deep.\n\nIntroducing Deep Research (Preview), plus Audio-in, Projects, and other updates.\n\nJul 17, 2025\nMistral AI\nLearn more\nResearch\nVoxtral\n\nIntroducing frontier open source speech understanding models.\n\nJul 15, 2025\nMistral AI\nLearn more\nResearch\nUpgrading agentic coding capabilities with the new Devstral models\nJul 10, 2025\nMistral AI\nLearn more\nSolutions\nAnnouncing AI for Citizens\n\nEmpowering countries to use AI to transform public action and catalyze innovation for the benefit of their citizens.\n\nJul 3, 2025\nMistral AI\nLearn more\nCompany\nMistral Compute\n\nFrontier AI infrastructure for everyone.\n\nJun 11, 2025\nMistr"
+    },
+    {
+      "id": 111,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:18:44.478Z",
+      "company": "Mistral AI",
+      "url_name": "news",
+      "old_hash": null,
+      "new_hash": "202eaf74cdb3fd6e23659f9cf8945503b28adefaa4d0393bfb991190a74a82d7",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of Deep Research (Preview)",
+          "Audio-in and Projects updates",
+          "Open source speech understanding models (Voxtral)",
+          "Upgrading agentic coding capabilities with Devstral models"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Speech Recognition",
+          "AI Infrastructure"
+        ],
+        "summary": "Mistral AI has introduced several updates, including Deep Research (Preview), Audio-in, and Projects, showcasing notable technical advances in AI/ML research and development. The introduction of open source speech understanding models (Voxtral) and upgraded agentic coding capabilities with Devstral models demonstrate significant technical innovation. However, the business impact is moderate, with product updates and new features, but no major launches or significant funding announcements."
+      },
+      "url": null,
+      "title": "Latest news | Mistral AI",
+      "content_preview": "Title: Latest news | Mistral AI\n\nProducts\nSolutions\nResearch\nResources\nPricing\nCompany\nTry the API\nTalk to sales\n\nLatest updates from Mistral AI.\n\nLe Chat dives deep.\n\nIntroducing Deep Research (Preview), plus Audio-in, Projects, and other updates.\n\nLearn more\nProduct\nJul 17, 2025\n|\nMistral AI\nBy category:\nAll news\nCompany\nProduct\nResearch\nSolutions\nProduct\nLe Chat dives deep.\n\nIntroducing Deep Research (Preview), plus Audio-in, Projects, and other updates.\n\nJul 17, 2025\nMistral AI\nLearn more\nResearch\nVoxtral\n\nIntroducing frontier open source speech understanding models.\n\nJul 15, 2025\nMistral AI\nLearn more\nResearch\nUpgrading agentic coding capabilities with the new Devstral models\nJul 10, 2025\nMistral AI\nLearn more\nSolutions\nAnnouncing AI for Citizens\n\nEmpowering countries to use AI to transform public action and catalyze innovation for the benefit of their citizens.\n\nJul 3, 2025\nMistral AI\nLearn more\nCompany\nMistral Compute\n\nFrontier AI infrastructure for everyone.\n\nJun 11, 2025\nMistr"
+    },
+    {
+      "id": 110,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:18:37.877Z",
+      "company": "Mistral AI",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "46d99ee3c1dae0f216a7b4724c7a2707ae4e861c9a9f966550afb454c2572a21",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Pricing model for AI services",
+          "Tiered plans with varying features",
+          "Custom enterprise deployments"
+        ],
+        "category": "AI as a Service",
+        "impact_areas": [
+          "AI model accessibility",
+          "Collaborative AI workspaces",
+          "Custom AI solutions"
+        ],
+        "summary": "Mistral AI's pricing page reveals a tiered pricing model with free, pro, team, and enterprise plans, each offering varying levels of AI capabilities, collaboration features, and customizability, indicating a notable optimization in AI service delivery."
+      },
+      "url": null,
+      "title": "Pricing | Mistral AI",
+      "content_preview": "Title: Pricing | Mistral AI\n\nProducts\nSolutions\nResearch\nResources\nPricing\nCompany\nTry the API\nTalk to sales\nPricing\nLe Chat\nAPI pricing\nMistral Code\nEnterprise deployments\nUSD ($)\nEUR (€)\nFree\n\nYour personal AI assistant for life and work. Get started with our highest-performing models.\n\n$0/mo\n\nStart now\nPopular\nPro\n\nUnlock enhanced productivity with extended AI, and agentic capabilities.\n\n$14.99/mo*\nI am a student\nStart now\nTeam\n\nEmpower your team with a secure, collaborative, AI-powered workspace.\n\n$24.99/user/mo*\n\nAdd users\n\n-\n+\n\nTotal\n\n$50/mo\n\nStart now\nEnterprise\n\nPrivate deployments powered by custom models, UI, and tools.\n\nCustom\n\nContact us\nFeatures\nMessages\n\nUp to 6x Free\n\nUp to 6x Free\n\nCustom\nVoice mode\nCustom\nFlash answers\n\nUp to 150 / day\n\nUp to 200 / day\n\nCustom\nAgents\nCustom\nWeb searches\n\nUp to 5x Free\n\nUp to 5x Free\n\nCustom\nThink mode\n\nUp to 30x Free\n\nUp to 30x Free\n\nCustom\nDeep research\n\nUp to 5x Free\n\nUp to 5x Free\n\nCustom\nLibraries\n\nLimited\n\nUp to 15GB\n\nUp to 30GB /"
+    },
+    {
+      "id": 110,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:18:37.877Z",
+      "company": "Mistral AI",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "46d99ee3c1dae0f216a7b4724c7a2707ae4e861c9a9f966550afb454c2572a21",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Pricing model for AI services",
+          "Tiered plans with varying features",
+          "Custom enterprise deployments"
+        ],
+        "category": "AI as a Service",
+        "impact_areas": [
+          "AI model accessibility",
+          "Collaborative AI workspaces",
+          "Custom AI solutions"
+        ],
+        "summary": "Mistral AI's pricing page reveals a tiered pricing model with free, pro, team, and enterprise plans, each offering varying levels of AI capabilities, collaboration features, and customizability, indicating a notable optimization in AI service delivery."
+      },
+      "url": null,
+      "title": "Pricing | Mistral AI",
+      "content_preview": "Title: Pricing | Mistral AI\n\nProducts\nSolutions\nResearch\nResources\nPricing\nCompany\nTry the API\nTalk to sales\nPricing\nLe Chat\nAPI pricing\nMistral Code\nEnterprise deployments\nUSD ($)\nEUR (€)\nFree\n\nYour personal AI assistant for life and work. Get started with our highest-performing models.\n\n$0/mo\n\nStart now\nPopular\nPro\n\nUnlock enhanced productivity with extended AI, and agentic capabilities.\n\n$14.99/mo*\nI am a student\nStart now\nTeam\n\nEmpower your team with a secure, collaborative, AI-powered workspace.\n\n$24.99/user/mo*\n\nAdd users\n\n-\n+\n\nTotal\n\n$50/mo\n\nStart now\nEnterprise\n\nPrivate deployments powered by custom models, UI, and tools.\n\nCustom\n\nContact us\nFeatures\nMessages\n\nUp to 6x Free\n\nUp to 6x Free\n\nCustom\nVoice mode\nCustom\nFlash answers\n\nUp to 150 / day\n\nUp to 200 / day\n\nCustom\nAgents\nCustom\nWeb searches\n\nUp to 5x Free\n\nUp to 5x Free\n\nCustom\nThink mode\n\nUp to 30x Free\n\nUp to 30x Free\n\nCustom\nDeep research\n\nUp to 5x Free\n\nUp to 5x Free\n\nCustom\nLibraries\n\nLimited\n\nUp to 15GB\n\nUp to 30GB /"
+    },
+    {
+      "id": 109,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:18:30.814Z",
+      "company": "Mistral AI",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "3f9f70e90728ed41f8b468edfd98830118b35689a9ba75ccc60a31f180375d69",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Frontier LLMs",
+          "Customizable AI solutions",
+          "Enterprise-grade security",
+          "Comprehensive AI tooling"
+        ],
+        "category": "AI Platform",
+        "impact_areas": [
+          "Natural Language Processing",
+          "AI Deployment",
+          "Enterprise Software"
+        ],
+        "summary": "La Plateforme offers a comprehensive AI platform with frontier LLMs, customizable solutions, and enterprise-grade security, indicating significant technical innovation and business impact in the AI industry."
+      },
+      "url": null,
+      "title": "La Plateforme - frontier LLMs | Mistral AI",
+      "content_preview": "Title: La Plateforme - frontier LLMs | Mistral AI\n\nProducts\nSolutions\nResearch\nResources\nPricing\nCompany\nTry the API\nTalk to sales\n\nEverything you need at the frontier.\n\nExplore, customize, and deploy AI solutions with complete control. La Plateforme gives you all the tools you need.\n\nEnterprise deployments\n\nAI tooling, models, and infrastructure. Deployable  anywhere.\n\nGet complete control over your AI stack. Build and customize models, deploy across any infrastructure — from edge to cloud — and maintain enterprise-grade security throughout.\n\nRead our docs\n\nApplied AI and deployment services\n\nAI tooling\n\n\t\n\nAgents\n\nFine-tuning\n\nEmbedding\n\nFunction/tool calling\n\nDistillation\n\nSafety\n\nMonitoring\n\n\n\n\nLibrary of frontier LLMs\n\n\t\n\nSOTA language models\n\nSmall and edge models\n\nCode models \n\nMultimodal models\n\nCustom models\n\n\n\n\nAI infrastructure management\n\n\t\n\nInference container\n\nRouting/caching\n\nLoad balancing\n\nAPI gateway\n\nSecurity and resilience\n\nWhy la Plateforme?\n\nComprehensive AI tooli"
+    },
+    {
+      "id": 109,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:18:30.814Z",
+      "company": "Mistral AI",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "3f9f70e90728ed41f8b468edfd98830118b35689a9ba75ccc60a31f180375d69",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Frontier LLMs",
+          "Customizable AI solutions",
+          "Enterprise-grade security",
+          "Comprehensive AI tooling"
+        ],
+        "category": "AI Platform",
+        "impact_areas": [
+          "Natural Language Processing",
+          "AI Deployment",
+          "Enterprise Software"
+        ],
+        "summary": "La Plateforme offers a comprehensive AI platform with frontier LLMs, customizable solutions, and enterprise-grade security, indicating significant technical innovation and business impact in the AI industry."
+      },
+      "url": null,
+      "title": "La Plateforme - frontier LLMs | Mistral AI",
+      "content_preview": "Title: La Plateforme - frontier LLMs | Mistral AI\n\nProducts\nSolutions\nResearch\nResources\nPricing\nCompany\nTry the API\nTalk to sales\n\nEverything you need at the frontier.\n\nExplore, customize, and deploy AI solutions with complete control. La Plateforme gives you all the tools you need.\n\nEnterprise deployments\n\nAI tooling, models, and infrastructure. Deployable  anywhere.\n\nGet complete control over your AI stack. Build and customize models, deploy across any infrastructure — from edge to cloud — and maintain enterprise-grade security throughout.\n\nRead our docs\n\nApplied AI and deployment services\n\nAI tooling\n\n\t\n\nAgents\n\nFine-tuning\n\nEmbedding\n\nFunction/tool calling\n\nDistillation\n\nSafety\n\nMonitoring\n\n\n\n\nLibrary of frontier LLMs\n\n\t\n\nSOTA language models\n\nSmall and edge models\n\nCode models \n\nMultimodal models\n\nCustom models\n\n\n\n\nAI infrastructure management\n\n\t\n\nInference container\n\nRouting/caching\n\nLoad balancing\n\nAPI gateway\n\nSecurity and resilience\n\nWhy la Plateforme?\n\nComprehensive AI tooli"
+    }
+  ],
+  "insights": [],
+  "entities": {
+    "technologies": [],
+    "products": []
+  },
+  "themes": [],
+  "key_points": [],
+  "last_updated": "2025-07-21T17:29:25.432Z"
+}

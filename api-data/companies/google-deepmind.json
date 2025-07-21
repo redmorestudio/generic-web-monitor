@@ -1,0 +1,752 @@
+{
+  "company": {
+    "id": null,
+    "name": "Google DeepMind",
+    "category": "LLM Providers",
+    "description": null,
+    "created_at": null,
+    "thebrain_thought_id": "2937a32a-79bb-41a1-a9bb-e3794a9cb1e0",
+    "company_id": null,
+    "industry": null,
+    "founded_year": null,
+    "headquarters": null,
+    "website": null,
+    "updated_at": null,
+    "urls": []
+  },
+  "stats": {
+    "monitored_urls": "0",
+    "total_changes": "6",
+    "high_interest_changes": "2",
+    "changes_last_week": "6",
+    "avg_interest_level": "6.0000000000000000"
+  },
+  "changes": [
+    {
+      "id": 84,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:11:46.979Z",
+      "company": "Google DeepMind",
+      "url_name": "homepage",
+      "old_hash": "4185bcd94d694aabb44f137f9c5b81868ff170e08344354b2dddfce64bec16bb",
+      "new_hash": "0856f2678262f1e042bb2cfe5c5b91915f1e0c29d3ef676c602b4e613d6274f9",
+      "ai_analysis": {
+        "technical_innovation_score": 6,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of Backstory for exploring online image context",
+          "Stable release of Gemini 2.5 Pro and Flash",
+          "Continued development of AI models like Veo 3 and Imagen 4"
+        ],
+        "category": "AI/ML Model Development and Release",
+        "impact_areas": [
+          "Computer Vision",
+          "Natural Language Processing",
+          "Robotics"
+        ],
+        "summary": "The update introduces Backstory, a new tool for exploring online image context, and marks the stable release of Gemini 2.5 Pro and Flash, indicating incremental improvements in Google DeepMind's AI capabilities."
+      },
+      "url": null,
+      "title": "Google DeepMind",
+      "content_preview": "Title: Google DeepMind\n\nGoogle\nDeepMind\nModels\nResearch\nScience\nAbout\nTry Google AI Studio\nTry Gemini\nGoogle DeepMind\nGemini 2.5 Flash-Lite is here, and 2.5 Pro and Flash are now stable and generally available\nJune 2025\nModels\nLearn more\nchevron_right\nAdvanced audio dialog and generation with Gemini 2.5\nJune 2025\nModels\nLearn more\nchevron_right\nExploring the context of online images with Backstory\nJuly 2025\nResponsibility & Safety\nLearn more\nchevron_right\nAlphaGenome: AI for better understanding the genome\nJune 2025\nScience\nLearn more\nchevron_right\nGemini Robotics On-Device brings AI to local robotic devices\nJune 2025\nModels\nLearn more\nchevron_right\nAdvanced audio dialog and generation with Gemini 2.5\nJune 2025\nModels\nLearn more\nchevron_right\nVeo 3 our new state-of-the-art video generation model\nMay 2025\nModels\nLearn more\nchevron_right\nImagen 4: Our best image generation model yet\nMay 2025\nModels\nLearn more\nchevron_right\nProject Mariner: Exploring how AI agents can help you multitask\nM"
+    },
+    {
+      "id": 84,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:11:46.979Z",
+      "company": "Google DeepMind",
+      "url_name": "homepage",
+      "old_hash": "4185bcd94d694aabb44f137f9c5b81868ff170e08344354b2dddfce64bec16bb",
+      "new_hash": "0856f2678262f1e042bb2cfe5c5b91915f1e0c29d3ef676c602b4e613d6274f9",
+      "ai_analysis": {
+        "technical_innovation_score": 6,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of Backstory for exploring online image context",
+          "Stable release of Gemini 2.5 Pro and Flash",
+          "Continued development of AI models like Veo 3 and Imagen 4"
+        ],
+        "category": "AI/ML Model Development and Release",
+        "impact_areas": [
+          "Computer Vision",
+          "Natural Language Processing",
+          "Robotics"
+        ],
+        "summary": "The update introduces Backstory, a new tool for exploring online image context, and marks the stable release of Gemini 2.5 Pro and Flash, indicating incremental improvements in Google DeepMind's AI capabilities."
+      },
+      "url": null,
+      "title": "Google DeepMind",
+      "content_preview": "Title: Google DeepMind\n\nGoogle\nDeepMind\nModels\nResearch\nScience\nAbout\nTry Google AI Studio\nTry Gemini\nGoogle DeepMind\nGemini 2.5 Flash-Lite is here, and 2.5 Pro and Flash are now stable and generally available\nJune 2025\nModels\nLearn more\nchevron_right\nAdvanced audio dialog and generation with Gemini 2.5\nJune 2025\nModels\nLearn more\nchevron_right\nExploring the context of online images with Backstory\nJuly 2025\nResponsibility & Safety\nLearn more\nchevron_right\nAlphaGenome: AI for better understanding the genome\nJune 2025\nScience\nLearn more\nchevron_right\nGemini Robotics On-Device brings AI to local robotic devices\nJune 2025\nModels\nLearn more\nchevron_right\nAdvanced audio dialog and generation with Gemini 2.5\nJune 2025\nModels\nLearn more\nchevron_right\nVeo 3 our new state-of-the-art video generation model\nMay 2025\nModels\nLearn more\nchevron_right\nImagen 4: Our best image generation model yet\nMay 2025\nModels\nLearn more\nchevron_right\nProject Mariner: Exploring how AI agents can help you multitask\nM"
+    },
+    {
+      "id": 56,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:13:08.841Z",
+      "company": "Google DeepMind",
+      "url_name": "api",
+      "old_hash": null,
+      "new_hash": "e91e8fa1b59e87dce62227b00c55027c9f69f1b27eefa90e091df33497698a88",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "New Veo 3 model availability",
+          "Gemini API for integrating AI models",
+          "Gemma open models for custom AI solutions"
+        ],
+        "category": "AI/ML Development Tools",
+        "impact_areas": [
+          "AI model integration",
+          "Custom AI solution development",
+          "AI-powered app development"
+        ],
+        "summary": "The introduction of the Gemini Developer API, new Veo 3 model, and Gemma open models demonstrates significant technical advances and notable business impact, particularly in the areas of AI model integration and custom AI solution development."
+      },
+      "url": null,
+      "title": "Gemini Developer API | Gemma open models  |  Google AI for Developers",
+      "content_preview": "Title: Gemini Developer API | Gemma open models  |  Google AI for Developers\n\nSkip to main content\nModels\nSolutions\nCode assistance\nShowcase\nCommunity\n/\nSign in\nNew Veo 3 is now available in the Gemini API!\n AI for every\ndeveloper\n\nUnlock AI models to build innovative apps and transform development workflows with tools across platforms.\n\nExplore models in Google AI Studio\nStart building\n\nGet started building with cutting-edge AI models and tools\n\nIntegrate Google AI models with an API key\n\nBuild with cutting-edge AI models, like Gemini, Imagen, and Veo, from Google DeepMind\n\nView Gemini API docs\nIntegrate models into apps\n\nUnlock AI capabilities for your apps with a simple call to the Gemini API.\n\n Gemini API docs\nExplore AI models\n\nQuickly evaluate AI models, develop prompts, and transform ideas into code.\n\n Google AI Studio\nOwn your AI with Gemma open models\n\nBuild custom AI solutions and retain complete control. Tailor Gemma models, built from the same research and technology as Gem"
+    },
+    {
+      "id": 56,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:13:08.841Z",
+      "company": "Google DeepMind",
+      "url_name": "api",
+      "old_hash": null,
+      "new_hash": "e91e8fa1b59e87dce62227b00c55027c9f69f1b27eefa90e091df33497698a88",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "New Veo 3 model availability",
+          "Gemini API for integrating AI models",
+          "Gemma open models for custom AI solutions"
+        ],
+        "category": "AI/ML Development Tools",
+        "impact_areas": [
+          "AI model integration",
+          "Custom AI solution development",
+          "AI-powered app development"
+        ],
+        "summary": "The introduction of the Gemini Developer API, new Veo 3 model, and Gemma open models demonstrates significant technical advances and notable business impact, particularly in the areas of AI model integration and custom AI solution development."
+      },
+      "url": null,
+      "title": "Gemini Developer API | Gemma open models  |  Google AI for Developers",
+      "content_preview": "Title: Gemini Developer API | Gemma open models  |  Google AI for Developers\n\nSkip to main content\nModels\nSolutions\nCode assistance\nShowcase\nCommunity\n/\nSign in\nNew Veo 3 is now available in the Gemini API!\n AI for every\ndeveloper\n\nUnlock AI models to build innovative apps and transform development workflows with tools across platforms.\n\nExplore models in Google AI Studio\nStart building\n\nGet started building with cutting-edge AI models and tools\n\nIntegrate Google AI models with an API key\n\nBuild with cutting-edge AI models, like Gemini, Imagen, and Veo, from Google DeepMind\n\nView Gemini API docs\nIntegrate models into apps\n\nUnlock AI capabilities for your apps with a simple call to the Gemini API.\n\n Gemini API docs\nExplore AI models\n\nQuickly evaluate AI models, develop prompts, and transform ideas into code.\n\n Google AI Studio\nOwn your AI with Gemma open models\n\nBuild custom AI solutions and retain complete control. Tailor Gemma models, built from the same research and technology as Gem"
+    },
+    {
+      "id": 56,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:13:08.841Z",
+      "company": "Google DeepMind",
+      "url_name": "api",
+      "old_hash": null,
+      "new_hash": "e91e8fa1b59e87dce62227b00c55027c9f69f1b27eefa90e091df33497698a88",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "New Veo 3 model availability",
+          "Gemini API for integrating AI models",
+          "Gemma open models for custom AI solutions"
+        ],
+        "category": "AI/ML Development Tools",
+        "impact_areas": [
+          "AI model integration",
+          "Custom AI solution development",
+          "AI-powered app development"
+        ],
+        "summary": "The introduction of the Gemini Developer API, new Veo 3 model, and Gemma open models demonstrates significant technical advances and notable business impact, particularly in the areas of AI model integration and custom AI solution development."
+      },
+      "url": null,
+      "title": "Gemini Developer API | Gemma open models  |  Google AI for Developers",
+      "content_preview": "Title: Gemini Developer API | Gemma open models  |  Google AI for Developers\n\nSkip to main content\nModels\nSolutions\nCode assistance\nShowcase\nCommunity\n/\nSign in\nNew Veo 3 is now available in the Gemini API!\n AI for every\ndeveloper\n\nUnlock AI models to build innovative apps and transform development workflows with tools across platforms.\n\nExplore models in Google AI Studio\nStart building\n\nGet started building with cutting-edge AI models and tools\n\nIntegrate Google AI models with an API key\n\nBuild with cutting-edge AI models, like Gemini, Imagen, and Veo, from Google DeepMind\n\nView Gemini API docs\nIntegrate models into apps\n\nUnlock AI capabilities for your apps with a simple call to the Gemini API.\n\n Gemini API docs\nExplore AI models\n\nQuickly evaluate AI models, develop prompts, and transform ideas into code.\n\n Google AI Studio\nOwn your AI with Gemma open models\n\nBuild custom AI solutions and retain complete control. Tailor Gemma models, built from the same research and technology as Gem"
+    },
+    {
+      "id": 56,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:13:08.841Z",
+      "company": "Google DeepMind",
+      "url_name": "api",
+      "old_hash": null,
+      "new_hash": "e91e8fa1b59e87dce62227b00c55027c9f69f1b27eefa90e091df33497698a88",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "New Veo 3 model availability",
+          "Gemini API for integrating AI models",
+          "Gemma open models for custom AI solutions"
+        ],
+        "category": "AI/ML Development Tools",
+        "impact_areas": [
+          "AI model integration",
+          "Custom AI solution development",
+          "AI-powered app development"
+        ],
+        "summary": "The introduction of the Gemini Developer API, new Veo 3 model, and Gemma open models demonstrates significant technical advances and notable business impact, particularly in the areas of AI model integration and custom AI solution development."
+      },
+      "url": null,
+      "title": "Gemini Developer API | Gemma open models  |  Google AI for Developers",
+      "content_preview": "Title: Gemini Developer API | Gemma open models  |  Google AI for Developers\n\nSkip to main content\nModels\nSolutions\nCode assistance\nShowcase\nCommunity\n/\nSign in\nNew Veo 3 is now available in the Gemini API!\n AI for every\ndeveloper\n\nUnlock AI models to build innovative apps and transform development workflows with tools across platforms.\n\nExplore models in Google AI Studio\nStart building\n\nGet started building with cutting-edge AI models and tools\n\nIntegrate Google AI models with an API key\n\nBuild with cutting-edge AI models, like Gemini, Imagen, and Veo, from Google DeepMind\n\nView Gemini API docs\nIntegrate models into apps\n\nUnlock AI capabilities for your apps with a simple call to the Gemini API.\n\n Gemini API docs\nExplore AI models\n\nQuickly evaluate AI models, develop prompts, and transform ideas into code.\n\n Google AI Studio\nOwn your AI with Gemma open models\n\nBuild custom AI solutions and retain complete control. Tailor Gemma models, built from the same research and technology as Gem"
+    },
+    {
+      "id": 55,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:13:00.463Z",
+      "company": "Google DeepMind",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "7a35b93de4620c6cbde77f1af1c14352e8dca1255877f05ac43f742198380f79",
+      "ai_analysis": {
+        "technical_innovation_score": 6,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of the Gemini App",
+          "Research on brain activity datasets",
+          "Google's focus on making AI helpful for everyone"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "AI Model Development",
+          "Neural Network Research",
+          "Consumer-Facing AI Applications"
+        ],
+        "summary": "Google's official AI blog highlights their efforts to make AI more accessible and useful, with updates on the Gemini App, brain activity research, and expert insights into AI and inference."
+      },
+      "url": null,
+      "title": "Official Google AI news and updates | Google Blog",
+      "content_preview": "Title: Official Google AI news and updates | Google Blog\n\nSkip to main content\nThe Keyword\nHome\nProduct news\nCompany news\nFeed\nGlobal (English)\nAfrica (English)\nAustralia (English)\nBrasil (Português)\nCanada (English)\nCanada (Français)\nČesko (Čeština)\nDeutschland (Deutsch)\nEspaña (Español)\nFrance (Français)\nIndia (English)\nIndonesia (Bahasa Indonesia)\n日本 (日本語)\n대한민국 (한국어)\nLatinoamérica (Español)\nالشرق الأوسط وشمال أفريقيا (اللغة العربية)\nNederlands (Nederland)\nPolska (Polski)\nItalia (Italiano)\nประเทศไทย (ไทย)\nTürkiye (Türkçe)\n台灣 (中文)\nMENA (English)\nSubscribe\n  TECHNOLOGY\nAI\n\nThe work we're doing to make AI helpful for everyone.\n\nFOLLOW US\n\nAI\n\nAsk a Techspert: What is inference?\n\nLearn more about AI and inference from Google experts.\n\nGemini App\nFind out the latest Gemini updates with Gemini Drops.\nTurn your photos into videos in Gemini\nPlan ahead with scheduled actions in the Gemini app.\nResearch\nHow we built one of the most ambitious datasets in brain activity research\nGoogle Beam: Our"
+    },
+    {
+      "id": 55,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:13:00.463Z",
+      "company": "Google DeepMind",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "7a35b93de4620c6cbde77f1af1c14352e8dca1255877f05ac43f742198380f79",
+      "ai_analysis": {
+        "technical_innovation_score": 6,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of the Gemini App",
+          "Research on brain activity datasets",
+          "Google's focus on making AI helpful for everyone"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "AI Model Development",
+          "Neural Network Research",
+          "Consumer-Facing AI Applications"
+        ],
+        "summary": "Google's official AI blog highlights their efforts to make AI more accessible and useful, with updates on the Gemini App, brain activity research, and expert insights into AI and inference."
+      },
+      "url": null,
+      "title": "Official Google AI news and updates | Google Blog",
+      "content_preview": "Title: Official Google AI news and updates | Google Blog\n\nSkip to main content\nThe Keyword\nHome\nProduct news\nCompany news\nFeed\nGlobal (English)\nAfrica (English)\nAustralia (English)\nBrasil (Português)\nCanada (English)\nCanada (Français)\nČesko (Čeština)\nDeutschland (Deutsch)\nEspaña (Español)\nFrance (Français)\nIndia (English)\nIndonesia (Bahasa Indonesia)\n日本 (日本語)\n대한민국 (한국어)\nLatinoamérica (Español)\nالشرق الأوسط وشمال أفريقيا (اللغة العربية)\nNederlands (Nederland)\nPolska (Polski)\nItalia (Italiano)\nประเทศไทย (ไทย)\nTürkiye (Türkçe)\n台灣 (中文)\nMENA (English)\nSubscribe\n  TECHNOLOGY\nAI\n\nThe work we're doing to make AI helpful for everyone.\n\nFOLLOW US\n\nAI\n\nAsk a Techspert: What is inference?\n\nLearn more about AI and inference from Google experts.\n\nGemini App\nFind out the latest Gemini updates with Gemini Drops.\nTurn your photos into videos in Gemini\nPlan ahead with scheduled actions in the Gemini app.\nResearch\nHow we built one of the most ambitious datasets in brain activity research\nGoogle Beam: Our"
+    },
+    {
+      "id": 55,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:13:00.463Z",
+      "company": "Google DeepMind",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "7a35b93de4620c6cbde77f1af1c14352e8dca1255877f05ac43f742198380f79",
+      "ai_analysis": {
+        "technical_innovation_score": 6,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of the Gemini App",
+          "Research on brain activity datasets",
+          "Google's focus on making AI helpful for everyone"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "AI Model Development",
+          "Neural Network Research",
+          "Consumer-Facing AI Applications"
+        ],
+        "summary": "Google's official AI blog highlights their efforts to make AI more accessible and useful, with updates on the Gemini App, brain activity research, and expert insights into AI and inference."
+      },
+      "url": null,
+      "title": "Official Google AI news and updates | Google Blog",
+      "content_preview": "Title: Official Google AI news and updates | Google Blog\n\nSkip to main content\nThe Keyword\nHome\nProduct news\nCompany news\nFeed\nGlobal (English)\nAfrica (English)\nAustralia (English)\nBrasil (Português)\nCanada (English)\nCanada (Français)\nČesko (Čeština)\nDeutschland (Deutsch)\nEspaña (Español)\nFrance (Français)\nIndia (English)\nIndonesia (Bahasa Indonesia)\n日本 (日本語)\n대한민국 (한국어)\nLatinoamérica (Español)\nالشرق الأوسط وشمال أفريقيا (اللغة العربية)\nNederlands (Nederland)\nPolska (Polski)\nItalia (Italiano)\nประเทศไทย (ไทย)\nTürkiye (Türkçe)\n台灣 (中文)\nMENA (English)\nSubscribe\n  TECHNOLOGY\nAI\n\nThe work we're doing to make AI helpful for everyone.\n\nFOLLOW US\n\nAI\n\nAsk a Techspert: What is inference?\n\nLearn more about AI and inference from Google experts.\n\nGemini App\nFind out the latest Gemini updates with Gemini Drops.\nTurn your photos into videos in Gemini\nPlan ahead with scheduled actions in the Gemini app.\nResearch\nHow we built one of the most ambitious datasets in brain activity research\nGoogle Beam: Our"
+    },
+    {
+      "id": 55,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:13:00.463Z",
+      "company": "Google DeepMind",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "7a35b93de4620c6cbde77f1af1c14352e8dca1255877f05ac43f742198380f79",
+      "ai_analysis": {
+        "technical_innovation_score": 6,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of the Gemini App",
+          "Research on brain activity datasets",
+          "Google's focus on making AI helpful for everyone"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "AI Model Development",
+          "Neural Network Research",
+          "Consumer-Facing AI Applications"
+        ],
+        "summary": "Google's official AI blog highlights their efforts to make AI more accessible and useful, with updates on the Gemini App, brain activity research, and expert insights into AI and inference."
+      },
+      "url": null,
+      "title": "Official Google AI news and updates | Google Blog",
+      "content_preview": "Title: Official Google AI news and updates | Google Blog\n\nSkip to main content\nThe Keyword\nHome\nProduct news\nCompany news\nFeed\nGlobal (English)\nAfrica (English)\nAustralia (English)\nBrasil (Português)\nCanada (English)\nCanada (Français)\nČesko (Čeština)\nDeutschland (Deutsch)\nEspaña (Español)\nFrance (Français)\nIndia (English)\nIndonesia (Bahasa Indonesia)\n日本 (日本語)\n대한민국 (한국어)\nLatinoamérica (Español)\nالشرق الأوسط وشمال أفريقيا (اللغة العربية)\nNederlands (Nederland)\nPolska (Polski)\nItalia (Italiano)\nประเทศไทย (ไทย)\nTürkiye (Türkçe)\n台灣 (中文)\nMENA (English)\nSubscribe\n  TECHNOLOGY\nAI\n\nThe work we're doing to make AI helpful for everyone.\n\nFOLLOW US\n\nAI\n\nAsk a Techspert: What is inference?\n\nLearn more about AI and inference from Google experts.\n\nGemini App\nFind out the latest Gemini updates with Gemini Drops.\nTurn your photos into videos in Gemini\nPlan ahead with scheduled actions in the Gemini app.\nResearch\nHow we built one of the most ambitious datasets in brain activity research\nGoogle Beam: Our"
+    },
+    {
+      "id": 54,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:55.045Z",
+      "company": "Google DeepMind",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "4185bcd94d694aabb44f137f9c5b81868ff170e08344354b2dddfce64bec16bb",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Gemini 2.5 Flash-Lite release",
+          "AlphaGenome for genome understanding",
+          "Gemini Robotics On-Device",
+          "Veo 3 video generation model",
+          "Imagen 4 image generation model"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "Robotics",
+          "Genomics"
+        ],
+        "summary": "Google DeepMind has released several significant updates, including Gemini 2.5, AlphaGenome, and Veo 3, showcasing advancements in AI/ML capabilities, particularly in audio dialog, genome understanding, and video generation."
+      },
+      "url": null,
+      "title": "Google DeepMind",
+      "content_preview": "Title: Google DeepMind\n\nGoogle\nDeepMind\nModels\nResearch\nScience\nAbout\nTry Google AI Studio\nTry Gemini\nGoogle DeepMind\nGemini 2.5 Flash-Lite is here, and 2.5 Pro and Flash are now stable and generally available\nJune 2025\nModels\nLearn more\nchevron_right\nAdvanced audio dialog and generation with Gemini 2.5\nJune 2025\nModels\nLearn more\nchevron_right\nAlphaGenome: AI for better understanding the genome\nJune 2025\nScience\nLearn more\nchevron_right\nGemini Robotics On-Device brings AI to local robotic devices\nJune 2025\nModels\nLearn more\nchevron_right\nAdvanced audio dialog and generation with Gemini 2.5\nJune 2025\nModels\nLearn more\nchevron_right\nVeo 3 our new state-of-the-art video generation model\nMay 2025\nModels\nLearn more\nchevron_right\nImagen 4: Our best image generation model yet\nMay 2025\nModels\nLearn more\nchevron_right\nProject Mariner: Exploring how AI agents can help you multitask\nMay 2025\nLabs\nLearn more\nchevron_right\nBringing Project Astra’s live capabilities into our products\nMay 2025\nModel"
+    },
+    {
+      "id": 54,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:55.045Z",
+      "company": "Google DeepMind",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "4185bcd94d694aabb44f137f9c5b81868ff170e08344354b2dddfce64bec16bb",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Gemini 2.5 Flash-Lite release",
+          "AlphaGenome for genome understanding",
+          "Gemini Robotics On-Device",
+          "Veo 3 video generation model",
+          "Imagen 4 image generation model"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "Robotics",
+          "Genomics"
+        ],
+        "summary": "Google DeepMind has released several significant updates, including Gemini 2.5, AlphaGenome, and Veo 3, showcasing advancements in AI/ML capabilities, particularly in audio dialog, genome understanding, and video generation."
+      },
+      "url": null,
+      "title": "Google DeepMind",
+      "content_preview": "Title: Google DeepMind\n\nGoogle\nDeepMind\nModels\nResearch\nScience\nAbout\nTry Google AI Studio\nTry Gemini\nGoogle DeepMind\nGemini 2.5 Flash-Lite is here, and 2.5 Pro and Flash are now stable and generally available\nJune 2025\nModels\nLearn more\nchevron_right\nAdvanced audio dialog and generation with Gemini 2.5\nJune 2025\nModels\nLearn more\nchevron_right\nAlphaGenome: AI for better understanding the genome\nJune 2025\nScience\nLearn more\nchevron_right\nGemini Robotics On-Device brings AI to local robotic devices\nJune 2025\nModels\nLearn more\nchevron_right\nAdvanced audio dialog and generation with Gemini 2.5\nJune 2025\nModels\nLearn more\nchevron_right\nVeo 3 our new state-of-the-art video generation model\nMay 2025\nModels\nLearn more\nchevron_right\nImagen 4: Our best image generation model yet\nMay 2025\nModels\nLearn more\nchevron_right\nProject Mariner: Exploring how AI agents can help you multitask\nMay 2025\nLabs\nLearn more\nchevron_right\nBringing Project Astra’s live capabilities into our products\nMay 2025\nModel"
+    },
+    {
+      "id": 53,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:46.820Z",
+      "company": "Google DeepMind",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "803b85bcc20c98f30f421abf6d9d6a802f097284e350d47e7117d4ac8bc28b3e",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Comprehensive pricing information for Vertex AI",
+          "Comparison to legacy product pricing",
+          "Pricing details for Generative AI, AutoML, and custom-trained models"
+        ],
+        "category": "Cloud AI/ML Services",
+        "impact_areas": [
+          "AI/ML Pricing Strategy",
+          "Cloud Service Competition",
+          "Google Cloud Ecosystem"
+        ],
+        "summary": "The webpage provides detailed pricing information for Vertex AI, a cloud-based AI/ML platform, including comparisons to legacy products and pricing for various AI/ML services. This information is relevant for competitive intelligence and market analysis."
+      },
+      "url": null,
+      "title": "Pricing  |  Vertex AI  |  Google Cloud",
+      "content_preview": "Title: Pricing  |  Vertex AI  |  Google Cloud\n\n.\nSkip to main content\nOverview\nSolutions\nProducts\nPricing\nResources\n/\nDocs\nSupport\nConsole\nSign in\nVertex AI\nContact Us\nStart free\nPRICING\nVertex AI pricing\nVertex AI pricing compared to legacy product pricing\nPricing for Generative AI on Vertex AI\nPricing for AutoML models\nVertex AI Forecast\nCustom-trained models\nGen AI Evaluation Service\nVertex AI Agent Engine\nRay on Vertex AI\nPrediction and explanation\nVertex AI Neural Architecture Search\nVertex AI Pipelines\nVertex AI Feature Store\nVertex AI Feature Store (Legacy)\nVertex ML Metadata\nVertex AI TensorBoard\nVertex AI Vizier\nVector Search\nVertex AI Model Registry\nVertex AI Model Monitoring\nVertex AI Workbench\nColab Enterprise\nDeep Learning Containers, Deep Learning VM, and AI Platform Pipelines\nData labeling\nRequired use of Cloud Storage\nFree operations for managing your resources\nGoogle Cloud costs\nWhat's next\nVertex AI pricing\n\nPrices are listed in US Dollars (USD). If you pay in a curre"
+    },
+    {
+      "id": 53,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:46.820Z",
+      "company": "Google DeepMind",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "803b85bcc20c98f30f421abf6d9d6a802f097284e350d47e7117d4ac8bc28b3e",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Comprehensive pricing information for Vertex AI",
+          "Comparison to legacy product pricing",
+          "Pricing details for Generative AI, AutoML, and custom-trained models"
+        ],
+        "category": "Cloud AI/ML Services",
+        "impact_areas": [
+          "AI/ML Pricing Strategy",
+          "Cloud Service Competition",
+          "Google Cloud Ecosystem"
+        ],
+        "summary": "The webpage provides detailed pricing information for Vertex AI, a cloud-based AI/ML platform, including comparisons to legacy products and pricing for various AI/ML services. This information is relevant for competitive intelligence and market analysis."
+      },
+      "url": null,
+      "title": "Pricing  |  Vertex AI  |  Google Cloud",
+      "content_preview": "Title: Pricing  |  Vertex AI  |  Google Cloud\n\n.\nSkip to main content\nOverview\nSolutions\nProducts\nPricing\nResources\n/\nDocs\nSupport\nConsole\nSign in\nVertex AI\nContact Us\nStart free\nPRICING\nVertex AI pricing\nVertex AI pricing compared to legacy product pricing\nPricing for Generative AI on Vertex AI\nPricing for AutoML models\nVertex AI Forecast\nCustom-trained models\nGen AI Evaluation Service\nVertex AI Agent Engine\nRay on Vertex AI\nPrediction and explanation\nVertex AI Neural Architecture Search\nVertex AI Pipelines\nVertex AI Feature Store\nVertex AI Feature Store (Legacy)\nVertex ML Metadata\nVertex AI TensorBoard\nVertex AI Vizier\nVector Search\nVertex AI Model Registry\nVertex AI Model Monitoring\nVertex AI Workbench\nColab Enterprise\nDeep Learning Containers, Deep Learning VM, and AI Platform Pipelines\nData labeling\nRequired use of Cloud Storage\nFree operations for managing your resources\nGoogle Cloud costs\nWhat's next\nVertex AI pricing\n\nPrices are listed in US Dollars (USD). If you pay in a curre"
+    },
+    {
+      "id": 53,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:46.820Z",
+      "company": "Google DeepMind",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "803b85bcc20c98f30f421abf6d9d6a802f097284e350d47e7117d4ac8bc28b3e",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Comprehensive pricing information for Vertex AI",
+          "Comparison to legacy product pricing",
+          "Pricing details for Generative AI, AutoML, and custom-trained models"
+        ],
+        "category": "Cloud AI/ML Services",
+        "impact_areas": [
+          "AI/ML Pricing Strategy",
+          "Cloud Service Competition",
+          "Google Cloud Ecosystem"
+        ],
+        "summary": "The webpage provides detailed pricing information for Vertex AI, a cloud-based AI/ML platform, including comparisons to legacy products and pricing for various AI/ML services. This information is relevant for competitive intelligence and market analysis."
+      },
+      "url": null,
+      "title": "Pricing  |  Vertex AI  |  Google Cloud",
+      "content_preview": "Title: Pricing  |  Vertex AI  |  Google Cloud\n\n.\nSkip to main content\nOverview\nSolutions\nProducts\nPricing\nResources\n/\nDocs\nSupport\nConsole\nSign in\nVertex AI\nContact Us\nStart free\nPRICING\nVertex AI pricing\nVertex AI pricing compared to legacy product pricing\nPricing for Generative AI on Vertex AI\nPricing for AutoML models\nVertex AI Forecast\nCustom-trained models\nGen AI Evaluation Service\nVertex AI Agent Engine\nRay on Vertex AI\nPrediction and explanation\nVertex AI Neural Architecture Search\nVertex AI Pipelines\nVertex AI Feature Store\nVertex AI Feature Store (Legacy)\nVertex ML Metadata\nVertex AI TensorBoard\nVertex AI Vizier\nVector Search\nVertex AI Model Registry\nVertex AI Model Monitoring\nVertex AI Workbench\nColab Enterprise\nDeep Learning Containers, Deep Learning VM, and AI Platform Pipelines\nData labeling\nRequired use of Cloud Storage\nFree operations for managing your resources\nGoogle Cloud costs\nWhat's next\nVertex AI pricing\n\nPrices are listed in US Dollars (USD). If you pay in a curre"
+    },
+    {
+      "id": 53,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:46.820Z",
+      "company": "Google DeepMind",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "803b85bcc20c98f30f421abf6d9d6a802f097284e350d47e7117d4ac8bc28b3e",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Comprehensive pricing information for Vertex AI",
+          "Comparison to legacy product pricing",
+          "Pricing details for Generative AI, AutoML, and custom-trained models"
+        ],
+        "category": "Cloud AI/ML Services",
+        "impact_areas": [
+          "AI/ML Pricing Strategy",
+          "Cloud Service Competition",
+          "Google Cloud Ecosystem"
+        ],
+        "summary": "The webpage provides detailed pricing information for Vertex AI, a cloud-based AI/ML platform, including comparisons to legacy products and pricing for various AI/ML services. This information is relevant for competitive intelligence and market analysis."
+      },
+      "url": null,
+      "title": "Pricing  |  Vertex AI  |  Google Cloud",
+      "content_preview": "Title: Pricing  |  Vertex AI  |  Google Cloud\n\n.\nSkip to main content\nOverview\nSolutions\nProducts\nPricing\nResources\n/\nDocs\nSupport\nConsole\nSign in\nVertex AI\nContact Us\nStart free\nPRICING\nVertex AI pricing\nVertex AI pricing compared to legacy product pricing\nPricing for Generative AI on Vertex AI\nPricing for AutoML models\nVertex AI Forecast\nCustom-trained models\nGen AI Evaluation Service\nVertex AI Agent Engine\nRay on Vertex AI\nPrediction and explanation\nVertex AI Neural Architecture Search\nVertex AI Pipelines\nVertex AI Feature Store\nVertex AI Feature Store (Legacy)\nVertex ML Metadata\nVertex AI TensorBoard\nVertex AI Vizier\nVector Search\nVertex AI Model Registry\nVertex AI Model Monitoring\nVertex AI Workbench\nColab Enterprise\nDeep Learning Containers, Deep Learning VM, and AI Platform Pipelines\nData labeling\nRequired use of Cloud Storage\nFree operations for managing your resources\nGoogle Cloud costs\nWhat's next\nVertex AI pricing\n\nPrices are listed in US Dollars (USD). If you pay in a curre"
+    },
+    {
+      "id": 52,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:34.152Z",
+      "company": "Google DeepMind",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "fb68f4f17a176d730b4bbeabcfe54b7e3f5638424726a61ec9d32ab95aecce14",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 2,
+        "interest_level": 2,
+        "interest_drivers": [
+          "Introduction of Google AI Studio and Gemini",
+          "Mention of cutting-edge AI models and tools"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "AI Research",
+          "AI Product Development"
+        ],
+        "summary": "The webpage appears to be a general introduction to Google AI, with no specific technical innovations or major business announcements. However, the mention of Google AI Studio and Gemini suggests potential future developments in AI/ML."
+      },
+      "url": null,
+      "title": "Google AI - Page not found",
+      "content_preview": "Title: Google AI - Page not found\n\nGoogle\nAI\nProducts\nBuild\nResearch\nResponsibility\nSocietal impact\nAbout\nTry Google AI Studio\nTry Gemini\nPage not found\nSorry, this page could not be found.\nFollow us\nMaking AI helpful for everyone\nProducts\nDiscover how AI can be helpful, from work to everyday life\nFor knowledge\nFor creativity\nFor productivity\nFor students\nFor experimenting\nExplore products\nBuild\nGet started building with cutting-edge AI models and tools\nStart building\nCode with AI assistance\nLeverage frameworks and tools\nBuild with Google AI\nResearch\nTackling the most challenging problems in computer science\nHealth\nScience\nSustainability\nExplore more research\nResponsibility\nWe’re building and deploying AI responsibly\nResponsibility and safety\nPolicy\nBuilding for everyone\nSocial impact\nAbout\nWe're committed to improving the lives of as many people as possible\nWhy AI\nOur AI Journey\nAI Principles\nFor organizations\nLearn AI Skills\nAbout Google\nGoogle Products\nPrivacy\nTerms"
+    },
+    {
+      "id": 52,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:34.152Z",
+      "company": "Google DeepMind",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "fb68f4f17a176d730b4bbeabcfe54b7e3f5638424726a61ec9d32ab95aecce14",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 2,
+        "interest_level": 2,
+        "interest_drivers": [
+          "Introduction of Google AI Studio and Gemini",
+          "Mention of cutting-edge AI models and tools"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "AI Research",
+          "AI Product Development"
+        ],
+        "summary": "The webpage appears to be a general introduction to Google AI, with no specific technical innovations or major business announcements. However, the mention of Google AI Studio and Gemini suggests potential future developments in AI/ML."
+      },
+      "url": null,
+      "title": "Google AI - Page not found",
+      "content_preview": "Title: Google AI - Page not found\n\nGoogle\nAI\nProducts\nBuild\nResearch\nResponsibility\nSocietal impact\nAbout\nTry Google AI Studio\nTry Gemini\nPage not found\nSorry, this page could not be found.\nFollow us\nMaking AI helpful for everyone\nProducts\nDiscover how AI can be helpful, from work to everyday life\nFor knowledge\nFor creativity\nFor productivity\nFor students\nFor experimenting\nExplore products\nBuild\nGet started building with cutting-edge AI models and tools\nStart building\nCode with AI assistance\nLeverage frameworks and tools\nBuild with Google AI\nResearch\nTackling the most challenging problems in computer science\nHealth\nScience\nSustainability\nExplore more research\nResponsibility\nWe’re building and deploying AI responsibly\nResponsibility and safety\nPolicy\nBuilding for everyone\nSocial impact\nAbout\nWe're committed to improving the lives of as many people as possible\nWhy AI\nOur AI Journey\nAI Principles\nFor organizations\nLearn AI Skills\nAbout Google\nGoogle Products\nPrivacy\nTerms"
+    },
+    {
+      "id": 52,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:34.152Z",
+      "company": "Google DeepMind",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "fb68f4f17a176d730b4bbeabcfe54b7e3f5638424726a61ec9d32ab95aecce14",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 2,
+        "interest_level": 2,
+        "interest_drivers": [
+          "Introduction of Google AI Studio and Gemini",
+          "Mention of cutting-edge AI models and tools"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "AI Research",
+          "AI Product Development"
+        ],
+        "summary": "The webpage appears to be a general introduction to Google AI, with no specific technical innovations or major business announcements. However, the mention of Google AI Studio and Gemini suggests potential future developments in AI/ML."
+      },
+      "url": null,
+      "title": "Google AI - Page not found",
+      "content_preview": "Title: Google AI - Page not found\n\nGoogle\nAI\nProducts\nBuild\nResearch\nResponsibility\nSocietal impact\nAbout\nTry Google AI Studio\nTry Gemini\nPage not found\nSorry, this page could not be found.\nFollow us\nMaking AI helpful for everyone\nProducts\nDiscover how AI can be helpful, from work to everyday life\nFor knowledge\nFor creativity\nFor productivity\nFor students\nFor experimenting\nExplore products\nBuild\nGet started building with cutting-edge AI models and tools\nStart building\nCode with AI assistance\nLeverage frameworks and tools\nBuild with Google AI\nResearch\nTackling the most challenging problems in computer science\nHealth\nScience\nSustainability\nExplore more research\nResponsibility\nWe’re building and deploying AI responsibly\nResponsibility and safety\nPolicy\nBuilding for everyone\nSocial impact\nAbout\nWe're committed to improving the lives of as many people as possible\nWhy AI\nOur AI Journey\nAI Principles\nFor organizations\nLearn AI Skills\nAbout Google\nGoogle Products\nPrivacy\nTerms"
+    },
+    {
+      "id": 52,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:34.152Z",
+      "company": "Google DeepMind",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "fb68f4f17a176d730b4bbeabcfe54b7e3f5638424726a61ec9d32ab95aecce14",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 2,
+        "interest_level": 2,
+        "interest_drivers": [
+          "Introduction of Google AI Studio and Gemini",
+          "Mention of cutting-edge AI models and tools"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "AI Research",
+          "AI Product Development"
+        ],
+        "summary": "The webpage appears to be a general introduction to Google AI, with no specific technical innovations or major business announcements. However, the mention of Google AI Studio and Gemini suggests potential future developments in AI/ML."
+      },
+      "url": null,
+      "title": "Google AI - Page not found",
+      "content_preview": "Title: Google AI - Page not found\n\nGoogle\nAI\nProducts\nBuild\nResearch\nResponsibility\nSocietal impact\nAbout\nTry Google AI Studio\nTry Gemini\nPage not found\nSorry, this page could not be found.\nFollow us\nMaking AI helpful for everyone\nProducts\nDiscover how AI can be helpful, from work to everyday life\nFor knowledge\nFor creativity\nFor productivity\nFor students\nFor experimenting\nExplore products\nBuild\nGet started building with cutting-edge AI models and tools\nStart building\nCode with AI assistance\nLeverage frameworks and tools\nBuild with Google AI\nResearch\nTackling the most challenging problems in computer science\nHealth\nScience\nSustainability\nExplore more research\nResponsibility\nWe’re building and deploying AI responsibly\nResponsibility and safety\nPolicy\nBuilding for everyone\nSocial impact\nAbout\nWe're committed to improving the lives of as many people as possible\nWhy AI\nOur AI Journey\nAI Principles\nFor organizations\nLearn AI Skills\nAbout Google\nGoogle Products\nPrivacy\nTerms"
+    }
+  ],
+  "insights": [],
+  "entities": {
+    "technologies": [],
+    "products": []
+  },
+  "themes": [],
+  "key_points": [],
+  "last_updated": "2025-07-21T17:29:23.951Z"
+}

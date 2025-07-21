@@ -1,0 +1,133 @@
+{
+  "company": {
+    "id": null,
+    "name": "Phind",
+    "category": "AI Search",
+    "description": null,
+    "created_at": null,
+    "thebrain_thought_id": "7898bcb3-c107-4bc6-9272-165435ee2f54",
+    "company_id": null,
+    "industry": null,
+    "founded_year": null,
+    "headquarters": null,
+    "website": null,
+    "updated_at": null,
+    "urls": []
+  },
+  "stats": {
+    "monitored_urls": "0",
+    "total_changes": "1",
+    "high_interest_changes": "0",
+    "changes_last_week": "1",
+    "avg_interest_level": "2.0000000000000000"
+  },
+  "changes": [
+    {
+      "id": 193,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:28:07.659Z",
+      "company": "Phind",
+      "url_name": "homepage",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "57455ae5572b7791026f3e0f23dd48055fa59b6c7c9c67d7382b04dedb4400cc",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 1,
+        "interest_level": 2,
+        "interest_drivers": [
+          "error message change"
+        ],
+        "category": "Error Handling",
+        "impact_areas": [
+          "User Experience",
+          "System Reliability"
+        ],
+        "summary": "The change from a captcha/challenge block to a client-side exception error message does not indicate significant technical innovation or business impact, suggesting routine maintenance or minor updates with little relevance to AI/ML advancements or competitive intelligence."
+      },
+      "url": null,
+      "title": "",
+      "content_preview": "Title: \n\nApplication error: a client-side exception has occurred (see the browser console for more information)."
+    },
+    {
+      "id": 193,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:28:07.659Z",
+      "company": "Phind",
+      "url_name": "homepage",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "57455ae5572b7791026f3e0f23dd48055fa59b6c7c9c67d7382b04dedb4400cc",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 1,
+        "interest_level": 2,
+        "interest_drivers": [
+          "error message change"
+        ],
+        "category": "Error Handling",
+        "impact_areas": [
+          "User Experience",
+          "System Reliability"
+        ],
+        "summary": "The change from a captcha/challenge block to a client-side exception error message does not indicate significant technical innovation or business impact, suggesting routine maintenance or minor updates with little relevance to AI/ML advancements or competitive intelligence."
+      },
+      "url": null,
+      "title": "",
+      "content_preview": "Title: \n\nApplication error: a client-side exception has occurred (see the browser console for more information)."
+    },
+    {
+      "id": 193,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:28:07.659Z",
+      "company": "Phind",
+      "url_name": "homepage",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "57455ae5572b7791026f3e0f23dd48055fa59b6c7c9c67d7382b04dedb4400cc",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 1,
+        "interest_level": 2,
+        "interest_drivers": [
+          "error message change"
+        ],
+        "category": "Error Handling",
+        "impact_areas": [
+          "User Experience",
+          "System Reliability"
+        ],
+        "summary": "The change from a captcha/challenge block to a client-side exception error message does not indicate significant technical innovation or business impact, suggesting routine maintenance or minor updates with little relevance to AI/ML advancements or competitive intelligence."
+      },
+      "url": null,
+      "title": "",
+      "content_preview": "Title: \n\nApplication error: a client-side exception has occurred (see the browser console for more information)."
+    }
+  ],
+  "insights": [],
+  "entities": {
+    "technologies": [],
+    "products": []
+  },
+  "themes": [],
+  "key_points": [],
+  "last_updated": "2025-07-21T17:29:26.281Z"
+}

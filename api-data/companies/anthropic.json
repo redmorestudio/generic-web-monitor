@@ -1,0 +1,757 @@
+{
+  "company": {
+    "id": null,
+    "name": "Anthropic",
+    "category": "LLM Providers",
+    "description": null,
+    "created_at": null,
+    "thebrain_thought_id": "261033ad-a04c-408b-908e-0d16aafb51fa",
+    "company_id": null,
+    "industry": null,
+    "founded_year": null,
+    "headquarters": null,
+    "website": null,
+    "updated_at": null,
+    "urls": []
+  },
+  "stats": {
+    "monitored_urls": "0",
+    "total_changes": "6",
+    "high_interest_changes": "4",
+    "changes_last_week": "6",
+    "avg_interest_level": "6.8333333333333333"
+  },
+  "changes": [
+    {
+      "id": 64,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-21T14:21:02.651Z",
+      "company": "Anthropic",
+      "url_name": "news",
+      "old_hash": "0df5854e95a3055eb194e9001e6b250e47151d1800c94e31320e7815ff53f031",
+      "new_hash": "715149c11ce9ecfeb58230117d600c56aab66e6ae501de8e5c65f2d8bde958eb",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 6,
+        "interest_level": 4,
+        "interest_drivers": [
+          "Anthropic's commitment to EU Code of Practice",
+          "Expansion of Claude for Enterprise use"
+        ],
+        "category": "AI/ML Industry News",
+        "impact_areas": [
+          "Regulatory Compliance",
+          "AI Adoption in Enterprises"
+        ],
+        "summary": "Anthropic's announcement to sign the EU Code of Practice indicates a commitment to regulatory compliance, while the expansion of Claude for Enterprise use suggests growing adoption of AI in enterprises."
+      },
+      "url": null,
+      "title": "Newsroom \\ Anthropic",
+      "content_preview": "Title: Newsroom \\ Anthropic\n\nSkip to main content\nSkip to footer\nClaude\nAPI\nSolutions\nResearch\nCommitments\nLearn\nNews\nTry Claude\nNewsroom\nAnnouncements\nIntroducing Claude 4\nPress inquiries\npress@anthropic.com\n\n\nNon-media inquiries\nsupport.anthropic.com\n\n\nMedia assets\nDownload press kit\n\n\nFollow Anthropic\n\nFeatured\nAnthropic raises Series E at $61.5B post-money valuation\nFeatured\nIntroducing the Anthropic Economic Index\nNews\nPolicy\nAnthropic to sign the EU Code of Practice\nJul 21, 2025\nAnnouncements\nPaul Smith to join Anthropic as Chief Commercial Officer\nJul 15, 2025\nProduct\nClaude for Financial Services\nJul 15, 2025\nAlignment\n  ·  Policy\nInvesting in energy to secure America's AI future\nJul 15, 2025\nProduct\nDiscover tools that work with Claude\nJul 14, 2025\nAnnouncements\nAnthropic and the Department of Defense to advance responsible AI in defense operations\nJul 14, 2025\nProduct\nAdvancing Claude for Education\nJul 9, 2025\nAnnouncements\nLawrence Livermore National Laboratory expands Claud"
+    },
+    {
+      "id": 64,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-21T14:21:02.651Z",
+      "company": "Anthropic",
+      "url_name": "news",
+      "old_hash": "0df5854e95a3055eb194e9001e6b250e47151d1800c94e31320e7815ff53f031",
+      "new_hash": "715149c11ce9ecfeb58230117d600c56aab66e6ae501de8e5c65f2d8bde958eb",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 6,
+        "interest_level": 4,
+        "interest_drivers": [
+          "Anthropic's commitment to EU Code of Practice",
+          "Expansion of Claude for Enterprise use"
+        ],
+        "category": "AI/ML Industry News",
+        "impact_areas": [
+          "Regulatory Compliance",
+          "AI Adoption in Enterprises"
+        ],
+        "summary": "Anthropic's announcement to sign the EU Code of Practice indicates a commitment to regulatory compliance, while the expansion of Claude for Enterprise use suggests growing adoption of AI in enterprises."
+      },
+      "url": null,
+      "title": "Newsroom \\ Anthropic",
+      "content_preview": "Title: Newsroom \\ Anthropic\n\nSkip to main content\nSkip to footer\nClaude\nAPI\nSolutions\nResearch\nCommitments\nLearn\nNews\nTry Claude\nNewsroom\nAnnouncements\nIntroducing Claude 4\nPress inquiries\npress@anthropic.com\n\n\nNon-media inquiries\nsupport.anthropic.com\n\n\nMedia assets\nDownload press kit\n\n\nFollow Anthropic\n\nFeatured\nAnthropic raises Series E at $61.5B post-money valuation\nFeatured\nIntroducing the Anthropic Economic Index\nNews\nPolicy\nAnthropic to sign the EU Code of Practice\nJul 21, 2025\nAnnouncements\nPaul Smith to join Anthropic as Chief Commercial Officer\nJul 15, 2025\nProduct\nClaude for Financial Services\nJul 15, 2025\nAlignment\n  ·  Policy\nInvesting in energy to secure America's AI future\nJul 15, 2025\nProduct\nDiscover tools that work with Claude\nJul 14, 2025\nAnnouncements\nAnthropic and the Department of Defense to advance responsible AI in defense operations\nJul 14, 2025\nProduct\nAdvancing Claude for Education\nJul 9, 2025\nAnnouncements\nLawrence Livermore National Laboratory expands Claud"
+    },
+    {
+      "id": 64,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-21T14:21:02.651Z",
+      "company": "Anthropic",
+      "url_name": "news",
+      "old_hash": "0df5854e95a3055eb194e9001e6b250e47151d1800c94e31320e7815ff53f031",
+      "new_hash": "715149c11ce9ecfeb58230117d600c56aab66e6ae501de8e5c65f2d8bde958eb",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 6,
+        "interest_level": 4,
+        "interest_drivers": [
+          "Anthropic's commitment to EU Code of Practice",
+          "Expansion of Claude for Enterprise use"
+        ],
+        "category": "AI/ML Industry News",
+        "impact_areas": [
+          "Regulatory Compliance",
+          "AI Adoption in Enterprises"
+        ],
+        "summary": "Anthropic's announcement to sign the EU Code of Practice indicates a commitment to regulatory compliance, while the expansion of Claude for Enterprise use suggests growing adoption of AI in enterprises."
+      },
+      "url": null,
+      "title": "Newsroom \\ Anthropic",
+      "content_preview": "Title: Newsroom \\ Anthropic\n\nSkip to main content\nSkip to footer\nClaude\nAPI\nSolutions\nResearch\nCommitments\nLearn\nNews\nTry Claude\nNewsroom\nAnnouncements\nIntroducing Claude 4\nPress inquiries\npress@anthropic.com\n\n\nNon-media inquiries\nsupport.anthropic.com\n\n\nMedia assets\nDownload press kit\n\n\nFollow Anthropic\n\nFeatured\nAnthropic raises Series E at $61.5B post-money valuation\nFeatured\nIntroducing the Anthropic Economic Index\nNews\nPolicy\nAnthropic to sign the EU Code of Practice\nJul 21, 2025\nAnnouncements\nPaul Smith to join Anthropic as Chief Commercial Officer\nJul 15, 2025\nProduct\nClaude for Financial Services\nJul 15, 2025\nAlignment\n  ·  Policy\nInvesting in energy to secure America's AI future\nJul 15, 2025\nProduct\nDiscover tools that work with Claude\nJul 14, 2025\nAnnouncements\nAnthropic and the Department of Defense to advance responsible AI in defense operations\nJul 14, 2025\nProduct\nAdvancing Claude for Education\nJul 9, 2025\nAnnouncements\nLawrence Livermore National Laboratory expands Claud"
+    },
+    {
+      "id": 14,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:11.303Z",
+      "company": "Anthropic",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "0db4d14b9badf390e1904c3db5f56192b8873a033edaa97e0f1e9e8416604eba",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Introduction of Claude Code",
+          "Model Context Protocol (MCP)",
+          "API Reference and SDKs",
+          "Upgrade to Claude 4"
+        ],
+        "category": "AI/ML Developer Platform",
+        "impact_areas": [
+          "Natural Language Processing",
+          "AI Model Development",
+          "Developer Tools"
+        ],
+        "summary": "Anthropic's new developer platform and API introduce notable technical advancements, with features like Claude Code and Model Context Protocol, indicating a significant step forward in AI/ML capabilities, but the business impact, while substantial, is more related to product updates and feature enhancements rather than groundbreaking market moves."
+      },
+      "url": null,
+      "title": "Home - Anthropic",
+      "content_preview": "Title: Home - Anthropic\n\nAnthropic home page\nEnglish\nSearch...\nCtrl K\nResearch\nLogin\nSupport\nSign up\nWelcome\nDeveloper Platform\nClaude Code\nModel Context Protocol (MCP)\nAPI Reference\nResources\nRelease Notes\nBuild with\n\nLearn how to get started with the Anthropic API, the Console, and Claude Code.\n\nAsk Claude about docs…\n\nDeveloper Platform\n\nGet started\n\nMake your first API call in minutes.\n\nFeatures overview\n\nExplore the advanced features and capabilities now available in Claude.\n\nAPI reference\n\nIntegrate and scale using our API and SDKs.\n\nAnthropic Console\n\nCraft and test powerful prompts directly in your browser.\n\nRelease notes\n\nLearn about changes and new features in Claude and the API.\n\nUpgrade to Claude 4\n\nUpgrade to the latest model to access new tools and features available in Claude 4.\n\nClaude Code\n\nClaude Code quickstart\n\nGet started with Claude Code.\n\nClaude Code reference\n\nConsult the Claude Code reference documentation for details on feature implementation and configuration"
+    },
+    {
+      "id": 14,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:11.303Z",
+      "company": "Anthropic",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "0db4d14b9badf390e1904c3db5f56192b8873a033edaa97e0f1e9e8416604eba",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Introduction of Claude Code",
+          "Model Context Protocol (MCP)",
+          "API Reference and SDKs",
+          "Upgrade to Claude 4"
+        ],
+        "category": "AI/ML Developer Platform",
+        "impact_areas": [
+          "Natural Language Processing",
+          "AI Model Development",
+          "Developer Tools"
+        ],
+        "summary": "Anthropic's new developer platform and API introduce notable technical advancements, with features like Claude Code and Model Context Protocol, indicating a significant step forward in AI/ML capabilities, but the business impact, while substantial, is more related to product updates and feature enhancements rather than groundbreaking market moves."
+      },
+      "url": null,
+      "title": "Home - Anthropic",
+      "content_preview": "Title: Home - Anthropic\n\nAnthropic home page\nEnglish\nSearch...\nCtrl K\nResearch\nLogin\nSupport\nSign up\nWelcome\nDeveloper Platform\nClaude Code\nModel Context Protocol (MCP)\nAPI Reference\nResources\nRelease Notes\nBuild with\n\nLearn how to get started with the Anthropic API, the Console, and Claude Code.\n\nAsk Claude about docs…\n\nDeveloper Platform\n\nGet started\n\nMake your first API call in minutes.\n\nFeatures overview\n\nExplore the advanced features and capabilities now available in Claude.\n\nAPI reference\n\nIntegrate and scale using our API and SDKs.\n\nAnthropic Console\n\nCraft and test powerful prompts directly in your browser.\n\nRelease notes\n\nLearn about changes and new features in Claude and the API.\n\nUpgrade to Claude 4\n\nUpgrade to the latest model to access new tools and features available in Claude 4.\n\nClaude Code\n\nClaude Code quickstart\n\nGet started with Claude Code.\n\nClaude Code reference\n\nConsult the Claude Code reference documentation for details on feature implementation and configuration"
+    },
+    {
+      "id": 14,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:11.303Z",
+      "company": "Anthropic",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "0db4d14b9badf390e1904c3db5f56192b8873a033edaa97e0f1e9e8416604eba",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Introduction of Claude Code",
+          "Model Context Protocol (MCP)",
+          "API Reference and SDKs",
+          "Upgrade to Claude 4"
+        ],
+        "category": "AI/ML Developer Platform",
+        "impact_areas": [
+          "Natural Language Processing",
+          "AI Model Development",
+          "Developer Tools"
+        ],
+        "summary": "Anthropic's new developer platform and API introduce notable technical advancements, with features like Claude Code and Model Context Protocol, indicating a significant step forward in AI/ML capabilities, but the business impact, while substantial, is more related to product updates and feature enhancements rather than groundbreaking market moves."
+      },
+      "url": null,
+      "title": "Home - Anthropic",
+      "content_preview": "Title: Home - Anthropic\n\nAnthropic home page\nEnglish\nSearch...\nCtrl K\nResearch\nLogin\nSupport\nSign up\nWelcome\nDeveloper Platform\nClaude Code\nModel Context Protocol (MCP)\nAPI Reference\nResources\nRelease Notes\nBuild with\n\nLearn how to get started with the Anthropic API, the Console, and Claude Code.\n\nAsk Claude about docs…\n\nDeveloper Platform\n\nGet started\n\nMake your first API call in minutes.\n\nFeatures overview\n\nExplore the advanced features and capabilities now available in Claude.\n\nAPI reference\n\nIntegrate and scale using our API and SDKs.\n\nAnthropic Console\n\nCraft and test powerful prompts directly in your browser.\n\nRelease notes\n\nLearn about changes and new features in Claude and the API.\n\nUpgrade to Claude 4\n\nUpgrade to the latest model to access new tools and features available in Claude 4.\n\nClaude Code\n\nClaude Code quickstart\n\nGet started with Claude Code.\n\nClaude Code reference\n\nConsult the Claude Code reference documentation for details on feature implementation and configuration"
+    },
+    {
+      "id": 14,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:11.303Z",
+      "company": "Anthropic",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "0db4d14b9badf390e1904c3db5f56192b8873a033edaa97e0f1e9e8416604eba",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Introduction of Claude Code",
+          "Model Context Protocol (MCP)",
+          "API Reference and SDKs",
+          "Upgrade to Claude 4"
+        ],
+        "category": "AI/ML Developer Platform",
+        "impact_areas": [
+          "Natural Language Processing",
+          "AI Model Development",
+          "Developer Tools"
+        ],
+        "summary": "Anthropic's new developer platform and API introduce notable technical advancements, with features like Claude Code and Model Context Protocol, indicating a significant step forward in AI/ML capabilities, but the business impact, while substantial, is more related to product updates and feature enhancements rather than groundbreaking market moves."
+      },
+      "url": null,
+      "title": "Home - Anthropic",
+      "content_preview": "Title: Home - Anthropic\n\nAnthropic home page\nEnglish\nSearch...\nCtrl K\nResearch\nLogin\nSupport\nSign up\nWelcome\nDeveloper Platform\nClaude Code\nModel Context Protocol (MCP)\nAPI Reference\nResources\nRelease Notes\nBuild with\n\nLearn how to get started with the Anthropic API, the Console, and Claude Code.\n\nAsk Claude about docs…\n\nDeveloper Platform\n\nGet started\n\nMake your first API call in minutes.\n\nFeatures overview\n\nExplore the advanced features and capabilities now available in Claude.\n\nAPI reference\n\nIntegrate and scale using our API and SDKs.\n\nAnthropic Console\n\nCraft and test powerful prompts directly in your browser.\n\nRelease notes\n\nLearn about changes and new features in Claude and the API.\n\nUpgrade to Claude 4\n\nUpgrade to the latest model to access new tools and features available in Claude 4.\n\nClaude Code\n\nClaude Code quickstart\n\nGet started with Claude Code.\n\nClaude Code reference\n\nConsult the Claude Code reference documentation for details on feature implementation and configuration"
+    },
+    {
+      "id": 13,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:04.850Z",
+      "company": "Anthropic",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "67bec9f6dc6615bfc90a431b22de1c03c4d6f0dfd44d83e1cd5e1222376b2c61",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Introduction of Claude Opus 4, a new AI model",
+          "Availability of API for building AI-powered applications",
+          "Emphasis on safety and long-term well-being in AI development"
+        ],
+        "category": "AI Research and Development",
+        "impact_areas": [
+          "AI safety",
+          "AI-powered application development",
+          "Machine learning model advancements"
+        ],
+        "summary": "Anthropic introduces Claude Opus 4, a new AI model, and emphasizes safety and long-term well-being in AI development, demonstrating significant technical innovation and business impact in the AI research and development space."
+      },
+      "url": null,
+      "title": "Home \\ Anthropic",
+      "content_preview": "Title: Home \\ Anthropic\n\nSkip to main content\nSkip to footer\nAI research and products that put safety at the frontier\nAI research and products that put safety at the frontier\nCLAUDE.AI\nMeet Claude Opus 4\nClaude Opus 4, our most intelligent AI model, is now available.\nTalk to Claude\nTalk to Claude\nAPI\nBuild with Claude\nCreate AI-powered applications and custom experiences using Claude.\nLearn more\nLearn more\nClaude Opus 4 and Sonnet 4\n\nOur most powerful models yet, pushing the frontier for coding and AI agents—and enabling Claude to handle hours of work across Claude and Claude Code.\n\nRead announcement\nRead announcement\n\nModel details\n\nOpus 4\nLearn more Claude Opus 4\n\nModel details\n\nSonnet 4\nLearn more about Sonnet 4\n\n“\n\nIf knowledge is power and we’re building machines that have more knowledge than us, what will happen between us and the machines?\n\nDeep Ganguli\nResearch Lead, Societal Impacts\n\nAt Anthropic, we build AI to serve humanity’s long-term well-being.\n\n‍\n\nWhile no one can fores"
+    },
+    {
+      "id": 13,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:04.850Z",
+      "company": "Anthropic",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "67bec9f6dc6615bfc90a431b22de1c03c4d6f0dfd44d83e1cd5e1222376b2c61",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Introduction of Claude Opus 4, a new AI model",
+          "Availability of API for building AI-powered applications",
+          "Emphasis on safety and long-term well-being in AI development"
+        ],
+        "category": "AI Research and Development",
+        "impact_areas": [
+          "AI safety",
+          "AI-powered application development",
+          "Machine learning model advancements"
+        ],
+        "summary": "Anthropic introduces Claude Opus 4, a new AI model, and emphasizes safety and long-term well-being in AI development, demonstrating significant technical innovation and business impact in the AI research and development space."
+      },
+      "url": null,
+      "title": "Home \\ Anthropic",
+      "content_preview": "Title: Home \\ Anthropic\n\nSkip to main content\nSkip to footer\nAI research and products that put safety at the frontier\nAI research and products that put safety at the frontier\nCLAUDE.AI\nMeet Claude Opus 4\nClaude Opus 4, our most intelligent AI model, is now available.\nTalk to Claude\nTalk to Claude\nAPI\nBuild with Claude\nCreate AI-powered applications and custom experiences using Claude.\nLearn more\nLearn more\nClaude Opus 4 and Sonnet 4\n\nOur most powerful models yet, pushing the frontier for coding and AI agents—and enabling Claude to handle hours of work across Claude and Claude Code.\n\nRead announcement\nRead announcement\n\nModel details\n\nOpus 4\nLearn more Claude Opus 4\n\nModel details\n\nSonnet 4\nLearn more about Sonnet 4\n\n“\n\nIf knowledge is power and we’re building machines that have more knowledge than us, what will happen between us and the machines?\n\nDeep Ganguli\nResearch Lead, Societal Impacts\n\nAt Anthropic, we build AI to serve humanity’s long-term well-being.\n\n‍\n\nWhile no one can fores"
+    },
+    {
+      "id": 13,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:04.850Z",
+      "company": "Anthropic",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "67bec9f6dc6615bfc90a431b22de1c03c4d6f0dfd44d83e1cd5e1222376b2c61",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Introduction of Claude Opus 4, a new AI model",
+          "Availability of API for building AI-powered applications",
+          "Emphasis on safety and long-term well-being in AI development"
+        ],
+        "category": "AI Research and Development",
+        "impact_areas": [
+          "AI safety",
+          "AI-powered application development",
+          "Machine learning model advancements"
+        ],
+        "summary": "Anthropic introduces Claude Opus 4, a new AI model, and emphasizes safety and long-term well-being in AI development, demonstrating significant technical innovation and business impact in the AI research and development space."
+      },
+      "url": null,
+      "title": "Home \\ Anthropic",
+      "content_preview": "Title: Home \\ Anthropic\n\nSkip to main content\nSkip to footer\nAI research and products that put safety at the frontier\nAI research and products that put safety at the frontier\nCLAUDE.AI\nMeet Claude Opus 4\nClaude Opus 4, our most intelligent AI model, is now available.\nTalk to Claude\nTalk to Claude\nAPI\nBuild with Claude\nCreate AI-powered applications and custom experiences using Claude.\nLearn more\nLearn more\nClaude Opus 4 and Sonnet 4\n\nOur most powerful models yet, pushing the frontier for coding and AI agents—and enabling Claude to handle hours of work across Claude and Claude Code.\n\nRead announcement\nRead announcement\n\nModel details\n\nOpus 4\nLearn more Claude Opus 4\n\nModel details\n\nSonnet 4\nLearn more about Sonnet 4\n\n“\n\nIf knowledge is power and we’re building machines that have more knowledge than us, what will happen between us and the machines?\n\nDeep Ganguli\nResearch Lead, Societal Impacts\n\nAt Anthropic, we build AI to serve humanity’s long-term well-being.\n\n‍\n\nWhile no one can fores"
+    },
+    {
+      "id": 13,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:07:04.850Z",
+      "company": "Anthropic",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "67bec9f6dc6615bfc90a431b22de1c03c4d6f0dfd44d83e1cd5e1222376b2c61",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Introduction of Claude Opus 4, a new AI model",
+          "Availability of API for building AI-powered applications",
+          "Emphasis on safety and long-term well-being in AI development"
+        ],
+        "category": "AI Research and Development",
+        "impact_areas": [
+          "AI safety",
+          "AI-powered application development",
+          "Machine learning model advancements"
+        ],
+        "summary": "Anthropic introduces Claude Opus 4, a new AI model, and emphasizes safety and long-term well-being in AI development, demonstrating significant technical innovation and business impact in the AI research and development space."
+      },
+      "url": null,
+      "title": "Home \\ Anthropic",
+      "content_preview": "Title: Home \\ Anthropic\n\nSkip to main content\nSkip to footer\nAI research and products that put safety at the frontier\nAI research and products that put safety at the frontier\nCLAUDE.AI\nMeet Claude Opus 4\nClaude Opus 4, our most intelligent AI model, is now available.\nTalk to Claude\nTalk to Claude\nAPI\nBuild with Claude\nCreate AI-powered applications and custom experiences using Claude.\nLearn more\nLearn more\nClaude Opus 4 and Sonnet 4\n\nOur most powerful models yet, pushing the frontier for coding and AI agents—and enabling Claude to handle hours of work across Claude and Claude Code.\n\nRead announcement\nRead announcement\n\nModel details\n\nOpus 4\nLearn more Claude Opus 4\n\nModel details\n\nSonnet 4\nLearn more about Sonnet 4\n\n“\n\nIf knowledge is power and we’re building machines that have more knowledge than us, what will happen between us and the machines?\n\nDeep Ganguli\nResearch Lead, Societal Impacts\n\nAt Anthropic, we build AI to serve humanity’s long-term well-being.\n\n‍\n\nWhile no one can fores"
+    },
+    {
+      "id": 12,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:06:58.430Z",
+      "company": "Anthropic",
+      "url_name": "news",
+      "old_hash": null,
+      "new_hash": "0df5854e95a3055eb194e9001e6b250e47151d1800c94e31320e7815ff53f031",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 8,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Introduction of Claude 4",
+          "Anthropic's $61.5B post-money valuation",
+          "Partnership with the Department of Defense",
+          "Expansion of Claude for Enterprise use"
+        ],
+        "category": "AI/ML Advancements and Business Developments",
+        "impact_areas": [
+          "AI research and development",
+          "AI applications in finance and education",
+          "Responsible AI in defense operations"
+        ],
+        "summary": "Anthropic's recent updates, including the introduction of Claude 4 and a $61.5B post-money valuation, demonstrate significant technical innovation and business impact in the AI/ML space."
+      },
+      "url": null,
+      "title": "Newsroom \\ Anthropic",
+      "content_preview": "Title: Newsroom \\ Anthropic\n\nSkip to main content\nSkip to footer\nClaude\nAPI\nSolutions\nResearch\nCommitments\nLearn\nNews\nTry Claude\nNewsroom\nAnnouncements\nIntroducing Claude 4\nPress inquiries\npress@anthropic.com\n\n\nNon-media inquiries\nsupport.anthropic.com\n\n\nMedia assets\nDownload press kit\n\n\nFollow Anthropic\n\nFeatured\nAnthropic raises Series E at $61.5B post-money valuation\nFeatured\nIntroducing the Anthropic Economic Index\nNews\nAnnouncements\nPaul Smith to join Anthropic as Chief Commercial Officer\nJul 15, 2025\nProduct\nClaude for Financial Services\nJul 15, 2025\nAlignment\n  ·  Policy\nInvesting in energy to secure America's AI future\nJul 15, 2025\nProduct\nDiscover tools that work with Claude\nJul 14, 2025\nAnnouncements\nAnthropic and the Department of Defense to advance responsible AI in defense operations\nJul 14, 2025\nProduct\nAdvancing Claude for Education\nJul 9, 2025\nAnnouncements\nLawrence Livermore National Laboratory expands Claude for Enterprise use to empower scientists and researchers\nJul"
+    },
+    {
+      "id": 11,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:06:50.654Z",
+      "company": "Anthropic",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "0ca2242f35fbde5b5ce1788846cb631680ffeb16fddb8029bcc3a68a197b68c3",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of tiered pricing model",
+          "Availability of API and desktop extensions",
+          "Integration with Google Workspace and other tools"
+        ],
+        "category": "AI-powered productivity tools",
+        "impact_areas": [
+          "AI model accessibility",
+          "Productivity software",
+          "Cloud-based services"
+        ],
+        "summary": "Anthropic's pricing page reveals a tiered model for its AI-powered productivity tool Claude, with features like code generation, data visualization, and web search. The introduction of a free tier, pro tier, and max tier suggests a strategic move to expand its user base and cater to different customer segments."
+      },
+      "url": null,
+      "title": "Pricing \\ Anthropic",
+      "content_preview": "Title: Pricing \\ Anthropic\n\nSkip to main content\nSkip to footer\nPricing\n\nPricing\n\nIndividual\nTeam & Enterprise\nAPI\nFree\nTry Claude\n\n$0\nFree for everyone\nTry Claude\nTry Claude\n\nChat on web, iOS, Android, and on your desktop\n\nGenerate code and visualize data\n\nWrite, edit, and create content\n\nAnalyze text and images\n\nAbility to search the web\n\nUnlock more from Claude with desktop extensions\n\nPro\nFor everyday productivity\n\n$17\nPer month with annual subscription discount; $200 billed up front. $20 if billed monthly.\nTry Claude\nTry Claude\nEverything in Free, plus:\n\nMore usage*\n\nAccess Claude Code directly in your terminal\n\nAccess to unlimited Projects to organize chats and documents\n\nAccess to Research\n\nConnect Google Workspace: email, calendar, and docs\n\nConnect your everyday tools in just a few clicks  (with remote MCP servers)\n\nExtended thinking for complex work\n\nAbility to use more Claude models\n\nMax\nGet the most out of Claude\n\nFrom $100\nPer person billed monthly\n\nTry Claude\nTry Claude\nE"
+    },
+    {
+      "id": 11,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:06:50.654Z",
+      "company": "Anthropic",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "0ca2242f35fbde5b5ce1788846cb631680ffeb16fddb8029bcc3a68a197b68c3",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of tiered pricing model",
+          "Availability of API and desktop extensions",
+          "Integration with Google Workspace and other tools"
+        ],
+        "category": "AI-powered productivity tools",
+        "impact_areas": [
+          "AI model accessibility",
+          "Productivity software",
+          "Cloud-based services"
+        ],
+        "summary": "Anthropic's pricing page reveals a tiered model for its AI-powered productivity tool Claude, with features like code generation, data visualization, and web search. The introduction of a free tier, pro tier, and max tier suggests a strategic move to expand its user base and cater to different customer segments."
+      },
+      "url": null,
+      "title": "Pricing \\ Anthropic",
+      "content_preview": "Title: Pricing \\ Anthropic\n\nSkip to main content\nSkip to footer\nPricing\n\nPricing\n\nIndividual\nTeam & Enterprise\nAPI\nFree\nTry Claude\n\n$0\nFree for everyone\nTry Claude\nTry Claude\n\nChat on web, iOS, Android, and on your desktop\n\nGenerate code and visualize data\n\nWrite, edit, and create content\n\nAnalyze text and images\n\nAbility to search the web\n\nUnlock more from Claude with desktop extensions\n\nPro\nFor everyday productivity\n\n$17\nPer month with annual subscription discount; $200 billed up front. $20 if billed monthly.\nTry Claude\nTry Claude\nEverything in Free, plus:\n\nMore usage*\n\nAccess Claude Code directly in your terminal\n\nAccess to unlimited Projects to organize chats and documents\n\nAccess to Research\n\nConnect Google Workspace: email, calendar, and docs\n\nConnect your everyday tools in just a few clicks  (with remote MCP servers)\n\nExtended thinking for complex work\n\nAbility to use more Claude models\n\nMax\nGet the most out of Claude\n\nFrom $100\nPer person billed monthly\n\nTry Claude\nTry Claude\nE"
+    },
+    {
+      "id": 11,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:06:50.654Z",
+      "company": "Anthropic",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "0ca2242f35fbde5b5ce1788846cb631680ffeb16fddb8029bcc3a68a197b68c3",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of tiered pricing model",
+          "Availability of API and desktop extensions",
+          "Integration with Google Workspace and other tools"
+        ],
+        "category": "AI-powered productivity tools",
+        "impact_areas": [
+          "AI model accessibility",
+          "Productivity software",
+          "Cloud-based services"
+        ],
+        "summary": "Anthropic's pricing page reveals a tiered model for its AI-powered productivity tool Claude, with features like code generation, data visualization, and web search. The introduction of a free tier, pro tier, and max tier suggests a strategic move to expand its user base and cater to different customer segments."
+      },
+      "url": null,
+      "title": "Pricing \\ Anthropic",
+      "content_preview": "Title: Pricing \\ Anthropic\n\nSkip to main content\nSkip to footer\nPricing\n\nPricing\n\nIndividual\nTeam & Enterprise\nAPI\nFree\nTry Claude\n\n$0\nFree for everyone\nTry Claude\nTry Claude\n\nChat on web, iOS, Android, and on your desktop\n\nGenerate code and visualize data\n\nWrite, edit, and create content\n\nAnalyze text and images\n\nAbility to search the web\n\nUnlock more from Claude with desktop extensions\n\nPro\nFor everyday productivity\n\n$17\nPer month with annual subscription discount; $200 billed up front. $20 if billed monthly.\nTry Claude\nTry Claude\nEverything in Free, plus:\n\nMore usage*\n\nAccess Claude Code directly in your terminal\n\nAccess to unlimited Projects to organize chats and documents\n\nAccess to Research\n\nConnect Google Workspace: email, calendar, and docs\n\nConnect your everyday tools in just a few clicks  (with remote MCP servers)\n\nExtended thinking for complex work\n\nAbility to use more Claude models\n\nMax\nGet the most out of Claude\n\nFrom $100\nPer person billed monthly\n\nTry Claude\nTry Claude\nE"
+    },
+    {
+      "id": 11,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:06:50.654Z",
+      "company": "Anthropic",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "0ca2242f35fbde5b5ce1788846cb631680ffeb16fddb8029bcc3a68a197b68c3",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of tiered pricing model",
+          "Availability of API and desktop extensions",
+          "Integration with Google Workspace and other tools"
+        ],
+        "category": "AI-powered productivity tools",
+        "impact_areas": [
+          "AI model accessibility",
+          "Productivity software",
+          "Cloud-based services"
+        ],
+        "summary": "Anthropic's pricing page reveals a tiered model for its AI-powered productivity tool Claude, with features like code generation, data visualization, and web search. The introduction of a free tier, pro tier, and max tier suggests a strategic move to expand its user base and cater to different customer segments."
+      },
+      "url": null,
+      "title": "Pricing \\ Anthropic",
+      "content_preview": "Title: Pricing \\ Anthropic\n\nSkip to main content\nSkip to footer\nPricing\n\nPricing\n\nIndividual\nTeam & Enterprise\nAPI\nFree\nTry Claude\n\n$0\nFree for everyone\nTry Claude\nTry Claude\n\nChat on web, iOS, Android, and on your desktop\n\nGenerate code and visualize data\n\nWrite, edit, and create content\n\nAnalyze text and images\n\nAbility to search the web\n\nUnlock more from Claude with desktop extensions\n\nPro\nFor everyday productivity\n\n$17\nPer month with annual subscription discount; $200 billed up front. $20 if billed monthly.\nTry Claude\nTry Claude\nEverything in Free, plus:\n\nMore usage*\n\nAccess Claude Code directly in your terminal\n\nAccess to unlimited Projects to organize chats and documents\n\nAccess to Research\n\nConnect Google Workspace: email, calendar, and docs\n\nConnect your everyday tools in just a few clicks  (with remote MCP servers)\n\nExtended thinking for complex work\n\nAbility to use more Claude models\n\nMax\nGet the most out of Claude\n\nFrom $100\nPer person billed monthly\n\nTry Claude\nTry Claude\nE"
+    },
+    {
+      "id": 10,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:06:44.412Z",
+      "company": "Anthropic",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "a2d3fed1f434994e3a6829172b2eed96f11da716a50ed50ce4f8c6f9f252f24d",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Introduction of Claude, a new AI partner",
+          "Integration of natural conversation with documents, tools, and web knowledge",
+          "Ability to tackle complex questions and build working code",
+          "Amplification of creative potential with suggestions and functional prototypes"
+        ],
+        "category": "AI/ML Innovation",
+        "impact_areas": [
+          "Conversational AI",
+          "AI-assisted productivity",
+          "Creative AI"
+        ],
+        "summary": "Anthropic introduces Claude, a thinking partner that connects to users' worlds, expands their capabilities, and solves complex challenges, marking a significant technical advance and potential business impact in the AI/ML landscape."
+      },
+      "url": null,
+      "title": "Meet Claude \\ Anthropic",
+      "content_preview": "Title: Meet Claude \\ Anthropic\n\nSkip to main content\nSkip to footer\nClaude for\nIndividuals\nMeet Claude, your thinking partner\nMeet Claude, your thinking partner\n\nClaude connects to your world and expands what you can do—individually or with your team.\n\nTry Claude on web\nTry Claude on web\n\nRight now, people are asking Claude to build a bedtime story app\n\nTry Claude on desktop:\n\nmacOS\nmacOS\nWindows\nWindows\nWindows (arm64)\nWindows (arm64)\nWhy Claude?\nConnects to your world\n\nBring together your documents, tools, and web knowledge in a natural conversation. Claude is helpful because it understands your context.\n\nSolves your toughest challenges\n\nTackle complex questions, build working code, and understand difficult concepts with clear, step-by-step help.\n\n\nAmplifies your creative potential\n\nTurn your initial ideas into polished projects with creative suggestions and functional prototypes you can actually use.\n\nClaude Opus 4 and Sonnet 4\n\nOur most powerful models yet, pushing the frontier for"
+    },
+    {
+      "id": 10,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:06:44.412Z",
+      "company": "Anthropic",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "a2d3fed1f434994e3a6829172b2eed96f11da716a50ed50ce4f8c6f9f252f24d",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Introduction of Claude, a new AI partner",
+          "Integration of natural conversation with documents, tools, and web knowledge",
+          "Ability to tackle complex questions and build working code",
+          "Amplification of creative potential with suggestions and functional prototypes"
+        ],
+        "category": "AI/ML Innovation",
+        "impact_areas": [
+          "Conversational AI",
+          "AI-assisted productivity",
+          "Creative AI"
+        ],
+        "summary": "Anthropic introduces Claude, a thinking partner that connects to users' worlds, expands their capabilities, and solves complex challenges, marking a significant technical advance and potential business impact in the AI/ML landscape."
+      },
+      "url": null,
+      "title": "Meet Claude \\ Anthropic",
+      "content_preview": "Title: Meet Claude \\ Anthropic\n\nSkip to main content\nSkip to footer\nClaude for\nIndividuals\nMeet Claude, your thinking partner\nMeet Claude, your thinking partner\n\nClaude connects to your world and expands what you can do—individually or with your team.\n\nTry Claude on web\nTry Claude on web\n\nRight now, people are asking Claude to build a bedtime story app\n\nTry Claude on desktop:\n\nmacOS\nmacOS\nWindows\nWindows\nWindows (arm64)\nWindows (arm64)\nWhy Claude?\nConnects to your world\n\nBring together your documents, tools, and web knowledge in a natural conversation. Claude is helpful because it understands your context.\n\nSolves your toughest challenges\n\nTackle complex questions, build working code, and understand difficult concepts with clear, step-by-step help.\n\n\nAmplifies your creative potential\n\nTurn your initial ideas into polished projects with creative suggestions and functional prototypes you can actually use.\n\nClaude Opus 4 and Sonnet 4\n\nOur most powerful models yet, pushing the frontier for"
+    },
+    {
+      "id": 10,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:06:44.412Z",
+      "company": "Anthropic",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "a2d3fed1f434994e3a6829172b2eed96f11da716a50ed50ce4f8c6f9f252f24d",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Introduction of Claude, a new AI partner",
+          "Integration of natural conversation with documents, tools, and web knowledge",
+          "Ability to tackle complex questions and build working code",
+          "Amplification of creative potential with suggestions and functional prototypes"
+        ],
+        "category": "AI/ML Innovation",
+        "impact_areas": [
+          "Conversational AI",
+          "AI-assisted productivity",
+          "Creative AI"
+        ],
+        "summary": "Anthropic introduces Claude, a thinking partner that connects to users' worlds, expands their capabilities, and solves complex challenges, marking a significant technical advance and potential business impact in the AI/ML landscape."
+      },
+      "url": null,
+      "title": "Meet Claude \\ Anthropic",
+      "content_preview": "Title: Meet Claude \\ Anthropic\n\nSkip to main content\nSkip to footer\nClaude for\nIndividuals\nMeet Claude, your thinking partner\nMeet Claude, your thinking partner\n\nClaude connects to your world and expands what you can do—individually or with your team.\n\nTry Claude on web\nTry Claude on web\n\nRight now, people are asking Claude to build a bedtime story app\n\nTry Claude on desktop:\n\nmacOS\nmacOS\nWindows\nWindows\nWindows (arm64)\nWindows (arm64)\nWhy Claude?\nConnects to your world\n\nBring together your documents, tools, and web knowledge in a natural conversation. Claude is helpful because it understands your context.\n\nSolves your toughest challenges\n\nTackle complex questions, build working code, and understand difficult concepts with clear, step-by-step help.\n\n\nAmplifies your creative potential\n\nTurn your initial ideas into polished projects with creative suggestions and functional prototypes you can actually use.\n\nClaude Opus 4 and Sonnet 4\n\nOur most powerful models yet, pushing the frontier for"
+    },
+    {
+      "id": 10,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:06:44.412Z",
+      "company": "Anthropic",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "a2d3fed1f434994e3a6829172b2eed96f11da716a50ed50ce4f8c6f9f252f24d",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Introduction of Claude, a new AI partner",
+          "Integration of natural conversation with documents, tools, and web knowledge",
+          "Ability to tackle complex questions and build working code",
+          "Amplification of creative potential with suggestions and functional prototypes"
+        ],
+        "category": "AI/ML Innovation",
+        "impact_areas": [
+          "Conversational AI",
+          "AI-assisted productivity",
+          "Creative AI"
+        ],
+        "summary": "Anthropic introduces Claude, a thinking partner that connects to users' worlds, expands their capabilities, and solves complex challenges, marking a significant technical advance and potential business impact in the AI/ML landscape."
+      },
+      "url": null,
+      "title": "Meet Claude \\ Anthropic",
+      "content_preview": "Title: Meet Claude \\ Anthropic\n\nSkip to main content\nSkip to footer\nClaude for\nIndividuals\nMeet Claude, your thinking partner\nMeet Claude, your thinking partner\n\nClaude connects to your world and expands what you can do—individually or with your team.\n\nTry Claude on web\nTry Claude on web\n\nRight now, people are asking Claude to build a bedtime story app\n\nTry Claude on desktop:\n\nmacOS\nmacOS\nWindows\nWindows\nWindows (arm64)\nWindows (arm64)\nWhy Claude?\nConnects to your world\n\nBring together your documents, tools, and web knowledge in a natural conversation. Claude is helpful because it understands your context.\n\nSolves your toughest challenges\n\nTackle complex questions, build working code, and understand difficult concepts with clear, step-by-step help.\n\n\nAmplifies your creative potential\n\nTurn your initial ideas into polished projects with creative suggestions and functional prototypes you can actually use.\n\nClaude Opus 4 and Sonnet 4\n\nOur most powerful models yet, pushing the frontier for"
+    }
+  ],
+  "insights": [],
+  "entities": {
+    "technologies": [],
+    "products": []
+  },
+  "themes": [],
+  "key_points": [],
+  "last_updated": "2025-07-21T17:29:22.363Z"
+}
