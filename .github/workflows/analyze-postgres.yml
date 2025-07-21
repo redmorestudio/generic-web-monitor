@@ -46,6 +46,15 @@ jobs:
           cd github-actions-backend
           npm install --omit=dev
       
+      - name: Fix PostgreSQL schema for analyze step
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          cd github-actions-backend
+          
+          echo "🔧 Ensuring PostgreSQL schema is ready for analysis..."
+          node fix-postgres-analyze-schema.js
+      
       - name: Run baseline AI analysis with PostgreSQL
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
