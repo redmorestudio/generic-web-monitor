@@ -4,7 +4,10 @@ const { Client } = require('pg');
 
 async function fixAnalyzeSchema() {
     const client = new Client({
-        connectionString: process.env.POSTGRES_CONNECTION_STRING
+        connectionString: process.env.POSTGRES_CONNECTION_STRING,
+        ssl: { 
+            rejectUnauthorized: false // Required for Heroku and other cloud providers
+        }
     });
 
     try {
