@@ -57,7 +57,7 @@ jobs:
       cascade: false  # Prevent cascading
     permissions:
       contents: write
-      actions: read
+      actions: write
     secrets: inherit
   
   # Job 2: Process content
@@ -67,7 +67,7 @@ jobs:
     uses: ./.github/workflows/process-postgres.yml
     permissions:
       contents: write
-      actions: read
+      actions: write
     with:
       trigger_source: ${{ inputs.skip_scrape && 'manual' || 'scrape' }}
       run_id: ${{ needs.scrape.outputs.run_id || github.run_id }}
@@ -81,7 +81,7 @@ jobs:
     uses: ./.github/workflows/analyze-postgres.yml
     permissions:
       contents: write
-      actions: read
+      actions: write
     with:
       trigger_source: ${{ inputs.skip_process && 'manual' || 'process' }}
       run_id: ${{ needs.process.outputs.run_id || github.run_id }}
