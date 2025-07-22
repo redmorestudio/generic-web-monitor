@@ -352,7 +352,7 @@ async function generateContentSnapshotsData() {
             cd.interest_level,
             cd.ai_analysis,
             u.company_id,
-            u.name as url_name
+            sp.url_name
         FROM raw_content.scraped_pages sp
         LEFT JOIN processed_content.change_detection cd ON sp.content_hash = cd.new_hash
         LEFT JOIN intelligence.urls u ON sp.url = u.url
@@ -428,7 +428,7 @@ async function generateCompanyDetailsData() {
         const urls = await db.all(`
             SELECT * FROM intelligence.urls 
             WHERE company_id = $1
-            ORDER BY name
+            ORDER BY url
         `, [company.id]);
         
         // Get recent change stats - FIXED with DISTINCT
@@ -457,10 +457,10 @@ async function generateCompanyDetailsData() {
             urls: urls.map(url => ({
                 id: url.id,
                 url: url.url,
-                name: url.name,
-                category: url.category,
-                importance: url.importance,
-                check_frequency: url.check_frequency
+                name: url.url_type || url.url,  // Use url_type or fallback to url
+                category: url.url_type,
+                importance: null,  // Column doesn't exist
+                check_frequency: url.scrape_frequency
             })),
             stats: {
                 total_changes: recentStats.total_changes || 0,
@@ -557,7 +557,7 @@ async function generateIndividualCompanyFiles(companyName) {
     const urls = await db.all(`
         SELECT * FROM intelligence.urls 
         WHERE company_id = $1
-        ORDER BY name
+        ORDER BY url
     `, [company.id]);
     
     // Get recent changes with details - FIXED with DISTINCT
