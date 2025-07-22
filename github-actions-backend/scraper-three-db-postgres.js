@@ -442,7 +442,7 @@ Focus on AI/ML relevance and competitive intelligence value.`;
       
       // Process batch concurrently with error isolation
       const batchPromises = batch.map(urlInfo => 
-        this.scrapeUrl(urlInfo.url, company.name, urlInfo.name)
+        this.scrapeUrl(urlInfo.url, company.name, urlInfo.url_type || urlInfo.url)
           .catch(error => {
             console.error(`    🚨 Unhandled error for ${urlInfo.url}:`, error.message);
             return { success: false, url: urlInfo.url, error: error.message };
@@ -483,8 +483,8 @@ Focus on AI/ML relevance and competitive intelligence value.`;
       const companies = await db.all(
         `SELECT c.*, COUNT(u.id) as url_count
          FROM intelligence.companies c
-         LEFT JOIN intelligence.company_urls u ON c.id = u.company_id
-         GROUP BY c.id
+         LEFT JOIN intelligence.urls u ON c.id = u.company_id
+         GROUP BY c.id, c.name, c.category, c.interest_level
          ORDER BY c.name`
       );
       
@@ -500,9 +500,9 @@ Focus on AI/ML relevance and competitive intelligence value.`;
         
         // Get URLs for this company
         const urls = await db.all(
-          `SELECT * FROM intelligence.company_urls 
+          `SELECT * FROM intelligence.urls 
            WHERE company_id = $1 
-           ORDER BY name`,
+           ORDER BY url`,
           [company.id]
         );
         
