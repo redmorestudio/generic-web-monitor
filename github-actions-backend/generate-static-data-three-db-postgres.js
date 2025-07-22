@@ -10,6 +10,8 @@ if (process.env.NODE_ENV === 'production' || process.env.POSTGRES_CONNECTION_STR
  * 
  * This script converts our dynamic API into static JSON files
  * that can be served by GitHub Pages and consumed by the frontend
+ * 
+ * Updated to match SQLite output format for dashboard compatibility
  */
 
 const fs = require('fs');
@@ -92,7 +94,7 @@ async function getTopEntities(companyId, entityType, limit = 3) {
     }
 }
 
-// Generate AI news items
+// Generate AI news items (keeping this new feature)
 async function generateAINews() {
     console.log('📰 Generating AI news...');
     
@@ -139,11 +141,11 @@ async function generateAINews() {
     return news;
 }
 
-// Generate data for the main dashboard
+// Generate dashboard.json - main dashboard data
 async function generateDashboard() {
     console.log('📊 Generating dashboard data...');
     
-    // Get all companies (no active column)
+    // Get all companies
     const companies = await db.all(`
         SELECT c.*, ca.industry 
         FROM intelligence.companies c
@@ -154,7 +156,7 @@ async function generateDashboard() {
     const companyStats = [];
     
     for (const company of companies) {
-        // Get URL count (no active column)
+        // Get URL count
         const urlCount = await db.get(`
             SELECT COUNT(*) as count 
             FROM intelligence.company_urls 
@@ -203,7 +205,7 @@ async function generateDashboard() {
         });
     }
     
-    // Overall statistics (no active columns)
+    // Overall statistics
     const overallStats = await db.get(`
         SELECT 
             (SELECT COUNT(*) FROM intelligence.companies) as total_companies,
@@ -220,8 +222,238 @@ async function generateDashboard() {
     };
 }
 
-// Generate detailed company data
-async function generateCompanyDetails(companyName) {
+// Generate companies.json - company list and metadata
+async function generateCompaniesData() {
+    console.log('📁 Generating companies data...');
+    
+    const companies = await db.all(`
+        SELECT c.*, ca.* 
+        FROM intelligence.companies c
+        LEFT JOIN intelligence.company_attributes ca ON c.id = ca.company_id
+        ORDER BY c.name
+    `);
+    
+    return {
+        companies: companies.map(company => ({
+            id: company.id,
+            name: company.name,
+            category: company.category,
+            industry: company.industry,
+            focus_areas: company.focus_areas,
+            description: company.description,
+            headquarters: company.headquarters,
+            founded: company.founded,
+            website: company.website,
+            stock_symbol: company.stock_symbol,
+            employees: company.employees,
+            revenue: company.revenue,
+            competitors: company.competitors,
+            products: company.products,
+            technologies: company.technologies,
+            thebrain_thought_id: company.thebrain_thought_id
+        })),
+        generated_at: new Date().toISOString()
+    };
+}
+
+// Generate changes.json - recent changes data
+async function generateRecentChangesData() {
+    console.log('🔄 Generating recent changes data...');
+    
+    const changes = await db.all(`
+        SELECT 
+            cd.*,
+            sp.title,
+            SUBSTRING(sp.content, 1, 1000) as content_preview
+        FROM processed_content.change_detection cd
+        LEFT JOIN raw_content.scraped_pages sp ON cd.new_hash = sp.content_hash
+        WHERE cd.detected_at > NOW() - INTERVAL '30 days'
+        ORDER BY cd.detected_at DESC
+        LIMIT 500
+    `);
+    
+    return {
+        changes: changes.map(change => {
+            let analysis = {};
+            try {
+                analysis = change.ai_analysis ? JSON.parse(change.ai_analysis) : {};
+            } catch (e) {
+                // Use defaults
+            }
+            
+            return {
+                id: change.id,
+                company: change.company,
+                url: change.url,
+                url_name: change.url_name,
+                detected_at: change.detected_at,
+                interest_level: change.interest_level,
+                relevance_score: change.interest_level, // For compatibility
+                ai_analysis: analysis,
+                title: change.title,
+                summary: analysis.summary || (change.content_preview ? change.content_preview.substring(0, 200) + '...' : ''),
+                category: analysis.category || 'General Update',
+                impact_areas: analysis.impact_areas || [],
+                before_hash: change.before_hash,
+                after_hash: change.new_hash
+            };
+        }),
+        generated_at: new Date().toISOString()
+    };
+}
+
+// Generate extracted-data.json - content snapshots
+async function generateContentSnapshotsData() {
+    console.log('📸 Generating content snapshots data...');
+    
+    const snapshots = await db.all(`
+        SELECT 
+            sp.url,
+            sp.company,
+            sp.title,
+            SUBSTRING(sp.content, 1, 2000) as content_preview,
+            sp.scraped_at,
+            sp.content_hash,
+            cd.interest_level,
+            cd.ai_analysis,
+            u.company_id,
+            u.name as url_name
+        FROM raw_content.scraped_pages sp
+        LEFT JOIN processed_content.change_detection cd ON sp.content_hash = cd.new_hash
+        JOIN intelligence.company_urls u ON sp.url = u.url
+        WHERE sp.scraped_at > NOW() - INTERVAL '7 days'
+        ORDER BY sp.scraped_at DESC
+        LIMIT 200
+    `);
+    
+    return {
+        items: snapshots.map(snap => ({
+            id: snap.content_hash,
+            company: snap.company,
+            url: snap.url,
+            url_name: snap.url_name,
+            title: snap.title,
+            content_preview: snap.content_preview,
+            scraped_at: snap.scraped_at,
+            aiProcessed: !!snap.ai_analysis,
+            interest_level: snap.interest_level || 0,
+            content_hash: snap.content_hash
+        })),
+        generated_at: new Date().toISOString()
+    };
+}
+
+// Generate monitoring-runs.json - scraping run history
+async function generateMonitoringRunsData() {
+    console.log('🏃 Generating monitoring runs data...');
+    
+    const runs = await db.all(`
+        SELECT 
+            sr.*,
+            (SELECT COUNT(*) FROM processed_content.change_detection 
+             WHERE detected_at >= sr.started_at AND detected_at <= sr.completed_at) as changes_detected
+        FROM raw_content.scrape_runs sr
+        WHERE sr.status = 'completed'
+        ORDER BY sr.completed_at DESC
+        LIMIT 50
+    `);
+    
+    return {
+        runs: runs.map(run => ({
+            id: run.id,
+            started_at: run.started_at,
+            completed_at: run.completed_at,
+            urls_processed: run.urls_processed,
+            urls_changed: run.urls_changed,
+            errors_count: run.errors_count || 0,
+            changes_detected: run.changes_detected || 0,
+            success_rate: run.urls_processed > 0 ? 
+                ((run.urls_processed - (run.errors_count || 0)) / run.urls_processed * 100).toFixed(2) : 
+                '0.00',
+            duration_seconds: run.completed_at && run.started_at ? 
+                Math.round((new Date(run.completed_at) - new Date(run.started_at)) / 1000) : 
+                0
+        })),
+        generated_at: new Date().toISOString()
+    };
+}
+
+// Generate company-details.json - detailed company data
+async function generateCompanyDetailsData() {
+    console.log('🏢 Generating company details data...');
+    
+    const companies = await db.all(`
+        SELECT c.id, c.name FROM intelligence.companies c ORDER BY c.name
+    `);
+    
+    const details = {};
+    
+    for (const company of companies) {
+        // Get URLs
+        const urls = await db.all(`
+            SELECT * FROM intelligence.company_urls 
+            WHERE company_id = $1
+            ORDER BY name
+        `, [company.id]);
+        
+        // Get recent change stats
+        const recentStats = await db.get(`
+            SELECT 
+                COUNT(*) as total_changes,
+                COUNT(CASE WHEN detected_at > NOW() - INTERVAL '7 days' THEN 1 END) as changes_7d,
+                COUNT(CASE WHEN detected_at > NOW() - INTERVAL '30 days' THEN 1 END) as changes_30d,
+                MAX(detected_at) as last_change,
+                AVG(interest_level) as avg_interest_level
+            FROM processed_content.change_detection
+            WHERE company = $1
+        `, [company.name]);
+        
+        // Get top insights
+        const insights = await db.all(`
+            SELECT * FROM intelligence.insights
+            WHERE company_id = $1
+            ORDER BY created_at DESC
+            LIMIT 5
+        `, [company.id]);
+        
+        details[company.name] = {
+            id: company.id,
+            name: company.name,
+            urls: urls.map(url => ({
+                id: url.id,
+                url: url.url,
+                name: url.name,
+                category: url.category,
+                importance: url.importance,
+                check_frequency: url.check_frequency
+            })),
+            stats: {
+                total_changes: recentStats.total_changes || 0,
+                changes_7d: recentStats.changes_7d || 0,
+                changes_30d: recentStats.changes_30d || 0,
+                last_change: recentStats.last_change,
+                avg_interest_level: recentStats.avg_interest_level ? 
+                    parseFloat(recentStats.avg_interest_level).toFixed(2) : 
+                    '0.00'
+            },
+            insights: insights.map(i => ({
+                id: i.id,
+                title: i.title,
+                content: i.content,
+                importance: i.importance,
+                created_at: i.created_at
+            }))
+        };
+    }
+    
+    return {
+        companies: details,
+        generated_at: new Date().toISOString()
+    };
+}
+
+// Generate individual company detail files (keeping this feature)
+async function generateIndividualCompanyFiles(companyName) {
     console.log(`  📁 Generating data for ${companyName}...`);
     
     const company = await db.get(`
@@ -236,7 +468,7 @@ async function generateCompanyDetails(companyName) {
         return null;
     }
     
-    // Get URLs (no active column)
+    // Get URLs
     const urls = await db.all(`
         SELECT * FROM intelligence.company_urls 
         WHERE company_id = $1
@@ -354,19 +586,34 @@ async function generateCompanyDetails(companyName) {
 
 // Main generation function
 async function generateAllData() {
-    console.log('🚀 Static Data Generator for PostgreSQL');
+    console.log('🚀 Static Data Generator for PostgreSQL (SQLite-Compatible Output)');
     console.log('=' .repeat(60));
     
     try {
-        // Generate dashboard
-        const dashboard = await generateDashboard();
-        fs.writeFileSync(
-            path.join(OUTPUT_DIR, 'dashboard.json'),
-            JSON.stringify(dashboard, null, 2)
-        );
-        console.log('✅ Generated dashboard.json');
+        // Generate all files matching SQLite structure
+        const files = [
+            { name: 'dashboard.json', generator: generateDashboard },
+            { name: 'companies.json', generator: generateCompaniesData },
+            { name: 'extracted-data.json', generator: generateContentSnapshotsData },
+            { name: 'changes.json', generator: generateRecentChangesData },
+            { name: 'monitoring-runs.json', generator: generateMonitoringRunsData },
+            { name: 'company-details.json', generator: generateCompanyDetailsData }
+        ];
         
-        // Generate AI news
+        for (const file of files) {
+            console.log(`\n📝 Generating ${file.name}...`);
+            const data = await file.generator();
+            fs.writeFileSync(
+                path.join(OUTPUT_DIR, file.name),
+                JSON.stringify(data, null, 2)
+            );
+            console.log(`✅ Generated ${file.name} (${JSON.stringify(data).length} bytes)`);
+        }
+        
+        // Also generate new features (bonus)
+        console.log('\n📰 Generating bonus files...');
+        
+        // AI News
         const news = await generateAINews();
         fs.writeFileSync(
             path.join(OUTPUT_DIR, 'ai-news.json'),
@@ -374,8 +621,8 @@ async function generateAllData() {
         );
         console.log('✅ Generated ai-news.json');
         
-        // Generate individual company files
-        console.log('\n📁 Generating company detail files...');
+        // Generate individual company files (in subdirectory)
+        console.log('\n📁 Generating individual company files...');
         const companies = await db.all(`
             SELECT name FROM intelligence.companies 
             ORDER BY name
@@ -387,7 +634,7 @@ async function generateAllData() {
         }
         
         for (const company of companies) {
-            const details = await generateCompanyDetails(company.name);
+            const details = await generateIndividualCompanyFiles(company.name);
             if (details) {
                 const filename = company.name.toLowerCase().replace(/\s+/g, '-') + '.json';
                 fs.writeFileSync(
@@ -397,19 +644,18 @@ async function generateAllData() {
             }
         }
         
-        console.log(`✅ Generated ${companies.length} company detail files`);
+        console.log(`✅ Generated ${companies.length} individual company files`);
         
-        // Generate manifest
+        // Generate manifest for all files
         const manifest = {
-            version: '1.0',
+            version: '2.0',
+            backend: 'postgresql',
+            compatible_with: 'sqlite-dashboard',
             generated_at: new Date().toISOString(),
             files: {
-                dashboard: 'dashboard.json',
-                news: 'ai-news.json',
-                companies: companies.map(c => ({
-                    name: c.name,
-                    file: `companies/${c.name.toLowerCase().replace(/\s+/g, '-')}.json`
-                }))
+                core: files.map(f => f.name),
+                bonus: ['ai-news.json'],
+                companies: companies.map(c => `companies/${c.name.toLowerCase().replace(/\s+/g, '-')}.json`)
             }
         };
         
@@ -419,7 +665,19 @@ async function generateAllData() {
         );
         console.log('✅ Generated manifest.json');
         
+        // Status file
+        fs.writeFileSync(
+            path.join(OUTPUT_DIR, 'status.json'),
+            JSON.stringify({
+                generated_at: new Date().toISOString(),
+                backend: 'postgresql',
+                files_generated: files.length + 2 + companies.length,
+                compatible_with_dashboard: true
+            }, null, 2)
+        );
+        
         console.log('\n✨ All static data generated successfully!');
+        console.log('📊 Dashboard-compatible files created in:', OUTPUT_DIR);
         
     } catch (error) {
         console.error('❌ Error generating static data:', error);
