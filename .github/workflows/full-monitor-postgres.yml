@@ -136,7 +136,7 @@ jobs:
           echo "🔌 Testing PostgreSQL connection for sync stage..."
           node -e "
             const { db, end } = require('./postgres-db');
-            db.one('SELECT NOW() as current_time')
+            db.get('SELECT NOW() as current_time')
               .then(result => {
                 console.log('✅ PostgreSQL connection successful:', result.current_time);
                 process.exit(0);
@@ -168,7 +168,7 @@ jobs:
           
           BASELINE_COUNT=$(node -e "
             const { db, end } = require('./postgres-db');
-            db.one('SELECT COUNT(*) as count FROM intelligence.baseline_analysis')
+            db.get('SELECT COUNT(*) as count FROM intelligence.baseline_analysis')
               .then(result => {
                 console.log(result.count);
                 process.exit(0);
