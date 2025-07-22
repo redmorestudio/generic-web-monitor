@@ -30,7 +30,7 @@ async function generateChangeDetails() {
     
     try {
         // Check if intelligence.changes table exists
-        const hasChangesTable = await db.oneOrNone(`
+        const hasChangesTable = await db.get(`
             SELECT COUNT(*) as count 
             FROM information_schema.tables 
             WHERE table_schema = 'intelligence' AND table_name = 'changes'
@@ -59,7 +59,7 @@ async function generateChangeDetails() {
         }
         
         // Get recent changes from PostgreSQL
-        const changes = await db.manyOrNone(`
+        const changes = await db.all(`
             SELECT 
                 c.*,
                 c.company as company_name,
