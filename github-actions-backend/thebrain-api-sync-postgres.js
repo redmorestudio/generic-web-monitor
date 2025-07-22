@@ -1,11 +1,13 @@
+#!/usr/bin/env node
+
 // SSL Certificate fix for Heroku PostgreSQL
 if (process.env.NODE_ENV === 'production' || process.env.POSTGRES_CONNECTION_STRING) {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 }
 
 const axios = require('axios');
-const path = require('path');
 const { db, end } = require('./postgres-db');
+const path = require('path');
 require('dotenv').config();
 
 // Error tracking class for TheBrain sync
@@ -112,7 +114,7 @@ class TheBrainAPISyncPostgreSQL {
     // Initialize error tracker
     this.errorTracker = new TheBrainErrorTracker();
     
-    console.log('🧠 TheBrain API Sync (PostgreSQL) initialized');
+    console.log('🧠 TheBrain API Sync initialized (PostgreSQL)');
     console.log(`   Brain ID: ${this.brainId}`);
   }
 
@@ -133,7 +135,7 @@ class TheBrainAPISyncPostgreSQL {
   }
 
   async syncToTheBrain() {
-    console.log('🚀 Starting TheBrain API sync (PostgreSQL)...');
+    console.log('🚀 Starting TheBrain API sync from PostgreSQL...');
     
     // Test connection first
     const connected = await this.testConnection();
@@ -165,8 +167,8 @@ class TheBrainAPISyncPostgreSQL {
       // Generate and log the error report
       const report = this.errorTracker.getReport();
       
-      console.log('\n📊 TheBrain API Sync Report (PostgreSQL):');
-      console.log('==========================================');
+      console.log('\n📊 TheBrain API Sync Report:');
+      console.log('================================');
       console.log(`✅ Thoughts created: ${report.summary.thoughts_created}`);
       console.log(`✅ Thoughts updated: ${report.summary.thoughts_updated}`);
       console.log(`✅ Links created: ${report.summary.links_created}`);
@@ -202,9 +204,6 @@ class TheBrainAPISyncPostgreSQL {
       console.error(error);
       this.errorTracker.addCriticalError('sync', error);
       return false;
-    } finally {
-      // Clean up PostgreSQL connection
-      await end();
     }
   }
 
@@ -249,10 +248,10 @@ class TheBrainAPISyncPostgreSQL {
     }
     
     // ALWAYS ensure link to brain's central thought exists
-    console.log('Ensuring link to brain\\'s central thought...');
+    console.log('Ensuring link to brain\'s central thought...');
     try {
       await this.createLink(BRAIN_CENTRAL_THOUGHT_ID, thoughtId, 1); // Child link from brain central
-      console.log('✅ Successfully linked to brain\\'s central thought');
+      console.log('✅ Successfully linked to brain\'s central thought');
       this.errorTracker.addLinkSuccess();
     } catch (error) {
       if (error.message?.toLowerCase().includes('duplicate') || 
@@ -261,27 +260,13 @@ class TheBrainAPISyncPostgreSQL {
       } else {
         console.error('⚠️  Failed to link to central thought:', error.message);
         this.errorTracker.addLinkFailure();
-        // Try reverse link if forward link fails
-        try {
-          await this.createLink(thoughtId, BRAIN_CENTRAL_THOUGHT_ID, 2); // Parent link to brain central
-          console.log('✅ Successfully created parent link to brain\\'s central thought');
-          this.errorTracker.addLinkSuccess();
-        } catch (reverseError) {
-          if (reverseError.message?.toLowerCase().includes('duplicate') || 
-              reverseError.message?.toLowerCase().includes('already exists')) {
-            console.log('✅ Reverse link to central thought already exists');
-          } else {
-            console.error('⚠️  Failed to create reverse link:', reverseError.message);
-            this.errorTracker.addLinkFailure();
-          }
-        }
       }
     }
     
     this.thoughtCache.set('root', thoughtId);
     
     // Add note with system overview
-    await this.updateNote(thoughtId, `# AI Competitive Monitor (PostgreSQL)\n\n## System Overview\nReal-time monitoring and analysis of 52+ companies in the AI space using PostgreSQL backend.\n\n### PostgreSQL Architecture\n- **Raw Content Schema**: HTML snapshots and change detection\n- **Processed Content Schema**: Markdown and structured text\n- **Intelligence Schema**: AI analysis and insights\n\n### Categories\n- 🤖 LLM Providers\n- 💻 AI Coding Tools\n- 🏗️ AI Infrastructure\n- 🔬 AI Research\n- ⚔️ Competitors\n- 🤝 Partners\n- 🏭 Industry Players\n\nLast sync: ${new Date().toISOString()}\nDatabase: PostgreSQL`);
+    await this.updateNote(thoughtId, `# AI Competitive Monitor (PostgreSQL)\n\n## System Overview\nReal-time monitoring and analysis of 52+ companies in the AI space.\n**Database**: PostgreSQL on Heroku\n\n### Architecture\n- **raw_content schema**: HTML snapshots and change detection\n- **processed_content schema**: Markdown and structured text\n- **intelligence schema**: AI analysis and insights\n\n### Categories\n- 🤖 LLM Providers\n- 💻 AI Coding Tools\n- 🏗️ AI Infrastructure\n- 🔬 AI Research\n- ⚔️ Competitors\n- 🤝 Partners\n- 🏭 Industry Players\n\nLast sync: ${new Date().toISOString()}`);
     
     return thoughtId;
   }
@@ -342,18 +327,18 @@ class TheBrainAPISyncPostgreSQL {
   }
 
   async createArchitecture(archId) {
-    console.log('Creating PostgreSQL architecture visualization...');
+    console.log('Creating architecture visualization...');
     
     const schemas = [
-      { name: '💾 Raw Content Schema', desc: 'scraped_pages & change detection tables' },
-      { name: '📝 Processed Content Schema', desc: 'markdown_pages & structured text tables' },
-      { name: '🧠 Intelligence Schema', desc: 'baseline_analysis, enhanced_analysis & changes tables' }
+      { name: '💾 raw_content Schema', desc: 'HTML snapshots & change detection' },
+      { name: '📝 processed_content Schema', desc: 'Markdown & structured text' },
+      { name: '🧠 intelligence Schema', desc: 'AI analysis & insights' }
     ];
     
     for (const schema of schemas) {
-      const existingSchemaId = await this.getMapping('schema', schema.name);
+      const existingDbId = await this.getMapping('database', schema.name);
       
-      const schemaData = {
+      const dbData = {
         name: schema.name,
         label: 'SCHEMA',
         kind: 1,
@@ -362,31 +347,31 @@ class TheBrainAPISyncPostgreSQL {
         backgroundColor: '#1e40af'
       };
       
-      let schemaId;
-      if (existingSchemaId) {
-        schemaId = existingSchemaId;
+      let dbId;
+      if (existingDbId) {
+        dbId = existingDbId;
         try {
-          await this.updateThought(schemaId, schemaData);
+          await this.updateThought(dbId, dbData);
           this.errorTracker.addUpdateSuccess();
         } catch (error) {
           if (error.response?.status === 404) {
-            this.errorTracker.addNotFound('schema', schemaId, schema.name);
-            schemaId = await this.createThought(schemaData);
-            await this.createLink(archId, schemaId, 1);
-            await this.storeMapping('schema', schema.name, schemaId);
+            this.errorTracker.addNotFound('database', dbId, schema.name);
+            dbId = await this.createThought(dbData);
+            await this.createLink(archId, dbId, 1);
+            await this.storeMapping('database', schema.name, dbId);
             this.errorTracker.addCreateSuccess();
           } else {
             throw error;
           }
         }
       } else {
-        schemaId = await this.createThought(schemaData);
-        await this.createLink(archId, schemaId, 1);
-        await this.storeMapping('schema', schema.name, schemaId);
+        dbId = await this.createThought(dbData);
+        await this.createLink(archId, dbId, 1);
+        await this.storeMapping('database', schema.name, dbId);
         this.errorTracker.addCreateSuccess();
       }
       
-      await this.updateNote(schemaId, `# ${schema.name}\n\n${schema.desc}\n\nPostgreSQL schema with full ACID compliance and advanced querying capabilities.`);
+      await this.updateNote(dbId, `# ${schema.name}\n\n${schema.desc}\n\n**Database**: PostgreSQL`);
     }
   }
 
@@ -394,7 +379,7 @@ class TheBrainAPISyncPostgreSQL {
     console.log('Syncing companies from PostgreSQL...');
     
     // Get company summary from intelligence schema
-    const companySummary = await db.manyOrNone(`
+    const companySummary = await db.all(`
       SELECT category, COUNT(*) as count 
       FROM intelligence.companies 
       GROUP BY category
@@ -442,13 +427,15 @@ class TheBrainAPISyncPostgreSQL {
       categoryGroups[key] = groupId;
     }
     
-    // Sync individual companies from PostgreSQL
-    const companies = await db.manyOrNone(`
+    // Sync individual companies
+    const companies = await db.all(`
       SELECT 
         c.*,
-        tm.thought_id
+        b.thought_id
       FROM intelligence.companies c
-      LEFT JOIN intelligence.thebrain_mappings tm ON tm.entity_type = 'company' AND tm.entity_id = c.id::text
+      LEFT JOIN intelligence.thebrain_mappings b 
+        ON b.entity_type = 'company' 
+        AND b.entity_id = c.id::text
       ORDER BY c.category, c.name
     `);
     
@@ -482,7 +469,7 @@ class TheBrainAPISyncPostgreSQL {
             companyThoughtId = await this.createThought(updateData);
             await this.createLink(groupId, companyThoughtId, 1);
             // Update the database with the new thought ID
-            await db.none(`
+            await db.run(`
               UPDATE intelligence.thebrain_mappings 
               SET thought_id = $1, updated_at = NOW() 
               WHERE entity_type = 'company' AND entity_id = $2
@@ -497,13 +484,13 @@ class TheBrainAPISyncPostgreSQL {
         // No thought_id stored, create new thought
         companyThoughtId = await this.createThought(updateData);
         await this.createLink(groupId, companyThoughtId, 1);
-        await this.storeMapping('company', company.id.toString(), companyThoughtId);
+        await this.storeMapping('company', company.id, companyThoughtId);
         createdCount++;
         this.errorTracker.addCreateSuccess();
       }
       
       // Add note with company details
-      const note = `# ${company.name}\n\n**Category**: ${company.category}\n**Description**: ${company.description || 'No description available'}\n\n## Monitoring Details\n- Added: ${company.created_at}\n- Database: PostgreSQL\n- Schema: intelligence.companies`;
+      const note = `# ${company.name}\n\n**Category**: ${company.category}\n**Description**: ${company.description || 'No description available'}\n\n## Monitoring Details\n- Added: ${company.created_at}`;
       
       await this.updateNote(companyThoughtId, note);
     }
@@ -515,25 +502,18 @@ class TheBrainAPISyncPostgreSQL {
   async syncChanges(changesId) {
     console.log('Syncing recent changes from PostgreSQL...');
     
-    // Check if changes table exists in intelligence schema
-    const hasTable = await db.oneOrNone(`
-      SELECT COUNT(*) as count 
-      FROM information_schema.tables 
-      WHERE table_schema = 'intelligence' AND table_name = 'changes'
-    `);
-    
-    if (!hasTable || hasTable.count === '0') {
-      console.log('   No intelligence.changes table found, skipping changes');
-      return;
-    }
-    
-    // Get recent high-priority changes
-    const recentChanges = await db.manyOrNone(`
+    // Get recent high-priority changes from PostgreSQL
+    const recentChanges = await db.all(`
       SELECT 
         c.*,
-        c.company as company_name,
-        c.url as company_url
+        c.company,
+        c.url,
+        c.interest_level,
+        c.analysis,
+        ea.business_impact,
+        ea.key_insights
       FROM intelligence.changes c
+      LEFT JOIN intelligence.enhanced_analysis ea ON ea.change_id = c.id
       WHERE c.interest_level >= 7
       ORDER BY c.detected_at DESC
       LIMIT 20
@@ -601,22 +581,24 @@ class TheBrainAPISyncPostgreSQL {
       
       // Create individual change thoughts
       for (const change of group.changes) {
-        let changeSummary = 'Change Detected';
-        try {
-          if (change.analysis && typeof change.analysis === 'object') {
-            changeSummary = change.analysis.summary || changeSummary;
-          } else if (typeof change.analysis === 'string') {
-            const parsed = JSON.parse(change.analysis);
-            changeSummary = parsed.summary || changeSummary;
+        let changeTitle = 'Change Detected';
+        
+        // Parse analysis JSON if it's a string
+        let analysis = change.analysis;
+        if (typeof analysis === 'string') {
+          try {
+            analysis = JSON.parse(analysis);
+          } catch (e) {
+            // If parsing fails, use the string as-is
           }
-        } catch (e) {
-          // Use default if JSON parsing fails
         }
         
-        const changeTitle = changeSummary.substring(0, 50) + '...';
+        if (analysis?.what_changed) {
+          changeTitle = analysis.what_changed.substring(0, 50) + '...';
+        }
         
         const changeData = {
-          name: `${change.company_name}: ${changeTitle}`,
+          name: `${change.company}: ${changeTitle}`,
           label: `Score: ${Math.round(change.interest_level)}/10`,
           kind: 1,
           acType: 0,
@@ -629,7 +611,7 @@ class TheBrainAPISyncPostgreSQL {
         this.errorTracker.addCreateSuccess();
         
         // Add detailed note
-        const note = `# ${changeTitle}\n\n**Company**: ${change.company_name}\n**Interest Level**: ${Math.round(change.interest_level)}/10\n**Detected**: ${change.detected_at}\n\n## Summary\n${changeSummary}\n\n## Change Type\n${change.change_type || 'Unknown'}\n\n## Database Info\n- Source: PostgreSQL\n- Schema: intelligence.changes\n- Change ID: ${change.id}\n\n[View Company Page](${change.company_url})`;
+        const note = `# ${changeTitle}\n\n**Company**: ${change.company}\n**Interest Level**: ${Math.round(change.interest_level)}/10\n**Detected**: ${change.detected_at}\n\n## Summary\n${analysis?.what_changed || 'No summary available'}\n\n## Business Impact\n${change.business_impact || 'No impact assessment available'}\n\n## Key Insights\n${Array.isArray(change.key_insights) ? change.key_insights.join('\n- ') : 'No insights available'}\n\n## Change Type\n${change.change_type || 'Unknown'}\n\n[View on ${change.company}](${change.url})`;
         
         await this.updateNote(changeId, note);
       }
@@ -639,34 +621,25 @@ class TheBrainAPISyncPostgreSQL {
   async createInsights(insightsId) {
     console.log('Creating AI insights from PostgreSQL...');
     
-    // Get system statistics from PostgreSQL
+    // Get system statistics
     const stats = {
       totalCompanies: 0,
       totalChanges: 0,
       highPriorityChanges: 0
     };
     
-    try {
-      const companyCount = await db.one('SELECT COUNT(*) as count FROM intelligence.companies');
-      stats.totalCompanies = parseInt(companyCount.count);
-    } catch (error) {
-      console.log('   Could not get company count:', error.message);
-    }
+    const companyCount = await db.get('SELECT COUNT(*) as count FROM intelligence.companies');
+    stats.totalCompanies = companyCount.count;
     
-    // Check if changes table exists before querying
-    try {
-      const changesCount = await db.one('SELECT COUNT(*) as count FROM intelligence.changes');
-      stats.totalChanges = parseInt(changesCount.count);
-      
-      const highPriorityCount = await db.one('SELECT COUNT(*) as count FROM intelligence.changes WHERE interest_level >= 8');
-      stats.highPriorityChanges = parseInt(highPriorityCount.count);
-    } catch (error) {
-      console.log('   Could not get changes count (table may not exist):', error.message);
-    }
+    const changeCount = await db.get('SELECT COUNT(*) as count FROM intelligence.changes');
+    stats.totalChanges = changeCount.count;
+    
+    const highPriorityCount = await db.get('SELECT COUNT(*) as count FROM intelligence.changes WHERE interest_level >= 8');
+    stats.highPriorityChanges = highPriorityCount.count;
     
     // Create insights
     const insightData = {
-      name: `📊 PostgreSQL Stats (${new Date().toLocaleDateString()})`,
+      name: `📊 System Stats (${new Date().toLocaleDateString()})`,
       kind: 1,
       acType: 0,
       foregroundColor: '#ffffff',
@@ -677,7 +650,7 @@ class TheBrainAPISyncPostgreSQL {
     await this.createLink(insightsId, insightId, 1);
     this.errorTracker.addCreateSuccess();
     
-    const insightNote = `# AI Competitive Monitor - PostgreSQL Statistics\n\n## Overview\n- **Total Companies Monitored**: ${stats.totalCompanies}\n- **Total Changes Detected**: ${stats.totalChanges}\n- **High Priority Changes**: ${stats.highPriorityChanges}\n\n## System Health\n- **Last Sync**: ${new Date().toISOString()}\n- **Database Status**: ✅ PostgreSQL Operational\n- **API Status**: ✅ Connected\n\n## PostgreSQL Architecture\n- Three-schema system for efficient processing\n- ACID compliance and advanced querying\n- AI-powered change detection and analysis\n- Real-time monitoring of competitor activities\n\n## Schema Information\n- **raw_content**: HTML storage and change tracking\n- **processed_content**: Markdown and structured data\n- **intelligence**: AI analysis and insights`;
+    const insightNote = `# AI Competitive Monitor - System Statistics\n\n## Overview\n- **Total Companies Monitored**: ${stats.totalCompanies}\n- **Total Changes Detected**: ${stats.totalChanges}\n- **High Priority Changes**: ${stats.highPriorityChanges}\n\n## System Health\n- **Last Sync**: ${new Date().toISOString()}\n- **Database Status**: ✅ PostgreSQL Operational\n- **API Status**: ✅ Connected\n\n## Architecture\n- PostgreSQL database with three schemas\n- AI-powered change detection and analysis\n- Real-time monitoring of competitor activities`;
     
     await this.updateNote(insightId, insightNote);
   }
@@ -786,45 +759,28 @@ class TheBrainAPISyncPostgreSQL {
     }
   }
 
-  // Helper methods for tracking mappings in PostgreSQL
+  // Helper methods for tracking mappings
   async storeMapping(entityType, entityId, thoughtId) {
     try {
-      // Check if thebrain_mappings table exists
-      const hasTable = await db.oneOrNone(`
-        SELECT COUNT(*) as count 
-        FROM information_schema.tables 
-        WHERE table_schema = 'intelligence' AND table_name = 'thebrain_mappings'
-      `);
-      
-      if (hasTable && hasTable.count > 0) {
-        await db.none(`
-          INSERT INTO intelligence.thebrain_mappings (entity_type, entity_id, thought_id, updated_at)
-          VALUES ($1, $2, $3, NOW())
-          ON CONFLICT (entity_type, entity_id) DO UPDATE SET
-            thought_id = EXCLUDED.thought_id,
-            updated_at = NOW()
-        `, [entityType, entityId.toString(), thoughtId]);
-      }
+      await db.run(`
+        INSERT INTO intelligence.thebrain_mappings 
+        (entity_type, entity_id, thought_id, updated_at)
+        VALUES ($1, $2, $3, NOW())
+        ON CONFLICT (entity_type, entity_id) 
+        DO UPDATE SET 
+          thought_id = EXCLUDED.thought_id,
+          updated_at = NOW()
+      `, [entityType, entityId.toString(), thoughtId]);
     } catch (error) {
-      console.log(`Note: Could not store mapping - table may not exist yet:`, error.message);
+      console.log(`Note: Could not store mapping - table may not exist yet`);
     }
   }
 
   async getMapping(entityType, entityId) {
     try {
-      // Check if thebrain_mappings table exists
-      const hasTable = await db.oneOrNone(`
-        SELECT COUNT(*) as count 
-        FROM information_schema.tables 
-        WHERE table_schema = 'intelligence' AND table_name = 'thebrain_mappings'
-      `);
-      
-      if (!hasTable || hasTable.count === '0') {
-        return null;
-      }
-      
-      const result = await db.oneOrNone(`
-        SELECT thought_id FROM intelligence.thebrain_mappings 
+      const result = await db.get(`
+        SELECT thought_id 
+        FROM intelligence.thebrain_mappings 
         WHERE entity_type = $1 AND entity_id = $2
       `, [entityType, entityId.toString()]);
       
@@ -844,6 +800,9 @@ if (require.main === module) {
     const sync = new TheBrainAPISyncPostgreSQL();
     const success = await sync.syncToTheBrain();
     
+    // Close PostgreSQL connection
+    await end();
+    
     // Exit with proper code based on critical errors
     if (!success) {
       console.error('\n❌ Sync failed due to critical errors');
@@ -858,8 +817,9 @@ if (require.main === module) {
     }
   }
   
-  main().catch(error => {
+  main().catch(async error => {
     console.error('Fatal error:', error);
+    await end();
     process.exit(1);
   });
 }
