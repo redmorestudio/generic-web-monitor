@@ -158,6 +158,14 @@ jobs:
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
+      - name: Fix intelligence.changes schema
+        run: |
+          cd github-actions-backend
+          echo "🔧 Running intelligence.changes schema fix..."
+          node fix-intelligence-changes-schema.js
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
       - name: Run baseline AI analysis (PostgreSQL)
         run: |
           cd github-actions-backend
