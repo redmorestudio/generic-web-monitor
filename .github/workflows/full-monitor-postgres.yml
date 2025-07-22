@@ -231,8 +231,14 @@ jobs:
             exit 1
           fi
           
-          # Use proper version that writes to JSONB structure
-          if [ -f "ai-analyzer-baseline-three-db-postgres-proper.js" ]; then
+          # Use fixed version that only analyzes companies that exist
+          if [ -f "ai-analyzer-baseline-three-db-postgres-fixed.js" ]; then
+            echo "Using fixed baseline analyzer that only processes valid companies..."
+            if ! node ai-analyzer-baseline-three-db-postgres-fixed.js; then
+              echo "⚠️  Fixed version failed, trying proper version..."
+              node ai-analyzer-baseline-three-db-postgres-proper.js
+            fi
+          elif [ -f "ai-analyzer-baseline-three-db-postgres-proper.js" ]; then
             echo "Using proper JSONB baseline analyzer..."
             if ! node ai-analyzer-baseline-three-db-postgres-proper.js; then
               echo "❌ PostgreSQL baseline analysis failed"
