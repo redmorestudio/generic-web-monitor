@@ -206,7 +206,7 @@ Focus on AI/ML relevance and competitive intelligence value.`;
         console.log(`    🚫 Captcha/challenge detected: ${captchaResult.type}`);
         this.stats.captchas++;
         
-        // Store blocked attempt
+        // Store blocked attempt - FIXED: Including url column
         await db.run(
           `INSERT INTO raw_content.scraped_pages 
            (company, url, url_name, content, html, title, content_hash, scraped_at, 
@@ -292,7 +292,7 @@ Focus on AI/ML relevance and competitive intelligence value.`;
         console.log(`    ✓ No changes detected`);
       }
       
-      // Store the scraped content
+      // Store the scraped content - FIXED: Including url column
       await db.run(
         `INSERT INTO raw_content.scraped_pages 
          (company, url, url_name, content, html, title, content_hash, scraped_at, 
@@ -339,7 +339,7 @@ Focus on AI/ML relevance and competitive intelligence value.`;
           ]
         );
         
-        // Record change detection with interest assessment
+        // Record change detection with interest assessment - FIXED: Including url column
         await db.run(
           `INSERT INTO processed_content.change_detection 
            (company, url_name, url, change_type, old_hash, new_hash, detected_at, 
@@ -387,7 +387,7 @@ Focus on AI/ML relevance and competitive intelligence value.`;
         return this.scrapeUrl(url, companyName, urlName, retryCount + 1);
       }
       
-      // Store error in database for failed URLs
+      // Store error in database for failed URLs - FIXED: Including url column and storing error in content field
       try {
         await db.run(
           `INSERT INTO raw_content.scraped_pages 
