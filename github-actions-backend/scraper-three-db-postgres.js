@@ -342,12 +342,13 @@ Focus on AI/ML relevance and competitive intelligence value.`;
         // Record change detection with interest assessment
         await db.run(
           `INSERT INTO processed_content.change_detection 
-           (company, url_name, change_type, old_hash, new_hash, detected_at, 
+           (company, url_name, url, change_type, old_hash, new_hash, detected_at, 
             interest_level, ai_analysis)
-           VALUES ($1, $2, $3, $4, $5, NOW(), $6, $7)`,
+           VALUES ($1, $2, $3, $4, $5, $6, NOW(), $7, $8)`,
           [
             companyName,
             urlName || url,
+            url,  // FIXED: Added missing url column
             changeType,
             existing?.content_hash || null,
             contentHash,
@@ -391,19 +392,18 @@ Focus on AI/ML relevance and competitive intelligence value.`;
         await db.run(
           `INSERT INTO raw_content.scraped_pages 
            (company, url, url_name, content, html, title, content_hash, scraped_at, 
-            change_detected, scrape_status, error_message)
-           VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), $8, $9, $10)`,
+            change_detected, scrape_status)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, NOW(), $8, $9)`,
           [
             companyName,
             url,
             urlName || url,
-            'Error: ' + error.message,
+            'Error: ' + error.message,  // FIXED: Storing error in content field instead of non-existent error_message column
             null,
             'Error',
             this.generateContentHash('error-' + error.message),
             false,
-            'error',
-            error.message
+            'error'
           ]
         );
       } catch (dbError) {
