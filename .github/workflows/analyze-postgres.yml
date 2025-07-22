@@ -154,7 +154,7 @@ jobs:
         run: |
           cd github-actions-backend
           echo "🔧 Running PostgreSQL schema fix for analyzer..."
-          node fix-postgres-analyze-schema.js
+          node fix-all-analyzer-schemas.js
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       

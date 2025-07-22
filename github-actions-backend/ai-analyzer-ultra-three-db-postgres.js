@@ -270,7 +270,7 @@ async function processRecentChanges(mode = 'recent') {
           const before = await db.get(`
             SELECT content 
             FROM processed_content.markdown_pages 
-            WHERE markdown_hash = $1
+            WHERE source_hash = $1
           `, [change.old_hash]);
           beforeContent = before?.content;
         }
@@ -279,7 +279,7 @@ async function processRecentChanges(mode = 'recent') {
           const after = await db.get(`
             SELECT content 
             FROM processed_content.markdown_pages 
-            WHERE markdown_hash = $1
+            WHERE source_hash = $1
           `, [change.new_hash]);
           afterContent = after?.content;
         }
