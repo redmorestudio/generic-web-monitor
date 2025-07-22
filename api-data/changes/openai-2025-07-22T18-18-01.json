@@ -1,0 +1,93 @@
+{
+  "id": 228,
+  "company": "OpenAI",
+  "page_url": "homepage",
+  "detected_at": "2025-07-22T18:18:01.891Z",
+  "change_type": "modified",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "major overhaul",
+    "change_scale": "major",
+    "what_changed": "The homepage content of OpenAI has been completely overhauled, shifting from a security verification page to a comprehensive platform showcasing various products, research, and company information.",
+    "specific_changes": [
+      "Introduction of a new homepage design",
+      "Addition of product sections for ChatGPT, Sora, and API Platform",
+      "Inclusion of research and safety sections",
+      "Links to news, stories, and company information",
+      "Call-to-actions for logging in, downloading ChatGPT, and exploring the API platform"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "OpenAI is focusing on commercialization and user experience",
+      "The company is emphasizing its research and safety efforts"
+    ],
+    "business_impact": "The changes could lead to increased user engagement, improved brand visibility, and potentially more revenue streams through the showcased products and services.",
+    "strategic_direction": "OpenAI seems to be moving towards a more user-centric and commercial approach, while still prioritizing research and safety.",
+    "competitive_implications": "OpenAI's new strategy could pose a competitive threat to other AI companies, as it showcases a wide range of products and services, potentially attracting more users and partners."
+  },
+  "entities": {
+    "people": [
+      "Sam Altman",
+      "Jony Ive",
+      "Fidji Simo"
+    ],
+    "markets": [
+      "United States"
+    ],
+    "pricing": [
+      "ChatGPT Pricing",
+      "Sora Pricing",
+      "API Platform Pricing"
+    ],
+    "features": [
+      "Research Residency",
+      "GPT-4o",
+      "GPT-4o mini",
+      "Sora System Card"
+    ],
+    "products": [
+      "ChatGPT",
+      "Sora",
+      "API Platform"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "GPT-4.1",
+      "Realtime API"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI market",
+      "Potential regulatory challenges due to OpenAI's growing commercial presence"
+    ],
+    "key_findings": [
+      "OpenAI's new homepage reflects a significant strategic shift",
+      "The company is highlighting its products, research, and safety efforts"
+    ],
+    "opportunities": [
+      "Partnership opportunities with OpenAI",
+      "Integration of OpenAI's products and services into other businesses"
+    ],
+    "recommended_actions": [
+      "Monitor OpenAI's product developments and research",
+      "Consider partnerships or integrations with OpenAI",
+      "Assess the competitive implications of OpenAI's new strategy"
+    ]
+  },
+  "key_insights": [
+    "OpenAI's new homepage reflects a significant strategic shift",
+    "The company is highlighting its products, research, and safety efforts"
+  ],
+  "business_impact": "The changes could lead to increased user engagement, improved brand visibility, and potentially more revenue streams through the showcased products and services.",
+  "competitive_implications": "OpenAI's new strategy could pose a competitive threat to other AI companies, as it showcases a wide range of products and services, potentially attracting more users and partners.",
+  "content_hash_before": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+  "content_hash_after": "c8c2eaf2d2d717422c3ec32d1a6d4a859792a60ea689363a94ea25dc12dd4b86",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}
