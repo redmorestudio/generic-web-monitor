@@ -1,0 +1,67 @@
+{
+  "id": 219,
+  "company": "Anthropic",
+  "page_url": "news",
+  "detected_at": "2025-07-22T17:13:18.357Z",
+  "change_type": "modified",
+  "interest_level": 6,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "minor",
+    "what_changed": "New article 'Build AI in America' added to the newsroom",
+    "specific_changes": [
+      "Addition of a new policy article titled 'Build AI in America'",
+      "Update to the newsroom section with the latest article"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on domestic AI development",
+      "Potential for new partnerships or initiatives"
+    ],
+    "business_impact": "The new article may indicate a shift in the company's focus towards building AI in America, which could have implications for their business strategy and operations.",
+    "strategic_direction": "The company's strategic direction may be shifting towards a more domestic focus, which could impact its competitive positioning.",
+    "competitive_implications": "The company may be trying to differentiate itself from competitors by emphasizing its commitment to building AI in America."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Potential for increased competition in the domestic AI market",
+      "Regulatory challenges associated with building AI in America"
+    ],
+    "key_findings": [
+      "The company is emphasizing its commitment to building AI in America",
+      "The new article may indicate a shift in the company's business strategy"
+    ],
+    "opportunities": [
+      "Potential for new partnerships or initiatives",
+      "Increased focus on domestic AI development"
+    ],
+    "recommended_actions": [
+      "Monitor the company's future announcements and initiatives",
+      "Assess the potential impact on the competitive landscape"
+    ]
+  },
+  "key_insights": [
+    "The company is emphasizing its commitment to building AI in America",
+    "The new article may indicate a shift in the company's business strategy"
+  ],
+  "business_impact": "The new article may indicate a shift in the company's focus towards building AI in America, which could have implications for their business strategy and operations.",
+  "competitive_implications": "The company may be trying to differentiate itself from competitors by emphasizing its commitment to building AI in America.",
+  "content_hash_before": "715149c11ce9ecfeb58230117d600c56aab66e6ae501de8e5c65f2d8bde958eb",
+  "content_hash_after": "3e93d97a981a6c18ec82db5a02466a714245503230014ea45ed7885df13d58cb",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

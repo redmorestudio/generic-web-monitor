@@ -1,0 +1,46 @@
+{
+  "id": 221,
+  "company": "Amazon CodeWhisperer",
+  "page_url": "homepage",
+  "detected_at": "2025-07-22T17:12:35.573Z",
+  "change_type": "modified",
+  "interest_level": 1,
+  "ai_confidence": 0.99,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "no change",
+    "change_scale": "no change",
+    "what_changed": "No significant changes were detected in the content between the two versions.",
+    "specific_changes": []
+  },
+  "strategic_analysis": {
+    "market_signals": [],
+    "business_impact": "No impact, as there were no significant changes.",
+    "strategic_direction": "No change in strategic direction.",
+    "competitive_implications": "No implications, as the content remains the same."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [],
+    "key_findings": [],
+    "opportunities": [],
+    "recommended_actions": []
+  },
+  "key_insights": [],
+  "business_impact": "No impact, as there were no significant changes.",
+  "competitive_implications": "No implications, as the content remains the same.",
+  "content_hash_before": "98cd6ea0042bd620525bc014fde041a5b5fa6c9a657fb5fc5bb0f544e4ced0b0",
+  "content_hash_after": "b31fec6cd8e911d9e508e434789dbe88398d1f65a5758337d5dd7be13862df49",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

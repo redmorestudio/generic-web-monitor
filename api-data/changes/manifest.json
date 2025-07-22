@@ -1,9 +1,36 @@
 {
   "version": "1.0",
-  "generated_at": "2025-07-22T16:05:08.883Z",
+  "generated_at": "2025-07-22T18:47:57.658Z",
   "source": "postgresql",
-  "total_changes": 120,
+  "total_changes": 136,
   "files": [
+    {
+      "filename": "openai-2025-07-22T17-33-40.json",
+      "change_id": 208,
+      "company": "OpenAI",
+      "detected_at": "2025-07-22T17:33:40.166Z",
+      "interest_level": 9,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anyscale-2025-07-22T17-13-47.json",
+      "change_id": 217,
+      "company": "Anyscale",
+      "detected_at": "2025-07-22T17:13:47.746Z",
+      "interest_level": 9,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anyscale-2025-07-22T17-13-39.json",
+      "change_id": 218,
+      "company": "Anyscale",
+      "detected_at": "2025-07-22T17:13:39.209Z",
+      "interest_level": 9,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
     {
       "filename": "dall-e-2025-07-21T16-16-30.json",
       "change_id": 15,
@@ -473,6 +500,24 @@
       "summary": "Change detected"
     },
     {
+      "filename": "cerebras-2025-07-22T17-14-18.json",
+      "change_id": 215,
+      "company": "Cerebras",
+      "detected_at": "2025-07-22T17:14:18.603Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anyscale-2025-07-22T17-13-55.json",
+      "change_id": 216,
+      "company": "Anyscale",
+      "detected_at": "2025-07-22T17:13:55.013Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
       "filename": "replit-2025-07-21T16-30-23.json",
       "change_id": 1,
       "company": "Replit",
@@ -860,6 +905,15 @@
       "summary": "Change detected"
     },
     {
+      "filename": "anthropic-2025-07-22T17-13-18.json",
+      "change_id": 219,
+      "company": "Anthropic",
+      "detected_at": "2025-07-22T17:13:18.357Z",
+      "interest_level": 6,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
       "filename": "codeium-2025-07-21T16-14-57.json",
       "change_id": 18,
       "company": "Codeium",
@@ -884,6 +938,42 @@
       "detected_at": "2025-07-21T15:23:16.183Z",
       "interest_level": 6,
       "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "andi-2025-07-22T17-12-58.json",
+      "change_id": 220,
+      "company": "Andi",
+      "detected_at": "2025-07-22T17:12:58.592Z",
+      "interest_level": 5,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "ai21-labs-2025-07-22T17-00-49.json",
+      "change_id": 223,
+      "company": "AI21 Labs",
+      "detected_at": "2025-07-22T17:00:49.419Z",
+      "interest_level": 5,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "codeium-2025-07-22T17-14-47.json",
+      "change_id": 213,
+      "company": "Codeium",
+      "detected_at": "2025-07-22T17:14:47.576Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "codeium-2025-07-22T17-14-39.json",
+      "change_id": 214,
+      "company": "Codeium",
+      "detected_at": "2025-07-22T17:14:39.794Z",
+      "interest_level": 4,
+      "change_type": "modified",
       "summary": "Change detected"
     },
     {
@@ -968,6 +1058,24 @@
       "summary": "Change detected"
     },
     {
+      "filename": "github-copilot-2025-07-22T17-17-58.json",
+      "change_id": 210,
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-22T17:17:58.613Z",
+      "interest_level": 3,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "cohere-2025-07-22T17-15-02.json",
+      "change_id": 212,
+      "company": "Cohere",
+      "detected_at": "2025-07-22T17:15:02.379Z",
+      "interest_level": 3,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
       "filename": "replicate-2025-07-21T16-29-53.json",
       "change_id": 2,
       "company": "Replicate",
@@ -1018,6 +1126,33 @@
       "company": "Cursor",
       "detected_at": "2025-07-21T15:08:46.641Z",
       "interest_level": 3,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "google-deepmind-2025-07-22T17-18-26.json",
+      "change_id": 209,
+      "company": "Google DeepMind",
+      "detected_at": "2025-07-22T17:18:26.929Z",
+      "interest_level": 2,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "flux-2025-07-22T17-17-40.json",
+      "change_id": 211,
+      "company": "Flux",
+      "detected_at": "2025-07-22T17:17:40.798Z",
+      "interest_level": 2,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "amazon-codewhisperer-2025-07-22T17-12-22.json",
+      "change_id": 222,
+      "company": "Amazon CodeWhisperer",
+      "detected_at": "2025-07-22T17:12:22.080Z",
+      "interest_level": 2,
       "change_type": "modified",
       "summary": "Change detected"
     },
@@ -1081,6 +1216,15 @@
       "company": "Descript",
       "detected_at": "2025-07-21T15:09:38.441Z",
       "interest_level": 2,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "amazon-codewhisperer-2025-07-22T17-12-35.json",
+      "change_id": 221,
+      "company": "Amazon CodeWhisperer",
+      "detected_at": "2025-07-22T17:12:35.573Z",
+      "interest_level": 1,
       "change_type": "modified",
       "summary": "Change detected"
     }

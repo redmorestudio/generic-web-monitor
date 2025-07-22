@@ -1,0 +1,62 @@
+{
+  "id": 213,
+  "company": "Codeium",
+  "page_url": "homepage",
+  "detected_at": "2025-07-22T17:14:47.576Z",
+  "change_type": "modified",
+  "interest_level": 4,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "minor",
+    "what_changed": "Download option for Windsurf Editor changed from Linux to Windows with additional options for x64 and arm64 architectures",
+    "specific_changes": [
+      "Download option changed from Linux to Windows",
+      "Added options for x64 and arm64 architectures"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Windsurf is continuing to develop and improve its product"
+    ],
+    "business_impact": "The change may slightly improve user experience for Windows users, but it is unlikely to have a significant impact on the business",
+    "strategic_direction": "Windsurf is focused on improving its product and user experience",
+    "competitive_implications": "The change is unlikely to affect Windsurf's competitive position in the market"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [
+      "Windsurf Editor"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "x64",
+      "arm64"
+    ]
+  },
+  "insights": {
+    "threats": [],
+    "key_findings": [
+      "Windsurf is continuing to develop and improve its product",
+      "The change may slightly improve user experience for Windows users"
+    ],
+    "opportunities": [],
+    "recommended_actions": []
+  },
+  "key_insights": [
+    "Windsurf is continuing to develop and improve its product",
+    "The change may slightly improve user experience for Windows users"
+  ],
+  "business_impact": "The change may slightly improve user experience for Windows users, but it is unlikely to have a significant impact on the business",
+  "competitive_implications": "The change is unlikely to affect Windsurf's competitive position in the market",
+  "content_hash_before": "09520b999a3e7d53e8d1905ba790e619541d84f7a895bcc94e4b4a464f51cb0d",
+  "content_hash_after": "2f9fce4bfbb3f58c60d48f34c47363423c5e56cf216cf39dfa20673b4c0e3ca1",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

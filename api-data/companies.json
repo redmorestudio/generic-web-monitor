@@ -2,16 +2,6 @@
   "companies": [
     {
       "id": null,
-      "name": "OpenAI",
-      "category": "LLM Providers",
-      "industry": null,
-      "description": null,
-      "headquarters": null,
-      "website": null,
-      "thebrain_thought_id": "db6402dc-6e31-4fbc-bf57-f6f84db34a73"
-    },
-    {
-      "id": null,
       "name": "Anthropic",
       "category": "LLM Providers",
       "industry": null,
@@ -19,26 +9,6 @@
       "headquarters": null,
       "website": null,
       "thebrain_thought_id": "261033ad-a04c-408b-908e-0d16aafb51fa"
-    },
-    {
-      "id": null,
-      "name": "Google DeepMind",
-      "category": "LLM Providers",
-      "industry": null,
-      "description": null,
-      "headquarters": null,
-      "website": null,
-      "thebrain_thought_id": "2937a32a-79bb-41a1-a9bb-e3794a9cb1e0"
-    },
-    {
-      "id": null,
-      "name": "Perplexity AI",
-      "category": "AI Search",
-      "industry": null,
-      "description": null,
-      "headquarters": null,
-      "website": null,
-      "thebrain_thought_id": "5d41557d-369a-4075-ad03-e83ebddb3605"
     },
     {
       "id": null,
@@ -52,6 +22,16 @@
     },
     {
       "id": null,
+      "name": "Google DeepMind",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "2937a32a-79bb-41a1-a9bb-e3794a9cb1e0"
+    },
+    {
+      "id": null,
       "name": "Midjourney",
       "category": "Image Generation",
       "industry": null,
@@ -59,7 +39,27 @@
       "headquarters": null,
       "website": null,
       "thebrain_thought_id": "81a6395f-1194-4ed2-beaf-9878c1d12ff0"
+    },
+    {
+      "id": null,
+      "name": "OpenAI",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "db6402dc-6e31-4fbc-bf57-f6f84db34a73"
+    },
+    {
+      "id": null,
+      "name": "Perplexity AI",
+      "category": "AI Search",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "5d41557d-369a-4075-ad03-e83ebddb3605"
     }
   ],
-  "generated_at": "2025-07-22T18:00:00.000Z"
+  "generated_at": "2025-07-22T18:47:56.806Z"
 }

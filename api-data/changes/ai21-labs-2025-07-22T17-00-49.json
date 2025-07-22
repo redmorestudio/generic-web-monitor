@@ -1,0 +1,66 @@
+{
+  "id": 223,
+  "company": "AI21 Labs",
+  "page_url": "blog",
+  "detected_at": "2025-07-22T17:00:49.419Z",
+  "change_type": "modified",
+  "interest_level": 5,
+  "ai_confidence": 0.7,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "minor",
+    "what_changed": "A new blog post titled 'Automating Product Descriptions in Real Time: Clear the Content Debt, Win the Cart' was added to the AI21 blog.",
+    "specific_changes": [
+      "Addition of a new blog post",
+      "Update to the blog's pagination"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on product description automation",
+      "Potential expansion into new markets or industries"
+    ],
+    "business_impact": "The new blog post may attract more visitors to the AI21 website and increase engagement with the company's content.",
+    "strategic_direction": "AI21 may be shifting its focus towards more practical applications of AI, such as product description automation, to attract more customers and increase revenue.",
+    "competitive_implications": "The addition of a new blog post may indicate that AI21 is trying to establish itself as a thought leader in the AI industry, potentially gaining a competitive advantage."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Increased competition from other companies that offer similar AI-powered tools and services"
+    ],
+    "key_findings": [
+      "AI21 is producing more content related to practical applications of AI",
+      "The company may be trying to establish itself as a thought leader in the AI industry"
+    ],
+    "opportunities": [
+      "Potential partnership opportunities with companies that specialize in product description automation",
+      "Increased revenue through the sale of AI-powered product description automation tools"
+    ],
+    "recommended_actions": [
+      "Monitor AI21's future blog posts and content to see if they continue to focus on practical applications of AI",
+      "Consider partnering with AI21 or other companies that specialize in AI-powered product description automation"
+    ]
+  },
+  "key_insights": [
+    "AI21 is producing more content related to practical applications of AI",
+    "The company may be trying to establish itself as a thought leader in the AI industry"
+  ],
+  "business_impact": "The new blog post may attract more visitors to the AI21 website and increase engagement with the company's content.",
+  "competitive_implications": "The addition of a new blog post may indicate that AI21 is trying to establish itself as a thought leader in the AI industry, potentially gaining a competitive advantage.",
+  "content_hash_before": "7d31b7fa3adf9c9b0402cb3370ec50ac71382a8d7a8c55727ba361677839bb65",
+  "content_hash_after": "7d861de17ba5ab12f3470da7ba721f40f2ccfca403e28d8f688da556e6afa6d3",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

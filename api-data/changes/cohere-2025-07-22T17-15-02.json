@@ -1,0 +1,59 @@
+{
+  "id": 212,
+  "company": "Cohere",
+  "page_url": "product",
+  "detected_at": "2025-07-22T17:15:02.379Z",
+  "change_type": "modified",
+  "interest_level": 3,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "minor",
+    "what_changed": "The provided 'BEFORE' and 'AFTER' content appears to be nearly identical, with the main difference being the presence of a 404 error page in the AFTER content, indicating a potential issue with page routing or content loading.",
+    "specific_changes": [
+      "Presence of 404 error page in AFTER content",
+      "Potential updates to page routing or content loading"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Potential issues with page routing or content loading may impact user experience."
+    ],
+    "business_impact": "The changes do not appear to have a significant impact on the business or its operations.",
+    "strategic_direction": "The changes do not suggest any changes to the company's strategic direction.",
+    "competitive_implications": "The changes do not indicate any significant competitive advantages or disadvantages."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Potential negative impact on user experience due to page routing or content loading issues."
+    ],
+    "key_findings": [
+      "The presence of a 404 error page in the AFTER content may indicate issues with page routing or content loading."
+    ],
+    "opportunities": [],
+    "recommended_actions": [
+      "Investigate and resolve any issues with page routing or content loading to improve user experience."
+    ]
+  },
+  "key_insights": [
+    "The presence of a 404 error page in the AFTER content may indicate issues with page routing or content loading."
+  ],
+  "business_impact": "The changes do not appear to have a significant impact on the business or its operations.",
+  "competitive_implications": "The changes do not indicate any significant competitive advantages or disadvantages.",
+  "content_hash_before": "d461adeacb6926790a20b0f15ee51717be91462124971846458f2e07c4de6b13",
+  "content_hash_after": "21bd2038bc73cf4a1e7e415ec37d35a6412c632d8470ce3e311d6f0db72d9e5d",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

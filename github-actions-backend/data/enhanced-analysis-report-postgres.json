@@ -1,15 +1,50 @@
 {
-  "generated_at": "2025-07-22T16:04:10.617Z",
+  "generated_at": "2025-07-22T18:47:56.285Z",
   "database": "PostgreSQL",
   "period": "last_7_days",
   "summary": {
-    "total_changes": 120,
-    "high_interest": 95,
-    "medium_interest": 3,
-    "low_interest": 22,
-    "average_interest": "7.5"
+    "total_changes": 136,
+    "high_interest": 100,
+    "medium_interest": 6,
+    "low_interest": 30,
+    "average_interest": "7.2"
   },
   "top_changes": [
+    {
+      "company": "OpenAI",
+      "url": "product",
+      "interest_level": 9,
+      "type": "modified",
+      "impact": "The update may attract more users to the ChatGPT platform, potentially increasing revenue and market share for OpenAI",
+      "insights": [
+        "OpenAI is investing in its ChatGPT product",
+        "The company is prioritizing user experience and security"
+      ]
+    },
+    {
+      "company": "Anyscale",
+      "url": "homepage",
+      "interest_level": 9,
+      "type": "modified",
+      "impact": "The changes suggest a significant expansion of the company's product offerings and marketing strategy, potentially indicating a major growth phase.",
+      "insights": [
+        "The company is investing heavily in AI and ML",
+        "There is a growing demand for cloud computing solutions",
+        "The company is expanding its product offerings and marketing strategy"
+      ]
+    },
+    {
+      "company": "Anyscale",
+      "url": "pricing",
+      "interest_level": 9,
+      "type": "modified",
+      "impact": "The changes could lead to increased revenue and customer adoption for Anyscale, as well as improved competitiveness in the AI and machine learning market.",
+      "insights": [
+        "Anyscale is investing heavily in its AI Compute Platform and Ray Open Source",
+        "The company is targeting large-scale AI and machine learning deployments",
+        "The updates could lead to increased competition in the AI and machine learning market"
+      ]
+    },
     {
       "company": "DALL-E",
       "url": "pricing",
@@ -201,40 +236,6 @@
       "insights": [
         "SambaNova is expanding its presence in the AI market with new products and features.",
         "The company is focusing on efficient AI solutions for data centers."
-      ]
-    },
-    {
-      "company": "Runway",
-      "url": "blog",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The creation of this content demonstrates Runway's commitment to transparency, innovation, and community engagement, which can positively impact its reputation and attract new customers, partners, and talent.",
-      "insights": [
-        "Runway is committed to transparency and community engagement",
-        "Partnerships and collaborations are crucial to Runway's strategy",
-        "AI and machine learning are key areas of focus for the company"
-      ]
-    },
-    {
-      "company": "Runway",
-      "url": "homepage",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The changes are likely to attract new customers and partners, and to establish Runway as a leader in the AI-powered creative tools market.",
-      "insights": [
-        "Runway is expanding its product offerings and focusing on storytelling and creative applications",
-        "The company is establishing itself as a leader in the AI-powered creative tools market"
-      ]
-    },
-    {
-      "company": "Runway",
-      "url": "pricing",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "Runway AI is expanding its offerings with new pricing plans, targeting a wider range of customers from individuals to large enterprises",
-      "insights": [
-        "Runway AI is targeting a wide range of customers with its new pricing plans",
-        "The company is focusing on accessibility and flexibility with its pricing and features"
       ]
     }
   ]
