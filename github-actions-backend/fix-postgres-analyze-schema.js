@@ -1,246 +1,79 @@
 #!/usr/bin/env node
 
-const { Client } = require('pg');
+// SSL Certificate fix for Heroku PostgreSQL
+if (process.env.NODE_ENV === 'production' || process.env.POSTGRES_CONNECTION_STRING) {
+  process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+}
+
+const { db, end } = require('./postgres-db');
 
 async function fixAnalyzeSchema() {
-    const client = new Client({
-        connectionString: process.env.POSTGRES_CONNECTION_STRING,
-        ssl: { 
-            rejectUnauthorized: false // Required for Heroku and other cloud providers
-        }
-    });
-
-    try {
-        await client.connect();
-        console.log('🔧 Connected to PostgreSQL - Fixing schema for analyze step...');
-
-        // Create schemas if they don't exist
-        const schemas = ['raw_content', 'processed_content', 'intelligence'];
-        for (const schema of schemas) {
-            await client.query(`CREATE SCHEMA IF NOT EXISTS ${schema}`);
-            console.log(`✅ Ensured schema: ${schema}`);
-        }
-
-        // Check if tables exist and what columns they have
-        const tableCheck = await client.query(`
-            SELECT 
-                table_schema,
-                table_name,
-                column_name
-            FROM information_schema.columns
-            WHERE table_schema IN ('raw_content', 'processed_content', 'intelligence')
-            AND table_name IN ('scraped_pages', 'markdown_pages', 'baseline_analysis', 'changes')
-            ORDER BY table_schema, table_name, ordinal_position
-        `);
-
-        // Check if we need to rename company_name to company
-        const hasCompanyName = tableCheck.rows.some(row => 
-            row.column_name === 'company_name' && row.table_name === 'scraped_pages'
-        );
-        const hasCompany = tableCheck.rows.some(row => 
-            row.column_name === 'company' && row.table_name === 'scraped_pages'
-        );
-
-        if (hasCompanyName && !hasCompany) {
-            console.log('🔄 Renaming company_name to company in scraped_pages...');
-            await client.query(`ALTER TABLE raw_content.scraped_pages RENAME COLUMN company_name TO company`);
-        }
-
-        // Create all required tables for the analyze step
-        
-        // 1. Raw content tables (should already exist from scraper)
-        await client.query(`
-            CREATE TABLE IF NOT EXISTS raw_content.scraped_pages (
-                id SERIAL PRIMARY KEY,
-                company TEXT NOT NULL,
-                url TEXT NOT NULL,
-                html_content TEXT,
-                scraped_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                content_hash TEXT,
-                status TEXT DEFAULT 'success',
-                error_message TEXT,
-                captcha_detected BOOLEAN DEFAULT FALSE,
-                access_blocked BOOLEAN DEFAULT FALSE,
-                UNIQUE(company, url)
-            )
-        `);
-        console.log('✅ Ensured table: raw_content.scraped_pages');
-
-        // 2. Processed content tables
-        await client.query(`
-            CREATE TABLE IF NOT EXISTS processed_content.markdown_pages (
-                id SERIAL PRIMARY KEY,
-                company TEXT NOT NULL,
-                url TEXT NOT NULL,
-                url_name TEXT,
-                content TEXT,
-                markdown_hash TEXT,
-                source_hash TEXT UNIQUE,
-                source_type TEXT,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                title TEXT
-            )
-        `);
-        console.log('✅ Ensured table: processed_content.markdown_pages');
-
-        // 3. Intelligence tables for analysis results
-        await client.query(`
-            CREATE TABLE IF NOT EXISTS intelligence.baseline_analysis (
-                id SERIAL PRIMARY KEY,
-                company TEXT NOT NULL,
-                url TEXT NOT NULL,
-                company_type TEXT,
-                page_purpose TEXT,
-                key_topics TEXT[],
-                main_message TEXT,
-                target_audience TEXT,
-                unique_value TEXT,
-                trust_elements TEXT[],
-                differentiation TEXT,
-                technology_stack TEXT[],
-                analysis_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                content_hash TEXT,
-                ai_model TEXT DEFAULT 'groq-llama-3.3-70b',
-                UNIQUE(company, url)
-            )
-        `);
-        console.log('✅ Ensured table: intelligence.baseline_analysis');
-
-        await client.query(`
-            CREATE TABLE IF NOT EXISTS intelligence.changes (
-                id SERIAL PRIMARY KEY,
-                company TEXT NOT NULL,
-                url TEXT NOT NULL,
-                detected_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                change_type TEXT,
-                before_content TEXT,
-                after_content TEXT,
-                analysis TEXT,
-                interest_level INTEGER,
-                ai_confidence FLOAT,
-                content_hash_before TEXT,
-                content_hash_after TEXT,
-                markdown_before TEXT,
-                markdown_after TEXT,
-                ai_model TEXT DEFAULT 'groq-llama-3.3-70b'
-            )
-        `);
-        console.log('✅ Ensured table: intelligence.changes');
-
-        await client.query(`
-            CREATE TABLE IF NOT EXISTS intelligence.enhanced_analysis (
-                id SERIAL PRIMARY KEY,
-                change_id INTEGER REFERENCES intelligence.changes(id),
-                ultra_analysis JSONB,
-                key_insights TEXT[],
-                business_impact TEXT,
-                competitive_implications TEXT,
-                market_signals TEXT[],
-                risk_assessment TEXT,
-                opportunity_score INTEGER,
-                analysis_timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                ai_model TEXT DEFAULT 'groq-llama-3.3-70b',
-                UNIQUE(change_id)
-            )
-        `);
-        console.log('✅ Ensured table: intelligence.enhanced_analysis');
-
-        await client.query(`
-            CREATE TABLE IF NOT EXISTS intelligence.email_notifications (
-                id SERIAL PRIMARY KEY,
-                sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                recipient_email TEXT NOT NULL,
-                email_type TEXT NOT NULL,
-                subject TEXT NOT NULL,
-                changes_included INTEGER,
-                status TEXT DEFAULT 'sent',
-                error_message TEXT
-            )
-        `);
-        console.log('✅ Ensured table: intelligence.email_notifications');
-
-        await client.query(`
-            CREATE TABLE IF NOT EXISTS intelligence.summaries (
-                id SERIAL PRIMARY KEY,
-                company TEXT NOT NULL,
-                summary_date DATE DEFAULT CURRENT_DATE,
-                total_changes INTEGER,
-                high_interest_changes INTEGER,
-                key_themes TEXT[],
-                executive_summary TEXT,
-                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-                UNIQUE(company, summary_date)
-            )
-        `);
-        console.log('✅ Ensured table: intelligence.summaries');
-
-        // Create indexes for performance - wrapped in try/catch for each
-        const indexes = [
-            'CREATE INDEX IF NOT EXISTS idx_scraped_pages_company_url ON raw_content.scraped_pages(company, url)',
-            'CREATE INDEX IF NOT EXISTS idx_scraped_pages_hash ON raw_content.scraped_pages(content_hash)',
-            'CREATE INDEX IF NOT EXISTS idx_markdown_pages_company_url ON processed_content.markdown_pages(company, url)',
-            'CREATE INDEX IF NOT EXISTS idx_markdown_pages_source_hash ON processed_content.markdown_pages(source_hash)',
-            'CREATE INDEX IF NOT EXISTS idx_baseline_company_url ON intelligence.baseline_analysis(company, url)',
-            'CREATE INDEX IF NOT EXISTS idx_changes_company ON intelligence.changes(company)',
-            'CREATE INDEX IF NOT EXISTS idx_changes_detected_at ON intelligence.changes(detected_at)',
-            'CREATE INDEX IF NOT EXISTS idx_changes_interest ON intelligence.changes(interest_level)',
-            'CREATE INDEX IF NOT EXISTS idx_enhanced_change_id ON intelligence.enhanced_analysis(change_id)'
-        ];
-
-        for (const indexSql of indexes) {
-            try {
-                await client.query(indexSql);
-                console.log(`✅ ${indexSql.match(/idx_\w+/)[0]}`);
-            } catch (err) {
-                console.log(`⚠️  Failed to create index: ${err.message}`);
-            }
-        }
-
-        // Verify schema
-        const tableVerification = await client.query(`
-            SELECT 
-                schemaname,
-                tablename
-            FROM pg_tables 
-            WHERE schemaname IN ('raw_content', 'processed_content', 'intelligence')
-            ORDER BY schemaname, tablename
-        `);
-        
-        console.log('\n📊 Schema verification:');
-        tableVerification.rows.forEach(row => {
-            console.log(`  - ${row.schemaname}.${row.tablename}`);
-        });
-
-        // Also check column names for debugging
-        const columnCheck = await client.query(`
-            SELECT 
-                table_schema,
-                table_name,
-                column_name
-            FROM information_schema.columns
-            WHERE table_schema = 'raw_content'
-            AND table_name = 'scraped_pages'
-            ORDER BY ordinal_position
-        `);
-        
-        console.log('\n📋 Columns in raw_content.scraped_pages:');
-        columnCheck.rows.forEach(row => {
-            console.log(`  - ${row.column_name}`);
-        });
-
-        console.log('\n✅ PostgreSQL schema is ready for analyze step!');
-
-    } catch (error) {
-        console.error('❌ Error fixing schema:', error);
-        process.exit(1);
-    } finally {
-        await client.end();
+  console.log('🔧 Fixing PostgreSQL analyzer schema...');
+  
+  try {
+    // Check if enhanced_analysis table exists
+    const tableExists = await db.get(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.tables 
+        WHERE table_schema = 'intelligence' 
+        AND table_name = 'enhanced_analysis'
+      )
+    `);
+    
+    if (!tableExists.exists) {
+      console.log('❌ enhanced_analysis table does not exist! Please run the full schema creation.');
+      process.exit(1);
     }
+    
+    // Check if change_id column exists
+    const columnExists = await db.get(`
+      SELECT EXISTS (
+        SELECT FROM information_schema.columns 
+        WHERE table_schema = 'intelligence' 
+        AND table_name = 'enhanced_analysis'
+        AND column_name = 'change_id'
+      )
+    `);
+    
+    if (!columnExists.exists) {
+      console.log('⚠️  Adding missing change_id column to enhanced_analysis...');
+      await db.run(`
+        ALTER TABLE intelligence.enhanced_analysis 
+        ADD COLUMN IF NOT EXISTS change_id INTEGER REFERENCES intelligence.changes(id)
+      `);
+      console.log('✅ Added change_id column');
+    }
+    
+    // Check for unique constraint and add if missing
+    const constraintExists = await db.get(`
+      SELECT EXISTS (
+        SELECT FROM pg_constraint 
+        WHERE conname = 'enhanced_analysis_change_id_key'
+      )
+    `);
+    
+    if (!constraintExists.exists) {
+      console.log('⚠️  Adding unique constraint on change_id...');
+      await db.run(`
+        ALTER TABLE intelligence.enhanced_analysis 
+        ADD CONSTRAINT enhanced_analysis_change_id_key UNIQUE (change_id)
+      `);
+      console.log('✅ Added unique constraint');
+    }
+    
+    console.log('✅ Schema fixes complete!');
+    
+  } catch (error) {
+    console.error('❌ Error fixing schema:', error);
+    process.exit(1);
+  } finally {
+    await end();
+  }
 }
 
 // Run if called directly
 if (require.main === module) {
-    fixAnalyzeSchema();
+  fixAnalyzeSchema();
 }
 
 module.exports = { fixAnalyzeSchema };
