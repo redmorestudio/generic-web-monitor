@@ -18,9 +18,9 @@
   },
   "strategic_analysis": {
     "market_signals": [],
-    "business_impact": "The change has no significant business impact, as it is a minor update to a code example",
-    "strategic_direction": "The change does not indicate a shift in the strategic direction of Replicate",
-    "competitive_implications": "The change does not affect the competitive positioning of Replicate"
+    "business_impact": "None, the change is minor and does not affect the business",
+    "strategic_direction": "No change in strategic direction",
+    "competitive_implications": "None, the change does not impact the competitive landscape"
   },
   "entities": {
     "people": [],
@@ -34,16 +34,16 @@
   "insights": {
     "threats": [],
     "key_findings": [
-      "The change is minor and only affects a code example"
+      "The Replicate platform is focused on providing a wide range of AI models for various use cases"
     ],
     "opportunities": [],
     "recommended_actions": []
   },
   "key_insights": [
-    "The change is minor and only affects a code example"
+    "The Replicate platform is focused on providing a wide range of AI models for various use cases"
   ],
-  "business_impact": "The change has no significant business impact, as it is a minor update to a code example",
-  "competitive_implications": "The change does not affect the competitive positioning of Replicate",
+  "business_impact": "None, the change is minor and does not affect the business",
+  "competitive_implications": "None, the change does not impact the competitive landscape",
   "content_hash_before": "8ecbc863725ef4232ab5df2307e6f3b1fe0c08e94ea93dd651351ec852f85114",
   "content_hash_after": "29078c2d53d0c6da5d9289f2f06d55eb06f3b90043b49e44fd2f09dfc025945a",
   "ai_model": "groq-llama-3.3-70b",
