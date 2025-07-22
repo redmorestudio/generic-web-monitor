@@ -206,8 +206,11 @@ jobs:
           cd github-actions-backend
           echo "🔧 Ensuring baseline_analysis table exists with correct schema..."
           
-          # Use smart version that preserves existing data structure
-          if [ -f "fix-baseline-analysis-schema-smart.js" ]; then
+          # Use proper version that creates ONE table with JSONB structure
+          if [ -f "fix-baseline-analysis-schema-proper.js" ]; then
+            echo "Using proper JSONB schema fix..."
+            node fix-baseline-analysis-schema-proper.js
+          elif [ -f "fix-baseline-analysis-schema-smart.js" ]; then
             echo "Using smart schema fix..."
             node fix-baseline-analysis-schema-smart.js
           elif [ -f "fix-baseline-analysis-schema-robust.js" ]; then
@@ -235,9 +238,18 @@ jobs:
             exit 1
           fi
           
-          if ! node ai-analyzer-baseline-three-db-postgres.js; then
-            echo "❌ PostgreSQL baseline analysis failed"
-            exit 1
+          # Use proper version that writes to JSONB structure
+          if [ -f "ai-analyzer-baseline-three-db-postgres-proper.js" ]; then
+            echo "Using proper JSONB baseline analyzer..."
+            if ! node ai-analyzer-baseline-three-db-postgres-proper.js; then
+              echo "❌ PostgreSQL baseline analysis failed"
+              exit 1
+            fi
+          else
+            if ! node ai-analyzer-baseline-three-db-postgres.js; then
+              echo "❌ PostgreSQL baseline analysis failed"
+              exit 1
+            fi
           fi
           
           echo "✅ PostgreSQL baseline analysis completed successfully"

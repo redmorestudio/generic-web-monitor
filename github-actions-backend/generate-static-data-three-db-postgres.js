@@ -54,22 +54,30 @@ function deduplicatePreservingCase(arr) {
 // Helper function to get top entities for a company
 async function getTopEntities(companyId, entityType, limit = 3) {
     try {
-        // Get latest analysis for company
+        // Get latest analysis for company from intelligence schema with JSONB
         const analyses = await db.all(`
             SELECT ba.entities
-            FROM processed_content.baseline_analysis ba
-            JOIN intelligence.company_urls u ON ba.url_id = u.id
-            WHERE u.company_id = $1
-            ORDER BY ba.created_at DESC
+            FROM intelligence.baseline_analysis ba
+            WHERE ba.company_id = $1
+            ORDER BY ba.analysis_date DESC
             LIMIT 5
         `, [companyId]);
         
         const allEntities = [];
         for (const analysis of analyses) {
             try {
-                const entities = JSON.parse(analysis.entities);
+                const entities = typeof analysis.entities === 'string' ? 
+                    JSON.parse(analysis.entities) : analysis.entities;
+                    
                 if (entities && entities[entityType]) {
-                    allEntities.push(...entities[entityType]);
+                    // Handle different entity types
+                    if (entityType === 'technologies' || entityType === 'products') {
+                        // These are arrays of objects with 'name' property
+                        allEntities.push(...entities[entityType].map(e => e.name || e));
+                    } else {
+                        // Simple arrays
+                        allEntities.push(...entities[entityType]);
+                    }
                 }
             } catch (e) {
                 // Skip invalid JSON
@@ -79,8 +87,10 @@ async function getTopEntities(companyId, entityType, limit = 3) {
         // Count occurrences and sort by frequency
         const entityCounts = {};
         allEntities.forEach(entity => {
-            const key = entity.toLowerCase();
-            entityCounts[key] = (entityCounts[key] || 0) + 1;
+            const key = (entity || '').toString().toLowerCase();
+            if (key) {
+                entityCounts[key] = (entityCounts[key] || 0) + 1;
+            }
         });
         
         return Object.entries(entityCounts)
@@ -524,13 +534,12 @@ async function generateIndividualCompanyFiles(companyName) {
         WHERE cd.company = $1
     `, [companyName]);
     
-    // Get entities from latest analyses
+    // Get entities from latest analyses in intelligence schema
     const latestAnalyses = await db.all(`
         SELECT ba.entities, ba.themes, ba.key_points
-        FROM processed_content.baseline_analysis ba
-        JOIN intelligence.company_urls u ON ba.url_id = u.id
-        WHERE u.company_id = $1
-        ORDER BY ba.created_at DESC
+        FROM intelligence.baseline_analysis ba
+        WHERE ba.company_id = $1
+        ORDER BY ba.analysis_date DESC
         LIMIT 10
     `, [company.id]);
     
@@ -542,20 +551,40 @@ async function generateIndividualCompanyFiles(companyName) {
     
     for (const analysis of latestAnalyses) {
         try {
+            // Parse JSONB entities
             if (analysis.entities) {
-                const entities = JSON.parse(analysis.entities);
-                if (entities.technologies) allTechnologies.push(...entities.technologies);
-                if (entities.products) allProducts.push(...entities.products);
+                const entities = typeof analysis.entities === 'string' ? 
+                    JSON.parse(analysis.entities) : analysis.entities;
+                    
+                if (entities.technologies) {
+                    const techNames = entities.technologies.map(t => t.name || t);
+                    allTechnologies.push(...techNames);
+                }
+                if (entities.products) {
+                    const productNames = entities.products.map(p => p.name || p);
+                    allProducts.push(...productNames);
+                }
             }
+            
+            // Parse JSONB themes
             if (analysis.themes) {
-                const themes = JSON.parse(analysis.themes);
-                allThemes.push(...themes);
+                const themes = typeof analysis.themes === 'string' ? 
+                    JSON.parse(analysis.themes) : analysis.themes;
+                if (Array.isArray(themes)) {
+                    allThemes.push(...themes);
+                }
             }
+            
+            // Parse JSONB key_points
             if (analysis.key_points) {
-                const keyPoints = JSON.parse(analysis.key_points);
-                allKeyPoints.push(...keyPoints);
+                const keyPoints = typeof analysis.key_points === 'string' ? 
+                    JSON.parse(analysis.key_points) : analysis.key_points;
+                if (Array.isArray(keyPoints)) {
+                    allKeyPoints.push(...keyPoints);
+                }
             }
         } catch (e) {
+            console.error(`Error parsing analysis data: ${e.message}`);
             // Skip invalid JSON
         }
     }
