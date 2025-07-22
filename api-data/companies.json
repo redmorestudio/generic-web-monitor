@@ -1,560 +1,545 @@
 {
   "companies": [
     {
-      "company": "AI21 Labs",
-      "type": "LLM Providers",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://ai21.com",
-        "https://ai21.com/jamba",
-        "https://ai21.com/pricing",
-        "https://ai21.com/blog"
-      ]
+      "id": null,
+      "name": "AI21 Labs",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "2d844ff7-ceec-413e-a1a0-b6db926bf943"
     },
     {
-      "company": "AMD",
-      "type": "AI Hardware",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://amd.com/en/graphics/instinct-server-accelerators",
-        "https://amd.com/en/newsroom"
-      ]
+      "id": null,
+      "name": "Aleph Alpha",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "4f8266f5-a5ab-4028-b664-82cb49db38f3"
     },
     {
-      "company": "Aleph Alpha",
-      "type": "LLM Providers",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://aleph-alpha.com",
-        "https://aleph-alpha.com/luminous",
-        "https://aleph-alpha.com/pricing",
-        "https://docs.aleph-alpha.com"
-      ]
+      "id": null,
+      "name": "Amazon CodeWhisperer",
+      "category": "AI Coding",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "37bdb681-f5af-4360-84a1-f64753792ffe"
     },
     {
-      "company": "Amazon CodeWhisperer",
-      "type": "AI Coding",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://aws.amazon.com/codewhisperer",
-        "https://aws.amazon.com/codewhisperer/pricing",
-        "https://aws.amazon.com/blogs/aws/tag/amazon-codewhisperer",
-        "https://docs.aws.amazon.com/codewhisperer"
-      ]
+      "id": null,
+      "name": "AMD",
+      "category": "AI Hardware",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "ce2a0c7f-91ac-461c-be22-800975220768"
     },
     {
-      "company": "Andi",
-      "type": "AI Search",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://andisearch.com"
-      ]
+      "id": null,
+      "name": "Andi",
+      "category": "AI Search",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "50edc6ac-ad89-4b50-9a60-41987daa255e"
     },
     {
-      "company": "Anthropic",
-      "type": "LLM Providers",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://anthropic.com",
-        "https://anthropic.com/claude",
-        "https://anthropic.com/pricing",
-        "https://anthropic.com/news",
-        "https://docs.anthropic.com"
-      ]
+      "id": null,
+      "name": "Anthropic",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "261033ad-a04c-408b-908e-0d16aafb51fa"
     },
     {
-      "company": "Anyscale",
-      "type": "AI Infrastructure",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://anyscale.com",
-        "https://anyscale.com/pricing",
-        "https://anyscale.com/blog"
-      ]
+      "id": null,
+      "name": "Anyscale",
+      "category": "AI Infrastructure",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "70260c21-a315-45a4-8221-927a2aabe93d"
     },
     {
-      "company": "Cerebras",
-      "type": "AI Hardware",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://cerebras.net",
-        "https://cerebras.net/product-system",
-        "https://cerebras.net/blog"
-      ]
+      "id": null,
+      "name": "Cerebras",
+      "category": "AI Hardware",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "a361e6ee-3e12-4e77-8e9b-acfde685b06f"
     },
     {
-      "company": "Cisco Systems",
-      "type": "Other",
-      "created_at": "2025-07-19 16:08:20",
-      "urls": [
-        "https://www.cisco.com"
-      ]
+      "id": null,
+      "name": "Cisco Systems",
+      "category": "Other",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": null
     },
     {
-      "company": "Codeium",
-      "type": "AI Coding",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://codeium.com",
-        "https://codeium.com/windsurf",
-        "https://codeium.com/pricing",
-        "https://codeium.com/blog"
-      ]
+      "id": null,
+      "name": "Codeium",
+      "category": "AI Coding",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "b82358b7-13a0-4f7f-86f3-6dc8fdd9e90b"
     },
     {
-      "company": "Cohere",
-      "type": "LLM Providers",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://cohere.ai",
-        "https://cohere.ai/products",
-        "https://cohere.ai/pricing",
-        "https://cohere.ai/blog",
-        "https://docs.cohere.ai"
-      ]
+      "id": null,
+      "name": "Cohere",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "953053ec-3e74-4fa6-b187-d0b54ddc1a60"
     },
     {
-      "company": "Cursor",
-      "type": "AI Coding",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://cursor.com",
-        "https://cursor.com/features",
-        "https://cursor.com/pricing",
-        "https://cursor.com/blog"
-      ]
+      "id": null,
+      "name": "Cursor",
+      "category": "AI Coding",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "ee42329d-6e79-4d78-8854-8a796e07d0ba"
     },
     {
-      "company": "DALL-E",
-      "type": "Image Generation",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://openai.com/dall-e-3",
-        "https://openai.com/pricing"
-      ]
+      "id": null,
+      "name": "DALL-E",
+      "category": "Image Generation",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "506cee2c-56ff-4648-9b30-b62e6599d971"
     },
     {
-      "company": "DataRobot",
-      "type": "Enterprise AI",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://datarobot.com",
-        "https://datarobot.com/platform",
-        "https://datarobot.com/blog"
-      ]
+      "id": null,
+      "name": "DataRobot",
+      "category": "Enterprise AI",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "272323b0-71cc-4a79-9c06-f7abd32ed96e"
     },
     {
-      "company": "Descript",
-      "type": "AI Voice/Audio",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://descript.com",
-        "https://descript.com/overdub",
-        "https://descript.com/pricing",
-        "https://descript.com/blog"
-      ]
+      "id": null,
+      "name": "Descript",
+      "category": "AI Voice/Audio",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "a4ddd406-9711-452d-b9a7-549ac5df81aa"
     },
     {
-      "company": "ElevenLabs",
-      "type": "AI Voice/Audio",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://elevenlabs.io",
-        "https://elevenlabs.io/voice-generator",
-        "https://elevenlabs.io/pricing",
-        "https://elevenlabs.io/blog"
-      ]
+      "id": null,
+      "name": "ElevenLabs",
+      "category": "AI Voice/Audio",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "68f7835a-a8df-4d34-ab84-b6db7cac9d7f"
     },
     {
-      "company": "Flux",
-      "type": "Image Generation",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://blackforestlabs.ai",
-        "https://blackforestlabs.ai/our-models"
-      ]
+      "id": null,
+      "name": "Flux",
+      "category": "Image Generation",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "20187616-bb5e-4940-a2b2-c497e100ec90"
     },
     {
-      "company": "GitHub Copilot",
-      "type": "AI Coding",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://github.com/features/copilot",
-        "https://github.com/pricing",
-        "https://github.blog/tag/github-copilot",
-        "https://docs.github.com/en/copilot"
-      ]
+      "id": null,
+      "name": "GitHub Copilot",
+      "category": "AI Coding",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "37230941-59f8-4225-b04f-fcc64a63afaf"
     },
     {
-      "company": "Google DeepMind",
-      "type": "LLM Providers",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://deepmind.google",
-        "https://ai.google/discover/gemini",
-        "https://cloud.google.com/vertex-ai/pricing",
-        "https://blog.google/technology/ai",
-        "https://ai.google.dev"
-      ]
+      "id": null,
+      "name": "Google DeepMind",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "2937a32a-79bb-41a1-a9bb-e3794a9cb1e0"
     },
     {
-      "company": "H2O.ai",
-      "type": "Enterprise AI",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://h2o.ai",
-        "https://h2o.ai/platform",
-        "https://h2o.ai/blog"
-      ]
+      "id": null,
+      "name": "H2O.ai",
+      "category": "Enterprise AI",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "48c80f2f-a3e6-4c18-8e89-2b63e1a458da"
     },
     {
-      "company": "HeyGen",
-      "type": "Video AI",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://heygen.com",
-        "https://heygen.com/features",
-        "https://heygen.com/pricing",
-        "https://heygen.com/blog"
-      ]
+      "id": null,
+      "name": "HeyGen",
+      "category": "Video AI",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "f5852b7e-4603-4c83-8a64-d08dfd65511a"
     },
     {
-      "company": "Hugging Face",
-      "type": "AI Infrastructure",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://huggingface.co",
-        "https://huggingface.co/pricing",
-        "https://huggingface.co/blog",
-        "https://huggingface.co/docs"
-      ]
+      "id": null,
+      "name": "Hugging Face",
+      "category": "AI Infrastructure",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "44fb829b-791d-4244-9d06-be43e0dc478d"
     },
     {
-      "company": "Ideogram",
-      "type": "Image Generation",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://ideogram.ai",
-        "https://ideogram.ai/pricing"
-      ]
+      "id": null,
+      "name": "Ideogram",
+      "category": "Image Generation",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "72d50df5-a948-4273-86cb-b594a1e8a1f5"
     },
     {
-      "company": "Inflection AI",
-      "type": "LLM Providers",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://inflection.ai",
-        "https://pi.ai",
-        "https://inflection.ai/blog"
-      ]
+      "id": null,
+      "name": "Inflection AI",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "81d7854f-ccda-47f2-81a2-e86f3a5aaf78"
     },
     {
-      "company": "Intel",
-      "type": "AI Hardware",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://intel.com/content/www/us/en/artificial-intelligence",
-        "https://intel.com/content/www/us/en/newsroom"
-      ]
+      "id": null,
+      "name": "Intel",
+      "category": "AI Hardware",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "a17b7960-a7ba-4e4a-bd69-d23ae9faef07"
     },
     {
-      "company": "LangChain",
-      "type": "AI Infrastructure",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://langchain.com",
-        "https://langchain.com/langsmith",
-        "https://blog.langchain.dev",
-        "https://docs.langchain.com"
-      ]
+      "id": null,
+      "name": "LangChain",
+      "category": "AI Infrastructure",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "53cdce82-c9bb-4a97-aa06-63d8b99e0986"
     },
     {
-      "company": "Leonardo AI",
-      "type": "Image Generation",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://leonardo.ai",
-        "https://leonardo.ai/pricing"
-      ]
+      "id": null,
+      "name": "Leonardo AI",
+      "category": "Image Generation",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "6a6fd3ce-fd45-4310-8790-12ae14f8c5dc"
     },
     {
-      "company": "Luma AI",
-      "type": "Video AI",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://lumalabs.ai",
-        "https://lumalabs.ai/dream-machine",
-        "https://lumalabs.ai/pricing"
-      ]
+      "id": null,
+      "name": "Luma AI",
+      "category": "Video AI",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "1f51b237-fff9-484a-b031-9f289850ab24"
     },
     {
-      "company": "Meta AI",
-      "type": "LLM Providers",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://ai.meta.com",
-        "https://ai.meta.com/llama",
-        "https://ai.meta.com/blog",
-        "https://llama.meta.com"
-      ]
+      "id": null,
+      "name": "Meta AI",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "115146e5-b33c-410e-b11a-e700d602e8cc"
     },
     {
-      "company": "Midjourney",
-      "type": "Image Generation",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://midjourney.com",
-        "https://docs.midjourney.com",
-        "https://docs.midjourney.com/docs/plans"
-      ]
+      "id": null,
+      "name": "Midjourney",
+      "category": "Image Generation",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "81a6395f-1194-4ed2-beaf-9878c1d12ff0"
     },
     {
-      "company": "Mistral AI",
-      "type": "LLM Providers",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://mistral.ai",
-        "https://mistral.ai/technology",
-        "https://mistral.ai/pricing",
-        "https://mistral.ai/news",
-        "https://docs.mistral.ai"
-      ]
+      "id": null,
+      "name": "Mistral AI",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "a4078baf-64c0-4fc7-b559-7e917fadbe20"
     },
     {
-      "company": "Murf AI",
-      "type": "AI Voice/Audio",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://murf.ai",
-        "https://murf.ai/pricing",
-        "https://murf.ai/resources/blog"
-      ]
+      "id": null,
+      "name": "Murf AI",
+      "category": "AI Voice/Audio",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "29451386-e8d8-435f-9cf8-9b612fb008ea"
     },
     {
-      "company": "NVIDIA",
-      "type": "AI Hardware",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://nvidia.com/ai",
-        "https://nvidia.com/en-us/data-center/products",
-        "https://blogs.nvidia.com/ai",
-        "https://developer.nvidia.com"
-      ]
+      "id": null,
+      "name": "Neeva",
+      "category": "AI Search",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "bb4d39d4-6ed9-4c42-a002-e224b37de675"
     },
     {
-      "company": "Neeva",
-      "type": "AI Search",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://neeva.com"
-      ]
+      "id": null,
+      "name": "NVIDIA",
+      "category": "AI Hardware",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "0d8a428d-27d8-44a2-81e7-e02e35b40926"
     },
     {
-      "company": "OpenAI",
-      "type": "LLM Providers",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://openai.com",
-        "https://openai.com/chatgpt",
-        "https://openai.com/pricing",
-        "https://openai.com/blog",
-        "https://platform.openai.com"
-      ]
+      "id": null,
+      "name": "OpenAI",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "db6402dc-6e31-4fbc-bf57-f6f84db34a73"
     },
     {
-      "company": "Palantir",
-      "type": "Enterprise AI",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://palantir.com",
-        "https://palantir.com/platforms/aip",
-        "https://blog.palantir.com"
-      ]
+      "id": null,
+      "name": "Palantir",
+      "category": "Enterprise AI",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "e9f52c09-6ecc-41cc-abe0-7dc103238671"
     },
     {
-      "company": "Perplexity AI",
-      "type": "AI Search",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://perplexity.ai",
-        "https://perplexity.ai/pro",
-        "https://blog.perplexity.ai"
-      ]
+      "id": null,
+      "name": "Perplexity AI",
+      "category": "AI Search",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "5d41557d-369a-4075-ad03-e83ebddb3605"
     },
     {
-      "company": "Phind",
-      "type": "AI Search",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://phind.com",
-        "https://phind.com/search?q=pricing"
-      ]
+      "id": null,
+      "name": "Phind",
+      "category": "AI Search",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "7898bcb3-c107-4bc6-9272-165435ee2f54"
     },
     {
-      "company": "Pieces",
-      "type": "AI Coding",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://pieces.app",
-        "https://pieces.app/features",
-        "https://pieces.app/pricing",
-        "https://pieces.app/blog"
-      ]
+      "id": null,
+      "name": "Pieces",
+      "category": "AI Coding",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "ffe2f400-ea6a-4757-9f8a-ec3316164168"
     },
     {
-      "company": "Pika",
-      "type": "Video AI",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://pika.art",
-        "https://pika.art/pricing",
-        "https://pika.art/blog"
-      ]
+      "id": null,
+      "name": "Pika",
+      "category": "Video AI",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "8a9c74ef-a174-422f-bc33-7fba9344688b"
     },
     {
-      "company": "Redmore Studio",
-      "type": "AI Consulting and Education",
-      "created_at": "2025-07-15 18:02:37",
-      "urls": [
-        "https://redmore.studio",
-        "https://redmore.studio/blog"
-      ]
+      "id": null,
+      "name": "Redmore Studio",
+      "category": "AI Consulting and Education",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": null
     },
     {
-      "company": "Replicate",
-      "type": "AI Infrastructure",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://replicate.com",
-        "https://replicate.com/pricing",
-        "https://replicate.com/blog"
-      ]
+      "id": null,
+      "name": "Replicate",
+      "category": "AI Infrastructure",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "c13b5d69-34cd-4489-92de-713150121edc"
     },
     {
-      "company": "Replit",
-      "type": "AI Coding",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://replit.com",
-        "https://replit.com/ai",
-        "https://replit.com/pricing",
-        "https://blog.replit.com"
-      ]
+      "id": null,
+      "name": "Replit",
+      "category": "AI Coding",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "4e019394-a905-4408-82cd-13a96cba7bd2"
     },
     {
-      "company": "Resemble AI",
-      "type": "AI Voice/Audio",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://resemble.ai",
-        "https://resemble.ai/pricing",
-        "https://resemble.ai/blog"
-      ]
+      "id": null,
+      "name": "Resemble AI",
+      "category": "AI Voice/Audio",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "20eefa1b-c138-49c4-b1d4-85f719ce4de4"
     },
     {
-      "company": "Runway",
-      "type": "Video AI",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://runwayml.com",
-        "https://runwayml.com/pricing",
-        "https://runwayml.com/blog"
-      ]
+      "id": null,
+      "name": "Runway",
+      "category": "Video AI",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "39e65a64-4837-4924-953d-569fd90e7be1"
     },
     {
-      "company": "SambaNova",
-      "type": "AI Hardware",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://sambanova.ai",
-        "https://sambanova.ai/products",
-        "https://sambanova.ai/blog"
-      ]
+      "id": null,
+      "name": "SambaNova",
+      "category": "AI Hardware",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "e24128dd-0eb3-45c1-8400-3361fe521ebd"
     },
     {
-      "company": "Scale AI",
-      "type": "Enterprise AI",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://scale.com",
-        "https://scale.com/enterprise",
-        "https://scale.com/blog"
-      ]
+      "id": null,
+      "name": "Scale AI",
+      "category": "Enterprise AI",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "4fcafab4-550b-4760-80b3-bec51959395d"
     },
     {
-      "company": "Sourcegraph",
-      "type": "AI Coding",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://sourcegraph.com",
-        "https://sourcegraph.com/cody",
-        "https://sourcegraph.com/pricing",
-        "https://sourcegraph.com/blog"
-      ]
+      "id": null,
+      "name": "Sourcegraph",
+      "category": "AI Coding",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "0bab5c0d-49cd-4c9e-91bd-c773f99b73bf"
     },
     {
-      "company": "Stability AI",
-      "type": "LLM Providers",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://stability.ai",
-        "https://stability.ai/stable-diffusion",
-        "https://stability.ai/pricing",
-        "https://stability.ai/blog"
-      ]
+      "id": null,
+      "name": "Stability AI",
+      "category": "LLM Providers",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "5f15447e-696d-4189-88cf-833485706b51"
     },
     {
-      "company": "Synthesia",
-      "type": "Video AI",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://synthesia.io",
-        "https://synthesia.io/features",
-        "https://synthesia.io/pricing",
-        "https://synthesia.io/blog"
-      ]
+      "id": null,
+      "name": "Synthesia",
+      "category": "Video AI",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "4953da30-9f80-417b-b2aa-8ec8722ebbb9"
     },
     {
-      "company": "Tabnine",
-      "type": "AI Coding",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://tabnine.com",
-        "https://tabnine.com/pricing",
-        "https://tabnine.com/blog",
-        "https://docs.tabnine.com"
-      ]
+      "id": null,
+      "name": "Tabnine",
+      "category": "AI Coding",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "dc1a4157-a3dd-4cf7-b82d-777027d734f3"
     },
     {
-      "company": "Weights & Biases",
-      "type": "AI Infrastructure",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://wandb.ai",
-        "https://wandb.ai/pricing",
-        "https://wandb.ai/fully-connected"
-      ]
+      "id": null,
+      "name": "Weights & Biases",
+      "category": "AI Infrastructure",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "eef6f7c2-547d-4080-86cf-3655eec11891"
     },
     {
-      "company": "WellSaid Labs",
-      "type": "AI Voice/Audio",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://wellsaidlabs.com",
-        "https://wellsaidlabs.com/pricing",
-        "https://wellsaidlabs.com/blog"
-      ]
+      "id": null,
+      "name": "WellSaid Labs",
+      "category": "AI Voice/Audio",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "a1838193-0ea0-4e1c-89cf-e8dd1fe459eb"
     },
     {
-      "company": "You.com",
-      "type": "AI Search",
-      "created_at": "2025-06-25 04:21:55",
-      "urls": [
-        "https://you.com",
-        "https://you.com/search?q=pricing",
-        "https://you.com/code"
-      ]
+      "id": null,
+      "name": "You.com",
+      "category": "AI Search",
+      "industry": null,
+      "description": null,
+      "headquarters": null,
+      "website": null,
+      "thebrain_thought_id": "6dc0aaf2-12ca-4011-9f81-c95f9a059f4e"
     }
   ],
-  "generated_at": "2025-07-19T18:47:50.319Z"
+  "generated_at": "2025-07-22T14:24:27.839Z"
 }
