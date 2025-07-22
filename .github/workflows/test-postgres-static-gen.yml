@@ -1,0 +1,77 @@
+name: Test PostgreSQL Static Data Generation
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test-static-gen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Test PostgreSQL connection
+        run: |
+          cd github-actions-backend
+          echo "🔌 Testing PostgreSQL connection..."
+          node -e "
+            const { db, end } = require('./postgres-db');
+            db.one('SELECT NOW() as current_time')
+              .then(result => {
+                console.log('✅ PostgreSQL connection successful:', result.current_time);
+                process.exit(0);
+              })
+              .catch(error => {
+                console.error('❌ PostgreSQL connection failed:', error.message);
+                process.exit(1);
+              })
+              .finally(() => end());
+          "
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Generate static data files
+        run: |
+          cd github-actions-backend
+          echo "📊 Generating static data files from PostgreSQL..."
+          node generate-static-data-three-db-postgres.js
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: List generated files
+        run: |
+          echo "📁 Generated files in api-data:"
+          ls -la api-data/
+          echo ""
+          echo "📄 Sample content from changes.json:"
+          head -20 api-data/changes.json || echo "No changes.json found"
+          echo ""
+          echo "📄 Sample content from companies.json:"
+          head -20 api-data/companies.json || echo "No companies.json found"
+      
+      - name: Commit and push generated files
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          git add api-data/
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Test: PostgreSQL static data generation - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+            git push origin main
+          fi
