@@ -840,13 +840,6 @@
                         console.log('No recent changes data available');
                     }
                     
-                    // Try to load dashboard data (PostgreSQL format)
-                    let dashboardData = null;
-                    if (dashboardResponse && dashboardResponse.ok) {
-                        dashboardData = await dashboardResponse.json();
-                        console.log('Loaded dashboard data (PostgreSQL format)');
-                    }
-                    
                     rawData = {
                         dashboard: {
                             company_activity: []
@@ -856,83 +849,56 @@
                     // Make it globally accessible
                     window.rawData = rawData;
                     
-                    // Check if we have PostgreSQL format data (dashboard.json)
-                    if (dashboardData && dashboardData.companies) {
-                        console.log('Using PostgreSQL format data');
+                    companiesData.companies.forEach(company => {
+                        const companyName = company.company;
+                        const details = Object.values(detailsData.companies).find(d => d.company_name === companyName);
                         
-                        dashboardData.companies.forEach(company => {
-                            const companyEntry = {
-                                id: company.id,
-                                company: company.name,
-                                type: company.category || 'Other',
-                                entity_type: company.category || 'Other',
-                                url_count: parseInt(company.url_count) || 0,
-                                recent_changes: parseInt(company.recent_changes) || 0,
-                                high_interest_changes: parseInt(company.high_interest_changes) || 0,
-                                intelligence: {
-                                    interest_level: Math.max(1, parseInt(company.high_interest_changes) || 1),
-                                    ai_technologies: company.top_technologies || [],
-                                    ai_ml_concepts: company.top_products || []
-                                }
-                            };
-                            
-                            rawData.dashboard.company_activity.push(companyEntry);
-                        });
-                    } else {
-                        // Fall back to old SQLite format
-                        console.log('Using SQLite format data');
-                        
-                        companiesData.companies.forEach(company => {
-                            const companyName = company.company;
-                            const details = Object.values(detailsData.companies).find(d => d.company_name === companyName);
-                            
-                            const companyEntry = {
-                                company: companyName,
-                                type: company.type,
-                                entity_type: company.type,
-                                url_count: company.urls.length,
-                                intelligence: {
-                                    interest_level: details?.interest_level || 5,
-                                    ai_technologies: [],
-                                    ai_ml_concepts: []
-                                }
-                            };
-                            
-                            if (details?.products) {
-                                details.products.forEach(product => {
-                                    if (product.uses_technologies) {
-                                        // Normalize technology names to avoid duplicates
-                                        const normalizedTechs = product.uses_technologies.map(tech => {
-                                            // Convert to lowercase and trim
-                                            const normalized = tech.trim().toLowerCase();
-                                            // Capitalize first letter of each word
-                                            return normalized.split(' ').map(word => 
-                                                word.charAt(0).toUpperCase() + word.slice(1)
-                                            ).join(' ');
-                                        });
-                                        companyEntry.intelligence.ai_technologies.push(...normalizedTechs);
-                                    }
-                                    if (product.ai_capabilities) {
-                                        // Normalize concept names to avoid duplicates
-                                        const normalizedConcepts = product.ai_capabilities.map(concept => {
-                                            // Convert to lowercase and trim
-                                            const normalized = concept.trim().toLowerCase();
-                                            // Capitalize first letter of each word
-                                            return normalized.split(' ').map(word => 
-                                                word.charAt(0).toUpperCase() + word.slice(1)
-                                            ).join(' ');
-                                        });
-                                        companyEntry.intelligence.ai_ml_concepts.push(...normalizedConcepts);
-                                    }
-                                });
-                                
-                                companyEntry.intelligence.ai_technologies = [...new Set(companyEntry.intelligence.ai_technologies)];
-                                companyEntry.intelligence.ai_ml_concepts = [...new Set(companyEntry.intelligence.ai_ml_concepts)];
+                        const companyEntry = {
+                            company: companyName,
+                            type: company.type,
+                            entity_type: company.type,
+                            url_count: company.urls.length,
+                            intelligence: {
+                                interest_level: details?.interest_level || 5,
+                                ai_technologies: [],
+                                ai_ml_concepts: []
                             }
+                        };
+                        
+                        if (details?.products) {
+                            details.products.forEach(product => {
+                                if (product.uses_technologies) {
+                                    // Normalize technology names to avoid duplicates
+                                    const normalizedTechs = product.uses_technologies.map(tech => {
+                                        // Convert to lowercase and trim
+                                        const normalized = tech.trim().toLowerCase();
+                                        // Capitalize first letter of each word
+                                        return normalized.split(' ').map(word => 
+                                            word.charAt(0).toUpperCase() + word.slice(1)
+                                        ).join(' ');
+                                    });
+                                    companyEntry.intelligence.ai_technologies.push(...normalizedTechs);
+                                }
+                                if (product.ai_capabilities) {
+                                    // Normalize concept names to avoid duplicates
+                                    const normalizedConcepts = product.ai_capabilities.map(concept => {
+                                        // Convert to lowercase and trim
+                                        const normalized = concept.trim().toLowerCase();
+                                        // Capitalize first letter of each word
+                                        return normalized.split(' ').map(word => 
+                                            word.charAt(0).toUpperCase() + word.slice(1)
+                                        ).join(' ');
+                                    });
+                                    companyEntry.intelligence.ai_ml_concepts.push(...normalizedConcepts);
+                                }
+                            });
                             
-                            rawData.dashboard.company_activity.push(companyEntry);
-                        });
-                    }
+                            companyEntry.intelligence.ai_technologies = [...new Set(companyEntry.intelligence.ai_technologies)];
+                            companyEntry.intelligence.ai_ml_concepts = [...new Set(companyEntry.intelligence.ai_ml_concepts)];
+                        }
+                        
+                        rawData.dashboard.company_activity.push(companyEntry);
+                    });
                     
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('info').style.display = 'block';

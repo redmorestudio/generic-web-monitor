@@ -1,0 +1,32 @@
+                        1000
+                    );
+                };
+                
+                // Update colors function
+                window.updateColors = function() {
+                    window.Graph.nodeColor(node => getNodeColor(node));
+                    updateLegend();
+                };
+                
+                // Update data
+                window.Graph.graphData({ nodes, links });
+                
+                // Apply initial filters
+                window.applyFilters();
+                
+                // Initial camera position
+                setTimeout(() => centerView(), 1000);
+            }
+            
+            // Make functions globally accessible
+            window.processAndRenderData = processAndRenderData;
+            window.applyFilters = () => {}; // Will be set by createGraph
+            window.updateColors = () => {}; // Will be set by createGraph
+            window.focusOnNode = () => {}; // Will be set by createGraph
+            
+            // Load data when page loads
+            loadData();
+        })();
+    </script>
+</body>
+</html>
