@@ -16,13 +16,193 @@
   },
   "stats": {
     "monitored_urls": "0",
-    "total_changes": "5",
-    "high_interest_changes": "2",
-    "changes_last_week": "5",
-    "avg_interest_level": "4.4000000000000000"
+    "total_changes": "6",
+    "high_interest_changes": "3",
+    "changes_last_week": "6",
+    "avg_interest_level": "4.8333333333333333"
   },
   "changes": [
     {
+      "id": 209,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:16:03.060Z",
+      "company": "DALL-E",
+      "url_name": "pricing",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 8,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Pricing model for ChatGPT",
+          "Access to GPT-4.1 mini and other AI models",
+          "Expanded limits on messaging, file uploads, and image generation"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "AI Adoption",
+          "Competitive Pricing",
+          "AI Model Accessibility"
+        ],
+        "summary": "OpenAI's ChatGPT pricing page reveals a tiered plan structure with varying levels of access to AI models, features, and capabilities, indicating a significant business move to expand AI adoption and competitiveness."
+      },
+      "url": null,
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
+    },
+    {
+      "id": 209,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:16:03.060Z",
+      "company": "DALL-E",
+      "url_name": "pricing",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 8,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Pricing model for ChatGPT",
+          "Access to GPT-4.1 mini and other AI models",
+          "Expanded limits on messaging, file uploads, and image generation"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "AI Adoption",
+          "Competitive Pricing",
+          "AI Model Accessibility"
+        ],
+        "summary": "OpenAI's ChatGPT pricing page reveals a tiered plan structure with varying levels of access to AI models, features, and capabilities, indicating a significant business move to expand AI adoption and competitiveness."
+      },
+      "url": null,
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
+    },
+    {
+      "id": 209,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:16:03.060Z",
+      "company": "DALL-E",
+      "url_name": "pricing",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 8,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Pricing model for ChatGPT",
+          "Access to GPT-4.1 mini and other AI models",
+          "Expanded limits on messaging, file uploads, and image generation"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "AI Adoption",
+          "Competitive Pricing",
+          "AI Model Accessibility"
+        ],
+        "summary": "OpenAI's ChatGPT pricing page reveals a tiered plan structure with varying levels of access to AI models, features, and capabilities, indicating a significant business move to expand AI adoption and competitiveness."
+      },
+      "url": null,
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
+    },
+    {
+      "id": 209,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:16:03.060Z",
+      "company": "DALL-E",
+      "url_name": "pricing",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 8,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Pricing model for ChatGPT",
+          "Access to GPT-4.1 mini and other AI models",
+          "Expanded limits on messaging, file uploads, and image generation"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "AI Adoption",
+          "Competitive Pricing",
+          "AI Model Accessibility"
+        ],
+        "summary": "OpenAI's ChatGPT pricing page reveals a tiered plan structure with varying levels of access to AI models, features, and capabilities, indicating a significant business move to expand AI adoption and competitiveness."
+      },
+      "url": null,
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
+    },
+    {
+      "id": 209,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:16:03.060Z",
+      "company": "DALL-E",
+      "url_name": "pricing",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 8,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Pricing model for ChatGPT",
+          "Access to GPT-4.1 mini and other AI models",
+          "Expanded limits on messaging, file uploads, and image generation"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "AI Adoption",
+          "Competitive Pricing",
+          "AI Model Accessibility"
+        ],
+        "summary": "OpenAI's ChatGPT pricing page reveals a tiered plan structure with varying levels of access to AI models, features, and capabilities, indicating a significant business move to expand AI adoption and competitiveness."
+      },
+      "url": null,
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
+    },
+    {
       "id": 182,
       "url_id": null,
       "change_type": "modified",
@@ -215,32 +395,76 @@
       "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
     },
     {
-      "id": 74,
+      "id": 181,
       "url_id": null,
       "change_type": "modified",
       "summary": null,
       "old_content_id": null,
       "new_content_id": null,
       "relevance_score": null,
-      "interest_level": 2,
+      "interest_level": 7,
       "interest_data": null,
-      "detected_at": "2025-07-21T14:23:51.810Z",
+      "detected_at": "2025-07-21T16:16:30.142Z",
       "company": "DALL-E",
-      "url_name": "homepage",
+      "url_name": "pricing",
       "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
-      "new_hash": "57455ae5572b7791026f3e0f23dd48055fa59b6c7c9c67d7382b04dedb4400cc",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
       "ai_analysis": {
-        "technical_innovation_score": 2,
-        "business_impact_score": 1,
-        "interest_level": 2,
-        "interest_drivers": [],
-        "category": "Error Messages",
-        "impact_areas": [],
-        "summary": "The change from a captcha/challenge block to a client-side exception error message does not indicate any significant technical innovation or business impact, particularly in the context of AI/ML relevance and competitive intelligence."
+        "technical_innovation_score": 5,
+        "business_impact_score": 8,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Pricing model for ChatGPT",
+          "Access to GPT-4.1 mini and other AI models",
+          "Expanded limits on messaging, file uploads, and image generation"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "AI Adoption",
+          "Competitive Pricing",
+          "Market Expansion"
+        ],
+        "summary": "OpenAI's ChatGPT pricing page reveals a tiered pricing model with varying levels of access to AI features, indicating a strategic move to expand its user base and increase revenue."
       },
       "url": null,
-      "title": "",
-      "content_preview": "Title: \n\nApplication error: a client-side exception has occurred (see the browser console for more information)."
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
+    },
+    {
+      "id": 181,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:16:30.142Z",
+      "company": "DALL-E",
+      "url_name": "pricing",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 8,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Pricing model for ChatGPT",
+          "Access to GPT-4.1 mini and other AI models",
+          "Expanded limits on messaging, file uploads, and image generation"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "AI Adoption",
+          "Competitive Pricing",
+          "Market Expansion"
+        ],
+        "summary": "OpenAI's ChatGPT pricing page reveals a tiered pricing model with varying levels of access to AI features, indicating a strategic move to expand its user base and increase revenue."
+      },
+      "url": null,
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
     },
     {
       "id": 74,
@@ -297,6 +521,102 @@
       "url": null,
       "title": "",
       "content_preview": "Title: \n\nApplication error: a client-side exception has occurred (see the browser console for more information)."
+    },
+    {
+      "id": 74,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T14:23:51.810Z",
+      "company": "DALL-E",
+      "url_name": "homepage",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "57455ae5572b7791026f3e0f23dd48055fa59b6c7c9c67d7382b04dedb4400cc",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 1,
+        "interest_level": 2,
+        "interest_drivers": [],
+        "category": "Error Messages",
+        "impact_areas": [],
+        "summary": "The change from a captcha/challenge block to a client-side exception error message does not indicate any significant technical innovation or business impact, particularly in the context of AI/ML relevance and competitive intelligence."
+      },
+      "url": null,
+      "title": "",
+      "content_preview": "Title: \n\nApplication error: a client-side exception has occurred (see the browser console for more information)."
+    },
+    {
+      "id": 73,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-21T14:23:46.337Z",
+      "company": "DALL-E",
+      "url_name": "pricing",
+      "old_hash": "a268cb97c16ead5e6f61dfc1597e8487831e80a7ca4909f6cf610e5f08159ecb",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 6,
+        "interest_level": 4,
+        "interest_drivers": [
+          "New pricing plan introduction",
+          "Expanded access to AI features"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "Competitive Pricing Strategy",
+          "AI Feature Expansion"
+        ],
+        "summary": "OpenAI has introduced a new pricing plan, 'Pro', and expanded access to AI features for existing plans, indicating a strategic move to enhance user experience and stay competitive in the AI market."
+      },
+      "url": null,
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
+    },
+    {
+      "id": 73,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-21T14:23:46.337Z",
+      "company": "DALL-E",
+      "url_name": "pricing",
+      "old_hash": "a268cb97c16ead5e6f61dfc1597e8487831e80a7ca4909f6cf610e5f08159ecb",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 6,
+        "interest_level": 4,
+        "interest_drivers": [
+          "New pricing plan introduction",
+          "Expanded access to AI features"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "Competitive Pricing Strategy",
+          "AI Feature Expansion"
+        ],
+        "summary": "OpenAI has introduced a new pricing plan, 'Pro', and expanded access to AI features for existing plans, indicating a strategic move to enhance user experience and stay competitive in the AI market."
+      },
+      "url": null,
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
     },
     {
       "id": 73,
@@ -445,5 +765,5 @@
   },
   "themes": [],
   "key_points": [],
-  "last_updated": "2025-07-22T16:26:16.678Z"
+  "last_updated": "2025-07-22T17:46:50.833Z"
 }

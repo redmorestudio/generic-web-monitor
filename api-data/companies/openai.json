@@ -16,12 +16,49 @@
   },
   "stats": {
     "monitored_urls": "0",
-    "total_changes": "0",
-    "high_interest_changes": "0",
-    "changes_last_week": "0",
-    "avg_interest_level": null
+    "total_changes": "1",
+    "high_interest_changes": "1",
+    "changes_last_week": "1",
+    "avg_interest_level": "9.0000000000000000"
   },
-  "changes": [],
+  "changes": [
+    {
+      "id": 215,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 9,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:33:40.166Z",
+      "company": "OpenAI",
+      "url_name": "product",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "8485ace5f8dc30d7969561191e78d15a6162b7b5019d1e7b2429ea0980d7cc3c",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 9,
+        "interest_level": 9,
+        "interest_drivers": [
+          "Introduction of ChatGPT",
+          "Potential for advanced AI-powered chat capabilities",
+          "Terms and Privacy Policy indicate a production-ready service"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "Conversational AI",
+          "Natural Language Processing",
+          "Customer Service Automation"
+        ],
+        "summary": "The introduction of ChatGPT, with its advanced AI capabilities and production-ready service, indicates significant technical innovation and major business impact, particularly in the areas of conversational AI and customer service automation."
+      },
+      "url": null,
+      "title": "ChatGPT",
+      "content_preview": "Title: ChatGPT\n\nSkip to content\nChatGPT\nLog in\nSign up for free\nChatGPT\n\nAttach\nSearch\nVoice\nBy messaging ChatGPT, you agree to our Terms and have read our Privacy Policy."
+    }
+  ],
   "insights": [],
   "entities": {
     "technologies": [],
@@ -29,5 +66,5 @@
   },
   "themes": [],
   "key_points": [],
-  "last_updated": "2025-07-22T16:26:22.136Z"
+  "last_updated": "2025-07-22T17:46:55.437Z"
 }

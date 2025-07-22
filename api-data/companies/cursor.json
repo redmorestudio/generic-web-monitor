@@ -16,12 +16,40 @@
   },
   "stats": {
     "monitored_urls": "0",
-    "total_changes": "7",
+    "total_changes": "8",
     "high_interest_changes": "2",
-    "changes_last_week": "7",
-    "avg_interest_level": "5.4285714285714286"
+    "changes_last_week": "8",
+    "avg_interest_level": "4.8750000000000000"
   },
   "changes": [
+    {
+      "id": 208,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 1,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:15:39.521Z",
+      "company": "Cursor",
+      "url_name": "pricing",
+      "old_hash": "951d90c10261a303cb1f05459b3deeb6995b873511065744a7de7acea3dda926",
+      "new_hash": "5e5d9f1f8300f97c92119d5ffe83a4e1f4c2c2d6d0e4e9c38a3d588bc7ff2dcb",
+      "ai_analysis": {
+        "technical_innovation_score": 1,
+        "business_impact_score": 1,
+        "interest_level": 1,
+        "interest_drivers": [],
+        "category": "Pricing Update",
+        "impact_areas": [],
+        "summary": "No significant changes were detected in the provided content snippets, indicating no major technical innovations or business impact."
+      },
+      "url": null,
+      "title": "Pricing | Cursor - The AI Code Editor",
+      "content_preview": "Title: Pricing | Cursor - The AI Code Editor\n\nPricing\nFeatures\nEnterprise\nBlog\nForum\nCareers\nSign in\nDownload\nPricing\n\nChoose the plan that works for you\n\nMONTHLY\nYEARLY (SAVE 20%)\nIndividual Plans\nHobby\n\nFree\n\nIncludes\n\nPro two-week trial\nLimited agent requests\nLimited tab completions\nDownload\nOthers\nPro\n\n$20\n/mo\n\nEverything in Hobby, plus\n\nExtended limits on agent\nUnlimited tab completions\nAccess to Background Agents\nAccess to Bugbot\nAccess to maximum context windows\nGet Pro\nMore info\nUltra\n\n$200\n/mo\n\nEverything in Pro, plus\n\n20x usage on all OpenAI, Claude, Gemini models\nPriority access to new features\nGet Ultra\nTeam Plans\nTeams\n\n$40\n/user/mo\n\nEverything in Pro, plus\n\nEnforce Privacy Mode org-wide\nAdmin Dashboard with usage stats\nCentralized team billing\nSAML/OIDC SSO\nGet Team\nEnterprise\n\nCustom\n\nEverything in Teams, plus\n\nMore usage included\nSCIM seat management\nAccess control features\nPriority support and account management\nContact Sales\n\nTRUSTED BY ENGINEERS AT\n\nWhy isn't Cursor "
+    },
     {
       "id": 180,
       "url_id": null,
@@ -55,6 +83,73 @@
       "url": null,
       "title": "Features | Cursor - The AI Code Editor",
       "content_preview": "Title: Features | Cursor - The AI Code Editor\n\nPricing\nFeatures\nEnterprise\nBlog\nForum\nCareers\nSign in\nDownload\nFeatures\n\nBuild software faster\n\nTab\n\nPowered by proprietary models, Cursor includes a powerful autocomplete that predicts your next edit. Once enabled, it will suggest edits across lines, taking into account your recent changes.\n\nMulti-Line Edits\n\nCursor can suggest multiple edits at once, saving you time.\n\nSmart Rewrites\n\nType carelessly, and Cursor will fix your mistakes.\n\nTab, Tab, Tab\n\nCursor Tab jumps you through edits across files.\n\nAgent\n\nCursor’s agent mode completes tasks end to end. It does this quickly, while keeping programmers in the loop. Try it out by hitting Ctrl + I and instructing a change.\n\nFinds Context\n\nUsing custom retrieval models, Cursor can understand a codebase. This reduces the need to manually add context.\n\nRuns Commands\n\nCursor can automatically write and run terminal commands. By default, you’ll be asked to confirm all commands.\n\nLoops on Errors\n"
+    },
+    {
+      "id": 180,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:16:16.970Z",
+      "company": "Cursor",
+      "url_name": "features",
+      "old_hash": "4205714f88bb2643c535b6f3b4bfb2660827ab7d8fec7ed5076bc04eb24ae926",
+      "new_hash": "e9bbce2d2eed40e22edc54333b2d85d7471098c6b8072e244721e6c11adc6a77",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 3,
+        "interest_level": 4,
+        "interest_drivers": [
+          "AI-powered code editing features",
+          "custom retrieval models for codebase understanding"
+        ],
+        "category": "AI-powered code editing",
+        "impact_areas": [
+          "software development productivity",
+          "AI-assisted coding"
+        ],
+        "summary": "The update shows minor changes in the features section, with a change in the keyboard shortcut for agent mode from ⌘ + I to Ctrl + I, indicating a potential expansion to support more platforms. The technical innovation score is moderate due to the existing AI-powered features, while the business impact score is low as there are no significant announcements or updates."
+      },
+      "url": null,
+      "title": "Features | Cursor - The AI Code Editor",
+      "content_preview": "Title: Features | Cursor - The AI Code Editor\n\nPricing\nFeatures\nEnterprise\nBlog\nForum\nCareers\nSign in\nDownload\nFeatures\n\nBuild software faster\n\nTab\n\nPowered by proprietary models, Cursor includes a powerful autocomplete that predicts your next edit. Once enabled, it will suggest edits across lines, taking into account your recent changes.\n\nMulti-Line Edits\n\nCursor can suggest multiple edits at once, saving you time.\n\nSmart Rewrites\n\nType carelessly, and Cursor will fix your mistakes.\n\nTab, Tab, Tab\n\nCursor Tab jumps you through edits across files.\n\nAgent\n\nCursor’s agent mode completes tasks end to end. It does this quickly, while keeping programmers in the loop. Try it out by hitting Ctrl + I and instructing a change.\n\nFinds Context\n\nUsing custom retrieval models, Cursor can understand a codebase. This reduces the need to manually add context.\n\nRuns Commands\n\nCursor can automatically write and run terminal commands. By default, you’ll be asked to confirm all commands.\n\nLoops on Errors\n"
+    },
+    {
+      "id": 81,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:08:46.641Z",
+      "company": "Cursor",
+      "url_name": "homepage",
+      "old_hash": "400d67da4f2595b7a3a1ae656c54d41ce0dba64669a75b3d9ef8f2c3b1e65cfc",
+      "new_hash": "180a6070735f6ad36affbd032f3821360a0cc56245652ec859715cfb9f5e05ad",
+      "ai_analysis": {
+        "technical_innovation_score": 3,
+        "business_impact_score": 5,
+        "interest_level": 4,
+        "interest_drivers": [
+          "Expansion to new platforms (macOS)"
+        ],
+        "category": "AI-powered code editors",
+        "impact_areas": [
+          "Developer productivity",
+          "AI-assisted coding"
+        ],
+        "summary": "Cursor, an AI code editor, has expanded its availability to macOS, increasing its reach and potential user base, but without introducing significant technical innovations."
+      },
+      "url": null,
+      "title": "Cursor - The AI Code Editor",
+      "content_preview": "Title: Cursor - The AI Code Editor\n\nPricing\nFeatures\nEnterprise\nBlog\nForum\nCareers\nSign in\nDownload\nThe AI Code Editor\n\nBuilt to make you extraordinarily productive, Cursor is the best way to code with AI.\n\nDownload for macOS\nAll Downloads\n\nTRUSTED BY ENGINEERS AT\n\nTab, tab, tab\n\nCursor lets you breeze through changes by predicting your next edit.\n\nKnows your codebase\n\nGet answers from your codebase or refer to files or docs. Use the model's code in one click.\n\nEdit in natural language\n\nCursor lets you write code using instructions. Update entire classes or functions with a simple prompt.\n\nBuild software faster\n\nIntelligent, fast, and familiar, Cursor is the best way to code with AI.\n\nSee more features\nFrontier Intelligence\n\nPowered by a mix of purpose-built and frontier models, Cursor is smart and fast.\n\nFeels Familiar\n\nImport all your extensions, themes, and keybindings in one click.\n\nPrivacy Options\n\nIf you enable Privacy Mode, your code is never stored remotely without your consent"
     },
     {
       "id": 81,
@@ -334,40 +429,40 @@
       "content_preview": "Title: Blog | Cursor - The AI Code Editor\n\nPricing\nFeatures\nEnterprise\nBlog\nForum\nCareers\nSign in\nDownload\nBlog\n\nCompiled notes from the team\n\nFeatured\nCursor on Web and Mobile\n\nWork with a powerful coding assistant anywhere with the Cursor Agent on web and mobile\n\nBy Andrew & Jason\n\n2 minutes read\n\nCharacter Prefix Conditioning\n\nA clever algorithm for more accurate code completion sampling.\n\nBy Jacob\n\n2 minutes read\n\nInference Characteristics of Llama\n\nA primer on inference math and an examination of the surprising costs of Llama.\n\nBy Aman\n\n19 minutes read\n\nAll posts\nClarifying Our Pricing\n\nHow the new Pro plan works and why we changed our pricing.\n\nBy Michael\n\n3 minutes read\n\nCursor on Web and Mobile\n\nWork with a powerful coding assistant anywhere with the Cursor Agent on web and mobile\n\nBy Andrew & Jason\n\n2 minutes read\n\nUpdates to Ultra and Pro\n\nIn collaboration with the model providers, we're introducing a $200 / mo tier for power users.\n\nBy Michael\n\n1 minutes read\n\nSeries C and S"
     },
     {
-      "id": 32,
+      "id": 33,
       "url_id": null,
       "change_type": "new",
       "summary": null,
       "old_content_id": null,
       "new_content_id": null,
       "relevance_score": null,
-      "interest_level": 7,
+      "interest_level": 6,
       "interest_data": null,
-      "detected_at": "2025-07-21T03:10:02.435Z",
+      "detected_at": "2025-07-21T03:10:07.852Z",
       "company": "Cursor",
-      "url_name": "features",
+      "url_name": "blog",
       "old_hash": null,
-      "new_hash": "4205714f88bb2643c535b6f3b4bfb2660827ab7d8fec7ed5076bc04eb24ae926",
+      "new_hash": "fd2e00ae081688bd87f1713228c8b7183b55224bf2d79516ffc70b5111fadb82",
       "ai_analysis": {
-        "technical_innovation_score": 8,
-        "business_impact_score": 6,
-        "interest_level": 7,
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
         "interest_drivers": [
-          "Proprietary AI models for code editing",
-          "Autocomplete and smart rewrites",
-          "Agent mode for end-to-end task completion"
+          "Character Prefix Conditioning algorithm",
+          "Inference Characteristics of Llama",
+          "Introduction of new pricing tier"
         ],
-        "category": "AI-powered Code Editing",
+        "category": "AI Code Editor",
         "impact_areas": [
-          "Software Development",
-          "Artificial Intelligence",
-          "Productivity Tools"
+          "Code completion accuracy",
+          "Pricing strategy",
+          "Mobile and web development"
         ],
-        "summary": "Cursor introduces AI-driven features for code editing, including autocomplete, smart rewrites, and agent mode, which can significantly improve software development efficiency and productivity."
+        "summary": "The blog posts highlight technical advancements in code completion algorithms and inference characteristics, as well as business updates such as new pricing tiers and the introduction of the Cursor Agent on web and mobile."
       },
       "url": null,
-      "title": "Features | Cursor - The AI Code Editor",
-      "content_preview": "Title: Features | Cursor - The AI Code Editor\n\nPricing\nFeatures\nEnterprise\nBlog\nForum\nCareers\nSign in\nDownload\nFeatures\n\nBuild software faster\n\nTab\n\nPowered by proprietary models, Cursor includes a powerful autocomplete that predicts your next edit. Once enabled, it will suggest edits across lines, taking into account your recent changes.\n\nMulti-Line Edits\n\nCursor can suggest multiple edits at once, saving you time.\n\nSmart Rewrites\n\nType carelessly, and Cursor will fix your mistakes.\n\nTab, Tab, Tab\n\nCursor Tab jumps you through edits across files.\n\nAgent\n\nCursor’s agent mode completes tasks end to end. It does this quickly, while keeping programmers in the loop. Try it out by hitting ⌘ + I and instructing a change.\n\nFinds Context\n\nUsing custom retrieval models, Cursor can understand a codebase. This reduces the need to manually add context.\n\nRuns Commands\n\nCursor can automatically write and run terminal commands. By default, you’ll be asked to confirm all commands.\n\nLoops on Errors\n\nCu"
+      "title": "Blog | Cursor - The AI Code Editor",
+      "content_preview": "Title: Blog | Cursor - The AI Code Editor\n\nPricing\nFeatures\nEnterprise\nBlog\nForum\nCareers\nSign in\nDownload\nBlog\n\nCompiled notes from the team\n\nFeatured\nCursor on Web and Mobile\n\nWork with a powerful coding assistant anywhere with the Cursor Agent on web and mobile\n\nBy Andrew & Jason\n\n2 minutes read\n\nCharacter Prefix Conditioning\n\nA clever algorithm for more accurate code completion sampling.\n\nBy Jacob\n\n2 minutes read\n\nInference Characteristics of Llama\n\nA primer on inference math and an examination of the surprising costs of Llama.\n\nBy Aman\n\n19 minutes read\n\nAll posts\nClarifying Our Pricing\n\nHow the new Pro plan works and why we changed our pricing.\n\nBy Michael\n\n3 minutes read\n\nCursor on Web and Mobile\n\nWork with a powerful coding assistant anywhere with the Cursor Agent on web and mobile\n\nBy Andrew & Jason\n\n2 minutes read\n\nUpdates to Ultra and Pro\n\nIn collaboration with the model providers, we're introducing a $200 / mo tier for power users.\n\nBy Michael\n\n1 minutes read\n\nSeries C and S"
     },
     {
       "id": 32,
@@ -440,6 +535,79 @@
       "url": null,
       "title": "Features | Cursor - The AI Code Editor",
       "content_preview": "Title: Features | Cursor - The AI Code Editor\n\nPricing\nFeatures\nEnterprise\nBlog\nForum\nCareers\nSign in\nDownload\nFeatures\n\nBuild software faster\n\nTab\n\nPowered by proprietary models, Cursor includes a powerful autocomplete that predicts your next edit. Once enabled, it will suggest edits across lines, taking into account your recent changes.\n\nMulti-Line Edits\n\nCursor can suggest multiple edits at once, saving you time.\n\nSmart Rewrites\n\nType carelessly, and Cursor will fix your mistakes.\n\nTab, Tab, Tab\n\nCursor Tab jumps you through edits across files.\n\nAgent\n\nCursor’s agent mode completes tasks end to end. It does this quickly, while keeping programmers in the loop. Try it out by hitting ⌘ + I and instructing a change.\n\nFinds Context\n\nUsing custom retrieval models, Cursor can understand a codebase. This reduces the need to manually add context.\n\nRuns Commands\n\nCursor can automatically write and run terminal commands. By default, you’ll be asked to confirm all commands.\n\nLoops on Errors\n\nCu"
+    },
+    {
+      "id": 32,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:10:02.435Z",
+      "company": "Cursor",
+      "url_name": "features",
+      "old_hash": null,
+      "new_hash": "4205714f88bb2643c535b6f3b4bfb2660827ab7d8fec7ed5076bc04eb24ae926",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Proprietary AI models for code editing",
+          "Autocomplete and smart rewrites",
+          "Agent mode for end-to-end task completion"
+        ],
+        "category": "AI-powered Code Editing",
+        "impact_areas": [
+          "Software Development",
+          "Artificial Intelligence",
+          "Productivity Tools"
+        ],
+        "summary": "Cursor introduces AI-driven features for code editing, including autocomplete, smart rewrites, and agent mode, which can significantly improve software development efficiency and productivity."
+      },
+      "url": null,
+      "title": "Features | Cursor - The AI Code Editor",
+      "content_preview": "Title: Features | Cursor - The AI Code Editor\n\nPricing\nFeatures\nEnterprise\nBlog\nForum\nCareers\nSign in\nDownload\nFeatures\n\nBuild software faster\n\nTab\n\nPowered by proprietary models, Cursor includes a powerful autocomplete that predicts your next edit. Once enabled, it will suggest edits across lines, taking into account your recent changes.\n\nMulti-Line Edits\n\nCursor can suggest multiple edits at once, saving you time.\n\nSmart Rewrites\n\nType carelessly, and Cursor will fix your mistakes.\n\nTab, Tab, Tab\n\nCursor Tab jumps you through edits across files.\n\nAgent\n\nCursor’s agent mode completes tasks end to end. It does this quickly, while keeping programmers in the loop. Try it out by hitting ⌘ + I and instructing a change.\n\nFinds Context\n\nUsing custom retrieval models, Cursor can understand a codebase. This reduces the need to manually add context.\n\nRuns Commands\n\nCursor can automatically write and run terminal commands. By default, you’ll be asked to confirm all commands.\n\nLoops on Errors\n\nCu"
+    },
+    {
+      "id": 31,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:09:56.691Z",
+      "company": "Cursor",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "180a6070735f6ad36affbd032f3821360a0cc56245652ec859715cfb9f5e05ad",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "AI-powered code editing",
+          "Natural language code writing",
+          "Predictive editing capabilities",
+          "Integration with existing development environments"
+        ],
+        "category": "AI-powered Development Tools",
+        "impact_areas": [
+          "Software Development",
+          "Artificial Intelligence",
+          "Machine Learning"
+        ],
+        "summary": "Cursor introduces an AI code editor that leverages predictive models and natural language processing to enhance developer productivity, with features like predictive editing, codebase knowledge, and seamless integration with existing development environments."
+      },
+      "url": null,
+      "title": "Cursor - The AI Code Editor",
+      "content_preview": "Title: Cursor - The AI Code Editor\n\nPricing\nFeatures\nEnterprise\nBlog\nForum\nCareers\nSign in\nDownload\nThe AI Code Editor\n\nBuilt to make you extraordinarily productive, Cursor is the best way to code with AI.\n\nDownload for macOS\nAll Downloads\n\nTRUSTED BY ENGINEERS AT\n\nTab, tab, tab\n\nCursor lets you breeze through changes by predicting your next edit.\n\nKnows your codebase\n\nGet answers from your codebase or refer to files or docs. Use the model's code in one click.\n\nEdit in natural language\n\nCursor lets you write code using instructions. Update entire classes or functions with a simple prompt.\n\nBuild software faster\n\nIntelligent, fast, and familiar, Cursor is the best way to code with AI.\n\nSee more features\nFrontier Intelligence\n\nPowered by a mix of purpose-built and frontier models, Cursor is smart and fast.\n\nFeels Familiar\n\nImport all your extensions, themes, and keybindings in one click.\n\nPrivacy Options\n\nIf you enable Privacy Mode, your code is never stored remotely without your consent"
     },
     {
       "id": 31,
@@ -704,5 +872,5 @@
   },
   "themes": [],
   "key_points": [],
-  "last_updated": "2025-07-22T16:26:16.425Z"
+  "last_updated": "2025-07-22T17:46:50.619Z"
 }

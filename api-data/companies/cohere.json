@@ -16,13 +16,69 @@
   },
   "stats": {
     "monitored_urls": "0",
-    "total_changes": "8",
+    "total_changes": "9",
     "high_interest_changes": "0",
-    "changes_last_week": "8",
-    "avg_interest_level": "1.5000000000000000"
+    "changes_last_week": "9",
+    "avg_interest_level": "1.4444444444444444"
   },
   "changes": [
     {
+      "id": 207,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 1,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:15:02.379Z",
+      "company": "Cohere",
+      "url_name": "product",
+      "old_hash": "d461adeacb6926790a20b0f15ee51717be91462124971846458f2e07c4de6b13",
+      "new_hash": "21bd2038bc73cf4a1e7e415ec37d35a6412c632d8470ce3e311d6f0db72d9e5d",
+      "ai_analysis": {
+        "technical_innovation_score": 1,
+        "business_impact_score": 1,
+        "interest_level": 1,
+        "interest_drivers": [],
+        "category": "cookie policy update",
+        "impact_areas": [],
+        "summary": "No significant changes or updates related to AI/ML were found in the provided content snippets, indicating no technical innovation or business impact."
+      },
+      "url": null,
+      "title": "",
+      "content_preview": "Title: \n\nWe use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.\n\nManage settings Reject All Accept All\nCustomize Consent Preferences \n\nWe use cookies to help you navigate efficiently and perform certain functions. You will find detailed information about all cookies under each consent category below.\n\nThe cookies that are categorized as \"Necessary\" are stored on your browser as they are essential for enabling the basic functionalities of the site. ... Show more\n\nNecessaryAlways Active\n\nNecessary cookies are required to enable the basic features of this site, such as providing secure log-in or adjusting your consent preferences. These cookies do not store any personally identifiable data.\n\nFunctional\n\nFunctional cookies help perform certain functionalities like sharing the content of the website on social media platforms, collecting feedback, and other third-party features.\n\nAn"
+    },
+    {
+      "id": 71,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 1,
+      "interest_data": null,
+      "detected_at": "2025-07-21T14:23:15.063Z",
+      "company": "Cohere",
+      "url_name": "blog",
+      "old_hash": "ac0e3307619ab4445ff2bb06b9a88379c56dbc1221065be7b537e69455865b72",
+      "new_hash": "8472debba2f69745f21422d84bf1575cdb95415f388e21891dc21b392ba03a48",
+      "ai_analysis": {
+        "technical_innovation_score": 1,
+        "business_impact_score": 1,
+        "interest_level": 1,
+        "interest_drivers": [],
+        "category": "cookie policy update",
+        "impact_areas": [],
+        "summary": "No significant changes or updates related to AI/ML were found in the provided content snippets, only cookie policy information is presented."
+      },
+      "url": null,
+      "title": "Cohere Blog | AI News, Insights, and Innovation",
+      "content_preview": "Title: Cohere Blog | AI News, Insights, and Innovation\n\nWe use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.\n\nManage settings Reject All Accept All\nCustomize Consent Preferences \n\nWe use cookies to help you navigate efficiently and perform certain functions. You will find detailed information about all cookies under each consent category below.\n\nThe cookies that are categorized as \"Necessary\" are stored on your browser as they are essential for enabling the basic functionalities of the site. ... Show more\n\nNecessaryAlways Active\n\nNecessary cookies are required to enable the basic features of this site, such as providing secure log-in or adjusting your consent preferences. These cookies do not store any personally identifiable data.\n\nFunctional\n\nFunctional cookies help perform certain functionalities like sharing the content of the website on social media platforms, collectin"
+    },
+    {
       "id": 71,
       "url_id": null,
       "change_type": "modified",
@@ -189,6 +245,62 @@
       "url": null,
       "title": "Cohere Documentation | Cohere",
       "content_preview": "Title: Cohere Documentation | Cohere\n\nWe use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.\n\nManage settings Reject All Accept All\nCustomize Consent Preferences \n\nWe use cookies to help you navigate efficiently and perform certain functions. You will find detailed information about all cookies under each consent category below.\n\nThe cookies that are categorized as \"Necessary\" are stored on your browser as they are essential for enabling the basic functionalities of the site. ... Show more\n\nNecessaryAlways Active\n\nNecessary cookies are required to enable the basic features of this site, such as providing secure log-in or adjusting your consent preferences. These cookies do not store any personally identifiable data.\n\nFunctional\n\nFunctional cookies help perform certain functionalities like sharing the content of the website on social media platforms, collecting feedback, and ot"
+    },
+    {
+      "id": 70,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 1,
+      "interest_data": null,
+      "detected_at": "2025-07-21T14:23:07.459Z",
+      "company": "Cohere",
+      "url_name": "docs",
+      "old_hash": "cd8e29cd011c575b0671bed81b21c056cef6394d41dc9ad4a5e878faa024c839",
+      "new_hash": "6f5f05d90184eb8f1cdb28bde8804bb9a89748f36421f1e2c2f5eacf65c8b36c",
+      "ai_analysis": {
+        "technical_innovation_score": 1,
+        "business_impact_score": 1,
+        "interest_level": 1,
+        "interest_drivers": [],
+        "category": "cookie policy update",
+        "impact_areas": [],
+        "summary": "No significant changes or updates related to AI/ML or competitive intelligence were found in the provided content snippets."
+      },
+      "url": null,
+      "title": "Cohere Documentation | Cohere",
+      "content_preview": "Title: Cohere Documentation | Cohere\n\nWe use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.\n\nManage settings Reject All Accept All\nCustomize Consent Preferences \n\nWe use cookies to help you navigate efficiently and perform certain functions. You will find detailed information about all cookies under each consent category below.\n\nThe cookies that are categorized as \"Necessary\" are stored on your browser as they are essential for enabling the basic functionalities of the site. ... Show more\n\nNecessaryAlways Active\n\nNecessary cookies are required to enable the basic features of this site, such as providing secure log-in or adjusting your consent preferences. These cookies do not store any personally identifiable data.\n\nFunctional\n\nFunctional cookies help perform certain functionalities like sharing the content of the website on social media platforms, collecting feedback, and ot"
+    },
+    {
+      "id": 69,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 1,
+      "interest_data": null,
+      "detected_at": "2025-07-21T14:22:59.790Z",
+      "company": "Cohere",
+      "url_name": "homepage",
+      "old_hash": "cc67eabb424384b5a6b270a4bc77114c0baf801894cf80058a87e3582517e187",
+      "new_hash": "ac06ac249ed6c9c092d01d1b3d432c9050d85f5a412dd02cca51407f33de990d",
+      "ai_analysis": {
+        "technical_innovation_score": 1,
+        "business_impact_score": 1,
+        "interest_level": 1,
+        "interest_drivers": [],
+        "category": "cookie policy update",
+        "impact_areas": [],
+        "summary": "No significant changes or updates related to AI/ML technology or business impact were found in the provided content snippets."
+      },
+      "url": null,
+      "title": "The Secure AI Platform for Enterprise | Cohere",
+      "content_preview": "Title: The Secure AI Platform for Enterprise | Cohere\n\nWe use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies.\n\nManage settings Reject All Accept All\nCustomize Consent Preferences \n\nWe use cookies to help you navigate efficiently and perform certain functions. You will find detailed information about all cookies under each consent category below.\n\nThe cookies that are categorized as \"Necessary\" are stored on your browser as they are essential for enabling the basic functionalities of the site. ... Show more\n\nNecessaryAlways Active\n\nNecessary cookies are required to enable the basic features of this site, such as providing secure log-in or adjusting your consent preferences. These cookies do not store any personally identifiable data.\n\nFunctional\n\nFunctional cookies help perform certain functionalities like sharing the content of the website on social media platforms, collecting"
     },
     {
       "id": 69,
@@ -490,5 +602,5 @@
   },
   "themes": [],
   "key_points": [],
-  "last_updated": "2025-07-22T16:26:16.177Z"
+  "last_updated": "2025-07-22T17:46:50.411Z"
 }

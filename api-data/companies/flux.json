@@ -16,12 +16,47 @@
   },
   "stats": {
     "monitored_urls": "0",
-    "total_changes": "4",
-    "high_interest_changes": "3",
-    "changes_last_week": "4",
-    "avg_interest_level": "5.5000000000000000"
+    "total_changes": "5",
+    "high_interest_changes": "4",
+    "changes_last_week": "5",
+    "avg_interest_level": "5.8000000000000000"
   },
   "changes": [
+    {
+      "id": 212,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:17:40.798Z",
+      "company": "Flux",
+      "url_name": "homepage",
+      "old_hash": "4d765e86014feb3a8c59fdb33f7d245e94860a68befa2af0d789d2d55b6f1741",
+      "new_hash": "b449f79df91859de676086e74e90d242fbea5721b770db4162a76160efd5c540",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "in-context image generation",
+          "text-and-image-driven generation and editing",
+          "generative flow matching models"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "Computer Vision",
+          "Natural Language Processing"
+        ],
+        "summary": "Black Forest Labs has updated their FLUX.1 Kontext model suite, which now allows for in-context image generation and editing using both text and images. This update demonstrates significant technical advances in generative models, but the business impact is currently limited to product updates and new features."
+      },
+      "url": null,
+      "title": "Black Forest Labs - Frontier AI Lab",
+      "content_preview": "Title: Black Forest Labs - Frontier AI Lab\n\nResearch\nProducts\nResources\nCompany\nLogin\nNewFLUX.1 Kontext [dev] is now available!\nRead announcement\nFLUX.1 Kontext\n\nNew model suite for text-and-image-driven generation and editing.\n\nRead announcement\nTechnical report\nTry Demo\nShowcase\nSelf-serve license\nGet started\n1.\nInput image\n2.\n\"Remove the thing from her face\"\n3.\n\"She is now taking a selfie in the streets of Freiburg, it's a lovely day out\"\n4.\n\"It's now snowing, everything is covered in snow\"\n\nCONTEXTUAL UNDERSTANDING\n\nTransform elements while preserving their relationship to the surrounding scene\n\n1 / 3\nInput image\nYour images. Your words. Your world.\n\nFLUX.1 Kontext is a suite of generative flow matching models that allow you to generate and edit images. Unlike existing text-to-image models, the FLUX.1 Kontext family performs in-context image generation, allowing you to prompt with both text and images, and seamlessly extract and modify visual concepts to produce new, coherent rende"
+    },
     {
       "id": 185,
       "url_id": null,
@@ -384,6 +419,34 @@
       "url": null,
       "title": "404: This page could not be found.",
       "content_preview": "Title: 404: This page could not be found.\n\n404\nThis page could not be found."
+    },
+    {
+      "id": 46,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 1,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:11:56.763Z",
+      "company": "Flux",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "6f59c3475028f4f792bd077c18d1ed46b90a099f74b8ff7fa6d1b0ce96b6443a",
+      "ai_analysis": {
+        "technical_innovation_score": 1,
+        "business_impact_score": 1,
+        "interest_level": 1,
+        "interest_drivers": [],
+        "category": "Error Page",
+        "impact_areas": [],
+        "summary": "The current content snippet is a standard 404 error page with no AI/ML relevance or competitive intelligence value."
+      },
+      "url": null,
+      "title": "404: This page could not be found.",
+      "content_preview": "Title: 404: This page could not be found.\n\n404\nThis page could not be found."
     }
   ],
   "insights": [],
@@ -393,5 +456,5 @@
   },
   "themes": [],
   "key_points": [],
-  "last_updated": "2025-07-22T16:26:17.669Z"
+  "last_updated": "2025-07-22T17:46:51.672Z"
 }

@@ -16,12 +16,40 @@
   },
   "stats": {
     "monitored_urls": "0",
-    "total_changes": "4",
+    "total_changes": "5",
     "high_interest_changes": "0",
-    "changes_last_week": "4",
-    "avg_interest_level": "2.5000000000000000"
+    "changes_last_week": "5",
+    "avg_interest_level": "2.2000000000000000"
   },
   "changes": [
+    {
+      "id": 199,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 1,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:12:58.592Z",
+      "company": "Andi",
+      "url_name": "homepage",
+      "old_hash": "bb193f34f7b22d261217b7704514b7482ce922e4bf4de3d3240fd1c221eaa296",
+      "new_hash": "953a0869358d76a2cad4bb3316be7012b33dc0ecdf72d7fcf9aab3e88c575a45",
+      "ai_analysis": {
+        "technical_innovation_score": 1,
+        "business_impact_score": 1,
+        "interest_level": 1,
+        "interest_drivers": [],
+        "category": "AI Search",
+        "impact_areas": [],
+        "summary": "No significant changes detected in the content, indicating no notable technical innovation or business impact."
+      },
+      "url": null,
+      "title": "Andi - AI Search for the Next Generation",
+      "content_preview": "Title: Andi - AI Search for the Next Generation\n\nNew Chat\n\nHome\n\nAbout\n\nPrivacy\n\nHelp\n\nSettings\n\nFeedback\n\nBug Report\n\nCommunity \n\nWebsite \n\nDownload\n\nMade with ❤️\n\nv0.5.249\n\nHello! I'm Andi, your friendly search assistant. What are you looking for? 🤗\n\nGetting Started\n\nAndi is an AI search agent that can answer anything, find everything, and create great content for you. It's like your AI brain for the web 🚀\n\nAccurate. Private and anonymous. No ads, spam or tracking.\n\n Install Andi App Install Chrome Extension\nGet Instant, Accurate Answers\nAsk anything and get concise, reliable answers. Powered by cutting-edge AI that understands content deeply.\nDiscover New Ways to Search\nSearch smarter with AI-powered results. No more spam or ads. No tracking. Find exactly what you need, faster.\nSupercharge Your Writing\nUnlock your creativity with AI-assisted research and writing. Produce factual, high-quality content, with sources.\nExplore the Best of the Web\nDiscover fascinating content with visual"
+    },
     {
       "id": 174,
       "url_id": null,
@@ -150,5 +178,5 @@
   },
   "themes": [],
   "key_points": [],
-  "last_updated": "2025-07-22T16:26:14.669Z"
+  "last_updated": "2025-07-22T17:46:49.151Z"
 }

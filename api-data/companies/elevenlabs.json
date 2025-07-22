@@ -16,13 +16,77 @@
   },
   "stats": {
     "monitored_urls": "0",
-    "total_changes": "4",
+    "total_changes": "5",
     "high_interest_changes": "2",
-    "changes_last_week": "4",
-    "avg_interest_level": "6.5000000000000000"
+    "changes_last_week": "5",
+    "avg_interest_level": "5.4000000000000000"
   },
   "changes": [
     {
+      "id": 211,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 1,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:17:19.496Z",
+      "company": "ElevenLabs",
+      "url_name": "homepage",
+      "old_hash": "397dcb4c15f3f5b5cbd7572be844a4b0608ad74f8f94d293d25c981d534ff95d",
+      "new_hash": "f8f8fabaf59cb4dd9aaa556dc2c1f4bc4dde5aa0764e676a146760d5359240e1",
+      "ai_analysis": {
+        "technical_innovation_score": 1,
+        "business_impact_score": 1,
+        "interest_level": 1,
+        "interest_drivers": [],
+        "category": "No Change",
+        "impact_areas": [],
+        "summary": "No significant changes detected in the web content, indicating no notable technical innovation or business impact."
+      },
+      "url": null,
+      "title": "Free Text to Speech & AI Voice Generator | ElevenLabs",
+      "content_preview": "Title: Free Text to Speech & AI Voice Generator | ElevenLabs\n\nSkip to content\nPlatform\nSolutions\nAPI\nResources\nDocs\nEnterprise\nPricing\nLog inSign up\n\nSign up\nThe most realistic voice AI platform\n\nAI voice models and products powering millions of developers, creators, and enterprises. From low‑latency conversational agents to the leading AI voice generator for voiceovers and audiobooks.\n\nSign up\nContact Sales\nText to SpeechSpeech to TextConversational AIDubbingVoice CloningElevenReader\nIn the ancient land of Eldoria, where skies shimmered and forests, whispered secrets to the wind, lived a dragon named Zephyros. [sarcastically] Not the “burn it all down” kind... [giggles] but he was gentle, wise, with eyes like old stars. [whispers] Even the birds fell silent when he passed.\n294/1000\nSamara\nNarrate a story\n2 speakers\nCreate a dialogue\nAnnouncer\nVoiceover a game\nSergeant\nPlay a drill sergeant\nSpuds\nRecount an old story\nJessica\nProvide customer support\nEnglish\nPlay\nPowered by Eleven v3 (a"
+    },
+    {
+      "id": 45,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:11:45.332Z",
+      "company": "ElevenLabs",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "10df9902de785e2d0cc06cc625274b41db242d0be5cb3453b4a7d7d68a48e187",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Expressive Text to Speech model (Eleven v3)",
+          "Partnerships with notable figures (Deepak Chopra, Sam Feldt)",
+          "AI-generated voice content for various applications"
+        ],
+        "category": "AI Audio Research and Deployment",
+        "impact_areas": [
+          "Text-to-Speech Technology",
+          "Conversational AI",
+          "Content Creation"
+        ],
+        "summary": "ElevenLabs introduces Eleven v3, an expressive Text to Speech model, and showcases its applications through partnerships with notable figures and customer stories, demonstrating the potential of AI-generated voice content."
+      },
+      "url": null,
+      "title": "AI audio research, product deployment, and company updates | ElevenLabs",
+      "content_preview": "Title: AI audio research, product deployment, and company updates | ElevenLabs\n\nSign up\nSkip to content\nPlatform\nSolutions\nAPI\nResources\nDocs\nEnterprise\nPricing\nLog inSign up\nBlog\nIntroducing Eleven v3 (alpha) — the most expressive Text to Speech model\n\nEleven v3 is the most expressive Text to Speech model\n\nRead article\nResearch\nAllAffiliatesCompanyCustomer storiesDeveloperImpactProductResearchResourcesSafety\nProduct\nProduct\nDeepak Chopra brings his voice and teachings to life with ElevenLabs and Supertab\n\nSharing decades of wisdom through conversational AI\n\nJul 16, 2025\nAuthors\nDustin Blank, Partnerships\nCustomer stories\nCustomer stories\nArtists like Sam Feldt use voice AI to reach fans anywhere - without a studio\n\nThe Dutch DJ, producer, and founder uses ElevenLabs to create voice content anywhere - backstage, in transit, or between shows\n\nJul 14, 2025\nImpact\nImpact\nMOST: bringing Krakow's Jewish heritage to life through AI-generated voices\n\nAn AI-powered audio guide for Krakow’s Jew"
+    },
+    {
       "id": 45,
       "url_id": null,
       "change_type": "new",
@@ -457,6 +521,78 @@
       "url": null,
       "title": "ElevenLabs Pricing for Creators & Businesses of All Sizes",
       "content_preview": "Title: ElevenLabs Pricing for Creators & Businesses of All Sizes\n\nSkip to content\nPlatform\nSolutions\nAPI\nResources\nDocs\nEnterprise\nPricing\nLog inSign up\n\nSign up\nPricing\n\nPlans built for creators and business of all sizes\n\nAnnual billing\n2 months free\nFree\n\nFor individuals who want to try out the most advanced AI audio\n\n10k credits/month\n\n$0per month\n\nGet started\n Text to Speech\n Speech to Text\n Conversational AI\n Studio\n Automated Dubbing\n API access\n\nCredits usable for either:\n\n 10 minutes of high-quality Text to Speech\n 15 minutes of Conversational AI\nView more\nStarter\n\nFor hobbyists creating projects with AI audio\n\n30k credits/month\n\n$5per month\n\nGet started\n\nEverything in free, plus\n\n Commercial license\n Instant Voice Cloning\n 20 projects in Studio\n Dubbing Studio\n\nCredits usable for either:\n\n 30 minutes of high-quality Text to Speech\n 50 minutes of Conversational AI\nView more\nMost popular\nCreator\n\nFor creators making premium content for global audiences\n\n100k credits/month\n\nfirst"
+    },
+    {
+      "id": 43,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:11:30.714Z",
+      "company": "ElevenLabs",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "887e6238dd11c9673e75098af8c8ac79b2a6608335361fc8587e4f6eb20721fd",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of pricing plans for AI audio solutions",
+          "Availability of credits for Text to Speech and Conversational AI",
+          "Commercial license and Instant Voice Cloning features"
+        ],
+        "category": "AI Audio Solutions",
+        "impact_areas": [
+          "Content Creation",
+          "AI-powered Audio Solutions",
+          "Pricing and Monetization Strategies"
+        ],
+        "summary": "ElevenLabs has introduced pricing plans for creators and businesses, offering a range of features and credits for AI audio solutions, indicating a notable optimization in the AI audio market."
+      },
+      "url": null,
+      "title": "ElevenLabs Pricing for Creators & Businesses of All Sizes",
+      "content_preview": "Title: ElevenLabs Pricing for Creators & Businesses of All Sizes\n\nSkip to content\nPlatform\nSolutions\nAPI\nResources\nDocs\nEnterprise\nPricing\nLog inSign up\n\nSign up\nPricing\n\nPlans built for creators and business of all sizes\n\nAnnual billing\n2 months free\nFree\n\nFor individuals who want to try out the most advanced AI audio\n\n10k credits/month\n\n$0per month\n\nGet started\n Text to Speech\n Speech to Text\n Conversational AI\n Studio\n Automated Dubbing\n API access\n\nCredits usable for either:\n\n 10 minutes of high-quality Text to Speech\n 15 minutes of Conversational AI\nView more\nStarter\n\nFor hobbyists creating projects with AI audio\n\n30k credits/month\n\n$5per month\n\nGet started\n\nEverything in free, plus\n\n Commercial license\n Instant Voice Cloning\n 20 projects in Studio\n Dubbing Studio\n\nCredits usable for either:\n\n 30 minutes of high-quality Text to Speech\n 50 minutes of Conversational AI\nView more\nMost popular\nCreator\n\nFor creators making premium content for global audiences\n\n100k credits/month\n\nfirst"
+    },
+    {
+      "id": 42,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:11:23.435Z",
+      "company": "ElevenLabs",
+      "url_name": "product",
+      "old_hash": null,
+      "new_hash": "bf6db06abd1c54d4ee02cc74cf02d1756f49bf78a216d99f3008f949d6a27806",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "AI-powered audio solutions",
+          "Text-to-Speech and Speech-to-Text capabilities",
+          "Voice Cloning and Voice Isolator features"
+        ],
+        "category": "AI Audio Technology",
+        "impact_areas": [
+          "Media and Entertainment",
+          "Conversational AI",
+          "Audio Content Creation"
+        ],
+        "summary": "ElevenLabs offers a range of AI-powered audio solutions, including Text-to-Speech, Speech-to-Text, and Voice Cloning. While the technical innovation is notable, the business impact is moderate, indicating a growing company with a focus on AI audio technology."
+      },
+      "url": null,
+      "title": "",
+      "content_preview": "Title: \n\nSkip to content\nPlatform\nSolutions\nAPI\nResources\nDocs\nEnterprise\nPricing\nLog inSign up\n404\n\nThis page could not be found\n\nElevenLabs\n\nCreate with the highest quality AI Audio\n\nGet started free\n\nAlready have an account? Log in\n\nFooter\nResearch\nText to Speech\nSpeech to Text\nVoice Changer\nText to Sound Effects\nVoice Cloning\nVoice Isolator\nProducts\nStudio\nConversational AI\nDubbing Studio\nVoice Library\nAudio Native\nElevenStudios\nAPI\nVoiceover Studio\nElevenReader\nMobile App\nSolutions\nFor Enterprise\nFor Teams\nFor Creators\nFor Developers\nFor Startups\nPublishing\nMedia and Entertainment\nConversational AI\nEarn As\nAffiliate\nVoice Actor\nData Partner\nCommercial Partner\nResources\nAPI Reference\nProduct Guides\nHelp Centre\nLanguages\nWebinars\nDiscord\nCompany\nAbout\nSafety\nCareers\nBlog\nImpact Program\nBrand and Press Kit\nIconic Voices\nModern Slavery Policy\n\nResearch\n\nText to Speech\nSpeech to Text\nVoice Changer\nText to Sound Effects\nVoice Cloning\nVoice Isolator\n\nProducts\n\nStudio\nConversational AI\nDu"
     },
     {
       "id": 42,
@@ -610,5 +746,5 @@
   },
   "themes": [],
   "key_points": [],
-  "last_updated": "2025-07-22T16:26:17.421Z"
+  "last_updated": "2025-07-22T17:46:51.464Z"
 }

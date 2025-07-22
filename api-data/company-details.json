@@ -3,33 +3,12 @@
     "AI21 Labs": {
       "id": 7,
       "name": "AI21 Labs",
-      "urls": [
-        {
-          "id": 33,
-          "url": "https://ai21.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 30,
-          "url": "https://ai21.com",
-          "name": "homepage"
-        },
-        {
-          "id": 32,
-          "url": "https://ai21.com/pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 31,
-          "url": "https://ai21.com/jamba",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "1",
-        "changes_7d": "1",
-        "changes_30d": "1",
-        "last_change": "2025-07-21T14:19:24.504Z",
+        "total_changes": "2",
+        "changes_7d": "2",
+        "changes_30d": "2",
+        "last_change": "2025-07-22T17:00:49.419Z",
         "avg_interest_level": "5.00"
       },
       "insights": []
@@ -37,28 +16,7 @@
     "Aleph Alpha": {
       "id": 9,
       "name": "Aleph Alpha",
-      "urls": [
-        {
-          "id": 40,
-          "url": "https://docs.aleph-alpha.com",
-          "name": "docs"
-        },
-        {
-          "id": 37,
-          "url": "https://aleph-alpha.com",
-          "name": "homepage"
-        },
-        {
-          "id": 39,
-          "url": "https://aleph-alpha.com/pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 38,
-          "url": "https://aleph-alpha.com/luminous",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "2",
         "changes_7d": "2",
@@ -71,52 +29,20 @@
     "Amazon CodeWhisperer": {
       "id": 16,
       "name": "Amazon CodeWhisperer",
-      "urls": [
-        {
-          "id": 67,
-          "url": "https://aws.amazon.com/blogs/aws/tag/amazon-codewhisperer",
-          "name": "blog"
-        },
-        {
-          "id": 68,
-          "url": "https://docs.aws.amazon.com/codewhisperer",
-          "name": "docs"
-        },
-        {
-          "id": 65,
-          "url": "https://aws.amazon.com/codewhisperer",
-          "name": "homepage"
-        },
-        {
-          "id": 66,
-          "url": "https://aws.amazon.com/codewhisperer/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "6",
-        "changes_7d": "6",
-        "changes_30d": "6",
-        "last_change": "2025-07-21T14:20:18.730Z",
-        "avg_interest_level": "6.67"
+        "total_changes": "8",
+        "changes_7d": "8",
+        "changes_30d": "8",
+        "last_change": "2025-07-22T17:12:35.573Z",
+        "avg_interest_level": "5.25"
       },
       "insights": []
     },
     "AMD": {
       "id": 49,
       "name": "AMD",
-      "urls": [
-        {
-          "id": 165,
-          "url": "https://amd.com/en/graphics/instinct-server-accelerators",
-          "name": "homepage"
-        },
-        {
-          "id": 166,
-          "url": "https://amd.com/en/newsroom",
-          "name": "news"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "0",
         "changes_7d": "0",
@@ -129,19 +55,13 @@
     "Andi": {
       "id": 22,
       "name": "Andi",
-      "urls": [
-        {
-          "id": 85,
-          "url": "https://andisearch.com",
-          "name": "homepage"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "4",
-        "changes_7d": "4",
-        "changes_30d": "4",
-        "last_change": "2025-07-21T16:13:19.796Z",
-        "avg_interest_level": "2.50"
+        "total_changes": "5",
+        "changes_7d": "5",
+        "changes_30d": "5",
+        "last_change": "2025-07-22T17:12:58.592Z",
+        "avg_interest_level": "2.20"
       },
       "insights": []
     },
@@ -176,82 +96,44 @@
         }
       ],
       "stats": {
-        "total_changes": "6",
-        "changes_7d": "6",
-        "changes_30d": "6",
-        "last_change": "2025-07-21T14:21:02.651Z",
-        "avg_interest_level": "6.83"
+        "total_changes": "7",
+        "changes_7d": "7",
+        "changes_30d": "7",
+        "last_change": "2025-07-22T17:13:18.357Z",
+        "avg_interest_level": "6.57"
       },
       "insights": []
     },
     "Anyscale": {
       "id": 46,
       "name": "Anyscale",
-      "urls": [
-        {
-          "id": 157,
-          "url": "https://anyscale.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 155,
-          "url": "https://anyscale.com",
-          "name": "homepage"
-        },
-        {
-          "id": 156,
-          "url": "https://anyscale.com/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "6",
-        "changes_7d": "6",
-        "changes_30d": "6",
-        "last_change": "2025-07-21T16:14:18.467Z",
-        "avg_interest_level": "4.17"
+        "total_changes": "9",
+        "changes_7d": "9",
+        "changes_30d": "9",
+        "last_change": "2025-07-22T17:13:55.013Z",
+        "avg_interest_level": "5.11"
       },
       "insights": []
     },
     "Cerebras": {
       "id": 51,
       "name": "Cerebras",
-      "urls": [
-        {
-          "id": 171,
-          "url": "https://cerebras.net/blog",
-          "name": "blog"
-        },
-        {
-          "id": 169,
-          "url": "https://cerebras.net",
-          "name": "homepage"
-        },
-        {
-          "id": 170,
-          "url": "https://cerebras.net/product-system",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "3",
-        "changes_7d": "3",
-        "changes_30d": "3",
-        "last_change": "2025-07-21T03:08:27.379Z",
-        "avg_interest_level": "1.67"
+        "total_changes": "4",
+        "changes_7d": "4",
+        "changes_30d": "4",
+        "last_change": "2025-07-22T17:14:18.603Z",
+        "avg_interest_level": "1.50"
       },
       "insights": []
     },
     "Cisco Systems": {
       "id": 55,
       "name": "Cisco Systems",
-      "urls": [
-        {
-          "id": 177,
-          "url": "https://www.cisco.com",
-          "name": "homepage"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "1",
         "changes_7d": "1",
@@ -264,154 +146,59 @@
     "Codeium": {
       "id": 12,
       "name": "Codeium",
-      "urls": [
-        {
-          "id": 52,
-          "url": "https://codeium.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 49,
-          "url": "https://codeium.com",
-          "name": "homepage"
-        },
-        {
-          "id": 51,
-          "url": "https://codeium.com/pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 50,
-          "url": "https://codeium.com/windsurf",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "13",
-        "changes_7d": "13",
-        "changes_30d": "13",
-        "last_change": "2025-07-21T16:15:19.250Z",
-        "avg_interest_level": "4.85"
+        "total_changes": "15",
+        "changes_7d": "15",
+        "changes_30d": "15",
+        "last_change": "2025-07-22T17:14:47.576Z",
+        "avg_interest_level": "4.60"
       },
       "insights": []
     },
     "Cohere": {
       "id": 6,
       "name": "Cohere",
-      "urls": [
-        {
-          "id": 28,
-          "url": "https://cohere.ai/blog",
-          "name": "blog"
-        },
-        {
-          "id": 29,
-          "url": "https://docs.cohere.ai",
-          "name": "docs"
-        },
-        {
-          "id": 25,
-          "url": "https://cohere.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 27,
-          "url": "https://cohere.ai/pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 26,
-          "url": "https://cohere.ai/products",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "8",
-        "changes_7d": "8",
-        "changes_30d": "8",
-        "last_change": "2025-07-21T14:23:15.063Z",
-        "avg_interest_level": "1.50"
+        "total_changes": "9",
+        "changes_7d": "9",
+        "changes_30d": "9",
+        "last_change": "2025-07-22T17:15:02.379Z",
+        "avg_interest_level": "1.44"
       },
       "insights": []
     },
     "Cursor": {
       "id": 13,
       "name": "Cursor",
-      "urls": [
-        {
-          "id": 56,
-          "url": "https://cursor.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 54,
-          "url": "https://cursor.com/features",
-          "name": "features"
-        },
-        {
-          "id": 53,
-          "url": "https://cursor.com",
-          "name": "homepage"
-        },
-        {
-          "id": 55,
-          "url": "https://cursor.com/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "7",
-        "changes_7d": "7",
-        "changes_30d": "7",
-        "last_change": "2025-07-21T16:16:16.970Z",
-        "avg_interest_level": "5.43"
+        "total_changes": "8",
+        "changes_7d": "8",
+        "changes_30d": "8",
+        "last_change": "2025-07-22T17:15:39.521Z",
+        "avg_interest_level": "4.88"
       },
       "insights": []
     },
     "DALL-E": {
       "id": 35,
       "name": "DALL-E",
-      "urls": [
-        {
-          "id": 124,
-          "url": "https://openai.com/dall-e-3",
-          "name": "homepage"
-        },
-        {
-          "id": 125,
-          "url": "https://openai.com/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "5",
-        "changes_7d": "5",
-        "changes_30d": "5",
-        "last_change": "2025-07-21T16:16:36.684Z",
-        "avg_interest_level": "4.40"
+        "total_changes": "6",
+        "changes_7d": "6",
+        "changes_30d": "6",
+        "last_change": "2025-07-22T17:16:03.060Z",
+        "avg_interest_level": "4.83"
       },
       "insights": []
     },
     "DataRobot": {
       "id": 41,
       "name": "DataRobot",
-      "urls": [
-        {
-          "id": 140,
-          "url": "https://datarobot.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 138,
-          "url": "https://datarobot.com",
-          "name": "homepage"
-        },
-        {
-          "id": 139,
-          "url": "https://datarobot.com/platform",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "3",
         "changes_7d": "3",
@@ -424,92 +211,39 @@
     "Descript": {
       "id": 25,
       "name": "Descript",
-      "urls": [
-        {
-          "id": 94,
-          "url": "https://descript.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 91,
-          "url": "https://descript.com",
-          "name": "homepage"
-        },
-        {
-          "id": 93,
-          "url": "https://descript.com/pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 92,
-          "url": "https://descript.com/overdub",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "8",
-        "changes_7d": "8",
-        "changes_30d": "8",
-        "last_change": "2025-07-21T16:17:22.812Z",
-        "avg_interest_level": "5.38"
+        "total_changes": "9",
+        "changes_7d": "9",
+        "changes_30d": "9",
+        "last_change": "2025-07-22T17:16:50.688Z",
+        "avg_interest_level": "5.44"
       },
       "insights": []
     },
     "ElevenLabs": {
       "id": 24,
       "name": "ElevenLabs",
-      "urls": [
-        {
-          "id": 90,
-          "url": "https://elevenlabs.io/blog",
-          "name": "blog"
-        },
-        {
-          "id": 87,
-          "url": "https://elevenlabs.io",
-          "name": "homepage"
-        },
-        {
-          "id": 89,
-          "url": "https://elevenlabs.io/pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 88,
-          "url": "https://elevenlabs.io/voice-generator",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "4",
-        "changes_7d": "4",
-        "changes_30d": "4",
-        "last_change": "2025-07-21T03:11:45.332Z",
-        "avg_interest_level": "6.50"
+        "total_changes": "5",
+        "changes_7d": "5",
+        "changes_30d": "5",
+        "last_change": "2025-07-22T17:17:19.496Z",
+        "avg_interest_level": "5.40"
       },
       "insights": []
     },
     "Flux": {
       "id": 38,
       "name": "Flux",
-      "urls": [
-        {
-          "id": 130,
-          "url": "https://blackforestlabs.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 131,
-          "url": "https://blackforestlabs.ai/our-models",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
-        "total_changes": "4",
-        "changes_7d": "4",
-        "changes_30d": "4",
-        "last_change": "2025-07-21T16:18:18.552Z",
-        "avg_interest_level": "5.50"
+        "total_changes": "5",
+        "changes_7d": "5",
+        "changes_30d": "5",
+        "last_change": "2025-07-22T17:17:40.798Z",
+        "avg_interest_level": "5.80"
       },
       "insights": []
     },
@@ -539,11 +273,11 @@
         }
       ],
       "stats": {
-        "total_changes": "5",
-        "changes_7d": "5",
-        "changes_30d": "5",
-        "last_change": "2025-07-21T16:18:27.267Z",
-        "avg_interest_level": "6.00"
+        "total_changes": "6",
+        "changes_7d": "6",
+        "changes_30d": "6",
+        "last_change": "2025-07-22T17:17:58.613Z",
+        "avg_interest_level": "5.33"
       },
       "insights": []
     },
@@ -578,34 +312,18 @@
         }
       ],
       "stats": {
-        "total_changes": "6",
-        "changes_7d": "6",
-        "changes_30d": "6",
-        "last_change": "2025-07-21T15:11:46.979Z",
-        "avg_interest_level": "6.00"
+        "total_changes": "7",
+        "changes_7d": "7",
+        "changes_30d": "7",
+        "last_change": "2025-07-22T17:18:26.929Z",
+        "avg_interest_level": "6.14"
       },
       "insights": []
     },
     "H2O.ai": {
       "id": 42,
       "name": "H2O.ai",
-      "urls": [
-        {
-          "id": 143,
-          "url": "https://h2o.ai/blog",
-          "name": "blog"
-        },
-        {
-          "id": 141,
-          "url": "https://h2o.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 142,
-          "url": "https://h2o.ai/platform",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "3",
         "changes_7d": "3",
@@ -618,28 +336,7 @@
     "HeyGen": {
       "id": 30,
       "name": "HeyGen",
-      "urls": [
-        {
-          "id": 111,
-          "url": "https://heygen.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 109,
-          "url": "https://heygen.com/features",
-          "name": "features"
-        },
-        {
-          "id": 108,
-          "url": "https://heygen.com",
-          "name": "homepage"
-        },
-        {
-          "id": 110,
-          "url": "https://heygen.com/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "0",
         "changes_7d": "0",
@@ -652,28 +349,7 @@
     "Hugging Face": {
       "id": 43,
       "name": "Hugging Face",
-      "urls": [
-        {
-          "id": 146,
-          "url": "https://huggingface.co/blog",
-          "name": "blog"
-        },
-        {
-          "id": 147,
-          "url": "https://huggingface.co/docs",
-          "name": "docs"
-        },
-        {
-          "id": 144,
-          "url": "https://huggingface.co",
-          "name": "homepage"
-        },
-        {
-          "id": 145,
-          "url": "https://huggingface.co/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "6",
         "changes_7d": "6",
@@ -686,18 +362,7 @@
     "Ideogram": {
       "id": 36,
       "name": "Ideogram",
-      "urls": [
-        {
-          "id": 126,
-          "url": "https://ideogram.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 127,
-          "url": "https://ideogram.ai/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "0",
         "changes_7d": "0",
@@ -710,23 +375,7 @@
     "Inflection AI": {
       "id": 8,
       "name": "Inflection AI",
-      "urls": [
-        {
-          "id": 36,
-          "url": "https://inflection.ai/blog",
-          "name": "blog"
-        },
-        {
-          "id": 34,
-          "url": "https://inflection.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 35,
-          "url": "https://pi.ai",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "3",
         "changes_7d": "3",
@@ -739,18 +388,7 @@
     "Intel": {
       "id": 50,
       "name": "Intel",
-      "urls": [
-        {
-          "id": 167,
-          "url": "https://intel.com/content/www/us/en/artificial-intelligence",
-          "name": "homepage"
-        },
-        {
-          "id": 168,
-          "url": "https://intel.com/content/www/us/en/newsroom",
-          "name": "news"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "2",
         "changes_7d": "2",
@@ -763,28 +401,7 @@
     "LangChain": {
       "id": 45,
       "name": "LangChain",
-      "urls": [
-        {
-          "id": 153,
-          "url": "https://blog.langchain.dev",
-          "name": "blog"
-        },
-        {
-          "id": 154,
-          "url": "https://docs.langchain.com",
-          "name": "docs"
-        },
-        {
-          "id": 151,
-          "url": "https://langchain.com",
-          "name": "homepage"
-        },
-        {
-          "id": 152,
-          "url": "https://langchain.com/langsmith",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "4",
         "changes_7d": "4",
@@ -797,18 +414,7 @@
     "Leonardo AI": {
       "id": 37,
       "name": "Leonardo AI",
-      "urls": [
-        {
-          "id": 128,
-          "url": "https://leonardo.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 129,
-          "url": "https://leonardo.ai/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "2",
         "changes_7d": "2",
@@ -821,23 +427,7 @@
     "Luma AI": {
       "id": 33,
       "name": "Luma AI",
-      "urls": [
-        {
-          "id": 118,
-          "url": "https://lumalabs.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 120,
-          "url": "https://lumalabs.ai/pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 119,
-          "url": "https://lumalabs.ai/dream-machine",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "4",
         "changes_7d": "4",
@@ -850,28 +440,7 @@
     "Meta AI": {
       "id": 4,
       "name": "Meta AI",
-      "urls": [
-        {
-          "id": 19,
-          "url": "https://llama.meta.com",
-          "name": "api"
-        },
-        {
-          "id": 18,
-          "url": "https://ai.meta.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 16,
-          "url": "https://ai.meta.com",
-          "name": "homepage"
-        },
-        {
-          "id": 17,
-          "url": "https://ai.meta.com/llama",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "6",
         "changes_7d": "6",
@@ -913,33 +482,7 @@
     "Mistral AI": {
       "id": 5,
       "name": "Mistral AI",
-      "urls": [
-        {
-          "id": 24,
-          "url": "https://docs.mistral.ai",
-          "name": "docs"
-        },
-        {
-          "id": 20,
-          "url": "https://mistral.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 23,
-          "url": "https://mistral.ai/news",
-          "name": "news"
-        },
-        {
-          "id": 22,
-          "url": "https://mistral.ai/pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 21,
-          "url": "https://mistral.ai/technology",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "5",
         "changes_7d": "5",
@@ -952,23 +495,7 @@
     "Murf AI": {
       "id": 27,
       "name": "Murf AI",
-      "urls": [
-        {
-          "id": 100,
-          "url": "https://murf.ai/resources/blog",
-          "name": "blog"
-        },
-        {
-          "id": 98,
-          "url": "https://murf.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 99,
-          "url": "https://murf.ai/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "2",
         "changes_7d": "2",
@@ -981,13 +508,7 @@
     "Neeva": {
       "id": 23,
       "name": "Neeva",
-      "urls": [
-        {
-          "id": 86,
-          "url": "https://neeva.com",
-          "name": "homepage"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "1",
         "changes_7d": "1",
@@ -1000,28 +521,7 @@
     "NVIDIA": {
       "id": 48,
       "name": "NVIDIA",
-      "urls": [
-        {
-          "id": 163,
-          "url": "https://blogs.nvidia.com/ai",
-          "name": "blog"
-        },
-        {
-          "id": 164,
-          "url": "https://developer.nvidia.com",
-          "name": "docs"
-        },
-        {
-          "id": 161,
-          "url": "https://nvidia.com/ai",
-          "name": "homepage"
-        },
-        {
-          "id": 162,
-          "url": "https://nvidia.com/en-us/data-center/products",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "4",
         "changes_7d": "4",
@@ -1062,34 +562,18 @@
         }
       ],
       "stats": {
-        "total_changes": "0",
-        "changes_7d": "0",
-        "changes_30d": "0",
-        "last_change": null,
-        "avg_interest_level": "0.00"
+        "total_changes": "1",
+        "changes_7d": "1",
+        "changes_30d": "1",
+        "last_change": "2025-07-22T17:33:40.166Z",
+        "avg_interest_level": "9.00"
       },
       "insights": []
     },
     "Palantir": {
       "id": 39,
       "name": "Palantir",
-      "urls": [
-        {
-          "id": 134,
-          "url": "https://blog.palantir.com",
-          "name": "blog"
-        },
-        {
-          "id": 132,
-          "url": "https://palantir.com",
-          "name": "homepage"
-        },
-        {
-          "id": 133,
-          "url": "https://palantir.com/platforms/aip",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "4",
         "changes_7d": "4",
@@ -1131,18 +615,7 @@
     "Phind": {
       "id": 21,
       "name": "Phind",
-      "urls": [
-        {
-          "id": 83,
-          "url": "https://phind.com",
-          "name": "homepage"
-        },
-        {
-          "id": 84,
-          "url": "https://phind.com/search?q=pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "1",
         "changes_7d": "1",
@@ -1155,28 +628,7 @@
     "Pieces": {
       "id": 18,
       "name": "Pieces",
-      "urls": [
-        {
-          "id": 76,
-          "url": "https://pieces.app/blog",
-          "name": "blog"
-        },
-        {
-          "id": 74,
-          "url": "https://pieces.app/features",
-          "name": "features"
-        },
-        {
-          "id": 73,
-          "url": "https://pieces.app",
-          "name": "homepage"
-        },
-        {
-          "id": 75,
-          "url": "https://pieces.app/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "4",
         "changes_7d": "4",
@@ -1189,23 +641,7 @@
     "Pika": {
       "id": 31,
       "name": "Pika",
-      "urls": [
-        {
-          "id": 114,
-          "url": "https://pika.art/blog",
-          "name": "blog"
-        },
-        {
-          "id": 112,
-          "url": "https://pika.art",
-          "name": "homepage"
-        },
-        {
-          "id": 113,
-          "url": "https://pika.art/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "3",
         "changes_7d": "3",
@@ -1218,18 +654,7 @@
     "Redmore Studio": {
       "id": 54,
       "name": "Redmore Studio",
-      "urls": [
-        {
-          "id": 176,
-          "url": "https://redmore.studio/blog",
-          "name": "blog"
-        },
-        {
-          "id": 175,
-          "url": "https://redmore.studio",
-          "name": "homepage"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "2",
         "changes_7d": "2",
@@ -1242,23 +667,7 @@
     "Replicate": {
       "id": 47,
       "name": "Replicate",
-      "urls": [
-        {
-          "id": 160,
-          "url": "https://replicate.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 158,
-          "url": "https://replicate.com",
-          "name": "homepage"
-        },
-        {
-          "id": 159,
-          "url": "https://replicate.com/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "4",
         "changes_7d": "4",
@@ -1271,28 +680,7 @@
     "Replit": {
       "id": 15,
       "name": "Replit",
-      "urls": [
-        {
-          "id": 64,
-          "url": "https://blog.replit.com",
-          "name": "blog"
-        },
-        {
-          "id": 61,
-          "url": "https://replit.com",
-          "name": "homepage"
-        },
-        {
-          "id": 63,
-          "url": "https://replit.com/pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 62,
-          "url": "https://replit.com/ai",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "4",
         "changes_7d": "4",
@@ -1305,23 +693,7 @@
     "Resemble AI": {
       "id": 26,
       "name": "Resemble AI",
-      "urls": [
-        {
-          "id": 97,
-          "url": "https://resemble.ai/blog",
-          "name": "blog"
-        },
-        {
-          "id": 95,
-          "url": "https://resemble.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 96,
-          "url": "https://resemble.ai/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "3",
         "changes_7d": "3",
@@ -1334,23 +706,7 @@
     "Runway": {
       "id": 32,
       "name": "Runway",
-      "urls": [
-        {
-          "id": 117,
-          "url": "https://runwayml.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 115,
-          "url": "https://runwayml.com",
-          "name": "homepage"
-        },
-        {
-          "id": 116,
-          "url": "https://runwayml.com/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "3",
         "changes_7d": "3",
@@ -1363,23 +719,7 @@
     "SambaNova": {
       "id": 52,
       "name": "SambaNova",
-      "urls": [
-        {
-          "id": 174,
-          "url": "https://sambanova.ai/blog",
-          "name": "blog"
-        },
-        {
-          "id": 172,
-          "url": "https://sambanova.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 173,
-          "url": "https://sambanova.ai/products",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "3",
         "changes_7d": "3",
@@ -1392,23 +732,7 @@
     "Scale AI": {
       "id": 40,
       "name": "Scale AI",
-      "urls": [
-        {
-          "id": 137,
-          "url": "https://scale.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 135,
-          "url": "https://scale.com",
-          "name": "homepage"
-        },
-        {
-          "id": 136,
-          "url": "https://scale.com/enterprise",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "3",
         "changes_7d": "3",
@@ -1421,28 +745,7 @@
     "Sourcegraph": {
       "id": 17,
       "name": "Sourcegraph",
-      "urls": [
-        {
-          "id": 72,
-          "url": "https://sourcegraph.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 69,
-          "url": "https://sourcegraph.com",
-          "name": "homepage"
-        },
-        {
-          "id": 71,
-          "url": "https://sourcegraph.com/pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 70,
-          "url": "https://sourcegraph.com/cody",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "4",
         "changes_7d": "4",
@@ -1455,28 +758,7 @@
     "Stability AI": {
       "id": 10,
       "name": "Stability AI",
-      "urls": [
-        {
-          "id": 44,
-          "url": "https://stability.ai/blog",
-          "name": "blog"
-        },
-        {
-          "id": 41,
-          "url": "https://stability.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 43,
-          "url": "https://stability.ai/pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 42,
-          "url": "https://stability.ai/stable-diffusion",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "4",
         "changes_7d": "4",
@@ -1489,28 +771,7 @@
     "Synthesia": {
       "id": 29,
       "name": "Synthesia",
-      "urls": [
-        {
-          "id": 107,
-          "url": "https://synthesia.io/blog",
-          "name": "blog"
-        },
-        {
-          "id": 105,
-          "url": "https://synthesia.io/features",
-          "name": "features"
-        },
-        {
-          "id": 104,
-          "url": "https://synthesia.io",
-          "name": "homepage"
-        },
-        {
-          "id": 106,
-          "url": "https://synthesia.io/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "3",
         "changes_7d": "3",
@@ -1523,28 +784,7 @@
     "Tabnine": {
       "id": 14,
       "name": "Tabnine",
-      "urls": [
-        {
-          "id": 59,
-          "url": "https://tabnine.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 60,
-          "url": "https://docs.tabnine.com",
-          "name": "docs"
-        },
-        {
-          "id": 57,
-          "url": "https://tabnine.com",
-          "name": "homepage"
-        },
-        {
-          "id": 58,
-          "url": "https://tabnine.com/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "4",
         "changes_7d": "4",
@@ -1557,23 +797,7 @@
     "Weights & Biases": {
       "id": 44,
       "name": "Weights & Biases",
-      "urls": [
-        {
-          "id": 150,
-          "url": "https://wandb.ai/fully-connected",
-          "name": "blog"
-        },
-        {
-          "id": 148,
-          "url": "https://wandb.ai",
-          "name": "homepage"
-        },
-        {
-          "id": 149,
-          "url": "https://wandb.ai/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "3",
         "changes_7d": "3",
@@ -1586,23 +810,7 @@
     "WellSaid Labs": {
       "id": 28,
       "name": "WellSaid Labs",
-      "urls": [
-        {
-          "id": 103,
-          "url": "https://wellsaidlabs.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 101,
-          "url": "https://wellsaidlabs.com",
-          "name": "homepage"
-        },
-        {
-          "id": 102,
-          "url": "https://wellsaidlabs.com/pricing",
-          "name": "pricing"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "3",
         "changes_7d": "3",
@@ -1615,23 +823,7 @@
     "You.com": {
       "id": 20,
       "name": "You.com",
-      "urls": [
-        {
-          "id": 80,
-          "url": "https://you.com",
-          "name": "homepage"
-        },
-        {
-          "id": 81,
-          "url": "https://you.com/search?q=pricing",
-          "name": "pricing"
-        },
-        {
-          "id": 82,
-          "url": "https://you.com/code",
-          "name": "product"
-        }
-      ],
+      "urls": [],
       "stats": {
         "total_changes": "1",
         "changes_7d": "1",
@@ -1642,5 +834,5 @@
       "insights": []
     }
   },
-  "generated_at": "2025-07-22T16:26:13.348Z"
+  "generated_at": "2025-07-22T17:46:48.026Z"
 }
