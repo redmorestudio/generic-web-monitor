@@ -17,24 +17,50 @@ async function fixBaselineAnalysisSchema() {
     // Create intelligence schema if it doesn't exist
     await db.run('CREATE SCHEMA IF NOT EXISTS intelligence');
     
-    // Drop the old table if it exists in the wrong schema
-    console.log('🔍 Checking for existing baseline_analysis tables...');
-    const oldTable = await db.get(`
+    // Check if table already exists
+    console.log('🔍 Checking for existing baseline_analysis table...');
+    const tableExists = await db.get(`
       SELECT EXISTS (
         SELECT FROM information_schema.tables 
-        WHERE table_schema = 'processed_content' 
+        WHERE table_schema = 'intelligence' 
         AND table_name = 'baseline_analysis'
       )
     `);
     
-    if (oldTable.exists) {
-      console.log('⚠️  Found baseline_analysis in processed_content schema - will migrate data');
+    if (tableExists.exists) {
+      console.log('⚠️  Table intelligence.baseline_analysis already exists');
+      
+      // Check if it has the required columns
+      const columns = await db.all(`
+        SELECT column_name 
+        FROM information_schema.columns 
+        WHERE table_schema = 'intelligence' 
+        AND table_name = 'baseline_analysis'
+      `);
+      
+      const columnNames = columns.map(c => c.column_name);
+      console.log('📋 Existing columns:', columnNames.join(', '));
+      
+      // Check for required columns
+      const requiredColumns = ['company', 'url', 'company_type', 'page_purpose'];
+      const missingColumns = requiredColumns.filter(col => !columnNames.includes(col));
+      
+      if (missingColumns.length > 0) {
+        console.log('❌ Missing required columns:', missingColumns.join(', '));
+        
+        // Drop and recreate the table
+        console.log('🔄 Dropping and recreating table with correct schema...');
+        await db.run('DROP TABLE IF EXISTS intelligence.baseline_analysis CASCADE');
+      } else {
+        console.log('✅ Table has all required columns');
+        return;
+      }
     }
     
     // Create the baseline_analysis table in intelligence schema with correct columns
     console.log('📊 Creating intelligence.baseline_analysis table...');
     await db.run(`
-      CREATE TABLE IF NOT EXISTS intelligence.baseline_analysis (
+      CREATE TABLE intelligence.baseline_analysis (
         id SERIAL PRIMARY KEY,
         company TEXT NOT NULL,
         url TEXT NOT NULL,
@@ -55,45 +81,48 @@ async function fixBaselineAnalysisSchema() {
       )
     `);
     
+    console.log('✅ Table created successfully');
+    
     // Create indexes
     console.log('🔍 Creating indexes...');
-    await db.run('CREATE INDEX IF NOT EXISTS idx_baseline_analysis_company ON intelligence.baseline_analysis(company)');
-    await db.run('CREATE INDEX IF NOT EXISTS idx_baseline_analysis_url ON intelligence.baseline_analysis(url)');
-    await db.run('CREATE INDEX IF NOT EXISTS idx_baseline_analysis_analysis_date ON intelligence.baseline_analysis(analysis_date DESC)');
+    const indexes = [
+      'CREATE INDEX idx_baseline_analysis_company ON intelligence.baseline_analysis(company)',
+      'CREATE INDEX idx_baseline_analysis_url ON intelligence.baseline_analysis(url)',
+      'CREATE INDEX idx_baseline_analysis_analysis_date ON intelligence.baseline_analysis(analysis_date DESC)'
+    ];
     
-    // Verify the table was created
-    const tableExists = await db.get(`
-      SELECT EXISTS (
-        SELECT FROM information_schema.tables 
-        WHERE table_schema = 'intelligence' 
-        AND table_name = 'baseline_analysis'
-      )
+    for (const index of indexes) {
+      try {
+        await db.run(index);
+        console.log('✅ Created index:', index.match(/idx_\w+/)[0]);
+      } catch (err) {
+        if (err.message.includes('already exists')) {
+          console.log('⚠️  Index already exists:', index.match(/idx_\w+/)[0]);
+        } else {
+          throw err;
+        }
+      }
+    }
+    
+    // Verify the final table structure
+    const finalColumns = await db.all(`
+      SELECT column_name, data_type 
+      FROM information_schema.columns 
+      WHERE table_schema = 'intelligence' 
+      AND table_name = 'baseline_analysis'
+      ORDER BY ordinal_position
     `);
     
-    if (tableExists.exists) {
-      console.log('✅ intelligence.baseline_analysis table created successfully');
-      
-      // Check column structure
-      const columns = await db.all(`
-        SELECT column_name, data_type 
-        FROM information_schema.columns 
-        WHERE table_schema = 'intelligence' 
-        AND table_name = 'baseline_analysis'
-        ORDER BY ordinal_position
-      `);
-      
-      console.log('\n📋 Table columns:');
-      columns.forEach(col => {
-        console.log(`   - ${col.column_name}: ${col.data_type}`);
-      });
-    } else {
-      throw new Error('Failed to create baseline_analysis table');
-    }
+    console.log('\n📋 Final table structure:');
+    finalColumns.forEach(col => {
+      console.log(`   - ${col.column_name}: ${col.data_type}`);
+    });
     
     console.log('\n✨ Schema fix complete!');
     
   } catch (error) {
     console.error('❌ Error fixing schema:', error);
+    console.error('Full error:', error.stack);
     process.exit(1);
   } finally {
     await end();

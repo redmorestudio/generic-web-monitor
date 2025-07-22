@@ -205,7 +205,10 @@ jobs:
         run: |
           cd github-actions-backend
           echo "🔧 Ensuring baseline_analysis table exists with correct schema..."
-          node fix-baseline-analysis-schema.js
+          node fix-baseline-analysis-schema.js || {
+            echo "⚠️  Individual fix failed, running comprehensive fix..."
+            node fix-all-analyzer-schemas.js
+          }
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
