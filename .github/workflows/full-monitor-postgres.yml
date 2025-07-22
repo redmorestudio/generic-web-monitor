@@ -69,8 +69,6 @@ jobs:
       contents: write
       actions: write
     with:
-      trigger_source: ${{ inputs.skip_scrape && 'manual' || 'scrape' }}
-      run_id: ${{ needs.scrape.outputs.run_id || github.run_id }}
       cascade: false  # Prevent cascading
     secrets: inherit
   
