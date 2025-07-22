@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "lastModified": "2025-07-22T20:21:56Z",
+  "modifiedBy": "fix-postgres-schema-complete.js",
+  "checksum": "0f82a5b4f763e107842e81ff65e731ed26146fceb0dfbf2267f81821ac4aa8f4",
+  "changes": "Complete schema rebuild after corruption - all tables verified and indexes created",
+  "previousVersion": "0.0.0",
+  "previousChecksum": "unknown"
+}

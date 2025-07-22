@@ -193,9 +193,52 @@ async function generateDashboard() {
             (SELECT COUNT(*) FROM raw_content.scraped_pages) as snapshots
     `);
     
+    // Get recent changes for summary
+    const recentChanges = await db.all(`
+        SELECT DISTINCT ON (cd.id)
+            cd.id,
+            cd.company,
+            cd.url,
+            cd.url_name,
+            cd.detected_at,
+            cd.interest_level,
+            cd.ai_analysis,
+            sp.title
+        FROM processed_content.change_detection cd
+        LEFT JOIN raw_content.scraped_pages sp ON cd.new_hash = sp.content_hash
+        WHERE cd.detected_at > NOW() - INTERVAL '7 days'
+        ORDER BY cd.id, cd.detected_at DESC
+        LIMIT 5
+    `);
+    
+    // Format recent changes for dashboard
+    const formattedChanges = recentChanges.map(change => {
+        let analysis = {};
+        try {
+            analysis = change.ai_analysis || {};
+        } catch (e) {}
+        
+        return {
+            id: change.id,
+            company: change.company,
+            title: change.title || change.url_name,
+            summary: analysis.summary || 'Content update detected',
+            interest_level: change.interest_level,
+            detected_at: change.detected_at,
+            category: analysis.category || 'General Update',
+            emoji: change.interest_level >= 7 ? '🌟' : '📌'
+        };
+    });
+    
     return {
         company_activity: companyStats,  // Changed from 'companies' to match dashboard
         stats: overallStats,
+        recent_changes_summary: {
+            last_24h_count: parseInt(overallStats.changes_24h) || 0,
+            last_7d_count: parseInt(overallStats.changes_7d) || 0,
+            high_priority_count: parseInt(overallStats.high_interest_7d) || 0,
+            last_5_changes: formattedChanges
+        },
         last_updated: new Date().toISOString()
     };
 }
