@@ -16,12 +16,216 @@
   },
   "stats": {
     "monitored_urls": "0",
-    "total_changes": "4",
+    "total_changes": "6",
     "high_interest_changes": "2",
-    "changes_last_week": "4",
+    "changes_last_week": "6",
     "avg_interest_level": "5.0000000000000000"
   },
   "changes": [
+    {
+      "id": 220,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-22T19:04:23.608Z",
+      "company": "OpenAI",
+      "url_name": "pricing",
+      "old_hash": "a268cb97c16ead5e6f61dfc1597e8487831e80a7ca4909f6cf610e5f08159ecb",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 6,
+        "interest_level": 4,
+        "interest_drivers": [
+          "New pricing plan introduction",
+          "Expansion of access to AI capabilities"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "Competitive Pricing Strategy",
+          "AI Accessibility"
+        ],
+        "summary": "OpenAI has introduced a new pricing plan, 'Pro', and expanded access to AI capabilities for existing plans, indicating a strategic move to enhance user experience and stay competitive in the AI market."
+      },
+      "url": null,
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
+    },
+    {
+      "id": 220,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-22T19:04:23.608Z",
+      "company": "OpenAI",
+      "url_name": "pricing",
+      "old_hash": "a268cb97c16ead5e6f61dfc1597e8487831e80a7ca4909f6cf610e5f08159ecb",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 6,
+        "interest_level": 4,
+        "interest_drivers": [
+          "New pricing plan introduction",
+          "Expansion of access to AI capabilities"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "Competitive Pricing Strategy",
+          "AI Accessibility"
+        ],
+        "summary": "OpenAI has introduced a new pricing plan, 'Pro', and expanded access to AI capabilities for existing plans, indicating a strategic move to enhance user experience and stay competitive in the AI market."
+      },
+      "url": null,
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
+    },
+    {
+      "id": 220,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-22T19:04:23.608Z",
+      "company": "OpenAI",
+      "url_name": "pricing",
+      "old_hash": "a268cb97c16ead5e6f61dfc1597e8487831e80a7ca4909f6cf610e5f08159ecb",
+      "new_hash": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 6,
+        "interest_level": 4,
+        "interest_drivers": [
+          "New pricing plan introduction",
+          "Expansion of access to AI capabilities"
+        ],
+        "category": "AI Pricing and Plans",
+        "impact_areas": [
+          "Competitive Pricing Strategy",
+          "AI Accessibility"
+        ],
+        "summary": "OpenAI has introduced a new pricing plan, 'Pro', and expanded access to AI capabilities for existing plans, indicating a strategic move to enhance user experience and stay competitive in the AI market."
+      },
+      "url": null,
+      "title": "ChatGPT Pricing | OpenAI",
+      "content_preview": "Title: ChatGPT Pricing | OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nHome\nExplore ChatGPT\nTeam\nEnterprise\nEducation\nPricing\nDownload\nChatGPT Pricing | OpenAI\n\nChatGPT\n\nPricing\n\nSee pricing for our individual, team, and enterprise plans.\n\nFree\nPlus\nPro\nTeam\nEnterprise\nFree\n\nExplore how AI can help with everyday tasks\n\nAccess to GPT‑4.1 mini\n\nReal-time data from the web with search\n\nLimited access to GPT‑4o, OpenAI o4-mini, and deep research\n\nLimited access to file uploads, data analysis, image generation, and voice mode\n\nCode edits with the ChatGPT desktop app for macOS\n\nUse custom GPTs\n\nHave an existing plan? See billing help⁠\n(opens in a new window)\n\n$0\n/ month\nGet Free\n(opens in a new window)\nPlus\n\nLevel up productivity and creativity with expanded access\n\nEverything in Free\n\nExtended limits on messaging, file uploads, data analysis, and image generation\n\nStandard and advanced voice mo"
+    },
+    {
+      "id": 219,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-22T19:04:16.736Z",
+      "company": "OpenAI",
+      "url_name": "product",
+      "old_hash": "e0a488af6668fc00b7a9ab06b8c67135629cb36abec2e26bb065c1b64736c6dc",
+      "new_hash": "8485ace5f8dc30d7969561191e78d15a6162b7b5019d1e7b2429ea0980d7cc3c",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "new feature addition",
+          "enhanced user experience"
+        ],
+        "category": "AI-powered chat platforms",
+        "impact_areas": [
+          "user engagement",
+          "competitive differentiation"
+        ],
+        "summary": "The addition of a 'Voice' feature to ChatGPT indicates a notable optimization, enhancing user interaction and potentially expanding its user base, thus having a moderate impact on both technical innovation and business aspects."
+      },
+      "url": null,
+      "title": "ChatGPT",
+      "content_preview": "Title: ChatGPT\n\nSkip to content\nChatGPT\nLog in\nSign up for free\nChatGPT\n\nAttach\nSearch\nVoice\nBy messaging ChatGPT, you agree to our Terms and have read our Privacy Policy."
+    },
+    {
+      "id": 219,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-22T19:04:16.736Z",
+      "company": "OpenAI",
+      "url_name": "product",
+      "old_hash": "e0a488af6668fc00b7a9ab06b8c67135629cb36abec2e26bb065c1b64736c6dc",
+      "new_hash": "8485ace5f8dc30d7969561191e78d15a6162b7b5019d1e7b2429ea0980d7cc3c",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "new feature addition",
+          "enhanced user experience"
+        ],
+        "category": "AI-powered chat platforms",
+        "impact_areas": [
+          "user engagement",
+          "competitive differentiation"
+        ],
+        "summary": "The addition of a 'Voice' feature to ChatGPT indicates a notable optimization, enhancing user interaction and potentially expanding its user base, thus having a moderate impact on both technical innovation and business aspects."
+      },
+      "url": null,
+      "title": "ChatGPT",
+      "content_preview": "Title: ChatGPT\n\nSkip to content\nChatGPT\nLog in\nSign up for free\nChatGPT\n\nAttach\nSearch\nVoice\nBy messaging ChatGPT, you agree to our Terms and have read our Privacy Policy."
+    },
+    {
+      "id": 219,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-22T19:04:16.736Z",
+      "company": "OpenAI",
+      "url_name": "product",
+      "old_hash": "e0a488af6668fc00b7a9ab06b8c67135629cb36abec2e26bb065c1b64736c6dc",
+      "new_hash": "8485ace5f8dc30d7969561191e78d15a6162b7b5019d1e7b2429ea0980d7cc3c",
+      "ai_analysis": {
+        "technical_innovation_score": 5,
+        "business_impact_score": 6,
+        "interest_level": 6,
+        "interest_drivers": [
+          "new feature addition",
+          "enhanced user experience"
+        ],
+        "category": "AI-powered chat platforms",
+        "impact_areas": [
+          "user engagement",
+          "competitive differentiation"
+        ],
+        "summary": "The addition of a 'Voice' feature to ChatGPT indicates a notable optimization, enhancing user interaction and potentially expanding its user base, thus having a moderate impact on both technical innovation and business aspects."
+      },
+      "url": null,
+      "title": "ChatGPT",
+      "content_preview": "Title: ChatGPT\n\nSkip to content\nChatGPT\nLog in\nSign up for free\nChatGPT\n\nAttach\nSearch\nVoice\nBy messaging ChatGPT, you agree to our Terms and have read our Privacy Policy."
+    },
     {
       "id": 218,
       "url_id": null,
@@ -156,6 +360,78 @@
       "content_preview": "Title: OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nResearch\nSafety\nFor Business\nChatGPT\nSora\nAPI Platform\nStories\nCompany\nNews\nOpenAI\nAI as the greatest source of empowerment for all\n\nFidji Simo\n\nClose\nWhat can I help with?\nMessage ChatGPT\nQuiz me on vocabulary\nPlan a surf trip to Costa Rica in August\nIndia stock market today\nExplica por qué el maíz palomitas explota\nTeach me Mahjong for beginners\nFind hiking boots for wide feet\nExplain this code\nWas mach ich in Berlin wenn es regnet?\nWhat are some outdoor markets in Mexico City?\nRédigez une note de remerciement\nRecommend an easy potluck dish\nハーフマラソンのトレーニングを手伝ってください\nHelp me improve this job description\nWrite a Python script\nDraw a picture of a mini aussie as a diver\nTravel pillow that actually works\nTranslate this recipe into Greek\nRank dog breeds for a small apartment\n楽しいディナーパーティーの計画を手伝ってください\nExplain paradiddles for me\nQuais são as chan"
     },
     {
+      "id": 216,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-22T18:18:01.891Z",
+      "company": "OpenAI",
+      "url_name": "homepage",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "c8c2eaf2d2d717422c3ec32d1a6d4a859792a60ea689363a94ea25dc12dd4b86",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 8,
+        "interest_level": 8,
+        "interest_drivers": [
+          "OpenAI's expanded offerings",
+          "Multilingual support",
+          "Integration of various AI tools"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Natural Language Processing",
+          "Computer Vision",
+          "Conversational AI"
+        ],
+        "summary": "The updated content showcases OpenAI's diverse range of AI-powered tools and services, including ChatGPT, Sora, and API Platform, highlighting the company's commitment to making AI accessible and empowering for all. The presence of multilingual support and various AI-driven features demonstrates significant technical advances and notable business impact."
+      },
+      "url": null,
+      "title": "OpenAI",
+      "content_preview": "Title: OpenAI\n\nSkip to main content\nLog in\nSwitch to\nChatGPT\n(opens in a new window)\nSora\n(opens in a new window)\nAPI Platform\n(opens in a new window)\nResearch\nSafety\nFor Business\nChatGPT\nSora\nAPI Platform\nStories\nCompany\nNews\nOpenAI\nAI as the greatest source of empowerment for all\n\nFidji Simo\n\nClose\nWhat can I help with?\nMessage ChatGPT\nQuiz me on vocabulary\nPlan a surf trip to Costa Rica in August\nIndia stock market today\nExplica por qué el maíz palomitas explota\nTeach me Mahjong for beginners\nFind hiking boots for wide feet\nExplain this code\nWas mach ich in Berlin wenn es regnet?\nWhat are some outdoor markets in Mexico City?\nRédigez une note de remerciement\nRecommend an easy potluck dish\nハーフマラソンのトレーニングを手伝ってください\nHelp me improve this job description\nWrite a Python script\nDraw a picture of a mini aussie as a diver\nTravel pillow that actually works\nTranslate this recipe into Greek\nRank dog breeds for a small apartment\n楽しいディナーパーティーの計画を手伝ってください\nExplain paradiddles for me\nQuais são as chan"
+    },
+    {
+      "id": 215,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 9,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:33:40.166Z",
+      "company": "OpenAI",
+      "url_name": "product",
+      "old_hash": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+      "new_hash": "8485ace5f8dc30d7969561191e78d15a6162b7b5019d1e7b2429ea0980d7cc3c",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 9,
+        "interest_level": 9,
+        "interest_drivers": [
+          "Introduction of ChatGPT",
+          "Potential for advanced AI-powered chat capabilities",
+          "Terms and Privacy Policy indicate a production-ready service"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "Conversational AI",
+          "Natural Language Processing",
+          "Customer Service Automation"
+        ],
+        "summary": "The introduction of ChatGPT, with its advanced AI capabilities and production-ready service, indicates significant technical innovation and major business impact, particularly in the areas of conversational AI and customer service automation."
+      },
+      "url": null,
+      "title": "ChatGPT",
+      "content_preview": "Title: ChatGPT\n\nSkip to content\nChatGPT\nLog in\nSign up for free\nChatGPT\n\nAttach\nSearch\nVoice\nBy messaging ChatGPT, you agree to our Terms and have read our Privacy Policy."
+    },
+    {
       "id": 215,
       "url_id": null,
       "change_type": "modified",
@@ -235,5 +511,5 @@
   },
   "themes": [],
   "key_points": [],
-  "last_updated": "2025-07-22T18:47:57.234Z"
+  "last_updated": "2025-07-22T19:07:57.190Z"
 }

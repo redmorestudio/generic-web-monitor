@@ -159,7 +159,7 @@
       "content_preview": "Title: GitHub Copilot documentation - GitHub Docs\n\nSkip to main content\nGitHub Docs\nVersion: Free, Pro, & Team\nSearch or askCopilot\nHome\nGitHub Copilot\nGet started\nQuickstart\nWhat is GitHub Copilot?\nPlans for Copilot\nCopilot features\nBest practices\nChoose enterprise plan\nAchieve company goals\nConcepts\nCopilot billing\nUnderstand and manage requests\nIndividual Copilot plans and benefits\nBilling for individuals\nBilling for organizations\nBilling for enterprises\nChoose the right AI tool\nCompletions\nIDE code suggestions\nCode referencing\nPrompt engineering\nCustomize Copilot responses\nAbout GitHub Copilot Chat\nContent exclusion\nSemantic indexing\nAbout Copilot coding agent\nOrganize and share context\nPolicies\nCopilot knowledge bases\nBuild Copilot Extensions\nAbout building Extensions\nAgents for Copilot Extensions\nSkillsets for Copilot Extensions\nOpenID Connect\nRate limits\nNetwork settings\nHow-tos\nSet up\nSet up for self\nSet up for organization\nSet up for enterprise\nInstall Copilot extension\nInstal"
     },
     {
-      "id": 186,
+      "id": 213,
       "url_id": null,
       "change_type": "modified",
       "summary": null,
@@ -168,29 +168,63 @@
       "relevance_score": null,
       "interest_level": 2,
       "interest_data": null,
-      "detected_at": "2025-07-21T16:18:27.267Z",
+      "detected_at": "2025-07-22T17:17:58.613Z",
       "company": "GitHub Copilot",
-      "url_name": "pricing",
-      "old_hash": "93dd0403b2b7b48795e5266614348c0592f8fd275bbed1134440f0fcb75490f2",
-      "new_hash": "6aca057463b882e4cb30673eca85a89c7ef930a7d0ac66f5a0aa49d2e3371243",
+      "url_name": "docs",
+      "old_hash": "cf2635ac0219c77deb3e57242b3053b4031bbbb4336ebb6017e671768c2558b9",
+      "new_hash": "583ee9b6ddbda60c038375e1e53c87f7cd11ebba4bcb6d837f295097dcc96b9f",
       "ai_analysis": {
         "technical_innovation_score": 2,
         "business_impact_score": 2,
         "interest_level": 2,
         "interest_drivers": [
           "minor update",
-          "no significant technical change"
+          "rebranding of a feature"
         ],
-        "category": "version control and collaboration",
+        "category": "AI-powered coding tools",
         "impact_areas": [
-          "software development",
-          "DevOps"
+          "developer productivity",
+          "AI-assisted coding"
         ],
-        "summary": "No significant changes were observed in the GitHub pricing page, with only minor wording updates, such as 'Protected branches' being replaced by 'Repository rules'. The technical innovation and business impact of this change are minimal."
+        "summary": "The update from 'Customize Copilot responses' to 'About GitHub Copilot Chat' suggests a minor rebranding or feature update, but lacks significant technical innovation or business impact."
       },
       "url": null,
-      "title": "Pricing · Plans for every developer · GitHub",
-      "content_preview": "Title: Pricing · Plans for every developer · GitHub\n\nSkip to content\nNavigation Menu\nProduct\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSearch or jump to...\nSign in\nSign up\nTry the Copilot-powered platform\n\nWe get it, there's a lot you can do with GitHub. That’s why we've packed all of it into a single risk-free trial that includes GitHub Enterprise, Copilot, and Advanced Security.\n\nStart free for 30 days\nFree\n\nThe basics for individuals\nand organizations\n\n$\n0\nUSD\nper user/month\nJoin for free\nUnlimited public/private repositories\nDependabot security and version updates\n2,000 CI/CD minutes/month\n\nFree for public repositories\n\n500MB of Packages storage\n\nFree for public repositories\n\nIssues & Projects\nCommunity support\nFEATURED ADD-ONS\nGitHub Copilot Access\nGitHub Codespaces Access\nTeam\n\nAdvanced collaboration for\nindividuals and organizations\n\n$\n4\nUSD\nper user/month\nContinue with Team\nEverything included in Free, plus...\nAccess to GitHub Codespaces\nRepository rules\nMultiple revie"
+      "title": "GitHub Copilot documentation - GitHub Docs",
+      "content_preview": "Title: GitHub Copilot documentation - GitHub Docs\n\nSkip to main content\nGitHub Docs\nVersion: Free, Pro, & Team\nSearch or askCopilot\nHome\nGitHub Copilot\nGet started\nQuickstart\nWhat is GitHub Copilot?\nPlans for Copilot\nCopilot features\nBest practices\nChoose enterprise plan\nAchieve company goals\nConcepts\nCopilot billing\nUnderstand and manage requests\nIndividual Copilot plans and benefits\nBilling for individuals\nBilling for organizations\nBilling for enterprises\nChoose the right AI tool\nCompletions\nIDE code suggestions\nCode referencing\nPrompt engineering\nCustomize Copilot responses\nAbout GitHub Copilot Chat\nContent exclusion\nSemantic indexing\nAbout Copilot coding agent\nOrganize and share context\nPolicies\nCopilot knowledge bases\nBuild Copilot Extensions\nAbout building Extensions\nAgents for Copilot Extensions\nSkillsets for Copilot Extensions\nOpenID Connect\nRate limits\nNetwork settings\nHow-tos\nSet up\nSet up for self\nSet up for organization\nSet up for enterprise\nInstall Copilot extension\nInstal"
+    },
+    {
+      "id": 213,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-22T17:17:58.613Z",
+      "company": "GitHub Copilot",
+      "url_name": "docs",
+      "old_hash": "cf2635ac0219c77deb3e57242b3053b4031bbbb4336ebb6017e671768c2558b9",
+      "new_hash": "583ee9b6ddbda60c038375e1e53c87f7cd11ebba4bcb6d837f295097dcc96b9f",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 2,
+        "interest_level": 2,
+        "interest_drivers": [
+          "minor update",
+          "rebranding of a feature"
+        ],
+        "category": "AI-powered coding tools",
+        "impact_areas": [
+          "developer productivity",
+          "AI-assisted coding"
+        ],
+        "summary": "The update from 'Customize Copilot responses' to 'About GitHub Copilot Chat' suggests a minor rebranding or feature update, but lacks significant technical innovation or business impact."
+      },
+      "url": null,
+      "title": "GitHub Copilot documentation - GitHub Docs",
+      "content_preview": "Title: GitHub Copilot documentation - GitHub Docs\n\nSkip to main content\nGitHub Docs\nVersion: Free, Pro, & Team\nSearch or askCopilot\nHome\nGitHub Copilot\nGet started\nQuickstart\nWhat is GitHub Copilot?\nPlans for Copilot\nCopilot features\nBest practices\nChoose enterprise plan\nAchieve company goals\nConcepts\nCopilot billing\nUnderstand and manage requests\nIndividual Copilot plans and benefits\nBilling for individuals\nBilling for organizations\nBilling for enterprises\nChoose the right AI tool\nCompletions\nIDE code suggestions\nCode referencing\nPrompt engineering\nCustomize Copilot responses\nAbout GitHub Copilot Chat\nContent exclusion\nSemantic indexing\nAbout Copilot coding agent\nOrganize and share context\nPolicies\nCopilot knowledge bases\nBuild Copilot Extensions\nAbout building Extensions\nAgents for Copilot Extensions\nSkillsets for Copilot Extensions\nOpenID Connect\nRate limits\nNetwork settings\nHow-tos\nSet up\nSet up for self\nSet up for organization\nSet up for enterprise\nInstall Copilot extension\nInstal"
     },
     {
       "id": 186,
@@ -327,6 +361,180 @@
       "url": null,
       "title": "Pricing · Plans for every developer · GitHub",
       "content_preview": "Title: Pricing · Plans for every developer · GitHub\n\nSkip to content\nNavigation Menu\nProduct\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSearch or jump to...\nSign in\nSign up\nTry the Copilot-powered platform\n\nWe get it, there's a lot you can do with GitHub. That’s why we've packed all of it into a single risk-free trial that includes GitHub Enterprise, Copilot, and Advanced Security.\n\nStart free for 30 days\nFree\n\nThe basics for individuals\nand organizations\n\n$\n0\nUSD\nper user/month\nJoin for free\nUnlimited public/private repositories\nDependabot security and version updates\n2,000 CI/CD minutes/month\n\nFree for public repositories\n\n500MB of Packages storage\n\nFree for public repositories\n\nIssues & Projects\nCommunity support\nFEATURED ADD-ONS\nGitHub Copilot Access\nGitHub Codespaces Access\nTeam\n\nAdvanced collaboration for\nindividuals and organizations\n\n$\n4\nUSD\nper user/month\nContinue with Team\nEverything included in Free, plus...\nAccess to GitHub Codespaces\nRepository rules\nMultiple revie"
+    },
+    {
+      "id": 186,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:18:27.267Z",
+      "company": "GitHub Copilot",
+      "url_name": "pricing",
+      "old_hash": "93dd0403b2b7b48795e5266614348c0592f8fd275bbed1134440f0fcb75490f2",
+      "new_hash": "6aca057463b882e4cb30673eca85a89c7ef930a7d0ac66f5a0aa49d2e3371243",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 2,
+        "interest_level": 2,
+        "interest_drivers": [
+          "minor update",
+          "no significant technical change"
+        ],
+        "category": "version control and collaboration",
+        "impact_areas": [
+          "software development",
+          "DevOps"
+        ],
+        "summary": "No significant changes were observed in the GitHub pricing page, with only minor wording updates, such as 'Protected branches' being replaced by 'Repository rules'. The technical innovation and business impact of this change are minimal."
+      },
+      "url": null,
+      "title": "Pricing · Plans for every developer · GitHub",
+      "content_preview": "Title: Pricing · Plans for every developer · GitHub\n\nSkip to content\nNavigation Menu\nProduct\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSearch or jump to...\nSign in\nSign up\nTry the Copilot-powered platform\n\nWe get it, there's a lot you can do with GitHub. That’s why we've packed all of it into a single risk-free trial that includes GitHub Enterprise, Copilot, and Advanced Security.\n\nStart free for 30 days\nFree\n\nThe basics for individuals\nand organizations\n\n$\n0\nUSD\nper user/month\nJoin for free\nUnlimited public/private repositories\nDependabot security and version updates\n2,000 CI/CD minutes/month\n\nFree for public repositories\n\n500MB of Packages storage\n\nFree for public repositories\n\nIssues & Projects\nCommunity support\nFEATURED ADD-ONS\nGitHub Copilot Access\nGitHub Codespaces Access\nTeam\n\nAdvanced collaboration for\nindividuals and organizations\n\n$\n4\nUSD\nper user/month\nContinue with Team\nEverything included in Free, plus...\nAccess to GitHub Codespaces\nRepository rules\nMultiple revie"
+    },
+    {
+      "id": 186,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:18:27.267Z",
+      "company": "GitHub Copilot",
+      "url_name": "pricing",
+      "old_hash": "93dd0403b2b7b48795e5266614348c0592f8fd275bbed1134440f0fcb75490f2",
+      "new_hash": "6aca057463b882e4cb30673eca85a89c7ef930a7d0ac66f5a0aa49d2e3371243",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 2,
+        "interest_level": 2,
+        "interest_drivers": [
+          "minor update",
+          "no significant technical change"
+        ],
+        "category": "version control and collaboration",
+        "impact_areas": [
+          "software development",
+          "DevOps"
+        ],
+        "summary": "No significant changes were observed in the GitHub pricing page, with only minor wording updates, such as 'Protected branches' being replaced by 'Repository rules'. The technical innovation and business impact of this change are minimal."
+      },
+      "url": null,
+      "title": "Pricing · Plans for every developer · GitHub",
+      "content_preview": "Title: Pricing · Plans for every developer · GitHub\n\nSkip to content\nNavigation Menu\nProduct\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSearch or jump to...\nSign in\nSign up\nTry the Copilot-powered platform\n\nWe get it, there's a lot you can do with GitHub. That’s why we've packed all of it into a single risk-free trial that includes GitHub Enterprise, Copilot, and Advanced Security.\n\nStart free for 30 days\nFree\n\nThe basics for individuals\nand organizations\n\n$\n0\nUSD\nper user/month\nJoin for free\nUnlimited public/private repositories\nDependabot security and version updates\n2,000 CI/CD minutes/month\n\nFree for public repositories\n\n500MB of Packages storage\n\nFree for public repositories\n\nIssues & Projects\nCommunity support\nFEATURED ADD-ONS\nGitHub Copilot Access\nGitHub Codespaces Access\nTeam\n\nAdvanced collaboration for\nindividuals and organizations\n\n$\n4\nUSD\nper user/month\nContinue with Team\nEverything included in Free, plus...\nAccess to GitHub Codespaces\nRepository rules\nMultiple revie"
+    },
+    {
+      "id": 186,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:18:27.267Z",
+      "company": "GitHub Copilot",
+      "url_name": "pricing",
+      "old_hash": "93dd0403b2b7b48795e5266614348c0592f8fd275bbed1134440f0fcb75490f2",
+      "new_hash": "6aca057463b882e4cb30673eca85a89c7ef930a7d0ac66f5a0aa49d2e3371243",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 2,
+        "interest_level": 2,
+        "interest_drivers": [
+          "minor update",
+          "no significant technical change"
+        ],
+        "category": "version control and collaboration",
+        "impact_areas": [
+          "software development",
+          "DevOps"
+        ],
+        "summary": "No significant changes were observed in the GitHub pricing page, with only minor wording updates, such as 'Protected branches' being replaced by 'Repository rules'. The technical innovation and business impact of this change are minimal."
+      },
+      "url": null,
+      "title": "Pricing · Plans for every developer · GitHub",
+      "content_preview": "Title: Pricing · Plans for every developer · GitHub\n\nSkip to content\nNavigation Menu\nProduct\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSearch or jump to...\nSign in\nSign up\nTry the Copilot-powered platform\n\nWe get it, there's a lot you can do with GitHub. That’s why we've packed all of it into a single risk-free trial that includes GitHub Enterprise, Copilot, and Advanced Security.\n\nStart free for 30 days\nFree\n\nThe basics for individuals\nand organizations\n\n$\n0\nUSD\nper user/month\nJoin for free\nUnlimited public/private repositories\nDependabot security and version updates\n2,000 CI/CD minutes/month\n\nFree for public repositories\n\n500MB of Packages storage\n\nFree for public repositories\n\nIssues & Projects\nCommunity support\nFEATURED ADD-ONS\nGitHub Copilot Access\nGitHub Codespaces Access\nTeam\n\nAdvanced collaboration for\nindividuals and organizations\n\n$\n4\nUSD\nper user/month\nContinue with Team\nEverything included in Free, plus...\nAccess to GitHub Codespaces\nRepository rules\nMultiple revie"
+    },
+    {
+      "id": 51,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:28.715Z",
+      "company": "GitHub Copilot",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "2cb93954a031de3070b41c7233da6ac75bec56f317a6d33477e46e8dcc2b5b25",
+      "ai_analysis": {
+        "technical_innovation_score": 6,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "GitHub Copilot updates",
+          "AI-powered code review",
+          "Custom instruction for Copilot agents"
+        ],
+        "category": "AI & ML",
+        "impact_areas": [
+          "Developer productivity",
+          "Code quality",
+          "AI-assisted programming"
+        ],
+        "summary": "The GitHub Blog features updates on GitHub Copilot, focusing on improving developer workflows, code review, and partnership with AI pair programmers, indicating notable advancements in AI-powered development tools."
+      },
+      "url": null,
+      "title": "GitHub Copilot Archives - The GitHub Blog",
+      "content_preview": "Title: GitHub Copilot Archives - The GitHub Blog\n\nSkip to content\n/\nBlog\nChangelog\nDocs\nCustomer stories\nTry GitHub Copilot\nAttend GitHub Universe\nAI & ML\nDeveloper skills\nEngineering\nEnterprise software\nNews & insights\nOpen Source\nSecurity\nHome / GitHub Copilot\nGitHub Copilot\nAI & ML\nFrom chaos to clarity: Using GitHub Copilot agents to improve developer workflows\n\nExplore how you can set Copilot coding agent up for success with custom instruction and Copilot setup steps.\n\nChris Reddington · July 15, 2025\nAI & ML\nCode review in the age of AI: Why developers will always own the merge button\n\nWhen it comes to merging code, developers will always make the final decision. But we’re rethinking how tools like GitHub Copilot can help.\n\nElle Shwer · July 14, 2025\nAI & ML\nBeyond prompt crafting: How to be a better partner for your AI pair programmer\n\nEnsuring quality code suggestions from Copilot goes beyond the perfect prompt. Context is key to success when working with your AI pair programme"
+    },
+    {
+      "id": 51,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:28.715Z",
+      "company": "GitHub Copilot",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "2cb93954a031de3070b41c7233da6ac75bec56f317a6d33477e46e8dcc2b5b25",
+      "ai_analysis": {
+        "technical_innovation_score": 6,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "GitHub Copilot updates",
+          "AI-powered code review",
+          "Custom instruction for Copilot agents"
+        ],
+        "category": "AI & ML",
+        "impact_areas": [
+          "Developer productivity",
+          "Code quality",
+          "AI-assisted programming"
+        ],
+        "summary": "The GitHub Blog features updates on GitHub Copilot, focusing on improving developer workflows, code review, and partnership with AI pair programmers, indicating notable advancements in AI-powered development tools."
+      },
+      "url": null,
+      "title": "GitHub Copilot Archives - The GitHub Blog",
+      "content_preview": "Title: GitHub Copilot Archives - The GitHub Blog\n\nSkip to content\n/\nBlog\nChangelog\nDocs\nCustomer stories\nTry GitHub Copilot\nAttend GitHub Universe\nAI & ML\nDeveloper skills\nEngineering\nEnterprise software\nNews & insights\nOpen Source\nSecurity\nHome / GitHub Copilot\nGitHub Copilot\nAI & ML\nFrom chaos to clarity: Using GitHub Copilot agents to improve developer workflows\n\nExplore how you can set Copilot coding agent up for success with custom instruction and Copilot setup steps.\n\nChris Reddington · July 15, 2025\nAI & ML\nCode review in the age of AI: Why developers will always own the merge button\n\nWhen it comes to merging code, developers will always make the final decision. But we’re rethinking how tools like GitHub Copilot can help.\n\nElle Shwer · July 14, 2025\nAI & ML\nBeyond prompt crafting: How to be a better partner for your AI pair programmer\n\nEnsuring quality code suggestions from Copilot goes beyond the perfect prompt. Context is key to success when working with your AI pair programme"
     },
     {
       "id": 51,
@@ -759,6 +967,78 @@
       "url": null,
       "title": "GitHub Copilot documentation - GitHub Docs",
       "content_preview": "Title: GitHub Copilot documentation - GitHub Docs\n\nSkip to main content\nGitHub Docs\nVersion: Free, Pro, & Team\nSearch or askCopilot\nHome\nGitHub Copilot\nGet started\nQuickstart\nWhat is GitHub Copilot?\nPlans for Copilot\nCopilot features\nBest practices\nChoose enterprise plan\nAchieve company goals\nConcepts\nCopilot billing\nUnderstand and manage requests\nIndividual Copilot plans and benefits\nBilling for individuals\nBilling for organizations\nBilling for enterprises\nChoose the right AI tool\nCompletions\nIDE code suggestions\nCode referencing\nPrompt engineering\nCustomize Copilot responses\nContent exclusion\nSemantic indexing\nAbout Copilot coding agent\nOrganize and share context\nPolicies\nCopilot knowledge bases\nBuild Copilot Extensions\nAbout building Extensions\nAgents for Copilot Extensions\nSkillsets for Copilot Extensions\nOpenID Connect\nRate limits\nNetwork settings\nHow-tos\nSet up\nSet up for self\nSet up for organization\nSet up for enterprise\nInstall Copilot extension\nInstall Copilot in the CLI\nCompl"
+    },
+    {
+      "id": 49,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:15.826Z",
+      "company": "GitHub Copilot",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "54652a78ff894f182099a704804624ce045e9c01165c9f29a79286689f992527",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "AI-powered coding assistance",
+          "Integration with GitHub Actions",
+          "Automated code testing and iteration"
+        ],
+        "category": "AI-powered Development Tools",
+        "impact_areas": [
+          "Software Development",
+          "Artificial Intelligence",
+          "DevOps"
+        ],
+        "summary": "GitHub Copilot's introduction of agent mode represents a significant technical advancement in AI-powered coding assistance, with potential to improve developer productivity and efficiency. The business impact is notable, as it expands GitHub's offerings and further establishes the company as a leader in the software development and AI spaces."
+      },
+      "url": null,
+      "title": "GitHub Copilot · Your AI pair programmer · GitHub",
+      "content_preview": "Title: GitHub Copilot · Your AI pair programmer · GitHub\n\nSkip to content\nNavigation Menu\nProduct\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSearch or jump to...\nSign in\nSign up\nGitHub Copilot\nFor business\nExtensions\nTutorials\nWhat’s new\nPlans & pricing\nNow supercharged with agent mode\nAI that builds with you\nGet started for free\nSee plans & pricing\nAlready have Visual Studio Code? Open now\nPause\nCompanies using Copilot\nFeatures\nDelegate like a boss\n\nPlay\n\nYour backlog doesn’t stand a chance. Delegate open issues to GitHub Copilot and let your coding agent write, run, and test code in the background.\nPreview GitHub Copilot coding agent\n\nDeals with your issues. When assigned issues, GitHub Copilot plans, writes, tests, and iterates—using GitHub Actions to run code and deliver ready-to-review pull requests.\nCodes like an insider. GitHub Copilot hooks into MCP servers to draw on data from your repositories and external resources—working like an onboarded team member from day one.\n"
+    },
+    {
+      "id": 49,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:12:15.826Z",
+      "company": "GitHub Copilot",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "54652a78ff894f182099a704804624ce045e9c01165c9f29a79286689f992527",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "AI-powered coding assistance",
+          "Integration with GitHub Actions",
+          "Automated code testing and iteration"
+        ],
+        "category": "AI-powered Development Tools",
+        "impact_areas": [
+          "Software Development",
+          "Artificial Intelligence",
+          "DevOps"
+        ],
+        "summary": "GitHub Copilot's introduction of agent mode represents a significant technical advancement in AI-powered coding assistance, with potential to improve developer productivity and efficiency. The business impact is notable, as it expands GitHub's offerings and further establishes the company as a leader in the software development and AI spaces."
+      },
+      "url": null,
+      "title": "GitHub Copilot · Your AI pair programmer · GitHub",
+      "content_preview": "Title: GitHub Copilot · Your AI pair programmer · GitHub\n\nSkip to content\nNavigation Menu\nProduct\nSolutions\nResources\nOpen Source\nEnterprise\nPricing\nSearch or jump to...\nSign in\nSign up\nGitHub Copilot\nFor business\nExtensions\nTutorials\nWhat’s new\nPlans & pricing\nNow supercharged with agent mode\nAI that builds with you\nGet started for free\nSee plans & pricing\nAlready have Visual Studio Code? Open now\nPause\nCompanies using Copilot\nFeatures\nDelegate like a boss\n\nPlay\n\nYour backlog doesn’t stand a chance. Delegate open issues to GitHub Copilot and let your coding agent write, run, and test code in the background.\nPreview GitHub Copilot coding agent\n\nDeals with your issues. When assigned issues, GitHub Copilot plans, writes, tests, and iterates—using GitHub Actions to run code and deliver ready-to-review pull requests.\nCodes like an insider. GitHub Copilot hooks into MCP servers to draw on data from your repositories and external resources—working like an onboarded team member from day one.\n"
     },
     {
       "id": 49,
@@ -1164,5 +1444,5 @@
   },
   "themes": [],
   "key_points": [],
-  "last_updated": "2025-07-22T18:47:57.108Z"
+  "last_updated": "2025-07-22T19:07:56.176Z"
 }
