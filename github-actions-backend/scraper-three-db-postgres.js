@@ -484,7 +484,7 @@ Focus on AI/ML relevance and competitive intelligence value.`;
         `SELECT c.*, COUNT(u.id) as url_count
          FROM intelligence.companies c
          LEFT JOIN intelligence.urls u ON c.id = u.company_id
-         GROUP BY c.id, c.name, c.category, c.interest_level
+         GROUP BY c.id, c.name, c.category
          ORDER BY c.name`
       );
       
