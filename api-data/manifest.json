@@ -2,7 +2,7 @@
   "version": "2.1",
   "backend": "postgresql",
   "compatible_with": "sqlite-dashboard",
-  "generated_at": "2025-07-22T23:50:13.647Z",
+  "generated_at": "2025-07-22T23:57:40.323Z",
   "fixes_applied": [
     "proper_company_ids",
     "eliminate_duplicates",
