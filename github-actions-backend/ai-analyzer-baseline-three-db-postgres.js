@@ -351,7 +351,7 @@ async function storeBaselineAnalysis(company, url, extractedData) {
       `${company}: ${extractedData.current_state?.positioning || 'AI company'}`;
 
     // Get the latest markdown content hash for this URL
-    const contentHash = await db.oneOrNone(`
+    const contentHash = await db.get(`
       SELECT markdown_hash 
       FROM processed_content.markdown_pages 
       WHERE company = $1 AND url = $2 
@@ -360,7 +360,7 @@ async function storeBaselineAnalysis(company, url, extractedData) {
     `, [company, url]);
 
     // Store using PostgreSQL syntax with ON CONFLICT
-    await db.none(`
+    await db.run(`
       INSERT INTO intelligence.baseline_analysis 
       (company, url, company_type, page_purpose, key_topics, main_message, 
        target_audience, unique_value, trust_elements, differentiation, 
@@ -413,7 +413,7 @@ async function processAllSnapshots() {
   const errorTracker = new AnalysisErrorTracker();
 
   // Check if baseline analysis already exists
-  const existingCount = await db.one('SELECT COUNT(*) as count FROM intelligence.baseline_analysis');
+  const existingCount = await db.get('SELECT COUNT(*) as count FROM intelligence.baseline_analysis');
   if (parseInt(existingCount.count) > 0) {
     console.log(`⚠️  Found existing baseline analysis (${existingCount.count} records)`);
     console.log('   Use --force flag to re-analyze all content');
@@ -442,7 +442,7 @@ async function processAllSnapshots() {
   }
 
   // Get the most recent processed content for each URL
-  const latestSnapshots = await db.manyOrNone(`
+  const latestSnapshots = await db.all(`
     SELECT DISTINCT ON (company, url)
       company,
       url,
@@ -594,7 +594,7 @@ async function generateBaselineReport() {
   };
 
   // Get statistics
-  const stats = await db.one(`
+  const stats = await db.get(`
     SELECT 
       COUNT(DISTINCT company) as companies,
       COUNT(*) as urls_analyzed
@@ -605,7 +605,7 @@ async function generateBaselineReport() {
   report.statistics.urls_analyzed = parseInt(stats.urls_analyzed);
 
   // Get all companies with their baseline analysis
-  const companies = await db.manyOrNone(`
+  const companies = await db.all(`
     SELECT DISTINCT
       company,
       COUNT(*) as url_count
@@ -616,7 +616,7 @@ async function generateBaselineReport() {
 
   for (const company of companies) {
     // Get all baseline analyses for this company
-    const analyses = await db.manyOrNone(`
+    const analyses = await db.all(`
       SELECT *
       FROM intelligence.baseline_analysis
       WHERE company = $1
