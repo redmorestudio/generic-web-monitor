@@ -201,26 +201,19 @@ jobs:
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
-      - name: Fix baseline analysis schema
+      - name: Fix ALL PostgreSQL schemas (FINAL)
         run: |
           cd github-actions-backend
-          echo "🔧 Ensuring baseline_analysis table exists with correct schema..."
+          echo "🔧 Running FINAL comprehensive schema fix..."
           
-          # Use proper version that creates ONE table with JSONB structure
-          if [ -f "fix-baseline-analysis-schema-proper.js" ]; then
-            echo "Using proper JSONB schema fix..."
-            node fix-baseline-analysis-schema-proper.js
-          elif [ -f "fix-baseline-analysis-schema-smart.js" ]; then
-            echo "Using smart schema fix..."
-            node fix-baseline-analysis-schema-smart.js
-          elif [ -f "fix-baseline-analysis-schema-robust.js" ]; then
-            echo "Using robust schema fix..."
-            node fix-baseline-analysis-schema-robust.js
+          # Use the new final fix script
+          if [ -f "fix-postgres-schema-final.js" ]; then
+            echo "🚀 Running final schema fix that fixes EVERYTHING..."
+            node fix-postgres-schema-final.js
           else
-            node fix-baseline-analysis-schema.js || {
-              echo "⚠️  Individual fix failed, running comprehensive fix..."
-              node fix-all-analyzer-schemas.js
-            }
+            # Fallback to old method
+            echo "⚠️  Final fix not found, using legacy fixes..."
+            node fix-baseline-analysis-schema-proper.js || node fix-all-analyzer-schemas.js
           fi
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
