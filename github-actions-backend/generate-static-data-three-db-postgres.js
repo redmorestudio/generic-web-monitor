@@ -58,7 +58,7 @@ async function getTopEntities(companyId, entityType, limit = 3) {
         const analyses = await db.all(`
             SELECT ba.entities
             FROM intelligence.baseline_analysis ba
-            WHERE ba.company_id = $1
+            WHERE ba.company = (SELECT name FROM intelligence.companies WHERE id = $1)
             ORDER BY ba.analysis_date DESC
             LIMIT 5
         `, [companyId]);
@@ -538,7 +538,7 @@ async function generateIndividualCompanyFiles(companyName) {
     const latestAnalyses = await db.all(`
         SELECT ba.entities, ba.themes, ba.key_points
         FROM intelligence.baseline_analysis ba
-        WHERE ba.company_id = $1
+        WHERE ba.company = (SELECT name FROM intelligence.companies WHERE id = $1)
         ORDER BY ba.analysis_date DESC
         LIMIT 10
     `, [company.id]);
