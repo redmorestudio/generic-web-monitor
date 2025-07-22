@@ -1,0 +1,82 @@
+{
+  "id": 71,
+  "company": "Pieces",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:22:11.849Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Introduction of pricing page with two plans: FREE (Individual) and Teams, along with features and support details",
+    "specific_changes": [
+      "Added pricing plans",
+      "Introduced features for each plan",
+      "Provided support details",
+      "Included installation guides for different operating systems"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Expansion into the developer tools market",
+      "Competition with existing developer productivity and collaboration platforms"
+    ],
+    "business_impact": "The introduction of pricing plans could significantly impact the company's revenue stream, potentially attracting more customers with the FREE plan while generating income from Teams and larger enterprises.",
+    "strategic_direction": "The company is moving towards establishing a strong presence in the developer tools and productivity software market.",
+    "competitive_implications": "Pieces is positioning itself as a unique solution with its Long-Term Memory technology, potentially disrupting traditional developer tool markets."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "FREE (Individual)",
+      "Teams (contact for pricing)"
+    ],
+    "features": [
+      "Long-Term Memory technology",
+      "Basic Copilot assistance",
+      "Email support",
+      "Shared Memory Across Teams",
+      "Bring your own model or choose preferred LLMs"
+    ],
+    "products": [
+      "Pieces for Developers"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "Long-Term Memory"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competition from established players in the market",
+      "Adoption challenges for new technology"
+    ],
+    "key_findings": [
+      "Pieces is transitioning towards a monetized model",
+      "The company is focusing on developer productivity and collaboration"
+    ],
+    "opportunities": [
+      "Potential for growth in the developer tools market",
+      "Innovation in productivity software"
+    ],
+    "recommended_actions": [
+      "Monitor Pieces' pricing strategy and its impact on the market",
+      "Analyze customer adoption and feedback on the new pricing plans"
+    ]
+  },
+  "key_insights": [
+    "Pieces is transitioning towards a monetized model",
+    "The company is focusing on developer productivity and collaboration"
+  ],
+  "business_impact": "The introduction of pricing plans could significantly impact the company's revenue stream, potentially attracting more customers with the FREE plan while generating income from Teams and larger enterprises.",
+  "competitive_implications": "Pieces is positioning itself as a unique solution with its Long-Term Memory technology, potentially disrupting traditional developer tool markets.",
+  "content_hash_before": null,
+  "content_hash_after": "3e016546630b9cfc56e7ca0c1c9d6238fab3110a9b3126f9d038e26700329015",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

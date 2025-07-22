@@ -1,0 +1,75 @@
+{
+  "id": 47,
+  "company": "Scale AI",
+  "page_url": "product",
+  "detected_at": "2025-07-21T15:26:11.057Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added for Scale AI product page, including various products, enterprise, government, customers, and resources sections",
+    "specific_changes": [
+      "Added products section with multiple offerings",
+      "Added enterprise section with solutions and prebuilt applications",
+      "Added government section with public sector and STL",
+      "Added customers section with notable customers",
+      "Added resources section with various links to guides, documentation, research, and more"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on AI and machine learning solutions",
+      "Expansion into new markets, including government and enterprise"
+    ],
+    "business_impact": "The updated product page is likely to improve Scale AI's online visibility, showcase their capabilities, and attract potential customers, ultimately driving business growth",
+    "strategic_direction": "The update suggests that Scale AI is focusing on expanding its product offerings, improving its online presence, and targeting new markets, including government and enterprise",
+    "competitive_implications": "Scale AI's updated product page may pose a competitive threat to other companies in the AI and machine learning space, as it showcases their comprehensive offerings and capabilities"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [
+      "Scale Data Engine",
+      "Scale GenAI Platform",
+      "Scale Donovan",
+      "Scale Evaluation"
+    ],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI and machine learning space",
+      "Potential for Scale AI to disrupt existing markets and business models"
+    ],
+    "key_findings": [
+      "Scale AI has significantly expanded its product offerings",
+      "The company is targeting new markets, including government and enterprise"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Scale AI to leverage their AI and machine learning capabilities",
+      "Potential for business growth through expanded product offerings and market reach"
+    ],
+    "recommended_actions": [
+      "Monitor Scale AI's product offerings and market expansion",
+      "Consider partnership opportunities to leverage their AI and machine learning capabilities"
+    ]
+  },
+  "key_insights": [
+    "Scale AI has significantly expanded its product offerings",
+    "The company is targeting new markets, including government and enterprise"
+  ],
+  "business_impact": "The updated product page is likely to improve Scale AI's online visibility, showcase their capabilities, and attract potential customers, ultimately driving business growth",
+  "competitive_implications": "Scale AI's updated product page may pose a competitive threat to other companies in the AI and machine learning space, as it showcases their comprehensive offerings and capabilities",
+  "content_hash_before": null,
+  "content_hash_after": "f930e2ccedd4880109ebc0a6e1f29320a51a75891a24ce40bee1fe501ab4533e",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

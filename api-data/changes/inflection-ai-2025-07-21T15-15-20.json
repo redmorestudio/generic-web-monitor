@@ -1,0 +1,84 @@
+{
+  "id": 177,
+  "company": "Inflection AI",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:15:20.205Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Initial blog content creation",
+    "specific_changes": [
+      "Introduction of the Inflection AI blog",
+      "Publication of multiple articles on AI, technology, and innovation",
+      "Inclusion of links to various resources, such as API requests and career pages"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing demand for AI solutions",
+      "Increasing importance of transparency and thought leadership in the AI industry"
+    ],
+    "business_impact": "The creation of the blog and publication of articles can help establish Inflection AI as a thought leader in the AI industry, potentially attracting customers, investors, and talent.",
+    "strategic_direction": "Inflection AI appears to be focusing on developing and promoting its AI solutions, particularly in the enterprise market, while emphasizing transparency and thought leadership.",
+    "competitive_implications": "Inflection AI's blog and articles may help the company differentiate itself from competitors and establish a strong brand presence in the AI market."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Enterprise AI"
+    ],
+    "pricing": [],
+    "features": [
+      "Personal AI",
+      "LLM (Large Language Model)"
+    ],
+    "products": [
+      "Pi",
+      "Inflection AI"
+    ],
+    "partnerships": [
+      "Microsoft",
+      "NVIDIA",
+      "CoreWeave",
+      "White House"
+    ],
+    "technologies": [
+      "AI",
+      "MLPerf"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Intense competition in the AI market",
+      "Potential regulatory challenges and concerns around AI safety"
+    ],
+    "key_findings": [
+      "Inflection AI is committed to developing and promoting its AI solutions",
+      "The company is focused on establishing itself as a thought leader in the AI industry"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the AI industry",
+      "Potential for Inflection AI to expand its customer base and increase revenue"
+    ],
+    "recommended_actions": [
+      "Monitor Inflection AI's blog and articles for updates on the company's strategy and developments",
+      "Consider potential partnership opportunities with Inflection AI"
+    ]
+  },
+  "key_insights": [
+    "Inflection AI is committed to developing and promoting its AI solutions",
+    "The company is focused on establishing itself as a thought leader in the AI industry"
+  ],
+  "business_impact": "The creation of the blog and publication of articles can help establish Inflection AI as a thought leader in the AI industry, potentially attracting customers, investors, and talent.",
+  "competitive_implications": "Inflection AI's blog and articles may help the company differentiate itself from competitors and establish a strong brand presence in the AI market.",
+  "content_hash_before": null,
+  "content_hash_after": "17f98e7274d2cdd908d9a7f3b673b1cf776070c11854b66c6ebc1dd06cfec0c2",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

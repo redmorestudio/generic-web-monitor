@@ -1,0 +1,91 @@
+{
+  "id": 154,
+  "company": "Murf AI",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:19:19.457Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Initial content creation",
+    "specific_changes": [
+      "Introduction of Murf AI's products and services",
+      "Description of AI voice generator and text to speech software",
+      "Mention of various features such as voice cloning, AI dubbing, and voice changer",
+      "Introduction of integrations with other tools and platforms",
+      "Availability of resources such as help center, community, academy, and blog"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing demand for AI-powered voice solutions",
+      "Increasing importance of text to speech technology in various industries"
+    ],
+    "business_impact": "Murf AI's initial content creation is expected to have a significant impact on the AI voice generator and text to speech market, as it provides a comprehensive overview of the company's offerings and capabilities",
+    "strategic_direction": "Murf AI's focus on AI voice generator and text to speech technology suggests a strategic direction towards providing innovative voice solutions for various industries and applications",
+    "competitive_implications": "Murf AI's strategic move is likely to influence the competitive landscape of the AI voice generator and text to speech market, with potential implications for other players in the industry"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Enterprise"
+    ],
+    "pricing": [],
+    "features": [
+      "Voice Cloning",
+      "AI Dubbing",
+      "Voice Changer",
+      "Text to Speech"
+    ],
+    "products": [
+      "Murf Studio",
+      "Murf API",
+      "Murf Voices Installer"
+    ],
+    "partnerships": [
+      "Canva",
+      "Google Slides",
+      "Adobe Audition",
+      "Adobe Captivate",
+      "PowerPoint"
+    ],
+    "technologies": [
+      "AI voice generator",
+      "Text to speech software"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Intense competition in the AI voice generator and text to speech market",
+      "Rapidly evolving technology landscape"
+    ],
+    "key_findings": [
+      "Murf AI's initial content creation provides a comprehensive overview of the company's offerings and capabilities",
+      "The company's focus on AI voice generator and text to speech technology suggests a strategic direction towards providing innovative voice solutions"
+    ],
+    "opportunities": [
+      "Growing demand for AI-powered voice solutions",
+      "Increasing importance of text to speech technology in various industries"
+    ],
+    "recommended_actions": [
+      "Monitor Murf AI's progress and strategic moves",
+      "Assess the competitive implications of Murf AI's strategic direction",
+      "Explore potential opportunities for collaboration or partnership with Murf AI"
+    ]
+  },
+  "key_insights": [
+    "Murf AI's initial content creation provides a comprehensive overview of the company's offerings and capabilities",
+    "The company's focus on AI voice generator and text to speech technology suggests a strategic direction towards providing innovative voice solutions"
+  ],
+  "business_impact": "Murf AI's initial content creation is expected to have a significant impact on the AI voice generator and text to speech market, as it provides a comprehensive overview of the company's offerings and capabilities",
+  "competitive_implications": "Murf AI's strategic move is likely to influence the competitive landscape of the AI voice generator and text to speech market, with potential implications for other players in the industry",
+  "content_hash_before": null,
+  "content_hash_after": "ffd4e086e6f44d0bc1b7eee991af92a92f874c35fe0a01512467b353690cd551",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

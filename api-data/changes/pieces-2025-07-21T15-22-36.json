@@ -1,0 +1,84 @@
+{
+  "id": 68,
+  "company": "Pieces",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:22:36.374Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Initial blog content creation",
+    "specific_changes": [
+      "Introduction of blog sections such as AI & LLM, Developer Workflow, Engineering, Product Updates, Insights, and Podcast",
+      "Publication of multiple blog posts on various topics including nano models, MCP, LLM benchmarking, and AI knowledge management",
+      "Inclusion of a newsletter signup section and links to social media platforms",
+      "Addition of resource links such as changelog, news, events, user stories, and support"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing interest in AI and LLM",
+      "Increasing demand for developer tools and workflows"
+    ],
+    "business_impact": "Establishing a strong online presence and thought leadership in the AI and developer community",
+    "strategic_direction": "Expansion into the developer community and establishment of a strong online presence",
+    "competitive_implications": "Pieces is positioning itself as a key player in the AI and developer tool market, potentially threatening competitors"
+  },
+  "entities": {
+    "people": [
+      "Ellie Zubrowski",
+      "Jim Bennett",
+      "Hanna Stechenko",
+      "Haimantika Mitra"
+    ],
+    "markets": [
+      "Developer community"
+    ],
+    "pricing": [],
+    "features": [
+      "Model Context Protocol (MCP)",
+      "Long-Term Memory",
+      "agentic workflows"
+    ],
+    "products": [
+      "Pieces"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "LLM"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competition from established players in the AI and developer tool market"
+    ],
+    "key_findings": [
+      "Pieces is focusing on AI and LLM",
+      "The company is establishing a strong online presence"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other developer tool companies",
+      "Expansion into new markets"
+    ],
+    "recommended_actions": [
+      "Monitor Pieces' blog and social media for further updates",
+      "Assess potential partnership opportunities"
+    ]
+  },
+  "key_insights": [
+    "Pieces is focusing on AI and LLM",
+    "The company is establishing a strong online presence"
+  ],
+  "business_impact": "Establishing a strong online presence and thought leadership in the AI and developer community",
+  "competitive_implications": "Pieces is positioning itself as a key player in the AI and developer tool market, potentially threatening competitors",
+  "content_hash_before": null,
+  "content_hash_after": "8da5920886cabae51f450b45466b36f896707918583dada66011731a84efd784",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

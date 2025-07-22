@@ -1,13 +1,241 @@
 {
-  "generated_at": "2025-07-22T14:38:16.465Z",
+  "generated_at": "2025-07-22T14:51:08.800Z",
   "database": "PostgreSQL",
   "period": "last_7_days",
   "summary": {
-    "total_changes": 0,
-    "high_interest": 0,
-    "medium_interest": 0,
-    "low_interest": 0,
-    "average_interest": "NaN"
+    "total_changes": 120,
+    "high_interest": 95,
+    "medium_interest": 3,
+    "low_interest": 22,
+    "average_interest": "7.5"
   },
-  "top_changes": []
+  "top_changes": [
+    {
+      "company": "DALL-E",
+      "url": "pricing",
+      "interest_level": 9,
+      "type": "modified",
+      "impact": "The introduction of a pricing page for ChatGPT indicates a significant shift in OpenAI's business model, potentially generating revenue through subscription-based plans.",
+      "insights": [
+        "OpenAI has introduced a pricing page for ChatGPT, indicating a significant strategic move",
+        "The pricing page offers various plans with different features and limitations",
+        "The company is targeting both individual and enterprise customers"
+      ]
+    },
+    {
+      "company": "You.com",
+      "url": "homepage",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "You.com is positioning itself as a major player in the AI for workplace productivity market with the introduction of ARI",
+      "insights": [
+        "You.com is investing heavily in AI research and development",
+        "The company is targeting large enterprises with its solutions"
+      ]
+    },
+    {
+      "company": "WellSaid Labs",
+      "url": "pricing",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The new pricing plans may attract more customers, especially small businesses and individuals, and increase revenue for WellSaid Labs.",
+      "insights": [
+        "WellSaid Labs has introduced a new pricing page with various plans",
+        "The plans include a trial plan, creative plan, business plan, and enterprise plan"
+      ]
+    },
+    {
+      "company": "Weights & Biases",
+      "url": "blog",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The updates are likely to enhance Weights & Biases' competitive position in the AI engineering market, particularly in the areas of inference, online evaluations, and observability.",
+      "insights": [
+        "Weights & Biases is enhancing its product offerings to support AI engineering and generative AI",
+        "The company is focusing on inference, online evaluations, and observability as key areas of development"
+      ]
+    },
+    {
+      "company": "Weights & Biases",
+      "url": "homepage",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The changes are likely to have a significant impact on the company's business, as they position themselves as a leading AI developer platform and highlight their various features and solutions",
+      "insights": [
+        "Weights & Biases is positioning itself as a leading AI developer platform",
+        "The company is highlighting its various features and solutions to attract customers and establish itself as a leader in the market"
+      ]
+    },
+    {
+      "company": "Tabnine",
+      "url": "docs",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The creation of comprehensive documentation for Tabnine's AI code assistant can increase user adoption and retention, ultimately driving business growth.",
+      "insights": [
+        "Tabnine's AI code assistant has the potential to significantly accelerate and simplify software development",
+        "The creation of comprehensive documentation is a key factor in user adoption and retention"
+      ]
+    },
+    {
+      "company": "Tabnine",
+      "url": "homepage",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The changes are likely to attract more customers and increase revenue for Tabnine, as the new features and emphasis on code privacy and protection address key concerns for software developers",
+      "insights": [
+        "Tabnine's updated homepage showcases new features and emphasizes code privacy and protection",
+        "The company is investing in AI-powered code assistant technology",
+        "There is growing demand for code privacy and protection solutions"
+      ]
+    },
+    {
+      "company": "Synthesia",
+      "url": "blog",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The new content highlights Synthesia's focus on video transformation and training, which could lead to increased adoption and revenue growth.",
+      "insights": [
+        "Synthesia's new content showcases significant updates to its services and features.",
+        "The company is focusing on video transformation and training.",
+        "AI video generation is a key technology driving Synthesia's growth."
+      ]
+    },
+    {
+      "company": "Stability AI",
+      "url": "blog",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The changes are likely to improve the company's visibility, credibility, and customer engagement, ultimately driving business growth and revenue.",
+      "insights": [
+        "Stability AI is investing heavily in its online presence and customer experience",
+        "The company is expanding its product and service offerings to cater to a broader range of customers",
+        "Generative AI and open-source technologies are becoming increasingly important in the industry"
+      ]
+    },
+    {
+      "company": "Stability AI",
+      "url": "homepage",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The changes suggest a significant expansion of the company's product offerings and a stronger focus on enterprise customers",
+      "insights": [
+        "The company is expanding its product offerings to include more AI-powered creative tools",
+        "The company is targeting enterprise customers with its new products and features"
+      ]
+    },
+    {
+      "company": "Stability AI",
+      "url": "product",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "Expansion of Stability AI's product offerings and services, indicating a significant strategic move",
+      "insights": [
+        "Stability AI is introducing new image models and services",
+        "The company is expanding its product offerings and services"
+      ]
+    },
+    {
+      "company": "Sourcegraph",
+      "url": "homepage",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The changes are likely to have a significant impact on the company's revenue and market position, as they demonstrate a strong commitment to innovation and customer needs.",
+      "insights": [
+        "Sourcegraph is shifting its focus towards AI-powered software development solutions",
+        "The company is investing in new products and features to meet customer needs",
+        "The changes demonstrate a strong commitment to innovation and customer satisfaction"
+      ]
+    },
+    {
+      "company": "Sourcegraph",
+      "url": "pricing",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "Sourcegraph is expanding its offerings with new pricing plans and features, targeting growing organizations and enterprises",
+      "insights": [
+        "Sourcegraph is expanding its product offerings and pricing plans",
+        "The company is targeting growing organizations and enterprises"
+      ]
+    },
+    {
+      "company": "Scale AI",
+      "url": "homepage",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The changes suggest a significant expansion of Scale AI's product offerings and market reach, potentially increasing its competitiveness in the AI solutions market",
+      "insights": [
+        "Scale AI is expanding its product offerings to include more comprehensive AI solutions",
+        "The company is partnering with leading AI providers to enhance its offerings"
+      ]
+    },
+    {
+      "company": "Scale AI",
+      "url": "product",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The updated product page is likely to improve Scale AI's online visibility, showcase their capabilities, and attract potential customers, ultimately driving business growth",
+      "insights": [
+        "Scale AI has significantly expanded its product offerings",
+        "The company is targeting new markets, including government and enterprise"
+      ]
+    },
+    {
+      "company": "SambaNova",
+      "url": "homepage",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The changes are likely to have a significant impact on the company's business, as they indicate a major expansion of its product and solution offerings, as well as new partnerships and customer acquisitions.",
+      "insights": [
+        "SambaNova is expanding its AI platform and solution offerings",
+        "The company is partnering with new customers and industries",
+        "The changes are likely to increase competition in the AI market"
+      ]
+    },
+    {
+      "company": "SambaNova",
+      "url": "product",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The introduction of SambaStack and related products is expected to enhance SambaNova's market share and revenue growth in the AI industry.",
+      "insights": [
+        "SambaNova is expanding its presence in the AI market with new products and features.",
+        "The company is focusing on efficient AI solutions for data centers."
+      ]
+    },
+    {
+      "company": "Runway",
+      "url": "blog",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The creation of this content demonstrates Runway's commitment to transparency, innovation, and community engagement, which can positively impact its reputation and attract new customers, partners, and talent.",
+      "insights": [
+        "Runway is committed to transparency and community engagement",
+        "Partnerships and collaborations are crucial to Runway's strategy",
+        "AI and machine learning are key areas of focus for the company"
+      ]
+    },
+    {
+      "company": "Runway",
+      "url": "homepage",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "The changes are likely to attract new customers and partners, and to establish Runway as a leader in the AI-powered creative tools market.",
+      "insights": [
+        "Runway is expanding its product offerings and focusing on storytelling and creative applications",
+        "The company is establishing itself as a leader in the AI-powered creative tools market"
+      ]
+    },
+    {
+      "company": "Runway",
+      "url": "pricing",
+      "interest_level": 9,
+      "type": "new",
+      "impact": "Runway AI is expanding its offerings with new pricing plans, targeting a wider range of customers from individuals to large enterprises",
+      "insights": [
+        "Runway AI is targeting a wide range of customers with its new pricing plans",
+        "The company is focusing on accessibility and flexibility with its pricing and features"
+      ]
+    }
+  ]
 }

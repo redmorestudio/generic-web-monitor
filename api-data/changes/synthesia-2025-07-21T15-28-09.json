@@ -1,0 +1,83 @@
+{
+  "id": 34,
+  "company": "Synthesia",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:28:09.942Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New blog content added",
+    "specific_changes": [
+      "Introduction of how-to guides and case studies",
+      "Addition of new features such as AI video dubbing and interactivity",
+      "Emphasis on video transformation and training",
+      "Inclusion of customer reviews and success stories"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing demand for video-based training and development",
+      "Increasing importance of AI-generated content"
+    ],
+    "business_impact": "The new content highlights Synthesia's focus on video transformation and training, which could lead to increased adoption and revenue growth.",
+    "strategic_direction": "Synthesia is likely to continue investing in AI video generation and video transformation, expanding its services to meet the growing demand for video-based training and development.",
+    "competitive_implications": "Synthesia's emphasis on video transformation and training positions the company as a leader in the AI video generation market, potentially threatening competitors."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Training and development",
+      "Sales enablement",
+      "Marketing"
+    ],
+    "pricing": [],
+    "features": [
+      "AI video dubbing",
+      "Interactivity",
+      "Video from text"
+    ],
+    "products": [
+      "Synthesia AI video generator"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI video generation"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competition from established video generation companies",
+      "Regulatory challenges related to AI-generated content"
+    ],
+    "key_findings": [
+      "Synthesia's new content showcases significant updates to its services and features.",
+      "The company is focusing on video transformation and training.",
+      "AI video generation is a key technology driving Synthesia's growth."
+    ],
+    "opportunities": [
+      "Partnerships with training and development organizations",
+      "Expansion into new markets, such as education and healthcare"
+    ],
+    "recommended_actions": [
+      "Monitor Synthesia's progress and adjust competitive strategies accordingly.",
+      "Explore potential partnerships or collaborations with Synthesia."
+    ]
+  },
+  "key_insights": [
+    "Synthesia's new content showcases significant updates to its services and features.",
+    "The company is focusing on video transformation and training.",
+    "AI video generation is a key technology driving Synthesia's growth."
+  ],
+  "business_impact": "The new content highlights Synthesia's focus on video transformation and training, which could lead to increased adoption and revenue growth.",
+  "competitive_implications": "Synthesia's emphasis on video transformation and training positions the company as a leader in the AI video generation market, potentially threatening competitors.",
+  "content_hash_before": null,
+  "content_hash_after": "30172812f836d5c3fbad30685b6829e218509ebdb6ee7f0eed21f4544cdf18b3",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

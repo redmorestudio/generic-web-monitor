@@ -1,0 +1,63 @@
+{
+  "id": 189,
+  "company": "Codeium",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:07:47.128Z",
+  "change_type": "modified",
+  "interest_level": 4,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "minor",
+    "what_changed": "Download option for Windows has been replaced with a download option for Linux",
+    "specific_changes": [
+      "Download for Windows replaced with Download for Linux",
+      "Added link to view all download options"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Windsurf may be expanding its support for different operating systems"
+    ],
+    "business_impact": "The change may slightly impact user experience, but it is unlikely to have a significant impact on the business",
+    "strategic_direction": "Windsurf may be focusing on improving user experience and supporting a wider range of operating systems",
+    "competitive_implications": "The change is unlikely to give Windsurf a significant competitive advantage"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [
+      "Windsurf Editor"
+    ],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "The change may cause some users to experience minor inconvenience"
+    ],
+    "key_findings": [
+      "Windsurf has updated its download options to include a link to view all download options"
+    ],
+    "opportunities": [
+      "Windsurf may be able to attract more users by supporting a wider range of operating systems"
+    ],
+    "recommended_actions": [
+      "Monitor user feedback to ensure the change has not caused any significant issues"
+    ]
+  },
+  "key_insights": [
+    "Windsurf has updated its download options to include a link to view all download options"
+  ],
+  "business_impact": "The change may slightly impact user experience, but it is unlikely to have a significant impact on the business",
+  "competitive_implications": "The change is unlikely to give Windsurf a significant competitive advantage",
+  "content_hash_before": "2f9fce4bfbb3f58c60d48f34c47363423c5e56cf216cf39dfa20673b4c0e3ca1",
+  "content_hash_after": "09520b999a3e7d53e8d1905ba790e619541d84f7a895bcc94e4b4a464f51cb0d",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

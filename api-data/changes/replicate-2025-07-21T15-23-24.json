@@ -1,0 +1,88 @@
+{
+  "id": 62,
+  "company": "Replicate",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:23:24.360Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Initial pricing page content",
+    "specific_changes": [
+      "Introduction of pricing model",
+      "Listing of public models with their pricing",
+      "Explanation of private models and their pricing",
+      "Hardware pricing details",
+      "Introduction of enterprise and volume discounts"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increasing demand for machine learning services",
+      "Growing competition in the machine learning market"
+    ],
+    "business_impact": "The introduction of a pricing page with detailed information on public and private models, hardware pricing, and enterprise discounts is likely to attract more customers, especially enterprise customers, and increase revenue for Replicate.",
+    "strategic_direction": "Replicate's strategic direction is to become a leading provider of machine learning services, and its pricing strategy is designed to support this goal.",
+    "competitive_implications": "Replicate's pricing strategy may influence the pricing strategies of its competitors, and its introduction of enterprise discounts may attract customers away from competitors."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Machine learning market",
+      "Enterprise market"
+    ],
+    "pricing": [
+      "Price-per-second for public models",
+      "Price-per-output for private models",
+      "Hardware pricing for GPU and CPU"
+    ],
+    "features": [
+      "Pricing model",
+      "Hardware pricing",
+      "Enterprise discounts"
+    ],
+    "products": [
+      "Public models",
+      "Private models",
+      "Custom models"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "Machine learning models",
+      "GPU hardware"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competition from other machine learning service providers may lead to pricing pressure and decreased revenue.",
+      "The complexity of Replicate's pricing model may confuse customers and lead to decreased adoption."
+    ],
+    "key_findings": [
+      "Replicate's pricing model is based on usage, with prices varying depending on the type of model and hardware used.",
+      "Enterprise discounts are available for large customers, indicating that Replicate is targeting the enterprise market."
+    ],
+    "opportunities": [
+      "Replicate's pricing strategy may attract more customers, especially enterprise customers, and increase revenue.",
+      "The introduction of custom models and enterprise discounts may lead to increased adoption of Replicate's services."
+    ],
+    "recommended_actions": [
+      "Monitor Replicate's pricing strategy and its impact on the market.",
+      "Consider partnering with Replicate to offer its services to our customers."
+    ]
+  },
+  "key_insights": [
+    "Replicate's pricing model is based on usage, with prices varying depending on the type of model and hardware used.",
+    "Enterprise discounts are available for large customers, indicating that Replicate is targeting the enterprise market."
+  ],
+  "business_impact": "The introduction of a pricing page with detailed information on public and private models, hardware pricing, and enterprise discounts is likely to attract more customers, especially enterprise customers, and increase revenue for Replicate.",
+  "competitive_implications": "Replicate's pricing strategy may influence the pricing strategies of its competitors, and its introduction of enterprise discounts may attract customers away from competitors.",
+  "content_hash_before": null,
+  "content_hash_after": "67714965133ea32e3cdeb34c9bdf80d56a95ee622e00b72337865cf5adbf83e0",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

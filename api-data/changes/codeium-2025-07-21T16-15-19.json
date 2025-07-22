@@ -1,0 +1,67 @@
+{
+  "id": 17,
+  "company": "Codeium",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T16:15:19.250Z",
+  "change_type": "modified",
+  "interest_level": 4,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "minor",
+    "what_changed": "Download options for the Windsurf Editor",
+    "specific_changes": [
+      "Added download options for Windows (x64 and arm64)",
+      "Removed download option for Linux from the main page"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on Windows users"
+    ],
+    "business_impact": "The change may slightly improve the user experience for Windows users, but it is unlikely to have a significant impact on the business.",
+    "strategic_direction": "The change is consistent with the company's focus on providing a user-friendly experience, but it does not reveal any new strategic directions.",
+    "competitive_implications": "The change does not indicate any significant competitive advantages or disadvantages."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [
+      "Windsurf Editor"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "Windows",
+      "x64",
+      "arm64"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Potential negative impact on Linux users who may feel neglected"
+    ],
+    "key_findings": [
+      "The company is updating its download options to better serve Windows users"
+    ],
+    "opportunities": [
+      "Improved user experience for Windows users"
+    ],
+    "recommended_actions": [
+      "Monitor user feedback to ensure the change does not negatively impact other user groups"
+    ]
+  },
+  "key_insights": [
+    "The company is updating its download options to better serve Windows users"
+  ],
+  "business_impact": "The change may slightly improve the user experience for Windows users, but it is unlikely to have a significant impact on the business.",
+  "competitive_implications": "The change does not indicate any significant competitive advantages or disadvantages.",
+  "content_hash_before": "933c3031df262cdc4c10dd269a37a11f4c0d7d565684c54ad18c3445160a1ec9",
+  "content_hash_after": "a8c79b22cf71e8ab9d176888ad2f658dc9e6643089923a16619fb5661d00c76e",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

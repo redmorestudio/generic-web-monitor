@@ -1,0 +1,92 @@
+{
+  "id": 166,
+  "company": "Luma AI",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:16:55.799Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New homepage content for Luma AI, including introduction of new products and features such as Modify Video, Camera Motion Concepts, Ray2, and Ray2 Flash",
+    "specific_changes": [
+      "Introduction of Modify Video, a feature allowing users to reimagine any video",
+      "Introduction of Camera Motion Concepts, a set of concepts for Ray2 allowing reliable and composable control over camera motion in video generation",
+      "Introduction of Ray2, a large-scale video generative model capable of creating realistic visuals with natural, coherent motion",
+      "Introduction of Ray2 Flash, a free version of Ray2 allowing users to generate videos at a lower cost and faster speed",
+      "Update to the Luma AI homepage, including new navigation menu and introduction to the company's mission and products"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "increased competition in the video generation market",
+      "growing demand for AI-powered video creation tools"
+    ],
+    "business_impact": "The introduction of new products and features is likely to increase Luma AI's competitiveness in the market and attract new customers, potentially leading to increased revenue and growth",
+    "strategic_direction": "Luma AI's strategic direction appears to be focused on expanding its capabilities and offerings in the video generation market, with a focus on AI-powered tools and features",
+    "competitive_implications": "Luma AI's new products and features may pose a competitive threat to other companies in the video generation market, potentially disrupting the market and forcing other companies to adapt"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "media",
+      "entertainment",
+      "marketing",
+      "advertising"
+    ],
+    "pricing": [
+      "Ray2 Flash pricing"
+    ],
+    "features": [
+      "video generation",
+      "camera motion control",
+      "text-to-video",
+      "image-to-video"
+    ],
+    "products": [
+      "Modify Video",
+      "Camera Motion Concepts",
+      "Ray2",
+      "Ray2 Flash"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "machine learning",
+      "video generation"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "increased competition in the video generation market",
+      "potential for other companies to adapt and respond to Luma AI's new products and features"
+    ],
+    "key_findings": [
+      "Luma AI is expanding its capabilities and offerings in the video generation market",
+      "The company is introducing new products and features, including Modify Video, Camera Motion Concepts, Ray2, and Ray2 Flash"
+    ],
+    "opportunities": [
+      "increased demand for AI-powered video creation tools",
+      "potential for Luma AI to disrupt the video generation market"
+    ],
+    "recommended_actions": [
+      "monitor Luma AI's progress and developments in the video generation market",
+      "consider potential partnerships or collaborations with Luma AI",
+      "assess the potential impact of Luma AI's new products and features on the market and competitors"
+    ]
+  },
+  "key_insights": [
+    "Luma AI is expanding its capabilities and offerings in the video generation market",
+    "The company is introducing new products and features, including Modify Video, Camera Motion Concepts, Ray2, and Ray2 Flash"
+  ],
+  "business_impact": "The introduction of new products and features is likely to increase Luma AI's competitiveness in the market and attract new customers, potentially leading to increased revenue and growth",
+  "competitive_implications": "Luma AI's new products and features may pose a competitive threat to other companies in the video generation market, potentially disrupting the market and forcing other companies to adapt",
+  "content_hash_before": null,
+  "content_hash_after": "c32c0cd17dce6bbd9282e31751dd4067e6b33832b2692ddd6f44dc9a6a5da476",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

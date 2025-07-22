@@ -1,0 +1,81 @@
+{
+  "id": 44,
+  "company": "Sourcegraph",
+  "page_url": "product",
+  "detected_at": "2025-07-21T15:26:39.034Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "Introduction of Cody, an AI coding assistant, with updates to pricing plans and new features",
+    "specific_changes": [
+      "Introduction of Cody Free, Cody Pro, and Enterprise Starter plans",
+      "Addition of new features such as auto-edit, agentic chat, and in-line edits",
+      "Integration with various IDEs and code hosts",
+      "Access to latest LLMs"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI coding assistant market",
+      "Growing demand for developer productivity tools"
+    ],
+    "business_impact": "The introduction of Cody and its features is expected to enhance developer productivity, improve code quality, and increase customer satisfaction, ultimately driving business growth for Sourcegraph.",
+    "strategic_direction": "Sourcegraph's strategic direction is focused on enhancing developer productivity, improving code quality, and expanding its customer base through innovative products and features.",
+    "competitive_implications": "Sourcegraph's introduction of Cody positions the company as a strong competitor in the AI coding assistant market, potentially threatening existing market players."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "Cody Free",
+      "Cody Pro",
+      "Enterprise Starter"
+    ],
+    "features": [
+      "auto-edit",
+      "agentic chat",
+      "in-line edits"
+    ],
+    "products": [
+      "Cody"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "LLMs"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competition from established AI coding assistant providers",
+      "Potential technical challenges in integrating Cody with various IDEs and code hosts"
+    ],
+    "key_findings": [
+      "Cody's features are designed to enhance developer productivity and code quality",
+      "Sourcegraph's integration with various IDEs and code hosts expands its reach and accessibility"
+    ],
+    "opportunities": [
+      "Partnerships with IDE and code host providers to further expand Cody's reach",
+      "Development of additional features to enhance Cody's capabilities"
+    ],
+    "recommended_actions": [
+      "Monitor market trends and competitor activity",
+      "Continuously gather customer feedback to improve and expand Cody's features and capabilities"
+    ]
+  },
+  "key_insights": [
+    "Cody's features are designed to enhance developer productivity and code quality",
+    "Sourcegraph's integration with various IDEs and code hosts expands its reach and accessibility"
+  ],
+  "business_impact": "The introduction of Cody and its features is expected to enhance developer productivity, improve code quality, and increase customer satisfaction, ultimately driving business growth for Sourcegraph.",
+  "competitive_implications": "Sourcegraph's introduction of Cody positions the company as a strong competitor in the AI coding assistant market, potentially threatening existing market players.",
+  "content_hash_before": null,
+  "content_hash_after": "9d108bd4b751b2619a4c19057f657d17b30d6ed7a5b34ef5882a7a9b0ec7947d",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

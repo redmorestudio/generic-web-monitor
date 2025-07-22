@@ -1,0 +1,88 @@
+{
+  "id": 176,
+  "company": "Intel",
+  "page_url": "news",
+  "detected_at": "2025-07-21T15:15:31.704Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "New content added to Intel Newsroom, including articles on AI, data center, and client computing",
+    "specific_changes": [
+      "Addition of new articles on AI, data center, and client computing",
+      "Introduction of new AI-powered PC experiences",
+      "Collaboration with HP and Lenovo for next-gen AI PCs",
+      "Celebration of Aurora Exascale Computer at Argonne National Laboratory"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increasing demand for AI-powered PCs",
+      "Growing importance of data center and cloud computing"
+    ],
+    "business_impact": "The changes are expected to drive business growth for Intel through advancements in AI, data center, and client computing",
+    "strategic_direction": "The changes align with Intel's strategic direction of focusing on AI, data center, and client computing to drive business growth",
+    "competitive_implications": "The changes position Intel as a leader in AI, data center, and client computing, enhancing its competitive positioning"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Guatemala",
+      "Global"
+    ],
+    "pricing": [],
+    "features": [
+      "AI acceleration algorithms",
+      "Speculative decoding advance",
+      "On-device AI accelerators"
+    ],
+    "products": [
+      "Intel Core Ultra processors",
+      "HP EliteBook X",
+      "HP EliteBook Ultra",
+      "Lenovo AI-powered laptops"
+    ],
+    "partnerships": [
+      "HP",
+      "Lenovo",
+      "Weizmann Institute"
+    ],
+    "technologies": [
+      "Artificial Intelligence",
+      "Data Center",
+      "Client Computing"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Intense competition in the AI, data center, and client computing markets"
+    ],
+    "key_findings": [
+      "Intel is making significant advancements in AI, data center, and client computing",
+      "The company is collaborating with major partners to drive business growth"
+    ],
+    "opportunities": [
+      "Growing demand for AI-powered PCs",
+      "Increasing importance of data center and cloud computing"
+    ],
+    "recommended_actions": [
+      "Monitor Intel's progress in AI, data center, and client computing",
+      "Analyze the competitive landscape and market trends"
+    ]
+  },
+  "key_insights": [
+    "Intel is making significant advancements in AI, data center, and client computing",
+    "The company is collaborating with major partners to drive business growth"
+  ],
+  "business_impact": "The changes are expected to drive business growth for Intel through advancements in AI, data center, and client computing",
+  "competitive_implications": "The changes position Intel as a leader in AI, data center, and client computing, enhancing its competitive positioning",
+  "content_hash_before": null,
+  "content_hash_after": "55b653c1bff655c2c0f6456672a505c2c08a62178926472807f6bf685855a28d",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

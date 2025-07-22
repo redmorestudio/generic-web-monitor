@@ -1,0 +1,84 @@
+{
+  "id": 43,
+  "company": "Sourcegraph",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:26:46.696Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New pricing page with detailed plans and features",
+    "specific_changes": [
+      "Introduction of Enterprise Starter and Enterprise plans",
+      "Detailed features and pricing for each plan",
+      "Information on deployment, compatibility, and support"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increasing demand for AI-powered coding tools",
+      "Growing need for enterprise-level security and scalability"
+    ],
+    "business_impact": "Sourcegraph is expanding its offerings with new pricing plans and features, targeting growing organizations and enterprises",
+    "strategic_direction": "Sourcegraph is focusing on enterprise customers, offering customized solutions and support",
+    "competitive_implications": "Sourcegraph is positioning itself as a leader in the coding tool market, competing with other AI-powered coding platforms"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "Enterprise Starter: $19 per user/month",
+      "Enterprise: $49 per user/month"
+    ],
+    "features": [
+      "AI coding assistant",
+      "Deep codebase context",
+      "Advanced codebase search",
+      "Batch changes and insights"
+    ],
+    "products": [
+      "Sourcegraph",
+      "Cody",
+      "Code Search",
+      "Batch Changes"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "Machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increasing competition in the coding tool market",
+      "Potential challenges in implementing and supporting enterprise-level solutions"
+    ],
+    "key_findings": [
+      "Sourcegraph is expanding its product offerings and pricing plans",
+      "The company is targeting growing organizations and enterprises"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other coding tool providers",
+      "Expansion into new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor Sourcegraph's progress and market response",
+      "Consider partnership opportunities and expansion into new markets"
+    ]
+  },
+  "key_insights": [
+    "Sourcegraph is expanding its product offerings and pricing plans",
+    "The company is targeting growing organizations and enterprises"
+  ],
+  "business_impact": "Sourcegraph is expanding its offerings with new pricing plans and features, targeting growing organizations and enterprises",
+  "competitive_implications": "Sourcegraph is positioning itself as a leader in the coding tool market, competing with other AI-powered coding platforms",
+  "content_hash_before": null,
+  "content_hash_after": "e7a3b4e64ea1534af4077d84df242af0837670e6f3879f07f29a91c66e6e8066",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

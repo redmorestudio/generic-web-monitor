@@ -1,0 +1,68 @@
+{
+  "id": 39,
+  "company": "Stability AI",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:27:22.699Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "removal",
+    "change_scale": "major",
+    "what_changed": "The pricing page is no longer available and has been replaced with a 404 error page",
+    "specific_changes": [
+      "Removal of pricing information",
+      "Introduction of a 404 error page",
+      "No redirect to an alternative page with pricing information"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Potential change in pricing strategy",
+      "Possible shift in business model"
+    ],
+    "business_impact": "The removal of the pricing page could impact the company's revenue and customer acquisition",
+    "strategic_direction": "The company may be moving towards a more customized or dynamic pricing model",
+    "competitive_implications": "The removal of pricing information could make it more difficult for competitors to compare prices and services"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "Removal of pricing information"
+    ],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "The removal of pricing information could make it more difficult for customers to compare prices and services, potentially impacting customer acquisition and revenue"
+    ],
+    "key_findings": [
+      "The removal of the pricing page is a significant change that could impact the company's business model and revenue",
+      "The introduction of a 404 error page instead of a redirect to an alternative page with pricing information suggests a deliberate decision to remove pricing information"
+    ],
+    "opportunities": [
+      "The company may be exploring new pricing strategies or business models that could provide a competitive advantage"
+    ],
+    "recommended_actions": [
+      "Monitor the company's website and announcements for updates on pricing and business model changes",
+      "Analyze the company's competitors to see if they have made similar changes to their pricing strategies or business models"
+    ]
+  },
+  "key_insights": [
+    "The removal of the pricing page is a significant change that could impact the company's business model and revenue",
+    "The introduction of a 404 error page instead of a redirect to an alternative page with pricing information suggests a deliberate decision to remove pricing information"
+  ],
+  "business_impact": "The removal of the pricing page could impact the company's revenue and customer acquisition",
+  "competitive_implications": "The removal of pricing information could make it more difficult for competitors to compare prices and services",
+  "content_hash_before": null,
+  "content_hash_after": "c599020625ae89a148f5f99f74b884c8e79d997a64950a234dd15909a661ebcd",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

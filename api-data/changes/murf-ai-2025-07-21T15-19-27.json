@@ -1,0 +1,85 @@
+{
+  "id": 153,
+  "company": "Murf AI",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:19:27.198Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "removal",
+    "change_scale": "major",
+    "what_changed": "The blog page is no longer available and has been replaced with a 404 error page",
+    "specific_changes": [
+      "The blog content is no longer accessible",
+      "A 404 error page has been put in place",
+      "The navigation menu still links to other pages on the site"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "A potential shift in content strategy",
+      "A technical issue with the website"
+    ],
+    "business_impact": "The removal of the blog page could impact the company's ability to attract and engage with customers through content marketing",
+    "strategic_direction": "The company may be focusing on other marketing channels or strategies",
+    "competitive_implications": "The removal of the blog page could give competitors an opportunity to fill the content gap"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [
+      "AI Voice Generator",
+      "Text to speech",
+      "AI Translation",
+      "AI Dubbing",
+      "Transcription",
+      "Voice Cloning",
+      "Voice over Video",
+      "Voice over Google Slides",
+      "Voice Changer",
+      "Murf Text to Speech API",
+      "Accent Generator",
+      "Integrations",
+      "Canva add-on",
+      "Speech to text",
+      "Read Aloud",
+      "Audio to text converter"
+    ],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "The removal of the blog page could negatively impact the company's reputation",
+      "Competitors could gain an advantage by filling the content gap"
+    ],
+    "key_findings": [
+      "The blog page is no longer available",
+      "The company still offers a range of products and services"
+    ],
+    "opportunities": [
+      "Competitors could create similar content to attract Murf AI's target audience",
+      "Murf AI could focus on other marketing channels to reach customers"
+    ],
+    "recommended_actions": [
+      "Monitor the company's website and marketing channels for updates",
+      "Analyze competitors' content strategies to identify opportunities and threats"
+    ]
+  },
+  "key_insights": [
+    "The blog page is no longer available",
+    "The company still offers a range of products and services"
+  ],
+  "business_impact": "The removal of the blog page could impact the company's ability to attract and engage with customers through content marketing",
+  "competitive_implications": "The removal of the blog page could give competitors an opportunity to fill the content gap",
+  "content_hash_before": null,
+  "content_hash_after": "efd2d5af62e36f8eb4bddc282f698f2a13b288009db1a213120bfb803289035d",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

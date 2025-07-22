@@ -1,0 +1,96 @@
+{
+  "id": 170,
+  "company": "Leonardo AI",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:16:22.424Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "Introduction of new API plans and pricing for Leonardo AI, including API Basic, API Standard, API Pro, and API Custom, with varying levels of API credits and discounts",
+    "specific_changes": [
+      "New API plans introduced",
+      "Pricing details provided for each plan",
+      "API credits and discounts vary by plan",
+      "Custom API plan available for tailored needs"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Expansion into new markets",
+      "Increased competition in the AI API market"
+    ],
+    "business_impact": "The new API plans and pricing are likely to attract more customers and increase revenue for Leonardo AI, while also expanding its presence in various markets",
+    "strategic_direction": "Leonardo AI is focusing on expanding its offerings and attracting a broader range of customers, while also emphasizing its expertise in AI and API technology",
+    "competitive_implications": "Leonardo AI is positioning itself as a major player in the AI API market, with a range of plans and pricing options to appeal to different customers"
+  },
+  "entities": {
+    "people": [
+      "Quyen Quach",
+      "Gwan Yip"
+    ],
+    "markets": [
+      "Marketing & Advertising",
+      "Game Development",
+      "Education & Training",
+      "E-Commerce",
+      "Film & Animation",
+      "IT & SaaS"
+    ],
+    "pricing": [
+      "$9/month",
+      "$49/month",
+      "$299/month",
+      "Custom"
+    ],
+    "features": [
+      "API credits",
+      "concurrent generations",
+      "Alchemy",
+      "Prompt Magic v3",
+      "PhotoReal",
+      "Motion"
+    ],
+    "products": [
+      "Leonardo AI API"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "API"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI API market",
+      "Potential challenges in attracting and retaining customers"
+    ],
+    "key_findings": [
+      "Leonardo AI is introducing new API plans and pricing",
+      "The company is expanding its presence in various markets"
+    ],
+    "opportunities": [
+      "Increased revenue and customer base for Leonardo AI",
+      "Expansion into new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor the market response to the new API plans and pricing",
+      "Continuously evaluate and improve the offerings to stay competitive"
+    ]
+  },
+  "key_insights": [
+    "Leonardo AI is introducing new API plans and pricing",
+    "The company is expanding its presence in various markets"
+  ],
+  "business_impact": "The new API plans and pricing are likely to attract more customers and increase revenue for Leonardo AI, while also expanding its presence in various markets",
+  "competitive_implications": "Leonardo AI is positioning itself as a major player in the AI API market, with a range of plans and pricing options to appeal to different customers",
+  "content_hash_before": null,
+  "content_hash_after": "9978575d3f5bdc78c603075d81c2794f8782e4cd0583215a492a0a9d440ea48c",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

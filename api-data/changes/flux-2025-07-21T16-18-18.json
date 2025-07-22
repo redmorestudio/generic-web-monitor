@@ -1,0 +1,76 @@
+{
+  "id": 11,
+  "company": "Flux",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T16:18:18.552Z",
+  "change_type": "modified",
+  "interest_level": 2,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "no change",
+    "change_scale": "minor",
+    "what_changed": "No significant changes were detected in the content between the two versions.",
+    "specific_changes": []
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "No change in market positioning or strategy is indicated."
+    ],
+    "business_impact": "No significant business impact is expected from the lack of changes in the content.",
+    "strategic_direction": "The company's strategic direction remains unchanged based on the provided content.",
+    "competitive_implications": "The absence of changes does not provide any new competitive advantages or disadvantages."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [
+      "text-and-image-driven generation and editing",
+      "character consistency",
+      "local editing",
+      "style reference",
+      "interactive speed"
+    ],
+    "products": [
+      "FLUX.1 Kontext"
+    ],
+    "partnerships": [
+      "Freepik",
+      "Fal",
+      "Replicate",
+      "TogetherAI",
+      "Krea",
+      "Lightricks",
+      "Leonardo AI",
+      "OpenArt",
+      "ComfyUI",
+      "DataCrunch",
+      "Runware"
+    ],
+    "technologies": [
+      "generative flow matching models"
+    ]
+  },
+  "insights": {
+    "threats": [],
+    "key_findings": [
+      "No significant changes were detected in the content."
+    ],
+    "opportunities": [],
+    "recommended_actions": [
+      "Monitor the company's website for future updates or changes in their products or services."
+    ]
+  },
+  "key_insights": [
+    "No significant changes were detected in the content."
+  ],
+  "business_impact": "No significant business impact is expected from the lack of changes in the content.",
+  "competitive_implications": "The absence of changes does not provide any new competitive advantages or disadvantages.",
+  "content_hash_before": "a8f6ad43d93f358e8d3f6b2501a492356b24ec7396e0f0f9c3b7eb04d9ca7d16",
+  "content_hash_after": "4d765e86014feb3a8c59fdb33f7d245e94860a68befa2af0d789d2d55b6f1741",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

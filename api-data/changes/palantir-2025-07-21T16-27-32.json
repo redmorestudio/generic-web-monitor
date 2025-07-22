@@ -1,0 +1,46 @@
+{
+  "id": 4,
+  "company": "Palantir",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T16:27:32.451Z",
+  "change_type": "modified",
+  "interest_level": 2,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "no change",
+    "change_scale": "minor",
+    "what_changed": "No significant changes were detected in the provided content.",
+    "specific_changes": []
+  },
+  "strategic_analysis": {
+    "market_signals": [],
+    "business_impact": "No significant business impact is expected from the lack of changes.",
+    "strategic_direction": "No clear strategic direction can be inferred from the provided content.",
+    "competitive_implications": "The absence of changes does not provide any notable competitive implications."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [],
+    "key_findings": [],
+    "opportunities": [],
+    "recommended_actions": []
+  },
+  "key_insights": [],
+  "business_impact": "No significant business impact is expected from the lack of changes.",
+  "competitive_implications": "The absence of changes does not provide any notable competitive implications.",
+  "content_hash_before": "eb16a5e27432f84c9b4a96a6c4fc7a402512fe692d6274c643f20e5fd7a352f0",
+  "content_hash_after": "49e490026ebb56e5af33ad0440604a24dda1730d155136af8eed320901cd173e",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

@@ -1,0 +1,85 @@
+{
+  "id": 1,
+  "company": "Replit",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T16:30:23.787Z",
+  "change_type": "modified",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "significant",
+    "what_changed": "The content has undergone significant updates, including changes to the main prompt, addition of new customer testimonials, and updates to the Replit Agent section.",
+    "specific_changes": [
+      "Updated main prompt from 'Make me a business tool for business executives that helps streamline employee onboarding and training' to 'Make me an automation for busy professionals that helps generate weekly progress reports from project management tools'",
+      "Added new customer testimonials from Reid Hoffman and Andrew Wilkinson",
+      "Updated Replit Agent section with new images and descriptions",
+      "Added new section 'Don't just take our word for it' with customer testimonials"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on enterprise customers",
+      "Expansion of product offerings"
+    ],
+    "business_impact": "The updates to the Replit Agent and the addition of new customer testimonials could lead to increased adoption and revenue for the company.",
+    "strategic_direction": "The company appears to be focusing on expanding its product offerings and increasing its presence in the enterprise market.",
+    "competitive_implications": "The updates could pose a competitive threat to other companies in the market, particularly those that offer similar products and services."
+  },
+  "entities": {
+    "people": [
+      "Reid Hoffman",
+      "Andrew Wilkinson"
+    ],
+    "markets": [
+      "Enterprise",
+      "Business"
+    ],
+    "pricing": [],
+    "features": [
+      "Replit Agent",
+      "Visual Editor",
+      "Database",
+      "Auth"
+    ],
+    "products": [
+      "Replit Agent"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "Machine Learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition from other companies",
+      "Potential backlash from customers if the updates are not well-received"
+    ],
+    "key_findings": [
+      "The company is investing in its Replit Agent product",
+      "The company is expanding its presence in the enterprise market"
+    ],
+    "opportunities": [
+      "Increased adoption and revenue",
+      "Expansion into new markets"
+    ],
+    "recommended_actions": [
+      "Monitor the company's progress and adjust strategy accordingly",
+      "Consider investing in similar products and services"
+    ]
+  },
+  "key_insights": [
+    "The company is investing in its Replit Agent product",
+    "The company is expanding its presence in the enterprise market"
+  ],
+  "business_impact": "The updates to the Replit Agent and the addition of new customer testimonials could lead to increased adoption and revenue for the company.",
+  "competitive_implications": "The updates could pose a competitive threat to other companies in the market, particularly those that offer similar products and services.",
+  "content_hash_before": "c5329e229c1da5562b5cb9e9e0faca8c75454abd166279b3b20e6b753bd99f20",
+  "content_hash_after": "42a9c6efe85b478239bb063866e631cbb9f8b151b374fa497f8a53f7b006b848",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

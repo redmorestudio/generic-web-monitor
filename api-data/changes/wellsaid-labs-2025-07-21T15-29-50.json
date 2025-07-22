@@ -1,0 +1,87 @@
+{
+  "id": 24,
+  "company": "WellSaid Labs",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:29:50.779Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added to the WellSaid Labs blog, including product information, solutions, resources, and articles about AI voice technology.",
+    "specific_changes": [
+      "Introduction of the WellSaid Blog with various articles and resources",
+      "Addition of product information, including Studio, API, Voices, Team, Security, and Integrations",
+      "Introduction of solutions for corporate training, marketing, advertising, and video production",
+      "Addition of resources, including case studies, ethics, blog, about us, trust report, help center, and voice actor program"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing demand for AI voice technology",
+      "Increasing competition in the AI voice market"
+    ],
+    "business_impact": "The changes suggest a significant investment in establishing the company's online presence and thought leadership in AI voice technology, which could lead to increased brand awareness, customer engagement, and revenue growth.",
+    "strategic_direction": "The company's strategic direction appears to be focused on establishing itself as a leader in AI voice technology, with a focus on innovation, customer engagement, and revenue growth.",
+    "competitive_implications": "The changes position WellSaid Labs as a major player in the AI voice technology market, potentially threatening competitors and establishing the company as a leader in the industry."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "corporate training",
+      "marketing",
+      "advertising",
+      "video production"
+    ],
+    "pricing": [],
+    "features": [
+      "Caption Files",
+      "Word Timing",
+      "AI Director"
+    ],
+    "products": [
+      "Studio",
+      "API",
+      "Voices",
+      "Team",
+      "Security",
+      "Integrations"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI voice technology"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increasing competition in the AI voice market.",
+      "Regulatory challenges related to AI voice technology."
+    ],
+    "key_findings": [
+      "WellSaid Labs is investing heavily in establishing its online presence and thought leadership in AI voice technology.",
+      "The company is focused on innovation, customer engagement, and revenue growth."
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the AI voice technology market.",
+      "Expansion into new markets, such as education or healthcare."
+    ],
+    "recommended_actions": [
+      "Monitor the company's progress and adjust competitive strategies accordingly.",
+      "Explore partnership opportunities with WellSaid Labs or other companies in the AI voice technology market."
+    ]
+  },
+  "key_insights": [
+    "WellSaid Labs is investing heavily in establishing its online presence and thought leadership in AI voice technology.",
+    "The company is focused on innovation, customer engagement, and revenue growth."
+  ],
+  "business_impact": "The changes suggest a significant investment in establishing the company's online presence and thought leadership in AI voice technology, which could lead to increased brand awareness, customer engagement, and revenue growth.",
+  "competitive_implications": "The changes position WellSaid Labs as a major player in the AI voice technology market, potentially threatening competitors and establishing the company as a leader in the industry.",
+  "content_hash_before": null,
+  "content_hash_after": "5bc05a8bc9cfcd1ba28fdb31be0681505719a86d17b1c378ccef793f9b107fb4",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

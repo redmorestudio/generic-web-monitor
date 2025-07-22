@@ -1,0 +1,82 @@
+{
+  "id": 163,
+  "company": "Meta AI",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:17:26.122Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added to the Meta AI blog, including research articles, announcements, and updates on Llama and other Meta AI projects",
+    "specific_changes": [
+      "Introduction of the Llama Startup Program",
+      "Announcement of the V-JEPA 2 world model and new benchmarks for physical reasoning",
+      "Publication of research articles on Seamless Interaction, Llama's application in a major Australian bank, and Aria Gen 2 research glasses"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI market",
+      "Growing demand for AI-powered solutions"
+    ],
+    "business_impact": "The changes demonstrate Meta AI's commitment to advancing AI research and development, which could lead to new business opportunities and revenue streams",
+    "strategic_direction": "Meta AI's strategic direction is focused on advancing AI research and development, with a emphasis on natural language processing, computer vision, and generative AI",
+    "competitive_implications": "Meta AI's advancements in AI research and development could give the company a competitive edge in the market, potentially threatening other AI companies and startups"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Artificial intelligence",
+      "Machine learning"
+    ],
+    "pricing": [],
+    "features": [
+      "Seamless Interaction",
+      "V-JEPA 2 world model"
+    ],
+    "products": [
+      "Llama",
+      "Aria Gen 2 research glasses"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "Natural language processing",
+      "Computer vision",
+      "Generative AI"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI market",
+      "Potential disruption of traditional industries by AI-powered solutions"
+    ],
+    "key_findings": [
+      "Meta AI is making significant advancements in AI research and development",
+      "The company is focusing on natural language processing, computer vision, and generative AI"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Meta AI",
+      "Potential applications of Meta AI's research and development in various industries"
+    ],
+    "recommended_actions": [
+      "Monitor Meta AI's research and development advancements",
+      "Explore potential partnership opportunities with Meta AI",
+      "Assess the potential impact of AI-powered solutions on traditional industries"
+    ]
+  },
+  "key_insights": [
+    "Meta AI is making significant advancements in AI research and development",
+    "The company is focusing on natural language processing, computer vision, and generative AI"
+  ],
+  "business_impact": "The changes demonstrate Meta AI's commitment to advancing AI research and development, which could lead to new business opportunities and revenue streams",
+  "competitive_implications": "Meta AI's advancements in AI research and development could give the company a competitive edge in the market, potentially threatening other AI companies and startups",
+  "content_hash_before": null,
+  "content_hash_after": "ffba8e9644f73a57865086de1400ef82f777f61a2b97d7c1bc0f2433ea3edd00",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

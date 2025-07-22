@@ -1,0 +1,94 @@
+{
+  "id": 54,
+  "company": "Resemble AI",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:24:31.932Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added to the Resemble AI blog, including product information, case studies, research, and resources.",
+    "specific_changes": [
+      "Added product pages for AI Voice Generator, Voice Cloning, Text to Speech, Speech to Speech, and more.",
+      "Added case studies for Personalization with Zomato and TrueFan, Crayola Adventures with Red Games, and others.",
+      "Added research pages for DETECT-2B, PerTH Watermarker, and Resemblyzer.",
+      "Added resources for On Prem, API Docs, Status, Ethics, and Blog."
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing demand for AI-powered voice technology",
+      "Increasing importance of deepfake detection and security"
+    ],
+    "business_impact": "The changes suggest a significant expansion of Resemble AI's business, with a focus on product development, research, and partnerships.",
+    "strategic_direction": "Resemble AI is likely to continue investing in research and development, with a focus on expanding its product offerings and partnerships.",
+    "competitive_implications": "Resemble AI is positioning itself as a leader in the AI-powered voice technology market, with a strong focus on research and development."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Education",
+      "Entertainment",
+      "Security"
+    ],
+    "pricing": [],
+    "features": [
+      "Generative AI",
+      "Multilingual support",
+      "Audio Editing",
+      "Chatterbox"
+    ],
+    "products": [
+      "AI Voice Generator",
+      "Voice Cloning",
+      "Text to Speech",
+      "Speech to Speech",
+      "Deepfake Detection",
+      "AI Watermarker"
+    ],
+    "partnerships": [
+      "Zomato",
+      "TrueFan",
+      "Red Games"
+    ],
+    "technologies": [
+      "AI",
+      "Machine Learning",
+      "Deep Learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competitive threats from other companies developing similar AI-powered voice technology solutions.",
+      "Regulatory threats related to the use of AI-powered voice technology."
+    ],
+    "key_findings": [
+      "Resemble AI is expanding its product offerings to include a range of AI-powered voice technology solutions.",
+      "The company is investing heavily in research and development, with a focus on deepfake detection and security."
+    ],
+    "opportunities": [
+      "Partnership opportunities with Resemble AI to leverage its AI-powered voice technology solutions.",
+      "Investment opportunities in Resemble AI's research and development initiatives."
+    ],
+    "recommended_actions": [
+      "Monitor Resemble AI's product development and research initiatives.",
+      "Explore partnership opportunities with Resemble AI.",
+      "Invest in research and development to stay competitive in the AI-powered voice technology market."
+    ]
+  },
+  "key_insights": [
+    "Resemble AI is expanding its product offerings to include a range of AI-powered voice technology solutions.",
+    "The company is investing heavily in research and development, with a focus on deepfake detection and security."
+  ],
+  "business_impact": "The changes suggest a significant expansion of Resemble AI's business, with a focus on product development, research, and partnerships.",
+  "competitive_implications": "Resemble AI is positioning itself as a leader in the AI-powered voice technology market, with a strong focus on research and development.",
+  "content_hash_before": null,
+  "content_hash_after": "3487bddc8b4cecc9194e4047fb33ce6ddb5ceaa4e6e01ab466cd0032abef194d",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

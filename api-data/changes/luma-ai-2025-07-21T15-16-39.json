@@ -1,0 +1,84 @@
+{
+  "id": 168,
+  "company": "Luma AI",
+  "page_url": "product",
+  "detected_at": "2025-07-21T15:16:39.881Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Introduction of Luma Dream Machine, a new product by Luma AI, with features for creating stunning images and videos, character creation, and video editing.",
+    "specific_changes": [
+      "New product announcement",
+      "Introduction of AI-powered image and video creation tools",
+      "Character creation and video editing features",
+      "Availability on iOS and the Web"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "expansion into new markets",
+      "increased competition in the creative industry"
+    ],
+    "business_impact": "The introduction of Luma Dream Machine is expected to have a significant impact on Luma AI's business, potentially increasing revenue and expanding their customer base.",
+    "strategic_direction": "Luma AI's strategic direction appears to be focused on expanding their product offerings and entering new markets, with a emphasis on AI-powered creative tools.",
+    "competitive_implications": "The introduction of Luma Dream Machine may pose a competitive threat to existing players in the creative industry, particularly those offering similar image and video creation tools."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "creative industry",
+      "video production",
+      "image editing"
+    ],
+    "pricing": [],
+    "features": [
+      "AI-powered image and video creation",
+      "character creation",
+      "video editing"
+    ],
+    "products": [
+      "Luma Dream Machine"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the creative industry",
+      "Potential for cannibalization of existing products"
+    ],
+    "key_findings": [
+      "Luma AI is expanding its product offerings with a new product, Luma Dream Machine",
+      "The product features AI-powered image and video creation tools, character creation, and video editing",
+      "The product is available on iOS and the Web"
+    ],
+    "opportunities": [
+      "Potential for increased revenue and customer base expansion",
+      "Opportunity to establish Luma AI as a leader in the creative industry"
+    ],
+    "recommended_actions": [
+      "Monitor Luma AI's progress and adjust competitive strategy accordingly",
+      "Consider partnering with Luma AI to leverage their AI-powered creative tools"
+    ]
+  },
+  "key_insights": [
+    "Luma AI is expanding its product offerings with a new product, Luma Dream Machine",
+    "The product features AI-powered image and video creation tools, character creation, and video editing",
+    "The product is available on iOS and the Web"
+  ],
+  "business_impact": "The introduction of Luma Dream Machine is expected to have a significant impact on Luma AI's business, potentially increasing revenue and expanding their customer base.",
+  "competitive_implications": "The introduction of Luma Dream Machine may pose a competitive threat to existing players in the creative industry, particularly those offering similar image and video creation tools.",
+  "content_hash_before": null,
+  "content_hash_after": "eeb141e1bd3ea609cc3db3b83842371b1d33d2b734aff6565609f821c19b697d",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

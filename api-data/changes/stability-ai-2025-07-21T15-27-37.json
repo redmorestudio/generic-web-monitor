@@ -1,0 +1,92 @@
+{
+  "id": 37,
+  "company": "Stability AI",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:27:37.674Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.95,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New website content and structure for Stability AI",
+    "specific_changes": [
+      "Introduction of new navigation and menu system",
+      "Addition of various product and service pages (e.g., Models, Image, Video, Audio, 3D, Applications, Stable Assistant, Stable Audio)",
+      "Inclusion of company information pages (e.g., Board of Directors, Partners, Safety, Research, Careers, News)",
+      "Creation of resource sections (e.g., Learning Hub, Customer Stories, Brand Resources)",
+      "Introduction of contact and support options (e.g., email, support request form)",
+      "Addition of legal pages (e.g., Acceptable Use Policy, Privacy Policy, Terms of Service, Security)",
+      "Inclusion of social media links and a mailing list sign-up form"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on customer experience and support",
+      "Expansion into new markets and industries",
+      "Growing importance of generative AI and open-source technologies"
+    ],
+    "business_impact": "The changes are likely to improve the company's visibility, credibility, and customer engagement, ultimately driving business growth and revenue.",
+    "strategic_direction": "The company appears to be shifting its focus towards providing a more comprehensive and user-friendly platform for customers, while also emphasizing its commitment to open-source technologies and community engagement.",
+    "competitive_implications": "The changes position Stability AI as a major player in the generative AI market, potentially threatening competitors and attracting new customers."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Creative professionals",
+      "Enterprises",
+      "Individuals"
+    ],
+    "pricing": [],
+    "features": [
+      "Image generation",
+      "Video generation",
+      "Audio generation",
+      "3D modeling"
+    ],
+    "products": [
+      "Stable Assistant",
+      "Stable Audio",
+      "Stable Artisan"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "Generative AI",
+      "Open-source AI"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the generative AI market",
+      "Potential risks associated with open-source technologies and community engagement"
+    ],
+    "key_findings": [
+      "Stability AI is investing heavily in its online presence and customer experience",
+      "The company is expanding its product and service offerings to cater to a broader range of customers",
+      "Generative AI and open-source technologies are becoming increasingly important in the industry"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Stability AI or other companies in the generative AI space",
+      "Investment opportunities in companies focused on open-source technologies and customer experience"
+    ],
+    "recommended_actions": [
+      "Monitor Stability AI's progress and adjust business strategies accordingly",
+      "Explore partnership or investment opportunities in the generative AI space",
+      "Stay up-to-date with industry trends and developments in open-source technologies and customer experience"
+    ]
+  },
+  "key_insights": [
+    "Stability AI is investing heavily in its online presence and customer experience",
+    "The company is expanding its product and service offerings to cater to a broader range of customers",
+    "Generative AI and open-source technologies are becoming increasingly important in the industry"
+  ],
+  "business_impact": "The changes are likely to improve the company's visibility, credibility, and customer engagement, ultimately driving business growth and revenue.",
+  "competitive_implications": "The changes position Stability AI as a major player in the generative AI market, potentially threatening competitors and attracting new customers.",
+  "content_hash_before": null,
+  "content_hash_after": "c599020625ae89a148f5f99f74b884c8e79d997a64950a234dd15909a661ebcd",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

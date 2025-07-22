@@ -1,0 +1,78 @@
+{
+  "id": 31,
+  "company": "Tabnine",
+  "page_url": "docs",
+  "detected_at": "2025-07-21T15:28:39.995Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Initial content creation for Tabnine documentation",
+    "specific_changes": [
+      "Introduction of Tabnine's AI code assistant",
+      "Explanation of code acceleration and exploration",
+      "Description of how to use Tabnine",
+      "Overview of Tabnine's features and benefits"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "increased investment in AI-powered coding tools"
+    ],
+    "business_impact": "The creation of comprehensive documentation for Tabnine's AI code assistant can increase user adoption and retention, ultimately driving business growth.",
+    "strategic_direction": "Tabnine is likely to continue investing in its AI code assistant and documentation, further establishing itself as a leader in the software development tools market.",
+    "competitive_implications": "Tabnine's documentation may set a new standard for AI code assistants, putting pressure on competitors to improve their own documentation and user experience."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "software development"
+    ],
+    "pricing": [],
+    "features": [
+      "code completions",
+      "coding assistance chat"
+    ],
+    "products": [
+      "Tabnine"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competition from other AI-powered coding tools",
+      "Potential difficulties in maintaining and updating comprehensive documentation"
+    ],
+    "key_findings": [
+      "Tabnine's AI code assistant has the potential to significantly accelerate and simplify software development",
+      "The creation of comprehensive documentation is a key factor in user adoption and retention"
+    ],
+    "opportunities": [
+      "Increased adoption of Tabnine's AI code assistant",
+      "Expansion into new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor Tabnine's documentation and user experience",
+      "Assess the competitive landscape and potential threats",
+      "Consider investing in AI-powered coding tools and documentation"
+    ]
+  },
+  "key_insights": [
+    "Tabnine's AI code assistant has the potential to significantly accelerate and simplify software development",
+    "The creation of comprehensive documentation is a key factor in user adoption and retention"
+  ],
+  "business_impact": "The creation of comprehensive documentation for Tabnine's AI code assistant can increase user adoption and retention, ultimately driving business growth.",
+  "competitive_implications": "Tabnine's documentation may set a new standard for AI code assistants, putting pressure on competitors to improve their own documentation and user experience.",
+  "content_hash_before": null,
+  "content_hash_after": "350440132dd950fbf8272f0c3cd070122ed95b50b109f5c14acfe977dca9a5a9",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

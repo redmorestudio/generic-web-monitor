@@ -1,0 +1,52 @@
+{
+  "id": 184,
+  "company": "Google DeepMind",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:11:46.979Z",
+  "change_type": "modified",
+  "interest_level": 2,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "no significant update",
+    "change_scale": "minor",
+    "what_changed": "No significant changes were detected in the content structure or major updates to models, research, or science sections.",
+    "specific_changes": []
+  },
+  "strategic_analysis": {
+    "market_signals": [],
+    "business_impact": "No significant business impact is expected from the minor changes detected.",
+    "strategic_direction": "The strategic direction of Google DeepMind remains unchanged based on the provided content.",
+    "competitive_implications": "No competitive implications are noted as the changes are not substantial."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [],
+    "key_findings": [
+      "No significant updates were found in the provided content."
+    ],
+    "opportunities": [],
+    "recommended_actions": [
+      "Monitor for future updates that may indicate strategic shifts or significant developments."
+    ]
+  },
+  "key_insights": [
+    "No significant updates were found in the provided content."
+  ],
+  "business_impact": "No significant business impact is expected from the minor changes detected.",
+  "competitive_implications": "No competitive implications are noted as the changes are not substantial.",
+  "content_hash_before": "4185bcd94d694aabb44f137f9c5b81868ff170e08344354b2dddfce64bec16bb",
+  "content_hash_after": "0856f2678262f1e042bb2cfe5c5b91915f1e0c29d3ef676c602b4e613d6274f9",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

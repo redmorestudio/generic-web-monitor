@@ -1,0 +1,72 @@
+{
+  "id": 6,
+  "company": "Meta AI",
+  "page_url": "product",
+  "detected_at": "2025-07-21T16:24:18.910Z",
+  "change_type": "modified",
+  "interest_level": 4,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "removal and addition",
+    "change_scale": "minor",
+    "what_changed": "Removal of extensive benchmark comparisons and addition of a feedback request",
+    "specific_changes": [
+      "Removal of detailed benchmark results for Llama 4 models",
+      "Addition of a feedback request for users to provide thoughts on Llama"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on user experience"
+    ],
+    "business_impact": "The removal of benchmark comparisons may reduce transparency, while the feedback request could improve user engagement",
+    "strategic_direction": "Continued emphasis on user-centric development and potential expansion of Llama's capabilities",
+    "competitive_implications": "The changes do not significantly impact Llama's competitive positioning"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [
+      "Llama API",
+      "Llama Stack"
+    ],
+    "products": [
+      "Llama 4"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "native multimodality",
+      "mixture-of-experts models"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Reduced transparency due to removed benchmark comparisons"
+    ],
+    "key_findings": [
+      "Minor changes to the Llama website",
+      "Potential shift in focus towards user experience"
+    ],
+    "opportunities": [
+      "Improved user engagement through feedback",
+      "Enhanced user experience"
+    ],
+    "recommended_actions": [
+      "Monitor user feedback and adjust development priorities accordingly"
+    ]
+  },
+  "key_insights": [
+    "Minor changes to the Llama website",
+    "Potential shift in focus towards user experience"
+  ],
+  "business_impact": "The removal of benchmark comparisons may reduce transparency, while the feedback request could improve user engagement",
+  "competitive_implications": "The changes do not significantly impact Llama's competitive positioning",
+  "content_hash_before": "4ca06d45e0c3374e1ef742b221f1cb9a7597240edafa8081ea216a12adc4a67a",
+  "content_hash_after": "c0be26492fb2f2e1309d43910d3122b60c17257190adc05af5af4245252ae142",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

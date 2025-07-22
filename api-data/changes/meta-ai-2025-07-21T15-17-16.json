@@ -1,0 +1,80 @@
+{
+  "id": 164,
+  "company": "Meta AI",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:17:16.833Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "Introduction of the new Meta AI app, updates to Llama, and introduction of AI Studio",
+    "specific_changes": [
+      "New Meta AI app with personal AI and video restyling capabilities",
+      "Updates to Llama with mixture-of-experts architecture and native multimodal capabilities",
+      "Introduction of AI Studio for custom AIs"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased investment in AI technology",
+      "Expansion of AI capabilities to new areas such as video restyling"
+    ],
+    "business_impact": "The new app and updates to existing products are likely to increase Meta's competitiveness in the AI market",
+    "strategic_direction": "Meta is focusing on developing and expanding its AI capabilities to drive business growth",
+    "competitive_implications": "Meta's competitors will need to respond to these updates to remain competitive"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [
+      "personal AI",
+      "video restyling",
+      "mixture-of-experts architecture",
+      "native multimodal capabilities"
+    ],
+    "products": [
+      "Meta AI app",
+      "Llama",
+      "AI Studio"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition from Meta in the AI market",
+      "Potential disruption to existing business models due to Meta's AI capabilities"
+    ],
+    "key_findings": [
+      "Meta is investing heavily in AI technology",
+      "The new app and updates to existing products are likely to increase Meta's competitiveness in the AI market"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Meta to leverage its AI capabilities",
+      "Investment opportunities in AI startups that can complement Meta's products"
+    ],
+    "recommended_actions": [
+      "Monitor Meta's AI developments and updates",
+      "Assess potential partnership or investment opportunities with Meta or AI startups"
+    ]
+  },
+  "key_insights": [
+    "Meta is investing heavily in AI technology",
+    "The new app and updates to existing products are likely to increase Meta's competitiveness in the AI market"
+  ],
+  "business_impact": "The new app and updates to existing products are likely to increase Meta's competitiveness in the AI market",
+  "competitive_implications": "Meta's competitors will need to respond to these updates to remain competitive",
+  "content_hash_before": null,
+  "content_hash_after": "4e2a63f234f10752d2641172c3923650164a94646de080828880a4034948d345",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

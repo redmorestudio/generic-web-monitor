@@ -1,0 +1,61 @@
+{
+  "id": 152,
+  "company": "Neeva",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:19:35.892Z",
+  "change_type": "new",
+  "interest_level": 2,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "minor",
+    "what_changed": "Initial content addition",
+    "specific_changes": [
+      "Added copyright information",
+      "Added links to Privacy Policy and Legal pages",
+      "Added repetitive homepage links"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Neeva is taking initial steps to establish its online presence"
+    ],
+    "business_impact": "The changes suggest that Neeva is establishing a basic online presence, but there is no significant business impact from these minor updates.",
+    "strategic_direction": "The changes do not reveal a clear strategic direction beyond establishing a basic website.",
+    "competitive_implications": "There are no direct competitive implications from these minor changes."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [],
+    "key_findings": [
+      "Neeva is in the process of setting up its website",
+      "The company is prioritizing basic content and legal information"
+    ],
+    "opportunities": [],
+    "recommended_actions": [
+      "Monitor Neeva's website for more significant updates or announcements",
+      "Assess Neeva's products or services once they are announced"
+    ]
+  },
+  "key_insights": [
+    "Neeva is in the process of setting up its website",
+    "The company is prioritizing basic content and legal information"
+  ],
+  "business_impact": "The changes suggest that Neeva is establishing a basic online presence, but there is no significant business impact from these minor updates.",
+  "competitive_implications": "There are no direct competitive implications from these minor changes.",
+  "content_hash_before": null,
+  "content_hash_after": "9db41e18882e58ef8b8e7765ec7a68ff7f69b9f03d3980433860e4d99b6dd977",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

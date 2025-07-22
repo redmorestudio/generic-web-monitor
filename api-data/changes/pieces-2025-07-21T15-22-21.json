@@ -1,0 +1,87 @@
+{
+  "id": 70,
+  "company": "Pieces",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:22:21.071Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content introduction for Pieces for Developers, highlighting its long-term memory features for developer workstreams",
+    "specific_changes": [
+      "Introduction of Pieces for Developers",
+      "Emphasis on long-term memory for developer workstreams",
+      "Mention of automatic saving of memories",
+      "Highlighting of context preservation and access",
+      "Introduction of MCP and LTM-2",
+      "Mention of plugins and integrations",
+      "Emphasis on private by design and local by default",
+      "Testimonials from users"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "increased focus on developer productivity",
+      "growing demand for private and secure solutions"
+    ],
+    "business_impact": "The introduction of Pieces for Developers with its unique features and emphasis on privacy and security could significantly impact the developer tools market, potentially disrupting existing solutions",
+    "strategic_direction": "The company is likely to continue investing in AI-powered solutions and expanding its product offerings to cater to the growing demand for productivity and security",
+    "competitive_implications": "Competitors may need to reassess their offerings and prioritize privacy and security to remain competitive"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "developer tools",
+      "productivity"
+    ],
+    "pricing": [],
+    "features": [
+      "long-term memory",
+      "automatic saving",
+      "context preservation",
+      "MCP",
+      "LTM-2"
+    ],
+    "products": [
+      "Pieces for Developers"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "LTM-2"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "competitive response from established players",
+      "regulatory challenges"
+    ],
+    "key_findings": [
+      " Pieces for Developers introduces a new approach to long-term memory for developer workstreams",
+      "Emphasis on privacy and security is a key differentiator"
+    ],
+    "opportunities": [
+      "expansion into new markets",
+      "partnerships with complementary solution providers"
+    ],
+    "recommended_actions": [
+      "monitor market response and adjust strategy accordingly",
+      "continue investing in AI-powered solutions and security"
+    ]
+  },
+  "key_insights": [
+    " Pieces for Developers introduces a new approach to long-term memory for developer workstreams",
+    "Emphasis on privacy and security is a key differentiator"
+  ],
+  "business_impact": "The introduction of Pieces for Developers with its unique features and emphasis on privacy and security could significantly impact the developer tools market, potentially disrupting existing solutions",
+  "competitive_implications": "Competitors may need to reassess their offerings and prioritize privacy and security to remain competitive",
+  "content_hash_before": null,
+  "content_hash_after": "0429d092c54b0b788e46a478455d08f4df874003cc6f1fafb757a5e1c3679d1b",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

@@ -1,0 +1,97 @@
+{
+  "id": 49,
+  "company": "SambaNova",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:25:52.088Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New website content and structure",
+    "specific_changes": [
+      "Introduction of new AI inference solution for data centers",
+      "Launch of SambaManaged, a turnkey path to AI for data centers",
+      "Introduction of SambaNova 2.0, a new version of the AI platform",
+      "Updated product and solution offerings",
+      "New customer logos and partnerships"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI market",
+      "Growing demand for AI solutions in data centers and other industries"
+    ],
+    "business_impact": "The changes are likely to have a significant impact on the company's business, as they indicate a major expansion of its product and solution offerings, as well as new partnerships and customer acquisitions.",
+    "strategic_direction": "The company's strategic direction appears to be focused on expanding its AI platform and solution offerings, as well as partnering with new customers and industries.",
+    "competitive_implications": "The changes are likely to increase competition in the AI market, as SambaNova expands its product and solution offerings and partners with new customers."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Data Centers",
+      "Developers & Enterprises",
+      "Government & Public Sector"
+    ],
+    "pricing": [],
+    "features": [],
+    "products": [
+      "SambaCloud",
+      "SambaStack",
+      "SambaManaged",
+      "SambaRack",
+      "RDU"
+    ],
+    "partnerships": [
+      "Argonne",
+      "Black Box",
+      "Crew AI",
+      "Hugging Face",
+      "Los Alamos",
+      "Meta",
+      "OpenRouter",
+      "Parasail",
+      "Tacc",
+      "Zilliz",
+      "AILabs",
+      "AION Labs",
+      "AIXplan"
+    ],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI market",
+      "Potential disruption to existing business models"
+    ],
+    "key_findings": [
+      "SambaNova is expanding its AI platform and solution offerings",
+      "The company is partnering with new customers and industries",
+      "The changes are likely to increase competition in the AI market"
+    ],
+    "opportunities": [
+      "Partnership opportunities with SambaNova",
+      "Increased demand for AI solutions in data centers and other industries"
+    ],
+    "recommended_actions": [
+      "Monitor SambaNova's product and solution offerings",
+      "Assess partnership opportunities with SambaNova",
+      "Develop strategies to address increased competition in the AI market"
+    ]
+  },
+  "key_insights": [
+    "SambaNova is expanding its AI platform and solution offerings",
+    "The company is partnering with new customers and industries",
+    "The changes are likely to increase competition in the AI market"
+  ],
+  "business_impact": "The changes are likely to have a significant impact on the company's business, as they indicate a major expansion of its product and solution offerings, as well as new partnerships and customer acquisitions.",
+  "competitive_implications": "The changes are likely to increase competition in the AI market, as SambaNova expands its product and solution offerings and partners with new customers.",
+  "content_hash_before": null,
+  "content_hash_after": "f3ee5c12f1b9f780d96a4f611b0d88eb20f52212deaec05da2c88ecaba710687",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

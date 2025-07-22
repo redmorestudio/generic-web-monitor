@@ -1,7 +1,1088 @@
 {
   "version": "1.0",
-  "generated_at": "2025-07-22T14:38:45.751Z",
+  "generated_at": "2025-07-22T14:51:11.250Z",
   "source": "postgresql",
-  "total_changes": 0,
-  "files": []
+  "total_changes": 120,
+  "files": [
+    {
+      "filename": "dall-e-2025-07-21T16-16-30.json",
+      "change_id": 15,
+      "company": "DALL-E",
+      "detected_at": "2025-07-21T16:16:30.142Z",
+      "interest_level": 9,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "you-com-2025-07-21T15-30-09.json",
+      "change_id": 23,
+      "company": "You.com",
+      "detected_at": "2025-07-21T15:30:09.144Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "wellsaid-labs-2025-07-21T15-29-33.json",
+      "change_id": 26,
+      "company": "WellSaid Labs",
+      "detected_at": "2025-07-21T15:29:33.270Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "weights---biases-2025-07-21T15-29-20.json",
+      "change_id": 27,
+      "company": "Weights & Biases",
+      "detected_at": "2025-07-21T15:29:20.174Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "weights---biases-2025-07-21T15-29-10.json",
+      "change_id": 28,
+      "company": "Weights & Biases",
+      "detected_at": "2025-07-21T15:29:10.960Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "tabnine-2025-07-21T15-28-39.json",
+      "change_id": 31,
+      "company": "Tabnine",
+      "detected_at": "2025-07-21T15:28:39.995Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "tabnine-2025-07-21T15-28-30.json",
+      "change_id": 32,
+      "company": "Tabnine",
+      "detected_at": "2025-07-21T15:28:30.274Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "synthesia-2025-07-21T15-28-09.json",
+      "change_id": 34,
+      "company": "Synthesia",
+      "detected_at": "2025-07-21T15:28:09.942Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "stability-ai-2025-07-21T15-27-37.json",
+      "change_id": 37,
+      "company": "Stability AI",
+      "detected_at": "2025-07-21T15:27:37.674Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "stability-ai-2025-07-21T15-27-30.json",
+      "change_id": 38,
+      "company": "Stability AI",
+      "detected_at": "2025-07-21T15:27:30.420Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "stability-ai-2025-07-21T15-27-15.json",
+      "change_id": 40,
+      "company": "Stability AI",
+      "detected_at": "2025-07-21T15:27:15.985Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "sourcegraph-2025-07-21T15-26-56.json",
+      "change_id": 42,
+      "company": "Sourcegraph",
+      "detected_at": "2025-07-21T15:26:56.843Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "sourcegraph-2025-07-21T15-26-46.json",
+      "change_id": 43,
+      "company": "Sourcegraph",
+      "detected_at": "2025-07-21T15:26:46.696Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "scale-ai-2025-07-21T15-26-19.json",
+      "change_id": 46,
+      "company": "Scale AI",
+      "detected_at": "2025-07-21T15:26:19.297Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "scale-ai-2025-07-21T15-26-11.json",
+      "change_id": 47,
+      "company": "Scale AI",
+      "detected_at": "2025-07-21T15:26:11.057Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "sambanova-2025-07-21T15-25-52.json",
+      "change_id": 49,
+      "company": "SambaNova",
+      "detected_at": "2025-07-21T15:25:52.088Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "sambanova-2025-07-21T15-25-37.json",
+      "change_id": 50,
+      "company": "SambaNova",
+      "detected_at": "2025-07-21T15:25:37.368Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "runway-2025-07-21T15-24-54.json",
+      "change_id": 51,
+      "company": "Runway",
+      "detected_at": "2025-07-21T15:24:54.830Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "runway-2025-07-21T15-24-49.json",
+      "change_id": 52,
+      "company": "Runway",
+      "detected_at": "2025-07-21T15:24:49.567Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "runway-2025-07-21T15-24-40.json",
+      "change_id": 53,
+      "company": "Runway",
+      "detected_at": "2025-07-21T15:24:40.576Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "resemble-ai-2025-07-21T15-24-31.json",
+      "change_id": 54,
+      "company": "Resemble AI",
+      "detected_at": "2025-07-21T15:24:31.932Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "resemble-ai-2025-07-21T15-24-25.json",
+      "change_id": 55,
+      "company": "Resemble AI",
+      "detected_at": "2025-07-21T15:24:25.017Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "replit-2025-07-21T15-24-08.json",
+      "change_id": 57,
+      "company": "Replit",
+      "detected_at": "2025-07-21T15:24:08.595Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "replit-2025-07-21T15-24-01.json",
+      "change_id": 58,
+      "company": "Replit",
+      "detected_at": "2025-07-21T15:24:01.418Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "replit-2025-07-21T15-23-47.json",
+      "change_id": 59,
+      "company": "Replit",
+      "detected_at": "2025-07-21T15:23:47.668Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "replicate-2025-07-21T15-23-32.json",
+      "change_id": 61,
+      "company": "Replicate",
+      "detected_at": "2025-07-21T15:23:32.924Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "replicate-2025-07-21T15-23-24.json",
+      "change_id": 62,
+      "company": "Replicate",
+      "detected_at": "2025-07-21T15:23:24.360Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "pika-2025-07-21T15-22-56.json",
+      "change_id": 65,
+      "company": "Pika",
+      "detected_at": "2025-07-21T15:22:56.711Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "pika-2025-07-21T15-22-44.json",
+      "change_id": 67,
+      "company": "Pika",
+      "detected_at": "2025-07-21T15:22:44.909Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "pieces-2025-07-21T15-22-28.json",
+      "change_id": 69,
+      "company": "Pieces",
+      "detected_at": "2025-07-21T15:22:28.553Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "pieces-2025-07-21T15-22-21.json",
+      "change_id": 70,
+      "company": "Pieces",
+      "detected_at": "2025-07-21T15:22:21.071Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "pieces-2025-07-21T15-22-11.json",
+      "change_id": 71,
+      "company": "Pieces",
+      "detected_at": "2025-07-21T15:22:11.849Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "perplexity-ai-2025-07-21T15-21-10.json",
+      "change_id": 72,
+      "company": "Perplexity AI",
+      "detected_at": "2025-07-21T15:21:10.364Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "palantir-2025-07-21T15-20-48.json",
+      "change_id": 147,
+      "company": "Palantir",
+      "detected_at": "2025-07-21T15:20:48.155Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "nvidia-2025-07-21T15-19-50.json",
+      "change_id": 151,
+      "company": "NVIDIA",
+      "detected_at": "2025-07-21T15:19:50.760Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "murf-ai-2025-07-21T15-19-19.json",
+      "change_id": 154,
+      "company": "Murf AI",
+      "detected_at": "2025-07-21T15:19:19.457Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "mistral-ai-2025-07-21T15-18-56.json",
+      "change_id": 155,
+      "company": "Mistral AI",
+      "detected_at": "2025-07-21T15:18:56.925Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "mistral-ai-2025-07-21T15-18-50.json",
+      "change_id": 156,
+      "company": "Mistral AI",
+      "detected_at": "2025-07-21T15:18:50.273Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "mistral-ai-2025-07-21T15-18-30.json",
+      "change_id": 159,
+      "company": "Mistral AI",
+      "detected_at": "2025-07-21T15:18:30.814Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "midjourney-2025-07-21T15-17-43.json",
+      "change_id": 161,
+      "company": "Midjourney",
+      "detected_at": "2025-07-21T15:17:43.481Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "meta-ai-2025-07-21T15-17-36.json",
+      "change_id": 162,
+      "company": "Meta AI",
+      "detected_at": "2025-07-21T15:17:36.021Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "meta-ai-2025-07-21T15-17-26.json",
+      "change_id": 163,
+      "company": "Meta AI",
+      "detected_at": "2025-07-21T15:17:26.122Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "meta-ai-2025-07-21T15-17-10.json",
+      "change_id": 165,
+      "company": "Meta AI",
+      "detected_at": "2025-07-21T15:17:10.125Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "luma-ai-2025-07-21T15-16-55.json",
+      "change_id": 166,
+      "company": "Luma AI",
+      "detected_at": "2025-07-21T15:16:55.799Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "luma-ai-2025-07-21T15-16-39.json",
+      "change_id": 168,
+      "company": "Luma AI",
+      "detected_at": "2025-07-21T15:16:39.881Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "langchain-2025-07-21T15-16-11.json",
+      "change_id": 171,
+      "company": "LangChain",
+      "detected_at": "2025-07-21T15:16:11.144Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "langchain-2025-07-21T15-16-04.json",
+      "change_id": 172,
+      "company": "LangChain",
+      "detected_at": "2025-07-21T15:16:04.047Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "langchain-2025-07-21T15-15-49.json",
+      "change_id": 174,
+      "company": "LangChain",
+      "detected_at": "2025-07-21T15:15:49.685Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "intel-2025-07-21T15-15-39.json",
+      "change_id": 175,
+      "company": "Intel",
+      "detected_at": "2025-07-21T15:15:39.774Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "hugging-face-2025-07-21T15-14-39.json",
+      "change_id": 181,
+      "company": "Hugging Face",
+      "detected_at": "2025-07-21T15:14:39.679Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "hugging-face-2025-07-21T15-14-34.json",
+      "change_id": 182,
+      "company": "Hugging Face",
+      "detected_at": "2025-07-21T15:14:34.463Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "hugging-face-2025-07-21T15-14-28.json",
+      "change_id": 183,
+      "company": "Hugging Face",
+      "detected_at": "2025-07-21T15:14:28.878Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "replit-2025-07-21T16-30-23.json",
+      "change_id": 1,
+      "company": "Replit",
+      "detected_at": "2025-07-21T16:30:23.787Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "phind-2025-07-21T16-28-07.json",
+      "change_id": 3,
+      "company": "Phind",
+      "detected_at": "2025-07-21T16:28:07.659Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "meta-ai-2025-07-21T16-24-35.json",
+      "change_id": 5,
+      "company": "Meta AI",
+      "detected_at": "2025-07-21T16:24:35.091Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "descript-2025-07-21T16-17-22.json",
+      "change_id": 12,
+      "company": "Descript",
+      "detected_at": "2025-07-21T16:17:22.812Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "dall-e-2025-07-21T16-16-36.json",
+      "change_id": 14,
+      "company": "DALL-E",
+      "detected_at": "2025-07-21T16:16:36.684Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "wellsaid-labs-2025-07-21T15-29-50.json",
+      "change_id": 24,
+      "company": "WellSaid Labs",
+      "detected_at": "2025-07-21T15:29:50.779Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "wellsaid-labs-2025-07-21T15-29-42.json",
+      "change_id": 25,
+      "company": "WellSaid Labs",
+      "detected_at": "2025-07-21T15:29:42.021Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "weights---biases-2025-07-21T15-29-00.json",
+      "change_id": 29,
+      "company": "Weights & Biases",
+      "detected_at": "2025-07-21T15:29:00.492Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "tabnine-2025-07-21T15-28-48.json",
+      "change_id": 30,
+      "company": "Tabnine",
+      "detected_at": "2025-07-21T15:28:48.769Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "tabnine-2025-07-21T15-28-21.json",
+      "change_id": 33,
+      "company": "Tabnine",
+      "detected_at": "2025-07-21T15:28:21.319Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "synthesia-2025-07-21T15-28-02.json",
+      "change_id": 35,
+      "company": "Synthesia",
+      "detected_at": "2025-07-21T15:28:02.992Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "synthesia-2025-07-21T15-27-48.json",
+      "change_id": 36,
+      "company": "Synthesia",
+      "detected_at": "2025-07-21T15:27:48.749Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "stability-ai-2025-07-21T15-27-22.json",
+      "change_id": 39,
+      "company": "Stability AI",
+      "detected_at": "2025-07-21T15:27:22.699Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "sourcegraph-2025-07-21T15-27-05.json",
+      "change_id": 41,
+      "company": "Sourcegraph",
+      "detected_at": "2025-07-21T15:27:05.846Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "sourcegraph-2025-07-21T15-26-39.json",
+      "change_id": 44,
+      "company": "Sourcegraph",
+      "detected_at": "2025-07-21T15:26:39.034Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "scale-ai-2025-07-21T15-26-27.json",
+      "change_id": 45,
+      "company": "Scale AI",
+      "detected_at": "2025-07-21T15:26:27.158Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "sambanova-2025-07-21T15-25-59.json",
+      "change_id": 48,
+      "company": "SambaNova",
+      "detected_at": "2025-07-21T15:25:59.938Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "resemble-ai-2025-07-21T15-24-19.json",
+      "change_id": 56,
+      "company": "Resemble AI",
+      "detected_at": "2025-07-21T15:24:19.045Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "replicate-2025-07-21T15-23-39.json",
+      "change_id": 60,
+      "company": "Replicate",
+      "detected_at": "2025-07-21T15:23:39.376Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "redmore-studio-2025-07-21T15-23-06.json",
+      "change_id": 64,
+      "company": "Redmore Studio",
+      "detected_at": "2025-07-21T15:23:06.499Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "pika-2025-07-21T15-22-50.json",
+      "change_id": 66,
+      "company": "Pika",
+      "detected_at": "2025-07-21T15:22:50.566Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "pieces-2025-07-21T15-22-36.json",
+      "change_id": 68,
+      "company": "Pieces",
+      "detected_at": "2025-07-21T15:22:36.374Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "palantir-2025-07-21T15-21-02.json",
+      "change_id": 145,
+      "company": "Palantir",
+      "detected_at": "2025-07-21T15:21:02.138Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "palantir-2025-07-21T15-20-56.json",
+      "change_id": 146,
+      "company": "Palantir",
+      "detected_at": "2025-07-21T15:20:56.028Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "nvidia-2025-07-21T15-20-16.json",
+      "change_id": 148,
+      "company": "NVIDIA",
+      "detected_at": "2025-07-21T15:20:16.031Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "nvidia-2025-07-21T15-20-09.json",
+      "change_id": 149,
+      "company": "NVIDIA",
+      "detected_at": "2025-07-21T15:20:09.168Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "nvidia-2025-07-21T15-20-01.json",
+      "change_id": 150,
+      "company": "NVIDIA",
+      "detected_at": "2025-07-21T15:20:01.011Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "murf-ai-2025-07-21T15-19-27.json",
+      "change_id": 153,
+      "company": "Murf AI",
+      "detected_at": "2025-07-21T15:19:27.198Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "mistral-ai-2025-07-21T15-18-44.json",
+      "change_id": 157,
+      "company": "Mistral AI",
+      "detected_at": "2025-07-21T15:18:44.478Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "mistral-ai-2025-07-21T15-18-37.json",
+      "change_id": 158,
+      "company": "Mistral AI",
+      "detected_at": "2025-07-21T15:18:37.877Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "midjourney-2025-07-21T15-18-22.json",
+      "change_id": 160,
+      "company": "Midjourney",
+      "detected_at": "2025-07-21T15:18:22.044Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "meta-ai-2025-07-21T15-17-16.json",
+      "change_id": 164,
+      "company": "Meta AI",
+      "detected_at": "2025-07-21T15:17:16.833Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "luma-ai-2025-07-21T15-16-47.json",
+      "change_id": 167,
+      "company": "Luma AI",
+      "detected_at": "2025-07-21T15:16:47.426Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "leonardo-ai-2025-07-21T15-16-29.json",
+      "change_id": 169,
+      "company": "Leonardo AI",
+      "detected_at": "2025-07-21T15:16:29.106Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "leonardo-ai-2025-07-21T15-16-22.json",
+      "change_id": 170,
+      "company": "Leonardo AI",
+      "detected_at": "2025-07-21T15:16:22.424Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "langchain-2025-07-21T15-15-56.json",
+      "change_id": 173,
+      "company": "LangChain",
+      "detected_at": "2025-07-21T15:15:56.925Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "intel-2025-07-21T15-15-31.json",
+      "change_id": 176,
+      "company": "Intel",
+      "detected_at": "2025-07-21T15:15:31.704Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "inflection-ai-2025-07-21T15-15-20.json",
+      "change_id": 177,
+      "company": "Inflection AI",
+      "detected_at": "2025-07-21T15:15:20.205Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "inflection-ai-2025-07-21T15-15-12.json",
+      "change_id": 178,
+      "company": "Inflection AI",
+      "detected_at": "2025-07-21T15:15:12.668Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "inflection-ai-2025-07-21T15-15-04.json",
+      "change_id": 179,
+      "company": "Inflection AI",
+      "detected_at": "2025-07-21T15:15:04.267Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "hugging-face-2025-07-21T15-14-45.json",
+      "change_id": 180,
+      "company": "Hugging Face",
+      "detected_at": "2025-07-21T15:14:45.960Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anyscale-2025-07-21T16-14-10.json",
+      "change_id": 20,
+      "company": "Anyscale",
+      "detected_at": "2025-07-21T16:14:10.781Z",
+      "interest_level": 7,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anyscale-2025-07-21T16-14-03.json",
+      "change_id": 21,
+      "company": "Anyscale",
+      "detected_at": "2025-07-21T16:14:03.897Z",
+      "interest_level": 7,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "codeium-2025-07-21T16-14-57.json",
+      "change_id": 18,
+      "company": "Codeium",
+      "detected_at": "2025-07-21T16:14:57.347Z",
+      "interest_level": 6,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "andi-2025-07-21T16-13-19.json",
+      "change_id": 22,
+      "company": "Andi",
+      "detected_at": "2025-07-21T16:13:19.796Z",
+      "interest_level": 6,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "redmore-studio-2025-07-21T15-23-16.json",
+      "change_id": 63,
+      "company": "Redmore Studio",
+      "detected_at": "2025-07-21T15:23:16.183Z",
+      "interest_level": 6,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "meta-ai-2025-07-21T16-24-18.json",
+      "change_id": 6,
+      "company": "Meta AI",
+      "detected_at": "2025-07-21T16:24:18.910Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "cursor-2025-07-21T16-16-16.json",
+      "change_id": 16,
+      "company": "Cursor",
+      "detected_at": "2025-07-21T16:16:16.970Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "codeium-2025-07-21T16-15-19.json",
+      "change_id": 17,
+      "company": "Codeium",
+      "detected_at": "2025-07-21T16:15:19.250Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anyscale-2025-07-21T16-14-18.json",
+      "change_id": 19,
+      "company": "Anyscale",
+      "detected_at": "2025-07-21T16:14:18.467Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "codeium-2025-07-21T15-07-53.json",
+      "change_id": 188,
+      "company": "Codeium",
+      "detected_at": "2025-07-21T15:07:53.956Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "codeium-2025-07-21T15-07-47.json",
+      "change_id": 189,
+      "company": "Codeium",
+      "detected_at": "2025-07-21T15:07:47.128Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "codeium-2025-07-21T15-07-37.json",
+      "change_id": 190,
+      "company": "Codeium",
+      "detected_at": "2025-07-21T15:07:37.893Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "codeium-2025-07-21T15-07-30.json",
+      "change_id": 191,
+      "company": "Codeium",
+      "detected_at": "2025-07-21T15:07:30.193Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "andi-2025-07-21T15-05-41.json",
+      "change_id": 192,
+      "company": "Andi",
+      "detected_at": "2025-07-21T15:05:41.053Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "replicate-2025-07-21T16-29-53.json",
+      "change_id": 2,
+      "company": "Replicate",
+      "detected_at": "2025-07-21T16:29:53.435Z",
+      "interest_level": 3,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "luma-ai-2025-07-21T16-23-38.json",
+      "change_id": 7,
+      "company": "Luma AI",
+      "detected_at": "2025-07-21T16:23:38.616Z",
+      "interest_level": 3,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "hugging-face-2025-07-21T16-21-55.json",
+      "change_id": 8,
+      "company": "Hugging Face",
+      "detected_at": "2025-07-21T16:21:55.509Z",
+      "interest_level": 3,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "hugging-face-2025-07-21T16-21-44.json",
+      "change_id": 9,
+      "company": "Hugging Face",
+      "detected_at": "2025-07-21T16:21:44.078Z",
+      "interest_level": 3,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "descript-2025-07-21T16-17-03.json",
+      "change_id": 13,
+      "company": "Descript",
+      "detected_at": "2025-07-21T16:17:03.190Z",
+      "interest_level": 3,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "cursor-2025-07-21T15-08-46.json",
+      "change_id": 187,
+      "company": "Cursor",
+      "detected_at": "2025-07-21T15:08:46.641Z",
+      "interest_level": 3,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "palantir-2025-07-21T16-27-32.json",
+      "change_id": 4,
+      "company": "Palantir",
+      "detected_at": "2025-07-21T16:27:32.451Z",
+      "interest_level": 2,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "github-copilot-2025-07-21T16-18-27.json",
+      "change_id": 10,
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-21T16:18:27.267Z",
+      "interest_level": 2,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "flux-2025-07-21T16-18-18.json",
+      "change_id": 11,
+      "company": "Flux",
+      "detected_at": "2025-07-21T16:18:18.552Z",
+      "interest_level": 2,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "neeva-2025-07-21T15-19-35.json",
+      "change_id": 152,
+      "company": "Neeva",
+      "detected_at": "2025-07-21T15:19:35.892Z",
+      "interest_level": 2,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "google-deepmind-2025-07-21T15-11-46.json",
+      "change_id": 184,
+      "company": "Google DeepMind",
+      "detected_at": "2025-07-21T15:11:46.979Z",
+      "interest_level": 2,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "flux-2025-07-21T15-10-51.json",
+      "change_id": 185,
+      "company": "Flux",
+      "detected_at": "2025-07-21T15:10:51.660Z",
+      "interest_level": 2,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "descript-2025-07-21T15-09-38.json",
+      "change_id": 186,
+      "company": "Descript",
+      "detected_at": "2025-07-21T15:09:38.441Z",
+      "interest_level": 2,
+      "change_type": "modified",
+      "summary": "Change detected"
+    }
+  ]
 }

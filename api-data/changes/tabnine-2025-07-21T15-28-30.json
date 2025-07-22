@@ -1,0 +1,87 @@
+{
+  "id": 32,
+  "company": "Tabnine",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:28:30.274Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added to the homepage of Tabnine, including features, pricing, and resources",
+    "specific_changes": [
+      "Added sections for features, pricing, and resources",
+      "Introduced new AI agents for various tasks such as testing, code fixing, and documentation",
+      "Emphasized the importance of code privacy and protection",
+      "Highlighted the benefits of using Tabnine's AI-powered code assistant"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI-powered code assistant market",
+      "Growing demand for code privacy and protection solutions"
+    ],
+    "business_impact": "The changes are likely to attract more customers and increase revenue for Tabnine, as the new features and emphasis on code privacy and protection address key concerns for software developers",
+    "strategic_direction": "Tabnine is likely to continue investing in AI-powered code assistant technology and expanding its features to meet the evolving needs of software developers",
+    "competitive_implications": "Tabnine's updated homepage and new features may give the company a competitive edge in the market, but also increase pressure on other companies to respond with similar offerings"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Software development"
+    ],
+    "pricing": [
+      "Get started for free"
+    ],
+    "features": [
+      "AI-powered code assistant",
+      "Code review agent",
+      "Testing agent",
+      "Code fix agent",
+      "Documentation agent"
+    ],
+    "products": [
+      "Tabnine AI Code Assistant"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "Machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI-powered code assistant market",
+      "Regulatory challenges related to code privacy and protection"
+    ],
+    "key_findings": [
+      "Tabnine's updated homepage showcases new features and emphasizes code privacy and protection",
+      "The company is investing in AI-powered code assistant technology",
+      "There is growing demand for code privacy and protection solutions"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the software development industry",
+      "Expansion into new markets, such as enterprise software development"
+    ],
+    "recommended_actions": [
+      "Monitor Tabnine's progress and adjust competitive strategy accordingly",
+      "Invest in AI-powered code assistant technology to stay competitive",
+      "Develop strategic partnerships with other companies in the software development industry"
+    ]
+  },
+  "key_insights": [
+    "Tabnine's updated homepage showcases new features and emphasizes code privacy and protection",
+    "The company is investing in AI-powered code assistant technology",
+    "There is growing demand for code privacy and protection solutions"
+  ],
+  "business_impact": "The changes are likely to attract more customers and increase revenue for Tabnine, as the new features and emphasis on code privacy and protection address key concerns for software developers",
+  "competitive_implications": "Tabnine's updated homepage and new features may give the company a competitive edge in the market, but also increase pressure on other companies to respond with similar offerings",
+  "content_hash_before": null,
+  "content_hash_after": "31c81fe00ab63f1c1ff4c9a367b0b0c63552cfc55dff7f45faa6d5a82f0607ba",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

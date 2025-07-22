@@ -1,0 +1,100 @@
+{
+  "id": 155,
+  "company": "Mistral AI",
+  "page_url": "docs",
+  "detected_at": "2025-07-21T15:18:56.925Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Initial documentation release for Mistral AI, including product information, model descriptions, and API capabilities",
+    "specific_changes": [
+      "Introduction of premier models: Mistral Medium, Codestral, Mistral OCR, Mistral Saba, Mistral Large, Pixtral Large, Ministral 3B, Ministral 8B, Mistral Embed, and Mistral Moderation",
+      "Introduction of free models: Mistral Small, Devstral Small, Pixtral, Mistral NeMo, Codestral Mamba, and Mathstral 7b",
+      "Description of API capabilities: text generation, vision, OCR, code generation, embeddings, function calling, citations, structured outputs, fine-tuning, and guardrailing"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased transparency and openness in the AI industry",
+      "Growing demand for AI-powered products and services"
+    ],
+    "business_impact": "The release of comprehensive documentation for Mistral AI can attract developers and enterprises, driving innovation and adoption of the company's products and services",
+    "strategic_direction": "Mistral AI's strategic direction appears to focus on developing and showcasing its AI capabilities, products, and services, with an emphasis on innovation, transparency, and openness",
+    "competitive_implications": "Mistral AI's documentation release can position the company as a leader in the AI industry, potentially threatening competitors who lack similar transparency and openness"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [
+      "text generation",
+      "vision",
+      "OCR",
+      "code generation",
+      "embeddings",
+      "function calling",
+      "citations",
+      "structured outputs",
+      "fine-tuning",
+      "guardrailing"
+    ],
+    "products": [
+      "Mistral Medium",
+      "Codestral",
+      "Mistral OCR",
+      "Mistral Saba",
+      "Mistral Large",
+      "Pixtral Large",
+      "Ministral 3B",
+      "Ministral 8B",
+      "Mistral Embed",
+      "Mistral Moderation",
+      "Mistral Small",
+      "Devstral Small",
+      "Pixtral",
+      "Mistral NeMo",
+      "Codestral Mamba",
+      "Mathstral 7b"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "large language models (LLMs)",
+      "APIs"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI industry",
+      "Potential risks associated with the adoption of AI-powered products and services"
+    ],
+    "key_findings": [
+      "Mistral AI's documentation release provides valuable insights into the company's products, models, and API capabilities",
+      "The company's strategic direction appears to focus on innovation, transparency, and openness"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Mistral AI for developers and enterprises",
+      "Potential for innovation and growth in the AI industry"
+    ],
+    "recommended_actions": [
+      "Monitor Mistral AI's developments and updates",
+      "Consider partnership opportunities with Mistral AI",
+      "Assess the potential risks and benefits of adopting AI-powered products and services"
+    ]
+  },
+  "key_insights": [
+    "Mistral AI's documentation release provides valuable insights into the company's products, models, and API capabilities",
+    "The company's strategic direction appears to focus on innovation, transparency, and openness"
+  ],
+  "business_impact": "The release of comprehensive documentation for Mistral AI can attract developers and enterprises, driving innovation and adoption of the company's products and services",
+  "competitive_implications": "Mistral AI's documentation release can position the company as a leader in the AI industry, potentially threatening competitors who lack similar transparency and openness",
+  "content_hash_before": null,
+  "content_hash_after": "f110ec63a40bb346bab2c650fcee3099ca13f0195cdb59278312a6e959a6c477",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

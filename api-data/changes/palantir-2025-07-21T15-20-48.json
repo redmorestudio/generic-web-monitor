@@ -1,0 +1,92 @@
+{
+  "id": 147,
+  "company": "Palantir",
+  "page_url": "product",
+  "detected_at": "2025-07-21T15:20:48.155Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Introduction of Palantir Artificial Intelligence Platform (AIP) content",
+    "specific_changes": [
+      "Introduction of AIP platform",
+      "Addition of industry-specific use cases",
+      "Introduction of AIP Now for exploring pre-built AI applications",
+      "Addition of Build with AIP for requesting access and building with AIP"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on AI and machine learning",
+      "Expansion into new industries and markets"
+    ],
+    "business_impact": "The introduction of AIP is expected to have a significant impact on Palantir's business, enabling the company to expand its offerings and reach new customers",
+    "strategic_direction": "The introduction of AIP suggests that Palantir is committed to investing in AI and machine learning, and is likely to continue to expand its offerings in this area",
+    "competitive_implications": "The introduction of AIP is likely to increase competition in the AI and machine learning market, as Palantir is now a major player in this space"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Aerospace & Aviation",
+      "Automotive",
+      "Construction & Real Estate",
+      "Energy & Renewables",
+      "Financial Services & Banking",
+      "Government & Security",
+      "Healthcare & Lifesciences",
+      "Insurance",
+      "Logistics",
+      "Manufacturing & Industrials",
+      "Media & Telecommunication",
+      "Retail & Consumer Goods",
+      "Utilities & Chemicals"
+    ],
+    "pricing": [],
+    "features": [
+      "AIP Now",
+      "Build with AIP"
+    ],
+    "products": [
+      "Palantir Artificial Intelligence Platform (AIP)"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "Artificial Intelligence (AI)"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI and machine learning market",
+      "Potential disruption to existing business models"
+    ],
+    "key_findings": [
+      "Palantir is investing heavily in AI and machine learning",
+      "AIP is a major new platform that enables customers to build and deploy AI applications",
+      "Palantir is expanding its reach into new industries and markets"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Palantir to develop new AI applications",
+      "Expansion into new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor Palantir's progress with AIP and its impact on the market",
+      "Consider partnership opportunities with Palantir to develop new AI applications"
+    ]
+  },
+  "key_insights": [
+    "Palantir is investing heavily in AI and machine learning",
+    "AIP is a major new platform that enables customers to build and deploy AI applications",
+    "Palantir is expanding its reach into new industries and markets"
+  ],
+  "business_impact": "The introduction of AIP is expected to have a significant impact on Palantir's business, enabling the company to expand its offerings and reach new customers",
+  "competitive_implications": "The introduction of AIP is likely to increase competition in the AI and machine learning market, as Palantir is now a major player in this space",
+  "content_hash_before": null,
+  "content_hash_after": "f19bb8ed850b7e3c59509c43b66994ab21e6bf53476f3bbfd9cd3730383c7813",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

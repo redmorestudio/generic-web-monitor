@@ -1,0 +1,68 @@
+{
+  "id": 192,
+  "company": "Andi",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:05:41.053Z",
+  "change_type": "modified",
+  "interest_level": 4,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "minor",
+    "what_changed": "Minor content updates and reorganization of examples",
+    "specific_changes": [
+      "Updated examples for using Andi",
+      "Reorganized 'Getting Started' section",
+      "Minor text changes for clarity and readability"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Andi is focusing on improving user experience",
+      "Andi is enhancing its search capabilities"
+    ],
+    "business_impact": "The updates aim to enhance user engagement and simplify the onboarding process for new users, potentially leading to increased adoption rates.",
+    "strategic_direction": "Andi is moving towards becoming a more comprehensive and user-centric search platform.",
+    "competitive_implications": "Andi is competing with other AI-powered search tools by offering a more user-friendly and efficient search experience."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Competition from established search engines and AI-powered tools",
+      "User retention if the updates do not meet user expectations"
+    ],
+    "key_findings": [
+      "Andi is updating its content to better serve its users",
+      "The updates are focused on enhancing the user experience"
+    ],
+    "opportunities": [
+      "Andi could explore more interactive tutorials or guides to further enhance user engagement",
+      "Andi could consider expanding its capabilities to include more specialized search features"
+    ],
+    "recommended_actions": [
+      "Monitor user feedback and engagement metrics post-update",
+      "Continuously evaluate and improve the search algorithm for better results"
+    ]
+  },
+  "key_insights": [
+    "Andi is updating its content to better serve its users",
+    "The updates are focused on enhancing the user experience"
+  ],
+  "business_impact": "The updates aim to enhance user engagement and simplify the onboarding process for new users, potentially leading to increased adoption rates.",
+  "competitive_implications": "Andi is competing with other AI-powered search tools by offering a more user-friendly and efficient search experience.",
+  "content_hash_before": "6a45a225ac608ab63669399e6c56f5182c606bebaf0616dba6ab836f7284bb07",
+  "content_hash_after": "45eb00b79f541461d6aed7eab3383a45e03c0d1f895924d1bcace512be249b88",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

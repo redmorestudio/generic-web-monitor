@@ -1,0 +1,71 @@
+{
+  "id": 167,
+  "company": "Luma AI",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:16:47.426Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "major",
+    "what_changed": "The pricing page now returns a 404 error with a 'Page Not Found' message, and the content has been replaced with a generic 404 page containing the company's logo, social media links, and a footer with copyright information.",
+    "specific_changes": [
+      "Removal of pricing information",
+      "Replacement with a generic 404 page",
+      "Inclusion of social media links and company logo"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Potential rebranding or restructuring",
+      "Shift in pricing strategy"
+    ],
+    "business_impact": "The removal of pricing information may indicate a shift in the company's pricing strategy, potentially to a more customized or tiered approach.",
+    "strategic_direction": "The company may be moving towards a more flexible or dynamic pricing model, or potentially preparing for a new product or service launch.",
+    "competitive_implications": "The change may impact the company's competitive positioning, potentially making it more or less attractive to customers depending on the new pricing strategy."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "Removal of pricing information"
+    ],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Potential loss of customers due to uncertainty or dissatisfaction with the new pricing strategy.",
+      "Risk of competitors gaining an advantage if they can offer more transparent or attractive pricing options."
+    ],
+    "key_findings": [
+      "The removal of pricing information is a significant change that may impact the company's revenue and customer acquisition strategy.",
+      "The inclusion of social media links and company logo on the 404 page suggests an effort to maintain brand visibility and engagement."
+    ],
+    "opportunities": [
+      "Potential for the company to introduce new pricing tiers or models that better align with customer needs.",
+      "Opportunity for competitors to capitalize on the uncertainty surrounding Luma AI's pricing strategy."
+    ],
+    "recommended_actions": [
+      "Monitor Luma AI's website and social media channels for updates on their pricing strategy.",
+      "Analyze competitor pricing strategies to identify potential opportunities or threats.",
+      "Consider adjusting our own pricing strategy to remain competitive in the market."
+    ]
+  },
+  "key_insights": [
+    "The removal of pricing information is a significant change that may impact the company's revenue and customer acquisition strategy.",
+    "The inclusion of social media links and company logo on the 404 page suggests an effort to maintain brand visibility and engagement."
+  ],
+  "business_impact": "The removal of pricing information may indicate a shift in the company's pricing strategy, potentially to a more customized or tiered approach.",
+  "competitive_implications": "The change may impact the company's competitive positioning, potentially making it more or less attractive to customers depending on the new pricing strategy.",
+  "content_hash_before": null,
+  "content_hash_after": "5328ad6aedb99c125875293effdec42d6dc7696e85f61eae6eada080dba74b6f",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

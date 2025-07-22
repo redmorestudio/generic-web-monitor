@@ -1,0 +1,63 @@
+{
+  "id": 187,
+  "company": "Cursor",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:08:46.641Z",
+  "change_type": "modified",
+  "interest_level": 3,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "minor",
+    "what_changed": "Download option changed from Windows to macOS",
+    "specific_changes": [
+      "Download for Windows changed to Download for macOS"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Cursor is expanding its compatibility to more operating systems."
+    ],
+    "business_impact": "The change may slightly impact the user experience for macOS users, but it is unlikely to have a significant impact on the overall business.",
+    "strategic_direction": "Cursor is focusing on expanding its user base and improving user experience.",
+    "competitive_implications": "The change may give Cursor a slight competitive advantage in terms of compatibility, but it is unlikely to be a major differentiator."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [
+      "Cursor"
+    ],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Competitors may respond by also expanding their compatibility, reducing Cursor's competitive advantage."
+    ],
+    "key_findings": [
+      "Cursor is expanding its compatibility to more operating systems."
+    ],
+    "opportunities": [
+      "Cursor can further expand its user base by supporting more operating systems."
+    ],
+    "recommended_actions": [
+      "Monitor user feedback and adjust the download options accordingly.",
+      "Consider expanding compatibility to other operating systems."
+    ]
+  },
+  "key_insights": [
+    "Cursor is expanding its compatibility to more operating systems."
+  ],
+  "business_impact": "The change may slightly impact the user experience for macOS users, but it is unlikely to have a significant impact on the overall business.",
+  "competitive_implications": "The change may give Cursor a slight competitive advantage in terms of compatibility, but it is unlikely to be a major differentiator.",
+  "content_hash_before": "400d67da4f2595b7a3a1ae656c54d41ce0dba64669a75b3d9ef8f2c3b1e65cfc",
+  "content_hash_after": "180a6070735f6ad36affbd032f3821360a0cc56245652ec859715cfb9f5e05ad",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

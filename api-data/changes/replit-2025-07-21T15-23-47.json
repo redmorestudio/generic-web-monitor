@@ -1,0 +1,81 @@
+{
+  "id": 59,
+  "company": "Replit",
+  "page_url": "product",
+  "detected_at": "2025-07-21T15:23:47.668Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Introduction of Replit AI, a new feature that allows users to turn natural language into apps and websites",
+    "specific_changes": [
+      "Replit AI feature announcement",
+      "New use cases and solutions added",
+      "Updated website layout and design",
+      "Introduction of Replit Agent, a tool that builds apps and websites based on user input"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing demand for no-code solutions",
+      "Increasing adoption of AI-powered development tools"
+    ],
+    "business_impact": "The introduction of Replit AI and Replit Agent is likely to disrupt the development industry, providing a new and innovative way for users to build apps and websites",
+    "strategic_direction": "Replit's strategic direction is focused on providing innovative, AI-powered solutions for developers and non-technical users alike",
+    "competitive_implications": "Replit's move into AI-powered development positions the company as a leader in the industry, potentially threatening competitors who do not have similar offerings"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Development",
+      "No-code solutions"
+    ],
+    "pricing": [],
+    "features": [
+      "Natural language processing",
+      "No-code development",
+      "AI-powered app and website building"
+    ],
+    "products": [
+      "Replit AI",
+      "Replit Agent"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "Machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competitors may respond by developing similar AI-powered features, potentially threatening Replit's market share"
+    ],
+    "key_findings": [
+      "Replit AI and Replit Agent represent a significant shift towards AI-powered development",
+      "The introduction of these features is likely to disrupt the development industry"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Replit to leverage their AI-powered development capabilities",
+      "Potential for Replit to expand into new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor Replit's progress and adoption of Replit AI and Replit Agent",
+      "Consider partnering with Replit to leverage their AI-powered development capabilities"
+    ]
+  },
+  "key_insights": [
+    "Replit AI and Replit Agent represent a significant shift towards AI-powered development",
+    "The introduction of these features is likely to disrupt the development industry"
+  ],
+  "business_impact": "The introduction of Replit AI and Replit Agent is likely to disrupt the development industry, providing a new and innovative way for users to build apps and websites",
+  "competitive_implications": "Replit's move into AI-powered development positions the company as a leader in the industry, potentially threatening competitors who do not have similar offerings",
+  "content_hash_before": null,
+  "content_hash_after": "d2aa1bb9cdb437c5ff11545c9946d02ea11dac67a181d24e1e15fa400e69a9c4",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

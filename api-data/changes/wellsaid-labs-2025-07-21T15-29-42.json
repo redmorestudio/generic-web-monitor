@@ -1,0 +1,70 @@
+{
+  "id": 25,
+  "company": "WellSaid Labs",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:29:42.021Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "New AI voice model, Caruso, was introduced",
+    "specific_changes": [
+      "Introduction of Caruso, a new AI voice model",
+      "Update to the homepage to reflect the new voice model",
+      "No changes to pricing or existing products"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on AI-powered voice models",
+      "Growing demand for high-quality voice models"
+    ],
+    "business_impact": "The introduction of Caruso can enhance the company's competitiveness and attract new customers",
+    "strategic_direction": "The company is likely to continue investing in AI-powered voice models and expanding its product offerings",
+    "competitive_implications": "The introduction of Caruso can help the company differentiate itself from competitors and establish a leadership position in the market"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [
+      "Caruso, a new AI voice model"
+    ],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Intense competition in the voice model market",
+      "Rapidly evolving technology landscape"
+    ],
+    "key_findings": [
+      "The introduction of Caruso is a significant update that can impact the company's product offerings and competitiveness",
+      "The company is likely to continue investing in AI-powered voice models and expanding its product offerings"
+    ],
+    "opportunities": [
+      "Increased demand for high-quality voice models",
+      "Growing need for AI-powered voice models in various industries"
+    ],
+    "recommended_actions": [
+      "Monitor the company's product offerings and updates",
+      "Analyze the competitive landscape and market trends"
+    ]
+  },
+  "key_insights": [
+    "The introduction of Caruso is a significant update that can impact the company's product offerings and competitiveness",
+    "The company is likely to continue investing in AI-powered voice models and expanding its product offerings"
+  ],
+  "business_impact": "The introduction of Caruso can enhance the company's competitiveness and attract new customers",
+  "competitive_implications": "The introduction of Caruso can help the company differentiate itself from competitors and establish a leadership position in the market",
+  "content_hash_before": null,
+  "content_hash_after": "30fb5203d0c7ca7e22dca4a194aabca60fd0f23af04cdc4807b97dc3ec571a52",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}
