@@ -206,8 +206,11 @@ jobs:
           cd github-actions-backend
           echo "🔧 Ensuring baseline_analysis table exists with correct schema..."
           
-          # Use robust version that handles all edge cases
-          if [ -f "fix-baseline-analysis-schema-robust.js" ]; then
+          # Use smart version that preserves existing data structure
+          if [ -f "fix-baseline-analysis-schema-smart.js" ]; then
+            echo "Using smart schema fix..."
+            node fix-baseline-analysis-schema-smart.js
+          elif [ -f "fix-baseline-analysis-schema-robust.js" ]; then
             echo "Using robust schema fix..."
             node fix-baseline-analysis-schema-robust.js
           else
