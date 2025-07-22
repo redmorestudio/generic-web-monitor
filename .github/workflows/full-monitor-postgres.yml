@@ -201,6 +201,14 @@ jobs:
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
+      - name: Fix baseline analysis schema
+        run: |
+          cd github-actions-backend
+          echo "🔧 Ensuring baseline_analysis table exists with correct schema..."
+          node fix-baseline-analysis-schema.js
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
       - name: Run baseline analysis for TheBrain (if needed)
         if: ${{ !inputs.skip_thebrain && steps.check_baseline.outputs.baseline_count == '0' }}
         run: |
