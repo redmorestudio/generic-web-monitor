@@ -336,14 +336,39 @@ async function processRecentChanges(mode = 'recent') {
           WHERE company = $1 AND url = $2 AND detected_at = $3
         `, [change.company, change.url_name, change.detected_at]);
 
+        // Get company_id for enhanced_analysis
+        const companyData = await db.get(`
+          SELECT id FROM intelligence.companies WHERE name = $1
+        `, [change.company]);
+        
+        // If company doesn't exist, create it
+        let companyId = companyData?.id;
+        if (!companyId) {
+          const newCompany = await db.get(`
+            INSERT INTO intelligence.companies (name, category, interest_level)
+            VALUES ($1, 'auto-created', 5)
+            ON CONFLICT (name) DO UPDATE SET name = EXCLUDED.name
+            RETURNING id
+          `, [change.company]);
+          companyId = newCompany.id;
+          console.log(`   📌 Created new company: ${change.company} (ID: ${companyId})`);
+        }
+        
+        // Get content_id from markdown_pages
+        const contentData = await db.get(`
+          SELECT id FROM processed_content.markdown_pages WHERE source_hash = $1
+        `, [change.new_hash]);
+
         // Then store the enhanced analysis
         await db.run(`
           INSERT INTO intelligence.enhanced_analysis
-          (change_id, ultra_analysis, key_insights, business_impact, 
+          (company_id, content_id, change_id, ultra_analysis, key_insights, business_impact, 
            competitive_implications, market_signals, risk_assessment, 
            opportunity_score, analysis_timestamp, ai_model)
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW(), $9)
+          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW(), $11)
           ON CONFLICT (change_id) DO UPDATE SET
+            company_id = EXCLUDED.company_id,
+            content_id = EXCLUDED.content_id,
             ultra_analysis = EXCLUDED.ultra_analysis,
             key_insights = EXCLUDED.key_insights,
             business_impact = EXCLUDED.business_impact,
@@ -353,6 +378,8 @@ async function processRecentChanges(mode = 'recent') {
             opportunity_score = EXCLUDED.opportunity_score,
             analysis_timestamp = NOW()
         `, [
+          companyId,  // company_id (guaranteed to exist now)
+          contentData?.id || null,  // content_id (can be null if content not found)
           changeRecord.id,
           JSON.stringify(analysis),  // Fix: Stringify the analysis object for JSONB
           JSON.stringify(analysis.insights?.key_findings || []),  // Fix: Stringify array for JSONB
