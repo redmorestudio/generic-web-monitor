@@ -351,14 +351,11 @@ async function storeBaselineAnalysis(company, url, extractedData) {
       `${company}: ${extractedData.current_state?.positioning || 'AI company'}`;
 
     // Get the latest markdown content hash for this URL
-    // Note: markdown_content table doesn't have company/url directly - need to join through raw_content
     const contentHash = await db.get(`
-      SELECT 
-        md5(mc.content) as markdown_hash 
-      FROM processed_content.markdown_content mc
-      JOIN raw_content.scraped_pages sp ON sp.id = mc.raw_content_id
-      WHERE sp.company = $1 AND sp.url = $2 
-      ORDER BY mc.created_at DESC 
+      SELECT markdown_hash 
+      FROM processed_content.markdown_pages 
+      WHERE company = $1 AND url = $2 
+      ORDER BY created_at DESC 
       LIMIT 1
     `, [company, url]);
 
@@ -458,21 +455,15 @@ async function processAllSnapshots() {
   }
 
   // Get the most recent processed content for each URL
-  // Join scraped_pages with markdown_content to get company/url info
   const latestSnapshots = await db.all(`
-    WITH latest_content AS (
-      SELECT DISTINCT ON (sp.company, sp.url)
-        sp.company,
-        sp.url,
-        mc.content as markdown_text,
-        mc.created_at,
-        mc.id as markdown_id
-      FROM raw_content.scraped_pages sp
-      JOIN processed_content.markdown_content mc ON mc.raw_content_id = sp.id
-      WHERE mc.content IS NOT NULL AND LENGTH(mc.content) > 100
-      ORDER BY sp.company, sp.url, mc.created_at DESC
-    )
-    SELECT * FROM latest_content
+    SELECT DISTINCT ON (company, url)
+      company,
+      url,
+      content as markdown_text,
+      created_at
+    FROM processed_content.markdown_pages
+    WHERE content IS NOT NULL AND LENGTH(content) > 100
+    ORDER BY company, url, created_at DESC
   `);
 
   console.log(`📋 Found ${latestSnapshots.length} URLs to analyze\n`);
