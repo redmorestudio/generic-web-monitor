@@ -252,19 +252,7 @@ async function generateCompaniesData() {
             c.id, 
             c.name, 
             c.category,
-            ca.industry,
-            ca.focus_areas,
-            ca.description,
-            ca.headquarters,
-            ca.founded,
-            ca.website,
-            ca.stock_symbol,
-            ca.employees,
-            ca.revenue,
-            ca.competitors,
-            ca.products,
-            ca.technologies,
-            ca.thebrain_thought_id
+            ca.industry
         FROM intelligence.companies c
         LEFT JOIN intelligence.company_attributes ca ON c.id = ca.company_id
         ORDER BY c.name
@@ -276,18 +264,20 @@ async function generateCompaniesData() {
             name: company.name,
             category: company.category,
             industry: company.industry,
-            focus_areas: company.focus_areas,
-            description: company.description,
-            headquarters: company.headquarters,
-            founded: company.founded,
-            website: company.website,
-            stock_symbol: company.stock_symbol,
-            employees: company.employees,
-            revenue: company.revenue,
-            competitors: company.competitors,
-            products: company.products,
-            technologies: company.technologies,
-            thebrain_thought_id: company.thebrain_thought_id
+            // Note: Additional fields like focus_areas, description, etc. would need to be
+            // added to the company_attributes table or stored elsewhere
+            focus_areas: null,
+            description: null,
+            headquarters: null,
+            founded: null,
+            website: null,
+            stock_symbol: null,
+            employees: null,
+            revenue: null,
+            competitors: null,
+            products: null,
+            technologies: null,
+            thebrain_thought_id: null
         })),
         generated_at: new Date().toISOString()
     };
@@ -550,7 +540,9 @@ async function generateIndividualCompanyFiles(companyName) {
     console.log(`  📁 Generating data for ${companyName}...`);
     
     const company = await db.get(`
-        SELECT c.*, ca.* 
+        SELECT c.id, c.name, c.category, c.interest_level, 
+               c.created_at, c.updated_at,
+               ca.industry
         FROM intelligence.companies c
         LEFT JOIN intelligence.company_attributes ca ON c.id = ca.company_id
         WHERE c.name = $1
