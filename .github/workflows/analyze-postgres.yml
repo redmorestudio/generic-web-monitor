@@ -150,6 +150,14 @@ jobs:
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
+      - name: Fix PostgreSQL analyzer schema
+        run: |
+          cd github-actions-backend
+          echo "🔧 Running PostgreSQL schema fix for analyzer..."
+          node fix-postgres-analyze-schema.js
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
       - name: Run baseline AI analysis (PostgreSQL)
         run: |
           cd github-actions-backend
