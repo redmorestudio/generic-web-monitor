@@ -185,11 +185,12 @@ async function generateDashboard() {
     // Overall statistics
     const overallStats = await db.get(`
         SELECT 
-            (SELECT COUNT(*) FROM intelligence.companies) as total_companies,
-            (SELECT COUNT(*) FROM intelligence.urls) as total_urls,
+            (SELECT COUNT(*) FROM intelligence.companies) as companies,
+            (SELECT COUNT(*) FROM intelligence.urls) as urls,
             (SELECT COUNT(DISTINCT id) FROM processed_content.change_detection WHERE detected_at > NOW() - INTERVAL '24 hours') as changes_24h,
             (SELECT COUNT(DISTINCT id) FROM processed_content.change_detection WHERE detected_at > NOW() - INTERVAL '7 days') as changes_7d,
-            (SELECT COUNT(DISTINCT id) FROM processed_content.change_detection WHERE interest_level >= 7 AND detected_at > NOW() - INTERVAL '7 days') as high_interest_7d
+            (SELECT COUNT(DISTINCT id) FROM processed_content.change_detection WHERE interest_level >= 7 AND detected_at > NOW() - INTERVAL '7 days') as high_interest_7d,
+            (SELECT COUNT(*) FROM raw_content.scraped_pages) as snapshots
     `);
     
     return {
