@@ -354,11 +354,11 @@ async function processRecentChanges(mode = 'recent') {
             analysis_timestamp = NOW()
         `, [
           changeRecord.id,
-          analysis,
-          analysis.insights?.key_findings || [],
+          JSON.stringify(analysis),  // Fix: Stringify the analysis object for JSONB
+          JSON.stringify(analysis.insights?.key_findings || []),  // Fix: Stringify array for JSONB
           analysis.strategic_analysis?.business_impact || '',
           analysis.strategic_analysis?.competitive_implications || '',
-          analysis.strategic_analysis?.market_signals || [],
+          JSON.stringify(analysis.strategic_analysis?.market_signals || []),  // Fix: Stringify array for JSONB
           analysis.insights?.threats?.join('; ') || '',
           interestLevel,
           'groq-llama-3.3-70b'
