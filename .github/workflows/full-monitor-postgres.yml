@@ -51,7 +51,7 @@ env:
 jobs:
   # Job 1: Scrape websites
   scrape:
-    if: ${{ github.event.inputs.skip_scrape != 'true' }}
+    if: inputs.skip_scrape != true
     uses: ./.github/workflows/scrape-postgres.yml
     with:
       cascade: false  # Prevent cascading
@@ -63,13 +63,13 @@ jobs:
   # Job 2: Process content
   process:
     needs: [scrape]
-    if: always() && (needs.scrape.result == 'success' || github.event.inputs.skip_scrape == 'true')
+    if: always() && (needs.scrape.result == 'success' || inputs.skip_scrape == true)
     uses: ./.github/workflows/process-postgres.yml
     permissions:
       contents: write
       actions: read
     with:
-      trigger_source: ${{ github.event.inputs.skip_scrape == 'true' && 'manual' || 'scrape' }}
+      trigger_source: ${{ inputs.skip_scrape && 'manual' || 'scrape' }}
       run_id: ${{ needs.scrape.outputs.run_id || github.run_id }}
       cascade: false  # Prevent cascading
     secrets: inherit
@@ -77,15 +77,15 @@ jobs:
   # Job 3: Analyze content
   analyze:
     needs: [process]
-    if: always() && (needs.process.result == 'success' || github.event.inputs.skip_process == 'true')
+    if: always() && (needs.process.result == 'success' || inputs.skip_process)
     uses: ./.github/workflows/analyze-postgres.yml
     permissions:
       contents: write
       actions: read
     with:
-      trigger_source: ${{ github.event.inputs.skip_process == 'true' && 'manual' || 'process' }}
+      trigger_source: ${{ inputs.skip_process && 'manual' || 'process' }}
       run_id: ${{ needs.process.outputs.run_id || github.run_id }}
-      analysis_mode: ${{ github.event.inputs.analysis_mode }}
+      analysis_mode: ${{ inputs.analysis_mode }}
       cascade: false  # Prevent cascading
     secrets: inherit
   
@@ -161,7 +161,7 @@ jobs:
           echo "🐘 Using PostgreSQL backend - no local SQLite files needed"
       
       - name: Check baseline analysis status
-        if: ${{ github.event.inputs.skip_thebrain != 'true' }}
+        if: ${{ !inputs.skip_thebrain }}
         id: check_baseline
         run: |
           cd github-actions-backend
@@ -192,7 +192,7 @@ jobs:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
       - name: Run baseline analysis for TheBrain (if needed)
-        if: ${{ github.event.inputs.skip_thebrain != 'true' && steps.check_baseline.outputs.baseline_count == '0' }}
+        if: ${{ !inputs.skip_thebrain && steps.check_baseline.outputs.baseline_count == '0' }}
         run: |
           cd github-actions-backend
           
@@ -236,7 +236,7 @@ jobs:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
       - name: Sync to TheBrain API (PostgreSQL)
-        if: ${{ github.event.inputs.skip_thebrain != 'true' }}
+        if: ${{ !inputs.skip_thebrain }}
         run: |
           cd github-actions-backend
           
