@@ -215,6 +215,26 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
+      - name: Generate static data files (PostgreSQL)
+        run: |
+          cd github-actions-backend
+          
+          echo "📊 Generating static data files from PostgreSQL..."
+          
+          if ! node generate-static-data-three-db-postgres.js; then
+            echo "❌ Failed to generate static data files"
+            exit 1
+          fi
+          
+          echo "✅ Static data files generated successfully"
+          
+          # Verify files were created
+          echo "📁 Generated files:"
+          ls -la ../api-data/*.json
+          ls -la ../api-data/companies/*.json | head -10
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
       - name: Sync to TheBrain API (PostgreSQL)
         if: ${{ !inputs.skip_thebrain }}
         run: |
