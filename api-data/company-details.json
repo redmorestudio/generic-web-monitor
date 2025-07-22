@@ -5,29 +5,39 @@
       "name": "Anthropic",
       "urls": [
         {
-          "id": 10,
-          "url": "https://docs.anthropic.com",
-          "name": "docs"
-        },
-        {
           "id": 6,
           "url": "https://anthropic.com",
-          "name": "homepage"
-        },
-        {
-          "id": 9,
-          "url": "https://anthropic.com/news",
-          "name": "news"
-        },
-        {
-          "id": 8,
-          "url": "https://anthropic.com/pricing",
-          "name": "pricing"
+          "name": "homepage",
+          "category": "homepage",
+          "importance": null
         },
         {
           "id": 7,
           "url": "https://anthropic.com/claude",
-          "name": "product"
+          "name": "product",
+          "category": "product",
+          "importance": null
+        },
+        {
+          "id": 9,
+          "url": "https://anthropic.com/news",
+          "name": "news",
+          "category": "news",
+          "importance": null
+        },
+        {
+          "id": 8,
+          "url": "https://anthropic.com/pricing",
+          "name": "pricing",
+          "category": "pricing",
+          "importance": null
+        },
+        {
+          "id": 10,
+          "url": "https://docs.anthropic.com",
+          "name": "docs",
+          "category": "docs",
+          "importance": null
         }
       ],
       "stats": {
@@ -44,32 +54,40 @@
       "name": "GitHub Copilot",
       "urls": [
         {
-          "id": 47,
-          "url": "https://github.blog/tag/github-copilot",
-          "name": "blog"
-        },
-        {
           "id": 48,
           "url": "https://docs.github.com/en/copilot",
-          "name": "docs"
+          "name": "docs",
+          "category": "docs",
+          "importance": null
+        },
+        {
+          "id": 47,
+          "url": "https://github.blog/tag/github-copilot",
+          "name": "blog",
+          "category": "blog",
+          "importance": null
         },
         {
           "id": 45,
           "url": "https://github.com/features/copilot",
-          "name": "homepage"
+          "name": "homepage",
+          "category": "homepage",
+          "importance": null
         },
         {
           "id": 46,
           "url": "https://github.com/pricing",
-          "name": "pricing"
+          "name": "pricing",
+          "category": "pricing",
+          "importance": null
         }
       ],
       "stats": {
-        "total_changes": "6",
-        "changes_7d": "6",
-        "changes_30d": "6",
-        "last_change": "2025-07-22T17:17:58.613Z",
-        "avg_interest_level": "5.33"
+        "total_changes": "7",
+        "changes_7d": "7",
+        "changes_30d": "7",
+        "last_change": "2025-07-22T22:52:15.696Z",
+        "avg_interest_level": "5.43"
       },
       "insights": []
     },
@@ -80,27 +98,37 @@
         {
           "id": 15,
           "url": "https://ai.google.dev",
-          "name": "api"
-        },
-        {
-          "id": 14,
-          "url": "https://blog.google/technology/ai",
-          "name": "blog"
-        },
-        {
-          "id": 11,
-          "url": "https://deepmind.google",
-          "name": "homepage"
-        },
-        {
-          "id": 13,
-          "url": "https://cloud.google.com/vertex-ai/pricing",
-          "name": "pricing"
+          "name": "api",
+          "category": "api",
+          "importance": null
         },
         {
           "id": 12,
           "url": "https://ai.google/discover/gemini",
-          "name": "product"
+          "name": "product",
+          "category": "product",
+          "importance": null
+        },
+        {
+          "id": 14,
+          "url": "https://blog.google/technology/ai",
+          "name": "blog",
+          "category": "blog",
+          "importance": null
+        },
+        {
+          "id": 13,
+          "url": "https://cloud.google.com/vertex-ai/pricing",
+          "name": "pricing",
+          "category": "pricing",
+          "importance": null
+        },
+        {
+          "id": 11,
+          "url": "https://deepmind.google",
+          "name": "homepage",
+          "category": "homepage",
+          "importance": null
         }
       ],
       "stats": {
@@ -119,17 +147,23 @@
         {
           "id": 122,
           "url": "https://docs.midjourney.com",
-          "name": "docs"
-        },
-        {
-          "id": 121,
-          "url": "https://midjourney.com",
-          "name": "homepage"
+          "name": "docs",
+          "category": "docs",
+          "importance": null
         },
         {
           "id": 123,
           "url": "https://docs.midjourney.com/docs/plans",
-          "name": "pricing"
+          "name": "pricing",
+          "category": "pricing",
+          "importance": null
+        },
+        {
+          "id": 121,
+          "url": "https://midjourney.com",
+          "name": "homepage",
+          "category": "homepage",
+          "importance": null
         }
       ],
       "stats": {
@@ -146,29 +180,39 @@
       "name": "OpenAI",
       "urls": [
         {
-          "id": 5,
-          "url": "https://platform.openai.com",
-          "name": "api"
+          "id": 1,
+          "url": "https://openai.com",
+          "name": "homepage",
+          "category": "homepage",
+          "importance": null
         },
         {
           "id": 4,
           "url": "https://openai.com/blog",
-          "name": "blog"
-        },
-        {
-          "id": 1,
-          "url": "https://openai.com",
-          "name": "homepage"
-        },
-        {
-          "id": 3,
-          "url": "https://openai.com/pricing",
-          "name": "pricing"
+          "name": "blog",
+          "category": "blog",
+          "importance": null
         },
         {
           "id": 2,
           "url": "https://openai.com/chatgpt",
-          "name": "product"
+          "name": "product",
+          "category": "product",
+          "importance": null
+        },
+        {
+          "id": 3,
+          "url": "https://openai.com/pricing",
+          "name": "pricing",
+          "category": "pricing",
+          "importance": null
+        },
+        {
+          "id": 5,
+          "url": "https://platform.openai.com",
+          "name": "api",
+          "category": "api",
+          "importance": null
         }
       ],
       "stats": {
@@ -187,17 +231,23 @@
         {
           "id": 79,
           "url": "https://blog.perplexity.ai",
-          "name": "blog"
+          "name": "blog",
+          "category": "blog",
+          "importance": null
         },
         {
           "id": 77,
           "url": "https://perplexity.ai",
-          "name": "homepage"
+          "name": "homepage",
+          "category": "homepage",
+          "importance": null
         },
         {
           "id": 78,
           "url": "https://perplexity.ai/pro",
-          "name": "product"
+          "name": "product",
+          "category": "product",
+          "importance": null
         }
       ],
       "stats": {
@@ -210,5 +260,5 @@
       "insights": []
     }
   },
-  "generated_at": "2025-07-22T19:47:11.218Z"
+  "generated_at": "2025-07-22T23:49:27.394Z"
 }

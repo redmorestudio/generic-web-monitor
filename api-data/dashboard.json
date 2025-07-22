@@ -1,84 +1,184 @@
 {
-  "companies": [
+  "company_activity": [
     {
       "id": 2,
+      "company": "Anthropic",
       "name": "Anthropic",
       "category": "LLM Providers",
+      "type": "LLM Providers",
       "industry": null,
       "url_count": "5",
       "recent_changes": "7",
       "high_interest_changes": "4",
-      "last_scan": "2025-07-22T19:02:32.426Z",
-      "top_technologies": [],
-      "top_products": []
+      "last_scan": "2025-07-22T22:51:54.538Z",
+      "intelligence": {
+        "interest_level": 8,
+        "interest_category": "high",
+        "products": [],
+        "technologies": [],
+        "ai_ml_concepts": []
+      }
     },
     {
       "id": 11,
+      "company": "GitHub Copilot",
       "name": "GitHub Copilot",
       "category": "AI Coding",
+      "type": "AI Coding",
       "industry": null,
       "url_count": "4",
-      "recent_changes": "6",
+      "recent_changes": "7",
       "high_interest_changes": "2",
-      "last_scan": "2025-07-22T19:02:55.453Z",
-      "top_technologies": [],
-      "top_products": []
+      "last_scan": "2025-07-22T22:52:21.718Z",
+      "intelligence": {
+        "interest_level": 8,
+        "interest_category": "high",
+        "products": [],
+        "technologies": [],
+        "ai_ml_concepts": []
+      }
     },
     {
       "id": 3,
+      "company": "Google DeepMind",
       "name": "Google DeepMind",
       "category": "LLM Providers",
+      "type": "LLM Providers",
       "industry": null,
       "url_count": "5",
       "recent_changes": "7",
       "high_interest_changes": "3",
-      "last_scan": "2025-07-22T19:03:30.565Z",
-      "top_technologies": [],
-      "top_products": []
+      "last_scan": "2025-07-22T22:53:00.250Z",
+      "intelligence": {
+        "interest_level": 8,
+        "interest_category": "high",
+        "products": [],
+        "technologies": [],
+        "ai_ml_concepts": []
+      }
     },
     {
       "id": 34,
+      "company": "Midjourney",
       "name": "Midjourney",
       "category": "Image Generation",
+      "type": "Image Generation",
       "industry": null,
       "url_count": "3",
       "recent_changes": "2",
       "high_interest_changes": "0",
-      "last_scan": "2025-07-22T19:04:08.788Z",
-      "top_technologies": [],
-      "top_products": []
+      "last_scan": "2025-07-22T22:53:38.522Z",
+      "intelligence": {
+        "interest_level": 5,
+        "interest_category": "medium",
+        "products": [],
+        "technologies": [],
+        "ai_ml_concepts": []
+      }
     },
     {
       "id": 1,
+      "company": "OpenAI",
       "name": "OpenAI",
       "category": "LLM Providers",
+      "type": "LLM Providers",
       "industry": null,
       "url_count": "5",
       "recent_changes": "6",
       "high_interest_changes": "2",
-      "last_scan": "2025-07-22T19:04:37.180Z",
-      "top_technologies": [],
-      "top_products": []
+      "last_scan": "2025-07-22T22:53:59.471Z",
+      "intelligence": {
+        "interest_level": 8,
+        "interest_category": "high",
+        "products": [],
+        "technologies": [],
+        "ai_ml_concepts": []
+      }
     },
     {
       "id": 19,
+      "company": "Perplexity AI",
       "name": "Perplexity AI",
       "category": "AI Search",
+      "type": "AI Search",
       "industry": null,
       "url_count": "3",
       "recent_changes": "1",
       "high_interest_changes": "1",
-      "last_scan": "2025-07-22T19:04:51.903Z",
-      "top_technologies": [],
-      "top_products": []
+      "last_scan": "2025-07-22T22:54:16.709Z",
+      "intelligence": {
+        "interest_level": 8,
+        "interest_category": "high",
+        "products": [],
+        "technologies": [],
+        "ai_ml_concepts": []
+      }
     }
   ],
   "stats": {
-    "total_companies": "6",
-    "total_urls": "25",
-    "changes_24h": "9",
-    "changes_7d": "29",
-    "high_interest_7d": "12"
+    "companies": "6",
+    "urls": "25",
+    "changes_24h": "10",
+    "changes_7d": "30",
+    "high_interest_7d": "12",
+    "snapshots": "227"
   },
-  "last_updated": "2025-07-22T19:47:09.353Z"
+  "recent_changes_summary": {
+    "last_24h_count": 10,
+    "last_7d_count": 30,
+    "high_priority_count": 12,
+    "last_5_changes": [
+      {
+        "id": 10,
+        "company": "Anthropic",
+        "title": "Meet Claude \\ Anthropic",
+        "summary": "Content update detected",
+        "interest_level": 8,
+        "detected_at": "2025-07-21T03:06:44.412Z",
+        "category": "General Update",
+        "emoji": "🌟"
+      },
+      {
+        "id": 11,
+        "company": "Anthropic",
+        "title": "Pricing \\ Anthropic",
+        "summary": "Content update detected",
+        "interest_level": 6,
+        "detected_at": "2025-07-21T03:06:50.654Z",
+        "category": "General Update",
+        "emoji": "📌"
+      },
+      {
+        "id": 12,
+        "company": "Anthropic",
+        "title": "Newsroom \\ Anthropic",
+        "summary": "Content update detected",
+        "interest_level": 8,
+        "detected_at": "2025-07-21T03:06:58.430Z",
+        "category": "General Update",
+        "emoji": "🌟"
+      },
+      {
+        "id": 13,
+        "company": "Anthropic",
+        "title": "Home \\ Anthropic",
+        "summary": "Content update detected",
+        "interest_level": 8,
+        "detected_at": "2025-07-21T03:07:04.850Z",
+        "category": "General Update",
+        "emoji": "🌟"
+      },
+      {
+        "id": 14,
+        "company": "Anthropic",
+        "title": "Home - Anthropic",
+        "summary": "Content update detected",
+        "interest_level": 7,
+        "detected_at": "2025-07-21T03:07:11.303Z",
+        "category": "General Update",
+        "emoji": "🌟"
+      }
+    ]
+  },
+  "last_updated": "2025-07-22T23:49:27.311Z"
 }

@@ -1,8 +1,14 @@
 {
-  "version": "2.0",
+  "version": "2.1",
   "backend": "postgresql",
   "compatible_with": "sqlite-dashboard",
-  "generated_at": "2025-07-22T19:47:13.804Z",
+  "generated_at": "2025-07-22T23:49:27.494Z",
+  "fixes_applied": [
+    "proper_company_ids",
+    "eliminate_duplicates",
+    "extract_jsonb_entities",
+    "correct_join_logic"
+  ],
   "files": {
     "core": [
       "dashboard.json",
