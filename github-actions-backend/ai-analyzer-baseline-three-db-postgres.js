@@ -351,22 +351,33 @@ async function storeBaselineAnalysis(company, url, extractedData) {
       `${company}: ${extractedData.current_state?.positioning || 'AI company'}`;
 
     // Get the latest markdown content hash for this URL
+    // Note: markdown_content table doesn't have company/url directly - need to join through raw_content
     const contentHash = await db.get(`
-      SELECT markdown_hash 
-      FROM processed_content.markdown_pages 
-      WHERE company = $1 AND url = $2 
-      ORDER BY created_at DESC 
+      SELECT 
+        md5(mc.content) as markdown_hash 
+      FROM processed_content.markdown_content mc
+      JOIN raw_content.scraped_pages sp ON sp.id = mc.raw_content_id
+      WHERE sp.company = $1 AND sp.url = $2 
+      ORDER BY mc.created_at DESC 
       LIMIT 1
     `, [company, url]);
 
     // Store using PostgreSQL syntax with ON CONFLICT
+    // Schema expects JSONB columns for entities, themes, sentiment, key_points, relationships
     await db.run(`
       INSERT INTO intelligence.baseline_analysis 
-      (company, url, company_type, page_purpose, key_topics, main_message, 
+      (company, url, 
+       entities, themes, sentiment, key_points, relationships,
+       company_type, page_purpose, key_topics, main_message, 
        target_audience, unique_value, trust_elements, differentiation, 
        technology_stack, analysis_date, content_hash, ai_model)
-      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, NOW(), $12, $13)
+      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, NOW(), $17, $18)
       ON CONFLICT (company, url) DO UPDATE SET
+        entities = EXCLUDED.entities,
+        themes = EXCLUDED.themes,
+        sentiment = EXCLUDED.sentiment,
+        key_points = EXCLUDED.key_points,
+        relationships = EXCLUDED.relationships,
         company_type = EXCLUDED.company_type,
         page_purpose = EXCLUDED.page_purpose,
         key_topics = EXCLUDED.key_topics,
@@ -382,15 +393,20 @@ async function storeBaselineAnalysis(company, url, extractedData) {
     `, [
       company,
       url,
+      JSON.stringify(extractedData.entities || {}), // entities JSONB
+      JSON.stringify(extractedData.capabilities || {}), // themes JSONB
+      JSON.stringify(extractedData.strategic_intelligence?.interest_assessment || {}), // sentiment JSONB
+      JSON.stringify(extractedData.summary?.key_insights || []), // key_points JSONB
+      JSON.stringify(extractedData.relationships || []), // relationships JSONB
       extractedData.entities?.products?.[0]?.type || 'AI Company',
       extractedData.current_state?.positioning || '',
-      extractedData.summary?.key_insights || [],
+      JSON.stringify(extractedData.summary?.key_insights || []), // key_topics as text
       extractedData.summary?.one_line || '',
       extractedData.entities?.markets?.[0]?.segment || '',
       extractedData.current_state?.value_props?.[0] || '',
-      extractedData.current_state?.core_capabilities || [],
+      JSON.stringify(extractedData.current_state?.core_capabilities || []), // trust_elements as text
       extractedData.strategic_intelligence?.innovation_level || '',
-      extractedData.entities?.technologies?.map(t => t.name) || [],
+      JSON.stringify(extractedData.entities?.technologies?.map(t => t.name) || []), // technology_stack as text
       contentHash?.markdown_hash || null,
       'groq-llama-3.3-70b'
     ]);
@@ -442,15 +458,21 @@ async function processAllSnapshots() {
   }
 
   // Get the most recent processed content for each URL
+  // Join scraped_pages with markdown_content to get company/url info
   const latestSnapshots = await db.all(`
-    SELECT DISTINCT ON (company, url)
-      company,
-      url,
-      content as markdown_text,
-      created_at
-    FROM processed_content.markdown_pages
-    WHERE content IS NOT NULL AND LENGTH(content) > 100
-    ORDER BY company, url, created_at DESC
+    WITH latest_content AS (
+      SELECT DISTINCT ON (sp.company, sp.url)
+        sp.company,
+        sp.url,
+        mc.content as markdown_text,
+        mc.created_at,
+        mc.id as markdown_id
+      FROM raw_content.scraped_pages sp
+      JOIN processed_content.markdown_content mc ON mc.raw_content_id = sp.id
+      WHERE mc.content IS NOT NULL AND LENGTH(mc.content) > 100
+      ORDER BY sp.company, sp.url, mc.created_at DESC
+    )
+    SELECT * FROM latest_content
   `);
 
   console.log(`📋 Found ${latestSnapshots.length} URLs to analyze\n`);
@@ -635,14 +657,43 @@ async function generateBaselineReport() {
 
     // Merge data from all URLs
     for (const analysis of analyses) {
+      // Parse JSON strings back to arrays
       if (analysis.technology_stack) {
-        aggregated.technologies.push(...analysis.technology_stack);
+        try {
+          const techs = typeof analysis.technology_stack === 'string' 
+            ? JSON.parse(analysis.technology_stack) 
+            : analysis.technology_stack;
+          if (Array.isArray(techs)) {
+            aggregated.technologies.push(...techs);
+          }
+        } catch (e) {
+          // If not valid JSON, treat as single value
+          aggregated.technologies.push(analysis.technology_stack);
+        }
       }
       if (analysis.key_topics) {
-        aggregated.key_topics.push(...analysis.key_topics);
+        try {
+          const topics = typeof analysis.key_topics === 'string' 
+            ? JSON.parse(analysis.key_topics) 
+            : analysis.key_topics;
+          if (Array.isArray(topics)) {
+            aggregated.key_topics.push(...topics);
+          }
+        } catch (e) {
+          aggregated.key_topics.push(analysis.key_topics);
+        }
       }
       if (analysis.trust_elements) {
-        aggregated.trust_elements.push(...analysis.trust_elements);
+        try {
+          const elements = typeof analysis.trust_elements === 'string' 
+            ? JSON.parse(analysis.trust_elements) 
+            : analysis.trust_elements;
+          if (Array.isArray(elements)) {
+            aggregated.trust_elements.push(...elements);
+          }
+        } catch (e) {
+          aggregated.trust_elements.push(analysis.trust_elements);
+        }
       }
       if (analysis.page_purpose) {
         aggregated.page_purposes.push(analysis.page_purpose);
