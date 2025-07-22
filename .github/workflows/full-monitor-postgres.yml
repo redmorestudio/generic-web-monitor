@@ -164,19 +164,31 @@ jobs:
         run: |
           cd github-actions-backend
           
-          BASELINE_COUNT=$(node -e "
-            const { db, end } = require('./postgres-db');
-            db.get('SELECT COUNT(*) as count FROM intelligence.baseline_analysis')
-              .then(result => {
-                console.log(result.count);
-                process.exit(0);
-              })
-              .catch(error => {
-                console.log('0');
-                process.exit(0);
-              })
-              .finally(() => end());
-          " 2>/dev/null || echo "0")
+          # Create a temporary script to avoid stdout pollution
+          cat > check_baseline.js << 'EOF'
+          const { db, end } = require('./postgres-db');
+          
+          // Suppress connection logs
+          const originalLog = console.log;
+          console.log = () => {};
+          
+          db.get('SELECT COUNT(*) as count FROM intelligence.baseline_analysis')
+            .then(result => {
+              // Restore console.log and output only the count
+              console.log = originalLog;
+              process.stdout.write(result.count.toString());
+              process.exit(0);
+            })
+            .catch(error => {
+              console.log = originalLog;
+              process.stdout.write('0');
+              process.exit(0);
+            })
+            .finally(() => end());
+          EOF
+          
+          BASELINE_COUNT=$(node check_baseline.js 2>/dev/null || echo "0")
+          rm -f check_baseline.js
           
           echo "baseline_count=$BASELINE_COUNT" >> $GITHUB_OUTPUT
           
