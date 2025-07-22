@@ -443,13 +443,8 @@ async function generateCompanyDetailsData() {
             WHERE cd.company = $1
         `, [company.name]);
         
-        // Get top insights
-        const insights = await db.all(`
-            SELECT * FROM intelligence.insights
-            WHERE company_id = $1
-            ORDER BY created_at DESC
-            LIMIT 5
-        `, [company.id]);
+        // Get top insights - TABLE DOESN'T EXIST
+        const insights = []; // await db.all(`SELECT * FROM intelligence.insights WHERE company_id = $1 ORDER BY created_at DESC LIMIT 5`, [company.id]);
         
         details[company.name] = {
             id: company.id,
@@ -540,8 +535,7 @@ async function generateIndividualCompanyFiles(companyName) {
     console.log(`  📁 Generating data for ${companyName}...`);
     
     const company = await db.get(`
-        SELECT c.id, c.name, c.category, 
-               c.created_at, c.updated_at,
+        SELECT c.id, c.name, c.category,
                ca.industry
         FROM intelligence.companies c
         LEFT JOIN intelligence.company_attributes ca ON c.id = ca.company_id
@@ -589,13 +583,8 @@ async function generateIndividualCompanyFiles(companyName) {
         };
     });
     
-    // Get insights
-    const insights = await db.all(`
-        SELECT * FROM intelligence.insights
-        WHERE company_id = $1
-        ORDER BY created_at DESC
-        LIMIT 10
-    `, [company.id]);
+    // Get insights - TABLE DOESN'T EXIST
+    const insights = []; // await db.all(`SELECT * FROM intelligence.insights WHERE company_id = $1 ORDER BY created_at DESC LIMIT 10`, [company.id]);
     
     // Get aggregated stats - FIXED with DISTINCT
     const stats = await db.get(`
