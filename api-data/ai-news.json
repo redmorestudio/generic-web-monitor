@@ -1,6 +1,51 @@
 {
   "news": [
     {
+      "id": "OpenAI-1753208281891",
+      "company": "OpenAI",
+      "title": "OpenAI",
+      "summary": "The updated content showcases OpenAI's diverse range of AI-powered tools and services, including ChatGPT, Sora, and API Platform, highlighting the company's commitment to making AI accessible and empowering for all. The presence of multilingual support and various AI-driven features demonstrates significant technical advances and notable business impact.",
+      "category": "AI/ML Platform",
+      "interest_level": 8,
+      "impact_areas": [
+        "Natural Language Processing",
+        "Computer Vision",
+        "Conversational AI"
+      ],
+      "url": null,
+      "date": "2025-07-22T18:18:01.891Z"
+    },
+    {
+      "id": "OpenAI-1753208281891",
+      "company": "OpenAI",
+      "title": "OpenAI",
+      "summary": "The updated content showcases OpenAI's diverse range of AI-powered tools and services, including ChatGPT, Sora, and API Platform, highlighting the company's commitment to making AI accessible and empowering for all. The presence of multilingual support and various AI-driven features demonstrates significant technical advances and notable business impact.",
+      "category": "AI/ML Platform",
+      "interest_level": 8,
+      "impact_areas": [
+        "Natural Language Processing",
+        "Computer Vision",
+        "Conversational AI"
+      ],
+      "url": null,
+      "date": "2025-07-22T18:18:01.891Z"
+    },
+    {
+      "id": "OpenAI-1753205620166",
+      "company": "OpenAI",
+      "title": "ChatGPT",
+      "summary": "The introduction of ChatGPT, with its advanced AI capabilities and production-ready service, indicates significant technical innovation and major business impact, particularly in the areas of conversational AI and customer service automation.",
+      "category": "AI/ML",
+      "interest_level": 9,
+      "impact_areas": [
+        "Conversational AI",
+        "Natural Language Processing",
+        "Customer Service Automation"
+      ],
+      "url": null,
+      "date": "2025-07-22T17:33:40.166Z"
+    },
+    {
       "id": "OpenAI-1753205620166",
       "company": "OpenAI",
       "title": "ChatGPT",
@@ -46,264 +91,215 @@
       "date": "2025-07-22T17:18:26.929Z"
     },
     {
-      "id": "Flux-1753204660798",
-      "company": "Flux",
-      "title": "Black Forest Labs - Frontier AI Lab",
-      "summary": "Black Forest Labs has updated their FLUX.1 Kontext model suite, which now allows for in-context image generation and editing using both text and images. This update demonstrates significant technical advances in generative models, but the business impact is currently limited to product updates and new features.",
-      "category": "AI/ML",
+      "id": "Google DeepMind-1753204706929",
+      "company": "Google DeepMind",
+      "title": "Google DeepMind",
+      "summary": "Google DeepMind has made significant advancements in their Gemini model, including scaled production readiness and achieving a gold-medal standard at the International Mathematical Olympiad, demonstrating notable technical innovation and moderate business impact.",
+      "category": "AI/ML Model Advancements",
       "interest_level": 7,
+      "impact_areas": [
+        "Natural Language Processing",
+        "Mathematical Problem Solving",
+        "Robotics"
+      ],
+      "url": null,
+      "date": "2025-07-22T17:18:26.929Z"
+    },
+    {
+      "id": "Google DeepMind-1753204706929",
+      "company": "Google DeepMind",
+      "title": "Google DeepMind",
+      "summary": "Google DeepMind has made significant advancements in their Gemini model, including scaled production readiness and achieving a gold-medal standard at the International Mathematical Olympiad, demonstrating notable technical innovation and moderate business impact.",
+      "category": "AI/ML Model Advancements",
+      "interest_level": 7,
+      "impact_areas": [
+        "Natural Language Processing",
+        "Mathematical Problem Solving",
+        "Robotics"
+      ],
+      "url": null,
+      "date": "2025-07-22T17:18:26.929Z"
+    },
+    {
+      "id": "Perplexity AI-1753111270364",
+      "company": "Perplexity AI",
+      "title": "Perplexity",
+      "summary": "Perplexity Pro offers advanced AI-powered search capabilities, upgraded AI models, and collaborative features, indicating significant technical innovation and business impact in the AI search and productivity space.",
+      "category": "AI-powered Search and Productivity",
+      "interest_level": 8,
+      "impact_areas": [
+        "Search",
+        "AI Models",
+        "Productivity",
+        "Collaboration"
+      ],
+      "url": null,
+      "date": "2025-07-21T15:21:10.364Z"
+    },
+    {
+      "id": "Perplexity AI-1753111270364",
+      "company": "Perplexity AI",
+      "title": "Perplexity",
+      "summary": "Perplexity Pro offers advanced AI-powered search capabilities, upgraded AI models, and collaborative features, indicating significant technical innovation and business impact in the AI search and productivity space.",
+      "category": "AI-powered Search and Productivity",
+      "interest_level": 8,
+      "impact_areas": [
+        "Search",
+        "AI Models",
+        "Productivity",
+        "Collaboration"
+      ],
+      "url": null,
+      "date": "2025-07-21T15:21:10.364Z"
+    },
+    {
+      "id": "Perplexity AI-1753111270364",
+      "company": "Perplexity AI",
+      "title": "Perplexity",
+      "summary": "Perplexity Pro offers advanced AI-powered search capabilities, upgraded AI models, and collaborative features, indicating significant technical innovation and business impact in the AI search and productivity space.",
+      "category": "AI-powered Search and Productivity",
+      "interest_level": 8,
+      "impact_areas": [
+        "Search",
+        "AI Models",
+        "Productivity",
+        "Collaboration"
+      ],
+      "url": null,
+      "date": "2025-07-21T15:21:10.364Z"
+    },
+    {
+      "id": "Perplexity AI-1753111270364",
+      "company": "Perplexity AI",
+      "title": "Perplexity",
+      "summary": "Perplexity Pro offers advanced AI-powered search capabilities, upgraded AI models, and collaborative features, indicating significant technical innovation and business impact in the AI search and productivity space.",
+      "category": "AI-powered Search and Productivity",
+      "interest_level": 8,
+      "impact_areas": [
+        "Search",
+        "AI Models",
+        "Productivity",
+        "Collaboration"
+      ],
+      "url": null,
+      "date": "2025-07-21T15:21:10.364Z"
+    },
+    {
+      "id": "Perplexity AI-1753111270364",
+      "company": "Perplexity AI",
+      "title": "Perplexity",
+      "summary": "Perplexity Pro offers advanced AI-powered search capabilities, upgraded AI models, and collaborative features, indicating significant technical innovation and business impact in the AI search and productivity space.",
+      "category": "AI-powered Search and Productivity",
+      "interest_level": 8,
+      "impact_areas": [
+        "Search",
+        "AI Models",
+        "Productivity",
+        "Collaboration"
+      ],
+      "url": null,
+      "date": "2025-07-21T15:21:10.364Z"
+    },
+    {
+      "id": "Midjourney-1753111102044",
+      "company": "Midjourney",
+      "title": "Midjourney",
+      "summary": "Midjourney appears to be a new AI/ML platform with available documentation, support, and community guidelines, indicating a notable development in the AI/ML space.",
+      "category": "AI/ML Platform",
+      "interest_level": 6,
+      "impact_areas": [
+        "AI-powered tools and services",
+        "Machine learning community engagement"
+      ],
+      "url": null,
+      "date": "2025-07-21T15:18:22.044Z"
+    },
+    {
+      "id": "Midjourney-1753111102044",
+      "company": "Midjourney",
+      "title": "Midjourney",
+      "summary": "Midjourney appears to be a new AI/ML platform with available documentation, support, and community guidelines, indicating a notable development in the AI/ML space.",
+      "category": "AI/ML Platform",
+      "interest_level": 6,
+      "impact_areas": [
+        "AI-powered tools and services",
+        "Machine learning community engagement"
+      ],
+      "url": null,
+      "date": "2025-07-21T15:18:22.044Z"
+    },
+    {
+      "id": "Midjourney-1753111102044",
+      "company": "Midjourney",
+      "title": "Midjourney",
+      "summary": "Midjourney appears to be a new AI/ML platform with available documentation, support, and community guidelines, indicating a notable development in the AI/ML space.",
+      "category": "AI/ML Platform",
+      "interest_level": 6,
+      "impact_areas": [
+        "AI-powered tools and services",
+        "Machine learning community engagement"
+      ],
+      "url": null,
+      "date": "2025-07-21T15:18:22.044Z"
+    },
+    {
+      "id": "Midjourney-1753111102044",
+      "company": "Midjourney",
+      "title": "Midjourney",
+      "summary": "Midjourney appears to be a new AI/ML platform with available documentation, support, and community guidelines, indicating a notable development in the AI/ML space.",
+      "category": "AI/ML Platform",
+      "interest_level": 6,
+      "impact_areas": [
+        "AI-powered tools and services",
+        "Machine learning community engagement"
+      ],
+      "url": null,
+      "date": "2025-07-21T15:18:22.044Z"
+    },
+    {
+      "id": "Midjourney-1753111102044",
+      "company": "Midjourney",
+      "title": "Midjourney",
+      "summary": "Midjourney appears to be a new AI/ML platform with available documentation, support, and community guidelines, indicating a notable development in the AI/ML space.",
+      "category": "AI/ML Platform",
+      "interest_level": 6,
+      "impact_areas": [
+        "AI-powered tools and services",
+        "Machine learning community engagement"
+      ],
+      "url": null,
+      "date": "2025-07-21T15:18:22.044Z"
+    },
+    {
+      "id": "Google DeepMind-1753110706979",
+      "company": "Google DeepMind",
+      "title": "Google DeepMind",
+      "summary": "The update introduces Backstory, a new tool for exploring online image context, and marks the stable release of Gemini 2.5 Pro and Flash, indicating incremental improvements in Google DeepMind's AI capabilities.",
+      "category": "AI/ML Model Development and Release",
+      "interest_level": 6,
       "impact_areas": [
         "Computer Vision",
-        "Natural Language Processing"
+        "Natural Language Processing",
+        "Robotics"
       ],
       "url": null,
-      "date": "2025-07-22T17:17:40.798Z"
+      "date": "2025-07-21T15:11:46.979Z"
     },
     {
-      "id": "Descript-1753204610688",
-      "company": "Descript",
-      "title": "Descript: Edit Videos & Podcasts Like a Doc | AI Video Editor",
-      "summary": "Descript's updates emphasize AI-driven video editing and automated design, indicating a focus on enhancing user experience and efficiency. The introduction of Underlord for script editing and generation suggests a notable technical advance, but the business impact appears to be more incremental, related to product updates and feature enhancements.",
-      "category": "AI Video Editing",
+      "id": "Google DeepMind-1753110706979",
+      "company": "Google DeepMind",
+      "title": "Google DeepMind",
+      "summary": "The update introduces Backstory, a new tool for exploring online image context, and marks the stable release of Gemini 2.5 Pro and Flash, indicating incremental improvements in Google DeepMind's AI capabilities.",
+      "category": "AI/ML Model Development and Release",
       "interest_level": 6,
       "impact_areas": [
-        "Content Creation",
-        "Video Editing",
-        "AI-assisted Design"
+        "Computer Vision",
+        "Natural Language Processing",
+        "Robotics"
       ],
       "url": null,
-      "date": "2025-07-22T17:16:50.688Z"
-    },
-    {
-      "id": "Descript-1753204610688",
-      "company": "Descript",
-      "title": "Descript: Edit Videos & Podcasts Like a Doc | AI Video Editor",
-      "summary": "Descript's updates emphasize AI-driven video editing and automated design, indicating a focus on enhancing user experience and efficiency. The introduction of Underlord for script editing and generation suggests a notable technical advance, but the business impact appears to be more incremental, related to product updates and feature enhancements.",
-      "category": "AI Video Editing",
-      "interest_level": 6,
-      "impact_areas": [
-        "Content Creation",
-        "Video Editing",
-        "AI-assisted Design"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:16:50.688Z"
-    },
-    {
-      "id": "DALL-E-1753204563060",
-      "company": "DALL-E",
-      "title": "ChatGPT Pricing | OpenAI",
-      "summary": "OpenAI's ChatGPT pricing page reveals a tiered plan structure with varying levels of access to AI models, features, and capabilities, indicating a significant business move to expand AI adoption and competitiveness.",
-      "category": "AI Pricing and Plans",
-      "interest_level": 7,
-      "impact_areas": [
-        "AI Adoption",
-        "Competitive Pricing",
-        "AI Model Accessibility"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:16:03.060Z"
-    },
-    {
-      "id": "DALL-E-1753204563060",
-      "company": "DALL-E",
-      "title": "ChatGPT Pricing | OpenAI",
-      "summary": "OpenAI's ChatGPT pricing page reveals a tiered plan structure with varying levels of access to AI models, features, and capabilities, indicating a significant business move to expand AI adoption and competitiveness.",
-      "category": "AI Pricing and Plans",
-      "interest_level": 7,
-      "impact_areas": [
-        "AI Adoption",
-        "Competitive Pricing",
-        "AI Model Accessibility"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:16:03.060Z"
-    },
-    {
-      "id": "DALL-E-1753204563060",
-      "company": "DALL-E",
-      "title": "ChatGPT Pricing | OpenAI",
-      "summary": "OpenAI's ChatGPT pricing page reveals a tiered plan structure with varying levels of access to AI models, features, and capabilities, indicating a significant business move to expand AI adoption and competitiveness.",
-      "category": "AI Pricing and Plans",
-      "interest_level": 7,
-      "impact_areas": [
-        "AI Adoption",
-        "Competitive Pricing",
-        "AI Model Accessibility"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:16:03.060Z"
-    },
-    {
-      "id": "DALL-E-1753204563060",
-      "company": "DALL-E",
-      "title": "ChatGPT Pricing | OpenAI",
-      "summary": "OpenAI's ChatGPT pricing page reveals a tiered plan structure with varying levels of access to AI models, features, and capabilities, indicating a significant business move to expand AI adoption and competitiveness.",
-      "category": "AI Pricing and Plans",
-      "interest_level": 7,
-      "impact_areas": [
-        "AI Adoption",
-        "Competitive Pricing",
-        "AI Model Accessibility"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:16:03.060Z"
-    },
-    {
-      "id": "DALL-E-1753204563060",
-      "company": "DALL-E",
-      "title": "ChatGPT Pricing | OpenAI",
-      "summary": "OpenAI's ChatGPT pricing page reveals a tiered plan structure with varying levels of access to AI models, features, and capabilities, indicating a significant business move to expand AI adoption and competitiveness.",
-      "category": "AI Pricing and Plans",
-      "interest_level": 7,
-      "impact_areas": [
-        "AI Adoption",
-        "Competitive Pricing",
-        "AI Model Accessibility"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:16:03.060Z"
-    },
-    {
-      "id": "Anyscale-1753204435013",
-      "company": "Anyscale",
-      "title": "Blog | Anyscale",
-      "summary": "The updated content highlights Anyscale's involvement in the AI/ML community through calls for papers, product integrations, and new releases, indicating a moderate level of technical innovation and business impact.",
-      "category": "AI/ML",
-      "interest_level": 7,
-      "impact_areas": [
-        "AI Development",
-        "Distributed Computing",
-        "Cloud Integration",
-        "Reinforcement Learning"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:13:55.013Z"
-    },
-    {
-      "id": "Anyscale-1753204427746",
-      "company": "Anyscale",
-      "title": "Anyscale | Supercharge your AI Platform",
-      "summary": "Anyscale's update highlights its involvement in the AI/ML community through the call for papers at Ray Summit, and showcases its partnerships with prominent AI companies like Cohere and OpenAI. The $100 credit offer for new users and the emphasis on Ray's capabilities indicate a focus on growth and user acquisition.",
-      "category": "AI/ML Platform",
-      "interest_level": 8,
-      "impact_areas": [
-        "AI/ML development",
-        "Distributed computing",
-        "Scalability",
-        "Cloud computing"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:13:47.746Z"
-    },
-    {
-      "id": "Anyscale-1753204427746",
-      "company": "Anyscale",
-      "title": "Anyscale | Supercharge your AI Platform",
-      "summary": "Anyscale's update highlights its involvement in the AI/ML community through the call for papers at Ray Summit, and showcases its partnerships with prominent AI companies like Cohere and OpenAI. The $100 credit offer for new users and the emphasis on Ray's capabilities indicate a focus on growth and user acquisition.",
-      "category": "AI/ML Platform",
-      "interest_level": 8,
-      "impact_areas": [
-        "AI/ML development",
-        "Distributed computing",
-        "Scalability",
-        "Cloud computing"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:13:47.746Z"
-    },
-    {
-      "id": "Anyscale-1753204427746",
-      "company": "Anyscale",
-      "title": "Anyscale | Supercharge your AI Platform",
-      "summary": "Anyscale's update highlights its involvement in the AI/ML community through the call for papers at Ray Summit, and showcases its partnerships with prominent AI companies like Cohere and OpenAI. The $100 credit offer for new users and the emphasis on Ray's capabilities indicate a focus on growth and user acquisition.",
-      "category": "AI/ML Platform",
-      "interest_level": 8,
-      "impact_areas": [
-        "AI/ML development",
-        "Distributed computing",
-        "Scalability",
-        "Cloud computing"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:13:47.746Z"
-    },
-    {
-      "id": "Anyscale-1753204427746",
-      "company": "Anyscale",
-      "title": "Anyscale | Supercharge your AI Platform",
-      "summary": "Anyscale's update highlights its involvement in the AI/ML community through the call for papers at Ray Summit, and showcases its partnerships with prominent AI companies like Cohere and OpenAI. The $100 credit offer for new users and the emphasis on Ray's capabilities indicate a focus on growth and user acquisition.",
-      "category": "AI/ML Platform",
-      "interest_level": 8,
-      "impact_areas": [
-        "AI/ML development",
-        "Distributed computing",
-        "Scalability",
-        "Cloud computing"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:13:47.746Z"
-    },
-    {
-      "id": "Anyscale-1753204419209",
-      "company": "Anyscale",
-      "title": "Pricing",
-      "summary": "Anyscale has introduced a new pricing model based on compute usage, offering flexible deployment options and access to its optimized Ray Runtime, which may attract AI pioneers and industry experts.",
-      "category": "AI Compute Platform",
-      "interest_level": 6,
-      "impact_areas": [
-        "Pricing models",
-        "AI deployment flexibility",
-        "Compute optimization"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:13:39.209Z"
-    },
-    {
-      "id": "Anyscale-1753204419209",
-      "company": "Anyscale",
-      "title": "Pricing",
-      "summary": "Anyscale has introduced a new pricing model based on compute usage, offering flexible deployment options and access to its optimized Ray Runtime, which may attract AI pioneers and industry experts.",
-      "category": "AI Compute Platform",
-      "interest_level": 6,
-      "impact_areas": [
-        "Pricing models",
-        "AI deployment flexibility",
-        "Compute optimization"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:13:39.209Z"
-    },
-    {
-      "id": "Anyscale-1753204419209",
-      "company": "Anyscale",
-      "title": "Pricing",
-      "summary": "Anyscale has introduced a new pricing model based on compute usage, offering flexible deployment options and access to its optimized Ray Runtime, which may attract AI pioneers and industry experts.",
-      "category": "AI Compute Platform",
-      "interest_level": 6,
-      "impact_areas": [
-        "Pricing models",
-        "AI deployment flexibility",
-        "Compute optimization"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:13:39.209Z"
-    },
-    {
-      "id": "Anyscale-1753204419209",
-      "company": "Anyscale",
-      "title": "Pricing",
-      "summary": "Anyscale has introduced a new pricing model based on compute usage, offering flexible deployment options and access to its optimized Ray Runtime, which may attract AI pioneers and industry experts.",
-      "category": "AI Compute Platform",
-      "interest_level": 6,
-      "impact_areas": [
-        "Pricing models",
-        "AI deployment flexibility",
-        "Compute optimization"
-      ],
-      "url": null,
-      "date": "2025-07-22T17:13:39.209Z"
+      "date": "2025-07-21T15:11:46.979Z"
     }
   ],
-  "last_updated": "2025-07-22T17:46:48.063Z"
+  "last_updated": "2025-07-22T18:47:27.490Z"
 }
