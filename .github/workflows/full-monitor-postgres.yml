@@ -205,10 +205,17 @@ jobs:
         run: |
           cd github-actions-backend
           echo "🔧 Ensuring baseline_analysis table exists with correct schema..."
-          node fix-baseline-analysis-schema.js || {
-            echo "⚠️  Individual fix failed, running comprehensive fix..."
-            node fix-all-analyzer-schemas.js
-          }
+          
+          # Use robust version that handles all edge cases
+          if [ -f "fix-baseline-analysis-schema-robust.js" ]; then
+            echo "Using robust schema fix..."
+            node fix-baseline-analysis-schema-robust.js
+          else
+            node fix-baseline-analysis-schema.js || {
+              echo "⚠️  Individual fix failed, running comprehensive fix..."
+              node fix-all-analyzer-schemas.js
+            }
+          fi
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
