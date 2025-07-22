@@ -1,241 +1,145 @@
 {
-  "generated_at": "2025-07-22T18:47:56.285Z",
+  "generated_at": "2025-07-22T19:45:26.333Z",
   "database": "PostgreSQL",
   "period": "last_7_days",
   "summary": {
-    "total_changes": 136,
-    "high_interest": 100,
-    "medium_interest": 6,
-    "low_interest": 30,
-    "average_interest": "7.2"
+    "total_changes": 13,
+    "high_interest": 6,
+    "medium_interest": 0,
+    "low_interest": 7,
+    "average_interest": "5.2"
   },
   "top_changes": [
+    {
+      "company": "OpenAI",
+      "url": "homepage",
+      "interest_level": 9,
+      "type": "modified",
+      "impact": "The changes indicate a significant expansion of OpenAI's product offerings and research focus, which can impact the company's market position and revenue.",
+      "insights": [
+        "OpenAI is expanding its product offerings and research focus",
+        "The company is emphasizing the development and marketing of AI-powered products and services"
+      ]
+    },
     {
       "company": "OpenAI",
       "url": "product",
       "interest_level": 9,
       "type": "modified",
-      "impact": "The update may attract more users to the ChatGPT platform, potentially increasing revenue and market share for OpenAI",
+      "impact": "The update may attract more users to the ChatGPT platform, increasing engagement and potentially driving revenue",
       "insights": [
-        "OpenAI is investing in its ChatGPT product",
-        "The company is prioritizing user experience and security"
+        "OpenAI is investing in user experience and chat services",
+        "The update may drive user engagement and revenue"
       ]
     },
     {
-      "company": "Anyscale",
-      "url": "homepage",
-      "interest_level": 9,
-      "type": "modified",
-      "impact": "The changes suggest a significant expansion of the company's product offerings and marketing strategy, potentially indicating a major growth phase.",
-      "insights": [
-        "The company is investing heavily in AI and ML",
-        "There is a growing demand for cloud computing solutions",
-        "The company is expanding its product offerings and marketing strategy"
-      ]
-    },
-    {
-      "company": "Anyscale",
-      "url": "pricing",
-      "interest_level": 9,
-      "type": "modified",
-      "impact": "The changes could lead to increased revenue and customer adoption for Anyscale, as well as improved competitiveness in the AI and machine learning market.",
-      "insights": [
-        "Anyscale is investing heavily in its AI Compute Platform and Ray Open Source",
-        "The company is targeting large-scale AI and machine learning deployments",
-        "The updates could lead to increased competition in the AI and machine learning market"
-      ]
-    },
-    {
-      "company": "DALL-E",
-      "url": "pricing",
-      "interest_level": 9,
-      "type": "modified",
-      "impact": "The introduction of a pricing page for ChatGPT indicates a significant shift in OpenAI's business model, potentially generating revenue through subscription-based plans.",
-      "insights": [
-        "OpenAI has introduced a pricing page for ChatGPT, indicating a significant strategic move",
-        "The pricing page offers various plans with different features and limitations",
-        "The company is targeting both individual and enterprise customers"
-      ]
-    },
-    {
-      "company": "You.com",
-      "url": "homepage",
+      "company": "Perplexity AI",
+      "url": "product",
       "interest_level": 9,
       "type": "new",
-      "impact": "You.com is positioning itself as a major player in the AI for workplace productivity market with the introduction of ARI",
+      "impact": "The introduction of Perplexity Pro and Max plans indicates a shift towards a more premium and feature-rich offering, potentially increasing revenue and competitiveness",
       "insights": [
-        "You.com is investing heavily in AI research and development",
-        "The company is targeting large enterprises with its solutions"
+        "Perplexity AI is introducing new subscription plans with significant features and pricing",
+        "The company is focusing on providing premium features and services to its users"
       ]
     },
     {
-      "company": "WellSaid Labs",
+      "company": "Midjourney",
       "url": "pricing",
       "interest_level": 9,
       "type": "new",
-      "impact": "The new pricing plans may attract more customers, especially small businesses and individuals, and increase revenue for WellSaid Labs.",
+      "impact": "The introduction of a new pricing page with detailed plan comparisons and features is likely to increase revenue and attract more customers to Midjourney's platform",
       "insights": [
-        "WellSaid Labs has introduced a new pricing page with various plans",
-        "The plans include a trial plan, creative plan, business plan, and enterprise plan"
+        "Midjourney's new pricing page provides a clear and detailed comparison of its plans and features",
+        "The introduction of a 20% discount for annual commitments may incentivize customers to commit to longer-term subscriptions"
       ]
     },
     {
-      "company": "Weights & Biases",
-      "url": "blog",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The updates are likely to enhance Weights & Biases' competitive position in the AI engineering market, particularly in the areas of inference, online evaluations, and observability.",
+      "company": "Anthropic",
+      "url": "news",
+      "interest_level": 8,
+      "type": "modified",
+      "impact": "The changes suggest Anthropic is emphasizing policy and strategic initiatives, potentially indicating a broader impact on their business model and market approach.",
       "insights": [
-        "Weights & Biases is enhancing its product offerings to support AI engineering and generative AI",
-        "The company is focusing on inference, online evaluations, and observability as key areas of development"
+        "Anthropic has added a new policy announcement 'Build AI in America'",
+        "Multiple news articles have been removed from the newsroom page"
       ]
     },
     {
-      "company": "Weights & Biases",
-      "url": "homepage",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The changes are likely to have a significant impact on the company's business, as they position themselves as a leading AI developer platform and highlight their various features and solutions",
-      "insights": [
-        "Weights & Biases is positioning itself as a leading AI developer platform",
-        "The company is highlighting its various features and solutions to attract customers and establish itself as a leader in the market"
-      ]
-    },
-    {
-      "company": "Tabnine",
+      "company": "Midjourney",
       "url": "docs",
-      "interest_level": 9,
+      "interest_level": 8,
       "type": "new",
-      "impact": "The creation of comprehensive documentation for Tabnine's AI code assistant can increase user adoption and retention, ultimately driving business growth.",
+      "impact": "Enhanced user experience and support, potentially leading to increased customer satisfaction and retention.",
       "insights": [
-        "Tabnine's AI code assistant has the potential to significantly accelerate and simplify software development",
-        "The creation of comprehensive documentation is a key factor in user adoption and retention"
+        "Midjourney is investing in comprehensive documentation and support",
+        "Emphasis on policies and guidelines for transparency"
       ]
     },
     {
-      "company": "Tabnine",
-      "url": "homepage",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The changes are likely to attract more customers and increase revenue for Tabnine, as the new features and emphasis on code privacy and protection address key concerns for software developers",
-      "insights": [
-        "Tabnine's updated homepage showcases new features and emphasizes code privacy and protection",
-        "The company is investing in AI-powered code assistant technology",
-        "There is growing demand for code privacy and protection solutions"
-      ]
-    },
-    {
-      "company": "Synthesia",
-      "url": "blog",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The new content highlights Synthesia's focus on video transformation and training, which could lead to increased adoption and revenue growth.",
-      "insights": [
-        "Synthesia's new content showcases significant updates to its services and features.",
-        "The company is focusing on video transformation and training.",
-        "AI video generation is a key technology driving Synthesia's growth."
-      ]
-    },
-    {
-      "company": "Stability AI",
-      "url": "blog",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The changes are likely to improve the company's visibility, credibility, and customer engagement, ultimately driving business growth and revenue.",
-      "insights": [
-        "Stability AI is investing heavily in its online presence and customer experience",
-        "The company is expanding its product and service offerings to cater to a broader range of customers",
-        "Generative AI and open-source technologies are becoming increasingly important in the industry"
-      ]
-    },
-    {
-      "company": "Stability AI",
-      "url": "homepage",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The changes suggest a significant expansion of the company's product offerings and a stronger focus on enterprise customers",
-      "insights": [
-        "The company is expanding its product offerings to include more AI-powered creative tools",
-        "The company is targeting enterprise customers with its new products and features"
-      ]
-    },
-    {
-      "company": "Stability AI",
+      "company": "OpenAI",
       "url": "product",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "Expansion of Stability AI's product offerings and services, indicating a significant strategic move",
+      "interest_level": 3,
+      "type": "modified",
+      "impact": "The removal of the 'Voice' feature may indicate a focus on text-based interactions or a simplification of the user interface",
       "insights": [
-        "Stability AI is introducing new image models and services",
-        "The company is expanding its product offerings and services"
+        "The removal of the 'Voice' feature suggests a potential shift in product strategy"
       ]
     },
     {
-      "company": "Sourcegraph",
-      "url": "homepage",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The changes are likely to have a significant impact on the company's revenue and market position, as they demonstrate a strong commitment to innovation and customer needs.",
+      "company": "GitHub Copilot",
+      "url": "docs",
+      "interest_level": 3,
+      "type": "modified",
+      "impact": "No significant business impact is expected from this minor change.",
       "insights": [
-        "Sourcegraph is shifting its focus towards AI-powered software development solutions",
-        "The company is investing in new products and features to meet customer needs",
-        "The changes demonstrate a strong commitment to innovation and customer satisfaction"
+        "The change is minor and does not affect the overall functionality of GitHub Copilot."
       ]
     },
     {
-      "company": "Sourcegraph",
+      "company": "OpenAI",
       "url": "pricing",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "Sourcegraph is expanding its offerings with new pricing plans and features, targeting growing organizations and enterprises",
+      "interest_level": 2,
+      "type": "modified",
+      "impact": "The change is unlikely to have a significant impact on OpenAI's business operations or revenue.",
       "insights": [
-        "Sourcegraph is expanding its product offerings and pricing plans",
-        "The company is targeting growing organizations and enterprises"
+        "The 'openaicom-did' parameter is used for tracking or analytics purposes."
       ]
     },
     {
-      "company": "Scale AI",
+      "company": "OpenAI",
+      "url": "pricing",
+      "interest_level": 2,
+      "type": "modified",
+      "impact": "The change is unlikely to have a significant impact on the business, as it only affects the 'openaicom-did' parameter in the URLs.",
+      "insights": [
+        "The 'openaicom-did' parameter is used for tracking or analytics purposes."
+      ]
+    },
+    {
+      "company": "Google DeepMind",
       "url": "homepage",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The changes suggest a significant expansion of Scale AI's product offerings and market reach, potentially increasing its competitiveness in the AI solutions market",
-      "insights": [
-        "Scale AI is expanding its product offerings to include more comprehensive AI solutions",
-        "The company is partnering with leading AI providers to enhance its offerings"
-      ]
+      "interest_level": 2,
+      "type": "modified",
+      "impact": "No significant impact on the business or market is expected from these changes.",
+      "insights": []
     },
     {
-      "company": "Scale AI",
-      "url": "product",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The updated product page is likely to improve Scale AI's online visibility, showcase their capabilities, and attract potential customers, ultimately driving business growth",
-      "insights": [
-        "Scale AI has significantly expanded its product offerings",
-        "The company is targeting new markets, including government and enterprise"
-      ]
+      "company": "GitHub Copilot",
+      "url": "pricing",
+      "interest_level": 2,
+      "type": "modified",
+      "impact": "No significant business impact is expected from the detected changes.",
+      "insights": []
     },
     {
-      "company": "SambaNova",
+      "company": "Google DeepMind",
       "url": "homepage",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The changes are likely to have a significant impact on the company's business, as they indicate a major expansion of its product and solution offerings, as well as new partnerships and customer acquisitions.",
+      "interest_level": 2,
+      "type": "modified",
+      "impact": "No significant business impact is expected from the minor changes detected.",
       "insights": [
-        "SambaNova is expanding its AI platform and solution offerings",
-        "The company is partnering with new customers and industries",
-        "The changes are likely to increase competition in the AI market"
-      ]
-    },
-    {
-      "company": "SambaNova",
-      "url": "product",
-      "interest_level": 9,
-      "type": "new",
-      "impact": "The introduction of SambaStack and related products is expected to enhance SambaNova's market share and revenue growth in the AI industry.",
-      "insights": [
-        "SambaNova is expanding its presence in the AI market with new products and features.",
-        "The company is focusing on efficient AI solutions for data centers."
+        "No significant updates were found in the provided content."
       ]
     }
   ]

@@ -1,0 +1,65 @@
+{
+  "id": 227,
+  "company": "OpenAI",
+  "page_url": "product",
+  "detected_at": "2025-07-22T18:46:20.404Z",
+  "change_type": "modified",
+  "interest_level": 3,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "removal",
+    "change_scale": "minor",
+    "what_changed": "Removal of the 'Voice' feature",
+    "specific_changes": [
+      "The 'Voice' button has been removed from the interface"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Potential shift in focus towards text-based AI interactions"
+    ],
+    "business_impact": "The removal of the 'Voice' feature may indicate a focus on text-based interactions or a simplification of the user interface",
+    "strategic_direction": "OpenAI may be streamlining its product to focus on its core strengths",
+    "competitive_implications": "Competitors may view this as an opportunity to differentiate their products by offering voice features"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [
+      "Voice"
+    ],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Loss of users who relied on the 'Voice' feature",
+      "Competitors may gain an advantage by offering similar or improved voice features"
+    ],
+    "key_findings": [
+      "The removal of the 'Voice' feature suggests a potential shift in product strategy"
+    ],
+    "opportunities": [
+      "Competitors can differentiate their products by offering voice features",
+      "OpenAI can focus on improving its core text-based AI interactions"
+    ],
+    "recommended_actions": [
+      "Monitor user feedback and adjust product strategy accordingly",
+      "Consider offering alternative features that meet the needs of users who relied on the 'Voice' feature"
+    ]
+  },
+  "key_insights": [
+    "The removal of the 'Voice' feature suggests a potential shift in product strategy"
+  ],
+  "business_impact": "The removal of the 'Voice' feature may indicate a focus on text-based interactions or a simplification of the user interface",
+  "competitive_implications": "Competitors may view this as an opportunity to differentiate their products by offering voice features",
+  "content_hash_before": "8485ace5f8dc30d7969561191e78d15a6162b7b5019d1e7b2429ea0980d7cc3c",
+  "content_hash_after": "e0a488af6668fc00b7a9ab06b8c67135629cb36abec2e26bb065c1b64736c6dc",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

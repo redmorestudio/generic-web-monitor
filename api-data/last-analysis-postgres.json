@@ -1,9 +1,9 @@
 {
   "workflow": "analyze-postgres",
-  "run_id": "16452797654",
-  "timestamp": "2025-07-22T18:47:57.716Z",
+  "run_id": "16453983414",
+  "timestamp": "2025-07-22T19:45:29.249Z",
   "mode": "only-new",
-  "trigger_source": "process",
+  "trigger_source": "manual",
   "database": "postgresql",
   "ai_model": "groq-llama-3.3-70b",
   "status": "completed"

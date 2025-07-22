@@ -5,20 +5,20 @@
   "detected_at": "2025-07-22T17:18:26.929Z",
   "change_type": "modified",
   "interest_level": 2,
-  "ai_confidence": 0.9,
+  "ai_confidence": 0.8,
   "summary": "Change detected",
   "category": "General Update",
   "change_summary": {
-    "change_type": "no change",
+    "change_type": "no significant update",
     "change_scale": "minor",
-    "what_changed": "No significant changes were detected in the content between the two versions.",
+    "what_changed": "No significant changes were detected in the content structure or major updates to the models, research, or science sections.",
     "specific_changes": []
   },
   "strategic_analysis": {
     "market_signals": [],
-    "business_impact": "No impact, as there are no changes.",
-    "strategic_direction": "No direction, as there are no changes.",
-    "competitive_implications": "No implications, as there are no changes."
+    "business_impact": "No significant impact on the business or market is expected from these changes.",
+    "strategic_direction": "The company's strategic direction remains unchanged.",
+    "competitive_implications": "No change in competitive positioning is anticipated."
   },
   "entities": {
     "people": [],
@@ -36,8 +36,8 @@
     "recommended_actions": []
   },
   "key_insights": [],
-  "business_impact": "No impact, as there are no changes.",
-  "competitive_implications": "No implications, as there are no changes.",
+  "business_impact": "No significant impact on the business or market is expected from these changes.",
+  "competitive_implications": "No change in competitive positioning is anticipated.",
   "content_hash_before": "0856f2678262f1e042bb2cfe5c5b91915f1e0c29d3ef676c602b4e613d6274f9",
   "content_hash_after": "7c29ea70057d3c2a4be9e266c797b17779337c551fca9e012b54d45cec0dc8df",
   "ai_model": "groq-llama-3.3-70b",
