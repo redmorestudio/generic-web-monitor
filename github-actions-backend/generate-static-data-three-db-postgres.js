@@ -540,7 +540,7 @@ async function generateIndividualCompanyFiles(companyName) {
     console.log(`  📁 Generating data for ${companyName}...`);
     
     const company = await db.get(`
-        SELECT c.id, c.name, c.category, c.interest_level, 
+        SELECT c.id, c.name, c.category, 
                c.created_at, c.updated_at,
                ca.industry
         FROM intelligence.companies c
