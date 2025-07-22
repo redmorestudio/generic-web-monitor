@@ -296,7 +296,7 @@ async function generateRecentChangesData() {
             cd.detected_at,
             cd.interest_level,
             cd.ai_analysis,
-            cd.before_hash,
+            cd.old_hash,
             cd.new_hash,
             sp.title,
             SUBSTRING(sp.content, 1, 1000) as content_preview
@@ -329,7 +329,7 @@ async function generateRecentChangesData() {
                 summary: analysis.summary || (change.content_preview ? change.content_preview.substring(0, 200) + '...' : ''),
                 category: analysis.category || 'General Update',
                 impact_areas: analysis.impact_areas || [],
-                before_hash: change.before_hash,
+                before_hash: change.old_hash,
                 after_hash: change.new_hash
             };
         }),
