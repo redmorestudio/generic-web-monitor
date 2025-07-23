@@ -478,6 +478,22 @@ async function processAllSnapshots() {
   console.log('🎯 Focus: AI/ML technologies, products, concepts, and relationships');
   console.log('📊 Building rich knowledge graph data\n');
 
+  // Check for --force flag
+  const forceReanalyze = process.argv.includes('--force');
+  
+  // Check if baseline analysis already exists
+  const existingCount = await db.get('SELECT COUNT(*) as count FROM intelligence.baseline_analysis');
+  if (parseInt(existingCount.count) > 0 && !forceReanalyze) {
+    console.log(`⚠️  Found existing baseline analysis (${existingCount.count} records)`);
+    console.log('   Use --force flag to re-analyze all content');
+    console.log('✅ Skipping duplicate analysis to save API costs');
+    return { successful: 0, failed: 0, totalEntities: 0, totalRelationships: 0 };
+  }
+  
+  if (forceReanalyze) {
+    console.log('🔄 Force flag detected - re-analyzing all content with enhanced extraction');
+  }
+
   // Get all companies and their latest content
   const latestSnapshots = await db.all(`
     SELECT DISTINCT ON (company, url)
