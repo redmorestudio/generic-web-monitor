@@ -102,20 +102,37 @@ jobs:
           echo "Cascade: ${{ inputs.cascade }}"
           echo "========================================"
 
-      - name: Run schema fixes
+      - name: Run PostgreSQL schema fixes
         working-directory: github-actions-backend
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.DATABASE_URL }}
         run: |
-          echo "🔧 Running schema fixes..."
+          echo "🔧 Running PostgreSQL schema fixes..."
           
-          # Run all fix scripts
-          for script in fix-*.js; do
+          # Define the list of PostgreSQL-specific fix scripts
+          POSTGRES_FIX_SCRIPTS=(
+            "fix-postgres-schema-complete.js"
+            "fix-postgres-schema.js"
+            "fix-postgres-schema-final.js"
+            "fix-postgres-analysis-schema.js"
+            "fix-postgres-analyze-schema.js"
+            "fix-baseline-analysis-schema.js"
+            "fix-enhanced-analysis-postgres.js"
+            "fix-intelligence-changes-schema.js"
+          )
+          
+          # Run only PostgreSQL-specific fix scripts
+          for script in "${POSTGRES_FIX_SCRIPTS[@]}"; do
             if [ -f "$script" ]; then
               echo "Running $script..."
               node "$script" || echo "Warning: $script had issues but continuing"
+            else
+              echo "Script $script not found - skipping"
             fi
           done
+          
+          echo "✅ PostgreSQL schema fixes complete"
 
       - name: 🧠 Run Baseline AI Analysis (PostgreSQL)
         if: success()
@@ -123,6 +140,7 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.DATABASE_URL }}
           NODE_ENV: production
         run: |
           echo "🧠 Starting BASELINE AI Analysis (PostgreSQL)..."
@@ -162,6 +180,7 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.DATABASE_URL }}
           NODE_ENV: production
         run: |
           echo "🔍 Starting CHANGE DETECTION AI Analysis (PostgreSQL)..."
@@ -194,6 +213,7 @@ jobs:
         working-directory: github-actions-backend
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.DATABASE_URL }}
           NODE_ENV: production
         run: |
           echo "📝 Generating individual change detail files..."
