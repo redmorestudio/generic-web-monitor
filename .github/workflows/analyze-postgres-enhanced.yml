@@ -1,0 +1,327 @@
+name: 3. Analyze Content (PostgreSQL Enhanced)
+
+on:
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      trigger_source:
+        description: 'What triggered this workflow'
+        required: false
+        type: string
+        default: 'manual'
+      run_id:
+        description: 'Previous workflow run ID'
+        required: false
+        type: string
+      analysis_mode:
+        description: 'Analysis mode'
+        required: false
+        type: choice
+        default: 'recent'
+        options:
+          - recent        # Last 24 hours only
+          - full          # Analyze everything
+          - force         # Force re-analyze all
+      use_enhanced:
+        description: 'Use enhanced entity extraction'
+        required: false
+        type: boolean
+        default: true
+      cascade:
+        description: 'Trigger next workflow in chain'
+        required: false
+        type: boolean
+        default: true
+  
+  # Allow being called by other workflows
+  workflow_call:
+    inputs:
+      trigger_source:
+        description: 'What triggered this workflow'
+        required: false
+        type: string
+        default: 'manual'
+      run_id:
+        description: 'Previous workflow run ID'
+        required: false
+        type: string
+      analysis_mode:
+        description: 'Analysis mode'
+        required: false
+        type: string
+        default: 'recent'
+      use_enhanced:
+        description: 'Use enhanced entity extraction'
+        required: false
+        type: boolean
+        default: true
+      cascade:
+        description: 'Trigger next workflow in chain'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  WORKFLOW_NAME: "3. Analyze Content (PostgreSQL)"
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  analyze:
+    name: AI Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
+          lfs: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: github-actions-backend/package-lock.json
+
+      - name: Install dependencies
+        working-directory: github-actions-backend
+        run: |
+          echo "📦 Installing npm packages..."
+          npm ci --prefer-offline --no-audit
+          
+      - name: Display workflow trigger info
+        run: |
+          echo "🔍 PostgreSQL Analyze Workflow Information"
+          echo "========================================"
+          echo "Triggered by: ${{ inputs.trigger_source || 'unknown' }}"
+          echo "Analysis Mode: ${{ inputs.analysis_mode || 'recent' }}"
+          echo "Enhanced Mode: ${{ inputs.use_enhanced || true }}"
+          echo "Previous Run ID: ${{ inputs.run_id || 'none' }}"
+          echo "Cascade: ${{ inputs.cascade }}"
+          echo "========================================"
+
+      - name: Run schema fixes
+        working-directory: github-actions-backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          echo "🔧 Running schema fixes..."
+          
+          # Run all fix scripts
+          for script in fix-*.js; do
+            if [ -f "$script" ]; then
+              echo "Running $script..."
+              node "$script" || echo "Warning: $script had issues but continuing"
+            fi
+          done
+
+      - name: 🧠 Run Baseline AI Analysis (PostgreSQL)
+        if: success()
+        working-directory: github-actions-backend
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NODE_ENV: production
+        run: |
+          echo "🧠 Starting BASELINE AI Analysis (PostgreSQL)..."
+          echo "📊 This analyzes the current state of all companies"
+          
+          # Choose analyzer based on use_enhanced flag
+          if [ "${{ inputs.use_enhanced }}" == "true" ]; then
+            echo "🚀 Using ENHANCED entity extraction analyzer"
+            if [ -f "ai-analyzer-baseline-enhanced-postgres.js" ]; then
+              if [ "${{ inputs.analysis_mode }}" == "force" ]; then
+                echo "🔄 Force mode: Re-analyzing all content"
+                node ai-analyzer-baseline-enhanced-postgres.js --force
+              else
+                echo "⚡ Smart mode: Only analyzing new content"
+                node ai-analyzer-baseline-enhanced-postgres.js
+              fi
+            else
+              echo "⚠️ Enhanced analyzer not found, falling back to standard"
+              node ai-analyzer-baseline-three-db-postgres.js
+            fi
+          else
+            echo "📊 Using standard analyzer"
+            if [ "${{ inputs.analysis_mode }}" == "force" ]; then
+              echo "🔄 Force mode: Re-analyzing all content"
+              node ai-analyzer-baseline-three-db-postgres.js --force
+            else
+              echo "⚡ Smart mode: Only analyzing new content"
+              node ai-analyzer-baseline-three-db-postgres.js
+            fi
+          fi
+          
+          echo "✅ Baseline analysis complete"
+
+      - name: 🔍 Run Change Detection Analysis (PostgreSQL)
+        if: success()
+        working-directory: github-actions-backend
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NODE_ENV: production
+        run: |
+          echo "🔍 Starting CHANGE DETECTION AI Analysis (PostgreSQL)..."
+          echo "📊 This analyzes what has changed recently"
+          
+          # Create error handling for ultra analyzer
+          set +e  # Don't exit on error
+          
+          if [ "${{ inputs.analysis_mode }}" == "full" ] || [ "${{ inputs.analysis_mode }}" == "force" ]; then
+            echo "🔄 Full mode: Analyzing all changes"
+            node ai-analyzer-ultra-three-db-postgres.js full
+          else
+            echo "⚡ Recent mode: Only analyzing last 24 hours"
+            node ai-analyzer-ultra-three-db-postgres.js recent
+          fi
+          
+          ULTRA_EXIT_CODE=$?
+          set -e  # Re-enable exit on error
+          
+          if [ $ULTRA_EXIT_CODE -ne 0 ]; then
+            echo "⚠️ Ultra analyzer had issues (exit code: $ULTRA_EXIT_CODE)"
+            echo "⚠️ This is often due to no recent changes to analyze"
+            echo "⚠️ Continuing with workflow..."
+          else
+            echo "✅ Change detection analysis complete"
+          fi
+
+      - name: 🔄 Generate change detail files (PostgreSQL)
+        if: success()
+        working-directory: github-actions-backend
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          NODE_ENV: production
+        run: |
+          echo "📝 Generating individual change detail files..."
+          
+          # Check if the PostgreSQL version exists
+          if [ -f "generate-change-details-postgres.js" ]; then
+            node generate-change-details-postgres.js
+            echo "✅ Change details generated"
+          else
+            echo "⚠️ PostgreSQL change details generator not found - skipping"
+          fi
+
+      - name: 💾 Commit analysis results
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
+        run: |
+          # Configure git
+          git config --global user.name "GitHub Action"
+          git config --global user.email "action@github.com"
+          
+          # Function to push with retry logic
+          push_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            local wait_time=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔄 Attempt $attempt/$max_attempts to push changes..."
+              
+              # Pull latest changes before each attempt
+              git pull origin main --rebase || {
+                echo "❌ Failed to rebase, trying merge strategy..."
+                git rebase --abort 2>/dev/null || true
+                git pull origin main --no-rebase --strategy=ours || {
+                  echo "❌ Merge failed, resetting to origin/main"
+                  git reset --hard origin/main
+                  return 1
+                }
+              }
+              
+              # Try to push
+              if git push origin main; then
+                echo "✅ Successfully pushed changes!"
+                return 0
+              else
+                echo "❌ Push failed"
+                
+                if [ $attempt -lt $max_attempts ]; then
+                  echo "⏳ Waiting ${wait_time}s before retry..."
+                  sleep $wait_time
+                  wait_time=$((wait_time * 2))
+                  attempt=$((attempt + 1))
+                else
+                  echo "❌ All push attempts failed"
+                  return 1
+                fi
+              fi
+            done
+          }
+          
+          # Add all analysis outputs
+          git add api-data/ || true
+          git add github-actions-backend/data/*.json || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            echo "📝 Changes to commit:"
+            git diff --staged --name-only
+            
+            COMMIT_MSG="🚀 Update PostgreSQL AI analysis"
+            if [ "${{ inputs.use_enhanced }}" == "true" ]; then
+              COMMIT_MSG="$COMMIT_MSG (Enhanced Entities)"
+            fi
+            COMMIT_MSG="$COMMIT_MSG - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
+            
+            git commit -m "$COMMIT_MSG"
+            
+            # Push changes with retry logic
+            push_with_retry || {
+              echo "⚠️ Failed to push changes after multiple attempts"
+              echo "⚠️ This is likely due to concurrent workflows"
+              echo "⚠️ Changes will be included in next workflow run"
+              # Don't fail the workflow - changes are committed locally
+              # and will be pushed in the next successful run
+              exit 0
+            }
+          fi
+      
+      - name: Trigger Sync workflow (if configured)
+        if: inputs.cascade == true
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
+          script: |
+            try {
+              // Check if sync-postgres.yml exists
+              const { data: files } = await github.rest.repos.getContent({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                path: '.github/workflows'
+              });
+              
+              const syncWorkflowExists = files.some(file => 
+                file.name === 'sync-postgres.yml'
+              );
+              
+              if (syncWorkflowExists) {
+                const result = await github.rest.actions.createWorkflowDispatch({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  workflow_id: 'sync-postgres.yml',
+                  ref: 'main',
+                  inputs: {
+                    trigger_source: 'analyze-postgres-cascade',
+                    run_id: '${{ github.run_id }}'
+                  }
+                });
+                console.log(`✅ Triggered PostgreSQL Sync workflow`);
+              } else {
+                console.log(`⚠️  sync-postgres.yml not found - skipping cascade`);
+                console.log(`   This is normal - full-monitor-postgres.yml handles sync inline`);
+              }
+            } catch (error) {
+              console.log(`⚠️  Could not trigger sync workflow:`, error.message);
+              console.log(`   This is normal if sync-postgres.yml doesn't exist`);
+            }
