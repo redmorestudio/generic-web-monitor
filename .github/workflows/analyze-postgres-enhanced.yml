@@ -142,6 +142,25 @@ jobs:
             exit 1
           fi
 
+      - name: Migrate baseline_analysis table for JSONB columns
+        working-directory: github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          echo "🔄 Running baseline_analysis table migration..."
+          echo "📋 Adding missing JSONB columns (entities, themes, sentiment, etc.)"
+          
+          if [ -f "migrate-baseline-analysis-jsonb-columns.js" ]; then
+            echo "🚀 Running JSONB column migration..."
+            node migrate-baseline-analysis-jsonb-columns.js
+            echo "✅ Migration completed successfully"
+          else
+            echo "❌ Migration script not found!"
+            echo "❌ Cannot add missing JSONB columns"
+            exit 1
+          fi
+
       - name: Verify entities column exists
         working-directory: github-actions-backend
         env:
@@ -161,6 +180,7 @@ jobs:
             .then(result => {
               if (result) {
                 console.log('✅ entities column found in baseline_analysis table');
+                console.log('🎉 Schema is ready for enhanced entity extraction!');
                 process.exit(0);
               } else {
                 console.log('❌ entities column MISSING from baseline_analysis table');
@@ -179,7 +199,7 @@ jobs:
                 console.log('📊 Available columns in baseline_analysis:');
                 columns.forEach(col => console.log(\`  - \${col.column_name} (\${col.data_type})\`));
                 console.log('');
-                console.log('❌ The entities column is missing. Schema fix may have failed.');
+                console.log('❌ The entities column is missing. Migration may have failed.');
                 process.exit(1);
               }
               return end();
