@@ -38,12 +38,27 @@
       ],
       "recentChanges": [
         {
+          "id": 295,
+          "url": "news",
+          "detectedAt": "2025-07-23T19:39:42.299Z",
+          "relativeTime": "4 hours ago",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"Addition of new news articles and removal of old ones, update of featured news section\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new article: Thoughts on America’s AI Action Plan\",\"Removed old articles to make room for new ones\",\"Updated featured news section with new articles\"]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
           "id": 286,
           "url": "news",
           "detectedAt": "2025-07-23T19:02:49.922Z",
-          "relativeTime": "1 hours ago",
+          "relativeTime": "4 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New announcements and updates were added, including partnerships, product updates, and policy changes\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added announcement about Anthropic partnering with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Added announcement about Claude for Financial Services\",\"Added announcement about investing in energy to secure America's AI future\",\"Added announcement about Discover tools that work with Claude\",\"Added announcement about Advancing Claude for Education\",\"Added announcement about Lawrence Livermore National Laboratory expanding Claude for Enterprise use\"]}",
+          "summary": "{\"what_changed\":\"New announcements and updates were added to the newsroom section, including partnerships, product updates, and policy changes.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added announcement about Anthropic partnering with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Added announcement about Anthropic's AI for Science Program\",\"Added update on Claude for Education\",\"Added policy update on securing America's compute advantage\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -60,11 +75,11 @@
           "interestLevel": 8,
           "summary": "{\"what_changed\":\"Addition of a new policy announcement 'Build AI in America' and removal of several news articles\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new policy announcement 'Build AI in America'\",\"Removed news articles from before July 21, 2025\"]}",
           "changeType": "modified",
-          "businessImpact": "The new article may indicate Anthropic's focus on promoting AI development in America, which could have implications for their business strategy and market positioning.",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "The emphasis on 'Build AI in America' might be a strategic move to differentiate Anthropic from competitors and align with national interests.",
-            "riskAssessment": "Possible backlash from international partners or competitors; Dependence on American market and policy changes",
-            "opportunityScore": 6
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         }
       ],
@@ -91,9 +106,9 @@
       },
       "attributes": {},
       "stats": {
-        "totalChanges": 2,
-        "highInterestChanges": 2,
-        "lastActivity": "2025-07-23T19:02:49.922Z"
+        "totalChanges": 3,
+        "highInterestChanges": 3,
+        "lastActivity": "2025-07-23T19:39:42.299Z"
       }
     },
     {
@@ -128,12 +143,42 @@
       ],
       "recentChanges": [
         {
+          "id": 310,
+          "url": "docs",
+          "detectedAt": "2025-07-23T23:36:42.053Z",
+          "relativeTime": "3 min ago",
+          "interestLevel": 2,
+          "summary": "{\"what_changed\":\"No significant changes were detected in the provided content.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 298,
+          "url": "docs",
+          "detectedAt": "2025-07-23T19:03:26.617Z",
+          "relativeTime": "4 hours ago",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"Addition of new links and reorganization of existing content, including the addition of a 'Create a custom model' option under 'Use AI models' and changes to 'Completions' and 'Chat' sections\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of 'Create a custom model' option under 'Use AI models'\",\"Changes to 'Completions' section, including addition of 'Write PR descriptions' and 'Find matching code'\",\"Changes to 'Chat' section, including reorganization of existing links\",\"Addition of new links under 'Configure custom instructions' and 'Configure content exclusion'\"]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
           "id": 285,
           "url": "homepage",
           "detectedAt": "2025-07-23T19:03:14.475Z",
-          "relativeTime": "1 hours ago",
+          "relativeTime": "4 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Introduction of GitHub Spark, update in pricing plans, and addition of new models\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Introduction of GitHub Spark\",\"Update in pricing plans to include access to GitHub Spark in Pro+ plan\",\"Addition of new models such as Claude Opus 4 and o3\"]}",
+          "summary": "{\"what_changed\":\"Introduction of GitHub Spark, a new feature for building and deploying intelligent apps\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added GitHub Spark to the list of GitHub features\",\"Updated the Pro+ plan to include access to GitHub Spark\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -146,7 +191,7 @@
           "id": 257,
           "url": "blog",
           "detectedAt": "2025-07-22T22:52:15.696Z",
-          "relativeTime": "22 hours ago",
+          "relativeTime": "1 days ago",
           "interestLevel": 1,
           "summary": "{\"what_changed\":\"No significant changes were detected in the provided content.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
@@ -165,11 +210,11 @@
           "interestLevel": 4,
           "summary": "{\"what_changed\":\"The removal of the 'Set extension permissions' link under 'Administer' > 'Manage for organization' and the addition of 'About GitHub Copilot Chat' under 'Concepts'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Removal of 'Set extension permissions' link\",\"Addition of 'About GitHub Copilot Chat' under 'Concepts'\"]}",
           "changeType": "modified",
-          "businessImpact": "The changes do not have a significant impact on the business",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "The changes do not provide a competitive advantage or disadvantage",
-            "riskAssessment": "",
-            "opportunityScore": 4
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         },
         {
@@ -180,11 +225,11 @@
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the provided content, only minor errors and loading issues were present in both versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
-          "businessImpact": "No significant business impact is expected from the detected changes.",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "No competitive implications are expected from the detected changes.",
-            "riskAssessment": "",
-            "opportunityScore": 2
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         }
       ],
@@ -208,9 +253,9 @@
       },
       "attributes": {},
       "stats": {
-        "totalChanges": 4,
-        "highInterestChanges": 1,
-        "lastActivity": "2025-07-23T19:03:14.475Z"
+        "totalChanges": 6,
+        "highInterestChanges": 2,
+        "lastActivity": "2025-07-23T23:36:42.053Z"
       }
     },
     {
@@ -254,9 +299,39 @@
           "id": 289,
           "url": "blog",
           "detectedAt": "2025-07-23T19:40:46.363Z",
-          "relativeTime": "1 hours ago",
+          "relativeTime": "3 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Listen to a conversation about the newest AI capabilities in Search', and 'Transform your photos into videos and remix your pics in Google Photos'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new articles under the 'AI' section\",\"Updated the 'Gemini App' section with new features\",\"Added new research articles under the 'Research' section\",\"Updated the 'Developers' section with new Gemini Code Assist features\",\"Added new articles under the 'All the Latest' section\"]}",
+          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Gemini Code Assist adds Gemini 2.5, personalization and context management', 'Listen to a conversation about the newest AI capabilities in Search', 'Transform your photos into videos and remix your pics in Google Photos'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new articles under 'AI', 'Gemini App', 'Research', 'Developers', and 'All the Latest' sections\",\"Updated Gemini Code Assist with new features\",\"Introduced Gemini CLI as an open-source AI agent\",\"Announced the first images of wildfires detected by FireSat\",\"Published a podcast episode about the newest AI capabilities in Search\"]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 296,
+          "url": "blog",
+          "detectedAt": "2025-07-23T19:03:49.432Z",
+          "relativeTime": "4 hours ago",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Check out the first images of wildfires detected by FireSat', 'Transform your photos into videos and remix your pics in Google Photos', and 'Startups can apply now for the Google for Startups Gemini Founders Forum'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of new research article about FireSat\",\"Update to Google Photos with new features\",\"Introduction of Google for Startups Gemini Founders Forum\"]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 297,
+          "url": "homepage",
+          "detectedAt": "2025-07-23T19:03:32.433Z",
+          "relativeTime": "4 hours ago",
+          "interestLevel": 2,
+          "summary": "{\"what_changed\":\"No significant changes were detected in the content between the two versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -273,11 +348,11 @@
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the content between the two versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
-          "businessImpact": "No significant business impact is expected from these changes.",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "No competitive implications are evident from the lack of significant changes.",
-            "riskAssessment": "",
-            "opportunityScore": 2
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         },
         {
@@ -288,11 +363,11 @@
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the content structure or major updates to models, research, or science sections.\",\"change_type\":\"no significant update\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
-          "businessImpact": "No significant business impact is expected from the minor changes detected.",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "No competitive implications are noted as the changes are not substantial.",
-            "riskAssessment": "",
-            "opportunityScore": 2
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         }
       ],
@@ -316,8 +391,8 @@
       },
       "attributes": {},
       "stats": {
-        "totalChanges": 3,
-        "highInterestChanges": 1,
+        "totalChanges": 5,
+        "highInterestChanges": 2,
         "lastActivity": "2025-07-23T19:40:46.363Z"
       }
     },
@@ -354,11 +429,11 @@
           "interestLevel": 8,
           "summary": "{\"what_changed\":\"Initial content creation for Midjourney documentation\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of help center with various sections\",\"Addition of getting started guide\",\"Documentation section for making the most of Midjourney\",\"Billing support section\",\"Policies and guidelines including terms of service, privacy policy, data deletion and privacy FAQ, and community guidelines\",\"Links to Midjourney website and Discord server\"]}",
           "changeType": "new",
-          "businessImpact": "Enhanced user experience and support, potentially leading to increased customer satisfaction and retention.",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "Midjourney is positioning itself as a customer-centric platform, potentially differentiating itself from competitors.",
-            "riskAssessment": "High investment in support infrastructure may pose financial challenges",
-            "opportunityScore": 8
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         },
         {
@@ -369,11 +444,11 @@
           "interestLevel": 9,
           "summary": "{\"what_changed\":\"Introduction of a new pricing page with detailed plan comparisons and features\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of four subscription tiers: Basic, Standard, Pro, and Mega\",\"Detailed comparison of plan features, including GPU time, image and video generation, and stealth mode\",\"Information on pricing, including monthly and annual rates, and a 20% discount for annual commitments\"]}",
           "changeType": "new",
-          "businessImpact": "The introduction of a new pricing page with detailed plan comparisons and features is likely to increase revenue and attract more customers to Midjourney's platform",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "Midjourney's new pricing strategy may put pressure on competitors to revisit their own pricing models and feature offerings",
-            "riskAssessment": "Competitors may respond to Midjourney's new pricing strategy by introducing their own competitive pricing models; Customers may be deterred by the complexity of Midjourney's new pricing page and plan comparisons",
-            "opportunityScore": 9
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         }
       ],
@@ -447,11 +522,11 @@
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"The 'openaicom-did' parameter in the URLs has changed from '4aa03562-c3c6-4634-98a2-6d29cf24c479' to '99580f75-39b7-4bf3-9a9c-e2a544c14234'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated 'openaicom-did' parameter in URLs\"]}",
           "changeType": "modified",
-          "businessImpact": "The change is unlikely to have a significant impact on OpenAI's business or operations.",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "The change does not reveal any significant competitive advantages or disadvantages.",
-            "riskAssessment": "",
-            "opportunityScore": 2
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         },
         {
@@ -462,11 +537,11 @@
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"The 'openaicom-did' parameter in the URLs has changed from '99580f75-39b7-4bf3-9a9c-e2a544c14234' to '4aa03562-c3c6-4634-98a2-6d29cf24c479'.\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated 'openaicom-did' parameter in URLs\"]}",
           "changeType": "modified",
-          "businessImpact": "The change is unlikely to have a significant impact on the business, as it only affects the 'openaicom-did' parameter in the URLs.",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "The change does not reveal any significant competitive advantages or disadvantages.",
-            "riskAssessment": "",
-            "opportunityScore": 2
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         },
         {
@@ -477,11 +552,11 @@
           "interestLevel": 4,
           "summary": "{\"what_changed\":\"Removal of Voice feature\",\"change_type\":\"removal\",\"change_scale\":\"minor\",\"specific_changes\":[\"Voice feature button removed from the interface\"]}",
           "changeType": "modified",
-          "businessImpact": "The removal of the Voice feature might slightly affect user engagement, especially for those who preferred voice interactions. However, the overall impact on the business is likely to be minimal.",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "Competitors might view this as an opportunity to differentiate their products by offering robust voice interaction features.",
-            "riskAssessment": "Potential loss of users who prefer voice interactions",
-            "opportunityScore": 4
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         },
         {
@@ -492,11 +567,11 @@
           "interestLevel": 9,
           "summary": "{\"what_changed\":\"The content has changed from a security verification page to the OpenAI homepage, featuring various products, research, and company information.\",\"change_type\":\"major overhaul\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of new products and features such as ChatGPT, Sora, and API Platform\",\"Addition of research and company information sections\",\"Removal of security verification page content\",\"Update of the website's layout and design\"]}",
           "changeType": "modified",
-          "businessImpact": "The changes indicate a significant expansion of OpenAI's offerings, which can lead to increased market share and revenue.",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "The introduction of new products and features can pose a threat to competitors in the AI market.",
-            "riskAssessment": "Increased competition in the AI market; Potential disruption of traditional industries",
-            "opportunityScore": 9
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         },
         {
@@ -507,11 +582,11 @@
           "interestLevel": 9,
           "summary": "{\"what_changed\":\"The content changed from a security verification page for www.perplexity.ai to a ChatGPT interface\",\"change_type\":\"update\",\"change_scale\":\"major\",\"specific_changes\":[\"Removal of security verification content\",\"Introduction of ChatGPT interface\",\"Addition of login and sign-up options\",\"Inclusion of terms and privacy policy links\"]}",
           "changeType": "modified",
-          "businessImpact": "The update may attract more users to the ChatGPT platform, increasing engagement and potentially driving revenue",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "The change may give OpenAI a competitive edge in the AI chatbot market, potentially threatening other players",
-            "riskAssessment": "Competitive pressure from other AI chatbot providers",
-            "opportunityScore": 9
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         }
       ],
@@ -573,9 +648,9 @@
           "id": 275,
           "url": "product",
           "detectedAt": "2025-07-23T00:38:32.210Z",
-          "relativeTime": "20 hours ago",
+          "relativeTime": "23 hours ago",
           "interestLevel": 3,
-          "summary": "{\"what_changed\":\"The description of Perplexity Pro has been updated to 'unlocks more ways to learn and get work done' and 'Upgrade your productivity and learning with unlimited Research, unlimited file uploads, exclusive Pro Perks and more'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated Perplexity Pro description\",\"No changes to pricing or features\"]}",
+          "summary": "{\"what_changed\":\"Rephrased introduction to Perplexity Pro\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Changed 'Perplexity Pro is the most powerful way to search the internet' to 'Perplexity Pro unlocks more ways to learn and get work done'\",\"Updated 'Upgrade productivity and learning with additional access' to maintain consistency in messaging\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -592,11 +667,11 @@
           "interestLevel": 9,
           "summary": "{\"what_changed\":\"Introduction of Perplexity Pro and Max subscription plans with various features and pricing\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of Perplexity Pro with features like unlimited Pro Search, upgraded AI models, and collaborative spaces\",\"Introduction of Perplexity Max with features like early access to new products, unlimited access to Perplexity Labs and Research, and priority support\",\"Pricing for Perplexity Pro and Max plans\",\"Introduction of exclusive features for Pro and Max subscribers\"]}",
           "changeType": "new",
-          "businessImpact": "The introduction of Perplexity Pro and Max plans indicates a shift towards a more premium and feature-rich offering, potentially increasing revenue and competitiveness",
+          "businessImpact": null,
           "enhancedAnalysis": {
-            "competitiveImplications": "Perplexity AI is positioning itself as a leader in the AI market with its new subscription plans, potentially threatening competitors",
-            "riskAssessment": "Increasing competition in the AI market; Potential backlash from users due to pricing changes",
-            "opportunityScore": 9
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
           }
         }
       ],
@@ -626,7 +701,7 @@
       }
     }
   ],
-  "lastUpdated": "2025-07-23T20:54:57.710Z",
-  "totalChanges": 18,
-  "highInterestChanges": 9
+  "lastUpdated": "2025-07-23T23:39:51.444Z",
+  "totalChanges": 23,
+  "highInterestChanges": 12
 }
