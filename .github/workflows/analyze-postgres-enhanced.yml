@@ -132,7 +132,7 @@ jobs:
           echo "📊 This analyzes the current state of all companies"
           
           # Choose analyzer based on use_enhanced flag
-          if [ "${{ inputs.use_enhanced }}" == "true" ]; then
+          if [ "${{ inputs.use_enhanced }}" = "true" ] || [ "${{ inputs.use_enhanced }}" = "" ]; then
             echo "🚀 Using ENHANCED entity extraction analyzer"
             if [ -f "ai-analyzer-baseline-enhanced-postgres.js" ]; then
               if [ "${{ inputs.analysis_mode }}" == "force" ]; then
@@ -269,7 +269,7 @@ jobs:
             git diff --staged --name-only
             
             COMMIT_MSG="🚀 Update PostgreSQL AI analysis"
-            if [ "${{ inputs.use_enhanced }}" == "true" ]; then
+            if [ "${{ inputs.use_enhanced }}" = "true" ] || [ "${{ inputs.use_enhanced }}" = "" ]; then
               COMMIT_MSG="$COMMIT_MSG (Enhanced Entities)"
             fi
             COMMIT_MSG="$COMMIT_MSG - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
