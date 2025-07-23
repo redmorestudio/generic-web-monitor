@@ -481,6 +481,14 @@ async function processAllSnapshots() {
   // Check for --force flag
   const forceReanalyze = process.argv.includes('--force');
   
+  if (forceReanalyze) {
+    console.log('🔄 Force flag detected - re-analyzing all content with enhanced extraction');
+  } else {
+    console.log('🚀 Running enhanced extraction on new content');
+  }
+  
+  // Skip the existing check for now to debug the issue
+  /*
   try {
     // Check if baseline analysis already exists
     const existingCount = await db.get('SELECT COUNT(*) as count FROM intelligence.baseline_analysis');
@@ -494,10 +502,7 @@ async function processAllSnapshots() {
     console.log('⚠️  Could not check existing analysis:', error.message);
     console.log('   Proceeding with analysis...');
   }
-  
-  if (forceReanalyze) {
-    console.log('🔄 Force flag detected - re-analyzing all content with enhanced extraction');
-  }
+  */
 
   // Get all companies and their latest content
   const latestSnapshots = await db.all(`
