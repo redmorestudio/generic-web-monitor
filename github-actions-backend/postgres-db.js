@@ -7,11 +7,11 @@
 
 const { Pool } = require('pg');
 
-// Check for connection string
-const POSTGRES_CONNECTION_STRING = process.env.POSTGRES_CONNECTION_STRING;
+// Check for connection string (support both DATABASE_URL and POSTGRES_CONNECTION_STRING)
+const POSTGRES_CONNECTION_STRING = process.env.DATABASE_URL || process.env.POSTGRES_CONNECTION_STRING;
 
 if (!POSTGRES_CONNECTION_STRING) {
-  console.error('❌ ERROR: POSTGRES_CONNECTION_STRING environment variable not set');
+  console.error('❌ ERROR: DATABASE_URL or POSTGRES_CONNECTION_STRING environment variable not set');
   console.error('Make sure to set it in your environment or GitHub Actions secrets');
   process.exit(1);
 }

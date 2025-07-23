@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 // SSL Certificate fix for Heroku PostgreSQL
-if (process.env.NODE_ENV === 'production' || process.env.POSTGRES_CONNECTION_STRING) {
+if (process.env.NODE_ENV === 'production' || process.env.DATABASE_URL || process.env.POSTGRES_CONNECTION_STRING) {
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 }
 
