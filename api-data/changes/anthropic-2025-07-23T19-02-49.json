@@ -1,0 +1,22 @@
+{
+  "id": 286,
+  "company": "Anthropic",
+  "page_url": "news",
+  "detected_at": "2025-07-23T19:02:49.922Z",
+  "change_type": "modified",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
+  "content_hash_before": "3e93d97a981a6c18ec82db5a02466a714245503230014ea45ed7885df13d58cb",
+  "content_hash_after": "4704836a0d9e2d1291e7ce22b0f1f0e3285c519c216b7a8cd288b971e4f218fc",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}
