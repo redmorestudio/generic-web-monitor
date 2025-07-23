@@ -1329,28 +1329,86 @@
             } catch (error) {
                 console.error('Failed to fetch detailed change data:', error);
                 
-                // Fall back to basic information
+                // Fall back to basic information with AI analysis
+                // Parse AI analysis if available
+                let aiAnalysis = null;
+                if (changeData.ai_analysis) {
+                    try {
+                        aiAnalysis = typeof changeData.ai_analysis === 'string' 
+                            ? JSON.parse(changeData.ai_analysis) 
+                            : changeData.ai_analysis;
+                    } catch (e) {
+                        console.error('Failed to parse AI analysis:', e);
+                    }
+                }
+
                 modalContent.innerHTML = `
                     <div class="config-section">
                         <h4>📊 Change Information</h4>
                         <p><strong>Company:</strong> ${escapeHtml(changeData.company)}</p>
-                        <p><strong>URL:</strong> <a href="${escapeHtml(changeData.url)}" target="_blank">${escapeHtml(changeData.url)}</a></p>
-                        <p><strong>Type:</strong> ${escapeHtml(changeData.change_type || 'Content Update')}</p>
-                        <p><strong>Time:</strong> ${changeData.time_ago}</p>
-                        ${changeData.relevance_score ? `<p><strong>Relevance Score:</strong> ${changeData.relevance_score}/10</p>` : ''}
+                        <p><strong>URL:</strong> ${changeData.url ? `<a href="${escapeHtml(changeData.url)}" target="_blank">${escapeHtml(changeData.url)}</a>` : 'Not available'}</p>
+                        <p><strong>Type:</strong> ${escapeHtml(changeData.category || 'Content Update')}</p>
+                        <p><strong>Detected:</strong> ${changeData.detected_at ? new Date(changeData.detected_at).toLocaleString() : 'Unknown'}</p>
+                        <p><strong>Interest Level:</strong> ${changeData.interest_level}/10 ${getInterestEmoji(changeData.interest_level)}</p>
                     </div>
                     
-                    <div class="config-section">
-                        <h4>📝 Summary</h4>
-                        <p>${escapeHtml(changeData.summary || 'No summary available')}</p>
-                    </div>
+                    ${aiAnalysis ? `
+                        <div class="config-section">
+                            <h4>🤖 AI Analysis Summary</h4>
+                            <p>${escapeHtml(aiAnalysis.summary)}</p>
+                        </div>
+                        
+                        ${aiAnalysis.interest_drivers && aiAnalysis.interest_drivers.length > 0 ? `
+                            <div class="config-section">
+                                <h4>🎯 Key Interest Drivers</h4>
+                                <div style="margin-top: 10px;">
+                                    ${aiAnalysis.interest_drivers.map(driver => `
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 4px 12px; border-radius: 16px; font-size: 0.85rem; margin-right: 8px; display: inline-block; margin-bottom: 5px;">
+                                            ${escapeHtml(driver)}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        ${aiAnalysis.impact_areas && aiAnalysis.impact_areas.length > 0 ? `
+                            <div class="config-section">
+                                <h4>💼 Impact Areas</h4>
+                                <ul style="margin: 0; padding-left: 20px;">
+                                    ${aiAnalysis.impact_areas.map(area => `<li>${escapeHtml(area)}</li>`).join('')}
+                                </ul>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="config-section">
+                            <h4>📈 Analysis Scores</h4>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                                <div style="background: #1e293b; padding: 15px; border-radius: 8px;">
+                                    <h5 style="margin: 0 0 5px 0; color: #94a3b8;">Technical Innovation</h5>
+                                    <div style="font-size: 1.5rem; color: #60a5fa;">${aiAnalysis.technical_innovation_score || 0}/10</div>
+                                </div>
+                                <div style="background: #1e293b; padding: 15px; border-radius: 8px;">
+                                    <h5 style="margin: 0 0 5px 0; color: #94a3b8;">Business Impact</h5>
+                                    <div style="font-size: 1.5rem; color: #34d399;">${aiAnalysis.business_impact_score || 0}/10</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        ${aiAnalysis.category ? `
+                            <div class="config-section">
+                                <h4>📁 Category</h4>
+                                <p>${escapeHtml(aiAnalysis.category)}</p>
+                            </div>
+                        ` : ''}
+                    ` : `
+                        <div class="config-section">
+                            <h4>📝 Summary</h4>
+                            <p>${escapeHtml(changeData.summary || 'No summary available')}</p>
+                        </div>
+                    `}
                     
-                    <div class="error-message" style="margin: 15px 0;">
-                        <p>⚠️ Detailed change analysis not available. The backend API may be offline.</p>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <a href="${escapeHtml(changeData.url)}" target="_blank" class="button button-primary">View Current Page</a>
+                    <div class="action-buttons" style="margin-top: 20px;">
+                        ${changeData.url ? `<a href="${escapeHtml(changeData.url)}" target="_blank" class="button button-primary">View Current Page</a>` : ''}
                         <button type="button" class="button button-secondary" onclick="closeModal()">Close</button>
                     </div>
                 `;
@@ -2020,6 +2078,20 @@
             window.changesData = data;
         }
 
+        // Helper function to get interest level color
+        function getInterestColor(level) {
+            if (level >= 8) return '#FFD700'; // Gold for high interest
+            if (level >= 5) return '#87CEEB'; // Sky blue for medium
+            return '#6bcf7f'; // Green for low
+        }
+
+        // Helper function to get interest level emoji
+        function getInterestEmoji(level) {
+            if (level >= 8) return '🌟'; // Star for high interest
+            if (level >= 5) return '📌'; // Pin for medium
+            return '📊'; // Chart for low
+        }
+
         // Load recent changes for the dashboard
         async function loadRecentChanges() {
             const data = await loadStaticData('changes.json');
@@ -2033,27 +2105,52 @@
                 return;
             }
 
-            const recentChanges = data.changes.slice(0, 3); // Show top 3
+            // Filter to only show changes with interest level >= 3
+            const significantChanges = data.changes.filter(c => c.interest_level >= 3);
+            const recentChanges = significantChanges.slice(0, 3); // Show top 3
             let html = ``;
 
             recentChanges.forEach((change, index) => {
-                const changeId = `change-${index}`;
+                // Parse AI analysis if it's a string
+                let aiAnalysis = null;
+                if (change.ai_analysis) {
+                    try {
+                        aiAnalysis = typeof change.ai_analysis === 'string' 
+                            ? JSON.parse(change.ai_analysis) 
+                            : change.ai_analysis;
+                    } catch (e) {
+                        console.error('Failed to parse AI analysis:', e);
+                    }
+                }
+
+                // Use AI summary if available, otherwise fall back to regular summary
+                const displaySummary = aiAnalysis?.summary || change.summary || 'No summary available';
+                
+                // Determine time display
+                const timeDisplay = change.time_ago || (change.detected_at ? formatTimeAgo(new Date(change.detected_at)) : 'Unknown');
+
+                const changeId = change.id || change.change_id || `change-${index}`;
                 html += `
-                    <div class="change-item" style="background: rgba(59, 130, 246, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid #3b82f6; cursor: pointer;" 
+                    <div class="change-item" style="background: rgba(59, 130, 246, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid ${getInterestColor(change.interest_level)}; cursor: pointer;" 
                          onclick="showChangeDetail.call(this, '${changeId}', event)" data-change='${JSON.stringify(change).replace(/'/g, "&apos;")}'>
                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
-                            <span style="font-size: 1.5rem;">${change.emoji || '📊'}</span>
+                            <span style="font-size: 1.5rem;">${getInterestEmoji(change.interest_level)}</span>
                             <span style="font-weight: bold; color: #93c5fd;">${escapeHtml(change.company)}</span>
-                            <span style="color: #6b7280; font-size: 0.85rem;">${change.time_ago}</span>
+                            <span style="color: #6b7280; font-size: 0.85rem;">${timeDisplay}</span>
                         </div>
-                        <div style="color: #d1d5db; font-size: 0.9rem;">
-                            ${escapeHtml((change.summary || '').substring(0, 120))}${change.summary?.length > 120 ? '...' : ''}
+                        <div style="color: #d1d5db; font-size: 0.9rem; line-height: 1.4;">
+                            ${escapeHtml(displaySummary.substring(0, 200))}${displaySummary.length > 200 ? '...' : ''}
                         </div>
-                        ${change.relevance_score || change.interest_level ? `
-                            <div style="margin-top: 8px;">
+                        ${change.interest_level ? `
+                            <div style="margin-top: 8px; display: flex; align-items: center; gap: 10px;">
                                 <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;">
-                                    Interest: ${change.interest_level || change.relevance_score}/10
+                                    Interest: ${change.interest_level}/10
                                 </span>
+                                ${aiAnalysis?.category ? `
+                                    <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;">
+                                        ${escapeHtml(aiAnalysis.category)}
+                                    </span>
+                                ` : ''}
                             </div>
                         ` : ''}
                     </div>
