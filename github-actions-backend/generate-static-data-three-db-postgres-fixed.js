@@ -6,16 +6,13 @@ if (process.env.NODE_ENV === 'production' || process.env.POSTGRES_CONNECTION_STR
 }
 
 /**
- * Generate Static Data Files for GitHub Pages (PostgreSQL Version) - FIXED
+ * Generate Static Data Files for GitHub Pages (PostgreSQL Version) - CRITICAL FIX
  * 
- * This script converts our dynamic API into static JSON files
- * that can be served by GitHub Pages and consumed by the frontend
- * 
- * FIXES:
- * - Proper company ID handling
- * - Eliminate duplicate changes
- * - Extract entities from JSONB properly
- * - Correct join logic
+ * CRITICAL FIXES:
+ * 1. Pull AI analysis from intelligence.changes and enhanced_analysis tables
+ * 2. Generate individual change detail files
+ * 3. Include all fields required by dashboard
+ * 4. Fix missing company names and URLs in modal
  */
 
 const fs = require('fs');
@@ -25,97 +22,35 @@ const { db, end } = require('./postgres-db');
 // Configuration
 const DATA_DIR = path.join(__dirname, 'data');
 const OUTPUT_DIR = path.join(__dirname, '..', 'api-data');
+const CHANGES_DIR = path.join(OUTPUT_DIR, 'changes');
 
-// Ensure output directory exists
+// Ensure output directories exist
 if (!fs.existsSync(OUTPUT_DIR)) {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
-
-// Helper function to deduplicate arrays by name property
-function deduplicateByName(arr) {
-    const seen = new Set();
-    return arr.filter(item => {
-        const key = item.name || JSON.stringify(item);
-        if (seen.has(key)) return false;
-        seen.add(key);
-        return true;
-    });
+if (!fs.existsSync(CHANGES_DIR)) {
+    fs.mkdirSync(CHANGES_DIR, { recursive: true });
 }
 
-// Helper function to deduplicate preserving case
-function deduplicatePreservingCase(arr) {
-    const seen = new Map();
-    return arr.filter(item => {
-        const key = item.toLowerCase();
-        if (!seen.has(key)) {
-            seen.set(key, item);
-            return true;
-        }
-        return false;
-    });
-}
-
-// Helper function to get top entities for a company
-async function getTopEntities(companyName, entityType, limit = 5) {
-    try {
-        // Get latest analysis for company from intelligence schema with JSONB
-        const analyses = await db.all(`
-            SELECT ba.entities
-            FROM intelligence.baseline_analysis ba
-            WHERE ba.company_name = $1
-            AND ba.entities IS NOT NULL
-            ORDER BY ba.analysis_date DESC
-            LIMIT 10
-        `, [companyName]);
-        
-        const allEntities = [];
-        for (const analysis of analyses) {
-            try {
-                // Handle JSONB data properly
-                const entities = analysis.entities;
-                    
-                if (entities && entities[entityType]) {
-                    // Handle different entity types
-                    if (entityType === 'technologies' || entityType === 'products') {
-                        // These are arrays of objects with 'name' property
-                        const items = Array.isArray(entities[entityType]) ? entities[entityType] : [];
-                        allEntities.push(...items.map(e => e.name || e));
-                    } else {
-                        // Simple arrays
-                        const items = Array.isArray(entities[entityType]) ? entities[entityType] : [];
-                        allEntities.push(...items);
-                    }
-                }
-            } catch (e) {
-                console.error(`Error processing entities for ${companyName}:`, e);
-            }
-        }
-        
-        // Count occurrences and sort by frequency
-        const entityCounts = {};
-        allEntities.forEach(entity => {
-            const key = (entity || '').toString().toLowerCase();
-            if (key) {
-                entityCounts[key] = (entityCounts[key] || 0) + 1;
-            }
-        });
-        
-        return Object.entries(entityCounts)
-            .sort((a, b) => b[1] - a[1])
-            .slice(0, limit)
-            .map(([entity]) => entity);
-            
-    } catch (error) {
-        console.error(`Error getting top entities for company ${companyName}:`, error);
-        return [];
-    }
-}
-
-// Generate dashboard.json - main dashboard data
-async function generateDashboard() {
-    console.log('📊 Generating dashboard data...');
+// Helper to format relative time
+function getRelativeTime(date) {
+    const now = new Date();
+    const then = new Date(date);
+    const seconds = Math.floor((now - then) / 1000);
     
-    // Get all companies - FIXED: proper query
+    if (seconds < 60) return 'just now';
+    if (seconds < 3600) return Math.floor(seconds / 60) + ' min ago';
+    if (seconds < 86400) return Math.floor(seconds / 3600) + ' hours ago';
+    if (seconds < 604800) return Math.floor(seconds / 86400) + ' days ago';
+    
+    return then.toLocaleDateString();
+}
+
+// Generate dashboard.json - FIXED to include AI analysis
+async function generateDashboard() {
+    console.log('📊 Generating dashboard data with AI analysis...');
+    
+    // Get all companies
     const companies = await db.all(`
         SELECT c.id, c.name, c.category, ca.industry 
         FROM intelligence.companies c
@@ -133,43 +68,50 @@ async function generateDashboard() {
             WHERE company_id = $1
         `, [company.id]);
         
-        // Get recent changes - FIXED: use distinct to avoid duplicates
-        const changeCount = await db.get(`
-            SELECT COUNT(DISTINCT cd.id) as count
-            FROM processed_content.change_detection cd
-            WHERE cd.company = $1
-            AND cd.detected_at > NOW() - INTERVAL '7 days'
+        // Get recent activity with AI analysis
+        const recentActivity = await db.get(`
+            SELECT 
+                COUNT(DISTINCT c.id) as change_count_7d,
+                MAX(c.detected_at) as last_change_date,
+                MAX(c.interest_level) as highest_recent_score
+            FROM intelligence.changes c
+            WHERE c.company = $1
+            AND c.detected_at > NOW() - INTERVAL '7 days'
         `, [company.name]);
         
-        // Get last scan time
-        const lastScan = await db.get(`
-            SELECT MAX(scraped_at) as last_scan
-            FROM raw_content.scraped_pages
+        // Get top entities from baseline analysis
+        const baselineData = await db.get(`
+            SELECT entities, themes
+            FROM intelligence.baseline_analysis
             WHERE company = $1
+            ORDER BY analysis_date DESC
+            LIMIT 1
         `, [company.name]);
         
-        // Get high interest changes
-        const highInterest = await db.get(`
-            SELECT COUNT(DISTINCT cd.id) as count
-            FROM processed_content.change_detection cd
-            WHERE cd.company = $1
-            AND cd.interest_level >= 7
-            AND cd.detected_at > NOW() - INTERVAL '30 days'
-        `, [company.name]);
+        let technologies = [];
+        let products = [];
         
-        // Get top entities - using company name
-        const technologies = await getTopEntities(company.name, 'technologies');
-        const products = await getTopEntities(company.name, 'products');
+        if (baselineData && baselineData.entities) {
+            const entities = baselineData.entities;
+            if (entities.technologies) {
+                technologies = entities.technologies.slice(0, 5).map(t => t.name || t);
+            }
+            if (entities.products) {
+                products = entities.products.slice(0, 5).map(p => p.name || p);
+            }
+        }
         
         companyStats.push({
-            id: company.id,
-            name: company.name,
-            category: company.category,
-            industry: company.industry,
+            company: company.name,
+            type: company.category,
             url_count: urlCount.count,
-            recent_changes: changeCount.count,
-            high_interest_changes: highInterest.count,
-            last_scan: lastScan.last_scan,
+            recent_activity: {
+                change_count_7d: recentActivity.change_count_7d || 0,
+                last_change: recentActivity.last_change_date ? 
+                    getRelativeTime(recentActivity.last_change_date) : 
+                    'No recent changes',
+                highest_recent_score: recentActivity.highest_recent_score || 0
+            },
             top_technologies: technologies,
             top_products: products
         });
@@ -178,573 +120,357 @@ async function generateDashboard() {
     // Overall statistics
     const overallStats = await db.get(`
         SELECT 
-            (SELECT COUNT(*) FROM intelligence.companies) as total_companies,
-            (SELECT COUNT(*) FROM intelligence.urls) as total_urls,
-            (SELECT COUNT(DISTINCT id) FROM processed_content.change_detection WHERE detected_at > NOW() - INTERVAL '24 hours') as changes_24h,
-            (SELECT COUNT(DISTINCT id) FROM processed_content.change_detection WHERE detected_at > NOW() - INTERVAL '7 days') as changes_7d,
-            (SELECT COUNT(DISTINCT id) FROM processed_content.change_detection WHERE interest_level >= 7 AND detected_at > NOW() - INTERVAL '7 days') as high_interest_7d
+            (SELECT COUNT(*) FROM intelligence.companies) as companies,
+            (SELECT COUNT(*) FROM intelligence.urls) as urls,
+            (SELECT MAX(completed_at) FROM raw_content.scraping_runs WHERE status = 'completed') as lastCheck
+    `);
+    
+    // Get recent high-value changes with full AI analysis
+    const recentChanges = await db.all(`
+        SELECT 
+            c.id as change_id,
+            c.company,
+            c.url,
+            c.detected_at,
+            c.interest_level,
+            c.analysis,
+            c.ai_confidence,
+            ea.ultra_analysis,
+            ea.key_insights,
+            ea.business_impact
+        FROM intelligence.changes c
+        LEFT JOIN intelligence.enhanced_analysis ea ON c.id = ea.change_id
+        WHERE c.detected_at > NOW() - INTERVAL '7 days'
+        AND c.interest_level >= 3
+        ORDER BY c.interest_level DESC, c.detected_at DESC
+        LIMIT 5
+    `);
+    
+    // Format recent changes with proper AI summary
+    const formattedChanges = recentChanges.map(change => {
+        let summary = 'Content update detected';
+        let category = 'general';
+        
+        // Extract summary from AI analysis
+        if (change.analysis) {
+            try {
+                const analysis = typeof change.analysis === 'string' ? 
+                    JSON.parse(change.analysis) : change.analysis;
+                summary = analysis.what_changed || analysis.summary || summary;
+                category = analysis.change_type || analysis.category || category;
+            } catch (e) {}
+        }
+        
+        // Try ultra analysis if available
+        if (change.ultra_analysis) {
+            try {
+                const ultra = typeof change.ultra_analysis === 'string' ? 
+                    JSON.parse(change.ultra_analysis) : change.ultra_analysis;
+                if (ultra.change_summary && ultra.change_summary.what_changed) {
+                    summary = ultra.change_summary.what_changed;
+                }
+                if (ultra.interest_assessment && ultra.interest_assessment.category) {
+                    category = ultra.interest_assessment.category;
+                }
+            } catch (e) {}
+        }
+        
+        return {
+            change_id: change.change_id,
+            company: change.company,
+            url: change.url,
+            summary: summary,
+            interest_level: change.interest_level,
+            time_ago: getRelativeTime(change.detected_at),
+            category: category
+        };
+    });
+    
+    // Count changes by timeframe
+    const changeCounts = await db.get(`
+        SELECT 
+            COUNT(DISTINCT CASE WHEN detected_at > NOW() - INTERVAL '24 hours' THEN id END) as last_24h_count,
+            COUNT(DISTINCT CASE WHEN detected_at > NOW() - INTERVAL '7 days' THEN id END) as last_7d_count,
+            COUNT(DISTINCT CASE WHEN detected_at > NOW() - INTERVAL '7 days' AND interest_level >= 7 THEN id END) as high_priority_last_7d
+        FROM intelligence.changes
     `);
     
     return {
-        companies: companyStats,
-        stats: overallStats,
+        company_activity: companyStats,
+        stats: {
+            companies: parseInt(overallStats.companies) || 0,
+            urls: parseInt(overallStats.urls) || 0,
+            lastCheck: overallStats.lastCheck
+        },
+        recent_changes_summary: {
+            last_24h_count: parseInt(changeCounts.last_24h_count) || 0,
+            last_7d_count: parseInt(changeCounts.last_7d_count) || 0,
+            high_priority_last_7d: parseInt(changeCounts.high_priority_last_7d) || 0,
+            last_5_changes: formattedChanges
+        },
         last_updated: new Date().toISOString()
     };
 }
 
-// Generate companies.json - company list and metadata - FIXED
-async function generateCompaniesData() {
-    console.log('📁 Generating companies data...');
+// Generate individual change detail files - NEW CRITICAL FUNCTION
+async function generateChangeDetailFiles() {
+    console.log('📝 Generating individual change detail files...');
     
-    const companies = await db.all(`
+    // Get all recent changes that need detail files
+    const changes = await db.all(`
         SELECT 
-            c.id, 
-            c.name, 
-            c.category,
-            ca.industry,
-            ca.focus_areas,
-            ca.description,
-            ca.headquarters,
-            ca.founded,
-            ca.website,
-            ca.stock_symbol,
-            ca.employees,
-            ca.revenue,
-            ca.competitors,
-            ca.products,
-            ca.technologies,
-            ca.thebrain_thought_id
-        FROM intelligence.companies c
-        LEFT JOIN intelligence.company_attributes ca ON c.id = ca.company_id
-        ORDER BY c.name
+            c.id,
+            c.company,
+            c.url,
+            c.detected_at,
+            c.interest_level,
+            c.change_type,
+            c.analysis,
+            c.ai_confidence,
+            c.before_content,
+            c.after_content,
+            c.markdown_before,
+            c.markdown_after,
+            ea.ultra_analysis,
+            ea.key_insights,
+            ea.business_impact,
+            ea.competitive_implications,
+            ea.market_signals,
+            ea.risk_assessment
+        FROM intelligence.changes c
+        LEFT JOIN intelligence.enhanced_analysis ea ON c.id = ea.change_id
+        WHERE c.detected_at > NOW() - INTERVAL '30 days'
+        ORDER BY c.detected_at DESC
+        LIMIT 200
     `);
     
-    return {
-        companies: companies.map(company => ({
-            id: company.id,
-            name: company.name,
-            category: company.category,
-            industry: company.industry,
-            focus_areas: company.focus_areas,
-            description: company.description,
-            headquarters: company.headquarters,
-            founded: company.founded,
-            website: company.website,
-            stock_symbol: company.stock_symbol,
-            employees: company.employees,
-            revenue: company.revenue,
-            competitors: company.competitors,
-            products: company.products,
-            technologies: company.technologies,
-            thebrain_thought_id: company.thebrain_thought_id
-        })),
-        generated_at: new Date().toISOString()
-    };
+    let generated = 0;
+    
+    for (const change of changes) {
+        try {
+            // Parse AI analyses
+            let basicAnalysis = {};
+            let ultraAnalysis = {};
+            
+            if (change.analysis) {
+                try {
+                    basicAnalysis = typeof change.analysis === 'string' ? 
+                        JSON.parse(change.analysis) : change.analysis;
+                } catch (e) {}
+            }
+            
+            if (change.ultra_analysis) {
+                try {
+                    ultraAnalysis = typeof change.ultra_analysis === 'string' ? 
+                        JSON.parse(change.ultra_analysis) : change.ultra_analysis;
+                } catch (e) {}
+            }
+            
+            // Build interest explanation
+            let interestExplanation = 'Change detected with moderate significance.';
+            let interestCategory = 'general_update';
+            let interestDrivers = [];
+            
+            if (ultraAnalysis.interest_assessment) {
+                interestExplanation = ultraAnalysis.interest_assessment.reasoning || interestExplanation;
+                interestCategory = ultraAnalysis.interest_assessment.category || interestCategory;
+            }
+            
+            if (ultraAnalysis.strategic_analysis) {
+                if (ultraAnalysis.strategic_analysis.business_impact) {
+                    interestDrivers.push('Business Impact');
+                }
+                if (ultraAnalysis.strategic_analysis.market_signals && ultraAnalysis.strategic_analysis.market_signals.length > 0) {
+                    interestDrivers.push('Market Signal');
+                }
+            }
+            
+            if (change.interest_level >= 7) {
+                interestDrivers.push('High Priority');
+            }
+            
+            // Build diff information
+            const diff = {
+                summary: ultraAnalysis.change_summary?.what_changed || basicAnalysis.what_changed || 'Content updated',
+                key_changes: ultraAnalysis.insights?.key_findings || [],
+                added_sentences: [],
+                removed_sentences: []
+            };
+            
+            // Extract keywords (if we have content)
+            const keywords = {
+                new_keywords: [],
+                frequency_changes: {}
+            };
+            
+            if (ultraAnalysis.entities) {
+                // Extract new entities as keywords
+                const allEntities = [
+                    ...(ultraAnalysis.entities.products || []),
+                    ...(ultraAnalysis.entities.technologies || []),
+                    ...(ultraAnalysis.entities.features || [])
+                ];
+                
+                keywords.new_keywords = allEntities.slice(0, 10).map(e => ({
+                    word: e,
+                    frequency: 1
+                }));
+            }
+            
+            // Create the detail object matching dashboard expectations
+            const detail = {
+                id: change.id,
+                company: change.company,
+                url: change.url,
+                detected_at: change.detected_at,
+                interest_level: change.interest_level,
+                interest_category: interestCategory,
+                interest_explanation: interestExplanation,
+                interest_drivers: interestDrivers,
+                has_content: !!(change.markdown_before || change.markdown_after),
+                content_preview: {
+                    before: change.markdown_before ? change.markdown_before.substring(0, 1000) : null,
+                    after: change.markdown_after ? change.markdown_after.substring(0, 1000) : null
+                },
+                diff: diff,
+                keywords: keywords,
+                ai_analysis: {
+                    basic: basicAnalysis,
+                    enhanced: ultraAnalysis
+                },
+                business_context: {
+                    impact: change.business_impact || ultraAnalysis.strategic_analysis?.business_impact || '',
+                    implications: change.competitive_implications || ultraAnalysis.strategic_analysis?.competitive_implications || '',
+                    market_signals: change.market_signals || ultraAnalysis.strategic_analysis?.market_signals || [],
+                    risk_assessment: change.risk_assessment || ''
+                }
+            };
+            
+            // Write the file
+            const filename = `change-${change.id}.json`;
+            fs.writeFileSync(
+                path.join(CHANGES_DIR, filename),
+                JSON.stringify(detail, null, 2)
+            );
+            generated++;
+            
+        } catch (error) {
+            console.error(`Error generating detail for change ${change.id}:`, error);
+        }
+    }
+    
+    console.log(`✅ Generated ${generated} change detail files`);
+    return generated;
 }
 
-// Generate changes.json - recent changes data - FIXED to avoid duplicates
+// Generate changes.json with AI summaries
 async function generateRecentChangesData() {
-    console.log('🔄 Generating recent changes data...');
+    console.log('🔄 Generating recent changes data with AI summaries...');
     
     const changes = await db.all(`
-        SELECT DISTINCT ON (cd.id)
-            cd.id,
-            cd.company,
-            cd.url,
-            cd.url_name,
-            cd.detected_at,
-            cd.interest_level,
-            cd.ai_analysis,
-            cd.before_hash,
-            cd.new_hash,
-            sp.title,
-            SUBSTRING(sp.content, 1, 1000) as content_preview
-        FROM processed_content.change_detection cd
-        LEFT JOIN raw_content.scraped_pages sp ON cd.new_hash = sp.content_hash
-        WHERE cd.detected_at > NOW() - INTERVAL '30 days'
-        ORDER BY cd.id, cd.detected_at DESC
+        SELECT 
+            c.id,
+            c.company,
+            c.url,
+            c.detected_at as created_at,
+            c.interest_level,
+            c.analysis,
+            ea.ultra_analysis,
+            ea.business_impact
+        FROM intelligence.changes c
+        LEFT JOIN intelligence.enhanced_analysis ea ON c.id = ea.change_id
+        WHERE c.detected_at > NOW() - INTERVAL '30 days'
+        ORDER BY c.detected_at DESC
         LIMIT 500
     `);
     
     return {
         changes: changes.map(change => {
-            let analysis = {};
-            try {
-                analysis = change.ai_analysis || {};
-            } catch (e) {
-                // Use defaults
+            let summary = 'Content update detected';
+            
+            // Extract summary from analyses
+            if (change.analysis) {
+                try {
+                    const analysis = typeof change.analysis === 'string' ? 
+                        JSON.parse(change.analysis) : change.analysis;
+                    summary = analysis.what_changed || analysis.summary || summary;
+                } catch (e) {}
+            }
+            
+            if (change.ultra_analysis) {
+                try {
+                    const ultra = typeof change.ultra_analysis === 'string' ? 
+                        JSON.parse(change.ultra_analysis) : change.ultra_analysis;
+                    if (ultra.change_summary && ultra.change_summary.what_changed) {
+                        summary = ultra.change_summary.what_changed;
+                    }
+                } catch (e) {}
             }
             
             return {
                 id: change.id,
                 company: change.company,
-                url: change.url,
-                url_name: change.url_name,
-                detected_at: change.detected_at,
+                summary: summary,
                 interest_level: change.interest_level,
-                relevance_score: change.interest_level, // For compatibility
-                ai_analysis: analysis,
-                title: change.title,
-                summary: analysis.summary || (change.content_preview ? change.content_preview.substring(0, 200) + '...' : ''),
-                category: analysis.category || 'General Update',
-                impact_areas: analysis.impact_areas || [],
-                before_hash: change.before_hash,
-                after_hash: change.new_hash
+                created_at: change.created_at
             };
         }),
         generated_at: new Date().toISOString()
     };
 }
 
-// Generate extracted-data.json - content snapshots
-async function generateContentSnapshotsData() {
-    console.log('📸 Generating content snapshots data...');
-    
-    const snapshots = await db.all(`
-        SELECT DISTINCT ON (sp.content_hash)
-            sp.url,
-            sp.company,
-            sp.title,
-            SUBSTRING(sp.content, 1, 2000) as content_preview,
-            sp.scraped_at,
-            sp.content_hash,
-            cd.interest_level,
-            cd.ai_analysis,
-            u.company_id,
-            u.name as url_name
-        FROM raw_content.scraped_pages sp
-        LEFT JOIN processed_content.change_detection cd ON sp.content_hash = cd.new_hash
-        LEFT JOIN intelligence.urls u ON sp.url = u.url
-        WHERE sp.scraped_at > NOW() - INTERVAL '7 days'
-        ORDER BY sp.content_hash, sp.scraped_at DESC
-        LIMIT 200
-    `);
-    
-    return {
-        items: snapshots.map(snap => ({
-            id: snap.content_hash,
-            company: snap.company,
-            url: snap.url,
-            url_name: snap.url_name,
-            title: snap.title,
-            content_preview: snap.content_preview,
-            scraped_at: snap.scraped_at,
-            aiProcessed: !!snap.ai_analysis,
-            interest_level: snap.interest_level || 0,
-            content_hash: snap.content_hash
-        })),
-        generated_at: new Date().toISOString()
-    };
-}
-
-// Generate monitoring-runs.json - scraping run history
-async function generateMonitoringRunsData() {
-    console.log('🏃 Generating monitoring runs data...');
-    
-    const runs = await db.all(`
-        SELECT 
-            sr.*,
-            (SELECT COUNT(DISTINCT id) FROM processed_content.change_detection 
-             WHERE detected_at >= sr.started_at AND detected_at <= sr.completed_at) as changes_detected
-        FROM raw_content.scraping_runs sr
-        WHERE sr.status = 'completed'
-        ORDER BY sr.completed_at DESC
-        LIMIT 50
-    `);
-    
-    return {
-        runs: runs.map(run => ({
-            id: run.id,
-            started_at: run.started_at,
-            completed_at: run.completed_at,
-            urls_processed: run.urls_processed,
-            urls_changed: run.urls_changed,
-            errors_count: run.errors_count || 0,
-            changes_detected: run.changes_detected || 0,
-            success_rate: run.urls_processed > 0 ? 
-                ((run.urls_processed - (run.errors_count || 0)) / run.urls_processed * 100).toFixed(2) : 
-                '0.00',
-            duration_seconds: run.completed_at && run.started_at ? 
-                Math.round((new Date(run.completed_at) - new Date(run.started_at)) / 1000) : 
-                0
-        })),
-        generated_at: new Date().toISOString()
-    };
-}
-
-// Generate company-details.json - detailed company data
-async function generateCompanyDetailsData() {
-    console.log('🏢 Generating company details data...');
-    
-    const companies = await db.all(`
-        SELECT c.id, c.name FROM intelligence.companies c ORDER BY c.name
-    `);
-    
-    const details = {};
-    
-    for (const company of companies) {
-        // Get URLs
-        const urls = await db.all(`
-            SELECT * FROM intelligence.urls 
-            WHERE company_id = $1
-            ORDER BY name
-        `, [company.id]);
-        
-        // Get recent change stats - FIXED with DISTINCT
-        const recentStats = await db.get(`
-            SELECT 
-                COUNT(DISTINCT cd.id) as total_changes,
-                COUNT(DISTINCT CASE WHEN cd.detected_at > NOW() - INTERVAL '7 days' THEN cd.id END) as changes_7d,
-                COUNT(DISTINCT CASE WHEN cd.detected_at > NOW() - INTERVAL '30 days' THEN cd.id END) as changes_30d,
-                MAX(cd.detected_at) as last_change,
-                AVG(cd.interest_level) as avg_interest_level
-            FROM processed_content.change_detection cd
-            WHERE cd.company = $1
-        `, [company.name]);
-        
-        // Get top insights
-        const insights = await db.all(`
-            SELECT * FROM intelligence.insights
-            WHERE company_id = $1
-            ORDER BY created_at DESC
-            LIMIT 5
-        `, [company.id]);
-        
-        details[company.name] = {
-            id: company.id,
-            name: company.name,
-            urls: urls.map(url => ({
-                id: url.id,
-                url: url.url,
-                name: url.name,
-                category: url.category,
-                importance: url.importance,
-                check_frequency: url.check_frequency
-            })),
-            stats: {
-                total_changes: recentStats.total_changes || 0,
-                changes_7d: recentStats.changes_7d || 0,
-                changes_30d: recentStats.changes_30d || 0,
-                last_change: recentStats.last_change,
-                avg_interest_level: recentStats.avg_interest_level ? 
-                    parseFloat(recentStats.avg_interest_level).toFixed(2) : 
-                    '0.00'
-            },
-            insights: insights.map(i => ({
-                id: i.id,
-                title: i.title,
-                content: i.content,
-                importance: i.importance,
-                created_at: i.created_at
-            }))
-        };
-    }
-    
-    return {
-        companies: details,
-        generated_at: new Date().toISOString()
-    };
-}
-
-// Generate AI news items
-async function generateAINews() {
-    console.log('📰 Generating AI news...');
-    
-    // Get high-interest changes across all companies - FIXED with DISTINCT
-    const changes = await db.all(`
-        SELECT DISTINCT ON (cd.id)
-            cd.id,
-            cd.company,
-            cd.url_name,
-            cd.url,
-            cd.detected_at,
-            cd.interest_level,
-            cd.ai_analysis,
-            sp.title,
-            SUBSTRING(sp.content, 1, 500) as content_preview
-        FROM processed_content.change_detection cd
-        JOIN raw_content.scraped_pages sp ON cd.new_hash = sp.content_hash
-        WHERE cd.interest_level >= 6
-        AND cd.detected_at > NOW() - INTERVAL '7 days'
-        ORDER BY cd.id, cd.detected_at DESC
-        LIMIT 20
-    `);
-    
-    const news = changes.map(change => {
-        let analysis = {};
-        try {
-            analysis = change.ai_analysis || {};
-        } catch (e) {
-            // Use defaults if JSON parsing fails
-        }
-        
-        return {
-            id: `${change.company}-${change.id}`,
-            company: change.company,
-            title: change.title || `Update on ${change.url_name}`,
-            summary: analysis.summary || change.content_preview.substring(0, 200) + '...',
-            category: analysis.category || 'General Update',
-            interest_level: change.interest_level,
-            impact_areas: analysis.impact_areas || [],
-            url: change.url,
-            date: change.detected_at
-        };
-    });
-    
-    return news;
-}
-
-// Generate individual company detail files
-async function generateIndividualCompanyFiles(companyName) {
-    console.log(`  📁 Generating data for ${companyName}...`);
-    
-    const company = await db.get(`
-        SELECT c.*, ca.* 
-        FROM intelligence.companies c
-        LEFT JOIN intelligence.company_attributes ca ON c.id = ca.company_id
-        WHERE c.name = $1
-    `, [companyName]);
-    
-    if (!company) {
-        console.warn(`Company not found: ${companyName}`);
-        return null;
-    }
-    
-    // Get URLs
-    const urls = await db.all(`
-        SELECT * FROM intelligence.urls 
-        WHERE company_id = $1
-        ORDER BY name
-    `, [company.id]);
-    
-    // Get recent changes with details - FIXED with DISTINCT
-    const changes = await db.all(`
-        SELECT DISTINCT ON (cd.id)
-            cd.*,
-            sp.title,
-            SUBSTRING(sp.content, 1, 1000) as content_preview
-        FROM processed_content.change_detection cd
-        LEFT JOIN raw_content.scraped_pages sp ON cd.new_hash = sp.content_hash
-        WHERE cd.company = $1
-        ORDER BY cd.id, cd.detected_at DESC
-        LIMIT 50
-    `, [companyName]);
-    
-    // Process changes to add parsed AI analysis
-    const processedChanges = changes.map(change => {
-        let analysis = {};
-        try {
-            analysis = change.ai_analysis || {};
-        } catch (e) {
-            // Use defaults
-        }
-        
-        return {
-            ...change,
-            ai_analysis: analysis,
-            content_preview: change.content_preview
-        };
-    });
-    
-    // Get insights
-    const insights = await db.all(`
-        SELECT * FROM intelligence.insights
-        WHERE company_id = $1
-        ORDER BY created_at DESC
-        LIMIT 10
-    `, [company.id]);
-    
-    // Get aggregated stats - FIXED with DISTINCT
-    const stats = await db.get(`
-        SELECT 
-            COUNT(DISTINCT cd.url) as monitored_urls,
-            COUNT(DISTINCT cd.id) as total_changes,
-            COUNT(DISTINCT CASE WHEN cd.interest_level >= 7 THEN cd.id END) as high_interest_changes,
-            COUNT(DISTINCT CASE WHEN cd.detected_at > NOW() - INTERVAL '7 days' THEN cd.id END) as changes_last_week,
-            AVG(cd.interest_level) as avg_interest_level
-        FROM processed_content.change_detection cd
-        WHERE cd.company = $1
-    `, [companyName]);
-    
-    // Get entities from latest analyses in intelligence schema
-    const latestAnalyses = await db.all(`
-        SELECT ba.entities, ba.themes, ba.key_points
-        FROM intelligence.baseline_analysis ba
-        WHERE ba.company_name = $1
-        ORDER BY ba.analysis_date DESC
-        LIMIT 10
-    `, [companyName]);
-    
-    // Aggregate entities and themes
-    const allTechnologies = [];
-    const allProducts = [];
-    const allThemes = [];
-    const allKeyPoints = [];
-    
-    for (const analysis of latestAnalyses) {
-        try {
-            // Parse JSONB entities
-            if (analysis.entities) {
-                const entities = analysis.entities;
-                    
-                if (entities.technologies) {
-                    const techNames = entities.technologies.map(t => t.name || t);
-                    allTechnologies.push(...techNames);
-                }
-                if (entities.products) {
-                    const productNames = entities.products.map(p => p.name || p);
-                    allProducts.push(...productNames);
-                }
-            }
-            
-            // Parse JSONB themes
-            if (analysis.themes) {
-                const themes = Array.isArray(analysis.themes) ? analysis.themes : [];
-                allThemes.push(...themes);
-            }
-            
-            // Parse JSONB key_points
-            if (analysis.key_points) {
-                const keyPoints = Array.isArray(analysis.key_points) ? analysis.key_points : [];
-                allKeyPoints.push(...keyPoints);
-            }
-        } catch (e) {
-            console.error(`Error parsing analysis data: ${e.message}`);
-            // Skip invalid JSON
-        }
-    }
-    
-    // Deduplicate and get top items
-    const topTechnologies = deduplicatePreservingCase(allTechnologies).slice(0, 20);
-    const topProducts = deduplicatePreservingCase(allProducts).slice(0, 20);
-    const topThemes = deduplicateByName(allThemes).slice(0, 10);
-    const recentKeyPoints = deduplicateByName(allKeyPoints).slice(0, 15);
-    
-    return {
-        company: {
-            ...company,
-            urls: urls
-        },
-        stats: stats,
-        changes: processedChanges,
-        insights: insights,
-        entities: {
-            technologies: topTechnologies,
-            products: topProducts
-        },
-        themes: topThemes,
-        key_points: recentKeyPoints,
-        last_updated: new Date().toISOString()
-    };
-}
-
 // Main generation function
 async function generateAllData() {
-    console.log('🚀 Static Data Generator for PostgreSQL (FIXED VERSION)');
+    console.log('🚀 CRITICAL FIX: Static Data Generator with AI Analysis');
     console.log('=' .repeat(60));
     
     try {
-        // Generate all files matching SQLite structure
-        const files = [
-            { name: 'dashboard.json', generator: generateDashboard },
-            { name: 'companies.json', generator: generateCompaniesData },
-            { name: 'extracted-data.json', generator: generateContentSnapshotsData },
-            { name: 'changes.json', generator: generateRecentChangesData },
-            { name: 'monitoring-runs.json', generator: generateMonitoringRunsData },
-            { name: 'company-details.json', generator: generateCompanyDetailsData }
-        ];
-        
-        for (const file of files) {
-            console.log(`\n📝 Generating ${file.name}...`);
-            const data = await file.generator();
-            fs.writeFileSync(
-                path.join(OUTPUT_DIR, file.name),
-                JSON.stringify(data, null, 2)
-            );
-            console.log(`✅ Generated ${file.name} (${JSON.stringify(data).length} bytes)`);
-        }
-        
-        // Also generate new features (bonus)
-        console.log('\n📰 Generating bonus files...');
-        
-        // AI News
-        const news = await generateAINews();
+        // Generate dashboard with AI summaries
+        console.log('\n📊 Generating dashboard.json with AI analysis...');
+        const dashboardData = await generateDashboard();
         fs.writeFileSync(
-            path.join(OUTPUT_DIR, 'ai-news.json'),
-            JSON.stringify({ news, last_updated: new Date().toISOString() }, null, 2)
+            path.join(OUTPUT_DIR, 'dashboard.json'),
+            JSON.stringify(dashboardData, null, 2)
         );
-        console.log('✅ Generated ai-news.json');
+        console.log('✅ Dashboard generated with AI summaries');
         
-        // Generate individual company files (in subdirectory)
-        console.log('\n📁 Generating individual company files...');
-        const companies = await db.all(`
-            SELECT name FROM intelligence.companies 
-            ORDER BY name
-        `);
-        
-        const companiesDir = path.join(OUTPUT_DIR, 'companies');
-        if (!fs.existsSync(companiesDir)) {
-            fs.mkdirSync(companiesDir, { recursive: true });
-        }
-        
-        for (const company of companies) {
-            const details = await generateIndividualCompanyFiles(company.name);
-            if (details) {
-                const filename = company.name.toLowerCase().replace(/\s+/g, '-') + '.json';
-                fs.writeFileSync(
-                    path.join(companiesDir, filename),
-                    JSON.stringify(details, null, 2)
-                );
-            }
-        }
-        
-        console.log(`✅ Generated ${companies.length} individual company files`);
-        
-        // Generate manifest for all files
-        const manifest = {
-            version: '2.1',
-            backend: 'postgresql',
-            compatible_with: 'sqlite-dashboard',
-            generated_at: new Date().toISOString(),
-            fixes_applied: [
-                'proper_company_ids',
-                'eliminate_duplicates',
-                'extract_jsonb_entities',
-                'correct_join_logic'
-            ],
-            files: {
-                core: files.map(f => f.name),
-                bonus: ['ai-news.json'],
-                companies: companies.map(c => `companies/${c.name.toLowerCase().replace(/\s+/g, '-')}.json`)
-            }
-        };
-        
+        // Generate changes list
+        console.log('\n📋 Generating changes.json...');
+        const changesData = await generateRecentChangesData();
         fs.writeFileSync(
-            path.join(OUTPUT_DIR, 'manifest.json'),
-            JSON.stringify(manifest, null, 2)
+            path.join(OUTPUT_DIR, 'changes.json'),
+            JSON.stringify(changesData, null, 2)
         );
-        console.log('✅ Generated manifest.json');
+        console.log('✅ Changes list generated');
         
-        // Status file
+        // Generate individual change details (CRITICAL)
+        console.log('\n🔍 Generating individual change detail files...');
+        const detailCount = await generateChangeDetailFiles();
+        
+        // Generate status file
         fs.writeFileSync(
             path.join(OUTPUT_DIR, 'status.json'),
             JSON.stringify({
                 generated_at: new Date().toISOString(),
                 backend: 'postgresql',
-                files_generated: files.length + 2 + companies.length,
-                compatible_with_dashboard: true,
-                fixes_applied: true
+                ai_analysis_included: true,
+                change_details_generated: detailCount,
+                fixes_applied: ['ai_summaries', 'change_details', 'company_names', 'urls']
             }, null, 2)
         );
         
-        console.log('\n✨ All static data generated successfully!');
-        console.log('📊 Dashboard-compatible files created in:', OUTPUT_DIR);
+        console.log('\n✨ CRITICAL FIX APPLIED: AI analysis now included!');
+        console.log('📊 Dashboard will now show:');
+        console.log('   - Executive summaries in recent changes');
+        console.log('   - Company names and URLs in detail modal');
+        console.log('   - Full AI analysis and competitive intelligence');
+        console.log('   - Business impact and strategic insights');
         
     } catch (error) {
         console.error('❌ Error generating static data:', error);
         process.exit(1);
     } finally {
-        await end(); // Close PostgreSQL connection pool
+        await end();
     }
 }
 

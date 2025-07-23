@@ -1,0 +1,2356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Competitive Monitor - GitHub Actions Powered</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a2e;
+            --secondary-bg: #2a2a3e;
+            --accent-bg: #1e1e3e;
+            --primary-color: #667eea;
+            --accent-color: #00ff88;
+            --error-color: #ff4444;
+            --warning-color: #ffa726;
+            --text-primary: #eee;
+            --text-secondary: #bbb;
+            --border-color: #3a3a5e;
+            --changed-color: #ffd700;
+            --new-color: #00ff88;
+            --high-interest: #FFD700;
+            --medium-interest: #87CEEB;
+            --low-interest: #6bcf7f;
+        }
+
+        html {
+            font-size: 16px;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #764ba2 100%);
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            color: white;
+        }
+
+        .stats-bar {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            color: white;
+            flex: 1;
+            min-width: 150px;
+            cursor: default; /* Not clickable */
+        }
+
+        .stat-item strong {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            color: #ffd93d;
+        }
+
+        .ai-badge {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--accent-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .tabs {
+            display: flex;
+            background: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 5px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .tab {
+            flex: 1;
+            padding: 12px 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tab:hover {
+            background: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--secondary-bg);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            min-height: 500px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .button-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #667eea 100%);
+            color: white;
+        }
+
+        .button-secondary {
+            background: linear-gradient(135deg, var(--border-color) 0%, #667eea 100%);
+            color: white;
+        }
+
+        .button-warning {
+            background: linear-gradient(135deg, var(--warning-color) 0%, #ff7043 100%);
+            color: white;
+        }
+
+        .button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .status-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .status-card {
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            cursor: default; /* Not clickable */
+        }
+
+        .status-card h3 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+
+        .status-card .value {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .status-card .label {
+            font-size: 12px;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .company-card {
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer; /* Make it clear this is clickable */
+        }
+
+        .company-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .company-card.recent-change {
+            border-color: var(--changed-color);
+            background: linear-gradient(135deg, var(--accent-bg) 0%, rgba(255, 215, 0, 0.05) 100%);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .company-card.new-company {
+            border-color: var(--new-color);
+            background: linear-gradient(135deg, var(--accent-bg) 0%, rgba(0, 255, 136, 0.05) 100%);
+            box-shadow: 0 0 20px rgba(0, 255, 136, 0.1);
+        }
+
+        .recent-highlight {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            padding: 3px 10px;
+            border-radius: 15px;
+        }
+
+        .interest-indicator {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+        }
+
+        .interest-high { color: #ff6b6b; }
+        .interest-medium { color: #ffd93d; }
+        .interest-low { color: #6bcf7f; }
+
+        .company-header {
+            margin-bottom: 15px;
+        }
+
+        .company-header h3 {
+            margin: 0;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+        }
+
+        .company-type {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
+        .company-summary {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 10px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .company-card .url {
+            color: #87CEEB;
+            text-decoration: none;
+            font-size: 14px;
+            word-break: break-all;
+        }
+
+        /* Ensure all URLs are readable */
+        a[href] {
+            color: #87CEEB !important;
+        }
+
+        .modal a[href],
+        .tab-content a[href],
+        .company-detail-modal a[href] {
+            color: #87CEEB !important;
+            text-decoration: underline;
+        }
+
+        .company-card .status {
+            margin: 10px 0;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .status-good {
+            background: rgba(108, 207, 127, 0.2);
+            color: #6bcf7f;
+        }
+
+        .status-warning {
+            background: rgba(255, 167, 38, 0.2);
+            color: #ffa726;
+        }
+
+        .status-error {
+            background: rgba(255, 68, 68, 0.2);
+            color: #ff4444;
+        }
+
+        .intel-section {
+            margin: 10px 0;
+        }
+
+        .intel-label {
+            font-size: 11px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .intel-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .intel-pill {
+            background: rgba(102, 126, 234, 0.2);
+            color: var(--primary-color);
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            border: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .change-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        .change-indicator.recent {
+            background: var(--changed-color);
+        }
+
+        .change-indicator.new {
+            background: var(--new-color);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
+        }
+
+        .error-message {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            color: var(--error-color);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .data-table th {
+            background: var(--accent-bg);
+            color: var(--primary-color);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+        }
+
+        .data-table tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+
+        .clickable-row {
+            cursor: pointer;
+        }
+
+        .clickable-row:hover {
+            background: rgba(102, 126, 234, 0.1) !important;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--secondary-bg);
+            margin: 2% auto;
+            padding: 0;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px 12px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1001;
+        }
+
+        .modal-title {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .modal-body {
+            padding: 20px;
+        }
+
+        .modal-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            text-align: right;
+            background: var(--accent-bg);
+            border-radius: 0 0 12px 12px;
+            position: sticky;
+            bottom: 0;
+            z-index: 1001;
+        }
+
+        .config-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--accent-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .config-section h4 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+        }
+
+        .config-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 8px 0;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .config-row:last-child {
+            border-bottom: none;
+        }
+
+        .config-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .config-value {
+            color: var(--text-secondary);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+
+        .status-success { background: #4caf50; }
+        .status-warning { background: #ff9800; }
+        .status-error { background: #f44336; }
+        .status-info { background: #2196f3; }
+
+        .close {
+            color: var(--text-primary);
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            margin-left: auto;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: white;
+            background: rgba(255, 68, 68, 0.8);
+            transform: scale(1.1);
+        }
+
+        .change-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-left: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        .change-indicator.recent {
+            background: var(--changed-color);
+        }
+
+        .change-indicator.new {
+            background: var(--new-color);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .interest-score {
+            background: rgba(102, 126, 234, 0.1);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .quick-nav {
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #667eea 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .nav-button .icon {
+            font-size: 1.2rem;
+        }
+
+        .recent-changes {
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .change-item {
+            background: rgba(59, 130, 246, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            border-left: 4px solid #3b82f6;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .change-item:hover {
+            background: rgba(59, 130, 246, 0.15);
+            transform: translateX(5px);
+        }
+
+        /* View Mode Selector */
+        .view-mode-selector {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .view-btn {
+            padding: 10px 20px;
+            border: 2px solid var(--border-color);
+            background: var(--secondary-bg);
+            color: var(--text-secondary);
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .view-btn:hover {
+            background: var(--accent-bg);
+            color: var(--text-primary);
+            border-color: var(--primary-color);
+        }
+
+        .view-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* View Panels */
+        .view-panel {
+            display: none;
+        }
+
+        .view-panel.active {
+            display: block;
+        }
+
+        /* Change Cards */
+        .change-card {
+            display: flex;
+            align-items: center;
+            background: var(--accent-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-left: 5px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .change-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .change-card.high-interest {
+            border-left-color: var(--high-interest);
+            background: linear-gradient(135deg, var(--accent-bg) 0%, rgba(255, 215, 0, 0.05) 100%);
+        }
+
+        .change-card.medium-interest {
+            border-left-color: var(--medium-interest);
+            background: linear-gradient(135deg, var(--accent-bg) 0%, rgba(135, 206, 235, 0.05) 100%);
+        }
+
+        .change-card.low-interest {
+            border-left-color: var(--low-interest);
+        }
+
+        .change-card .interest-indicator {
+            min-width: 80px;
+            text-align: center;
+            margin-right: 20px;
+        }
+
+        .change-card .interest-indicator .score {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--text-primary);
+        }
+
+        .change-card .interest-indicator .emoji {
+            display: block;
+            font-size: 28px;
+            margin-top: 5px;
+        }
+
+        .change-content {
+            flex: 1;
+        }
+
+        .change-content h3 {
+            margin: 0 0 10px 0;
+            color: var(--primary-color);
+        }
+
+        .change-content p {
+            margin: 0 0 10px 0;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .change-content .time {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Timeline View */
+        .timeline-container {
+            max-height: 600px;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .timeline-filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .timeline-filters select,
+        .timeline-filters input {
+            padding: 8px 12px;
+            background: var(--accent-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            border-radius: 6px;
+        }
+
+        .date-group {
+            margin-bottom: 30px;
+        }
+
+        .date-group h3 {
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .timeline-item {
+            background: var(--accent-bg);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-left-color: var(--primary-color);
+        }
+
+        /* Summary Stats */
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .summary-stat {
+            background: var(--accent-bg);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .summary-stat .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .summary-stat .label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .companies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .container {
+                padding: 15px;
+            }
+
+            .companies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 15px;
+            }
+
+            .stat-item {
+                min-width: 120px;
+                padding: 8px 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .stats-bar {
+                gap: 10px;
+            }
+
+            .stat-item {
+                flex: 1 1 calc(50% - 5px);
+                min-width: 0;
+            }
+
+            .companies-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+
+            .nav-button {
+                min-width: 0;
+                width: 100%;
+            }
+
+            .status-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tab {
+                min-width: 0;
+                flex: 1 1 auto;
+                padding: 10px 15px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stat-item {
+                flex: 1 1 100%;
+            }
+
+            .ai-badge {
+                position: static;
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header with Live Stats -->
+        <div class="header">
+            <div class="ai-badge">🤖 AI-Powered</div>
+            <h1>AI Competitive Monitor</h1>
+            <p>Real-time competitive intelligence powered by GitHub Actions</p>
+            <div class="stats-bar" id="statsBar">
+                <div class="stat-item">🏢 <strong>--</strong> Companies</div>
+                <div class="stat-item">🔍 <strong>--</strong> URLs Monitored</div>
+                <div class="stat-item">📊 <strong>--</strong> Analyses</div>
+                <div class="stat-item">⏰ Last Check: <strong>--</strong></div>
+            </div>
+        </div>
+
+        <!-- Quick Navigation -->
+        <div class="quick-nav">
+            <h3 style="margin: 0 0 15px 0; color: var(--primary-color);">🚀 Quick Navigation</h3>
+            <div class="nav-buttons">
+                <a href="3d-force-graph-fixed.html" class="nav-button" target="_blank">
+                    <span class="icon">🌐</span>
+                    <span>3D Company Graph</span>
+                </a>
+                <a href="manage-companies-hybrid.html" class="nav-button">
+                    <span class="icon">🏢</span>
+                    <span>Manage Companies</span>
+                </a>                <a href="#" class="nav-button" onclick="openTheBrainTest()">
+                    <span class="icon">🧠</span>
+                    <span>TheBrain Integration</span>
+                </a>
+                <a href="manage-companies-hybrid.html" class="nav-button" target="_blank">
+                    <span class="icon">⚙️</span>
+                    <span>Manage Companies</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Recent Changes Section -->
+        <div class="recent-changes">
+            <h3 style="margin: 0 0 15px 0; color: var(--primary-color);">📈 Recent Changes</h3>
+            <div id="recentChanges">
+                <div class="loading">Loading recent changes...</div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs -->
+        <div class="tabs">
+            <button type="button" class="tab active" onclick="showTab(event, 'dashboard')">📊 Dashboard</button>
+            <button type="button" class="tab" onclick="showTab(event, 'extracted')">📄 Extracted Data</button>
+            <button type="button" class="tab" onclick="showTab(event, 'changes')">📈 Change History</button>
+            <button type="button" class="tab" onclick="showTab(event, 'logs')">📝 System Logs</button>
+            <button type="button" class="tab" onclick="showTab(event, 'sendemail')">📧 Send Email</button>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="dashboard" class="tab-content active">
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button type="button" class="button button-primary" onclick="refreshStatus(event)">🔄 Refresh Status</button>
+                <button type="button" class="button button-warning" onclick="checkWorkflowStatus(event)">📊 Check Workflow Status</button>
+            </div>
+
+            <!-- View Mode Selector -->
+            <div class="view-mode-selector">
+                <button class="view-btn active" data-view="recent-changes" onclick="switchView('recent-changes')">
+                    <i class="fas fa-clock"></i> Recent Changes
+                </button>
+                <button class="view-btn" data-view="timeline" onclick="switchView('timeline')">
+                    <i class="fas fa-history"></i> Timeline
+                </button>
+                <button class="view-btn" data-view="company-grid" onclick="switchView('company-grid')">
+                    <i class="fas fa-th"></i> Company Grid
+                </button>
+            </div>
+
+            <!-- Recent Changes View -->
+            <div id="recent-changes-view" class="view-panel active">
+                <div class="summary-stats" id="changeSummaryStats">
+                    <div class="summary-stat">
+                        <div class="number">--</div>
+                        <div class="label">Changes Today</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="number">--</div>
+                        <div class="label">Last 7 Days</div>
+                    </div>
+                    <div class="summary-stat">
+                        <div class="number">--</div>
+                        <div class="label">High Priority</div>
+                    </div>
+                </div>
+                <h3>🌟 Recent Changes by Interest Score</h3>
+                <div id="recentChangesCards" class="changes-list">
+                    <div class="loading">Loading recent changes...</div>
+                </div>
+            </div>
+
+            <!-- Timeline View -->
+            <div id="timeline-view" class="view-panel">
+                <div class="timeline-filters">
+                    <select id="companyFilter" onchange="filterTimeline()">
+                        <option value="">All Companies</option>
+                    </select>
+                    <select id="interestFilter" onchange="filterTimeline()">
+                        <option value="">All Interest Levels</option>
+                        <option value="high">High (8-10)</option>
+                        <option value="medium">Medium (5-7)</option>
+                        <option value="low">Low (1-4)</option>
+                    </select>
+                    <input type="date" id="dateFrom" onchange="filterTimeline()" />
+                    <input type="date" id="dateTo" onchange="filterTimeline()" />
+                </div>
+                <div class="timeline-container" id="timelineContainer">
+                    <div class="loading">Loading timeline...</div>
+                </div>
+            </div>
+
+            <!-- Company Grid View -->
+            <div id="company-grid-view" class="view-panel">
+                <div id="companiesDisplay">
+                    <h3>📊 Monitored Companies</h3>
+                    <div class="loading">Loading company data from GitHub Actions...</div>
+                </div>
+            </div>
+        </div>
+
+        <div id="extracted" class="tab-content">
+            <h3>📄 Extracted Data</h3>
+            <div id="extractedContent">
+                <div class="loading">Loading extracted data...</div>
+            </div>
+        </div>
+
+        <div id="changes" class="tab-content">
+            <h3>📈 Change History</h3>
+            <div id="changesContent">
+                <div class="loading">Loading change history...</div>
+            </div>
+        </div>
+
+        <div id="logs" class="tab-content">
+            <h3>📝 System Logs</h3>
+            <div id="logsContent">
+                <div class="loading">Loading system logs...</div>
+            </div>
+        </div>
+
+        <div id="sendemail" class="tab-content">
+            <h3>📧 Send Email Report</h3>
+            <div id="emailContent">
+                <div class="config-section">
+                    <h4>Send AI Competitive Intelligence Report</h4>
+                    <p>Generate and send a comprehensive report of recent changes and competitive intelligence.</p>
+                    <div class="action-buttons">
+                        <button type="button" class="button button-primary" onclick="sendEmailReport()">📧 Send Report Now</button>
+                        <button type="button" class="button button-secondary" onclick="previewEmailReport()">👁️ Preview Report</button>
+                    </div>
+                    <div id="emailStatus" style="margin-top: 20px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <div id="companyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle" class="modal-title">Company Details</h2>
+                <span class="close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body" id="modalContent">
+                <!-- Content will be populated by JavaScript -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button button-secondary" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const CONFIG = {
+            githubRepo: 'redmorestudio/ai-competitive-monitor',
+            repoUrl: 'https://github.com/redmorestudio/ai-competitive-monitor',
+            apiBaseUrl: './api-data',  // Static files served by GitHub Pages
+            refreshInterval: 5 * 60 * 1000, // 5 minutes
+            maxRetries: 3,
+            retryDelay: 2000
+        };
+
+        // Global state
+        let companies = [];
+        let workflowStatus = null;
+        let currentFilter = 'all';
+        let dashboardData = null;
+
+        // Initialize the application
+        function init() {
+            console.log('🚀 AI Competitive Monitor - GitHub Actions Powered');
+            console.log('📊 Loading static data generated by GitHub Actions workflows...');
+
+            // Load initial status
+            refreshStatus();
+
+            // Set up auto-refresh
+            setInterval(refreshStatus, CONFIG.refreshInterval);
+
+            // Set up modal close handlers
+            window.onclick = function(event) {
+                const modal = document.getElementById('companyModal');
+                if (event.target === modal) {
+                    closeModal();
+                }
+            };
+
+            const span = companyModal.getElementsByClassName('close')[0];
+            if (span) {
+                span.onclick = closeModal;
+            }
+        }
+
+        // Show change details in modal
+        async function showChangeDetail(changeIdOrElement, event) {
+            let changeData;
+            
+            // Handle different calling patterns
+            if (typeof changeIdOrElement === 'string' || typeof changeIdOrElement === 'number') {
+                // Called with just an ID (from timeline or other views)
+                // We need to find the change data from our loaded data
+                const changeId = changeIdOrElement;
+                
+                // Try to find the change in recent changes
+                if (window.dashboardData && window.dashboardData.changes) {
+                    changeData = window.dashboardData.changes.find(c => 
+                        (c.id == changeId || c.change_id == changeId)
+                    );
+                }
+                
+                // If not found in dashboard data, try changes.json
+                if (!changeData && window.changesData && window.changesData.changes) {
+                    changeData = window.changesData.changes.find(c => 
+                        (c.id == changeId || c.change_id == changeId)
+                    );
+                }
+                
+                // If still not found, create minimal data
+                if (!changeData) {
+                    changeData = {
+                        id: changeId,
+                        change_id: changeId,
+                        company: 'Loading...',
+                        url: '#'
+                    };
+                }
+            } else {
+                // Called with element context (from Change History)
+                const clickedElement = this || changeIdOrElement;
+                const dataAttr = clickedElement.getAttribute('data-change');
+                if (dataAttr) {
+                    changeData = JSON.parse(dataAttr);
+                } else {
+                    console.error('No data-change attribute found');
+                    return;
+                }
+            }
+            
+            if (event) {
+                event.stopPropagation();
+            }
+            
+            const modal = document.getElementById('companyModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalTitle.textContent = `Change Details: ${changeData.company}`;
+            
+            // Show loading state
+            modalContent.innerHTML = `
+                <div class="loading">Loading change details...</div>
+            `;
+            
+            modal.style.display = 'block';
+            
+            // Try to fetch detailed change information from static JSON file
+            try {
+                const changeId = changeData.id || changeData.change_id;
+                const response = await fetch(`${CONFIG.apiBaseUrl}/changes/change-${changeId}.json?t=${Date.now()}`);
+                if (!response.ok) {
+                    throw new Error('Change detail file not found');
+                }
+                
+                const detailData = await response.json();
+                
+                // Create tabbed interface for the detailed view
+                modalContent.innerHTML = `
+                    <div class="config-section">
+                        <h4>📊 Change Information</h4>
+                        <p><strong>Company:</strong> ${escapeHtml(detailData.company || changeData.company)}</p>
+                        <p><strong>URL:</strong> <a href="${escapeHtml(detailData.url || changeData.url)}" target="_blank">${escapeHtml(detailData.url || changeData.url)}</a></p>
+                        <p><strong>Detected:</strong> ${new Date(detailData.detected_at || changeData.detected_at).toLocaleString()}</p>
+                        ${detailData.interest_level ? `
+                            <p><strong>Interest Level:</strong> ${detailData.interest_level}/10
+                            ${detailData.interest_category ? ` (${detailData.interest_category})` : ''}</p>
+                        ` : ''}
+                    </div>
+                    
+                    ${detailData.interest_explanation ? `
+                        <div class="config-section">
+                            <h4>🎯 Why This Matters</h4>
+                            <p>${escapeHtml(detailData.interest_explanation)}</p>
+                            ${detailData.interest_drivers && detailData.interest_drivers.length > 0 ? `
+                                <div style="margin-top: 10px;">
+                                    ${detailData.interest_drivers.map(driver => `
+                                        <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 4px 12px; border-radius: 16px; font-size: 0.85rem; margin-right: 8px; display: inline-block; margin-bottom: 5px;">
+                                            ${escapeHtml(driver)}
+                                        </span>
+                                    `).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    ` : ''}
+                    
+                    ${detailData.has_content && detailData.content_preview ? `
+                        <div class="config-section">
+                            <h4>📝 Content Comparison</h4>
+                            ${detailData.content_preview.before || detailData.content_preview.after ? `
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 10px;">
+                                    <div style="background: #1e293b; padding: 15px; border-radius: 8px; max-height: 300px; overflow-y: auto;">
+                                        <h5 style="margin: 0 0 10px 0; color: #94a3b8;">Before</h5>
+                                        <pre style="margin: 0; white-space: pre-wrap; word-wrap: break-word; font-size: 0.85rem; color: #e2e8f0;">${escapeHtml(detailData.content_preview.before || 'No previous content')}</pre>
+                                    </div>
+                                    <div style="background: #1e293b; padding: 15px; border-radius: 8px; max-height: 300px; overflow-y: auto;">
+                                        <h5 style="margin: 0 0 10px 0; color: #94a3b8;">After</h5>
+                                        <pre style="margin: 0; white-space: pre-wrap; word-wrap: break-word; font-size: 0.85rem; color: #e2e8f0;">${escapeHtml(detailData.content_preview.after || 'No new content')}</pre>
+                                    </div>
+                                </div>
+                            ` : '<p style="color: #888; font-style: italic;">Content comparison not available</p>'}
+                        </div>
+                    ` : ''}
+                    
+                    ${detailData.diff && detailData.diff.key_changes && detailData.diff.key_changes.length > 0 ? `
+                        <div class="config-section">
+                            <h4>🔍 Key Changes</h4>
+                            <ul style="margin: 0; padding-left: 20px;">
+                                ${detailData.diff.key_changes.map(change => `<li>${escapeHtml(change)}</li>`).join('')}
+                            </ul>
+                            ${detailData.diff.summary ? `<p style="margin-top: 10px; font-size: 0.9rem; color: #888;">${escapeHtml(detailData.diff.summary)}</p>` : ''}
+                        </div>
+                    ` : ''}
+                    
+                    ${detailData.keywords && detailData.keywords.new_keywords && detailData.keywords.new_keywords.length > 0 ? `
+                        <div class="config-section">
+                            <h4>🆕 New Keywords</h4>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                ${detailData.keywords.new_keywords.slice(0, 15).map(kw => `
+                                    <span style="background: #1e293b; color: #e2e8f0; padding: 4px 12px; border-radius: 16px; font-size: 0.85rem;">
+                                        ${escapeHtml(kw.word)} <span style="opacity: 0.7;">(${kw.frequency})</span>
+                                    </span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="action-buttons" style="margin-top: 20px;">
+                        <a href="${escapeHtml(detailData.url || changeData.url)}" target="_blank" class="button button-primary">View Current Page</a>
+                        <button type="button" class="button button-secondary" onclick="closeModal()">Close</button>
+                    </div>
+                `;
+                
+            } catch (error) {
+                console.error('Failed to fetch detailed change data:', error);
+                
+                // Fall back to basic information
+                modalContent.innerHTML = `
+                    <div class="config-section">
+                        <h4>📊 Change Information</h4>
+                        <p><strong>Company:</strong> ${escapeHtml(changeData.company)}</p>
+                        <p><strong>URL:</strong> <a href="${escapeHtml(changeData.url)}" target="_blank">${escapeHtml(changeData.url)}</a></p>
+                        <p><strong>Type:</strong> ${escapeHtml(changeData.change_type || 'Content Update')}</p>
+                        <p><strong>Time:</strong> ${changeData.time_ago}</p>
+                        ${changeData.relevance_score ? `<p><strong>Relevance Score:</strong> ${changeData.relevance_score}/10</p>` : ''}
+                    </div>
+                    
+                    <div class="config-section">
+                        <h4>📝 Summary</h4>
+                        <p>${escapeHtml(changeData.summary || 'No summary available')}</p>
+                    </div>
+                    
+                    <div class="error-message" style="margin: 15px 0;">
+                        <p>⚠️ Detailed change analysis not available. The backend API may be offline.</p>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <a href="${escapeHtml(changeData.url)}" target="_blank" class="button button-primary">View Current Page</a>
+                        <button type="button" class="button button-secondary" onclick="closeModal()">Close</button>
+                    </div>
+                `;
+            }
+        }
+
+        // Load static data with error handling
+        async function loadStaticData(filename) {
+            const maxRetries = CONFIG.maxRetries;
+            let lastError;
+
+            for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                try {
+                    const response = await fetch(`${CONFIG.apiBaseUrl}/${filename}?t=${Date.now()}`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const data = await response.json();
+                    console.log(`✅ Loaded ${filename} successfully`);
+                    return data;
+                } catch (error) {
+                    lastError = error;
+                    console.warn(`⚠️ Attempt ${attempt}/${maxRetries} failed for ${filename}:`, error.message);
+                    
+                    if (attempt < maxRetries) {
+                        await new Promise(resolve => setTimeout(resolve, CONFIG.retryDelay * attempt));
+                    }
+                }
+            }
+
+            console.error(`❌ Failed to load ${filename} after ${maxRetries} attempts:`, lastError.message);
+            return { error: lastError.message };
+        }
+
+        // Refresh status from static data
+        async function refreshStatus(event) {
+            if (event) {
+                event.preventDefault();
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '⏳ Loading...';
+                button.disabled = true;
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                }, 2000);
+            }
+
+            const dashboardData = await loadStaticData('dashboard.json');
+            const changesData = await loadStaticData('changes.json');
+            const workflowStatusData = await loadStaticData('workflow-status.json');
+
+            if (dashboardData.error) {
+                updateStatusDisplay({
+                    stats: { companies: 0, urls: 0, snapshots: 0, lastCheck: 'No data yet' },
+                    company_activity: [],
+                    error: dashboardData.error
+                }, {});
+                return;
+            }
+
+            // Store for global access
+            window.dashboardData = dashboardData;
+            window.changesData = changesData;
+            
+            workflowStatus = workflowStatusData;
+        
+        // Update status display with both dashboard and changes data
+            updateStatusDisplay(dashboardData, changesData);
+            
+            // Update companies data
+            if (dashboardData.company_activity) {
+                companies = dashboardData.company_activity;
+                updateCompaniesDisplay();
+                // updateCompanyFilter(); // Not needed for new view system
+                console.log(`📊 Loaded ${companies.length} companies from GitHub Actions data`);
+            }
+            
+            // Load the current view
+            const activeView = document.querySelector('.view-btn.active');
+            if (activeView) {
+                const viewName = activeView.getAttribute('data-view');
+                if (viewName === 'recent-changes') {
+                    loadRecentChangesView();
+                } else if (viewName === 'timeline') {
+                    loadTimelineView();
+                }
+            } else {
+                // Default to recent changes view
+                loadRecentChangesView();
+            }
+        }
+
+        // View switching function
+        function switchView(viewName) {
+            // Update button states
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-view') === viewName) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Update panel visibility
+            document.querySelectorAll('.view-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            document.getElementById(viewName + '-view').classList.add('active');
+            
+            // Load appropriate data
+            if (viewName === 'recent-changes') {
+                loadRecentChangesView();
+            } else if (viewName === 'timeline') {
+                loadTimelineView();
+            } else if (viewName === 'company-grid') {
+                // Company grid is already loaded by updateCompaniesDisplay()
+            }
+        }
+
+        // Load recent changes view
+        function loadRecentChangesView() {
+            if (!window.dashboardData || !window.dashboardData.recent_changes_summary) {
+                document.getElementById('recentChangesCards').innerHTML = 
+                    '<div class="error-message">No recent changes data available</div>';
+                return;
+            }
+            
+            const summary = window.dashboardData.recent_changes_summary;
+            
+            // Update summary stats
+            const statsContainer = document.getElementById('changeSummaryStats');
+            statsContainer.innerHTML = `
+                <div class="summary-stat">
+                    <div class="number">${summary.last_24h_count || 0}</div>
+                    <div class="label">Changes Today</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">${summary.last_7d_count || 0}</div>
+                    <div class="label">Last 7 Days</div>
+                </div>
+                <div class="summary-stat">
+                    <div class="number">${summary.high_priority_last_7d || 0}</div>
+                    <div class="label">High Priority</div>
+                </div>
+            `;
+            
+            // Display recent changes
+            const changesContainer = document.getElementById('recentChangesCards');
+            if (!summary.last_5_changes || summary.last_5_changes.length === 0) {
+                changesContainer.innerHTML = '<div class="error-message">No recent changes detected</div>';
+                return;
+            }
+            
+            changesContainer.innerHTML = summary.last_5_changes.map(change => {
+                const interestLevel = change.interest_level || 5;
+                const interestClass = interestLevel >= 8 ? 'high-interest' : 
+                                    interestLevel >= 5 ? 'medium-interest' : 'low-interest';
+                const emoji = interestLevel >= 8 ? '🌟' : 
+                            interestLevel >= 5 ? '📌' : '📊';
+                
+                return `
+                    <div class="change-card ${interestClass}" onclick="showRecentChangeDetail(${change.id})">
+                        <div class="interest-indicator">
+                            <span class="score">${interestLevel}/10</span>
+                            <span class="emoji">${emoji}</span>
+                        </div>
+                        <div class="change-content">
+                            <h3>${escapeHtml(change.company)}</h3>
+                            <p>${escapeHtml(change.summary || 'Content updated')}</p>
+                            <span class="time">${change.time_ago}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Load timeline view
+        function loadTimelineView() {
+            const timelineContainer = document.getElementById('timelineContainer');
+            
+            // Load full changes data
+            if (!window.changesData || !window.changesData.changes) {
+                timelineContainer.innerHTML = '<div class="error-message">No timeline data available</div>';
+                return;
+            }
+            
+            // Populate company filter
+            const companyFilter = document.getElementById('companyFilter');
+            const companies = [...new Set(window.changesData.changes.map(c => c.company))].sort();
+            companyFilter.innerHTML = '<option value="">All Companies</option>' + 
+                companies.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join('');
+            
+            // Display timeline
+            filterTimeline();
+        }
+
+        // Filter timeline based on selections
+        function filterTimeline() {
+            const companyFilter = document.getElementById('companyFilter').value;
+            const interestFilter = document.getElementById('interestFilter').value;
+            const dateFrom = document.getElementById('dateFrom').value;
+            const dateTo = document.getElementById('dateTo').value;
+            
+            if (!window.changesData || !window.changesData.changes) return;
+            
+            let filteredChanges = window.changesData.changes;
+            
+            // Apply filters
+            if (companyFilter) {
+                filteredChanges = filteredChanges.filter(c => c.company === companyFilter);
+            }
+            
+            if (interestFilter) {
+                filteredChanges = filteredChanges.filter(c => {
+                    const level = c.interest_level || c.relevance_score || 5;
+                    if (interestFilter === 'high') return level >= 8;
+                    if (interestFilter === 'medium') return level >= 5 && level < 8;
+                    if (interestFilter === 'low') return level < 5;
+                    return true;
+                });
+            }
+            
+            if (dateFrom) {
+                filteredChanges = filteredChanges.filter(c => 
+                    new Date(c.created_at) >= new Date(dateFrom)
+                );
+            }
+            
+            if (dateTo) {
+                filteredChanges = filteredChanges.filter(c => 
+                    new Date(c.created_at) <= new Date(dateTo + 'T23:59:59')
+                );
+            }
+            
+            // Group by date
+            const grouped = {};
+            filteredChanges.forEach(change => {
+                const date = new Date(change.created_at).toLocaleDateString();
+                if (!grouped[date]) grouped[date] = [];
+                grouped[date].push(change);
+            });
+            
+            // Render timeline
+            const timelineContainer = document.getElementById('timelineContainer');
+            if (Object.keys(grouped).length === 0) {
+                timelineContainer.innerHTML = '<div class="error-message">No changes match the selected filters</div>';
+                return;
+            }
+            
+            timelineContainer.innerHTML = Object.entries(grouped)
+                .sort((a, b) => new Date(b[0]) - new Date(a[0]))
+                .map(([date, changes]) => `
+                    <div class="date-group">
+                        <h3>${date}</h3>
+                        <div class="day-changes">
+                            ${changes.map(change => {
+                                const level = change.interest_level || change.relevance_score || 5;
+                                return `
+                                    <div class="timeline-item" onclick="showChangeDetail('${change.id}')">
+                                        <strong>${escapeHtml(change.company)}</strong> - 
+                                        ${escapeHtml(change.summary || 'Content updated')}
+                                        <span style="float: right; color: var(--primary-color);">
+                                            ${level}/10 ${level >= 8 ? '🌟' : level >= 5 ? '📌' : '📊'}
+                                        </span>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                `).join('');
+        }
+
+        // Show recent change detail
+        function showRecentChangeDetail(changeId) {
+            const change = window.dashboardData.recent_changes_summary.last_5_changes.find(c => c.id === changeId);
+            if (!change) return;
+            
+            const modal = document.getElementById('companyModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalTitle.textContent = `Change Details: ${change.company}`;
+            modalContent.innerHTML = `
+                <div class="config-section">
+                    <h4>📊 Change Information</h4>
+                    <p><strong>Company:</strong> ${escapeHtml(change.company)}</p>
+                    <p><strong>URL:</strong> <a href="${escapeHtml(change.url)}" target="_blank">${escapeHtml(change.url)}</a></p>
+                    <p><strong>Interest Level:</strong> ${change.interest_level || 5}/10</p>
+                    <p><strong>Time:</strong> ${change.time_ago}</p>
+                    <p><strong>Detected:</strong> ${new Date(change.detected_at).toLocaleString()}</p>
+                </div>
+                
+                <div class="config-section">
+                    <h4>📝 Summary</h4>
+                    <p>${escapeHtml(change.summary || 'No summary available')}</p>
+                </div>
+                
+                <div class="action-buttons">
+                    <a href="${escapeHtml(change.url)}" target="_blank" class="button button-primary">View Current Page</a>
+                    <button type="button" class="button button-secondary" onclick="closeModal()">Close</button>
+                </div>
+            `;
+            
+            modal.style.display = 'block';
+        }
+
+        // Update status display
+        function updateStatusDisplay(data, changesData) {
+            const stats = data.stats || {};
+            const lastCheck = workflowStatus ? new Date(workflowStatus.last_run) : (stats.lastCheck ? new Date(stats.lastCheck) : new Date(data.generated_at));
+            const timeAgo = formatTimeAgo(lastCheck);
+
+            // Update header stats bar
+            const statsBar = document.getElementById('statsBar');
+            
+            // Count changes in last 24 hours
+            let todayChanges = 0;
+            if (changesData && changesData.changes) {
+                const now = new Date();
+                const dayAgo = new Date(now - 24 * 60 * 60 * 1000);
+                todayChanges = changesData.changes.filter(change => 
+                    new Date(change.created_at) > dayAgo
+                ).length;
+            }
+            
+            statsBar.innerHTML = `
+                <div class="stat-item">🏢 <strong>${stats.companies || '0'}</strong> Companies</div>
+                <div class="stat-item">🔍 <strong>${stats.urls || '0'}</strong> URLs Monitored</div>
+                <div class="stat-item">🔄 <strong>${todayChanges}</strong> Changes Today</div>
+                <div class="stat-item">⏰ Last Check: <strong>${timeAgo}</strong><br><small style="color: rgba(255,255,255,0.7); font-size: 0.75rem;">${lastCheck.toLocaleString()}</small></div>
+            `;
+        }
+
+        // Format time ago
+        function formatTimeAgo(date) {
+            const now = new Date();
+            const diff = now - date;
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+
+            if (days > 0) return `${days}d ago`;
+            if (hours > 0) return `${hours}h ago`;
+            if (minutes > 0) return `${minutes}m ago`;
+            return 'just now';
+        }
+
+        // Update companies display
+        function updateCompaniesDisplay() {
+            const companiesDisplay = document.getElementById('companiesDisplay');
+            if (companies.length === 0) {
+                companiesDisplay.innerHTML = `
+                    <h3>📊 Monitored Companies</h3>
+                    <div class="error-message">
+                        No company data available yet.<br>
+                        Trigger a GitHub Actions workflow run to generate monitoring data.
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '<h3>📊 Monitored Companies</h3><div class="companies-grid">';
+            companies.forEach(company => {
+                const companyName = company.company || company.name || 'Unknown Company';
+                const companyType = company.type || company.category || 'competitor';
+                const companyDescription = company.description || '';
+                
+                // Get intelligence data
+                const intelligence = company.intelligence || {};
+                const interestLevel = intelligence.interest_level || 5;
+                const interestCategory = intelligence.interest_category || 
+                    (interestLevel >= 8 ? 'high' : interestLevel >= 5 ? 'medium' : 'low');
+                const interestEmoji = interestCategory === 'high' ? '🌟' : 
+                    interestCategory === 'medium' ? '📌' : '📊';
+                
+                const products = intelligence.products || [];
+                const technologies = intelligence.technologies || [];
+                const aiConcepts = intelligence.ai_ml_concepts || [];
+                
+                html += `
+                    <div class="company-card" onclick="showCompanyDetails('${escapeHtml(companyName)}')">
+                        <div class="company-header">
+                            <h3>${escapeHtml(companyName)}
+                                ${company.latest_change ? '<span class="change-indicator recent"></span>' : ''}
+                            </h3>
+                            <div class="company-type">${escapeHtml(companyType)}</div>
+                        </div>
+                        
+                        ${companyDescription && companyDescription !== `${companyType} company` && companyDescription !== `Leading ${companyType} company` ? `
+                            <div class="company-summary">
+                                ${escapeHtml(companyDescription)}
+                            </div>
+                        ` : ''}
+                        
+                        ${products.length > 0 ? `
+                            <div class="intel-section">
+                                <div class="intel-label">Products</div>
+                                <div class="intel-pills">
+                                    ${products.slice(0, 3).map(p => `<span class="intel-pill">${escapeHtml(p)}</span>`).join('')}
+                                    ${products.length > 3 ? `<span class="intel-pill">+${products.length - 3} more</span>` : ''}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        ${technologies.length > 0 ? `
+                            <div class="intel-section">
+                                <div class="intel-label">Technologies</div>
+                                <div class="intel-pills">
+                                    ${technologies.slice(0, 3).map(t => `<span class="intel-pill">${escapeHtml(t)}</span>`).join('')}
+                                    ${technologies.length > 3 ? `<span class="intel-pill">+${technologies.length - 3} more</span>` : ''}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        ${aiConcepts.length > 0 ? `
+                            <div class="intel-section">
+                                <div class="intel-label">AI/ML Concepts</div>
+                                <div class="intel-pills">
+                                    ${aiConcepts.slice(0, 2).map(c => `<span class="intel-pill">${escapeHtml(c)}</span>`).join('')}
+                                    ${aiConcepts.length > 2 ? `<span class="intel-pill">+${aiConcepts.length - 2} more</span>` : ''}
+                                </div>
+                            </div>
+                        ` : ''}
+                        
+                        <div class="config-row">
+                            <span class="config-label">URLs Monitored:</span>
+                            <span class="config-value">${company.url_count || 0}</span>
+                        </div>
+                        
+                        <div class="config-row">
+                            <span class="config-label">Last Check:</span>
+                            <span class="config-value">${formatTimeAgo(new Date(company.last_check))}</span>
+                        </div>
+                        
+                        <div class="action-buttons" style="margin-top: 15px; position: relative; z-index: 10;">
+                            <button type="button" class="button button-primary" onclick="event.stopPropagation(); showCompanyDetails('${escapeHtml(companyName)}')">
+                                View Details
+                            </button>
+                            <button type="button" class="button button-secondary" onclick="event.stopPropagation(); showCompanyUrls('${escapeHtml(companyName)}')">
+                                View URLs
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            companiesDisplay.innerHTML = html;
+
+            // Update status display using the loaded data
+            updateStatusDisplay(window.dashboardData || {}, window.changesData || {});
+        }
+
+        // Show company details in modal
+        function showCompanyDetails(companyName) {
+            const company = companies.find(c => (c.company || c.name) === companyName);
+            if (!company) return;
+
+            const modal = document.getElementById('companyModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            const intelligence = company.intelligence || {};
+            const details = intelligence.details || {};
+
+            modalTitle.textContent = `${companyName} - Intelligence Report`;
+            modalContent.innerHTML = `
+                <div class="config-section">
+                    <h4>📊 Overview</h4>
+                    <div class="config-row">
+                        <span class="config-label">Company Type:</span>
+                        <span class="config-value">${escapeHtml(company.type || 'Unknown')}</span>
+                    </div>
+                    <div class="config-row">
+                        <span class="config-label">URLs Monitored:</span>
+                        <span class="config-value">${company.url_count || 0}</span>
+                    </div>
+                    <div class="config-row">
+                        <span class="config-label">Last Analysis:</span>
+                        <span class="config-value">${formatTimeAgo(new Date(company.last_check))}</span>
+                    </div>
+                </div>
+
+                <p><strong>${details.summary?.one_line || 'No executive summary available'}</strong></p>
+
+                ${intelligence.products?.length ? `
+                    <div class="config-section">
+                        <h4>🛠️ Products & Services</h4>
+                        <ul>
+                            ${intelligence.products.map(p => `<li>${escapeHtml(p)}</li>`).join('')}
+                        </ul>
+                    </div>
+                ` : ''}
+
+                ${intelligence.technologies?.length ? `
+                    <div class="config-section">
+                        <h4>⚙️ Technologies</h4>
+                        <ul>
+                            ${intelligence.technologies.map(t => `<li>${escapeHtml(t)}</li>`).join('')}
+                        </ul>
+                    </div>
+                ` : ''}
+
+                ${intelligence.ai_ml_concepts?.length ? `
+                    <div class="config-section">
+                        <h4>🤖 AI/ML Concepts</h4>
+                        <ul>
+                            ${intelligence.ai_ml_concepts.map(c => `<li>${escapeHtml(c)}</li>`).join('')}
+                        </ul>
+                    </div>
+                ` : ''}
+
+                ${company.latest_change ? `
+                    <div class="config-section">
+                        <h4>📈 Latest Change</h4>
+                        <p><strong>Summary:</strong> ${escapeHtml(company.latest_change.summary)}</p>
+                        <p><strong>Detected:</strong> ${company.latest_change.time_ago}</p>
+                        ${company.latest_change.relevance_score ? `<p><strong>Relevance:</strong> ${company.latest_change.relevance_score}/10</p>` : ''}
+                    </div>
+                ` : ''}
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        // Show company URLs in modal
+        function showCompanyUrls(companyName) {
+            const company = companies.find(c => (c.company || c.name) === companyName);
+            if (!company) return;
+
+            const modal = document.getElementById('companyModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            const urls = company.urls || [];
+
+            modalTitle.textContent = `${companyName} - Monitored URLs`;
+            modalContent.innerHTML = `
+                <div class="config-section">
+                    <h4>🔍 Monitored URLs (${urls.length})</h4>
+                    ${urls.length > 0 ? `
+                        <ul>
+                            ${urls.map((url, idx) => 
+                                `<li><a href="${escapeHtml(typeof url === 'string' ? url : url.url)}" target="_blank">${escapeHtml(typeof url === 'string' ? url : url.url)}</a></li>`
+                            ).join('')}
+                        </ul>
+                    ` : '<p>No URLs configured for monitoring.</p>'}
+                </div>
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        // Load extracted data
+        async function loadExtractedData() {
+            const data = await loadStaticData('extracted-data.json');
+            const contentDiv = document.getElementById('extractedContent');
+
+            if (data.error) {
+                contentDiv.innerHTML = `<div class="error-message">Error: ${data.error}</div>`;
+                return;
+            }
+
+            if (!data.items || data.items.length === 0) {
+                contentDiv.innerHTML = '<div class="error-message">No extracted data available yet.</div>';
+                return;
+            }
+
+            let html = `
+                <p style="margin-bottom: 20px;">Found ${data.items.length} extracted items</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Type</th>
+                            <th>Title</th>
+                            <th>Entities Found</th>
+                            <th>Extracted</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            data.items.forEach(item => {
+                const extractedDate = new Date(item.extracted_at);
+
+                html += `
+                    <tr class="clickable-row" onclick="showExtractedDetail('${escapeHtml(item.id)}')">
+                        <td>${escapeHtml(item.company)}</td>
+                        <td>${escapeHtml(item.type)}</td>
+                        <td>${escapeHtml(item.title)}</td>
+                        <td>${item.entities ? Object.keys(item.entities).length : 0}</td>
+                        <td>${formatTimeAgo(extractedDate)}</td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table>';
+            contentDiv.innerHTML = html;
+
+            // Store data for modal access
+            window.extractedData = data;
+        }
+
+        // Load changes data
+        async function loadChangesData() {
+            const data = await loadStaticData('changes.json');
+            const contentDiv = document.getElementById('changesContent');
+            
+            // Store data globally for modal access
+            window.changesData = data;
+
+            if (data.error) {
+                contentDiv.innerHTML = `<div class="error-message">Error: ${data.error}</div>`;
+                return;
+            }
+
+            const changes = data.changes || [];
+            if (changes.length === 0) {
+                contentDiv.innerHTML = '<div class="error-message">No changes detected yet.</div>';
+                return;
+            }
+
+            let html = `
+                <p style="margin-bottom: 20px;">Tracking ${changes.length} changes</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Company</th>
+                            <th>URL</th>
+                            <th>Type</th>
+                            <th>AI Summary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            changes.forEach(change => {
+                const changeDate = new Date(change.created_at);
+                const isRecent = (new Date() - changeDate) < 24 * 60 * 60 * 1000;
+                const isNew = (new Date() - changeDate) < 60 * 60 * 1000;
+
+                html += `
+                    <tr class="clickable-row ${isNew ? 'new-company' : isRecent ? 'recent-change' : ''}"
+                        data-change='${JSON.stringify(change).replace(/'/g, "&#39;")}'
+                        onclick="showChangeDetail.call(this, '${change.id || change.change_id}', event)">
+                        <td>${formatTimeAgo(changeDate)}</td>
+                        <td>${escapeHtml(change.company)}</td>
+                        <td>
+                            <a href="${escapeHtml(change.url)}" target="_blank" style="color: var(--accent-color);">
+                                ${escapeHtml(change.title || change.url)}
+                            </a>
+                        </td>
+                        <td>${escapeHtml(change.change_type || 'Content')}</td>
+                        <td>${escapeHtml((change.summary || '').substring(0, 100))}${change.summary?.length > 100 ? '...' : ''}</td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table>';
+            contentDiv.innerHTML = html;
+
+            // Store data for modal access
+            window.changesData = data;
+        }
+
+        // Load recent changes for the dashboard
+        async function loadRecentChanges() {
+            const data = await loadStaticData('changes.json');
+            const changesDiv = document.getElementById('recentChanges');
+
+            if (data.error || !data.changes || data.changes.length === 0) {
+                changesDiv.innerHTML = `
+                    <h3 style="margin: 0 0 15px 0; color: var(--primary-color);">📈 Recent Changes</h3>
+                    <div class="error-message">No recent changes detected.</div>
+                `;
+                return;
+            }
+
+            const recentChanges = data.changes.slice(0, 3); // Show top 3
+            let html = ``;
+
+            recentChanges.forEach((change, index) => {
+                const changeId = `change-${index}`;
+                html += `
+                    <div class="change-item" style="background: rgba(59, 130, 246, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid #3b82f6; cursor: pointer;" 
+                         onclick="showChangeDetail.call(this, '${changeId}', event)" data-change='${JSON.stringify(change).replace(/'/g, "&apos;")}'>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
+                            <span style="font-size: 1.5rem;">${change.emoji || '📊'}</span>
+                            <span style="font-weight: bold; color: #93c5fd;">${escapeHtml(change.company)}</span>
+                            <span style="color: #6b7280; font-size: 0.85rem;">${change.time_ago}</span>
+                        </div>
+                        <div style="color: #d1d5db; font-size: 0.9rem;">
+                            ${escapeHtml((change.summary || '').substring(0, 120))}${change.summary?.length > 120 ? '...' : ''}
+                        </div>
+                        ${change.relevance_score || change.interest_level ? `
+                            <div style="margin-top: 8px;">
+                                <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;">
+                                    Interest: ${change.interest_level || change.relevance_score}/10
+                                </span>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+
+            changesDiv.innerHTML = html;
+        }
+
+        // Show extracted item details
+        function showExtractedDetail(itemId) {
+            const item = window.extractedData?.items?.find(i => i.id === itemId);
+            if (!item) return;
+
+            const modal = document.getElementById('companyModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            modalTitle.textContent = item.title;
+            modalContent.innerHTML = `
+                <div class="config-section">
+                    <h4>📊 Metadata</h4>
+                    <p><strong>Company:</strong> ${escapeHtml(item.company)}</p>
+                    <p><strong>Type:</strong> ${escapeHtml(item.type)}</p>
+                    <p><strong>URL:</strong> <a href="${escapeHtml(item.url)}" target="_blank">${escapeHtml(item.url)}</a></p>
+                    <p><strong>Interest Level:</strong> ${item.interest_level || item.relevance_score}/10 ${item.interest_level >= 8 ? '🌟' : item.interest_level >= 5 ? '📌' : '📊'}</p>
+                    <p><strong>Extracted:</strong> ${new Date(item.extracted_at).toLocaleString()}</p>
+                </div>
+                
+                ${item.summary ? `
+                    <div class="config-section">
+                        <h4>📝 Summary</h4>
+                        <p>${escapeHtml(item.summary)}</p>
+                    </div>
+                ` : ''}
+                
+                ${item.entities && Object.keys(item.entities).length > 0 ? `
+                    <div class="config-section">
+                        <h4>🏷️ Entities</h4>
+                        ${Object.entries(item.entities).map(([type, entities]) => `
+                            <div style="margin-bottom: 10px;">
+                                <strong>${escapeHtml(type)}:</strong>
+                                <div style="margin-top: 5px;">
+                                    ${entities.map(entity => `<span class="intel-pill">${escapeHtml(entity.name || entity)}</span>`).join(' ')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                ` : ''}
+            `;
+
+            modal.style.display = 'block';
+        }
+
+        // Load system logs
+        async function loadSystemLogs() {
+            const data = await loadStaticData('monitoring-runs.json');
+            const contentDiv = document.getElementById('logsContent');
+
+            if (data.error) {
+                contentDiv.innerHTML = `<div class="error-message">Error: ${data.error}</div>`;
+                return;
+            }
+
+            const runs = data.runs || [];
+            if (runs.length === 0) {
+                contentDiv.innerHTML = '<div class="error-message">No monitoring runs logged yet.</div>';
+                return;
+            }
+
+            let html = `
+                <p style="margin-bottom: 20px;">Found ${runs.length} monitoring runs</p>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th>Duration</th>
+                            <th>Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            runs.forEach(run => {
+                const runDate = new Date(run.timestamp);
+                const statusClass = run.status === 'success' ? 'status-success' : 
+                                  run.status === 'error' ? 'status-error' : 'status-warning';
+
+                html += `
+                    <tr>
+                        <td>${formatTimeAgo(runDate)}</td>
+                        <td>${escapeHtml(run.type || 'Monitor')}</td>
+                        <td><span class="status-indicator ${statusClass}"></span>${escapeHtml(run.status)}</td>
+                        <td>${run.duration || '--'}</td>
+                        <td>${escapeHtml((run.details || '').substring(0, 100))}${run.details?.length > 100 ? '...' : ''}</td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table>';
+            contentDiv.innerHTML = html;
+        }
+
+        // Check workflow status
+        async function checkWorkflowStatus(event) {
+            if (event) {
+                event.preventDefault();
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = '⏳ Checking...';
+                button.disabled = true;
+
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.disabled = false;
+                }, 3000);
+            }
+
+            const modal = document.getElementById('companyModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            modalTitle.textContent = 'GitHub Actions Workflow Status';
+
+            const contentDiv = document.getElementById('modalContent');
+
+            contentDiv.innerHTML = `
+                <div class="config-section">
+                    <h4>📊 GitHub Actions Workflow Status</h4>
+                    <p>View detailed logs and workflow runs in GitHub:</p>
+                    <div class="action-buttons">
+                        <a href="${CONFIG.repoUrl}/actions/workflows/full-monitor.yml" 
+                           target="_blank" 
+                           class="button button-primary">
+                            🔄 Full Monitor Pipeline
+                        </a>
+                        <a href="${CONFIG.repoUrl}/actions/workflows/scrape.yml" 
+                           target="_blank" 
+                           class="button button-secondary">
+                            🌐 Scrape Websites
+                        </a>
+                        <a href="${CONFIG.repoUrl}/actions/workflows/analyze.yml" 
+                           target="_blank" 
+                           class="button button-secondary">
+                            🤖 Analyze Content
+                        </a>
+                        <a href="${CONFIG.repoUrl}/actions/workflows/sync.yml" 
+                           target="_blank" 
+                           class="button button-secondary">
+                            📊 Sync & Deploy
+                        </a>
+                        <a href="${CONFIG.repoUrl}/actions" 
+                           target="_blank" 
+                           class="button button-warning">
+                            🎬 All Workflows
+                        </a>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <p><strong>Current Status:</strong> Backend powered by GitHub Actions</p>
+                        <p><strong>Data Source:</strong> Static files generated by workflows</p>
+                        <p><strong>Last Update:</strong> <span id="lastUpdateTime">--</span></p>
+                    </div>
+                </div>
+            `;
+
+            // Update the last update time if we have dashboard data
+            if (window.dashboardData) {
+                const lastUpdate = new Date(window.dashboardData.generated_at);
+                document.getElementById('lastUpdateTime').textContent = lastUpdate.toLocaleString();
+            }
+
+            modal.style.display = 'block';
+        }
+
+        // Test TheBrain connection
+        function openTheBrainTest() {
+            const modal = document.getElementById('companyModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            modalTitle.textContent = 'TheBrain Integration Test';
+            modalContent.innerHTML = `
+                <div class="config-section">
+                    <h4>🧠 TheBrain Connection Test</h4>
+                    <p>This test verifies that TheBrain API integration is properly configured.</p>
+                    
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin: 15px 0;">
+                        <h5 style="margin-top: 0;">📋 Configuration Requirements:</h5>
+                        <ul style="margin: 10px 0;">
+                            <li><strong>THEBRAIN_API_KEY</strong> - Your TheBrain API key</li>
+                            <li><strong>THEBRAIN_BRAIN_ID</strong> - The ID of your brain</li>
+                            <li><strong>THEBRAIN_CENTRAL_THOUGHT_ID</strong> - Root thought for connections (optional)</li>
+                        </ul>
+                        <p style="margin-bottom: 0; font-size: 14px; color: #666;">
+                            These should be configured in GitHub Secrets or your local .env file.
+                        </p>
+                    </div>
+                    
+                    <div id="brainTestResults">
+                        <div class="loading">Checking configuration...</div>
+                    </div>
+                </div>
+            `;
+
+            modal.style.display = 'block';
+
+            // Show test results with helpful information
+            setTimeout(() => {
+                document.getElementById('brainTestResults').innerHTML = `
+                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; padding: 15px; border-radius: 8px; margin-top: 15px;">
+                        <h5 style="margin-top: 0;">⚠️ Web-based Test Not Available</h5>
+                        <p>TheBrain API credentials cannot be exposed in the browser for security reasons.</p>
+                        <p style="margin-bottom: 0;">To test the connection, you can:</p>
+                    </div>
+                    
+                    <div style="margin-top: 15px;">
+                        <h5>Option 1: Run Test Script</h5>
+                        <pre style="background: #f8f9fa; padding: 10px; border-radius: 5px; overflow-x: auto;">cd github-actions-backend
+node test-thebrain-connection.js</pre>
+                        
+                        <h5>Option 2: Check GitHub Actions</h5>
+                        <p>The sync workflow will show connection status in its logs.</p>
+                        
+                        <h5>Option 3: Manual Test</h5>
+                        <p>Run the full sync workflow and check for errors.</p>
+                    </div>
+                    
+                    <div class="action-buttons" style="margin-top: 20px;">
+                        <a href="${CONFIG.repoUrl}/actions/workflows/sync.yml" 
+                           target="_blank" 
+                           class="button button-primary">
+                            🔄 View Sync Workflow
+                        </a>
+                        <a href="${CONFIG.repoUrl}/blob/main/github-actions-backend/THEBRAIN_API_SETUP.md" 
+                           target="_blank" 
+                           class="button button-secondary" 
+                           style="margin-left: 10px;">
+                            📖 Setup Guide
+                        </a>
+                    </div>
+                `;
+            }, 2000);
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('companyModal').style.display = 'none';
+        }
+
+        // Tab switching
+        function showTab(event, tabName) {
+            // Hide all tab contents
+            const tabContents = document.getElementsByClassName('tab-content');
+            for (let content of tabContents) {
+                content.classList.remove('active');
+            }
+
+            // Remove active class from all tabs
+            const tabs = document.getElementsByClassName('tab');
+            for (let tab of tabs) {
+                tab.classList.remove('active');
+            }
+
+            // Show selected tab and mark button as active
+            document.getElementById(tabName).classList.add('active');
+            event.currentTarget.classList.add('active');
+
+            // Load data for the selected tab
+            switch (tabName) {
+                case 'extracted':
+                    loadExtractedData();
+                    break;
+                case 'changes':
+                    loadChangesData();
+                    break;
+                case 'logs':
+                    loadSystemLogs();
+                    break;
+            }
+        }
+
+        // Utility function to escape HTML
+        function escapeHtml(text) {
+            if (typeof text !== 'string') return text;
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            init();
+            loadRecentChanges();
+        });
+    </script>
+</body>
+</html>

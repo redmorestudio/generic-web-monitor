@@ -1,184 +1,572 @@
 {
-  "company_activity": [
+  "companies": [
     {
       "id": 2,
-      "company": "Anthropic",
       "name": "Anthropic",
       "category": "LLM Providers",
-      "type": "LLM Providers",
-      "industry": null,
-      "url_count": "5",
-      "recent_changes": "7",
-      "high_interest_changes": "4",
-      "last_scan": "2025-07-22T22:51:54.538Z",
+      "urls": [
+        {
+          "id": 6,
+          "url": "https://anthropic.com",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 7,
+          "url": "https://anthropic.com/claude",
+          "type": "product",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 9,
+          "url": "https://anthropic.com/news",
+          "type": "news",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 8,
+          "url": "https://anthropic.com/pricing",
+          "type": "pricing",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 10,
+          "url": "https://docs.anthropic.com",
+          "type": "docs",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "id": 219,
+          "url": "news",
+          "detectedAt": "2025-07-23T00:13:18.357Z",
+          "relativeTime": "8 min ago",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"New article 'Build AI in America' added, and 'No results found' message replaced with actual news articles\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of new article 'Build AI in America'\",\"Replacement of 'No results found' with actual news articles\"]}",
+          "changeType": "modified",
+          "businessImpact": "The new article may indicate Anthropic's focus on promoting AI development in America, which could have implications for their business strategy and market positioning.",
+          "enhancedAnalysis": {
+            "competitiveImplications": "The emphasis on 'Build AI in America' might be a strategic move to differentiate Anthropic from competitors and align with national interests.",
+            "riskAssessment": "Possible backlash from international partners or competitors; Dependence on American market and policy changes",
+            "opportunityScore": 6
+          }
+        }
+      ],
       "intelligence": {
-        "interest_level": 8,
-        "interest_category": "high",
-        "products": [],
-        "technologies": [],
-        "ai_ml_concepts": []
+        "products": [
+          "Claude API",
+          "Claude Pro",
+          "Claude for Business",
+          "Constitutional AI"
+        ],
+        "technologies": [
+          "Claude",
+          "Constitutional AI",
+          "RLHF",
+          "Context Windows",
+          "Claude Instant"
+        ],
+        "ai_ml_concepts": [
+          "AI Safety",
+          "Alignment Research",
+          "Interpretability",
+          "Harmless AI"
+        ]
+      },
+      "attributes": {},
+      "stats": {
+        "totalChanges": 1,
+        "highInterestChanges": 1,
+        "lastActivity": "2025-07-23T00:13:18.357Z"
       }
     },
     {
       "id": 11,
-      "company": "GitHub Copilot",
       "name": "GitHub Copilot",
       "category": "AI Coding",
-      "type": "AI Coding",
-      "industry": null,
-      "url_count": "4",
-      "recent_changes": "7",
-      "high_interest_changes": "2",
-      "last_scan": "2025-07-22T22:52:21.718Z",
+      "urls": [
+        {
+          "id": 48,
+          "url": "https://docs.github.com/en/copilot",
+          "type": "docs",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 47,
+          "url": "https://github.blog/tag/github-copilot",
+          "type": "blog",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 45,
+          "url": "https://github.com/features/copilot",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 46,
+          "url": "https://github.com/pricing",
+          "type": "pricing",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "id": 257,
+          "url": "blog",
+          "detectedAt": "2025-07-23T05:52:15.696Z",
+          "relativeTime": "just now",
+          "interestLevel": 1,
+          "summary": "{\"what_changed\":\"No significant changes were detected in the provided content.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 210,
+          "url": "docs",
+          "detectedAt": "2025-07-23T00:17:58.613Z",
+          "relativeTime": "3 min ago",
+          "interestLevel": 3,
+          "summary": "{\"what_changed\":\"Removal of the 'Set extension permissions' link under 'Administer' > 'Manage for organization'\",\"change_type\":\"removal\",\"change_scale\":\"minor\",\"specific_changes\":[\"The 'Set extension permissions' link has been removed from the 'Administer' > 'Manage for organization' section\"]}",
+          "changeType": "modified",
+          "businessImpact": "The changes do not have a significant impact on the business",
+          "enhancedAnalysis": {
+            "competitiveImplications": "The changes do not provide a competitive advantage or disadvantage",
+            "riskAssessment": "",
+            "opportunityScore": 4
+          }
+        },
+        {
+          "id": 10,
+          "url": "pricing",
+          "detectedAt": "2025-07-21T23:18:27.267Z",
+          "relativeTime": "1 days ago",
+          "interestLevel": 2,
+          "summary": "{\"what_changed\":\"No significant changes were detected in the provided content, only minor errors and loading issues were present in both versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
+          "changeType": "modified",
+          "businessImpact": "No significant business impact is expected from the detected changes.",
+          "enhancedAnalysis": {
+            "competitiveImplications": "No competitive implications are expected from the detected changes.",
+            "riskAssessment": "",
+            "opportunityScore": 2
+          }
+        }
+      ],
       "intelligence": {
-        "interest_level": 8,
-        "interest_category": "high",
-        "products": [],
-        "technologies": [],
-        "ai_ml_concepts": []
+        "products": [
+          "AI Platform",
+          "Developer Tools",
+          "Enterprise Solutions"
+        ],
+        "technologies": [
+          "Machine Learning",
+          "Cloud Computing",
+          "APIs",
+          "Data Processing"
+        ],
+        "ai_ml_concepts": [
+          "Artificial Intelligence",
+          "Automation",
+          "Data Analysis"
+        ]
+      },
+      "attributes": {},
+      "stats": {
+        "totalChanges": 3,
+        "highInterestChanges": 0,
+        "lastActivity": "2025-07-23T05:52:15.696Z"
       }
     },
     {
       "id": 3,
-      "company": "Google DeepMind",
       "name": "Google DeepMind",
       "category": "LLM Providers",
-      "type": "LLM Providers",
-      "industry": null,
-      "url_count": "5",
-      "recent_changes": "7",
-      "high_interest_changes": "3",
-      "last_scan": "2025-07-22T22:53:00.250Z",
+      "urls": [
+        {
+          "id": 15,
+          "url": "https://ai.google.dev",
+          "type": "api",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 12,
+          "url": "https://ai.google/discover/gemini",
+          "type": "product",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 14,
+          "url": "https://blog.google/technology/ai",
+          "type": "blog",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 13,
+          "url": "https://cloud.google.com/vertex-ai/pricing",
+          "type": "pricing",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 11,
+          "url": "https://deepmind.google",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "id": 209,
+          "url": "homepage",
+          "detectedAt": "2025-07-23T00:18:26.929Z",
+          "relativeTime": "3 min ago",
+          "interestLevel": 2,
+          "summary": "{\"what_changed\":\"No significant changes were detected in the content between the two versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
+          "changeType": "modified",
+          "businessImpact": "No significant business impact is expected from these changes.",
+          "enhancedAnalysis": {
+            "competitiveImplications": "No competitive implications are evident from the lack of significant changes.",
+            "riskAssessment": "",
+            "opportunityScore": 2
+          }
+        },
+        {
+          "id": 184,
+          "url": "homepage",
+          "detectedAt": "2025-07-21T22:11:46.979Z",
+          "relativeTime": "1 days ago",
+          "interestLevel": 2,
+          "summary": "{\"what_changed\":\"No significant changes were detected in the content structure or major updates to models, research, or science sections.\",\"change_type\":\"no significant update\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
+          "changeType": "modified",
+          "businessImpact": "No significant business impact is expected from the minor changes detected.",
+          "enhancedAnalysis": {
+            "competitiveImplications": "No competitive implications are noted as the changes are not substantial.",
+            "riskAssessment": "",
+            "opportunityScore": 2
+          }
+        }
+      ],
       "intelligence": {
-        "interest_level": 8,
-        "interest_category": "high",
-        "products": [],
-        "technologies": [],
-        "ai_ml_concepts": []
+        "products": [
+          "AI Platform",
+          "Developer Tools",
+          "Enterprise Solutions"
+        ],
+        "technologies": [
+          "Machine Learning",
+          "Cloud Computing",
+          "APIs",
+          "Data Processing"
+        ],
+        "ai_ml_concepts": [
+          "Artificial Intelligence",
+          "Automation",
+          "Data Analysis"
+        ]
+      },
+      "attributes": {},
+      "stats": {
+        "totalChanges": 2,
+        "highInterestChanges": 0,
+        "lastActivity": "2025-07-23T00:18:26.929Z"
       }
     },
     {
       "id": 34,
-      "company": "Midjourney",
       "name": "Midjourney",
       "category": "Image Generation",
-      "type": "Image Generation",
-      "industry": null,
-      "url_count": "3",
-      "recent_changes": "2",
-      "high_interest_changes": "0",
-      "last_scan": "2025-07-22T22:53:38.522Z",
+      "urls": [
+        {
+          "id": 122,
+          "url": "https://docs.midjourney.com",
+          "type": "docs",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 123,
+          "url": "https://docs.midjourney.com/docs/plans",
+          "type": "pricing",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 121,
+          "url": "https://midjourney.com",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "id": 160,
+          "url": "docs",
+          "detectedAt": "2025-07-21T22:18:22.044Z",
+          "relativeTime": "1 days ago",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"Initial content creation for Midjourney documentation\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of help center with various sections\",\"Addition of getting started guide\",\"Documentation section for making the most of Midjourney\",\"Billing support section\",\"Policies and guidelines including terms of service, privacy policy, data deletion and privacy FAQ, and community guidelines\",\"Links to Midjourney website and Discord server\"]}",
+          "changeType": "new",
+          "businessImpact": "Enhanced user experience and support, potentially leading to increased customer satisfaction and retention.",
+          "enhancedAnalysis": {
+            "competitiveImplications": "Midjourney is positioning itself as a customer-centric platform, potentially differentiating itself from competitors.",
+            "riskAssessment": "High investment in support infrastructure may pose financial challenges",
+            "opportunityScore": 8
+          }
+        },
+        {
+          "id": 161,
+          "url": "pricing",
+          "detectedAt": "2025-07-21T22:17:43.481Z",
+          "relativeTime": "1 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"Introduction of a new pricing page with detailed plan comparisons and features\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of four subscription tiers: Basic, Standard, Pro, and Mega\",\"Detailed comparison of plan features, including GPU time, image and video generation, and stealth mode\",\"Information on pricing, including monthly and annual rates, and a 20% discount for annual commitments\"]}",
+          "changeType": "new",
+          "businessImpact": "The introduction of a new pricing page with detailed plan comparisons and features is likely to increase revenue and attract more customers to Midjourney's platform",
+          "enhancedAnalysis": {
+            "competitiveImplications": "Midjourney's new pricing strategy may put pressure on competitors to revisit their own pricing models and feature offerings",
+            "riskAssessment": "Competitors may respond to Midjourney's new pricing strategy by introducing their own competitive pricing models; Customers may be deterred by the complexity of Midjourney's new pricing page and plan comparisons",
+            "opportunityScore": 9
+          }
+        }
+      ],
       "intelligence": {
-        "interest_level": 5,
-        "interest_category": "medium",
-        "products": [],
-        "technologies": [],
-        "ai_ml_concepts": []
+        "products": [
+          "AI Platform",
+          "Developer Tools",
+          "Enterprise Solutions"
+        ],
+        "technologies": [
+          "Machine Learning",
+          "Cloud Computing",
+          "APIs",
+          "Data Processing"
+        ],
+        "ai_ml_concepts": [
+          "Artificial Intelligence",
+          "Automation",
+          "Data Analysis"
+        ]
+      },
+      "attributes": {},
+      "stats": {
+        "totalChanges": 2,
+        "highInterestChanges": 2,
+        "lastActivity": "2025-07-21T22:18:22.044Z"
       }
     },
     {
       "id": 1,
-      "company": "OpenAI",
       "name": "OpenAI",
       "category": "LLM Providers",
-      "type": "LLM Providers",
-      "industry": null,
-      "url_count": "5",
-      "recent_changes": "6",
-      "high_interest_changes": "2",
-      "last_scan": "2025-07-22T22:53:59.471Z",
+      "urls": [
+        {
+          "id": 1,
+          "url": "https://openai.com",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 4,
+          "url": "https://openai.com/blog",
+          "type": "blog",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 2,
+          "url": "https://openai.com/chatgpt",
+          "type": "product",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 3,
+          "url": "https://openai.com/pricing",
+          "type": "pricing",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 5,
+          "url": "https://platform.openai.com",
+          "type": "api",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "id": 225,
+          "url": "pricing",
+          "detectedAt": "2025-07-23T02:04:23.608Z",
+          "relativeTime": "just now",
+          "interestLevel": 3,
+          "summary": "{\"what_changed\":\"The OpenAI pricing page has been updated with minor tweaks in wording and formatting, but the core pricing and features remain the same.\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated 'openaicom-did' parameter in URLs\",\"Minor wording changes in plan descriptions\"]}",
+          "changeType": "modified",
+          "businessImpact": "The change is unlikely to have a significant impact on OpenAI's business or operations.",
+          "enhancedAnalysis": {
+            "competitiveImplications": "The change does not reveal any significant competitive advantages or disadvantages.",
+            "riskAssessment": "",
+            "opportunityScore": 2
+          }
+        },
+        {
+          "id": 226,
+          "url": "pricing",
+          "detectedAt": "2025-07-23T01:46:27.592Z",
+          "relativeTime": "just now",
+          "interestLevel": 2,
+          "summary": "{\"what_changed\":\"The 'openaicom-did' parameter in the URLs has changed from '99580f75-39b7-4bf3-9a9c-e2a544c14234' to '4aa03562-c3c6-4634-98a2-6d29cf24c479'.\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated 'openaicom-did' parameter in URLs\"]}",
+          "changeType": "modified",
+          "businessImpact": "The change is unlikely to have a significant impact on the business, as it only affects the 'openaicom-did' parameter in the URLs.",
+          "enhancedAnalysis": {
+            "competitiveImplications": "The change does not reveal any significant competitive advantages or disadvantages.",
+            "riskAssessment": "",
+            "opportunityScore": 2
+          }
+        },
+        {
+          "id": 227,
+          "url": "product",
+          "detectedAt": "2025-07-23T01:46:20.404Z",
+          "relativeTime": "just now",
+          "interestLevel": 4,
+          "summary": "{\"what_changed\":\"Removal of the 'Voice' feature\",\"change_type\":\"removal\",\"change_scale\":\"minor\",\"specific_changes\":[\"The 'Voice' feature is no longer available in the chat interface\"]}",
+          "changeType": "modified",
+          "businessImpact": "The removal of the Voice feature might slightly affect user engagement, especially for those who preferred voice interactions. However, the overall impact on the business is likely to be minimal.",
+          "enhancedAnalysis": {
+            "competitiveImplications": "Competitors might view this as an opportunity to differentiate their products by offering robust voice interaction features.",
+            "riskAssessment": "Potential loss of users who prefer voice interactions",
+            "opportunityScore": 4
+          }
+        },
+        {
+          "id": 228,
+          "url": "homepage",
+          "detectedAt": "2025-07-23T01:18:01.891Z",
+          "relativeTime": "just now",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"The content has changed from a security verification page to the OpenAI homepage, featuring various products, research, and company information.\",\"change_type\":\"major overhaul\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of new products and features such as ChatGPT, Sora, and API Platform\",\"Addition of research and safety sections\",\"Inclusion of company information, news, and stories\",\"Removal of security verification page content\"]}",
+          "changeType": "modified",
+          "businessImpact": "The changes indicate a significant expansion of OpenAI's offerings, which can lead to increased market share and revenue.",
+          "enhancedAnalysis": {
+            "competitiveImplications": "The introduction of new products and features can pose a threat to competitors in the AI market.",
+            "riskAssessment": "Increased competition in the AI market; Potential disruption of traditional industries",
+            "opportunityScore": 9
+          }
+        },
+        {
+          "id": 208,
+          "url": "product",
+          "detectedAt": "2025-07-23T00:33:40.166Z",
+          "relativeTime": "just now",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"The content changed from a security verification page to a ChatGPT interface\",\"change_type\":\"update\",\"change_scale\":\"major\",\"specific_changes\":[\"Removal of security verification content\",\"Introduction of ChatGPT interface\",\"Addition of login and sign-up options\",\"Inclusion of terms and privacy policy links\"]}",
+          "changeType": "modified",
+          "businessImpact": "The update may attract more users to the ChatGPT platform, increasing engagement and potentially driving revenue",
+          "enhancedAnalysis": {
+            "competitiveImplications": "The change may give OpenAI a competitive edge in the AI chatbot market, potentially threatening other players",
+            "riskAssessment": "Competitive pressure from other AI chatbot providers",
+            "opportunityScore": 9
+          }
+        }
+      ],
       "intelligence": {
-        "interest_level": 8,
-        "interest_category": "high",
-        "products": [],
-        "technologies": [],
-        "ai_ml_concepts": []
+        "products": [
+          "ChatGPT",
+          "GPT API",
+          "DALL-E API",
+          "ChatGPT Enterprise",
+          "GPT-4 Turbo"
+        ],
+        "technologies": [
+          "GPT-4",
+          "DALL-E",
+          "Whisper",
+          "Codex",
+          "Function Calling"
+        ],
+        "ai_ml_concepts": [
+          "AGI Research",
+          "RLHF",
+          "Constitutional AI",
+          "Multimodal Models"
+        ]
+      },
+      "attributes": {},
+      "stats": {
+        "totalChanges": 5,
+        "highInterestChanges": 2,
+        "lastActivity": "2025-07-23T02:04:23.608Z"
       }
     },
     {
       "id": 19,
-      "company": "Perplexity AI",
       "name": "Perplexity AI",
       "category": "AI Search",
-      "type": "AI Search",
-      "industry": null,
-      "url_count": "3",
-      "recent_changes": "1",
-      "high_interest_changes": "1",
-      "last_scan": "2025-07-22T22:54:16.709Z",
+      "urls": [
+        {
+          "id": 79,
+          "url": "https://blog.perplexity.ai",
+          "type": "blog",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 77,
+          "url": "https://perplexity.ai",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 78,
+          "url": "https://perplexity.ai/pro",
+          "type": "product",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "id": 72,
+          "url": "product",
+          "detectedAt": "2025-07-21T22:21:10.364Z",
+          "relativeTime": "1 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"Introduction of Perplexity Pro and Max subscription plans with various features and pricing\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of Perplexity Pro with features like unlimited Pro Search, upgraded AI models, and collaborative spaces\",\"Introduction of Perplexity Max with features like early access to new products, unlimited access to Perplexity Labs and Research, and priority support\",\"Pricing for Perplexity Pro and Max plans\",\"Introduction of exclusive features for Pro and Max subscribers\"]}",
+          "changeType": "new",
+          "businessImpact": "The introduction of Perplexity Pro and Max plans indicates a shift towards a more premium and feature-rich offering, potentially increasing revenue and competitiveness",
+          "enhancedAnalysis": {
+            "competitiveImplications": "Perplexity AI is positioning itself as a leader in the AI market with its new subscription plans, potentially threatening competitors",
+            "riskAssessment": "Increasing competition in the AI market; Potential backlash from users due to pricing changes",
+            "opportunityScore": 9
+          }
+        }
+      ],
       "intelligence": {
-        "interest_level": 8,
-        "interest_category": "high",
-        "products": [],
-        "technologies": [],
-        "ai_ml_concepts": []
+        "products": [
+          "AI Platform",
+          "Developer Tools",
+          "Enterprise Solutions"
+        ],
+        "technologies": [
+          "Machine Learning",
+          "Cloud Computing",
+          "APIs",
+          "Data Processing"
+        ],
+        "ai_ml_concepts": [
+          "Artificial Intelligence",
+          "Automation",
+          "Data Analysis"
+        ]
+      },
+      "attributes": {},
+      "stats": {
+        "totalChanges": 1,
+        "highInterestChanges": 1,
+        "lastActivity": "2025-07-21T22:21:10.364Z"
       }
     }
   ],
-  "stats": {
-    "companies": "6",
-    "urls": "25",
-    "changes_24h": "10",
-    "changes_7d": "30",
-    "high_interest_7d": "12",
-    "snapshots": "227"
-  },
-  "recent_changes_summary": {
-    "last_24h_count": 10,
-    "last_7d_count": 30,
-    "high_priority_count": 12,
-    "last_5_changes": [
-      {
-        "id": 10,
-        "company": "Anthropic",
-        "title": "Meet Claude \\ Anthropic",
-        "summary": "Content update detected",
-        "interest_level": 8,
-        "detected_at": "2025-07-21T03:06:44.412Z",
-        "category": "General Update",
-        "emoji": "🌟"
-      },
-      {
-        "id": 11,
-        "company": "Anthropic",
-        "title": "Pricing \\ Anthropic",
-        "summary": "Content update detected",
-        "interest_level": 6,
-        "detected_at": "2025-07-21T03:06:50.654Z",
-        "category": "General Update",
-        "emoji": "📌"
-      },
-      {
-        "id": 12,
-        "company": "Anthropic",
-        "title": "Newsroom \\ Anthropic",
-        "summary": "Content update detected",
-        "interest_level": 8,
-        "detected_at": "2025-07-21T03:06:58.430Z",
-        "category": "General Update",
-        "emoji": "🌟"
-      },
-      {
-        "id": 13,
-        "company": "Anthropic",
-        "title": "Home \\ Anthropic",
-        "summary": "Content update detected",
-        "interest_level": 8,
-        "detected_at": "2025-07-21T03:07:04.850Z",
-        "category": "General Update",
-        "emoji": "🌟"
-      },
-      {
-        "id": 14,
-        "company": "Anthropic",
-        "title": "Home - Anthropic",
-        "summary": "Content update detected",
-        "interest_level": 7,
-        "detected_at": "2025-07-21T03:07:11.303Z",
-        "category": "General Update",
-        "emoji": "🌟"
-      }
-    ]
-  },
-  "last_updated": "2025-07-22T23:58:09.037Z"
+  "lastUpdated": "2025-07-23T00:21:45.370Z",
+  "totalChanges": 14,
+  "highInterestChanges": 6
 }

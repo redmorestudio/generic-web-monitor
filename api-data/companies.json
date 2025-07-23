@@ -1,113 +1,121 @@
-{
-  "companies": [
-    {
-      "id": 2,
-      "name": "Anthropic",
-      "category": "LLM Providers",
-      "industry": null,
-      "focus_areas": null,
-      "description": null,
-      "headquarters": null,
-      "founded": null,
-      "website": null,
-      "stock_symbol": null,
-      "employees": null,
-      "revenue": null,
-      "competitors": null,
-      "products": null,
-      "technologies": null,
-      "thebrain_thought_id": null
-    },
-    {
-      "id": 11,
-      "name": "GitHub Copilot",
-      "category": "AI Coding",
-      "industry": null,
-      "focus_areas": null,
-      "description": null,
-      "headquarters": null,
-      "founded": null,
-      "website": null,
-      "stock_symbol": null,
-      "employees": null,
-      "revenue": null,
-      "competitors": null,
-      "products": null,
-      "technologies": null,
-      "thebrain_thought_id": null
-    },
-    {
-      "id": 3,
-      "name": "Google DeepMind",
-      "category": "LLM Providers",
-      "industry": null,
-      "focus_areas": null,
-      "description": null,
-      "headquarters": null,
-      "founded": null,
-      "website": null,
-      "stock_symbol": null,
-      "employees": null,
-      "revenue": null,
-      "competitors": null,
-      "products": null,
-      "technologies": null,
-      "thebrain_thought_id": null
-    },
-    {
-      "id": 34,
-      "name": "Midjourney",
-      "category": "Image Generation",
-      "industry": null,
-      "focus_areas": null,
-      "description": null,
-      "headquarters": null,
-      "founded": null,
-      "website": null,
-      "stock_symbol": null,
-      "employees": null,
-      "revenue": null,
-      "competitors": null,
-      "products": null,
-      "technologies": null,
-      "thebrain_thought_id": null
-    },
-    {
-      "id": 1,
-      "name": "OpenAI",
-      "category": "LLM Providers",
-      "industry": null,
-      "focus_areas": null,
-      "description": null,
-      "headquarters": null,
-      "founded": null,
-      "website": null,
-      "stock_symbol": null,
-      "employees": null,
-      "revenue": null,
-      "competitors": null,
-      "products": null,
-      "technologies": null,
-      "thebrain_thought_id": null
-    },
-    {
-      "id": 19,
-      "name": "Perplexity AI",
-      "category": "AI Search",
-      "industry": null,
-      "focus_areas": null,
-      "description": null,
-      "headquarters": null,
-      "founded": null,
-      "website": null,
-      "stock_symbol": null,
-      "employees": null,
-      "revenue": null,
-      "competitors": null,
-      "products": null,
-      "technologies": null,
-      "thebrain_thought_id": null
+[
+  {
+    "id": 2,
+    "name": "Anthropic",
+    "category": "LLM Providers",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "Claude API",
+        "Claude Pro",
+        "Claude for Business",
+        "Constitutional AI"
+      ],
+      "top_technologies": [
+        "Claude",
+        "Constitutional AI",
+        "RLHF",
+        "Context Windows",
+        "Claude Instant"
+      ]
     }
-  ],
-  "generated_at": "2025-07-22T23:58:09.044Z"
-}
+  },
+  {
+    "id": 11,
+    "name": "GitHub Copilot",
+    "category": "AI Coding",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "AI Platform",
+        "Developer Tools",
+        "Enterprise Solutions"
+      ],
+      "top_technologies": [
+        "Machine Learning",
+        "Cloud Computing",
+        "APIs",
+        "Data Processing"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "name": "Google DeepMind",
+    "category": "LLM Providers",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "AI Platform",
+        "Developer Tools",
+        "Enterprise Solutions"
+      ],
+      "top_technologies": [
+        "Machine Learning",
+        "Cloud Computing",
+        "APIs",
+        "Data Processing"
+      ]
+    }
+  },
+  {
+    "id": 34,
+    "name": "Midjourney",
+    "category": "Image Generation",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "AI Platform",
+        "Developer Tools",
+        "Enterprise Solutions"
+      ],
+      "top_technologies": [
+        "Machine Learning",
+        "Cloud Computing",
+        "APIs",
+        "Data Processing"
+      ]
+    }
+  },
+  {
+    "id": 1,
+    "name": "OpenAI",
+    "category": "LLM Providers",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "ChatGPT",
+        "GPT API",
+        "DALL-E API",
+        "ChatGPT Enterprise",
+        "GPT-4 Turbo"
+      ],
+      "top_technologies": [
+        "GPT-4",
+        "DALL-E",
+        "Whisper",
+        "Codex",
+        "Function Calling"
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "name": "Perplexity AI",
+    "category": "AI Search",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "AI Platform",
+        "Developer Tools",
+        "Enterprise Solutions"
+      ],
+      "top_technologies": [
+        "Machine Learning",
+        "Cloud Computing",
+        "APIs",
+        "Data Processing"
+      ]
+    }
+  }
+]
