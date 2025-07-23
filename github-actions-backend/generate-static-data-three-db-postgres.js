@@ -273,7 +273,7 @@ async function generateDashboard() {
                 })),
                 intelligence: {
                     products: products || [],
-                    technologies: technologies || [],
+                    ai_technologies: technologies || [],  // Changed from 'technologies'
                     ai_ml_concepts: aiConcepts || []
                 },
                 attributes: attributes,
@@ -343,7 +343,7 @@ async function generateCompaniesData() {
                 industry: attributes.industry,
                 intelligence: {
                     top_products: products,
-                    top_technologies: technologies
+                    ai_technologies: technologies  // Changed from 'top_technologies'
                 }
             };
         }));

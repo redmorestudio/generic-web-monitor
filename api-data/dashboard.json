@@ -41,9 +41,9 @@
           "id": 219,
           "url": "news",
           "detectedAt": "2025-07-23T00:13:18.357Z",
-          "relativeTime": "8 min ago",
+          "relativeTime": "32 min ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New article 'Build AI in America' added, and 'No results found' message replaced with actual news articles\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of new article 'Build AI in America'\",\"Replacement of 'No results found' with actual news articles\"]}",
+          "summary": "{\"what_changed\":\"Addition of a new policy announcement 'Build AI in America' and removal of several news articles\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new policy announcement 'Build AI in America'\",\"Removed news articles from before July 21, 2025\"]}",
           "changeType": "modified",
           "businessImpact": "The new article may indicate Anthropic's focus on promoting AI development in America, which could have implications for their business strategy and market positioning.",
           "enhancedAnalysis": {
@@ -60,7 +60,7 @@
           "Claude for Business",
           "Constitutional AI"
         ],
-        "technologies": [
+        "ai_technologies": [
           "Claude",
           "Constitutional AI",
           "RLHF",
@@ -131,9 +131,9 @@
           "id": 210,
           "url": "docs",
           "detectedAt": "2025-07-23T00:17:58.613Z",
-          "relativeTime": "3 min ago",
-          "interestLevel": 3,
-          "summary": "{\"what_changed\":\"Removal of the 'Set extension permissions' link under 'Administer' > 'Manage for organization'\",\"change_type\":\"removal\",\"change_scale\":\"minor\",\"specific_changes\":[\"The 'Set extension permissions' link has been removed from the 'Administer' > 'Manage for organization' section\"]}",
+          "relativeTime": "27 min ago",
+          "interestLevel": 4,
+          "summary": "{\"what_changed\":\"The removal of the 'Set extension permissions' link under 'Administer' > 'Manage for organization' and the addition of 'About GitHub Copilot Chat' under 'Concepts'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Removal of 'Set extension permissions' link\",\"Addition of 'About GitHub Copilot Chat' under 'Concepts'\"]}",
           "changeType": "modified",
           "businessImpact": "The changes do not have a significant impact on the business",
           "enhancedAnalysis": {
@@ -164,7 +164,7 @@
           "Developer Tools",
           "Enterprise Solutions"
         ],
-        "technologies": [
+        "ai_technologies": [
           "Machine Learning",
           "Cloud Computing",
           "APIs",
@@ -224,7 +224,7 @@
           "id": 209,
           "url": "homepage",
           "detectedAt": "2025-07-23T00:18:26.929Z",
-          "relativeTime": "3 min ago",
+          "relativeTime": "27 min ago",
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the content between the two versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
@@ -257,7 +257,7 @@
           "Developer Tools",
           "Enterprise Solutions"
         ],
-        "technologies": [
+        "ai_technologies": [
           "Machine Learning",
           "Cloud Computing",
           "APIs",
@@ -338,7 +338,7 @@
           "Developer Tools",
           "Enterprise Solutions"
         ],
-        "technologies": [
+        "ai_technologies": [
           "Machine Learning",
           "Cloud Computing",
           "APIs",
@@ -399,8 +399,8 @@
           "url": "pricing",
           "detectedAt": "2025-07-23T02:04:23.608Z",
           "relativeTime": "just now",
-          "interestLevel": 3,
-          "summary": "{\"what_changed\":\"The OpenAI pricing page has been updated with minor tweaks in wording and formatting, but the core pricing and features remain the same.\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated 'openaicom-did' parameter in URLs\",\"Minor wording changes in plan descriptions\"]}",
+          "interestLevel": 2,
+          "summary": "{\"what_changed\":\"The 'openaicom-did' parameter in the URLs has changed from '4aa03562-c3c6-4634-98a2-6d29cf24c479' to '99580f75-39b7-4bf3-9a9c-e2a544c14234'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated 'openaicom-did' parameter in URLs\"]}",
           "changeType": "modified",
           "businessImpact": "The change is unlikely to have a significant impact on OpenAI's business or operations.",
           "enhancedAnalysis": {
@@ -430,7 +430,7 @@
           "detectedAt": "2025-07-23T01:46:20.404Z",
           "relativeTime": "just now",
           "interestLevel": 4,
-          "summary": "{\"what_changed\":\"Removal of the 'Voice' feature\",\"change_type\":\"removal\",\"change_scale\":\"minor\",\"specific_changes\":[\"The 'Voice' feature is no longer available in the chat interface\"]}",
+          "summary": "{\"what_changed\":\"Removal of Voice feature\",\"change_type\":\"removal\",\"change_scale\":\"minor\",\"specific_changes\":[\"Voice feature button removed from the interface\"]}",
           "changeType": "modified",
           "businessImpact": "The removal of the Voice feature might slightly affect user engagement, especially for those who preferred voice interactions. However, the overall impact on the business is likely to be minimal.",
           "enhancedAnalysis": {
@@ -445,7 +445,7 @@
           "detectedAt": "2025-07-23T01:18:01.891Z",
           "relativeTime": "just now",
           "interestLevel": 9,
-          "summary": "{\"what_changed\":\"The content has changed from a security verification page to the OpenAI homepage, featuring various products, research, and company information.\",\"change_type\":\"major overhaul\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of new products and features such as ChatGPT, Sora, and API Platform\",\"Addition of research and safety sections\",\"Inclusion of company information, news, and stories\",\"Removal of security verification page content\"]}",
+          "summary": "{\"what_changed\":\"The content has changed from a security verification page to the OpenAI homepage, featuring various products, research, and company information.\",\"change_type\":\"major overhaul\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of new products and features such as ChatGPT, Sora, and API Platform\",\"Addition of research and company information sections\",\"Removal of security verification page content\",\"Update of the website's layout and design\"]}",
           "changeType": "modified",
           "businessImpact": "The changes indicate a significant expansion of OpenAI's offerings, which can lead to increased market share and revenue.",
           "enhancedAnalysis": {
@@ -458,9 +458,9 @@
           "id": 208,
           "url": "product",
           "detectedAt": "2025-07-23T00:33:40.166Z",
-          "relativeTime": "just now",
+          "relativeTime": "12 min ago",
           "interestLevel": 9,
-          "summary": "{\"what_changed\":\"The content changed from a security verification page to a ChatGPT interface\",\"change_type\":\"update\",\"change_scale\":\"major\",\"specific_changes\":[\"Removal of security verification content\",\"Introduction of ChatGPT interface\",\"Addition of login and sign-up options\",\"Inclusion of terms and privacy policy links\"]}",
+          "summary": "{\"what_changed\":\"The content changed from a security verification page for www.perplexity.ai to a ChatGPT interface\",\"change_type\":\"update\",\"change_scale\":\"major\",\"specific_changes\":[\"Removal of security verification content\",\"Introduction of ChatGPT interface\",\"Addition of login and sign-up options\",\"Inclusion of terms and privacy policy links\"]}",
           "changeType": "modified",
           "businessImpact": "The update may attract more users to the ChatGPT platform, increasing engagement and potentially driving revenue",
           "enhancedAnalysis": {
@@ -478,7 +478,7 @@
           "ChatGPT Enterprise",
           "GPT-4 Turbo"
         ],
-        "technologies": [
+        "ai_technologies": [
           "GPT-4",
           "DALL-E",
           "Whisper",
@@ -525,6 +525,21 @@
       ],
       "recentChanges": [
         {
+          "id": 275,
+          "url": "product",
+          "detectedAt": "2025-07-23T07:38:32.210Z",
+          "relativeTime": "just now",
+          "interestLevel": 3,
+          "summary": "{\"what_changed\":\"The introductory text describing Perplexity Pro has been updated to 'Perplexity Pro unlocks more ways to learn and get work done. Upgrade your productivity and learning with unlimited Research, unlimited file uploads, exclusive Pro Perks and more.'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated introductory text for Perplexity Pro\"]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
           "id": 72,
           "url": "product",
           "detectedAt": "2025-07-21T22:21:10.364Z",
@@ -546,7 +561,7 @@
           "Developer Tools",
           "Enterprise Solutions"
         ],
-        "technologies": [
+        "ai_technologies": [
           "Machine Learning",
           "Cloud Computing",
           "APIs",
@@ -560,13 +575,13 @@
       },
       "attributes": {},
       "stats": {
-        "totalChanges": 1,
+        "totalChanges": 2,
         "highInterestChanges": 1,
-        "lastActivity": "2025-07-21T22:21:10.364Z"
+        "lastActivity": "2025-07-23T07:38:32.210Z"
       }
     }
   ],
-  "lastUpdated": "2025-07-23T00:21:45.370Z",
-  "totalChanges": 14,
+  "lastUpdated": "2025-07-23T00:45:54.387Z",
+  "totalChanges": 15,
   "highInterestChanges": 6
 }

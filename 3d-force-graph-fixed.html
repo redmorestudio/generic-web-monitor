@@ -866,13 +866,14 @@
                                 company: company.name,
                                 type: company.category || 'Other',
                                 entity_type: company.category || 'Other',
-                                url_count: parseInt(company.url_count) || 0,
-                                recent_changes: parseInt(company.recent_changes) || 0,
-                                high_interest_changes: parseInt(company.high_interest_changes) || 0,
+                                url_count: company.urls ? company.urls.length : 0,
+                                recent_changes: company.stats ? company.stats.totalChanges : 0,
+                                high_interest_changes: company.stats ? company.stats.highInterestChanges : 0,
                                 intelligence: {
-                                    interest_level: Math.max(1, parseInt(company.high_interest_changes) || 1),
-                                    ai_technologies: company.top_technologies || [],
-                                    ai_ml_concepts: company.top_products || []
+                                    interest_level: Math.max(1, (company.stats ? company.stats.highInterestChanges : 0) || 1),
+                                    ai_technologies: company.intelligence ? (company.intelligence.ai_technologies || company.intelligence.technologies || []) : [],
+                                    ai_ml_concepts: company.intelligence ? (company.intelligence.ai_ml_concepts || []) : [],
+                                    products: company.intelligence ? (company.intelligence.products || []) : []
                                 }
                             };
                             
