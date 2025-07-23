@@ -1,8 +1,8 @@
 {
   "version": "1.0",
-  "generated_at": "2025-07-22T23:50:13.894Z",
+  "generated_at": "2025-07-23T19:06:12.681Z",
   "source": "postgresql",
-  "total_changes": 14,
+  "total_changes": 17,
   "files": [
     {
       "filename": "openai-2025-07-22T18-18-01.json",
@@ -41,6 +41,24 @@
       "summary": "Change detected"
     },
     {
+      "filename": "github-copilot-2025-07-23T19-03-14.json",
+      "change_id": 285,
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-23T19:03:14.475Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anthropic-2025-07-23T19-02-49.json",
+      "change_id": 286,
+      "company": "Anthropic",
+      "detected_at": "2025-07-23T19:02:49.922Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
       "filename": "anthropic-2025-07-22T17-13-18.json",
       "change_id": 219,
       "company": "Anthropic",
@@ -68,20 +86,29 @@
       "summary": "Change detected"
     },
     {
-      "filename": "openai-2025-07-22T19-04-23.json",
-      "change_id": 225,
-      "company": "OpenAI",
-      "detected_at": "2025-07-22T19:04:23.608Z",
+      "filename": "github-copilot-2025-07-22T17-17-58.json",
+      "change_id": 210,
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-22T17:17:58.613Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "perplexity-ai-2025-07-23T00-38-32.json",
+      "change_id": 275,
+      "company": "Perplexity AI",
+      "detected_at": "2025-07-23T00:38:32.210Z",
       "interest_level": 3,
       "change_type": "modified",
       "summary": "Change detected"
     },
     {
-      "filename": "github-copilot-2025-07-22T17-17-58.json",
-      "change_id": 210,
-      "company": "GitHub Copilot",
-      "detected_at": "2025-07-22T17:17:58.613Z",
-      "interest_level": 3,
+      "filename": "openai-2025-07-22T19-04-23.json",
+      "change_id": 225,
+      "company": "OpenAI",
+      "detected_at": "2025-07-22T19:04:23.608Z",
+      "interest_level": 2,
       "change_type": "modified",
       "summary": "Change detected"
     },

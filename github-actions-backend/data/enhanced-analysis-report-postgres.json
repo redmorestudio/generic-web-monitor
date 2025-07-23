@@ -1,13 +1,13 @@
 {
-  "generated_at": "2025-07-22T23:50:12.786Z",
+  "generated_at": "2025-07-23T19:06:10.924Z",
   "database": "PostgreSQL",
   "period": "last_7_days",
   "summary": {
-    "total_changes": 14,
-    "high_interest": 6,
+    "total_changes": 17,
+    "high_interest": 8,
     "medium_interest": 0,
-    "low_interest": 8,
-    "average_interest": "5.1"
+    "low_interest": 9,
+    "average_interest": "5.3"
   },
   "top_changes": [
     {
@@ -88,24 +88,24 @@
       ]
     },
     {
-      "company": "OpenAI",
-      "url": "pricing",
-      "interest_level": 3,
-      "type": "modified",
-      "impact": "The change is unlikely to have a significant impact on OpenAI's business or operations.",
-      "insights": [
-        "The 'openaicom-did' parameter is used for tracking or analytics purposes."
-      ]
-    },
-    {
       "company": "GitHub Copilot",
       "url": "docs",
-      "interest_level": 3,
+      "interest_level": 4,
       "type": "modified",
       "impact": "The changes do not have a significant impact on the business",
       "insights": [
         "The removal of 'Set extension permissions' may indicate a simplification of the administration process",
         "The addition of 'About GitHub Copilot Chat' may indicate an increased focus on chat functionality"
+      ]
+    },
+    {
+      "company": "OpenAI",
+      "url": "pricing",
+      "interest_level": 2,
+      "type": "modified",
+      "impact": "The change is unlikely to have a significant impact on OpenAI's business or operations.",
+      "insights": [
+        "The 'openaicom-did' parameter is used for tracking or analytics purposes."
       ]
     },
     {
