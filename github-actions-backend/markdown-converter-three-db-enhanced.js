@@ -10,7 +10,14 @@
 const TurndownService = require('turndown');
 const crypto = require('crypto');
 const dbManager = require('./db-manager');
-require('dotenv').config();
+// Only load dotenv in development (not in GitHub Actions)
+if (!process.env.GITHUB_ACTIONS && !process.env.POSTGRES_CONNECTION_STRING) {
+  try {
+    require('dotenv').config();
+  } catch (e) {
+    // dotenv not available or no .env file - this is fine
+  }
+}
 
 // Initialize Turndown with custom rules
 const turndownService = new TurndownService({

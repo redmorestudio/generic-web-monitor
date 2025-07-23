@@ -141,7 +141,14 @@ console.log('Test 3: Testing exit code behavior');
 console.log('  Running analyzer with simulated error...\n');
 
 // Load the actual analyzer wrapper
-require('dotenv').config();
+// Only load dotenv in development (not in GitHub Actions)
+if (!process.env.GITHUB_ACTIONS && !process.env.POSTGRES_CONNECTION_STRING) {
+  try {
+    require('dotenv').config();
+  } catch (e) {
+    // dotenv not available or no .env file - this is fine
+  }
+}
 const { spawn } = require('child_process');
 
 // Create a test analyzer that will fail

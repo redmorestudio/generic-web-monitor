@@ -9,7 +9,14 @@
 
 const Groq = require('groq-sdk');
 const dbManager = require('./db-manager');
-require('dotenv').config();
+// Only load dotenv in development (not in GitHub Actions)
+if (!process.env.GITHUB_ACTIONS && !process.env.POSTGRES_CONNECTION_STRING) {
+  try {
+    require('dotenv').config();
+  } catch (e) {
+    // dotenv not available or no .env file - this is fine
+  }
+}
 
 // Initialize AI client - prefer Groq, fallback to mock for testing
 let groq = null;

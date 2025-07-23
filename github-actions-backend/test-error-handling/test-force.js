@@ -8,7 +8,14 @@ console.log('🧪 Running analyzer integration test with --force flag and invali
 
 // Create a test script that uses the actual analyzer with injected errors
 const testScript = `
-require('dotenv').config();
+// Only load dotenv in development (not in GitHub Actions)
+if (!process.env.GITHUB_ACTIONS && !process.env.POSTGRES_CONNECTION_STRING) {
+  try {
+    require('dotenv').config();
+  } catch (e) {
+    // dotenv not available or no .env file - this is fine
+  }
+}
 const path = require('path');
 
 // Override GROQ_API_KEY to simulate API failure

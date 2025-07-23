@@ -3,7 +3,14 @@
 const Database = require('better-sqlite3');
 const path = require('path');
 const fs = require('fs');
-require('dotenv').config();
+// Only load dotenv in development (not in GitHub Actions)
+if (!process.env.GITHUB_ACTIONS && !process.env.POSTGRES_CONNECTION_STRING) {
+  try {
+    require('dotenv').config();
+  } catch (e) {
+    // dotenv not available or no .env file - this is fine
+  }
+}
 
 // Import MCP client for TheBrain
 const { MCPClient } = require('@modelcontextprotocol/mcp-client');

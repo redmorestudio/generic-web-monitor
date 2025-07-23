@@ -15,7 +15,14 @@ if (process.env.NODE_ENV === 'production' || process.env.POSTGRES_CONNECTION_STR
 const TurndownService = require('turndown');
 const crypto = require('crypto');
 const { db, end } = require('./postgres-db');
-require('dotenv').config();
+// Only load dotenv in development (not in GitHub Actions)
+if (!process.env.GITHUB_ACTIONS && !process.env.POSTGRES_CONNECTION_STRING) {
+  try {
+    require('dotenv').config();
+  } catch (e) {
+    // dotenv not available or no .env file - this is fine
+  }
+}
 
 // Initialize Turndown with custom rules
 const turndownService = new TurndownService({

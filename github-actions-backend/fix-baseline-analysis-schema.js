@@ -7,7 +7,14 @@
  * with the correct columns expected by ai-analyzer-baseline-three-db-postgres.js
  */
 
-require('dotenv').config();
+// Only load dotenv in development (not in GitHub Actions)
+if (!process.env.GITHUB_ACTIONS && !process.env.POSTGRES_CONNECTION_STRING) {
+  try {
+    require('dotenv').config();
+  } catch (e) {
+    // dotenv not available or no .env file - this is fine
+  }
+}
 const { db, end } = require('./postgres-db');
 
 async function fixBaselineAnalysisSchema() {

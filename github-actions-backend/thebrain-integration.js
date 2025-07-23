@@ -10,7 +10,14 @@
 const axios = require('axios');
 const Database = require('better-sqlite3');
 const path = require('path');
-require('dotenv').config();
+// Only load dotenv in development (not in GitHub Actions)
+if (!process.env.GITHUB_ACTIONS && !process.env.POSTGRES_CONNECTION_STRING) {
+  try {
+    require('dotenv').config();
+  } catch (e) {
+    // dotenv not available or no .env file - this is fine
+  }
+}
 
 // Configuration - Use environment variables (no hardcoded keys!)
 const THEBRAIN_API_KEY = process.env.THEBRAIN_API_KEY;
