@@ -481,13 +481,18 @@ async function processAllSnapshots() {
   // Check for --force flag
   const forceReanalyze = process.argv.includes('--force');
   
-  // Check if baseline analysis already exists
-  const existingCount = await db.get('SELECT COUNT(*) as count FROM intelligence.baseline_analysis');
-  if (parseInt(existingCount.count) > 0 && !forceReanalyze) {
-    console.log(`⚠️  Found existing baseline analysis (${existingCount.count} records)`);
-    console.log('   Use --force flag to re-analyze all content');
-    console.log('✅ Skipping duplicate analysis to save API costs');
-    return { successful: 0, failed: 0, totalEntities: 0, totalRelationships: 0 };
+  try {
+    // Check if baseline analysis already exists
+    const existingCount = await db.get('SELECT COUNT(*) as count FROM intelligence.baseline_analysis');
+    if (existingCount && parseInt(existingCount.count) > 0 && !forceReanalyze) {
+      console.log(`⚠️  Found existing baseline analysis (${existingCount.count} records)`);
+      console.log('   Use --force flag to re-analyze all content');
+      console.log('✅ Skipping duplicate analysis to save API costs');
+      return { successful: 0, failed: 0, totalEntities: 0, totalRelationships: 0 };
+    }
+  } catch (error) {
+    console.log('⚠️  Could not check existing analysis:', error.message);
+    console.log('   Proceeding with analysis...');
   }
   
   if (forceReanalyze) {
