@@ -4,9 +4,45 @@
     "company": "Google DeepMind",
     "url": "blog",
     "detectedAt": "2025-07-23T19:40:46.363Z",
-    "relativeTime": "1 hours ago",
+    "relativeTime": "3 hours ago",
     "interestLevel": 8,
-    "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Listen to a conversation about the newest AI capabilities in Search', and 'Transform your photos into videos and remix your pics in Google Photos'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new articles under the 'AI' section\",\"Updated the 'Gemini App' section with new features\",\"Added new research articles under the 'Research' section\",\"Updated the 'Developers' section with new Gemini Code Assist features\",\"Added new articles under the 'All the Latest' section\"]}",
+    "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Listen to a conversation about the newest AI capabilities in Search', and 'Transform your photos into videos and remix your pics in Google Photos'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new articles under the 'Gemini App' section\",\"Added new articles under the 'Research' section\",\"Added new articles under the 'Developers' section\",\"Added new articles under the 'All the Latest' section\"]}",
+    "changeType": "modified",
+    "businessImpact": null,
+    "competitiveImplications": null
+  },
+  {
+    "id": 295,
+    "company": "Anthropic",
+    "url": "news",
+    "detectedAt": "2025-07-23T19:39:42.299Z",
+    "relativeTime": "3 hours ago",
+    "interestLevel": 7,
+    "summary": "{\"what_changed\":\"Addition of new news articles and removal of old ones, update of featured news section\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added news article 'Thoughts on America’s AI Action Plan'\",\"Removed news article 'The need for transparency in Frontier AI'\",\"Updated featured news section with new articles\"]}",
+    "changeType": "modified",
+    "businessImpact": null,
+    "competitiveImplications": null
+  },
+  {
+    "id": 296,
+    "company": "Google DeepMind",
+    "url": "blog",
+    "detectedAt": "2025-07-23T19:03:49.432Z",
+    "relativeTime": "4 hours ago",
+    "interestLevel": 8,
+    "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Check out the first images of wildfires detected by FireSat', 'Transform your photos into videos and remix your pics in Google Photos', and 'Startups can apply now for the Google for Startups Gemini Founders Forum'.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of new research article about FireSat\",\"Update to Google Photos with new features\",\"Introduction of Google for Startups Gemini Founders Forum\"]}",
+    "changeType": "modified",
+    "businessImpact": null,
+    "competitiveImplications": null
+  },
+  {
+    "id": 298,
+    "company": "GitHub Copilot",
+    "url": "docs",
+    "detectedAt": "2025-07-23T19:03:26.617Z",
+    "relativeTime": "4 hours ago",
+    "interestLevel": 8,
+    "summary": "{\"what_changed\":\"Addition of new links and reorganization of existing content, including the addition of a 'Use AI models' section and expansion of 'Configure custom instructions' and 'Configure content exclusion' sections\",\"change_type\":\"addition/reorganization\",\"change_scale\":\"significant\",\"specific_changes\":[\"New links added under 'How-tos' and 'Concepts' sections\",\"Reorganization of 'Get started' and 'Concepts' sections\",\"Addition of 'Use AI models' section\",\"Expansion of 'Configure custom instructions' and 'Configure content exclusion' sections\"]}",
     "changeType": "modified",
     "businessImpact": null,
     "competitiveImplications": null
@@ -16,9 +52,9 @@
     "company": "GitHub Copilot",
     "url": "homepage",
     "detectedAt": "2025-07-23T19:03:14.475Z",
-    "relativeTime": "1 hours ago",
+    "relativeTime": "4 hours ago",
     "interestLevel": 8,
-    "summary": "{\"what_changed\":\"Introduction of GitHub Spark, update in pricing plans, and addition of new models\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Introduction of GitHub Spark\",\"Update in pricing plans to include access to GitHub Spark in Pro+ plan\",\"Addition of new models such as Claude Opus 4 and o3\"]}",
+    "summary": "{\"what_changed\":\"Introduction of GitHub Spark, a new feature for building and deploying intelligent apps\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of GitHub Spark to the product lineup\",\"Update to the Pro+ plan to include access to GitHub Spark\"]}",
     "changeType": "modified",
     "businessImpact": null,
     "competitiveImplications": null
@@ -28,9 +64,9 @@
     "company": "Anthropic",
     "url": "news",
     "detectedAt": "2025-07-23T19:02:49.922Z",
-    "relativeTime": "1 hours ago",
+    "relativeTime": "4 hours ago",
     "interestLevel": 8,
-    "summary": "{\"what_changed\":\"New announcements and updates were added, including partnerships, product updates, and policy changes\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added announcement about Anthropic partnering with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Added announcement about Claude for Financial Services\",\"Added announcement about investing in energy to secure America's AI future\",\"Added announcement about Discover tools that work with Claude\",\"Added announcement about Advancing Claude for Education\",\"Added announcement about Lawrence Livermore National Laboratory expanding Claude for Enterprise use\"]}",
+    "summary": "{\"what_changed\":\"New announcements and news articles were added to the newsroom section of the Anthropic website, including partnerships, product updates, and policy announcements.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new news articles and announcements\",\"Updated product information and features\",\"Introduced new partnerships and collaborations\"]}",
     "changeType": "modified",
     "businessImpact": null,
     "competitiveImplications": null
@@ -40,9 +76,9 @@
     "company": "Perplexity AI",
     "url": "product",
     "detectedAt": "2025-07-23T00:38:32.210Z",
-    "relativeTime": "20 hours ago",
+    "relativeTime": "23 hours ago",
     "interestLevel": 3,
-    "summary": "{\"what_changed\":\"The description of Perplexity Pro has been updated to 'unlocks more ways to learn and get work done' and 'Upgrade your productivity and learning with unlimited Research, unlimited file uploads, exclusive Pro Perks and more'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated Perplexity Pro description\",\"No changes to pricing or features\"]}",
+    "summary": "{\"what_changed\":\"The description of Perplexity Pro was updated to 'unlocks more ways to learn and get work done' and 'Upgrade your productivity and learning with unlimited Research, unlimited file uploads, exclusive Pro Perks and more'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated Perplexity Pro description\",\"No changes to pricing or features\"]}",
     "changeType": "modified",
     "businessImpact": null,
     "competitiveImplications": null
@@ -56,8 +92,8 @@
     "interestLevel": 4,
     "summary": "{\"what_changed\":\"Removal of Voice feature\",\"change_type\":\"removal\",\"change_scale\":\"minor\",\"specific_changes\":[\"Voice feature button removed from the interface\"]}",
     "changeType": "modified",
-    "businessImpact": "The removal of the Voice feature might slightly affect user engagement, especially for those who preferred voice interactions. However, the overall impact on the business is likely to be minimal.",
-    "competitiveImplications": "Competitors might view this as an opportunity to differentiate their products by offering robust voice interaction features."
+    "businessImpact": null,
+    "competitiveImplications": null
   },
   {
     "id": 228,
@@ -68,8 +104,8 @@
     "interestLevel": 9,
     "summary": "{\"what_changed\":\"The content has changed from a security verification page to the OpenAI homepage, featuring various products, research, and company information.\",\"change_type\":\"major overhaul\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of new products and features such as ChatGPT, Sora, and API Platform\",\"Addition of research and company information sections\",\"Removal of security verification page content\",\"Update of the website's layout and design\"]}",
     "changeType": "modified",
-    "businessImpact": "The changes indicate a significant expansion of OpenAI's offerings, which can lead to increased market share and revenue.",
-    "competitiveImplications": "The introduction of new products and features can pose a threat to competitors in the AI market."
+    "businessImpact": null,
+    "competitiveImplications": null
   },
   {
     "id": 208,
@@ -80,8 +116,8 @@
     "interestLevel": 9,
     "summary": "{\"what_changed\":\"The content changed from a security verification page for www.perplexity.ai to a ChatGPT interface\",\"change_type\":\"update\",\"change_scale\":\"major\",\"specific_changes\":[\"Removal of security verification content\",\"Introduction of ChatGPT interface\",\"Addition of login and sign-up options\",\"Inclusion of terms and privacy policy links\"]}",
     "changeType": "modified",
-    "businessImpact": "The update may attract more users to the ChatGPT platform, increasing engagement and potentially driving revenue",
-    "competitiveImplications": "The change may give OpenAI a competitive edge in the AI chatbot market, potentially threatening other players"
+    "businessImpact": null,
+    "competitiveImplications": null
   },
   {
     "id": 210,
@@ -92,8 +128,8 @@
     "interestLevel": 4,
     "summary": "{\"what_changed\":\"The removal of the 'Set extension permissions' link under 'Administer' > 'Manage for organization' and the addition of 'About GitHub Copilot Chat' under 'Concepts'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Removal of 'Set extension permissions' link\",\"Addition of 'About GitHub Copilot Chat' under 'Concepts'\"]}",
     "changeType": "modified",
-    "businessImpact": "The changes do not have a significant impact on the business",
-    "competitiveImplications": "The changes do not provide a competitive advantage or disadvantage"
+    "businessImpact": null,
+    "competitiveImplications": null
   },
   {
     "id": 219,
@@ -104,8 +140,8 @@
     "interestLevel": 8,
     "summary": "{\"what_changed\":\"Addition of a new policy announcement 'Build AI in America' and removal of several news articles\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new policy announcement 'Build AI in America'\",\"Removed news articles from before July 21, 2025\"]}",
     "changeType": "modified",
-    "businessImpact": "The new article may indicate Anthropic's focus on promoting AI development in America, which could have implications for their business strategy and market positioning.",
-    "competitiveImplications": "The emphasis on 'Build AI in America' might be a strategic move to differentiate Anthropic from competitors and align with national interests."
+    "businessImpact": null,
+    "competitiveImplications": null
   },
   {
     "id": 72,
@@ -116,8 +152,8 @@
     "interestLevel": 9,
     "summary": "{\"what_changed\":\"Introduction of Perplexity Pro and Max subscription plans with various features and pricing\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of Perplexity Pro with features like unlimited Pro Search, upgraded AI models, and collaborative spaces\",\"Introduction of Perplexity Max with features like early access to new products, unlimited access to Perplexity Labs and Research, and priority support\",\"Pricing for Perplexity Pro and Max plans\",\"Introduction of exclusive features for Pro and Max subscribers\"]}",
     "changeType": "new",
-    "businessImpact": "The introduction of Perplexity Pro and Max plans indicates a shift towards a more premium and feature-rich offering, potentially increasing revenue and competitiveness",
-    "competitiveImplications": "Perplexity AI is positioning itself as a leader in the AI market with its new subscription plans, potentially threatening competitors"
+    "businessImpact": null,
+    "competitiveImplications": null
   },
   {
     "id": 160,
@@ -128,8 +164,8 @@
     "interestLevel": 8,
     "summary": "{\"what_changed\":\"Initial content creation for Midjourney documentation\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of help center with various sections\",\"Addition of getting started guide\",\"Documentation section for making the most of Midjourney\",\"Billing support section\",\"Policies and guidelines including terms of service, privacy policy, data deletion and privacy FAQ, and community guidelines\",\"Links to Midjourney website and Discord server\"]}",
     "changeType": "new",
-    "businessImpact": "Enhanced user experience and support, potentially leading to increased customer satisfaction and retention.",
-    "competitiveImplications": "Midjourney is positioning itself as a customer-centric platform, potentially differentiating itself from competitors."
+    "businessImpact": null,
+    "competitiveImplications": null
   },
   {
     "id": 161,
@@ -140,7 +176,7 @@
     "interestLevel": 9,
     "summary": "{\"what_changed\":\"Introduction of a new pricing page with detailed plan comparisons and features\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of four subscription tiers: Basic, Standard, Pro, and Mega\",\"Detailed comparison of plan features, including GPU time, image and video generation, and stealth mode\",\"Information on pricing, including monthly and annual rates, and a 20% discount for annual commitments\"]}",
     "changeType": "new",
-    "businessImpact": "The introduction of a new pricing page with detailed plan comparisons and features is likely to increase revenue and attract more customers to Midjourney's platform",
-    "competitiveImplications": "Midjourney's new pricing strategy may put pressure on competitors to revisit their own pricing models and feature offerings"
+    "businessImpact": null,
+    "competitiveImplications": null
   }
 ]
