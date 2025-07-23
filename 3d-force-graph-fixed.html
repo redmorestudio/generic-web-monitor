@@ -898,9 +898,9 @@
                         }
                         
                         rawData.dashboard.company_activity.push(companyEntry);
-                    });
-                    
-                    // PostgreSQL format compatibility (dashboard.json)
+                        });
+
+                        // PostgreSQL format compatibility (dashboard.json)
                     if (dashboardData && dashboardData.companies) {
                         console.log('Adding PostgreSQL format data');
                         
@@ -927,6 +927,7 @@
                                 
                                 // Add intelligence data
                                 if (company.intelligence) {
+                                    // Handle both field names for technologies
                                     if (company.intelligence.ai_technologies || company.intelligence.technologies) {
                                         companyEntry.intelligence.ai_technologies = company.intelligence.ai_technologies || company.intelligence.technologies || [];
                                     }
@@ -956,7 +957,7 @@
                             }
                         });
                     }
-                    
+
                     document.getElementById('loading').style.display = 'none';
                     document.getElementById('info').style.display = 'block';
 
