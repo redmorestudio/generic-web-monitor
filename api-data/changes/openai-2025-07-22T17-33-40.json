@@ -8,67 +8,12 @@
   "ai_confidence": 0.9,
   "summary": "Change detected",
   "category": "General Update",
-  "change_summary": {
-    "change_type": "update",
-    "change_scale": "major",
-    "what_changed": "The content has changed from a security verification page to a ChatGPT interface",
-    "specific_changes": [
-      "Removal of security verification content",
-      "Introduction of ChatGPT interface",
-      "Addition of login and sign-up options",
-      "Inclusion of terms and privacy policy links"
-    ]
-  },
-  "strategic_analysis": {
-    "market_signals": [
-      "Increased focus on user experience",
-      "Expansion of product offerings"
-    ],
-    "business_impact": "The update may attract more users to the ChatGPT platform, increasing engagement and potentially driving revenue",
-    "strategic_direction": "The update suggests that OpenAI is prioritizing user experience and product development, indicating a strategic direction towards becoming a leading AI chatbot provider",
-    "competitive_implications": "The change may give OpenAI a competitive edge in the AI chatbot market, potentially threatening other players"
-  },
-  "entities": {
-    "people": [],
-    "markets": [],
-    "pricing": [],
-    "features": [
-      "Temporary Chat",
-      "Attach",
-      "Search",
-      "Voice"
-    ],
-    "products": [
-      "ChatGPT"
-    ],
-    "partnerships": [],
-    "technologies": [
-      "Cloudflare"
-    ]
-  },
-  "insights": {
-    "threats": [
-      "Competitive pressure from other AI chatbot providers"
-    ],
-    "key_findings": [
-      "Major update to the product interface",
-      "Introduction of new features"
-    ],
-    "opportunities": [
-      "Increased user engagement",
-      "Potential revenue growth"
-    ],
-    "recommended_actions": [
-      "Monitor user feedback and engagement",
-      "Analyze competitive responses to the update"
-    ]
-  },
-  "key_insights": [
-    "Major update to the product interface",
-    "Introduction of new features"
-  ],
-  "business_impact": "The update may attract more users to the ChatGPT platform, increasing engagement and potentially driving revenue",
-  "competitive_implications": "The change may give OpenAI a competitive edge in the AI chatbot market, potentially threatening other players",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
   "content_hash_before": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
   "content_hash_after": "8485ace5f8dc30d7969561191e78d15a6162b7b5019d1e7b2429ea0980d7cc3c",
   "ai_model": "groq-llama-3.3-70b",

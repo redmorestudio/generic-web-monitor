@@ -8,73 +8,12 @@
   "ai_confidence": 0.9,
   "summary": "Change detected",
   "category": "General Update",
-  "change_summary": {
-    "change_type": "addition",
-    "change_scale": "major",
-    "what_changed": "Introduction of a new pricing page with detailed plan comparisons and features",
-    "specific_changes": [
-      "Introduction of four subscription tiers: Basic, Standard, Pro, and Mega",
-      "Detailed comparison of plan features, including GPU time, image and video generation, and stealth mode",
-      "Information on pricing, including monthly and annual rates, and a 20% discount for annual commitments"
-    ]
-  },
-  "strategic_analysis": {
-    "market_signals": [
-      "Increased transparency and competitiveness in pricing",
-      "Expansion of features and services to attract a wider range of customers"
-    ],
-    "business_impact": "The introduction of a new pricing page with detailed plan comparisons and features is likely to increase revenue and attract more customers to Midjourney's platform",
-    "strategic_direction": "Midjourney is likely to continue investing in its platform and expanding its services to maintain a competitive edge in the market",
-    "competitive_implications": "Midjourney's new pricing strategy may put pressure on competitors to revisit their own pricing models and feature offerings"
-  },
-  "entities": {
-    "people": [],
-    "markets": [],
-    "pricing": [
-      "Basic Plan: $10/month or $96/year",
-      "Standard Plan: $30/month or $288/year",
-      "Pro Plan: $60/month or $576/year",
-      "Mega Plan: $120/month or $1,152/year"
-    ],
-    "features": [
-      "Relax Mode",
-      "Stealth Mode",
-      "Unlimited image and video generation",
-      "GPU time",
-      "Fast and Relax GPU modes"
-    ],
-    "products": [
-      "Midjourney"
-    ],
-    "partnerships": [],
-    "technologies": [
-      "GPU"
-    ]
-  },
-  "insights": {
-    "threats": [
-      "Competitors may respond to Midjourney's new pricing strategy by introducing their own competitive pricing models",
-      "Customers may be deterred by the complexity of Midjourney's new pricing page and plan comparisons"
-    ],
-    "key_findings": [
-      "Midjourney's new pricing page provides a clear and detailed comparison of its plans and features",
-      "The introduction of a 20% discount for annual commitments may incentivize customers to commit to longer-term subscriptions"
-    ],
-    "opportunities": [
-      "Midjourney may be able to attract more customers with its new pricing strategy and expanded feature set",
-      "The company may be able to increase revenue through the introduction of new plans and features"
-    ],
-    "recommended_actions": [
-      "Monitor Midjourney's pricing strategy and feature updates to stay competitive",
-      "Consider introducing similar pricing models and features to attract and retain customers"
-    ]
-  },
-  "key_insights": [
-    "Midjourney's new pricing page provides a clear and detailed comparison of its plans and features",
-    "The introduction of a 20% discount for annual commitments may incentivize customers to commit to longer-term subscriptions"
-  ],
-  "business_impact": "The introduction of a new pricing page with detailed plan comparisons and features is likely to increase revenue and attract more customers to Midjourney's platform",
-  "competitive_implications": "Midjourney's new pricing strategy may put pressure on competitors to revisit their own pricing models and feature offerings",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
   "content_hash_before": null,
   "content_hash_after": "823666b2cbc29261f2343d1cb1082928176e446331abb0a6db694a32d77b959e",
   "ai_model": "groq-llama-3.3-70b",
