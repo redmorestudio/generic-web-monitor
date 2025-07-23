@@ -70,6 +70,10 @@ jobs:
       NODE_ENV: production
       USE_POSTGRES: 'true'
     
+    outputs:
+      deployment_url: ${{ steps.deployment.outputs.page_url }}
+      high_priority_count: ${{ steps.check-changes.outputs.high_priority_count }}
+    
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -454,11 +458,3 @@ jobs:
           NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
           EMAIL_THRESHOLD: ${{ secrets.EMAIL_THRESHOLD }}
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
-
-    outputs:
-      deployment_url:
-        description: "URL of the deployed dashboard"
-        value: ${{ steps.deployment.outputs.page_url }}
-      high_priority_count:
-        description: "Number of high-priority changes detected"
-        value: ${{ steps.check-changes.outputs.high_priority_count }}
