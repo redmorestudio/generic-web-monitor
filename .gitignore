@@ -1,5 +1,5 @@
-# Database files that are too large (handled by LFS)
-# github-actions-backend/data/raw_content.db is tracked by LFS
+# Database files that are too large (now ignored completely)
+github-actions-backend/data/raw_content.db
 
 # Old database file to ignore
 github-actions-backend/data/monitor.db
