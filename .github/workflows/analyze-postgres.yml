@@ -238,6 +238,14 @@ jobs:
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
+      - name: Generate changes.json
+        run: |
+          cd github-actions-backend
+          echo "📝 Generating changes.json from PostgreSQL data..."
+          node generate-changes-json-postgres.js || echo "⚠️ Failed to generate changes.json"
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
       - name: Create analysis summary
         run: |
           cd github-actions-backend
