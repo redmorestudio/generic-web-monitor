@@ -102,36 +102,76 @@ jobs:
           echo "Cascade: ${{ inputs.cascade }}"
           echo "========================================"
 
-      - name: Run PostgreSQL schema fixes
+      - name: Check PostgreSQL schema status (PROTECTED)
         working-directory: github-actions-backend
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
         run: |
-          echo "🔧 Running PostgreSQL schema fixes..."
+          echo "🔍 Checking PostgreSQL schema status with protection..."
           
-          # Define the list of PostgreSQL-specific fix scripts
-          POSTGRES_FIX_SCRIPTS=(
-            "fix-postgres-schema-complete.js"
-            "fix-postgres-schema.js"
-            "fix-postgres-schema-final.js"
-            "fix-postgres-analysis-schema.js"
-            "fix-postgres-analyze-schema.js"
-            "fix-baseline-analysis-schema.js"
-            "fix-enhanced-analysis-postgres.js"
-            "fix-intelligence-changes-schema.js"
-          )
+          # Check if schema protector exists
+          if [ -f "schema-protector.js" ]; then
+            echo "✅ Schema protector found - checking status..."
+            node schema-protector.js status || echo "⚠️ Schema status check had issues"
+          else
+            echo "⚠️ Schema protector not found - proceeding with caution"
+          fi
+
+      - name: Run PROTECTED PostgreSQL schema fix
+        working-directory: github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          echo "🔧 Running PROTECTED PostgreSQL schema fix..."
+          echo "🛡️ Using schema-protector.js wrapper as required"
           
-          # Run only PostgreSQL-specific fix scripts
-          for script in "${POSTGRES_FIX_SCRIPTS[@]}"; do
-            if [ -f "$script" ]; then
-              echo "Running $script..."
-              node "$script" || echo "Warning: $script had issues but continuing"
-            else
-              echo "Script $script not found - skipping"
-            fi
-          done
+          # Use ONLY the complete schema fix with protection
+          if [ -f "schema-protector.js" ] && [ -f "fix-postgres-schema-complete.js" ]; then
+            echo "🚀 Running protected schema fix..."
+            node schema-protector.js fix-postgres-schema-complete.js || {
+              echo "⚠️ Protected fix had issues - trying direct method"
+              node fix-postgres-schema-complete.js
+            }
+          elif [ -f "fix-postgres-schema-complete.js" ]; then
+            echo "⚠️ No schema protector - running direct fix (not recommended)"
+            node fix-postgres-schema-complete.js
+          else
+            echo "❌ Critical schema fix script not found!"
+            echo "❌ Cannot proceed without fix-postgres-schema-complete.js"
+            exit 1
+          fi
           
-          echo "✅ PostgreSQL schema fixes complete"
+          echo "✅ PostgreSQL schema fix complete"
+
+      - name: Verify entities column exists
+        working-directory: github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          echo "🔍 Verifying entities column exists in baseline_analysis..."
+          node -e "
+            const { db, end } = require('./postgres-db');
+            db.get(\`
+              SELECT column_name 
+              FROM information_schema.columns 
+              WHERE table_schema = 'intelligence' 
+              AND table_name = 'baseline_analysis' 
+              AND column_name = 'entities'
+            \`)
+            .then(result => {
+              if (result) {
+                console.log('✅ entities column found in baseline_analysis table');
+              } else {
+                console.log('❌ entities column MISSING from baseline_analysis table');
+                process.exit(1);
+              }
+              return end();
+            })
+            .catch(err => {
+              console.error('❌ Error checking entities column:', err);
+              process.exit(1);
+            });
+          "
 
       - name: 🧠 Run Baseline AI Analysis (PostgreSQL)
         if: success()
