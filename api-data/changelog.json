@@ -1,12 +1,24 @@
 [
   {
+    "id": 289,
+    "company": "Google DeepMind",
+    "url": "blog",
+    "detectedAt": "2025-07-23T19:40:46.363Z",
+    "relativeTime": "4 min ago",
+    "interestLevel": 8,
+    "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Listen to a conversation about the newest AI capabilities in Search', and 'Transform your photos into videos and remix your pics in Google Photos'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new articles under the 'AI' section\",\"Updated the 'Gemini App' section with new features\",\"Added new research articles under the 'Research' section\",\"Updated the 'Developers' section with new Gemini Code Assist features\",\"Added new articles under the 'All the Latest' section\"]}",
+    "changeType": "modified",
+    "businessImpact": null,
+    "competitiveImplications": null
+  },
+  {
     "id": 285,
     "company": "GitHub Copilot",
     "url": "homepage",
     "detectedAt": "2025-07-23T19:03:14.475Z",
-    "relativeTime": "4 min ago",
+    "relativeTime": "41 min ago",
     "interestLevel": 8,
-    "summary": "{\"what_changed\":\"Introduction of GitHub Spark, a new feature for building and deploying intelligent apps\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of GitHub Spark to the list of GitHub features\",\"Update of the 'Get started' and 'Plans & pricing' sections to include GitHub Spark\",\"Inclusion of GitHub Spark in the Pro+ plan features\"]}",
+    "summary": "{\"what_changed\":\"Introduction of GitHub Spark, update in pricing plans, and addition of new models\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Introduction of GitHub Spark\",\"Update in pricing plans to include access to GitHub Spark in Pro+ plan\",\"Addition of new models such as Claude Opus 4 and o3\"]}",
     "changeType": "modified",
     "businessImpact": null,
     "competitiveImplications": null
@@ -16,9 +28,9 @@
     "company": "Anthropic",
     "url": "news",
     "detectedAt": "2025-07-23T19:02:49.922Z",
-    "relativeTime": "5 min ago",
+    "relativeTime": "42 min ago",
     "interestLevel": 8,
-    "summary": "{\"what_changed\":\"New announcements and updates were added to the newsroom section of the Anthropic website, including partnerships, product updates, and policy announcements.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added announcement about Anthropic partnering with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Added announcement about Anthropic's Economic Futures Program\",\"Added updates on Claude for Financial Services and Claude for Education\",\"Added policy announcements, including 'Build AI in America' and 'The need for transparency in Frontier AI'\"]}",
+    "summary": "{\"what_changed\":\"New announcements and updates were added, including partnerships, product updates, and policy changes\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added announcement about Anthropic partnering with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Added announcement about Claude for Financial Services\",\"Added announcement about investing in energy to secure America's AI future\",\"Added announcement about Discover tools that work with Claude\",\"Added announcement about Advancing Claude for Education\",\"Added announcement about Lawrence Livermore National Laboratory expanding Claude for Enterprise use\"]}",
     "changeType": "modified",
     "businessImpact": null,
     "competitiveImplications": null
@@ -28,9 +40,9 @@
     "company": "Perplexity AI",
     "url": "product",
     "detectedAt": "2025-07-23T00:38:32.210Z",
-    "relativeTime": "18 hours ago",
+    "relativeTime": "19 hours ago",
     "interestLevel": 3,
-    "summary": "{\"what_changed\":\"Rephrased introduction to Perplexity Pro\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Changed 'Perplexity Pro is the most powerful way to search the internet' to 'Perplexity Pro unlocks more ways to learn and get work done'\",\"Updated 'Upgrade productivity and learning with additional access' to maintain consistency in messaging\"]}",
+    "summary": "{\"what_changed\":\"The description of Perplexity Pro has been updated to 'unlocks more ways to learn and get work done' and 'Upgrade your productivity and learning with unlimited Research, unlimited file uploads, exclusive Pro Perks and more'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated Perplexity Pro description\",\"No changes to pricing or features\"]}",
     "changeType": "modified",
     "businessImpact": null,
     "competitiveImplications": null
