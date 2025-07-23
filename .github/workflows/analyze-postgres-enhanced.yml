@@ -106,6 +106,7 @@ jobs:
         working-directory: github-actions-backend
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
         run: |
           echo "🔍 Checking PostgreSQL schema status with protection..."
           
@@ -117,17 +118,22 @@ jobs:
             echo "⚠️ Schema protector not found - proceeding with caution"
           fi
 
-      - name: Run PostgreSQL schema fix (DIRECT EXECUTION)
+      - name: Run PostgreSQL schema fix (PROTECTED EXECUTION)
         working-directory: github-actions-backend
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
         run: |
-          echo "🔧 Running PostgreSQL schema fix directly..."
+          echo "🔧 Running PostgreSQL schema fix with protection..."
           echo "📋 Status check complete - now applying complete schema fix"
           
-          # Run the complete schema fix directly since protector requires module usage
-          if [ -f "fix-postgres-schema-complete.js" ]; then
-            echo "🚀 Running fix-postgres-schema-complete.js..."
+          # Use schema protector if available, fallback to direct execution
+          if [ -f "schema-protector.js" ] && [ -f "fix-postgres-schema-complete.js" ]; then
+            echo "🛡️ Using schema protector for safe execution..."
+            node schema-protector.js fix-postgres-schema-complete.js
+            echo "✅ Schema fix executed safely with protection"
+          elif [ -f "fix-postgres-schema-complete.js" ]; then
+            echo "🚀 Running fix-postgres-schema-complete.js directly..."
             node fix-postgres-schema-complete.js
             echo "✅ Schema fix executed successfully"
           else
@@ -140,6 +146,7 @@ jobs:
         working-directory: github-actions-backend
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
         run: |
           echo "🔍 Verifying entities column exists in baseline_analysis..."
           node -e "
@@ -189,6 +196,7 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
           NODE_ENV: production
         run: |
           echo "🧠 Starting BASELINE AI Analysis (PostgreSQL)..."
@@ -228,6 +236,7 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
           NODE_ENV: production
         run: |
           echo "🔍 Starting CHANGE DETECTION AI Analysis (PostgreSQL)..."
@@ -260,6 +269,7 @@ jobs:
         working-directory: github-actions-backend
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
           NODE_ENV: production
         run: |
           echo "📝 Generating individual change detail files..."
