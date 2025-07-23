@@ -239,18 +239,22 @@ jobs:
             exit 1
           fi
           
-          # Use fixed version that only analyzes companies that exist
-          if [ -f "ai-analyzer-baseline-three-db-postgres-fixed.js" ]; then
+          # Use enhanced analyzer for rich entity extraction
+          if [ -f "ai-analyzer-baseline-enhanced-postgres.js" ]; then
+            echo "Using ENHANCED baseline analyzer for rich entity extraction..."
+            if ! node ai-analyzer-baseline-enhanced-postgres.js; then
+              echo "⚠️  Enhanced version failed, trying fixed version..."
+              if [ -f "ai-analyzer-baseline-three-db-postgres-fixed.js" ]; then
+                node ai-analyzer-baseline-three-db-postgres-fixed.js
+              else
+                node ai-analyzer-baseline-three-db-postgres.js
+              fi
+            fi
+          elif [ -f "ai-analyzer-baseline-three-db-postgres-fixed.js" ]; then
             echo "Using fixed baseline analyzer that only processes valid companies..."
             if ! node ai-analyzer-baseline-three-db-postgres-fixed.js; then
               echo "⚠️  Fixed version failed, trying proper version..."
               node ai-analyzer-baseline-three-db-postgres-proper.js
-            fi
-          elif [ -f "ai-analyzer-baseline-three-db-postgres-proper.js" ]; then
-            echo "Using proper JSONB baseline analyzer..."
-            if ! node ai-analyzer-baseline-three-db-postgres-proper.js; then
-              echo "❌ PostgreSQL baseline analysis failed"
-              exit 1
             fi
           else
             if ! node ai-analyzer-baseline-three-db-postgres.js; then
@@ -271,9 +275,18 @@ jobs:
           
           echo "📊 Generating static data files from PostgreSQL..."
           
-          if ! node generate-static-data-three-db-postgres.js; then
-            echo "❌ Failed to generate static data files"
-            exit 1
+          # Use enhanced static data generator for rich graph data
+          if [ -f "generate-static-data-three-db-postgres-enhanced.js" ]; then
+            echo "Using ENHANCED static data generator for rich 3D graph..."
+            if ! node generate-static-data-three-db-postgres-enhanced.js; then
+              echo "⚠️  Enhanced generator failed, using standard version..."
+              node generate-static-data-three-db-postgres.js
+            fi
+          else
+            if ! node generate-static-data-three-db-postgres.js; then
+              echo "❌ Failed to generate static data files"
+              exit 1
+            fi
           fi
           
           echo "✅ Static data files generated successfully"
