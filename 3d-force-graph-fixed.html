@@ -849,15 +849,18 @@
                     // Make it globally accessible
                     window.rawData = rawData;
                     
-                    companiesData.companies.forEach(company => {
-                        const companyName = company.company;
+                    // Handle both array and object formats for backward compatibility
+                    const companiesList = Array.isArray(companiesData) ? companiesData : companiesData.companies;
+                    companiesList.forEach(company => {
+                        // Handle different field names between SQLite and PostgreSQL
+                        const companyName = company.company || company.name;
                         const details = Object.values(detailsData.companies).find(d => d.company_name === companyName);
                         
                         const companyEntry = {
                             company: companyName,
-                            type: company.type,
-                            entity_type: company.type,
-                            url_count: company.urls.length,
+                            type: company.type || company.category,
+                            entity_type: company.type || company.category,
+                            url_count: company.urls ? company.urls.length : (company.url_count || 0),
                             intelligence: {
                                 interest_level: details?.interest_level || 5,
                                 ai_technologies: [],
