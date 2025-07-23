@@ -40,8 +40,8 @@
         {
           "id": 219,
           "url": "news",
-          "detectedAt": "2025-07-23T00:13:18.357Z",
-          "relativeTime": "32 min ago",
+          "detectedAt": "2025-07-22T17:13:18.357Z",
+          "relativeTime": "1 days ago",
           "interestLevel": 8,
           "summary": "{\"what_changed\":\"Addition of a new policy announcement 'Build AI in America' and removal of several news articles\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new policy announcement 'Build AI in America'\",\"Removed news articles from before July 21, 2025\"]}",
           "changeType": "modified",
@@ -78,7 +78,7 @@
       "stats": {
         "totalChanges": 1,
         "highInterestChanges": 1,
-        "lastActivity": "2025-07-23T00:13:18.357Z"
+        "lastActivity": "2025-07-22T17:13:18.357Z"
       }
     },
     {
@@ -115,8 +115,8 @@
         {
           "id": 257,
           "url": "blog",
-          "detectedAt": "2025-07-23T05:52:15.696Z",
-          "relativeTime": "just now",
+          "detectedAt": "2025-07-22T22:52:15.696Z",
+          "relativeTime": "20 hours ago",
           "interestLevel": 1,
           "summary": "{\"what_changed\":\"No significant changes were detected in the provided content.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
@@ -130,8 +130,8 @@
         {
           "id": 210,
           "url": "docs",
-          "detectedAt": "2025-07-23T00:17:58.613Z",
-          "relativeTime": "27 min ago",
+          "detectedAt": "2025-07-22T17:17:58.613Z",
+          "relativeTime": "1 days ago",
           "interestLevel": 4,
           "summary": "{\"what_changed\":\"The removal of the 'Set extension permissions' link under 'Administer' > 'Manage for organization' and the addition of 'About GitHub Copilot Chat' under 'Concepts'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Removal of 'Set extension permissions' link\",\"Addition of 'About GitHub Copilot Chat' under 'Concepts'\"]}",
           "changeType": "modified",
@@ -145,8 +145,8 @@
         {
           "id": 10,
           "url": "pricing",
-          "detectedAt": "2025-07-21T23:18:27.267Z",
-          "relativeTime": "1 days ago",
+          "detectedAt": "2025-07-21T16:18:27.267Z",
+          "relativeTime": "2 days ago",
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the provided content, only minor errors and loading issues were present in both versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
@@ -180,7 +180,7 @@
       "stats": {
         "totalChanges": 3,
         "highInterestChanges": 0,
-        "lastActivity": "2025-07-23T05:52:15.696Z"
+        "lastActivity": "2025-07-22T22:52:15.696Z"
       }
     },
     {
@@ -223,8 +223,8 @@
         {
           "id": 209,
           "url": "homepage",
-          "detectedAt": "2025-07-23T00:18:26.929Z",
-          "relativeTime": "27 min ago",
+          "detectedAt": "2025-07-22T17:18:26.929Z",
+          "relativeTime": "1 days ago",
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the content between the two versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
@@ -238,8 +238,8 @@
         {
           "id": 184,
           "url": "homepage",
-          "detectedAt": "2025-07-21T22:11:46.979Z",
-          "relativeTime": "1 days ago",
+          "detectedAt": "2025-07-21T15:11:46.979Z",
+          "relativeTime": "2 days ago",
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the content structure or major updates to models, research, or science sections.\",\"change_type\":\"no significant update\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
@@ -273,7 +273,7 @@
       "stats": {
         "totalChanges": 2,
         "highInterestChanges": 0,
-        "lastActivity": "2025-07-23T00:18:26.929Z"
+        "lastActivity": "2025-07-22T17:18:26.929Z"
       }
     },
     {
@@ -304,8 +304,8 @@
         {
           "id": 160,
           "url": "docs",
-          "detectedAt": "2025-07-21T22:18:22.044Z",
-          "relativeTime": "1 days ago",
+          "detectedAt": "2025-07-21T15:18:22.044Z",
+          "relativeTime": "2 days ago",
           "interestLevel": 8,
           "summary": "{\"what_changed\":\"Initial content creation for Midjourney documentation\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of help center with various sections\",\"Addition of getting started guide\",\"Documentation section for making the most of Midjourney\",\"Billing support section\",\"Policies and guidelines including terms of service, privacy policy, data deletion and privacy FAQ, and community guidelines\",\"Links to Midjourney website and Discord server\"]}",
           "changeType": "new",
@@ -319,8 +319,8 @@
         {
           "id": 161,
           "url": "pricing",
-          "detectedAt": "2025-07-21T22:17:43.481Z",
-          "relativeTime": "1 days ago",
+          "detectedAt": "2025-07-21T15:17:43.481Z",
+          "relativeTime": "2 days ago",
           "interestLevel": 9,
           "summary": "{\"what_changed\":\"Introduction of a new pricing page with detailed plan comparisons and features\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of four subscription tiers: Basic, Standard, Pro, and Mega\",\"Detailed comparison of plan features, including GPU time, image and video generation, and stealth mode\",\"Information on pricing, including monthly and annual rates, and a 20% discount for annual commitments\"]}",
           "changeType": "new",
@@ -354,7 +354,7 @@
       "stats": {
         "totalChanges": 2,
         "highInterestChanges": 2,
-        "lastActivity": "2025-07-21T22:18:22.044Z"
+        "lastActivity": "2025-07-21T15:18:22.044Z"
       }
     },
     {
@@ -397,8 +397,8 @@
         {
           "id": 225,
           "url": "pricing",
-          "detectedAt": "2025-07-23T02:04:23.608Z",
-          "relativeTime": "just now",
+          "detectedAt": "2025-07-22T19:04:23.608Z",
+          "relativeTime": "1 days ago",
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"The 'openaicom-did' parameter in the URLs has changed from '4aa03562-c3c6-4634-98a2-6d29cf24c479' to '99580f75-39b7-4bf3-9a9c-e2a544c14234'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated 'openaicom-did' parameter in URLs\"]}",
           "changeType": "modified",
@@ -412,8 +412,8 @@
         {
           "id": 226,
           "url": "pricing",
-          "detectedAt": "2025-07-23T01:46:27.592Z",
-          "relativeTime": "just now",
+          "detectedAt": "2025-07-22T18:46:27.592Z",
+          "relativeTime": "1 days ago",
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"The 'openaicom-did' parameter in the URLs has changed from '99580f75-39b7-4bf3-9a9c-e2a544c14234' to '4aa03562-c3c6-4634-98a2-6d29cf24c479'.\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated 'openaicom-did' parameter in URLs\"]}",
           "changeType": "modified",
@@ -427,8 +427,8 @@
         {
           "id": 227,
           "url": "product",
-          "detectedAt": "2025-07-23T01:46:20.404Z",
-          "relativeTime": "just now",
+          "detectedAt": "2025-07-22T18:46:20.404Z",
+          "relativeTime": "1 days ago",
           "interestLevel": 4,
           "summary": "{\"what_changed\":\"Removal of Voice feature\",\"change_type\":\"removal\",\"change_scale\":\"minor\",\"specific_changes\":[\"Voice feature button removed from the interface\"]}",
           "changeType": "modified",
@@ -442,8 +442,8 @@
         {
           "id": 228,
           "url": "homepage",
-          "detectedAt": "2025-07-23T01:18:01.891Z",
-          "relativeTime": "just now",
+          "detectedAt": "2025-07-22T18:18:01.891Z",
+          "relativeTime": "1 days ago",
           "interestLevel": 9,
           "summary": "{\"what_changed\":\"The content has changed from a security verification page to the OpenAI homepage, featuring various products, research, and company information.\",\"change_type\":\"major overhaul\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of new products and features such as ChatGPT, Sora, and API Platform\",\"Addition of research and company information sections\",\"Removal of security verification page content\",\"Update of the website's layout and design\"]}",
           "changeType": "modified",
@@ -457,8 +457,8 @@
         {
           "id": 208,
           "url": "product",
-          "detectedAt": "2025-07-23T00:33:40.166Z",
-          "relativeTime": "12 min ago",
+          "detectedAt": "2025-07-22T17:33:40.166Z",
+          "relativeTime": "1 days ago",
           "interestLevel": 9,
           "summary": "{\"what_changed\":\"The content changed from a security verification page for www.perplexity.ai to a ChatGPT interface\",\"change_type\":\"update\",\"change_scale\":\"major\",\"specific_changes\":[\"Removal of security verification content\",\"Introduction of ChatGPT interface\",\"Addition of login and sign-up options\",\"Inclusion of terms and privacy policy links\"]}",
           "changeType": "modified",
@@ -496,7 +496,7 @@
       "stats": {
         "totalChanges": 5,
         "highInterestChanges": 2,
-        "lastActivity": "2025-07-23T02:04:23.608Z"
+        "lastActivity": "2025-07-22T19:04:23.608Z"
       }
     },
     {
@@ -527,8 +527,8 @@
         {
           "id": 275,
           "url": "product",
-          "detectedAt": "2025-07-23T07:38:32.210Z",
-          "relativeTime": "just now",
+          "detectedAt": "2025-07-23T00:38:32.210Z",
+          "relativeTime": "18 hours ago",
           "interestLevel": 3,
           "summary": "{\"what_changed\":\"The introductory text describing Perplexity Pro has been updated to 'Perplexity Pro unlocks more ways to learn and get work done. Upgrade your productivity and learning with unlimited Research, unlimited file uploads, exclusive Pro Perks and more.'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated introductory text for Perplexity Pro\"]}",
           "changeType": "modified",
@@ -542,8 +542,8 @@
         {
           "id": 72,
           "url": "product",
-          "detectedAt": "2025-07-21T22:21:10.364Z",
-          "relativeTime": "1 days ago",
+          "detectedAt": "2025-07-21T15:21:10.364Z",
+          "relativeTime": "2 days ago",
           "interestLevel": 9,
           "summary": "{\"what_changed\":\"Introduction of Perplexity Pro and Max subscription plans with various features and pricing\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of Perplexity Pro with features like unlimited Pro Search, upgraded AI models, and collaborative spaces\",\"Introduction of Perplexity Max with features like early access to new products, unlimited access to Perplexity Labs and Research, and priority support\",\"Pricing for Perplexity Pro and Max plans\",\"Introduction of exclusive features for Pro and Max subscribers\"]}",
           "changeType": "new",
@@ -577,11 +577,11 @@
       "stats": {
         "totalChanges": 2,
         "highInterestChanges": 1,
-        "lastActivity": "2025-07-23T07:38:32.210Z"
+        "lastActivity": "2025-07-23T00:38:32.210Z"
       }
     }
   ],
-  "lastUpdated": "2025-07-23T00:45:54.387Z",
+  "lastUpdated": "2025-07-23T19:05:34.264Z",
   "totalChanges": 15,
   "highInterestChanges": 6
 }
