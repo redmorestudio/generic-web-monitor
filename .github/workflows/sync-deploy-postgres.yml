@@ -1,4 +1,4 @@
-name: Sync and Deploy (PostgreSQL)
+name: 4. Sync and Deploy (PostgreSQL)
 
 on:
   workflow_call:
