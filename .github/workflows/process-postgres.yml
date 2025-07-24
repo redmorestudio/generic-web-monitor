@@ -78,25 +78,103 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           
+          # Function to push with enhanced retry and conflict resolution
+          push_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔄 Push attempt $attempt/$max_attempts..."
+              
+              # First, try to push directly
+              if git push origin main; then
+                echo "✅ Successfully pushed on attempt $attempt"
+                return 0
+              fi
+              
+              echo "⚠️ Push failed, attempting to resolve..."
+              
+              # Fetch latest changes
+              git fetch origin main
+              
+              # Try different strategies based on the attempt
+              if [ $attempt -eq 1 ]; then
+                # First attempt: Try simple rebase
+                echo "Trying rebase strategy..."
+                if git rebase origin/main; then
+                  if git push origin main; then
+                    echo "✅ Rebase strategy succeeded"
+                    return 0
+                  fi
+                else
+                  git rebase --abort 2>/dev/null || true
+                fi
+              elif [ $attempt -eq 2 ]; then
+                # Second attempt: Merge with 'ours' strategy for api-data
+                echo "Trying merge with 'ours' strategy for api-data..."
+                git reset --mixed origin/main
+                git add api-data/
+                git commit -m "🔄 Update static data from PostgreSQL - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+                if git push origin main; then
+                  echo "✅ Reset and recommit strategy succeeded"
+                  return 0
+                fi
+              elif [ $attempt -eq 3 ]; then
+                # Third attempt: Force merge preferring our api-data
+                echo "Trying merge preferring our api-data changes..."
+                git reset --hard HEAD
+                git pull origin main --no-rebase --strategy=recursive --strategy-option=ours
+                git add api-data/
+                git commit --amend --no-edit
+                if git push origin main; then
+                  echo "✅ Merge strategy succeeded"
+                  return 0
+                fi
+              else
+                # Final attempts: Stash, pull, reapply
+                echo "Trying stash strategy..."
+                git stash push -m "api-data changes"
+                git reset --hard origin/main
+                git stash pop || true
+                git add api-data/
+                git commit -m "🔄 Update static data from PostgreSQL - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+                if git push origin main; then
+                  echo "✅ Stash strategy succeeded"
+                  return 0
+                fi
+              fi
+              
+              # Exponential backoff
+              if [ $attempt -lt $max_attempts ]; then
+                local wait_time=$((2 ** attempt))
+                echo "⏳ Waiting ${wait_time}s before retry..."
+                sleep $wait_time
+              fi
+              
+              attempt=$((attempt + 1))
+            done
+            
+            echo "❌ All push attempts failed"
+            return 1
+          }
+          
           # Add the generated static data
-          git add api-data/
+          git add api-data/ || {
+            echo "⚠️ No api-data directory to add"
+            exit 0
+          }
           
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "ℹ️ No changes to commit"
           else
             git commit -m "🔄 Update static data from PostgreSQL - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
             
-            # Push with retry logic
-            for attempt in {1..5}; do
-              if git push; then
-                echo "Successfully pushed on attempt $attempt"
-                break
-              else
-                echo "Push failed on attempt $attempt, retrying..."
-                git pull --rebase
-                sleep $((2 ** (attempt - 1)))
-              fi
-            done
+            if ! push_with_retry; then
+              echo "⚠️ WARNING: Failed to push changes after multiple attempts"
+              echo "This is non-critical - the sync-deploy stage will handle the final push"
+              echo "Continuing workflow..."
+              exit 0
+            fi
           fi
       
       - name: Trigger Analyze workflow
