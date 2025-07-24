@@ -62,7 +62,7 @@ on:
         default: false
 
 env:
-  WORKFLOW_NAME: "3. Analyze Content (PostgreSQL)"
+  WORKFLOW_NAME: "3. Analyze Content (PostgreSQL Enhanced)"
 
 permissions:
   contents: write
@@ -110,7 +110,8 @@ jobs:
         run: |
           echo "🔍 Checking PostgreSQL schema status with protection..."
           
-          # Check if schema protector exists and get status
+          # CRITICAL: Follow DATABASE PROTECTION rules
+          # ✅ Check schema status first
           if [ -f "schema-protector.js" ]; then
             echo "✅ Schema protector found - checking status..."
             node schema-protector.js status || echo "⚠️ Schema status check had issues"
@@ -118,96 +119,142 @@ jobs:
             echo "⚠️ Schema protector not found - proceeding with caution"
           fi
 
-      - name: Run PostgreSQL schema fix (PROTECTED EXECUTION)
+      - name: Fix schema issues (PROTECTED EXECUTION)
         working-directory: github-actions-backend
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
           DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
         run: |
-          echo "🔧 Running PostgreSQL schema fix with protection..."
-          echo "📋 Status check complete - now applying complete schema fix"
+          echo "🔧 Running PROTECTED PostgreSQL schema fixes..."
           
-          # Use schema protector if available, fallback to direct execution
-          if [ -f "schema-protector.js" ] && [ -f "fix-postgres-schema-complete.js" ]; then
-            echo "🛡️ Using schema protector for safe execution..."
-            node schema-protector.js fix-postgres-schema-complete.js
-            echo "✅ Schema fix executed safely with protection"
+          # CRITICAL: Follow DATABASE PROTECTION rules
+          # ✅ Use schema-protector.js wrapper
+          # ✅ Single script execution (no loops)
+          # ✅ Proper version control
+          
+          if [ -f "schema-protector.js" ] && [ -f "fix-enhanced-analysis-company-id.js" ]; then
+            echo "🛡️  Using PROTECTED schema fix for enhanced_analysis..."
+            node fix-enhanced-analysis-company-id.js
+            echo "✅ Protected schema fix completed"
           elif [ -f "fix-postgres-schema-complete.js" ]; then
-            echo "🚀 Running fix-postgres-schema-complete.js directly..."
+            echo "⚠️  Using legacy schema fix (not fully protected)..."
             node fix-postgres-schema-complete.js
-            echo "✅ Schema fix executed successfully"
+            echo "✅ Legacy schema fix completed"
           else
-            echo "❌ Critical error: fix-postgres-schema-complete.js not found!"
-            echo "❌ Cannot proceed without the complete schema fix script"
+            echo "❌ Critical error: No schema fix scripts found!"
+            echo "❌ Cannot proceed without fixing enhanced_analysis table"
             exit 1
           fi
 
-      - name: Migrate baseline_analysis table for JSONB columns
+      - name: Verify enhanced_analysis table structure
         working-directory: github-actions-backend
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
           DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
         run: |
-          echo "🔄 Running baseline_analysis table migration..."
-          echo "📋 Adding missing JSONB columns (entities, themes, sentiment, etc.)"
-          
-          if [ -f "migrate-baseline-analysis-jsonb-columns.js" ]; then
-            echo "🚀 Running JSONB column migration..."
-            node migrate-baseline-analysis-jsonb-columns.js
-            echo "✅ Migration completed successfully"
-          else
-            echo "❌ Migration script not found!"
-            echo "❌ Cannot add missing JSONB columns"
-            exit 1
-          fi
-
-      - name: Verify entities column exists
-        working-directory: github-actions-backend
-        env:
-          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
-          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
-        run: |
-          echo "🔍 Verifying entities column exists in baseline_analysis..."
+          echo "🔍 Verifying enhanced_analysis table has required columns..."
           node -e "
             const { db, end } = require('./postgres-db');
-            db.get(\`
-              SELECT column_name 
-              FROM information_schema.columns 
-              WHERE table_schema = 'intelligence' 
-              AND table_name = 'baseline_analysis' 
-              AND column_name = 'entities'
-            \`)
-            .then(result => {
-              if (result) {
-                console.log('✅ entities column found in baseline_analysis table');
-                console.log('🎉 Schema is ready for enhanced entity extraction!');
-                process.exit(0);
-              } else {
-                console.log('❌ entities column MISSING from baseline_analysis table');
-                console.log('🔍 Let me check what columns do exist...');
-                return db.all(\`
+            
+            async function checkTable() {
+              try {
+                const columns = await db.all(\`
+                  SELECT column_name, data_type, is_nullable
+                  FROM information_schema.columns 
+                  WHERE table_schema = 'intelligence' 
+                  AND table_name = 'enhanced_analysis'
+                  ORDER BY ordinal_position
+                \`);
+                
+                if (columns.length === 0) {
+                  console.log('❌ enhanced_analysis table does not exist!');
+                  process.exit(1);
+                }
+                
+                console.log('📊 enhanced_analysis table structure:');
+                columns.forEach(col => {
+                  console.log(\`  - \${col.column_name}: \${col.data_type} \${col.is_nullable === 'NO' ? 'NOT NULL' : 'NULL'}\`);
+                });
+                
+                // Check for required columns
+                const hasCompanyId = columns.some(col => col.column_name === 'company_id');
+                const hasChangeId = columns.some(col => col.column_name === 'change_id');
+                
+                if (!hasCompanyId) {
+                  console.log('❌ Missing required column: company_id');
+                  process.exit(1);
+                }
+                
+                if (!hasChangeId) {
+                  console.log('❌ Missing required column: change_id');
+                  process.exit(1);
+                }
+                
+                console.log('✅ All required columns found in enhanced_analysis table');
+                console.log('🎉 Table is ready for AI analysis!');
+                
+              } catch (error) {
+                console.error('❌ Error checking table structure:', error.message);
+                process.exit(1);
+              } finally {
+                await end();
+              }
+            }
+            
+            checkTable();
+          "
+
+      - name: Verify baseline_analysis table structure  
+        working-directory: github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          echo "🔍 Verifying baseline_analysis table for enhanced entity extraction..."
+          node -e "
+            const { db, end } = require('./postgres-db');
+            
+            async function checkBaselineTable() {
+              try {
+                const columns = await db.all(\`
                   SELECT column_name, data_type
                   FROM information_schema.columns 
                   WHERE table_schema = 'intelligence' 
                   AND table_name = 'baseline_analysis'
                   ORDER BY ordinal_position
                 \`);
-              }
-            })
-            .then(columns => {
-              if (columns) {
-                console.log('📊 Available columns in baseline_analysis:');
-                columns.forEach(col => console.log(\`  - \${col.column_name} (\${col.data_type})\`));
-                console.log('');
-                console.log('❌ The entities column is missing. Migration may have failed.');
+                
+                if (columns.length === 0) {
+                  console.log('❌ baseline_analysis table does not exist!');
+                  process.exit(1);
+                }
+                
+                console.log('📊 baseline_analysis table columns:');
+                columns.forEach(col => {
+                  console.log(\`  - \${col.column_name}: \${col.data_type}\`);
+                });
+                
+                // Check for JSONB columns needed for enhanced extraction
+                const hasEntities = columns.some(col => col.column_name === 'entities' && col.data_type === 'jsonb');
+                const hasThemes = columns.some(col => col.column_name === 'themes' && col.data_type === 'jsonb');
+                
+                if (hasEntities && hasThemes) {
+                  console.log('✅ Enhanced JSONB columns found - ready for rich entity extraction');
+                } else {
+                  console.log('⚠️  Enhanced JSONB columns missing - will use basic text fields');
+                  if (!hasEntities) console.log('  - Missing: entities JSONB');
+                  if (!hasThemes) console.log('  - Missing: themes JSONB');
+                }
+                
+              } catch (error) {
+                console.error('❌ Error checking baseline_analysis table:', error.message);
                 process.exit(1);
+              } finally {
+                await end();
               }
-              return end();
-            })
-            .catch(err => {
-              console.error('❌ Error checking entities column:', err);
-              process.exit(1);
-            });
+            }
+            
+            checkBaselineTable();
           "
 
       - name: 🧠 Run Baseline AI Analysis (PostgreSQL)
