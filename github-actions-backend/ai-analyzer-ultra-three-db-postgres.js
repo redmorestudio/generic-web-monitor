@@ -366,13 +366,13 @@ async function processRecentChanges(mode = 'recent') {
           SELECT id FROM processed_content.markdown_pages WHERE source_hash = $1
         `, [change.new_hash]);
 
-        // Then store the enhanced analysis - FIXED JSONB STORAGE
+        // Then store the enhanced analysis - FIXED: Pass JSONB data as JavaScript objects, not strings
         await db.run(`
           INSERT INTO intelligence.enhanced_analysis
           (company_id, content_id, change_id, ultra_analysis, key_insights, business_impact, 
            competitive_implications, market_signals, risk_assessment, 
            opportunity_score, analysis_timestamp, ai_model)
-          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, NOW(), $11)
+          VALUES ($1, $2, $3, $4::jsonb, $5::jsonb, $6, $7, $8::jsonb, $9::jsonb, $10, NOW(), $11)
           ON CONFLICT (change_id) DO UPDATE SET
             company_id = EXCLUDED.company_id,
             content_id = EXCLUDED.content_id,
@@ -388,12 +388,12 @@ async function processRecentChanges(mode = 'recent') {
           companyId,  // company_id (guaranteed to exist now)
           contentData?.id || null,  // content_id (can be null if content not found)
           changeRecord.id,
-          JSON.stringify(analysis),  // ultra_analysis as JSONB
+          JSON.stringify(analysis),  // ultra_analysis as JSONB - PostgreSQL will parse this
           JSON.stringify(analysis.insights?.key_findings || []),  // key_insights as JSONB
           analysis.strategic_analysis?.business_impact || '',
           analysis.strategic_analysis?.competitive_implications || '',
           JSON.stringify(analysis.strategic_analysis?.market_signals || []),  // market_signals as JSONB
-          JSON.stringify(analysis.insights?.threats || []),  // FIXED: risk_assessment as JSONB, not string
+          JSON.stringify(analysis.insights?.threats || []),  // risk_assessment as JSONB
           interestLevel,
           'groq-llama-3.3-70b'
         ]);
