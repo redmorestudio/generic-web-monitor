@@ -33,6 +33,11 @@ on:
         required: false
         type: boolean
         default: false
+      use_enhanced:
+        description: 'Use enhanced entity extraction'
+        required: false
+        type: boolean
+        default: true
   
   # Optionally run on schedule (disabled by default)
   # schedule:
@@ -81,7 +86,7 @@ jobs:
   analyze:
     needs: [process]
     if: always() && (needs.process.result == 'success' || inputs.skip_process) && inputs.skip_analyze != true
-    uses: ./.github/workflows/analyze-postgres.yml
+    uses: ./.github/workflows/analyze-postgres-enhanced.yml
     permissions:
       contents: write
       actions: write
@@ -89,6 +94,7 @@ jobs:
       trigger_source: ${{ inputs.skip_process && 'manual' || 'process' }}
       run_id: ${{ needs.process.outputs.run_id || github.run_id }}
       analysis_mode: ${{ inputs.analysis_mode }}
+      use_enhanced: ${{ inputs.use_enhanced }}
       cascade: false  # Prevent cascading
     secrets: inherit
   
