@@ -41,9 +41,9 @@
           "id": 295,
           "url": "news",
           "detectedAt": "2025-07-23T19:39:42.299Z",
-          "relativeTime": "18 hours ago",
+          "relativeTime": "19 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Addition of new news articles and removal of old ones, update of featured news section\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of 'Thoughts on America’s AI Action Plan' article\",\"Removal of 'Anthropic Economic Index: AI’s impact on software development' from featured section\",\"Update of 'Introducing Claude 4' article\"]}",
+          "summary": "{\"what_changed\":\"Addition of new news articles and removal of old ones, update of existing content\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"New article: Thoughts on America’s AI Action Plan\",\"Removal of old articles\",\"Update of Anthropic's news page layout\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -58,7 +58,7 @@
           "detectedAt": "2025-07-23T19:02:49.922Z",
           "relativeTime": "19 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New announcements and updates were added to the newsroom section of the Anthropic website, including partnerships, product updates, and policy announcements.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added announcement about Anthropic partnering with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Added announcement about Paul Smith joining Anthropic as Chief Commercial Officer\",\"Added product updates for Claude, including new capabilities and integrations\",\"Added policy announcements, including the need for transparency in Frontier AI and Anthropic's position on the diffusion rule\"]}",
+          "summary": "{\"what_changed\":\"Addition of new news articles and updates to existing ones, including announcements, product updates, and policy changes\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"New partnership with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Introduction of Claude for Financial Services\",\"Advancements in Claude for Education\",\"Appointment of Paul Smith as Chief Commercial Officer\",\"Updates to the Anthropic API, including new capabilities for building agents and token-saving updates\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -184,9 +184,9 @@
         "ai_technologies": [
           "python",
           "amazon bedrock",
-          "github",
           "api",
-          "sdks"
+          "aws",
+          "github"
         ],
         "ai_ml_concepts": [
           "AI Safety",
@@ -237,7 +237,7 @@
           "id": 310,
           "url": "docs",
           "detectedAt": "2025-07-23T23:36:42.053Z",
-          "relativeTime": "14 hours ago",
+          "relativeTime": "15 hours ago",
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the provided content.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
@@ -254,7 +254,7 @@
           "detectedAt": "2025-07-23T19:03:26.617Z",
           "relativeTime": "19 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Addition of new links and reorganization of existing content, including the addition of a 'Use AI models' section and expansion of 'Get code suggestions' and 'Use Chat' sections\",\"change_type\":\"addition/reorganization\",\"change_scale\":\"significant\",\"specific_changes\":[\"New links added under 'Concepts' and 'How-tos' sections\",\"Reorganization of 'Get code suggestions' and 'Use Chat' sections\",\"Addition of 'Use AI models' section\",\"Expansion of 'Completions' and 'Chat' sections\"]}",
+          "summary": "{\"what_changed\":\"Reorganization and addition of new sections and links in the GitHub Copilot documentation\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new links under 'Concepts' and 'How-tos' sections\",\"Reorganized 'How-tos' section with new subcategories\",\"Added 'Use AI models' and 'Provide context' sections\",\"Updated 'Configure custom instructions' and 'Configure content exclusion' sections\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -269,7 +269,7 @@
           "detectedAt": "2025-07-23T19:03:14.475Z",
           "relativeTime": "19 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Introduction of GitHub Spark, a new feature for building and deploying intelligent apps\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of GitHub Spark under the Product section\",\"Inclusion of GitHub Spark in the Pro+ plan features\"]}",
+          "summary": "{\"what_changed\":\"Introduction of GitHub Spark, a new feature for building and deploying intelligent apps\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of GitHub Spark to the list of GitHub features\",\"Update of the Pro+ plan to include access to GitHub Spark\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -387,16 +387,16 @@
       "intelligence": {
         "products": [
           "github copilot",
-          "github models",
           "github advanced security",
+          "github spark",
           "github codespaces",
           "github actions"
         ],
         "ai_technologies": [
-          "github",
-          "windows terminal",
-          "mcp",
           "python",
+          "javascript",
+          "windows terminal",
+          "github",
           "microsoft azure"
         ],
         "ai_ml_concepts": [
@@ -453,9 +453,9 @@
           "id": 289,
           "url": "blog",
           "detectedAt": "2025-07-23T19:40:46.363Z",
-          "relativeTime": "18 hours ago",
+          "relativeTime": "19 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Plan ahead with scheduled actions in the Gemini app', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Gemini Code Assist adds Gemini 2.5, personalization and context management', 'Listen to a conversation about the newest AI capabilities in Search', 'Transform your photos into videos and remix your pics in Google Photos'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new articles under 'AI', 'Gemini App', 'Research', 'Developers', and 'All the Latest' sections\",\"Updated Gemini Code Assist with new features\",\"Introduced Gemini CLI as an open-source AI agent\",\"Announced new AI capabilities in Search\",\"Added new features to Google Photos\"]}",
+          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', and 'Listen to a conversation about the newest AI capabilities in Search'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new article 'Ask a Techspert: What is inference?'\",\"Added new article 'Find out the latest Gemini updates with Gemini Drops'\",\"Added new article 'Turn your photos into videos in Gemini'\",\"Added new article 'Check out the first images of wildfires detected by FireSat'\",\"Added new article 'New in Gemini Code Assist: Agent Mode and IDE enhancements'\",\"Added new article 'Listen to a conversation about the newest AI capabilities in Search'\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -470,7 +470,7 @@
           "detectedAt": "2025-07-23T19:03:49.432Z",
           "relativeTime": "19 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Check out the first images of wildfires detected by FireSat' and 'Transform your photos into videos and remix your pics in Google Photos'.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of new research article about FireSat\",\"Addition of new article about Google Photos features\",\"Update to Gemini Code Assist with Agent Mode and IDE enhancements\"]}",
+          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Check out the first images of wildfires detected by FireSat', 'Transform your photos into videos and remix your pics in Google Photos', and 'Startups can apply now for the Google for Startups Gemini Founders Forum'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new article about FireSat detecting wildfires\",\"Added new article about Google Photos features\",\"Added new article about Google for Startups Gemini Founders Forum\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -603,17 +603,17 @@
       "intelligence": {
         "products": [
           "google ai studio",
-          "gemini",
+          "google workspace",
           "gemini app",
           "vertex ai",
-          "google search"
+          "cloud sql"
         ],
         "ai_technologies": [
           "python",
           "google cloud",
-          "kubernetes",
-          "docker",
-          "apache spark"
+          "tensorflow",
+          "pytorch",
+          "jax"
         ],
         "ai_ml_concepts": [
           "Artificial Intelligence",
@@ -686,17 +686,18 @@
       ],
       "intelligence": {
         "products": [
-          "midjourney",
           "basic plan",
           "standard plan",
           "pro plan",
-          "mega plan"
+          "mega plan",
+          "midjourney magazine subscription"
         ],
         "ai_technologies": [
           "discord",
           "web",
           "python",
-          "hc"
+          "javascript",
+          "html"
         ],
         "ai_ml_concepts": [
           "Artificial Intelligence",
@@ -851,8 +852,8 @@
           "python",
           "tensorflow",
           "pytorch",
-          "aws",
-          "azure"
+          "jax",
+          "aws"
         ],
         "ai_ml_concepts": [
           "AGI Research",
@@ -927,13 +928,17 @@
       "intelligence": {
         "products": [
           "perplexity pro",
-          "perplexity max"
+          "perplexity max",
+          "perplexity labs",
+          "perplexity research",
+          "perplexity ai"
         ],
         "ai_technologies": [
           "unlimited file uploads",
-          "unlimited research",
-          "exclusive pro perks",
-          "cloudflare"
+          "unlimited photo uploads",
+          "image generation",
+          "cloudflare",
+          "favicon"
         ],
         "ai_ml_concepts": [
           "Artificial Intelligence",
@@ -949,7 +954,7 @@
       }
     }
   ],
-  "lastUpdated": "2025-07-24T14:35:41.471Z",
+  "lastUpdated": "2025-07-24T14:53:29.473Z",
   "totalChanges": 39,
   "highInterestChanges": 26
 }
