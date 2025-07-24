@@ -168,31 +168,34 @@ jobs:
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
-      - name: Fix missing is_primary column (PROTECTED)
+      - name: Fix missing URLs table columns (PROTECTED)
         run: |
           cd github-actions-backend
-          echo "🔧 Ensuring is_primary column exists in intelligence.urls..."
+          echo "🔧 Ensuring all required columns exist in intelligence.urls..."
           
           # CRITICAL: Follow DATABASE PROTECTION rules
           # ✅ Use schema-protector.js wrapper if available
           # ✅ Single script execution
           # ✅ Proper error handling
           
-          if [ -f "schema-protector.js" ] && [ -f "fix-urls-is-primary-column.js" ]; then
-            echo "🛡️  Using schema protector for is_primary column fix..."
-            node schema-protector.js run fix-urls-is-primary-column.js || {
+          if [ -f "schema-protector.js" ] && [ -f "fix-urls-missing-columns.js" ]; then
+            echo "🛡️  Using schema protector for URLs table fix..."
+            node schema-protector.js run fix-urls-missing-columns.js || {
               echo "⚠️  Protected execution failed, trying direct execution..."
-              node fix-urls-is-primary-column.js || {
-                echo "⚠️  Column fix failed, but continuing..."
+              node fix-urls-missing-columns.js || {
+                echo "⚠️  URLs table fix failed, but continuing..."
               }
             }
-          elif [ -f "fix-urls-is-primary-column.js" ]; then
+          elif [ -f "fix-urls-missing-columns.js" ]; then
             echo "⚠️  Schema protector not found, using direct execution..."
-            node fix-urls-is-primary-column.js || {
-              echo "⚠️  Column fix failed, but continuing..."
+            node fix-urls-missing-columns.js || {
+              echo "⚠️  URLs table fix failed, but continuing..."
             }
           else
-            echo "⚠️  is_primary column fix script not found"
+            echo "⚠️  URLs table fix script not found, trying legacy script..."
+            if [ -f "fix-urls-is-primary-column.js" ]; then
+              node fix-urls-is-primary-column.js || echo "⚠️  Legacy fix failed"
+            fi
           fi
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
