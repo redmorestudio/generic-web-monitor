@@ -114,6 +114,43 @@ jobs:
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
+      - name: Check schema status (PROTECTED)
+        run: |
+          cd github-actions-backend
+          echo "🔍 Checking PostgreSQL schema status with protection..."
+          
+          if [ -f "schema-protector.js" ]; then
+            echo "📊 Schema protection system available - checking status..."
+            node schema-protector.js status
+          else
+            echo "⚠️  Schema protection system not found"
+          fi
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Fix schema issues (PROTECTED)
+        run: |
+          cd github-actions-backend
+          echo "🔧 Running PROTECTED schema fixes..."
+          
+          # CRITICAL: Follow DATABASE PROTECTION rules
+          # ✅ Use schema-protector.js wrapper
+          # ✅ Single script execution (no loops)
+          # ✅ Proper version control
+          
+          if [ -f "schema-protector.js" ] && [ -f "fix-enhanced-analysis-company-id.js" ]; then
+            echo "🛡️  Using protected schema fix for enhanced_analysis..."
+            node fix-enhanced-analysis-company-id.js
+          elif [ -f "fix-postgres-schema-complete.js" ]; then
+            echo "⚠️  Using legacy schema fix (not protected)..."
+            node fix-postgres-schema-complete.js
+          else
+            echo "❌ No schema fix scripts available"
+            exit 1
+          fi
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
       - name: Ensure latest PostgreSQL data files
         run: |
           echo "✅ Checking for required PostgreSQL data files..."
@@ -163,23 +200,6 @@ jobs:
             echo "🔄 Skipping duplicate analysis to save Groq API costs"
           else
             echo "⚠️  No baseline analysis found in PostgreSQL"
-          fi
-        env:
-          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
-      
-      - name: Fix ALL PostgreSQL schemas (FINAL)
-        run: |
-          cd github-actions-backend
-          echo "🔧 Running FINAL comprehensive schema fix..."
-          
-          # Use the new final fix script
-          if [ -f "fix-postgres-schema-final.js" ]; then
-            echo "🚀 Running final schema fix that fixes EVERYTHING..."
-            node fix-postgres-schema-final.js
-          else
-            # Fallback to old method
-            echo "⚠️  Final fix not found, using legacy fixes..."
-            node fix-baseline-analysis-schema-proper.js || node fix-all-analyzer-schemas.js
           fi
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
