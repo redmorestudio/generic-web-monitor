@@ -529,6 +529,7 @@
         // Global state
         let companies = [];
         let dashboardData = null;
+        let workflowStatus = null;
 
         // Initialize the application
         function init() {
@@ -580,7 +581,7 @@
             return { error: lastError.message };
         }
 
-        // Refresh status from static data
+        // ENHANCED: Fixed refreshStatus function
         async function refreshStatus(event) {
             if (event) {
                 event.preventDefault();
@@ -595,49 +596,75 @@
                 }, 2000);
             }
 
-            const data = await loadStaticData('dashboard.json');
+            const dashboardData = await loadStaticData('dashboard.json');
+            const changesData = await loadStaticData('changes.json');
+            const workflowStatusData = await loadStaticData('workflow-status.json');
 
-            if (data.error) {
+            if (dashboardData.error) {
                 updateStatusDisplay({
                     companies: [],
                     totalChanges: 0,
                     highInterestChanges: 0,
-                    lastUpdated: null,
-                    error: data.error
-                });
+                    error: dashboardData.error
+                }, {});
                 return;
             }
 
             // Store for global access
-            dashboardData = data;
+            window.dashboardData = dashboardData;
+            window.changesData = changesData;
+            workflowStatus = workflowStatusData;
+
+            // Update status display with both dashboard and changes data
+            updateStatusDisplay(dashboardData, changesData);
             
-            // **FIX: Use correct field name**
-            companies = data.companies || [];
+            // FIXED: Update companies data from correct field
+            if (dashboardData.companies) {
+                companies = dashboardData.companies;
+                updateCompaniesDisplay();
+                console.log(`📊 Loaded ${companies.length} companies from GitHub Actions data`);
+            }
             
-            updateStatusDisplay(data);
-            updateCompaniesDisplay();
+            // Also load recent changes for the main dashboard
             loadRecentChanges();
-            
-            console.log(`📊 Loaded ${companies.length} companies from GitHub Actions data`);
         }
 
-        // **FIX: Updated to use correct data structure**
-        function updateStatusDisplay(data) {
-            const lastCheck = data.lastUpdated ? new Date(data.lastUpdated) : new Date();
-            const timeAgo = formatTimeAgo(lastCheck);
-
-            // Count total URLs monitored
+        // ENHANCED: Fixed updateStatusDisplay function
+        function updateStatusDisplay(data, changesData) {
+            // FIXED: Calculate correct stats from dashboard data
+            const totalCompanies = data.companies ? data.companies.length : 0;
+            
+            // Count total URLs
             let totalUrls = 0;
             if (data.companies) {
-                totalUrls = data.companies.reduce((sum, company) => sum + (company.urls ? company.urls.length : 0), 0);
+                totalUrls = data.companies.reduce((sum, company) => {
+                    return sum + (company.urls ? company.urls.length : 0);
+                }, 0);
             }
+            
+            // Use data from dashboard.json
+            const totalChanges = data.totalChanges || 0;
+            
+            const lastCheck = workflowStatus ? new Date(workflowStatus.last_run) : 
+                             (data.lastUpdated ? new Date(data.lastUpdated) : new Date());
+            const timeAgo = formatTimeAgo(lastCheck);
 
+            // Count changes in last 24 hours from changesData
+            let todayChanges = 0;
+            if (changesData && changesData.changes) {
+                const now = new Date();
+                const dayAgo = new Date(now - 24 * 60 * 60 * 1000);
+                todayChanges = changesData.changes.filter(change => 
+                    new Date(change.created_at || change.detectedAt) > dayAgo
+                ).length;
+            }
+            
             // Update header stats bar
             const statsBar = document.getElementById('statsBar');
             statsBar.innerHTML = `
-                <div class="stat-item">🏢 <strong>${data.companies ? data.companies.length : 0}</strong> Companies</div>
+                <div class="stat-item">🏢 <strong>${totalCompanies}</strong> Companies</div>
                 <div class="stat-item">🔍 <strong>${totalUrls}</strong> URLs Monitored</div>
-                <div class="stat-item">📊 <strong>${data.totalChanges || 0}</strong> Changes Tracked</div>
+                <div class="stat-item">🔄 <strong>${todayChanges}</strong> Changes Today</div>
                 <div class="stat-item">⏰ Last Check: <strong>${timeAgo}</strong><br><small style="color: rgba(255,255,255,0.7); font-size: 0.75rem;">${lastCheck.toLocaleString()}</small></div>
             `;
         }
@@ -656,7 +683,7 @@
             return 'just now';
         }
 
-        // **FIX: Updated to use correct data structure**
+        // ENHANCED: Fixed updateCompaniesDisplay function
         function updateCompaniesDisplay() {
             const companiesDisplay = document.getElementById('companiesDisplay');
             if (companies.length === 0) {
@@ -672,18 +699,22 @@
 
             let html = '<h3>📊 Monitored Companies</h3><div class="companies-grid">';
             companies.forEach(company => {
-                // **FIX: Use correct field names**
+                // FIXED: Map correct field names from dashboard.json structure
                 const companyName = company.name || 'Unknown Company';
                 const companyType = company.category || 'competitor';
                 
                 // Get intelligence data
                 const intelligence = company.intelligence || {};
+                const recentChanges = company.recentChanges || [];
+                const stats = company.stats || {};
+                
                 const products = intelligence.products || [];
                 const technologies = intelligence.ai_technologies || [];
                 const aiConcepts = intelligence.ai_ml_concepts || [];
                 
-                // Check if company has recent changes
-                const hasRecentChanges = company.recentChanges && company.recentChanges.length > 0;
+                // Check for recent activity
+                const hasRecentChanges = recentChanges.length > 0;
+                const lastActivity = stats.lastActivity || company.lastUpdated;
                 
                 html += `
                     <div class="company-card ${hasRecentChanges ? 'recent-change' : ''}" onclick="showCompanyDetails('${escapeHtml(companyName)}')">
@@ -731,17 +762,27 @@
                         
                         <div class="config-row">
                             <span class="config-label">Total Changes:</span>
-                            <span class="config-value">${company.stats ? company.stats.totalChanges : 0}</span>
+                            <span class="config-value">${stats.totalChanges || 0}</span>
                         </div>
                         
                         <div class="config-row">
                             <span class="config-label">High Interest:</span>
-                            <span class="config-value">${company.stats ? company.stats.highInterestChanges : 0}</span>
+                            <span class="config-value">${stats.highInterestChanges || 0}</span>
                         </div>
+                        
+                        ${lastActivity ? `
+                            <div class="config-row">
+                                <span class="config-label">Last Activity:</span>
+                                <span class="config-value">${formatTimeAgo(new Date(lastActivity))}</span>
+                            </div>
+                        ` : ''}
                         
                         <div class="action-buttons" style="margin-top: 15px; position: relative; z-index: 10;">
                             <button type="button" class="button button-primary" onclick="event.stopPropagation(); showCompanyDetails('${escapeHtml(companyName)}')">
                                 View Details
+                            </button>
+                            <button type="button" class="button button-secondary" onclick="event.stopPropagation(); showCompanyUrls('${escapeHtml(companyName)}')">
+                                View URLs
                             </button>
                         </div>
                     </div>
@@ -751,60 +792,63 @@
             companiesDisplay.innerHTML = html;
         }
 
-        // **FIX: Load recent changes from companies array**
-        function loadRecentChanges() {
+        // ENHANCED: Fixed loadRecentChanges function for main dashboard section
+        async function loadRecentChanges() {
+            if (!window.dashboardData) {
+                const data = await loadStaticData('dashboard.json');
+                window.dashboardData = data;
+            }
+            
             const changesDiv = document.getElementById('recentChanges');
 
-            if (!dashboardData || !dashboardData.companies) {
+            if (!window.dashboardData || !window.dashboardData.companies) {
                 changesDiv.innerHTML = `
-                    <h3 style="margin: 0 0 15px 0; color: var(--primary-color);">📈 Recent High-Interest Changes</h3>
                     <div class="error-message">No recent changes detected.</div>
                 `;
                 return;
             }
 
-            // Collect all recent changes from all companies
-            let allChanges = [];
-            dashboardData.companies.forEach(company => {
-                if (company.recentChanges) {
-                    company.recentChanges.forEach(change => {
-                        // Add company name to change object
-                        change.companyName = company.name;
-                        allChanges.push(change);
+            // Extract recent high-interest changes from companies
+            let allRecentChanges = [];
+            window.dashboardData.companies.forEach(company => {
+                if (company.recentChanges && company.recentChanges.length > 0) {
+                    // Filter to only show changes with interest level >= 6
+                    const significantChanges = company.recentChanges.filter(c => (c.interestLevel || 5) >= 6);
+                    significantChanges.forEach(change => {
+                        allRecentChanges.push({
+                            ...change,
+                            companyName: company.name
+                        });
                     });
                 }
             });
-
-            // Filter to high-interest changes (>= 6) and sort by interest level and time
-            const significantChanges = allChanges
-                .filter(c => c.interestLevel >= 6)
-                .sort((a, b) => {
-                    // Sort by interest level first, then by time
-                    if (b.interestLevel !== a.interestLevel) {
-                        return b.interestLevel - a.interestLevel;
-                    }
-                    return new Date(b.detectedAt) - new Date(a.detectedAt);
-                })
-                .slice(0, 5); // Show top 5
-
-            if (significantChanges.length === 0) {
+            
+            // Sort by interest level and date
+            allRecentChanges.sort((a, b) => {
+                const scoreA = (a.interestLevel || 5) * 1000 + new Date(a.detectedAt || 0).getTime();
+                const scoreB = (b.interestLevel || 5) * 1000 + new Date(b.detectedAt || 0).getTime();
+                return scoreB - scoreA;
+            });
+            
+            const recentChanges = allRecentChanges.slice(0, 3); // Show top 3
+            
+            if (recentChanges.length === 0) {
                 changesDiv.innerHTML = `
-                    <h3 style="margin: 0 0 15px 0; color: var(--primary-color);">📈 Recent High-Interest Changes</h3>
-                    <div class="error-message">No high-interest changes detected recently.</div>
+                    <div class="error-message">No significant recent changes detected.</div>
                 `;
                 return;
             }
-
+            
             let html = '';
-            significantChanges.forEach((change, index) => {
-                // **FIX: Parse AI analysis JSON if it's a string**
-                let displaySummary = 'No summary available';
-                if (change.summary) {
+            recentChanges.forEach((change, index) => {
+                // Parse AI summary JSON if needed
+                let displaySummary = change.summary || 'Content updated';
+                if (typeof displaySummary === 'string' && displaySummary.startsWith('{')) {
                     try {
-                        const parsed = JSON.parse(change.summary);
-                        displaySummary = parsed.what_changed || parsed.summary || change.summary;
+                        const parsed = JSON.parse(displaySummary);
+                        displaySummary = parsed.what_changed || parsed.summary || 'Content updated';
                     } catch (e) {
-                        displaySummary = change.summary;
+                        // Keep original if parsing fails
                     }
                 }
                 
@@ -812,7 +856,7 @@
                 const changeId = change.id || `change-${index}`;
                 
                 html += `
-                    <div class="change-item" style="border-left-color: ${getInterestColor(change.interestLevel)};" 
+                    <div class="change-item" style="background: rgba(59, 130, 246, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid ${getInterestColor(change.interestLevel)}; cursor: pointer;" 
                          onclick="showChangeDetail('${changeId}', '${escapeHtml(change.companyName)}', event)">
                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
                             <span style="font-size: 1.5rem;">${getInterestEmoji(change.interestLevel)}</span>
@@ -825,9 +869,6 @@
                         <div style="margin-top: 8px; display: flex; align-items: center; gap: 10px;">
                             <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;">
                                 Interest: ${change.interestLevel}/10
-                            </span>
-                            <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;">
-                                ${escapeHtml(change.changeType || 'Update')}
                             </span>
                         </div>
                     </div>
@@ -918,6 +959,45 @@
                     </div>
                 ` : ''}
             `;
+
+            modal.style.display = 'block';
+        }
+
+        // Show URLs for a company
+        function showCompanyUrls(companyName) {
+            const company = companies.find(c => c.name === companyName);
+            if (!company) return;
+
+            const modal = document.getElementById('companyModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalContent = document.getElementById('modalContent');
+
+            modalTitle.textContent = `${companyName} - Monitored URLs`;
+            
+            const urls = company.urls || [];
+            if (urls.length === 0) {
+                modalContent.innerHTML = `
+                    <div class="config-section">
+                        <h4>📝 No URLs Configured</h4>
+                        <p>No URLs are currently being monitored for this company.</p>
+                    </div>
+                `;
+            } else {
+                modalContent.innerHTML = `
+                    <div class="config-section">
+                        <h4>🔗 Monitored URLs (${urls.length})</h4>
+                        <ul>
+                            ${urls.map(url => `
+                                <li style="margin-bottom: 10px;">
+                                    <a href="${escapeHtml(url)}" target="_blank" style="color: var(--primary-color); text-decoration: none;">
+                                        ${escapeHtml(url)}
+                                    </a>
+                                </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
 
             modal.style.display = 'block';
         }
