@@ -1,5 +1,29 @@
 [
   {
+    "company": "Google DeepMind",
+    "url": "https://blog.google/technology/ai",
+    "change_type": "modified",
+    "detected_at": "2025-07-24T15:45:05.834Z",
+    "interest_level": 2,
+    "ai_analysis": "{\"technical_innovation_score\":2,\"business_impact_score\":2,\"interest_level\":2,\"interest_drivers\":[],\"category\":\"No Change\",\"impact_areas\":[],\"summary\":\"No significant changes detected in the content, no new technical innovations or business impact.\"}"
+  },
+  {
+    "company": "GitHub Copilot",
+    "url": "https://docs.github.com/en/copilot",
+    "change_type": "modified",
+    "detected_at": "2025-07-24T15:44:39.009Z",
+    "interest_level": 6,
+    "ai_analysis": "{\"technical_innovation_score\":5,\"business_impact_score\":6,\"interest_level\":6,\"interest_drivers\":[\"Enhanced AI tools\",\"Improved code suggestions\",\"Expanded billing options\",\"New extensions and integrations\"],\"category\":\"AI-powered coding assistance\",\"impact_areas\":[\"Software development\",\"Artificial intelligence\",\"Machine learning\"],\"summary\":\"The updated GitHub Copilot documentation reflects incremental improvements in AI-powered coding assistance, with expanded features, billing options, and integrations. While not revolutionary, these updates demonstrate ongoing investment in AI/ML capabilities, enhancing the competitive position of GitHub Copilot in the market.\"}"
+  },
+  {
+    "company": "Anthropic",
+    "url": "https://anthropic.com/claude",
+    "change_type": "modified",
+    "detected_at": "2025-07-24T15:44:05.779Z",
+    "interest_level": 5,
+    "ai_analysis": "{\"technical_innovation_score\":5,\"business_impact_score\":5,\"interest_level\":5,\"interest_drivers\":[\"Improved AI model capabilities\",\"Enhanced user experience\",\"Expanded platform support\"],\"category\":\"AI/ML\",\"impact_areas\":[\"Natural Language Processing\",\"Conversational AI\",\"Creative Assistance\"],\"summary\":\"The updated content snippet showcases Claude's capabilities in debugging and creative assistance, with a focus on user experience and platform support. While there are no groundbreaking technical innovations, the updates demonstrate incremental improvements and a commitment to enhancing the user experience.\"}"
+  },
+  {
     "company": "GitHub Copilot",
     "url": "https://docs.github.com/en/copilot",
     "change_type": "modified",
