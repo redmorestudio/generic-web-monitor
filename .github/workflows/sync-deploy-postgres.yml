@@ -168,6 +168,21 @@ jobs:
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
+      - name: Fix missing is_primary column
+        run: |
+          cd github-actions-backend
+          echo "🔧 Ensuring is_primary column exists in intelligence.urls..."
+          
+          if [ -f "fix-urls-is-primary-column.js" ]; then
+            node fix-urls-is-primary-column.js || {
+              echo "⚠️  Column fix failed, but continuing..."
+            }
+          else
+            echo "⚠️  is_primary column fix script not found"
+          fi
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
       - name: Ensure latest PostgreSQL data files
         run: |
           echo "✅ Checking for required PostgreSQL data files..."
