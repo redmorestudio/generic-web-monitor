@@ -8,16 +8,16 @@
       "top_products": [
         "claude",
         "claude code",
-        "api",
         "max plan",
-        "team plan"
+        "team plan",
+        "enterprise plan"
       ],
       "ai_technologies": [
         "python",
         "amazon bedrock",
-        "aws",
-        "google cloud's vertex ai",
-        "api"
+        "github",
+        "api",
+        "sdks"
       ]
     }
   },
@@ -29,15 +29,15 @@
     "intelligence": {
       "top_products": [
         "github copilot",
-        "github copilot free",
-        "github copilot pro",
-        "github free",
-        "github team"
+        "github models",
+        "github advanced security",
+        "github codespaces",
+        "github actions"
       ],
       "ai_technologies": [
         "github",
-        "javascript",
         "windows terminal",
+        "mcp",
         "python",
         "microsoft azure"
       ]
@@ -51,17 +51,17 @@
     "intelligence": {
       "top_products": [
         "google ai studio",
-        "google workspace",
+        "gemini",
         "gemini app",
         "vertex ai",
-        "google photos"
+        "google search"
       ],
       "ai_technologies": [
         "python",
         "google cloud",
-        "tensorflow",
-        "pytorch",
-        "jax"
+        "kubernetes",
+        "docker",
+        "apache spark"
       ]
     }
   },
@@ -72,16 +72,17 @@
     "industry": null,
     "intelligence": {
       "top_products": [
+        "midjourney",
         "basic plan",
         "standard plan",
         "pro plan",
-        "mega plan",
-        "midjourney magazine subscription"
+        "mega plan"
       ],
       "ai_technologies": [
         "discord",
         "web",
-        "python"
+        "python",
+        "hc"
       ]
     }
   },
@@ -102,8 +103,8 @@
         "python",
         "tensorflow",
         "pytorch",
-        "jax",
-        "aws"
+        "aws",
+        "azure"
       ]
     }
   },
@@ -118,7 +119,9 @@
         "perplexity max"
       ],
       "ai_technologies": [
-        "perplexity ai",
+        "unlimited file uploads",
+        "unlimited research",
+        "exclusive pro perks",
         "cloudflare"
       ]
     }
