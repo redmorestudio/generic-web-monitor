@@ -6,8 +6,8 @@
     "industry": null,
     "intelligence": {
       "top_products": [
-        "claude",
         "claude code",
+        "claude",
         "max plan",
         "team plan",
         "enterprise plan"
@@ -15,9 +15,9 @@
       "ai_technologies": [
         "python",
         "amazon bedrock",
-        "api",
         "aws",
-        "github"
+        "github",
+        "google cloud's vertex ai"
       ]
     }
   },
@@ -29,14 +29,14 @@
     "intelligence": {
       "top_products": [
         "github copilot",
-        "github advanced security",
-        "github spark",
+        "github models",
+        "github actions",
         "github codespaces",
-        "github actions"
+        "github advanced security"
       ],
       "ai_technologies": [
         "python",
-        "javascript",
+        "github actions",
         "windows terminal",
         "github",
         "microsoft azure"
@@ -51,10 +51,10 @@
     "intelligence": {
       "top_products": [
         "google ai studio",
-        "google workspace",
         "gemini app",
         "vertex ai",
-        "cloud sql"
+        "google workspace",
+        "google photos"
       ],
       "ai_technologies": [
         "python",
@@ -82,8 +82,7 @@
         "discord",
         "web",
         "python",
-        "javascript",
-        "html"
+        "hc"
       ]
     }
   },
@@ -102,10 +101,10 @@
       ],
       "ai_technologies": [
         "python",
-        "tensorflow",
-        "pytorch",
-        "jax",
-        "aws"
+        "web",
+        "ios",
+        "android",
+        "macos"
       ]
     }
   },
@@ -117,17 +116,13 @@
     "intelligence": {
       "top_products": [
         "perplexity pro",
-        "perplexity max",
-        "perplexity labs",
-        "perplexity research",
-        "perplexity ai"
+        "perplexity max"
       ],
       "ai_technologies": [
         "unlimited file uploads",
-        "unlimited photo uploads",
-        "image generation",
-        "cloudflare",
-        "favicon"
+        "unlimited research",
+        "exclusive pro perks",
+        "cloudflare"
       ]
     }
   }

@@ -38,12 +38,27 @@
       ],
       "recentChanges": [
         {
+          "id": 440,
+          "url": "product",
+          "detectedAt": "2025-07-24T15:44:05.779Z",
+          "relativeTime": "12 min ago",
+          "interestLevel": 4,
+          "summary": "{\"what_changed\":\"The download link for the Claude app has been updated with a new redirect URL.\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated download link for Claude app from https://claude.ai/redirect/website.v1.f1d860cf-d18a-4694-bb3d-9d8f5920d73d/download to https://claude.ai/redirect/website.v1.e0360d15-f344-4083-ad78-29350c54037c/download\",\"Example use case changed from 'build a bedtime story app' to 'debug a wedding website'\"]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
           "id": 295,
           "url": "news",
           "detectedAt": "2025-07-23T19:39:42.299Z",
           "relativeTime": "20 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Addition of new news articles and removal of old ones, update of existing content\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"New article: Thoughts on America’s AI Action Plan\",\"Removal of old articles\",\"Update of Anthropic's news page layout\"]}",
+          "summary": "{\"what_changed\":\"Addition of new news articles and removal of old ones, update of featured news section\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of 'Thoughts on America’s AI Action Plan' article\",\"Removal of 'Anthropic Economic Index: AI’s impact on software development' from featured section\",\"Update of 'Introducing Claude 4' article\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -58,7 +73,7 @@
           "detectedAt": "2025-07-23T19:02:49.922Z",
           "relativeTime": "20 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Addition of new news articles and updates to existing ones, including announcements, product updates, and policy changes\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"New partnership with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Introduction of Claude for Financial Services\",\"Advancements in Claude for Education\",\"Appointment of Paul Smith as Chief Commercial Officer\",\"Updates to the Anthropic API, including new capabilities for building agents and token-saving updates\"]}",
+          "summary": "{\"what_changed\":\"Addition of new news articles and updates to existing ones, including announcements, product updates, and policy changes\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"New partnership with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Introduction of Claude for Financial Services\",\"Advancements in Claude for Education\",\"Expansion of Claude for Enterprise use by Lawrence Livermore National Laboratory\",\"Appointment of Paul Smith as Chief Commercial Officer\",\"Introduction of the Anthropic Economic Futures Program\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -175,8 +190,8 @@
       ],
       "intelligence": {
         "products": [
-          "claude",
           "claude code",
+          "claude",
           "max plan",
           "team plan",
           "enterprise plan"
@@ -184,9 +199,9 @@
         "ai_technologies": [
           "python",
           "amazon bedrock",
-          "api",
           "aws",
-          "github"
+          "github",
+          "google cloud's vertex ai"
         ],
         "ai_ml_concepts": [
           "AI Safety",
@@ -197,9 +212,9 @@
       },
       "attributes": {},
       "stats": {
-        "totalChanges": 9,
+        "totalChanges": 10,
         "highInterestChanges": 7,
-        "lastActivity": "2025-07-23T19:39:42.299Z"
+        "lastActivity": "2025-07-24T15:44:05.779Z"
       }
     },
     {
@@ -234,6 +249,21 @@
       ],
       "recentChanges": [
         {
+          "id": 439,
+          "url": "docs",
+          "detectedAt": "2025-07-24T15:44:39.009Z",
+          "relativeTime": "12 min ago",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"Reorganization and updates of GitHub Copilot documentation\",\"change_type\":\"update/restructure\",\"change_scale\":\"significant\",\"specific_changes\":[\"Reorganized 'Concepts' section\",\"Updated 'How-tos' section with new links and reorganized content\",\"Removed or renamed certain links and sections\",\"Added new links for 'Coding agent', 'Code review', and 'Spaces'\"]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
           "id": 310,
           "url": "docs",
           "detectedAt": "2025-07-23T23:36:42.053Z",
@@ -254,7 +284,7 @@
           "detectedAt": "2025-07-23T19:03:26.617Z",
           "relativeTime": "20 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Reorganization and addition of new sections and links in the GitHub Copilot documentation\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new links under 'Concepts' and 'How-tos' sections\",\"Reorganized 'How-tos' section with new subcategories\",\"Added 'Use AI models' and 'Provide context' sections\",\"Updated 'Configure custom instructions' and 'Configure content exclusion' sections\"]}",
+          "summary": "{\"what_changed\":\"Reorganization and updates of GitHub Copilot documentation, including changes to billing, concepts, and how-to sections\",\"change_type\":\"update/restructure\",\"change_scale\":\"significant\",\"specific_changes\":[\"Updated billing section to include information on Spark billing\",\"Added new concepts such as text completion and code referencing\",\"Reorganized how-to sections for better clarity and added new topics such as using Copilot for common tasks and managing spending\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -269,7 +299,7 @@
           "detectedAt": "2025-07-23T19:03:14.475Z",
           "relativeTime": "20 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Introduction of GitHub Spark, a new feature for building and deploying intelligent apps\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of GitHub Spark to the list of GitHub features\",\"Update of the Pro+ plan to include access to GitHub Spark\"]}",
+          "summary": "{\"what_changed\":\"Introduction of GitHub Spark, update to pricing plans and addition of new models\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Introduction of GitHub Spark\",\"Update to pricing plans, including the addition of a free tier and changes to the Pro and Pro+ plans\",\"Addition of new models, including Claude Opus 4 and o3\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -367,34 +397,19 @@
             "riskAssessment": null,
             "opportunityScore": null
           }
-        },
-        {
-          "id": 369,
-          "url": "pricing",
-          "detectedAt": "2025-07-21T03:12:08.824Z",
-          "relativeTime": "3 days ago",
-          "interestLevel": 9,
-          "summary": "{\"what_changed\":\"New pricing page for GitHub Copilot with three plans: Free, Team, and Enterprise\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of a free plan with limited features\",\"Team plan with additional features such as access to GitHub Codespaces and protected branches\",\"Enterprise plan with advanced security, compliance, and deployment options\"]}",
-          "changeType": "new",
-          "businessImpact": null,
-          "enhancedAnalysis": {
-            "competitiveImplications": null,
-            "riskAssessment": null,
-            "opportunityScore": null
-          }
         }
       ],
       "intelligence": {
         "products": [
           "github copilot",
-          "github advanced security",
-          "github spark",
+          "github models",
+          "github actions",
           "github codespaces",
-          "github actions"
+          "github advanced security"
         ],
         "ai_technologies": [
           "python",
-          "javascript",
+          "github actions",
           "windows terminal",
           "github",
           "microsoft azure"
@@ -409,7 +424,7 @@
       "stats": {
         "totalChanges": 10,
         "highInterestChanges": 6,
-        "lastActivity": "2025-07-23T23:36:42.053Z"
+        "lastActivity": "2025-07-24T15:44:39.009Z"
       }
     },
     {
@@ -450,12 +465,27 @@
       ],
       "recentChanges": [
         {
+          "id": 438,
+          "url": "blog",
+          "detectedAt": "2025-07-24T15:45:05.834Z",
+          "relativeTime": "11 min ago",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Check out the first images of wildfires detected by FireSat', and 'Try on styles with AI, jump on great prices and more'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new article 'Ask a Techspert: What is inference?'\",\"Added new article 'Find out the latest Gemini updates with Gemini Drops'\",\"Added new article 'Check out the first images of wildfires detected by FireSat'\",\"Added new article 'Try on styles with AI, jump on great prices and more'\"]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
           "id": 289,
           "url": "blog",
           "detectedAt": "2025-07-23T19:40:46.363Z",
           "relativeTime": "20 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', and 'Listen to a conversation about the newest AI capabilities in Search'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new article 'Ask a Techspert: What is inference?'\",\"Added new article 'Find out the latest Gemini updates with Gemini Drops'\",\"Added new article 'Turn your photos into videos in Gemini'\",\"Added new article 'Check out the first images of wildfires detected by FireSat'\",\"Added new article 'New in Gemini Code Assist: Agent Mode and IDE enhancements'\",\"Added new article 'Listen to a conversation about the newest AI capabilities in Search'\"]}",
+          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Gemini Code Assist adds Gemini 2.5, personalization and context management', 'Listen to a conversation about the newest AI capabilities in Search', 'Transform your photos into videos and remix your pics in Google Photos'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new articles under 'AI', 'Gemini App', 'Research', 'Developers', and 'All the Latest' sections\",\"Updated Gemini Code Assist with new features\",\"Introduced Gemini CLI as an open-source AI agent\",\"Announced the first images of wildfires detected by FireSat\",\"Published a podcast about the newest AI capabilities in Search\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -470,7 +500,7 @@
           "detectedAt": "2025-07-23T19:03:49.432Z",
           "relativeTime": "20 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Check out the first images of wildfires detected by FireSat', 'Transform your photos into videos and remix your pics in Google Photos', and 'Startups can apply now for the Google for Startups Gemini Founders Forum'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new article about FireSat detecting wildfires\",\"Added new article about Google Photos features\",\"Added new article about Google for Startups Gemini Founders Forum\"]}",
+          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Check out the first images of wildfires detected by FireSat', 'Transform your photos into videos and remix your pics in Google Photos', and 'Startups can apply now for the Google for Startups Gemini Founders Forum'.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of new research article about FireSat\",\"Update to Google Photos with new features\",\"Introduction of Google for Startups Gemini Founders Forum\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -485,7 +515,7 @@
           "detectedAt": "2025-07-23T19:03:32.433Z",
           "relativeTime": "20 hours ago",
           "interestLevel": 2,
-          "summary": "{\"what_changed\":\"No significant changes were detected in the content structure or major sections.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
+          "summary": "{\"what_changed\":\"No significant changes were detected in the content structure or major updates to the models, research, or science sections.\",\"change_type\":\"no significant update\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -583,30 +613,15 @@
             "riskAssessment": null,
             "opportunityScore": null
           }
-        },
-        {
-          "id": 365,
-          "url": "product",
-          "detectedAt": "2025-07-21T03:12:34.152Z",
-          "relativeTime": "3 days ago",
-          "interestLevel": 9,
-          "summary": "{\"what_changed\":\"New content introduction with various AI-related products and features\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of AI-first products\",\"Addition of new features like Gemini, AI Mode, NotebookLM, and Flow\",\"Inclusion of various AI tools and platforms like Google AI Studio, Vertex AI, and Gemini API\",\"Emphasis on responsible AI development and deployment\"]}",
-          "changeType": "new",
-          "businessImpact": null,
-          "enhancedAnalysis": {
-            "competitiveImplications": null,
-            "riskAssessment": null,
-            "opportunityScore": null
-          }
         }
       ],
       "intelligence": {
         "products": [
           "google ai studio",
-          "google workspace",
           "gemini app",
           "vertex ai",
-          "cloud sql"
+          "google workspace",
+          "google photos"
         ],
         "ai_technologies": [
           "python",
@@ -625,7 +640,7 @@
       "stats": {
         "totalChanges": 10,
         "highInterestChanges": 7,
-        "lastActivity": "2025-07-23T19:40:46.363Z"
+        "lastActivity": "2025-07-24T15:45:05.834Z"
       }
     },
     {
@@ -696,8 +711,7 @@
           "discord",
           "web",
           "python",
-          "javascript",
-          "html"
+          "hc"
         ],
         "ai_ml_concepts": [
           "Artificial Intelligence",
@@ -850,10 +864,10 @@
         ],
         "ai_technologies": [
           "python",
-          "tensorflow",
-          "pytorch",
-          "jax",
-          "aws"
+          "web",
+          "ios",
+          "android",
+          "macos"
         ],
         "ai_ml_concepts": [
           "AGI Research",
@@ -928,17 +942,13 @@
       "intelligence": {
         "products": [
           "perplexity pro",
-          "perplexity max",
-          "perplexity labs",
-          "perplexity research",
-          "perplexity ai"
+          "perplexity max"
         ],
         "ai_technologies": [
           "unlimited file uploads",
-          "unlimited photo uploads",
-          "image generation",
-          "cloudflare",
-          "favicon"
+          "unlimited research",
+          "exclusive pro perks",
+          "cloudflare"
         ],
         "ai_ml_concepts": [
           "Artificial Intelligence",
@@ -954,7 +964,7 @@
       }
     }
   ],
-  "lastUpdated": "2025-07-24T15:47:19.061Z",
-  "totalChanges": 39,
+  "lastUpdated": "2025-07-24T15:56:54.976Z",
+  "totalChanges": 40,
   "highInterestChanges": 26
 }
