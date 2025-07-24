@@ -43,7 +43,7 @@
           "detectedAt": "2025-07-23T19:39:42.299Z",
           "relativeTime": "4 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Addition of new news articles and removal of old ones, update of featured news section\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new article: Thoughts on America’s AI Action Plan\",\"Removed old articles to make room for new ones\",\"Updated featured news section with new articles\"]}",
+          "summary": "{\"what_changed\":\"Addition of new news articles and removal of old ones, update of featured news section\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of 'Thoughts on America’s AI Action Plan' news article\",\"Removal of 'Detecting and countering malicious uses of Claude: March 2025' news article\",\"Update of featured news section to include 'Anthropic raises Series E at $61.5B post-money valuation' and 'Introducing the Anthropic Economic Index'\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -56,9 +56,9 @@
           "id": 286,
           "url": "news",
           "detectedAt": "2025-07-23T19:02:49.922Z",
-          "relativeTime": "4 hours ago",
+          "relativeTime": "5 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New announcements and updates were added to the newsroom section, including partnerships, product updates, and policy changes.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added announcement about Anthropic partnering with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Added announcement about Anthropic's AI for Science Program\",\"Added update on Claude for Education\",\"Added policy update on securing America's compute advantage\"]}",
+          "summary": "{\"what_changed\":\"New announcements and updates were added to the newsroom section, including partnerships, product updates, and policy changes.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added announcement about Anthropic partnering with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Added announcement about Paul Smith joining Anthropic as Chief Commercial Officer\",\"Added product updates, such as Claude for Financial Services and Discover tools that work with Claude\",\"Added policy updates, such as Build AI in America and The need for transparency in Frontier AI\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -146,7 +146,7 @@
           "id": 310,
           "url": "docs",
           "detectedAt": "2025-07-23T23:36:42.053Z",
-          "relativeTime": "5 min ago",
+          "relativeTime": "35 min ago",
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the provided content.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
@@ -161,9 +161,9 @@
           "id": 298,
           "url": "docs",
           "detectedAt": "2025-07-23T19:03:26.617Z",
-          "relativeTime": "4 hours ago",
+          "relativeTime": "5 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Addition of new links and reorganization of existing content, including the addition of a 'Create a custom model' option under 'Use AI models' and changes to 'Completions' and 'Chat' sections\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of 'Create a custom model' option under 'Use AI models'\",\"Changes to 'Completions' section, including addition of 'Write PR descriptions' and 'Find matching code'\",\"Changes to 'Chat' section, including reorganization of existing links\",\"Addition of new links under 'Configure custom instructions' and 'Configure content exclusion'\"]}",
+          "summary": "{\"what_changed\":\"Reorganization and updates of GitHub Copilot documentation, including changes to billing, concepts, and how-to sections\",\"change_type\":\"update/restructure\",\"change_scale\":\"significant\",\"specific_changes\":[\"Updated billing section with new links and information\",\"Added new concepts such as 'text completion' and 'create a custom model'\",\"Reorganized how-to sections for better clarity and added new topics\",\"Updated links and information throughout the documentation\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -176,9 +176,9 @@
           "id": 285,
           "url": "homepage",
           "detectedAt": "2025-07-23T19:03:14.475Z",
-          "relativeTime": "4 hours ago",
+          "relativeTime": "5 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Introduction of GitHub Spark, a new feature for building and deploying intelligent apps\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added GitHub Spark to the list of GitHub features\",\"Updated the Pro+ plan to include access to GitHub Spark\"]}",
+          "summary": "{\"what_changed\":\"Introduction of GitHub Spark, a new feature, and updates to the pricing plans with additional details on premium requests and model access\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Introduction of GitHub Spark\",\"Update to Pro plan with unlimited agent mode and chats, and access to more models\",\"Update to Pro+ plan with access to all models and 30x more premium requests\",\"Addition of GitHub Spark to Pro+ plan features\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -301,7 +301,7 @@
           "detectedAt": "2025-07-23T19:40:46.363Z",
           "relativeTime": "4 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Gemini Code Assist adds Gemini 2.5, personalization and context management', 'Listen to a conversation about the newest AI capabilities in Search', 'Transform your photos into videos and remix your pics in Google Photos'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new articles under 'AI', 'Gemini App', 'Research', 'Developers', and 'All the Latest' sections\",\"Updated Gemini Code Assist with new features\",\"Introduced Gemini CLI as an open-source AI agent\",\"Announced the first images of wildfires detected by FireSat\",\"Published a podcast episode about the newest AI capabilities in Search\"]}",
+          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Listen to a conversation about the newest AI capabilities in Search', and 'Transform your photos into videos and remix your pics in Google Photos'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new articles under the 'Gemini App', 'Research', 'Developers', and 'All the Latest' sections\",\"Updated the 'Gemini Code Assist' with new features\",\"Introduced 'Gemini CLI' as an open-source AI agent\",\"Added a new podcast episode about the newest AI capabilities in Search\",\"Updated Google Photos with new features to transform photos into videos and remix pics\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -314,9 +314,9 @@
           "id": 296,
           "url": "blog",
           "detectedAt": "2025-07-23T19:03:49.432Z",
-          "relativeTime": "4 hours ago",
+          "relativeTime": "5 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Check out the first images of wildfires detected by FireSat', 'Transform your photos into videos and remix your pics in Google Photos', and 'Startups can apply now for the Google for Startups Gemini Founders Forum'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of new research article about FireSat\",\"Update to Google Photos with new features\",\"Introduction of Google for Startups Gemini Founders Forum\"]}",
+          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, specifically in the AI, Research, and Developers sections.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"New article: 'Check out the first images of wildfires detected by FireSat'\",\"New article: 'Transform your photos into videos and remix your pics in Google Photos'\",\"New article: 'Startups can apply now for the Google for Startups Gemini Founders Forum.'\",\"Updates to Gemini Code Assist and Gemini CLI\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -329,7 +329,7 @@
           "id": 297,
           "url": "homepage",
           "detectedAt": "2025-07-23T19:03:32.433Z",
-          "relativeTime": "4 hours ago",
+          "relativeTime": "5 hours ago",
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the content between the two versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
@@ -650,7 +650,7 @@
           "detectedAt": "2025-07-23T00:38:32.210Z",
           "relativeTime": "23 hours ago",
           "interestLevel": 3,
-          "summary": "{\"what_changed\":\"Rephrased introduction to Perplexity Pro\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Changed 'Perplexity Pro is the most powerful way to search the internet' to 'Perplexity Pro unlocks more ways to learn and get work done'\",\"Updated 'Upgrade productivity and learning with additional access' to maintain consistency in messaging\"]}",
+          "summary": "{\"what_changed\":\"Rephrased introduction to Perplexity Pro\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Changed 'Perplexity Pro is the most powerful way to search the internet' to 'Perplexity Pro unlocks more ways to learn and get work done'\",\"Added 'Upgrade your productivity and learning with unlimited Research' to the Pro description\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -701,7 +701,7 @@
       }
     }
   ],
-  "lastUpdated": "2025-07-23T23:41:51.439Z",
+  "lastUpdated": "2025-07-24T00:12:11.560Z",
   "totalChanges": 23,
   "highInterestChanges": 12
 }
