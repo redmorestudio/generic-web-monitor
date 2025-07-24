@@ -366,7 +366,7 @@ async function processRecentChanges(mode = 'recent') {
           SELECT id FROM processed_content.markdown_pages WHERE source_hash = $1
         `, [change.new_hash]);
 
-        // Then store the enhanced analysis
+        // Then store the enhanced analysis - FIXED JSONB STORAGE
         await db.run(`
           INSERT INTO intelligence.enhanced_analysis
           (company_id, content_id, change_id, ultra_analysis, key_insights, business_impact, 
@@ -388,12 +388,12 @@ async function processRecentChanges(mode = 'recent') {
           companyId,  // company_id (guaranteed to exist now)
           contentData?.id || null,  // content_id (can be null if content not found)
           changeRecord.id,
-          JSON.stringify(analysis),  // Fix: Stringify the analysis object for JSONB
-          JSON.stringify(analysis.insights?.key_findings || []),  // Fix: Stringify array for JSONB
+          JSON.stringify(analysis),  // ultra_analysis as JSONB
+          JSON.stringify(analysis.insights?.key_findings || []),  // key_insights as JSONB
           analysis.strategic_analysis?.business_impact || '',
           analysis.strategic_analysis?.competitive_implications || '',
-          JSON.stringify(analysis.strategic_analysis?.market_signals || []),  // Fix: Stringify array for JSONB
-          analysis.insights?.threats?.join('; ') || '',
+          JSON.stringify(analysis.strategic_analysis?.market_signals || []),  // market_signals as JSONB
+          JSON.stringify(analysis.insights?.threats || []),  // FIXED: risk_assessment as JSONB, not string
           interestLevel,
           'groq-llama-3.3-70b'
         ]);
