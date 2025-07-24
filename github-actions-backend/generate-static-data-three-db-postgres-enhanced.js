@@ -320,8 +320,7 @@ async function generateDashboard() {
             c.url,
             c.detected_at,
             c.interest_level,
-            c.ai_analysis,
-            c.analysis_metadata
+            c.analysis
         FROM intelligence.changes c
         WHERE c.detected_at > NOW() - INTERVAL '7 days'
         AND c.interest_level >= 3
@@ -391,10 +390,10 @@ function formatChange(change) {
     let category = 'general';
     let impactAreas = [];
     
-    if (change.ai_analysis) {
+    if (change.analysis) {
         try {
-            const analysis = typeof change.ai_analysis === 'string' ? 
-                JSON.parse(change.ai_analysis) : change.ai_analysis;
+            const analysis = typeof change.analysis === 'string' ? 
+                JSON.parse(change.analysis) : change.analysis;
             
             summary = analysis.executive_summary || analysis.summary || summary;
             category = analysis.category || category;
@@ -448,7 +447,7 @@ async function getCompanyRecentChanges(companyName) {
             url,
             detected_at,
             interest_level,
-            ai_analysis
+            analysis
         FROM intelligence.changes
         WHERE company = $1
         AND detected_at > NOW() - INTERVAL '30 days'
