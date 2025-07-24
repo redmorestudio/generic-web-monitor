@@ -1,9 +1,64 @@
 {
-  "version": "1.0.0",
-  "lastModified": "2025-07-22T20:21:56Z",
-  "modifiedBy": "fix-postgres-schema-complete.js",
-  "checksum": "0f82a5b4f763e107842e81ff65e731ed26146fceb0dfbf2267f81821ac4aa8f4",
-  "changes": "Complete schema rebuild after corruption - all tables verified and indexes created",
-  "previousVersion": "0.0.0",
-  "previousChecksum": "unknown"
+  "version": "2.0.0",
+  "lastModified": "2025-07-24T08:03:16.864Z",
+  "modifiedBy": "update-schema-version.js",
+  "checksum": "9a9892b5d7ddf92ef575cfe88220259221bd91cb98704e1a2b5a64d08955c822",
+  "changes": "Successfully converted all TEXT columns to JSONB in intelligence.enhanced_analysis. Updated schema tracking to include all schemas (public, intelligence, raw_content, processed_content).",
+  "previousVersion": "1.1.0",
+  "previousChecksum": "c2ef2778b538782a59b61e68b76f8059e63fbf7e348e022d96c1f38d1d25007f",
+  "details": {
+    "schemasTracked": [
+      "public",
+      "intelligence",
+      "raw_content",
+      "processed_content"
+    ],
+    "tablesPerSchema": {
+      "intelligence": [
+        "baseline_analysis",
+        "changes",
+        "companies",
+        "company_attributes",
+        "company_groups",
+        "email_notifications",
+        "enhanced_analysis",
+        "groups",
+        "insights",
+        "scrape_status",
+        "scraping_runs",
+        "summaries",
+        "thebrain_sync",
+        "urls"
+      ],
+      "processed_content": [
+        "baseline_analysis",
+        "change_detection",
+        "changes",
+        "markdown_content",
+        "markdown_pages"
+      ],
+      "public": [
+        "schema_audit_log",
+        "schema_lock"
+      ],
+      "raw_content": [
+        "company_pages_baseline",
+        "raw_html",
+        "scrape_runs",
+        "scraped_pages",
+        "scraping_runs"
+      ]
+    },
+    "jsonbConversions": {
+      "table": "intelligence.enhanced_analysis",
+      "columnsConverted": [
+        "key_changes",
+        "competitive_implications"
+      ],
+      "conversionDate": "2025-07-24T08:03:16.869Z",
+      "status": "completed"
+    },
+    "totalTables": 26,
+    "totalColumns": 261
+  }
 }
