@@ -1,4 +1,4 @@
-name: 3. Analyze Content (PostgreSQL Enhanced)
+name: 3. Analyze Content (PostgreSQL)
 
 on:
   # Allow manual trigger
@@ -62,7 +62,7 @@ on:
         default: false
 
 env:
-  WORKFLOW_NAME: "3. Analyze Content (PostgreSQL Enhanced)"
+  WORKFLOW_NAME: "3. Analyze Content (PostgreSQL)"
 
 permissions:
   contents: write
@@ -331,6 +331,24 @@ jobs:
             echo "✅ Change detection analysis complete"
           fi
 
+      - name: 📊 Generate static data files (PostgreSQL)
+        if: success()
+        working-directory: github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          NODE_ENV: production
+        run: |
+          echo "📊 Generating static data files..."
+          
+          # Check if the PostgreSQL version exists
+          if [ -f "generate-static-data-three-db-postgres.js" ]; then
+            node generate-static-data-three-db-postgres.js
+            echo "✅ Static data files generated"
+          else
+            echo "⚠️ PostgreSQL static data generator not found - skipping"
+          fi
+
       - name: 🔄 Generate change detail files (PostgreSQL)
         if: success()
         working-directory: github-actions-backend
@@ -348,6 +366,77 @@ jobs:
           else
             echo "⚠️ PostgreSQL change details generator not found - skipping"
           fi
+
+      - name: 📋 Generate changes.json
+        if: success()
+        working-directory: github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          echo "📋 Generating changes.json for dashboard..."
+          
+          # Generate changes.json from PostgreSQL
+          node -e "
+            const { db, end } = require('./postgres-db');
+            const fs = require('fs');
+            const path = require('path');
+            
+            async function generateChanges() {
+              try {
+                const changes = await db.all(\`
+                  SELECT 
+                    cd.company,
+                    cd.url,
+                    cd.change_type,
+                    cd.detected_at,
+                    cd.interest_level,
+                    cd.ai_analysis
+                  FROM processed_content.change_detection cd
+                  ORDER BY cd.detected_at DESC
+                  LIMIT 100
+                \`);
+                
+                const outputPath = path.join('..', 'api-data', 'changes.json');
+                fs.writeFileSync(outputPath, JSON.stringify(changes, null, 2));
+                console.log(\`✅ Generated changes.json with \${changes.length} changes\`);
+                
+              } catch (error) {
+                console.error('❌ Error generating changes.json:', error.message);
+              } finally {
+                await end();
+              }
+            }
+            
+            generateChanges();
+          "
+
+      - name: Create analysis summary
+        if: success()
+        run: |
+          echo "📄 Creating analysis summary..."
+          cd github-actions-backend
+          echo "{
+            \"workflow\": \"analyze-postgres\",
+            \"run_id\": \"${{ github.run_id }}\",
+            \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"mode\": \"${{ inputs.analysis_mode }}\",
+            \"enhanced\": ${{ inputs.use_enhanced || true }},
+            \"trigger_source\": \"${{ inputs.trigger_source }}\",
+            \"database\": \"postgresql\",
+            \"ai_model\": \"groq-llama-3.3-70b\",
+            \"status\": \"completed\"
+          }" > ../api-data/last-analysis.json
+
+      - name: Upload analysis artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-results-postgres-${{ github.run_id }}
+          path: |
+            github-actions-backend/data/*.json
+            api-data/
+          retention-days: 30
 
       - name: 💾 Commit analysis results
         if: success()
