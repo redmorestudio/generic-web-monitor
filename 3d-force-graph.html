@@ -150,6 +150,9 @@
             'Cloud Providers': '#96ceb4',
             'AI Applications': '#f7b731',
             'AI Research': '#5f27cd',
+            'AI Coding': '#e74c3c',
+            'Image Generation': '#9b59b6',
+            'AI Search': '#f39c12',
             'default': '#667eea'
         },
         threatColors: {
@@ -172,16 +175,14 @@
     // Initialize the graph
     async function initGraph() {
         try {
-            // Fetch data
+            // Fetch only dashboard.json (the other files don't exist)
             const dashboardResponse = await fetch('./api-data/dashboard.json');
-            const companiesResponse = await fetch('./api-data/companies.json');
-            const changesResponse = await fetch('./api-data/changes.json');
             
-            rawData = {
-                dashboard: await dashboardResponse.json(),
-                companies: await companiesResponse.json(),
-                changes: await changesResponse.json()
-            };
+            if (!dashboardResponse.ok) {
+                throw new Error(`HTTP error! status: ${dashboardResponse.status}`);
+            }
+            
+            rawData.dashboard = await dashboardResponse.json();
             
             // Build initial graph data
             buildCompanyNetwork();
@@ -247,32 +248,34 @@
         graphData.links = [];
         const nodeMap = new Map();
         
-        // Create company nodes
-        rawData.dashboard.company_activity.forEach(company => {
+        // Create company nodes using the correct data structure
+        rawData.dashboard.companies.forEach(company => {
             const node = {
-                id: company.company,
-                name: company.company,
-                group: company.type,
-                color: CONFIG.nodeColors[company.type] || CONFIG.nodeColors.default,
-                description: `URLs: ${company.url_count}<br/>Threat: ${company.intelligence.threat_category}`,
-                val: company.url_count * 5, // Node size based on URL count
-                threatLevel: company.intelligence.threat_level
+                id: company.name,
+                name: company.name,
+                group: company.category,
+                color: CONFIG.nodeColors[company.category] || CONFIG.nodeColors.default,
+                description: `URLs: ${company.urls.length}<br/>Changes: ${company.stats.totalChanges}<br/>High Interest: ${company.stats.highInterestChanges}`,
+                val: company.urls.length * 3, // Node size based on URL count
+                company: company
             };
             graphData.nodes.push(node);
-            nodeMap.set(company.company, node);
+            nodeMap.set(company.name, node);
         });
         
-        // Create technology/product connections
+        // Create technology/product connections based on real intelligence data
         const techConnections = new Map();
         
-        rawData.dashboard.company_activity.forEach(company => {
-            // Connect companies that share technologies
-            company.intelligence.technologies.forEach(tech => {
-                if (!techConnections.has(tech)) {
-                    techConnections.set(tech, []);
-                }
-                techConnections.get(tech).push(company.company);
-            });
+        rawData.dashboard.companies.forEach(company => {
+            // Connect companies that share AI technologies
+            if (company.intelligence.ai_technologies) {
+                company.intelligence.ai_technologies.forEach(tech => {
+                    if (!techConnections.has(tech)) {
+                        techConnections.set(tech, []);
+                    }
+                    techConnections.get(tech).push(company.name);
+                });
+            }
         });
         
         // Create links between companies sharing technologies
@@ -284,7 +287,7 @@
                             source: companies[i],
                             target: companies[j],
                             label: tech,
-                            color: '#666',
+                            color: '#4ecdc4',
                             particles: 1,
                             width: 0.5
                         });
@@ -293,28 +296,43 @@
             }
         });
         
-        // Add some AI concept connections
-        const conceptConnections = new Map();
-        rawData.dashboard.company_activity.forEach(company => {
-            company.intelligence.ai_ml_concepts.forEach(concept => {
-                if (!conceptConnections.has(concept)) {
-                    conceptConnections.set(concept, []);
-                }
-                conceptConnections.get(concept).push(company.company);
-            });
+        // Add product-based connections
+        const productConnections = new Map();
+        rawData.dashboard.companies.forEach(company => {
+            if (company.intelligence.products) {
+                company.intelligence.products.forEach(product => {
+                    if (!productConnections.has(product)) {
+                        productConnections.set(product, []);
+                    }
+                    productConnections.get(product).push(company.name);
+                });
+            }
         });
         
-        // Highlight strong concept connections
+        // Create concept nodes for major AI/ML concepts
+        const conceptConnections = new Map();
+        rawData.dashboard.companies.forEach(company => {
+            if (company.intelligence.ai_ml_concepts) {
+                company.intelligence.ai_ml_concepts.forEach(concept => {
+                    if (!conceptConnections.has(concept)) {
+                        conceptConnections.set(concept, []);
+                    }
+                    conceptConnections.get(concept).push(company.name);
+                });
+            }
+        });
+        
+        // Add concept nodes and connections for concepts shared by multiple companies
         conceptConnections.forEach((companies, concept) => {
-            if (companies.length > 2) {
+            if (companies.length > 1) {
                 // Create a central concept node
                 const conceptNode = {
                     id: `concept-${concept}`,
                     name: concept,
                     group: 'AI Concept',
                     color: '#00ff88',
-                    val: companies.length * 3,
-                    description: `Shared by ${companies.length} companies`
+                    val: companies.length * 4,
+                    description: `AI/ML Concept shared by ${companies.length} companies`
                 };
                 graphData.nodes.push(conceptNode);
                 
@@ -339,38 +357,41 @@
         
         const techNodes = new Map();
         
-        // Create technology nodes
-        rawData.dashboard.company_activity.forEach(company => {
-            company.intelligence.technologies.forEach(tech => {
-                if (!techNodes.has(tech)) {
-                    techNodes.set(tech, {
-                        id: `tech-${tech}`,
-                        name: tech,
-                        group: 'Technology',
-                        color: '#4ecdc4',
-                        companies: [],
-                        val: 5
-                    });
-                }
-                techNodes.get(tech).companies.push(company.company);
-                techNodes.get(tech).val += 3;
-            });
+        // Create technology nodes from real data
+        rawData.dashboard.companies.forEach(company => {
+            if (company.intelligence.ai_technologies) {
+                company.intelligence.ai_technologies.forEach(tech => {
+                    if (!techNodes.has(tech)) {
+                        techNodes.set(tech, {
+                            id: `tech-${tech}`,
+                            name: tech,
+                            group: 'Technology',
+                            color: '#4ecdc4',
+                            companies: [],
+                            val: 5
+                        });
+                    }
+                    techNodes.get(tech).companies.push(company.name);
+                    techNodes.get(tech).val += 3;
+                });
+            }
         });
         
         // Add technology nodes to graph
         techNodes.forEach(node => {
-            node.description = `Used by ${node.companies.length} companies`;
+            node.description = `Technology used by ${node.companies.length} companies`;
             graphData.nodes.push(node);
         });
         
         // Add company nodes
-        rawData.dashboard.company_activity.forEach(company => {
+        rawData.dashboard.companies.forEach(company => {
             graphData.nodes.push({
-                id: company.company,
-                name: company.company,
-                group: company.type,
-                color: CONFIG.nodeColors[company.type] || CONFIG.nodeColors.default,
-                val: 3
+                id: company.name,
+                name: company.name,
+                group: company.category,
+                color: CONFIG.nodeColors[company.category] || CONFIG.nodeColors.default,
+                val: 3,
+                description: `${company.category} company with ${company.urls.length} monitored URLs`
             });
         });
         
@@ -380,7 +401,108 @@
                 graphData.links.push({
                     source: techNode.id,
                     target: company,
-                    particles: 1
+                    particles: 1,
+                    color: '#4ecdc4'
+                });
+            });
+        });
+    }
+
+    // Build AI/ML concepts view
+    function buildConceptsView() {
+        graphData.nodes = [];
+        graphData.links = [];
+        
+        const conceptNodes = new Map();
+        
+        // Create concept nodes from real data
+        rawData.dashboard.companies.forEach(company => {
+            if (company.intelligence.ai_ml_concepts) {
+                company.intelligence.ai_ml_concepts.forEach(concept => {
+                    if (!conceptNodes.has(concept)) {
+                        conceptNodes.set(concept, {
+                            id: `concept-${concept}`,
+                            name: concept,
+                            group: 'AI Concept',
+                            color: '#00ff88',
+                            companies: [],
+                            val: 6
+                        });
+                    }
+                    conceptNodes.get(concept).companies.push(company.name);
+                    conceptNodes.get(concept).val += 4;
+                });
+            }
+        });
+        
+        // Add concept nodes
+        conceptNodes.forEach(node => {
+            node.description = `AI/ML concept used by ${node.companies.length} companies`;
+            graphData.nodes.push(node);
+        });
+        
+        // Add company nodes
+        rawData.dashboard.companies.forEach(company => {
+            graphData.nodes.push({
+                id: company.name,
+                name: company.name,
+                group: company.category,
+                color: CONFIG.nodeColors[company.category] || CONFIG.nodeColors.default,
+                val: 4,
+                description: `${company.category}: ${company.intelligence.ai_ml_concepts ? company.intelligence.ai_ml_concepts.length : 0} AI concepts`
+            });
+        });
+        
+        // Create links
+        conceptNodes.forEach((conceptNode, concept) => {
+            conceptNode.companies.forEach(company => {
+                graphData.links.push({
+                    source: conceptNode.id,
+                    target: company,
+                    particles: 2,
+                    color: '#00ff88'
+                });
+            });
+        });
+    }
+
+    // Build recent changes view
+    function buildChangesView() {
+        graphData.nodes = [];
+        graphData.links = [];
+        
+        // Add company nodes
+        rawData.dashboard.companies.forEach(company => {
+            const recentChanges = company.recentChanges.filter(change => change.interestLevel >= 6);
+            
+            graphData.nodes.push({
+                id: company.name,
+                name: company.name,
+                group: company.category,
+                color: CONFIG.nodeColors[company.category] || CONFIG.nodeColors.default,
+                val: Math.max(3, recentChanges.length * 2),
+                description: `${company.category}<br/>${recentChanges.length} high-interest changes<br/>Total: ${company.stats.totalChanges} changes`
+            });
+            
+            // Add change nodes for high-interest changes
+            recentChanges.slice(0, 3).forEach((change, index) => {
+                const changeNode = {
+                    id: `change-${company.name}-${index}`,
+                    name: `Change ${index + 1}`,
+                    group: 'Change',
+                    color: change.interestLevel >= 8 ? '#ff4444' : '#ffa726',
+                    val: change.interestLevel,
+                    description: `Interest: ${change.interestLevel}/10<br/>${change.relativeTime}<br/>Type: ${change.changeType}`
+                };
+                graphData.nodes.push(changeNode);
+                
+                // Link change to company
+                graphData.links.push({
+                    source: company.name,
+                    target: changeNode.id,
+                    color: changeNode.color,
+                    particles: change.interestLevel >= 8 ? 3 : 1,
+                    width: 1
                 });
             });
         });
@@ -388,12 +510,17 @@
 
     // Update statistics
     function updateStats() {
-        const stats = rawData.dashboard.stats;
+        const stats = {
+            companies: rawData.dashboard.companies.length,
+            totalChanges: rawData.dashboard.totalChanges,
+            highInterestChanges: rawData.dashboard.highInterestChanges
+        };
+        
         document.getElementById('statsContent').innerHTML = `
-            <strong>Monitoring Stats:</strong><br/>
+            <strong>Network Stats:</strong><br/>
             Companies: ${stats.companies}<br/>
-            URLs: ${stats.urls}<br/>
-            Snapshots: ${stats.snapshots}<br/>
+            Total Changes: ${stats.totalChanges}<br/>
+            High Interest: ${stats.highInterestChanges}<br/>
             Nodes: ${graphData.nodes.length}<br/>
             Links: ${graphData.links.length}
         `;
@@ -405,6 +532,12 @@
         switch(currentView) {
             case 'technologies':
                 buildTechnologyView();
+                break;
+            case 'concepts':
+                buildConceptsView();
+                break;
+            case 'changes':
+                buildChangesView();
                 break;
             case 'companies':
             default:
@@ -420,9 +553,9 @@
         if (filterType === 'all') {
             buildCompanyNetwork();
         } else {
-            // Filter nodes
+            // Filter nodes by company category
             const filteredNodes = graphData.nodes.filter(node => 
-                node.group === filterType || node.group === 'AI Concept'
+                node.group === filterType || node.group === 'AI Concept' || node.group === 'Technology'
             );
             const nodeIds = new Set(filteredNodes.map(n => n.id));
             const filteredLinks = graphData.links.filter(link =>
