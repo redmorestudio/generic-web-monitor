@@ -1,10 +1,11 @@
 {
-  "workflow": "analyze",
-  "run_id": "16391517916",
-  "timestamp": "2025-07-19T18:47:58.335Z",
-  "mode": "",
-  "trigger_source": "process",
-  "architecture": "three-db",
+  "workflow": "analyze-postgres",
+  "run_id": "16499276303",
+  "timestamp": "2025-07-24T14:13:19.339Z",
+  "mode": "recent",
+  "enhanced": true,
+  "trigger_source": "manual",
+  "database": "postgresql",
   "ai_model": "groq-llama-3.3-70b",
   "status": "completed"
 }

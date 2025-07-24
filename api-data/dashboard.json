@@ -41,9 +41,9 @@
           "id": 295,
           "url": "news",
           "detectedAt": "2025-07-23T19:39:42.299Z",
-          "relativeTime": "4 hours ago",
+          "relativeTime": "18 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Addition of new news articles and removal of old ones, update of featured news section\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of 'Thoughts on America’s AI Action Plan' news article\",\"Removal of 'Detecting and countering malicious uses of Claude: March 2025' news article\",\"Update of featured news section to include 'Anthropic raises Series E at $61.5B post-money valuation' and 'Introducing the Anthropic Economic Index'\"]}",
+          "summary": "{\"what_changed\":\"Multiple news articles and announcements have been added or removed from the newsroom section of the Anthropic website.\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Addition of new articles such as 'Thoughts on America’s AI Action Plan' and 'Anthropic partners with the University of Chicago’s Becker Friedman Institute on AI economic research'.\",\"Removal of older articles to maintain a list of recent news and announcements.\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -56,9 +56,9 @@
           "id": 286,
           "url": "news",
           "detectedAt": "2025-07-23T19:02:49.922Z",
-          "relativeTime": "5 hours ago",
+          "relativeTime": "19 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New announcements and updates were added to the newsroom section, including partnerships, product updates, and policy changes.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added announcement about Anthropic partnering with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Added announcement about Paul Smith joining Anthropic as Chief Commercial Officer\",\"Added product updates, such as Claude for Financial Services and Discover tools that work with Claude\",\"Added policy updates, such as Build AI in America and The need for transparency in Frontier AI\"]}",
+          "summary": "{\"what_changed\":\"New announcements and updates were added to the newsroom section of the Anthropic website, including partnerships, product updates, and policy announcements.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added announcement about Anthropic partnering with the University of Chicago's Becker Friedman Institute on AI economic research\",\"Added announcement about Paul Smith joining Anthropic as Chief Commercial Officer\",\"Added product updates for Claude, including new capabilities and integrations\",\"Added policy announcements, including the need for transparency in Frontier AI and Anthropic's position on the diffusion rule\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -72,9 +72,99 @@
           "url": "news",
           "detectedAt": "2025-07-22T17:13:18.357Z",
           "relativeTime": "1 days ago",
-          "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Addition of a new policy announcement 'Build AI in America' and removal of several news articles\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new policy announcement 'Build AI in America'\",\"Removed news articles from before July 21, 2025\"]}",
+          "interestLevel": 6,
+          "summary": "{\"what_changed\":\"New article 'Build AI in America' added, and 'No results found' message removed\",\"change_type\":\"addition\",\"change_scale\":\"minor\",\"specific_changes\":[\"Added new article 'Build AI in America' on Jul 21, 2025\",\"Removed 'No results found' message from news section\"]}",
           "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 360,
+          "url": "news",
+          "detectedAt": "2025-07-21T14:21:02.651Z",
+          "relativeTime": "2 days ago",
+          "interestLevel": 6,
+          "summary": "{\"what_changed\":\"Addition of a new policy announcement: Anthropic to sign the EU Code of Practice\",\"change_type\":\"addition\",\"change_scale\":\"minor\",\"specific_changes\":[\"New policy announcement added to the news section\",\"No other significant changes to the content or structure\"]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 370,
+          "url": "docs",
+          "detectedAt": "2025-07-21T03:07:11.303Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"Initial content creation for Anthropic documentation\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of navigation menu with links to Research, Login, Support, and Sign up\",\"Addition of sections for Developer Platform, Claude Code, Model Context Protocol (MCP), API Reference, Resources, and Release Notes\",\"Inclusion of quickstart guides, reference documentation, and release notes for Claude Code\",\"Links to external resources such as Anthropic Courses, Anthropic Cookbook, and Anthropic Quickstarts\"]}",
+          "changeType": "new",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 371,
+          "url": "homepage",
+          "detectedAt": "2025-07-21T03:07:04.850Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"New homepage content with updated product information, research highlights, and company commitments\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of Claude Opus 4 and Sonnet 4 models\",\"Updated research section with new projects and publications\",\"Emphasis on AI safety and responsible scaling policy\",\"New career opportunities and contact sales information\"]}",
+          "changeType": "new",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 372,
+          "url": "news",
+          "detectedAt": "2025-07-21T03:06:58.430Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"New content added to the news section of Anthropic's website, including announcements, product updates, and policy changes.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Introduction of Claude 4\",\"Appointment of Paul Smith as Chief Commercial Officer\",\"Introduction of the Anthropic Economic Index\",\"Expansion of Claude for Enterprise use by Lawrence Livermore National Laboratory\",\"Introduction of web search on the Anthropic API\",\"Appointment of Guillaume Princen as Head of EMEA\",\"Introduction of Claude for Education\"]}",
+          "changeType": "new",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 373,
+          "url": "pricing",
+          "detectedAt": "2025-07-21T03:06:50.654Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"Introduction of a new pricing page for Anthropic's Claude AI model\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"New pricing plans introduced: Free, Pro, Max, Team, and Enterprise\",\"Pricing details for each plan, including features and limitations\",\"Introduction of a comprehensive university-wide Education plan\",\"Pricing for latest models: Claude Opus 4, Claude Sonnet 4, and Claude Haiku 3.5\",\"Pricing for tools, including web search and prompt caching\"]}",
+          "changeType": "new",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 374,
+          "url": "product",
+          "detectedAt": "2025-07-21T03:06:44.412Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"New content introduction for Anthropic's product Claude\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of Claude as a thinking partner\",\"Details about Claude's capabilities and features\",\"Information on how to use Claude for various tasks\",\"Introduction of Claude Opus 4 and Sonnet 4 models\",\"Availability of Claude on web, desktop, and mobile platforms\"]}",
+          "changeType": "new",
           "businessImpact": null,
           "enhancedAnalysis": {
             "competitiveImplications": null,
@@ -85,17 +175,18 @@
       ],
       "intelligence": {
         "products": [
-          "Claude API",
-          "Claude Pro",
-          "Claude for Business",
-          "Constitutional AI"
+          "claude",
+          "claude code",
+          "api",
+          "max plan",
+          "team plan"
         ],
         "ai_technologies": [
-          "Claude",
-          "Constitutional AI",
-          "RLHF",
-          "Context Windows",
-          "Claude Instant"
+          "python",
+          "amazon bedrock",
+          "aws",
+          "google cloud's vertex ai",
+          "api"
         ],
         "ai_ml_concepts": [
           "AI Safety",
@@ -106,8 +197,8 @@
       },
       "attributes": {},
       "stats": {
-        "totalChanges": 3,
-        "highInterestChanges": 3,
+        "totalChanges": 9,
+        "highInterestChanges": 7,
         "lastActivity": "2025-07-23T19:39:42.299Z"
       }
     },
@@ -146,7 +237,7 @@
           "id": 310,
           "url": "docs",
           "detectedAt": "2025-07-23T23:36:42.053Z",
-          "relativeTime": "35 min ago",
+          "relativeTime": "14 hours ago",
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the provided content.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
@@ -161,9 +252,9 @@
           "id": 298,
           "url": "docs",
           "detectedAt": "2025-07-23T19:03:26.617Z",
-          "relativeTime": "5 hours ago",
+          "relativeTime": "19 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Reorganization and updates of GitHub Copilot documentation, including changes to billing, concepts, and how-to sections\",\"change_type\":\"update/restructure\",\"change_scale\":\"significant\",\"specific_changes\":[\"Updated billing section with new links and information\",\"Added new concepts such as 'text completion' and 'create a custom model'\",\"Reorganized how-to sections for better clarity and added new topics\",\"Updated links and information throughout the documentation\"]}",
+          "summary": "{\"what_changed\":\"Reorganization and updates of GitHub Copilot documentation, including changes to sections on concepts, how-tos, and administration, with new links and reworded descriptions\",\"change_type\":\"update/restructure\",\"change_scale\":\"significant\",\"specific_changes\":[\"Updated 'Concepts' section with new links and reworded descriptions\",\"Reorganized 'How-tos' section with new categories and links\",\"Added new links and descriptions in 'Administer' section\",\"Changes to 'Get started' and 'Plans for Copilot' sections\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -176,9 +267,9 @@
           "id": 285,
           "url": "homepage",
           "detectedAt": "2025-07-23T19:03:14.475Z",
-          "relativeTime": "5 hours ago",
+          "relativeTime": "19 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Introduction of GitHub Spark, a new feature, and updates to the pricing plans with additional details on premium requests and model access\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Introduction of GitHub Spark\",\"Update to Pro plan with unlimited agent mode and chats, and access to more models\",\"Update to Pro+ plan with access to all models and 30x more premium requests\",\"Addition of GitHub Spark to Pro+ plan features\"]}",
+          "summary": "{\"what_changed\":\"Introduction of GitHub Spark, update in pricing plans, and addition of new models\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"Introduction of GitHub Spark\",\"Update in pricing plans, including the addition of a free tier and changes to Pro and Pro+ plans\",\"Addition of new models, including Claude Opus 4 and o3\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -193,7 +284,7 @@
           "detectedAt": "2025-07-22T22:52:15.696Z",
           "relativeTime": "1 days ago",
           "interestLevel": 1,
-          "summary": "{\"what_changed\":\"No significant changes were detected in the provided content.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
+          "summary": "{\"what_changed\":\"No significant changes were detected in the content structure or links between the two versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -208,7 +299,7 @@
           "detectedAt": "2025-07-22T17:17:58.613Z",
           "relativeTime": "1 days ago",
           "interestLevel": 4,
-          "summary": "{\"what_changed\":\"The removal of the 'Set extension permissions' link under 'Administer' > 'Manage for organization' and the addition of 'About GitHub Copilot Chat' under 'Concepts'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Removal of 'Set extension permissions' link\",\"Addition of 'About GitHub Copilot Chat' under 'Concepts'\"]}",
+          "summary": "{\"what_changed\":\"Removal of 'Set extension permissions' under 'Administer' and 'Manage for organization' sections, and addition of 'About GitHub Copilot Chat' under 'Concepts' section\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Removal of 'Set extension permissions' link\",\"Addition of 'About GitHub Copilot Chat' link\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -223,8 +314,68 @@
           "detectedAt": "2025-07-21T16:18:27.267Z",
           "relativeTime": "2 days ago",
           "interestLevel": 2,
-          "summary": "{\"what_changed\":\"No significant changes were detected in the provided content, only minor errors and loading issues were present in both versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
+          "summary": "{\"what_changed\":\"No significant changes were detected in the provided content, only minor loading errors and 'Uh oh!' messages were found, which do not affect the overall content or pricing information.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 366,
+          "url": "blog",
+          "detectedAt": "2025-07-21T03:12:28.715Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"New content added to the GitHub blog, including various categories and subcategories related to AI, ML, developer skills, engineering, enterprise software, news, and security.\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Added AI & ML category with subcategories for generative AI, GitHub Copilot, LLMs, and machine learning\",\"Added Developer skills category with subcategories for application development, career growth, GitHub, GitHub Education, and programming languages & frameworks\",\"Added Engineering category with subcategories for architecture & optimization, engineering principles, infrastructure, platform security, and user experience\",\"Added Enterprise software category with subcategories for automation, CI/CD, collaboration, DevOps, DevSecOps, and governance & compliance\",\"Added News & insights category with subcategories for company news, product news, Octoverse, policy, and research\"]}",
+          "changeType": "new",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 367,
+          "url": "docs",
+          "detectedAt": "2025-07-21T03:12:22.286Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"Initial documentation release for GitHub Copilot\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Release of comprehensive documentation for GitHub Copilot\",\"Introduction of various guides, tutorials, and how-to sections for users\",\"Detailed information on plans, features, and best practices for GitHub Copilot\"]}",
+          "changeType": "new",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 368,
+          "url": "homepage",
+          "detectedAt": "2025-07-21T03:12:15.826Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"Introduction of GitHub Copilot, a new AI-powered developer tool, with various features, pricing plans, and integrations with popular IDEs and platforms\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of GitHub Copilot as a new AI-powered developer tool\",\"Various pricing plans, including Free, Pro, and Pro+\",\"Integration with popular IDEs and platforms, such as Visual Studio Code, Visual Studio, JetBrains IDEs, and Neovim\",\"Features like code completions, chat assistance, code explanations, and answers to documentation\"]}",
+          "changeType": "new",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 369,
+          "url": "pricing",
+          "detectedAt": "2025-07-21T03:12:08.824Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"New pricing page for GitHub Copilot with three plans: Free, Team, and Enterprise\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of a free plan with limited features\",\"Team plan with additional features such as access to GitHub Codespaces and protected branches\",\"Enterprise plan with advanced security, compliance, and deployment options\"]}",
+          "changeType": "new",
           "businessImpact": null,
           "enhancedAnalysis": {
             "competitiveImplications": null,
@@ -235,15 +386,18 @@
       ],
       "intelligence": {
         "products": [
-          "AI Platform",
-          "Developer Tools",
-          "Enterprise Solutions"
+          "github copilot",
+          "github copilot free",
+          "github copilot pro",
+          "github free",
+          "github team"
         ],
         "ai_technologies": [
-          "Machine Learning",
-          "Cloud Computing",
-          "APIs",
-          "Data Processing"
+          "github",
+          "javascript",
+          "windows terminal",
+          "python",
+          "microsoft azure"
         ],
         "ai_ml_concepts": [
           "Artificial Intelligence",
@@ -253,8 +407,8 @@
       },
       "attributes": {},
       "stats": {
-        "totalChanges": 6,
-        "highInterestChanges": 2,
+        "totalChanges": 10,
+        "highInterestChanges": 6,
         "lastActivity": "2025-07-23T23:36:42.053Z"
       }
     },
@@ -299,9 +453,9 @@
           "id": 289,
           "url": "blog",
           "detectedAt": "2025-07-23T19:40:46.363Z",
-          "relativeTime": "4 hours ago",
+          "relativeTime": "18 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Listen to a conversation about the newest AI capabilities in Search', and 'Transform your photos into videos and remix your pics in Google Photos'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new articles under the 'Gemini App', 'Research', 'Developers', and 'All the Latest' sections\",\"Updated the 'Gemini Code Assist' with new features\",\"Introduced 'Gemini CLI' as an open-source AI agent\",\"Added a new podcast episode about the newest AI capabilities in Search\",\"Updated Google Photos with new features to transform photos into videos and remix pics\"]}",
+          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Listen to a conversation about the newest AI capabilities in Search', and 'Transform your photos into videos and remix your pics in Google Photos'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new articles under the 'Gemini App', 'Research', 'Developers', and 'All the Latest' sections\",\"Updated the 'Gemini Code Assist' with new features\",\"Introduced 'Gemini CLI' as an open-source AI agent\",\"Published new podcast episodes, such as 'Release Notes' and 'Transform your photos into videos and remix your pics in Google Photos'\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -314,9 +468,9 @@
           "id": 296,
           "url": "blog",
           "detectedAt": "2025-07-23T19:03:49.432Z",
-          "relativeTime": "5 hours ago",
+          "relativeTime": "19 hours ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, specifically in the AI, Research, and Developers sections.\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"New article: 'Check out the first images of wildfires detected by FireSat'\",\"New article: 'Transform your photos into videos and remix your pics in Google Photos'\",\"New article: 'Startups can apply now for the Google for Startups Gemini Founders Forum.'\",\"Updates to Gemini Code Assist and Gemini CLI\"]}",
+          "summary": "{\"what_changed\":\"New articles and updates were added to the Google Blog, including 'Check out the first images of wildfires detected by FireSat', 'Transform your photos into videos and remix your pics in Google Photos', and 'Startups can apply now for the Google for Startups Gemini Founders Forum'\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Added new article about FireSat detecting wildfires\",\"Added new article about Google Photos features\",\"Added new article about Google for Startups Gemini Founders Forum\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -329,7 +483,7 @@
           "id": 297,
           "url": "homepage",
           "detectedAt": "2025-07-23T19:03:32.433Z",
-          "relativeTime": "5 hours ago",
+          "relativeTime": "19 hours ago",
           "interestLevel": 2,
           "summary": "{\"what_changed\":\"No significant changes were detected in the content between the two versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
@@ -346,7 +500,7 @@
           "detectedAt": "2025-07-22T17:18:26.929Z",
           "relativeTime": "1 days ago",
           "interestLevel": 2,
-          "summary": "{\"what_changed\":\"No significant changes were detected in the content between the two versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
+          "summary": "{\"what_changed\":\"No significant changes were detected in the content structure or major updates to the models, research, or science sections.\",\"change_type\":\"no significant update\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -361,8 +515,83 @@
           "detectedAt": "2025-07-21T15:11:46.979Z",
           "relativeTime": "2 days ago",
           "interestLevel": 2,
-          "summary": "{\"what_changed\":\"No significant changes were detected in the content structure or major updates to models, research, or science sections.\",\"change_type\":\"no significant update\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
+          "summary": "{\"what_changed\":\"No significant changes were detected in the content between the two versions.\",\"change_type\":\"no change\",\"change_scale\":\"minor\",\"specific_changes\":[]}",
           "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 361,
+          "url": "api",
+          "detectedAt": "2025-07-21T03:13:08.841Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"Introduction of the Gemini Developer API and Gemma open models\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"New API for Gemini models\",\"Introduction of Gemma open models\",\"New features for code assistance and productivity\",\"New solutions for building with Gemini and customizing Gemma open models\",\"New showcase for apps built with the Gemini API\"]}",
+          "changeType": "new",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 362,
+          "url": "blog",
+          "detectedAt": "2025-07-21T03:13:00.463Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"New content added to the Google Blog, including AI news and updates, product news, company news, and more\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of a new section for AI news and updates\",\"Addition of product news, company news, and other categories\",\"Inclusion of links to various Google products and services\",\"Introduction of a newsletter subscription option\"]}",
+          "changeType": "new",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 363,
+          "url": "homepage",
+          "detectedAt": "2025-07-21T03:12:55.045Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"New content added to the Google DeepMind homepage, including models, research, science, and about sections\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Added models section with Gemini, Gemma, Generative models, and Experiments\",\"Added research section with Projects, Publications, and News\",\"Added science section with AI for biology, climate and sustainability, mathematics and computer science, and physics and chemistry\",\"Added about section with News, Careers, Milestones, Education, Responsibility, and The Podcast\"]}",
+          "changeType": "new",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 364,
+          "url": "pricing",
+          "detectedAt": "2025-07-21T03:12:46.820Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"New pricing page for Vertex AI on Google Cloud\",\"change_type\":\"addition\",\"change_scale\":\"significant\",\"specific_changes\":[\"Introduction of a new pricing page for Vertex AI\",\"Detailed pricing information for various Google Cloud services\",\"Emphasis on industry-specific solutions and use cases\"]}",
+          "changeType": "new",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 365,
+          "url": "product",
+          "detectedAt": "2025-07-21T03:12:34.152Z",
+          "relativeTime": "3 days ago",
+          "interestLevel": 9,
+          "summary": "{\"what_changed\":\"New content introduction with various AI-related products and features\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of AI-first products\",\"Addition of new features like Gemini, AI Mode, NotebookLM, and Flow\",\"Inclusion of various AI tools and platforms like Google AI Studio, Vertex AI, and Gemini API\",\"Emphasis on responsible AI development and deployment\"]}",
+          "changeType": "new",
           "businessImpact": null,
           "enhancedAnalysis": {
             "competitiveImplications": null,
@@ -373,15 +602,18 @@
       ],
       "intelligence": {
         "products": [
-          "AI Platform",
-          "Developer Tools",
-          "Enterprise Solutions"
+          "google ai studio",
+          "google workspace",
+          "gemini app",
+          "vertex ai",
+          "google photos"
         ],
         "ai_technologies": [
-          "Machine Learning",
-          "Cloud Computing",
-          "APIs",
-          "Data Processing"
+          "python",
+          "google cloud",
+          "tensorflow",
+          "pytorch",
+          "jax"
         ],
         "ai_ml_concepts": [
           "Artificial Intelligence",
@@ -391,8 +623,8 @@
       },
       "attributes": {},
       "stats": {
-        "totalChanges": 5,
-        "highInterestChanges": 2,
+        "totalChanges": 10,
+        "highInterestChanges": 7,
         "lastActivity": "2025-07-23T19:40:46.363Z"
       }
     },
@@ -427,7 +659,7 @@
           "detectedAt": "2025-07-21T15:18:22.044Z",
           "relativeTime": "2 days ago",
           "interestLevel": 8,
-          "summary": "{\"what_changed\":\"Initial content creation for Midjourney documentation\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of help center with various sections\",\"Addition of getting started guide\",\"Documentation section for making the most of Midjourney\",\"Billing support section\",\"Policies and guidelines including terms of service, privacy policy, data deletion and privacy FAQ, and community guidelines\",\"Links to Midjourney website and Discord server\"]}",
+          "summary": "{\"what_changed\":\"Initial content creation for Midjourney documentation\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of help center with various sections\",\"Addition of getting started, documentation, and billing support links\",\"Inclusion of policies and guidelines such as terms of service, privacy policy, data deletion & privacy FAQ, and community guidelines\",\"Links to Midjourney website and Discord server\"]}",
           "changeType": "new",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -442,7 +674,7 @@
           "detectedAt": "2025-07-21T15:17:43.481Z",
           "relativeTime": "2 days ago",
           "interestLevel": 9,
-          "summary": "{\"what_changed\":\"Introduction of a new pricing page with detailed plan comparisons and features\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of four subscription tiers: Basic, Standard, Pro, and Mega\",\"Detailed comparison of plan features, including GPU time, image and video generation, and stealth mode\",\"Information on pricing, including monthly and annual rates, and a 20% discount for annual commitments\"]}",
+          "summary": "{\"what_changed\":\"Introduction of a new pricing page with detailed plan comparisons and features\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of four subscription tiers: Basic, Standard, Pro, and Mega\",\"Detailed comparison of plan features, including GPU time, image and video generation, and stealth mode\",\"Information on pricing, including monthly and annual rates, and discounts for annual commitments\"]}",
           "changeType": "new",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -454,15 +686,16 @@
       ],
       "intelligence": {
         "products": [
-          "AI Platform",
-          "Developer Tools",
-          "Enterprise Solutions"
+          "basic plan",
+          "standard plan",
+          "pro plan",
+          "mega plan",
+          "midjourney magazine subscription"
         ],
         "ai_technologies": [
-          "Machine Learning",
-          "Cloud Computing",
-          "APIs",
-          "Data Processing"
+          "discord",
+          "web",
+          "python"
         ],
         "ai_ml_concepts": [
           "Artificial Intelligence",
@@ -519,8 +752,23 @@
           "url": "pricing",
           "detectedAt": "2025-07-22T19:04:23.608Z",
           "relativeTime": "1 days ago",
-          "interestLevel": 2,
-          "summary": "{\"what_changed\":\"The 'openaicom-did' parameter in the URLs has changed from '4aa03562-c3c6-4634-98a2-6d29cf24c479' to '99580f75-39b7-4bf3-9a9c-e2a544c14234'\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated 'openaicom-did' parameter in URLs\"]}",
+          "interestLevel": 8,
+          "summary": "{\"what_changed\":\"The OpenAI pricing page has been updated with new features, models, and pricing plans.\",\"change_type\":\"update\",\"change_scale\":\"significant\",\"specific_changes\":[\"New features added to each plan, including access to GPT-4.5 research preview and OpenAI o3-pro\",\"Changes to the pricing plans, including the introduction of a new 'Pro' plan\",\"Updates to the 'Team' and 'Enterprise' plans, including new features and security controls\"]}",
+          "changeType": "modified",
+          "businessImpact": null,
+          "enhancedAnalysis": {
+            "competitiveImplications": null,
+            "riskAssessment": null,
+            "opportunityScore": null
+          }
+        },
+        {
+          "id": 347,
+          "url": "product",
+          "detectedAt": "2025-07-22T19:04:16.736Z",
+          "relativeTime": "1 days ago",
+          "interestLevel": 6,
+          "summary": "{\"what_changed\":\"Addition of 'Voice' feature\",\"change_type\":\"addition\",\"change_scale\":\"minor\",\"specific_changes\":[\"Introduction of a 'Voice' option in the chat interface\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -535,7 +783,7 @@
           "detectedAt": "2025-07-22T18:46:27.592Z",
           "relativeTime": "1 days ago",
           "interestLevel": 2,
-          "summary": "{\"what_changed\":\"The 'openaicom-did' parameter in the URLs has changed from '99580f75-39b7-4bf3-9a9c-e2a544c14234' to '4aa03562-c3c6-4634-98a2-6d29cf24c479'.\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated 'openaicom-did' parameter in URLs\"]}",
+          "summary": "{\"what_changed\":\"The 'openaicom-did' parameter in the URLs has changed from '99580f75-39b7-4bf3-9a9c-e2a544c14234' to '4aa03562-c3c6-4634-98a2-6d29cf24c479'.\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Updated 'openaicom-did' parameter in URLs for ChatGPT, Sora, and API Platform.\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -549,8 +797,8 @@
           "url": "product",
           "detectedAt": "2025-07-22T18:46:20.404Z",
           "relativeTime": "1 days ago",
-          "interestLevel": 4,
-          "summary": "{\"what_changed\":\"Removal of Voice feature\",\"change_type\":\"removal\",\"change_scale\":\"minor\",\"specific_changes\":[\"Voice feature button removed from the interface\"]}",
+          "interestLevel": 3,
+          "summary": "{\"what_changed\":\"Removal of the 'Voice' feature\",\"change_type\":\"removal\",\"change_scale\":\"minor\",\"specific_changes\":[\"The 'Voice' button has been removed from the interface\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -565,7 +813,7 @@
           "detectedAt": "2025-07-22T18:18:01.891Z",
           "relativeTime": "1 days ago",
           "interestLevel": 9,
-          "summary": "{\"what_changed\":\"The content has changed from a security verification page to the OpenAI homepage, featuring various products, research, and company information.\",\"change_type\":\"major overhaul\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of new products and features such as ChatGPT, Sora, and API Platform\",\"Addition of research and company information sections\",\"Removal of security verification page content\",\"Update of the website's layout and design\"]}",
+          "summary": "{\"what_changed\":\"The content has changed from a security verification page to the OpenAI homepage, featuring various products, research, and company information.\",\"change_type\":\"update\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of new products and features such as ChatGPT, Sora, and API Platform\",\"Addition of research and company information sections\",\"Removal of security verification page content\",\"Update of the overall layout and design\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -580,7 +828,7 @@
           "detectedAt": "2025-07-22T17:33:40.166Z",
           "relativeTime": "1 days ago",
           "interestLevel": 9,
-          "summary": "{\"what_changed\":\"The content changed from a security verification page for www.perplexity.ai to a ChatGPT interface\",\"change_type\":\"update\",\"change_scale\":\"major\",\"specific_changes\":[\"Removal of security verification content\",\"Introduction of ChatGPT interface\",\"Addition of login and sign-up options\",\"Inclusion of terms and privacy policy links\"]}",
+          "summary": "{\"what_changed\":\"The content has changed from a security verification page to a ChatGPT interface\",\"change_type\":\"update\",\"change_scale\":\"major\",\"specific_changes\":[\"Removal of security verification content\",\"Introduction of ChatGPT interface\",\"Addition of login and sign-up options\",\"Inclusion of terms and privacy policy links\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -592,18 +840,18 @@
       ],
       "intelligence": {
         "products": [
-          "ChatGPT",
-          "GPT API",
-          "DALL-E API",
-          "ChatGPT Enterprise",
-          "GPT-4 Turbo"
+          "chatgpt",
+          "sora",
+          "api platform",
+          "chatgpt plus",
+          "chatgpt pro"
         ],
         "ai_technologies": [
-          "GPT-4",
-          "DALL-E",
-          "Whisper",
-          "Codex",
-          "Function Calling"
+          "python",
+          "tensorflow",
+          "pytorch",
+          "jax",
+          "aws"
         ],
         "ai_ml_concepts": [
           "AGI Research",
@@ -614,8 +862,8 @@
       },
       "attributes": {},
       "stats": {
-        "totalChanges": 5,
-        "highInterestChanges": 2,
+        "totalChanges": 6,
+        "highInterestChanges": 3,
         "lastActivity": "2025-07-22T19:04:23.608Z"
       }
     },
@@ -648,9 +896,9 @@
           "id": 275,
           "url": "product",
           "detectedAt": "2025-07-23T00:38:32.210Z",
-          "relativeTime": "23 hours ago",
-          "interestLevel": 3,
-          "summary": "{\"what_changed\":\"Rephrased introduction to Perplexity Pro\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Changed 'Perplexity Pro is the most powerful way to search the internet' to 'Perplexity Pro unlocks more ways to learn and get work done'\",\"Added 'Upgrade your productivity and learning with unlimited Research' to the Pro description\"]}",
+          "relativeTime": "1 days ago",
+          "interestLevel": 4,
+          "summary": "{\"what_changed\":\"Rephrased introduction to Perplexity Pro\",\"change_type\":\"update\",\"change_scale\":\"minor\",\"specific_changes\":[\"Changed 'Perplexity Pro is the most powerful way to search the internet' to 'Perplexity Pro unlocks more ways to learn and get work done'\",\"Removed 'unlimited Pro Search' and 'collaborative spaces' from the introduction\",\"Added 'unlimited Research' to the introduction\"]}",
           "changeType": "modified",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -665,7 +913,7 @@
           "detectedAt": "2025-07-21T15:21:10.364Z",
           "relativeTime": "2 days ago",
           "interestLevel": 9,
-          "summary": "{\"what_changed\":\"Introduction of Perplexity Pro and Max subscription plans with various features and pricing\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of Perplexity Pro with features like unlimited Pro Search, upgraded AI models, and collaborative spaces\",\"Introduction of Perplexity Max with features like early access to new products, unlimited access to Perplexity Labs and Research, and priority support\",\"Pricing for Perplexity Pro and Max plans\",\"Introduction of exclusive features for Pro and Max subscribers\"]}",
+          "summary": "{\"what_changed\":\"Introduction of Perplexity Pro and Max plans with various features and pricing\",\"change_type\":\"addition\",\"change_scale\":\"major\",\"specific_changes\":[\"Introduction of Perplexity Pro plan at $20.00/month\",\"Introduction of Perplexity Max plan at $200.00/month\",\"Listing of features for each plan, including unlimited Pro Search, AI models, file upload, image generation, and more\"]}",
           "changeType": "new",
           "businessImpact": null,
           "enhancedAnalysis": {
@@ -677,15 +925,12 @@
       ],
       "intelligence": {
         "products": [
-          "AI Platform",
-          "Developer Tools",
-          "Enterprise Solutions"
+          "perplexity pro",
+          "perplexity max"
         ],
         "ai_technologies": [
-          "Machine Learning",
-          "Cloud Computing",
-          "APIs",
-          "Data Processing"
+          "perplexity ai",
+          "cloudflare"
         ],
         "ai_ml_concepts": [
           "Artificial Intelligence",
@@ -701,7 +946,7 @@
       }
     }
   ],
-  "lastUpdated": "2025-07-24T00:12:11.560Z",
-  "totalChanges": 23,
-  "highInterestChanges": 12
+  "lastUpdated": "2025-07-24T14:13:13.516Z",
+  "totalChanges": 39,
+  "highInterestChanges": 26
 }
