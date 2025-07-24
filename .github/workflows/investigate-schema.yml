@@ -1,0 +1,53 @@
+name: 🔍 Investigate PostgreSQL Schema Issues
+
+on:
+  workflow_dispatch:
+    inputs:
+      debug_mode:
+        description: 'Enable debug output'
+        required: false
+        default: 'false'
+        type: boolean
+
+jobs:
+  investigate-schema:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+
+    - name: 🔍 Run PostgreSQL Schema Investigation
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        NODE_ENV: production
+      run: |
+        cd github-actions-backend
+        echo "🔍 Starting PostgreSQL schema investigation..."
+        echo "🎯 Goal: Identify array vs JSONB column type issues"
+        echo ""
+        
+        node investigate-postgresql-schema.js
+        
+        echo ""
+        echo "🔍 Investigation complete!"
+        echo "📋 Check the output above for schema issues"
+        
+    - name: 📊 Upload Investigation Results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: schema-investigation-results
+        path: |
+          github-actions-backend/data/
+        retention-days: 7
