@@ -1,6 +1,23 @@
 name: 4. Sync and Deploy (PostgreSQL)
 
 on:
+  workflow_dispatch:
+    inputs:
+      skip_thebrain:
+        description: 'Skip TheBrain sync'
+        required: false
+        type: boolean
+        default: false
+      trigger_source:
+        description: 'Source that triggered this workflow'
+        required: false
+        type: string
+        default: 'manual'
+      run_id:
+        description: 'Previous workflow run ID'
+        required: false
+        type: string
+  
   workflow_call:
     inputs:
       skip_thebrain:

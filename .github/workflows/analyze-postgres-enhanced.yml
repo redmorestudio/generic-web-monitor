@@ -531,14 +531,14 @@ jobs:
               });
               
               const syncWorkflowExists = files.some(file => 
-                file.name === 'sync-postgres.yml'
+                file.name === 'sync-deploy-postgres.yml'
               );
               
               if (syncWorkflowExists) {
                 const result = await github.rest.actions.createWorkflowDispatch({
                   owner: context.repo.owner,
                   repo: context.repo.repo,
-                  workflow_id: 'sync-postgres.yml',
+                  workflow_id: 'sync-deploy-postgres.yml',
                   ref: 'main',
                   inputs: {
                     trigger_source: 'analyze-postgres-cascade',
@@ -547,10 +547,10 @@ jobs:
                 });
                 console.log(`✅ Triggered PostgreSQL Sync workflow`);
               } else {
-                console.log(`⚠️  sync-postgres.yml not found - skipping cascade`);
+                console.log(`⚠️  sync-deploy-postgres.yml not found - skipping cascade`);
                 console.log(`   This is normal - full-monitor-postgres.yml handles sync inline`);
               }
             } catch (error) {
               console.log(`⚠️  Could not trigger sync workflow:`, error.message);
-              console.log(`   This is normal if sync-postgres.yml doesn't exist`);
+              console.log(`   This is normal if sync-deploy-postgres.yml doesn't exist`);
             }
