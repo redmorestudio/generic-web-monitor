@@ -1,8 +1,8 @@
 {
   "version": "2.0.0",
-  "lastModified": "2025-07-24T08:03:16.864Z",
+  "lastModified": "2025-07-24T08:14:47.159Z",
   "modifiedBy": "update-schema-version.js",
-  "checksum": "9a9892b5d7ddf92ef575cfe88220259221bd91cb98704e1a2b5a64d08955c822",
+  "checksum": "9a9892b5d7ddf92e0c5577797a27bda87cf7e1a9b953bd652e7c28b83fdbcc01",
   "changes": "Successfully converted all TEXT columns to JSONB in intelligence.enhanced_analysis. Updated schema tracking to include all schemas (public, intelligence, raw_content, processed_content).",
   "previousVersion": "1.1.0",
   "previousChecksum": "c2ef2778b538782a59b61e68b76f8059e63fbf7e348e022d96c1f38d1d25007f",
@@ -20,22 +20,22 @@
         "companies",
         "company_attributes",
         "company_groups",
-        "email_notifications",
+        "company_urls",
         "enhanced_analysis",
         "groups",
-        "insights",
         "scrape_status",
         "scraping_runs",
-        "summaries",
+        "social_auth",
         "thebrain_sync",
-        "urls"
+        "urls",
+        "url_scraping_exceptions"
       ],
       "processed_content": [
-        "baseline_analysis",
-        "change_detection",
+        "article_summaries",
         "changes",
+        "change_detection",
         "markdown_content",
-        "markdown_pages"
+        "ultra_analysis"
       ],
       "public": [
         "schema_audit_log",
@@ -43,10 +43,10 @@
       ],
       "raw_content": [
         "company_pages_baseline",
+        "raw_content",
         "raw_html",
-        "scrape_runs",
-        "scraped_pages",
-        "scraping_runs"
+        "scraped_content",
+        "scraped_pages"
       ]
     },
     "jsonbConversions": {
@@ -55,7 +55,7 @@
         "key_changes",
         "competitive_implications"
       ],
-      "conversionDate": "2025-07-24T08:03:16.869Z",
+      "conversionDate": "2025-07-24T08:14:47.159Z",
       "status": "completed"
     },
     "totalTables": 26,

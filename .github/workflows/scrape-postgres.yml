@@ -1,4 +1,4 @@
-name: Scrape Websites (PostgreSQL)
+name: 1. Scrape Websites (PostgreSQL)
 
 on:
   workflow_dispatch:

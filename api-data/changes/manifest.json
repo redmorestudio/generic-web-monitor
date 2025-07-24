@@ -1,8 +1,8 @@
 {
   "version": "1.0",
-  "generated_at": "2025-07-22T23:50:13.894Z",
+  "generated_at": "2025-07-24T03:07:09.485Z",
   "source": "postgresql",
-  "total_changes": 14,
+  "total_changes": 39,
   "files": [
     {
       "filename": "openai-2025-07-22T18-18-01.json",
@@ -41,10 +41,154 @@
       "summary": "Change detected"
     },
     {
-      "filename": "anthropic-2025-07-22T17-13-18.json",
-      "change_id": 219,
+      "filename": "google-deepmind-2025-07-21T03-13-08.json",
+      "change_id": 361,
+      "company": "Google DeepMind",
+      "detected_at": "2025-07-21T03:13:08.841Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "google-deepmind-2025-07-21T03-12-55.json",
+      "change_id": 363,
+      "company": "Google DeepMind",
+      "detected_at": "2025-07-21T03:12:55.045Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "google-deepmind-2025-07-21T03-12-34.json",
+      "change_id": 365,
+      "company": "Google DeepMind",
+      "detected_at": "2025-07-21T03:12:34.152Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "github-copilot-2025-07-21T03-12-22.json",
+      "change_id": 367,
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-21T03:12:22.286Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "github-copilot-2025-07-21T03-12-15.json",
+      "change_id": 368,
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-21T03:12:15.826Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "github-copilot-2025-07-21T03-12-08.json",
+      "change_id": 369,
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-21T03:12:08.824Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anthropic-2025-07-21T03-07-11.json",
+      "change_id": 370,
       "company": "Anthropic",
-      "detected_at": "2025-07-22T17:13:18.357Z",
+      "detected_at": "2025-07-21T03:07:11.303Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anthropic-2025-07-21T03-07-04.json",
+      "change_id": 371,
+      "company": "Anthropic",
+      "detected_at": "2025-07-21T03:07:04.850Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anthropic-2025-07-21T03-06-50.json",
+      "change_id": 373,
+      "company": "Anthropic",
+      "detected_at": "2025-07-21T03:06:50.654Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anthropic-2025-07-21T03-06-44.json",
+      "change_id": 374,
+      "company": "Anthropic",
+      "detected_at": "2025-07-21T03:06:44.412Z",
+      "interest_level": 9,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "google-deepmind-2025-07-23T19-40-46.json",
+      "change_id": 289,
+      "company": "Google DeepMind",
+      "detected_at": "2025-07-23T19:40:46.363Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anthropic-2025-07-23T19-39-42.json",
+      "change_id": 295,
+      "company": "Anthropic",
+      "detected_at": "2025-07-23T19:39:42.299Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "google-deepmind-2025-07-23T19-03-49.json",
+      "change_id": 296,
+      "company": "Google DeepMind",
+      "detected_at": "2025-07-23T19:03:49.432Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "github-copilot-2025-07-23T19-03-26.json",
+      "change_id": 298,
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-23T19:03:26.617Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "github-copilot-2025-07-23T19-03-14.json",
+      "change_id": 285,
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-23T19:03:14.475Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anthropic-2025-07-23T19-02-49.json",
+      "change_id": 286,
+      "company": "Anthropic",
+      "detected_at": "2025-07-23T19:02:49.922Z",
+      "interest_level": 8,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "openai-2025-07-22T19-04-23.json",
+      "change_id": 225,
+      "company": "OpenAI",
+      "detected_at": "2025-07-22T19:04:23.608Z",
       "interest_level": 8,
       "change_type": "modified",
       "summary": "Change detected"
@@ -59,20 +203,74 @@
       "summary": "Change detected"
     },
     {
-      "filename": "openai-2025-07-22T18-46-20.json",
-      "change_id": 227,
+      "filename": "google-deepmind-2025-07-21T03-13-00.json",
+      "change_id": 362,
+      "company": "Google DeepMind",
+      "detected_at": "2025-07-21T03:13:00.463Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "google-deepmind-2025-07-21T03-12-46.json",
+      "change_id": 364,
+      "company": "Google DeepMind",
+      "detected_at": "2025-07-21T03:12:46.820Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "github-copilot-2025-07-21T03-12-28.json",
+      "change_id": 366,
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-21T03:12:28.715Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anthropic-2025-07-21T03-06-58.json",
+      "change_id": 372,
+      "company": "Anthropic",
+      "detected_at": "2025-07-21T03:06:58.430Z",
+      "interest_level": 8,
+      "change_type": "new",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "openai-2025-07-22T19-04-16.json",
+      "change_id": 347,
       "company": "OpenAI",
-      "detected_at": "2025-07-22T18:46:20.404Z",
-      "interest_level": 4,
+      "detected_at": "2025-07-22T19:04:16.736Z",
+      "interest_level": 6,
       "change_type": "modified",
       "summary": "Change detected"
     },
     {
-      "filename": "openai-2025-07-22T19-04-23.json",
-      "change_id": 225,
-      "company": "OpenAI",
-      "detected_at": "2025-07-22T19:04:23.608Z",
-      "interest_level": 3,
+      "filename": "anthropic-2025-07-22T17-13-18.json",
+      "change_id": 219,
+      "company": "Anthropic",
+      "detected_at": "2025-07-22T17:13:18.357Z",
+      "interest_level": 6,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "anthropic-2025-07-21T14-21-02.json",
+      "change_id": 360,
+      "company": "Anthropic",
+      "detected_at": "2025-07-21T14:21:02.651Z",
+      "interest_level": 6,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "perplexity-ai-2025-07-23T00-38-32.json",
+      "change_id": 275,
+      "company": "Perplexity AI",
+      "detected_at": "2025-07-23T00:38:32.210Z",
+      "interest_level": 4,
       "change_type": "modified",
       "summary": "Change detected"
     },
@@ -81,7 +279,34 @@
       "change_id": 210,
       "company": "GitHub Copilot",
       "detected_at": "2025-07-22T17:17:58.613Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "openai-2025-07-22T18-46-20.json",
+      "change_id": 227,
+      "company": "OpenAI",
+      "detected_at": "2025-07-22T18:46:20.404Z",
       "interest_level": 3,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "github-copilot-2025-07-23T23-36-42.json",
+      "change_id": 310,
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-23T23:36:42.053Z",
+      "interest_level": 2,
+      "change_type": "modified",
+      "summary": "Change detected"
+    },
+    {
+      "filename": "google-deepmind-2025-07-23T19-03-32.json",
+      "change_id": 297,
+      "company": "Google DeepMind",
+      "detected_at": "2025-07-23T19:03:32.433Z",
+      "interest_level": 2,
       "change_type": "modified",
       "summary": "Change detected"
     },

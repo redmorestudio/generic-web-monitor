@@ -5,41 +5,15 @@
   "detected_at": "2025-07-22T17:18:26.929Z",
   "change_type": "modified",
   "interest_level": 2,
-  "ai_confidence": 0.99,
+  "ai_confidence": 0.8,
   "summary": "Change detected",
   "category": "General Update",
-  "change_summary": {
-    "change_type": "no significant update",
-    "change_scale": "minor",
-    "what_changed": "No significant changes were detected in the content structure or major updates to the models, research, or science sections.",
-    "specific_changes": []
-  },
-  "strategic_analysis": {
-    "market_signals": [],
-    "business_impact": "No significant business impact is expected from these changes.",
-    "strategic_direction": "The strategic direction of Google DeepMind remains focused on AI research and development.",
-    "competitive_implications": "No competitive implications are evident from the lack of significant changes."
-  },
-  "entities": {
-    "people": [],
-    "markets": [],
-    "pricing": [],
-    "features": [],
-    "products": [],
-    "partnerships": [],
-    "technologies": []
-  },
-  "insights": {
-    "threats": [],
-    "key_findings": [],
-    "opportunities": [],
-    "recommended_actions": [
-      "Monitor Google DeepMind's blog and research sections for future updates and announcements."
-    ]
-  },
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
   "key_insights": [],
-  "business_impact": "No significant business impact is expected from these changes.",
-  "competitive_implications": "No competitive implications are evident from the lack of significant changes.",
+  "business_impact": "",
+  "competitive_implications": "",
   "content_hash_before": "0856f2678262f1e042bb2cfe5c5b91915f1e0c29d3ef676c602b4e613d6274f9",
   "content_hash_after": "7c29ea70057d3c2a4be9e266c797b17779337c551fca9e012b54d45cec0dc8df",
   "ai_model": "groq-llama-3.3-70b",

@@ -1,0 +1,22 @@
+{
+  "id": 296,
+  "company": "Google DeepMind",
+  "page_url": "blog",
+  "detected_at": "2025-07-23T19:03:49.432Z",
+  "change_type": "modified",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
+  "content_hash_before": "7a35b93de4620c6cbde77f1af1c14352e8dca1255877f05ac43f742198380f79",
+  "content_hash_after": "b7b7ee267714fb9d20ab990c44aa7279db45174585c310afa1af47d45d46b2a1",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

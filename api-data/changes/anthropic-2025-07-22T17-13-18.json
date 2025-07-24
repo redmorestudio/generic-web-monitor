@@ -4,61 +4,16 @@
   "page_url": "news",
   "detected_at": "2025-07-22T17:13:18.357Z",
   "change_type": "modified",
-  "interest_level": 8,
+  "interest_level": 6,
   "ai_confidence": 0.8,
   "summary": "Change detected",
   "category": "General Update",
-  "change_summary": {
-    "change_type": "addition",
-    "change_scale": "minor",
-    "what_changed": "New article 'Build AI in America' added, and some older articles are no longer visible on the main news page",
-    "specific_changes": [
-      "Addition of new article 'Build AI in America'",
-      "Removal of older articles from the main news page"
-    ]
-  },
-  "strategic_analysis": {
-    "market_signals": [
-      "Increased focus on AI development in America",
-      "Potential for new initiatives or partnerships"
-    ],
-    "business_impact": "The new article may indicate Anthropic's focus on promoting AI development in America, which could have implications for their business strategy and market positioning.",
-    "strategic_direction": "Anthropic may be shifting its focus towards more nationally-oriented AI development, which could impact its global market presence.",
-    "competitive_implications": "The emphasis on 'Build AI in America' might be a strategic move to differentiate Anthropic from competitors and align with national interests."
-  },
-  "entities": {
-    "people": [],
-    "markets": [],
-    "pricing": [],
-    "features": [],
-    "products": [],
-    "partnerships": [],
-    "technologies": []
-  },
-  "insights": {
-    "threats": [
-      "Possible backlash from international partners or competitors",
-      "Dependence on American market and policy changes"
-    ],
-    "key_findings": [
-      "Anthropic is promoting AI development in America",
-      "The company is updating its news page to reflect current initiatives"
-    ],
-    "opportunities": [
-      "Potential for new business opportunities in the American AI market",
-      "Increased cooperation with American organizations and government"
-    ],
-    "recommended_actions": [
-      "Monitor Anthropic's future updates and initiatives",
-      "Assess the impact of 'Build AI in America' on the global AI market"
-    ]
-  },
-  "key_insights": [
-    "Anthropic is promoting AI development in America",
-    "The company is updating its news page to reflect current initiatives"
-  ],
-  "business_impact": "The new article may indicate Anthropic's focus on promoting AI development in America, which could have implications for their business strategy and market positioning.",
-  "competitive_implications": "The emphasis on 'Build AI in America' might be a strategic move to differentiate Anthropic from competitors and align with national interests.",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
   "content_hash_before": "715149c11ce9ecfeb58230117d600c56aab66e6ae501de8e5c65f2d8bde958eb",
   "content_hash_after": "3e93d97a981a6c18ec82db5a02466a714245503230014ea45ed7885df13d58cb",
   "ai_model": "groq-llama-3.3-70b",

@@ -1,4 +1,4 @@
-name: 3. Analyze Content
+name: Analyze Content (SQLite - DEPRECATED)
 
 on:
   # Allow manual trigger
@@ -63,7 +63,7 @@ on:
 
 # Prevent concurrent runs
 concurrency:
-  group: analyze-workflow
+  group: analyze-workflow-deprecated
   cancel-in-progress: false
 
 env:
@@ -83,6 +83,13 @@ jobs:
       actions: read
     
     steps:
+      - name: ⚠️ DEPRECATED WORKFLOW WARNING
+        run: |
+          echo "=================== ⚠️  WARNING ⚠️  ==================="
+          echo "This SQLite-based workflow is DEPRECATED!"
+          echo "Please use '3. Analyze Content (PostgreSQL Enhanced)' instead"
+          echo "======================================================"
+      
       - name: Checkout code
         uses: actions/checkout@v4
         with:
@@ -192,24 +199,25 @@ jobs:
         run: |
           cd github-actions-backend
           echo "{
-            \"workflow\": \"analyze\",
+            \"workflow\": \"analyze-deprecated\",
             \"run_id\": \"${{ github.run_id }}\",
             \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
             \"mode\": \"${{ inputs.analysis_mode }}\",
             \"trigger_source\": \"${{ inputs.trigger_source }}\",
             \"architecture\": \"${{ env.USE_THREE_DB == 'true' && 'three-db' || 'legacy' }}\",
             \"ai_model\": \"groq-llama-3.3-70b\",
-            \"status\": \"completed\"
+            \"status\": \"deprecated\",
+            \"warning\": \"This SQLite workflow is deprecated. Use PostgreSQL Enhanced instead.\"
           }" > ../api-data/last-analysis.json
       
       - name: Upload analysis artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: analysis-results-${{ github.run_id }}
+          name: analysis-results-deprecated-${{ github.run_id }}
           path: |
             github-actions-backend/data/baseline-intelligence-report.json
             api-data/
-          retention-days: 30
+          retention-days: 7  # Shorter retention for deprecated workflow
       
       - name: Commit analysis results
         run: |
@@ -266,7 +274,7 @@ jobs:
             echo "📝 Changes to commit:"
             git diff --staged --name-only
             
-            git commit -m "🚀 Update AI analysis (Groq) - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
+            git commit -m "🚀 Update AI analysis (DEPRECATED SQLite) - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
             
             # Push changes with retry logic
             push_with_retry || {
@@ -291,13 +299,9 @@ jobs:
               workflow_id: 'sync.yml',
               ref: 'main',
               inputs: {
-                trigger_source: 'analyze-cascade',
+                trigger_source: 'analyze-deprecated-cascade',
                 run_id: '${{ github.run_id }}'
                 // Note: Don't pass cascade to sync - it's the last stage
               }
             });
             console.log(`✅ Triggered Sync workflow`);
-      
-      # Cascade parameter system implemented
-      # Manual runs (cascade: true) trigger the next workflow
-      # Full-monitor runs (cascade: false) prevent duplicates

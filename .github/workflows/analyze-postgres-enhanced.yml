@@ -1,4 +1,4 @@
-name: 3. Analyze Content (PostgreSQL Enhanced)
+name: 3. Analyze Content (PostgreSQL)
 
 on:
   # Allow manual trigger
@@ -102,36 +102,160 @@ jobs:
           echo "Cascade: ${{ inputs.cascade }}"
           echo "========================================"
 
-      - name: Run PostgreSQL schema fixes
+      - name: Check PostgreSQL schema status (PROTECTED)
         working-directory: github-actions-backend
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
         run: |
-          echo "🔧 Running PostgreSQL schema fixes..."
+          echo "🔍 Checking PostgreSQL schema status with protection..."
           
-          # Define the list of PostgreSQL-specific fix scripts
-          POSTGRES_FIX_SCRIPTS=(
-            "fix-postgres-schema-complete.js"
-            "fix-postgres-schema.js"
-            "fix-postgres-schema-final.js"
-            "fix-postgres-analysis-schema.js"
-            "fix-postgres-analyze-schema.js"
-            "fix-baseline-analysis-schema.js"
-            "fix-enhanced-analysis-postgres.js"
-            "fix-intelligence-changes-schema.js"
-          )
+          # CRITICAL: Follow DATABASE PROTECTION rules
+          # ✅ Check schema status first
+          if [ -f "schema-protector.js" ]; then
+            echo "✅ Schema protector found - checking status..."
+            node schema-protector.js status || echo "⚠️ Schema status check had issues"
+          else
+            echo "⚠️ Schema protector not found - proceeding with caution"
+          fi
+
+      - name: Fix schema issues (PROTECTED EXECUTION)
+        working-directory: github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          echo "🔧 Running PROTECTED PostgreSQL schema fixes..."
           
-          # Run only PostgreSQL-specific fix scripts
-          for script in "${POSTGRES_FIX_SCRIPTS[@]}"; do
-            if [ -f "$script" ]; then
-              echo "Running $script..."
-              node "$script" || echo "Warning: $script had issues but continuing"
-            else
-              echo "Script $script not found - skipping"
-            fi
-          done
+          # CRITICAL: Follow DATABASE PROTECTION rules
+          # ✅ Use schema-protector.js wrapper
+          # ✅ Single script execution (no loops)
+          # ✅ Proper version control
           
-          echo "✅ PostgreSQL schema fixes complete"
+          if [ -f "schema-protector.js" ] && [ -f "fix-enhanced-analysis-company-id.js" ]; then
+            echo "🛡️  Using PROTECTED schema fix for enhanced_analysis..."
+            node fix-enhanced-analysis-company-id.js
+            echo "✅ Protected schema fix completed"
+          elif [ -f "fix-postgres-schema-complete.js" ]; then
+            echo "⚠️  Using legacy schema fix (not fully protected)..."
+            node fix-postgres-schema-complete.js
+            echo "✅ Legacy schema fix completed"
+          else
+            echo "❌ Critical error: No schema fix scripts found!"
+            echo "❌ Cannot proceed without fixing enhanced_analysis table"
+            exit 1
+          fi
+
+      - name: Verify enhanced_analysis table structure
+        working-directory: github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          echo "🔍 Verifying enhanced_analysis table has required columns..."
+          node -e "
+            const { db, end } = require('./postgres-db');
+            
+            async function checkTable() {
+              try {
+                const columns = await db.all(\`
+                  SELECT column_name, data_type, is_nullable
+                  FROM information_schema.columns 
+                  WHERE table_schema = 'intelligence' 
+                  AND table_name = 'enhanced_analysis'
+                  ORDER BY ordinal_position
+                \`);
+                
+                if (columns.length === 0) {
+                  console.log('❌ enhanced_analysis table does not exist!');
+                  process.exit(1);
+                }
+                
+                console.log('📊 enhanced_analysis table structure:');
+                columns.forEach(col => {
+                  console.log(\`  - \${col.column_name}: \${col.data_type} \${col.is_nullable === 'NO' ? 'NOT NULL' : 'NULL'}\`);
+                });
+                
+                // Check for required columns
+                const hasCompanyId = columns.some(col => col.column_name === 'company_id');
+                const hasChangeId = columns.some(col => col.column_name === 'change_id');
+                
+                if (!hasCompanyId) {
+                  console.log('❌ Missing required column: company_id');
+                  process.exit(1);
+                }
+                
+                if (!hasChangeId) {
+                  console.log('❌ Missing required column: change_id');
+                  process.exit(1);
+                }
+                
+                console.log('✅ All required columns found in enhanced_analysis table');
+                console.log('🎉 Table is ready for AI analysis!');
+                
+              } catch (error) {
+                console.error('❌ Error checking table structure:', error.message);
+                process.exit(1);
+              } finally {
+                await end();
+              }
+            }
+            
+            checkTable();
+          "
+
+      - name: Verify baseline_analysis table structure  
+        working-directory: github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          echo "🔍 Verifying baseline_analysis table for enhanced entity extraction..."
+          node -e "
+            const { db, end } = require('./postgres-db');
+            
+            async function checkBaselineTable() {
+              try {
+                const columns = await db.all(\`
+                  SELECT column_name, data_type
+                  FROM information_schema.columns 
+                  WHERE table_schema = 'intelligence' 
+                  AND table_name = 'baseline_analysis'
+                  ORDER BY ordinal_position
+                \`);
+                
+                if (columns.length === 0) {
+                  console.log('❌ baseline_analysis table does not exist!');
+                  process.exit(1);
+                }
+                
+                console.log('📊 baseline_analysis table columns:');
+                columns.forEach(col => {
+                  console.log(\`  - \${col.column_name}: \${col.data_type}\`);
+                });
+                
+                // Check for JSONB columns needed for enhanced extraction
+                const hasEntities = columns.some(col => col.column_name === 'entities' && col.data_type === 'jsonb');
+                const hasThemes = columns.some(col => col.column_name === 'themes' && col.data_type === 'jsonb');
+                
+                if (hasEntities && hasThemes) {
+                  console.log('✅ Enhanced JSONB columns found - ready for rich entity extraction');
+                } else {
+                  console.log('⚠️  Enhanced JSONB columns missing - will use basic text fields');
+                  if (!hasEntities) console.log('  - Missing: entities JSONB');
+                  if (!hasThemes) console.log('  - Missing: themes JSONB');
+                }
+                
+              } catch (error) {
+                console.error('❌ Error checking baseline_analysis table:', error.message);
+                process.exit(1);
+              } finally {
+                await end();
+              }
+            }
+            
+            checkBaselineTable();
+          "
 
       - name: 🧠 Run Baseline AI Analysis (PostgreSQL)
         if: success()
@@ -139,6 +263,7 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
           NODE_ENV: production
         run: |
           echo "🧠 Starting BASELINE AI Analysis (PostgreSQL)..."
@@ -178,6 +303,7 @@ jobs:
         env:
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
           NODE_ENV: production
         run: |
           echo "🔍 Starting CHANGE DETECTION AI Analysis (PostgreSQL)..."
@@ -205,11 +331,30 @@ jobs:
             echo "✅ Change detection analysis complete"
           fi
 
+      - name: 📊 Generate static data files (PostgreSQL)
+        if: success()
+        working-directory: github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          NODE_ENV: production
+        run: |
+          echo "📊 Generating static data files..."
+          
+          # Check if the PostgreSQL version exists
+          if [ -f "generate-static-data-three-db-postgres.js" ]; then
+            node generate-static-data-three-db-postgres.js
+            echo "✅ Static data files generated"
+          else
+            echo "⚠️ PostgreSQL static data generator not found - skipping"
+          fi
+
       - name: 🔄 Generate change detail files (PostgreSQL)
         if: success()
         working-directory: github-actions-backend
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
           NODE_ENV: production
         run: |
           echo "📝 Generating individual change detail files..."
@@ -221,6 +366,77 @@ jobs:
           else
             echo "⚠️ PostgreSQL change details generator not found - skipping"
           fi
+
+      - name: 📋 Generate changes.json
+        if: success()
+        working-directory: github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          DATABASE_URL: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        run: |
+          echo "📋 Generating changes.json for dashboard..."
+          
+          # Generate changes.json from PostgreSQL
+          node -e "
+            const { db, end } = require('./postgres-db');
+            const fs = require('fs');
+            const path = require('path');
+            
+            async function generateChanges() {
+              try {
+                const changes = await db.all(\`
+                  SELECT 
+                    cd.company,
+                    cd.url,
+                    cd.change_type,
+                    cd.detected_at,
+                    cd.interest_level,
+                    cd.ai_analysis
+                  FROM processed_content.change_detection cd
+                  ORDER BY cd.detected_at DESC
+                  LIMIT 100
+                \`);
+                
+                const outputPath = path.join('..', 'api-data', 'changes.json');
+                fs.writeFileSync(outputPath, JSON.stringify(changes, null, 2));
+                console.log(\`✅ Generated changes.json with \${changes.length} changes\`);
+                
+              } catch (error) {
+                console.error('❌ Error generating changes.json:', error.message);
+              } finally {
+                await end();
+              }
+            }
+            
+            generateChanges();
+          "
+
+      - name: Create analysis summary
+        if: success()
+        run: |
+          echo "📄 Creating analysis summary..."
+          cd github-actions-backend
+          echo "{
+            \"workflow\": \"analyze-postgres\",
+            \"run_id\": \"${{ github.run_id }}\",
+            \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"mode\": \"${{ inputs.analysis_mode }}\",
+            \"enhanced\": ${{ inputs.use_enhanced || true }},
+            \"trigger_source\": \"${{ inputs.trigger_source }}\",
+            \"database\": \"postgresql\",
+            \"ai_model\": \"groq-llama-3.3-70b\",
+            \"status\": \"completed\"
+          }" > ../api-data/last-analysis.json
+
+      - name: Upload analysis artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-results-postgres-${{ github.run_id }}
+          path: |
+            github-actions-backend/data/*.json
+            api-data/
+          retention-days: 30
 
       - name: 💾 Commit analysis results
         if: success()

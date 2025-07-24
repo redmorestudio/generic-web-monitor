@@ -8,82 +8,12 @@
   "ai_confidence": 0.95,
   "summary": "Change detected",
   "category": "General Update",
-  "change_summary": {
-    "change_type": "major overhaul",
-    "change_scale": "major",
-    "what_changed": "The content has changed from a security verification page to the OpenAI homepage, featuring various products, research, and company information.",
-    "specific_changes": [
-      "Introduction of new products and features such as ChatGPT, Sora, and API Platform",
-      "Addition of research and company information sections",
-      "Removal of security verification page content",
-      "Update of the overall layout and design"
-    ]
-  },
-  "strategic_analysis": {
-    "market_signals": [
-      "Increased focus on AI-powered products",
-      "Expansion into new markets"
-    ],
-    "business_impact": "The changes indicate a significant expansion of OpenAI's offerings, which can lead to increased market share and revenue.",
-    "strategic_direction": "The changes suggest that OpenAI is shifting its focus towards becoming a leading provider of AI-powered solutions.",
-    "competitive_implications": "The introduction of new products and features can pose a threat to competitors in the AI market."
-  },
-  "entities": {
-    "people": [
-      "Sam Altman",
-      "Jony Ive"
-    ],
-    "markets": [
-      "AI market",
-      "Technology market"
-    ],
-    "pricing": [
-      "ChatGPT pricing",
-      "Sora pricing",
-      "API Platform pricing"
-    ],
-    "features": [
-      "Research",
-      "Company information"
-    ],
-    "products": [
-      "ChatGPT",
-      "Sora",
-      "API Platform"
-    ],
-    "partnerships": [],
-    "technologies": [
-      "GPT-4o",
-      "GPT-4o mini"
-    ]
-  },
-  "insights": {
-    "threats": [
-      "Increased competition in the AI market",
-      "Potential disruption of traditional industries"
-    ],
-    "key_findings": [
-      "OpenAI is expanding its product offerings",
-      "The company is focusing on AI-powered solutions",
-      "The changes can impact the market and competition"
-    ],
-    "opportunities": [
-      "Partnership opportunities with OpenAI",
-      "Investment opportunities in AI-powered solutions"
-    ],
-    "recommended_actions": [
-      "Monitor OpenAI's product developments",
-      "Assess the potential impact on the market and competition",
-      "Consider partnership or investment opportunities"
-    ]
-  },
-  "key_insights": [
-    "OpenAI is expanding its product offerings",
-    "The company is focusing on AI-powered solutions",
-    "The changes can impact the market and competition"
-  ],
-  "business_impact": "The changes indicate a significant expansion of OpenAI's offerings, which can lead to increased market share and revenue.",
-  "competitive_implications": "The introduction of new products and features can pose a threat to competitors in the AI market.",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
   "content_hash_before": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
   "content_hash_after": "c8c2eaf2d2d717422c3ec32d1a6d4a859792a60ea689363a94ea25dc12dd4b86",
   "ai_model": "groq-llama-3.3-70b",

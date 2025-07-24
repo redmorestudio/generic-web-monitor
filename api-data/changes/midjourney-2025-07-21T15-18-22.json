@@ -8,66 +8,12 @@
   "ai_confidence": 0.9,
   "summary": "Change detected",
   "category": "General Update",
-  "change_summary": {
-    "change_type": "addition",
-    "change_scale": "major",
-    "what_changed": "Initial content creation for Midjourney documentation",
-    "specific_changes": [
-      "Introduction of help center with various sections",
-      "Addition of getting started guide",
-      "Documentation section for making the most of Midjourney",
-      "Billing support section",
-      "Policies and guidelines including terms of service, privacy policy, data deletion and privacy FAQ, and community guidelines",
-      "Links to Midjourney website and Discord server"
-    ]
-  },
-  "strategic_analysis": {
-    "market_signals": [
-      "Investment in customer support",
-      "Emphasis on transparency through policies and guidelines"
-    ],
-    "business_impact": "Enhanced user experience and support, potentially leading to increased customer satisfaction and retention.",
-    "strategic_direction": "Focus on user experience, support, and transparency.",
-    "competitive_implications": "Midjourney is positioning itself as a customer-centric platform, potentially differentiating itself from competitors."
-  },
-  "entities": {
-    "people": [],
-    "markets": [],
-    "pricing": [],
-    "features": [
-      "Getting Started guide",
-      "Documentation",
-      "Billing Support"
-    ],
-    "products": [
-      "Midjourney"
-    ],
-    "partnerships": [],
-    "technologies": []
-  },
-  "insights": {
-    "threats": [
-      "High investment in support infrastructure may pose financial challenges"
-    ],
-    "key_findings": [
-      "Midjourney is investing in comprehensive documentation and support",
-      "Emphasis on policies and guidelines for transparency"
-    ],
-    "opportunities": [
-      "Enhanced customer satisfaction and retention",
-      "Differentiation from competitors through customer-centric approach"
-    ],
-    "recommended_actions": [
-      "Monitor Midjourney's customer satisfaction and retention rates",
-      "Analyze the impact of Midjourney's customer-centric approach on its competitive positioning"
-    ]
-  },
-  "key_insights": [
-    "Midjourney is investing in comprehensive documentation and support",
-    "Emphasis on policies and guidelines for transparency"
-  ],
-  "business_impact": "Enhanced user experience and support, potentially leading to increased customer satisfaction and retention.",
-  "competitive_implications": "Midjourney is positioning itself as a customer-centric platform, potentially differentiating itself from competitors.",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
   "content_hash_before": null,
   "content_hash_after": "2155c3b7e5514b7240a3fc868ca3af7068938cc0aab51d19b9002f88932391ff",
   "ai_model": "groq-llama-3.3-70b",
