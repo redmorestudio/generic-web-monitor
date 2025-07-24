@@ -15,9 +15,9 @@
       "ai_technologies": [
         "python",
         "amazon bedrock",
-        "github",
         "api",
-        "sdks"
+        "aws",
+        "github"
       ]
     }
   },
@@ -29,16 +29,16 @@
     "intelligence": {
       "top_products": [
         "github copilot",
-        "github models",
         "github advanced security",
+        "github spark",
         "github codespaces",
         "github actions"
       ],
       "ai_technologies": [
-        "github",
-        "windows terminal",
-        "mcp",
         "python",
+        "javascript",
+        "windows terminal",
+        "github",
         "microsoft azure"
       ]
     }
@@ -51,17 +51,17 @@
     "intelligence": {
       "top_products": [
         "google ai studio",
-        "gemini",
+        "google workspace",
         "gemini app",
         "vertex ai",
-        "google search"
+        "cloud sql"
       ],
       "ai_technologies": [
         "python",
         "google cloud",
-        "kubernetes",
-        "docker",
-        "apache spark"
+        "tensorflow",
+        "pytorch",
+        "jax"
       ]
     }
   },
@@ -72,17 +72,18 @@
     "industry": null,
     "intelligence": {
       "top_products": [
-        "midjourney",
         "basic plan",
         "standard plan",
         "pro plan",
-        "mega plan"
+        "mega plan",
+        "midjourney magazine subscription"
       ],
       "ai_technologies": [
         "discord",
         "web",
         "python",
-        "hc"
+        "javascript",
+        "html"
       ]
     }
   },
@@ -103,8 +104,8 @@
         "python",
         "tensorflow",
         "pytorch",
-        "aws",
-        "azure"
+        "jax",
+        "aws"
       ]
     }
   },
@@ -116,13 +117,17 @@
     "intelligence": {
       "top_products": [
         "perplexity pro",
-        "perplexity max"
+        "perplexity max",
+        "perplexity labs",
+        "perplexity research",
+        "perplexity ai"
       ],
       "ai_technologies": [
         "unlimited file uploads",
-        "unlimited research",
-        "exclusive pro perks",
-        "cloudflare"
+        "unlimited photo uploads",
+        "image generation",
+        "cloudflare",
+        "favicon"
       ]
     }
   }
