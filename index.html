@@ -835,36 +835,18 @@
             
             const changesDiv = document.getElementById('recentChanges');
 
-            if (!window.dashboardData || !window.dashboardData.companies) {
+            // Check if we have the recent_changes_summary
+            if (!window.dashboardData || !window.dashboardData.recent_changes_summary || !window.dashboardData.recent_changes_summary.last_5_changes) {
                 changesDiv.innerHTML = `
                     <div class="error-message">No recent changes detected.</div>
                 `;
                 return;
             }
 
-            // Extract recent high-interest changes from companies
-            let allRecentChanges = [];
-            window.dashboardData.companies.forEach(company => {
-                if (company.recentChanges && company.recentChanges.length > 0) {
-                    // Filter to only show changes with interest level >= 6
-                    const significantChanges = company.recentChanges.filter(c => (c.interestLevel || 5) >= 6);
-                    significantChanges.forEach(change => {
-                        allRecentChanges.push({
-                            ...change,
-                            companyName: company.name
-                        });
-                    });
-                }
-            });
-            
-            // Sort by interest level and date
-            allRecentChanges.sort((a, b) => {
-                const scoreA = (a.interestLevel || 5) * 1000 + new Date(a.detectedAt || 0).getTime();
-                const scoreB = (b.interestLevel || 5) * 1000 + new Date(b.detectedAt || 0).getTime();
-                return scoreB - scoreA;
-            });
-            
-            const recentChanges = allRecentChanges.slice(0, 3); // Show top 3
+            // Use the recent_changes_summary directly
+            const recentChanges = window.dashboardData.recent_changes_summary.last_5_changes
+                .filter(change => (change.interest_level || 5) >= 6)
+                .slice(0, 3); // Show top 3 high-interest changes
             
             if (recentChanges.length === 0) {
                 changesDiv.innerHTML = `
@@ -874,27 +856,18 @@
             }
             
             let html = '';
-            recentChanges.forEach((change, index) => {
-                // Parse AI summary JSON if needed
-                let displaySummary = change.summary || 'Content updated';
-                if (typeof displaySummary === 'string' && displaySummary.startsWith('{')) {
-                    try {
-                        const parsed = JSON.parse(displaySummary);
-                        displaySummary = parsed.what_changed || parsed.summary || 'Content updated';
-                    } catch (e) {
-                        // Keep original if parsing fails
-                    }
-                }
-                
-                const timeDisplay = change.relativeTime || formatTimeAgo(new Date(change.detectedAt));
-                const changeId = change.id || `change-${index}`;
+            recentChanges.forEach((change) => {
+                // Use the summary directly from recent_changes_summary
+                const displaySummary = change.summary || 'Content updated';
+                const timeDisplay = change.time_ago || formatTimeAgo(new Date(change.detected_at));
+                const changeId = change.change_id;
                 
                 html += `
-                    <div class="change-item" style="background: rgba(59, 130, 246, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid ${getInterestColor(change.interestLevel)}; cursor: pointer;" 
-                         onclick="showChangeDetail('${changeId}', '${escapeHtml(change.companyName)}', event)">
+                    <div class="change-item" style="background: rgba(59, 130, 246, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid ${getInterestColor(change.interest_level)}; cursor: pointer;" 
+                         onclick="showChangeDetail('${changeId}', '${escapeHtml(change.company)}', event)">
                         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 5px;">
-                            <span style="font-size: 1.5rem;">${getInterestEmoji(change.interestLevel)}</span>
-                            <span style="font-weight: bold; color: #93c5fd;">${escapeHtml(change.companyName)}</span>
+                            <span style="font-size: 1.5rem;">${getInterestEmoji(change.interest_level)}</span>
+                            <span style="font-weight: bold; color: #93c5fd;">${escapeHtml(change.company)}</span>
                             <span style="color: #6b7280; font-size: 0.85rem;">${timeDisplay}</span>
                         </div>
                         <div style="color: #d1d5db; font-size: 0.9rem; line-height: 1.4;">
@@ -902,7 +875,7 @@
                         </div>
                         <div style="margin-top: 8px; display: flex; align-items: center; gap: 10px;">
                             <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; padding: 2px 8px; border-radius: 12px; font-size: 0.75rem;">
-                                Interest: ${change.interestLevel}/10
+                                Interest: ${change.interest_level}/10
                             </span>
                         </div>
                     </div>
@@ -1050,17 +1023,17 @@
             
             try {
                 // Try direct ID-based URL first
-                let response = await fetch(`/api-data/changes/change-${changeId}.json`);
+                let response = await fetch(`./api-data/changes/change-${changeId}.json`);
                 
                 // Fallback to manifest lookup if needed
                 if (!response.ok) {
-                    const manifestResponse = await fetch('/api-data/changes/manifest.json');
+                    const manifestResponse = await fetch('./api-data/changes/manifest.json');
                     if (manifestResponse.ok) {
                         const manifest = await manifestResponse.json();
                         const changeFile = manifest.files.find(f => f.change_id === parseInt(changeId));
                         
                         if (changeFile) {
-                            response = await fetch(`/api-data/changes/${changeFile.filename}`);
+                            response = await fetch(`./api-data/changes/${changeFile.filename}`);
                         }
                     }
                 }
