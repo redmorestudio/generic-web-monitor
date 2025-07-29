@@ -327,7 +327,7 @@ async function processRecentChanges(mode = 'recent') {
           change.change_type,
           beforeContent?.substring(0, 1000) || '',
           afterContent.substring(0, 1000) || '',
-          JSON.stringify(analysis.change_summary),
+          JSON.stringify(analysis),  // FIXED: Store FULL analysis, not just change_summary
           interestLevel,
           analysis.interest_assessment?.confidence || 0.8,
           change.old_hash,

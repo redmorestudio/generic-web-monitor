@@ -1,0 +1,72 @@
+{
+  "id": 452,
+  "company": "GitHub Copilot",
+  "page_url": "docs",
+  "detected_at": "2025-07-29T14:45:53.478Z",
+  "change_type": "modified",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Reorganization and renaming of certain sections, addition of new links and removal of old ones, changes in wording and formatting",
+  "category": "product_update",
+  "change_summary": {
+    "what_changed": "Reorganization and renaming of certain sections, addition of new links and removal of old ones, changes in wording and formatting",
+    "change_type": "update",
+    "change_scale": "significant",
+    "specific_changes": [
+      "Renaming of 'Plans for Copilot' to 'Plans'",
+      "Removal of 'Copilot features' and 'Best practices for using GitHub Copilot'",
+      "Addition of new links under 'How-tos' and 'Administer Copilot'",
+      "Changes in the 'Concepts' section, including the addition of 'About MCP'",
+      "Reorganization of the 'Use Copilot agents' section"
+    ]
+  },
+  "strategic_analysis": {
+    "business_impact": "The changes may indicate an expansion of GitHub Copilot's features or a shift in its target market",
+    "market_signals": [
+      "Increased focus on AI-powered tools",
+      "Growing demand for coding assistance"
+    ],
+    "competitive_implications": "The updates may give GitHub Copilot a competitive edge in the market for coding assistance tools",
+    "strategic_direction": "The changes suggest that GitHub is investing in the development and marketing of GitHub Copilot"
+  },
+  "entities": {
+    "products": [
+      "GitHub Copilot"
+    ],
+    "features": [],
+    "partnerships": [],
+    "technologies": [],
+    "people": [],
+    "pricing": [],
+    "markets": []
+  },
+  "insights": {
+    "key_findings": [
+      "GitHub Copilot's documentation has undergone significant changes",
+      "The updates may reflect changes to the product or its features"
+    ],
+    "opportunities": [
+      "Expansion into new markets or industries",
+      "Increased adoption of GitHub Copilot among developers"
+    ],
+    "threats": [
+      "Increased competition from other coding assistance tools",
+      "Potential backlash from developers who prefer traditional coding methods"
+    ],
+    "recommended_actions": [
+      "Monitor GitHub Copilot's development and marketing efforts",
+      "Assess the potential impact of the updates on the competitive landscape"
+    ]
+  },
+  "key_insights": [
+    "GitHub Copilot's documentation has undergone significant changes",
+    "The updates may reflect changes to the product or its features"
+  ],
+  "business_impact": "The changes may indicate an expansion of GitHub Copilot's features or a shift in its target market",
+  "competitive_implications": "The updates may give GitHub Copilot a competitive edge in the market for coding assistance tools",
+  "content_hash_before": "fb9bd9ab1c945464855b84f432ad8699ed9a533cecbc41e157e4db9abce3eb6e",
+  "content_hash_after": "34ccf3da5e7a69efe3fab9a816a03357f7d4cfcbd1866884dbd37f2397db51e2",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

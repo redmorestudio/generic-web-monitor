@@ -104,10 +104,19 @@ async function generateDashboard() {
                             } else {
                                 aiAnalysis = change.analysis;
                             }
-                            summary = aiAnalysis.summary || aiAnalysis.change_summary || 'Change detected';
+                            // FIXED: Handle new analysis structure with nested change_summary
+                            if (aiAnalysis.change_summary && aiAnalysis.change_summary.what_changed) {
+                                summary = aiAnalysis.change_summary.what_changed;
+                            } else if (aiAnalysis.summary) {
+                                summary = aiAnalysis.summary;
+                            } else if (aiAnalysis.change_summary && typeof aiAnalysis.change_summary === 'string') {
+                                summary = aiAnalysis.change_summary;
+                            } else {
+                                summary = 'Change detected';
+                            }
                         }
                     } catch (e) {
-                        console.log(`Could not parse analysis for change ${change.change_id}`);
+                        console.log(`Could not parse analysis for change ${change.change_id}:`, e.message);
                     }
                     
                     return {
@@ -163,7 +172,72 @@ async function generateDashboard() {
                 LIMIT 10
             `, [company.name]);
 
-            // Get intelligence data (simplified for now)
+            // FIXED: Get baseline analysis data for this company
+            const baselineAnalysis = await db.all(`
+                SELECT 
+                    entities,
+                    key_topics,
+                    technology_stack
+                FROM intelligence.baseline_analysis
+                WHERE company = $1
+            `, [company.name]);
+
+            // Extract intelligence data from baseline analysis
+            let products = [];
+            let ai_technologies = [];
+            let ai_ml_concepts = [];
+
+            for (const baseline of baselineAnalysis) {
+                try {
+                    // Parse entities JSONB
+                    if (baseline.entities) {
+                        const entities = typeof baseline.entities === 'string' 
+                            ? JSON.parse(baseline.entities) 
+                            : baseline.entities;
+                        
+                        // Extract products
+                        if (entities.products && Array.isArray(entities.products)) {
+                            products.push(...entities.products.map(p => p.name || p));
+                        }
+                        
+                        // Extract technologies
+                        if (entities.technologies && Array.isArray(entities.technologies)) {
+                            ai_technologies.push(...entities.technologies.map(t => t.name || t));
+                        }
+                        
+                        // Extract AI/ML concepts
+                        if (entities.ai_ml_concepts && Array.isArray(entities.ai_ml_concepts)) {
+                            ai_ml_concepts.push(...entities.ai_ml_concepts.map(c => c.concept || c.name || c));
+                        }
+                    }
+                    
+                    // Also check technology_stack field
+                    if (baseline.technology_stack) {
+                        try {
+                            const techStack = typeof baseline.technology_stack === 'string'
+                                ? JSON.parse(baseline.technology_stack)
+                                : baseline.technology_stack;
+                            if (Array.isArray(techStack)) {
+                                ai_technologies.push(...techStack);
+                            }
+                        } catch (e) {
+                            // If not JSON, treat as single value
+                            if (baseline.technology_stack) {
+                                ai_technologies.push(baseline.technology_stack);
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.log(`Error parsing baseline data for ${company.name}:`, e.message);
+                }
+            }
+
+            // Deduplicate arrays
+            products = [...new Set(products)].filter(p => p && p.length > 0);
+            ai_technologies = [...new Set(ai_technologies)].filter(t => t && t.length > 0);
+            ai_ml_concepts = [...new Set(ai_ml_concepts)].filter(c => c && c.length > 0);
+
+            // Build company data with intelligence
             const companyData = {
                 id: company.id,
                 name: company.name,
@@ -185,10 +259,19 @@ async function generateDashboard() {
                             } else {
                                 aiAnalysis = ch.analysis;
                             }
-                            summary = aiAnalysis.summary || aiAnalysis.change_summary || 'Change detected';
+                            // FIXED: Handle new analysis structure with nested change_summary
+                            if (aiAnalysis.change_summary && aiAnalysis.change_summary.what_changed) {
+                                summary = aiAnalysis.change_summary.what_changed;
+                            } else if (aiAnalysis.summary) {
+                                summary = aiAnalysis.summary;
+                            } else if (aiAnalysis.change_summary && typeof aiAnalysis.change_summary === 'string') {
+                                summary = aiAnalysis.change_summary;
+                            } else {
+                                summary = 'Change detected';
+                            }
                         }
                     } catch (e) {
-                        console.log(`Could not parse analysis for change ${ch.change_id}`);
+                        console.log(`Could not parse analysis for change ${ch.change_id}:`, e.message);
                     }
                     
                     return {
@@ -205,9 +288,9 @@ async function generateDashboard() {
                     };
                 }),
                 intelligence: {
-                    products: [],  // Will be populated by baseline analysis
-                    ai_technologies: [],
-                    ai_ml_concepts: []
+                    products: products,  // Now populated from baseline analysis!
+                    ai_technologies: ai_technologies,
+                    ai_ml_concepts: ai_ml_concepts
                 },
                 stats: {
                     totalChanges: companyChanges.length,

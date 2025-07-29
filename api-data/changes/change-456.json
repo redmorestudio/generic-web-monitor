@@ -1,0 +1,70 @@
+{
+  "id": 456,
+  "company": "Anthropic",
+  "page_url": "news",
+  "detected_at": "2025-07-29T14:45:17.004Z",
+  "change_type": "modified",
+  "interest_level": 5,
+  "ai_confidence": 0.8,
+  "summary": "New article 'How Anthropic teams use Claude Code' was added to the news section",
+  "category": "content_update",
+  "change_summary": {
+    "what_changed": "New article 'How Anthropic teams use Claude Code' was added to the news section",
+    "change_type": "addition",
+    "change_scale": "minor",
+    "specific_changes": [
+      "Addition of a new case study article",
+      "Update of the news section with the latest article"
+    ]
+  },
+  "strategic_analysis": {
+    "business_impact": "The addition of a new case study article may indicate Anthropic's efforts to showcase the practical applications of their products and build trust with potential customers",
+    "market_signals": [
+      "Increased focus on customer success stories",
+      "Emphasis on product development and usage"
+    ],
+    "competitive_implications": "The update may be seen as a competitive move to demonstrate the value of Anthropic's products and stay ahead in the market",
+    "strategic_direction": "The change suggests that Anthropic is focused on showcasing the practical applications of their products and building a strong customer base"
+  },
+  "entities": {
+    "products": [
+      "Claude",
+      "Claude Code"
+    ],
+    "features": [],
+    "partnerships": [],
+    "technologies": [],
+    "people": [],
+    "pricing": [],
+    "markets": []
+  },
+  "insights": {
+    "key_findings": [
+      "Anthropic is highlighting the use of Claude Code by their teams",
+      "The company is emphasizing customer success stories"
+    ],
+    "opportunities": [
+      "Potential for increased customer engagement and trust",
+      "Opportunity to showcase more case studies and success stories"
+    ],
+    "threats": [
+      "Competitors may respond with similar case studies and success stories",
+      "The update may not be seen as significant by customers or investors"
+    ],
+    "recommended_actions": [
+      "Monitor customer feedback and engagement",
+      "Consider showcasing more case studies and success stories"
+    ]
+  },
+  "key_insights": [
+    "Anthropic is highlighting the use of Claude Code by their teams",
+    "The company is emphasizing customer success stories"
+  ],
+  "business_impact": "The addition of a new case study article may indicate Anthropic's efforts to showcase the practical applications of their products and build trust with potential customers",
+  "competitive_implications": "The update may be seen as a competitive move to demonstrate the value of Anthropic's products and stay ahead in the market",
+  "content_hash_before": "8dcd6e51fc6ce3b1763bcf7edeeb4a6302c8affb4e928be84b1962b00cd74ec1",
+  "content_hash_after": "8066db112a4ecdff7edd77991dccce777334aa7ded3c7cdf74a395b13c9a06fd",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}
