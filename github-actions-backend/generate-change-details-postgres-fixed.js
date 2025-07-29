@@ -139,6 +139,16 @@ async function generateChangeDetails() {
                     console.log(`   ⚠️  Could not parse ultra analysis for change ${change.id}`);
                 }
                 
+                // FIXED: Extract summary from the new nested structure
+                let extractedSummary = 'Change detected';
+                if (analysis.change_summary && analysis.change_summary.what_changed) {
+                    extractedSummary = analysis.change_summary.what_changed;
+                } else if (analysis.summary) {
+                    extractedSummary = analysis.summary;
+                } else if (analysis.change_summary && typeof analysis.change_summary === 'string') {
+                    extractedSummary = analysis.change_summary;
+                }
+                
                 // Create detailed change object
                 const changeDetail = {
                     id: change.id,
@@ -149,20 +159,20 @@ async function generateChangeDetails() {
                     interest_level: change.interest_level,
                     ai_confidence: change.ai_confidence || 0.8,
                     
-                    // Basic analysis
-                    summary: analysis.summary || analysis.change_summary || 'Change detected',
-                    category: analysis.category || 'General Update',
+                    // Basic analysis - FIXED to use extracted summary
+                    summary: extractedSummary,
+                    category: analysis.interest_assessment?.category || analysis.category || 'General Update',
                     
                     // Enhanced analysis from ultra_analysis
                     change_summary: ultraAnalysis.change_summary || analysis.change_summary,
-                    strategic_analysis: ultraAnalysis.strategic_analysis || {},
-                    entities: ultraAnalysis.entities || {},
-                    insights: ultraAnalysis.insights || {},
+                    strategic_analysis: ultraAnalysis.strategic_analysis || analysis.strategic_analysis || {},
+                    entities: ultraAnalysis.entities || analysis.entities || {},
+                    insights: ultraAnalysis.insights || analysis.insights || {},
                     
                     // From enhanced_analysis table
-                    key_insights: change.key_insights || [],
-                    business_impact: change.business_impact || '',
-                    competitive_implications: change.competitive_implications || '',
+                    key_insights: change.key_insights || analysis.insights?.key_findings || [],
+                    business_impact: change.business_impact || analysis.strategic_analysis?.business_impact || '',
+                    competitive_implications: change.competitive_implications || analysis.strategic_analysis?.competitive_implications || '',
                     
                     // Content hashes
                     content_hash_before: change.content_hash_before,
@@ -192,7 +202,7 @@ async function generateChangeDetails() {
                     detected_at: change.detected_at,
                     interest_level: change.interest_level,
                     change_type: change.change_type,
-                    summary: changeDetail.summary.substring(0, 100) + (changeDetail.summary.length > 100 ? '...' : '')
+                    summary: extractedSummary.substring(0, 100) + (extractedSummary.length > 100 ? '...' : '')
                 });
                 
                 // Progress update
