@@ -2034,6 +2034,16 @@
                                 // Find the company data to get technologies and concepts
                                 const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
                                 if (companyData) {
+                                    // Show products if available
+                                    if (companyData.intelligence?.products?.length > 0) {
+                                        content += '<br><strong>Products:</strong><br>';
+                                        content += '<div style="font-size: 11px; color: #aaa;">';
+                                        companyData.intelligence.products.forEach(product => {
+                                            content += `• ${product.name || product}<br>`;
+                                        });
+                                        content += '</div>';
+                                    }
+                                    
                                     if (companyData.intelligence?.ai_technologies?.length > 0) {
                                         content += '<br><strong>Technologies:</strong><br>';
                                         companyData.intelligence.ai_technologies.forEach(tech => {
@@ -2072,9 +2082,29 @@
                             }
                             
                             // Update the static info panel
-                            document.getElementById('node-info').innerHTML = node ? 
-                                `<strong>${node.name}</strong><br>Type: ${node.group}<br>Interest Level: ${node.interestLevel}/10<br>URLs: ${node.urlCount}<br>Connections: ${node.connectionCount}` : 
-                                '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
+                            if (node) {
+                                let infoContent = `<strong>${node.name}</strong><br>Type: ${node.group}<br>Interest Level: ${node.interestLevel}/10<br>URLs: ${node.urlCount}<br>Connections: ${node.connectionCount}`;
+                                
+                                // Add tech/concept count for this company
+                                const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
+                                if (companyData) {
+                                    const techCount = companyData.intelligence?.ai_technologies?.length || 0;
+                                    const conceptCount = companyData.intelligence?.ai_ml_concepts?.length || 0;
+                                    const productCount = companyData.intelligence?.products?.length || 0;
+                                    
+                                    if (techCount > 0 || conceptCount > 0 || productCount > 0) {
+                                        infoContent += '<br><br><em style="color: #888; font-size: 11px;">';
+                                        if (productCount > 0) infoContent += `${productCount} products • `;
+                                        if (techCount > 0) infoContent += `${techCount} technologies • `;
+                                        if (conceptCount > 0) infoContent += `${conceptCount} concepts`;
+                                        infoContent += '</em>';
+                                    }
+                                }
+                                
+                                document.getElementById('node-info').innerHTML = infoContent;
+                            } else {
+                                document.getElementById('node-info').innerHTML = '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
+                            }
                         })
                         .onNodeClick(node => {
                             const distance = 300;
