@@ -1284,8 +1284,22 @@
             content.style.display = 'none';
             
             try {
-                // Fetch change details from API
-                const response = await fetch(`/api-data/changes/change-${changeId}.json`);
+                // Try direct ID-based URL first
+                let response = await fetch(`/api-data/changes/change-${changeId}.json`);
+                
+                // Fallback to manifest lookup if needed
+                if (!response.ok) {
+                    const manifestResponse = await fetch('/api-data/changes/manifest.json');
+                    if (manifestResponse.ok) {
+                        const manifest = await manifestResponse.json();
+                        const changeFile = manifest.files.find(f => f.change_id === parseInt(changeId));
+                        
+                        if (changeFile) {
+                            response = await fetch(`/api-data/changes/${changeFile.filename}`);
+                        }
+                    }
+                }
+                
                 if (!response.ok) throw new Error('Failed to fetch change details');
                 
                 const data = await response.json();
@@ -1308,19 +1322,30 @@
         function populateChangeModal(data) {
             // Company info
             document.getElementById('modalCompanyName').textContent = data.company;
-            document.getElementById('modalUrl').href = data.url;
-            document.getElementById('modalUrl').textContent = new URL(data.url).hostname;
+            const url = data.page_url || data.url;
+            document.getElementById('modalUrl').href = url;
+            document.getElementById('modalUrl').textContent = url ? new URL(url).hostname : 'N/A';
             
             // Interest info
             document.getElementById('modalInterestScore').textContent = data.interest_level + '/10';
-            document.getElementById('modalInterestCategory').textContent = data.interest_category.replace('_', ' ');
-            document.getElementById('modalInterestExplanation').textContent = data.interest_explanation;
             
-            // Interest drivers
+            // Handle different data structures (old vs new)
+            const category = data.interest_category || data.category || 'General Update';
+            document.getElementById('modalInterestCategory').textContent = category.replace('_', ' ');
+            
+            const explanation = data.interest_explanation || data.summary || 'No explanation available';
+            document.getElementById('modalInterestExplanation').textContent = explanation;
+            
+            // Interest drivers - may come from different sources
             const driversContainer = document.getElementById('modalInterestDrivers');
-            driversContainer.innerHTML = data.interest_drivers.map(driver => 
-                `<span class="driver">${driver}</span>`
-            ).join('');
+            const drivers = data.interest_drivers || data.key_insights || [];
+            if (Array.isArray(drivers) && drivers.length > 0) {
+                driversContainer.innerHTML = drivers.map(driver => 
+                    `<span class="driver">${driver}</span>`
+                ).join('');
+            } else {
+                driversContainer.innerHTML = '<span class="driver">No specific drivers identified</span>';
+            }
             
             // Content comparison
             if (data.has_content && data.content_preview) {
