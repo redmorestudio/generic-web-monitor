@@ -1,8 +1,8 @@
 {
-  "last_run": "2025-07-29T15:56:24.434Z",
+  "last_run": "2025-07-29T16:09:16.206Z",
   "status": "success",
-  "workflow_run_id": "16601161947",
-  "trigger_source": "analyze-postgres-cascade",
+  "workflow_run_id": "16601461450",
+  "trigger_source": "manual-fix-baseline",
   "backend": "postgresql",
   "database": "postgresql"
 }

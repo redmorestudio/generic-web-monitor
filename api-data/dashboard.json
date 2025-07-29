@@ -211,8 +211,46 @@
         }
       ],
       "intelligence": {
-        "products": [],
-        "ai_technologies": [],
+        "products": [
+          "Claude",
+          "API",
+          "Claude Code",
+          "Max plan",
+          "Team plan",
+          "Enterprise plan",
+          "Anthropic Console",
+          "Claude for Enterprise",
+          "Claude for Education",
+          "Artifacts",
+          "Message Batches API",
+          "Contextual Retrieval",
+          "Workspaces",
+          "Projects",
+          "Claude Android app",
+          "Education plan",
+          "Anthropic API"
+        ],
+        "ai_technologies": [
+          "Python",
+          "Amazon Bedrock",
+          "Google Cloud's Vertex AI",
+          "HTML",
+          "CSS",
+          "JS",
+          "Google Workspace",
+          "JIRA",
+          "Zapier",
+          "Intercom",
+          "macOS",
+          "Windows",
+          "AWS",
+          "Google Cloud",
+          "Vertex AI",
+          "GitHub",
+          "GitHub Copilot",
+          "API",
+          "SDKs"
+        ],
         "ai_ml_concepts": []
       },
       "stats": {
@@ -374,8 +412,58 @@
         }
       ],
       "intelligence": {
-        "products": [],
-        "ai_technologies": [],
+        "products": [
+          "GitHub Copilot",
+          "Copilot Free",
+          "Copilot Pro",
+          "Copilot Team",
+          "Copilot Enterprise",
+          "GitHub Copilot Extensions",
+          "Copilot Chat",
+          "Copilot Coding Agent",
+          "GitHub Copilot Spaces",
+          "GitHub",
+          "GitHub Docs",
+          "GitHub Desktop",
+          "Atom",
+          "Electron",
+          "GitHub Copilot Free",
+          "GitHub Copilot Pro",
+          "GitHub Copilot Pro+",
+          "GitHub Copilot Business",
+          "GitHub Copilot Enterprise",
+          "GitHub Advanced Security",
+          "GitHub Spark",
+          "GitHub Models",
+          "GitHub Codespaces",
+          "GitHub Actions",
+          "GitHub Packages"
+        ],
+        "ai_technologies": [
+          "GitHub",
+          "CLI",
+          "IDE",
+          "Windows Terminal",
+          "GitHub Desktop",
+          "Azure",
+          "Git",
+          "MCP",
+          "Playwright",
+          "Python",
+          "JavaScript",
+          "Visual Studio Code",
+          "Visual Studio",
+          "JetBrains IDEs",
+          "Neovim",
+          "Azure Data Studio",
+          "Eclipse",
+          "GitHub CLI",
+          "GitHub Actions",
+          "GitHub Codespaces",
+          "GitHub Packages",
+          "SAML",
+          "SCIM"
+        ],
         "ai_ml_concepts": []
       },
       "stats": {
@@ -543,8 +631,66 @@
         }
       ],
       "intelligence": {
-        "products": [],
-        "ai_technologies": [],
+        "products": [
+          "Gemini API",
+          "Google AI Studio",
+          "Gemma Open Models",
+          "Google AI Edge",
+          "Chrome Built-in Web APIs",
+          "Responsible GenAI Toolkit",
+          "Secure AI Framework",
+          "Gemini",
+          "Vertex AI",
+          "Google Search",
+          "Google Maps",
+          "YouTube",
+          "Google Photos",
+          "Google Workspace",
+          "Chrome",
+          "Gemini App",
+          "Gemini Code Assist",
+          "Gemini CLI",
+          "Google Cloud",
+          "FireSat",
+          "Google Beam",
+          "Compute Engine",
+          "Cloud Storage",
+          "BigQuery",
+          "Cloud Run",
+          "Google Kubernetes Engine",
+          "Looker",
+          "Apigee API Management",
+          "Cloud SQL",
+          "Cloud CDN",
+          "Gemini app",
+          "Vertex AI Studio",
+          "Flow",
+          "Whisk",
+          "MusicFX DJ"
+        ],
+        "ai_technologies": [
+          "Python",
+          "Android",
+          "Chrome",
+          "Google Cloud",
+          "Firebase",
+          "Colab",
+          "Jules",
+          "VS Code",
+          "JetBrains IDEs",
+          "Android Studio",
+          "Chrome DevTools",
+          "Firebase Studio",
+          "Google Cloud Platform",
+          "TensorFlow",
+          "PyTorch",
+          "Kubernetes",
+          "Docker",
+          "Apache Spark",
+          "Apache Hadoop",
+          "Apache Airflow",
+          "JAX"
+        ],
         "ai_ml_concepts": []
       },
       "stats": {
@@ -604,8 +750,19 @@
         }
       ],
       "intelligence": {
-        "products": [],
-        "ai_technologies": [],
+        "products": [
+          "Midjourney",
+          "Basic Plan",
+          "Standard Plan",
+          "Pro Plan",
+          "Mega Plan",
+          "Midjourney Magazine Subscription"
+        ],
+        "ai_technologies": [
+          "Python",
+          "Discord",
+          "Web"
+        ],
         "ai_ml_concepts": []
       },
       "stats": {
@@ -725,8 +882,26 @@
         }
       ],
       "intelligence": {
-        "products": [],
-        "ai_technologies": [],
+        "products": [
+          "ChatGPT",
+          "Sora",
+          "API Platform",
+          "Research Residency",
+          "API",
+          "ChatGPT Plus",
+          "ChatGPT Pro",
+          "ChatGPT Team",
+          "ChatGPT Enterprise"
+        ],
+        "ai_technologies": [
+          "Python",
+          "Oracle",
+          "Cloud Platforms",
+          "Web",
+          "iOS",
+          "Android",
+          "macOS"
+        ],
         "ai_ml_concepts": []
       },
       "stats": {
@@ -786,8 +961,20 @@
         }
       ],
       "intelligence": {
-        "products": [],
-        "ai_technologies": [],
+        "products": [
+          "Perplexity AI",
+          "Perplexity Pro",
+          "Perplexity Max",
+          "Perplexity Labs",
+          "Perplexity Research"
+        ],
+        "ai_technologies": [
+          "Cloudflare",
+          "Favicon",
+          "Unlimited file uploads",
+          "Unlimited photo uploads",
+          "Image generation"
+        ],
         "ai_ml_concepts": []
       },
       "stats": {
@@ -797,7 +984,7 @@
       }
     }
   ],
-  "lastUpdated": "2025-07-29T15:56:23.381Z",
+  "lastUpdated": "2025-07-29T16:09:12.999Z",
   "totalChanges": 40,
   "highInterestChanges": 20,
   "backend": "postgresql",
