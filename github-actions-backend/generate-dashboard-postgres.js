@@ -104,10 +104,19 @@ async function generateDashboard() {
                             } else {
                                 aiAnalysis = change.analysis;
                             }
-                            summary = aiAnalysis.summary || aiAnalysis.change_summary || 'Change detected';
+                            // FIXED: Handle new analysis structure with nested change_summary
+                            if (aiAnalysis.change_summary && aiAnalysis.change_summary.what_changed) {
+                                summary = aiAnalysis.change_summary.what_changed;
+                            } else if (aiAnalysis.summary) {
+                                summary = aiAnalysis.summary;
+                            } else if (aiAnalysis.change_summary && typeof aiAnalysis.change_summary === 'string') {
+                                summary = aiAnalysis.change_summary;
+                            } else {
+                                summary = 'Change detected';
+                            }
                         }
                     } catch (e) {
-                        console.log(`Could not parse analysis for change ${change.change_id}`);
+                        console.log(`Could not parse analysis for change ${change.change_id}:`, e.message);
                     }
                     
                     return {
@@ -185,10 +194,19 @@ async function generateDashboard() {
                             } else {
                                 aiAnalysis = ch.analysis;
                             }
-                            summary = aiAnalysis.summary || aiAnalysis.change_summary || 'Change detected';
+                            // FIXED: Handle new analysis structure with nested change_summary
+                            if (aiAnalysis.change_summary && aiAnalysis.change_summary.what_changed) {
+                                summary = aiAnalysis.change_summary.what_changed;
+                            } else if (aiAnalysis.summary) {
+                                summary = aiAnalysis.summary;
+                            } else if (aiAnalysis.change_summary && typeof aiAnalysis.change_summary === 'string') {
+                                summary = aiAnalysis.change_summary;
+                            } else {
+                                summary = 'Change detected';
+                            }
                         }
                     } catch (e) {
-                        console.log(`Could not parse analysis for change ${ch.change_id}`);
+                        console.log(`Could not parse analysis for change ${ch.change_id}:`, e.message);
                     }
                     
                     return {
