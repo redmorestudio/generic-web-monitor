@@ -6,18 +6,18 @@
     "industry": null,
     "intelligence": {
       "top_products": [
-        "claude",
         "claude code",
+        "claude",
+        "api",
         "max plan",
-        "team plan",
-        "enterprise plan"
+        "team plan"
       ],
       "ai_technologies": [
         "python",
         "amazon bedrock",
-        "aws",
-        "github",
-        "api"
+        "google cloud's vertex ai",
+        "api",
+        "sdks"
       ]
     }
   },
@@ -30,16 +30,16 @@
       "top_products": [
         "github copilot",
         "github advanced security",
-        "github copilot free",
-        "github copilot pro",
-        "github models"
+        "github models",
+        "github codespaces",
+        "github actions"
       ],
       "ai_technologies": [
-        "github",
+        "python",
         "windows terminal",
-        "microsoft azure",
-        "saml",
-        "scim"
+        "github actions",
+        "github codespaces",
+        "github packages"
       ]
     }
   },
@@ -81,9 +81,7 @@
       "ai_technologies": [
         "discord",
         "web",
-        "python",
-        "html",
-        "css"
+        "python"
       ]
     }
   },
@@ -102,10 +100,10 @@
       ],
       "ai_technologies": [
         "python",
-        "tensorflow",
-        "pytorch",
-        "aws",
-        "azure"
+        "web",
+        "ios",
+        "android",
+        "macos"
       ]
     }
   },
@@ -119,13 +117,15 @@
         "perplexity pro",
         "perplexity max",
         "perplexity labs",
-        "perplexity research"
+        "perplexity research",
+        "perplexity ai"
       ],
       "ai_technologies": [
         "unlimited file uploads",
         "unlimited photo uploads",
         "image generation",
-        "cloudflare"
+        "cloudflare",
+        "favicon"
       ]
     }
   }

@@ -1,5 +1,101 @@
 [
   {
+    "company": "Google DeepMind",
+    "url": "https://blog.google/technology/ai",
+    "change_type": "modified",
+    "detected_at": "2025-07-29T14:46:17.001Z",
+    "interest_level": 2,
+    "ai_analysis": "{\"technical_innovation_score\":2,\"business_impact_score\":2,\"interest_level\":2,\"interest_drivers\":[],\"category\":\"No Change\",\"impact_areas\":[],\"summary\":\"No significant changes detected in the content, no new technical innovations or business impact\"}"
+  },
+  {
+    "company": "Google DeepMind",
+    "url": "https://cloud.google.com/vertex-ai/pricing",
+    "change_type": "modified",
+    "detected_at": "2025-07-29T14:46:11.731Z",
+    "interest_level": 1,
+    "ai_analysis": "{\"technical_innovation_score\":1,\"business_impact_score\":1,\"interest_level\":1,\"interest_drivers\":[],\"category\":\"No Change\",\"impact_areas\":[],\"summary\":\"No significant changes were detected in the content, indicating no technical innovation or business impact.\"}"
+  },
+  {
+    "company": "Google DeepMind",
+    "url": "https://deepmind.google",
+    "change_type": "modified",
+    "detected_at": "2025-07-29T14:46:00.101Z",
+    "interest_level": 2,
+    "ai_analysis": "{\"technical_innovation_score\":2,\"business_impact_score\":2,\"interest_level\":2,\"interest_drivers\":[],\"category\":\"No Change\",\"impact_areas\":[],\"summary\":\"No significant changes or updates were found in the current content snippet compared to the previous one, indicating no notable technical innovation or business impact.\"}"
+  },
+  {
+    "company": "GitHub Copilot",
+    "url": "https://docs.github.com/en/copilot",
+    "change_type": "modified",
+    "detected_at": "2025-07-29T14:45:53.478Z",
+    "interest_level": 2,
+    "ai_analysis": "{\"technical_innovation_score\":2,\"business_impact_score\":2,\"interest_level\":2,\"interest_drivers\":[\"minor documentation updates\",\"no significant technical changes\"],\"category\":\"AI/ML documentation\",\"impact_areas\":[\"developer tools\",\"AI-powered coding assistance\"],\"summary\":\"The update to GitHub Copilot documentation does not introduce significant technical innovations or business impact, but rather minor adjustments to the existing documentation, suggesting routine maintenance.\"}"
+  },
+  {
+    "company": "GitHub Copilot",
+    "url": "https://github.blog/tag/github-copilot",
+    "change_type": "modified",
+    "detected_at": "2025-07-29T14:45:46.743Z",
+    "interest_level": 6,
+    "ai_analysis": "{\"technical_innovation_score\":5,\"business_impact_score\":7,\"interest_level\":6,\"interest_drivers\":[\"GitHub Copilot's application in non-traditional areas like agriculture\",\"Potential for AI-driven tools to enhance developer workflows and productivity\",\"Growing focus on open-source and social impact initiatives\"],\"category\":\"AI/ML for Social Impact and Developer Productivity\",\"impact_areas\":[\"Agricultural Technology\",\"Developer Tools and Productivity\",\"Open-Source Software and Community Development\"],\"summary\":\"The updated content highlights GitHub Copilot's potential in driving social impact, particularly in empowering smallholder farmers, and its role in improving developer workflows through AI-driven tools. While the technical innovation is notable, the business impact is more significant due to the potential for large-scale social and economic change.\"}"
+  },
+  {
+    "company": "Anthropic",
+    "url": "https://anthropic.com",
+    "change_type": "modified",
+    "detected_at": "2025-07-29T14:45:29.310Z",
+    "interest_level": 3,
+    "ai_analysis": "{\"technical_innovation_score\":3,\"business_impact_score\":3,\"interest_level\":3,\"interest_drivers\":[\"No significant changes in AI models or capabilities\",\"No new announcements or breakthroughs\"],\"category\":\"AI Research and Products\",\"impact_areas\":[\"AI Safety\",\"AI Agents\"],\"summary\":\"No substantial updates or innovations in the current content snippet compared to the previous one, indicating routine maintenance or no significant technical or business impact.\"}"
+  },
+  {
+    "company": "Anthropic",
+    "url": "https://anthropic.com/claude",
+    "change_type": "modified",
+    "detected_at": "2025-07-29T14:45:23.411Z",
+    "interest_level": 5,
+    "ai_analysis": "{\"technical_innovation_score\":5,\"business_impact_score\":5,\"interest_level\":5,\"interest_drivers\":[\"AI-powered productivity tool\",\"Contextual understanding\",\"Creative suggestion capabilities\"],\"category\":\"AI-powered productivity\",\"impact_areas\":[\"Productivity software\",\"AI-assisted development\",\"Creative industries\"],\"summary\":\"The update to the Claude webpage showcases its capabilities as a thinking partner, with a focus on connecting to users' worlds, solving complex challenges, and amplifying creative potential. While there are no groundbreaking technical innovations, the tool's features and applications demonstrate notable optimizations and useful capabilities, warranting a moderate technical innovation score. The business impact score is also moderate, as the webpage update highlights the tool's potential for market expansion and team growth, but lacks major launches or significant funding announcements.\"}"
+  },
+  {
+    "company": "Anthropic",
+    "url": "https://anthropic.com/news",
+    "change_type": "modified",
+    "detected_at": "2025-07-29T14:45:17.004Z",
+    "interest_level": 6,
+    "ai_analysis": "{\"technical_innovation_score\":5,\"business_impact_score\":7,\"interest_level\":6,\"interest_drivers\":[\"Introduction of Claude 4\",\"Partnership with the University of Chicago’s Becker Friedman Institute\",\"Series E funding at $61.5B post-money valuation\"],\"category\":\"AI/ML Research and Development\",\"impact_areas\":[\"AI Economic Research\",\"Financial Services\",\"Energy Investment\"],\"summary\":\"Anthropic's recent updates include the introduction of Claude 4, a significant partnership with the University of Chicago, and a substantial Series E funding round, indicating notable advancements in AI research and development, as well as strategic business expansions.\"}"
+  },
+  {
+    "company": "Anthropic",
+    "url": "https://anthropic.com/pricing",
+    "change_type": "modified",
+    "detected_at": "2025-07-29T14:45:10.018Z",
+    "interest_level": 1,
+    "ai_analysis": "{\"technical_innovation_score\":1,\"business_impact_score\":1,\"interest_level\":1,\"interest_drivers\":[],\"category\":\"Pricing Update\",\"impact_areas\":[],\"summary\":\"No changes were detected in the provided content snippets, indicating no technical innovation or business impact.\"}"
+  },
+  {
+    "company": "Google DeepMind",
+    "url": "https://blog.google/technology/ai",
+    "change_type": "modified",
+    "detected_at": "2025-07-24T15:45:05.834Z",
+    "interest_level": 2,
+    "ai_analysis": "{\"technical_innovation_score\":2,\"business_impact_score\":2,\"interest_level\":2,\"interest_drivers\":[],\"category\":\"No Change\",\"impact_areas\":[],\"summary\":\"No significant changes detected in the content, no new technical innovations or business impact.\"}"
+  },
+  {
+    "company": "GitHub Copilot",
+    "url": "https://docs.github.com/en/copilot",
+    "change_type": "modified",
+    "detected_at": "2025-07-24T15:44:39.009Z",
+    "interest_level": 6,
+    "ai_analysis": "{\"technical_innovation_score\":5,\"business_impact_score\":6,\"interest_level\":6,\"interest_drivers\":[\"Enhanced AI tools\",\"Improved code suggestions\",\"Expanded billing options\",\"New extensions and integrations\"],\"category\":\"AI-powered coding assistance\",\"impact_areas\":[\"Software development\",\"Artificial intelligence\",\"Machine learning\"],\"summary\":\"The updated GitHub Copilot documentation reflects incremental improvements in AI-powered coding assistance, with expanded features, billing options, and integrations. While not revolutionary, these updates demonstrate ongoing investment in AI/ML capabilities, enhancing the competitive position of GitHub Copilot in the market.\"}"
+  },
+  {
+    "company": "Anthropic",
+    "url": "https://anthropic.com/claude",
+    "change_type": "modified",
+    "detected_at": "2025-07-24T15:44:05.779Z",
+    "interest_level": 5,
+    "ai_analysis": "{\"technical_innovation_score\":5,\"business_impact_score\":5,\"interest_level\":5,\"interest_drivers\":[\"Improved AI model capabilities\",\"Enhanced user experience\",\"Expanded platform support\"],\"category\":\"AI/ML\",\"impact_areas\":[\"Natural Language Processing\",\"Conversational AI\",\"Creative Assistance\"],\"summary\":\"The updated content snippet showcases Claude's capabilities in debugging and creative assistance, with a focus on user experience and platform support. While there are no groundbreaking technical innovations, the updates demonstrate incremental improvements and a commitment to enhancing the user experience.\"}"
+  },
+  {
     "company": "GitHub Copilot",
     "url": "https://docs.github.com/en/copilot",
     "change_type": "modified",

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generated_at": "2025-07-29T14:50:56.560Z",
+  "generated_at": "2025-07-29T15:55:49.873Z",
   "source": "postgresql",
   "total_changes": 51,
   "files": [
@@ -152,7 +152,7 @@
       "detected_at": "2025-07-29T14:46:17.001Z",
       "interest_level": 8,
       "change_type": "modified",
-      "summary": "Change detected"
+      "summary": "New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inferenc..."
     },
     {
       "filename": "change-452.json",
@@ -162,7 +162,7 @@
       "detected_at": "2025-07-29T14:45:53.478Z",
       "interest_level": 8,
       "change_type": "modified",
-      "summary": "Change detected"
+      "summary": "Reorganization and renaming of certain sections, addition of new links and removal of old ones, chan..."
     },
     {
       "filename": "change-457.json",
@@ -172,7 +172,7 @@
       "detected_at": "2025-07-29T14:45:10.018Z",
       "interest_level": 8,
       "change_type": "modified",
-      "summary": "Change detected"
+      "summary": "Changes in pricing plans, specifically in the Team and Enterprise plans, with the addition of 'Claud..."
     },
     {
       "filename": "change-438.json",
@@ -315,16 +315,6 @@
       "summary": "Change detected"
     },
     {
-      "filename": "change-456.json",
-      "change_id": 456,
-      "api_path": "/api-data/changes/change-456.json",
-      "company": "Anthropic",
-      "detected_at": "2025-07-29T14:45:17.004Z",
-      "interest_level": 6,
-      "change_type": "modified",
-      "summary": "Change detected"
-    },
-    {
       "filename": "change-347.json",
       "change_id": 347,
       "api_path": "/api-data/changes/change-347.json",
@@ -353,6 +343,26 @@
       "interest_level": 6,
       "change_type": "modified",
       "summary": "Change detected"
+    },
+    {
+      "filename": "change-456.json",
+      "change_id": 456,
+      "api_path": "/api-data/changes/change-456.json",
+      "company": "Anthropic",
+      "detected_at": "2025-07-29T14:45:17.004Z",
+      "interest_level": 5,
+      "change_type": "modified",
+      "summary": "New article 'How Anthropic teams use Claude Code' was added to the news section"
+    },
+    {
+      "filename": "change-455.json",
+      "change_id": 455,
+      "api_path": "/api-data/changes/change-455.json",
+      "company": "Anthropic",
+      "detected_at": "2025-07-29T14:45:23.411Z",
+      "interest_level": 4,
+      "change_type": "modified",
+      "summary": "The download and login links for Claude have been updated with a new redirect URL."
     },
     {
       "filename": "change-440.json",
@@ -392,17 +402,7 @@
       "detected_at": "2025-07-29T14:45:29.310Z",
       "interest_level": 3,
       "change_type": "modified",
-      "summary": "Change detected"
-    },
-    {
-      "filename": "change-455.json",
-      "change_id": 455,
-      "api_path": "/api-data/changes/change-455.json",
-      "company": "Anthropic",
-      "detected_at": "2025-07-29T14:45:23.411Z",
-      "interest_level": 3,
-      "change_type": "modified",
-      "summary": "Change detected"
+      "summary": "Update of download and login links for Claude AI"
     },
     {
       "filename": "change-227.json",
@@ -422,7 +422,7 @@
       "detected_at": "2025-07-29T14:46:11.731Z",
       "interest_level": 2,
       "change_type": "modified",
-      "summary": "Change detected"
+      "summary": "No significant changes were detected in the provided content."
     },
     {
       "filename": "change-451.json",
@@ -432,17 +432,7 @@
       "detected_at": "2025-07-29T14:46:00.101Z",
       "interest_level": 2,
       "change_type": "modified",
-      "summary": "Change detected"
-    },
-    {
-      "filename": "change-453.json",
-      "change_id": 453,
-      "api_path": "/api-data/changes/change-453.json",
-      "company": "GitHub Copilot",
-      "detected_at": "2025-07-29T14:45:46.743Z",
-      "interest_level": 2,
-      "change_type": "modified",
-      "summary": "Change detected"
+      "summary": "No significant changes were detected in the content between the two versions."
     },
     {
       "filename": "change-310.json",
@@ -503,6 +493,16 @@
       "interest_level": 2,
       "change_type": "modified",
       "summary": "Change detected"
+    },
+    {
+      "filename": "change-453.json",
+      "change_id": 453,
+      "api_path": "/api-data/changes/change-453.json",
+      "company": "GitHub Copilot",
+      "detected_at": "2025-07-29T14:45:46.743Z",
+      "interest_level": 1,
+      "change_type": "modified",
+      "summary": "No significant changes were detected in the provided content."
     },
     {
       "filename": "change-257.json",
