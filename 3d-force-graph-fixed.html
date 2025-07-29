@@ -416,12 +416,33 @@
                         <option value="entity-type">Entity Type</option>
                         <option value="interest">Interest Level</option>
                         <option value="connections">Number of Connections</option>
+                        <option value="all-connections">All Connections</option>
+                        <option value="technology-links">Technology Links Only</option>
+                        <option value="concept-links">Concept Links Only</option>
+                        <option value="recent-activity">Recent Activity</option>
+                        <option value="high-interest">High Interest Only</option>
                     </select>
                 </label>
                 <div class="info-text">
                     • Entity Type: Colors by company type<br>
                     • Interest Level: Strategic importance (1-10)<br>
                     • Number of Connections: How many other nodes connected
+                </div>
+            </div>
+            
+            <div class="control-group simple-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Node Size</h4>
+                <label>
+                    Size By
+                    <select id="node-size-mode">
+                        <option value="uniform">Uniform</option>
+                        <option value="activity">By URL Count</option>
+                        <option value="connections">By Connections</option>
+                        <option value="interest">By Interest Level</option>
+                    </select>
+                </label>
+                <div class="info-text">
+                    Control how node sizes are calculated
                 </div>
             </div>
             
@@ -447,6 +468,18 @@
                     Floating Tooltip
                     <input type="checkbox" id="toggle-floating-tooltip" checked>
                 </label>
+                <label>
+                    Monochrome Mode
+                    <input type="checkbox" id="toggle-monochrome">
+                </label>
+                <label>
+                    Show Change Rings
+                    <input type="checkbox" id="toggle-change-rings">
+                </label>
+                <label>
+                    Auto-rotate
+                    <input type="checkbox" id="toggle-auto-rotate">
+                </label>
             </div>
             
             <div class="control-group advanced-group" style="display: none;">
@@ -466,6 +499,18 @@
                     <input type="range" id="link-distance" min="10" max="200" value="30" step="10">
                     <span class="slider-value" id="distance-value">30</span>
                 </label>
+            </div>
+            
+            <div class="control-group simple-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Link Strength Filter</h4>
+                <label>
+                    Connection Threshold
+                    <input type="range" id="link-threshold" min="0" max="10" value="0" step="1">
+                    <span class="slider-value" id="threshold-value">0</span>
+                </label>
+                <div class="info-text">
+                    Hide connections weaker than this value
+                </div>
             </div>
             
             <div class="control-group simple-group">
@@ -508,7 +553,9 @@
     <div id="context-menu">
         <div class="context-menu-header" id="context-menu-title">Node Name</div>
         <div class="context-menu-item" onclick="focusOnContextNode()">Show Only This & Connected</div>
+        <div class="context-menu-item" onclick="showAllNodes()">Show All</div>
         <div class="context-menu-item" onclick="centerOnContextNode()">Center Camera Here</div>
+        <div class="context-menu-item" onclick="fitToWindow()">Fit to Window</div>
         <div class="context-menu-separator"></div>
         <div class="context-menu-item" onclick="hideContextMenu()">Cancel</div>
     </div>
@@ -540,6 +587,20 @@
                     1000
                 );
             }
+            hideContextMenu();
+        }
+        
+        function showAllNodes() {
+            // Reset all filters to show all nodes
+            selectAllTypes();
+            document.getElementById('search-input').value = '';
+            window.customTagFilter = null;
+            if (window.applyFilters) window.applyFilters();
+            hideContextMenu();
+        }
+        
+        function fitToWindow() {
+            centerView();
             hideContextMenu();
         }
         
@@ -709,6 +770,11 @@
             let hoveredNode = null;
             let tooltipTimeout;
             let tooltipFixed = false;
+            let linkThreshold = 0;
+            let monochrome = false;
+            let showChangeRings = false;
+            let autoRotate = false;
+            let nodeSizeMode = 'activity';
             
             // Make applyFilters and Graph global for button access
             window.applyFilters = null;
@@ -1246,6 +1312,16 @@
                         }
                     }
                     
+                    // View mode specific filtering
+                    if (currentViewMode === 'high-interest' && node.interestLevel < 7) {
+                        return false;
+                    }
+                    if (currentViewMode === 'recent-activity') {
+                        // Only show nodes with recent changes
+                        const hasRecentChanges = node.recent_changes > 0 || node.high_interest_changes > 0;
+                        if (!hasRecentChanges) return false;
+                    }
+                    
                     // Type filter - if types are selected, only show matching types
                     if (selectedTypes.size > 0 && !selectedTypes.has(node.group)) {
                         return false;
@@ -1292,15 +1368,34 @@
                 
                 // Filter links
                 filteredData.links = graphData.links.filter(link => {
-                    return filteredNodeIds.has(link.source.id || link.source) && 
+                    // First check if both nodes are visible
+                    const hasNodes = filteredNodeIds.has(link.source.id || link.source) && 
                            filteredNodeIds.has(link.target.id || link.target);
+                    if (!hasNodes) return false;
+                    
+                    // Apply link threshold filter
+                    if (linkThreshold > 0 && link.connectionCount < linkThreshold) {
+                        return false;
+                    }
+                    
+                    // Apply view mode specific link filtering
+                    if (currentViewMode === 'technology-links') {
+                        return link.label && link.label !== 'uses concept';
+                    } else if (currentViewMode === 'concept-links') {
+                        return link.label === 'uses concept';
+                    }
+                    
+                    return true;
                 });
                 
-                // Apply view mode colors
+                // Apply view mode colors and node sizing
                 filteredData.nodes = filteredData.nodes.map(node => {
                     const newNode = {...node};
                     
-                    if (currentViewMode === 'interest') {
+                    // Apply colors based on view mode
+                    if (monochrome) {
+                        newNode.currentColor = '#00ffff'; // Cyan for monochrome mode
+                    } else if (currentViewMode === 'interest') {
                         newNode.currentColor = CONFIG.interestColors[node.interestLevel] || CONFIG.interestColors[5];
                     } else if (currentViewMode === 'connections') {
                         if (node.connectionCount >= 10) {
@@ -1313,6 +1408,24 @@
                     } else {
                         // Entity type view
                         newNode.currentColor = node.color;
+                    }
+                    
+                    // Apply node sizing based on mode
+                    switch (nodeSizeMode) {
+                        case 'uniform':
+                            newNode.val = 2; // Uniform size for all nodes
+                            break;
+                        case 'activity':
+                            newNode.val = Math.max(1, node.urlCount || 1);
+                            break;
+                        case 'connections':
+                            newNode.val = Math.max(1, node.connectionCount || 1);
+                            break;
+                        case 'interest':
+                            newNode.val = Math.max(1, node.interestLevel || 1) * 2;
+                            break;
+                        default:
+                            newNode.val = node.val || 1;
                     }
                     
                     return newNode;
@@ -1698,7 +1811,17 @@
                         })
                         .nodeThreeObjectExtend(false)
                         .linkWidth(link => getLinkWidth(link))
-                        .linkColor(() => 'rgba(150, 150, 150, 0.5)')
+                        .linkColor(link => {
+                            if (monochrome) return '#666666';
+                            
+                            // Advanced link coloring based on type
+                            if (link.label === 'uses concept') {
+                                return '#4ecdc4'; // Cyan for concept links
+                            } else if (link.label) {
+                                return '#00ff88'; // Green for technology links
+                            }
+                            return 'rgba(150, 150, 150, 0.5)'; // Default
+                        })
                         .linkOpacity(CONFIG.linkOpacity)
                         .linkDirectionalParticles(2)
                         .linkDirectionalParticleSpeed(0.001) // Much slower - was 0.006
@@ -1908,6 +2031,42 @@
             // Toggle controls on mobile
             document.getElementById('toggle-controls').addEventListener('click', () => {
                 document.getElementById('controls').classList.toggle('open');
+            });
+            
+            // New control event handlers
+            document.getElementById('link-threshold').addEventListener('input', (e) => {
+                const value = parseInt(e.target.value);
+                document.getElementById('threshold-value').textContent = value;
+                linkThreshold = value;
+                applyFilters();
+            });
+            
+            document.getElementById('node-size-mode').addEventListener('change', (e) => {
+                nodeSizeMode = e.target.value;
+                applyFilters();
+            });
+            
+            document.getElementById('toggle-monochrome').addEventListener('change', (e) => {
+                monochrome = e.target.checked;
+                applyFilters();
+                
+                // Update link colors for monochrome mode
+                if (Graph) {
+                    Graph.linkColor(() => monochrome ? '#666666' : 'rgba(150, 150, 150, 0.5)');
+                }
+            });
+            
+            document.getElementById('toggle-change-rings').addEventListener('change', (e) => {
+                showChangeRings = e.target.checked;
+                // TODO: Implement change rings visualization
+            });
+            
+            document.getElementById('toggle-auto-rotate').addEventListener('change', (e) => {
+                autoRotate = e.target.checked;
+                if (Graph && Graph.controls) {
+                    Graph.controls().autoRotate = autoRotate;
+                    Graph.controls().autoRotateSpeed = 0.5;
+                }
             });
             
             // Handle window resize
