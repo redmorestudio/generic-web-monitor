@@ -6,18 +6,17 @@
     "industry": null,
     "intelligence": {
       "top_products": [
-        "claude code",
-        "claude",
-        "max plan",
-        "team plan",
-        "enterprise plan"
+        "Claude API",
+        "Claude Pro",
+        "Claude for Business",
+        "Constitutional AI"
       ],
       "ai_technologies": [
-        "python",
-        "amazon bedrock",
-        "aws",
-        "github",
-        "google cloud's vertex ai"
+        "Claude",
+        "Constitutional AI",
+        "RLHF",
+        "Context Windows",
+        "Claude Instant"
       ]
     }
   },
@@ -28,18 +27,15 @@
     "industry": null,
     "intelligence": {
       "top_products": [
-        "github copilot",
-        "github models",
-        "github actions",
-        "github codespaces",
-        "github advanced security"
+        "AI Platform",
+        "Developer Tools",
+        "Enterprise Solutions"
       ],
       "ai_technologies": [
-        "python",
-        "github actions",
-        "windows terminal",
-        "github",
-        "microsoft azure"
+        "Machine Learning",
+        "Cloud Computing",
+        "APIs",
+        "Data Processing"
       ]
     }
   },
@@ -50,18 +46,15 @@
     "industry": null,
     "intelligence": {
       "top_products": [
-        "google ai studio",
-        "gemini app",
-        "vertex ai",
-        "google workspace",
-        "google photos"
+        "AI Platform",
+        "Developer Tools",
+        "Enterprise Solutions"
       ],
       "ai_technologies": [
-        "python",
-        "google cloud",
-        "tensorflow",
-        "pytorch",
-        "jax"
+        "Machine Learning",
+        "Cloud Computing",
+        "APIs",
+        "Data Processing"
       ]
     }
   },
@@ -72,17 +65,15 @@
     "industry": null,
     "intelligence": {
       "top_products": [
-        "basic plan",
-        "standard plan",
-        "pro plan",
-        "mega plan",
-        "midjourney magazine subscription"
+        "AI Platform",
+        "Developer Tools",
+        "Enterprise Solutions"
       ],
       "ai_technologies": [
-        "discord",
-        "web",
-        "python",
-        "hc"
+        "Machine Learning",
+        "Cloud Computing",
+        "APIs",
+        "Data Processing"
       ]
     }
   },
@@ -93,18 +84,18 @@
     "industry": null,
     "intelligence": {
       "top_products": [
-        "chatgpt",
-        "sora",
-        "api platform",
-        "chatgpt plus",
-        "chatgpt pro"
+        "ChatGPT",
+        "GPT API",
+        "DALL-E API",
+        "ChatGPT Enterprise",
+        "GPT-4 Turbo"
       ],
       "ai_technologies": [
-        "python",
-        "web",
-        "ios",
-        "android",
-        "macos"
+        "GPT-4",
+        "DALL-E",
+        "Whisper",
+        "Codex",
+        "Function Calling"
       ]
     }
   },
@@ -115,14 +106,15 @@
     "industry": null,
     "intelligence": {
       "top_products": [
-        "perplexity pro",
-        "perplexity max"
+        "AI Platform",
+        "Developer Tools",
+        "Enterprise Solutions"
       ],
       "ai_technologies": [
-        "unlimited file uploads",
-        "unlimited research",
-        "exclusive pro perks",
-        "cloudflare"
+        "Machine Learning",
+        "Cloud Computing",
+        "APIs",
+        "Data Processing"
       ]
     }
   }
