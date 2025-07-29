@@ -1022,7 +1022,60 @@
             modal.style.display = 'block';
             
             try {
-                // Try direct ID-based URL first
+                // If the changeId is a generated one (contains timestamp), look for the change in loaded data
+                if (changeId.includes('-') && changeId.split('-').length >= 3) {
+                    // This is a generated ID, find the change in our loaded data
+                    const changesData = await loadStaticData('changes.json');
+                    let changes = Array.isArray(changesData) ? changesData : (changesData.changes || []);
+                    
+                    // Find the change by matching company and approximate time
+                    const change = changes.find(c => c.company === companyName);
+                    
+                    if (change) {
+                        // Parse AI analysis
+                        let analysis = {};
+                        if (change.ai_analysis) {
+                            try {
+                                analysis = JSON.parse(change.ai_analysis);
+                            } catch (e) {
+                                console.error('Failed to parse AI analysis:', e);
+                            }
+                        }
+                        
+                        // Display the change details
+                        modalContent.innerHTML = `
+                            <div class="config-section">
+                                <h4>📊 Change Summary</h4>
+                                <p><strong>Company:</strong> ${escapeHtml(change.company || companyName)}</p>
+                                <p><strong>URL:</strong> <a href="${escapeHtml(change.url || '')}" target="_blank">${escapeHtml(change.url || 'N/A')}</a></p>
+                                <p><strong>Detected:</strong> ${new Date(change.detected_at || change.detectedAt).toLocaleString()}</p>
+                                <p><strong>Change Type:</strong> ${escapeHtml(change.change_type || 'modified')}</p>
+                                <p><strong>Interest Level:</strong> <span class="interest-badge interest-${change.interest_level}">${change.interest_level}/10</span></p>
+                            </div>
+                            
+                            <div class="config-section">
+                                <h4>🔍 AI Analysis</h4>
+                                <p><strong>Summary:</strong> ${escapeHtml(analysis.summary || 'No summary available')}</p>
+                                <p><strong>Category:</strong> ${escapeHtml(analysis.category || 'General Update')}</p>
+                                <p><strong>Technical Innovation Score:</strong> ${analysis.technical_innovation_score || 'N/A'}/10</p>
+                                <p><strong>Business Impact Score:</strong> ${analysis.business_impact_score || 'N/A'}/10</p>
+                                ${analysis.impact_areas && analysis.impact_areas.length > 0 ? `<p><strong>Impact Areas:</strong> ${escapeHtml(analysis.impact_areas.join(', '))}</p>` : ''}
+                            </div>
+                            
+                            ${analysis.interest_drivers && analysis.interest_drivers.length > 0 ? `
+                            <div class="config-section">
+                                <h4>💡 Interest Drivers</h4>
+                                <ul>
+                                    ${analysis.interest_drivers.map(driver => `<li>${escapeHtml(driver)}</li>`).join('')}
+                                </ul>
+                            </div>
+                            ` : ''}
+                        `;
+                        return;
+                    }
+                }
+                
+                // Try direct ID-based URL first (for real change IDs)
                 let response = await fetch(`./api-data/changes/change-${changeId}.json`);
                 
                 // Fallback to manifest lookup if needed
@@ -1089,35 +1142,91 @@
             const changesData = await loadStaticData('changes.json');
             const contentDiv = document.getElementById('changesContent');
 
-            if (changesData.error || !changesData.changes) {
-                contentDiv.innerHTML = '<div class="error-message">No changes data available.</div>';
+            // Handle both array and object structures
+            let changes = [];
+            if (Array.isArray(changesData)) {
+                changes = changesData;
+            } else if (changesData.changes) {
+                changes = changesData.changes;
+            } else if (changesData.error) {
+                contentDiv.innerHTML = '<div class="error-message">Error loading changes data.</div>';
                 return;
             }
 
-            const changes = changesData.changes || [];
             if (changes.length === 0) {
                 contentDiv.innerHTML = '<div class="error-message">No changes detected yet.</div>';
                 return;
             }
+
+            // Sort changes by date (newest first)
+            changes.sort((a, b) => {
+                const dateA = new Date(a.detected_at || a.detectedAt || a.created_at);
+                const dateB = new Date(b.detected_at || b.detectedAt || b.created_at);
+                return dateB - dateA;
+            });
+
+            // Group changes by date
+            const changesByDate = {};
+            changes.forEach((change, index) => {
+                const changeDate = new Date(change.detected_at || change.detectedAt || change.created_at);
+                const dateKey = changeDate.toLocaleDateString();
+                if (!changesByDate[dateKey]) {
+                    changesByDate[dateKey] = [];
+                }
+                // Generate ID if missing
+                if (!change.id) {
+                    change.id = `change-${index}-${Date.now()}`;
+                }
+                changesByDate[dateKey].push(change);
+            });
 
             let html = `
                 <p style="margin-bottom: 20px;">Showing ${changes.length} total changes</p>
                 <div style="max-height: 600px; overflow-y: auto;">
             `;
 
-            changes.forEach(change => {
-                const changeDate = new Date(change.created_at || change.detectedAt);
-                html += `
-                    <div class="change-item" onclick="showChangeDetail('${change.id}', '${escapeHtml(change.company)}', event)">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                            <strong>${escapeHtml(change.company)}</strong>
-                            <span style="color: var(--text-secondary); font-size: 0.9rem;">${formatTimeAgo(changeDate)}</span>
+            // Display changes grouped by date
+            Object.entries(changesByDate).forEach(([date, dateChanges]) => {
+                html += `<h4 style="margin: 20px 0 10px 0; color: var(--primary-color);">${date}</h4>`;
+                
+                dateChanges.forEach(change => {
+                    const changeDate = new Date(change.detected_at || change.detectedAt || change.created_at);
+                    const timeStr = changeDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    
+                    // Parse AI analysis to get summary
+                    let summary = change.summary || '';
+                    if (!summary && change.ai_analysis) {
+                        try {
+                            const analysis = JSON.parse(change.ai_analysis);
+                            summary = analysis.summary || '';
+                        } catch (e) {
+                            summary = 'Change detected';
+                        }
+                    }
+                    
+                    const interestLevel = change.interest_level || 1;
+                    const interestColor = getInterestColor(interestLevel);
+                    
+                    html += `
+                        <div class="change-item" style="border-left-color: ${interestColor};" onclick="showChangeDetail('${change.id}', '${escapeHtml(change.company)}', event)">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                <div style="display: flex; align-items: center; gap: 10px;">
+                                    <strong>${escapeHtml(change.company)}</strong>
+                                    <span class="interest-badge interest-${interestLevel}" style="font-size: 0.75rem;">
+                                        Interest: ${interestLevel}/10
+                                    </span>
+                                </div>
+                                <span style="color: var(--text-secondary); font-size: 0.9rem;">${timeStr}</span>
+                            </div>
+                            <div style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px;">
+                                ${change.url ? `<a href="${escapeHtml(change.url)}" target="_blank" style="color: var(--primary-color); text-decoration: none;">${escapeHtml(change.url)}</a>` : 'URL not available'}
+                            </div>
+                            <div style="color: var(--text-primary); font-size: 0.9rem;">
+                                ${escapeHtml(summary.substring(0, 200))}${summary.length > 200 ? '...' : ''}
+                            </div>
                         </div>
-                        <div style="color: var(--text-secondary); font-size: 0.9rem;">
-                            ${escapeHtml((change.summary || '').substring(0, 150))}${change.summary?.length > 150 ? '...' : ''}
-                        </div>
-                    </div>
-                `;
+                    `;
+                });
             });
 
             html += '</div>';
