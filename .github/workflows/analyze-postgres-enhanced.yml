@@ -360,7 +360,11 @@ jobs:
           echo "📝 Generating individual change detail files..."
           
           # Check if the PostgreSQL version exists
-          if [ -f "generate-change-details-postgres.js" ]; then
+          if [ -f "generate-change-details-postgres-fixed.js" ]; then
+            echo "📄 Using fixed change details generator with change-{id}.json format..."
+            node generate-change-details-postgres-fixed.js
+          elif [ -f "generate-change-details-postgres.js" ]; then
+            echo "📄 Using original change details generator..."
             node generate-change-details-postgres.js
             echo "✅ Change details generated"
           else

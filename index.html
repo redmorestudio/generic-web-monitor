@@ -448,6 +448,40 @@
                 width: 100%;
             }
         }
+        
+        .interest-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .interest-badge.interest-1,
+        .interest-badge.interest-2 {
+            background: #6b7280;
+        }
+        
+        .interest-badge.interest-3,
+        .interest-badge.interest-4 {
+            background: #3b82f6;
+        }
+        
+        .interest-badge.interest-5,
+        .interest-badge.interest-6 {
+            background: #10b981;
+        }
+        
+        .interest-badge.interest-7,
+        .interest-badge.interest-8 {
+            background: #f59e0b;
+        }
+        
+        .interest-badge.interest-9,
+        .interest-badge.interest-10 {
+            background: #ef4444;
+        }
     </style>
 </head>
 <body>
@@ -1003,7 +1037,7 @@
         }
 
         // Show change detail
-        function showChangeDetail(changeId, companyName, event) {
+        async function showChangeDetail(changeId, companyName, event) {
             if (event) event.stopPropagation();
             
             const modal = document.getElementById('companyModal');
@@ -1011,16 +1045,70 @@
             const modalContent = document.getElementById('modalContent');
             
             modalTitle.textContent = `Change Details: ${companyName}`;
-            modalContent.innerHTML = `
-                <div class="config-section">
-                    <h4>📊 Change Information</h4>
-                    <p><strong>Company:</strong> ${escapeHtml(companyName)}</p>
-                    <p><strong>Change ID:</strong> ${escapeHtml(changeId)}</p>
-                    <p>Detailed change analysis would be shown here.</p>
-                </div>
-            `;
-            
+            modalContent.innerHTML = '<div class="loading">Loading change details...</div>';
             modal.style.display = 'block';
+            
+            try {
+                // Try direct ID-based URL first
+                let response = await fetch(`/api-data/changes/change-${changeId}.json`);
+                
+                // Fallback to manifest lookup if needed
+                if (!response.ok) {
+                    const manifestResponse = await fetch('/api-data/changes/manifest.json');
+                    if (manifestResponse.ok) {
+                        const manifest = await manifestResponse.json();
+                        const changeFile = manifest.files.find(f => f.change_id === parseInt(changeId));
+                        
+                        if (changeFile) {
+                            response = await fetch(`/api-data/changes/${changeFile.filename}`);
+                        }
+                    }
+                }
+                
+                if (!response.ok) {
+                    throw new Error('Change details not found');
+                }
+                
+                const changeData = await response.json();
+                
+                // Display the change details
+                modalContent.innerHTML = `
+                    <div class="config-section">
+                        <h4>📊 Change Summary</h4>
+                        <p><strong>Company:</strong> ${escapeHtml(changeData.company || companyName)}</p>
+                        <p><strong>URL:</strong> <a href="${escapeHtml(changeData.page_url || changeData.url || '')}" target="_blank">${escapeHtml(changeData.page_url || changeData.url || 'N/A')}</a></p>
+                        <p><strong>Detected:</strong> ${new Date(changeData.detected_at).toLocaleString()}</p>
+                        <p><strong>Interest Level:</strong> <span class="interest-badge interest-${changeData.interest_level}">${changeData.interest_level}/10</span></p>
+                    </div>
+                    
+                    <div class="config-section">
+                        <h4>🔍 AI Analysis</h4>
+                        <p><strong>Summary:</strong> ${escapeHtml(changeData.summary || 'No summary available')}</p>
+                        <p><strong>Category:</strong> ${escapeHtml(changeData.category || 'General Update')}</p>
+                        ${changeData.business_impact ? `<p><strong>Business Impact:</strong> ${escapeHtml(changeData.business_impact)}</p>` : ''}
+                        ${changeData.competitive_implications ? `<p><strong>Competitive Implications:</strong> ${escapeHtml(changeData.competitive_implications)}</p>` : ''}
+                    </div>
+                    
+                    ${changeData.key_insights && changeData.key_insights.length > 0 ? `
+                    <div class="config-section">
+                        <h4>💡 Key Insights</h4>
+                        <ul>
+                            ${changeData.key_insights.map(insight => `<li>${escapeHtml(insight)}</li>`).join('')}
+                        </ul>
+                    </div>
+                    ` : ''}
+                `;
+                
+            } catch (error) {
+                console.error('Error loading change details:', error);
+                modalContent.innerHTML = `
+                    <div class="error-message">
+                        <p>Unable to load change details.</p>
+                        <p>Error: ${escapeHtml(error.message)}</p>
+                        <p><small>Change ID: ${escapeHtml(changeId)}</small></p>
+                    </div>
+                `;
+            }
         }
 
         // Load all changes for the changes tab

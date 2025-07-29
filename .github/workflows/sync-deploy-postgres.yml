@@ -318,10 +318,26 @@ jobs:
           
           echo "✅ Static data files generated successfully"
           
+          # Generate dashboard with change_id support
+          if [ -f "generate-dashboard-postgres.js" ]; then
+            echo "📊 Generating dashboard.json with change_id support..."
+            node generate-dashboard-postgres.js
+          fi
+          
+          # Generate change detail files
+          if [ -f "generate-change-details-postgres-fixed.js" ]; then
+            echo "📄 Generating individual change detail files..."
+            node generate-change-details-postgres-fixed.js
+          elif [ -f "generate-change-details-postgres.js" ]; then
+            echo "📄 Using original change details generator..."
+            node generate-change-details-postgres.js
+          fi
+          
           # Verify files were created
           echo "📁 Generated files:"
           ls -la ../api-data/*.json
-          ls -la ../api-data/companies/*.json | head -10
+          ls -la ../api-data/companies/*.json | head -10 || echo "No company files yet"
+          ls -la ../api-data/changes/*.json | head -10 || echo "No change files yet"
         env:
           POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
       
