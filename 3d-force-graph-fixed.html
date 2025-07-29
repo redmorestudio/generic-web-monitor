@@ -487,6 +487,25 @@
                 </label>
             </div>
             
+            <div class="control-group simple-group">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Node Visibility</h4>
+                <label>
+                    Show Technology Nodes
+                    <input type="checkbox" id="toggle-tech-nodes" checked>
+                </label>
+                <label>
+                    Show Concept Nodes
+                    <input type="checkbox" id="toggle-concept-nodes" checked>
+                </label>
+                <label>
+                    Show Company Nodes
+                    <input type="checkbox" id="toggle-company-nodes" checked>
+                </label>
+                <div class="info-text">
+                    Toggle visibility of different node types
+                </div>
+            </div>
+            
             <div class="control-group advanced-group" style="display: none;">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Camera Controls</h4>
                 <button onclick="centerView()" style="width: 100%; padding: 8px; background: rgba(0, 255, 136, 0.1); border: 1px solid #00ff88; color: #00ff88; border-radius: 4px; cursor: pointer; margin-bottom: 10px;">Center View</button>
@@ -796,6 +815,9 @@
             let showChangeRings = false;
             let autoRotate = false;
             let nodeSizeMode = 'activity';
+            let showTechNodes = true;
+            let showConceptNodes = true;
+            let showCompanyNodes = true;
             
             // Make applyFilters and Graph global for button access
             window.applyFilters = null;
@@ -825,6 +847,7 @@
                     'AI Concept': '#00ffff',
                     'AI Assistant': '#ffff00',
                     'AI Platform': '#ff69b4',
+                    'Technology': '#00ff88',
                     'Company': '#6fbf6f',
                     'default': '#888888'
                 },
@@ -1214,7 +1237,38 @@
                     }
                 });
                 
-                // Create concept nodes and links
+                // Create technology nodes and links
+                const techNodeMap = new Map();
+                techMap.forEach((companies, tech) => {
+                    // Create a node for EVERY technology
+                    const techNode = {
+                        id: `tech-${tech}`,
+                        name: tech,
+                        group: 'Technology',
+                        color: '#00ff88', // Bright green for technologies
+                        val: Math.max(2, companies.length * 2), // Size based on usage
+                        interestLevel: Math.min(10, companies.length),
+                        urlCount: 0,
+                        connectionCount: companies.length,
+                        nodeType: 'technology'
+                    };
+                    graphData.nodes.push(techNode);
+                    techNodeMap.set(tech, techNode);
+                    
+                    // Connect technology to all companies using it
+                    companies.forEach(company => {
+                        graphData.links.push({
+                            source: company,
+                            target: techNode.id,
+                            label: 'uses technology',
+                            connectionCount: companies.length
+                        });
+                        
+                        connectionCounts.set(company, connectionCounts.get(company) + 1);
+                    });
+                });
+                
+                // Create concept nodes and links (for ALL concepts now)
                 const conceptMap = new Map();
                 rawData.dashboard.company_activity.forEach(company => {
                     if (company.intelligence?.ai_ml_concepts) {
@@ -1228,30 +1282,30 @@
                 });
                 
                 conceptMap.forEach((companies, concept) => {
-                    if (companies.length >= 3) {
-                        const conceptNode = {
-                            id: `concept-${concept}`,
-                            name: concept,
-                            group: 'AI Concept',
-                            color: CONFIG.nodeColors['AI Concept'],
-                            val: companies.length * 4,
-                            interestLevel: 5,
-                            urlCount: 0,
+                    // Create node for EVERY concept (removed >= 3 requirement)
+                    const conceptNode = {
+                        id: `concept-${concept}`,
+                        name: concept,
+                        group: 'AI Concept',
+                        color: CONFIG.nodeColors['AI Concept'],
+                        val: Math.max(2, companies.length * 3),
+                        interestLevel: Math.min(10, Math.ceil(companies.length / 2)),
+                        urlCount: 0,
+                        connectionCount: companies.length,
+                        nodeType: 'concept'
+                    };
+                    graphData.nodes.push(conceptNode);
+                    
+                    companies.forEach(company => {
+                        graphData.links.push({
+                            source: company,
+                            target: conceptNode.id,
+                            label: 'uses concept',
                             connectionCount: companies.length
-                        };
-                        graphData.nodes.push(conceptNode);
-                        
-                        companies.forEach(company => {
-                            graphData.links.push({
-                                source: company,
-                                target: conceptNode.id,
-                                label: 'uses concept',
-                                connectionCount: companies.length
-                            });
-                            
-                            connectionCounts.set(company, connectionCounts.get(company) + 1);
                         });
-                    }
+                        
+                        connectionCounts.set(company, connectionCounts.get(company) + 1);
+                    });
                 });
                 
                 // Convert linkMap to links array
@@ -1424,6 +1478,11 @@
                 
                 // First filter by type and search
                 let tempFilteredNodes = graphData.nodes.filter(node => {
+                    // Node type visibility filter
+                    if (node.nodeType === 'technology' && !showTechNodes) return false;
+                    if (node.nodeType === 'concept' && !showConceptNodes) return false;
+                    if (!node.nodeType && !showCompanyNodes) return false; // Companies don't have nodeType
+                    
                     // Custom tag filter takes precedence
                     if (window.customTagFilter && window.customTagFilter.size > 0) {
                         if (!window.customTagFilter.has(node.id)) {
@@ -1450,13 +1509,13 @@
                         return false;
                     }
                     
-                    // Search filter
+                    // Search filter - apply to all node types
                     if (searchTerm && !node.name.toLowerCase().includes(searchTerm)) {
                         return false;
                     }
                     
-                    // Technology filter
-                    if (selectedTechs.size > 0) {
+                    // Technology filter - only apply to company nodes
+                    if (selectedTechs.size > 0 && !node.nodeType) {
                         const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
                         if (!companyData || !companyData.intelligence?.ai_technologies) return false;
                         
@@ -1466,8 +1525,14 @@
                         if (!hasTech) return false;
                     }
                     
-                    // Concept filter
-                    if (selectedConcepts.size > 0) {
+                    // Show technology nodes that match selected techs
+                    if (node.nodeType === 'technology' && selectedTechs.size > 0) {
+                        const techName = node.name;
+                        if (!selectedTechs.has(techName)) return false;
+                    }
+                    
+                    // Concept filter - only apply to company nodes
+                    if (selectedConcepts.size > 0 && !node.nodeType) {
                         const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
                         if (!companyData || !companyData.intelligence?.ai_ml_concepts) return false;
                         
@@ -1475,6 +1540,12 @@
                             companyData.intelligence.ai_ml_concepts.includes(concept)
                         );
                         if (!hasConcept) return false;
+                    }
+                    
+                    // Show concept nodes that match selected concepts
+                    if (node.nodeType === 'concept' && selectedConcepts.size > 0) {
+                        const conceptName = node.name;
+                        if (!selectedConcepts.has(conceptName)) return false;
                     }
                     
                     return true;
@@ -2359,6 +2430,22 @@
                     const label = item.querySelector('span').textContent.toLowerCase();
                     item.style.display = label.includes(searchTerm) ? 'flex' : 'none';
                 });
+            });
+            
+            // Node visibility toggles
+            document.getElementById('toggle-tech-nodes').addEventListener('change', (e) => {
+                showTechNodes = e.target.checked;
+                applyFilters();
+            });
+            
+            document.getElementById('toggle-concept-nodes').addEventListener('change', (e) => {
+                showConceptNodes = e.target.checked;
+                applyFilters();
+            });
+            
+            document.getElementById('toggle-company-nodes').addEventListener('change', (e) => {
+                showCompanyNodes = e.target.checked;
+                applyFilters();
             });
             
             // Start loading
