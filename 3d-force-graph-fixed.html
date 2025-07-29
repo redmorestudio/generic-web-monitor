@@ -578,7 +578,18 @@
             
             <div class="control-group simple-group">
                 <h4 style="font-size: 12px; margin-bottom: 8px;">Search</h4>
-                <input type="text" id="search-input" placeholder="Search companies...">
+                <input type="text" id="search-input" placeholder="Search nodes...">
+                <label style="margin-top: 8px;">
+                    Search Depth
+                    <select id="search-depth" style="margin-left: 10px;">
+                        <option value="0">Match Only</option>
+                        <option value="1" selected>1 Level Out</option>
+                        <option value="2">2 Levels Out</option>
+                    </select>
+                </label>
+                <div class="info-text">
+                    Controls how many connections to show from search results
+                </div>
             </div>
         </div>
     </div>
@@ -818,6 +829,7 @@
             let showTechNodes = true;
             let showConceptNodes = true;
             let showCompanyNodes = true;
+            let searchDepth = 1; // Default to 1 level out
             
             // Make applyFilters and Graph global for button access
             window.applyFilters = null;
@@ -1476,6 +1488,58 @@
                 console.log('Applying filters. Selected types:', Array.from(selectedTypes));
                 console.log('Total nodes before filter:', graphData.nodes.length);
                 
+                // Build a set of nodes to include based on search depth
+                let searchIncludedNodes = new Set();
+                
+                if (searchTerm) {
+                    // First, find all nodes that match the search term
+                    const matchingNodes = graphData.nodes.filter(node => 
+                        node.name.toLowerCase().includes(searchTerm)
+                    );
+                    
+                    // Add matching nodes to the set
+                    matchingNodes.forEach(node => searchIncludedNodes.add(node.id));
+                    
+                    // If search depth > 0, add connected nodes
+                    if (searchDepth > 0) {
+                        const nodesToProcess = [...matchingNodes];
+                        const processedNodes = new Set();
+                        
+                        for (let depth = 0; depth < searchDepth; depth++) {
+                            const nextLevel = [];
+                            
+                            nodesToProcess.forEach(node => {
+                                if (processedNodes.has(node.id)) return;
+                                processedNodes.add(node.id);
+                                
+                                // Find all connected nodes
+                                graphData.links.forEach(link => {
+                                    const sourceId = link.source.id || link.source;
+                                    const targetId = link.target.id || link.target;
+                                    
+                                    if (sourceId === node.id) {
+                                        searchIncludedNodes.add(targetId);
+                                        const targetNode = graphData.nodes.find(n => n.id === targetId);
+                                        if (targetNode && !processedNodes.has(targetId)) {
+                                            nextLevel.push(targetNode);
+                                        }
+                                    }
+                                    if (targetId === node.id) {
+                                        searchIncludedNodes.add(sourceId);
+                                        const sourceNode = graphData.nodes.find(n => n.id === sourceId);
+                                        if (sourceNode && !processedNodes.has(sourceId)) {
+                                            nextLevel.push(sourceNode);
+                                        }
+                                    }
+                                });
+                            });
+                            
+                            nodesToProcess.length = 0;
+                            nodesToProcess.push(...nextLevel);
+                        }
+                    }
+                }
+                
                 // First filter by type and search
                 let tempFilteredNodes = graphData.nodes.filter(node => {
                     // Node type visibility filter
@@ -1510,8 +1574,11 @@
                     }
                     
                     // Search filter - apply to all node types
-                    if (searchTerm && !node.name.toLowerCase().includes(searchTerm)) {
-                        return false;
+                    if (searchTerm) {
+                        // Use the searchIncludedNodes set built above
+                        if (!searchIncludedNodes.has(node.id)) {
+                            return false;
+                        }
                     }
                     
                     // Technology filter - only apply to company nodes
@@ -2307,6 +2374,11 @@
             });
             
             document.getElementById('search-input').addEventListener('input', (e) => {
+                applyFilters();
+            });
+            
+            document.getElementById('search-depth').addEventListener('change', (e) => {
+                searchDepth = parseInt(e.target.value);
                 applyFilters();
             });
             
