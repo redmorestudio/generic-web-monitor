@@ -1,8 +1,8 @@
 {
-  "id": 184,
-  "company": "Google DeepMind",
-  "page_url": "homepage",
-  "detected_at": "2025-07-21T15:11:46.979Z",
+  "id": 453,
+  "company": "GitHub Copilot",
+  "page_url": "blog",
+  "detected_at": "2025-07-29T14:45:46.743Z",
   "change_type": "modified",
   "interest_level": 2,
   "ai_confidence": 0.9,
@@ -14,8 +14,8 @@
   "key_insights": [],
   "business_impact": "",
   "competitive_implications": "",
-  "content_hash_before": "4185bcd94d694aabb44f137f9c5b81868ff170e08344354b2dddfce64bec16bb",
-  "content_hash_after": "0856f2678262f1e042bb2cfe5c5b91915f1e0c29d3ef676c602b4e613d6274f9",
+  "content_hash_before": "16e076230cacccf7370a2fc67a2000e3d129731e70c1748e52d82de12d34df08",
+  "content_hash_after": "7e5052462beb26fbae6b810eea66ad74d82513c10496c390b12058af3cd8d7b5",
   "ai_model": "groq-llama-3.3-70b",
   "database_source": "postgresql",
   "schema": "intelligence.changes"
