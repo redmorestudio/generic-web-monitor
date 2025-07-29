@@ -360,6 +360,11 @@
             • Click node = Center camera<br>
             • Right-click node = Show context menu
         </div>
+        <div id="graph-summary" style="margin-top: 15px; padding-top: 15px; border-top: 1px solid #333;">
+            <strong>Graph Intelligence:</strong><br>
+            <div id="tech-summary" style="font-size: 11px; color: #888; margin-top: 5px;"></div>
+            <div id="concept-summary" style="font-size: 11px; color: #888; margin-top: 5px;"></div>
+        </div>
     </div>
     
 
@@ -533,6 +538,22 @@
                 </div>
                 <div class="checkbox-group" id="type-filters">
                     <!-- Checkboxes will be populated here -->
+                </div>
+            </div>
+            
+            <div class="control-group advanced-group" style="display: none;">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Filter by Technology</h4>
+                <input type="text" id="tech-search" placeholder="Search technologies..." style="margin-bottom: 8px;">
+                <div class="checkbox-group" id="tech-filters" style="max-height: 150px;">
+                    <!-- Technology checkboxes will be populated here -->
+                </div>
+            </div>
+            
+            <div class="control-group advanced-group" style="display: none;">
+                <h4 style="font-size: 12px; margin-bottom: 8px;">Filter by AI Concepts</h4>
+                <input type="text" id="concept-search" placeholder="Search concepts..." style="margin-bottom: 8px;">
+                <div class="checkbox-group" id="concept-filters" style="max-height: 150px;">
+                    <!-- Concept checkboxes will be populated here -->
                 </div>
             </div>
             
@@ -968,6 +989,11 @@
                         
                         rawData.dashboard.company_activity.push(companyEntry);
                         });
+                        
+                    // Debug: Log sample data to verify intelligence is loaded
+                    console.log('Sample company data:', rawData.dashboard.company_activity.slice(0, 3));
+                    console.log('Technologies found:', [...new Set(rawData.dashboard.company_activity.flatMap(c => c.intelligence?.ai_technologies || []))]);
+                    console.log('Concepts found:', [...new Set(rawData.dashboard.company_activity.flatMap(c => c.intelligence?.ai_ml_concepts || []))]);
 
                         // PostgreSQL format compatibility (dashboard.json)
                     if (dashboardResponse && dashboardResponse.ok) {
@@ -1104,6 +1130,8 @@
                     
                     buildGraph();
                     populateTypeFilters();
+                    populateTechFilters();
+                    populateConceptFilters();
                     
                 } catch (error) {
                     console.error('Error loading data:', error);
@@ -1249,6 +1277,9 @@
                 document.getElementById('node-count').textContent = graphData.nodes.length;
                 document.getElementById('link-count').textContent = graphData.links.length;
                 
+                // Update technology and concept summary
+                updateGraphSummary();
+                
                 // Initialize graph only once
                 initializeGraph();
                 
@@ -1297,6 +1328,94 @@
                     });
             }
             
+            // New: Technology filters
+            let selectedTechs = new Set();
+            function populateTechFilters() {
+                const techStats = new Map();
+                
+                // Count companies using each technology
+                rawData.dashboard.company_activity.forEach(company => {
+                    if (company.intelligence?.ai_technologies) {
+                        company.intelligence.ai_technologies.forEach(tech => {
+                            techStats.set(tech, (techStats.get(tech) || 0) + 1);
+                        });
+                    }
+                });
+                
+                const container = document.getElementById('tech-filters');
+                container.innerHTML = '';
+                
+                // Sort by count and create checkboxes
+                Array.from(techStats.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .forEach(([tech, count]) => {
+                        const item = document.createElement('div');
+                        item.className = 'checkbox-item';
+                        item.innerHTML = `
+                            <input type="checkbox" id="tech-${tech.replace(/\s+/g, '-')}" value="${tech}">
+                            <label for="tech-${tech.replace(/\s+/g, '-')}">
+                                <span>${tech}</span>
+                                <span class="checkbox-count">(${count})</span>
+                            </label>
+                        `;
+                        
+                        item.querySelector('input').addEventListener('change', (e) => {
+                            if (e.target.checked) {
+                                selectedTechs.add(tech);
+                            } else {
+                                selectedTechs.delete(tech);
+                            }
+                            applyFilters();
+                        });
+                        
+                        container.appendChild(item);
+                    });
+            }
+            
+            // New: Concept filters
+            let selectedConcepts = new Set();
+            function populateConceptFilters() {
+                const conceptStats = new Map();
+                
+                // Count companies using each concept
+                rawData.dashboard.company_activity.forEach(company => {
+                    if (company.intelligence?.ai_ml_concepts) {
+                        company.intelligence.ai_ml_concepts.forEach(concept => {
+                            conceptStats.set(concept, (conceptStats.get(concept) || 0) + 1);
+                        });
+                    }
+                });
+                
+                const container = document.getElementById('concept-filters');
+                container.innerHTML = '';
+                
+                // Sort by count and create checkboxes
+                Array.from(conceptStats.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .forEach(([concept, count]) => {
+                        const item = document.createElement('div');
+                        item.className = 'checkbox-item';
+                        item.innerHTML = `
+                            <input type="checkbox" id="concept-${concept.replace(/\s+/g, '-')}" value="${concept}">
+                            <label for="concept-${concept.replace(/\s+/g, '-')}">
+                                <span>${concept}</span>
+                                <span class="checkbox-count">(${count})</span>
+                            </label>
+                        `;
+                        
+                        item.querySelector('input').addEventListener('change', (e) => {
+                            if (e.target.checked) {
+                                selectedConcepts.add(concept);
+                            } else {
+                                selectedConcepts.delete(concept);
+                            }
+                            applyFilters();
+                        });
+                        
+                        container.appendChild(item);
+                    });
+            }
+            
             function applyFilters() {
                 const searchTerm = document.getElementById('search-input')?.value.toLowerCase() || '';
                 
@@ -1334,6 +1453,28 @@
                     // Search filter
                     if (searchTerm && !node.name.toLowerCase().includes(searchTerm)) {
                         return false;
+                    }
+                    
+                    // Technology filter
+                    if (selectedTechs.size > 0) {
+                        const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
+                        if (!companyData || !companyData.intelligence?.ai_technologies) return false;
+                        
+                        const hasTech = Array.from(selectedTechs).some(tech => 
+                            companyData.intelligence.ai_technologies.includes(tech)
+                        );
+                        if (!hasTech) return false;
+                    }
+                    
+                    // Concept filter
+                    if (selectedConcepts.size > 0) {
+                        const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
+                        if (!companyData || !companyData.intelligence?.ai_ml_concepts) return false;
+                        
+                        const hasConcept = Array.from(selectedConcepts).some(concept => 
+                            companyData.intelligence.ai_ml_concepts.includes(concept)
+                        );
+                        if (!hasConcept) return false;
                     }
                     
                     return true;
@@ -1715,6 +1856,58 @@
             
             // Make focusOnNode globally available
             window.focusOnNode = focusOnNode;
+            
+            function updateGraphSummary() {
+                // Count unique technologies and concepts
+                const allTechs = new Set();
+                const allConcepts = new Set();
+                
+                rawData.dashboard.company_activity.forEach(company => {
+                    if (company.intelligence?.ai_technologies) {
+                        company.intelligence.ai_technologies.forEach(tech => allTechs.add(tech));
+                    }
+                    if (company.intelligence?.ai_ml_concepts) {
+                        company.intelligence.ai_ml_concepts.forEach(concept => allConcepts.add(concept));
+                    }
+                });
+                
+                // Update summary display
+                const techSummary = document.getElementById('tech-summary');
+                const conceptSummary = document.getElementById('concept-summary');
+                
+                techSummary.innerHTML = `<strong style="color: #00ff88;">${allTechs.size}</strong> technologies tracked`;
+                conceptSummary.innerHTML = `<strong style="color: #4ecdc4;">${allConcepts.size}</strong> AI concepts mapped`;
+                
+                // Show top 3 of each
+                const techCounts = new Map();
+                const conceptCounts = new Map();
+                
+                rawData.dashboard.company_activity.forEach(company => {
+                    company.intelligence?.ai_technologies?.forEach(tech => {
+                        techCounts.set(tech, (techCounts.get(tech) || 0) + 1);
+                    });
+                    company.intelligence?.ai_ml_concepts?.forEach(concept => {
+                        conceptCounts.set(concept, (conceptCounts.get(concept) || 0) + 1);
+                    });
+                });
+                
+                const topTechs = Array.from(techCounts.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([tech, count]) => `${tech} (${count})`);
+                    
+                const topConcepts = Array.from(conceptCounts.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([concept, count]) => `${concept} (${count})`);
+                    
+                if (topTechs.length > 0) {
+                    techSummary.innerHTML += `<br>Top: ${topTechs.join(', ')}`;
+                }
+                if (topConcepts.length > 0) {
+                    conceptSummary.innerHTML += `<br>Top: ${topConcepts.join(', ')}`;
+                }
+            }
             
             function updateLegend() {
                 const nodeTypes = new Map();
@@ -2115,6 +2308,27 @@
             
             document.getElementById('entity-tooltip').addEventListener('mouseleave', () => {
                 document.getElementById('entity-tooltip').style.display = 'none';
+            });
+            
+            // Tech/Concept search functionality
+            document.getElementById('tech-search').addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const items = document.querySelectorAll('#tech-filters .checkbox-item');
+                
+                items.forEach(item => {
+                    const label = item.querySelector('span').textContent.toLowerCase();
+                    item.style.display = label.includes(searchTerm) ? 'flex' : 'none';
+                });
+            });
+            
+            document.getElementById('concept-search').addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                const items = document.querySelectorAll('#concept-filters .checkbox-item');
+                
+                items.forEach(item => {
+                    const label = item.querySelector('span').textContent.toLowerCase();
+                    item.style.display = label.includes(searchTerm) ? 'flex' : 'none';
+                });
             });
             
             // Start loading
