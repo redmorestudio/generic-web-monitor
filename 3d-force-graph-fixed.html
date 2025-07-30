@@ -2322,6 +2322,15 @@
                             const nodes = Graph.graphData().nodes;
                             const depthFactor = graphDepth / 100;
                             
+                            // Log Z positions to debug
+                            const zValues = nodes.map(n => n.z || 0);
+                            const avgZ = zValues.reduce((a, b) => a + b, 0) / zValues.length;
+                            const maxZ = Math.max(...zValues);
+                            const minZ = Math.min(...zValues);
+                            if (Math.random() < 0.01) { // Log occasionally
+                                console.log('Z stats:', { avg: avgZ, max: maxZ, min: minZ, range: maxZ - minZ });
+                            }
+                            
                             nodes.forEach(node => {
                                 // Much stronger Z spreading
                                 const zTarget = (Math.random() - 0.5) * 500 * depthFactor;
