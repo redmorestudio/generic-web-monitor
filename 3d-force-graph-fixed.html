@@ -1823,7 +1823,7 @@
                 });
                 
                 // Update graph
-                if (Graph) {
+                if (Graph && Graph.graphData) {
                     console.log('Updating graph with filtered data:', filteredData.nodes.length, 'nodes,', filteredData.links.length, 'links');
                     
                     // Need to create completely fresh objects to avoid reference issues
@@ -1856,7 +1856,14 @@
                     Graph.linkWidth(link => getLinkWidth(link));
                     
                     // Reheat the simulation to ensure forces are applied
-                    Graph.d3ReheatSimulation();
+                    // Check if simulation exists to avoid errors during initialization
+                    if (Graph.d3ReheatSimulation) {
+                        try {
+                            Graph.d3ReheatSimulation();
+                        } catch (e) {
+                            console.log('Could not reheat simulation:', e);
+                        }
+                    }
                     
                     // Re-apply draw mode if not normal
                     if (currentDrawMode && currentDrawMode !== 'normal') {
