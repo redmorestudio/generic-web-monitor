@@ -356,9 +356,8 @@
         <div id="node-info">
             <strong>Controls:</strong><br>
             • Left-click + drag = Rotate view<br>
-            • Option/Alt-click + drag = Pan view<br>
-            • Right-click + drag = Pan view (may conflict with menu)<br>
-            • Middle-click + drag = Pan view (alternative)<br>
+            • Right-click + drag = Pan view<br>
+            • Middle-click + drag = Zoom<br>
             • Scroll = Zoom in/out<br>
             • Click node = Center camera<br>
             • Right-click node = Show context menu
@@ -823,7 +822,7 @@
         window.clearTagFilter = function() {
             window.customTagFilter = null;
             window.applyFilters();
-            document.getElementById('node-info').innerHTML = '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Option/Alt-click + drag = Pan view<br>• Right-click + drag = Pan view (may conflict)<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
+            document.getElementById('node-info').innerHTML = '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Middle-click + drag = Zoom<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
         };
         
         // Wrap main code in IIFE
@@ -2215,6 +2214,8 @@
                 Graph = ForceGraph3D()(container)
                     .backgroundColor('#0a0a0f')
                     .nodeId('id')
+                    .controlType('orbit') // Ensure orbit controls are used
+                    .enablePointerInteraction(true)
                     .nodeLabel(node => {
                         if (!floatingTooltipEnabled) {
                             const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
@@ -2282,15 +2283,8 @@
                     .d3Force('link', d3.forceLink().distance(CONFIG.linkDistance))
                     .d3Force('center', d3.forceCenter().strength(0.3))
                     .d3Force('collide', d3.forceCollide(node => Math.sqrt(node.val) * 10))
-                    // Add custom Z-constraint force
-                    .d3Force('flatten', (alpha) => {
-                        if (flattenGraph) {
-                            filteredData.nodes.forEach(node => {
-                                node.vz *= 0.5; // Dampen Z velocity
-                                node.z *= 0.9; // Pull toward Z=0
-                            });
-                        }
-                    })
+                    // Add custom Z-constraint force (initially null)
+                    .d3Force('flatten', null)
                     .onNodeClick(node => {
                         // Center camera on clicked node
                         const distance = 300;
@@ -3681,7 +3675,7 @@
                                 
                                 document.getElementById('node-info').innerHTML = infoContent;
                             } else {
-                                document.getElementById('node-info').innerHTML = '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Option/Alt-click + drag = Pan view<br>• Right-click + drag = Pan view (may conflict)<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
+                                document.getElementById('node-info').innerHTML = '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Middle-click + drag = Zoom<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
                             }
                         })
                         .onNodeClick(node => {
@@ -3903,89 +3897,31 @@
             }
             });
                 
-                // Add custom option-click panning after graph is initialized
+                // Enable proper mouse controls
+                // The 3d-force-graph uses three.js OrbitControls
+                // By default: left=rotate, right=pan, middle=zoom
+                // We need to check if we can modify these
                 setTimeout(() => {
                     if (!Graph) return;
                     
-                    let isPanning = false;
-                    let panStartX = 0;
-                    let panStartY = 0;
-                    let cameraStartPos = null;
-                    
-                    const container = document.getElementById('3d-graph');
-                    
-                    container.addEventListener('mousedown', (e) => {
-                        if (e.altKey || e.metaKey) { // Option/Alt key or Cmd key
-                            isPanning = true;
-                            panStartX = e.clientX;
-                            panStartY = e.clientY;
-                            cameraStartPos = Graph.cameraPosition();
-                            e.preventDefault();
-                            e.stopPropagation();
-                            container.style.cursor = 'move';
-                            
-                            // Disable orbit controls temporarily
-                            if (Graph.controls()) {
-                                Graph.controls().enabled = false;
-                            }
-                        }
+                    console.log('Checking Graph methods:', {
+                        controls: typeof Graph.controls,
+                        controlType: typeof Graph.controlType,
+                        renderer: typeof Graph.renderer
                     });
                     
-                    container.addEventListener('mousemove', (e) => {
-                        if (isPanning && Graph) {
-                            const deltaX = e.clientX - panStartX;
-                            const deltaY = e.clientY - panStartY;
-                            
-                            // Calculate pan distance based on camera distance
-                            const distance = Math.sqrt(
-                                Math.pow(cameraStartPos.x, 2) + 
-                                Math.pow(cameraStartPos.y, 2) + 
-                                Math.pow(cameraStartPos.z, 2)
-                            );
-                            const panScale = distance * 0.001;
-                            
-                            // Get camera vectors
-                            const camera = Graph.camera();
-                            const right = new THREE.Vector3();
-                            const up = new THREE.Vector3();
-                            
-                            camera.getWorldDirection(new THREE.Vector3()); // Update camera matrices
-                            right.setFromMatrixColumn(camera.matrix, 0);
-                            up.setFromMatrixColumn(camera.matrix, 1);
-                            
-                            // Calculate new position
-                            const newPos = {
-                                x: cameraStartPos.x - right.x * deltaX * panScale + up.x * deltaY * panScale,
-                                y: cameraStartPos.y - right.y * deltaX * panScale + up.y * deltaY * panScale,
-                                z: cameraStartPos.z - right.z * deltaX * panScale + up.z * deltaY * panScale
-                            };
-                            
-                            Graph.cameraPosition(newPos);
-                            e.preventDefault();
-                            e.stopPropagation();
+                    // Try to enable right-click panning properly
+                    if (Graph.controls && Graph.controls()) {
+                        const controls = Graph.controls();
+                        console.log('Controls found:', controls);
+                        // OrbitControls mouse buttons: LEFT=0, MIDDLE=1, RIGHT=2
+                        // Default is: rotate=LEFT, zoom=MIDDLE, pan=RIGHT
+                        // Make sure right-click panning is enabled
+                        if (controls.mouseButtons) {
+                            controls.mouseButtons.RIGHT = THREE.MOUSE.PAN;
+                            console.log('Enabled right-click panning');
                         }
-                    });
-                    
-                    const stopPanning = () => {
-                        if (isPanning) {
-                            isPanning = false;
-                            container.style.cursor = 'auto';
-                            // Re-enable orbit controls
-                            if (Graph.controls()) {
-                                Graph.controls().enabled = true;
-                            }
-                        }
-                    };
-                    
-                    container.addEventListener('mouseup', stopPanning);
-                    container.addEventListener('mouseleave', stopPanning);
-                    
-                    // Handle key release
-                    document.addEventListener('keyup', (e) => {
-                        if (!e.altKey && !e.metaKey && isPanning) {
-                            stopPanning();
-                        }
-                    });
+                    }
                 }, 1000);
             
             // Track mouse movement for tooltip positioning only on initial show
