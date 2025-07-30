@@ -2223,7 +2223,6 @@
                 Graph = ForceGraph3D()(container)
                     .backgroundColor('#0a0a0f')
                     .nodeId('id')
-                    .numDimensions(3) // Force 3D mode explicitly
                     .nodeLabel(node => {
                         if (!floatingTooltipEnabled) {
                             const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
@@ -2288,34 +2287,9 @@
                     .d3AlphaDecay(0.02)
                     .d3VelocityDecay(0.4)
                     .d3Force('charge', d3.forceManyBody().strength(CONFIG.forceStrength))
-                    .d3Force('link', null) // Temporarily disable link force
-                    // Remove 2D center force - replace with custom 3D centering
-                    .d3Force('center', null)
-                    .d3Force('3d-center', (alpha) => {
-                        // Custom 3D centering force
-                        const nodes = Graph.graphData().nodes;
-                        const strength = 0.3;
-                        let cx = 0, cy = 0, cz = 0;
-                        
-                        // Calculate center of mass
-                        nodes.forEach(node => {
-                            cx += node.x || 0;
-                            cy += node.y || 0;
-                            cz += node.z || 0;
-                        });
-                        
-                        cx /= nodes.length;
-                        cy /= nodes.length;
-                        cz /= nodes.length;
-                        
-                        // Apply centering force
-                        nodes.forEach(node => {
-                            node.vx -= cx * strength * alpha;
-                            node.vy -= cy * strength * alpha;
-                            node.vz -= cz * strength * alpha;
-                        });
-                    })
-                    .d3Force('collide', null) // Remove collision force temporarily to test
+                    .d3Force('link', d3.forceLink().distance(CONFIG.linkDistance))
+                    .d3Force('center', d3.forceCenter().strength(0.3))
+                    .d3Force('collide', d3.forceCollide(node => Math.sqrt(node.val) * 10))
                     // Add 3D spreading force
                     .d3Force('3d-spread', (alpha) => {
                         if (graphDepth > 0) {
@@ -2349,8 +2323,6 @@
                             });
                         }
                     })
-                    // Add flattening force (initially null)
-                    .d3Force('flatten', null)
                     .onNodeClick(node => {
                         // Center camera on clicked node
                         const distance = 300;
@@ -2660,26 +2632,7 @@
                 gravitySlider.addEventListener('input', (e) => {
                     const gravity = parseFloat(e.target.value);
                     gravityValue.textContent = gravity;
-                    Graph.d3Force('3d-center', (alpha) => {
-                        const nodes = Graph.graphData().nodes;
-                        let cx = 0, cy = 0, cz = 0;
-                        
-                        nodes.forEach(node => {
-                            cx += node.x || 0;
-                            cy += node.y || 0;
-                            cz += node.z || 0;
-                        });
-                        
-                        cx /= nodes.length;
-                        cy /= nodes.length;
-                        cz /= nodes.length;
-                        
-                        nodes.forEach(node => {
-                            node.vx -= cx * gravity * alpha;
-                            node.vy -= cy * gravity * alpha;
-                            node.vz -= cz * gravity * alpha;
-                        });
-                    });
+                    Graph.d3Force('center').strength(gravity);
                     Graph.d3ReheatSimulation();
                 });
                 
@@ -3885,26 +3838,7 @@
                 const value = parseFloat(e.target.value);
                 document.getElementById('gravity-value').textContent = value;
                 if (Graph) {
-                    Graph.d3Force('3d-center', (alpha) => {
-                        const nodes = Graph.graphData().nodes;
-                        let cx = 0, cy = 0, cz = 0;
-                        
-                        nodes.forEach(node => {
-                            cx += node.x || 0;
-                            cy += node.y || 0;
-                            cz += node.z || 0;
-                        });
-                        
-                        cx /= nodes.length;
-                        cy /= nodes.length;
-                        cz /= nodes.length;
-                        
-                        nodes.forEach(node => {
-                            node.vx -= cx * value * alpha;
-                            node.vy -= cy * value * alpha;
-                            node.vz -= cz * value * alpha;
-                        });
-                    });
+                    Graph.d3Force('center').strength(value);
                     Graph.d3ReheatSimulation();
                 }
             });
@@ -4016,19 +3950,6 @@
                             });
                         }
                     });
-                    
-                    // Add or remove flattening force based on depth
-                    if (graphDepth === 0) {
-                        Graph.d3Force('flatten', (alpha) => {
-                            const nodes = Graph.graphData().nodes;
-                            nodes.forEach(node => {
-                                node.z = 0;
-                                node.vz = 0;
-                            });
-                        });
-                    } else {
-                        Graph.d3Force('flatten', null);
-                    }
                     
                     Graph.d3ReheatSimulation();
                 }
