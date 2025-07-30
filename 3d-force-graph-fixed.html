@@ -466,8 +466,14 @@
                     <input type="checkbox" id="toggle-particles" checked>
                 </label>
                 <label>
-                    Thin Lines Mode
-                    <input type="checkbox" id="toggle-thin-lines">
+                    Link Width Multiplier
+                    <input type="range" id="link-width-multiplier" min="1" max="50" value="12" step="1">
+                    <span class="slider-value" id="link-width-value">12</span>
+                </label>
+                <label>
+                    Link Opacity
+                    <input type="range" id="link-opacity" min="0.1" max="1" value="0.5" step="0.1">
+                    <span class="slider-value" id="link-opacity-value">0.5</span>
                 </label>
                 <label>
                     Floating Tooltip
@@ -484,6 +490,10 @@
                 <label>
                     Auto-rotate
                     <input type="checkbox" id="toggle-auto-rotate">
+                </label>
+                <label>
+                    Flatten Graph (2D-like)
+                    <input type="checkbox" id="toggle-flatten-graph">
                 </label>
             </div>
             
@@ -822,7 +832,9 @@
             let linksEnabled = true;
             let labelsEnabled = true;
             let particlesEnabled = true;
-            let thinLinesEnabled = false;
+            let linkWidthMultiplier = 12;
+            let linkOpacity = 0.5;
+            let flattenGraph = false;
             let currentViewMode = 'entity-type';
             let currentDrawMode = 'normal';
             let entityLimit = 200;
@@ -911,38 +923,33 @@
             
             // Calculate link width based on connection strength
             function getLinkWidth(link) {
-                // If thin lines mode is enabled, return minimal but visible width
-                if (thinLinesEnabled) {
-                    return 0.2;  // Increased from 0.1 to be barely visible
-                }
-                
-                // Start with very thin base width
+                // Base width stays thin
                 let width = 0.1;
                 
                 // Calculate strength based on shared properties
                 let strength = 0;
                 
-                // Only make concept links thick - these are the most important
+                // Concept links get full multiplier
                 if (link.label && link.label === 'uses concept') {
-                    strength += 12;  // Much thicker for better visual impact
+                    strength = linkWidthMultiplier;
                 }
-                // Make technology links only slightly thicker if they have many connections
-                else if (link.label && link.connectionCount && link.connectionCount > 3) {
-                    strength += 1;  // Just barely visible increase
-                }
-                
-                // Only add thickness for very high connection counts
-                if (link.connectionCount && link.connectionCount > 5) {
-                    strength += 1;
+                // Technology links get scaled by connection count
+                else if (link.label && link.connectionCount) {
+                    strength = linkWidthMultiplier * Math.min(link.connectionCount / 10, 1);
                 }
                 
-                // Calculate final width - more dramatic range
+                // Apply multiplier
                 if (strength > 0) {
-                    width = 0.1 + (strength * 0.2);
+                    width = 0.1 + (strength * 0.1);
                 }
                 
-                // Cap at reasonable maximum but allow thicker lines
-                return Math.min(width, 2.5);
+                // Cap at reasonable maximum
+                return Math.min(width, 5.0);
+            }
+            
+            // Get link opacity based on settings
+            function getLinkOpacity(link) {
+                return linkOpacity;
             }
             
             // Load and process data
@@ -992,7 +999,7 @@
                             company: companyName,
                             type: company.type || company.category,
                             entity_type: company.type || company.category,
-                            url_count: company.urls ? company.urls.length : (company.url_count || 0),
+                            url_count: company.urls ? company.urls.length : (company.url_count || company.stats?.url_count || 0),
                             intelligence: {
                                 interest_level: details?.interest_level || 5,
                                 ai_technologies: [],
@@ -1088,7 +1095,7 @@
                                         company: company.name,
                                         type: company.category || 'Other',
                                         entity_type: company.category || 'Other',
-                                        url_count: company.urls ? company.urls.length : 0,
+                                        url_count: company.urls ? company.urls.length : (company.stats?.url_count || company.url_count || 0),
                                         recent_changes: company.stats ? company.stats.totalChanges : 0,
                                         high_interest_changes: company.stats ? company.stats.highInterestChanges : 0,
                                         intelligence: {
@@ -1223,6 +1230,1388 @@
                 
                 rawData.dashboard.company_activity.forEach(company => {
                     if (company.intelligence?.ai_technologies) {
+                        company.intelligence.ai_technologies.forEach(tech => {
+                            if (!techMap.has(tech)) {
+                                techMap.set(tech, []);
+                            }
+                            techMap.get(tech).push(company.company);
+                        });
+                    }
+                });
+                
+                // Connect companies that share technologies
+                techMap.forEach((companies, tech) => {
+                    if (companies.length > 1) {
+                        for (let i = 0; i < companies.length - 1; i++) {
+                            for (let j = i + 1; j < companies.length; j++) {
+                                const key = [companies[i], companies[j]].sort().join('|');
+                                
+                                if (!linkMap.has(key)) {
+                                    linkMap.set(key, {
+                                        source: companies[i],
+                                        target: companies[j],
+                                        labels: [],
+                                        count: 0
+                                    });
+                                }
+                                
+                                linkMap.get(key).labels.push(tech);
+                                linkMap.get(key).count++;
+                                
+                                // Update connection counts
+                                connectionCounts.set(companies[i], connectionCounts.get(companies[i]) + 1);
+                                connectionCounts.set(companies[j], connectionCounts.get(companies[j]) + 1);
+                            }
+                        }
+                    }
+                });
+                
+                // Create technology nodes and links
+                const techNodeMap = new Map();
+                techMap.forEach((companies, tech) => {
+                    // Create a node for EVERY technology
+                    const techNode = {
+                        id: `tech-${tech}`,
+                        name: tech,
+                        group: 'Technology',
+                        color: '#00ff88', // Bright green for technologies
+                        val: Math.max(2, companies.length * 2), // Size based on usage
+                        interestLevel: Math.min(10, companies.length),
+                        urlCount: 0,
+                        connectionCount: companies.length,
+                        nodeType: 'technology'
+                    };
+                    graphData.nodes.push(techNode);
+                    techNodeMap.set(tech, techNode);
+                    
+                    // Connect technology to all companies using it
+                    companies.forEach(company => {
+                        graphData.links.push({
+                            source: company,
+                            target: techNode.id,
+                            label: 'uses technology',
+                            connectionCount: companies.length
+                        });
+                        
+                        connectionCounts.set(company, connectionCounts.get(company) + 1);
+                    });
+                });
+                
+                // Create concept nodes and links (for ALL concepts now)
+                const conceptMap = new Map();
+                rawData.dashboard.company_activity.forEach(company => {
+                    if (company.intelligence?.ai_ml_concepts) {
+                        company.intelligence.ai_ml_concepts.forEach(concept => {
+                            if (!conceptMap.has(concept)) {
+                                conceptMap.set(concept, []);
+                            }
+                            conceptMap.get(concept).push(company.company);
+                        });
+                    }
+                });
+                
+                conceptMap.forEach((companies, concept) => {
+                    // Create node for EVERY concept (removed >= 3 requirement)
+                    const conceptNode = {
+                        id: `concept-${concept}`,
+                        name: concept,
+                        group: 'AI Concept',
+                        color: CONFIG.nodeColors['AI Concept'],
+                        val: Math.max(2, companies.length * 3),
+                        interestLevel: Math.min(10, Math.ceil(companies.length / 2)),
+                        urlCount: 0,
+                        connectionCount: companies.length,
+                        nodeType: 'concept'
+                    };
+                    graphData.nodes.push(conceptNode);
+                    
+                    companies.forEach(company => {
+                        graphData.links.push({
+                            source: company,
+                            target: conceptNode.id,
+                            label: 'uses concept',
+                            connectionCount: companies.length
+                        });
+                        
+                        connectionCounts.set(company, connectionCounts.get(company) + 1);
+                    });
+                });
+                
+                // Convert linkMap to links array
+                linkMap.forEach((linkData, key) => {
+                    graphData.links.push({
+                        source: linkData.source,
+                        target: linkData.target,
+                        label: linkData.labels[0], // Use first label
+                        connectionCount: linkData.count
+                    });
+                });
+                
+                // Update node connection counts
+                graphData.nodes.forEach(node => {
+                    if (connectionCounts.has(node.id)) {
+                        node.connectionCount = connectionCounts.get(node.id);
+                    }
+                });
+                
+                // Update stats
+                document.getElementById('company-count').textContent = rawData.dashboard.company_activity.length;
+                document.getElementById('url-count').textContent = totalUrls;
+                document.getElementById('node-count').textContent = graphData.nodes.length;
+                document.getElementById('link-count').textContent = graphData.links.length;
+                
+                // Update technology and concept summary
+                updateGraphSummary();
+                
+                // Initialize graph only once
+                initializeGraph();
+                
+                // Apply initial filters
+                applyFilters();
+                updateLegend();
+            }
+            
+            function populateTypeFilters() {
+                const typeStats = new Map();
+                graphData.nodes.forEach(node => {
+                    if (!typeStats.has(node.group)) {
+                        typeStats.set(node.group, 0);
+                    }
+                    typeStats.set(node.group, typeStats.get(node.group) + 1);
+                });
+                
+                const container = document.getElementById('type-filters');
+                container.innerHTML = '';
+                
+                Array.from(typeStats.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .forEach(([type, count]) => {
+                        selectedTypes.add(type); // Initially all selected
+                        
+                        const item = document.createElement('div');
+                        item.className = 'checkbox-item';
+                        item.innerHTML = `
+                            <input type="checkbox" id="type-${type.replace(/\s+/g, '-')}" value="${type}" checked>
+                            <label for="type-${type.replace(/\s+/g, '-')}">
+                                <span>${type}</span>
+                                <span class="checkbox-count">(${count})</span>
+                            </label>
+                        `;
+                        
+                        item.querySelector('input').addEventListener('change', (e) => {
+                            if (e.target.checked) {
+                                selectedTypes.add(type);
+                            } else {
+                                selectedTypes.delete(type);
+                            }
+                            applyFilters();
+                        });
+                        
+                        container.appendChild(item);
+                    });
+            }
+            
+            // New: Technology filters
+            let selectedTechs = new Set();
+            function populateTechFilters() {
+                const techStats = new Map();
+                
+                // Count companies using each technology
+                rawData.dashboard.company_activity.forEach(company => {
+                    if (company.intelligence?.ai_technologies) {
+                        company.intelligence.ai_technologies.forEach(tech => {
+                            techStats.set(tech, (techStats.get(tech) || 0) + 1);
+                        });
+                    }
+                });
+                
+                const container = document.getElementById('tech-filters');
+                container.innerHTML = '';
+                
+                // Sort by count and create checkboxes
+                Array.from(techStats.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .forEach(([tech, count]) => {
+                        const item = document.createElement('div');
+                        item.className = 'checkbox-item';
+                        item.innerHTML = `
+                            <input type="checkbox" id="tech-${tech.replace(/\s+/g, '-')}" value="${tech}">
+                            <label for="tech-${tech.replace(/\s+/g, '-')}">
+                                <span>${tech}</span>
+                                <span class="checkbox-count">(${count})</span>
+                            </label>
+                        `;
+                        
+                        item.querySelector('input').addEventListener('change', (e) => {
+                            if (e.target.checked) {
+                                selectedTechs.add(tech);
+                            } else {
+                                selectedTechs.delete(tech);
+                            }
+                            applyFilters();
+                        });
+                        
+                        container.appendChild(item);
+                    });
+            }
+            
+            // New: Concept filters
+            let selectedConcepts = new Set();
+            function populateConceptFilters() {
+                const conceptStats = new Map();
+                
+                // Count companies using each concept
+                rawData.dashboard.company_activity.forEach(company => {
+                    if (company.intelligence?.ai_ml_concepts) {
+                        company.intelligence.ai_ml_concepts.forEach(concept => {
+                            conceptStats.set(concept, (conceptStats.get(concept) || 0) + 1);
+                        });
+                    }
+                });
+                
+                const container = document.getElementById('concept-filters');
+                container.innerHTML = '';
+                
+                // Sort by count and create checkboxes
+                Array.from(conceptStats.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .forEach(([concept, count]) => {
+                        const item = document.createElement('div');
+                        item.className = 'checkbox-item';
+                        item.innerHTML = `
+                            <input type="checkbox" id="concept-${concept.replace(/\s+/g, '-')}" value="${concept}">
+                            <label for="concept-${concept.replace(/\s+/g, '-')}">
+                                <span>${concept}</span>
+                                <span class="checkbox-count">(${count})</span>
+                            </label>
+                        `;
+                        
+                        item.querySelector('input').addEventListener('change', (e) => {
+                            if (e.target.checked) {
+                                selectedConcepts.add(concept);
+                            } else {
+                                selectedConcepts.delete(concept);
+                            }
+                            applyFilters();
+                        });
+                        
+                        container.appendChild(item);
+                    });
+            }
+            
+            function applyFilters() {
+                const searchTerm = document.getElementById('search-input')?.value.toLowerCase() || '';
+                
+                console.log('Applying filters. Selected types:', Array.from(selectedTypes));
+                console.log('Total nodes before filter:', graphData.nodes.length);
+                console.log('Active change filter:', activeChangeFilter);
+                
+                // Apply change filter first if active
+                let changedNodeIds = null;
+                if (activeChangeFilter && changedCompaniesMap.size > 0) {
+                    changedNodeIds = new Set();
+                    
+                    changedCompaniesMap.forEach((changeInfo, companyName) => {
+                        let include = false;
+                        
+                        switch (activeChangeFilter) {
+                            case '24h':
+                                include = changeInfo.hoursAgo <= 24;
+                                break;
+                            case '48h':
+                                include = changeInfo.hoursAgo <= 48;
+                                break;
+                            case 'week':
+                                include = changeInfo.hoursAgo <= 168;
+                                break;
+                            case 'all':
+                                include = true;
+                                break;
+                        }
+                        
+                        if (include) {
+                            changedNodeIds.add(companyName);
+                        }
+                    });
+                    
+                    console.log('Changed nodes filter active:', changedNodeIds.size, 'companies');
+                }
+                
+                // Build a set of nodes to include based on search depth
+                let searchIncludedNodes = new Set();
+                
+                if (searchTerm) {
+                    // First, find all nodes that match the search term
+                    const matchingNodes = graphData.nodes.filter(node => 
+                        node.name.toLowerCase().includes(searchTerm)
+                    );
+                    
+                    // Add matching nodes to the set
+                    matchingNodes.forEach(node => searchIncludedNodes.add(node.id));
+                    
+                    // If search depth > 0, add connected nodes
+                    if (searchDepth > 0) {
+                        const nodesToProcess = [...matchingNodes];
+                        const processedNodes = new Set();
+                        
+                        for (let depth = 0; depth < searchDepth; depth++) {
+                            const nextLevel = [];
+                            
+                            nodesToProcess.forEach(node => {
+                                if (processedNodes.has(node.id)) return;
+                                processedNodes.add(node.id);
+                                
+                                // Find all connected nodes
+                                graphData.links.forEach(link => {
+                                    const sourceId = link.source.id || link.source;
+                                    const targetId = link.target.id || link.target;
+                                    
+                                    if (sourceId === node.id) {
+                                        searchIncludedNodes.add(targetId);
+                                        const targetNode = graphData.nodes.find(n => n.id === targetId);
+                                        if (targetNode && !processedNodes.has(targetId)) {
+                                            nextLevel.push(targetNode);
+                                        }
+                                    }
+                                    if (targetId === node.id) {
+                                        searchIncludedNodes.add(sourceId);
+                                        const sourceNode = graphData.nodes.find(n => n.id === sourceId);
+                                        if (sourceNode && !processedNodes.has(sourceId)) {
+                                            nextLevel.push(sourceNode);
+                                        }
+                                    }
+                                });
+                            });
+                            
+                            nodesToProcess.length = 0;
+                            nodesToProcess.push(...nextLevel);
+                        }
+                    }
+                }
+                
+                // First filter by type and search
+                let tempFilteredNodes = graphData.nodes.filter(node => {
+                    // Apply change filter if active
+                    if (changedNodeIds && !node.nodeType) { // Only apply to company nodes
+                        if (!changedNodeIds.has(node.id)) {
+                            return false;
+                        }
+                    }
+                    
+                    // Node type visibility filter
+                    if (node.nodeType === 'technology' && !showTechNodes) return false;
+                    if (node.nodeType === 'concept' && !showConceptNodes) return false;
+                    if (!node.nodeType && !showCompanyNodes) return false; // Companies don't have nodeType
+                    
+                    // Custom tag filter takes precedence
+                    if (window.customTagFilter && window.customTagFilter.size > 0) {
+                        if (!window.customTagFilter.has(node.id)) {
+                            return false;
+                        }
+                    }
+                    
+                    // View mode specific filtering
+                    if (currentViewMode === 'high-interest' && node.interestLevel < 7) {
+                        return false;
+                    }
+                    if (currentViewMode === 'recent-activity') {
+                        // Only show nodes with recent changes
+                        const hasRecentChanges = node.hasRecentChange || node.recent_changes > 0 || node.high_interest_changes > 0;
+                        if (!hasRecentChanges) return false;
+                    }
+                    
+                    // Type filter - if types are selected, only show matching types
+                    if (selectedTypes.size > 0 && !selectedTypes.has(node.group)) {
+                        return false;
+                    }
+                    // If no types selected via "Select None", show nothing
+                    if (selectedTypes.size === 0 && document.querySelectorAll('#type-filters input[type="checkbox"]').length > 0) {
+                        return false;
+                    }
+                    
+                    // Search filter - apply to all node types
+                    if (searchTerm) {
+                        // Use the searchIncludedNodes set built above
+                        if (!searchIncludedNodes.has(node.id)) {
+                            return false;
+                        }
+                    }
+                    
+                    // Technology filter - only apply to company nodes
+                    if (selectedTechs.size > 0 && !node.nodeType) {
+                        const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
+                        if (!companyData || !companyData.intelligence?.ai_technologies) return false;
+                        
+                        const hasTech = Array.from(selectedTechs).some(tech => 
+                            companyData.intelligence.ai_technologies.includes(tech)
+                        );
+                        if (!hasTech) return false;
+                    }
+                    
+                    // Show technology nodes that match selected techs
+                    if (node.nodeType === 'technology' && selectedTechs.size > 0) {
+                        const techName = node.name;
+                        if (!selectedTechs.has(techName)) return false;
+                    }
+                    
+                    // Concept filter - only apply to company nodes
+                    if (selectedConcepts.size > 0 && !node.nodeType) {
+                        const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
+                        if (!companyData || !companyData.intelligence?.ai_ml_concepts) return false;
+                        
+                        const hasConcept = Array.from(selectedConcepts).some(concept => 
+                            companyData.intelligence.ai_ml_concepts.includes(concept)
+                        );
+                        if (!hasConcept) return false;
+                    }
+                    
+                    // Show concept nodes that match selected concepts
+                    if (node.nodeType === 'concept' && selectedConcepts.size > 0) {
+                        const conceptName = node.name;
+                        if (!selectedConcepts.has(conceptName)) return false;
+                    }
+                    
+                    return true;
+                });
+                
+                // Apply entity limit
+                if (entityLimit < tempFilteredNodes.length) {
+                    // Sort by importance (interest level, then connection count, then URL count)
+                    tempFilteredNodes.sort((a, b) => {
+                        // First by interest level (higher is better)
+                        if (a.interestLevel !== b.interestLevel) {
+                            return b.interestLevel - a.interestLevel;
+                        }
+                        // Then by connection count
+                        if (a.connectionCount !== b.connectionCount) {
+                            return b.connectionCount - a.connectionCount;
+                        }
+                        // Finally by URL count
+                        return b.urlCount - a.urlCount;
+                    });
+                    
+                    // Take only the top N entities
+                    filteredData.nodes = tempFilteredNodes.slice(0, entityLimit);
+                } else {
+                    filteredData.nodes = tempFilteredNodes;
+                }
+                
+                console.log('Nodes after filter:', filteredData.nodes.length);
+                
+                // Get filtered node IDs
+                const filteredNodeIds = new Set(filteredData.nodes.map(n => n.id));
+                
+                // Filter links
+                filteredData.links = graphData.links.filter(link => {
+                    // First check if both nodes are visible
+                    const hasNodes = filteredNodeIds.has(link.source.id || link.source) && 
+                           filteredNodeIds.has(link.target.id || link.target);
+                    if (!hasNodes) return false;
+                    
+                    // Apply link threshold filter
+                    if (linkThreshold > 0 && link.connectionCount < linkThreshold) {
+                        return false;
+                    }
+                    
+                    // Apply view mode specific link filtering
+                    if (currentViewMode === 'technology-links') {
+                        return link.label && link.label !== 'uses concept';
+                    } else if (currentViewMode === 'concept-links') {
+                        return link.label === 'uses concept';
+                    }
+                    
+                    return true;
+                });
+                
+                // Apply view mode colors and node sizing
+                filteredData.nodes = filteredData.nodes.map(node => {
+                    const newNode = {...node};
+                    
+                    // Mark nodes with recent changes for visual effects
+                    if (node.hasRecentChange) {
+                        newNode.isRecentChange = true;
+                        if (activeChangeFilter) {
+                            // Add visual emphasis when change filter is active
+                            newNode.val = (newNode.val || 1) * 1.5;
+                        }
+                    }
+                    
+                    // Apply colors based on view mode
+                    if (monochrome) {
+                        newNode.currentColor = '#00ffff'; // Cyan for monochrome mode
+                    } else if (currentViewMode === 'interest') {
+                        newNode.currentColor = CONFIG.interestColors[node.interestLevel] || CONFIG.interestColors[5];
+                    } else if (currentViewMode === 'connections') {
+                        if (node.connectionCount >= 10) {
+                            newNode.currentColor = CONFIG.connectionColors.high;
+                        } else if (node.connectionCount >= 5) {
+                            newNode.currentColor = CONFIG.connectionColors.medium;
+                        } else {
+                            newNode.currentColor = CONFIG.connectionColors.low;
+                        }
+                    } else if (node.hasRecentChange && (currentViewMode === 'recent-activity' || activeChangeFilter)) {
+                        // Highlight changed nodes in red
+                        newNode.currentColor = '#ff4444';
+                    } else {
+                        // Entity type view
+                        newNode.currentColor = node.color;
+                    }
+                    
+                    // Apply node sizing based on mode
+                    switch (nodeSizeMode) {
+                        case 'uniform':
+                            newNode.val = 2; // Uniform size for all nodes
+                            break;
+                        case 'activity':
+                            newNode.val = Math.max(1, node.urlCount || 1);
+                            break;
+                        case 'connections':
+                            newNode.val = Math.max(1, node.connectionCount || 1);
+                            break;
+                        case 'interest':
+                            newNode.val = Math.max(1, node.interestLevel || 1) * 2;
+                            break;
+                        default:
+                            newNode.val = node.val || 1;
+                    }
+                    
+                    return newNode;
+                });
+                
+                // Update graph
+                if (Graph) {
+                    console.log('Updating graph with filtered data:', filteredData.nodes.length, 'nodes,', filteredData.links.length, 'links');
+                    
+                    // Need to create completely fresh objects to avoid reference issues
+                    const freshData = {
+                        nodes: filteredData.nodes.map(n => ({ ...n })),
+                        links: filteredData.links.map(l => ({ 
+                            source: l.source.id || l.source,
+                            target: l.target.id || l.target,
+                            label: l.label,
+                            connectionCount: l.connectionCount,
+                            ...l 
+                        }))
+                    };
+                    
+                    Graph.graphData(freshData);
+                    
+                    // Re-apply link width function after data update
+                    Graph.linkWidth(link => getLinkWidth(link));
+                    
+                    // Re-apply draw mode if not normal
+                    if (currentDrawMode && currentDrawMode !== 'normal') {
+                        setTimeout(() => {
+                            applyDrawMode();
+                        }, 100);
+                    }
+                }
+                
+                updateLegend();
+            }
+            
+            // Make applyFilters available globally
+            window.applyFilters = applyFilters;
+            window.focusOnNode = null; // Will be set later
+            
+            // Apply different draw modes
+            function applyDrawMode() {
+                if (!Graph || !filteredData.nodes) return;
+                
+                switch (currentDrawMode) {
+                    case 'normal':
+                        // Standard force-directed layout
+                        Graph.d3Force('charge').strength(CONFIG.forceStrength);
+                        Graph.d3Force('link').distance(CONFIG.linkDistance);
+                        
+                        // Reset node positions - need to update the actual graph data
+                        const currentData = Graph.graphData();
+                        currentData.nodes.forEach(node => {
+                            delete node.fx;
+                            delete node.fy;
+                            delete node.fz;
+                        });
+                        
+                        // Re-apply the data to trigger update
+                        Graph.graphData(currentData);
+                        break;
+                        
+                    case 'group-by-type':
+                        // Group nodes by their type in spherical clusters
+                        const currentDataGrouped = Graph.graphData();
+                        const typeGroups = new Map();
+                        let typeIndex = 0;
+                        
+                        // Map each type to an index
+                        currentDataGrouped.nodes.forEach(node => {
+                            if (!typeGroups.has(node.group)) {
+                                typeGroups.set(node.group, typeIndex++);
+                            }
+                        });
+                        
+                        // Calculate positions for each type group
+                        const numGroups = typeGroups.size;
+                        const radius = 200;
+                        
+                        currentDataGrouped.nodes.forEach(node => {
+                            const groupIndex = typeGroups.get(node.group);
+                            const angle = (2 * Math.PI * groupIndex) / numGroups;
+                            const phi = Math.acos(1 - 2 * (groupIndex + 0.5) / numGroups);
+                            
+                            // Create a radial force for each group
+                            const targetX = radius * Math.sin(phi) * Math.cos(angle);
+                            const targetY = radius * Math.sin(phi) * Math.sin(angle);
+                            const targetZ = radius * Math.cos(phi);
+                            
+                            // Add some randomness to prevent perfect alignment
+                            const jitter = 50;
+                            node.fx = targetX + (Math.random() - 0.5) * jitter;
+                            node.fy = targetY + (Math.random() - 0.5) * jitter;
+                            node.fz = targetZ + (Math.random() - 0.5) * jitter;
+                        });
+                        
+                        // Re-apply the data to trigger update
+                        Graph.graphData(currentDataGrouped);
+                        
+                        // Weaken the charge force for tighter grouping
+                        Graph.d3Force('charge').strength(CONFIG.forceStrength / 3);
+                        break;
+                        
+                    case 'recent-changes-24h':
+                    case 'recent-changes-48h':
+                    case 'recent-changes-week':
+                        // Get companies with recent changes
+                        const currentDataRecent = Graph.graphData();
+                        const changedCompanies = new Set();
+                        
+                        if (changedCompaniesMap.size > 0) {
+                            let hoursThreshold;
+                            
+                            if (currentDrawMode === 'recent-changes-24h') {
+                                hoursThreshold = 24;
+                            } else if (currentDrawMode === 'recent-changes-48h') {
+                                hoursThreshold = 48;
+                            } else {
+                                hoursThreshold = 168; // 1 week
+                            }
+                            
+                            changedCompaniesMap.forEach((changeInfo, companyName) => {
+                                if (changeInfo.hoursAgo <= hoursThreshold) {
+                                    changedCompanies.add(companyName);
+                                }
+                            });
+                        }
+                        
+                        console.log('Companies with recent changes:', Array.from(changedCompanies));
+                        
+                        currentDataRecent.nodes.forEach(node => {
+                            if (changedCompanies.has(node.id)) {
+                                // Position changed nodes in the center
+                                node.fx = (Math.random() - 0.5) * 100;
+                                node.fy = (Math.random() - 0.5) * 100;
+                                node.fz = (Math.random() - 0.5) * 100;
+                                
+                                // Make them bigger and red
+                                node.val = (node.urlCount || 1) * 3;
+                                node.currentColor = '#ff0000'; // Red for recent changes
+                                node.isRecentChange = true; // Mark for bold text
+                            } else {
+                                // Push other nodes to the periphery
+                                const angle = Math.random() * 2 * Math.PI;
+                                const phi = Math.random() * Math.PI;
+                                const distance = 300 + Math.random() * 200;
+                                
+                                node.fx = distance * Math.sin(phi) * Math.cos(angle);
+                                node.fy = distance * Math.sin(phi) * Math.sin(angle);
+                                node.fz = distance * Math.cos(phi);
+                                
+                                // Make them smaller and dimmer
+                                node.val = (node.urlCount || 1) * 0.5;
+                                node.currentColor = '#444444'; // Gray for no recent changes
+                                node.isRecentChange = false;
+                            }
+                        });
+                        
+                        // Re-apply the data to trigger update
+                        Graph.graphData(currentDataRecent);
+                        
+                        // Update node visuals
+                        Graph.nodeThreeObject(node => {
+                            if (!labelsEnabled) {
+                                return null;
+                            }
+                            return createNodeObject(node);
+                        });
+                        break;
+                }
+                
+                // Reheat the simulation to apply changes
+                Graph.d3ReheatSimulation();
+                
+                // Force a resize to fix any rendering issues
+                if (Graph.renderer()) {
+                    const container = document.getElementById('3d-graph');
+                    Graph.width(container.clientWidth);
+                    Graph.height(container.clientHeight);
+                    Graph.renderer().setSize(container.clientWidth, container.clientHeight);
+                    Graph.camera().aspect = container.clientWidth / container.clientHeight;
+                    Graph.camera().updateProjectionMatrix();
+                }
+            }
+            
+            // Focus on a specific node and its connections
+            function focusOnNode(targetNode) {
+                if (!targetNode) return;
+                
+                // Get all connected nodes
+                const connectedNodeIds = new Set([targetNode.id]);
+                
+                // Find all links connected to this node
+                graphData.links.forEach(link => {
+                    const sourceId = link.source.id || link.source;
+                    const targetId = link.target.id || link.target;
+                    
+                    if (sourceId === targetNode.id) {
+                        connectedNodeIds.add(targetId);
+                    }
+                    if (targetId === targetNode.id) {
+                        connectedNodeIds.add(sourceId);
+                    }
+                });
+                
+                // Filter to show only connected nodes
+                filteredData.nodes = graphData.nodes.filter(node => 
+                    connectedNodeIds.has(node.id)
+                );
+                
+                // Filter links to only show connections between visible nodes
+                filteredData.links = graphData.links.filter(link => {
+                    const sourceId = link.source.id || link.source;
+                    const targetId = link.target.id || link.target;
+                    return connectedNodeIds.has(sourceId) && connectedNodeIds.has(targetId);
+                });
+                
+                // Apply view mode colors
+                filteredData.nodes = filteredData.nodes.map(node => {
+                    const newNode = {...node};
+                    
+                    if (currentViewMode === 'interest') {
+                        newNode.currentColor = CONFIG.interestColors[node.interestLevel] || CONFIG.interestColors[5];
+                    } else if (currentViewMode === 'connections') {
+                        if (node.connectionCount >= 10) {
+                            newNode.currentColor = CONFIG.connectionColors.high;
+                        } else if (node.connectionCount >= 5) {
+                            newNode.currentColor = CONFIG.connectionColors.medium;
+                        } else {
+                            newNode.currentColor = CONFIG.connectionColors.low;
+                        }
+                    } else {
+                        // Entity type view
+                        newNode.currentColor = node.color;
+                    }
+                    
+                    // Highlight the focused node
+                    if (node.id === targetNode.id) {
+                        newNode.currentColor = '#00ff88'; // Bright green for focused node
+                    }
+                    
+                    return newNode;
+                });
+                
+                // Update graph
+                if (Graph) {
+                    const freshData = {
+                        nodes: filteredData.nodes.map(n => ({ ...n })),
+                        links: filteredData.links.map(l => ({ 
+                            source: l.source.id || l.source,
+                            target: l.target.id || l.target,
+                            label: l.label,
+                            connectionCount: l.connectionCount,
+                            ...l 
+                        }))
+                    };
+                    
+                    Graph.graphData(freshData);
+                    Graph.linkWidth(link => getLinkWidth(link));
+                    
+                    // Center camera on the focused node
+                    setTimeout(() => {
+                        const distance = 300;
+                        const distRatio = 1 + distance/Math.hypot(targetNode.x, targetNode.y, targetNode.z);
+                        Graph.cameraPosition(
+                            { x: targetNode.x * distRatio, y: targetNode.y * distRatio, z: targetNode.z * distRatio },
+                            targetNode,
+                            1000
+                        );
+                    }, 100);
+                }
+                
+                // Update legend
+                updateLegend();
+                
+                // Update info panel
+                document.getElementById('node-info').innerHTML = 
+                    `<strong>Focused on: ${targetNode.name}</strong><br>
+                    Type: ${targetNode.group}<br>
+                    Connected nodes: ${connectedNodeIds.size - 1}<br>
+                    <em>Click "Select All" in filters to show all nodes again</em>`;
+            }
+            
+            // Make focusOnNode globally available
+            window.focusOnNode = focusOnNode;
+            
+            function updateGraphSummary() {
+                // Count unique technologies and concepts
+                const allTechs = new Set();
+                const allConcepts = new Set();
+                
+                rawData.dashboard.company_activity.forEach(company => {
+                    if (company.intelligence?.ai_technologies) {
+                        company.intelligence.ai_technologies.forEach(tech => allTechs.add(tech));
+                    }
+                    if (company.intelligence?.ai_ml_concepts) {
+                        company.intelligence.ai_ml_concepts.forEach(concept => allConcepts.add(concept));
+                    }
+                });
+                
+                // Update summary display
+                const techSummary = document.getElementById('tech-summary');
+                const conceptSummary = document.getElementById('concept-summary');
+                
+                techSummary.innerHTML = `<strong style="color: #00ff88;">${allTechs.size}</strong> technologies tracked`;
+                conceptSummary.innerHTML = `<strong style="color: #4ecdc4;">${allConcepts.size}</strong> AI concepts mapped`;
+                
+                // Show top 3 of each
+                const techCounts = new Map();
+                const conceptCounts = new Map();
+                
+                rawData.dashboard.company_activity.forEach(company => {
+                    company.intelligence?.ai_technologies?.forEach(tech => {
+                        techCounts.set(tech, (techCounts.get(tech) || 0) + 1);
+                    });
+                    company.intelligence?.ai_ml_concepts?.forEach(concept => {
+                        conceptCounts.set(concept, (conceptCounts.get(concept) || 0) + 1);
+                    });
+                });
+                
+                const topTechs = Array.from(techCounts.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([tech, count]) => `${tech} (${count})`);
+                    
+                const topConcepts = Array.from(conceptCounts.entries())
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 3)
+                    .map(([concept, count]) => `${concept} (${count})`);
+                    
+                if (topTechs.length > 0) {
+                    techSummary.innerHTML += `<br>Top: ${topTechs.join(', ')}`;
+                }
+                if (topConcepts.length > 0) {
+                    conceptSummary.innerHTML += `<br>Top: ${topConcepts.join(', ')}`;
+                }
+            }
+            
+            function updateLegend() {
+                const nodeTypes = new Map();
+                // If no filters selected or no filtered nodes, use all graph data
+                const dataToUse = (selectedTypes.size === 0 || filteredData.nodes.length === 0) ? graphData : filteredData;
+                
+                // Check if we're in recent changes mode
+                if (currentDrawMode.startsWith('recent-changes-') || activeChangeFilter) {
+                    const legendContent = document.getElementById('legend-content');
+                    legendContent.innerHTML = '';
+                    
+                    // Add recent changes legend
+                    const recentItem = document.createElement('div');
+                    recentItem.className = 'legend-item';
+                    recentItem.innerHTML = `
+                        <div class="legend-color" style="background: #ff4444; animation: pulse 2s ease-in-out infinite;"></div>
+                        <span>Recent Changes</span>
+                    `;
+                    legendContent.appendChild(recentItem);
+                    
+                    const unchangedItem = document.createElement('div');
+                    unchangedItem.className = 'legend-item';
+                    unchangedItem.innerHTML = `
+                        <div class="legend-color" style="background: #444444;"></div>
+                        <span>No Recent Changes</span>
+                    `;
+                    legendContent.appendChild(unchangedItem);
+                    
+                    // Count changed vs unchanged
+                    let changedCount = 0;
+                    let unchangedCount = 0;
+                    dataToUse.nodes.forEach(node => {
+                        if (node.hasRecentChange || node.isRecentChange) {
+                            changedCount++;
+                        } else {
+                            unchangedCount++;
+                        }
+                    });
+                    
+                    const summaryItem = document.createElement('div');
+                    summaryItem.style.marginTop = '10px';
+                    summaryItem.style.fontSize = '11px';
+                    summaryItem.style.color = '#888';
+                    summaryItem.innerHTML = `${changedCount} with changes, ${unchangedCount} unchanged`;
+                    legendContent.appendChild(summaryItem);
+                    
+                    return;
+                }
+                
+                // Count nodes by type
+                dataToUse.nodes.forEach(node => {
+                    if (!nodeTypes.has(node.group)) {
+                        nodeTypes.set(node.group, { count: 0, color: node.currentColor || node.color });
+                    }
+                    nodeTypes.get(node.group).count++;
+                });
+                
+                // Sort by count and update legend
+                const legendContent = document.getElementById('legend-content');
+                legendContent.innerHTML = '';
+                
+                Array.from(nodeTypes.entries())
+                    .sort((a, b) => b[1].count - a[1].count)
+                    .forEach(([type, data]) => {
+                        const item = document.createElement('div');
+                        item.className = 'legend-item';
+                        item.innerHTML = `
+                            <div class="legend-color" style="background: ${data.color};"></div>
+                            <span>${type} (${data.count})</span>
+                        `;
+                        legendContent.appendChild(item);
+                    });
+            }
+            
+            function initializeGraph() {
+                console.log('Initializing 3D force graph...');
+                
+                const container = document.getElementById('3d-graph');
+                
+                Graph = ForceGraph3D()(container)
+                    .backgroundColor('#0a0a0f')
+                    .nodeId('id')
+                    .nodeLabel(node => {
+                        if (!floatingTooltipEnabled) {
+                            const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
+                            let label = `<strong>${node.name}</strong><br>`;
+                            label += `Type: ${node.group}<br>`;
+                            label += `Interest Level: ${node.interestLevel || 0}<br>`;
+                            label += `URLs: ${node.urlCount || 0}<br>`;
+                            label += `Connections: ${node.connectionCount || 0}<br>`;
+                            
+                            if (node.hasRecentChange && node.changeDetails) {
+                                label += `<br><span style="color: #ff4444;">⚡ Changed ${Math.round(node.changeDetails.hoursAgo)}h ago</span><br>`;
+                                label += `Interest: ${node.changeDetails.latestChange.interest_level}/10<br>`;
+                            }
+                            
+                            if (companyData?.intelligence?.products?.length > 0) {
+                                label += '<br><strong>Products:</strong><br>';
+                                companyData.intelligence.products.forEach(p => {
+                                    label += `• ${p.name}<br>`;
+                                });
+                            }
+                            
+                            if (companyData?.intelligence?.ai_technologies?.length > 0) {
+                                label += '<br><strong>Technologies:</strong><br>';
+                                companyData.intelligence.ai_technologies.forEach(tech => {
+                                    label += `<span class="clickable-tag" onclick="filterByTag('${tech}')">${tech}</span> `;
+                                });
+                                label += '<br>';
+                            }
+                            
+                            if (companyData?.intelligence?.ai_ml_concepts?.length > 0) {
+                                label += '<br><strong>AI Concepts:</strong><br>';
+                                companyData.intelligence.ai_ml_concepts.forEach(concept => {
+                                    label += `<span class="clickable-tag" onclick="filterByTag('${concept}')">${concept}</span> `;
+                                });
+                            }
+                            
+                            return label;
+                        }
+                        return ''; // Return empty for floating tooltip
+                    })
+                    .nodeColor(node => monochrome ? '#00ffff' : (node.currentColor || node.color))
+                    .nodeVal(node => node.val || 1)
+                    .nodeThreeObject(node => {
+                        if (!labelsEnabled) {
+                            return null;
+                        }
+                        return createNodeObject(node);
+                    })
+                    .nodeThreeObjectExtend(true)
+                    .linkColor(link => {
+                        if (monochrome) return '#00ffff';
+                        if (link.label === 'uses concept') return '#4ecdc4';
+                        if (link.label === 'uses technology') return '#00ff88';
+                        return CONFIG.linkOpacity ? `rgba(150, 150, 150, ${CONFIG.linkOpacity})` : '#666';
+                    })
+                    .linkWidth(link => getLinkWidth(link))
+                    .linkOpacity(CONFIG.linkOpacity)
+                    .linkDirectionalParticles(link => particlesEnabled ? 2 : 0)
+                    .linkDirectionalParticleSpeed(0.005)
+                    .linkDirectionalParticleWidth(1.5)
+                    .linkDirectionalParticleColor(() => '#00ff88')
+                    .d3AlphaDecay(0.02)
+                    .d3VelocityDecay(0.4)
+                    .d3Force('charge', d3.forceManyBody().strength(CONFIG.forceStrength))
+                    .d3Force('link', d3.forceLink().distance(CONFIG.linkDistance))
+                    .d3Force('center', d3.forceCenter().strength(0.3))
+                    .d3Force('collide', d3.forceCollide(node => Math.sqrt(node.val) * 10))
+                    .onNodeClick(node => {
+                        // Center camera on clicked node
+                        const distance = 300;
+                        const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+                        Graph.cameraPosition(
+                            { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
+                            node,
+                            1000
+                        );
+                    })
+                    .onNodeDrag((node, translate) => {
+                        // Apply flattening constraint during drag
+                        if (flattenGraph) {
+                            node.fz = node.z * 0.1;
+                        }
+                    })
+                    .onNodeDragEnd(node => {
+                        // Apply final flattening constraint
+                        if (flattenGraph) {
+                            node.fz = node.z * 0.1;
+                        }
+                    })
+                    .onNodeRightClick(node => {
+                        // Show context menu
+                        const menu = document.getElementById('context-menu');
+                        const title = document.getElementById('context-menu-title');
+                        title.textContent = node.name;
+                        contextMenuNode = node;
+                        
+                        // Position menu at mouse location
+                        menu.style.display = 'block';
+                        menu.style.left = `${event.clientX}px`;
+                        menu.style.top = `${event.clientY}px`;
+                        
+                        // Prevent menu from going off screen
+                        const rect = menu.getBoundingClientRect();
+                        if (rect.right > window.innerWidth) {
+                            menu.style.left = `${window.innerWidth - rect.width - 10}px`;
+                        }
+                        if (rect.bottom > window.innerHeight) {
+                            menu.style.top = `${window.innerHeight - rect.height - 10}px`;
+                        }
+                        
+                        event.preventDefault();
+                    })
+                    .onNodeHover(node => {
+                        if (!floatingTooltipEnabled) return;
+                        
+                        hoveredNode = node;
+                        
+                        if (node && !tooltipFixed) {
+                            clearTimeout(tooltipTimeout);
+                            tooltipTimeout = setTimeout(() => {
+                                showFloatingTooltip(node);
+                            }, 300); // Small delay to prevent flashing
+                        } else if (!node && !tooltipFixed) {
+                            clearTimeout(tooltipTimeout);
+                            tooltipTimeout = setTimeout(() => {
+                                hideFloatingTooltip();
+                            }, 200);
+                        }
+                    });
+                
+                // Make Graph globally accessible
+                window.Graph = Graph;
+                
+                // Setup controls
+                setupControls();
+                
+                // Handle window resize
+                window.addEventListener('resize', () => {
+                    Graph.width(container.clientWidth);
+                    Graph.height(container.clientHeight);
+                });
+                
+                // Setup floating tooltip click handler
+                const tooltip = document.getElementById('entity-tooltip');
+                tooltip.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('clickable-tag')) {
+                        e.stopPropagation();
+                        return;
+                    }
+                    tooltipFixed = !tooltipFixed;
+                    if (!tooltipFixed && !hoveredNode) {
+                        hideFloatingTooltip();
+                    }
+                });
+            }
+            
+            function showFloatingTooltip(node) {
+                const tooltip = document.getElementById('entity-tooltip');
+                const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
+                
+                let content = `<strong>${node.name}</strong><br>`;
+                content += `Type: ${node.group}<br>`;
+                content += `Interest Level: ${node.interestLevel || 0}<br>`;
+                content += `URLs: ${node.urlCount || 0}<br>`;
+                content += `Connections: ${node.connectionCount || 0}<br>`;
+                
+                // Add change indicator
+                if (node.hasRecentChange && node.changeDetails) {
+                    content += `<div class="change-indicator">⚡ Changed ${Math.round(node.changeDetails.hoursAgo)}h ago<br>`;
+                    content += `Interest: ${node.changeDetails.latestChange.interest_level}/10</div>`;
+                }
+                
+                if (companyData?.intelligence?.products?.length > 0) {
+                    content += '<br><strong>Products:</strong><br>';
+                    companyData.intelligence.products.forEach(p => {
+                        content += `• ${p.name}<br>`;
+                    });
+                }
+                
+                if (companyData?.intelligence?.ai_technologies?.length > 0) {
+                    content += '<br><strong>Technologies:</strong><br>';
+                    companyData.intelligence.ai_technologies.forEach(tech => {
+                        content += `<span class="clickable-tag" onclick="filterByTag('${tech}')">${tech}</span> `;
+                    });
+                    content += '<br>';
+                }
+                
+                if (companyData?.intelligence?.ai_ml_concepts?.length > 0) {
+                    content += '<br><strong>AI Concepts:</strong><br>';
+                    companyData.intelligence.ai_ml_concepts.forEach(concept => {
+                        content += `<span class="clickable-tag" onclick="filterByTag('${concept}')">${concept}</span> `;
+                    });
+                }
+                
+                tooltip.innerHTML = content;
+                tooltip.style.display = 'block';
+                
+                // Position tooltip near cursor
+                const x = event.clientX + 15;
+                const y = event.clientY + 15;
+                
+                tooltip.style.left = `${x}px`;
+                tooltip.style.top = `${y}px`;
+                
+                // Prevent tooltip from going off screen
+                const rect = tooltip.getBoundingClientRect();
+                if (rect.right > window.innerWidth) {
+                    tooltip.style.left = `${x - rect.width - 30}px`;
+                }
+                if (rect.bottom > window.innerHeight) {
+                    tooltip.style.top = `${y - rect.height - 30}px`;
+                }
+            }
+            
+            function hideFloatingTooltip() {
+                if (!tooltipFixed) {
+                    document.getElementById('entity-tooltip').style.display = 'none';
+                }
+            }
+            
+            function setupControls() {
+                // Toggle controls on mobile
+                const toggleBtn = document.getElementById('toggle-controls');
+                const controls = document.getElementById('controls');
+                
+                toggleBtn.addEventListener('click', () => {
+                    controls.classList.toggle('open');
+                });
+                
+                // Draw mode dropdown
+                document.getElementById('draw-by-mode').addEventListener('change', (e) => {
+                    currentDrawMode = e.target.value;
+                    applyDrawMode();
+                });
+                
+                // View mode dropdown
+                document.getElementById('view-mode').addEventListener('change', (e) => {
+                    currentViewMode = e.target.value;
+                    applyFilters();
+                });
+                
+                // Node size mode
+                document.getElementById('node-size-mode').addEventListener('change', (e) => {
+                    nodeSizeMode = e.target.value;
+                    applyFilters();
+                });
+                
+                // Visual toggles
+                document.getElementById('toggle-links').addEventListener('change', (e) => {
+                    linksEnabled = e.target.checked;
+                    Graph.linkVisibility(linksEnabled);
+                });
+                
+                document.getElementById('toggle-labels').addEventListener('change', (e) => {
+                    labelsEnabled = e.target.checked;
+                    Graph.nodeThreeObject(node => {
+                        if (!labelsEnabled) {
+                            return null;
+                        }
+                        return createNodeObject(node);
+                    });
+                });
+                
+                document.getElementById('toggle-particles').addEventListener('change', (e) => {
+                    particlesEnabled = e.target.checked;
+                    Graph.linkDirectionalParticles(link => particlesEnabled ? 2 : 0);
+                });
+                
+                // Link width multiplier control
+                document.getElementById('link-width-multiplier').addEventListener('input', (e) => {
+                    linkWidthMultiplier = parseFloat(e.target.value);
+                    document.getElementById('link-width-value').textContent = e.target.value;
+                    if (Graph) {
+                        Graph.linkWidth(link => getLinkWidth(link));
+                    }
+                });
+                
+                // Link opacity control
+                document.getElementById('link-opacity').addEventListener('input', (e) => {
+                    linkOpacity = parseFloat(e.target.value);
+                    document.getElementById('link-opacity-value').textContent = e.target.value;
+                    if (Graph) {
+                        Graph.linkOpacity(linkOpacity);
+                    }
+                });
+                
+                document.getElementById('toggle-floating-tooltip').addEventListener('change', (e) => {
+                    floatingTooltipEnabled = e.target.checked;
+                    if (!floatingTooltipEnabled) {
+                        hideFloatingTooltip();
+                        tooltipFixed = false;
+                    }
+                });
+                
+                document.getElementById('toggle-monochrome').addEventListener('change', (e) => {
+                    monochrome = e.target.checked;
+                    applyFilters();
+                });
+                
+                document.getElementById('toggle-change-rings').addEventListener('change', (e) => {
+                    showChangeRings = e.target.checked;
+                    // Re-apply node objects to show/hide rings
+                    Graph.nodeThreeObject(node => {
+                        if (!labelsEnabled) {
+                            return null;
+                        }
+                        return createNodeObject(node);
+                    });
+                });
+                
+                document.getElementById('toggle-auto-rotate').addEventListener('change', (e) => {
+                    autoRotate = e.target.checked;
+                    // This would need OrbitControls integration
+                    console.log('Auto-rotate:', autoRotate);
+                });
+                
+                // Node visibility toggles
+                document.getElementById('toggle-tech-nodes').addEventListener('change', (e) => {
+                    showTechNodes = e.target.checked;
+                    applyFilters();
+                });
+                
+                document.getElementById('toggle-concept-nodes').addEventListener('change', (e) => {
+                    showConceptNodes = e.target.checked;
+                    applyFilters();
+                });
+                
+                document.getElementById('toggle-company-nodes').addEventListener('change', (e) => {
+                    showCompanyNodes = e.target.checked;
+                    applyFilters();
+                });
+                
+                // Physics sliders
+                const forceSlider = document.getElementById('force-strength');
+                const forceValue = document.getElementById('force-value');
+                forceSlider.addEventListener('input', (e) => {
+                    CONFIG.forceStrength = parseFloat(e.target.value);
+                    forceValue.textContent = CONFIG.forceStrength;
+                    Graph.d3Force('charge').strength(CONFIG.forceStrength);
+                    Graph.d3ReheatSimulation();
+                });
+                
+                const distanceSlider = document.getElementById('link-distance');
+                const distanceValue = document.getElementById('distance-value');
+                distanceSlider.addEventListener('input', (e) => {
+                    CONFIG.linkDistance = parseFloat(e.target.value);
+                    distanceValue.textContent = CONFIG.linkDistance;
+                    Graph.d3Force('link').distance(CONFIG.linkDistance);
+                    Graph.d3ReheatSimulation();
+                });
+                
+                const gravitySlider = document.getElementById('center-gravity');
+                const gravityValue = document.getElementById('gravity-value');
+                gravitySlider.addEventListener('input', (e) => {
+                    const gravity = parseFloat(e.target.value);
+                    gravityValue.textContent = gravity;
+                    Graph.d3Force('center').strength(gravity);
+                    Graph.d3ReheatSimulation();
+                });
+                
+                // Link threshold slider
+                const thresholdSlider = document.getElementById('link-threshold');
+                const thresholdValue = document.getElementById('threshold-value');
+                thresholdSlider.addEventListener('input', (e) => {
+                    linkThreshold = parseInt(e.target.value);
+                    thresholdValue.textContent = linkThreshold;
+                    applyFilters();
+                });
+                
+                // Entity limit slider
+                const entitySlider = document.getElementById('entity-limit');
+                const entityValue = document.getElementById('entity-value');
+                entitySlider.addEventListener('input', (e) => {
+                    entityLimit = parseInt(e.target.value);
+                    entityValue.textContent = entityLimit;
+                    applyFilters();
+                });
+                
+                // Search functionality
+                const searchInput = document.getElementById('search-input');
+                searchInput.addEventListener('input', () => {
+                    applyFilters();
+                });
+                
+                // Search depth dropdown
+                const searchDepthSelect = document.getElementById('search-depth');
+                searchDepthSelect.addEventListener('change', (e) => {
+                    searchDepth = parseInt(e.target.value);
+                    applyFilters();
+                });
+                
+                // Tech search
+                const techSearch = document.getElementById('tech-search');
+                techSearch.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    document.querySelectorAll('#tech-filters .checkbox-item').forEach(item => {
+                        const label = item.querySelector('label').textContent.toLowerCase();
+                        item.style.display = label.includes(searchTerm) ? 'flex' : 'none';
+                    });
+                });
+                
+                // Concept search
+                const conceptSearch = document.getElementById('concept-search');
+                conceptSearch.addEventListener('input', (e) => {
+                    const searchTerm = e.target.value.toLowerCase();
+                    document.querySelectorAll('#concept-filters .checkbox-item').forEach(item => {
+                        const label = item.querySelector('label').textContent.toLowerCase();
+                        item.style.display = label.includes(searchTerm) ? 'flex' : 'none';
+                    });
+                });
+            }
+            
+            // Start loading data
+            loadData();
+            
+        })();
+    </script>
+</body>
+</html>company.intelligence?.ai_technologies) {
                         company.intelligence.ai_technologies.forEach(tech => {
                             if (!techMap.has(tech)) {
                                 techMap.set(tech, []);
@@ -2338,13 +3727,7 @@
                 }
             });
             
-            document.getElementById('toggle-thin-lines').addEventListener('change', (e) => {
-                thinLinesEnabled = e.target.checked;
-                if (Graph) {
-                    // Re-apply link width function
-                    Graph.linkWidth(link => getLinkWidth(link));
-                }
-            });
+            // Already handled above - remove duplicate handler
             
             document.getElementById('toggle-floating-tooltip').addEventListener('change', (e) => {
                 floatingTooltipEnabled = e.target.checked;
@@ -2451,6 +3834,31 @@
                 if (Graph && Graph.controls) {
                     Graph.controls().autoRotate = autoRotate;
                     Graph.controls().autoRotateSpeed = 0.5;
+                }
+            });
+            
+            // Flatten graph control
+            document.getElementById('toggle-flatten-graph').addEventListener('change', (e) => {
+                flattenGraph = e.target.checked;
+                if (Graph) {
+                    // Apply flattening to current nodes
+                    const graphData = Graph.graphData();
+                    graphData.nodes.forEach(node => {
+                        if (flattenGraph && node.z !== undefined) {
+                            node.fz = node.z * 0.1; // Constrain Z axis
+                        } else {
+                            delete node.fz; // Release Z constraint
+                        }
+                    });
+                    
+                    // Adjust force to spread more in X/Y when flattened
+                    if (flattenGraph) {
+                        Graph.d3Force('charge').strength(CONFIG.forceStrength * 1.5);
+                    } else {
+                        Graph.d3Force('charge').strength(CONFIG.forceStrength);
+                    }
+                    
+                    Graph.d3ReheatSimulation();
                 }
             });
             
