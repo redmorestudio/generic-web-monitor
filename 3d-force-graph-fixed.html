@@ -851,6 +851,8 @@
             let floatingTooltipEnabled = true;
             let hoveredNode = null;
             let tooltipTimeout;
+            window.lastMouseX = 0;
+            window.lastMouseY = 0;
             let tooltipFixed = false;
             let linkThreshold = 0;
             let monochrome = false;
@@ -1243,7 +1245,8 @@
                         connectionCount: 0,
                         hasRecentChange: changedCompaniesMap.has(company.company),
                         // Add initial random Z position for 3D spread
-                        z: (Math.random() - 0.5) * 200
+                        z: (Math.random() - 0.5) * 500,
+                        vz: (Math.random() - 0.5) * 10
                     };
                     graphData.nodes.push(node);
                     nodeMap.set(company.company, node);
@@ -2294,14 +2297,19 @@
                             const depthFactor = graphDepth / 100;
                             
                             nodes.forEach(node => {
-                                // Add some random Z movement to prevent flat settling
-                                const zTarget = (Math.random() - 0.5) * 200 * depthFactor;
-                                const zForce = (zTarget - node.z) * alpha * 0.1;
+                                // Much stronger Z spreading
+                                const zTarget = (Math.random() - 0.5) * 500 * depthFactor;
+                                const zForce = (zTarget - node.z) * alpha * 0.3;
                                 node.vz += zForce;
                                 
-                                // Limit Z velocity
-                                if (Math.abs(node.vz) > 5) {
-                                    node.vz = node.vz > 0 ? 5 : -5;
+                                // Also add some sinusoidal movement based on node connections
+                                const phase = node.id.charCodeAt(0) * 0.1;
+                                const waveZ = Math.sin(Date.now() * 0.0001 + phase) * 100 * depthFactor;
+                                node.vz += (waveZ - node.z) * alpha * 0.1;
+                                
+                                // Higher velocity limits
+                                if (Math.abs(node.vz) > 20) {
+                                    node.vz = node.vz > 0 ? 20 : -20;
                                 }
                             });
                         }
@@ -2447,20 +2455,22 @@
                 tooltip.innerHTML = content;
                 tooltip.style.display = 'block';
                 
-                // Position tooltip near cursor
-                const x = event.clientX + 15;
-                const y = event.clientY + 15;
-                
-                tooltip.style.left = `${x}px`;
-                tooltip.style.top = `${y}px`;
-                
-                // Prevent tooltip from going off screen
-                const rect = tooltip.getBoundingClientRect();
-                if (rect.right > window.innerWidth) {
-                    tooltip.style.left = `${x - rect.width - 30}px`;
-                }
-                if (rect.bottom > window.innerHeight) {
-                    tooltip.style.top = `${y - rect.height - 30}px`;
+                // Position tooltip using last known mouse position
+                if (window.lastMouseX !== undefined && window.lastMouseY !== undefined) {
+                    const x = window.lastMouseX + 15;
+                    const y = window.lastMouseY + 15;
+                    
+                    tooltip.style.left = `${x}px`;
+                    tooltip.style.top = `${y}px`;
+                    
+                    // Prevent tooltip from going off screen
+                    const rect = tooltip.getBoundingClientRect();
+                    if (rect.right > window.innerWidth) {
+                        tooltip.style.left = `${x - rect.width - 30}px`;
+                    }
+                    if (rect.bottom > window.innerHeight) {
+                        tooltip.style.top = `${y - rect.height - 30}px`;
+                    }
                 }
             }
             
@@ -3906,14 +3916,19 @@
                         
                         if (graphDepth > 0) {
                             nodes.forEach(node => {
-                                // Add some random Z movement to prevent flat settling
-                                const zTarget = (Math.random() - 0.5) * 200 * depthFactor;
-                                const zForce = (zTarget - node.z) * alpha * 0.1;
+                                // Much stronger Z spreading with multiple effects
+                                const zTarget = (Math.random() - 0.5) * 800 * depthFactor;
+                                const zForce = (zTarget - node.z) * alpha * 0.5;
                                 node.vz += zForce;
                                 
-                                // Limit Z velocity
-                                if (Math.abs(node.vz) > 5 * depthFactor) {
-                                    node.vz = node.vz > 0 ? 5 * depthFactor : -5 * depthFactor;
+                                // Also add some sinusoidal movement based on node connections
+                                const phase = node.id.charCodeAt(0) * 0.1;
+                                const waveZ = Math.sin(Date.now() * 0.0001 + phase) * 200 * depthFactor;
+                                node.vz += (waveZ - node.z) * alpha * 0.2;
+                                
+                                // Higher velocity limits
+                                if (Math.abs(node.vz) > 30 * depthFactor) {
+                                    node.vz = node.vz > 0 ? 30 * depthFactor : -30 * depthFactor;
                                 }
                             });
                         } else {
@@ -4005,6 +4020,10 @@
             
             // Track mouse movement for tooltip positioning only on initial show
             document.addEventListener('mousemove', (e) => {
+                // Always track mouse position
+                window.lastMouseX = e.clientX;
+                window.lastMouseY = e.clientY;
+                
                 const tooltip = document.getElementById('entity-tooltip');
                 if (tooltip.style.display === 'block' && !tooltipFixed) {
                     // Only position tooltip on initial show, then fix it
