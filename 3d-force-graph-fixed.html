@@ -2214,8 +2214,6 @@
                 Graph = ForceGraph3D()(container)
                     .backgroundColor('#0a0a0f')
                     .nodeId('id')
-                    .controlType('orbit') // Ensure orbit controls are used
-                    .enablePointerInteraction(true)
                     .nodeLabel(node => {
                         if (!floatingTooltipEnabled) {
                             const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
@@ -3922,6 +3920,24 @@
                             console.log('Enabled right-click panning');
                         }
                     }
+                    
+                    // Prevent context menu on canvas (but not on nodes)
+                    const canvas = Graph.renderer().domElement;
+                    canvas.addEventListener('contextmenu', (e) => {
+                        // Only prevent if not clicking on a node
+                        const raycaster = new THREE.Raycaster();
+                        const mouse = new THREE.Vector2();
+                        mouse.x = (e.clientX / canvas.clientWidth) * 2 - 1;
+                        mouse.y = -(e.clientY / canvas.clientHeight) * 2 + 1;
+                        
+                        raycaster.setFromCamera(mouse, Graph.camera());
+                        const intersects = raycaster.intersectObjects(Graph.scene().children, true);
+                        
+                        // If no node was clicked, prevent context menu to allow panning
+                        if (intersects.length === 0) {
+                            e.preventDefault();
+                        }
+                    });
                 }, 1000);
             
             // Track mouse movement for tooltip positioning only on initial show
