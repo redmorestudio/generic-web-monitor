@@ -499,9 +499,13 @@
                     <input type="checkbox" id="toggle-auto-rotate">
                 </label>
                 <label>
-                    Flatten Graph (2D-like)
-                    <input type="checkbox" id="toggle-flatten-graph">
+                    Graph Depth (3D-ness)
+                    <input type="range" id="graph-depth" min="0" max="100" value="100" step="5">
+                    <span class="slider-value" id="depth-value">100%</span>
                 </label>
+                <div class="info-text">
+                    100% = Full 3D, 0% = Completely flat
+                </div>
             </div>
             
             <div class="control-group simple-group">
@@ -839,7 +843,7 @@
             let particlesEnabled = true;
             let linkWidthMultiplier = 12;
             let linkOpacity = 0.5;
-            let flattenGraph = false;
+            let graphDepth = 100; // 0-100% depth
             let currentViewMode = 'entity-type';
             let currentDrawMode = 'normal';
             let entityLimit = 200;
@@ -1237,7 +1241,9 @@
                         interestLevel: company.intelligence?.interest_level || 0,
                         urlCount: company.url_count || 0,
                         connectionCount: 0,
-                        hasRecentChange: changedCompaniesMap.has(company.company)
+                        hasRecentChange: changedCompaniesMap.has(company.company),
+                        // Add initial random Z position for 3D spread
+                        z: (Math.random() - 0.5) * 200
                     };
                     graphData.nodes.push(node);
                     nodeMap.set(company.company, node);
@@ -2281,7 +2287,26 @@
                     .d3Force('link', d3.forceLink().distance(CONFIG.linkDistance))
                     .d3Force('center', d3.forceCenter().strength(0.3))
                     .d3Force('collide', d3.forceCollide(node => Math.sqrt(node.val) * 10))
-                    // Add custom Z-constraint force (initially null)
+                    // Add 3D spreading force
+                    .d3Force('3d-spread', (alpha) => {
+                        if (graphDepth > 0) {
+                            const nodes = Graph.graphData().nodes;
+                            const depthFactor = graphDepth / 100;
+                            
+                            nodes.forEach(node => {
+                                // Add some random Z movement to prevent flat settling
+                                const zTarget = (Math.random() - 0.5) * 200 * depthFactor;
+                                const zForce = (zTarget - node.z) * alpha * 0.1;
+                                node.vz += zForce;
+                                
+                                // Limit Z velocity
+                                if (Math.abs(node.vz) > 5) {
+                                    node.vz = node.vz > 0 ? 5 : -5;
+                                }
+                            });
+                        }
+                    })
+                    // Add flattening force (initially null)
                     .d3Force('flatten', null)
                     .onNodeClick(node => {
                         // Center camera on clicked node
@@ -2294,18 +2319,24 @@
                         );
                     })
                     .onNodeDrag((node, translate) => {
-                        // Apply flattening constraint during drag
-                        if (flattenGraph) {
-                            node.z = 0;
-                            node.fz = 0;
+                        // Apply depth constraint during drag
+                        if (graphDepth < 100) {
+                            const depthFactor = graphDepth / 100;
+                            node.z *= depthFactor;
+                            node.fz = node.z;
                         }
                     })
                     .onNodeDragEnd(node => {
-                        // Apply final flattening constraint
-                        if (flattenGraph) {
-                            node.z = 0;
-                            node.vz = 0;
-                            node.fz = 0;
+                        // Apply final depth constraint
+                        if (graphDepth < 100) {
+                            const depthFactor = graphDepth / 100;
+                            node.z *= depthFactor;
+                            node.vz *= depthFactor;
+                            if (graphDepth === 0) {
+                                node.z = 0;
+                                node.vz = 0;
+                                node.fz = 0;
+                            }
                         }
                     })
                     .onNodeRightClick(node => {
@@ -3862,47 +3893,56 @@
                 }
             });
             
-            // Flatten graph control
-            document.getElementById('toggle-flatten-graph').addEventListener('change', (e) => {
-                flattenGraph = e.target.checked;
+            // Graph depth control
+            document.getElementById('graph-depth').addEventListener('input', (e) => {
+                graphDepth = parseInt(e.target.value);
+                document.getElementById('depth-value').textContent = graphDepth + '%';
+                
                 if (Graph) {
-                    if (flattenGraph) {
-                        console.log('Enabling flatten mode');
+                    // Update the 3D spreading force
+                    Graph.d3Force('3d-spread', (alpha) => {
+                        const nodes = Graph.graphData().nodes;
+                        const depthFactor = graphDepth / 100;
                         
-                        // Use dagMode to create a 2D layout
-                        Graph
-                            .dagMode('radialout') // This creates a 2D radial layout
-                            .dagLevelDistance(50);
-                        
-                        // Also add a force to keep nodes flat
-                        Graph.d3Force('flatten', (alpha) => {
-                            const nodes = Graph.graphData().nodes;
+                        if (graphDepth > 0) {
                             nodes.forEach(node => {
-                                if (node.z !== 0) {
+                                // Add some random Z movement to prevent flat settling
+                                const zTarget = (Math.random() - 0.5) * 200 * depthFactor;
+                                const zForce = (zTarget - node.z) * alpha * 0.1;
+                                node.vz += zForce;
+                                
+                                // Limit Z velocity
+                                if (Math.abs(node.vz) > 5 * depthFactor) {
+                                    node.vz = node.vz > 0 ? 5 * depthFactor : -5 * depthFactor;
+                                }
+                            });
+                        } else {
+                            // Completely flatten when depth is 0
+                            nodes.forEach(node => {
+                                node.z *= 0.9;
+                                node.vz *= 0.5;
+                                if (Math.abs(node.z) < 0.1) {
                                     node.z = 0;
                                     node.vz = 0;
                                 }
                             });
+                        }
+                    });
+                    
+                    // Add or remove flattening force based on depth
+                    if (graphDepth === 0) {
+                        Graph.d3Force('flatten', (alpha) => {
+                            const nodes = Graph.graphData().nodes;
+                            nodes.forEach(node => {
+                                node.z = 0;
+                                node.vz = 0;
+                            });
                         });
-                        
-                        // Increase charge force to spread nodes in X/Y
-                        Graph.d3Force('charge').strength(CONFIG.forceStrength * 2);
-                        
                     } else {
-                        console.log('Disabling flatten mode');
-                        
-                        // Disable dag mode
-                        Graph.dagMode(null);
-                        
-                        // Disable flattening force
                         Graph.d3Force('flatten', null);
-                        
-                        // Restore normal charge force
-                        Graph.d3Force('charge').strength(CONFIG.forceStrength);
                     }
                     
-                    // Refresh the simulation
-                    Graph.refresh();
+                    Graph.d3ReheatSimulation();
                 }
             });
             
