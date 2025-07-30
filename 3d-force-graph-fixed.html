@@ -1410,9 +1410,11 @@
                 // Initialize graph only once
                 initializeGraph();
                 
-                // Apply initial filters
-                applyFilters();
-                updateLegend();
+                // Apply initial filters after a short delay to ensure graph is ready
+                setTimeout(() => {
+                    applyFilters();
+                    updateLegend();
+                }, 100);
             }
             
             function populateTypeFilters() {
@@ -2328,22 +2330,26 @@
                     .d3Force('collide', d3.forceCollide(node => Math.sqrt(node.val) * 10))
                     // Add custom 3D centering force
                     .d3Force('3d-center', (alpha) => {
-                        const nodes = graphData.nodes;
+                        const nodes = Graph.graphData().nodes;
+                        if (!nodes || nodes.length === 0) return;
                         const center = {x: 0, y: 0, z: 0};
                         const strength = 0.3 * alpha;
                         nodes.forEach(node => {
-                            node.vx += (center.x - node.x) * strength;
-                            node.vy += (center.y - node.y) * strength;
-                            node.vz += (center.z - node.z) * strength;
+                            if (node.vx !== undefined) node.vx += (center.x - node.x) * strength;
+                            if (node.vy !== undefined) node.vy += (center.y - node.y) * strength;
+                            if (node.vz !== undefined) node.vz += (center.z - node.z) * strength;
                         });
                     })
                     // Add 3D spreading force to prevent flattening
                     .d3Force('3d-spread', (alpha) => {
-                        const nodes = graphData.nodes;
+                        const nodes = Graph.graphData().nodes;
+                        if (!nodes || nodes.length === 0) return;
                         const spreadStrength = 0.1 * alpha;
                         nodes.forEach(node => {
                             // Add random force in Z direction
-                            node.vz += (Math.random() - 0.5) * spreadStrength * 100;
+                            if (node.vz !== undefined) {
+                                node.vz += (Math.random() - 0.5) * spreadStrength * 100;
+                            }
                         });
                     })
                     .onNodeClick(node => {
