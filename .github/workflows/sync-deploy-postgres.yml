@@ -302,8 +302,22 @@ jobs:
           
           echo "📊 Generating static data files from PostgreSQL..."
           
-          # Use enhanced static data generator for rich graph data
-          if [ -f "generate-static-data-three-db-postgres-enhanced.js" ]; then
+          # Use context-enabled static data generator for source navigation
+          if [ -f "generate-static-data-three-db-postgres-with-contexts.js" ]; then
+            echo "Using CONTEXT-ENABLED static data generator with source navigation..."
+            if ! node generate-static-data-three-db-postgres-with-contexts.js; then
+              echo "⚠️  Context generator failed, trying enhanced version..."
+              if [ -f "generate-static-data-three-db-postgres-enhanced.js" ]; then
+                echo "Using ENHANCED static data generator..."
+                if ! node generate-static-data-three-db-postgres-enhanced.js; then
+                  echo "⚠️  Enhanced generator failed, using standard version..."
+                  node generate-static-data-three-db-postgres.js
+                fi
+              else
+                node generate-static-data-three-db-postgres.js
+              fi
+            fi
+          elif [ -f "generate-static-data-three-db-postgres-enhanced.js" ]; then
             echo "Using ENHANCED static data generator for rich 3D graph..."
             if ! node generate-static-data-three-db-postgres-enhanced.js; then
               echo "⚠️  Enhanced generator failed, using standard version..."
