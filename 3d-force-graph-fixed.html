@@ -356,7 +356,8 @@
         <div id="node-info">
             <strong>Controls:</strong><br>
             • Left-click + drag = Rotate view<br>
-            • Right-click + drag = Pan view<br>
+            • Option/Alt-click + drag = Pan view<br>
+            • Right-click + drag = Pan view (may conflict with menu)<br>
             • Middle-click + drag = Pan view (alternative)<br>
             • Scroll = Zoom in/out<br>
             • Click node = Center camera<br>
@@ -822,7 +823,7 @@
         window.clearTagFilter = function() {
             window.customTagFilter = null;
             window.applyFilters();
-            document.getElementById('node-info').innerHTML = '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
+            document.getElementById('node-info').innerHTML = '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Option/Alt-click + drag = Pan view<br>• Right-click + drag = Pan view (may conflict)<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
         };
         
         // Wrap main code in IIFE
@@ -3680,7 +3681,7 @@
                                 
                                 document.getElementById('node-info').innerHTML = infoContent;
                             } else {
-                                document.getElementById('node-info').innerHTML = '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Right-click + drag = Pan view<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
+                                document.getElementById('node-info').innerHTML = '<strong>Controls:</strong><br>• Left-click + drag = Rotate view<br>• Option/Alt-click + drag = Pan view<br>• Right-click + drag = Pan view (may conflict)<br>• Scroll = Zoom in/out<br>• Click node = Center camera<br>• Right-click node = Show context menu';
                             }
                         })
                         .onNodeClick(node => {
@@ -3892,15 +3893,100 @@
             
             // Handle window resize
             window.addEventListener('resize', () => {
-                if (Graph && Graph.renderer()) {
-                    const container = document.getElementById('3d-graph');
-                    Graph.width(container.clientWidth);
-                    Graph.height(container.clientHeight);
-                    Graph.renderer().setSize(container.clientWidth, container.clientHeight);
-                    Graph.camera().aspect = container.clientWidth / container.clientHeight;
-                    Graph.camera().updateProjectionMatrix();
-                }
+            if (Graph && Graph.renderer()) {
+            const container = document.getElementById('3d-graph');
+            Graph.width(container.clientWidth);
+            Graph.height(container.clientHeight);
+            Graph.renderer().setSize(container.clientWidth, container.clientHeight);
+            Graph.camera().aspect = container.clientWidth / container.clientHeight;
+            Graph.camera().updateProjectionMatrix();
+            }
             });
+                
+                // Add custom option-click panning after graph is initialized
+                setTimeout(() => {
+                    if (!Graph) return;
+                    
+                    let isPanning = false;
+                    let panStartX = 0;
+                    let panStartY = 0;
+                    let cameraStartPos = null;
+                    
+                    const container = document.getElementById('3d-graph');
+                    
+                    container.addEventListener('mousedown', (e) => {
+                        if (e.altKey || e.metaKey) { // Option/Alt key or Cmd key
+                            isPanning = true;
+                            panStartX = e.clientX;
+                            panStartY = e.clientY;
+                            cameraStartPos = Graph.cameraPosition();
+                            e.preventDefault();
+                            e.stopPropagation();
+                            container.style.cursor = 'move';
+                            
+                            // Disable orbit controls temporarily
+                            if (Graph.controls()) {
+                                Graph.controls().enabled = false;
+                            }
+                        }
+                    });
+                    
+                    container.addEventListener('mousemove', (e) => {
+                        if (isPanning && Graph) {
+                            const deltaX = e.clientX - panStartX;
+                            const deltaY = e.clientY - panStartY;
+                            
+                            // Calculate pan distance based on camera distance
+                            const distance = Math.sqrt(
+                                Math.pow(cameraStartPos.x, 2) + 
+                                Math.pow(cameraStartPos.y, 2) + 
+                                Math.pow(cameraStartPos.z, 2)
+                            );
+                            const panScale = distance * 0.001;
+                            
+                            // Get camera vectors
+                            const camera = Graph.camera();
+                            const right = new THREE.Vector3();
+                            const up = new THREE.Vector3();
+                            
+                            camera.getWorldDirection(new THREE.Vector3()); // Update camera matrices
+                            right.setFromMatrixColumn(camera.matrix, 0);
+                            up.setFromMatrixColumn(camera.matrix, 1);
+                            
+                            // Calculate new position
+                            const newPos = {
+                                x: cameraStartPos.x - right.x * deltaX * panScale + up.x * deltaY * panScale,
+                                y: cameraStartPos.y - right.y * deltaX * panScale + up.y * deltaY * panScale,
+                                z: cameraStartPos.z - right.z * deltaX * panScale + up.z * deltaY * panScale
+                            };
+                            
+                            Graph.cameraPosition(newPos);
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    });
+                    
+                    const stopPanning = () => {
+                        if (isPanning) {
+                            isPanning = false;
+                            container.style.cursor = 'auto';
+                            // Re-enable orbit controls
+                            if (Graph.controls()) {
+                                Graph.controls().enabled = true;
+                            }
+                        }
+                    };
+                    
+                    container.addEventListener('mouseup', stopPanning);
+                    container.addEventListener('mouseleave', stopPanning);
+                    
+                    // Handle key release
+                    document.addEventListener('keyup', (e) => {
+                        if (!e.altKey && !e.metaKey && isPanning) {
+                            stopPanning();
+                        }
+                    });
+                }, 1000);
             
             // Track mouse movement for tooltip positioning only on initial show
             document.addEventListener('mousemove', (e) => {
