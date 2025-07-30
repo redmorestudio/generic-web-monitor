@@ -2223,6 +2223,7 @@
                 Graph = ForceGraph3D()(container)
                     .backgroundColor('#0a0a0f')
                     .nodeId('id')
+                    .numDimensions(3) // Force 3D mode explicitly
                     .nodeLabel(node => {
                         if (!floatingTooltipEnabled) {
                             const companyData = rawData.dashboard.company_activity.find(c => c.company === node.id);
@@ -2287,7 +2288,7 @@
                     .d3AlphaDecay(0.02)
                     .d3VelocityDecay(0.4)
                     .d3Force('charge', d3.forceManyBody().strength(CONFIG.forceStrength))
-                    .d3Force('link', d3.forceLink().distance(CONFIG.linkDistance))
+                    .d3Force('link', null) // Temporarily disable link force
                     // Remove 2D center force - replace with custom 3D centering
                     .d3Force('center', null)
                     .d3Force('3d-center', (alpha) => {
@@ -2314,7 +2315,7 @@
                             node.vz -= cz * strength * alpha;
                         });
                     })
-                    .d3Force('collide', d3.forceCollide(node => Math.sqrt(node.val) * 10))
+                    .d3Force('collide', null) // Remove collision force temporarily to test
                     // Add 3D spreading force
                     .d3Force('3d-spread', (alpha) => {
                         if (graphDepth > 0) {
