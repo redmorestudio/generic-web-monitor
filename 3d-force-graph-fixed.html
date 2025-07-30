@@ -357,6 +357,7 @@
             <strong>Controls:</strong><br>
             • Left-click + drag = Rotate view<br>
             • Right-click + drag = Pan view<br>
+            • Middle-click + drag = Pan view (alternative)<br>
             • Scroll = Zoom in/out<br>
             • Click node = Center camera<br>
             • Right-click node = Show context menu
@@ -461,6 +462,11 @@
                 <label>
                     Show Labels
                     <input type="checkbox" id="toggle-labels" checked>
+                </label>
+                <label>
+                    Label Font Size
+                    <input type="range" id="label-font-size" min="4" max="16" value="8" step="1">
+                    <span class="slider-value" id="font-size-value">8</span>
                 </label>
                 <label>
                     Show Particles
@@ -695,18 +701,15 @@
         function setConfigMode(mode) {
             const simpleBtn = document.getElementById('simple-mode-btn');
             const advancedBtn = document.getElementById('advanced-mode-btn');
-            const simpleGroups = document.querySelectorAll('.simple-group');
             const advancedGroups = document.querySelectorAll('.advanced-group');
             
             if (mode === 'simple') {
                 simpleBtn.style.background = 'rgba(0, 255, 136, 0.2)';
                 advancedBtn.style.background = 'transparent';
-                simpleGroups.forEach(g => g.style.display = 'block');
                 advancedGroups.forEach(g => g.style.display = 'none');
             } else {
                 simpleBtn.style.background = 'transparent';
                 advancedBtn.style.background = 'rgba(0, 255, 136, 0.2)';
-                simpleGroups.forEach(g => g.style.display = 'block');
                 advancedGroups.forEach(g => g.style.display = 'block');
             }
         }
@@ -832,6 +835,7 @@
             let rawData = null;
             let linksEnabled = true;
             let labelsEnabled = true;
+            let labelFontSize = 8;
             let particlesEnabled = true;
             let linkWidthMultiplier = 12;
             let linkOpacity = 0.5;
@@ -918,7 +922,7 @@
                 const sprite = new SpriteText(node.name);
                 sprite.material.depthWrite = false;
                 sprite.color = node.currentColor || node.color || CONFIG.nodeColors[node.group] || CONFIG.nodeColors.default;
-                sprite.textHeight = 8;
+                sprite.textHeight = labelFontSize;
                 sprite.fontWeight = node.isRecentChange ? 700 : CONFIG.fontWeight;
                 sprite.backgroundColor = false;
                 return sprite;
@@ -2277,6 +2281,15 @@
                     .d3Force('link', d3.forceLink().distance(CONFIG.linkDistance))
                     .d3Force('center', d3.forceCenter().strength(0.3))
                     .d3Force('collide', d3.forceCollide(node => Math.sqrt(node.val) * 10))
+                    // Add custom Z-constraint force
+                    .d3Force('flatten', (alpha) => {
+                        if (flattenGraph) {
+                            filteredData.nodes.forEach(node => {
+                                node.vz *= 0.5; // Dampen Z velocity
+                                node.z *= 0.9; // Pull toward Z=0
+                            });
+                        }
+                    })
                     .onNodeClick(node => {
                         // Center camera on clicked node
                         const distance = 300;
@@ -2290,13 +2303,14 @@
                     .onNodeDrag((node, translate) => {
                         // Apply flattening constraint during drag
                         if (flattenGraph) {
-                            node.fz = node.z * 0.1;
+                            node.z = (node.z || 0) * 0.1;
                         }
                     })
                     .onNodeDragEnd(node => {
                         // Apply final flattening constraint
                         if (flattenGraph) {
-                            node.fz = node.z * 0.1;
+                            node.z = 0;
+                            node.vz = 0;
                         }
                     })
                     .onNodeRightClick(node => {
@@ -2471,6 +2485,15 @@
                         }
                         return createNodeObject(node);
                     });
+                });
+                
+                // Font size control
+                document.getElementById('label-font-size').addEventListener('input', (e) => {
+                    labelFontSize = parseInt(e.target.value);
+                    document.getElementById('font-size-value').textContent = e.target.value;
+                    if (Graph && labelsEnabled) {
+                        Graph.nodeThreeObject(node => createNodeObject(node));
+                    }
                 });
                 
                 document.getElementById('toggle-particles').addEventListener('change', (e) => {
@@ -3725,17 +3748,7 @@
                 }
             });
             
-            document.getElementById('toggle-labels').addEventListener('change', (e) => {
-                labelsEnabled = e.target.checked;
-                if (Graph) {
-                    Graph.nodeThreeObject(node => {
-                        if (!labelsEnabled) {
-                            return null;
-                        }
-                        return createNodeObject(node);
-                    });
-                }
-            });
+            // Already handled above - remove duplicate handler
             
             document.getElementById('toggle-particles').addEventListener('change', (e) => {
                 particlesEnabled = e.target.checked;
@@ -3858,21 +3871,19 @@
             document.getElementById('toggle-flatten-graph').addEventListener('change', (e) => {
                 flattenGraph = e.target.checked;
                 if (Graph) {
-                    // Apply flattening to current nodes
-                    const graphData = Graph.graphData();
-                    graphData.nodes.forEach(node => {
-                        if (flattenGraph && node.z !== undefined) {
-                            node.fz = node.z * 0.1; // Constrain Z axis
-                        } else {
-                            delete node.fz; // Release Z constraint
-                        }
-                    });
-                    
-                    // Adjust force to spread more in X/Y when flattened
                     if (flattenGraph) {
-                        Graph.d3Force('charge').strength(CONFIG.forceStrength * 1.5);
+                        // Enable flattening force
+                        Graph.d3Force('flatten', (alpha) => {
+                            const graphData = Graph.graphData();
+                            graphData.nodes.forEach(node => {
+                                node.vz = (node.vz || 0) * 0.5; // Dampen Z velocity
+                                node.z = (node.z || 0) * 0.8; // Pull toward Z=0
+                                if (Math.abs(node.z) < 1) node.z = 0; // Snap close values to 0
+                            });
+                        });
                     } else {
-                        Graph.d3Force('charge').strength(CONFIG.forceStrength);
+                        // Disable flattening force
+                        Graph.d3Force('flatten', null);
                     }
                     
                     Graph.d3ReheatSimulation();
