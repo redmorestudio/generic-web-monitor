@@ -168,12 +168,12 @@ async function extractEntityContexts(entityName) {
             SELECT 
                 c.name as company,
                 u.url as source_url,
-                sp.markdown_content,
+                sp.content as markdown_content,
                 sp.scraped_at
             FROM raw_content.scraped_pages sp
             JOIN intelligence.urls u ON sp.url = u.url
             JOIN intelligence.companies c ON u.company_id = c.id
-            WHERE sp.markdown_content ILIKE $1
+            WHERE sp.content ILIKE $1
             ORDER BY sp.scraped_at DESC
             LIMIT 200
         `, [`%${entityName}%`]);
