@@ -1239,7 +1239,14 @@
                         interestLevel: company.intelligence?.interest_level || 0,
                         urlCount: company.url_count || 0,
                         connectionCount: 0,
-                        hasRecentChange: changedCompaniesMap.has(company.company)
+                        hasRecentChange: changedCompaniesMap.has(company.company),
+                        // Initialize with random 3D positions
+                        x: (Math.random() - 0.5) * 400,
+                        y: (Math.random() - 0.5) * 400,
+                        z: (Math.random() - 0.5) * 400,
+                        vx: (Math.random() - 0.5) * 10,
+                        vy: (Math.random() - 0.5) * 10,
+                        vz: (Math.random() - 0.5) * 10
                     };
                     graphData.nodes.push(node);
                     nodeMap.set(company.company, node);
@@ -1302,7 +1309,14 @@
                         interestLevel: Math.min(10, companies.length),
                         urlCount: 0,
                         connectionCount: companies.length,
-                        nodeType: 'technology'
+                        nodeType: 'technology',
+                        // Initialize with random 3D positions
+                        x: (Math.random() - 0.5) * 400,
+                        y: (Math.random() - 0.5) * 400,
+                        z: (Math.random() - 0.5) * 400,
+                        vx: (Math.random() - 0.5) * 10,
+                        vy: (Math.random() - 0.5) * 10,
+                        vz: (Math.random() - 0.5) * 10
                     };
                     graphData.nodes.push(techNode);
                     techNodeMap.set(tech, techNode);
@@ -1344,7 +1358,14 @@
                         interestLevel: Math.min(10, Math.ceil(companies.length / 2)),
                         urlCount: 0,
                         connectionCount: companies.length,
-                        nodeType: 'concept'
+                        nodeType: 'concept',
+                        // Initialize with random 3D positions
+                        x: (Math.random() - 0.5) * 400,
+                        y: (Math.random() - 0.5) * 400,
+                        z: (Math.random() - 0.5) * 400,
+                        vx: (Math.random() - 0.5) * 10,
+                        vy: (Math.random() - 0.5) * 10,
+                        vz: (Math.random() - 0.5) * 10
                     };
                     graphData.nodes.push(conceptNode);
                     
@@ -2281,8 +2302,28 @@
                     .d3VelocityDecay(0.4)
                     .d3Force('charge', d3.forceManyBody().strength(CONFIG.forceStrength))
                     .d3Force('link', d3.forceLink().distance(CONFIG.linkDistance))
-                    .d3Force('center', d3.forceCenter().strength(0.3))
+                    .d3Force('center', null) // Remove 2D center force
                     .d3Force('collide', d3.forceCollide(node => Math.sqrt(node.val) * 10))
+                    // Add custom 3D centering force
+                    .d3Force('3d-center', (alpha) => {
+                        const nodes = graphData.nodes;
+                        const center = {x: 0, y: 0, z: 0};
+                        const strength = 0.3 * alpha;
+                        nodes.forEach(node => {
+                            node.vx += (center.x - node.x) * strength;
+                            node.vy += (center.y - node.y) * strength;
+                            node.vz += (center.z - node.z) * strength;
+                        });
+                    })
+                    // Add 3D spreading force to prevent flattening
+                    .d3Force('3d-spread', (alpha) => {
+                        const nodes = graphData.nodes;
+                        const spreadStrength = 0.1 * alpha;
+                        nodes.forEach(node => {
+                            // Add random force in Z direction
+                            node.vz += (Math.random() - 0.5) * spreadStrength * 100;
+                        });
+                    })
                     .onNodeClick(node => {
                         // Center camera on clicked node
                         const distance = 300;
@@ -2577,7 +2618,7 @@
                 gravitySlider.addEventListener('input', (e) => {
                     const gravity = parseFloat(e.target.value);
                     gravityValue.textContent = gravity;
-                    Graph.d3Force('center').strength(gravity);
+                    Graph.d3Force('3d-center').strength(gravity);
                     Graph.d3ReheatSimulation();
                 });
                 
@@ -3783,7 +3824,7 @@
                 const value = parseFloat(e.target.value);
                 document.getElementById('gravity-value').textContent = value;
                 if (Graph) {
-                    Graph.d3Force('center').strength(value);
+                    Graph.d3Force('3d-center').strength(value);
                     Graph.d3ReheatSimulation();
                 }
             });
