@@ -1828,7 +1828,19 @@
                     
                     // Need to create completely fresh objects to avoid reference issues
                     const freshData = {
-                        nodes: filteredData.nodes.map(n => ({ ...n })),
+                        nodes: filteredData.nodes.map(n => { 
+                            const newNode = { ...n };
+                            // Preserve 3D positions if they exist, otherwise initialize
+                            if (n.x === undefined) {
+                                newNode.x = (Math.random() - 0.5) * 400;
+                                newNode.y = (Math.random() - 0.5) * 400;
+                                newNode.z = (Math.random() - 0.5) * 400;
+                                newNode.vx = (Math.random() - 0.5) * 10;
+                                newNode.vy = (Math.random() - 0.5) * 10;
+                                newNode.vz = (Math.random() - 0.5) * 10;
+                            }
+                            return newNode;
+                        }),
                         links: filteredData.links.map(l => ({ 
                             source: l.source.id || l.source,
                             target: l.target.id || l.target,
@@ -1842,6 +1854,9 @@
                     
                     // Re-apply link width function after data update
                     Graph.linkWidth(link => getLinkWidth(link));
+                    
+                    // Reheat the simulation to ensure forces are applied
+                    Graph.d3ReheatSimulation();
                     
                     // Re-apply draw mode if not normal
                     if (currentDrawMode && currentDrawMode !== 'normal') {
