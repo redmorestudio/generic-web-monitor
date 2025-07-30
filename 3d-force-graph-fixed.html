@@ -499,13 +499,9 @@
                     <input type="checkbox" id="toggle-auto-rotate">
                 </label>
                 <label>
-                    Graph Depth (3D-ness)
-                    <input type="range" id="graph-depth" min="0" max="100" value="100" step="5">
-                    <span class="slider-value" id="depth-value">100%</span>
+                    Flatten Graph (2D-like)
+                    <input type="checkbox" id="toggle-flatten-graph">
                 </label>
-                <div class="info-text">
-                    100% = Full 3D, 0% = Completely flat
-                </div>
             </div>
             
             <div class="control-group simple-group">
@@ -843,7 +839,7 @@
             let particlesEnabled = true;
             let linkWidthMultiplier = 12;
             let linkOpacity = 0.5;
-            let graphDepth = 100; // 0-100% depth
+            let flattenGraph = false;
             let currentViewMode = 'entity-type';
             let currentDrawMode = 'normal';
             let entityLimit = 200;
@@ -1243,10 +1239,7 @@
                         interestLevel: company.intelligence?.interest_level || 0,
                         urlCount: company.url_count || 0,
                         connectionCount: 0,
-                        hasRecentChange: changedCompaniesMap.has(company.company),
-                        // Add initial random Z position for 3D spread
-                        z: (Math.random() - 0.5) * 500,
-                        vz: (Math.random() - 0.5) * 10
+                        hasRecentChange: changedCompaniesMap.has(company.company)
                     };
                     graphData.nodes.push(node);
                     nodeMap.set(company.company, node);
@@ -2290,39 +2283,6 @@
                     .d3Force('link', d3.forceLink().distance(CONFIG.linkDistance))
                     .d3Force('center', d3.forceCenter().strength(0.3))
                     .d3Force('collide', d3.forceCollide(node => Math.sqrt(node.val) * 10))
-                    // Add 3D spreading force
-                    .d3Force('3d-spread', (alpha) => {
-                        if (graphDepth > 0) {
-                            const nodes = Graph.graphData().nodes;
-                            const depthFactor = graphDepth / 100;
-                            
-                            // Log Z positions to debug
-                            const zValues = nodes.map(n => n.z || 0);
-                            const avgZ = zValues.reduce((a, b) => a + b, 0) / zValues.length;
-                            const maxZ = Math.max(...zValues);
-                            const minZ = Math.min(...zValues);
-                            if (Math.random() < 0.01) { // Log occasionally
-                                console.log('Z stats:', { avg: avgZ, max: maxZ, min: minZ, range: maxZ - minZ });
-                            }
-                            
-                            nodes.forEach(node => {
-                                // Much stronger Z spreading
-                                const zTarget = (Math.random() - 0.5) * 500 * depthFactor;
-                                const zForce = (zTarget - node.z) * alpha * 0.3;
-                                node.vz += zForce;
-                                
-                                // Also add some sinusoidal movement based on node connections
-                                const phase = node.id.charCodeAt(0) * 0.1;
-                                const waveZ = Math.sin(Date.now() * 0.0001 + phase) * 100 * depthFactor;
-                                node.vz += (waveZ - node.z) * alpha * 0.1;
-                                
-                                // Higher velocity limits
-                                if (Math.abs(node.vz) > 20) {
-                                    node.vz = node.vz > 0 ? 20 : -20;
-                                }
-                            });
-                        }
-                    })
                     .onNodeClick(node => {
                         // Center camera on clicked node
                         const distance = 300;
@@ -2334,25 +2294,10 @@
                         );
                     })
                     .onNodeDrag((node, translate) => {
-                        // Apply depth constraint during drag
-                        if (graphDepth < 100) {
-                            const depthFactor = graphDepth / 100;
-                            node.z *= depthFactor;
-                            node.fz = node.z;
-                        }
+                        // Keep default drag behavior
                     })
                     .onNodeDragEnd(node => {
-                        // Apply final depth constraint
-                        if (graphDepth < 100) {
-                            const depthFactor = graphDepth / 100;
-                            node.z *= depthFactor;
-                            node.vz *= depthFactor;
-                            if (graphDepth === 0) {
-                                node.z = 0;
-                                node.vz = 0;
-                                node.fz = 0;
-                            }
-                        }
+                        // Keep default drag end behavior
                     })
                     .onNodeRightClick(node => {
                         // Show context menu
@@ -3910,49 +3855,11 @@
                 }
             });
             
-            // Graph depth control
-            document.getElementById('graph-depth').addEventListener('input', (e) => {
-                graphDepth = parseInt(e.target.value);
-                document.getElementById('depth-value').textContent = graphDepth + '%';
-                
-                if (Graph) {
-                    // Update the 3D spreading force
-                    Graph.d3Force('3d-spread', (alpha) => {
-                        const nodes = Graph.graphData().nodes;
-                        const depthFactor = graphDepth / 100;
-                        
-                        if (graphDepth > 0) {
-                            nodes.forEach(node => {
-                                // Much stronger Z spreading with multiple effects
-                                const zTarget = (Math.random() - 0.5) * 800 * depthFactor;
-                                const zForce = (zTarget - node.z) * alpha * 0.5;
-                                node.vz += zForce;
-                                
-                                // Also add some sinusoidal movement based on node connections
-                                const phase = node.id.charCodeAt(0) * 0.1;
-                                const waveZ = Math.sin(Date.now() * 0.0001 + phase) * 200 * depthFactor;
-                                node.vz += (waveZ - node.z) * alpha * 0.2;
-                                
-                                // Higher velocity limits
-                                if (Math.abs(node.vz) > 30 * depthFactor) {
-                                    node.vz = node.vz > 0 ? 30 * depthFactor : -30 * depthFactor;
-                                }
-                            });
-                        } else {
-                            // Completely flatten when depth is 0
-                            nodes.forEach(node => {
-                                node.z *= 0.9;
-                                node.vz *= 0.5;
-                                if (Math.abs(node.z) < 0.1) {
-                                    node.z = 0;
-                                    node.vz = 0;
-                                }
-                            });
-                        }
-                    });
-                    
-                    Graph.d3ReheatSimulation();
-                }
+            // Flatten graph control
+            document.getElementById('toggle-flatten-graph').addEventListener('change', (e) => {
+                flattenGraph = e.target.checked;
+                // For now, just set the variable - we'll implement flattening later if needed
+                console.log('Flatten graph:', flattenGraph);
             });
             
             // Handle window resize
