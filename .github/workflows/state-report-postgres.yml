@@ -1,0 +1,35 @@
+name: Complete State Report - PostgreSQL
+
+on:
+  workflow_dispatch:
+
+jobs:
+  send-state-report:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+        
+    - name: Send complete state report email
+      env:
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        SMTP_HOST: ${{ secrets.SMTP_HOST }}
+        SMTP_PORT: ${{ secrets.SMTP_PORT }}
+        SMTP_USER: ${{ secrets.SMTP_USER }}
+        SMTP_PASS: ${{ secrets.SMTP_PASS }}
+        NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+      run: |
+        cd github-actions-backend
+        node email-notifications-postgres.js state || exit 0
+        # Don't fail the workflow if email fails
