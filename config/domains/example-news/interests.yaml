@@ -1,0 +1,160 @@
+# Local News Interest Scoring
+
+interest_configuration:
+  name: "Local News Priority Scoring"
+  version: "1.0.0"
+  
+  levels:
+    - score_range: [9, 10]
+      name: "emergency"
+      label: "🚨 Emergency - Immediate Alert"
+      color: "#dc2626"
+      criteria:
+        - "Weather emergency (tornado, flood, severe storms)"
+        - "Public safety threat (active incident)"
+        - "Major infrastructure failure (power, water)"
+        - "School closures or lockdowns"
+        - "Evacuation orders"
+      notification:
+        email: true
+        slack: true
+        sms: true
+    
+    - score_range: [7, 8]
+      name: "important"
+      label: "⚠️ Important - Affects Daily Life"
+      color: "#f59e0b"
+      criteria:
+        - "Road closures or major traffic"
+        - "Utility service interruptions"
+        - "Government meeting with public input"
+        - "Crime or safety update"
+        - "School board decisions"
+      notification:
+        email: true
+        slack: true
+        sms: false
+    
+    - score_range: [5, 6]
+      name: "community"
+      label: "🏘️ Community - Good to Know"
+      color: "#3b82f6"
+      criteria:
+        - "Local business news"
+        - "Community events"
+        - "City council updates"
+        - "School activities"
+        - "Local sports"
+      notification:
+        email: false
+        slack: true
+        sms: false
+    
+    - score_range: [3, 4]
+      name: "general"
+      label: "📰 General - Background Info"
+      color: "#6b7280"
+      criteria:
+        - "Human interest stories"
+        - "Opinion pieces"
+        - "Historical articles"
+        - "Lifestyle content"
+      notification:
+        email: false
+        slack: false
+        sms: false
+
+  scoring_factors:
+    - name: "proximity"
+      weight: 0.35
+      description: "How close to our specific location"
+      keywords:
+        boost:
+          - "Boyd"
+          - "Wise County"
+          - "our area"
+          - "local"
+        reduce:
+          - "statewide"
+          - "national"
+          - "other counties"
+    
+    - name: "urgency"
+      weight: 0.30
+      description: "How soon this affects us"
+      keywords:
+        boost:
+          - "immediately"
+          - "now"
+          - "today"
+          - "emergency"
+          - "breaking"
+        reduce:
+          - "planned"
+          - "future"
+          - "proposed"
+          - "considering"
+    
+    - name: "impact_scope"
+      weight: 0.20
+      description: "How many people affected"
+      keywords:
+        boost:
+          - "all residents"
+          - "citywide"
+          - "countywide"
+          - "major"
+        reduce:
+          - "some"
+          - "few"
+          - "limited"
+          - "minor"
+    
+    - name: "actionability"
+      weight: 0.15
+      description: "Whether action is required"
+      keywords:
+        boost:
+          - "must"
+          - "required"
+          - "deadline"
+          - "act now"
+        reduce:
+          - "informational"
+          - "FYI"
+          - "no action"
+
+  detection_rules:
+    - name: "weather_emergency"
+      pattern: "(tornado|severe thunderstorm|flash flood|winter storm) (warning|watch)"
+      automatic_score: 10
+      alert_immediately: true
+    
+    - name: "public_safety"
+      pattern: "(active shooter|gas leak|evacuation|shelter in place)"
+      automatic_score: 10
+      alert_immediately: true
+    
+    - name: "traffic_alert"
+      pattern: "(road closed|major accident|traffic alert).*(380|730|Boyd)"
+      score_modifier: 2.0
+    
+    - name: "meeting_notice"
+      pattern: "(city council|school board|commissioners).*(meeting|hearing)"
+      score_modifier: 1.5
+      extract_date: true
+
+  options:
+    adaptive_scoring: true
+    minimum_score: 3
+    duplicate_penalty: 0.3  # Local news often updates same story
+    
+    time_decay:
+      enabled: true
+      half_life_days: 7  # Local news ages quickly
+    
+    geographic_boosting:
+      enabled: true
+      center: "Boyd, TX"
+      boost_radius_miles: 10
+      penalty_outside_miles: 50

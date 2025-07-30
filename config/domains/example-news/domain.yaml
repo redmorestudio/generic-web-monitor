@@ -1,0 +1,115 @@
+# Example: Local News Monitoring
+# This example shows how to monitor local news websites
+
+domain:
+  id: "local-news"
+  name: "Local News Monitoring"
+  description: "Monitor local news for important community updates"
+  version: "1.0.0"
+  
+  entities:
+    - type: "organization"
+      plural: "organizations"
+      attributes:
+        - name: "name"
+          type: "string"
+          required: true
+        - name: "type"
+          type: "string"
+          enum: ["government", "business", "nonprofit", "school"]
+    
+    - type: "person"
+      plural: "people"
+      attributes:
+        - name: "name"
+          type: "string"
+        - name: "title"
+          type: "string"
+        - name: "organization"
+          type: "reference"
+          ref: "organization"
+    
+    - type: "event"
+      plural: "events"
+      attributes:
+        - name: "name"
+          type: "string"
+        - name: "date"
+          type: "date"
+        - name: "location"
+          type: "string"
+        - name: "type"
+          type: "string"
+          enum: ["meeting", "emergency", "celebration", "construction", "accident"]
+
+  relationships:
+    - from: "person"
+      to: "organization"
+      type: "works_for"
+    
+    - from: "event"
+      to: "organization"
+      type: "organized_by"
+
+  monitoring_targets:
+    - category: "local_news_sites"
+      check_frequency: "hourly"
+      urls:
+        - url: "https://www.texastribune.org/local/"
+          name: "Texas Tribune Local"
+          selectors:
+            - ".story-list"
+            - ".breaking-news"
+        
+        - url: "https://www.dallasnews.com/news/texas/"
+          name: "Dallas News Texas"
+    
+    - category: "government_sites"
+      check_frequency: "daily"
+      urls:
+        - url: "https://www.texas.gov/news"
+          name: "Texas.gov News"
+
+  keywords:
+    primary:
+      - "breaking"
+      - "emergency"
+      - "urgent"
+      - "alert"
+      - "closure"
+      - "evacuation"
+    
+    secondary:
+      - "announcement"
+      - "meeting"
+      - "update"
+      - "scheduled"
+      - "planned"
+    
+    negative:
+      - "advertisement"
+      - "sponsored"
+      - "opinion"
+      - "letter to editor"
+
+  extraction_rules:
+    - entity_type: "date"
+      patterns:
+        - regex: "(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday),? (January|February|March|April|May|June|July|August|September|October|November|December) \\d{1,2}"
+        - regex: "(today|tomorrow|yesterday|next week)"
+    
+    - entity_type: "organization"
+      patterns:
+        - regex: "(City of [A-Z][a-z]+)"
+        - regex: "([A-Z][a-z]+ County)"
+        - regex: "([A-Z][a-z]+ ISD)"  # School districts
+
+  custom:
+    geographic_focus: "Boyd, Texas and surrounding areas"
+    alert_keywords:
+      - "Boyd"
+      - "Wise County"
+      - "Highway 380"
+      - "FM 730"
+    weather_alerts: true
+    traffic_alerts: true

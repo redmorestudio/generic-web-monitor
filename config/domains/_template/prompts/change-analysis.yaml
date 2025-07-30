@@ -1,0 +1,135 @@
+# Change Analysis Prompt Template
+# This prompt analyzes detected changes for importance
+
+prompt:
+  name: "Change Analysis"
+  description: "Analyzes what changed and assigns importance scores"
+  model_preferences: 
+    - "llama-3.3-70b-versatile"
+    - "gpt-4"
+  temperature: 0.5
+  
+  system: |
+    You are an expert analyst specializing in {{domain.name}}.
+    Your role is to analyze changes in web content and assess their importance based on:
+    
+    {{#each scoring_factors}}
+    - {{this.name}}: {{this.description}} (weight: {{this.weight}})
+    {{/each}}
+    
+    Focus on identifying:
+    1. What specifically changed
+    2. Why it matters
+    3. Who it affects
+    4. How urgent it is
+    5. What action might be needed
+  
+  user: |
+    Analyze this change in {{company.name}}'s content:
+    
+    Source: {{url.name}}
+    URL: {{url.url}}
+    Type: {{url.type}}
+    
+    PREVIOUS CONTENT ({{previous_date}}):
+    {{previous_content}}
+    
+    CURRENT CONTENT ({{current_date}}):
+    {{current_content}}
+    
+    Based on the scoring criteria for {{domain.name}}, analyze:
+    
+    1. **What Changed**: List specific changes (additions, removals, modifications)
+    
+    2. **Entity Extraction**: Identify all relevant entities:
+    {{#each entity_types}}
+       - {{this.plural}}: Extract any {{this.type}} mentioned
+    {{/each}}
+    
+    3. **Impact Assessment**:
+       - Business Impact: How does this affect operations/strategy?
+       - Urgency: How quickly must someone respond?
+       - Scope: Who is affected and how broadly?
+    
+    4. **Interest Scoring** (1-10 for each factor):
+    {{#each scoring_factors}}
+       - {{this.name}} ({{this.weight}} weight): [score] - [brief reason]
+    {{/each}}
+    
+    5. **Overall Assessment**:
+       - Combined Interest Level: [weighted average]
+       - Category: [critical/high/medium/low/minimal]
+       - Recommended Action: [if any]
+    
+    Provide your analysis as structured JSON.
+
+  # Expected output format
+  output_schema:
+    type: "object"
+    required: ["change_summary", "entities", "impact_assessment", "interest_scores", "overall_assessment"]
+    properties:
+      change_summary:
+        type: "string"
+        description: "2-3 sentence summary of what changed"
+      
+      entities:
+        type: "object"
+        description: "Extracted entities by type"
+        # Properties will be dynamically generated based on entity_types
+      
+      impact_assessment:
+        type: "object"
+        properties:
+          business_impact:
+            type: "string"
+          urgency:
+            type: "string"
+          affected_parties:
+            type: "array"
+            items:
+              type: "string"
+          scope:
+            type: "string"
+            enum: ["individual", "team", "department", "company", "industry", "global"]
+      
+      interest_scores:
+        type: "object"
+        description: "Individual scores for each factor"
+        # Properties dynamically generated from scoring_factors
+      
+      overall_assessment:
+        type: "object"
+        properties:
+          interest_level:
+            type: "number"
+            minimum: 1
+            maximum: 10
+          category:
+            type: "string"
+          confidence:
+            type: "number"
+            minimum: 0
+            maximum: 1
+          key_factors:
+            type: "array"
+            items:
+              type: "string"
+          recommended_action:
+            type: "string"
+
+  # Fallback for errors
+  error_response:
+    change_summary: "Unable to analyze changes due to processing error"
+    entities: {}
+    impact_assessment:
+      business_impact: "Unknown"
+      urgency: "Unknown"
+      affected_parties: []
+      scope: "unknown"
+    interest_scores: {}
+    overall_assessment:
+      interest_level: 5
+      category: "medium"
+      confidence: 0.1
+      key_factors: ["Analysis failed - using default score"]
+      recommended_action: "Manual review recommended"

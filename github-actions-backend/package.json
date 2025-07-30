@@ -1,7 +1,7 @@
 {
-  "name": "ai-monitor-backend",
-  "version": "2.0.0",
-  "description": "Full-featured backend for AI Competitive Intelligence Monitor",
+  "name": "generic-monitor-backend",
+  "version": "1.0.0",
+  "description": "Backend for Generic Web Monitor - A flexible, domain-agnostic monitoring system",
   "main": "server.js",
   "bin": {
     "ai-monitor": "./cli.js"

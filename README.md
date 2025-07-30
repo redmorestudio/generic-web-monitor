@@ -1,163 +1,123 @@
-# AI Competitor Monitor 🚀
+# Generic Web Monitor
 
-Real-time competitive intelligence for AI companies. Monitor 16+ competitors, get AI-powered insights, and never miss important updates.
+A flexible, domain-agnostic web monitoring system with AI-powered analysis. Monitor any industry - regulatory compliance, competitive intelligence, news tracking, and more.
 
-![Dashboard Preview](docs/images/dashboard-preview.png)
+## 🚀 Features
 
-## ✨ Features
+- **Domain-Agnostic**: Monitor any industry or topic with customizable configurations
+- **AI-Powered Analysis**: Intelligent change detection and importance scoring
+- **Automated Workflows**: GitHub Actions-based automation requiring no infrastructure
+- **Flexible Scoring**: Customizable interest levels based on your specific needs
+- **Multi-Domain Support**: Monitor multiple industries from a single deployment
+- **Knowledge Graph Integration**: Optional TheBrain integration for visualization
+- **Stealth Scraping**: Advanced anti-detection measures for reliable data collection
 
-- **Automated Monitoring**: Checks competitor websites every 6 hours
-- **AI-Powered Analysis**: Sentiment analysis, categorization, and relevance scoring
-- **Change Intelligence**: See what changed with before/after content snippets
-- **Smart Explanations**: AI explains changes in plain English with business context
-- **Smart Alerts**: Get notified only about what matters
-- **Beautiful Dashboard**: Real-time visualization of competitor activity
-- **Email Summaries**: Daily intelligence reports delivered to your inbox
-- **Easy Setup**: Get running in under 30 minutes
+## 🎯 Use Cases
 
-## 🎯 What It Monitors
+- **Regulatory Compliance**: Track government regulations and policy changes
+- **Competitive Intelligence**: Monitor competitors across any industry
+- **News Monitoring**: Track news sites for specific topics or companies
+- **Price Monitoring**: Watch for pricing changes in e-commerce
+- **Research Tracking**: Monitor academic publications and research
+- **Supply Chain**: Track supplier announcements and disruptions
+- **Investment Research**: Monitor company news and market movements
 
-Currently tracking:
-- OpenAI, Anthropic, Google AI, Meta AI
-- Perplexity, Midjourney, Mistral AI, Cohere
-- Stability AI, Runway ML, Eleven Labs
-- Jasper AI, Copy.ai, Writesonic, Tome, Beautiful.ai
+## 🛠️ Quick Start
 
-## 🚀 Quick Start
+### 1. One-Command Setup (Coming Soon)
 
-### Option 1: Automatic Setup with Claude (Recommended)
-
-If you have Claude Desktop with MCPs enabled:
-
-```
-"Claude, I have filesystem, gdrive, and github MCPs enabled. 
-Please set up the AI Competitor Monitor for me with daily email summaries."
+```bash
+npx create-generic-monitor my-monitor
 ```
 
-That's it! Claude will handle everything.
+### 2. Manual Setup
 
-### Option 2: Manual Setup
+1. Fork this repository
+2. Clone your fork locally
+3. Run the setup wizard:
 
-1. **Copy the Google Apps Script**
-   - Open Google Sheets
-   - Create a new spreadsheet
-   - Go to Extensions → Apps Script
-   - Copy the code from `Code.gs`
-   - Save and run `setupSpreadsheet()`
-
-2. **Configure Companies**
-   - Add companies to monitor in the Configuration sheet
-   - Include URLs for blogs, news, and documentation pages
-
-3. **Deploy Dashboard**
-   - Fork this repository
-   - Enable GitHub Pages in Settings
-   - Update `CONFIG.apiUrl` in index.html with your Apps Script URL
-
-4. **Set Up Triggers**
-   - In Apps Script, run `setupTriggers()`
-   - Or use the menu: AI Monitor → Setup Triggers
-
-## 📊 Dashboard Access
-
-### Public Demo
-Visit: `https://[your-username].github.io/ai-competitive-monitor`
-
-### Private Deployment
-See [Private Deployment Guide](docs/private-deployment.md) for Google Sites instructions.
-
-## ⚙️ Configuration
-
-### Basic Settings
-Edit these in the Apps Script:
-
-```javascript
-const CONFIG = {
-  email: {
-    recipients: ['your-email@example.com'],
-    sendTime: '09:00',
-    timezone: 'America/New_York'
-  }
-};
+```bash
+npm install
+npm run setup-wizard
 ```
 
-### Advanced Features
-- **AI Analysis**: Add your Claude API key for intelligent insights
-- **Custom Categories**: Define your own update categories
-- **Alert Rules**: Set thresholds for urgent notifications
+4. Follow the AI-powered configuration wizard to set up your domain
+5. Deploy to GitHub Pages
 
-See [Configuration Guide](docs/configuration.md) for all options.
+## 📋 How It Works
 
-## 📧 Email Reports
+1. **Configure Your Domain**: Define what entities to track, what makes something interesting, and which URLs to monitor
+2. **Automated Scraping**: The system regularly checks your configured URLs for changes
+3. **AI Analysis**: When changes are detected, AI analyzes their importance based on your criteria
+4. **Smart Notifications**: Get alerted only about changes that matter to you
+5. **Dashboard Visualization**: See everything in a beautiful, real-time dashboard
 
-Daily summaries include:
-- Executive summary with key metrics
-- Updates grouped by company
-- Sentiment analysis
-- Urgency indicators
-- Direct links to sources
+## 🔧 Configuration Examples
 
-## 🔒 Privacy & Security
+### Regulatory Monitoring
+```yaml
+domain:
+  name: "AI Regulatory Monitoring"
+  entities:
+    - regulatory_bodies
+    - regulations
+    - enforcement_actions
+  interests:
+    critical: "New regulation effective within 30 days"
+    high: "Proposed rule published for comment"
+```
 
-- All data stored in your private Google Sheets
-- Dashboard can be public or private
-- No data sent to third parties (except optional AI analysis)
-- Respects robots.txt and rate limits
-
-## 🤝 Contributing
-
-We welcome contributions! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Submit a pull request
+### Competitive Intelligence
+```yaml
+domain:
+  name: "SaaS Competitive Intelligence"
+  entities:
+    - companies
+    - products
+    - pricing
+    - features
+  interests:
+    critical: "Competitor launches in our exact market"
+    high: "Major feature we don't have"
+```
 
 ## 📚 Documentation
 
-- [Setup Guide](docs/setup-guide.md) - Detailed installation instructions
-- [Configuration](docs/configuration.md) - All configuration options
-- [Private Deployment](docs/private-deployment.md) - For internal use
-- [API Reference](docs/api-reference.md) - Dashboard API endpoints
-- [AI Change Detection](docs/ai-change-detection.md) - Content snippets & AI explanations
+- [Setup Guide](docs/SETUP.md)
+- [Configuration Reference](docs/CONFIGURATION.md)
+- [Domain Examples](docs/DOMAINS.md)
+- [Plugin Development](docs/PLUGINS.md)
+- [Troubleshooting](docs/TROUBLESHOOTING.md)
 
-## 🐛 Troubleshooting
+## 🤝 Contributing
 
-**Dashboard shows "Failed to load"**
-- Check your Apps Script Web App URL
-- Ensure Web App is deployed with "Anyone" access
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-**No emails received**
-- Verify email addresses in configuration
-- Check spam folder
-- Run `sendDailySummary()` manually to test
+### Sharing Domain Configurations
 
-**Updates not detected**
-- Some sites may have anti-scraping measures
-- Check the Cache sheet for stored hashes
-- Verify URLs are accessible
+Have a great domain configuration? Share it with the community:
+
+1. Create your domain config in `config/domains/`
+2. Add documentation
+3. Submit a PR
 
 ## 📈 Roadmap
 
-- [ ] Slack integration
-- [ ] Custom webhook support
-- [ ] Competitor comparison charts
+- [ ] AI-powered setup wizard
+- [ ] Plugin marketplace
+- [ ] Multi-language support
+- [ ] Advanced analytics dashboard
 - [ ] Mobile app
-- [ ] Historical trend analysis
-- [ ] Export to PDF reports
+- [ ] Enterprise features (SSO, audit logs)
+
+## 🙏 Credits
+
+Based on the original [AI Competitive Monitor](https://github.com/redmorestudio/ai-competitive-monitor) by Redmore Studio.
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) file
-
-## 🙏 Acknowledgments
-
-Built with:
-- Google Apps Script
-- Claude AI
-- GitHub Pages
-- Community feedback
+MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-**Questions?** Open an issue or reach out!
-
-*Never miss another competitor move. Stay ahead with AI Competitor Monitor.*
+**Ready to monitor your industry?** [Get started now →](docs/SETUP.md)

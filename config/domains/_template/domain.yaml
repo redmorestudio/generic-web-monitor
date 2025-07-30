@@ -1,0 +1,91 @@
+# Domain Configuration Template
+# Copy this file and customize for your monitoring needs
+
+domain:
+  id: "your-domain-id"  # Unique identifier (lowercase, hyphens)
+  name: "Your Domain Name"
+  description: "What this domain monitors"
+  version: "1.0.0"
+  
+  # Define the types of entities you want to track
+  entities:
+    - type: "company"  # Change to match your domain (e.g., "agency", "product", "researcher")
+      plural: "companies"
+      attributes:
+        - name: "name"
+          type: "string"
+          required: true
+        - name: "category"
+          type: "string"
+        - name: "website"
+          type: "string"
+          format: "url"
+      
+    - type: "product"  # Add more entity types as needed
+      plural: "products"
+      attributes:
+        - name: "name"
+          type: "string"
+        - name: "company"
+          type: "reference"
+          ref: "company"
+        - name: "launch_date"
+          type: "date"
+
+  # Define relationships between entities
+  relationships:
+    - from: "company"
+      to: "product"
+      type: "develops"
+      reverse: "developed_by"
+
+  # URLs to monitor
+  monitoring_targets:
+    - category: "primary_sources"
+      check_frequency: "hourly"  # Options: hourly, daily, twice_daily, weekly
+      urls:
+        - url: "https://example.com/news"
+          name: "Example News"
+          selectors:  # Optional: specific parts of page to monitor
+            - ".news-content"
+            - "#main-article"
+        
+    - category: "secondary_sources"
+      check_frequency: "daily"
+      urls:
+        - url: "https://industry-news.com"
+          name: "Industry News"
+
+  # Keywords that indicate important content
+  keywords:
+    primary:  # High-value keywords
+      - "announcement"
+      - "launch"
+      - "partnership"
+    
+    secondary:  # Medium-value keywords
+      - "update"
+      - "feature"
+      - "improvement"
+    
+    negative:  # Keywords that reduce importance
+      - "minor"
+      - "routine"
+      - "scheduled maintenance"
+
+  # Data extraction rules (optional)
+  extraction_rules:
+    - entity_type: "company"
+      patterns:
+        - regex: "([A-Z][a-z]+ (?:Inc|Corp|LLC|Ltd))"
+          group: 1
+    
+    - entity_type: "date"
+      patterns:
+        - regex: "(January|February|March|April|May|June|July|August|September|October|November|December) \\d{1,2}, \\d{4}"
+        - regex: "\\d{1,2}/\\d{1,2}/\\d{4}"
+
+  # Custom configuration for your domain
+  custom:
+    # Add any domain-specific configuration here
+    # This section is completely flexible
