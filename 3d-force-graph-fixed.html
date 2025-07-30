@@ -2296,7 +2296,8 @@
                     .onNodeDrag((node, translate) => {
                         // Apply flattening constraint during drag
                         if (flattenGraph) {
-                            node.z = (node.z || 0) * 0.1;
+                            node.z = 0;
+                            node.fz = 0;
                         }
                     })
                     .onNodeDragEnd(node => {
@@ -2304,6 +2305,7 @@
                         if (flattenGraph) {
                             node.z = 0;
                             node.vz = 0;
+                            node.fz = 0;
                         }
                     })
                     .onNodeRightClick(node => {
@@ -3865,21 +3867,42 @@
                 flattenGraph = e.target.checked;
                 if (Graph) {
                     if (flattenGraph) {
-                        // Enable flattening force
+                        console.log('Enabling flatten mode');
+                        
+                        // Use dagMode to create a 2D layout
+                        Graph
+                            .dagMode('radialout') // This creates a 2D radial layout
+                            .dagLevelDistance(50);
+                        
+                        // Also add a force to keep nodes flat
                         Graph.d3Force('flatten', (alpha) => {
-                            const graphData = Graph.graphData();
-                            graphData.nodes.forEach(node => {
-                                node.vz = (node.vz || 0) * 0.5; // Dampen Z velocity
-                                node.z = (node.z || 0) * 0.8; // Pull toward Z=0
-                                if (Math.abs(node.z) < 1) node.z = 0; // Snap close values to 0
+                            const nodes = Graph.graphData().nodes;
+                            nodes.forEach(node => {
+                                if (node.z !== 0) {
+                                    node.z = 0;
+                                    node.vz = 0;
+                                }
                             });
                         });
+                        
+                        // Increase charge force to spread nodes in X/Y
+                        Graph.d3Force('charge').strength(CONFIG.forceStrength * 2);
+                        
                     } else {
+                        console.log('Disabling flatten mode');
+                        
+                        // Disable dag mode
+                        Graph.dagMode(null);
+                        
                         // Disable flattening force
                         Graph.d3Force('flatten', null);
+                        
+                        // Restore normal charge force
+                        Graph.d3Force('charge').strength(CONFIG.forceStrength);
                     }
                     
-                    Graph.d3ReheatSimulation();
+                    // Refresh the simulation
+                    Graph.refresh();
                 }
             });
             
