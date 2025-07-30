@@ -853,6 +853,8 @@
             let showConceptNodes = true;
             let showCompanyNodes = true;
             let searchDepth = 1; // Default to 1 level out
+            let activeChangeFilter = null; // For filtering by recent changes
+            let changedCompaniesMap = new Map(); // Store companies with recent changes
             
             // Make applyFilters and Graph global for button access
             window.applyFilters = null;
@@ -976,6 +978,19 @@
                     if (changesResponse && changesResponse.ok) {
                         recentChangesData = await changesResponse.json();
                         console.log('Loaded recent changes:', recentChangesData);
+                        
+                        // Populate changedCompaniesMap
+                        if (recentChangesData && recentChangesData.changes) {
+                            recentChangesData.changes.forEach(change => {
+                                if (change.company_name && change.hours_ago !== undefined) {
+                                    changedCompaniesMap.set(change.company_name, {
+                                        hoursAgo: change.hours_ago,
+                                        changeCount: change.change_count || 1
+                                    });
+                                }
+                            });
+                            console.log('Changed companies:', changedCompaniesMap.size);
+                        }
                     } else {
                         console.log('No recent changes data available');
                     }
@@ -1217,7 +1232,8 @@
                         val: company.url_count || 1,
                         interestLevel: company.intelligence?.interest_level || 0,
                         urlCount: company.url_count || 0,
-                        connectionCount: 0
+                        connectionCount: 0,
+                        hasRecentChange: changedCompaniesMap.has(company.company)
                     };
                     graphData.nodes.push(node);
                     nodeMap.set(company.company, node);
