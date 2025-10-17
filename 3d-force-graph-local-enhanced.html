@@ -1,0 +1,31 @@
+    
+    // Reset camera
+    document.getElementById('resetCamera').addEventListener('click', () => {
+        if (Graph) {
+            Graph.cameraPosition(
+                { x: 0, y: 0, z: 500 }, // new position
+                { x: 0, y: 0, z: 0 },   // look at
+                3000                     // duration
+            );
+        }
+    });
+    
+    // Toggle auto-rotate
+    document.getElementById('autoRotate').addEventListener('click', function() {
+        autoRotateEnabled = !autoRotateEnabled;
+        this.classList.toggle('active');
+        
+        if (Graph) {
+            Graph.controls().autoRotate = autoRotateEnabled;
+            Graph.controls().autoRotateSpeed = CONFIG.rotationSpeed;
+        }
+    });
+    
+    // Initialize on load
+    window.addEventListener('load', () => {
+        console.log('Page loaded, initializing graph...');
+        initGraph();
+    });
+    </script>
+</body>
+</html>

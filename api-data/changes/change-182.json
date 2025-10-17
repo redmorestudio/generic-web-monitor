@@ -1,0 +1,247 @@
+{
+  "change_id": 182,
+  "url": "https://you.com",
+  "company": "You.com",
+  "company_category": "AI Search",
+  "detected_at": "2025-07-18 16:42:49",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No noticeable changes were detected between the previous and current content of the You.com homepage.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://you.com\ncompany: You.com\nscraped_at: 2025-07-04 20:21:09\n---\n\nYou.com | AI for workplace productivity\n\n[Logo for YOU.com](/)\n\n[Book a demo](https://home.you.com/book-demo)[Enterprise Solutions](https://home.you.com/business)[Sign in](/signin)[Book a demo](https://home.you.com/book-demo)[Sign in](/signin)\n\n![](https://cdn.you.com/img/ari-landing-page/icon-ari.svg)\n\nARI beats OpenAI Deep Research 76% of the time.[See how\n\n](https://you.com/articles/o3-mini-judges-ari-enterprise-wi...",
+    "after": ":root{--toastify-color-light: #fff;--toastify-color-dark: #121212;--toastify-color-info: #3498db;--toastify-color-success: #07bc0c;--toastify-color-warning: #f1c40f;--toastify-color-error: hsl(6, 78%, 57%);--toastify-color-transparent: rgba(255, 255, 255, .7);--toastify-icon-color-info: var(--toastify-color-info);--toastify-icon-color-success: var(--toastify-color-success);--toastify-icon-color-warning: var(--toastify-color-warning);--toastify-icon-color-error: var(--toastify-color-error);--toas..."
+  },
+  "diff": {
+    "added_sentences": [
+      ":root{--toastify-color-light: #fff;--toastify-color-dark: #121212;--toastify-color-info: #3498db;--toastify-color-success: #07bc0c;--toastify-color-warning: #f1c40f;--toastify-color-error: hsl(6, 78%, 57%);--toastify-color-transparent: rgba(255, 255, 255, .",
+      "7);--toastify-icon-color-info: var(--toastify-color-info);--toastify-icon-color-success: var(--toastify-color-success);--toastify-icon-color-warning: var(--toastify-color-warning);--toastify-icon-color-error: var(--toastify-color-error);--toastify-container-width: fit-content;--toastify-toast-width: 320px;--toastify-toast-offset: 16px;--toastify-toast-top: max(var(--toastify-toast-offset), env(safe-area-inset-top));--toastify-toast-right: max(var(--toastify-toast-offset), env(safe-area-inset-right));--toastify-toast-left: max(var(--toastify-toast-offset), env(safe-area-inset-left));--toastify-toast-bottom: max(var(--toastify-toast-offset), env(safe-area-inset-bottom));--toastify-toast-background: #fff;--toastify-toast-padding: 14px;--toastify-toast-min-height: 64px;--toastify-toast-max-height: 800px;--toastify-toast-bd-radius: 6px;--toastify-toast-shadow: 0px 4px 12px rgba(0, 0, 0, .",
+      "1);--toastify-font-family: sans-serif;--toastify-z-index: 9999;--toastify-text-color-light: #757575;--toastify-text-color-dark: #fff;--toastify-text-color-info: #fff;--toastify-text-color-success: #fff;--toastify-text-color-warning: #fff;--toastify-text-color-error: #fff;--toastify-spinner-color: #616161;--toastify-spinner-color-empty-area: #e0e0e0;--toastify-color-progress-light: linear-gradient(to right, #4cd964, #5ac8fa, #007aff, #34aadc, #5856d6, #ff2d55);--toastify-color-progress-dark: #bb86fc;--toastify-color-progress-info: var(--toastify-color-info);--toastify-color-progress-success: var(--toastify-color-success);--toastify-color-progress-warning: var(--toastify-color-warning);--toastify-color-progress-error: var(--toastify-color-error);--toastify-color-progress-bgo: .",
+      "2}.",
+      "Toastify\\_\\_toast-container{z-index:var(--toastify-z-index);-webkit-transform:translate3d(0,0,var(--toastify-z-index));position:fixed;width:var(--toastify-container-width);box-sizing:border-box;color:#fff;display:flex;flex-direction:column}.",
+      "Toastify\\_\\_toast-container--top-left{top:var(--toastify-toast-top);left:var(--toastify-toast-left)}.",
+      "Toastify\\_\\_toast-container--top-center{top:var(--toastify-toast-top);left:50%;transform:translate(-50%);align-items:center}.",
+      "Toastify\\_\\_toast-container--top-right{top:var(--toastify-toast-top);right:var(--toastify-toast-right);align-items:end}.",
+      "Toastify\\_\\_toast-container--bottom-left{bottom:var(--toastify-toast-bottom);left:var(--toastify-toast-left)}.",
+      "Toastify\\_\\_toast-container--bottom-center{bottom:var(--toastify-toast-bottom);left:50%;transform:translate(-50%);align-items:center}."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://you.",
+      "com\ncompany: You.",
+      "com\nscraped_at: 2025-07-04 20:21:09\n---\n\nYou.",
+      "com | AI for workplace productivity\n\n[Logo for YOU.",
+      "svg)!",
+      "svg)!",
+      "svg)!",
+      "svg)!",
+      "svg)!",
+      "svg)!"
+    ],
+    "key_changes": [
+      "New version: 39.461, 4.1, 3.7, 3.5, 2.5, 2.0, 3.3, 5.0, 537.36, 120.0.0, 1.1",
+      "New model mentioned",
+      "New performance mentioned"
+    ],
+    "change_percentage": 79,
+    "summary": "79% content changed (540 additions, 24 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "assistant",
+        "frequency": 155
+      },
+      {
+        "word": "maxsize",
+        "frequency": 155
+      },
+      {
+        "word": "toastify",
+        "frequency": 149
+      },
+      {
+        "word": "application",
+        "frequency": 133
+      },
+      {
+        "word": "text",
+        "frequency": 122
+      },
+      {
+        "word": "true",
+        "frequency": 102
+      },
+      {
+        "word": "type",
+        "frequency": 97
+      },
+      {
+        "word": "mime",
+        "frequency": 91
+      },
+      {
+        "word": "octet-stream",
+        "frequency": 91
+      },
+      {
+        "word": "var",
+        "frequency": 89
+      },
+      {
+        "word": "false",
+        "frequency": 83
+      },
+      {
+        "word": "claude",
+        "frequency": 74
+      },
+      {
+        "word": "transform",
+        "frequency": 70
+      },
+      {
+        "word": "code",
+        "frequency": 58
+      },
+      {
+        "word": "translate3d",
+        "frequency": 48
+      },
+      {
+        "word": "sonnet",
+        "frequency": 45
+      },
+      {
+        "word": "shared",
+        "frequency": 43
+      },
+      {
+        "word": "gpt",
+        "frequency": 39
+      },
+      {
+        "word": "model",
+        "frequency": 38
+      },
+      {
+        "word": "name",
+        "frequency": 38
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "openai": {
+        "before": 1,
+        "after": 49,
+        "change": 48
+      },
+      "com": {
+        "before": 64,
+        "after": 104,
+        "change": 40
+      },
+      "you": {
+        "before": 62,
+        "after": 101,
+        "change": 39
+      },
+      "png": {
+        "before": 4,
+        "after": 41,
+        "change": 37
+      },
+      "company": {
+        "before": 2,
+        "after": 38,
+        "change": 36
+      },
+      "https": {
+        "before": 57,
+        "after": 92,
+        "change": 35
+      },
+      "cdn": {
+        "before": 22,
+        "after": 56,
+        "change": 34
+      },
+      "img": {
+        "before": 22,
+        "after": 56,
+        "change": 34
+      },
+      "data": {
+        "before": 1,
+        "after": 25,
+        "change": 24
+      },
+      "url": {
+        "before": 5,
+        "after": 28,
+        "change": 23
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "maxsize assistant",
+        "count": 150
+      },
+      {
+        "phrase": "you com",
+        "count": 97
+      },
+      {
+        "phrase": "mime text",
+        "count": 91
+      },
+      {
+        "phrase": "application octet-stream",
+        "count": 91
+      },
+      {
+        "phrase": "text application",
+        "count": 79
+      },
+      {
+        "phrase": "octet-stream type",
+        "count": 63
+      },
+      {
+        "phrase": "type code",
+        "count": 58
+      },
+      {
+        "phrase": "https cdn",
+        "count": 56
+      },
+      {
+        "phrase": "cdn you",
+        "count": 56
+      },
+      {
+        "phrase": "com img",
+        "count": 56
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

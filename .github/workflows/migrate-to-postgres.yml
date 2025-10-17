@@ -1,0 +1,61 @@
+name: Migrate SQLite to PostgreSQL
+
+on:
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        lfs: true  # Important: Need LFS to get the SQLite databases
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+    
+    - name: Check SQLite databases exist
+      run: |
+        cd github-actions-backend
+        echo "Checking for SQLite databases..."
+        ls -la data/*.db || echo "No databases found!"
+        
+        # If databases don't exist in data/, check parent directory
+        if [ ! -f data/intelligence.db ]; then
+          echo "Checking parent directory..."
+          ls -la ../*.db || echo "No databases in parent either!"
+        fi
+    
+    - name: Run migration script
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      run: |
+        cd github-actions-backend
+        
+        # The migration script expects databases in data/ subdirectory
+        # If they're not there, we need to copy them
+        if [ ! -f data/intelligence.db ]; then
+          echo "Creating data directory and copying databases..."
+          mkdir -p data
+          
+          # Copy from parent directory if they exist there
+          if [ -f ../intelligence.db ]; then
+            cp ../intelligence.db data/
+            cp ../raw_content.db data/
+            cp ../processed_content.db data/
+          else
+            echo "ERROR: Cannot find SQLite databases!"
+            exit 1
+          fi
+        fi
+        
+        echo "Running migration..."
+        node migrate-to-postgres.js

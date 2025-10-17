@@ -1,0 +1,88 @@
+{
+  "id": 162,
+  "company": "Meta AI",
+  "page_url": "api",
+  "detected_at": "2025-07-21T15:17:36.021Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Introduction of Llama 4, a new generation of AI models with natively multimodal, mixture-of-experts models, advanced reasoning, and industry-leading context windows",
+    "specific_changes": [
+      "Llama 4 models are designed with native multimodality",
+      "Llama 4 supports up to 10M tokens of context",
+      "Introduction of Llama 4 Scout, Llama 4 Maverick, and Llama 4 Behemoth models",
+      "New benchmarks and evaluation results for Llama 4 models"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI research space",
+      "Growing demand for multimodal AI models"
+    ],
+    "business_impact": "The introduction of Llama 4 is likely to have a significant impact on Meta's business, particularly in the areas of AI research and natural language processing",
+    "strategic_direction": "The introduction of Llama 4 suggests that Meta is committed to investing in AI research and development, with a focus on multimodal models and advanced reasoning capabilities",
+    "competitive_implications": "The introduction of Llama 4 positions Meta as a leader in the AI research space, with significant implications for competitors such as Google and Microsoft"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "AI research",
+      "natural language processing",
+      "computer vision"
+    ],
+    "pricing": [
+      "$0.19-$0.49 per 1M input & output tokens (3:1 blended) for Llama 4 Maverick"
+    ],
+    "features": [
+      "natively multimodal",
+      "mixture-of-experts models",
+      "advanced reasoning",
+      "industry-leading context windows"
+    ],
+    "products": [
+      "Llama 4",
+      "Llama 4 Scout",
+      "Llama 4 Maverick",
+      "Llama 4 Behemoth"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI research space",
+      "Potential challenges in integrating Llama 4 models with existing systems and applications"
+    ],
+    "key_findings": [
+      "Llama 4 represents a significant update to Meta's AI offerings",
+      "The introduction of Llama 4 has major implications for Meta's strategic direction and competitive positioning"
+    ],
+    "opportunities": [
+      "Increased adoption of Llama 4 models in AI research and natural language processing applications",
+      "Growing demand for multimodal AI models"
+    ],
+    "recommended_actions": [
+      "Monitor the adoption and performance of Llama 4 models",
+      "Assess the potential implications of Llama 4 for existing AI research and development initiatives"
+    ]
+  },
+  "key_insights": [
+    "Llama 4 represents a significant update to Meta's AI offerings",
+    "The introduction of Llama 4 has major implications for Meta's strategic direction and competitive positioning"
+  ],
+  "business_impact": "The introduction of Llama 4 is likely to have a significant impact on Meta's business, particularly in the areas of AI research and natural language processing",
+  "competitive_implications": "The introduction of Llama 4 positions Meta as a leader in the AI research space, with significant implications for competitors such as Google and Microsoft",
+  "content_hash_before": null,
+  "content_hash_after": "4ca06d45e0c3374e1ef742b221f1cb9a7597240edafa8081ea216a12adc4a67a",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

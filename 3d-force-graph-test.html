@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Force Graph Test</title>
+    <style>
+        body { margin: 0; background: #000; }
+        #info { 
+            position: absolute; 
+            top: 10px; 
+            left: 10px; 
+            color: white; 
+            background: rgba(0,0,0,0.7); 
+            padding: 10px;
+            font-family: monospace;
+        }
+    </style>
+    <script src="//unpkg.com/three"></script>
+    <script src="//unpkg.com/three-spritetext"></script>
+    <script src="//unpkg.com/3d-force-graph"></script>
+</head>
+<body>
+    <div id="info">Loading test...</div>
+    <div id="3d-graph"></div>
+
+    <script>
+    // Simple test with minimal data
+    const testData = {
+        nodes: [
+            { id: '1', name: 'Node 1', group: 'A' },
+            { id: '2', name: 'Node 2', group: 'A' },
+            { id: '3', name: 'Node 3', group: 'B' },
+            { id: '4', name: 'Node 4', group: 'B' }
+        ],
+        links: [
+            { source: '1', target: '2' },
+            { source: '2', target: '3' },
+            { source: '3', target: '4' },
+            { source: '4', target: '1' }
+        ]
+    };
+
+    try {
+        const Graph = ForceGraph3D()
+            (document.getElementById('3d-graph'))
+            .graphData(testData)
+            .nodeLabel('name')
+            .nodeAutoColorBy('group')
+            .nodeThreeObject(node => {
+                const sprite = new SpriteText(node.name);
+                sprite.material.depthWrite = false;
+                sprite.color = node.color || '#ffffff';
+                sprite.textHeight = 8;
+                return sprite;
+            });
+
+        // Set camera
+        Graph.cameraPosition({ z: 300 });
+        
+        document.getElementById('info').textContent = 'Test graph loaded successfully!';
+    } catch (error) {
+        document.getElementById('info').textContent = 'Error: ' + error.message;
+        console.error('Graph error:', error);
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,335 @@
+# DEPRECATED: This monolithic workflow is replaced by the modular 3DB architecture.
+# Use the "Full Monitor Pipeline" workflow instead, which runs:
+# 1. Scrape Websites
+# 2. Process Content
+# 3. Analyze Content
+# 4. Sync & Deploy
+#
+# DO NOT USE THIS WORKFLOW - it doesn't follow the 3-database architecture
+# and will cause issues like detecting changes for everything.
+
+name: AI Competitive Intelligence Monitor [DEPRECATED]
+
+on:
+  # DISABLED - Do not run on schedule
+  # schedule:
+  #   - cron: '0 */6 * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'full-monitor'
+        type: choice
+        options:
+          - full-monitor
+          - scrape-only
+          - analyze-only
+          - generate-data-only
+
+# Prevent concurrent runs to avoid git conflicts
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  NODE_ENV: production
+
+jobs:
+  # Job 1: Run monitoring and generate static data
+  monitor-and-generate:
+    runs-on: ubuntu-latest
+    
+    # Grant permissions to write to the repository
+    permissions:
+      contents: write
+      actions: read
+      issues: write
+      pull-requests: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          # Use npm install instead of npm ci to handle package-lock.json mismatches
+          npm install --omit=dev
+      
+      - name: Install Puppeteer browsers
+        run: |
+          cd github-actions-backend
+          npx puppeteer browsers install chrome
+      
+      - name: Initialize database
+        run: |
+          cd github-actions-backend
+          mkdir -p data
+          node scripts/init-db.js
+          # Note: add-companies.sh requires running server, skipping in CI
+          # The init-db.js already adds 4 initial companies
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+          THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
+      
+      - name: Run intelligent scraper
+        if: ${{ inputs.action != 'analyze-only' && inputs.action != 'generate-data-only' }}
+        run: |
+          cd github-actions-backend
+          timeout 1800 node scraper-wrapper.js || echo "Scraper completed or timed out"
+        timeout-minutes: 30
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+          THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
+          GITHUB_ACTIONS: 'true'
+      
+      - name: Run AI analysis and TheBrain integration
+        if: ${{ inputs.action != 'scrape-only' && inputs.action != 'generate-data-only' }}
+        run: |
+          cd github-actions-backend
+          # First run baseline analysis on all current content
+          node ai-analyzer-baseline.js || echo "Baseline AI analysis completed"
+          # Then run change analysis with entity extraction and auto-grouping
+          node ai-analyzer-ultra-wrapper.js full || echo "Ultra-enhanced AI analysis completed"
+          # Sync to TheBrain if credentials are available
+          node thebrain-sync-wrapper.js full || echo "TheBrain sync completed or skipped"
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+          THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
+          GITHUB_ACTIONS: 'true'
+        timeout-minutes: 30
+      
+      - name: Generate static data files for GitHub Pages
+        run: |
+          cd github-actions-backend
+          node generate-static-data.js
+          # Ensure api-data directory exists in root
+          mkdir -p ../api-data
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+      
+      - name: Update status file
+        run: |
+          cd github-actions-backend
+          echo "{
+            \"last_run\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"status\": \"success\",
+            \"workflow_run_id\": \"$GITHUB_RUN_ID\",
+            \"action\": \"${{ inputs.action || 'scheduled' }}\",
+            \"backend\": \"github-actions\"
+          }" > ../api-data/workflow-status.json
+      
+      - name: Commit and push updated data
+        run: |
+          # Configure git with GitHub Actions bot credentials
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Ensure we're on the latest commit
+          git fetch origin main
+          git reset --hard origin/main
+          
+          # Add all changes in api-data directory and database files
+          git add api-data/ || true
+          git add github-actions-backend/data/*.db || true
+          
+          # Check if there are any changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            # Commit the changes
+            git commit -m "🤖 Auto-update monitoring data - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+            
+            # Push with retry logic
+            for i in {1..3}; do
+              if git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:main; then
+                echo "Successfully pushed changes"
+                break
+              else
+                echo "Push failed, attempt $i of 3"
+                if [ $i -lt 3 ]; then
+                  echo "Pulling latest changes and retrying..."
+                  git pull --no-rebase https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git main
+                fi
+              fi
+            done
+          fi
+      
+      - name: Upload database backup
+        uses: actions/upload-artifact@v4
+        with:
+          name: monitor-database-backup
+          path: github-actions-backend/data/monitor.db
+          retention-days: 30
+
+  # Job 2: Deploy to GitHub Pages (runs after monitor-and-generate)
+  deploy:
+    needs: monitor-and-generate
+    runs-on: ubuntu-latest
+    if: success()
+    
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout updated code
+        uses: actions/checkout@v4
+        with:
+          ref: main  # Get the latest version with updated data
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.'  # Upload the entire repository (includes api-data)
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  # Job 3: Create alerts and send emails
+  create-alerts:
+    needs: monitor-and-generate
+    runs-on: ubuntu-latest
+    if: success()
+    
+    permissions:
+      contents: read
+      issues: write
+    
+    steps:
+      - name: Checkout updated code
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies for email
+        run: |
+          cd github-actions-backend
+          # FIXED: Do a full npm install to ensure all dependencies are available
+          # The email script needs the full environment, not just the email packages
+          npm install --omit=dev
+      
+      - name: Check for high-priority changes
+        id: check-changes
+        run: |
+          # Check if there are any high-priority changes (relevance score >= 8)
+          HIGH_PRIORITY=$(jq '[.changes[] | select(.relevance_score >= 8)] | length' api-data/changes.json 2>/dev/null || echo "0")
+          echo "high_priority_count=$HIGH_PRIORITY" >> $GITHUB_OUTPUT
+          
+          if [ "$HIGH_PRIORITY" -gt 0 ]; then
+            echo "Found $HIGH_PRIORITY high-priority changes"
+            # Get the details
+            jq -r '.changes[] | select(.relevance_score >= 8) | "- \(.company): \(.summary) (Score: \(.relevance_score)/10)"' api-data/changes.json > /tmp/changes.txt || echo "No changes file"
+            echo "changes_details<<EOF" >> $GITHUB_OUTPUT
+            cat /tmp/changes.txt >> $GITHUB_OUTPUT
+            echo "EOF" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create GitHub Issue for high-priority alerts
+        if: steps.check-changes.outputs.high_priority_count > 0
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const count = ${{ steps.check-changes.outputs.high_priority_count }};
+            const changes = `${{ steps.check-changes.outputs.changes_details }}`;
+            
+            const body = `# 🔴 High Priority Competitive Intelligence Alert
+            
+            **${count} high-priority changes detected** in competitor monitoring.
+            
+            ## Changes Detected:
+            ${changes}
+            
+            ## Next Steps:
+            - Review the [full dashboard](https://redmorestudio.github.io/ai-competitive-monitor) for detailed analysis
+            - Check the [workflow run](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) for technical details
+            - Consider updating our competitive strategy based on these changes
+            
+            ---
+            *This is an automated alert from the AI Competitive Intelligence Monitor.*
+            *Generated: ${new Date().toISOString()}*`;
+            
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔴 ${count} High Priority Competitive Intelligence Alert${count > 1 ? 's' : ''}`,
+              body: body,
+              labels: ['competitive-intel', 'high-priority', 'automated', 'ai-generated']
+            });
+            
+            console.log(`Created issue #${issue.data.number} for high-priority alerts`);
+      
+      # Send enhanced email notifications
+      - name: Send email notifications
+        if: always()  # Always run, script will check if SMTP is configured
+        run: |
+          cd github-actions-backend
+          # Check for high-priority changes and send alerts
+          node email-notifications-enhanced.js check || echo "Email notifications check completed"
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+      
+      # Daily verification email (run at 9 AM UTC - cron: '0 9 * * *')
+      - name: Send daily verification email
+        # Check if the current hour is 9 (UTC)
+        if: ${{ github.event_name == 'schedule' }}
+        run: |
+          HOUR=$(date -u +%H)
+          if [ "$HOUR" = "09" ] || [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Sending daily verification email..."
+            cd github-actions-backend
+            node email-notifications-enhanced.js daily || echo "Daily verification email completed"
+          else
+            echo "Not the scheduled time for daily email (current hour: $HOUR UTC)"
+          fi
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+      
+      # Export email summary for dashboard
+      - name: Export email summary
+        if: always()
+        run: |
+          cd github-actions-backend
+          node email-notifications-enhanced.js export || echo "Email summary export completed"
+          # Copy to api-data if generated
+          if [ -f ../api-data/email-summary.json ]; then
+            cp ../api-data/email-summary.json ../api-data/
+            echo "Email summary exported to api-data"
+          fi

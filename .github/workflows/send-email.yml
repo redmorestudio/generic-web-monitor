@@ -1,0 +1,125 @@
+name: Send Email Report
+
+on:
+  workflow_dispatch:
+    inputs:
+      email_type:
+        description: 'Type of email to send'
+        required: true
+        type: choice
+        options:
+          - state     # Full system state report
+          - daily     # Daily digest
+          - check     # Check for high-priority changes and alert
+          - test      # Test email configuration
+          - nochanges # No changes notification
+      custom_recipient:
+        description: 'Override recipient email (optional)'
+        required: false
+        type: string
+      test_mode:
+        description: 'Save to file instead of sending (for testing)'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Send Email
+        run: |
+          cd github-actions-backend
+          
+          echo "📧 Sending ${{ inputs.email_type }} email..."
+          
+          # Set test mode if requested
+          if [ "${{ inputs.test_mode }}" = "true" ]; then
+            export EMAIL_TEST_MODE=true
+            echo "🧪 Running in test mode - email will be saved to file"
+          fi
+          
+          # Override recipient if provided
+          if [ -n "${{ inputs.custom_recipient }}" ]; then
+            export NOTIFICATION_EMAIL="${{ inputs.custom_recipient }}"
+            echo "📬 Sending to custom recipient: ${{ inputs.custom_recipient }}"
+          fi
+          
+          # Run the email command
+          node email-notifications-three-db.js ${{ inputs.email_type }}
+          
+          # Show test email location if in test mode
+          if [ "${{ inputs.test_mode }}" = "true" ]; then
+            echo ""
+            echo "📁 Test emails saved in: github-actions-backend/test-emails/"
+            echo ""
+            ls -la test-emails/ || echo "No test emails found"
+          fi
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+      
+      - name: Upload test emails (if test mode)
+        if: ${{ inputs.test_mode == true }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-emails-${{ github.run_id }}
+          path: github-actions-backend/test-emails/
+          retention-days: 7
+      
+      - name: Summary
+        run: |
+          echo "## 📧 Email Report Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Type**: ${{ inputs.email_type }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Test Mode**: ${{ inputs.test_mode }}" >> $GITHUB_STEP_SUMMARY
+          if [ -n "${{ inputs.custom_recipient }}" ]; then
+            echo "- **Custom Recipient**: ${{ inputs.custom_recipient }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- **Recipient**: Configured in NOTIFICATION_EMAIL secret" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "- **Time**: $(date)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          case "${{ inputs.email_type }}" in
+            state)
+              echo "### 📊 Full System State Report" >> $GITHUB_STEP_SUMMARY
+              echo "Complete report with all companies, URLs, keywords, and recent changes." >> $GITHUB_STEP_SUMMARY
+              ;;
+            daily)
+              echo "### 📅 Daily Digest" >> $GITHUB_STEP_SUMMARY
+              echo "Summary of all changes from the last 24 hours." >> $GITHUB_STEP_SUMMARY
+              ;;
+            check)
+              echo "### 🚨 High Priority Alert Check" >> $GITHUB_STEP_SUMMARY
+              echo "Checking for high-priority changes (score ≥ 8) and sending alerts if found." >> $GITHUB_STEP_SUMMARY
+              ;;
+            test)
+              echo "### 🧪 Test Email" >> $GITHUB_STEP_SUMMARY
+              echo "Testing email configuration and connectivity." >> $GITHUB_STEP_SUMMARY
+              ;;
+            nochanges)
+              echo "### ✅ No Changes Notification" >> $GITHUB_STEP_SUMMARY
+              echo "Confirmation that monitoring ran successfully with no changes detected." >> $GITHUB_STEP_SUMMARY
+              ;;
+          esac

@@ -1,0 +1,87 @@
+{
+  "id": 60,
+  "company": "Replicate",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:23:39.376Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "New blog content and updates to existing posts",
+    "specific_changes": [
+      "Added new blog posts about various AI models and technologies",
+      "Updated existing posts with new information and examples",
+      "Introduced new features and tools for working with AI models"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI research and development space",
+      "Growing demand for advanced AI technologies"
+    ],
+    "business_impact": "The updates suggest a strong focus on AI research and development, potentially indicating a shift in the company's strategy towards more advanced AI technologies",
+    "strategic_direction": "The company appears to be focusing on advancing AI technologies and providing more tools and features for developers and researchers",
+    "competitive_implications": "The updates may indicate a competitive advantage for Replicate in the AI research and development space, potentially attracting more customers and partners"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "AI research",
+      "Machine learning development"
+    ],
+    "pricing": [],
+    "features": [
+      "Fine-tuning",
+      "API support",
+      "Custom model creation"
+    ],
+    "products": [
+      "Replicate",
+      "Stable Diffusion 3",
+      "FLUX.1",
+      "Wan2.1"
+    ],
+    "partnerships": [
+      "Bria",
+      "Hugging Face"
+    ],
+    "technologies": [
+      "AI",
+      "Machine learning",
+      "Deep learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI research and development space",
+      "Potential for Replicate to lose its competitive advantage if it fails to continue innovating"
+    ],
+    "key_findings": [
+      "Replicate is actively updating its blog content to reflect new developments in AI research and development",
+      "The company is focusing on providing more tools and features for developers and researchers"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Replicate for AI research and development",
+      "Potential for Replicate to expand its customer base and attract more developers and researchers"
+    ],
+    "recommended_actions": [
+      "Monitor Replicate's blog and updates for new developments and features",
+      "Consider partnering with Replicate for AI research and development projects"
+    ]
+  },
+  "key_insights": [
+    "Replicate is actively updating its blog content to reflect new developments in AI research and development",
+    "The company is focusing on providing more tools and features for developers and researchers"
+  ],
+  "business_impact": "The updates suggest a strong focus on AI research and development, potentially indicating a shift in the company's strategy towards more advanced AI technologies",
+  "competitive_implications": "The updates may indicate a competitive advantage for Replicate in the AI research and development space, potentially attracting more customers and partners",
+  "content_hash_before": null,
+  "content_hash_after": "f75fed01a0d4a9b37a4bf16d8a102ccc4aa4b2e31f956029c2fa5d208c20c34a",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

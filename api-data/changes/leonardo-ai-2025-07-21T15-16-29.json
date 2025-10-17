@@ -1,0 +1,89 @@
+{
+  "id": 169,
+  "company": "Leonardo AI",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:16:29.106Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "significant",
+    "what_changed": "New features and updates to the Leonardo AI homepage, including the introduction of Veo 3, a video generation tool, and updates to the layout and design of the page",
+    "specific_changes": [
+      "Introduction of Veo 3, a video generation tool",
+      "Updates to the layout and design of the homepage",
+      "New features and tools added, such as Elements, Flow State, and Phoenix",
+      "Changes to the solutions and learn sections of the page"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI-generated content market",
+      "Growing demand for AI-powered creative tools"
+    ],
+    "business_impact": "The introduction of new features and updates to the Leonardo AI homepage is likely to have a positive impact on the business, as it expands the platform's capabilities and offerings, making it more attractive to users and potential customers.",
+    "strategic_direction": "The updates to the Leonardo AI homepage suggest a strategic direction towards expanding the platform's capabilities and offerings, and increasing its focus on the creative and marketing industries.",
+    "competitive_implications": "The introduction of Veo 3, a video generation tool, may give Leonardo AI a competitive advantage in the market, as it offers a unique and powerful tool for users."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Marketing",
+      "Graphic design",
+      "Architecture",
+      "Interior design"
+    ],
+    "pricing": [],
+    "features": [
+      "Video generation",
+      "Image generation",
+      "AI art generator",
+      "Transparent PNG generator"
+    ],
+    "products": [
+      "Veo 3",
+      "Elements",
+      "Flow State",
+      "Phoenix"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "Machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI-generated content market",
+      "Potential challenges in integrating new features and tools into the platform"
+    ],
+    "key_findings": [
+      "The introduction of Veo 3, a video generation tool, is a significant update to the Leonardo AI platform",
+      "The updates to the homepage indicate a focus on expanding the platform's capabilities and offerings",
+      "The platform is targeting the creative and marketing industries with its new features and tools"
+    ],
+    "opportunities": [
+      "Partnership opportunities with creative and marketing agencies",
+      "Expansion into new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor the market and competitive landscape for opportunities and threats",
+      "Consider partnerships with creative and marketing agencies to expand the platform's reach and offerings"
+    ]
+  },
+  "key_insights": [
+    "The introduction of Veo 3, a video generation tool, is a significant update to the Leonardo AI platform",
+    "The updates to the homepage indicate a focus on expanding the platform's capabilities and offerings",
+    "The platform is targeting the creative and marketing industries with its new features and tools"
+  ],
+  "business_impact": "The introduction of new features and updates to the Leonardo AI homepage is likely to have a positive impact on the business, as it expands the platform's capabilities and offerings, making it more attractive to users and potential customers.",
+  "competitive_implications": "The introduction of Veo 3, a video generation tool, may give Leonardo AI a competitive advantage in the market, as it offers a unique and powerful tool for users.",
+  "content_hash_before": null,
+  "content_hash_after": "489f204821aab76fee8a051059b9246b35b2909d5a9df2922be949fba968fe06",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

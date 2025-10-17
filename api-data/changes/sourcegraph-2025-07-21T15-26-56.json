@@ -1,0 +1,88 @@
+{
+  "id": 42,
+  "company": "Sourcegraph",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:26:56.843Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New website content and design",
+    "specific_changes": [
+      "Introduction of AI-powered coding assistant 'Cody'",
+      "Emphasis on industrializing software development with AI agents",
+      "New features and products such as 'Amp' and 'Code Search'",
+      "Redesigned website layout and user interface",
+      "Addition of customer testimonials and case studies",
+      "Updated security and compliance information"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increasing demand for AI-powered software development solutions",
+      "Growing competition in the enterprise software market"
+    ],
+    "business_impact": "The changes are likely to have a significant impact on the company's revenue and market position, as they demonstrate a strong commitment to innovation and customer needs.",
+    "strategic_direction": "The company is likely to continue investing in AI-powered solutions and expanding its product offerings to meet the evolving needs of its customers.",
+    "competitive_implications": "The changes position Sourcegraph as a leader in the AI-powered software development market, with a strong focus on innovation and customer satisfaction."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Software development",
+      "Enterprise software"
+    ],
+    "pricing": [],
+    "features": [
+      "AI-powered coding assistant",
+      "Code search and batch changes",
+      "Automated large-scale code changes"
+    ],
+    "products": [
+      "Cody",
+      "Amp",
+      "Code Search"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "Machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increasing competition in the enterprise software market",
+      "Regulatory challenges related to AI-powered solutions"
+    ],
+    "key_findings": [
+      "Sourcegraph is shifting its focus towards AI-powered software development solutions",
+      "The company is investing in new products and features to meet customer needs",
+      "The changes demonstrate a strong commitment to innovation and customer satisfaction"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the software development market",
+      "Expansion into new markets and geographies"
+    ],
+    "recommended_actions": [
+      "Monitor the company's progress and adjust our strategy accordingly",
+      "Explore potential partnership opportunities with Sourcegraph",
+      "Stay up-to-date with the latest developments in AI-powered software development solutions"
+    ]
+  },
+  "key_insights": [
+    "Sourcegraph is shifting its focus towards AI-powered software development solutions",
+    "The company is investing in new products and features to meet customer needs",
+    "The changes demonstrate a strong commitment to innovation and customer satisfaction"
+  ],
+  "business_impact": "The changes are likely to have a significant impact on the company's revenue and market position, as they demonstrate a strong commitment to innovation and customer needs.",
+  "competitive_implications": "The changes position Sourcegraph as a leader in the AI-powered software development market, with a strong focus on innovation and customer satisfaction.",
+  "content_hash_before": null,
+  "content_hash_after": "a8dc994d10c85156784e05fe723427cd80bdf9fd98a6ea10aa5a90cb0562159a",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

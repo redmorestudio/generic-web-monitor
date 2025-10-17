@@ -1,0 +1,91 @@
+{
+  "id": 183,
+  "company": "Hugging Face",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:14:28.878Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New pricing page with detailed plans and features",
+    "specific_changes": [
+      "Introduction of PRO, Team, and Enterprise plans",
+      "Pricing details for each plan",
+      "Features and benefits for each plan",
+      "Information on Spaces Hardware, Inference Endpoints, and Spaces Persistent Storage"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing demand for AI and Machine Learning solutions",
+      "Increasing competition in the AI and Machine Learning market"
+    ],
+    "business_impact": "Hugging Face is expanding its offerings and revenue streams through new pricing plans and features, targeting a wider range of customers from individuals to enterprises",
+    "strategic_direction": "Hugging Face is focusing on expanding its customer base, increasing revenue, and establishing itself as a major player in the AI and Machine Learning market",
+    "competitive_implications": "Hugging Face is positioning itself as a leader in the AI and Machine Learning market, offering a range of solutions and features to attract and retain customers"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "$9 per month (PRO)",
+      "$20 per user per month (Team)",
+      "$50 per user per month (Enterprise)"
+    ],
+    "features": [
+      "10× private storage capacity",
+      "20× included inference credits",
+      "8× ZeroGPU quota and highest queue priority",
+      "Spaces Dev Mode & ZeroGPU Spaces hosting",
+      "Publish blog articles on your HF profile",
+      "Dataset Viewer for private datasets"
+    ],
+    "products": [
+      "Hugging Face Hub",
+      "PRO Account",
+      "Team Plan",
+      "Enterprise Plan",
+      "Spaces Hardware",
+      "Inference Endpoints",
+      "Spaces Persistent Storage"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "Machine Learning",
+      "AI"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increasing competition in the AI and Machine Learning market",
+      "Potential pricing pressure from competitors"
+    ],
+    "key_findings": [
+      "Hugging Face is introducing new pricing plans and features to target a wider range of customers",
+      "The company is focusing on expanding its customer base and increasing revenue"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Hugging Face to offer joint solutions and services",
+      "Expansion into new markets and industries through Hugging Face's AI and Machine Learning solutions"
+    ],
+    "recommended_actions": [
+      "Monitor Hugging Face's pricing and feature updates to stay competitive",
+      "Explore partnership opportunities with Hugging Face to offer joint solutions and services"
+    ]
+  },
+  "key_insights": [
+    "Hugging Face is introducing new pricing plans and features to target a wider range of customers",
+    "The company is focusing on expanding its customer base and increasing revenue"
+  ],
+  "business_impact": "Hugging Face is expanding its offerings and revenue streams through new pricing plans and features, targeting a wider range of customers from individuals to enterprises",
+  "competitive_implications": "Hugging Face is positioning itself as a leader in the AI and Machine Learning market, offering a range of solutions and features to attract and retain customers",
+  "content_hash_before": null,
+  "content_hash_after": "46d09552b7d8a35c93435e016e39f6d5ca72b8dba490f7a07346f703d0a94e6c",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

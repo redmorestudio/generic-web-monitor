@@ -1,0 +1,74 @@
+name: Cleanup PostgreSQL Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "yes" to confirm cleanup of orphaned data'
+        required: true
+        type: string
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Validate confirmation
+      if: inputs.confirm != 'yes'
+      run: |
+        echo "❌ Cleanup cancelled - you must type 'yes' to confirm"
+        exit 1
+        
+    - uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+        
+    - name: Show current data stats
+      run: |
+        cd github-actions-backend
+        node check-data-mismatch.js || echo "Check script not found"
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        
+    - name: Run PostgreSQL data cleanup
+      run: |
+        cd github-actions-backend
+        echo "🧹 Running PostgreSQL data cleanup..."
+        echo "This will remove all data for companies that don't exist in intelligence.companies"
+        node cleanup-postgres-data.js
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        
+    - name: Verify cleanup
+      run: |
+        cd github-actions-backend
+        echo "✅ Verifying cleanup results..."
+        node -e "
+          const { db, end } = require('./postgres-db');
+          
+          db.get('SELECT COUNT(DISTINCT company) as count FROM processed_content.markdown_pages')
+            .then(result => {
+              console.log('Remaining companies in markdown_pages:', result.count);
+              return db.get('SELECT COUNT(*) as count FROM intelligence.companies');
+            })
+            .then(result => {
+              console.log('Companies in intelligence.companies:', result.count);
+              console.log('These should match!');
+              process.exit(0);
+            })
+            .catch(err => {
+              console.error('Error:', err);
+              process.exit(1);
+            })
+            .finally(() => end());
+        "
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}

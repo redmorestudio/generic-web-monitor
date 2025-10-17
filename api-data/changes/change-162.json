@@ -1,0 +1,267 @@
+{
+  "change_id": 162,
+  "url": "https://sourcegraph.com",
+  "company": "Sourcegraph",
+  "company_category": "AI Coding",
+  "detected_at": "2025-07-18 16:41:43",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "No significant changes detected between the previous and current content of the Sourcegraph homepage.",
+  "interest_drivers": [],
+  "technical_innovation_score": 2,
+  "business_impact_score": 2,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://sourcegraph.com\ncompany: Sourcegraph\nscraped_at: 2025-07-04 20:20:25\n---\n\nSourcegraph | Industrializing software development with AI agents\n\n[UX Design & Webflow Agency NYC | Composite Global](https://www.composite.global/ \"Site built by Composite – Webflow Agency NYC & UX Design Agency NYC\")\n\n[![Sourcegraph](https://cdn.prod.website-files.com/673f71b4ebbb99190437de75/67917518352105f18532c234_Group%203.svg)](/)\n\nProducts\n\n[\n\n![](https://cdn.prod.website-files.com/673f71b4ebbb991...",
+    "after": ".wf-force-outline-none\\[tabindex=\"-1\"\\]:focus{outline:none;}Sourcegraph | Industrializing software development with AI agents!function(o,c){var n=c.documentElement,t=\" w-mod-\";n.className+=t+\"js\",(\"ontouchstart\"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+\"touch\")}(window,document);.anti-flicker, .anti-flicker \\* {visibility: hidden !important; opacity: 0 !important;}\\[data-wf-hidden-variation\\], \\[data-wf-hidden-variation\\] \\* { display: none !important; }localStorage.rem..."
+  },
+  "diff": {
+    "added_sentences": [
+      "wf-force-outline-none\\[tabindex=\"-1\"\\]:focus{outline:none;}Sourcegraph | Industrializing software development with AI agents!",
+      "function(o,c){var n=c.",
+      "documentElement,t=\" w-mod-\";n.",
+      "className+=t+\"js\",(\"ontouchstart\"in o||o.",
+      "DocumentTouch&&c instanceof DocumentTouch)&&(n.",
+      "className+=t+\"touch\")}(window,document);.",
+      "anti-flicker, .",
+      "anti-flicker \\* {visibility: hidden !",
+      "important; opacity: 0 !",
+      "important;}\\[data-wf-hidden-variation\\], \\[data-wf-hidden-variation\\] \\* { display: none !"
+    ],
+    "removed_sentences": [
+      "---\nurl: https://sourcegraph.",
+      "com\ncompany: Sourcegraph\nscraped_at: 2025-07-04 20:20:25\n---\n\nSourcegraph | Industrializing software development with AI agents\n\n[UX Design & Webflow Agency NYC | Composite Global](https://www.",
+      "global/ \"Site built by Composite – Webflow Agency NYC & UX Design Agency NYC\")\n\n[!",
+      "svg)\n\nCode Search\n\nAdvanced codebase search, batch changes, and insights\n\n](/code-search)\n\n[\n\nFeatures\n\n](/features)[\n\nChangelog\n\n](/changelog)\n\nFeatures\n\n[UX Design & Webflow Agency NYC | Composite Global](https://www.",
+      "global/ \"Site built by Composite – Webflow Agency NYC & UX Design Agency NYC\")\n\n[\n\nCoding Agent\n\nAccelerate development in complex codebases\n\n\n](/amp)[\n\nCode Search\n\nFind and fix code across your entire codebase\n\n\n](/code-search)[\n\nBatch Changes\n\nAutomate large-scale code changes\n\n\n](/batch-changes)\n\nResources\n\n[\n\nDocs\n\nProduct documentation\n\n\n](https://sourcegraph.",
+      "com/docs)[\n\nSupport Forum\n\nQuestions and feedback\n\n\n](https://community.",
+      "com/)[\n\nResource Library\n\nVideos, guides, content, and more\n\n\n](/resources)[\n\nCustomer Stories\n\nSuccess stories and case studies\n\n\n](/case-studies)[\n\nChangelog\n\nLatest product updates shipped\n\n\n](/changelog)[\n\nBlog\n\nLatest posts and company updates\n\n\n](/blog)[\n\nCommunity\n\nDev community, open source\n\n\n](/community)\n\n[\n\nPricing\n\n](/pricing)[\n\nSearch public code\n\n](https://sourcegraph.",
+      "svg)](/)\n\n[\n\nBook a demo\n\n\n](/contact/request-info)[\n\nLogin\n\n](https://sourcegraph.",
+      "returnTo=/cody/manage)\n\nFeatures\n\n[\n\nCoding Agent\n\n](/amp)[\n\nCode Search\n\n](/code-search)[\n\nBatch Changes\n\n](/batch-changes)\n\n[\n\nResources\n\n\n](#)\n\n[\n\nSupport Forum\n\n](https://community.",
+      "svg)\n\nContinue With GitHub\n\n\n](https://accounts."
+    ],
+    "key_changes": [
+      "New version: 2.0, 0.4, 0.6, 0.5, 0.7, 0.3, 0.9, 0.8, 0.2, 0.1, 1.5, 32.21, 65.39, 104.43, 175.9, 31.37, 0.818127, 70.39, 96.66, 0.125, 1.75, 2.25, 2.5, 2.75, 3.5, 4.5, 5.25, 5.5, 6.5, 6.75, 7.5, 2.375, 3.25, 3.75, 4.25, 4.75, 5.75, 14.97, 30.88, 47.49, 0.75, 0.875, 0.25, 1.02, 0.55, 706.939, 117.061, 706.94, 117.06, 677.06, v1.0, 1.0",
+      "New api mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 78,
+    "summary": "78% content changed (1012 additions, 21 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "important",
+        "frequency": 125
+      },
+      {
+        "word": "var",
+        "frequency": 87
+      },
+      {
+        "word": "0rem",
+        "frequency": 74
+      },
+      {
+        "word": "none",
+        "frequency": 53
+      },
+      {
+        "word": "display",
+        "frequency": 48
+      },
+      {
+        "word": "function",
+        "frequency": 44
+      },
+      {
+        "word": "rgba",
+        "frequency": 38
+      },
+      {
+        "word": "document",
+        "frequency": 36
+      },
+      {
+        "word": "5rem",
+        "frequency": 36
+      },
+      {
+        "word": "element",
+        "frequency": 30
+      },
+      {
+        "word": "100",
+        "frequency": 28
+      },
+      {
+        "word": "inherit",
+        "frequency": 28
+      },
+      {
+        "word": "max-width",
+        "frequency": 28
+      },
+      {
+        "word": "window",
+        "frequency": 26
+      },
+      {
+        "word": "page",
+        "frequency": 26
+      },
+      {
+        "word": "short",
+        "frequency": 26
+      },
+      {
+        "word": "long",
+        "frequency": 25
+      },
+      {
+        "word": "data-background-color",
+        "frequency": 24
+      },
+      {
+        "word": "const",
+        "frequency": 23
+      },
+      {
+        "word": "padding-bottom",
+        "frequency": 22
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "1071",
+        "frequency": 1
+      },
+      {
+        "word": "389523",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "788a9777-b94f-40ea-ae11-6c528573d7e4",
+        "frequency": 1
+      },
+      {
+        "word": "4f98bd10591411f091e501c9977405c8",
+        "frequency": 1
+      },
+      {
+        "word": "4f98ee70591411f0b61511ab6ae833aa",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "utm": {
+        "before": 3,
+        "after": 93,
+        "change": 90
+      },
+      "url": {
+        "before": 1,
+        "after": 42,
+        "change": 41
+      },
+      "get": {
+        "before": 3,
+        "after": 38,
+        "change": 35
+      },
+      "not": {
+        "before": 1,
+        "after": 33,
+        "change": 32
+      },
+      "source": {
+        "before": 2,
+        "after": 33,
+        "change": 31
+      },
+      "mid": {
+        "before": 1,
+        "after": 26,
+        "change": 25
+      },
+      "medium": {
+        "before": 1,
+        "after": 25,
+        "change": 24
+      },
+      "content": {
+        "before": 1,
+        "after": 23,
+        "change": 22
+      },
+      "https": {
+        "before": 87,
+        "after": 105,
+        "change": 18
+      },
+      "campaign": {
+        "before": 1,
+        "after": 19,
+        "change": 18
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "0rem important",
+        "count": 72
+      },
+      {
+        "phrase": "https cdn",
+        "count": 50
+      },
+      {
+        "phrase": "cdn prod",
+        "count": 46
+      },
+      {
+        "phrase": "prod website-files",
+        "count": 46
+      },
+      {
+        "phrase": "website-files com",
+        "count": 46
+      },
+      {
+        "phrase": "com 673f71b4ebbb99190437de75",
+        "count": 33
+      },
+      {
+        "phrase": "sourcegraph com",
+        "count": 31
+      },
+      {
+        "phrase": "display none",
+        "count": 29
+      },
+      {
+        "phrase": "get utm",
+        "count": 25
+      },
+      {
+        "phrase": "svg https",
+        "count": 20
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

@@ -1,0 +1,89 @@
+{
+  "id": 65,
+  "company": "Pika",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:22:56.711Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.95,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Initial content creation with fundraising announcement",
+    "specific_changes": [
+      "Introduction of Pika's $80M series B funding",
+      "Mention of total funding reaching $135M",
+      "Announcement of plans to accelerate progress in building the best video foundation model and product for video creators",
+      "Introduction of new investors and expression of gratitude towards them",
+      "Call to action for hiring and community appreciation"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased investment in video creation technology",
+      "Growing demand for accessible video creation tools"
+    ],
+    "business_impact": "Pika's significant funding will likely accelerate its growth, enhance its product offerings, and increase its competitiveness in the video creation market",
+    "strategic_direction": "Pika is focusing on building the best video foundation model and product for video creators, with plans to continue hiring top talent and expanding its community",
+    "competitive_implications": "Pika's funding announcement may pose a competitive threat to other video creation platforms, as it indicates a strong commitment to innovation and growth"
+  },
+  "entities": {
+    "people": [
+      "Demi",
+      "Chenlin",
+      "Jared Leto",
+      "Craig Kallman",
+      "Nat Friedman",
+      "Daniel Gross",
+      "Elad Gil",
+      "Adam D'Angelo",
+      "Mike Vernal",
+      "Karim Atiyeh",
+      "Aaron Levie",
+      "Andrej Karpathy",
+      "Aravind Srinivas",
+      "Clem Delangue",
+      "Alex Chung",
+      "Mateusz Staniszewski"
+    ],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": [
+      "video foundation model"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the video creation market, as Pika's funding announcement may attract new entrants"
+    ],
+    "key_findings": [
+      "Pika's significant funding indicates a strong market demand for video creation technology",
+      "The company's focus on building a strong video foundation model and product will likely drive innovation in the industry"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Pika for companies looking to leverage its video creation technology",
+      "Potential for growth in the video creation market, driven by increasing demand for accessible tools"
+    ],
+    "recommended_actions": [
+      "Monitor Pika's progress and product developments",
+      "Consider partnership opportunities with Pika or other video creation platforms",
+      "Assess the competitive implications of Pika's funding announcement and adjust business strategies accordingly"
+    ]
+  },
+  "key_insights": [
+    "Pika's significant funding indicates a strong market demand for video creation technology",
+    "The company's focus on building a strong video foundation model and product will likely drive innovation in the industry"
+  ],
+  "business_impact": "Pika's significant funding will likely accelerate its growth, enhance its product offerings, and increase its competitiveness in the video creation market",
+  "competitive_implications": "Pika's funding announcement may pose a competitive threat to other video creation platforms, as it indicates a strong commitment to innovation and growth",
+  "content_hash_before": null,
+  "content_hash_after": "910c31622aca3ce73c78b58cc862a8c14b6ca7b283279688157be7ee89883342",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

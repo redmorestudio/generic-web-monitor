@@ -1,0 +1,81 @@
+{
+  "id": 12,
+  "company": "Descript",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T16:17:22.812Z",
+  "change_type": "modified",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "significant",
+    "what_changed": "The homepage content of Descript has been updated with new sections, images, and calls-to-action, emphasizing ease of use, AI-powered features, and professional results.",
+    "specific_changes": [
+      "Added new hero section with a focus on ease of use and AI-powered video editing",
+      "Introduced a 'No skills? No idea? We got you.' section to appeal to beginners",
+      "Updated the 'Make it pretty' and 'Watch it glide' sections with new images and videos",
+      "Emphasized the use of AI for instant editing, green screen, and eye contact features",
+      "Added more customer logos to the homepage to build credibility"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "increased focus on ease of use",
+      "emphasis on AI-powered features"
+    ],
+    "business_impact": "The updates are likely to improve user engagement, increase conversions, and establish Descript as a leader in the video editing software market.",
+    "strategic_direction": "The company is moving towards a more customer-centric approach, highlighting the benefits of its AI-powered features and ease of use.",
+    "competitive_implications": "Descript is positioning itself as a user-friendly and innovative solution, potentially threatening competitors in the video editing software market."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "video editing",
+      "content creation"
+    ],
+    "pricing": [],
+    "features": [
+      "AI-powered video editing",
+      "green screen",
+      "eye contact",
+      "instant editing"
+    ],
+    "products": [
+      "Descript video editing software"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "competitive response from other video editing software companies"
+    ],
+    "key_findings": [
+      "Descript is focusing on ease of use and AI-powered features",
+      "The company is targeting a broader audience, including beginners"
+    ],
+    "opportunities": [
+      "increased market share",
+      "expanded customer base"
+    ],
+    "recommended_actions": [
+      "monitor competitor responses",
+      "continue to emphasize ease of use and AI-powered features in marketing efforts"
+    ]
+  },
+  "key_insights": [
+    "Descript is focusing on ease of use and AI-powered features",
+    "The company is targeting a broader audience, including beginners"
+  ],
+  "business_impact": "The updates are likely to improve user engagement, increase conversions, and establish Descript as a leader in the video editing software market.",
+  "competitive_implications": "Descript is positioning itself as a user-friendly and innovative solution, potentially threatening competitors in the video editing software market.",
+  "content_hash_before": "1f8456be72d5655c1a4e0102ffa04040950c8f4f9025da0b927a42ad0224df4d",
+  "content_hash_after": "4323ba4cfd9ce25d115ed106bcf67a2c1d6369e8880299de3e4870a5d0fcf00f",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

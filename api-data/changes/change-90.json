@@ -1,0 +1,243 @@
+{
+  "change_id": 90,
+  "url": "https://ideogram.ai/pricing",
+  "company": "Ideogram",
+  "company_category": "Image Generation",
+  "detected_at": "2025-07-18 16:37:25",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes detected in the pricing page content.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://ideogram.ai/pricing\ncompany: Ideogram\nscraped_at: 2025-07-04 20:15:33\n---\n\n       Ideogram\n\nideogram\n\nSign in\n\nStart for free\n\nPricing\n\nPersonal\n\nBusiness\n\nBilled yearly\n\nFree\n\n$\n\n0\n\nStart for free\n\nLimited slow credits\n\nLimited access to Canvas\n\nBasic\n\n$\n\n7\n\nUSD / month\nbilled yearly\n\n\\-12%\n\nGet Basic\n\nSwitch to monthly\n\n400 priority credits / month\n\n100 slow credits / day\n\nQueue multiple generations\n\nEdit in Canvas (no image upload)\n\nQuality export\n\nTop up 100 priority credits...",
+    "after": "       Ideogram                   window.dataLayer = window.dataLayer || \\[\\]; function gtag() { dataLayer.push(arguments); } gtag(\"js\", new Date()); gtag(\"config\", \"G-44J8R31CP6\"); let captchaPromise = null; // Prevent duplicated challenge window.turnstileLoad = function () { const originalFetch = window.fetch; // Create overlay and widget container const overlay = document.createElement('div'); overlay.style.position = 'fixed'; overlay.style.top = '0'; overlay.style.left = '0'; overlay.style.r..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Ideogram                   window.",
+      "dataLayer = window.",
+      "dataLayer || \\[\\]; function gtag() { dataLayer.",
+      "push(arguments); } gtag(\"js\", new Date()); gtag(\"config\", \"G-44J8R31CP6\"); let captchaPromise = null; // Prevent duplicated challenge window.",
+      "turnstileLoad = function () { const originalFetch = window.",
+      "fetch; // Create overlay and widget container const overlay = document.",
+      "createElement('div'); overlay.",
+      "style.",
+      "position = 'fixed'; overlay.",
+      "style."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://ideogram.",
+      "ai/pricing\ncompany: Ideogram\nscraped_at: 2025-07-04 20:15:33\n---\n\n       Ideogram\n\nideogram\n\nSign in\n\nStart for free\n\nPricing\n\nPersonal\n\nBusiness\n\nBilled yearly\n\nFree\n\n$\n\n0\n\nStart for free\n\nLimited slow credits\n\nLimited access to Canvas\n\nBasic\n\n$\n\n7\n\nUSD / month\nbilled yearly\n\n\\-12%\n\nGet Basic\n\nSwitch to monthly\n\n400 priority credits / month\n\n100 slow credits / day\n\nQueue multiple generations\n\nEdit in Canvas (no image upload)\n\nQuality export\n\nTop up 100 priority credits for $4\n\nMost popular\n\nPlus\n\n$\n\n16\n\nUSD / month\nbilled yearly\n\n\\-20%\n\nGet Plus\n\nSwitch to monthly\n\nPrivate generation\n\nUpload images to edit and remix\n\n1,000 priority credits / month\n\nUnlimited slow credits\n\nLarger generation queue\n\nQuality export\n\nTop up 150 priority credits for $4\n\nPro\n\n$\n\n48\n\nUSD / month\nbilled yearly\n\n\\-20%\n\nGet Pro\n\nSwitch to monthly\n\nPrivate generation\n\nUpload images to edit and remix\n\n3,500 priority credits / month\n\nUnlimited slow credits\n\nThe largest generation queue\n\nBatch Generation\n\nThe best cost per credit\n\nTop up 250 priority credits for $4\n\nImage uploadMagic FillExtendBackground removalDescribe\n\nBring your own images to describe, edit, and extend.",
+      "To regain priority access, you can:\n\n*   • Upgrade to a higher-tier plan with more priority credits\n\n*   • Purchase top-up credits without changing your plan\n\n*   • Wait for your priority credits to reset in the next billing cycle\n\n\nDo my unused priority credits carry over to the next monthly period?"
+    ],
+    "key_changes": [
+      "New version: 0.7, 1.2",
+      "New api mentioned"
+    ],
+    "change_percentage": 72,
+    "summary": "72% content changed (198 additions, 3 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "dialog",
+        "frequency": 53
+      },
+      {
+        "word": "none",
+        "frequency": 26
+      },
+      {
+        "word": "overlay",
+        "frequency": 19
+      },
+      {
+        "word": "position",
+        "frequency": 18
+      },
+      {
+        "word": "content",
+        "frequency": 16
+      },
+      {
+        "word": "iframe",
+        "frequency": 16
+      },
+      {
+        "word": "display",
+        "frequency": 15
+      },
+      {
+        "word": "width",
+        "frequency": 15
+      },
+      {
+        "word": "widget",
+        "frequency": 12
+      },
+      {
+        "word": "hidden",
+        "frequency": 12
+      },
+      {
+        "word": "height",
+        "frequency": 11
+      },
+      {
+        "word": "transform",
+        "frequency": 11
+      },
+      {
+        "word": "widgetcontainer",
+        "frequency": 10
+      },
+      {
+        "word": "normal",
+        "frequency": 10
+      },
+      {
+        "word": "overflow",
+        "frequency": 9
+      },
+      {
+        "word": "padding",
+        "frequency": 9
+      },
+      {
+        "word": "absolute",
+        "frequency": 9
+      },
+      {
+        "word": "header",
+        "frequency": 9
+      },
+      {
+        "word": "left",
+        "frequency": 8
+      },
+      {
+        "word": "fff",
+        "frequency": 8
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "100": {
+        "before": 2,
+        "after": 12,
+        "change": 10
+      },
+      "400": {
+        "before": 1,
+        "after": 3,
+        "change": 2
+      },
+      "background": {
+        "before": 2,
+        "after": 20,
+        "change": 18
+      },
+      "style": {
+        "before": 5,
+        "after": 21,
+        "change": 16
+      },
+      "top": {
+        "before": 4,
+        "after": 13,
+        "change": 9
+      },
+      "color": {
+        "before": 1,
+        "after": 9,
+        "change": 8
+      },
+      "https": {
+        "before": 7,
+        "after": 14,
+        "change": 7
+      },
+      "url": {
+        "before": 1,
+        "after": 7,
+        "change": 6
+      },
+      "transparent": {
+        "before": 1,
+        "after": 6,
+        "change": 5
+      },
+      "reset": {
+        "before": 1,
+        "after": 5,
+        "change": 4
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "priority credits",
+        "count": 16
+      },
+      {
+        "phrase": "dialog content",
+        "count": 14
+      },
+      {
+        "phrase": "overlay style",
+        "count": 13
+      },
+      {
+        "phrase": "content dialog",
+        "count": 10
+      },
+      {
+        "phrase": "iframe widget",
+        "count": 10
+      },
+      {
+        "phrase": "position absolute",
+        "count": 9
+      },
+      {
+        "phrase": "dialog mobile",
+        "count": 8
+      },
+      {
+        "phrase": "position relative",
+        "count": 7
+      },
+      {
+        "phrase": "url https",
+        "count": 7
+      },
+      {
+        "phrase": "https connect",
+        "count": 7
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

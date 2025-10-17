@@ -1,0 +1,460 @@
+{
+  "company": {
+    "id": null,
+    "name": "Aleph Alpha",
+    "category": "LLM Providers",
+    "description": null,
+    "created_at": null,
+    "thebrain_thought_id": "4f8266f5-a5ab-4028-b664-82cb49db38f3",
+    "company_id": null,
+    "industry": null,
+    "founded_year": null,
+    "headquarters": null,
+    "website": null,
+    "updated_at": null,
+    "urls": []
+  },
+  "stats": {
+    "monitored_urls": "0",
+    "total_changes": "2",
+    "high_interest_changes": "1",
+    "changes_last_week": "2",
+    "avg_interest_level": "6.5000000000000000"
+  },
+  "changes": [
+    {
+      "id": 4,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:45.180Z",
+      "company": "Aleph Alpha",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "f9f5f60dc52c45771fb9bf94269478b9064dfc5e3d848f40454b4e816a2ac168",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of PhariaAI, a full-stack generative AI suite",
+          "Four core components: PhariaAssistant, PhariaStudio, PhariaOS, and Pharia LLM"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Generative AI",
+          "AI Productivity",
+          "AI Development and Deployment"
+        ],
+        "summary": "Aleph Alpha introduces PhariaAI, a comprehensive AI suite with various tools for knowledge workers, developers, and IT administrators, indicating notable technical advances and useful product updates."
+      },
+      "url": null,
+      "title": "Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs",
+      "content_preview": "Title: Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs\n\nSkip to main content\nAleph Alpha Docs\nPhariaAI\nVerticals\nPharia LLM\nAPIs\nWelcome\nGlossary\nAbout us\nRelease Notes\nWhat's new\nWelcome\nWelcome to the Aleph Alpha documentation!\n\nWe are delighted to introduce you to PhariaAI, a full-stack generative AI suite designed to help you design and manage bespoke AI use cases. PhariaAI includes four core components:\n\nPhariaAssistant assists knowledge workers to summarize text, extract information from documents, and to translate content. This app enhances productivity for knowledge work across teams. Read more...\n\nPhariaStudio enables the development and deployment into production of organisation-specific AI solutions. This app provides a unified workspace where you can build, debug, fine-tune, and evaluate models and applications seamlessly. Read more...\n\nPhariaOS manages access to AI resources, such as models and infrastructure. This app enables IT administrators and operations "
+    },
+    {
+      "id": 4,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:45.180Z",
+      "company": "Aleph Alpha",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "f9f5f60dc52c45771fb9bf94269478b9064dfc5e3d848f40454b4e816a2ac168",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of PhariaAI, a full-stack generative AI suite",
+          "Four core components: PhariaAssistant, PhariaStudio, PhariaOS, and Pharia LLM"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Generative AI",
+          "AI Productivity",
+          "AI Development and Deployment"
+        ],
+        "summary": "Aleph Alpha introduces PhariaAI, a comprehensive AI suite with various tools for knowledge workers, developers, and IT administrators, indicating notable technical advances and useful product updates."
+      },
+      "url": null,
+      "title": "Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs",
+      "content_preview": "Title: Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs\n\nSkip to main content\nAleph Alpha Docs\nPhariaAI\nVerticals\nPharia LLM\nAPIs\nWelcome\nGlossary\nAbout us\nRelease Notes\nWhat's new\nWelcome\nWelcome to the Aleph Alpha documentation!\n\nWe are delighted to introduce you to PhariaAI, a full-stack generative AI suite designed to help you design and manage bespoke AI use cases. PhariaAI includes four core components:\n\nPhariaAssistant assists knowledge workers to summarize text, extract information from documents, and to translate content. This app enhances productivity for knowledge work across teams. Read more...\n\nPhariaStudio enables the development and deployment into production of organisation-specific AI solutions. This app provides a unified workspace where you can build, debug, fine-tune, and evaluate models and applications seamlessly. Read more...\n\nPhariaOS manages access to AI resources, such as models and infrastructure. This app enables IT administrators and operations "
+    },
+    {
+      "id": 4,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:45.180Z",
+      "company": "Aleph Alpha",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "f9f5f60dc52c45771fb9bf94269478b9064dfc5e3d848f40454b4e816a2ac168",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of PhariaAI, a full-stack generative AI suite",
+          "Four core components: PhariaAssistant, PhariaStudio, PhariaOS, and Pharia LLM"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Generative AI",
+          "AI Productivity",
+          "AI Development and Deployment"
+        ],
+        "summary": "Aleph Alpha introduces PhariaAI, a comprehensive AI suite with various tools for knowledge workers, developers, and IT administrators, indicating notable technical advances and useful product updates."
+      },
+      "url": null,
+      "title": "Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs",
+      "content_preview": "Title: Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs\n\nSkip to main content\nAleph Alpha Docs\nPhariaAI\nVerticals\nPharia LLM\nAPIs\nWelcome\nGlossary\nAbout us\nRelease Notes\nWhat's new\nWelcome\nWelcome to the Aleph Alpha documentation!\n\nWe are delighted to introduce you to PhariaAI, a full-stack generative AI suite designed to help you design and manage bespoke AI use cases. PhariaAI includes four core components:\n\nPhariaAssistant assists knowledge workers to summarize text, extract information from documents, and to translate content. This app enhances productivity for knowledge work across teams. Read more...\n\nPhariaStudio enables the development and deployment into production of organisation-specific AI solutions. This app provides a unified workspace where you can build, debug, fine-tune, and evaluate models and applications seamlessly. Read more...\n\nPhariaOS manages access to AI resources, such as models and infrastructure. This app enables IT administrators and operations "
+    },
+    {
+      "id": 4,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:45.180Z",
+      "company": "Aleph Alpha",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "f9f5f60dc52c45771fb9bf94269478b9064dfc5e3d848f40454b4e816a2ac168",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of PhariaAI, a full-stack generative AI suite",
+          "Four core components: PhariaAssistant, PhariaStudio, PhariaOS, and Pharia LLM"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Generative AI",
+          "AI Productivity",
+          "AI Development and Deployment"
+        ],
+        "summary": "Aleph Alpha introduces PhariaAI, a comprehensive AI suite with various tools for knowledge workers, developers, and IT administrators, indicating notable technical advances and useful product updates."
+      },
+      "url": null,
+      "title": "Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs",
+      "content_preview": "Title: Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs\n\nSkip to main content\nAleph Alpha Docs\nPhariaAI\nVerticals\nPharia LLM\nAPIs\nWelcome\nGlossary\nAbout us\nRelease Notes\nWhat's new\nWelcome\nWelcome to the Aleph Alpha documentation!\n\nWe are delighted to introduce you to PhariaAI, a full-stack generative AI suite designed to help you design and manage bespoke AI use cases. PhariaAI includes four core components:\n\nPhariaAssistant assists knowledge workers to summarize text, extract information from documents, and to translate content. This app enhances productivity for knowledge work across teams. Read more...\n\nPhariaStudio enables the development and deployment into production of organisation-specific AI solutions. This app provides a unified workspace where you can build, debug, fine-tune, and evaluate models and applications seamlessly. Read more...\n\nPhariaOS manages access to AI resources, such as models and infrastructure. This app enables IT administrators and operations "
+    },
+    {
+      "id": 4,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:45.180Z",
+      "company": "Aleph Alpha",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "f9f5f60dc52c45771fb9bf94269478b9064dfc5e3d848f40454b4e816a2ac168",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of PhariaAI, a full-stack generative AI suite",
+          "Four core components: PhariaAssistant, PhariaStudio, PhariaOS, and Pharia LLM"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Generative AI",
+          "AI Productivity",
+          "AI Development and Deployment"
+        ],
+        "summary": "Aleph Alpha introduces PhariaAI, a comprehensive AI suite with various tools for knowledge workers, developers, and IT administrators, indicating notable technical advances and useful product updates."
+      },
+      "url": null,
+      "title": "Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs",
+      "content_preview": "Title: Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs\n\nSkip to main content\nAleph Alpha Docs\nPhariaAI\nVerticals\nPharia LLM\nAPIs\nWelcome\nGlossary\nAbout us\nRelease Notes\nWhat's new\nWelcome\nWelcome to the Aleph Alpha documentation!\n\nWe are delighted to introduce you to PhariaAI, a full-stack generative AI suite designed to help you design and manage bespoke AI use cases. PhariaAI includes four core components:\n\nPhariaAssistant assists knowledge workers to summarize text, extract information from documents, and to translate content. This app enhances productivity for knowledge work across teams. Read more...\n\nPhariaStudio enables the development and deployment into production of organisation-specific AI solutions. This app provides a unified workspace where you can build, debug, fine-tune, and evaluate models and applications seamlessly. Read more...\n\nPhariaOS manages access to AI resources, such as models and infrastructure. This app enables IT administrators and operations "
+    },
+    {
+      "id": 4,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:45.180Z",
+      "company": "Aleph Alpha",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "f9f5f60dc52c45771fb9bf94269478b9064dfc5e3d848f40454b4e816a2ac168",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Introduction of PhariaAI, a full-stack generative AI suite",
+          "Four core components: PhariaAssistant, PhariaStudio, PhariaOS, and Pharia LLM"
+        ],
+        "category": "AI/ML Platform",
+        "impact_areas": [
+          "Generative AI",
+          "AI Productivity",
+          "AI Development and Deployment"
+        ],
+        "summary": "Aleph Alpha introduces PhariaAI, a comprehensive AI suite with various tools for knowledge workers, developers, and IT administrators, indicating notable technical advances and useful product updates."
+      },
+      "url": null,
+      "title": "Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs",
+      "content_preview": "Title: Welcome to the Aleph Alpha documentation! | Aleph Alpha Docs\n\nSkip to main content\nAleph Alpha Docs\nPhariaAI\nVerticals\nPharia LLM\nAPIs\nWelcome\nGlossary\nAbout us\nRelease Notes\nWhat's new\nWelcome\nWelcome to the Aleph Alpha documentation!\n\nWe are delighted to introduce you to PhariaAI, a full-stack generative AI suite designed to help you design and manage bespoke AI use cases. PhariaAI includes four core components:\n\nPhariaAssistant assists knowledge workers to summarize text, extract information from documents, and to translate content. This app enhances productivity for knowledge work across teams. Read more...\n\nPhariaStudio enables the development and deployment into production of organisation-specific AI solutions. This app provides a unified workspace where you can build, debug, fine-tune, and evaluate models and applications seamlessly. Read more...\n\nPhariaOS manages access to AI resources, such as models and infrastructure. This app enables IT administrators and operations "
+    },
+    {
+      "id": 3,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:39.223Z",
+      "company": "Aleph Alpha",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "56ebf35ffd2a4ff4edffeb4ddf4557d94e311d595147dc58b4dc112d616528aa",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Sovereign AI solutions",
+          "PhariaAI technology",
+          "AI research innovation"
+        ],
+        "category": "AI Solutions",
+        "impact_areas": [
+          "Enterprise AI adoption",
+          "Data sovereignty",
+          "Competitive intelligence"
+        ],
+        "summary": "Aleph Alpha introduces sovereign AI solutions for enterprises, focusing on PhariaAI technology and AI research innovation, enabling companies to build and retain their own competencies and protect their data and IP."
+      },
+      "url": null,
+      "title": "Sovereign AI Solutions for Enterprises | ALEPH ALPHA",
+      "content_preview": "Title: Sovereign AI Solutions for Enterprises | ALEPH ALPHA\n\nSolutions\nPhariaAI\nResearch\nPartners\nCompany\nBook a demo\nWe are Hiring!\nMaster Your Sovereign Transformation Into a New Era of Knowledge Work\n\nAI Technology for the most complex and critical business challenges\n\nTalk to an expert\n\nPartnering With Industry Leaders\n\nGo to end of slider\nExplore Our Technology\nPhariaAI: From Idea to Scalable Enterprise Value\nPhariaAI\n\nLearn more\n\nOur AI Research Innovation and Technology Breakthroughs\nResearch\n\nLearn more\n\nAleph Alpha is driving change — Building a better AI future alongside you.\nSovereignty\n\nOur mission is to secure your sovereignty. We enable you to build and retain your own competencies, protect your data and IP, run, change and scale operations without lock-in and empower you to master new knowledge work paradigms. Sovereignty in all layers is key to capture value in established and emerging markets.\n\nShape the future according to your values with PhariaAI.\n\nTransparency & Co"
+    },
+    {
+      "id": 3,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:39.223Z",
+      "company": "Aleph Alpha",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "56ebf35ffd2a4ff4edffeb4ddf4557d94e311d595147dc58b4dc112d616528aa",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Sovereign AI solutions",
+          "PhariaAI technology",
+          "AI research innovation"
+        ],
+        "category": "AI Solutions",
+        "impact_areas": [
+          "Enterprise AI adoption",
+          "Data sovereignty",
+          "Competitive intelligence"
+        ],
+        "summary": "Aleph Alpha introduces sovereign AI solutions for enterprises, focusing on PhariaAI technology and AI research innovation, enabling companies to build and retain their own competencies and protect their data and IP."
+      },
+      "url": null,
+      "title": "Sovereign AI Solutions for Enterprises | ALEPH ALPHA",
+      "content_preview": "Title: Sovereign AI Solutions for Enterprises | ALEPH ALPHA\n\nSolutions\nPhariaAI\nResearch\nPartners\nCompany\nBook a demo\nWe are Hiring!\nMaster Your Sovereign Transformation Into a New Era of Knowledge Work\n\nAI Technology for the most complex and critical business challenges\n\nTalk to an expert\n\nPartnering With Industry Leaders\n\nGo to end of slider\nExplore Our Technology\nPhariaAI: From Idea to Scalable Enterprise Value\nPhariaAI\n\nLearn more\n\nOur AI Research Innovation and Technology Breakthroughs\nResearch\n\nLearn more\n\nAleph Alpha is driving change — Building a better AI future alongside you.\nSovereignty\n\nOur mission is to secure your sovereignty. We enable you to build and retain your own competencies, protect your data and IP, run, change and scale operations without lock-in and empower you to master new knowledge work paradigms. Sovereignty in all layers is key to capture value in established and emerging markets.\n\nShape the future according to your values with PhariaAI.\n\nTransparency & Co"
+    },
+    {
+      "id": 3,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:39.223Z",
+      "company": "Aleph Alpha",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "56ebf35ffd2a4ff4edffeb4ddf4557d94e311d595147dc58b4dc112d616528aa",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Sovereign AI solutions",
+          "PhariaAI technology",
+          "AI research innovation"
+        ],
+        "category": "AI Solutions",
+        "impact_areas": [
+          "Enterprise AI adoption",
+          "Data sovereignty",
+          "Competitive intelligence"
+        ],
+        "summary": "Aleph Alpha introduces sovereign AI solutions for enterprises, focusing on PhariaAI technology and AI research innovation, enabling companies to build and retain their own competencies and protect their data and IP."
+      },
+      "url": null,
+      "title": "Sovereign AI Solutions for Enterprises | ALEPH ALPHA",
+      "content_preview": "Title: Sovereign AI Solutions for Enterprises | ALEPH ALPHA\n\nSolutions\nPhariaAI\nResearch\nPartners\nCompany\nBook a demo\nWe are Hiring!\nMaster Your Sovereign Transformation Into a New Era of Knowledge Work\n\nAI Technology for the most complex and critical business challenges\n\nTalk to an expert\n\nPartnering With Industry Leaders\n\nGo to end of slider\nExplore Our Technology\nPhariaAI: From Idea to Scalable Enterprise Value\nPhariaAI\n\nLearn more\n\nOur AI Research Innovation and Technology Breakthroughs\nResearch\n\nLearn more\n\nAleph Alpha is driving change — Building a better AI future alongside you.\nSovereignty\n\nOur mission is to secure your sovereignty. We enable you to build and retain your own competencies, protect your data and IP, run, change and scale operations without lock-in and empower you to master new knowledge work paradigms. Sovereignty in all layers is key to capture value in established and emerging markets.\n\nShape the future according to your values with PhariaAI.\n\nTransparency & Co"
+    },
+    {
+      "id": 3,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:39.223Z",
+      "company": "Aleph Alpha",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "56ebf35ffd2a4ff4edffeb4ddf4557d94e311d595147dc58b4dc112d616528aa",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Sovereign AI solutions",
+          "PhariaAI technology",
+          "AI research innovation"
+        ],
+        "category": "AI Solutions",
+        "impact_areas": [
+          "Enterprise AI adoption",
+          "Data sovereignty",
+          "Competitive intelligence"
+        ],
+        "summary": "Aleph Alpha introduces sovereign AI solutions for enterprises, focusing on PhariaAI technology and AI research innovation, enabling companies to build and retain their own competencies and protect their data and IP."
+      },
+      "url": null,
+      "title": "Sovereign AI Solutions for Enterprises | ALEPH ALPHA",
+      "content_preview": "Title: Sovereign AI Solutions for Enterprises | ALEPH ALPHA\n\nSolutions\nPhariaAI\nResearch\nPartners\nCompany\nBook a demo\nWe are Hiring!\nMaster Your Sovereign Transformation Into a New Era of Knowledge Work\n\nAI Technology for the most complex and critical business challenges\n\nTalk to an expert\n\nPartnering With Industry Leaders\n\nGo to end of slider\nExplore Our Technology\nPhariaAI: From Idea to Scalable Enterprise Value\nPhariaAI\n\nLearn more\n\nOur AI Research Innovation and Technology Breakthroughs\nResearch\n\nLearn more\n\nAleph Alpha is driving change — Building a better AI future alongside you.\nSovereignty\n\nOur mission is to secure your sovereignty. We enable you to build and retain your own competencies, protect your data and IP, run, change and scale operations without lock-in and empower you to master new knowledge work paradigms. Sovereignty in all layers is key to capture value in established and emerging markets.\n\nShape the future according to your values with PhariaAI.\n\nTransparency & Co"
+    },
+    {
+      "id": 3,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:39.223Z",
+      "company": "Aleph Alpha",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "56ebf35ffd2a4ff4edffeb4ddf4557d94e311d595147dc58b4dc112d616528aa",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Sovereign AI solutions",
+          "PhariaAI technology",
+          "AI research innovation"
+        ],
+        "category": "AI Solutions",
+        "impact_areas": [
+          "Enterprise AI adoption",
+          "Data sovereignty",
+          "Competitive intelligence"
+        ],
+        "summary": "Aleph Alpha introduces sovereign AI solutions for enterprises, focusing on PhariaAI technology and AI research innovation, enabling companies to build and retain their own competencies and protect their data and IP."
+      },
+      "url": null,
+      "title": "Sovereign AI Solutions for Enterprises | ALEPH ALPHA",
+      "content_preview": "Title: Sovereign AI Solutions for Enterprises | ALEPH ALPHA\n\nSolutions\nPhariaAI\nResearch\nPartners\nCompany\nBook a demo\nWe are Hiring!\nMaster Your Sovereign Transformation Into a New Era of Knowledge Work\n\nAI Technology for the most complex and critical business challenges\n\nTalk to an expert\n\nPartnering With Industry Leaders\n\nGo to end of slider\nExplore Our Technology\nPhariaAI: From Idea to Scalable Enterprise Value\nPhariaAI\n\nLearn more\n\nOur AI Research Innovation and Technology Breakthroughs\nResearch\n\nLearn more\n\nAleph Alpha is driving change — Building a better AI future alongside you.\nSovereignty\n\nOur mission is to secure your sovereignty. We enable you to build and retain your own competencies, protect your data and IP, run, change and scale operations without lock-in and empower you to master new knowledge work paradigms. Sovereignty in all layers is key to capture value in established and emerging markets.\n\nShape the future according to your values with PhariaAI.\n\nTransparency & Co"
+    },
+    {
+      "id": 3,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T03:05:39.223Z",
+      "company": "Aleph Alpha",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "56ebf35ffd2a4ff4edffeb4ddf4557d94e311d595147dc58b4dc112d616528aa",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Sovereign AI solutions",
+          "PhariaAI technology",
+          "AI research innovation"
+        ],
+        "category": "AI Solutions",
+        "impact_areas": [
+          "Enterprise AI adoption",
+          "Data sovereignty",
+          "Competitive intelligence"
+        ],
+        "summary": "Aleph Alpha introduces sovereign AI solutions for enterprises, focusing on PhariaAI technology and AI research innovation, enabling companies to build and retain their own competencies and protect their data and IP."
+      },
+      "url": null,
+      "title": "Sovereign AI Solutions for Enterprises | ALEPH ALPHA",
+      "content_preview": "Title: Sovereign AI Solutions for Enterprises | ALEPH ALPHA\n\nSolutions\nPhariaAI\nResearch\nPartners\nCompany\nBook a demo\nWe are Hiring!\nMaster Your Sovereign Transformation Into a New Era of Knowledge Work\n\nAI Technology for the most complex and critical business challenges\n\nTalk to an expert\n\nPartnering With Industry Leaders\n\nGo to end of slider\nExplore Our Technology\nPhariaAI: From Idea to Scalable Enterprise Value\nPhariaAI\n\nLearn more\n\nOur AI Research Innovation and Technology Breakthroughs\nResearch\n\nLearn more\n\nAleph Alpha is driving change — Building a better AI future alongside you.\nSovereignty\n\nOur mission is to secure your sovereignty. We enable you to build and retain your own competencies, protect your data and IP, run, change and scale operations without lock-in and empower you to master new knowledge work paradigms. Sovereignty in all layers is key to capture value in established and emerging markets.\n\nShape the future according to your values with PhariaAI.\n\nTransparency & Co"
+    }
+  ],
+  "insights": [],
+  "entities": {
+    "technologies": [],
+    "products": []
+  },
+  "themes": [],
+  "key_points": [],
+  "last_updated": "2025-07-22T17:46:48.519Z"
+}

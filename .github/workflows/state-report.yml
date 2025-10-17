@@ -1,0 +1,89 @@
+name: Complete State Report
+
+on:
+  # Run weekly on Mondays at 10 AM UTC
+  schedule:
+    - cron: '0 10 * * 1'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+
+env:
+  NODE_ENV: production
+
+jobs:
+  send-state-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Send Complete State Report Email
+        run: |
+          cd github-actions-backend
+          
+          echo "📧 Generating Complete State Report"
+          echo "=================================="
+          echo ""
+          
+          # Check for email configuration
+          if [ -z "$SMTP_HOST" ]; then
+            echo "❌ Email not configured!"
+            echo ""
+            echo "To enable email notifications, add these secrets:"
+            echo "  - SMTP_HOST (e.g., smtp.gmail.com)"
+            echo "  - SMTP_PORT (e.g., 587)"
+            echo "  - SMTP_USER (your email address)"
+            echo "  - SMTP_PASS (app password)"
+            echo "  - NOTIFICATION_EMAIL (recipient email)"
+            exit 1
+          fi
+          
+          echo "✅ Email Configuration Found"
+          echo "Recipient: ${NOTIFICATION_EMAIL:-$SMTP_USER}"
+          echo ""
+          
+          echo "📊 This report will include:"
+          echo "- All 52 monitored companies"
+          echo "- All 174 tracked URLs"
+          echo "- Page titles and descriptions"
+          echo "- Extracted keywords"
+          echo "- AI analysis and entities"
+          echo "- Threat scores and insights"
+          echo "- Recent changes and patterns"
+          echo ""
+          
+          # Send the complete state report
+          node email-notifications-enhanced.js state
+          
+          if [ $? -eq 0 ]; then
+            echo ""
+            echo "✅ Complete state report sent successfully!"
+            echo "Check your inbox for the comprehensive system snapshot."
+          else
+            echo ""
+            echo "❌ Failed to send state report"
+            exit 1
+          fi
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Graph Debug Test</title>
+</head>
+<body>
+    <h1>3D Graph Debug Test</h1>
+    <div id="status">Loading...</div>
+    <pre id="output"></pre>
+
+    <script>
+    async function testDataLoading() {
+        const status = document.getElementById('status');
+        const output = document.getElementById('output');
+        
+        try {
+            // Test 1: Check current location
+            output.textContent += `Current URL: ${window.location.href}\n`;
+            output.textContent += `Hostname: ${window.location.hostname}\n`;
+            output.textContent += `Protocol: ${window.location.protocol}\n\n`;
+            
+            // Test 2: Determine if local
+            const isLocal = window.location.hostname === 'localhost' || 
+                          window.location.hostname === '127.0.0.1' || 
+                          window.location.hostname === '' ||
+                          window.location.protocol === 'file:';
+            
+            output.textContent += `Is Local: ${isLocal}\n`;
+            
+            // Test 3: Set base URL
+            const baseUrl = isLocal ? './api-data' : 'https://redmorestudio.github.io/ai-competitive-monitor/api-data';
+            output.textContent += `Base URL: ${baseUrl}\n\n`;
+            
+            // Test 4: Try to fetch dashboard.json
+            output.textContent += `Fetching: ${baseUrl}/dashboard.json\n`;
+            const response = await fetch(`${baseUrl}/dashboard.json`);
+            
+            output.textContent += `Response Status: ${response.status}\n`;
+            output.textContent += `Response OK: ${response.ok}\n\n`;
+            
+            if (response.ok) {
+                const data = await response.json();
+                output.textContent += `Data loaded successfully!\n`;
+                output.textContent += `Companies: ${data.stats.companies}\n`;
+                output.textContent += `URLs: ${data.stats.urls}\n`;
+                output.textContent += `Company Activity Count: ${data.company_activity?.length || 0}\n`;
+                status.textContent = '✅ Data loading works!';
+                status.style.color = 'green';
+            } else {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
+            
+        } catch (error) {
+            status.textContent = '❌ Data loading failed!';
+            status.style.color = 'red';
+            output.textContent += `\nERROR: ${error.message}\n`;
+            output.textContent += `\nThis might be a CORS issue if running from file:// protocol.\n`;
+            output.textContent += `Try accessing via GitHub Pages or run a local server:\n`;
+            output.textContent += `python -m http.server 8000\n`;
+        }
+    }
+    
+    testDataLoading();
+    </script>
+</body>
+</html>

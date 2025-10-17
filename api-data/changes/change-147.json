@@ -1,0 +1,325 @@
+{
+  "change_id": 147,
+  "url": "https://blog.replit.com",
+  "company": "Replit",
+  "company_category": "AI Coding",
+  "detected_at": "2025-07-18 16:40:53",
+  "interest_level": 7,
+  "interest_category": "major_development",
+  "interest_explanation": "Replit has introduced new features such as Domain Purchasing, Web Search for Replit Agent, and Dynamic Intelligence, showcasing significant technical innovation and notable business impact.",
+  "interest_drivers": [
+    "Introduction of Domain Purchasing on Replit",
+    "Web Search capability for Replit Agent",
+    "Dynamic Intelligence for Replit Agent"
+  ],
+  "technical_innovation_score": 7,
+  "business_impact_score": 6,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://blog.replit.com\ncompany: Replit\nscraped_at: 2025-07-04 20:19:41\n---\n\nReplit — Replit Blog – Product updates from the team\n\n[](https://replit.com)\n\nFeatures\n\n[Replit AI](https://replit.com/ai)[Collaboration](https://replit.com/collaboration)[CDE](https://replit.com/cloud-development-environment)[Deployments](https://replit.com/deployments)\n\n[Teams](https://replit.com/teams)[Pricing](https://replit.com/pricing)[Blog](https://blog.replit.com)[Careers](https://replit.com/site/career...",
+    "after": "Replit — Replit Blog – Product updates from the team\n\n[](https://replit.com)\n\nFeatures\n\n[Replit Agent](https://replit.com/ai)[Collaboration](https://replit.com/collaboration)[Deployments](https://replit.com/deployments)\n\n[Teams](https://replit.com/teams)[Pricing](https://replit.com/pricing)[Blog](https://blog.replit.com)[Careers](https://replit.com/site/careers)\n\n[Log in](https://replit.com/login)[Start building](https://replit.com/signup)\n\n[](https://replit.com)\n\n*   Features\n    \n*   [Pricing]..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Replit — Replit Blog – Product updates from the team\n\n[](https://replit.",
+      "com)\n\nFeatures\n\n[Replit Agent](https://replit.",
+      "com/collaboration)[Deployments](https://replit.",
+      "com)\n\n*   Features\n    \n*   [Pricing](https://replit.",
+      "](/introducing-replit-agent)\n\n*   [\n    \n    !",
+      "io/images/bj34pdbp/migration/6410fb4d778e54a4380f83a3da8d389538044f69-4624x2427.",
+      "w=3840&q=75&fit=clip&auto=format)\n    \n    Wed, Jul 16, 2025\n    \n    ## Introducing Domain Purchasing on Replit\n    \n    Today, we're excited to announce the launch of Domain Purchasing on Replit.",
+      "With this new feature, you can now search, p...",
+      "](/domain-purchasing-on-replit)\n*   [\n    \n    !",
+      "io/images/bj34pdbp/migration/c97e9e68f13959675902a9d6f33984f2b8fefa1a-4800x2520."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://blog.",
+      "com\ncompany: Replit\nscraped_at: 2025-07-04 20:19:41\n---\n\nReplit — Replit Blog – Product updates from the team\n\n[](https://replit.",
+      "com)\n\nFeatures\n\n[Replit AI](https://replit.",
+      "com/collaboration)[CDE](https://replit.",
+      "com/cloud-development-environment)[Deployments](https://replit.",
+      "com)\n\n*   Features\n\n*   [Pricing](https://replit.",
+      "](/introducing-replit-agent)\n\n*   [\n\n    !",
+      "w=3840&q=75&fit=clip&auto=format)\n\n    Tue, Jul 1, 2025\n\n    ## Introducing Dynamic Intelligence for Replit Agent\n\n    Today, we're excited to introduce three new capabilities that bring Dynamic Intelligence to Replit Agent.",
+      "](/dynamic-intelligence)\n*   [\n\n    !",
+      "w=3840&q=75&fit=clip&auto=format)\n\n    Wed, Jun 18, 2025\n\n    ## Introducing Effort-Based Pricing for Replit Agent\n\n    We’re updating how pricing works for Replit Agent to better reflect the effort—measured in terms of time and computation..."
+    ],
+    "key_changes": [
+      "New version: 1.7787610619469028, 0.13, 0.57, 0.22, 53.567, 1.9052327976926247, 5.75, 0.02, 0.24, 1.15, 5.54, 29.969, 1.9047619047619047, 20.88, 10.66, 0.29, 1.73, 0.03, 0.05, 00.000, 1.9050228310502284, 10.45, 10.35, 1.26, 0.68, 0.11, 46.569, 2.11, 0.01, 0.43, 11.06, 11.05, 1.05, 0.48, 0.1, 11.691, 0.25, 20.94, 10.57, 0.34, 0.08, 1.9054209919261822, 6.66, 1.51, 0.19, 0.12, 0.3, 16.465, 0.06, 2.62, 0.39, 0.54, 21.95, 10.63, 0.37, 0.26, 28.842, 10.4, 9.19, 1.28, 5.48, 1.27, 10.426, 10.2, 8.46, 1.48, 5.1, 10.790, 4.21, 1.58, 54.083, 3.5, 0.5, 15.94, 0.73, 0.53, 36.994, 6.97, 0.04, 0.63, 4.59, 1.3, 5.03, 32.209, 1.7777777777777777, 11.91, 0.49, 24.449",
+      "Price change: $10, $5, $0.25, $40,000, $112,050",
+      "New model mentioned",
+      "New api mentioned",
+      "New release mentioned",
+      "New launch mentioned",
+      "New update mentioned",
+      "New feature mentioned",
+      "New funding mentioned"
+    ],
+    "change_percentage": 87,
+    "summary": "87% content changed (619 additions, 41 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "type",
+        "frequency": 195
+      },
+      {
+        "word": "fff",
+        "frequency": 182
+      },
+      {
+        "word": "title",
+        "frequency": 154
+      },
+      {
+        "word": "null",
+        "frequency": 115
+      },
+      {
+        "word": "background",
+        "frequency": 113
+      },
+      {
+        "word": "imagepaletteswatch",
+        "frequency": 112
+      },
+      {
+        "word": "foreground",
+        "frequency": 112
+      },
+      {
+        "word": "population",
+        "frequency": 112
+      },
+      {
+        "word": "image",
+        "frequency": 82
+      },
+      {
+        "word": "slug",
+        "frequency": 58
+      },
+      {
+        "word": "data",
+        "frequency": 37
+      },
+      {
+        "word": "createdat",
+        "frequency": 32
+      },
+      {
+        "word": "aspectratio",
+        "frequency": 32
+      },
+      {
+        "word": "true",
+        "frequency": 32
+      },
+      {
+        "word": "lqip",
+        "frequency": 32
+      },
+      {
+        "word": "base64",
+        "frequency": 32
+      },
+      {
+        "word": "description",
+        "frequency": 26
+      },
+      {
+        "word": "ivborw0kggoaaaansuheugaaabqaaaalcayaaab",
+        "frequency": 20
+      },
+      {
+        "word": "name",
+        "frequency": 19
+      },
+      {
+        "word": "9047619047619047",
+        "frequency": 18
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "feb",
+        "frequency": 2
+      },
+      {
+        "word": "workflows",
+        "frequency": 2
+      },
+      {
+        "word": "database",
+        "frequency": 2
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "cde",
+        "frequency": 1
+      },
+      {
+        "word": "cloud-development-environment",
+        "frequency": 1
+      },
+      {
+        "word": "74d1446d72459113bd10c0c5a204c7488c716160-11520x6480",
+        "frequency": 1
+      },
+      {
+        "word": "tvix",
+        "frequency": 1
+      },
+      {
+        "word": "store",
+        "frequency": 1
+      },
+      {
+        "word": "reduce",
+        "frequency": 1
+      },
+      {
+        "word": "storage",
+        "frequency": 1
+      },
+      {
+        "word": "costs",
+        "frequency": 1
+      },
+      {
+        "word": "past",
+        "frequency": 1
+      },
+      {
+        "word": "years",
+        "frequency": 1
+      },
+      {
+        "word": "packages",
+        "frequency": 1
+      },
+      {
+        "word": "consistent",
+        "frequency": 1
+      },
+      {
+        "word": "envi",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "sanity": {
+        "before": 16,
+        "after": 226,
+        "change": 210
+      },
+      "png": {
+        "before": 13,
+        "after": 138,
+        "change": 125
+      },
+      "replit": {
+        "before": 40,
+        "after": 129,
+        "change": 89
+      },
+      "https": {
+        "before": 34,
+        "after": 102,
+        "change": 68
+      },
+      "images": {
+        "before": 16,
+        "after": 66,
+        "change": 50
+      },
+      "bj34pdbp": {
+        "before": 16,
+        "after": 66,
+        "change": 50
+      },
+      "migration": {
+        "before": 16,
+        "after": 66,
+        "change": 50
+      },
+      "000": {
+        "before": 1,
+        "after": 45,
+        "change": 44
+      },
+      "agent": {
+        "before": 8,
+        "after": 45,
+        "change": 37
+      },
+      "cdn": {
+        "before": 16,
+        "after": 50,
+        "change": 34
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "type sanity",
+        "count": 176
+      },
+      {
+        "phrase": "sanity imagepaletteswatch",
+        "count": 112
+      },
+      {
+        "phrase": "imagepaletteswatch background",
+        "count": 112
+      },
+      {
+        "phrase": "population title",
+        "count": 112
+      },
+      {
+        "phrase": "title fff",
+        "count": 100
+      },
+      {
+        "phrase": "foreground fff",
+        "count": 82
+      },
+      {
+        "phrase": "fff population",
+        "count": 82
+      },
+      {
+        "phrase": "images bj34pdbp",
+        "count": 66
+      },
+      {
+        "phrase": "bj34pdbp migration",
+        "count": 66
+      },
+      {
+        "phrase": "image png",
+        "count": 60
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

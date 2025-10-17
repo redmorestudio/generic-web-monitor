@@ -1,0 +1,313 @@
+{
+  "change_id": 177,
+  "url": "https://wandb.ai",
+  "company": "Weights & Biases",
+  "company_category": "AI Infrastructure",
+  "detected_at": "2025-07-18 16:42:39",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "No notable changes detected in the homepage content of Weights & Biases. The structure and main features of the platform remain the same, with no apparent additions of breakthrough AI models, significant technical advances, major launches, or important partnerships.",
+  "interest_drivers": [],
+  "technical_innovation_score": 2,
+  "business_impact_score": 2,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://wandb.ai\ncompany: Weights & Biases\nscraped_at: 2025-07-04 20:21:03\n---\n\n         Weights & Biases: The AI Developer Platform\n\n[Skip to content](#content)\n\n[![](https://site.wandb.ai/wp-content/uploads/2023/05/wb-cw.svg)](/site)\n\n*   Platform\n\n    Close Platform Open Platform\n\n    [\n\n    Weave: LLMOps\n\n    ](https://wandb.ai/site/weave/)\n\n    *   [Traces\n        Explore and debug AI applications](https://wandb.ai/site/traces/)\n    *   [Evaluations\n        Rigorous evaluations of ...",
+    "after": ".async-hide { opacity: 0 !important} (function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1\\*new Date; h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')}; (a\\[n\\]=a\\[n\\]||\\[\\]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c; })(window,document.documentElement,'async-hide','dataLayer',4000, {'OPT-NSHDK56':true});     img:is(\\[sizes=\"auto\" i\\], \\[sizes^=\"auto,\" i\\]) { contain-intrinsic-size: 3000px 1500px } window.dataLayer = window.dataLayer || \\[\\];function gt..."
+  },
+  "diff": {
+    "added_sentences": [
+      "async-hide { opacity: 0 !",
+      "important} (function(a,s,y,n,c,h,i,d,e){s.",
+      "className+=' '+y;h.",
+      "start=1\\*new Date; h.",
+      "end=i=function(){s.",
+      "className=s.",
+      "className.",
+      "replace(RegExp(' ?",
+      "'+y),'')}; (a\\[n\\]=a\\[n\\]||\\[\\]).",
+      "hide=h;setTimeout(function(){i();h."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://wandb.",
+      "ai\ncompany: Weights & Biases\nscraped_at: 2025-07-04 20:21:03\n---\n\n         Weights & Biases: The AI Developer Platform\n\n[Skip to content](#content)\n\n[!",
+      "[](https://site.",
+      "wandb.",
+      "ai/wp-content/uploads/2023/05/wb-cw.",
+      "svg)](/site)\n\n*   Platform\n\n    Close Platform Open Platform\n\n    [\n\n    Weave: LLMOps\n\n    ](https://wandb.",
+      "ai/site/weave/)\n\n    *   [Traces\n        Explore and debug AI applications](https://wandb.",
+      "ai/site/traces/)\n    *   [Evaluations\n        Rigorous evaluations of AI applications](https://wandb.",
+      "ai/site/evaluations/)\n    *   [Playground\n        Explore prompts and models](https://wandb.",
+      "ai/site/playground)\n    *   [Agents\n        Observability tools for agentic systems](https://wandb."
+    ],
+    "key_changes": [
+      "New version: 0.44, 0.67, 1.5, 2.25, 3.38, 5.06, 0.2, 0.4, 0.5, 0.667, 1.333, 1.25, 1.6"
+    ],
+    "change_percentage": 142,
+    "summary": "142% content changed (221 additions, 525 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "important",
+        "frequency": 59
+      },
+      {
+        "word": "var",
+        "frequency": 54
+      },
+      {
+        "word": "rgb",
+        "frequency": 27
+      },
+      {
+        "word": "storage",
+        "frequency": 15
+      },
+      {
+        "word": "denied",
+        "frequency": 14
+      },
+      {
+        "word": "background-color",
+        "frequency": 13
+      },
+      {
+        "word": "color",
+        "frequency": 13
+      },
+      {
+        "word": "100",
+        "frequency": 12
+      },
+      {
+        "word": "linear-gradient",
+        "frequency": 12
+      },
+      {
+        "word": "135deg",
+        "frequency": 12
+      },
+      {
+        "word": "border-color",
+        "frequency": 12
+      },
+      {
+        "word": "background",
+        "frequency": 12
+      },
+      {
+        "word": "where",
+        "frequency": 11
+      },
+      {
+        "word": "auto",
+        "frequency": 10
+      },
+      {
+        "word": "rgba",
+        "frequency": 10
+      },
+      {
+        "word": "6px",
+        "frequency": 10
+      },
+      {
+        "word": "255",
+        "frequency": 8
+      },
+      {
+        "word": "2em",
+        "frequency": 8
+      },
+      {
+        "word": "0px",
+        "frequency": 7
+      },
+      {
+        "word": "personalization",
+        "frequency": 6
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "solutions",
+        "frequency": 79
+      },
+      {
+        "word": "articles",
+        "frequency": 32
+      },
+      {
+        "word": "you",
+        "frequency": 31
+      },
+      {
+        "word": "weave",
+        "frequency": 29
+      },
+      {
+        "word": "resources",
+        "frequency": 28
+      },
+      {
+        "word": "log",
+        "frequency": 20
+      },
+      {
+        "word": "services",
+        "frequency": 20
+      },
+      {
+        "word": "2025",
+        "frequency": 19
+      },
+      {
+        "word": "evaluations",
+        "frequency": 18
+      },
+      {
+        "word": "performance",
+        "frequency": 18
+      },
+      {
+        "word": "partners",
+        "frequency": 18
+      },
+      {
+        "word": "run",
+        "frequency": 18
+      },
+      {
+        "word": "customers",
+        "frequency": 17
+      },
+      {
+        "word": "import",
+        "frequency": 17
+      },
+      {
+        "word": "courses",
+        "frequency": 16
+      },
+      {
+        "word": "podcast",
+        "frequency": 16
+      },
+      {
+        "word": "events",
+        "frequency": 16
+      },
+      {
+        "word": "label",
+        "frequency": 16
+      },
+      {
+        "word": "explore",
+        "frequency": 15
+      },
+      {
+        "word": "all",
+        "frequency": 15
+      }
+    ],
+    "frequency_changes": {
+      "type": {
+        "before": 3,
+        "after": 12,
+        "change": 9
+      },
+      "url": {
+        "before": 1,
+        "after": 5,
+        "change": 4
+      },
+      "image": {
+        "before": 1,
+        "after": 4,
+        "change": 3
+      },
+      "en-us": {
+        "before": 1,
+        "after": 4,
+        "change": 3
+      },
+      "analytics": {
+        "before": 1,
+        "after": 3,
+        "change": 2
+      },
+      "developer": {
+        "before": 4,
+        "after": 6,
+        "change": 2
+      },
+      "functionality": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "genai": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "target": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "right": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "https wandb",
+        "count": 23
+      },
+      {
+        "phrase": "wandb site",
+        "count": 23
+      },
+      {
+        "phrase": "linear-gradient 135deg",
+        "count": 12
+      },
+      {
+        "phrase": "color var",
+        "count": 12
+      },
+      {
+        "phrase": "background-color var",
+        "count": 12
+      },
+      {
+        "phrase": "border-color var",
+        "count": 12
+      },
+      {
+        "phrase": "background var",
+        "count": 12
+      },
+      {
+        "phrase": "storage denied",
+        "count": 10
+      },
+      {
+        "phrase": "weights biases",
+        "count": 9
+      },
+      {
+        "phrase": "135deg rgb",
+        "count": 9
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

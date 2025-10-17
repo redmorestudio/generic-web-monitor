@@ -1,0 +1,82 @@
+name: 🚨 EMERGENCY - Investigate Schema Violation
+
+on:
+  workflow_dispatch:
+    inputs:
+      investigation_mode:
+        description: 'Investigation depth'
+        required: false
+        default: 'full'
+        type: choice
+        options:
+          - 'full'
+          - 'audit_only'
+
+jobs:
+  investigate-violation:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+
+    - name: 🚨 EMERGENCY Schema Violation Investigation
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        NODE_ENV: production
+      run: |
+        cd github-actions-backend
+        echo "🚨 CRITICAL: Schema integrity violation detected by schema-protector.js"
+        echo "🎯 Goal: Identify unauthorized database changes"
+        echo "📋 Expected checksum: 0f82a5b4f763e107842e81ff65e731ed26146fceb0dfbf2267f81821ac4aa8f4"
+        echo "📋 Current checksum:  6b201e839861ae8a38d7a9380484dc308972486e2ccb39a405c77ea9fca3b5cf"
+        echo ""
+        echo "RUNNING EMERGENCY INVESTIGATION..."
+        echo ""
+        
+        # Run the investigation
+        node investigate-schema-violation.js
+        
+        echo ""
+        echo "🚨 INVESTIGATION COMPLETE"
+        echo "📋 Review the audit trail above to identify unauthorized changes"
+        echo "⚠️  DO NOT proceed with schema modifications until this is resolved"
+
+    - name: 📊 Upload Investigation Results
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: schema-violation-investigation
+        path: |
+          github-actions-backend/data/
+        retention-days: 30
+
+    - name: 🚨 Mark as Critical Issue
+      if: always()
+      run: |
+        echo ""
+        echo "🚨 CRITICAL DATABASE PROTECTION ISSUE"
+        echo "=" 
+        echo ""
+        echo "📋 SITUATION: Schema integrity violation detected"
+        echo "🎯 IMPACT: Database protection system prevented unauthorized changes"
+        echo "🔍 ACTION: Full investigation completed above"
+        echo ""
+        echo "🛑 NEXT STEPS REQUIRED:"
+        echo "   1. Review investigation results above"
+        echo "   2. Identify source of unauthorized schema changes"  
+        echo "   3. Restore schema integrity before proceeding"
+        echo "   4. Update schema-version.json with correct checksum"
+        echo ""
+        echo "⚠️  CRITICAL: Do not bypass schema protection!"
+        echo "   The protection system is working as designed"

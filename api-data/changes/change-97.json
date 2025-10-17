@@ -1,0 +1,242 @@
+{
+  "change_id": 97,
+  "url": "https://langchain.com/langsmith",
+  "company": "LangChain",
+  "company_category": "AI Infrastructure",
+  "detected_at": "2025-07-18 16:37:39",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes were detected between the previous and current content. The content appears to be identical, with no new features, updates, or innovations introduced.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://langchain.com/langsmith\ncompany: LangChain\nscraped_at: 2025-07-04 20:15:39\n---\n\nLangSmith\n\n![Revisit consent button](https://uploads-ssl.webflow.com/65ff950538088944d66126b3/662ef3209b872e92e41212f6_cookieicon.png)\n\nWe value your privacy\n\nWe use cookies to analyze our traffic. By clicking \"Accept All\", you consent to our use of cookies. [Privacy Policy](https://www.langchain.com/privacy-policy)\n\nCustomize Reject All Accept All\n\nCustomize Consent Preferences ![Close](https://cdn-...",
+    "after": ".wf-force-outline-none\\[tabindex=\"-1\"\\]:focus{outline:none;}LangSmith@media (min-width:992px) {html.w-mod-js:not(.w-mod-ix) \\[data-w-id=\"f36ff6ba-b0d2-5683-9868-e4549014120d\"\\] {opacity:0;}html.w-mod-js:not(.w-mod-ix) \\[data-w-id=\"24eede2c-433c-0658-5d52-eaec6eb837dc\"\\] {opacity:0;}}@media (max-width:991px) and (min-width:768px) {html.w-mod-js:not(.w-mod-ix) \\[data-w-id=\"f36ff6ba-b0d2-5683-9868-e4549014120d\"\\] {opacity:0;}html.w-mod-js:not(.w-mod-ix) \\[data-w-id=\"24eede2c-433c-0658-5d52-eaec6eb8..."
+  },
+  "diff": {
+    "added_sentences": [
+      "wf-force-outline-none\\[tabindex=\"-1\"\\]:focus{outline:none;}LangSmith@media (min-width:992px) {html.",
+      "w-mod-js:not(.",
+      "w-mod-ix) \\[data-w-id=\"f36ff6ba-b0d2-5683-9868-e4549014120d\"\\] {opacity:0;}html.",
+      "w-mod-js:not(.",
+      "w-mod-ix) \\[data-w-id=\"24eede2c-433c-0658-5d52-eaec6eb837dc\"\\] {opacity:0;}}@media (max-width:991px) and (min-width:768px) {html.",
+      "w-mod-js:not(.",
+      "w-mod-ix) \\[data-w-id=\"f36ff6ba-b0d2-5683-9868-e4549014120d\"\\] {opacity:0;}html.",
+      "w-mod-js:not(.",
+      "w-mod-ix) \\[data-w-id=\"24eede2c-433c-0658-5d52-eaec6eb837dc\"\\] {opacity:0;}}!",
+      "function(o,c){var n=c."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://langchain.",
+      "com/langsmith\ncompany: LangChain\nscraped_at: 2025-07-04 20:15:39\n---\n\nLangSmith\n\n!",
+      "Reject All Save My Preferences Accept All\n\n[\n\n](/)\n\nProducts\n\nFrameworks\n\n[LangGraph](/langgraph)[LangChain](/langchain)\n\nPlatforms\n\n[LangSmith](/langsmith)[LangGraph Platform](/langgraph-platform)\n\nResources\n\n[Resources Hub](/resources)[Blog](https://blog.",
+      "com/)\n\n## Helping top teams ship reliable agents.",
+      "## Ready to start shipping reliable agents faster?"
+    ],
+    "key_changes": [
+      "New version: 1.4, 0.2, 0.4, 18.5, 0.2499999999999999, 0.6250000000000001, 0.41223612197028925, 0.4222048475371384, 0.125, 5.2.0",
+      "New api mentioned",
+      "New update mentioned"
+    ],
+    "change_percentage": 60,
+    "summary": "60% content changed (669 additions, 5 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "none",
+        "frequency": 53
+      },
+      {
+        "word": "important",
+        "frequency": 48
+      },
+      {
+        "word": "100",
+        "frequency": 36
+      },
+      {
+        "word": "0rem",
+        "frequency": 36
+      },
+      {
+        "word": "max-width",
+        "frequency": 34
+      },
+      {
+        "word": "width",
+        "frequency": 33
+      },
+      {
+        "word": "display",
+        "frequency": 33
+      },
+      {
+        "word": "font-size",
+        "frequency": 33
+      },
+      {
+        "word": "padding",
+        "frequency": 32
+      },
+      {
+        "word": "var",
+        "frequency": 30
+      },
+      {
+        "word": "margin",
+        "frequency": 29
+      },
+      {
+        "word": "color",
+        "frequency": 28
+      },
+      {
+        "word": "background",
+        "frequency": 27
+      },
+      {
+        "word": "solid",
+        "frequency": 26
+      },
+      {
+        "word": "24px",
+        "frequency": 26
+      },
+      {
+        "word": "center",
+        "frequency": 25
+      },
+      {
+        "word": "flex",
+        "frequency": 23
+      },
+      {
+        "word": "cky-btn",
+        "frequency": 23
+      },
+      {
+        "word": "border",
+        "frequency": 22
+      },
+      {
+        "word": "focus-visible",
+        "frequency": 22
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "media": {
+        "before": 1,
+        "after": 27,
+        "change": 26
+      },
+      "not": {
+        "before": 8,
+        "after": 32,
+        "change": 24
+      },
+      "button": {
+        "before": 1,
+        "after": 22,
+        "change": 21
+      },
+      "top": {
+        "before": 1,
+        "after": 12,
+        "change": 11
+      },
+      "content": {
+        "before": 1,
+        "after": 10,
+        "change": 9
+      },
+      "source": {
+        "before": 1,
+        "after": 10,
+        "change": 9
+      },
+      "all": {
+        "before": 10,
+        "after": 18,
+        "change": 8
+      },
+      "gap": {
+        "before": 1,
+        "after": 8,
+        "change": 7
+      },
+      "status": {
+        "before": 1,
+        "after": 7,
+        "change": 6
+      },
+      "active": {
+        "before": 1,
+        "after": 6,
+        "change": 5
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "https cdn",
+        "count": 60
+      },
+      {
+        "phrase": "cdn prod",
+        "count": 59
+      },
+      {
+        "phrase": "prod website-files",
+        "count": 59
+      },
+      {
+        "phrase": "website-files com",
+        "count": 59
+      },
+      {
+        "phrase": "com 65c81e88c254bb0f97633a71",
+        "count": 48
+      },
+      {
+        "phrase": "svg https",
+        "count": 47
+      },
+      {
+        "phrase": "0rem important",
+        "count": 36
+      },
+      {
+        "phrase": "langchain com",
+        "count": 28
+      },
+      {
+        "phrase": "201 svg",
+        "count": 22
+      },
+      {
+        "phrase": "media max-width",
+        "count": 19
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

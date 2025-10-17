@@ -1,0 +1,67 @@
+{
+  "id": 16,
+  "company": "Cursor",
+  "page_url": "features",
+  "detected_at": "2025-07-21T16:16:16.970Z",
+  "change_type": "modified",
+  "interest_level": 4,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "minor",
+    "what_changed": "The keyboard shortcut for Agent mode and Terminal has been changed from ⌘ + I to Ctrl + I and ⌘ K to Ctrl K respectively.",
+    "specific_changes": [
+      "Updated keyboard shortcut for Agent mode from ⌘ + I to Ctrl + I",
+      "Updated keyboard shortcut for Terminal from ⌘ K to Ctrl K"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Adaptation to user feedback",
+      "Continued development and refinement of the product"
+    ],
+    "business_impact": "The change is unlikely to have a significant impact on the business, as it is a minor update to existing features.",
+    "strategic_direction": "The change suggests that the company is focused on refining and improving the user experience, but does not indicate a significant shift in strategy.",
+    "competitive_implications": "The change does not significantly impact the competitive landscape, as it is a minor update and does not introduce new functionality."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [
+      "Agent mode",
+      "Terminal"
+    ],
+    "products": [
+      "Cursor"
+    ],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "The company may face competition from other products that offer similar functionality and user experience."
+    ],
+    "key_findings": [
+      "The company is responsive to user feedback and willing to make changes to improve the user experience."
+    ],
+    "opportunities": [
+      "The company could consider further refining the user experience and introducing new features to stay competitive."
+    ],
+    "recommended_actions": [
+      "Continue to monitor user feedback and make adjustments as necessary to stay competitive."
+    ]
+  },
+  "key_insights": [
+    "The company is responsive to user feedback and willing to make changes to improve the user experience."
+  ],
+  "business_impact": "The change is unlikely to have a significant impact on the business, as it is a minor update to existing features.",
+  "competitive_implications": "The change does not significantly impact the competitive landscape, as it is a minor update and does not introduce new functionality.",
+  "content_hash_before": "4205714f88bb2643c535b6f3b4bfb2660827ab7d8fec7ed5076bc04eb24ae926",
+  "content_hash_after": "e9bbce2d2eed40e22edc54333b2d85d7471098c6b8072e244721e6c11adc6a77",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

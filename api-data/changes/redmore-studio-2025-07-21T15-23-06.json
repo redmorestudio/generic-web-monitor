@@ -1,0 +1,82 @@
+{
+  "id": 64,
+  "company": "Redmore Studio",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:23:06.499Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Initial content creation",
+    "specific_changes": [
+      "Introduction of the Redmore Studio brand and its IlluminAIte concept",
+      "Creation of a cookie policy and implementation of a cookie consent banner",
+      "Development of a website structure including AI and non-AI categories",
+      "Introduction of a book titled 'Generative AI for the Curious Businessperson'",
+      "Establishment of a newsletter sign-up option"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing demand for AI education and resources",
+      "Increasing importance of data privacy and compliance"
+    ],
+    "business_impact": "Redmore Studio is positioning itself as a thought leader in the AI space, particularly for mid-market businesses, by providing educational content and resources.",
+    "strategic_direction": "Redmore Studio is likely to continue developing its IlluminAIte concept, creating more educational content, and expanding its services to support mid-market businesses in their AI adoption journeys.",
+    "competitive_implications": "Redmore Studio's unique approach to AI education and its focus on mid-market businesses may differentiate it from competitors and attract a specific niche audience."
+  },
+  "entities": {
+    "people": [
+      "Seth Redmore"
+    ],
+    "markets": [
+      "Mid-market business"
+    ],
+    "pricing": [],
+    "features": [
+      "IlluminAIte concept",
+      "Cookie consent banner"
+    ],
+    "products": [
+      "Generative AI for the Curious Businessperson (book)"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "Generative AI",
+      "Agentic Workflows"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competition from established AI education providers",
+      "Rapid changes in AI regulations and technologies"
+    ],
+    "key_findings": [
+      "Redmore Studio's target audience is mid-market businesses and individuals interested in AI education",
+      "The company is focused on providing actionable clarity on AI tools, regulations, and strategic implications"
+    ],
+    "opportunities": [
+      "Partnerships with AI technology providers to offer integrated solutions",
+      "Expansion into other markets, such as enterprise or small businesses"
+    ],
+    "recommended_actions": [
+      "Monitor Redmore Studio's content and services to understand its strategic direction",
+      "Assess the potential for partnerships or collaborations with Redmore Studio"
+    ]
+  },
+  "key_insights": [
+    "Redmore Studio's target audience is mid-market businesses and individuals interested in AI education",
+    "The company is focused on providing actionable clarity on AI tools, regulations, and strategic implications"
+  ],
+  "business_impact": "Redmore Studio is positioning itself as a thought leader in the AI space, particularly for mid-market businesses, by providing educational content and resources.",
+  "competitive_implications": "Redmore Studio's unique approach to AI education and its focus on mid-market businesses may differentiate it from competitors and attract a specific niche audience.",
+  "content_hash_before": null,
+  "content_hash_after": "0feb39c5d04f9ea68023237be2c24e53057762829cd1e524a64a999261fd57f4",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

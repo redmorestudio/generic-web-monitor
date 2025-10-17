@@ -1,0 +1,71 @@
+{
+  "id": 66,
+  "company": "Pika",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:22:50.566Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Initial content creation",
+    "specific_changes": [
+      "Introduction of Pikapocalypse effects",
+      "Addition of sign-in options with Google, Facebook, Discord, and email",
+      "Inclusion of links to about page, careers, terms of service, acceptable use policy, and privacy policy",
+      "Presence of social media links (Twitter, Discord) and support email"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Expansion into the reality modification or effects market",
+      "Potential competition with existing reality modification or social media platforms"
+    ],
+    "business_impact": "The launch of Pikapocalypse effects could attract a new user base and generate revenue for Pika, potentially disrupting the market with its innovative approach to reality modification.",
+    "strategic_direction": "Pika seems to be focusing on providing innovative, user-centric experiences, possibly indicating a strategic direction towards becoming a leader in the reality modification or effects space.",
+    "competitive_implications": "Pika's entry into the market could force competitors to innovate or adapt to the new reality modification offerings, potentially leading to a shift in market share."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [
+      "Pikapocalypse effects"
+    ],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Pika's innovative approach could disrupt the market and pose a threat to existing competitors.",
+      "The company's focus on reality modification could raise concerns about the potential impact on users' mental health or social interactions."
+    ],
+    "key_findings": [
+      "Pika is introducing a new product or service that could significantly impact the market.",
+      "The company is establishing a strong online presence through its website and social media."
+    ],
+    "opportunities": [
+      "Potential for partnerships or collaborations with Pika to leverage its innovative technology.",
+      "Opportunity for competitors to learn from Pika's approach and improve their own offerings."
+    ],
+    "recommended_actions": [
+      "Monitor Pika's progress and user adoption rates to assess the impact of its products on the market.",
+      "Consider potential partnerships or collaborations with Pika to stay competitive in the market."
+    ]
+  },
+  "key_insights": [
+    "Pika is introducing a new product or service that could significantly impact the market.",
+    "The company is establishing a strong online presence through its website and social media."
+  ],
+  "business_impact": "The launch of Pikapocalypse effects could attract a new user base and generate revenue for Pika, potentially disrupting the market with its innovative approach to reality modification.",
+  "competitive_implications": "Pika's entry into the market could force competitors to innovate or adapt to the new reality modification offerings, potentially leading to a shift in market share.",
+  "content_hash_before": null,
+  "content_hash_after": "139703c9fd74a0b53101ef977775d4c1b48078a03c05de9bae17c8d9fa99a105",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

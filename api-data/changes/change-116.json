@@ -1,0 +1,223 @@
+{
+  "change_id": 116,
+  "url": "https://docs.mistral.ai",
+  "company": "Mistral AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:38:17",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "The update to Mistral AI's documentation includes a minor addition of 'Audio & Transcription' to the capabilities section, but does not introduce any significant technical innovations or business impact.",
+  "interest_drivers": [
+    "Minor update to documentation",
+    "Addition of 'Audio & Transcription' to capabilities"
+  ],
+  "technical_innovation_score": 2,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://docs.mistral.ai\ncompany: Mistral AI\nscraped_at: 2025-07-04 20:17:29\n---\n\n  Bienvenue to Mistral AI Documentation | Mistral AI\n\n[Skip to main content](#__docusaurus_skipToContent_fallback)\n\n[\n\n![Mistral AI Logo](/img/logo.svg)\n\n](https://mistral.ai/)[Le Chat](https://chat.mistral.ai/)[La Plateforme](https://console.mistral.ai/)[Docs](/)[API](/api/)\n\n[GitHub](https://github.com/mistralai/)[Discord](https://discord.gg/mistralai)\n\n*   Getting Started\n*   [Introduction](/)\n*   [Quick...",
+    "after": "  Bienvenue to Mistral AI Documentation | Mistral AIfunction insertBanner(){var n=document.createElement(\"div\");n.id=\"\\_\\_docusaurus-base-url-issue-banner-container\";n.innerHTML='\\\\n<div id=\"\\_\\_docusaurus-base-url-issue-banner\" style=\"border: thick solid red; background-color: rgb(255, 230, 179); margin: 20px; padding: 20px; font-size: 20px;\">\\\\n <p style=\"font-weight: bold; font-size: 30px;\">Your Docusaurus site did not load properly.</p>\\\\n <p>A very common reason is a wrong site <a href=\"htt..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Bienvenue to Mistral AI Documentation | Mistral AIfunction insertBanner(){var n=document.",
+      "createElement(\"div\");n.",
+      "id=\"\\_\\_docusaurus-base-url-issue-banner-container\";n.",
+      "innerHTML='\\\\n<div id=\"\\_\\_docusaurus-base-url-issue-banner\" style=\"border: thick solid red; background-color: rgb(255, 230, 179); margin: 20px; padding: 20px; font-size: 20px;\">\\\\n <p style=\"font-weight: bold; font-size: 30px;\">Your Docusaurus site did not load properly.",
+      "</p>\\\\n <p>A very common reason is a wrong site <a href=\"https://docusaurus.",
+      "io/docs/docusaurus.",
+      "config.",
+      "js/#baseUrl\" style=\"font-weight: bold;\">baseUrl configuration</a>.",
+      "</p>\\\\n <p>Current configured baseUrl = <span style=\"font-weight: bold; color: red;\">/</span> (default value)</p>\\\\n <p>We suggest trying baseUrl = <span id=\"\\_\\_docusaurus-base-url-issue-banner-suggestion-container\" style=\"font-weight: bold; color: green;\"></span></p>\\\\n</div>\\\\n',document.",
+      "body."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://docs.",
+      "ai\ncompany: Mistral AI\nscraped_at: 2025-07-04 20:17:29\n---\n\n  Bienvenue to Mistral AI Documentation | Mistral AI\n\n[Skip to main content](#__docusaurus_skipToContent_fallback)\n\n[\n\n!",
+      "[Mistral AI Logo](/img/logo.",
+      "gg/mistralai)\n\n*   Getting Started\n*   [Introduction](/)\n*   [Quickstart](/getting-started/quickstart/)\n*   [Models](/getting-started/models/models_overview/)\n\n*   [Clients](/getting-started/clients/)\n*   [Model customization](/getting-started/customization/)\n*   [Developer examples](/getting-started/stories/)\n*   [Changelog](/getting-started/changelog/)\n*   [Glossary](/getting-started/glossary/)\n*   Capabilities\n*   [Text and Chat Completions](/capabilities/completion/)\n*   [Vision](/capabilities/vision/)\n*   [Reasoning](/capabilities/reasoning/)\n*   [Document AI](/capabilities/OCR/document_ai_overview/)\n\n*   [Code Generation](/capabilities/code_generation/)\n*   [Embeddings](/capabilities/embeddings/overview/)\n\n*   [Function calling](/capabilities/function_calling/)\n*   [Citations and References](/capabilities/citations/)\n*   [Structured Output](/capabilities/structured-output/structured_output_overview/)\n\n*   [Moderation](/capabilities/guardrailing/)\n*   [Finetuning](/capabilities/finetuning/finetuning_overview/)\n\n*   [Batch Inference](/capabilities/batch/)\n*   [Predicted outputs](/capabilities/predicted-outputs/)\n*   Agents\n*   [Introduction](/agents/agents_introduction/)\n*   [Agents & Conversations](/agents/agents_basics/)\n*   [Connectors](/agents/connectors/connectors/)\n\n*   [MCP](/agents/mcp/)\n*   [Function Calling](/agents/function_calling/)\n*   [Handoffs](/agents/handoffs/)\n*   Deployment\n*   [La Plateforme](/deployment/laplateforme/overview/)\n\n*   [Cloud](/deployment/cloud/overview/)\n\n*   [Self-deployment](/deployment/self-deployment/overview/)\n\n*   Guides\n*   [Prompting capabilities](/guides/prompting_capabilities/)\n*   [Basic RAG](/guides/rag/)\n*   [Prefix](/guides/prefix/)\n*   [Tokenization](/guides/tokenization/)\n*   [Sampling](/guides/sampling/)\n*   [Fine-tuning](/guides/finetuning/)\n*   [Evaluation](/guides/evaluation/)\n*   [Observability](/guides/observability/)\n*   [Other resources](/guides/resources/)\n*   [How to contribute](/guides/contribute/overview/)\n\n\n*   [](/)\n*   Introduction\n\nOn this page\n\n# Bienvenue to Mistral AI Documentation\n\nMistral AI is a research lab building the best open source models in the world."
+    ],
+    "key_changes": [],
+    "change_percentage": 56,
+    "summary": "56% content changed (43 additions, 4 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "window",
+        "frequency": 7
+      },
+      {
+        "word": "var",
+        "frequency": 5
+      },
+      {
+        "word": "style",
+        "frequency": 5
+      },
+      {
+        "word": "font-weight",
+        "frequency": 4
+      },
+      {
+        "word": "bold",
+        "frequency": 4
+      },
+      {
+        "word": "baseurl",
+        "frequency": 4
+      },
+      {
+        "word": "span",
+        "frequency": 4
+      },
+      {
+        "word": "div",
+        "frequency": 3
+      },
+      {
+        "word": "20px",
+        "frequency": 3
+      },
+      {
+        "word": "location",
+        "frequency": 3
+      },
+      {
+        "word": "try",
+        "frequency": 3
+      },
+      {
+        "word": "catch",
+        "frequency": 3
+      },
+      {
+        "word": "insertbanner",
+        "frequency": 2
+      },
+      {
+        "word": "innerhtml",
+        "frequency": 2
+      },
+      {
+        "word": "red",
+        "frequency": 2
+      },
+      {
+        "word": "font-size",
+        "frequency": 2
+      },
+      {
+        "word": "site",
+        "frequency": 2
+      },
+      {
+        "word": "color",
+        "frequency": 2
+      },
+      {
+        "word": "docusaurus-base-url-issue-banner-suggestion-container",
+        "frequency": 2
+      },
+      {
+        "word": "documentelement",
+        "frequency": 2
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "url",
+        "frequency": 1
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "document": {
+        "before": 2,
+        "after": 8,
+        "change": 6
+      },
+      "function": {
+        "before": 6,
+        "after": 12,
+        "change": 6
+      },
+      "docusaurus": {
+        "before": 1,
+        "after": 5,
+        "change": 4
+      },
+      "new": {
+        "before": 3,
+        "after": 5,
+        "change": 2
+      },
+      "capabilities": {
+        "before": 28,
+        "after": 29,
+        "change": 1
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "https mistral",
+        "count": 15
+      },
+      {
+        "phrase": "mistral news",
+        "count": 13
+      },
+      {
+        "phrase": "2024 https",
+        "count": 8
+      },
+      {
+        "phrase": "code generation",
+        "count": 6
+      },
+      {
+        "phrase": "function calling",
+        "count": 6
+      },
+      {
+        "phrase": "2025 https",
+        "count": 6
+      },
+      {
+        "phrase": "open source",
+        "count": 5
+      },
+      {
+        "phrase": "model released",
+        "count": 5
+      },
+      {
+        "phrase": "style font-weight",
+        "count": 4
+      },
+      {
+        "phrase": "font-weight bold",
+        "count": 4
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

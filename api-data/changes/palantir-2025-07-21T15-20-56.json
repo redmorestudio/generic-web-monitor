@@ -1,0 +1,90 @@
+{
+  "id": 146,
+  "company": "Palantir",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:20:56.028Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added to the Palantir homepage, including navigation, latest news, offerings, impact studies, and quick links",
+    "specific_changes": [
+      "Added navigation menu with links to various Palantir platforms and offerings",
+      "Included latest news section with links to news articles and videos",
+      "Added offerings section with descriptions of Palantir's platforms and services",
+      "Included impact studies section with links to case studies and success stories",
+      "Added quick links section with links to various Palantir resources and pages"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on customer engagement and marketing",
+      "Expansion into new markets and industries"
+    ],
+    "business_impact": "The changes suggest a shift in Palantir's marketing strategy, with a focus on showcasing its platforms and services to a wider audience",
+    "strategic_direction": "Palantir appears to be focusing on growth and expansion, with a emphasis on showcasing its capabilities and services to a broader audience",
+    "competitive_implications": "The changes may indicate a competitive response to other companies in the data analytics and AI space"
+  },
+  "entities": {
+    "people": [
+      "Alex Karp"
+    ],
+    "markets": [
+      "Defense",
+      "Government",
+      "Commercial"
+    ],
+    "pricing": [],
+    "features": [
+      "AI-powered automation",
+      "Data integration",
+      "Analytics"
+    ],
+    "products": [
+      "AIP",
+      "Foundry",
+      "Gotham",
+      "Apollo",
+      "TITAN",
+      "Vantage"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "Artificial intelligence",
+      "Machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the data analytics and AI space",
+      "Regulatory challenges in the defense and government markets"
+    ],
+    "key_findings": [
+      "Palantir is investing in its marketing and customer engagement efforts",
+      "The company is expanding its presence in the defense and government markets"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Palantir in the defense and government markets",
+      "Potential for growth in the commercial market"
+    ],
+    "recommended_actions": [
+      "Monitor Palantir's marketing and customer engagement efforts",
+      "Explore partnership opportunities with Palantir in the defense and government markets"
+    ]
+  },
+  "key_insights": [
+    "Palantir is investing in its marketing and customer engagement efforts",
+    "The company is expanding its presence in the defense and government markets"
+  ],
+  "business_impact": "The changes suggest a shift in Palantir's marketing strategy, with a focus on showcasing its platforms and services to a wider audience",
+  "competitive_implications": "The changes may indicate a competitive response to other companies in the data analytics and AI space",
+  "content_hash_before": null,
+  "content_hash_after": "eb16a5e27432f84c9b4a96a6c4fc7a402512fe692d6274c643f20e5fd7a352f0",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

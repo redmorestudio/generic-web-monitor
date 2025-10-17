@@ -1,0 +1,93 @@
+{
+  "id": 38,
+  "company": "Stability AI",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:27:30.420Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added to the Stability AI homepage",
+    "specific_changes": [
+      "Introduction of new products and features",
+      "Addition of case studies and customer stories",
+      "Introduction of a new logo and branding",
+      "Update to the navigation menu and website structure",
+      "Addition of a learning hub and customer stories section",
+      "Introduction of a mailing list sign-up form"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the generative AI market",
+      "Growing demand for AI-powered creative tools"
+    ],
+    "business_impact": "The changes suggest a significant expansion of the company's product offerings and a stronger focus on enterprise customers",
+    "strategic_direction": "The company is likely to continue to invest in research and development, and to expand its sales and marketing efforts to reach more enterprise customers",
+    "competitive_implications": "The company is positioning itself as a major player in the generative AI market, with a strong focus on enterprise customers and a wide range of product offerings"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Enterprise",
+      "Creative professionals"
+    ],
+    "pricing": [],
+    "features": [
+      "Image generation",
+      "Video generation",
+      "Audio generation",
+      "3D generation"
+    ],
+    "products": [
+      "Stable Diffusion",
+      "Stable Video",
+      "Stable Audio",
+      "Stable 3D"
+    ],
+    "partnerships": [
+      "Arm",
+      "AWS",
+      "Lenovo",
+      "Microsoft Azure",
+      "NVIDIA"
+    ],
+    "technologies": [
+      "Generative AI",
+      "Machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition from other companies in the generative AI market",
+      "Regulatory challenges related to the use of AI-powered creative tools"
+    ],
+    "key_findings": [
+      "The company is expanding its product offerings to include more AI-powered creative tools",
+      "The company is targeting enterprise customers with its new products and features"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the creative and technology industries",
+      "Expansion into new markets, such as the education sector"
+    ],
+    "recommended_actions": [
+      "Monitor the company's progress and adjust our own strategy accordingly",
+      "Consider partnership opportunities with the company"
+    ]
+  },
+  "key_insights": [
+    "The company is expanding its product offerings to include more AI-powered creative tools",
+    "The company is targeting enterprise customers with its new products and features"
+  ],
+  "business_impact": "The changes suggest a significant expansion of the company's product offerings and a stronger focus on enterprise customers",
+  "competitive_implications": "The company is positioning itself as a major player in the generative AI market, with a strong focus on enterprise customers and a wide range of product offerings",
+  "content_hash_before": null,
+  "content_hash_after": "90f2df31abc583fded60b9288ce5d2a573297f7f4118b192c31bf14bd6a4de55",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

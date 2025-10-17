@@ -1,0 +1,48 @@
+name: Test Static Data Generation
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test-static-gen:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install
+      
+      - name: Test static data generation
+        run: |
+          cd github-actions-backend
+          echo "=== Testing static data generation ==="
+          node generate-static-data-wrapper.js
+      
+      - name: Check generated files
+        run: |
+          echo "=== Checking generated files ==="
+          ls -la api-data/
+          echo -e "\n=== Dashboard data sample ==="
+          head -20 api-data/dashboard.json || echo "No dashboard.json"
+          echo -e "\n=== Companies count ==="
+          jq '.companies | length' api-data/companies.json || echo "No companies data"
+          echo -e "\n=== Content snapshots count ==="
+          jq '.extractedData | length' api-data/content-snapshots.json || echo "No snapshots data"
+      
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-data-test-${{ github.run_id }}
+          path: api-data/
+          retention-days: 7

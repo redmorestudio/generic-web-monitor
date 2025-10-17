@@ -1,0 +1,59 @@
+{
+  "id": 186,
+  "company": "Descript",
+  "page_url": "product",
+  "detected_at": "2025-07-21T15:09:38.441Z",
+  "change_type": "modified",
+  "interest_level": 2,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "minor",
+    "what_changed": "No significant changes were detected in the content structure or features.",
+    "specific_changes": [
+      "Minor adjustments in wording and formatting",
+      "No new features or products announced"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Descript continues to focus on its core audio editing and AI-powered features."
+    ],
+    "business_impact": "No significant business impact is expected from these minor changes.",
+    "strategic_direction": "Descript's strategic direction remains focused on audio editing and AI-powered tools.",
+    "competitive_implications": "The minor changes do not significantly affect Descript's competitive positioning."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [],
+    "key_findings": [
+      "Descript's website content has undergone minor updates.",
+      "No new features or significant changes were announced."
+    ],
+    "opportunities": [],
+    "recommended_actions": [
+      "Continue monitoring Descript's website and product updates for significant changes."
+    ]
+  },
+  "key_insights": [
+    "Descript's website content has undergone minor updates.",
+    "No new features or significant changes were announced."
+  ],
+  "business_impact": "No significant business impact is expected from these minor changes.",
+  "competitive_implications": "The minor changes do not significantly affect Descript's competitive positioning.",
+  "content_hash_before": "f6cbb6ecd78d4c65caa3444d50eb2448a9f491b64dd5897c6b319aaf77cc9307",
+  "content_hash_after": "9ff9768ada92eb7dc0e5d8c7b408e3779e2fe504fc3d6ba42b624a409947a1ed",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

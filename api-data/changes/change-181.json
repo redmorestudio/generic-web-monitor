@@ -1,0 +1,250 @@
+{
+  "change_id": 181,
+  "url": "https://wandb.ai/pricing",
+  "company": "Weights & Biases",
+  "company_category": "AI Infrastructure",
+  "detected_at": "2025-07-18 16:42:43",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes detected between the previous and current content of Weights & Biases pricing page.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://wandb.ai/pricing\ncompany: Weights & Biases\nscraped_at: 2025-07-04 20:20:59\n---\n\n         Weights & Biases pricing\n\n[Skip to content](#content)\n\n[![](https://site.wandb.ai/wp-content/uploads/2023/05/wb-cw.svg)](/site)\n\n*   Platform\n\n    Close Platform Open Platform\n\n    [\n\n    Weave: LLMOps\n\n    ](https://wandb.ai/site/weave/)\n\n    *   [Traces\n        Explore and debug AI applications](https://wandb.ai/site/traces/)\n    *   [Evaluations\n        Rigorous evaluations of AI applicat...",
+    "after": ".async-hide { opacity: 0 !important} (function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1\\*new Date; h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')}; (a\\[n\\]=a\\[n\\]||\\[\\]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c; })(window,document.documentElement,'async-hide','dataLayer',4000, {'OPT-NSHDK56':true});     img:is(\\[sizes=\"auto\" i\\], \\[sizes^=\"auto,\" i\\]) { contain-intrinsic-size: 3000px 1500px } window.dataLayer = window.dataLayer || \\[\\];function gt..."
+  },
+  "diff": {
+    "added_sentences": [
+      "async-hide { opacity: 0 !",
+      "important} (function(a,s,y,n,c,h,i,d,e){s.",
+      "className+=' '+y;h.",
+      "start=1\\*new Date; h.",
+      "end=i=function(){s.",
+      "className=s.",
+      "className.",
+      "replace(RegExp(' ?",
+      "'+y),'')}; (a\\[n\\]=a\\[n\\]||\\[\\]).",
+      "hide=h;setTimeout(function(){i();h."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://wandb.",
+      "ai/pricing\ncompany: Weights & Biases\nscraped_at: 2025-07-04 20:20:59\n---\n\n         Weights & Biases pricing\n\n[Skip to content](#content)\n\n[!",
+      "svg)](/site)\n\n*   Platform\n\n    Close Platform Open Platform\n\n    [\n\n    Weave: LLMOps\n\n    ](https://wandb.",
+      "ai/site/weave/)\n\n    *   [Traces\n        Explore and debug AI applications](https://wandb.",
+      "ai/site/traces/)\n    *   [Evaluations\n        Rigorous evaluations of AI applications](https://wandb.",
+      "ai/site/evaluations/)\n    *   [Playground\n        Explore prompts and models](https://wandb.",
+      "ai/site/playground)\n    *   [Agents\n        Observability tools for agentic systems](https://wandb.",
+      "ai/site/agents/)\n    *   [Guardrails\n        Block prompt attacks and harmful outputs](https://wandb.",
+      "ai/site/guardrails/)\n    *   [Monitors\n        Continuously improve in production](https://wandb.",
+      "ai/site/online-evaluations)\n\n    [\n\n    Models: MLOps\n\n    ](https://wandb."
+    ],
+    "key_changes": [
+      "New version: 0.44, 0.67, 2.25, 3.38, 5.06, 0.2, 0.4, 0.5, 0.667, 1.333, 1.25, 1.6, 4.1.0, 1.2, 13.3333333333, 30.6666666667, 65.3333333333, 82.6666666667, 91.3333333333, 1.3, 1.35, 1.4, 1.7, 2.5, 1.1, 7.5, 6.5, 11.5, 1.75, 2.75, 3.25, 3.5, 3.75, 4.25, 4.5, 4.75, 14.4, 1.11, 1.57, 1.46, 1.42, 37.5, 102.93, 19.47, 93.01, 107.39, 48.91, 100.86, 104.5, 29.6, 96.51, 107.69, 51.86, 98.34, 1.15, 1.05, 15.5, 39.21, 34.5, 1.055, 142.4232673267, 34.0767326733, 55.9207920792, 7.63, 13.74, 2.2222222222, 86.1764705882, 251.6322115385, 179.7860576923, 24.8677884615, 200.1235955056, 51.5, 222.6724137931, 142.5, 27.5, 3.30.2, 2.3.33",
+      "New model mentioned",
+      "New api mentioned",
+      "New update mentioned",
+      "New feature mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 97,
+    "summary": "97% content changed (8005 additions, 84 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "var",
+        "frequency": 3375
+      },
+      {
+        "word": "--scale",
+        "frequency": 1140
+      },
+      {
+        "word": "calc",
+        "frequency": 1133
+      },
+      {
+        "word": "--canvas",
+        "frequency": 1100
+      },
+      {
+        "word": "--multiplier",
+        "frequency": 1057
+      },
+      {
+        "word": "onetrust-pc-sdk",
+        "frequency": 808
+      },
+      {
+        "word": "important",
+        "frequency": 446
+      },
+      {
+        "word": "width",
+        "frequency": 388
+      },
+      {
+        "word": "height",
+        "frequency": 342
+      },
+      {
+        "word": "display",
+        "frequency": 334
+      },
+      {
+        "word": "font-size",
+        "frequency": 309
+      },
+      {
+        "word": "onetrust-banner-sdk",
+        "frequency": 279
+      },
+      {
+        "word": "color",
+        "frequency": 252
+      },
+      {
+        "word": "none",
+        "frequency": 248
+      },
+      {
+        "word": "auto",
+        "frequency": 239
+      },
+      {
+        "word": "ot-sdk-cookie-policy",
+        "frequency": 224
+      },
+      {
+        "word": "position",
+        "frequency": 210
+      },
+      {
+        "word": "fully-connected-sf-page",
+        "frequency": 200
+      },
+      {
+        "word": "padding",
+        "frequency": 199
+      },
+      {
+        "word": "flex",
+        "frequency": 163
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "100": {
+        "before": 4,
+        "after": 1438,
+        "change": 1434
+      },
+      "center": {
+        "before": 2,
+        "after": 167,
+        "change": 165
+      },
+      "function": {
+        "before": 4,
+        "after": 120,
+        "change": 116
+      },
+      "not": {
+        "before": 32,
+        "after": 142,
+        "change": 110
+      },
+      "button": {
+        "before": 2,
+        "after": 112,
+        "change": 110
+      },
+      "label": {
+        "before": 16,
+        "after": 124,
+        "change": 108
+      },
+      "right": {
+        "before": 2,
+        "after": 100,
+        "change": 98
+      },
+      "type": {
+        "before": 2,
+        "after": 90,
+        "change": 88
+      },
+      "input": {
+        "before": 1,
+        "after": 88,
+        "change": 87
+      },
+      "https": {
+        "before": 176,
+        "after": 260,
+        "change": 84
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "100 var",
+        "count": 1120
+      },
+      {
+        "phrase": "var --canvas",
+        "count": 1096
+      },
+      {
+        "phrase": "--canvas 100",
+        "count": 1096
+      },
+      {
+        "phrase": "var --scale",
+        "count": 1096
+      },
+      {
+        "phrase": "--scale var",
+        "count": 1055
+      },
+      {
+        "phrase": "var --multiplier",
+        "count": 1055
+      },
+      {
+        "phrase": "calc var",
+        "count": 882
+      },
+      {
+        "phrase": "font-size calc",
+        "count": 175
+      },
+      {
+        "phrase": "https wandb",
+        "count": 168
+      },
+      {
+        "phrase": "wandb site",
+        "count": 155
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

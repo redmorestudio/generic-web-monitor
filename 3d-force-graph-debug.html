@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Competitive Monitor - 3D Force Graph (Debug)</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #eee;
+            overflow: hidden;
+        }
+        
+        #debug {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            max-width: 600px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            font-family: monospace;
+            font-size: 12px;
+        }
+        
+        .debug-success { color: #00ff88; }
+        .debug-error { color: #ff4444; }
+        .debug-warning { color: #ffa726; }
+        .debug-info { color: #87CEEB; }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 999;
+        }
+        
+        .loading-content h3 {
+            color: #00ff88;
+            margin-bottom: 20px;
+        }
+        
+        .progress-bar {
+            width: 300px;
+            height: 20px;
+            background: #333;
+            border-radius: 10px;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00ff88, #00cc6a);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+            width: 0%;
+        }
+        
+        .step-counter {
+            color: #888;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        #error-display {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(20, 20, 30, 0.95);
+            border: 2px solid #ff4444;
+            border-radius: 8px;
+            padding: 30px;
+            max-width: 600px;
+            display: none;
+            z-index: 1001;
+        }
+        
+        #error-display h3 {
+            color: #ff4444;
+            margin-top: 0;
+        }
+    </style>
+    <!-- Fixed CDN links with HTTPS and specific versions -->
+    <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+</head>
+<body>
+    <div id="debug">
+        <h4 style="margin-top: 0; color: #00ff88;">3D Force Graph Debug Console</h4>
+        <div id="debug-log"></div>
+    </div>
+    
+    <div id="loading">
+        <div class="loading-content">
+            <h3>Loading AI Competitive Intelligence</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <p id="loading-message">Initializing...</p>
+            <p class="step-counter" id="step-counter">Step 0 of 5</p>
+        </div>
+    </div>
+    
+    <div id="error-display">
+        <h3>Error Loading Graph</h3>
+        <div id="error-content"></div>
+        <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; background: #ff4444; color: white; border: none; border-radius: 4px; cursor: pointer;">Retry</button>
+    </div>
+    
+    <div id="3d-graph"></div>
+
+    <script>
+    // Debug logging
+    const debugLog = [];
+    let loadingTimeout;
+    
+    function log(message, type = 'info') {
+        const timestamp = new Date().toISOString().split('T')[1].split('.')[0];
+        const logEntry = `[${timestamp}] ${message}`;
+        debugLog.push({ message: logEntry, type });
+        
+        console.log(logEntry);
+        
+        const debugDiv = document.getElementById('debug-log');
+        const entry = document.createElement('div');
+        entry.className = `debug-${type}`;
+        entry.textContent = logEntry;
+        debugDiv.appendChild(entry);
+        debugDiv.scrollTop = debugDiv.scrollHeight;
+    }
+    
+    function updateLoadingProgress(step, total, message) {
+        log(`Progress: Step ${step}/${total} - ${message}`, 'info');
+        document.getElementById('progress-fill').style.width = `${(step/total)*100}%`;
+        document.getElementById('loading-message').textContent = message;
+        document.getElementById('step-counter').textContent = `Step ${step} of ${total}`;
+    }
+    
+    function showError(title, details) {
+        log(`ERROR: ${title} - ${details}`, 'error');
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('error-display').style.display = 'block';
+        document.getElementById('error-content').innerHTML = `
+            <p><strong>${title}</strong></p>
+            <p>${details}</p>
+            <p style="margin-top: 20px; font-size: 12px; color: #888;">Check the debug console for more details.</p>
+        `;
+    }
+    
+    function hideLoading() {
+        clearTimeout(loadingTimeout);
+        document.getElementById('loading').style.display = 'none';
+    }
+    
+    // Check environment
+    log('=== 3D Force Graph Debug Started ===', 'success');
+    log(`Page URL: ${window.location.href}`, 'info');
+    log(`Protocol: ${window.location.protocol}`, 'info');
+    
+    // Check if libraries loaded
+    log('Checking libraries...', 'info');
+    if (typeof THREE === 'undefined') {
+        log('THREE.js NOT loaded!', 'error');
+    } else {
+        log(`THREE.js loaded: v${THREE.REVISION}`, 'success');
+    }
+    
+    if (typeof SpriteText === 'undefined') {
+        log('SpriteText NOT loaded!', 'error');
+    } else {
+        log('SpriteText loaded', 'success');
+    }
+    
+    if (typeof ForceGraph3D === 'undefined') {
+        log('ForceGraph3D NOT loaded!', 'error');
+    } else {
+        log('ForceGraph3D loaded', 'success');
+    }
+    
+    // Set loading timeout
+    loadingTimeout = setTimeout(() => {
+        log('Loading timeout after 15 seconds', 'error');
+        showError('Loading Timeout', 'The graph took too long to load. This might be due to network issues or missing data files.');
+    }, 15000);
+    
+    async function validateData(data, source) {
+        log(`Validating ${source} data...`, 'info');
+        
+        if (!data) {
+            throw new Error(`${source} data is null or undefined`);
+        }
+        
+        // Log data structure
+        log(`${source} keys: ${Object.keys(data).join(', ')}`, 'info');
+        
+        // Specific validation for each data type
+        if (source === 'dashboard') {
+            if (!data.company_activity) {
+                throw new Error('dashboard.json missing company_activity');
+            }
+            log(`Dashboard has ${data.company_activity.length} companies`, 'success');
+        } else if (source === 'companies') {
+            if (!data.companies) {
+                throw new Error('companies.json missing companies array');
+            }
+            log(`Companies data has ${data.companies.length} companies`, 'success');
+        } else if (source === 'changes') {
+            if (!data.changes) {
+                log('changes.json missing changes array (may be empty)', 'warning');
+                data.changes = [];
+            }
+            log(`Changes data has ${data.changes.length} changes`, 'success');
+        }
+        
+        return true;
+    }
+    
+    async function initGraph() {
+        try {
+            updateLoadingProgress(1, 5, 'Fetching dashboard data...');
+            
+            // Fetch with better error handling
+            const dashboardResponse = await fetch('./api-data/dashboard.json').catch(err => {
+                throw new Error(`Failed to fetch dashboard.json: ${err.message}`);
+            });
+            
+            if (!dashboardResponse.ok) {
+                throw new Error(`Dashboard fetch failed: ${dashboardResponse.status} ${dashboardResponse.statusText}`);
+            }
+            
+            const dashboardData = await dashboardResponse.json().catch(err => {
+                throw new Error(`Failed to parse dashboard.json: ${err.message}`);
+            });
+            
+            await validateData(dashboardData, 'dashboard');
+            
+            updateLoadingProgress(2, 5, 'Fetching companies data...');
+            
+            const companiesResponse = await fetch('./api-data/companies.json').catch(err => {
+                throw new Error(`Failed to fetch companies.json: ${err.message}`);
+            });
+            
+            if (!companiesResponse.ok) {
+                throw new Error(`Companies fetch failed: ${companiesResponse.status} ${companiesResponse.statusText}`);
+            }
+            
+            const companiesData = await companiesResponse.json().catch(err => {
+                throw new Error(`Failed to parse companies.json: ${err.message}`);
+            });
+            
+            await validateData(companiesData, 'companies');
+            
+            updateLoadingProgress(3, 5, 'Fetching changes data...');
+            
+            const changesResponse = await fetch('./api-data/changes.json').catch(err => {
+                throw new Error(`Failed to fetch changes.json: ${err.message}`);
+            });
+            
+            if (!changesResponse.ok) {
+                throw new Error(`Changes fetch failed: ${changesResponse.status} ${changesResponse.statusText}`);
+            }
+            
+            const changesData = await changesResponse.json().catch(err => {
+                throw new Error(`Failed to parse changes.json: ${err.message}`);
+            });
+            
+            await validateData(changesData, 'changes');
+            
+            updateLoadingProgress(4, 5, 'Building graph data...');
+            
+            // Build graph data
+            const graphData = buildGraphData(dashboardData, companiesData, changesData);
+            log(`Graph data built: ${graphData.nodes.length} nodes, ${graphData.links.length} links`, 'success');
+            
+            updateLoadingProgress(5, 5, 'Initializing 3D visualization...');
+            
+            // Initialize ForceGraph3D
+            const graphElement = document.getElementById('3d-graph');
+            if (!graphElement) {
+                throw new Error('3d-graph element not found');
+            }
+            
+            const Graph = ForceGraph3D()(graphElement)
+                .graphData(graphData)
+                .nodeLabel(node => node.label || node.name)
+                .nodeColor(node => node.color || '#667eea')
+                .linkWidth(0.5)
+                .linkOpacity(0.3);
+            
+            log('ForceGraph3D initialized successfully', 'success');
+            
+            // Set camera position
+            Graph.cameraPosition({ z: 500 });
+            
+            hideLoading();
+            log('=== Graph loaded successfully! ===', 'success');
+            
+        } catch (error) {
+            log(`Fatal error: ${error.message}`, 'error');
+            log(`Stack trace: ${error.stack}`, 'error');
+            showError('Failed to Initialize Graph', error.message);
+        }
+    }
+    
+    function buildGraphData(dashboard, companies, changes) {
+        const nodes = [];
+        const links = [];
+        const nodeMap = new Map();
+        
+        // Create nodes from dashboard company activity
+        dashboard.company_activity.forEach((company, index) => {
+            const node = {
+                id: company.company,
+                name: company.company,
+                label: `${company.company}\\n${company.type}\\nURLs: ${company.url_count}`,
+                group: company.type,
+                color: getColorForType(company.type),
+                intelligence: company.intelligence
+            };
+            nodes.push(node);
+            nodeMap.set(company.company, node);
+            log(`Created node: ${company.company}`, 'info');
+        });
+        
+        // Create some sample links based on shared technologies
+        const techMap = new Map();
+        dashboard.company_activity.forEach(company => {
+            if (company.intelligence && company.intelligence.technologies) {
+                company.intelligence.technologies.forEach(tech => {
+                    if (!techMap.has(tech)) {
+                        techMap.set(tech, []);
+                    }
+                    techMap.get(tech).push(company.company);
+                });
+            }
+        });
+        
+        // Create links between companies sharing technologies
+        let linkCount = 0;
+        techMap.forEach((companies, tech) => {
+            if (companies.length > 1) {
+                for (let i = 0; i < companies.length - 1; i++) {
+                    for (let j = i + 1; j < companies.length; j++) {
+                        links.push({
+                            source: companies[i],
+                            target: companies[j],
+                            value: 1
+                        });
+                        linkCount++;
+                        if (linkCount < 5) { // Log first few links only
+                            log(`Link: ${companies[i]} <-> ${companies[j]} (${tech})`, 'info');
+                        }
+                    }
+                }
+            }
+        });
+        
+        return { nodes, links };
+    }
+    
+    function getColorForType(type) {
+        const colors = {
+            'LLM Providers': '#ff6b6b',
+            'AI Hardware': '#4ecdc4',
+            'AI Frameworks': '#45b7d1',
+            'Cloud Providers': '#96ceb4',
+            'AI Applications': '#f7b731',
+            'AI Research': '#5f27cd'
+        };
+        return colors[type] || '#667eea';
+    }
+    
+    // Start initialization
+    log('Starting graph initialization...', 'info');
+    initGraph();
+    </script>
+</body>
+</html>

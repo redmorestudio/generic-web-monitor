@@ -1,0 +1,219 @@
+{
+  "change_id": 91,
+  "url": "https://pi.ai",
+  "company": "Inflection AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:37:26",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No changes detected in the content, technical and business impact scores reflect the lack of innovation or updates.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://pi.ai\ncompany: Inflection AI\nscraped_at: 2025-07-04 20:15:32\n---\n\nPi, your personal AI\n\nExploring the frontiers of\n_emotional intelligence_,\nfor every enterprise.\n\nComing soon\n\nThe original\n_emotionally intelligent_\npersonal AI.\n\nContinue to Pi Classic\n\nPi, your personal AI...",
+    "after": "Pi, your personal AI\n\nExploring the frontiers of  \n_emotional intelligence_,  \nfor every enterprise.\n\nComing soon\n\nThe original  \n_emotionally intelligent_  \npersonal AI.\n\nContinue to Pi Classic\n\n{\"props\":{\"pageProps\":{\"\\_\\_lang\":\"en\",\"\\_\\_namespaces\":{\"common\":{\"age-legal-notice\":\"I'm intended for users above 18.\",\"ask-for-first-name\":\"Let’s get started. What should I call you?\",\"ask-for-phone-number\":\"And what’s your phone number, so we can keep in touch?\",\"ask-for-verification-code\":\"Thanks! ..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Pi, your personal AI\n\nExploring the frontiers of  \n_emotional intelligence_,  \nfor every enterprise.",
+      "Coming soon\n\nThe original  \n_emotionally intelligent_  \npersonal AI.",
+      "Continue to Pi Classic\n\n{\"props\":{\"pageProps\":{\"\\_\\_lang\":\"en\",\"\\_\\_namespaces\":{\"common\":{\"age-legal-notice\":\"I'm intended for users above 18.",
+      "\",\"ask-for-first-name\":\"Let’s get started.",
+      "What should I call you?",
+      "\",\"ask-for-phone-number\":\"And what’s your phone number, so we can keep in touch?",
+      "\",\"ask-for-verification-code\":\"Thanks!",
+      "I’ve fired off a verification code to that number.",
+      "Can you please enter it?",
+      "\",\"confirm-delete\":\"This will permanently delete your account and all of your conversations with Pi."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://pi.",
+      "ai\ncompany: Inflection AI\nscraped_at: 2025-07-04 20:15:32\n---\n\nPi, your personal AI\n\nExploring the frontiers of\n_emotional intelligence_,\nfor every enterprise.",
+      "Coming soon\n\nThe original\n_emotionally intelligent_\npersonal AI."
+    ],
+    "key_changes": [],
+    "change_percentage": 103,
+    "summary": "103% content changed (92 additions, 3 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "you",
+        "frequency": 22
+      },
+      {
+        "word": "please",
+        "frequency": 10
+      },
+      {
+        "word": "let",
+        "frequency": 7
+      },
+      {
+        "word": "what",
+        "frequency": 7
+      },
+      {
+        "word": "talk",
+        "frequency": 7
+      },
+      {
+        "word": "thanks",
+        "frequency": 6
+      },
+      {
+        "word": "again",
+        "frequency": 6
+      },
+      {
+        "word": "terms",
+        "frequency": 6
+      },
+      {
+        "word": "check",
+        "frequency": 6
+      },
+      {
+        "word": "code",
+        "frequency": 5
+      },
+      {
+        "word": "mind",
+        "frequency": 5
+      },
+      {
+        "word": "great",
+        "frequency": 5
+      },
+      {
+        "word": "support",
+        "frequency": 5
+      },
+      {
+        "word": "number",
+        "frequency": 4
+      },
+      {
+        "word": "account",
+        "frequency": 4
+      },
+      {
+        "word": "like",
+        "frequency": 4
+      },
+      {
+        "word": "yes",
+        "frequency": 4
+      },
+      {
+        "word": "firstname",
+        "frequency": 4
+      },
+      {
+        "word": "hey",
+        "frequency": 4
+      },
+      {
+        "word": "message",
+        "frequency": 4
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "url",
+        "frequency": 1
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "your": {
+        "before": 2,
+        "after": 28,
+        "change": 26
+      },
+      "soon": {
+        "before": 1,
+        "after": 4,
+        "change": 3
+      },
+      "personal": {
+        "before": 3,
+        "after": 5,
+        "change": 2
+      },
+      "https": {
+        "before": 1,
+        "after": 3,
+        "change": 2
+      },
+      "inflection": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "what your",
+        "count": 5
+      },
+      {
+        "phrase": "your mind",
+        "count": 5
+      },
+      {
+        "phrase": "your personal",
+        "count": 4
+      },
+      {
+        "phrase": "your account",
+        "count": 4
+      },
+      {
+        "phrase": "terms service",
+        "count": 4
+      },
+      {
+        "phrase": "please check",
+        "count": 3
+      },
+      {
+        "phrase": "check back",
+        "count": 3
+      },
+      {
+        "phrase": "violations terms",
+        "count": 3
+      },
+      {
+        "phrase": "your phone",
+        "count": 2
+      },
+      {
+        "phrase": "phone number",
+        "count": 2
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

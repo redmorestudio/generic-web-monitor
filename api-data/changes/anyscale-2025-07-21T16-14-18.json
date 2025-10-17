@@ -1,0 +1,66 @@
+{
+  "id": 19,
+  "company": "Anyscale",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T16:14:18.467Z",
+  "change_type": "modified",
+  "interest_level": 4,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "minor",
+    "what_changed": "Addition of a cookie consent banner and modification of the website's footer to include a link to the company's privacy policy",
+    "specific_changes": [
+      "Addition of a cookie consent banner",
+      "Modification of the website's footer to include a link to the company's privacy policy",
+      "Update of the website's cookie policy to include more detailed information about the types of cookies used"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on data protection and privacy",
+      "Growing importance of transparency in cookie usage"
+    ],
+    "business_impact": "The changes are likely intended to improve the company's compliance with data protection regulations and enhance transparency about its use of cookies",
+    "strategic_direction": "The company appears to be prioritizing compliance and transparency, which may be part of a broader strategy to build trust with customers and stakeholders",
+    "competitive_implications": "The changes are unlikely to have a significant impact on the company's competitive positioning, as they are primarily related to compliance and transparency"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "The company may face reputational risks if it fails to comply with data protection regulations or is not transparent about its use of cookies"
+    ],
+    "key_findings": [
+      "The company has updated its cookie policy to include more detailed information about the types of cookies used",
+      "The company has added a cookie consent banner to its website"
+    ],
+    "opportunities": [
+      "The company may be able to build trust with customers and stakeholders by prioritizing transparency and compliance"
+    ],
+    "recommended_actions": [
+      "Monitor the company's compliance with data protection regulations",
+      "Assess the impact of the changes on the company's competitive positioning"
+    ]
+  },
+  "key_insights": [
+    "The company has updated its cookie policy to include more detailed information about the types of cookies used",
+    "The company has added a cookie consent banner to its website"
+  ],
+  "business_impact": "The changes are likely intended to improve the company's compliance with data protection regulations and enhance transparency about its use of cookies",
+  "competitive_implications": "The changes are unlikely to have a significant impact on the company's competitive positioning, as they are primarily related to compliance and transparency",
+  "content_hash_before": "09275801e441b412d9fbe237678d6b2887471257af4d99defe495eb2203b8066",
+  "content_hash_after": "fc572300cb955bb8ecd2fbe508c463f9b57d309a43e46128276a4bbc3a4cd8d3",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

@@ -1,0 +1,71 @@
+{
+  "id": 5,
+  "company": "Meta AI",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T16:24:35.091Z",
+  "change_type": "modified",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "New blog post added: 'Joining forces with AWS on a new program to help startups build with Llama'",
+    "specific_changes": [
+      "New blog post about AWS partnership",
+      "Updated list of featured and latest news articles"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on startup partnerships",
+      "Expansion of Llama's reach and capabilities"
+    ],
+    "business_impact": "The partnership with AWS could lead to increased adoption of Meta AI's Llama model among startups, potentially driving growth and revenue.",
+    "strategic_direction": "The partnership suggests that Meta AI is focusing on expanding its ecosystem and reach, particularly among startups, and is willing to collaborate with other industry leaders to achieve this goal.",
+    "competitive_implications": "The partnership may give Meta AI a competitive edge in the AI market, particularly among startups, by providing access to AWS's resources and expertise."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [
+      "AWS"
+    ],
+    "technologies": [
+      "Llama"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competition from other AI providers",
+      "Dependence on AWS for startup partnerships"
+    ],
+    "key_findings": [
+      "Meta AI is partnering with AWS to support startups",
+      "Llama is being positioned as a key technology for startups"
+    ],
+    "opportunities": [
+      "Increased adoption of Llama among startups",
+      "Potential for Meta AI to expand its reach and capabilities"
+    ],
+    "recommended_actions": [
+      "Monitor the partnership's progress and impact",
+      "Consider similar partnerships with other industry leaders"
+    ]
+  },
+  "key_insights": [
+    "Meta AI is partnering with AWS to support startups",
+    "Llama is being positioned as a key technology for startups"
+  ],
+  "business_impact": "The partnership with AWS could lead to increased adoption of Meta AI's Llama model among startups, potentially driving growth and revenue.",
+  "competitive_implications": "The partnership may give Meta AI a competitive edge in the AI market, particularly among startups, by providing access to AWS's resources and expertise.",
+  "content_hash_before": "ffba8e9644f73a57865086de1400ef82f777f61a2b97d7c1bc0f2433ea3edd00",
+  "content_hash_after": "91b2dc9217080758406618299d2fe12c3cf5b3a61faeb98e9e300147a07bdbeb",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

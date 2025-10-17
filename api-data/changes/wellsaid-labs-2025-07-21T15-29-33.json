@@ -1,0 +1,89 @@
+{
+  "id": 26,
+  "company": "WellSaid Labs",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:29:33.270Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.95,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New pricing page content added",
+    "specific_changes": [
+      "Introduction of a trial plan",
+      "Creative plan priced at $50/mo/user",
+      "Business plan priced at $160/mo/user",
+      "Enterprise plan with custom pricing"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI voiceover market",
+      "Growing demand for AI-powered content creation tools"
+    ],
+    "business_impact": "The new pricing plans may attract more customers, especially small businesses and individuals, and increase revenue for WellSaid Labs.",
+    "strategic_direction": "WellSaid Labs is focusing on expanding its customer base and increasing revenue through its new pricing plans and features.",
+    "competitive_implications": "WellSaid Labs is positioning itself as a leader in the AI voiceover market with its new pricing plans and features."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "Trial: Free",
+      "Creative: $50/mo/user",
+      "Business: $160/mo/user",
+      "Enterprise: Custom pricing"
+    ],
+    "features": [
+      "MP3 file format",
+      "Standard security",
+      "Email support",
+      "Adobe Express & Premiere Pro Integrations",
+      "Team Workspace",
+      "Caption files",
+      "Live support chat"
+    ],
+    "products": [
+      "Studio",
+      "API",
+      "Voices",
+      "Team",
+      "Security",
+      "Integrations"
+    ],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI voiceover market",
+      "Potential backlash from existing customers due to pricing changes"
+    ],
+    "key_findings": [
+      "WellSaid Labs has introduced a new pricing page with various plans",
+      "The plans include a trial plan, creative plan, business plan, and enterprise plan"
+    ],
+    "opportunities": [
+      "Increased revenue for WellSaid Labs",
+      "Expanded customer base for WellSaid Labs"
+    ],
+    "recommended_actions": [
+      "Monitor the market response to the new pricing plans",
+      "Analyze the impact of the new pricing plans on revenue and customer acquisition"
+    ]
+  },
+  "key_insights": [
+    "WellSaid Labs has introduced a new pricing page with various plans",
+    "The plans include a trial plan, creative plan, business plan, and enterprise plan"
+  ],
+  "business_impact": "The new pricing plans may attract more customers, especially small businesses and individuals, and increase revenue for WellSaid Labs.",
+  "competitive_implications": "WellSaid Labs is positioning itself as a leader in the AI voiceover market with its new pricing plans and features.",
+  "content_hash_before": null,
+  "content_hash_after": "551a6504c7345da7f644aea10980b4da26ed7967fb669c94f8f5ba0f0ffd26b6",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

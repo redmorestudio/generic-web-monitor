@@ -1,0 +1,77 @@
+{
+  "id": 185,
+  "company": "Flux",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:10:51.660Z",
+  "change_type": "modified",
+  "interest_level": 2,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "no change",
+    "change_scale": "minor",
+    "what_changed": "No significant changes were detected in the content between the two versions.",
+    "specific_changes": []
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "No change in market positioning or strategy"
+    ],
+    "business_impact": "No significant business impact is expected from the lack of changes in the content.",
+    "strategic_direction": "No change in strategic direction is indicated.",
+    "competitive_implications": "No competitive implications are expected from the lack of changes."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [
+      "text-and-image-driven generation and editing",
+      "character consistency",
+      "local editing",
+      "style reference",
+      "interactive speed"
+    ],
+    "products": [
+      "FLUX.1 Kontext"
+    ],
+    "partnerships": [
+      "Freepik",
+      "Fal",
+      "Replicate",
+      "TogetherAI",
+      "Krea",
+      "Lightricks",
+      "Leonardo AI",
+      "OpenArt",
+      "ComfyUI",
+      "DataCrunch",
+      "Runware"
+    ],
+    "technologies": [
+      "generative flow matching models",
+      "image editing"
+    ]
+  },
+  "insights": {
+    "threats": [],
+    "key_findings": [
+      "No significant changes were detected in the content."
+    ],
+    "opportunities": [],
+    "recommended_actions": [
+      "Monitor the company's website for future updates or changes."
+    ]
+  },
+  "key_insights": [
+    "No significant changes were detected in the content."
+  ],
+  "business_impact": "No significant business impact is expected from the lack of changes in the content.",
+  "competitive_implications": "No competitive implications are expected from the lack of changes.",
+  "content_hash_before": "4d765e86014feb3a8c59fdb33f7d245e94860a68befa2af0d789d2d55b6f1741",
+  "content_hash_after": "a8f6ad43d93f358e8d3f6b2501a492356b24ec7396e0f0f9c3b7eb04d9ca7d16",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

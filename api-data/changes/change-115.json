@@ -1,0 +1,290 @@
+{
+  "change_id": 115,
+  "url": "https://mistral.ai/news",
+  "company": "Mistral AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:38:16",
+  "interest_level": 6,
+  "interest_category": "major_development",
+  "interest_explanation": "Mistral AI has introduced several new updates, including Deep Research (Preview) in Le Chat, Audio-in, and Projects, as well as Voxtral, open source speech understanding models, and upgraded agentic coding capabilities with Devstral models. These updates demonstrate significant technical advances and notable product updates, but their business impact is moderate.",
+  "interest_drivers": [
+    "Introduction of Deep Research (Preview) in Le Chat",
+    "Introduction of Audio-in and Projects in Le Chat",
+    "Introduction of Voxtral, open source speech understanding models",
+    "Upgrading agentic coding capabilities with the new Devstral models"
+  ],
+  "technical_innovation_score": 7,
+  "business_impact_score": 5,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://mistral.ai/news\ncompany: Mistral AI\nscraped_at: 2025-07-04 20:17:28\n---\n\nLatest news | Mistral AI\n\n[\n\n](/)\n\n*   Products\n*   Solutions\n*   Research\n*   Resources\n*   [Pricing](/pricing)\n*   Company\n\n[Try the API\n\n](https://console.mistral.ai/)[Talk to sales\n\n](/contact)\n\n[\n\n](/)\n\n##\n\nLatest updates from Mistral AI.\n\n## Introducing Le Chat Enterprise\n\nYour Enterprise. Your AI.\n\n[Learn more\n\n](/news/le-chat-enterprise)\n\nProduct\n\nMay 7, 2025|Mistral AI\n\nBy category:\n\nAll news\n\nComp...",
+    "after": "Latest news | Mistral AIdocument.querySelectorAll('body link\\[rel=\"icon\"\\], body link\\[rel=\"apple-touch-icon\"\\]').forEach(el => document.head.appendChild(el)).magnifier { position: relative; display: inline-block; line-height: 0; } .magnifier-image { cursor: none; } .magnifying-glass { position: absolute; z-index: 1; background: #e5e5e5 no-repeat; border: solid #ebebeb; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); opacity: 0; transition: opacity 0.3s; pointer-events: none; } .magnifying-glass.cir..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Latest news | Mistral AIdocument.",
+      "querySelectorAll('body link\\[rel=\"icon\"\\], body link\\[rel=\"apple-touch-icon\"\\]').",
+      "forEach(el => document.",
+      "head.",
+      "appendChild(el)).",
+      "magnifier { position: relative; display: inline-block; line-height: 0; } .",
+      "magnifier-image { cursor: none; } .",
+      "magnifying-glass { position: absolute; z-index: 1; background: #e5e5e5 no-repeat; border: solid #ebebeb; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.",
+      "3); opacity: 0; transition: opacity 0.",
+      "3s; pointer-events: none; } ."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://mistral.",
+      "ai/news\ncompany: Mistral AI\nscraped_at: 2025-07-04 20:17:28\n---\n\nLatest news | Mistral AI\n\n[\n\n](/)\n\n*   Products\n*   Solutions\n*   Research\n*   Resources\n*   [Pricing](/pricing)\n*   Company\n\n[Try the API\n\n](https://console.",
+      "ai/)[Talk to sales\n\n](/contact)\n\n[\n\n](/)\n\n##\n\nLatest updates from Mistral AI.",
+      "## Introducing Le Chat Enterprise\n\nYour Enterprise.",
+      "Your AI.",
+      "[Learn more\n\n](/news/le-chat-enterprise)\n\nProduct\n\nMay 7, 2025|Mistral AI\n\nBy category:\n\nAll news\n\nCompany\n\nProduct\n\nResearch\n\nSolutions\n\n[\n\nSolutions\n\n### Announcing AI for Citizens\n\nEmpowering countries to use AI to transform public action and catalyze innovation for the benefit of their citizens.",
+      "Jul 3, 2025Mistral AI\n\nLearn more\n\n\n](news/ai-for-citizens)\n\n[\n\nCompany\n\n### Mistral Compute\n\nFrontier AI infrastructure for everyone.",
+      "Jun 11, 2025Mistral AI\n\nLearn more\n\n\n](news/mistral-compute)\n\n[\n\nResearch\n\n### Magistral\n\nStands to reason.",
+      "Jun 10, 2025Mistral AI\n\nLearn more\n\n\n](news/magistral)\n\n[\n\nProduct\n\n### Introducing Mistral Code\n\nJun 4, 2025Mistral AI\n\nLearn more\n\n\n](news/mistral-code)\n\n[\n\nResearch\n\n### Codestral Embed\n\nThe new state-of-the-art embedding model for code.",
+      "May 28, 2025Mistral AI\n\nLearn more\n\n\n](news/codestral-embed)\n\n[\n\nProduct\n\n### Build AI agents with the Mistral Agents API\n\nMay 27, 2025Mistral AI\n\nLearn more\n\n\n](news/agents-api)\n\n[\n\n](#)[1](#)[2](#)[3](#)[4](#)More pages[7](#)[\n\n](#)\n\n##\n\nThe next chapter of AI is yours."
+    ],
+    "key_changes": [
+      "New version: 0.3, 1.5, 11.7053, 5.85156, V5.79928, 35.1272, 29.2734, 17.559, 5.79883, V11.5981, V5.79883, 35.1293, 23.4219, 35.1239, 11.5977, V17.3969, V11.5977, 17.3984, V23.1977, V17.3984, 23.4162, 17.5625, 17.5648, 23.2012, V29.0005, V23.2012, 40.9867, 11.7072, 5.85352, 35.1252, 29.2715, 17.561, 35.1254, 23.418, 35.1258, 40.9828, 5.79932, V11.5986, V5.79932, 11.5986, V17.3979, 17.3979, V23.1972, 23.2007, V23.2007, 7.39166, 4.93066, 4.92969, V7.39936, V4.93066, 4.92681, 2.46875, 2.46484, V4.93744, V2.46875, 2.46197, V2.46869, 7.39941, V9.86811, V7.39941, 9.86133, V12.33, V9.86133, 0.890625, 24.8906, 9.5, 17.5, 21.628, 49.577, 21.654, 11.321, 21.691, 11.327, 50.6, 34.5, 45.6, 21.6, 24.5, 2.5",
+      "Price change: $1, $10, $11, $20, $24, $27",
+      "New model mentioned",
+      "New api mentioned",
+      "New release mentioned",
+      "New announcement mentioned",
+      "New update mentioned",
+      "New capability mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 96,
+    "summary": "96% content changed (1227 additions, 10 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "null",
+        "frequency": 407
+      },
+      {
+        "word": "dpl",
+        "frequency": 288
+      },
+      {
+        "word": "children",
+        "frequency": 252
+      },
+      {
+        "word": "u003e",
+        "frequency": 197
+      },
+      {
+        "word": "fill",
+        "frequency": 153
+      },
+      {
+        "word": "static",
+        "frequency": 144
+      },
+      {
+        "word": "doppxp9fgttpv2c7eoewgupnnop3",
+        "frequency": 142
+      },
+      {
+        "word": "u003cpath",
+        "frequency": 140
+      },
+      {
+        "word": "chunks",
+        "frequency": 136
+      },
+      {
+        "word": "locale",
+        "frequency": 128
+      },
+      {
+        "word": "name",
+        "frequency": 125
+      },
+      {
+        "word": "false",
+        "frequency": 122
+      },
+      {
+        "word": "currentcolor",
+        "frequency": 118
+      },
+      {
+        "word": "page",
+        "frequency": 110
+      },
+      {
+        "word": "button",
+        "frequency": 100
+      },
+      {
+        "word": "icon",
+        "frequency": 87
+      },
+      {
+        "word": "type",
+        "frequency": 74
+      },
+      {
+        "word": "open",
+        "frequency": 73
+      },
+      {
+        "word": "title",
+        "frequency": 72
+      },
+      {
+        "word": "sort",
+        "frequency": 71
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "your",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "le-chat-enterprise",
+        "frequency": 1
+      },
+      {
+        "word": "codestral",
+        "frequency": 1
+      },
+      {
+        "word": "embed",
+        "frequency": 1
+      },
+      {
+        "word": "state-of-the-art",
+        "frequency": 1
+      },
+      {
+        "word": "embedding",
+        "frequency": 1
+      },
+      {
+        "word": "codestral-embed",
+        "frequency": 1
+      },
+      {
+        "word": "agents-api",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "url": {
+        "before": 7,
+        "after": 114,
+        "change": 107
+      },
+      "new": {
+        "before": 1,
+        "after": 73,
+        "change": 72
+      },
+      "svg": {
+        "before": 3,
+        "after": 68,
+        "change": 65
+      },
+      "mistral": {
+        "before": 26,
+        "after": 70,
+        "change": 44
+      },
+      "next": {
+        "before": 7,
+        "after": 45,
+        "change": 38
+      },
+      "image": {
+        "before": 6,
+        "after": 35,
+        "change": 29
+      },
+      "products": {
+        "before": 5,
+        "after": 28,
+        "change": 23
+      },
+      "http": {
+        "before": 1,
+        "after": 23,
+        "change": 22
+      },
+      "www": {
+        "before": 1,
+        "after": 23,
+        "change": 22
+      },
+      "news": {
+        "before": 11,
+        "after": 32,
+        "change": 21
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "dpl dpl",
+        "count": 144
+      },
+      {
+        "phrase": "dpl doppxp9fgttpv2c7eoewgupnnop3",
+        "count": 142
+      },
+      {
+        "phrase": "u003e u003cpath",
+        "count": 140
+      },
+      {
+        "phrase": "static chunks",
+        "count": 136
+      },
+      {
+        "phrase": "fill currentcolor",
+        "count": 112
+      },
+      {
+        "phrase": "currentcolor u003e",
+        "count": 112
+      },
+      {
+        "phrase": "open new",
+        "count": 71
+      },
+      {
+        "phrase": "new tab",
+        "count": 71
+      },
+      {
+        "phrase": "null children",
+        "count": 70
+      },
+      {
+        "phrase": "sort url",
+        "count": 68
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

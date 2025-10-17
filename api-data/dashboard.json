@@ -1,0 +1,1019 @@
+{
+  "recent_changes_summary": {
+    "last_5_changes": [
+      {
+        "change_id": 449,
+        "company": "Google DeepMind",
+        "url": "blog",
+        "summary": "New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Plan ahead with scheduled actions in the Gemini app', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Gemini Code Assist adds Gemini 2.5, personalization and context management', 'Try on styles with AI, jump on great prices and more', 'Web Guide: An experimental AI-organized search results page'",
+        "interest_level": 8,
+        "time_ago": "13 hours ago",
+        "detected_at": "2025-07-29T14:46:17.001Z",
+        "change_type": "modified"
+      },
+      {
+        "change_id": 452,
+        "company": "GitHub Copilot",
+        "url": "docs",
+        "summary": "Reorganization and renaming of certain sections, addition of new links and removal of old ones, changes in wording and formatting",
+        "interest_level": 8,
+        "time_ago": "13 hours ago",
+        "detected_at": "2025-07-29T14:45:53.478Z",
+        "change_type": "modified"
+      },
+      {
+        "change_id": 454,
+        "company": "Anthropic",
+        "url": "homepage",
+        "summary": "Update of download and login links for Claude AI",
+        "interest_level": 3,
+        "time_ago": "13 hours ago",
+        "detected_at": "2025-07-29T14:45:29.310Z",
+        "change_type": "modified"
+      },
+      {
+        "change_id": 455,
+        "company": "Anthropic",
+        "url": "product",
+        "summary": "The download and login links for Claude have been updated with a new redirect URL.",
+        "interest_level": 4,
+        "time_ago": "13 hours ago",
+        "detected_at": "2025-07-29T14:45:23.411Z",
+        "change_type": "modified"
+      },
+      {
+        "change_id": 456,
+        "company": "Anthropic",
+        "url": "news",
+        "summary": "New article 'How Anthropic teams use Claude Code' was added to the news section",
+        "interest_level": 5,
+        "time_ago": "13 hours ago",
+        "detected_at": "2025-07-29T14:45:17.004Z",
+        "change_type": "modified"
+      }
+    ],
+    "last_24h_count": 6,
+    "last_7d_count": 15,
+    "high_priority_last_7d": 11
+  },
+  "companies": [
+    {
+      "id": 2,
+      "name": "Anthropic",
+      "category": "LLM Providers",
+      "urls": [
+        {
+          "id": 6,
+          "url": "https://anthropic.com",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 7,
+          "url": "https://anthropic.com/claude",
+          "type": "product",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 9,
+          "url": "https://anthropic.com/news",
+          "type": "news",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 8,
+          "url": "https://anthropic.com/pricing",
+          "type": "pricing",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 10,
+          "url": "https://docs.anthropic.com",
+          "type": "docs",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "change_id": 454,
+          "id": 454,
+          "url": "homepage",
+          "detectedAt": "2025-07-29T14:45:29.310Z",
+          "relativeTime": "13 hours ago",
+          "interestLevel": 3,
+          "summary": "Update of download and login links for Claude AI",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 455,
+          "id": 455,
+          "url": "product",
+          "detectedAt": "2025-07-29T14:45:23.411Z",
+          "relativeTime": "13 hours ago",
+          "interestLevel": 4,
+          "summary": "The download and login links for Claude have been updated with a new redirect URL.",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 456,
+          "id": 456,
+          "url": "news",
+          "detectedAt": "2025-07-29T14:45:17.004Z",
+          "relativeTime": "13 hours ago",
+          "interestLevel": 5,
+          "summary": "New article 'How Anthropic teams use Claude Code' was added to the news section",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 457,
+          "id": 457,
+          "url": "pricing",
+          "detectedAt": "2025-07-29T14:45:10.018Z",
+          "relativeTime": "13 hours ago",
+          "interestLevel": 8,
+          "summary": "Changes in pricing plans, specifically in the Team and Enterprise plans, with the addition of 'Claude Code available separately through Anthropic Console' and modifications in usage limits and features.",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 440,
+          "id": 440,
+          "url": "product",
+          "detectedAt": "2025-07-24T15:44:05.779Z",
+          "relativeTime": "5 days ago",
+          "interestLevel": 4,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 295,
+          "id": 295,
+          "url": "news",
+          "detectedAt": "2025-07-23T19:39:42.299Z",
+          "relativeTime": "6 days ago",
+          "interestLevel": 8,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 286,
+          "id": 286,
+          "url": "news",
+          "detectedAt": "2025-07-23T19:02:49.922Z",
+          "relativeTime": "6 days ago",
+          "interestLevel": 8,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 219,
+          "id": 219,
+          "url": "news",
+          "detectedAt": "2025-07-22T17:13:18.357Z",
+          "relativeTime": "7/22/2025",
+          "interestLevel": 6,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 360,
+          "id": 360,
+          "url": "news",
+          "detectedAt": "2025-07-21T14:21:02.651Z",
+          "relativeTime": "7/21/2025",
+          "interestLevel": 6,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 370,
+          "id": 370,
+          "url": "docs",
+          "detectedAt": "2025-07-21T03:07:11.303Z",
+          "relativeTime": "7/21/2025",
+          "interestLevel": 9,
+          "summary": "Change detected",
+          "changeType": "new",
+          "businessImpact": null,
+          "competitiveImplications": null
+        }
+      ],
+      "intelligence": {
+        "products": [
+          "Claude",
+          "API",
+          "Claude Code",
+          "Max plan",
+          "Team plan",
+          "Enterprise plan",
+          "Anthropic Console",
+          "Claude for Enterprise",
+          "Claude for Education",
+          "Artifacts",
+          "Message Batches API",
+          "Contextual Retrieval",
+          "Workspaces",
+          "Projects",
+          "Claude Android app",
+          "Education plan",
+          "Anthropic API"
+        ],
+        "ai_technologies": [
+          "Python",
+          "Amazon Bedrock",
+          "Google Cloud's Vertex AI",
+          "HTML",
+          "CSS",
+          "JS",
+          "Google Workspace",
+          "JIRA",
+          "Zapier",
+          "Intercom",
+          "macOS",
+          "Windows",
+          "AWS",
+          "Google Cloud",
+          "Vertex AI",
+          "GitHub",
+          "GitHub Copilot",
+          "API",
+          "SDKs"
+        ],
+        "ai_ml_concepts": []
+      },
+      "stats": {
+        "totalChanges": 10,
+        "highInterestChanges": 4,
+        "lastActivity": "2025-07-29T14:45:29.310Z"
+      }
+    },
+    {
+      "id": 11,
+      "name": "GitHub Copilot",
+      "category": "AI Coding",
+      "urls": [
+        {
+          "id": 48,
+          "url": "https://docs.github.com/en/copilot",
+          "type": "docs",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 47,
+          "url": "https://github.blog/tag/github-copilot",
+          "type": "blog",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 45,
+          "url": "https://github.com/features/copilot",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 46,
+          "url": "https://github.com/pricing",
+          "type": "pricing",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "change_id": 452,
+          "id": 452,
+          "url": "docs",
+          "detectedAt": "2025-07-29T14:45:53.478Z",
+          "relativeTime": "13 hours ago",
+          "interestLevel": 8,
+          "summary": "Reorganization and renaming of certain sections, addition of new links and removal of old ones, changes in wording and formatting",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 453,
+          "id": 453,
+          "url": "blog",
+          "detectedAt": "2025-07-29T14:45:46.743Z",
+          "relativeTime": "13 hours ago",
+          "interestLevel": 1,
+          "summary": "No significant changes were detected in the provided content.",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 439,
+          "id": 439,
+          "url": "docs",
+          "detectedAt": "2025-07-24T15:44:39.009Z",
+          "relativeTime": "5 days ago",
+          "interestLevel": 8,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 310,
+          "id": 310,
+          "url": "docs",
+          "detectedAt": "2025-07-23T23:36:42.053Z",
+          "relativeTime": "6 days ago",
+          "interestLevel": 2,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 298,
+          "id": 298,
+          "url": "docs",
+          "detectedAt": "2025-07-23T19:03:26.617Z",
+          "relativeTime": "6 days ago",
+          "interestLevel": 8,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 285,
+          "id": 285,
+          "url": "homepage",
+          "detectedAt": "2025-07-23T19:03:14.475Z",
+          "relativeTime": "6 days ago",
+          "interestLevel": 8,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 257,
+          "id": 257,
+          "url": "blog",
+          "detectedAt": "2025-07-22T22:52:15.696Z",
+          "relativeTime": "7/22/2025",
+          "interestLevel": 1,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 210,
+          "id": 210,
+          "url": "docs",
+          "detectedAt": "2025-07-22T17:17:58.613Z",
+          "relativeTime": "7/22/2025",
+          "interestLevel": 4,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 10,
+          "id": 10,
+          "url": "pricing",
+          "detectedAt": "2025-07-21T16:18:27.267Z",
+          "relativeTime": "7/21/2025",
+          "interestLevel": 2,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 366,
+          "id": 366,
+          "url": "blog",
+          "detectedAt": "2025-07-21T03:12:28.715Z",
+          "relativeTime": "7/21/2025",
+          "interestLevel": 8,
+          "summary": "Change detected",
+          "changeType": "new",
+          "businessImpact": null,
+          "competitiveImplications": null
+        }
+      ],
+      "intelligence": {
+        "products": [
+          "GitHub Copilot",
+          "Copilot Free",
+          "Copilot Pro",
+          "Copilot Team",
+          "Copilot Enterprise",
+          "GitHub Copilot Extensions",
+          "Copilot Chat",
+          "Copilot Coding Agent",
+          "GitHub Copilot Spaces",
+          "GitHub",
+          "GitHub Docs",
+          "GitHub Desktop",
+          "Atom",
+          "Electron",
+          "GitHub Copilot Free",
+          "GitHub Copilot Pro",
+          "GitHub Copilot Pro+",
+          "GitHub Copilot Business",
+          "GitHub Copilot Enterprise",
+          "GitHub Advanced Security",
+          "GitHub Spark",
+          "GitHub Models",
+          "GitHub Codespaces",
+          "GitHub Actions",
+          "GitHub Packages"
+        ],
+        "ai_technologies": [
+          "GitHub",
+          "CLI",
+          "IDE",
+          "Windows Terminal",
+          "GitHub Desktop",
+          "Azure",
+          "Git",
+          "MCP",
+          "Playwright",
+          "Python",
+          "JavaScript",
+          "Visual Studio Code",
+          "Visual Studio",
+          "JetBrains IDEs",
+          "Neovim",
+          "Azure Data Studio",
+          "Eclipse",
+          "GitHub CLI",
+          "GitHub Actions",
+          "GitHub Codespaces",
+          "GitHub Packages",
+          "SAML",
+          "SCIM"
+        ],
+        "ai_ml_concepts": []
+      },
+      "stats": {
+        "totalChanges": 10,
+        "highInterestChanges": 5,
+        "lastActivity": "2025-07-29T14:45:53.478Z"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Google DeepMind",
+      "category": "LLM Providers",
+      "urls": [
+        {
+          "id": 15,
+          "url": "https://ai.google.dev",
+          "type": "api",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 12,
+          "url": "https://ai.google/discover/gemini",
+          "type": "product",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 14,
+          "url": "https://blog.google/technology/ai",
+          "type": "blog",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 13,
+          "url": "https://cloud.google.com/vertex-ai/pricing",
+          "type": "pricing",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 11,
+          "url": "https://deepmind.google",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "change_id": 449,
+          "id": 449,
+          "url": "blog",
+          "detectedAt": "2025-07-29T14:46:17.001Z",
+          "relativeTime": "13 hours ago",
+          "interestLevel": 8,
+          "summary": "New articles and updates were added to the Google Blog, including 'Ask a Techspert: What is inference?', 'Find out the latest Gemini updates with Gemini Drops', 'Turn your photos into videos in Gemini', 'Plan ahead with scheduled actions in the Gemini app', 'Check out the first images of wildfires detected by FireSat', 'How we built one of the most ambitious datasets in brain activity research', 'Google Beam: Our AI-first 3D video communication platform', 'New in Gemini Code Assist: Agent Mode and IDE enhancements', 'Gemini CLI: your open-source AI agent', 'Gemini Code Assist adds Gemini 2.5, personalization and context management', 'Try on styles with AI, jump on great prices and more', 'Web Guide: An experimental AI-organized search results page'",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 450,
+          "id": 450,
+          "url": "pricing",
+          "detectedAt": "2025-07-29T14:46:11.731Z",
+          "relativeTime": "13 hours ago",
+          "interestLevel": 2,
+          "summary": "No significant changes were detected in the provided content.",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 451,
+          "id": 451,
+          "url": "homepage",
+          "detectedAt": "2025-07-29T14:46:00.101Z",
+          "relativeTime": "13 hours ago",
+          "interestLevel": 2,
+          "summary": "No significant changes were detected in the content between the two versions.",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 438,
+          "id": 438,
+          "url": "blog",
+          "detectedAt": "2025-07-24T15:45:05.834Z",
+          "relativeTime": "5 days ago",
+          "interestLevel": 8,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 289,
+          "id": 289,
+          "url": "blog",
+          "detectedAt": "2025-07-23T19:40:46.363Z",
+          "relativeTime": "6 days ago",
+          "interestLevel": 8,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 296,
+          "id": 296,
+          "url": "blog",
+          "detectedAt": "2025-07-23T19:03:49.432Z",
+          "relativeTime": "6 days ago",
+          "interestLevel": 8,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 297,
+          "id": 297,
+          "url": "homepage",
+          "detectedAt": "2025-07-23T19:03:32.433Z",
+          "relativeTime": "6 days ago",
+          "interestLevel": 2,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 209,
+          "id": 209,
+          "url": "homepage",
+          "detectedAt": "2025-07-22T17:18:26.929Z",
+          "relativeTime": "7/22/2025",
+          "interestLevel": 2,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 184,
+          "id": 184,
+          "url": "homepage",
+          "detectedAt": "2025-07-21T15:11:46.979Z",
+          "relativeTime": "7/21/2025",
+          "interestLevel": 2,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 361,
+          "id": 361,
+          "url": "api",
+          "detectedAt": "2025-07-21T03:13:08.841Z",
+          "relativeTime": "7/21/2025",
+          "interestLevel": 9,
+          "summary": "Change detected",
+          "changeType": "new",
+          "businessImpact": null,
+          "competitiveImplications": null
+        }
+      ],
+      "intelligence": {
+        "products": [
+          "Gemini API",
+          "Google AI Studio",
+          "Gemma Open Models",
+          "Google AI Edge",
+          "Chrome Built-in Web APIs",
+          "Responsible GenAI Toolkit",
+          "Secure AI Framework",
+          "Gemini",
+          "Vertex AI",
+          "Google Search",
+          "Google Maps",
+          "YouTube",
+          "Google Photos",
+          "Google Workspace",
+          "Chrome",
+          "Gemini App",
+          "Gemini Code Assist",
+          "Gemini CLI",
+          "Google Cloud",
+          "FireSat",
+          "Google Beam",
+          "Compute Engine",
+          "Cloud Storage",
+          "BigQuery",
+          "Cloud Run",
+          "Google Kubernetes Engine",
+          "Looker",
+          "Apigee API Management",
+          "Cloud SQL",
+          "Cloud CDN",
+          "Gemini app",
+          "Vertex AI Studio",
+          "Flow",
+          "Whisk",
+          "MusicFX DJ"
+        ],
+        "ai_technologies": [
+          "Python",
+          "Android",
+          "Chrome",
+          "Google Cloud",
+          "Firebase",
+          "Colab",
+          "Jules",
+          "VS Code",
+          "JetBrains IDEs",
+          "Android Studio",
+          "Chrome DevTools",
+          "Firebase Studio",
+          "Google Cloud Platform",
+          "TensorFlow",
+          "PyTorch",
+          "Kubernetes",
+          "Docker",
+          "Apache Spark",
+          "Apache Hadoop",
+          "Apache Airflow",
+          "JAX"
+        ],
+        "ai_ml_concepts": []
+      },
+      "stats": {
+        "totalChanges": 10,
+        "highInterestChanges": 5,
+        "lastActivity": "2025-07-29T14:46:17.001Z"
+      }
+    },
+    {
+      "id": 34,
+      "name": "Midjourney",
+      "category": "Image Generation",
+      "urls": [
+        {
+          "id": 122,
+          "url": "https://docs.midjourney.com",
+          "type": "docs",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 123,
+          "url": "https://docs.midjourney.com/docs/plans",
+          "type": "pricing",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 121,
+          "url": "https://midjourney.com",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "change_id": 160,
+          "id": 160,
+          "url": "docs",
+          "detectedAt": "2025-07-21T15:18:22.044Z",
+          "relativeTime": "7/21/2025",
+          "interestLevel": 8,
+          "summary": "Change detected",
+          "changeType": "new",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 161,
+          "id": 161,
+          "url": "pricing",
+          "detectedAt": "2025-07-21T15:17:43.481Z",
+          "relativeTime": "7/21/2025",
+          "interestLevel": 9,
+          "summary": "Change detected",
+          "changeType": "new",
+          "businessImpact": null,
+          "competitiveImplications": null
+        }
+      ],
+      "intelligence": {
+        "products": [
+          "Midjourney",
+          "Basic Plan",
+          "Standard Plan",
+          "Pro Plan",
+          "Mega Plan",
+          "Midjourney Magazine Subscription"
+        ],
+        "ai_technologies": [
+          "Python",
+          "Discord",
+          "Web"
+        ],
+        "ai_ml_concepts": []
+      },
+      "stats": {
+        "totalChanges": 2,
+        "highInterestChanges": 2,
+        "lastActivity": "2025-07-21T15:18:22.044Z"
+      }
+    },
+    {
+      "id": 1,
+      "name": "OpenAI",
+      "category": "LLM Providers",
+      "urls": [
+        {
+          "id": 1,
+          "url": "https://openai.com",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 4,
+          "url": "https://openai.com/blog",
+          "type": "blog",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 2,
+          "url": "https://openai.com/chatgpt",
+          "type": "product",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 3,
+          "url": "https://openai.com/pricing",
+          "type": "pricing",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 5,
+          "url": "https://platform.openai.com",
+          "type": "api",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "change_id": 225,
+          "id": 225,
+          "url": "pricing",
+          "detectedAt": "2025-07-22T19:04:23.608Z",
+          "relativeTime": "7/22/2025",
+          "interestLevel": 8,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 347,
+          "id": 347,
+          "url": "product",
+          "detectedAt": "2025-07-22T19:04:16.736Z",
+          "relativeTime": "7/22/2025",
+          "interestLevel": 6,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 226,
+          "id": 226,
+          "url": "pricing",
+          "detectedAt": "2025-07-22T18:46:27.592Z",
+          "relativeTime": "7/22/2025",
+          "interestLevel": 2,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 227,
+          "id": 227,
+          "url": "product",
+          "detectedAt": "2025-07-22T18:46:20.404Z",
+          "relativeTime": "7/22/2025",
+          "interestLevel": 3,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 228,
+          "id": 228,
+          "url": "homepage",
+          "detectedAt": "2025-07-22T18:18:01.891Z",
+          "relativeTime": "7/22/2025",
+          "interestLevel": 9,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 208,
+          "id": 208,
+          "url": "product",
+          "detectedAt": "2025-07-22T17:33:40.166Z",
+          "relativeTime": "7/22/2025",
+          "interestLevel": 9,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        }
+      ],
+      "intelligence": {
+        "products": [
+          "ChatGPT",
+          "Sora",
+          "API Platform",
+          "Research Residency",
+          "API",
+          "ChatGPT Plus",
+          "ChatGPT Pro",
+          "ChatGPT Team",
+          "ChatGPT Enterprise"
+        ],
+        "ai_technologies": [
+          "Python",
+          "Oracle",
+          "Cloud Platforms",
+          "Web",
+          "iOS",
+          "Android",
+          "macOS"
+        ],
+        "ai_ml_concepts": []
+      },
+      "stats": {
+        "totalChanges": 6,
+        "highInterestChanges": 3,
+        "lastActivity": "2025-07-22T19:04:23.608Z"
+      }
+    },
+    {
+      "id": 19,
+      "name": "Perplexity AI",
+      "category": "AI Search",
+      "urls": [
+        {
+          "id": 79,
+          "url": "https://blog.perplexity.ai",
+          "type": "blog",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 77,
+          "url": "https://perplexity.ai",
+          "type": "homepage",
+          "checkFrequency": "daily"
+        },
+        {
+          "id": 78,
+          "url": "https://perplexity.ai/pro",
+          "type": "product",
+          "checkFrequency": "daily"
+        }
+      ],
+      "recentChanges": [
+        {
+          "change_id": 275,
+          "id": 275,
+          "url": "product",
+          "detectedAt": "2025-07-23T00:38:32.210Z",
+          "relativeTime": "7/23/2025",
+          "interestLevel": 4,
+          "summary": "Change detected",
+          "changeType": "modified",
+          "businessImpact": null,
+          "competitiveImplications": null
+        },
+        {
+          "change_id": 72,
+          "id": 72,
+          "url": "product",
+          "detectedAt": "2025-07-21T15:21:10.364Z",
+          "relativeTime": "7/21/2025",
+          "interestLevel": 9,
+          "summary": "Change detected",
+          "changeType": "new",
+          "businessImpact": null,
+          "competitiveImplications": null
+        }
+      ],
+      "intelligence": {
+        "products": [
+          "Perplexity AI",
+          "Perplexity Pro",
+          "Perplexity Max",
+          "Perplexity Labs",
+          "Perplexity Research"
+        ],
+        "ai_technologies": [
+          "Cloudflare",
+          "Favicon",
+          "Unlimited file uploads",
+          "Unlimited photo uploads",
+          "Image generation"
+        ],
+        "ai_ml_concepts": []
+      },
+      "stats": {
+        "totalChanges": 2,
+        "highInterestChanges": 1,
+        "lastActivity": "2025-07-23T00:38:32.210Z"
+      }
+    }
+  ],
+  "lastUpdated": "2025-07-30T04:15:35.375Z",
+  "totalChanges": 40,
+  "highInterestChanges": 20,
+  "backend": "postgresql",
+  "company_activity": [
+    {
+      "company_name": "Anthropic",
+      "change_count": 7,
+      "max_interest_level": 8,
+      "last_activity": "2025-07-29T14:45:29.310Z",
+      "relative_time": "13 hours ago"
+    },
+    {
+      "company_name": "Google DeepMind",
+      "change_count": 7,
+      "max_interest_level": 8,
+      "last_activity": "2025-07-29T14:46:17.001Z",
+      "relative_time": "13 hours ago"
+    },
+    {
+      "company_name": "GitHub Copilot",
+      "change_count": 6,
+      "max_interest_level": 8,
+      "last_activity": "2025-07-29T14:45:53.478Z",
+      "relative_time": "13 hours ago"
+    }
+  ]
+}

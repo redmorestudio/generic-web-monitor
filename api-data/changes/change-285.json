@@ -1,0 +1,22 @@
+{
+  "id": 285,
+  "company": "GitHub Copilot",
+  "page_url": "homepage",
+  "detected_at": "2025-07-23T19:03:14.475Z",
+  "change_type": "modified",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
+  "content_hash_before": "54652a78ff894f182099a704804624ce045e9c01165c9f29a79286689f992527",
+  "content_hash_after": "b2a70ef07a84e0f5d879470435215de4a09995b90976ab5ac28058c4b5b46d89",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

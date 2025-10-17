@@ -1,0 +1,83 @@
+{
+  "id": 40,
+  "company": "Stability AI",
+  "page_url": "product",
+  "detected_at": "2025-07-21T15:27:15.985Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content introduction",
+    "specific_changes": [
+      "Introduction of Stability AI Image Models",
+      "Description of Stable Diffusion 3.5 model",
+      "Mention of flexible options for any use case",
+      "Introduction of self-hosted license, platform API, and cloud partners",
+      "Description of image editing services",
+      "Introduction of additional image models"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing demand for AI image generation",
+      "Increasing competition in the AI market"
+    ],
+    "business_impact": "Expansion of Stability AI's product offerings and services, indicating a significant strategic move",
+    "strategic_direction": "Expansion of product offerings and services to meet growing demand",
+    "competitive_implications": "Stability AI is positioning itself as a leader in the AI image generation market"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [
+      "Versatile styles",
+      "Prompt adherence",
+      "Diverse outputs"
+    ],
+    "products": [
+      "Stable Diffusion 3.5",
+      "Stable Diffusion XL",
+      "Stable Diffusion XL Turbo"
+    ],
+    "partnerships": [
+      "Cloud partners"
+    ],
+    "technologies": [
+      "Adversarial Diffusion Distillation"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increasing competition in the AI market",
+      "Regulatory challenges"
+    ],
+    "key_findings": [
+      "Stability AI is introducing new image models and services",
+      "The company is expanding its product offerings and services"
+    ],
+    "opportunities": [
+      "Growing demand for AI image generation",
+      "Increasing adoption of AI technology"
+    ],
+    "recommended_actions": [
+      "Monitor Stability AI's product offerings and services",
+      "Assess the competitive implications of Stability AI's strategic move"
+    ]
+  },
+  "key_insights": [
+    "Stability AI is introducing new image models and services",
+    "The company is expanding its product offerings and services"
+  ],
+  "business_impact": "Expansion of Stability AI's product offerings and services, indicating a significant strategic move",
+  "competitive_implications": "Stability AI is positioning itself as a leader in the AI image generation market",
+  "content_hash_before": null,
+  "content_hash_after": "027240147712aa1570997023d08a25a00715a6ec168a2a9754268269bd664619",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

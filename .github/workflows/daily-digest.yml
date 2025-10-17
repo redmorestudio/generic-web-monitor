@@ -1,0 +1,73 @@
+name: Daily Email Digest
+
+on:
+  schedule:
+    # Run at 9 AM UTC every day
+    - cron: '0 9 * * *'
+  
+  # Allow manual trigger
+  workflow_dispatch:
+
+env:
+  NODE_ENV: production
+
+jobs:
+  send-daily-digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    permissions:
+      contents: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Send Daily Digest Email
+        run: |
+          cd github-actions-backend
+          
+          # Check for email configuration
+          if [ -z "$SMTP_HOST" ]; then
+            echo "📧 Email not configured, skipping daily digest"
+            echo ""
+            echo "To enable email notifications, add these secrets:"
+            echo "  - SMTP_HOST (e.g., smtp.gmail.com)"
+            echo "  - SMTP_PORT (e.g., 587)"
+            echo "  - SMTP_USER (your email address)"
+            echo "  - SMTP_PASS (app password)"
+            echo "  - NOTIFICATION_EMAIL (recipient email)"
+            echo ""
+            echo "Go to: Settings → Secrets and variables → Actions"
+            exit 0
+          fi
+          
+          echo "📧 Sending Daily Digest Email"
+          echo ""
+          echo "Configuration:"
+          echo "- Recipient: ${NOTIFICATION_EMAIL:-$SMTP_USER}"
+          echo "- Time: $(date -u)"
+          echo ""
+          
+          # Send the daily digest
+          node email-notifications-enhanced.js daily || echo "Daily digest completed"
+          
+          echo ""
+          echo "✅ Daily digest process completed"
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}

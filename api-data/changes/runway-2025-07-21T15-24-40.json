@@ -1,0 +1,89 @@
+{
+  "id": 53,
+  "company": "Runway",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:24:40.576Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.95,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New pricing page content",
+    "specific_changes": [
+      "Introduction of new pricing plans (Free, Standard, Pro, Unlimited, Enterprise)",
+      "Detailed features and credits for each plan",
+      "Call-to-actions for sign-up and subscription",
+      "Navigation menu updates"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI tools market",
+      "Growing demand for AI-powered content creation"
+    ],
+    "business_impact": "Runway AI is expanding its offerings with new pricing plans, targeting a wider range of customers from individuals to large enterprises",
+    "strategic_direction": "Expansion into new markets and customer segments",
+    "competitive_implications": "Runway AI is positioning itself as a leader in the AI tools market, with a focus on accessibility and flexibility"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "Free ($0)",
+      "Standard ($12/user/month)",
+      "Pro ($28/user/month)",
+      "Unlimited ($76/user/month)"
+    ],
+    "features": [
+      "Generative Video",
+      "Generative Image",
+      "Upscale resolution",
+      "Remove watermarks",
+      "Custom Voices for Lip Sync and Text to Speech"
+    ],
+    "products": [
+      "Runway AI Tools",
+      "Gen-4 Turbo",
+      "Gen-3 Alpha Turbo",
+      "Act-Two",
+      "Gen-4"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "Machine Learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI tools market",
+      "Potential pricing pressure from competitors"
+    ],
+    "key_findings": [
+      "Runway AI is targeting a wide range of customers with its new pricing plans",
+      "The company is focusing on accessibility and flexibility with its pricing and features"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the AI and content creation spaces",
+      "Expansion into new markets and customer segments"
+    ],
+    "recommended_actions": [
+      "Monitor Runway AI's pricing and features for future updates",
+      "Consider partnership opportunities with Runway AI"
+    ]
+  },
+  "key_insights": [
+    "Runway AI is targeting a wide range of customers with its new pricing plans",
+    "The company is focusing on accessibility and flexibility with its pricing and features"
+  ],
+  "business_impact": "Runway AI is expanding its offerings with new pricing plans, targeting a wider range of customers from individuals to large enterprises",
+  "competitive_implications": "Runway AI is positioning itself as a leader in the AI tools market, with a focus on accessibility and flexibility",
+  "content_hash_before": null,
+  "content_hash_after": "df9a7cd896df10aca5c692fabefd8319e61e022b32ba966cde83845ada1f1864",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

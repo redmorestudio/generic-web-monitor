@@ -1,0 +1,65 @@
+{
+  "id": 188,
+  "company": "Codeium",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:07:53.956Z",
+  "change_type": "modified",
+  "interest_level": 4,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "minor",
+    "what_changed": "Download options for the Windsurf Editor",
+    "specific_changes": [
+      "Added download option for Linux",
+      "Removed download options for Windows (x64 and arm64)"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased support for Linux users"
+    ],
+    "business_impact": "The change may slightly improve user experience for Linux users, but it is unlikely to have a significant impact on the business.",
+    "strategic_direction": "The company may be focusing on improving user experience and supporting a wider range of operating systems.",
+    "competitive_implications": "The change is minor and does not provide a significant competitive advantage."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [
+      "Windsurf Editor"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "Linux"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Potential backlash from Windows users who may feel neglected"
+    ],
+    "key_findings": [
+      "The company is updating its download options to support Linux users"
+    ],
+    "opportunities": [
+      "Increased adoption among Linux users"
+    ],
+    "recommended_actions": [
+      "Monitor user feedback and adjust download options accordingly"
+    ]
+  },
+  "key_insights": [
+    "The company is updating its download options to support Linux users"
+  ],
+  "business_impact": "The change may slightly improve user experience for Linux users, but it is unlikely to have a significant impact on the business.",
+  "competitive_implications": "The change is minor and does not provide a significant competitive advantage.",
+  "content_hash_before": "a8c79b22cf71e8ab9d176888ad2f658dc9e6643089923a16619fb5661d00c76e",
+  "content_hash_after": "933c3031df262cdc4c10dd269a37a11f4c0d7d565684c54ad18c3445160a1ec9",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

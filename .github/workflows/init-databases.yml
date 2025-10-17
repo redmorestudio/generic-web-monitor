@@ -1,0 +1,64 @@
+name: Initialize Databases
+
+on:
+  workflow_dispatch:
+
+# Prevent concurrent runs
+concurrency:
+  group: init-databases
+  cancel-in-progress: false
+
+jobs:
+  init-databases:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install
+      
+      - name: Initialize three-database architecture
+        run: |
+          cd github-actions-backend
+          echo "=== Initializing three-database architecture ==="
+          node scripts/init-db-three.js
+      
+      - name: Check database contents
+        run: |
+          cd github-actions-backend
+          echo "=== Checking database contents ==="
+          echo -e "\n--- Companies count ---"
+          sqlite3 data/intelligence.db "SELECT COUNT(*) as count FROM companies;" || echo "No companies table"
+          echo -e "\n--- URLs count ---"
+          sqlite3 data/intelligence.db "SELECT COUNT(*) as count FROM urls;" || echo "No urls table"
+          echo -e "\n--- Sample companies ---"
+          sqlite3 data/intelligence.db "SELECT id, name, type FROM companies LIMIT 5;" || echo "Cannot query companies"
+      
+      - name: Commit initialized databases
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Add database files
+          git add github-actions-backend/data/*.db
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🗄️ Initialize three-database architecture with companies and URLs"
+            git push origin main
+          fi

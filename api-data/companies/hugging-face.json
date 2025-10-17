@@ -1,0 +1,313 @@
+{
+  "company": {
+    "id": null,
+    "name": "Hugging Face",
+    "category": "AI Infrastructure",
+    "description": null,
+    "created_at": null,
+    "thebrain_thought_id": "44fb829b-791d-4244-9d06-be43e0dc478d",
+    "company_id": null,
+    "industry": null,
+    "founded_year": null,
+    "headquarters": null,
+    "website": null,
+    "updated_at": null,
+    "urls": []
+  },
+  "stats": {
+    "monitored_urls": "0",
+    "total_changes": "6",
+    "high_interest_changes": "2",
+    "changes_last_week": "6",
+    "avg_interest_level": "4.8333333333333333"
+  },
+  "changes": [
+    {
+      "id": 188,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:21:55.509Z",
+      "company": "Hugging Face",
+      "url_name": "blog",
+      "old_hash": "a36a2bb0f42d21c702a63369c6b637fb69357b722b66c66f5465684e774480af",
+      "new_hash": "8c5d78dc5872069226843924ba14f9a7dc2dca7230d43c7866731ad74e4cd665",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 1,
+        "interest_level": 2,
+        "interest_drivers": [],
+        "category": "No Change",
+        "impact_areas": [],
+        "summary": "No significant changes detected in the content, no new technical innovations or business impact"
+      },
+      "url": null,
+      "title": "Hugging Face – Blog",
+      "content_preview": "Title: Hugging Face – Blog\n\nHugging Face\nModels\nDatasets\nSpaces\nCommunity\nDocs\nEnterprise\nPricing\nLog In\nSign Up\nBlog, Articles, and discussions\nNew Article\nEverything\nCommunity\nGuide\nOpen Source Collab\nPartnerships\nResearch\nNLP\nAudio\nCV\nRL\nEthics\nDiffusion\nGame Development\nRLHF\nLeaderboard\nCase Studies\nLeRobot\nInference Providers\nArc Virtual Cell Challenge: A Primer\n\nBy \nFL33TW00D-HF\nJuly 18, 2025\n•\n20\n\nConsilium: When Multiple LLMs Collaborate\n\nBy \nazettl\nJuly 17, 2025\nguest\n•\n9\n\nBack to The Future: Evaluating AI Agents on Predicting Future Events\n\nBy \nvinid\nJuly 17, 2025\nguest\n•\n21\n\nFive Big Improvements to Gradio MCP Servers\n\nBy \nfreddyaboulton\nJuly 17, 2025\n•\n16\n\nSeq vs Seq: the Ettin Suite of Paired Encoders and Decoders\n\nBy \norionweller\nJuly 16, 2025\n•\n39\n\nMigrating the Hub from Git LFS to Xet\n\nBy \njsulz\nJuly 15, 2025\n•\n21\n\nAsynchronous Robot Inference: Decoupling Action Prediction and Execution\n\nBy \nfracapuano\nJuly 10, 2025\n•\n33\n\nScreenEnv: Deploy your full stack Desktop Agent\n"
+    },
+    {
+      "id": 187,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:21:44.078Z",
+      "company": "Hugging Face",
+      "url_name": "homepage",
+      "old_hash": "c1f628e80d59301e7e3342d3d229a3d085c5399d343c43223052be0d1f5a8a98",
+      "new_hash": "6a072128f9371229d4d7cf86c8d8cab74284e92a5ee6ea603d0d4f6bdc6676a3",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 2,
+        "interest_level": 2,
+        "interest_drivers": [
+          "minor updates to model usage counts",
+          "small changes to Spaces"
+        ],
+        "category": "AI Community Platform",
+        "impact_areas": [
+          "machine learning",
+          "AI applications"
+        ],
+        "summary": "The updates to the Hugging Face platform are minimal, with small changes to model usage counts and Spaces. There are no significant technical innovations or business impact."
+      },
+      "url": null,
+      "title": "Hugging Face – The AI community building the future.",
+      "content_preview": "Title: Hugging Face – The AI community building the future.\n\nHugging Face\nModels\nDatasets\nSpaces\nCommunity\nDocs\nEnterprise\nPricing\nLog In\nSign Up\nThe AI community building the future.\n\nThe platform where the machine learning community collaborates on models, datasets, and applications.\n\nExplore AI Apps\nor\nBrowse 1M+ models\nTrending on\nthis week\nModels\nmoonshotai/Kimi-K2-Instruct\nUpdated about 6 hours ago\n•\n171k\n•\n1.61k\nmistralai/Voxtral-Mini-3B-2507\nUpdated 3 days ago\n•\n20.5k\n•\n371\nmistralai/Voxtral-Small-24B-2507\nUpdated 3 days ago\n•\n876\n•\n312\nLGAI-EXAONE/EXAONE-4.0-32B\nUpdated 3 days ago\n•\n273k\n•\n181\nHuggingFaceTB/SmolLM3-3B\nUpdated 4 days ago\n•\n283k\n•\n557\nBrowse 1M+ models\nSpaces\n10.6k\nDeepSite v2\n🐳\n\nGenerate any application with DeepSeek\n\n970\nFLUX.1 Kontext\n⚡\n\nKontext image editing on FLUX[dev]\n\n2.26k\nAnycoder\n🏢\n\nGenerate HTML/CSS/JS code for web applications\n\n1.24k\nWan2.1 Fast\n🎥\n\nTransform images into dynamic videos\n\n979\nRealistic Text To Speech Unlimited\n🔥\n\nFree Text-To-Speech ge"
+    },
+    {
+      "id": 88,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:14:45.960Z",
+      "company": "Hugging Face",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "a36a2bb0f42d21c702a63369c6b637fb69357b722b66c66f5465684e774480af",
+      "ai_analysis": {
+        "technical_innovation_score": 6,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "New research articles on AI and ML",
+          "Improvements to Gradio MCP Servers",
+          "Introduction of new tools like Seq vs Seq and ScreenEnv"
+        ],
+        "category": "AI/ML Research and Development",
+        "impact_areas": [
+          "Natural Language Processing (NLP)",
+          "Computer Vision (CV)",
+          "Reinforcement Learning (RL)",
+          "Robotics"
+        ],
+        "summary": "The Hugging Face blog features new research articles and improvements to AI/ML tools, indicating a moderate level of technical innovation and business impact."
+      },
+      "url": null,
+      "title": "Hugging Face – Blog",
+      "content_preview": "Title: Hugging Face – Blog\n\nHugging Face\nModels\nDatasets\nSpaces\nCommunity\nDocs\nEnterprise\nPricing\nLog In\nSign Up\nBlog, Articles, and discussions\nNew Article\nEverything\nCommunity\nGuide\nOpen Source Collab\nPartnerships\nResearch\nNLP\nAudio\nCV\nRL\nEthics\nDiffusion\nGame Development\nRLHF\nLeaderboard\nCase Studies\nLeRobot\nInference Providers\nArc Virtual Cell Challenge: A Primer\n\nBy \nFL33TW00D-HF\nJuly 18, 2025\n•\n20\n\nConsilium: When Multiple LLMs Collaborate\n\nBy \nazettl\nJuly 17, 2025\nguest\n•\n9\n\nBack to The Future: Evaluating AI Agents on Predicting Future Events\n\nBy \nvinid\nJuly 17, 2025\nguest\n•\n21\n\nFive Big Improvements to Gradio MCP Servers\n\nBy \nfreddyaboulton\nJuly 17, 2025\n•\n16\n\nSeq vs Seq: the Ettin Suite of Paired Encoders and Decoders\n\nBy \norionweller\nJuly 16, 2025\n•\n39\n\nMigrating the Hub from Git LFS to Xet\n\nBy \njsulz\nJuly 15, 2025\n•\n21\n\nAsynchronous Robot Inference: Decoupling Action Prediction and Execution\n\nBy \nfracapuano\nJuly 10, 2025\n•\n33\n\nScreenEnv: Deploy your full stack Desktop Agent\n"
+    },
+    {
+      "id": 87,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:14:39.679Z",
+      "company": "Hugging Face",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "0e87e406c93700959dd2057bdf91330ec59742b71e65909c2f3fba0d967a1e1d",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Comprehensive documentation for Hugging Face Hub and client libraries",
+          "Support for various tasks, including model hosting, dataset management, and deployment",
+          "Integration with major cloud providers like AWS and Microsoft Azure"
+        ],
+        "category": "AI/ML Model Deployment and Management",
+        "impact_areas": [
+          "Model deployment and inference",
+          "Dataset management",
+          "Cloud integration"
+        ],
+        "summary": "Hugging Face documentation provides a thorough overview of its platform, highlighting its capabilities in model deployment, dataset management, and integration with major cloud providers, indicating significant technical advances and notable business impact."
+      },
+      "url": null,
+      "title": "Hugging Face - Documentation",
+      "content_preview": "Title: Hugging Face - Documentation\n\nHugging Face\nModels\nDatasets\nSpaces\nCommunity\nDocs\nEnterprise\nPricing\nLog In\nSign Up\nDocumentation\nHub & Client Libraries\n\nHub\n\nHost Git-based models, datasets, and Spaces on the HF Hub\n\nHub Python Library\n\nPython client to interact with the Hugging Face Hub\n\nHuggingface.js\n\nJavaScript libraries for Hugging Face with built-in TS types\n\nTasks\n\nExplore demos, models, and datasets for any ML tasks\n\nDataset viewer\n\nAPI for metadata, stats, and content of HF Hub datasets\n\nDeployment & Inference\n\nInference Providers\n\nCall 200k+ models hosted by our 10+ Inference partners\n\nInference Endpoints (dedicated)\n\nDeploy models on dedicated & fully managed infrastructure on HF\n\nDeploying on AWS\n\nTrain/deploy models from Hugging Face to AWS with DLCs\n\nText Generation Inference\n\nServe language models with TGI optimized toolkit\n\nText Embeddings Inference\n\nServe embeddings models with TEI optimized toolkit\n\nMicrosoft Azure\n\nDeploy Hugging Face models on Microsoft Azure"
+    },
+    {
+      "id": 87,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 7,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:14:39.679Z",
+      "company": "Hugging Face",
+      "url_name": "docs",
+      "old_hash": null,
+      "new_hash": "0e87e406c93700959dd2057bdf91330ec59742b71e65909c2f3fba0d967a1e1d",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 6,
+        "interest_level": 7,
+        "interest_drivers": [
+          "Comprehensive documentation for Hugging Face Hub and client libraries",
+          "Support for various tasks, including model hosting, dataset management, and deployment",
+          "Integration with major cloud providers like AWS and Microsoft Azure"
+        ],
+        "category": "AI/ML Model Deployment and Management",
+        "impact_areas": [
+          "Model deployment and inference",
+          "Dataset management",
+          "Cloud integration"
+        ],
+        "summary": "Hugging Face documentation provides a thorough overview of its platform, highlighting its capabilities in model deployment, dataset management, and integration with major cloud providers, indicating significant technical advances and notable business impact."
+      },
+      "url": null,
+      "title": "Hugging Face - Documentation",
+      "content_preview": "Title: Hugging Face - Documentation\n\nHugging Face\nModels\nDatasets\nSpaces\nCommunity\nDocs\nEnterprise\nPricing\nLog In\nSign Up\nDocumentation\nHub & Client Libraries\n\nHub\n\nHost Git-based models, datasets, and Spaces on the HF Hub\n\nHub Python Library\n\nPython client to interact with the Hugging Face Hub\n\nHuggingface.js\n\nJavaScript libraries for Hugging Face with built-in TS types\n\nTasks\n\nExplore demos, models, and datasets for any ML tasks\n\nDataset viewer\n\nAPI for metadata, stats, and content of HF Hub datasets\n\nDeployment & Inference\n\nInference Providers\n\nCall 200k+ models hosted by our 10+ Inference partners\n\nInference Endpoints (dedicated)\n\nDeploy models on dedicated & fully managed infrastructure on HF\n\nDeploying on AWS\n\nTrain/deploy models from Hugging Face to AWS with DLCs\n\nText Generation Inference\n\nServe language models with TGI optimized toolkit\n\nText Embeddings Inference\n\nServe embeddings models with TEI optimized toolkit\n\nMicrosoft Azure\n\nDeploy Hugging Face models on Microsoft Azure"
+    },
+    {
+      "id": 86,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:14:34.463Z",
+      "company": "Hugging Face",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "c1f628e80d59301e7e3342d3d229a3d085c5399d343c43223052be0d1f5a8a98",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 8,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Large model repository with 1M+ models",
+          "Community-driven platform with trending models and applications",
+          "Diverse range of AI apps and tools, including text-to-speech and image editing"
+        ],
+        "category": "AI Community Platform",
+        "impact_areas": [
+          "Machine Learning",
+          "Natural Language Processing",
+          "Computer Vision"
+        ],
+        "summary": "Hugging Face is a prominent AI community platform that showcases a vast repository of models, datasets, and applications. The platform's technical innovation and business impact are significant, driven by its large community, trending models, and diverse range of AI apps."
+      },
+      "url": null,
+      "title": "Hugging Face – The AI community building the future.",
+      "content_preview": "Title: Hugging Face – The AI community building the future.\n\nHugging Face\nModels\nDatasets\nSpaces\nCommunity\nDocs\nEnterprise\nPricing\nLog In\nSign Up\nThe AI community building the future.\n\nThe platform where the machine learning community collaborates on models, datasets, and applications.\n\nExplore AI Apps\nor\nBrowse 1M+ models\nTrending on\nthis week\nModels\nmoonshotai/Kimi-K2-Instruct\nUpdated about 5 hours ago\n•\n171k\n•\n1.6k\nmistralai/Voxtral-Mini-3B-2507\nUpdated 3 days ago\n•\n20.5k\n•\n370\nmistralai/Voxtral-Small-24B-2507\nUpdated 3 days ago\n•\n876\n•\n312\nLGAI-EXAONE/EXAONE-4.0-32B\nUpdated 3 days ago\n•\n273k\n•\n180\nHuggingFaceTB/SmolLM3-3B\nUpdated 4 days ago\n•\n283k\n•\n556\nBrowse 1M+ models\nSpaces\n10.6k\nDeepSite v2\n🐳\n\nGenerate any application with DeepSeek\n\n970\nFLUX.1 Kontext\n⚡\n\nKontext image editing on FLUX[dev]\n\n2.26k\nAnycoder\n🏢\n\nGenerate HTML/CSS/JS code for web applications\n\n1.24k\nWan2.1 Fast\n🎥\n\nTransform images into dynamic videos\n\n978\nRealistic Text To Speech Unlimited\n🔥\n\nFree Text-To-Speech gen"
+    },
+    {
+      "id": 85,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:14:28.878Z",
+      "company": "Hugging Face",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "46d09552b7d8a35c93435e016e39f6d5ca72b8dba490f7a07346f703d0a94e6c",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 6,
+        "interest_level": 4,
+        "interest_drivers": [
+          "Pricing model for AI platform",
+          "Tiered subscription plans",
+          "Features for teams and enterprises"
+        ],
+        "category": "AI Platform Pricing",
+        "impact_areas": [
+          "AI Collaboration",
+          "Compute Resources",
+          "Enterprise Adoption"
+        ],
+        "summary": "Hugging Face introduces a pricing page with PRO and Team plans, offering features like increased storage, inference credits, and granular access control, indicating a focus on monetization and enterprise adoption."
+      },
+      "url": null,
+      "title": "Hugging Face – Pricing",
+      "content_preview": "Title: Hugging Face – Pricing\n\nHugging Face\nModels\nDatasets\nSpaces\nCommunity\nDocs\nEnterprise\nPricing\nLog In\nSign Up\nPricing\nLeveling up AI collaboration and compute.\n\nGive your personal account or your organization the most advanced platform to build AI.\n\nPRO\nPRO Account\n\nBoost your personal HF experience\n\nSubscribe for\n\n$9\nper month\nGet PRO\n10× private storage capacity\n20× included inference credits\n8× ZeroGPU quota and highest queue priority\nSpaces Dev Mode & ZeroGPU Spaces hosting\nPublish blog articles on your HF profile\nDataset Viewer for private datasets\nShow your support with a Pro badge\nTeam\n\nInstant setup for growing teams\n\nSubscribe for\n\n$20\nper user per month\nGet Team (via credit card)\nSSO and SAML support\nChoose data location with Storage Regions\nDetailed action reviews with Audit Logs\nGranular access control via Resource Groups\nRepository usage Analytics\nSet auth policies and default repository visibility\nCentralized token control and approvals\nDataset Viewer for private da"
+    },
+    {
+      "id": 85,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 4,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:14:28.878Z",
+      "company": "Hugging Face",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "46d09552b7d8a35c93435e016e39f6d5ca72b8dba490f7a07346f703d0a94e6c",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 6,
+        "interest_level": 4,
+        "interest_drivers": [
+          "Pricing model for AI platform",
+          "Tiered subscription plans",
+          "Features for teams and enterprises"
+        ],
+        "category": "AI Platform Pricing",
+        "impact_areas": [
+          "AI Collaboration",
+          "Compute Resources",
+          "Enterprise Adoption"
+        ],
+        "summary": "Hugging Face introduces a pricing page with PRO and Team plans, offering features like increased storage, inference credits, and granular access control, indicating a focus on monetization and enterprise adoption."
+      },
+      "url": null,
+      "title": "Hugging Face – Pricing",
+      "content_preview": "Title: Hugging Face – Pricing\n\nHugging Face\nModels\nDatasets\nSpaces\nCommunity\nDocs\nEnterprise\nPricing\nLog In\nSign Up\nPricing\nLeveling up AI collaboration and compute.\n\nGive your personal account or your organization the most advanced platform to build AI.\n\nPRO\nPRO Account\n\nBoost your personal HF experience\n\nSubscribe for\n\n$9\nper month\nGet PRO\n10× private storage capacity\n20× included inference credits\n8× ZeroGPU quota and highest queue priority\nSpaces Dev Mode & ZeroGPU Spaces hosting\nPublish blog articles on your HF profile\nDataset Viewer for private datasets\nShow your support with a Pro badge\nTeam\n\nInstant setup for growing teams\n\nSubscribe for\n\n$20\nper user per month\nGet Team (via credit card)\nSSO and SAML support\nChoose data location with Storage Regions\nDetailed action reviews with Audit Logs\nGranular access control via Resource Groups\nRepository usage Analytics\nSet auth policies and default repository visibility\nCentralized token control and approvals\nDataset Viewer for private da"
+    }
+  ],
+  "insights": [],
+  "entities": {
+    "technologies": [],
+    "products": []
+  },
+  "themes": [],
+  "key_points": [],
+  "last_updated": "2025-07-22T17:46:52.717Z"
+}

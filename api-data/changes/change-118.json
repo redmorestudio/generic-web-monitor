@@ -1,0 +1,238 @@
+{
+  "change_id": 118,
+  "url": "https://murf.ai/pricing",
+  "company": "Murf AI",
+  "company_category": "AI Voice/Audio",
+  "detected_at": "2025-07-18 16:38:19",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes detected in the pricing page content.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://murf.ai/pricing\ncompany: Murf AI\nscraped_at: 2025-07-04 20:17:31\n---\n\nMurf.AI text to speech Pricing | Get started for free\n\n[![MURF](https://murf.ai/public-assets/v2-assets/logos/murf-icon.svg)](/)\n\nProductschevron\\_right\n\nIntegrationschevron\\_right\n\nResourceschevron\\_right\n\nAPI\n\nEnterprise\n\nPricing\n\nnorth\\_eastContact Sales\n\nnorth\\_eastLogin\n\nSign Up\n\n# Choose a **Pricing Plan**\n\nTry for Free\n\nStudioDubAPI\n\nBilled Monthly\n\nBilled Yearly\n\nSaved 33%\n\nFree\n\nGet started. No Credit...",
+    "after": "Murf.AI text to speech Pricing | Get started for freefunction mobileCheck(){let i=!1;var e;e=navigator.userAgent||navigator.vendor||window.opera,(/(android|bb\\\\d+|meego).+mobile|avantgo|bada\\\\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\\\\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\\\\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(e)||/1207|6310|6590|3gso|4thp|..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Murf.",
+      "AI text to speech Pricing | Get started for freefunction mobileCheck(){let i=!",
+      "1;var e;e=navigator.",
+      "userAgent||navigator.",
+      "vendor||window.",
+      "opera,(/(android|bb\\\\d+|meego).",
+      "+mobile|avantgo|bada\\\\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.",
+      "+firefox|netfront|opera m(ob|in)i|palm( os)?",
+      "|phone|p(ixi|re)\\\\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\\\\.",
+      "(browser|link)|vodafone|wap|windows ce|xda|xiino/i."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://murf.",
+      "ai/pricing\ncompany: Murf AI\nscraped_at: 2025-07-04 20:17:31\n---\n\nMurf.",
+      "AI text to speech Pricing | Get started for free\n\n[!"
+    ],
+    "key_changes": [
+      "New version: 1.2, 0.4, 0.25, 1.4, 0.32, 0.16"
+    ],
+    "change_percentage": 26,
+    "summary": "26% content changed (197 additions, 3 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "window",
+        "frequency": 17
+      },
+      {
+        "word": "position",
+        "frequency": 16
+      },
+      {
+        "word": "height",
+        "frequency": 12
+      },
+      {
+        "word": "calendly-overlay",
+        "frequency": 10
+      },
+      {
+        "word": "display",
+        "frequency": 10
+      },
+      {
+        "word": "100",
+        "frequency": 9
+      },
+      {
+        "word": "location",
+        "frequency": 9
+      },
+      {
+        "word": "z-index",
+        "frequency": 9
+      },
+      {
+        "word": "width",
+        "frequency": 9
+      },
+      {
+        "word": "bottom",
+        "frequency": 9
+      },
+      {
+        "word": "hubspot-messages-iframe-container",
+        "frequency": 9
+      },
+      {
+        "word": "browser",
+        "frequency": 8
+      },
+      {
+        "word": "absolute",
+        "frequency": 8
+      },
+      {
+        "word": "none",
+        "frequency": 8
+      },
+      {
+        "word": "scale",
+        "frequency": 8
+      },
+      {
+        "word": "version",
+        "frequency": 7
+      },
+      {
+        "word": "calendly-badge-widget",
+        "frequency": 7
+      },
+      {
+        "word": "-webkit-transform",
+        "frequency": 7
+      },
+      {
+        "word": "transform",
+        "frequency": 7
+      },
+      {
+        "word": "pathname",
+        "frequency": 6
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "important": {
+        "before": 1,
+        "after": 20,
+        "change": 19
+      },
+      "right": {
+        "before": 7,
+        "after": 18,
+        "change": 11
+      },
+      "top": {
+        "before": 1,
+        "after": 9,
+        "change": 8
+      },
+      "left": {
+        "before": 1,
+        "after": 9,
+        "change": 8
+      },
+      "name": {
+        "before": 1,
+        "after": 7,
+        "change": 6
+      },
+      "linkedin": {
+        "before": 2,
+        "after": 8,
+        "change": 6
+      },
+      "partner": {
+        "before": 1,
+        "after": 6,
+        "change": 5
+      },
+      "https": {
+        "before": 164,
+        "after": 168,
+        "change": 4
+      },
+      "com": {
+        "before": 5,
+        "after": 9,
+        "change": 4
+      },
+      "studio": {
+        "before": 1,
+        "after": 4,
+        "change": 3
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "https murf",
+        "count": 158
+      },
+      {
+        "phrase": "murf public-assets",
+        "count": 155
+      },
+      {
+        "phrase": "public-assets v2-assets",
+        "count": 128
+      },
+      {
+        "phrase": "v2-assets icons",
+        "count": 98
+      },
+      {
+        "phrase": "company-icons https",
+        "count": 50
+      },
+      {
+        "phrase": "remove remove",
+        "count": 49
+      },
+      {
+        "phrase": "svg company-icons",
+        "count": 49
+      },
+      {
+        "phrase": "done done",
+        "count": 46
+      },
+      {
+        "phrase": "check https",
+        "count": 36
+      },
+      {
+        "phrase": "icons icon",
+        "count": 36
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

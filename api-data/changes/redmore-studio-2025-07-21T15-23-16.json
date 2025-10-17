@@ -1,0 +1,72 @@
+{
+  "id": 63,
+  "company": "Redmore Studio",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:23:16.183Z",
+  "change_type": "new",
+  "interest_level": 6,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "replacement",
+    "change_scale": "major",
+    "what_changed": "The blog content was replaced with a 'Page not found' error page, including a cookie consent banner and navigation menu.",
+    "specific_changes": [
+      "Introduction of a cookie consent banner",
+      "Display of a 'Page not found' error message",
+      "Presence of a navigation menu with links to different categories and pages"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Compliance with cookie regulations",
+      "Investment in website infrastructure"
+    ],
+    "business_impact": "The change may impact user experience and navigation on the website, potentially affecting engagement and conversion rates.",
+    "strategic_direction": "The change suggests a focus on website optimization and user experience, potentially paving the way for future content or feature updates.",
+    "competitive_implications": "The update may indicate a focus on user privacy and regulatory compliance, potentially influencing competitor strategies."
+  },
+  "entities": {
+    "people": [
+      "Seth Redmore"
+    ],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": [
+      "CookieYes"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Potential negative impact on user engagement due to changed website structure",
+      "Compliance risks if cookie regulations are not fully met"
+    ],
+    "key_findings": [
+      "The website now includes a cookie consent banner",
+      "The 'Page not found' error page is customized with navigation and search functionality"
+    ],
+    "opportunities": [
+      "Optimizing website content and structure for improved user experience",
+      "Enhancing cookie consent and privacy features to build trust with users"
+    ],
+    "recommended_actions": [
+      "Monitor user feedback and engagement metrics to assess the impact of the change",
+      "Review and refine cookie consent and privacy features to ensure compliance and transparency"
+    ]
+  },
+  "key_insights": [
+    "The website now includes a cookie consent banner",
+    "The 'Page not found' error page is customized with navigation and search functionality"
+  ],
+  "business_impact": "The change may impact user experience and navigation on the website, potentially affecting engagement and conversion rates.",
+  "competitive_implications": "The update may indicate a focus on user privacy and regulatory compliance, potentially influencing competitor strategies.",
+  "content_hash_before": null,
+  "content_hash_after": "9232156ce0d72228a68502a320934c4fc159f07456a5e60c85093991900ec52a",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

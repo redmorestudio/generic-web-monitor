@@ -1,0 +1,88 @@
+{
+  "id": 45,
+  "company": "Scale AI",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:26:27.158Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "New blog content and updates to the Scale AI website",
+    "specific_changes": [
+      "Introduction of new blog posts on AI research and company updates",
+      "Updates to the website's layout and design",
+      "Addition of new products and features, such as Scale GenAI Platform and Scale Donovan",
+      "Expansion of resources, including guides, documentation, and research papers"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on AI research and development",
+      "Expansion into new markets, such as government and public sector"
+    ],
+    "business_impact": "The updates suggest a focus on expanding the company's product offerings and showcasing its research capabilities, which could attract new customers and partners",
+    "strategic_direction": "The company appears to be focusing on expanding its product offerings and showcasing its research capabilities to attract new customers and partners",
+    "competitive_implications": "The updates could be seen as a competitive move to establish Scale AI as a leader in the AI research and development space"
+  },
+  "entities": {
+    "people": [
+      "Jason Droege"
+    ],
+    "markets": [
+      "Enterprise",
+      "Government",
+      "Public Sector"
+    ],
+    "pricing": [],
+    "features": [
+      "Agentic Solutions for Enterprise",
+      "Public Sector",
+      "STL"
+    ],
+    "products": [
+      "Scale Data Engine",
+      "Scale GenAI Platform",
+      "Scale Donovan"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "ML",
+      "Generative AI"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI research and development space",
+      "Regulatory challenges in the government and public sector markets"
+    ],
+    "key_findings": [
+      "The company is focusing on expanding its product offerings and showcasing its research capabilities",
+      "The updates suggest a focus on attracting new customers and partners"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the AI research and development space",
+      "Expansion into new markets, such as government and public sector"
+    ],
+    "recommended_actions": [
+      "Monitor the company's progress and updates",
+      "Consider partnership opportunities with Scale AI",
+      "Keep an eye on regulatory challenges in the government and public sector markets"
+    ]
+  },
+  "key_insights": [
+    "The company is focusing on expanding its product offerings and showcasing its research capabilities",
+    "The updates suggest a focus on attracting new customers and partners"
+  ],
+  "business_impact": "The updates suggest a focus on expanding the company's product offerings and showcasing its research capabilities, which could attract new customers and partners",
+  "competitive_implications": "The updates could be seen as a competitive move to establish Scale AI as a leader in the AI research and development space",
+  "content_hash_before": null,
+  "content_hash_after": "b79896f07662dd3fdcecf48e2e293aa30f05dcd65ae2d7b0530aa8ef33552af5",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

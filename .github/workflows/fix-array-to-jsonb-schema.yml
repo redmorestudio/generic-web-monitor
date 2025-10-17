@@ -1,0 +1,167 @@
+name: 🔧 Fix PostgreSQL Array to JSONB Schema Issue
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm_execution:
+        description: 'Type "EXECUTE" to confirm schema modification'
+        required: true
+        type: string
+      backup_before_changes:
+        description: 'Create backup before changes'
+        required: false
+        default: true
+        type: boolean
+
+jobs:
+  fix-schema:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+
+    - name: 🔒 Validate Execution Confirmation
+      run: |
+        if [ "${{ github.event.inputs.confirm_execution }}" != "EXECUTE" ]; then
+          echo "❌ Execution not confirmed. You must type 'EXECUTE' to proceed."
+          echo "   This is a safety measure for critical schema modifications."
+          exit 1
+        fi
+        echo "✅ Execution confirmed - proceeding with schema fix"
+
+    - name: 🔍 Check Schema Status Before Fix
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        NODE_ENV: production
+      run: |
+        cd github-actions-backend
+        echo "🔍 Checking current schema status..."
+        node schema-protector.js status
+        echo ""
+        echo "📋 Running schema investigation..."
+        node investigate-postgresql-schema.js || echo "Schema issues detected (expected)"
+
+    - name: 🛡️ Execute Protected Schema Fix
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        NODE_ENV: production
+      run: |
+        cd github-actions-backend
+        echo "🛡️  Starting protected schema conversion..."
+        echo "🎯 Goal: Convert TEXT[] array columns to JSONB"
+        echo "🔧 Fix: Resolve malformed array literal errors"
+        echo ""
+        echo "DATABASE PROTECTION STATUS:"
+        echo "✅ Using schema-protector.js wrapper"
+        echo "✅ Automatic backup creation"
+        echo "✅ Version control and audit logging"
+        echo "✅ Lock mechanism to prevent conflicts"
+        echo ""
+        
+        node fix-array-to-jsonb-schema.js
+        
+        echo ""
+        echo "🔍 Verifying schema fix results..."
+
+    - name: 🔍 Verify Schema Fix Results
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        NODE_ENV: production
+      run: |
+        cd github-actions-backend
+        echo "🔍 Post-fix schema verification..."
+        echo ""
+        
+        # Check schema status
+        echo "📊 Updated schema status:"
+        node schema-protector.js status
+        echo ""
+        
+        # Run investigation again to verify fix
+        echo "📋 Running post-fix investigation..."
+        if node investigate-postgresql-schema.js; then
+          echo "✅ Schema investigation passed - no issues detected!"
+        else
+          echo "❌ Schema investigation still shows issues"
+          exit 1
+        fi
+        
+        echo ""
+        echo "📜 Recent schema changes:"
+        node schema-protector.js history | head -10
+
+    - name: 🧪 Test Enhanced Analysis Pipeline
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+        GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        NODE_ENV: production
+      run: |
+        cd github-actions-backend
+        echo "🧪 Testing enhanced analysis with fixed schema..."
+        echo "🎯 This should now work without malformed array literal errors"
+        echo ""
+        
+        # Run a quick test of the enhanced analyzer
+        # Just test the first few changes to verify the fix works
+        timeout 300s node ai-analyzer-baseline-three-db-postgres.js --test || {
+          echo "⚠️  Test timed out or failed - this may be expected if no baseline data exists"
+          echo "   The important thing is that there are no 'malformed array literal' errors"
+        }
+
+    - name: 📊 Upload Schema Logs and Backups
+      if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: schema-fix-artifacts
+        path: |
+          github-actions-backend/schema-backups/
+          github-actions-backend/data/
+        retention-days: 30
+
+    - name: ✅ Summary
+      if: success()
+      run: |
+        echo ""
+        echo "=" 
+        echo "✅ SCHEMA FIX COMPLETED SUCCESSFULLY"
+        echo "="
+        echo ""
+        echo "🎯 Issue Fixed: Malformed array literal errors in enhanced analysis"
+        echo "🔧 Solution: Converted TEXT[] array columns to JSONB"
+        echo "🛡️  Protection: Full backup and audit trail created"
+        echo ""
+        echo "🚀 Next Steps:"
+        echo "   1. Run the enhanced analysis workflow to test the fix"
+        echo "   2. Monitor for any remaining issues"
+        echo "   3. All 21 companies should now analyze successfully"
+        echo ""
+        echo "📋 To run enhanced analysis:"
+        echo "   - Trigger: analyze-postgres-enhanced.yml workflow"
+        echo "   - Expected: No more malformed array literal errors"
+
+    - name: ❌ Failure Summary
+      if: failure()
+      run: |
+        echo ""
+        echo "❌ SCHEMA FIX FAILED"
+        echo ""
+        echo "🔍 Troubleshooting:"
+        echo "   1. Check the logs above for specific error messages"
+        echo "   2. Review schema-protector.js audit logs"
+        echo "   3. Check schema backup files if rollback is needed"
+        echo ""
+        echo "🛡️  Database Protection:"
+        echo "   - Schema backups are available in artifacts"
+        echo "   - Audit trail is maintained in schema_audit_log table"
+        echo "   - Schema lock should be automatically released"

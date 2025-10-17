@@ -1,0 +1,33 @@
+{
+  "version": "2.1",
+  "backend": "postgresql",
+  "compatible_with": "sqlite-dashboard",
+  "generated_at": "2025-07-22T23:58:09.397Z",
+  "fixes_applied": [
+    "proper_company_ids",
+    "eliminate_duplicates",
+    "extract_jsonb_entities",
+    "correct_join_logic"
+  ],
+  "files": {
+    "core": [
+      "dashboard.json",
+      "companies.json",
+      "extracted-data.json",
+      "changes.json",
+      "monitoring-runs.json",
+      "company-details.json"
+    ],
+    "bonus": [
+      "ai-news.json"
+    ],
+    "companies": [
+      "companies/anthropic.json",
+      "companies/github-copilot.json",
+      "companies/google-deepmind.json",
+      "companies/midjourney.json",
+      "companies/openai.json",
+      "companies/perplexity-ai.json"
+    ]
+  }
+}

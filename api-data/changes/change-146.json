@@ -1,0 +1,39 @@
+{
+  "change_id": 146,
+  "url": "https://replicate.com",
+  "company": "Replicate",
+  "company_category": "AI Infrastructure",
+  "detected_at": "2025-07-18 16:40:47",
+  "interest_level": 7,
+  "interest_category": "major_development",
+  "interest_explanation": "Replicate has launched a new AI API platform, allowing users to run and fine-tune AI models with ease. The platform supports various models and tasks, including image and video generation, and provides a simple API for deployment and customization.",
+  "interest_drivers": [
+    "Introduction of a new AI API platform",
+    "Support for various AI models and tasks",
+    "Easy deployment and fine-tuning of custom models"
+  ],
+  "technical_innovation_score": 7,
+  "business_impact_score": 6,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": false,
+  "content_preview": {
+    "before": null,
+    "after": "Replicate - Run AI with an API (() => { const theme = window.matchMedia(\"(prefers-color-scheme: light)\").matches ? 'light' : 'dark'; const cl = document.documentElement.classList; const dataAttr = document.documentElement.dataset.theme; if (dataAttr != null) { const themeAlreadyApplied = dataAttr === 'light' || dataAttr === 'dark'; if (!themeAlreadyApplied) { document.documentElement.dataset.theme = theme; } } else { const themeAlreadyApplied = cl.contains('light') || cl.contains('dark'); if (!t..."
+  },
+  "diff": {
+    "added_sentences": [],
+    "removed_sentences": [],
+    "key_changes": [],
+    "change_percentage": 0,
+    "summary": "No diff available"
+  },
+  "keywords": {
+    "new_keywords": [],
+    "removed_keywords": [],
+    "frequency_changes": {},
+    "significant_phrases": []
+  },
+  "entities": null,
+  "key_phrases": []
+}

@@ -1,0 +1,101 @@
+{
+  "id": 29,
+  "company": "Weights & Biases",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:29:00.492Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added for Weights & Biases pricing page",
+    "specific_changes": [
+      "Introduction of Weave: LLMOps and Models: MLOps",
+      "Addition of Core Platform Features",
+      "Introduction of Solutions, including Use Cases and Industries",
+      "Addition of Enterprise, Resources, and Docs sections"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on LLMOps and MLOps",
+      "Expansion into new industries and use cases"
+    ],
+    "business_impact": "The addition of new content and features indicates a significant expansion of Weights & Biases' offerings, potentially increasing its competitiveness in the market.",
+    "strategic_direction": "The company appears to be shifting its focus towards more comprehensive and integrated solutions for machine learning and AI applications.",
+    "competitive_implications": "The update may pose a threat to competitors in the LLMOps and MLOps space, while also creating opportunities for partnerships and collaborations."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Autonomous Vehicles",
+      "Communications",
+      "Financial Services",
+      "Healthcare & Life Sciences",
+      "Public Sector",
+      "Scientific Research"
+    ],
+    "pricing": [],
+    "features": [
+      "Traces",
+      "Evaluations",
+      "Playground",
+      "Agents",
+      "Guardrails",
+      "Monitors",
+      "Experiments",
+      "Sweeps",
+      "Tables",
+      "Registry",
+      "Artifacts",
+      "Reports",
+      "SDK",
+      "Automations",
+      "Inference"
+    ],
+    "products": [
+      "Weave: LLMOps",
+      "Models: MLOps"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "LLMOps",
+      "MLOps"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the LLMOps and MLOps space",
+      "Potential disruption to existing business models"
+    ],
+    "key_findings": [
+      "Weights & Biases is expanding its offerings to include Weave: LLMOps and Models: MLOps",
+      "The company is introducing new Core Platform Features and Solutions",
+      "The update indicates a significant shift in the company's strategic direction"
+    ],
+    "opportunities": [
+      "Partnerships and collaborations in the LLMOps and MLOps space",
+      "Expansion into new industries and use cases"
+    ],
+    "recommended_actions": [
+      "Monitor Weights & Biases' future updates and announcements",
+      "Assess the potential impact on existing business models and partnerships",
+      "Explore opportunities for partnerships and collaborations in the LLMOps and MLOps space"
+    ]
+  },
+  "key_insights": [
+    "Weights & Biases is expanding its offerings to include Weave: LLMOps and Models: MLOps",
+    "The company is introducing new Core Platform Features and Solutions",
+    "The update indicates a significant shift in the company's strategic direction"
+  ],
+  "business_impact": "The addition of new content and features indicates a significant expansion of Weights & Biases' offerings, potentially increasing its competitiveness in the market.",
+  "competitive_implications": "The update may pose a threat to competitors in the LLMOps and MLOps space, while also creating opportunities for partnerships and collaborations.",
+  "content_hash_before": null,
+  "content_hash_after": "d0dfd276f8dbb11a41836e7327126cb9b9a8969a1716e51c42d70d36b6d0593f",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

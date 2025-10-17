@@ -1,0 +1,80 @@
+name: 1. Scrape Websites (PostgreSQL)
+
+on:
+  workflow_dispatch:
+    inputs:
+      cascade:
+        description: 'Trigger next workflow (process)'
+        required: false
+        default: true
+        type: boolean
+  workflow_call:
+    inputs:
+      cascade:
+        description: 'Trigger next workflow (process)'
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+  actions: write
+
+concurrency:
+  group: scrape-workflow
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+        npm audit fix --force || true
+        
+    # REMOVED: Schema fix step - this should only run during initialization
+    # The schema should already exist from init-postgres.yml
+    # Running it every time adds unnecessary overhead
+        
+    - name: Log cascade status
+      run: |
+        echo "🔄 Cascade parameter: ${{ inputs.cascade }}"
+        echo "📋 Will trigger next workflow: ${{ inputs.cascade == true }}"
+        
+    - name: Run intelligent scraper with PostgreSQL
+      env:
+        GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      run: |
+        cd github-actions-backend
+        node scraper-three-db-postgres.js
+        
+    - name: Trigger Process Workflow
+      if: ${{ inputs.cascade == true }}
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          console.log('🚀 Triggering process-postgres workflow with cascade=true');
+          const result = await github.rest.actions.createWorkflowDispatch({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            workflow_id: 'process-postgres.yml',
+            ref: 'main',
+            inputs: {
+              cascade: 'true'
+            }
+          });
+          console.log('✅ Successfully triggered process workflow');

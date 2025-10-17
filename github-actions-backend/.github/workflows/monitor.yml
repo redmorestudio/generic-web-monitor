@@ -1,0 +1,244 @@
+name: AI Competitive Intelligence Monitor
+
+on:
+  # Run every 6 hours
+  schedule:
+    - cron: '0 */6 * * *'
+  
+  # Allow manual trigger with options
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform'
+        required: true
+        default: 'monitor'
+        type: choice
+        options:
+          - monitor
+          - analyze-only
+          - generate-brief
+          - full-baseline
+
+env:
+  NODE_ENV: production
+  API_URL: ${{ vars.API_URL || 'http://localhost:3000/api' }}
+
+jobs:
+  # Job 1: Run the backend API server
+  backend:
+    runs-on: ubuntu-latest
+    services:
+      api:
+        image: node:20
+        options: --health-cmd "curl -f http://localhost:3000/api/health || exit 1"
+        ports:
+          - 3000:3000
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Initialize database
+        run: |
+          mkdir -p data
+          node scripts/init-db.js
+      
+      - name: Start API server
+        run: |
+          npm run server &
+          sleep 10
+          curl -f http://localhost:3000/api/health
+      
+      - name: Upload database
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: monitor-database
+          path: data/monitor.db
+
+  # Job 2: Scrape websites and detect changes
+  scrape:
+    needs: backend
+    runs-on: ubuntu-latest
+    if: ${{ inputs.action != 'analyze-only' && inputs.action != 'generate-brief' }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Install Puppeteer browsers
+        run: npx puppeteer browsers install chrome
+      
+      - name: Download database
+        uses: actions/download-artifact@v3
+        with:
+          name: monitor-database
+          path: data
+      
+      - name: Run intelligent scraper
+        run: node scraper.js
+        timeout-minutes: 30
+        env:
+          API_URL: http://localhost:3000/api
+      
+      - name: Upload updated database
+        uses: actions/upload-artifact@v3
+        with:
+          name: monitor-database-updated
+          path: data/monitor.db
+
+  # Job 3: AI Analysis
+  ai-analysis:
+    needs: [backend, scrape]
+    runs-on: ubuntu-latest
+    if: ${{ inputs.action != 'generate-brief' }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Download database
+        uses: actions/download-artifact@v3
+        with:
+          name: monitor-database-updated
+          path: data
+      
+      - name: Run AI analyzer
+        run: node ai-analyzer.js analyze
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          API_URL: http://localhost:3000/api
+        timeout-minutes: 20
+      
+      - name: Generate intelligence brief
+        if: ${{ inputs.action == 'monitor' || inputs.action == 'generate-brief' }}
+        run: node ai-analyzer.js brief
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          API_URL: http://localhost:3000/api
+
+  # Job 4: Update GitHub Pages Dashboard
+  update-dashboard:
+    needs: [backend, scrape, ai-analysis]
+    runs-on: ubuntu-latest
+    if: success()
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Download final database
+        uses: actions/download-artifact@v3
+        with:
+          name: monitor-database-updated
+          path: data
+      
+      - name: Generate dashboard data
+        run: node scripts/generate-dashboard.js
+        env:
+          API_URL: http://localhost:3000/api
+      
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          keep_files: true
+
+  # Job 5: Notifications for high-priority changes
+  notify:
+    needs: ai-analysis
+    runs-on: ubuntu-latest
+    if: success()
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Check for high-priority alerts
+        id: check-alerts
+        run: |
+          # Query API for high-priority changes
+          ALERTS=$(curl -s http://localhost:3000/api/dashboard | jq '.recent_alerts | length')
+          echo "alert_count=$ALERTS" >> $GITHUB_OUTPUT
+      
+      - name: Create GitHub Issue for alerts
+        if: steps.check-alerts.outputs.alert_count > 0
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const alerts = ${{ steps.check-alerts.outputs.alert_count }};
+            
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🔴 ${alerts} High Priority Competitive Intelligence Alerts`,
+              body: `New high-priority changes detected in competitor monitoring.
+              
+              View the [full intelligence brief](https://yourdomain.com/brief) for details.
+              
+              This is an automated alert from the AI Competitive Intelligence Monitor.`,
+              labels: ['competitive-intel', 'high-priority', 'automated']
+            });
+            
+            console.log(`Created issue #${issue.data.number}`);
+
+  # Job 6: Database backup
+  backup:
+    needs: [scrape, ai-analysis]
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: Download final database
+        uses: actions/download-artifact@v3
+        with:
+          name: monitor-database-updated
+          path: data
+      
+      - name: Create backup
+        run: |
+          TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+          cp data/monitor.db data/monitor_backup_${TIMESTAMP}.db
+          
+      - name: Upload backup to S3 (optional)
+        if: ${{ vars.ENABLE_S3_BACKUP == 'true' }}
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --acl private --follow-symlinks
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: 'data'
+          DEST_DIR: 'backups'

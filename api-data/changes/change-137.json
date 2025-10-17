@@ -1,0 +1,242 @@
+{
+  "change_id": 137,
+  "url": "https://pika.art",
+  "company": "Pika",
+  "company_category": "Video AI",
+  "detected_at": "2025-07-18 16:40:35",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No noticeable changes were made to the content of the homepage. The previous and current content are identical, indicating no technical innovation or business impact.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://pika.art\ncompany: Pika\nscraped_at: 2025-07-04 20:18:03\n---\n\nPika\n\n[](/home)\n\nReality sucks. So we’re giving you the option to change it. Hate it? Deflate it. Wanna stop it? Just swap it. Try new Pikapocaylpse Pikaffects, available now.\n\nTo learn more about us, check out our [about page](/about).\nWe’re [hiring](/careers) across different roles!\n\n# Reality is optional\n\nReality sucks. So we’re giving you the option to change it. Hate it? Deflate it. Wanna stop it? Just swap it. Try...",
+    "after": "Pika(function(w,r){w.\\_rwq=r;w\\[r\\]=w\\[r\\]||function(){(w\\[r\\].q=w\\[r\\].q||\\[\\]).push(arguments)}})(window,'rewardful');self.\\_\\_wrap\\_n=self.\\_\\_wrap\\_n||(self.CSS&&CSS.supports(\"text-wrap\",\"balance\")?1:2);self.\\_\\_wrap\\_b=(n,e,a)=>{let i=(a=a||document.querySelector(\\`\\[data-br=\"${n}\"\\]\\`)).parentElement,t=n=>a.style.maxWidth=n+\"px\";a.style.maxWidth=\"\";let r=i.clientWidth,c=i.clientHeight,d=r/2-.25,b=r+.5,o;if(r){for(t(d),d=Math.max(a.scrollWidth,d);d+1<b;)t(o=Math.round((d+b)/2)),i.clientHeig..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Pika(function(w,r){w.",
+      "\\_rwq=r;w\\[r\\]=w\\[r\\]||function(){(w\\[r\\].",
+      "q=w\\[r\\].",
+      "q||\\[\\]).",
+      "push(arguments)}})(window,'rewardful');self.",
+      "\\_\\_wrap\\_n=self.",
+      "\\_\\_wrap\\_n||(self.",
+      "CSS&&CSS.",
+      "supports(\"text-wrap\",\"balance\")?",
+      "1:2);self."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://pika.",
+      "art\ncompany: Pika\nscraped_at: 2025-07-04 20:18:03\n---\n\nPika\n\n[](/home)\n\nReality sucks."
+    ],
+    "key_changes": [
+      "New version: 37.0057, 32.416, V4.8047, 6.88232, V29.6165, V6.88232, 67.7158, 3.45048, 61.3594, 45.5194, 15.7343, 40.9329, 40.9297, V29.6166, V17.1133, 61.5066, 29.6166, 68.1639, 51.0885, 16.0991, 16.4769, 4.58972, V19.0797, 27.5799, 19.0797, 28.7802, 12.4075, 9.54138, 28.777, 6.67216, 27.5767, 15.6479, 14.6831, V4.39658, 15.6511, 21.3995, 4.39658, 23.8512, 5.93322, 9.53829, 23.848, 13.1434, 21.3963, 73.1699, 22.728, 73.0547, V22.7837, V22.728, 22.6753, V22.7309, V22.6753, 95.8077, 24.45, V12.9732, 6.26388, 91.6085, 3.271, 82.189, 74.2738, 69.5497, 6.82969, 12.7907, 74.1778, 9.22276, 76.6487, 7.63356, 88.8815, 91.2564, 9.11764, 13.3009, 89.6209, 13.5204, 88.0686, 13.7152, 86.5515, 13.9038, 75.1764, 15.326, 68.311, 16.1856, 22.7681, 25.3497, 69.3, 27.1801, 71.3356, 28.3612, 73.1568, 29.4186, 76.4023, 29.9998, 80.4735, 85.9562, 90.5203, 28.6673, 91.8293, 26.6854, 91.7109, 28.4879, 29.6072, 29.6165, 96.003, 95.9966, 29.5979, 27.5449, 19.0455, 21.8436, 90.2642, 23.7636, 88.2222, 24.9107, 86.3979, 25.9372, 83.6549, 26.4164, 79.5965, 77.1096, 72.9392, 22.731, 21.1665, 74.0274, 20.2111, 76.6935, 19.4382, 79.5677, 18.6034, 84.3975, 17.9572, 91.2596, 17.1904, V19.0455",
+      "Price change: $1, $21, $22, $23, $24, $25, $26, $2"
+    ],
+    "change_percentage": 97,
+    "summary": "97% content changed (618 additions, 2 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "static",
+        "frequency": 231
+      },
+      {
+        "word": "chunks",
+        "frequency": 214
+      },
+      {
+        "word": "null",
+        "frequency": 106
+      },
+      {
+        "word": "children",
+        "frequency": 69
+      },
+      {
+        "word": "ttq",
+        "frequency": 50
+      },
+      {
+        "word": "next",
+        "frequency": 39
+      },
+      {
+        "word": "woff2",
+        "frequency": 26
+      },
+      {
+        "word": "font",
+        "frequency": 26
+      },
+      {
+        "word": "classname",
+        "frequency": 25
+      },
+      {
+        "word": "self",
+        "frequency": 22
+      },
+      {
+        "word": "push",
+        "frequency": 20
+      },
+      {
+        "word": "undefined",
+        "frequency": 20
+      },
+      {
+        "word": "div",
+        "frequency": 20
+      },
+      {
+        "word": "app",
+        "frequency": 18
+      },
+      {
+        "word": "2972",
+        "frequency": 16
+      },
+      {
+        "word": "function",
+        "frequency": 16
+      },
+      {
+        "word": "type",
+        "frequency": 16
+      },
+      {
+        "word": "2972-a09d1bb6d1390f3a",
+        "frequency": 16
+      },
+      {
+        "word": "952",
+        "frequency": 15
+      },
+      {
+        "word": "style",
+        "frequency": 15
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "page": {
+        "before": 2,
+        "after": 13,
+        "change": 11
+      },
+      "twitter": {
+        "before": 2,
+        "after": 8,
+        "change": 6
+      },
+      "https": {
+        "before": 3,
+        "after": 9,
+        "change": 6
+      },
+      "pika": {
+        "before": 6,
+        "after": 10,
+        "change": 4
+      },
+      "com": {
+        "before": 2,
+        "after": 6,
+        "change": 4
+      },
+      "new": {
+        "before": 2,
+        "after": 5,
+        "change": 3
+      },
+      "policy": {
+        "before": 3,
+        "after": 6,
+        "change": 3
+      },
+      "careers": {
+        "before": 4,
+        "after": 6,
+        "change": 2
+      },
+      "discord": {
+        "before": 3,
+        "after": 5,
+        "change": 2
+      },
+      "terms": {
+        "before": 2,
+        "after": 4,
+        "change": 2
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "static chunks",
+        "count": 214
+      },
+      {
+        "phrase": "ttq ttq",
+        "count": 21
+      },
+      {
+        "phrase": "div null",
+        "count": 20
+      },
+      {
+        "phrase": "null classname",
+        "count": 18
+      },
+      {
+        "phrase": "self next",
+        "count": 17
+      },
+      {
+        "phrase": "next static",
+        "count": 17
+      },
+      {
+        "phrase": "2972 static",
+        "count": 16
+      },
+      {
+        "phrase": "chunks 2972-a09d1bb6d1390f3a",
+        "count": 16
+      },
+      {
+        "phrase": "chunks app",
+        "count": 16
+      },
+      {
+        "phrase": "next push",
+        "count": 15
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

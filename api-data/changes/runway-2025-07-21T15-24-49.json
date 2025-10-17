@@ -1,0 +1,88 @@
+{
+  "id": 52,
+  "company": "Runway",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:24:49.567Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New website content and structure",
+    "specific_changes": [
+      "Introduction of new product features and tools",
+      "Addition of customer stories and use cases",
+      "Introduction of Runway Studios and its initiatives",
+      "Update of research and publications section",
+      "New company information and career opportunities"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing demand for AI-powered creative tools",
+      "Increasing importance of storytelling and content creation"
+    ],
+    "business_impact": "The changes are likely to attract new customers and partners, and to establish Runway as a leader in the AI-powered creative tools market.",
+    "strategic_direction": "The changes suggest that Runway is focusing on expanding its product offerings and establishing itself as a leader in the AI-powered creative tools market.",
+    "competitive_implications": "The changes may pose a competitive threat to other companies in the AI-powered creative tools market, and may lead to increased competition for talent and partnerships."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Entertainment",
+      "Film production",
+      "Music videos"
+    ],
+    "pricing": [],
+    "features": [
+      "Narrative Capabilities",
+      "Multimodal simulators"
+    ],
+    "products": [
+      "Runway Gen-4",
+      "Act-One",
+      "General World Models"
+    ],
+    "partnerships": [
+      "Tribeca Festival",
+      "Lionsgate"
+    ],
+    "technologies": [
+      "AI research models",
+      "Multimodal simulators"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI-powered creative tools market",
+      "Talent acquisition and retention challenges"
+    ],
+    "key_findings": [
+      "Runway is expanding its product offerings and focusing on storytelling and creative applications",
+      "The company is establishing itself as a leader in the AI-powered creative tools market"
+    ],
+    "opportunities": [
+      "Partnerships and collaborations with Runway",
+      "Investment in AI-powered creative tools"
+    ],
+    "recommended_actions": [
+      "Monitor Runway's product offerings and strategic direction",
+      "Consider partnerships or collaborations with Runway",
+      "Invest in AI-powered creative tools and talent acquisition"
+    ]
+  },
+  "key_insights": [
+    "Runway is expanding its product offerings and focusing on storytelling and creative applications",
+    "The company is establishing itself as a leader in the AI-powered creative tools market"
+  ],
+  "business_impact": "The changes are likely to attract new customers and partners, and to establish Runway as a leader in the AI-powered creative tools market.",
+  "competitive_implications": "The changes may pose a competitive threat to other companies in the AI-powered creative tools market, and may lead to increased competition for talent and partnerships.",
+  "content_hash_before": null,
+  "content_hash_after": "45c2f4f53d0869d2c72733ca02a6af4fe5eeb397aa243b5d6c440925365a2282",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

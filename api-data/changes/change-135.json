@@ -1,0 +1,309 @@
+{
+  "change_id": 135,
+  "url": "https://phind.com",
+  "company": "Phind",
+  "company_category": "AI Search",
+  "detected_at": "2025-07-18 16:40:31",
+  "interest_level": 6,
+  "interest_category": "major_development",
+  "interest_explanation": "Phind has introduced a new capability to analyze PDFs and updated examples of its search capabilities, including coding and general knowledge questions, indicating incremental improvements in its technical capabilities and potential business impact through expanded user engagement.",
+  "interest_drivers": [
+    "PDF analysis capability",
+    "New examples of Phind's capabilities"
+  ],
+  "technical_innovation_score": 5,
+  "business_impact_score": 6,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://phind.com\ncompany: Phind\nscraped_at: 2025-07-04 20:17:57\n---\n\nPhind\n\nReport Bug\n\n|\n\nSign Up\n\nSign In\n\nQuestions\n\n[\n\nNew Question\n\n\n](/)\n\nLogin to save and view your conversation history.\n\nExplore More\n\n[\n\n![Phind Logo](/assets/images/phind.svg)\n\n](/)\n\nAsk anything...\n\n\n\nPhind-70B\n\nAdvanced\n\nTrain a perceptron neural network using a Jupyter notebook\n\nDeepSpeed ZeRO vs PyTorch FSDP\n\nWere Neanderthals smarter than humans?\n\nBill Gates meets with Trump over dinner\n\nPhind can perform ...",
+    "after": "Phind@-webkit-keyframes popUp{0%{opacity:0;-webkit-transform:translatey(10px);transform:translatey(10px);z-index:-1}100%{opacity:1;-webkit-transform:translatey(0);transform:translatey(0);z-index:-1}}@-moz-keyframes popUp{0%{opacity:0;-moz-transform:translatey(10px);transform:translatey(10px);z-index:-1}100%{opacity:1;-moz-transform:translatey(0);transform:translatey(0);z-index:-1}}@-o-keyframes popUp{0%{opacity:0;-o-transform:translatey(10px);transform:translatey(10px);z-index:-1}100%{opacity:1;..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Phind@-webkit-keyframes popUp{0%{opacity:0;-webkit-transform:translatey(10px);transform:translatey(10px);z-index:-1}100%{opacity:1;-webkit-transform:translatey(0);transform:translatey(0);z-index:-1}}@-moz-keyframes popUp{0%{opacity:0;-moz-transform:translatey(10px);transform:translatey(10px);z-index:-1}100%{opacity:1;-moz-transform:translatey(0);transform:translatey(0);z-index:-1}}@-o-keyframes popUp{0%{opacity:0;-o-transform:translatey(10px);transform:translatey(10px);z-index:-1}100%{opacity:1;-o-transform:translatey(0);transform:translatey(0);z-index:-1}}@keyframes popUp{0%{opacity:0;-webkit-transform:translatey(10px);-moz-transform:translatey(10px);-o-transform:translatey(10px);transform:translatey(10px);z-index:-1}100%{opacity:1;-webkit-transform:translatey(0);-moz-transform:translatey(0);-o-transform:translatey(0);transform:translatey(0);z-index:-1}}@-webkit-keyframes popDown{0%{opacity:1;-webkit-transform:translatey(0);transform:translatey(0);z-index:-1}100%{opacity:0;-webkit-transform:translatey(10px);transform:translatey(10px);z-index:-1}}@-moz-keyframes popDown{0%{opacity:1;-moz-transform:translatey(0);transform:translatey(0);z-index:-1}100%{opacity:0;-moz-transform:translatey(10px);transform:translatey(10px);z-index:-1}}@-o-keyframes popDown{0%{opacity:1;-o-transform:translatey(0);transform:translatey(0);z-index:-1}100%{opacity:0;-o-transform:translatey(10px);transform:translatey(10px);z-index:-1}}@keyframes popDown{0%{opacity:1;-webkit-transform:translatey(0);-moz-transform:translatey(0);-o-transform:translatey(0);transform:translatey(0);z-index:-1}100%{opacity:0;-webkit-transform:translatey(10px);-moz-transform:translatey(10px);-o-transform:translatey(10px);transform:translatey(10px);z-index:-1}}\n\n!",
+      "function(){try{var d=document.",
+      "documentElement,n='data-theme',s='setAttribute';var e=localStorage.",
+      "getItem('theme');if('system'===e||(!",
+      "e&&true)){var t='(prefers-color-scheme: dark)',m=window.",
+      "matchMedia(t);if(m.",
+      "media!",
+      "==t||m.",
+      "matches){d.",
+      "style."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://phind.",
+      "com\ncompany: Phind\nscraped_at: 2025-07-04 20:17:57\n---\n\nPhind\n\nReport Bug\n\n|\n\nSign Up\n\nSign In\n\nQuestions\n\n[\n\nNew Question\n\n\n](/)\n\nLogin to save and view your conversation history.",
+      "Phind-70B\n\nAdvanced\n\nTrain a perceptron neural network using a Jupyter notebook\n\nDeepSpeed ZeRO vs PyTorch FSDP\n\nWere Neanderthals smarter than humans?"
+    ],
+    "key_changes": [
+      "New version: 157.50, 420.57, 79.29, 90.15, 513.95, 32.60, 218.94, 193.18, 604.93, 12.89, 321.97, 64.39, 167.43, 296.21, 38.64, 141.67, 270.46, 115.91, 244.70, 579.55, 374.69, 33.80, 0.40, 103.43, 87.74, 233.83, 373.89, 140.46, 205.66, 36.22, 93.77, 307.08, 467.26, 47.09, 280.52, 47.89, 154.95, 561.04, 86.81, 24.20, 18.34, 111.47, 64.91, 158.03, 24.99, 118.12, 71.56, 164.68, 31.65, 124.77, 78.21, 171.34, 38.30, 131.42, 84.86, 177.99, 44.95, 138.08, 91.51, 184.64, 51.60, 144.73, 98.17, 191.29, 58.25, 151.38, 104.82, 197.94"
+    ],
+    "change_percentage": 100,
+    "summary": "100% content changed (4991 additions, 3 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "null",
+        "frequency": 1740
+      },
+      {
+        "word": "classname",
+        "frequency": 1701
+      },
+      {
+        "word": "div",
+        "frequency": 1700
+      },
+      {
+        "word": "absolute",
+        "frequency": 1667
+      },
+      {
+        "word": "top-",
+        "frequency": 1624
+      },
+      {
+        "word": "border-",
+        "frequency": 1620
+      },
+      {
+        "word": "d1cae0",
+        "frequency": 1620
+      },
+      {
+        "word": "left-",
+        "frequency": 1583
+      },
+      {
+        "word": "border",
+        "frequency": 1581
+      },
+      {
+        "word": "0px",
+        "frequency": 1580
+      },
+      {
+        "word": "origin-top-left",
+        "frequency": 1140
+      },
+      {
+        "word": "20px",
+        "frequency": 1121
+      },
+      {
+        "word": "81px",
+        "frequency": 1120
+      },
+      {
+        "word": "-24",
+        "frequency": 1120
+      },
+      {
+        "word": "rotate-",
+        "frequency": 1120
+      },
+      {
+        "word": "-25deg",
+        "frequency": 1120
+      },
+      {
+        "word": "95px",
+        "frequency": 220
+      },
+      {
+        "word": "60px",
+        "frequency": 160
+      },
+      {
+        "word": "children",
+        "frequency": 142
+      },
+      {
+        "word": "513",
+        "frequency": 140
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "url",
+        "frequency": 1
+      },
+      {
+        "word": "https",
+        "frequency": 1
+      },
+      {
+        "word": "com",
+        "frequency": 1
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "deepspeed",
+        "frequency": 1
+      },
+      {
+        "word": "zero",
+        "frequency": 1
+      },
+      {
+        "word": "pytorch",
+        "frequency": 1
+      },
+      {
+        "word": "fsdp",
+        "frequency": 1
+      },
+      {
+        "word": "neanderthals",
+        "frequency": 1
+      },
+      {
+        "word": "smarter",
+        "frequency": 1
+      },
+      {
+        "word": "than",
+        "frequency": 1
+      },
+      {
+        "word": "humans",
+        "frequency": 1
+      },
+      {
+        "word": "bill",
+        "frequency": 1
+      },
+      {
+        "word": "gates",
+        "frequency": 1
+      },
+      {
+        "word": "meets",
+        "frequency": 1
+      },
+      {
+        "word": "trump",
+        "frequency": 1
+      },
+      {
+        "word": "over",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "phind": {
+        "before": 6,
+        "after": 8,
+        "change": 2
+      },
+      "questions": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "new": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "your": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "more": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "logo": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "assets": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "images": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "svg": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "phind-70b": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "div null",
+        "count": 1700
+      },
+      {
+        "phrase": "null classname",
+        "count": 1699
+      },
+      {
+        "phrase": "border- d1cae0",
+        "count": 1620
+      },
+      {
+        "phrase": "border border-",
+        "count": 1580
+      },
+      {
+        "phrase": "d1cae0 div",
+        "count": 1579
+      },
+      {
+        "phrase": "0px left-",
+        "count": 1520
+      },
+      {
+        "phrase": "absolute origin-top-left",
+        "count": 1140
+      },
+      {
+        "phrase": "classname 81px",
+        "count": 1120
+      },
+      {
+        "phrase": "81px 0px",
+        "count": 1120
+      },
+      {
+        "phrase": "left- -24",
+        "count": 1120
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

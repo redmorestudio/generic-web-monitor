@@ -1,0 +1,64 @@
+{
+  "id": 220,
+  "company": "Andi",
+  "page_url": "homepage",
+  "detected_at": "2025-07-22T17:12:58.592Z",
+  "change_type": "modified",
+  "interest_level": 5,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "minor",
+    "what_changed": "The examples of search queries and the text describing how to use Andi have changed.",
+    "specific_changes": [
+      "New examples of search queries have been added.",
+      "The text describing how to use Andi has been updated to include more specific examples."
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Andi is continuing to refine its user experience and provide more guidance on how to use its features."
+    ],
+    "business_impact": "The changes may improve user engagement and provide more clarity on how to use Andi, but the overall business impact is likely to be minor.",
+    "strategic_direction": "Andi is focused on providing a user-friendly and intuitive experience, and the changes reflect this strategic direction.",
+    "competitive_implications": "The changes do not significantly impact Andi's competitive position, but may help to slightly improve its user retention and acquisition."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "If Andi's competitors make more significant changes to their user experience, Andi may struggle to keep up and maintain its competitive position."
+    ],
+    "key_findings": [
+      "Andi is refining its user experience and providing more guidance on how to use its features.",
+      "The changes may improve user engagement and provide more clarity on how to use Andi."
+    ],
+    "opportunities": [
+      "Andi could continue to refine its user experience and provide more guidance on how to use its features to improve user engagement and retention."
+    ],
+    "recommended_actions": [
+      "Continue to monitor Andi's updates and changes to its user experience.",
+      "Consider providing more guidance and support to users to improve engagement and retention."
+    ]
+  },
+  "key_insights": [
+    "Andi is refining its user experience and providing more guidance on how to use its features.",
+    "The changes may improve user engagement and provide more clarity on how to use Andi."
+  ],
+  "business_impact": "The changes may improve user engagement and provide more clarity on how to use Andi, but the overall business impact is likely to be minor.",
+  "competitive_implications": "The changes do not significantly impact Andi's competitive position, but may help to slightly improve its user retention and acquisition.",
+  "content_hash_before": "bb193f34f7b22d261217b7704514b7482ce922e4bf4de3d3240fd1c221eaa296",
+  "content_hash_after": "953a0869358d76a2cad4bb3316be7012b33dc0ecdf72d7fcf9aab3e88c575a45",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

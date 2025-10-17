@@ -1,0 +1,97 @@
+{
+  "id": 28,
+  "company": "Weights & Biases",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:29:10.960Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added to the homepage",
+    "specific_changes": [
+      "Introduction of Weights & Biases as The AI Developer Platform",
+      "Addition of various platform features such as Weave: LLMOps, Models: MLOps, Core Platform Features, Solutions, Enterprise, and Resources",
+      "Inclusion of use cases, industries, and case studies"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on AI development",
+      "Expansion into new markets and industries"
+    ],
+    "business_impact": "The changes are likely to have a significant impact on the company's business, as they position themselves as a leading AI developer platform and highlight their various features and solutions",
+    "strategic_direction": "The company appears to be focusing on expanding its platform and solutions to meet the growing demand for AI development and deployment",
+    "competitive_implications": "The changes suggest that Weights & Biases is attempting to differentiate itself from competitors and establish itself as a leader in the AI developer platform space"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Autonomous Vehicles",
+      "Communications",
+      "Financial Services",
+      "Healthcare & Life Sciences",
+      "Public Sector",
+      "Scientific Research"
+    ],
+    "pricing": [],
+    "features": [
+      "Traces",
+      "Evaluations",
+      "Playground",
+      "Agents",
+      "Guardrails",
+      "Monitors",
+      "Experiments",
+      "Sweeps",
+      "Tables",
+      "Registry",
+      "Artifacts",
+      "Reports",
+      "SDK",
+      "Automations",
+      "Inference"
+    ],
+    "products": [
+      "Weave: LLMOps",
+      "Models: MLOps"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "LLMOps",
+      "MLOps"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI developer platform space",
+      "Potential disruption to existing business models"
+    ],
+    "key_findings": [
+      "Weights & Biases is positioning itself as a leading AI developer platform",
+      "The company is highlighting its various features and solutions to attract customers and establish itself as a leader in the market"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Weights & Biases to leverage their platform and solutions",
+      "Expansion into new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor Weights & Biases' progress and adjust business strategies accordingly",
+      "Consider partnership opportunities to leverage their platform and solutions"
+    ]
+  },
+  "key_insights": [
+    "Weights & Biases is positioning itself as a leading AI developer platform",
+    "The company is highlighting its various features and solutions to attract customers and establish itself as a leader in the market"
+  ],
+  "business_impact": "The changes are likely to have a significant impact on the company's business, as they position themselves as a leading AI developer platform and highlight their various features and solutions",
+  "competitive_implications": "The changes suggest that Weights & Biases is attempting to differentiate itself from competitors and establish itself as a leader in the AI developer platform space",
+  "content_hash_before": null,
+  "content_hash_after": "bf2ea35fb79c18c301abd61f18d294c7bc149fff11ca80310f9febd2c5ca7c52",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

@@ -1,0 +1,34 @@
+{
+  "name": "ai-competitive-monitor",
+  "version": "2.0.0",
+  "description": "AI-powered competitive intelligence monitoring using GitHub Actions",
+  "main": "index.js",
+  "scripts": {
+    "scrape": "node scripts/scrape.js",
+    "analyze": "node scripts/analyze-with-ai.js",
+    "monitor": "npm run scrape && npm run analyze",
+    "dashboard": "node scripts/generate-dashboard-data.js",
+    "serve": "cd docs && python3 -m http.server 8000"
+  },
+  "keywords": [
+    "competitive-intelligence",
+    "ai",
+    "monitoring",
+    "automation"
+  ],
+  "author": "Seth Redmore",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.20.0",
+    "puppeteer": "^22.0.0",
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "prettier": "^3.2.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

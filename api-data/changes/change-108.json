@@ -1,0 +1,325 @@
+{
+  "change_id": 108,
+  "url": "https://ai.meta.com/llama",
+  "company": "Meta AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:38:05",
+  "interest_level": 4,
+  "interest_category": "notable_update",
+  "interest_explanation": "The update appears to be a minor reorganization of the content, with no significant technical updates or new features announced. The removal of the mention of the livestream event with Oracle Cloud Infrastructure is the most notable change.",
+  "interest_drivers": [
+    "No significant technical updates",
+    "Minor content reorganization"
+  ],
+  "technical_innovation_score": 5,
+  "business_impact_score": 3,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://ai.meta.com/llama\ncompany: Meta AI\nscraped_at: 2025-07-04 20:15:58\n---\n\n           Industry Leading, Open-Source AI | Llama by Meta\n\n[\n\nSkip to main content\n\n\n](#mdc-main-content)\n\n[![Meta](https://static.xx.fbcdn.net/rsrc.php/y9/r/tL_v571NdZ0.svg)](/)\n\nModels & Products\n\nDocs\n\nCommunity\n\nResources\n\n[Llama API](https://llama.developer.meta.com/join_waitlist)\n\n[\n\nDownload models\n\n\n](/llama-downloads/)\n\n![Llama banner image](https://lookaside.fbsbx.com/elementpath/media/?media_id=...",
+    "after": ":root, .\\_\\_fb-light-mode:root, .\\_\\_fb-light-mode {--fds-black:#000000;--fds-black-alpha-05:rgba(0, 0, 0, 0.05);--fds-black-alpha-10:rgba(0, 0, 0, 0.1);--fds-black-alpha-15:rgba(0, 0, 0, 0.15);--fds-black-alpha-20:rgba(0, 0, 0, 0.2);--fds-black-alpha-30:rgba(0, 0, 0, 0.3);--fds-black-alpha-40:rgba(0, 0, 0, 0.4);--fds-black-alpha-50:rgba(0, 0, 0, 0.5);--fds-black-alpha-60:rgba(0, 0, 0, 0.6);--fds-black-alpha-80:rgba(0, 0, 0, 0.8);--fds-blue-05:#ECF3FF;--fds-blue-30:#AAC9FF;--fds-blue-40:#77A7FF;..."
+  },
+  "diff": {
+    "added_sentences": [
+      ":root, .",
+      "\\_\\_fb-light-mode:root, .",
+      "\\_\\_fb-light-mode {--fds-black:#000000;--fds-black-alpha-05:rgba(0, 0, 0, 0.",
+      "05);--fds-black-alpha-10:rgba(0, 0, 0, 0.",
+      "1);--fds-black-alpha-15:rgba(0, 0, 0, 0.",
+      "15);--fds-black-alpha-20:rgba(0, 0, 0, 0.",
+      "2);--fds-black-alpha-30:rgba(0, 0, 0, 0.",
+      "3);--fds-black-alpha-40:rgba(0, 0, 0, 0.",
+      "4);--fds-black-alpha-50:rgba(0, 0, 0, 0.",
+      "5);--fds-black-alpha-60:rgba(0, 0, 0, 0."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://ai.",
+      "com/llama\ncompany: Meta AI\nscraped_at: 2025-07-04 20:15:58\n---\n\n           Industry Leading, Open-Source AI | Llama by Meta\n\n[\n\nSkip to main content\n\n\n](#mdc-main-content)\n\n[!",
+      "com/join_waitlist)\n\n[\n\nDownload models\n\n\n](/llama-downloads/)\n\n!",
+      "media_id=1334211817846649&version=1751394390&transcode_extension=webp)\n\n# Llama 4: Leading intelligence.",
+      "# Unrivaled speed and efficiency.",
+      "The most intelligent, scalable, and convenient generation of Llama is here: natively multimodal, mixture-of-experts models, advanced reasoning, and industry-leading context windows.",
+      "[\n\nDownload models\n\n\n](/llama-downloads/?",
+      "utm_source=llama-home-hero&utm_medium=llama-referral&utm_campaign=llama-utm&utm_offering=llama-downloads&utm_product=llama)\n\n[\n\nJoin the Llama API Waitlist\n\n\n](https://llama.",
+      "com/join_waitlist)\n\n!",
+      "media_id=615824071444560&version=1749566738&transcode_extension=webp)\n\n### Join our livestream June 25th with Oracle Cloud Infrastructure to unlock enterprise growth."
+    ],
+    "key_changes": [
+      "New version: 0.05, 0.1, 0.15, 0.2, 0.3, 0.4, 0.5, 0.6, 0.8, 147.75, 109.5, 166.5, 0.35, 255.9, 245.9, 0.10, 0.9, 0.62, 0.12, 0.7, 0.03, 0.14, 0.34, 0.45, 1.2941, 0.75, 0.25, 2.1, 1752856678056.4, 1752856679157.4, 0.01, 0.001, 1.0, 120.0.0, 10.15, 10.15.7, 16.67, 9.7, 2.2, 1.1, 3.5, 4.4, 52.6, 3.6, 11.6, 820.4, 5.7, 3.4, 9.3, 12.7, 28.9, 1.7, 3.2, 5.6, 40.2, 55.2, 2.4, 1.4, 95.7, 1.6, 8.1, 6.2, 8.4, 47.9, 227.8, 37.6, 4.3, 9.8, 5.8, 5.1, 3.1, 25.4, 1.2, 17.2, 3.3, 10.6, 7.2, 5.2, 11.7, 74.1, 1.5, 4.1, 4.9, 913.1, 2.9, 76.1, 60.7, 2.8, 10.7, 1403.4, 14.2, 166.2, 71.2, 10.9, 2.3, 16.5, 72.6, 4.5, 13.4, 1.3, 13.7, 7.8, 1.9, 1.8, 330.3, 2.5, 18.7, 76.9, 7.7, 22.5, 19.2, 25.9, 21.9, 1067.1, 13.8, 12.2, 23.9, 14.9, 6.7, 4.6, 280.2, 15.8, 3.9, 12.5, 77.8, 37.2, 6.1, 58.1, 6.5, 478.6, 319.7, 107.2, 4.8, 6.9, 9.6, 9.1, 26.1, 7.6, 13.1, 22.2, 5.4, 7.4, 2.6, 100.8, 15.4, 22.6, 24.8, 6.4, 7.1, 3.7, 8.7, 52.4, 11.3, 11.1, 613.8, 45.7, 124.6, 216.7, 6.8, 985.8, 10.2, 142.2, 7.9, 8.6, 73.6, 12.8, 23.3, 1992.7, 164.4, 980.6, 12.6, 965.9, 26.4, 0.43, 0.89, 0.32, 1.27, 0.64, 0.67, 0.36, 0.04, 0.9375, 1.2667, 1.1667, 1.0625, 0.8125, 1.3077, 0.16, 0.6875, 1.4545, 0.86666666666667, 1.13334, 3.0832147598267, 1.75, 7.5, 0.63308577239513, 1.5779530704021, 9.2335087917745, 16.924449682236, 5.9, 0.0001, 69.4, 70.7, 88.8, 32.8, 74.3, 57.2, 42.2, 36.6, 39.7, 36.3, 33.3, 68.9, 50.5, 27.7, 49.0, 64.9, 67.6, 76.3, 90.4, 29.7, 67.5, 42.4, 62.8, 86.2, 94.1, 66.8, 68.0, 57.6, 73.0, 91.2, 71.6, 51.5, 42.3, 35.1, 49.4, 95.0, 82.2, 85.8, 83.2, 71.8, 36.0, 91.8, 79.1, 64.7, 72.7, 71.4, 85.1, 74.4, 1.0.0",
+      "Price change: $1, $2, $3",
+      "New model mentioned",
+      "New api mentioned",
+      "New release mentioned",
+      "New update mentioned",
+      "New performance mentioned",
+      "New benchmark mentioned",
+      "New feature mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 85,
+    "summary": "85% content changed (7643 additions, 130 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "100",
+        "frequency": 3374
+      },
+      {
+        "word": "mobile",
+        "frequency": 3326
+      },
+      {
+        "word": "type",
+        "frequency": 2615
+      },
+      {
+        "word": "false",
+        "frequency": 2386
+      },
+      {
+        "word": "props",
+        "frequency": 1778
+      },
+      {
+        "word": "iseagerloaded",
+        "frequency": 1776
+      },
+      {
+        "word": "children",
+        "frequency": 1631
+      },
+      {
+        "word": "null",
+        "frequency": 1344
+      },
+      {
+        "word": "display",
+        "frequency": 1233
+      },
+      {
+        "word": "height",
+        "frequency": 965
+      },
+      {
+        "word": "width",
+        "frequency": 930
+      },
+      {
+        "word": "true",
+        "frequency": 905
+      },
+      {
+        "word": "u0025",
+        "frequency": 905
+      },
+      {
+        "word": "mcdscmscommonbox",
+        "frequency": 832
+      },
+      {
+        "word": "block",
+        "frequency": 783
+      },
+      {
+        "word": "classname",
+        "frequency": 738
+      },
+      {
+        "word": "cssrules",
+        "frequency": 738
+      },
+      {
+        "word": "color",
+        "frequency": 712
+      },
+      {
+        "word": "flex",
+        "frequency": 669
+      },
+      {
+        "word": "react",
+        "frequency": 650
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "fzi0tcyqv",
+        "frequency": 5
+      },
+      {
+        "word": "qj9o9rxcy7lq",
+        "frequency": 5
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "1749566738",
+        "frequency": 1
+      },
+      {
+        "word": "company",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "615824071444560",
+        "frequency": 1
+      },
+      {
+        "word": "livestream",
+        "frequency": 1
+      },
+      {
+        "word": "june",
+        "frequency": 1
+      },
+      {
+        "word": "25th",
+        "frequency": 1
+      },
+      {
+        "word": "oracle",
+        "frequency": 1
+      },
+      {
+        "word": "cloud",
+        "frequency": 1
+      },
+      {
+        "word": "infrastructure",
+        "frequency": 1
+      },
+      {
+        "word": "unlock",
+        "frequency": 1
+      },
+      {
+        "word": "enterprise",
+        "frequency": 1
+      },
+      {
+        "word": "growth",
+        "frequency": 1
+      },
+      {
+        "word": "thepathtoagenticai-acollaborati7338992302243094528",
+        "frequency": 1
+      },
+      {
+        "word": "theater",
+        "frequency": 1
+      },
+      {
+        "word": "llama-home",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "center": {
+        "before": 4,
+        "after": 1081,
+        "change": 1077
+      },
+      "https": {
+        "before": 49,
+        "after": 715,
+        "change": 666
+      },
+      "net": {
+        "before": 7,
+        "after": 628,
+        "change": 621
+      },
+      "fbcdn": {
+        "before": 7,
+        "after": 621,
+        "change": 614
+      },
+      "php": {
+        "before": 2,
+        "after": 615,
+        "change": 613
+      },
+      "static": {
+        "before": 2,
+        "after": 605,
+        "change": 603
+      },
+      "rsrc": {
+        "before": 2,
+        "after": 590,
+        "change": 588
+      },
+      "www": {
+        "before": 16,
+        "after": 547,
+        "change": 531
+      },
+      "result": {
+        "before": 2,
+        "after": 306,
+        "change": 304
+      },
+      "time": {
+        "before": 2,
+        "after": 149,
+        "change": 147
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "iseagerloaded false",
+        "count": 1723
+      },
+      {
+        "phrase": "false children",
+        "count": 1567
+      },
+      {
+        "phrase": "children type",
+        "count": 1379
+      },
+      {
+        "phrase": "mobile center",
+        "count": 1067
+      },
+      {
+        "phrase": "100 u0025",
+        "count": 900
+      },
+      {
+        "phrase": "width 100",
+        "count": 858
+      },
+      {
+        "phrase": "100 width",
+        "count": 855
+      },
+      {
+        "phrase": "type mcdscmscommonbox",
+        "count": 826
+      },
+      {
+        "phrase": "mcdscmscommonbox props",
+        "count": 826
+      },
+      {
+        "phrase": "display mobile",
+        "count": 826
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

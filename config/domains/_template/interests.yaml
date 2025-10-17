@@ -1,0 +1,156 @@
+# Interest Level Configuration Template
+# Define what makes something interesting in your domain
+
+interest_configuration:
+  name: "Your Domain Interest Scoring"
+  version: "1.0.0"
+  
+  # Define interest levels (you can have 2-10 levels)
+  levels:
+    - score_range: [9, 10]
+      name: "critical"
+      label: "🚨 Critical - Immediate Action"
+      color: "#dc2626"  # Red
+      criteria:
+        # List specific criteria that would make something critical
+        - "Major acquisition or merger announced"
+        - "Regulatory action with immediate effect"
+        - "Security breach or critical vulnerability"
+        - "Market-moving announcement"
+      notification:
+        email: true
+        slack: true
+        sms: true  # Only for most critical
+    
+    - score_range: [7, 8]
+      name: "high"
+      label: "⚠️ High - Important Development"
+      color: "#f59e0b"  # Orange
+      criteria:
+        - "New product launch"
+        - "Significant partnership"
+        - "Major feature announcement"
+        - "Important personnel change"
+      notification:
+        email: true
+        slack: true
+        sms: false
+    
+    - score_range: [5, 6]
+      name: "medium"
+      label: "👀 Medium - Worth Monitoring"
+      color: "#3b82f6"  # Blue
+      criteria:
+        - "Product update or improvement"
+        - "New integration or API"
+        - "Industry trend or report"
+        - "Conference or event announcement"
+      notification:
+        email: false
+        slack: true
+        sms: false
+    
+    - score_range: [3, 4]
+      name: "low"
+      label: "📋 Low - Background Information"
+      color: "#6b7280"  # Gray
+      criteria:
+        - "Blog post or thought leadership"
+        - "Minor update or bug fix"
+        - "Routine announcement"
+        - "Marketing campaign"
+      notification:
+        email: false
+        slack: false
+        sms: false
+    
+    - score_range: [1, 2]
+      name: "minimal"
+      label: "📄 Minimal - Archive Only"
+      color: "#d1d5db"  # Light gray
+      criteria:
+        - "Terms of service update"
+        - "Website design change"
+        - "Social media post"
+        - "Repeated content"
+      notification:
+        email: false
+        slack: false
+        sms: false
+
+  # Scoring factors - what contributes to the interest score
+  scoring_factors:
+    - name: "business_impact"
+      weight: 0.30
+      description: "How much this affects your business/objectives"
+      keywords:
+        boost:  # Words that increase this factor
+          - "major"
+          - "significant"
+          - "breakthrough"
+          - "disruption"
+        reduce:  # Words that decrease this factor
+          - "minor"
+          - "routine"
+          - "scheduled"
+          - "planned"
+    
+    - name: "urgency"
+      weight: 0.25
+      description: "How quickly you need to respond"
+      rules:
+        - condition: "contains_date_within_7_days"
+          score_modifier: 2.0
+        - condition: "contains_words: immediate, urgent, now"
+          score_modifier: 1.5
+    
+    - name: "competitive_relevance"
+      weight: 0.25
+      description: "Impact on competitive position"
+      keywords:
+        boost:
+          - "competitor"
+          - "market share"
+          - "industry first"
+          - "exclusive"
+    
+    - name: "innovation_value"
+      weight: 0.20
+      description: "Technical or strategic innovation"
+      keywords:
+        boost:
+          - "novel"
+          - "patent"
+          - "research"
+          - "breakthrough"
+
+  # Special detection rules
+  detection_rules:
+    - name: "crisis_detection"
+      pattern: "(breach|hack|leak|emergency|crisis)"
+      automatic_score: 9
+      alert_immediately: true
+    
+    - name: "opportunity_detection"
+      pattern: "(acquisition|merger|partnership|collaboration)"
+      score_modifier: 1.5
+    
+    - name: "noise_filter"
+      pattern: "(unsubscribe|cookie policy|terms of service)"
+      score_modifier: 0.2
+
+  # Customization options
+  options:
+    # Should the system learn from your feedback?
+    adaptive_scoring: true
+    
+    # Minimum score to track (ignore below this)
+    minimum_score: 2
+    
+    # How to handle duplicate content
+    duplicate_penalty: 0.5  # Reduce score by 50% for duplicates
+    
+    # Time decay - reduce importance of older changes
+    time_decay:
+      enabled: true
+      half_life_days: 30  # Score reduces by half after 30 days

@@ -1,0 +1,22 @@
+{
+  "id": 364,
+  "company": "Google DeepMind",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T03:12:46.820Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
+  "content_hash_before": null,
+  "content_hash_after": "803b85bcc20c98f30f421abf6d9d6a802f097284e350d47e7117d4ac8bc28b3e",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

@@ -1,0 +1,378 @@
+name: Analyze Content - Standard (PostgreSQL)
+
+on:
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      trigger_source:
+        description: 'What triggered this workflow'
+        required: false
+        type: string
+        default: 'manual'
+      run_id:
+        description: 'Previous workflow run ID'
+        required: false
+        type: string
+      analysis_mode:
+        description: 'Analysis mode'
+        required: false
+        type: choice
+        default: 'recent'
+        options:
+          - recent        # Last 24 hours only
+          - full          # Analyze everything
+          - force         # Force re-analyze all
+      cascade:
+        description: 'Trigger next workflow in chain'
+        required: false
+        type: boolean
+        default: true
+  
+  # Allow being called by other workflows
+  workflow_call:
+    inputs:
+      trigger_source:
+        description: 'What triggered this workflow'
+        required: false
+        type: string
+        default: 'manual'
+      run_id:
+        description: 'Previous workflow run ID'
+        required: false
+        type: string
+      analysis_mode:
+        description: 'Analysis mode'
+        required: false
+        type: string
+        default: 'recent'
+      cascade:
+        description: 'Trigger next workflow in chain'
+        required: false
+        type: boolean
+        default: false  # Different default for when called by full-monitor
+    outputs:
+      run_id:
+        description: 'The workflow run ID'
+        value: ${{ jobs.analyze-content-postgres.outputs.run_id }}
+
+# Prevent concurrent runs
+concurrency:
+  group: analyze-postgres-workflow
+  cancel-in-progress: false
+
+env:
+  NODE_ENV: production
+
+jobs:
+  analyze-content-postgres:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    
+    outputs:
+      run_id: ${{ github.run_id }}
+    
+    permissions:
+      contents: write
+      actions: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Verify PostgreSQL connection
+        run: |
+          cd github-actions-backend
+          echo "🐘 Verifying PostgreSQL connection..."
+          node -e "
+            const { db, end } = require('./postgres-db');
+            db.get('SELECT NOW() as time')
+              .then(result => {
+                console.log('✅ PostgreSQL connected:', result.time);
+                return end();
+              })
+              .catch(err => {
+                console.error('❌ PostgreSQL connection failed:', err);
+                process.exit(1);
+              });
+          "
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Check PostgreSQL schema readiness
+        run: |
+          cd github-actions-backend
+          echo "🔍 Checking PostgreSQL schema..."
+          node -e "
+            const { db, end } = require('./postgres-db');
+            
+            async function checkSchema() {
+              try {
+                // Check intelligence schema tables
+                const tables = await db.all(\`
+                  SELECT table_name 
+                  FROM information_schema.tables 
+                  WHERE table_schema = 'intelligence'
+                  ORDER BY table_name
+                \`);
+                
+                console.log('✅ Intelligence schema tables:', tables.map(t => t.table_name).join(', '));
+                
+                // Check for change_detection data
+                const changeCount = await db.get(\`
+                  SELECT COUNT(*) as count 
+                  FROM processed_content.change_detection
+                \`);
+                
+                console.log('📊 Changes available for analysis:', changeCount.count);
+                
+                await end();
+              } catch (error) {
+                console.error('❌ Schema check failed:', error);
+                await end();
+                process.exit(1);
+              }
+            }
+            
+            checkSchema();
+          "
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Fix ALL PostgreSQL schemas (FINAL)
+        run: |
+          cd github-actions-backend
+          echo "🔧 Running FINAL comprehensive schema fix..."
+          
+          # Use the new final fix script that fixes EVERYTHING
+          if [ -f "fix-postgres-schema-final.js" ]; then
+            echo "🚀 Running final schema fix that fixes EVERYTHING..."
+            node fix-postgres-schema-final.js
+          else
+            # Fallback to old method
+            echo "⚠️  Final fix not found, using legacy fixes..."
+            node fix-all-analyzer-schemas.js
+            node fix-intelligence-changes-schema.js
+          fi
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Run baseline AI analysis (PostgreSQL)
+        run: |
+          cd github-actions-backend
+          
+          echo "🚀 Running baseline analysis with Groq Llama 3.3 (PostgreSQL)..."
+          echo "   Mode: ${{ inputs.analysis_mode }}"
+          echo "   Database: PostgreSQL"
+          
+          # Set analysis flags based on mode
+          case "${{ inputs.analysis_mode }}" in
+            "force")
+              node ai-analyzer-baseline-three-db-postgres.js --force
+              ;;
+            "full")
+              node ai-analyzer-baseline-three-db-postgres.js
+              ;;
+            *)
+              # Skip baseline for recent mode to save API costs
+              echo "⚠️  Skipping baseline analysis for recent mode"
+              ;;
+          esac
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          GITHUB_ACTIONS: 'true'
+      
+      - name: Run change detection analysis (PostgreSQL)
+        run: |
+          cd github-actions-backend
+          
+          echo "🔍 Running PostgreSQL change detection and ultra-enhanced analysis with Groq..."
+          
+          # Map workflow modes to script modes
+          case "${{ inputs.analysis_mode }}" in
+            "full")
+              node ai-analyzer-ultra-three-db-postgres.js full
+              ;;
+            *)
+              node ai-analyzer-ultra-three-db-postgres.js recent
+              ;;
+          esac
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          GITHUB_ACTIONS: 'true'
+      
+      - name: Generate static data files (PostgreSQL)
+        run: |
+          cd github-actions-backend
+          echo "📊 Generating static data files from PostgreSQL..."
+          node generate-static-data-three-db-postgres.js
+          
+          echo "📁 Generated files:"
+          ls -la ../api-data/
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Generate change detail files (PostgreSQL)
+        run: |
+          cd github-actions-backend
+          echo "📝 Generating change detail files from PostgreSQL..."
+          node generate-change-details-postgres.js
+          
+          echo "📁 Generated change files:"
+          ls -la ../api-data/changes/ | head -20 || echo "No changes directory yet"
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Generate changes.json
+        run: |
+          cd github-actions-backend
+          echo "📝 Generating changes.json from PostgreSQL data..."
+          node generate-changes-json-postgres.js || echo "⚠️ Failed to generate changes.json"
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      
+      - name: Create analysis summary
+        run: |
+          cd github-actions-backend
+          echo "{
+            \"workflow\": \"analyze-postgres\",
+            \"run_id\": \"${{ github.run_id }}\",
+            \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"mode\": \"${{ inputs.analysis_mode }}\",
+            \"trigger_source\": \"${{ inputs.trigger_source }}\",
+            \"database\": \"postgresql\",
+            \"ai_model\": \"groq-llama-3.3-70b\",
+            \"status\": \"completed\"
+          }" > ../api-data/last-analysis-postgres.json
+      
+      - name: Upload analysis artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: analysis-results-postgres-${{ github.run_id }}
+          path: |
+            github-actions-backend/data/baseline-intelligence-report-postgres.json
+            github-actions-backend/data/enhanced-analysis-report-postgres.json
+            api-data/
+          retention-days: 30
+      
+      - name: Commit analysis results
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Function to retry git push with exponential backoff
+          push_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            local wait_time=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔄 Attempt $attempt/$max_attempts to push changes..."
+              
+              # Pull latest changes before each attempt
+              git pull origin main --rebase || {
+                echo "❌ Failed to rebase, trying merge strategy..."
+                git rebase --abort 2>/dev/null || true
+                git pull origin main --no-rebase --strategy=ours || {
+                  echo "❌ Merge failed, resetting to origin/main"
+                  git reset --hard origin/main
+                  return 1
+                }
+              }
+              
+              # Try to push
+              if git push origin main; then
+                echo "✅ Successfully pushed changes!"
+                return 0
+              else
+                echo "❌ Push failed"
+                
+                if [ $attempt -lt $max_attempts ]; then
+                  echo "⏳ Waiting ${wait_time}s before retry..."
+                  sleep $wait_time
+                  wait_time=$((wait_time * 2))
+                  attempt=$((attempt + 1))
+                else
+                  echo "❌ All push attempts failed"
+                  return 1
+                fi
+              fi
+            done
+          }
+          
+          # Add all analysis outputs
+          git add api-data/ || true
+          git add github-actions-backend/data/*.json || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            echo "📝 Changes to commit:"
+            git diff --staged --name-only
+            
+            git commit -m "🚀 Update PostgreSQL AI analysis - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
+            
+            # Push changes with retry logic
+            push_with_retry || {
+              echo "⚠️ Failed to push changes after multiple attempts"
+              echo "⚠️ This is likely due to concurrent workflows"
+              echo "⚠️ Changes will be included in next workflow run"
+              # Don't fail the workflow - changes are committed locally
+              # and will be pushed in the next successful run
+              exit 0
+            }
+          fi
+      
+      - name: Trigger Sync workflow (if configured)
+        if: inputs.cascade == true
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
+          script: |
+            try {
+              // Check if sync-postgres.yml exists
+              const { data: files } = await github.rest.repos.getContent({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                path: '.github/workflows'
+              });
+              
+              const syncWorkflowExists = files.some(file => 
+                file.name === 'sync-postgres.yml'
+              );
+              
+              if (syncWorkflowExists) {
+                const result = await github.rest.actions.createWorkflowDispatch({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  workflow_id: 'sync-postgres.yml',
+                  ref: 'main',
+                  inputs: {
+                    trigger_source: 'analyze-postgres-cascade',
+                    run_id: '${{ github.run_id }}'
+                  }
+                });
+                console.log(`✅ Triggered PostgreSQL Sync workflow`);
+              } else {
+                console.log(`⚠️  sync-postgres.yml not found - skipping cascade`);
+                console.log(`   This is normal - full-monitor-postgres.yml handles sync inline`);
+              }
+            } catch (error) {
+              console.log(`⚠️  Could not trigger sync workflow:`, error.message);
+              console.log(`   This is normal if sync-postgres.yml doesn't exist`);
+            }

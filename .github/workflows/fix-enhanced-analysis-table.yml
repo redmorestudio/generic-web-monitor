@@ -1,0 +1,29 @@
+name: Fix Enhanced Analysis Table
+
+on:
+  workflow_dispatch:
+
+jobs:
+  fix-schema:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Fix enhanced_analysis table schema
+        run: |
+          cd github-actions-backend
+          node fix-enhanced-analysis-postgres.js
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}

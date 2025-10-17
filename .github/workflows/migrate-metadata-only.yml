@@ -1,0 +1,71 @@
+name: Migrate Metadata Only to PostgreSQL
+
+on:
+  workflow_dispatch:
+    inputs:
+      download_from_artifact:
+        description: 'Download intelligence.db from artifact first'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  migrate-metadata:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+    
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+    
+    - name: Download intelligence.db from artifact
+      if: inputs.download_from_artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: databases
+        path: github-actions-backend/data
+      continue-on-error: true
+    
+    - name: Check if intelligence.db exists
+      run: |
+        cd github-actions-backend
+        echo "Checking for intelligence.db..."
+        
+        if [ -f data/intelligence.db ]; then
+          echo "✅ Found intelligence.db in data/"
+          ls -la data/intelligence.db
+        else
+          echo "❌ ERROR: intelligence.db not found!"
+          echo "Available files in data/:"
+          ls -la data/
+          exit 1
+        fi
+    
+    - name: Run metadata-only migration
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      run: |
+        cd github-actions-backend
+        
+        echo "🚀 Running metadata-only migration..."
+        echo "This will only migrate companies and URLs, no historical data."
+        
+        node migrate-metadata-only.js
+    
+    - name: Summary
+      if: success()
+      run: |
+        echo "✅ Metadata migration completed successfully!"
+        echo ""
+        echo "Next steps:"
+        echo "1. Update your scraper scripts to use PostgreSQL connection"
+        echo "2. Run the scraper workflow to start collecting fresh data"
+        echo "3. All historical data will be rebuilt over time"

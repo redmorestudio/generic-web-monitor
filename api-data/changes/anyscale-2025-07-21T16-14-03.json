@@ -1,0 +1,71 @@
+{
+  "id": 21,
+  "company": "Anyscale",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T16:14:03.897Z",
+  "change_type": "modified",
+  "interest_level": 7,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "Addition of a cookie consent banner and modification of website content to include information about cookies and tracking",
+    "specific_changes": [
+      "Addition of a cookie consent banner",
+      "Modification of website content to include information about cookies and tracking",
+      "Changes to the website's footer and header sections"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "increased focus on user privacy",
+      "compliance with regulations"
+    ],
+    "business_impact": "The changes made to the website may improve user trust and experience, potentially leading to increased engagement and conversion",
+    "strategic_direction": "The company is likely focusing on improving user experience and complying with regulations",
+    "competitive_implications": "The website's competitors may also need to make similar changes to remain competitive"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": [
+      "cookies",
+      "tracking"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competitors may also make similar changes",
+      "Regulatory requirements may continue to evolve"
+    ],
+    "key_findings": [
+      "The company is prioritizing user privacy and experience",
+      "The website's changes are significant and indicate a shift in strategy"
+    ],
+    "opportunities": [
+      "Improved user trust and experience",
+      "Increased engagement and conversion"
+    ],
+    "recommended_actions": [
+      "Monitor user feedback and adjust the website accordingly",
+      "Continuously review and update the website to ensure compliance with regulations"
+    ]
+  },
+  "key_insights": [
+    "The company is prioritizing user privacy and experience",
+    "The website's changes are significant and indicate a shift in strategy"
+  ],
+  "business_impact": "The changes made to the website may improve user trust and experience, potentially leading to increased engagement and conversion",
+  "competitive_implications": "The website's competitors may also need to make similar changes to remain competitive",
+  "content_hash_before": "4e903c5db57a775a4124185b2eaebf87466440b2db239ce3fb1d4e89fc35ca24",
+  "content_hash_after": "38c6b71aa9efcb8f6a7c7df5b9e0e64ee129a2247b12ce112e91c2e5e01a7168",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

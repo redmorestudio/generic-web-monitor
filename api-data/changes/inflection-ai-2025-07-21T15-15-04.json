@@ -1,0 +1,78 @@
+{
+  "id": 179,
+  "company": "Inflection AI",
+  "page_url": "product",
+  "detected_at": "2025-07-21T15:15:04.267Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "Introduction of a new personal AI product called Pi, emphasizing emotional intelligence, and the addition of a 'Continue to Pi Classic' option",
+    "specific_changes": [
+      "Introduction of Pi as a personal AI",
+      "Emphasis on emotional intelligence",
+      "Mention of Pi Classic",
+      "Indication of a forthcoming release with 'Coming soon'"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Expansion into emotional intelligence",
+      "Personalized AI solutions"
+    ],
+    "business_impact": "Inflection AI is expanding its product line with a focus on emotional intelligence, potentially appealing to a broader customer base and differentiating itself in the market.",
+    "strategic_direction": "Towards more sophisticated, personalized AI solutions with a focus on emotional intelligence.",
+    "competitive_implications": "This move could pressure competitors to also develop more emotionally intelligent AI products, potentially changing the competitive landscape."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Enterprise"
+    ],
+    "pricing": [],
+    "features": [
+      "Emotional Intelligence"
+    ],
+    "products": [
+      "Pi",
+      "Pi Classic"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition if other companies follow suit",
+      "Potential backlash if the product does not meet emotional intelligence expectations"
+    ],
+    "key_findings": [
+      "Inflection AI is developing a new personal AI product",
+      "Emphasis on emotional intelligence for enterprise solutions"
+    ],
+    "opportunities": [
+      "Potential for Inflection AI to lead in emotionally intelligent AI solutions",
+      "Expansion into new markets with personalized AI"
+    ],
+    "recommended_actions": [
+      "Monitor Inflection AI's product development and release",
+      "Assess the market's response to emotionally intelligent AI solutions"
+    ]
+  },
+  "key_insights": [
+    "Inflection AI is developing a new personal AI product",
+    "Emphasis on emotional intelligence for enterprise solutions"
+  ],
+  "business_impact": "Inflection AI is expanding its product line with a focus on emotional intelligence, potentially appealing to a broader customer base and differentiating itself in the market.",
+  "competitive_implications": "This move could pressure competitors to also develop more emotionally intelligent AI products, potentially changing the competitive landscape.",
+  "content_hash_before": null,
+  "content_hash_after": "aeac6cac2aae0379f8725d40728200105ac5e29f44cd6e9f6132b592cee4e20c",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

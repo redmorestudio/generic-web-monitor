@@ -1,0 +1,22 @@
+{
+  "id": 161,
+  "company": "Midjourney",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:17:43.481Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
+  "content_hash_before": null,
+  "content_hash_after": "823666b2cbc29261f2343d1cb1082928176e446331abb0a6db694a32d77b959e",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

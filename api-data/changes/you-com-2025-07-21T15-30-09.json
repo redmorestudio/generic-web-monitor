@@ -1,0 +1,80 @@
+{
+  "id": 23,
+  "company": "You.com",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:30:09.144Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Initial content creation for You.com homepage",
+    "specific_changes": [
+      "Introduction of ARI, the world's most intelligent deep research agent",
+      "Mention of beating OpenAI Deep Research 76% of the time",
+      "Addition of various product and solution links",
+      "Inclusion of trusted by logos from major companies",
+      "SOC 2 Compliance Badge display",
+      "Links to social media, app stores, and other resources"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on enterprise solutions",
+      "Emphasis on AI-powered productivity"
+    ],
+    "business_impact": "You.com is positioning itself as a major player in the AI for workplace productivity market with the introduction of ARI",
+    "strategic_direction": "Expansion into the enterprise market with AI-powered solutions",
+    "competitive_implications": "You.com is directly competing with OpenAI and other AI solution providers"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Enterprise"
+    ],
+    "pricing": [],
+    "features": [
+      "Deep research agent",
+      "Enterprise solutions"
+    ],
+    "products": [
+      "ARI"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI solution market",
+      "Potential regulatory challenges for AI-powered solutions"
+    ],
+    "key_findings": [
+      "You.com is investing heavily in AI research and development",
+      "The company is targeting large enterprises with its solutions"
+    ],
+    "opportunities": [
+      "Partnership opportunities with You.com for AI-powered solutions",
+      "Potential for You.com to expand into new markets"
+    ],
+    "recommended_actions": [
+      "Monitor You.com's progress and expansion into new markets",
+      "Assess potential partnership opportunities with You.com"
+    ]
+  },
+  "key_insights": [
+    "You.com is investing heavily in AI research and development",
+    "The company is targeting large enterprises with its solutions"
+  ],
+  "business_impact": "You.com is positioning itself as a major player in the AI for workplace productivity market with the introduction of ARI",
+  "competitive_implications": "You.com is directly competing with OpenAI and other AI solution providers",
+  "content_hash_before": null,
+  "content_hash_after": "cd58a5107bbf34af3efabe268f2776a5f5ecbf559b055091e5719e63fa3b936a",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

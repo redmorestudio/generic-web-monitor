@@ -1,0 +1,83 @@
+{
+  "id": 1,
+  "company": "Replit",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T16:30:23.787Z",
+  "change_type": "modified",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "significant",
+    "what_changed": "The content has undergone significant updates, including changes to the hero section, addition of new customer testimonials, and updates to the Replit Agent section.",
+    "specific_changes": [
+      "Updated hero section with new prompt and call-to-action",
+      "Added new customer testimonials from Reid Hoffman and Andrew Wilkinson",
+      "Updated Replit Agent section with new features and visuals",
+      "Removed redundant content and images",
+      "Improved overall structure and formatting"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on enterprise customers",
+      "Emphasis on Replit Agent's capabilities"
+    ],
+    "business_impact": "The updates suggest a strategic shift towards targeting enterprise customers and highlighting the capabilities of Replit Agent, which could lead to increased revenue and market share.",
+    "strategic_direction": "The changes indicate a strategic direction towards expanding Replit's offerings and capabilities to meet the needs of enterprise customers.",
+    "competitive_implications": "The updates may pose a competitive threat to other companies in the AI-powered development space, particularly those targeting enterprise customers."
+  },
+  "entities": {
+    "people": [
+      "Reid Hoffman",
+      "Andrew Wilkinson"
+    ],
+    "markets": [
+      "Enterprise"
+    ],
+    "pricing": [],
+    "features": [
+      "Replit Agent's ability to build production-ready apps",
+      "Visual Editor",
+      "Database and Auth integration"
+    ],
+    "products": [
+      "Replit Agent"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "Machine Learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition from other AI-powered development companies"
+    ],
+    "key_findings": [
+      "Replit is targeting enterprise customers with its updated marketing strategy",
+      "Replit Agent is a key focus area for the company"
+    ],
+    "opportunities": [
+      "Partnership opportunities with enterprise customers",
+      "Expansion into new markets"
+    ],
+    "recommended_actions": [
+      "Monitor Replit's progress and updates",
+      "Assess the competitive landscape and adjust strategies accordingly"
+    ]
+  },
+  "key_insights": [
+    "Replit is targeting enterprise customers with its updated marketing strategy",
+    "Replit Agent is a key focus area for the company"
+  ],
+  "business_impact": "The updates suggest a strategic shift towards targeting enterprise customers and highlighting the capabilities of Replit Agent, which could lead to increased revenue and market share.",
+  "competitive_implications": "The updates may pose a competitive threat to other companies in the AI-powered development space, particularly those targeting enterprise customers.",
+  "content_hash_before": "c5329e229c1da5562b5cb9e9e0faca8c75454abd166279b3b20e6b753bd99f20",
+  "content_hash_after": "42a9c6efe85b478239bb063866e631cbb9f8b151b374fa497f8a53f7b006b848",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

@@ -1,0 +1,48 @@
+name: Reset and Initialize PostgreSQL Database
+
+on:
+  workflow_dispatch:
+
+jobs:
+  reset-and-init:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+        
+    - name: Reset and Initialize PostgreSQL Database
+      env:
+        POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      run: |
+        cd github-actions-backend
+        
+        # First, drop all schemas CASCADE to start fresh
+        node -e "
+        const { query, end } = require('./postgres-db');
+        (async () => {
+          try {
+            console.log('Dropping existing schemas...');
+            await query('DROP SCHEMA IF EXISTS intelligence CASCADE');
+            await query('DROP SCHEMA IF EXISTS raw_content CASCADE');
+            await query('DROP SCHEMA IF EXISTS processed_content CASCADE');
+            console.log('Schemas dropped successfully');
+          } catch (error) {
+            console.error('Error dropping schemas:', error);
+          } finally {
+            await end();
+          }
+        })();
+        "
+        
+        # Now run the init script
+        node scripts/init-db-postgres.js

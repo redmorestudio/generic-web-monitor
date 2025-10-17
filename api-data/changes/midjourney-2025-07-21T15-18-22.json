@@ -1,0 +1,22 @@
+{
+  "id": 160,
+  "company": "Midjourney",
+  "page_url": "docs",
+  "detected_at": "2025-07-21T15:18:22.044Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
+  "content_hash_before": null,
+  "content_hash_after": "2155c3b7e5514b7240a3fc868ca3af7068938cc0aab51d19b9002f88932391ff",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

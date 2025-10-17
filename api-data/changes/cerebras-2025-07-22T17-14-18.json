@@ -1,0 +1,79 @@
+{
+  "id": 215,
+  "company": "Cerebras",
+  "page_url": "blog",
+  "detected_at": "2025-07-22T17:14:18.603Z",
+  "change_type": "modified",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "significant",
+    "what_changed": "New blog posts have been added, and some older ones have been removed or archived.",
+    "specific_changes": [
+      "Addition of new blog posts such as 'Router Wars: Which MoE Routing Strategy Actually Works' and 'MoE Fundamentals: Sparse Models are the Future'.",
+      "Removal or archiving of older blog posts."
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on AI and LLM technologies"
+    ],
+    "business_impact": "The updates suggest Cerebras is focusing on advancing AI technologies, particularly in inference and reasoning, which could enhance their competitive positioning in the AI market.",
+    "strategic_direction": "Advancement of AI technologies for faster inference and smarter AI applications.",
+    "competitive_implications": "Cerebras is likely to be seen as a leader in AI innovation, potentially attracting more customers and partners."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "AI",
+      "Technology"
+    ],
+    "pricing": [],
+    "features": [
+      "Qwen3-32B",
+      "Llama 4"
+    ],
+    "products": [
+      "Cerebras Inference"
+    ],
+    "partnerships": [
+      "IBM"
+    ],
+    "technologies": [
+      "AI",
+      "LLM"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competition from other AI technology companies.",
+      "Rapidly evolving AI landscape requiring continuous innovation."
+    ],
+    "key_findings": [
+      "Cerebras is actively advancing AI technologies.",
+      "New blog posts highlight advancements in MoE routing strategies and sparse models."
+    ],
+    "opportunities": [
+      "Potential for Cerebras to lead in AI innovation.",
+      "Increased interest in Cerebras' technologies and solutions."
+    ],
+    "recommended_actions": [
+      "Monitor Cerebras' technological advancements.",
+      "Assess potential partnerships or integrations with Cerebras."
+    ]
+  },
+  "key_insights": [
+    "Cerebras is actively advancing AI technologies.",
+    "New blog posts highlight advancements in MoE routing strategies and sparse models."
+  ],
+  "business_impact": "The updates suggest Cerebras is focusing on advancing AI technologies, particularly in inference and reasoning, which could enhance their competitive positioning in the AI market.",
+  "competitive_implications": "Cerebras is likely to be seen as a leader in AI innovation, potentially attracting more customers and partners.",
+  "content_hash_before": "627b5e647c3b86df167f25e067f366693b59f6173d15fb7412d51b03ebd8513e",
+  "content_hash_after": "f73857b62e0a0185bd0829d10f15a7ca001e3d3ca9726a030e749f1a7fc19697",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

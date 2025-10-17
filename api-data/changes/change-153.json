@@ -1,0 +1,262 @@
+{
+  "change_id": 153,
+  "url": "https://runwayml.com/blog",
+  "company": "Runway",
+  "company_category": "Video AI",
+  "detected_at": "2025-07-18 16:40:59",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes were detected between the previous and current content. The content remains the same, indicating no new technical innovations or business impact.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://runwayml.com/blog\ncompany: Runway\nscraped_at: 2025-07-04 20:19:45\n---\n\nNews | Runway\n\n[](/)\n\n*   [Research](/research)\n*   [Product](/product)\n*   [Studios](/studios)\n*   [Company](/about)\n\n[Get Started](https://app.runwayml.com/)\n\n[![](https://d3phaj0sisr2ct.cloudfront.net/site/content/images/rw-gen4-thumb-0011.png)](/research/introducing-runway-gen-4)[\n\nfeatured\n\nIntroducing Runway Gen-4\n\nRunway Research / March 31st, 2025\n\n](/research/introducing-runway-gen-4)\n\n[Learn More](/...",
+    "after": "News | Runway\n\n[](/)\n\n*   [Research](/research)\n*   [Product](/product)\n*   [Studios](/studios)\n*   [Company](/about)\n\n[Get Started](https://app.runwayml.com/)\n\n[](/research/introducing-runway-gen-4)[\n\nfeatured\n\nIntroducing Runway Gen-4\n\nRunway Research / March 31st, 2025\n\n](/research/introducing-runway-gen-4)\n\n[Learn More](/research/introducing-runway-gen-4)\n\nAll news\n\n[\n\n![](https://d3phaj0sisr2ct.cloudfront.net/site/images/news/parsons-post.jpg)\n\nParsons School of Design Develops New Course P..."
+  },
+  "diff": {
+    "added_sentences": [
+      "News | Runway\n\n[](/)\n\n*   [Research](/research)\n*   [Product](/product)\n*   [Studios](/studios)\n*   [Company](/about)\n\n[Get Started](https://app.",
+      "com/)\n\n[](/research/introducing-runway-gen-4)[\n\nfeatured\n\nIntroducing Runway Gen-4\n\nRunway Research / March 31st, 2025\n\n](/research/introducing-runway-gen-4)\n\n[Learn More](/research/introducing-runway-gen-4)\n\nAll news\n\n[\n\n!",
+      "jpg)\n\nParsons School of Design Develops New Course Powered by Runway\n\nRunway /\n\nJune 26, 2025\n\n\n\n](news/parsons-school-design-develops-new-course-powered-by-runway)[\n\n!",
+      "jpg)\n\nRunway Partners with AMC Networks Across Marketing and TV Development\n\nRunway /\n\nJune 4, 2025\n\n\n\n](news/runway-amc-partnership)[\n\n!",
+      "jpg)\n\nIntroducing the Gen-4 Image API\n\nRunway /\n\nMay 16, 2025\n\n\n\n](news/introducing-runway-api-for-gen-4-images)[\n\n!",
+      "png)\n\nRunway and Fabula Unveil Production Partnership\n\nRunway /\n\nApril 14, 2025\n\n\n\n](news/runway-fabula-partnership)[\n\n!",
+      "png)\n\nRunway Inks First-Look Development Deal with Harmony Korine’s EDGLRD\n\nRunway /\n\nApril 10, 2025\n\n\n\n](news/runway-edglrd-deal)[\n\n!",
+      "webp)\n\nHarmony Korine Joins Runway’s 2025 AI Film Festival Jurors\n\nRunway /\n\nApril 7, 2025\n\n\n\n](news/harmony-korine-joins-aiff-2025-jurors)[\n\n!",
+      "jpg)\n\nTowards a new media ecosystem with world simulators\n\nCristóbal Valenzuela /\n\nApril 3, 2025\n\n\n\n](news/runway-series-d-funding)[\n\n!",
+      "png)\n\nGaspar Noé Joins Runway’s 2025 AI Film Festival Jurors\n\nRunway /\n\nMarch 17, 2025\n\n\n\n](news/gaspar-noe-joins-aiff-2025-jurors)[\n\n!"
+    ],
+    "removed_sentences": [
+      "---\nurl: https://runwayml.",
+      "com/blog\ncompany: Runway\nscraped_at: 2025-07-04 20:19:45\n---\n\nNews | Runway\n\n[](/)\n\n*   [Research](/research)\n*   [Product](/product)\n*   [Studios](/studios)\n*   [Company](/about)\n\n[Get Started](https://app.",
+      "com/)\n\n[!",
+      "png)](/research/introducing-runway-gen-4)[\n\nfeatured\n\nIntroducing Runway Gen-4\n\nRunway Research / March 31st, 2025\n\n](/research/introducing-runway-gen-4)\n\n[Learn More](/research/introducing-runway-gen-4)\n\nAll news\n\n[\n\n!",
+      "jpg)\n\nParsons School of Design Develops New Course Powered by Runway\n\nRunway /\n\nJune 26, 2025\n\n\n](news/parsons-school-design-develops-new-course-powered-by-runway)[\n\n!",
+      "jpg)\n\nRunway Partners with AMC Networks Across Marketing and TV Development\n\nRunway /\n\nJune 4, 2025\n\n\n](news/runway-amc-partnership)[\n\n!",
+      "jpg)\n\nIntroducing the Gen-4 Image API\n\nRunway /\n\nMay 16, 2025\n\n\n](news/introducing-runway-api-for-gen-4-images)[\n\n!",
+      "png)\n\nRunway and Fabula Unveil Production Partnership\n\nRunway /\n\nApril 14, 2025\n\n\n](news/runway-fabula-partnership)[\n\n!",
+      "png)\n\nRunway Inks First-Look Development Deal with Harmony Korine’s EDGLRD\n\nRunway /\n\nApril 10, 2025\n\n\n](news/runway-edglrd-deal)[\n\n!",
+      "webp)\n\nHarmony Korine Joins Runway’s 2025 AI Film Festival Jurors\n\nRunway /\n\nApril 7, 2025\n\n\n](news/harmony-korine-joins-aiff-2025-jurors)[\n\n!"
+    ],
+    "key_changes": [
+      "New version: 2.5, 10.110, 58.290, 41.722, 46.024, 43.317",
+      "Price change: $1, $11",
+      "New api mentioned",
+      "New announcement mentioned",
+      "New partnership mentioned",
+      "New funding mentioned"
+    ],
+    "change_percentage": 62,
+    "summary": "62% content changed (219 additions, 34 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "static",
+        "frequency": 72
+      },
+      {
+        "word": "chunks",
+        "frequency": 66
+      },
+      {
+        "word": "null",
+        "frequency": 52
+      },
+      {
+        "word": "false",
+        "frequency": 41
+      },
+      {
+        "word": "children",
+        "frequency": 41
+      },
+      {
+        "word": "href",
+        "frequency": 37
+      },
+      {
+        "word": "title",
+        "frequency": 34
+      },
+      {
+        "word": "undefined",
+        "frequency": 31
+      },
+      {
+        "word": "l12",
+        "frequency": 31
+      },
+      {
+        "word": "index",
+        "frequency": 31
+      },
+      {
+        "word": "hasmotion",
+        "frequency": 31
+      },
+      {
+        "word": "date",
+        "frequency": 28
+      },
+      {
+        "word": "author",
+        "frequency": 28
+      },
+      {
+        "word": "classname",
+        "frequency": 27
+      },
+      {
+        "word": "110z",
+        "frequency": 21
+      },
+      {
+        "word": "meta",
+        "frequency": 18
+      },
+      {
+        "word": "div",
+        "frequency": 17
+      },
+      {
+        "word": "next",
+        "frequency": 16
+      },
+      {
+        "word": "self",
+        "frequency": 11
+      },
+      {
+        "word": "name",
+        "frequency": 11
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "url",
+        "frequency": 1
+      },
+      {
+        "word": "blog",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "act-one",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "news": {
+        "before": 57,
+        "after": 120,
+        "change": 63
+      },
+      "image": {
+        "before": 1,
+        "after": 45,
+        "change": 44
+      },
+      "runway": {
+        "before": 44,
+        "after": 86,
+        "change": 42
+      },
+      "https": {
+        "before": 48,
+        "after": 84,
+        "change": 36
+      },
+      "site": {
+        "before": 32,
+        "after": 67,
+        "change": 35
+      },
+      "d3phaj0sisr2ct": {
+        "before": 32,
+        "after": 64,
+        "change": 32
+      },
+      "cloudfront": {
+        "before": 32,
+        "after": 64,
+        "change": 32
+      },
+      "net": {
+        "before": 32,
+        "after": 64,
+        "change": 32
+      },
+      "images": {
+        "before": 33,
+        "after": 65,
+        "change": 32
+      },
+      "content": {
+        "before": 10,
+        "after": 37,
+        "change": 27
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "static chunks",
+        "count": 66
+      },
+      {
+        "phrase": "https d3phaj0sisr2ct",
+        "count": 64
+      },
+      {
+        "phrase": "d3phaj0sisr2ct cloudfront",
+        "count": 64
+      },
+      {
+        "phrase": "cloudfront net",
+        "count": 64
+      },
+      {
+        "phrase": "net site",
+        "count": 64
+      },
+      {
+        "phrase": "site images",
+        "count": 44
+      },
+      {
+        "phrase": "images news",
+        "count": 44
+      },
+      {
+        "phrase": "l12 title",
+        "count": 31
+      },
+      {
+        "phrase": "image https",
+        "count": 31
+      },
+      {
+        "phrase": "href news",
+        "count": 31
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

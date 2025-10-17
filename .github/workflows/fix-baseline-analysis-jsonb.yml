@@ -1,0 +1,62 @@
+name: Fix Baseline Analysis JSONB Columns
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "CONFIRM" to run the schema fix'
+        required: true
+        type: string
+
+jobs:
+  fix-jsonb-columns:
+    runs-on: ubuntu-latest
+    name: Fix Baseline Analysis TEXT to JSONB
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Verify confirmation
+        run: |
+          if [ "${{ github.event.inputs.confirm }}" != "CONFIRM" ]; then
+            echo "❌ Confirmation not provided. Type CONFIRM to proceed."
+            exit 1
+          fi
+          echo "✅ Confirmation received, proceeding with fix..."
+
+      - name: Install dependencies
+        working-directory: ./github-actions-backend
+        run: npm install
+
+      - name: Check current column types
+        working-directory: ./github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          NODE_ENV: production
+        run: |
+          echo "🔍 Checking current column types..."
+          node check-baseline-analysis-columns.js || true
+
+      - name: Run JSONB conversion fix
+        working-directory: ./github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          NODE_ENV: production
+        run: |
+          echo "🔧 Running JSONB conversion fix..."
+          node fix-baseline-analysis-jsonb.js
+
+      - name: Verify fix was applied
+        working-directory: ./github-actions-backend
+        env:
+          POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+          NODE_ENV: production
+        run: |
+          echo "✅ Verifying columns are now JSONB..."
+          node check-baseline-analysis-columns.js

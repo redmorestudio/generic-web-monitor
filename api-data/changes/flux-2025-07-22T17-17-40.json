@@ -1,0 +1,83 @@
+{
+  "id": 211,
+  "company": "Flux",
+  "page_url": "homepage",
+  "detected_at": "2025-07-22T17:17:40.798Z",
+  "change_type": "modified",
+  "interest_level": 2,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "no change",
+    "change_scale": "minor",
+    "what_changed": "No significant changes were detected in the content between the two versions.",
+    "specific_changes": []
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "no change in product offerings",
+      "no update in partnerships or technologies"
+    ],
+    "business_impact": "No significant business impact is expected from the lack of changes in the content.",
+    "strategic_direction": "No clear strategic direction can be inferred from the absence of changes.",
+    "competitive_implications": "The lack of changes may indicate a stable product and market position, but also a potential lack of innovation or progress."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [
+      "text-and-image-driven generation and editing",
+      "character consistency",
+      "local editing",
+      "style reference",
+      "interactive speed"
+    ],
+    "products": [
+      "FLUX.1 Kontext"
+    ],
+    "partnerships": [
+      "Freepik",
+      "Fal",
+      "Replicate",
+      "TogetherAI",
+      "Krea",
+      "Lightricks",
+      "Leonardo AI",
+      "OpenArt",
+      "ComfyUI",
+      "DataCrunch",
+      "Runware"
+    ],
+    "technologies": [
+      "generative flow matching models",
+      "image editing"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "potential lack of competitiveness due to lack of innovation"
+    ],
+    "key_findings": [
+      "no significant changes were detected"
+    ],
+    "opportunities": [
+      "potential for innovation and progress in the field of image editing and generation"
+    ],
+    "recommended_actions": [
+      "monitor the market and competitors for signs of innovation and progress",
+      "consider investing in research and development to stay competitive"
+    ]
+  },
+  "key_insights": [
+    "no significant changes were detected"
+  ],
+  "business_impact": "No significant business impact is expected from the lack of changes in the content.",
+  "competitive_implications": "The lack of changes may indicate a stable product and market position, but also a potential lack of innovation or progress.",
+  "content_hash_before": "4d765e86014feb3a8c59fdb33f7d245e94860a68befa2af0d789d2d55b6f1741",
+  "content_hash_after": "b449f79df91859de676086e74e90d242fbea5721b770db4162a76160efd5c540",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

@@ -1,0 +1,87 @@
+{
+  "id": 165,
+  "company": "Meta AI",
+  "page_url": "product",
+  "detected_at": "2025-07-21T15:17:10.125Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.95,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Introduction of Llama 4, a new generation of AI models with natively multimodal capabilities, advanced reasoning, and industry-leading context windows",
+    "specific_changes": [
+      "Llama 4 models are designed with native multimodality",
+      "Advanced reasoning capabilities",
+      "Industry-leading context windows of up to 10M tokens",
+      "Introduction of Llama 4 Scout, Llama 4 Maverick, and Llama 4 Behemoth models",
+      "New benchmarks and evaluation results for Llama 4 models"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI market",
+      "Growing demand for advanced AI capabilities"
+    ],
+    "business_impact": "The introduction of Llama 4 is likely to have a significant impact on the AI industry, with potential applications in various sectors such as healthcare, finance, and education",
+    "strategic_direction": "The introduction of Llama 4 suggests that Meta is committed to advancing AI technology and expanding its presence in the industry",
+    "competitive_implications": "The introduction of Llama 4 may pose a competitive threat to other AI companies, particularly those that do not have similar capabilities"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "AI industry",
+      "Technology sector"
+    ],
+    "pricing": [
+      "$0.19-$0.49 per 1M input and output tokens"
+    ],
+    "features": [
+      "Natively multimodal capabilities",
+      "Advanced reasoning",
+      "Industry-leading context windows"
+    ],
+    "products": [
+      "Llama 4",
+      "Llama 4 Scout",
+      "Llama 4 Maverick",
+      "Llama 4 Behemoth"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "Machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI market",
+      "Potential disruption to existing business models"
+    ],
+    "key_findings": [
+      "Llama 4 represents a significant advancement in AI technology",
+      "The introduction of Llama 4 may have major implications for the industry and competitive landscape"
+    ],
+    "opportunities": [
+      "Potential applications of Llama 4 in various sectors",
+      "Opportunities for partnerships and collaborations with Meta"
+    ],
+    "recommended_actions": [
+      "Monitor the development and deployment of Llama 4",
+      "Assess the potential implications of Llama 4 for your business or organization"
+    ]
+  },
+  "key_insights": [
+    "Llama 4 represents a significant advancement in AI technology",
+    "The introduction of Llama 4 may have major implications for the industry and competitive landscape"
+  ],
+  "business_impact": "The introduction of Llama 4 is likely to have a significant impact on the AI industry, with potential applications in various sectors such as healthcare, finance, and education",
+  "competitive_implications": "The introduction of Llama 4 may pose a competitive threat to other AI companies, particularly those that do not have similar capabilities",
+  "content_hash_before": null,
+  "content_hash_after": "4ca06d45e0c3374e1ef742b221f1cb9a7597240edafa8081ea216a12adc4a67a",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

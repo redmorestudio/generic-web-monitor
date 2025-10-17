@@ -1,0 +1,70 @@
+name: Manual Static Data Update
+
+on:
+  workflow_dispatch:
+
+# Prevent concurrent runs
+concurrency:
+  group: manual-static-update
+  cancel-in-progress: false
+
+jobs:
+  update-static-data:
+    runs-on: ubuntu-latest
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install
+      
+      - name: Generate static data
+        run: |
+          cd github-actions-backend
+          echo "=== Generating static data ==="
+          node generate-static-data-wrapper.js
+      
+      - name: Check generated files
+        run: |
+          echo "=== Checking generated files ==="
+          ls -la api-data/
+          echo -e "\n=== Dashboard timestamp ==="
+          jq '.generated_at' api-data/dashboard.json || echo "No dashboard.json"
+          echo -e "\n=== Status check ==="
+          cat api-data/status.json || echo "No status.json"
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Add all changes
+          git add api-data/
+          
+          # Check if there are changes
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            echo "=== Changes to commit ==="
+            git diff --staged --name-only
+            
+            # Commit changes
+            git commit -m "📊 Update static data files - $(date -u +%Y-%m-%d_%H:%M:%S_UTC)"
+            
+            # Push changes
+            git push origin main
+          fi

@@ -1,0 +1,250 @@
+{
+  "company": {
+    "id": null,
+    "name": "Replicate",
+    "category": "AI Infrastructure",
+    "description": null,
+    "created_at": null,
+    "thebrain_thought_id": "c13b5d69-34cd-4489-92de-713150121edc",
+    "company_id": null,
+    "industry": null,
+    "founded_year": null,
+    "headquarters": null,
+    "website": null,
+    "updated_at": null,
+    "urls": []
+  },
+  "stats": {
+    "monitored_urls": "0",
+    "total_changes": "4",
+    "high_interest_changes": "2",
+    "changes_last_week": "4",
+    "avg_interest_level": "6.0000000000000000"
+  },
+  "changes": [
+    {
+      "id": 194,
+      "url_id": null,
+      "change_type": "modified",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 2,
+      "interest_data": null,
+      "detected_at": "2025-07-21T16:29:53.435Z",
+      "company": "Replicate",
+      "url_name": "homepage",
+      "old_hash": "8ecbc863725ef4232ab5df2307e6f3b1fe0c08e94ea93dd651351ec852f85114",
+      "new_hash": "29078c2d53d0c6da5d9289f2f06d55eb06f3b90043b49e44fd2f09dfc025945a",
+      "ai_analysis": {
+        "technical_innovation_score": 2,
+        "business_impact_score": 2,
+        "interest_level": 2,
+        "interest_drivers": [
+          "minor update to code snippet"
+        ],
+        "category": "AI/ML platform",
+        "impact_areas": [
+          "AI model deployment",
+          "API integration"
+        ],
+        "summary": "The update appears to be a minor change to the code snippet example, with no significant technical innovations or business impact."
+      },
+      "url": null,
+      "title": "Replicate - Run AI with an API",
+      "content_preview": "Title: Replicate - Run AI with an API\n\nExplore\nPricing\nDocs\nBlog\nChangelog\nSign in\nTry for free\nRun AI\nwith an API.\n\nRun and fine-tune models. Deploy custom models at scale. All with one line of code.\n\nGet started for free\n\nNode\nPython\nHTTP\nimport Replicate from \n\"replicate\"\n;\nconst replicate = new Replicate({\n  auth: process.env.REPLICATE_API_TOKEN\n})\nconst model = \n\"black-forest-labs/flux-pro\"\nconst input = {\n  prompt: \n\"an illustration of a dog\n};\nconst [output] = await replicate.run(model, { input });\nconsole.log(output);\nB200 GPUs\nSign up to be the first to know when they're available.\nGet early access\n\nWith Replicate you can\n\nGenerate images\nGenerate videos\nRestore images\nCaption images\nFine-tune models\nGenerate speech\nGenerate music\nGenerate text\n\nbytedance/sdxl-lightning-4step\n\nSDXL-Lightning by ByteDance: a fast text-to-image model that makes high-quality images in 4 steps\n\n827M runs\n\nblack-forest-labs/flux-1.1-pro-ultra\n\nFLUX1.1 [pro] in ultra and raw modes. Images are up to "
+    },
+    {
+      "id": 136,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:23:39.376Z",
+      "company": "Replicate",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "f75fed01a0d4a9b37a4bf16d8a102ccc4aa4b2e31f956029c2fa5d208c20c34a",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 8,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Partnership with Bria",
+          "Commercial-grade image generation and editing models",
+          "Optimization techniques for FLUX.1 Kontext",
+          "Comparison of AI video models"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "Computer Vision",
+          "AI Model Optimization",
+          "Partnerships and Collaborations"
+        ],
+        "summary": "Replicate has partnered with Bria to offer commercial-grade image generation and editing models, and has published several blog posts on optimizing AI models and comparing video models, indicating significant technical advances and business impact in the AI/ML space."
+      },
+      "url": null,
+      "title": "Blog – Replicate",
+      "content_preview": "Title: Blog – Replicate\n\nExplore\nPricing\nDocs\nBlog\nChangelog\nSign in\nTry for free\nBlog\nRSS\nAtom\nBria is now on Replicate\n\nWe've partnered with Bria to bring a suite of commercial-grade image generation and editing models to Replicate. Built entirely on licensed data, Bria’s tools are designed for enterprises and developers building safely with visual AI.\n\nJuly 17, 2025\nHow we optimized FLUX.1 Kontext [dev]\n\nA deep-dive into the Taylor Seer optimization technique\n\nJuly 15, 2025\nCompare AI video models\n\nIt's hard keeping up with every new video model. In this post we'll help you pick the best one for your needs.\n\nJuly 7, 2025\nThe FLUX.1 Kontext hackathon\n\nWe hosted a hackathon with BFL for FLUX.1 Kontext. Here were the winners.\n\nJuly 1, 2025\nHow to prompt Veo 3 for the best results\n\nLearn expert prompting techniques to create stunning videos with Google's Veo 3.\n\nJune 10, 2025\nGet the most from Google Veo 3\n\nWe're sharing our experiments and tips on Google's new Veo 3 model.\n\nJune 5, 202"
+    },
+    {
+      "id": 136,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:23:39.376Z",
+      "company": "Replicate",
+      "url_name": "blog",
+      "old_hash": null,
+      "new_hash": "f75fed01a0d4a9b37a4bf16d8a102ccc4aa4b2e31f956029c2fa5d208c20c34a",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 8,
+        "interest_level": 8,
+        "interest_drivers": [
+          "Partnership with Bria",
+          "Commercial-grade image generation and editing models",
+          "Optimization techniques for FLUX.1 Kontext",
+          "Comparison of AI video models"
+        ],
+        "category": "AI/ML",
+        "impact_areas": [
+          "Computer Vision",
+          "AI Model Optimization",
+          "Partnerships and Collaborations"
+        ],
+        "summary": "Replicate has partnered with Bria to offer commercial-grade image generation and editing models, and has published several blog posts on optimizing AI models and comparing video models, indicating significant technical advances and business impact in the AI/ML space."
+      },
+      "url": null,
+      "title": "Blog – Replicate",
+      "content_preview": "Title: Blog – Replicate\n\nExplore\nPricing\nDocs\nBlog\nChangelog\nSign in\nTry for free\nBlog\nRSS\nAtom\nBria is now on Replicate\n\nWe've partnered with Bria to bring a suite of commercial-grade image generation and editing models to Replicate. Built entirely on licensed data, Bria’s tools are designed for enterprises and developers building safely with visual AI.\n\nJuly 17, 2025\nHow we optimized FLUX.1 Kontext [dev]\n\nA deep-dive into the Taylor Seer optimization technique\n\nJuly 15, 2025\nCompare AI video models\n\nIt's hard keeping up with every new video model. In this post we'll help you pick the best one for your needs.\n\nJuly 7, 2025\nThe FLUX.1 Kontext hackathon\n\nWe hosted a hackathon with BFL for FLUX.1 Kontext. Here were the winners.\n\nJuly 1, 2025\nHow to prompt Veo 3 for the best results\n\nLearn expert prompting techniques to create stunning videos with Google's Veo 3.\n\nJune 10, 2025\nGet the most from Google Veo 3\n\nWe're sharing our experiments and tips on Google's new Veo 3 model.\n\nJune 5, 202"
+    },
+    {
+      "id": 135,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 8,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:23:32.924Z",
+      "company": "Replicate",
+      "url_name": "homepage",
+      "old_hash": null,
+      "new_hash": "8ecbc863725ef4232ab5df2307e6f3b1fe0c08e94ea93dd651351ec852f85114",
+      "ai_analysis": {
+        "technical_innovation_score": 8,
+        "business_impact_score": 7,
+        "interest_level": 8,
+        "interest_drivers": [
+          "API access to AI models",
+          "Fine-tuning and custom model deployment",
+          "Support for various AI tasks (image, video, speech, music, text generation)",
+          "Partnerships with notable AI model providers (e.g., ByteDance)"
+        ],
+        "category": "AI-as-a-Service",
+        "impact_areas": [
+          "AI model deployment and management",
+          "AI-powered content generation",
+          "Cloud computing and API services"
+        ],
+        "summary": "Replicate offers an API-based platform for running and fine-tuning AI models, with support for various tasks and partnerships with notable model providers, indicating significant technical advances and important market expansion."
+      },
+      "url": null,
+      "title": "Replicate - Run AI with an API",
+      "content_preview": "Title: Replicate - Run AI with an API\n\nExplore\nPricing\nDocs\nBlog\nChangelog\nSign in\nTry for free\nRun AI\nwith an API.\n\nRun and fine-tune models. Deploy custom models at scale. All with one line of code.\n\nGet started for free\n\nNode\nPython\nHTTP\nimport Replicate from \n\"replicate\"\n;\nconst replicate = new Replicate({\n  auth: process.env.REPLICATE_API_TOKEN\n})\nconst model = \n\"black-forest-labs/flux-pro\"\nconst input = {\n  prompt: \n\"an abstract painting of a sunrise\"\n};\nconst [output] = await replicate.run(model, { input });\nconsole.log(output);\nB200 GPUs\nSign up to be the first to know when they're available.\nGet early access\n\nWith Replicate you can\n\nGenerate images\nGenerate videos\nRestore images\nCaption images\nFine-tune models\nGenerate speech\nGenerate music\nGenerate text\n\nbytedance/sdxl-lightning-4step\n\nSDXL-Lightning by ByteDance: a fast text-to-image model that makes high-quality images in 4 steps\n\n827M runs\n\nblack-forest-labs/flux-1.1-pro-ultra\n\nFLUX1.1 [pro] in ultra and raw modes. Images "
+    },
+    {
+      "id": 134,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:23:24.360Z",
+      "company": "Replicate",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "67714965133ea32e3cdeb34c9bdf80d56a95ee622e00b72337865cf5adbf83e0",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Pricing model based on usage",
+          "Public and proprietary machine learning models available",
+          "Pay-per-second and pay-by-input/output pricing options"
+        ],
+        "category": "Cloud AI Services",
+        "impact_areas": [
+          "Machine Learning as a Service",
+          "AI Pricing Models",
+          "Cloud Computing"
+        ],
+        "summary": "Replicate's pricing model offers flexibility and cost-effectiveness, with a wide range of public and proprietary machine learning models available, making it an interesting development in the cloud AI services space."
+      },
+      "url": null,
+      "title": "Pricing – Replicate",
+      "content_preview": "Title: Pricing – Replicate\n\nExplore\nPricing\nDocs\nBlog\nChangelog\nSign in\nTry for free\nPricing\n\nYou only pay for what you use on Replicate. Some models are billed by hardware and time, others by input and output.\n\nPublic models\n\nThousands of open-source machine learning models have been contributed by our community and more are added every day. We also host a wide variety of proprietary models.\n\nMost models are billed by the time they take to run. The price-per-second varies according to the hardware in use. When running or training one of these public models, you only pay for the time it takes to process your request.\n\nSome models are billed by input and output. We've included some examples below.\n\nYou'll find estimates for how much any model will cost you on the model's page.\n\nanthropic/claude-3.7-sonnet\n\nThe most intelligent Claude model and the first hybrid reasoning model on the market (claude-3-7-sonnet-20250219)\n\n$0.015 / thousand output tokens\n$3.00 / million input tokens\nblack-f"
+    },
+    {
+      "id": 134,
+      "url_id": null,
+      "change_type": "new",
+      "summary": null,
+      "old_content_id": null,
+      "new_content_id": null,
+      "relevance_score": null,
+      "interest_level": 6,
+      "interest_data": null,
+      "detected_at": "2025-07-21T15:23:24.360Z",
+      "company": "Replicate",
+      "url_name": "pricing",
+      "old_hash": null,
+      "new_hash": "67714965133ea32e3cdeb34c9bdf80d56a95ee622e00b72337865cf5adbf83e0",
+      "ai_analysis": {
+        "technical_innovation_score": 7,
+        "business_impact_score": 5,
+        "interest_level": 6,
+        "interest_drivers": [
+          "Pricing model based on usage",
+          "Public and proprietary machine learning models available",
+          "Pay-per-second and pay-by-input/output pricing options"
+        ],
+        "category": "Cloud AI Services",
+        "impact_areas": [
+          "Machine Learning as a Service",
+          "AI Pricing Models",
+          "Cloud Computing"
+        ],
+        "summary": "Replicate's pricing model offers flexibility and cost-effectiveness, with a wide range of public and proprietary machine learning models available, making it an interesting development in the cloud AI services space."
+      },
+      "url": null,
+      "title": "Pricing – Replicate",
+      "content_preview": "Title: Pricing – Replicate\n\nExplore\nPricing\nDocs\nBlog\nChangelog\nSign in\nTry for free\nPricing\n\nYou only pay for what you use on Replicate. Some models are billed by hardware and time, others by input and output.\n\nPublic models\n\nThousands of open-source machine learning models have been contributed by our community and more are added every day. We also host a wide variety of proprietary models.\n\nMost models are billed by the time they take to run. The price-per-second varies according to the hardware in use. When running or training one of these public models, you only pay for the time it takes to process your request.\n\nSome models are billed by input and output. We've included some examples below.\n\nYou'll find estimates for how much any model will cost you on the model's page.\n\nanthropic/claude-3.7-sonnet\n\nThe most intelligent Claude model and the first hybrid reasoning model on the market (claude-3-7-sonnet-20250219)\n\n$0.015 / thousand output tokens\n$3.00 / million input tokens\nblack-f"
+    }
+  ],
+  "insights": [],
+  "entities": {
+    "technologies": [],
+    "products": []
+  },
+  "themes": [],
+  "key_points": [],
+  "last_updated": "2025-07-22T17:46:56.908Z"
+}

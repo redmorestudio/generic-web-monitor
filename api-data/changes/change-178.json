@@ -1,0 +1,281 @@
+{
+  "change_id": 178,
+  "url": "https://docs.tabnine.com",
+  "company": "Tabnine",
+  "company_category": "AI Coding",
+  "detected_at": "2025-07-18 16:42:40",
+  "interest_level": 4,
+  "interest_category": "notable_update",
+  "interest_explanation": "The updates to Tabnine's documentation primarily focus on minor technical adjustments, including the introduction of authentication token sign-in and enhanced reporting capabilities with CSV-based reports (V2). These changes indicate incremental improvements rather than breakthrough innovations or significant business impacts.",
+  "interest_drivers": [
+    "Addition of authentication token sign-in",
+    "Introduction of CSV-based reports (V2)",
+    "Configuration updates"
+  ],
+  "technical_innovation_score": 4,
+  "business_impact_score": 3,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://docs.tabnine.com\ncompany: Tabnine\nscraped_at: 2025-07-04 20:20:49\n---\n\nOverview | Tabnine Docs\n\n[![Logo](https://docs.tabnine.com/main/~gitbook/image?url=https%3A%2F%2F3436682446-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252FY2qxVf5VTm3fmwP4B4Gx%252Flogo%252FDE39Qebjhe02mwMFtlIx%252FGroup%25201405.png%3Falt%3Dmedia%26token%3Da9ef71bb-8b78-410f-bff7-a8adac0010df&width=260&dpr=4&quality=100&sign=41fa86aa&sv=2)![Logo](https://docs.tabnine.com...",
+    "after": "Overview | Tabnine Docs :root { --primary-1: 255 255 255; --contrast-primary-1: 29 29 29; --primary-2: 247 250 255; --contrast-primary-2: 29 29 29; --primary-3: 241 248 255; --contrast-primary-3: 29 29 29; --primary-4: 233 243 255; --contrast-primary-4: 29 29 29; --primary-5: 225 237 255; --contrast-primary-5: 29 29 29; --primary-6: 214 230 255; --contrast-primary-6: 29 29 29; --primary-7: 198 217 255; --contrast-primary-7: 29 29 29; --primary-8: 183 204 251; --contrast-primary-8: 29 29 29; --pr..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Overview | Tabnine Docs :root { --primary-1: 255 255 255; --contrast-primary-1: 29 29 29; --primary-2: 247 250 255; --contrast-primary-2: 29 29 29; --primary-3: 241 248 255; --contrast-primary-3: 29 29 29; --primary-4: 233 243 255; --contrast-primary-4: 29 29 29; --primary-5: 225 237 255; --contrast-primary-5: 29 29 29; --primary-6: 214 230 255; --contrast-primary-6: 29 29 29; --primary-7: 198 217 255; --contrast-primary-7: 29 29 29; --primary-8: 183 204 251; --contrast-primary-8: 29 29 29; --primary-9: 31 70 193; --contrast-primary-9: 255 255 255; --primary-10: 63 110 236; --contrast-primary-10: 255 255 255; --primary-11: 88 109 156; --contrast-primary-11: 255 255 255; --primary-12: 25 29 39; --contrast-primary-12: 255 255 255; --primary-original: 31 70 193; --contrast-primary-original: 255 255 255; --tint-1: 255 255 255; --contrast-tint-1: 29 29 29; --tint-2: 249 250 252; --contrast-tint-2: 29 29 29; --tint-3: 246 247 252; --contrast-tint-3: 29 29 29; --tint-4: 240 242 249; --contrast-tint-4: 29 29 29; --tint-5: 234 237 246; --contrast-tint-5: 29 29 29; --tint-6: 226 229 240; --contrast-tint-6: 29 29 29; --tint-7: 212 217 230; --contrast-tint-7: 29 29 29; --tint-8: 199 204 219; --contrast-tint-8: 29 29 29; --tint-9: 119 131 171; --contrast-tint-9: 255 255 255; --tint-10: 108 120 159; --contrast-tint-10: 255 255 255; --tint-11: 105 110 125; --contrast-tint-11: 255 255 255; --tint-12: 28 29 32; --contrast-tint-12: 255 255 255; --tint-original: 19 26 58; --contrast-tint-original: 255 255 255; --neutral-1: 255 255 255; --contrast-neutral-1: 29 29 29; --neutral-2: 250 250 250; --contrast-neutral-2: 29 29 29; --neutral-3: 247 247 247; --contrast-neutral-3: 29 29 29; --neutral-4: 242 242 242; --contrast-neutral-4: 29 29 29; --neutral-5: 237 237 237; --contrast-neutral-5: 29 29 29; --neutral-6: 229 229 229; --contrast-neutral-6: 29 29 29; --neutral-7: 217 217 217; --contrast-neutral-7: 29 29 29; --neutral-8: 204 204 204; --contrast-neutral-8: 29 29 29; --neutral-9: 120 120 120; --contrast-neutral-9: 255 255 255; --neutral-10: 121 121 121; --contrast-neutral-10: 255 255 255; --neutral-11: 110 110 110; --contrast-neutral-11: 255 255 255; --neutral-12: 29 29 29; --contrast-neutral-12: 255 255 255; --neutral-original: 120 120 120; --contrast-neutral-original: 255 255 255; --header-background: 19 26 58; --header-link: 255 255 255; --info-1: 255 255 255; --contrast-info-1: 29 29 29; --info-2: 250 250 250; --contrast-info-2: 29 29 29; --info-3: 247 247 247; --contrast-info-3: 29 29 29; --info-4: 242 242 242; --contrast-info-4: 29 29 29; --info-5: 237 237 237; --contrast-info-5: 29 29 29; --info-6: 229 229 229; --contrast-info-6: 29 29 29; --info-7: 217 217 217; --contrast-info-7: 29 29 29; --info-8: 204 204 204; --contrast-info-8: 29 29 29; --info-9: 120 120 120; --contrast-info-9: 255 255 255; --info-10: 121 121 121; --contrast-info-10: 255 255 255; --info-11: 110 110 110; --contrast-info-11: 255 255 255; --info-12: 29 29 29; --contrast-info-12: 255 255 255; --info-original: 120 120 120; --contrast-info-original: 255 255 255; --warning-1: 255 255 255; --contrast-warning-1: 29 29 29; --warning-2: 254 249 244; --contrast-warning-2: 29 29 29; --warning-3: 255 245 236; --contrast-warning-3: 29 29 29; --warning-4: 255 239 225; --contrast-warning-4: 29 29 29; --warning-5: 254 233 214; --contrast-warning-5: 29 29 29; --warning-6: 250 224 200; --contrast-warning-6: 29 29 29; --warning-7: 242 211 182; --contrast-warning-7: 29 29 29; --warning-8: 233 197 164; --contrast-warning-8: 29 29 29; --warning-9: 254 154 0; --contrast-warning-9: 29 29 29; --warning-10: 187 92 0; --contrast-warning-10: 255 255 255; --warning-11: 138 102 66; --contrast-warning-11: 255 255 255; --warning-12: 35 28 21; --contrast-warning-12: 255 255 255; --warning-original: 254 154 0; --contrast-warning-original: 29 29 29; --danger-1: 255 255 255; --contrast-danger-1: 29 29 29; --danger-2: 255 247 246; --contrast-danger-2: 29 29 29; --danger-3: 255 242 239; --contrast-danger-3: 29 29 29; --danger-4: 255 234 230; --contrast-danger-4: 29 29 29; --danger-5: 255 226 221; --contrast-danger-5: 29 29 29; --danger-6: 255 215 210; --contrast-danger-6: 29 29 29; --danger-7: 255 200 193; --contrast-danger-7: 29 29 29; --danger-8: 254 184 177; --contrast-danger-8: 29 29 29; --danger-9: 251 44 54; --contrast-danger-9: 255 255 255; --danger-10: 228 0 33; --contrast-danger-10: 255 255 255; --danger-11: 158 87 81; --contrast-danger-11: 255 255 255; --danger-12: 39 25 23; --contrast-danger-12: 255 255 255; --danger-original: 251 44 54; --contrast-danger-original: 255 255 255; --success-1: 255 255 255; --contrast-success-1: 29 29 29; --success-2: 245 252 246; --contrast-success-2: 29 29 29; --success-3: 238 252 240; --contrast-success-3: 29 29 29; --success-4: 229 249 231; --contrast-success-4: 29 29 29; --success-5: 219 246 222; --contrast-success-5: 29 29 29; --success-6: 207 240 210; --contrast-success-6: 29 29 29; --success-7: 190 229 194; --contrast-success-7: 29 29 29; --success-8: 172 218 177; --contrast-success-8: 29 29 29; --success-9: 0 201 80; --contrast-success-9: 29 29 29; --success-10: 0 152 23; --contrast-success-10: 255 255 255; --success-11: 74 124 82; --contrast-success-11: 255 255 255; --success-12: 22 32 23; --contrast-success-12: 255 255 255; --success-original: 0 201 80; --contrast-success-original: 29 29 29; } .",
+      "dark { --primary-1: 29 29 29; --contrast-primary-1: 255 255 255; --primary-2: 32 35 39; --contrast-primary-2: 255 255 255; --primary-3: 39 44 53; --contrast-primary-3: 255 255 255; --primary-4: 40 48 62; --contrast-primary-4: 255 255 255; --primary-5: 43 54 72; --contrast-primary-5: 255 255 255; --primary-6: 45 58 81; --contrast-primary-6: 255 255 255; --primary-7: 52 68 96; --contrast-primary-7: 255 255 255; --primary-8: 59 78 112; --contrast-primary-8: 255 255 255; --primary-9: 52 109 219; --contrast-primary-9: 255 255 255; --primary-10: 80 139 252; --contrast-primary-10: 255 255 255; --primary-11: 167 193 239; --contrast-primary-11: 29 29 29; --primary-12: 249 255 255; --contrast-primary-12: 29 29 29; --primary-original: 52 109 219; --contrast-primary-original: 255 255 255; --tint-1: 29 29 29; --contrast-tint-1: 255 255 255; --tint-2: 34 34 36; --contrast-tint-2: 255 255 255; --tint-3: 43 44 47; --contrast-tint-3: 255 255 255; --tint-4: 46 48 53; --contrast-tint-4: 255 255 255; --tint-5: 51 53 60; --contrast-tint-5: 255 255 255; --tint-6: 54 57 66; --contrast-tint-6: 255 255 255; --tint-7: 64 67 78; --contrast-tint-7: 255 255 255; --tint-8: 73 77 90; --contrast-tint-8: 255 255 255; --tint-9: 119 131 171; --contrast-tint-9: 255 255 255; --tint-10: 130 143 183; --contrast-tint-10: 255 255 255; --tint-11: 186 192 209; --contrast-tint-11: 29 29 29; --tint-12: 253 255 255; --contrast-tint-12: 29 29 29; --tint-original: 19 26 58; --contrast-tint-original: 255 255 255; --neutral-1: 29 29 29; --contrast-neutral-1: 255 255 255; --neutral-2: 34 34 34; --contrast-neutral-2: 255 255 255; --neutral-3: 44 44 44; --contrast-neutral-3: 255 255 255; --neutral-4: 48 48 48; --contrast-neutral-4: 255 255 255; --neutral-5: 53 53 53; --contrast-neutral-5: 255 255 255; --neutral-6: 57 57 57; --contrast-neutral-6: 255 255 255; --neutral-7: 67 67 67; --contrast-neutral-7: 255 255 255; --neutral-8: 78 78 78; --contrast-neutral-8: 255 255 255; --neutral-9: 120 120 120; --contrast-neutral-9: 255 255 255; --neutral-10: 144 144 144; --contrast-neutral-10: 255 255 255; --neutral-11: 192 192 192; --contrast-neutral-11: 29 29 29; --neutral-12: 255 255 255; --contrast-neutral-12: 29 29 29; --neutral-original: 120 120 120; --contrast-neutral-original: 255 255 255; --header-background: 19 26 58; --header-link: 255 255 255; --info-1: 29 29 29; --contrast-info-1: 255 255 255; --info-2: 34 34 34; --contrast-info-2: 255 255 255; --info-3: 44 44 44; --contrast-info-3: 255 255 255; --info-4: 48 48 48; --contrast-info-4: 255 255 255; --info-5: 53 53 53; --contrast-info-5: 255 255 255; --info-6: 57 57 57; --contrast-info-6: 255 255 255; --info-7: 67 67 67; --contrast-info-7: 255 255 255; --info-8: 78 78 78; --contrast-info-8: 255 255 255; --info-9: 120 120 120; --contrast-info-9: 255 255 255; --info-10: 144 144 144; --contrast-info-10: 255 255 255; --info-11: 192 192 192; --contrast-info-11: 29 29 29; --info-12: 255 255 255; --contrast-info-12: 29 29 29; --info-original: 120 120 120; --contrast-info-original: 255 255 255; --warning-1: 29 29 29; --contrast-warning-1: 255 255 255; --warning-2: 38 34 30; --contrast-warning-2: 255 255 255; --warning-3: 50 42 35; --contrast-warning-3: 255 255 255; --warning-4: 57 45 34; --contrast-warning-4: 255 255 255; --warning-5: 66 50 34; --contrast-warning-5: 255 255 255; --warning-6: 73 53 33; --contrast-warning-6: 255 255 255; --warning-7: 87 62 37; --contrast-warning-7: 255 255 255; --warning-8: 101 71 41; --contrast-warning-8: 255 255 255; --warning-9: 254 154 0; --contrast-warning-9: 29 29 29; --warning-10: 213 116 0; --contrast-warning-10: 255 255 255; --warning-11: 224 184 145; --contrast-warning-11: 29 29 29; --warning-12: 255 253 243; --contrast-warning-12: 29 29 29; --warning-original: 254 154 0; --contrast-warning-original: 29 29 29; --danger-1: 29 29 29; --contrast-danger-1: 255 255 255; --danger-2: 40 32 32; --contrast-danger-2: 255 255 255; --danger-3: 55 39 38; --contrast-danger-3: 255 255 255; --danger-4: 64 41 38; --contrast-danger-4: 255 255 255; --danger-5: 75 44 41; --contrast-danger-5: 255 255 255; --danger-6: 84 45 41; --contrast-danger-6: 255 255 255; --danger-7: 100 51 48; --contrast-danger-7: 255 255 255; --danger-8: 117 58 54; --contrast-danger-8: 255 255 255; --danger-9: 251 44 54; --contrast-danger-9: 255 255 255; --danger-10: 255 52 59; --contrast-danger-10: 255 255 255; --danger-11: 248 168 161; --contrast-danger-11: 29 29 29; --danger-12: 255 249 247; --contrast-danger-12: 29 29 29; --danger-original: 251 44 54; --contrast-danger-original: 255 255 255; --success-1: 29 29 29; --contrast-success-1: 255 255 255; --success-2: 31 36 32; --contrast-success-2: 255 255 255; --success-3: 37 47 38; --contrast-success-3: 255 255 255; --success-4: 37 52 39; --contrast-success-4: 255 255 255; --success-5: 38 60 41; --contrast-success-5: 255 255 255; --success-6: 38 65 41; --contrast-success-6: 255 255 255; --success-7: 42 77 48; --contrast-success-7: 255 255 255; --success-8: 47 89 54; --contrast-success-8: 255 255 255; --success-9: 0 201 80; --contrast-success-9: 29 29 29; --success-10: 0 176 54; --contrast-success-10: 255 255 255; --success-11: 155 208 161; --contrast-success-11: 29 29 29; --success-12: 246 255 247; --contrast-success-12: 29 29 29; --success-original: 0 201 80; --contrast-success-original: 29 29 29; } .",
+      "iframely-responsive{top:0;left:0;width:100%;height:0;position:relative;padding-bottom:56.",
+      "25%;box-sizing:border-box;}.",
+      "iframely-responsive>\\*{top:0;left:0;width:100%;height:100%;position:absolute;border:0;box-sizing:border-box;}!",
+      "function(){var d=document.",
+      "documentElement,c=d.",
+      "classList;c.",
+      "remove('light','dark');d.",
+      "style."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://docs.",
+      "com\ncompany: Tabnine\nscraped_at: 2025-07-04 20:20:49\n---\n\nOverview | Tabnine Docs\n\n[!",
+      "png%3Falt%3Dmedia%26token%3Da9ef71bb-8b78-410f-bff7-a8adac0010df&width=260&dpr=4&quality=100&sign=41fa86aa&sv=2)](https://docs.",
+      "com/main)\n\nAsk or search...",
+      "CtrlK\n\n[Tabnine website](https://www.",
+      "utm_source=docs&utm_medium=organic&utm_campaign=docs)\n\nMore\n\n*   Welcome\n\n    *   [Overview](/main)\n\n        *   [Architecture](/main/welcome/readme/architecture)\n\n            *   [Deployment options](/main/welcome/readme/architecture/deployment-options)\n\n        *   [Security](/main/welcome/readme/security)\n        *   [Privacy](/main/welcome/readme/privacy)\n        *   [Protection](/main/welcome/readme/protection)\n\n            *   [Provenance and Attribution](/main/welcome/readme/protection/provenance-and-attribution)\n\n        *   [Personalization](/main/welcome/readme/personalization)\n\n            *   [Tabnine’s Personalization in Depth](/main/welcome/readme/personalization/tabnines-personalization-in-depth)\n            *   [Connection: Global Codebase Awareness](/main/welcome/readme/personalization/connection-global-codebase-awareness)\n\n        *   [AI Models](/main/welcome/readme/ai-models)\n\n            *   [Tabnine's private and protected Universal models](/main/welcome/readme/ai-models/tabnines-private-and-protected-universal-models)\n            *   [Tabnine's fine-tuned AI models](/main/welcome/readme/ai-models/tabnines-fine-tuned-ai-models)\n\n        *   [Integrations](/main/welcome/readme/integrations)\n\n            *   [Atlassian Jira](/main/welcome/readme/integrations/atlassian-jira)\n\n        *   [System Requirements](/main/welcome/readme/system-requirements)\n        *   [Supported Languages](/main/welcome/readme/supported-languages)\n        *   [Supported IDEs](/main/welcome/readme/supported-ides)\n        *   [Tabnine Subscription Plans](/main/welcome/readme/tabnine-subscription-plans)\n\n            *   [Dev](/main/welcome/readme/tabnine-subscription-plans/dev)\n            *   [Enterprise (SaaS)](/main/welcome/readme/tabnine-subscription-plans/enterprise-saas)\n            *   [Enterprise (private installation)](/main/welcome/readme/tabnine-subscription-plans/enterprise-private-installation)\n\n\n    *   [Support & Feedback](/main/welcome/support-and-feedback)\n*   Getting started\n\n    *   [Install](/main/getting-started/install)\n\n        *   [Client setup (private installation)](/main/getting-started/install/client-setup-private-installation)\n\n            *   [Join your team (private installation)](/main/getting-started/install/client-setup-private-installation/join-your-team-private-installation)\n            *   [VS Code (private installation)](/main/getting-started/install/client-setup-private-installation/vs-code-private-installation)\n            *   [JetBrains IDEs (private installation)](/main/getting-started/install/client-setup-private-installation/jetbrains-ides-private-installation)\n            *   [Visual Studio (private installation)](/main/getting-started/install/client-setup-private-installation/visual-studio-private-installation)\n            *   [Eclipse (private installation)](/main/getting-started/install/client-setup-private-installation/eclipse-private-installation)\n\n\n    *   [Quickstart Guide](/main/getting-started/quickstart)\n\n        *   [Menus and Icons](/main/getting-started/quickstart/menus-and-icons)\n\n    *   [Getting the Most from Tabnine Code Completions](/main/getting-started/getting-the-most-from-tabnines-code-completion)\n\n        *   [Code Acceptance Logs](/main/getting-started/getting-the-most-from-tabnines-code-completion/code-acceptance-logs)\n        *   [Pause (snooze)](/main/getting-started/getting-the-most-from-tabnines-code-completion/pause-snooze)\n\n    *   [Getting the Most from Inline Actions](/main/getting-started/getting-the-most-from-inline-actions)\n    *   [Getting the Most from Tabnine Chat](/main/getting-started/getting-the-most-from-tabnine-chat)\n\n        *   [Launching Tabnine Chat](/main/getting-started/getting-the-most-from-tabnine-chat/launch)\n        *   [Interacting with Tabnine Chat](/main/getting-started/getting-the-most-from-tabnine-chat/interact)\n        *   [Reviewing suggestions](/main/getting-started/getting-the-most-from-tabnine-chat/consume)\n        *   [Writing prompts](/main/getting-started/getting-the-most-from-tabnine-chat/prompt)\n        *   [Chat Context](/main/getting-started/getting-the-most-from-tabnine-chat/chat-context)\n\n            *   [Understanding Context](/main/getting-started/getting-the-most-from-tabnine-chat/chat-context/context-context-window)\n            *   [Jira Connection](/main/getting-started/getting-the-most-from-tabnine-chat/chat-context/jira-connection)\n            *   [Context Scoping](/main/getting-started/getting-the-most-from-tabnine-chat/chat-context/context-scoping)\n\n        *   [Conversing with Tabnine Chat](/main/getting-started/getting-the-most-from-tabnine-chat/conversations)\n        *   [Switching between chat AI models](/main/getting-started/getting-the-most-from-tabnine-chat/switching-between-chat-ai-models)\n        *   [Image Prompts](/main/getting-started/getting-the-most-from-tabnine-chat/image-prompts)\n        *   [Tabnine's Prompting Guide](/main/getting-started/getting-the-most-from-tabnine-chat/tabnines-prompting-guide)\n\n*   Software Development with Tabnine\n\n    *   [Overview](/main/software-development-with-tabnine/overview)\n    *   [Plan](/main/software-development-with-tabnine/plan)\n    *   [Create](/main/software-development-with-tabnine/write-new-code)\n    *   [Test](/main/software-development-with-tabnine/accelerate-unit-testing)\n\n        *   [Intro to the Test Agent](/main/software-development-with-tabnine/accelerate-unit-testing/intro-to-the-test-agent)\n        *   [Test Agent Workflow](/main/software-development-with-tabnine/accelerate-unit-testing/test-agent-workflow)\n        *   [Custom Commands](/main/software-development-with-tabnine/accelerate-unit-testing/custom-commands)\n        *   [Generate Test Files with @Mentions](/main/software-development-with-tabnine/accelerate-unit-testing/generate-test-files-with-mentions)\n\n    *   [Review](/main/software-development-with-tabnine/review)\n    *   [Fix](/main/software-development-with-tabnine/fix)\n    *   [Document](/main/software-development-with-tabnine/generate-documentation)\n    *   [Explain](/main/software-development-with-tabnine/understand-existing-code)\n    *   [Maintain](/main/software-development-with-tabnine/extend-and-refactor-code)\n*   Administering Tabnine\n\n    *   [Start a team](/main/administering-tabnine/start-a-team)\n    *   [Manage a team](/main/administering-tabnine/manage-a-team)\n    *   [Private installation](/main/administering-tabnine/private-installation)\n\n        *   [Server setup guide](/main/administering-tabnine/private-installation/server-setup-guide)\n\n            *   [Kubernetes (MicroK8s) Installation guide](/main/administering-tabnine/private-installation/server-setup-guide/kubernetes-microk8s-installation-guide)\n            *   [Deployment guide](/main/administering-tabnine/private-installation/server-setup-guide/deployment-guide)\n\n                *   [Tabnine update guide](/main/administering-tabnine/private-installation/server-setup-guide/deployment-guide/tabnine-update-guide)\n\n            *   [Air-gapped deployment guide](/main/administering-tabnine/private-installation/server-setup-guide/air-gapped-deployment-guide)\n\n        *   [Admin guide](/main/administering-tabnine/private-installation/admin-guide)\n\n            *   [Monitoring Tabnine](/main/administering-tabnine/private-installation/admin-guide/monitoring-tabnine)\n            *   [Prometheus Operator install](/main/administering-tabnine/private-installation/admin-guide/prometheus-operator-install)\n            *   [Audit logs](/main/administering-tabnine/private-installation/admin-guide/audit-logs)\n\n        *   [Managing your team](/main/administering-tabnine/private-installation/managing-your-team)\n\n            *   [Tabnine teams](/main/administering-tabnine/private-installation/managing-your-team/tabnine-teams)\n            *   [Roles in an enterprise](/main/administering-tabnine/private-installation/managing-your-team/roles-in-an-enterprise)\n            *   [Inviting users to your team](/main/administering-tabnine/private-installation/managing-your-team/inviting-users-to-your-team)\n            *   [Deactivating and reactivating users](/main/administering-tabnine/private-installation/managing-your-team/deactivating-and-reactivating-users)\n            *   [Deleting PII data of a deactivated user](/main/administering-tabnine/private-installation/managing-your-team/deleting-pii-data-of-a-deactivated-user)\n            *   [Reset user's password](/main/administering-tabnine/private-installation/managing-your-team/deactivating-and-reactivating-users-1)\n            *   [Usage reports](/main/administering-tabnine/private-installation/managing-your-team/reporting)\n\n                *   [Reports Glossary](/main/administering-tabnine/private-installation/managing-your-team/reporting/reports-glossary)\n                *   [CSV-based reports (V2)](/main/administering-tabnine/private-installation/managing-your-team/reporting/reporting)\n\n                    *   [Configuring scheduled CSV reports](/main/administering-tabnine/private-installation/managing-your-team/reporting/reporting/configuring-scheduled-csv-reports)\n                    *   [CSV-based reports V1 (Depracted since version 5.",
+      "0](/main/administering-tabnine/private-installation/managing-your-team/reporting/reporting/reporting)\n\n                *   [Usage API](/main/administering-tabnine/private-installation/managing-your-team/reporting/usage-api)\n\n            *   [Settings](/main/administering-tabnine/private-installation/managing-your-team/settings)\n\n                *   [General](/main/administering-tabnine/private-installation/managing-your-team/settings/general-settings)\n                *   [Single Sign-On (SSO)](/main/administering-tabnine/private-installation/managing-your-team/settings/single-sign-on-sso)\n                *   [Personalization (f.",
+      "Workspace)](/main/administering-tabnine/private-installation/managing-your-team/settings/workspace-settings)\n\n                    *   [Connecting to External Code Repositories](/main/administering-tabnine/private-installation/managing-your-team/settings/workspace-settings/connecting-to-remote-repositories)\n\n                *   [Email](/main/administering-tabnine/private-installation/managing-your-team/settings/email-settings)\n                *   [License](/main/administering-tabnine/private-installation/managing-your-team/settings/license-settings)\n                *   [Models](/main/administering-tabnine/private-installation/managing-your-team/settings/models-settings)\n                *   [Access Tokens](/main/administering-tabnine/private-installation/managing-your-team/settings/access-tokens)\n\n            *   [IdP Sync](/main/administering-tabnine/private-installation/managing-your-team/idp-sync)\n\n        *   [Release Notes](/main/administering-tabnine/private-installation/release-notes)\n\n\n[Powered by GitBook](https://www.",
+      "1.",
+      "png%3Falt%3Dmedia%26token%3Db310396a-6d9d-4d75-8394-85b504506349&width=768&dpr=4&quality=100&sign=ecc7d118&sv=2)\n\n##\n\n[](#what-is-tabnine)\n\nWhat is Tabnine?"
+    ],
+    "key_changes": [
+      "New version: 56.25, v6.6.0, 149.0, 151.0, 4.25, 6.75, 0.5, 0.75, 1.5, 38.003, 56.5",
+      "Price change: $1, $0, $10, $27, $30, $31, $36, $37, $39",
+      "New model mentioned",
+      "New api mentioned",
+      "New release mentioned",
+      "New launch mentioned",
+      "New announcement mentioned",
+      "New update mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 59,
+    "summary": "59% content changed (1016 additions, 32 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "children",
+        "frequency": 1031
+      },
+      {
+        "word": "255",
+        "frequency": 743
+      },
+      {
+        "word": "null",
+        "frequency": 515
+      },
+      {
+        "word": "classname",
+        "frequency": 451
+      },
+      {
+        "word": "static",
+        "frequency": 389
+      },
+      {
+        "word": "href",
+        "frequency": 365
+      },
+      {
+        "word": "chunks",
+        "frequency": 314
+      },
+      {
+        "word": "undefined",
+        "frequency": 292
+      },
+      {
+        "word": "div",
+        "frequency": 223
+      },
+      {
+        "word": "icon",
+        "frequency": 204
+      },
+      {
+        "word": "link",
+        "frequency": 198
+      },
+      {
+        "word": "flex",
+        "frequency": 192
+      },
+      {
+        "word": "u0026",
+        "frequency": 191
+      },
+      {
+        "word": "type",
+        "frequency": 177
+      },
+      {
+        "word": "ml-0",
+        "frequency": 163
+      },
+      {
+        "word": "pt-0",
+        "frequency": 156
+      },
+      {
+        "word": "w-full",
+        "frequency": 145
+      },
+      {
+        "word": "false",
+        "frequency": 143
+      },
+      {
+        "word": "before",
+        "frequency": 142
+      },
+      {
+        "word": "target",
+        "frequency": 137
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "ctrlk",
+        "frequency": 1
+      },
+      {
+        "word": "protected",
+        "frequency": 1
+      },
+      {
+        "word": "universal",
+        "frequency": 1
+      },
+      {
+        "word": "tabnines-private-and-protected-universal-models",
+        "frequency": 1
+      },
+      {
+        "word": "fine-tuned",
+        "frequency": 1
+      },
+      {
+        "word": "tabnines-fine-tuned-ai-models",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "main": {
+        "before": 166,
+        "after": 571,
+        "change": 405
+      },
+      "tabnine": {
+        "before": 84,
+        "after": 352,
+        "change": 268
+      },
+      "com": {
+        "before": 26,
+        "after": 289,
+        "change": 263
+      },
+      "https": {
+        "before": 26,
+        "after": 286,
+        "change": 260
+      },
+      "gitbook": {
+        "before": 14,
+        "after": 234,
+        "change": 220
+      },
+      "page": {
+        "before": 1,
+        "after": 140,
+        "change": 139
+      },
+      "next": {
+        "before": 1,
+        "after": 135,
+        "change": 134
+      },
+      "getting-started": {
+        "before": 47,
+        "after": 176,
+        "change": 129
+      },
+      "docs": {
+        "before": 18,
+        "after": 145,
+        "change": 127
+      },
+      "welcome": {
+        "before": 45,
+        "after": 172,
+        "change": 127
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "255 255",
+        "count": 470
+      },
+      {
+        "phrase": "static chunks",
+        "count": 312
+      },
+      {
+        "phrase": "href main",
+        "count": 300
+      },
+      {
+        "phrase": "children children",
+        "count": 219
+      },
+      {
+        "phrase": "null classname",
+        "count": 213
+      },
+      {
+        "phrase": "div null",
+        "count": 203
+      },
+      {
+        "phrase": "icon undefined",
+        "count": 154
+      },
+      {
+        "phrase": "tabnine com",
+        "count": 151
+      },
+      {
+        "phrase": "main getting-started",
+        "count": 149
+      },
+      {
+        "phrase": "u0026 pt-0",
+        "count": 144
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

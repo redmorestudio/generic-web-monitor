@@ -1,0 +1,104 @@
+{
+  "id": 51,
+  "company": "Runway",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:24:54.830Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.95,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Initial content creation",
+    "specific_changes": [
+      "Introduction of company news and updates",
+      "Launch of new products and features",
+      "Announcement of partnerships and collaborations",
+      "Introduction of research initiatives and publications",
+      "Creation of career and education resources",
+      " Establishment of customer support and community channels"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on AI and machine learning",
+      "Growing importance of partnerships and collaborations",
+      "Expanding role of content creation and community engagement in business strategy"
+    ],
+    "business_impact": "The creation of this content demonstrates Runway's commitment to transparency, innovation, and community engagement, which can positively impact its reputation and attract new customers, partners, and talent.",
+    "strategic_direction": "Runway's strategic direction appears to be focused on establishing itself as a leader in the AI and machine learning space, with a strong emphasis on innovation, partnerships, and community engagement.",
+    "competitive_implications": "Runway's move to establish a strong online presence and showcase its initiatives and partnerships may put pressure on competitors to follow suit, potentially altering the competitive landscape."
+  },
+  "entities": {
+    "people": [
+      "Cristóbal Valenzuela",
+      "Anastasis Germanidis",
+      "Sophia Jennings",
+      "Gaspar Noé",
+      "Harmony Korine"
+    ],
+    "markets": [],
+    "pricing": [],
+    "features": [
+      "API",
+      "Use Cases",
+      "Staff Picks"
+    ],
+    "products": [
+      "Runway Gen-4",
+      "Act-Two",
+      "General World Models"
+    ],
+    "partnerships": [
+      "Lionsgate",
+      "Tribeca Festival",
+      "Media.Monks",
+      "Getty Images",
+      "Canva",
+      "AMC Networks",
+      "Parsons School of Design",
+      "Fabula",
+      "Harmony Korine’s EDGLRD"
+    ],
+    "technologies": [
+      "AI",
+      "Machine Learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Intensified competition in the AI and machine learning space",
+      "Potential risks associated with establishing a strong online presence",
+      "Dependence on partnerships and collaborations for success"
+    ],
+    "key_findings": [
+      "Runway is committed to transparency and community engagement",
+      "Partnerships and collaborations are crucial to Runway's strategy",
+      "AI and machine learning are key areas of focus for the company"
+    ],
+    "opportunities": [
+      "Potential for increased brand awareness and reputation",
+      "New business opportunities through partnerships and collaborations",
+      "Attracting top talent in the AI and machine learning space"
+    ],
+    "recommended_actions": [
+      "Monitor Runway's progress and adjust competitive strategy accordingly",
+      "Explore potential partnership opportunities with Runway",
+      "Invest in AI and machine learning capabilities to remain competitive"
+    ]
+  },
+  "key_insights": [
+    "Runway is committed to transparency and community engagement",
+    "Partnerships and collaborations are crucial to Runway's strategy",
+    "AI and machine learning are key areas of focus for the company"
+  ],
+  "business_impact": "The creation of this content demonstrates Runway's commitment to transparency, innovation, and community engagement, which can positively impact its reputation and attract new customers, partners, and talent.",
+  "competitive_implications": "Runway's move to establish a strong online presence and showcase its initiatives and partnerships may put pressure on competitors to follow suit, potentially altering the competitive landscape.",
+  "content_hash_before": null,
+  "content_hash_after": "eb44b2bf98ed46145d40df657976e69412fea89695d647ec52a6bd1c8f966263",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

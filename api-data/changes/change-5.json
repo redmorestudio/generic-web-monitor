@@ -1,0 +1,35 @@
+{
+  "change_id": 5,
+  "url": "https://amd.com/en/graphics/instinct-server-accelerators",
+  "company": "AMD",
+  "company_category": "AI Hardware",
+  "detected_at": "2025-07-15 18:50:56",
+  "interest_level": 5,
+  "interest_category": "routine_change",
+  "interest_explanation": "Content changed for AMD - https://amd.com/en/graphics/instinct-server-accelerators",
+  "interest_drivers": [],
+  "technical_innovation_score": 5,
+  "business_impact_score": 5,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": false,
+  "content_preview": {
+    "before": "OpenAI is a research organization focused on artificial intelligence.\\n\\nBREAKING: We are proud to announce GPT-5, our most advanced model yet with 10x more parameters!\\n\\nWe create AI systems that are safe and beneficial....",
+    "after": null
+  },
+  "diff": {
+    "added_sentences": [],
+    "removed_sentences": [],
+    "key_changes": [],
+    "change_percentage": 0,
+    "summary": "No diff available"
+  },
+  "keywords": {
+    "new_keywords": [],
+    "removed_keywords": [],
+    "frequency_changes": {},
+    "significant_phrases": []
+  },
+  "entities": null,
+  "key_phrases": []
+}

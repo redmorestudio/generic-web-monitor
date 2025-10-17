@@ -1,0 +1,103 @@
+{
+  "id": 158,
+  "company": "Mistral AI",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:18:37.877Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "Introduction of new pricing plans and models for Mistral AI services",
+    "specific_changes": [
+      "Introduction of Free, Pro, Team, and Enterprise plans",
+      "Addition of various AI models with different pricing tiers",
+      "Introduction of tools and services like Connectors, Enterprise search, and Agent API"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Expansion of services to cater to a broader customer base",
+      "Increased competition in the AI market"
+    ],
+    "business_impact": "The introduction of new pricing plans and models is likely to attract more customers and increase revenue for Mistral AI.",
+    "strategic_direction": "Mistral AI is focusing on expanding its services and increasing its customer base, with a strategic direction towards becoming a leading AI solutions provider.",
+    "competitive_implications": "Mistral AI is positioning itself as a major player in the AI market, with a wide range of services and pricing plans to attract different types of customers."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "Free plan: $0/mo",
+      "Pro plan: $14.99/mo",
+      "Team plan: $24.99/user/mo",
+      "Enterprise plan: custom pricing"
+    ],
+    "features": [
+      "Messages",
+      "Voice mode",
+      "Flash answers",
+      "Agents",
+      "Web searches",
+      "Think mode",
+      "Deep research",
+      "Libraries",
+      "Document upload",
+      "Verified news",
+      "Connections",
+      "Projects",
+      "Image generation",
+      "Code interpreter",
+      "Canvas mode"
+    ],
+    "products": [
+      "Mistral AI",
+      "Le Chat",
+      "Mistral Code",
+      "Mistral Medium 3",
+      "Magistral Medium",
+      "Mistral Large",
+      "Devstral Medium",
+      "Document AI & OCR",
+      "Voxtral Small",
+      "Voxtral Mini"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "Machine Learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI market",
+      "Potential challenges in implementing and supporting new services"
+    ],
+    "key_findings": [
+      "Mistral AI is introducing new pricing plans and models to expand its services and attract more customers.",
+      "The company is focusing on providing a wide range of AI models and tools to cater to different customer needs."
+    ],
+    "opportunities": [
+      "Increased revenue and customer base for Mistral AI",
+      "Expansion of services to new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor the market response to the new pricing plans and models",
+      "Continuously evaluate and improve the services and models to stay competitive"
+    ]
+  },
+  "key_insights": [
+    "Mistral AI is introducing new pricing plans and models to expand its services and attract more customers.",
+    "The company is focusing on providing a wide range of AI models and tools to cater to different customer needs."
+  ],
+  "business_impact": "The introduction of new pricing plans and models is likely to attract more customers and increase revenue for Mistral AI.",
+  "competitive_implications": "Mistral AI is positioning itself as a major player in the AI market, with a wide range of services and pricing plans to attract different types of customers.",
+  "content_hash_before": null,
+  "content_hash_after": "46d99ee3c1dae0f216a7b4724c7a2707ae4e861c9a9f966550afb454c2572a21",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

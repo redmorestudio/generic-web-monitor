@@ -1,0 +1,322 @@
+{
+  "change_id": 109,
+  "url": "https://ai.meta.com/blog",
+  "company": "Meta AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:38:06",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes or updates were found between the previous and current content.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://ai.meta.com/blog\ncompany: Meta AI\nscraped_at: 2025-07-04 20:15:53\n---\n\nAI at Meta Blog\n\n[](# \"Go up one level\")[![Meta](https://scontent-sjc3-1.xx.fbcdn.net/v/t39.8562-6/252294889_575082167077436_6034106545912333281_n.svg/meta-logo-primary_standardsize.svg?_nc_cat=1&ccb=1-7&_nc_sid=e280be&_nc_ohc=hUcF59i0K1MQ7kNvwHlgbaz&_nc_oc=Adk1bNTtICv0f9rKjIs7Vq2mgV-f4M92eYPtb283OZqDS8ce-haiiswPHcHSwWie1sk&_nc_zt=14&_nc_ht=scontent-sjc3-1.xx&_nc_gid=iZbbmozxKTxEzQLKFk4oNg&oh=00_AfMhfzJt-Og_E...",
+    "after": "function envFlush(a){function b(b){for(var c in a)b\\[c\\]=a\\[c\\]}window.requireLazy?window.requireLazy(\\[\"Env\"\\],b):(window.Env=window.Env||{},b(window.Env))}envFlush({\"useTrustedTypes\":true,\"isTrustedTypesReportOnly\":false,\"ajaxpipe\\_token\":\"AXjhNTEtecOqXrh5V0I\",\"stack\\_trace\\_limit\":30,\"timesliceBufferSize\":5000,\"show\\_invariant\\_decoder\":false,\"compat\\_iframe\\_token\":\"AUVdhm9dH5kfkia\\_U-VEZfHQHNk\",\"isCQuick\":false,\"brsid\":\"7528462103023568689\",\"promise\\_include\\_trace\":false});(function(a){fun..."
+  },
+  "diff": {
+    "added_sentences": [
+      "function envFlush(a){function b(b){for(var c in a)b\\[c\\]=a\\[c\\]}window.",
+      "requireLazy?",
+      "window.",
+      "requireLazy(\\[\"Env\"\\],b):(window.",
+      "Env=window.",
+      "Env||{},b(window.",
+      "Env))}envFlush({\"useTrustedTypes\":true,\"isTrustedTypesReportOnly\":false,\"ajaxpipe\\_token\":\"AXjhNTEtecOqXrh5V0I\",\"stack\\_trace\\_limit\":30,\"timesliceBufferSize\":5000,\"show\\_invariant\\_decoder\":false,\"compat\\_iframe\\_token\":\"AUVdhm9dH5kfkia\\_U-VEZfHQHNk\",\"isCQuick\":false,\"brsid\":\"7528462103023568689\",\"promise\\_include\\_trace\":false});(function(a){function b(a){var b;a=Object.",
+      "getOwnPropertyDescriptor(Document.",
+      "prototype,a);if(a===void 0||a.",
+      "configurable!"
+    ],
+    "removed_sentences": [
+      "---\nurl: https://ai.",
+      "com/blog\ncompany: Meta AI\nscraped_at: 2025-07-04 20:15:53\n---\n\nAI at Meta Blog\n\n[](# \"Go up one level\")[!",
+      "_nc_cat=1&ccb=1-7&_nc_sid=e280be&_nc_ohc=hUcF59i0K1MQ7kNvwHlgbaz&_nc_oc=Adk1bNTtICv0f9rKjIs7Vq2mgV-f4M92eYPtb283OZqDS8ce-haiiswPHcHSwWie1sk&_nc_zt=14&_nc_ht=scontent-sjc3-1.",
+      "xx&_nc_gid=iZbbmozxKTxEzQLKFk4oNg&oh=00_AfMhfzJt-Og_EqAR0BLwSh4FU4UMOBBFN042A2rSOxGoog&oe=686DF4B9)](/)\n\n*   [Our approach](#)\n\n*   [Research](#)\n\n*   [Meta AI](#)\n\n*   [Llama](https://www.",
+      "com/)\n\n*   [Blog](/blog/)\n\n\n*   [Try Meta AI](https://www.",
+      "utm_source=ai_meta_site&utm_medium=web&utm_content=AI_nav&utm_campaign=06112025_moment)\n*   [](# \"Toggle site search\")\n\n\n[](# \"Close submenu\")[](# \"Main menu\")\n\n[BACK](# \"Go up one level\")\n\n*   [About us](/about/)\n*   [People](/results/?",
+      "com/)\n\n*   [Explore Meta AI](/meta-ai/)\n*   [Get Meta AI](/get-meta-ai/)\n*   [AI Studio](/ai-studio/)\n\nClear\n\n*   Clear\n\n*   [\n\n    Our approach\n\n    \\>\n\n    ](#)\n\n*   [\n\n    Research\n\n    \\>\n\n    ](#)\n\n*   [\n\n    Meta AI\n\n    \\>\n\n    ](#)\n\n*   [Llama](https://www.",
+      "utm_source=ai_meta_site&utm_medium=web&utm_content=AI_nav&utm_campaign=06112025_moment)\n\nThe latest AI news from Meta\n\n[\n\nFEATURED\n\n!",
+      "_nc_cat=105&ccb=1-7&_nc_sid=e280be&_nc_ohc=5VNN-bByzz8Q7kNvwG9Ho7R&_nc_oc=AdkOgW85dUQFu5HVsv3_eYDlVdFta0zcFYCUR6CCsrutqlKBHS4EoPVvWBt6CygD71E&_nc_zt=14&_nc_ht=scontent-sjc3-1.",
+      "xx&_nc_gid=iZbbmozxKTxEzQLKFk4oNg&oh=00_AfMTdTqDBLARCnVsWEQsBxIW4-ayOIs8-iss_XBCIeC1zg&oe=688287C0)\n\n\n](https://ai."
+    ],
+    "key_changes": [
+      "New version: 2.0, 120.0.0, 10.15, 10.15.7, 16.67, 9.7, 1.0, 1752856676778.2, 0.1, 0.02, 0.001, 0.01, 1.0.0",
+      "Price change: $1, $2, $3",
+      "New date mentioned: June 18, 2025, June 04, 2025, June 17, 2025, June 11, 2025, May 01, 2025, April 29, 2025",
+      "New model mentioned",
+      "New api mentioned",
+      "New release mentioned",
+      "New update mentioned",
+      "New performance mentioned",
+      "New benchmark mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 65,
+    "summary": "65% content changed (946 additions, 79 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "elem",
+        "frequency": 348
+      },
+      {
+        "word": "null",
+        "frequency": 320
+      },
+      {
+        "word": "072b8e64",
+        "frequency": 180
+      },
+      {
+        "word": "type",
+        "frequency": 178
+      },
+      {
+        "word": "inst",
+        "frequency": 176
+      },
+      {
+        "word": "false",
+        "frequency": 158
+      },
+      {
+        "word": "php",
+        "frequency": 127
+      },
+      {
+        "word": "link",
+        "frequency": 117
+      },
+      {
+        "word": "click",
+        "frequency": 109
+      },
+      {
+        "word": "static",
+        "frequency": 105
+      },
+      {
+        "word": "src",
+        "frequency": 104
+      },
+      {
+        "word": "rsrc",
+        "frequency": 103
+      },
+      {
+        "word": "24928c59",
+        "frequency": 84
+      },
+      {
+        "word": "location",
+        "frequency": 77
+      },
+      {
+        "word": "hash",
+        "frequency": 74
+      },
+      {
+        "word": "value",
+        "frequency": 74
+      },
+      {
+        "word": "action",
+        "frequency": 73
+      },
+      {
+        "word": "result",
+        "frequency": 71
+      },
+      {
+        "word": "metaaianalytics",
+        "frequency": 71
+      },
+      {
+        "word": "logclickevent",
+        "frequency": 70
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "izbbmozxktxezqlkfk4ong",
+        "frequency": 32
+      },
+      {
+        "word": "xhpjcziufmoq7knvwgxmvuh",
+        "frequency": 6
+      },
+      {
+        "word": "adk5pspa1prm2vhsae8ujqmjnkrygymgouju4pb3byfktllzw4e6ksxfy77uncd",
+        "frequency": 6
+      },
+      {
+        "word": "22y",
+        "frequency": 6
+      },
+      {
+        "word": "afmojdhjvyaba7-qzc5dzhbxtksx6ieaj9bfpw3yc",
+        "frequency": 6
+      },
+      {
+        "word": "sb5a",
+        "frequency": 6
+      },
+      {
+        "word": "686e1d27",
+        "frequency": 6
+      },
+      {
+        "word": "mhkigsdpejkq7knvwfualfc",
+        "frequency": 6
+      },
+      {
+        "word": "adn34ok2dwn9q1lshnl9hhv1d4j--vd8pmfpulpxiabk6dvk5jzasnm7vawuxbnyugg",
+        "frequency": 6
+      },
+      {
+        "word": "afoaxd6bqpydc0csin",
+        "frequency": 6
+      },
+      {
+        "word": "qrjecdxpvrcfwi32cyvlb1jovug",
+        "frequency": 6
+      },
+      {
+        "word": "686e1562",
+        "frequency": 6
+      },
+      {
+        "word": "4ne0-b5sm14q7knvwguioax",
+        "frequency": 6
+      },
+      {
+        "word": "adlnx1vec1tebzcaxksvpdgdupum67m825czqspetfm",
+        "frequency": 6
+      },
+      {
+        "word": "pba1ghoqvrwocwzayuu2qym",
+        "frequency": 6
+      },
+      {
+        "word": "afmbidkcywa-xzhhuxrgabou49p7merkse6pmkdzzbsvpw",
+        "frequency": 6
+      },
+      {
+        "word": "686e08fb",
+        "frequency": 6
+      },
+      {
+        "word": "wl-lcmww",
+        "frequency": 6
+      },
+      {
+        "word": "g0q7knvwgiivqy",
+        "frequency": 6
+      },
+      {
+        "word": "admcyw-sgvykwfqqygy31f4ftqqtzrgjj35asstf-qghg5p13yfed",
+        "frequency": 6
+      }
+    ],
+    "frequency_changes": {
+      "https": {
+        "before": 82,
+        "after": 279,
+        "change": 197
+      },
+      "com": {
+        "before": 44,
+        "after": 198,
+        "change": 154
+      },
+      "blog": {
+        "before": 30,
+        "after": 167,
+        "change": 137
+      },
+      "net": {
+        "before": 36,
+        "after": 153,
+        "change": 117
+      },
+      "fbcdn": {
+        "before": 36,
+        "after": 147,
+        "change": 111
+      },
+      "meta": {
+        "before": 51,
+        "after": 159,
+        "change": 108
+      },
+      "page": {
+        "before": 2,
+        "after": 90,
+        "change": 88
+      },
+      "nav": {
+        "before": 2,
+        "after": 47,
+        "change": 45
+      },
+      "www": {
+        "before": 21,
+        "after": 62,
+        "change": 41
+      },
+      "menu": {
+        "before": 1,
+        "after": 39,
+        "change": 38
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "elem 072b8e64",
+        "count": 180
+      },
+      {
+        "phrase": "fbcdn net",
+        "count": 147
+      },
+      {
+        "phrase": "072b8e64 elem",
+        "count": 119
+      },
+      {
+        "phrase": "https static",
+        "count": 104
+      },
+      {
+        "phrase": "static fbcdn",
+        "count": 104
+      },
+      {
+        "phrase": "src https",
+        "count": 104
+      },
+      {
+        "phrase": "net rsrc",
+        "count": 103
+      },
+      {
+        "phrase": "rsrc php",
+        "count": 103
+      },
+      {
+        "phrase": "type src",
+        "count": 90
+      },
+      {
+        "phrase": "inst 24928c59",
+        "count": 84
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

@@ -1,0 +1,320 @@
+{
+  "change_id": 89,
+  "url": "https://huggingface.co/blog",
+  "company": "Hugging Face",
+  "company_category": "AI Infrastructure",
+  "detected_at": "2025-07-18 16:37:21",
+  "interest_level": 6,
+  "interest_category": "major_development",
+  "interest_explanation": "The Hugging Face blog has added new articles on various AI-related topics, including a primer on the Arc Virtual Cell Challenge and an article on SOTA 7B algorithms for Putnam Bench. These additions demonstrate ongoing research and development in AI, but do not represent breakthrough innovations or significant business impacts.",
+  "interest_drivers": [
+    "New article: Arc Virtual Cell Challenge: A Primer",
+    "New article: Bourbaki (7b): SOTA 7B Algorithms for Putnam Bench (Part I: Reasoning MDPs)"
+  ],
+  "technical_innovation_score": 6,
+  "business_impact_score": 5,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://huggingface.co/blog\ncompany: Hugging Face\nscraped_at: 2025-07-04 20:15:28\n---\n\n                 Hugging Face – Blog\n\n [![Hugging Face's logo](/front/assets/huggingface_logo-noborder.svg) Hugging Face](/)\n\n*   [Models](/models)\n*   [Datasets](/datasets)\n*   [Spaces](/spaces)\n*   Community\n\n*   [Docs](/docs)\n*   [Enterprise](/enterprise)\n*   [Pricing](/pricing)\n\n*   * * *\n\n*   [Log In](/login)\n*   [Sign Up](/join)\n\n# Blog, Articles, and discussions\n\nNew Article\n\n[Everything](/blog...",
+    "after": "               \n\nconst guestTheme = document.cookie.match(/theme=(\\\\w+)/)?.\\[1\\]; document.documentElement.classList.toggle('dark', guestTheme === 'dark' || ( (!guestTheme || guestTheme === 'system') && window.matchMedia('(prefers-color-scheme: dark)').matches));   Hugging Face – Blog window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || \\[\\]).push(arguments); }; window.hubConfig = {\"features\":{\"signupDisabled\":false},\"sshGitUrl\":\"git@hf.co\",\"moonHttpUr..."
+  },
+  "diff": {
+    "added_sentences": [
+      "const guestTheme = document.",
+      "cookie.",
+      "match(/theme=(\\\\w+)/)?.",
+      "\\[1\\]; document.",
+      "documentElement.",
+      "classList.",
+      "toggle('dark', guestTheme === 'dark' || ( (!",
+      "guestTheme || guestTheme === 'system') && window.",
+      "matchMedia('(prefers-color-scheme: dark)').",
+      "matches));   Hugging Face – Blog window."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://huggingface.",
+      "co/blog\ncompany: Hugging Face\nscraped_at: 2025-07-04 20:15:28\n---\n\n                 Hugging Face – Blog\n\n [!",
+      "svg) Hugging Face](/)\n\n*   [Models](/models)\n*   [Datasets](/datasets)\n*   [Spaces](/spaces)\n*   Community\n\n*   [Docs](/docs)\n*   [Enterprise](/enterprise)\n*   [Pricing](/pricing)\n\n*   * * *\n\n*   [Log In](/login)\n*   [Sign Up](/join)\n\n# Blog, Articles, and discussions\n\nNew Article\n\n[Everything](/blog) [community](/blog?",
+      "[](/blog/assets/train-sentence-transformers/st-hf-thumbnail.",
+      "png)\n\n## Training and Finetuning Sparse Embedding Models with Sentence Transformers v5\n\nBy [tomaarsen](/tomaarsen) July 1, 2025 • 72\n\n\n](/blog/train-sparse-encoder)\n\nCommunity Articles\n\n[view all](/blog/community)\n\n[\n\n#### Bringing Fusion Down to Earth: ML for Stellarator Optimization\n\nBy  [!",
+      "png) cgeorgiaw](/cgeorgiaw) •\n\n2 days ago\n\n• 55\n\n](/blog/cgeorgiaw/constellaration-fusion-challenge)\n\n[\n\n#### Welcome the NVIDIA Llama Nemotron Nano VLM to Hugging Face Hub\n\nBy  [!",
+      "co/v1/production/uploads/1613114437487-60262a8e0703121c822a80b6.",
+      "png) nvidia](/nvidia) and 10 others •\n\n7 days ago\n\n• 23\n\n](/blog/nvidia/llama-nemotron-nano-vl)\n\n[\n\n#### Teaching Data Literacy with Hugging Face's AI Sheets\n\nBy  [!",
+      "co/v1/production/uploads/60c8351eb935f5a38b2eaf65/S0oeerwpyYDehGQOodlOx.",
+      "jpeg) ParulPandey](/ParulPandey) •\n\n5 days ago\n\n• 23\n\n](/blog/ParulPandey/teaching-data-literacy-to-kids-with-hugging-faces)\n\n[\n\n#### Common Pitfalls in Sharing Open Source Models on Hugging Face (and How to Dodge Them)\n\nBy  [!"
+    ],
+    "key_changes": [
+      "Price change: $200",
+      "New date mentioned: July 17, 2025, July 16, 2025, July 15, 2025, July 14, 2025, July 9, 2025, July 8, 2025, July 7, 2025",
+      "New api mentioned",
+      "New update mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 106,
+    "summary": "106% content changed (151 additions, 115 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "xzwnlp",
+        "frequency": 12
+      },
+      {
+        "word": "window",
+        "frequency": 9
+      },
+      {
+        "word": "teravera",
+        "frequency": 8
+      },
+      {
+        "word": "maziyarpanahi",
+        "frequency": 6
+      },
+      {
+        "word": "fdaudens",
+        "frequency": 6
+      },
+      {
+        "word": "pollen-robotics",
+        "frequency": 6
+      },
+      {
+        "word": "ai-mo",
+        "frequency": 6
+      },
+      {
+        "word": "nerddisco",
+        "frequency": 6
+      },
+      {
+        "word": "hba123",
+        "frequency": 6
+      },
+      {
+        "word": "evijit",
+        "frequency": 6
+      },
+      {
+        "word": "procreations",
+        "frequency": 6
+      },
+      {
+        "word": "ngxson",
+        "frequency": 6
+      },
+      {
+        "word": "kbayoud",
+        "frequency": 6
+      },
+      {
+        "word": "dvgodoy",
+        "frequency": 6
+      },
+      {
+        "word": "easyedit",
+        "frequency": 6
+      },
+      {
+        "word": "script",
+        "frequency": 5
+      },
+      {
+        "word": "guesttheme",
+        "frequency": 4
+      },
+      {
+        "word": "plausible",
+        "frequency": 4
+      },
+      {
+        "word": "hand",
+        "frequency": 4
+      },
+      {
+        "word": "kimina-prover",
+        "frequency": 4
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "kseniase",
+        "frequency": 12
+      },
+      {
+        "word": "june",
+        "frequency": 11
+      },
+      {
+        "word": "nvidia",
+        "frequency": 9
+      },
+      {
+        "word": "parulpandey",
+        "frequency": 6
+      },
+      {
+        "word": "how",
+        "frequency": 6
+      },
+      {
+        "word": "friendliai",
+        "frequency": 6
+      },
+      {
+        "word": "codelion",
+        "frequency": 6
+      },
+      {
+        "word": "rishiraj",
+        "frequency": 6
+      },
+      {
+        "word": "linuxfoundation",
+        "frequency": 6
+      },
+      {
+        "word": "ifadaiml",
+        "frequency": 6
+      },
+      {
+        "word": "nicolas-bzrd",
+        "frequency": 6
+      },
+      {
+        "word": "jdelavande",
+        "frequency": 6
+      },
+      {
+        "word": "zamal",
+        "frequency": 6
+      },
+      {
+        "word": "mlabonne",
+        "frequency": 6
+      },
+      {
+        "word": "not-lain",
+        "frequency": 6
+      },
+      {
+        "word": "burtenshaw",
+        "frequency": 6
+      },
+      {
+        "word": "llama",
+        "frequency": 4
+      },
+      {
+        "word": "why",
+        "frequency": 4
+      },
+      {
+        "word": "openmdw",
+        "frequency": 4
+      },
+      {
+        "word": "license",
+        "frequency": 4
+      }
+    ],
+    "frequency_changes": {
+      "july": {
+        "before": 1,
+        "after": 15,
+        "change": 14
+      },
+      "svg": {
+        "before": 3,
+        "after": 9,
+        "change": 6
+      },
+      "manu": {
+        "before": 6,
+        "after": 12,
+        "change": 6
+      },
+      "avatars": {
+        "before": 2,
+        "after": 8,
+        "change": 6
+      },
+      "your": {
+        "before": 1,
+        "after": 6,
+        "change": 5
+      },
+      "document": {
+        "before": 2,
+        "after": 6,
+        "change": 4
+      },
+      "ago": {
+        "before": 28,
+        "after": 32,
+        "change": 4
+      },
+      "others": {
+        "before": 12,
+        "after": 16,
+        "change": 4
+      },
+      "reasoning": {
+        "before": 2,
+        "after": 6,
+        "change": 4
+      },
+      "com": {
+        "before": 1,
+        "after": 4,
+        "change": 3
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "ago blog",
+        "count": 32
+      },
+      {
+        "phrase": "huggingface production",
+        "count": 31
+      },
+      {
+        "phrase": "https cdn-avatars",
+        "count": 30
+      },
+      {
+        "phrase": "cdn-avatars huggingface",
+        "count": 30
+      },
+      {
+        "phrase": "production uploads",
+        "count": 30
+      },
+      {
+        "phrase": "days ago",
+        "count": 30
+      },
+      {
+        "phrase": "blog tag",
+        "count": 17
+      },
+      {
+        "phrase": "blog assets",
+        "count": 15
+      },
+      {
+        "phrase": "july 2025",
+        "count": 15
+      },
+      {
+        "phrase": "others days",
+        "count": 14
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

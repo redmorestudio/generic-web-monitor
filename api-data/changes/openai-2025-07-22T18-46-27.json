@@ -1,0 +1,22 @@
+{
+  "id": 226,
+  "company": "OpenAI",
+  "page_url": "pricing",
+  "detected_at": "2025-07-22T18:46:27.592Z",
+  "change_type": "modified",
+  "interest_level": 2,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
+  "content_hash_before": "2d466fcf0b92c9cc11b5fb80d6410c3161762ae887c22f11184b2e82a49af754",
+  "content_hash_after": "a268cb97c16ead5e6f61dfc1597e8487831e80a7ca4909f6cf610e5f08159ecb",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

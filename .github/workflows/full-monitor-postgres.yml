@@ -1,0 +1,154 @@
+name: Full Monitor Pipeline (PostgreSQL)
+
+on:
+  # Allow manual trigger only
+  workflow_dispatch:
+    inputs:
+      skip_scrape:
+        description: 'Skip scraping (use existing data)'
+        required: false
+        type: boolean
+        default: false
+      skip_process:
+        description: 'Skip processing (use existing processed data)'
+        required: false
+        type: boolean
+        default: false
+      analysis_mode:
+        description: 'Analysis mode'
+        required: false
+        type: choice
+        default: 'only-new'
+        options:
+          - all
+          - only-new
+          - force
+      skip_analyze:
+        description: 'Skip AI analysis (jump to sync/deploy)'
+        required: false
+        type: boolean
+        default: false
+      skip_thebrain:
+        description: 'Skip TheBrain sync'
+        required: false
+        type: boolean
+        default: false
+      use_enhanced:
+        description: 'Use enhanced entity extraction'
+        required: false
+        type: boolean
+        default: true
+  
+  # Optionally run on schedule (disabled by default)
+  # schedule:
+  #   - cron: '0 */4 * * *'  # Every 4 hours
+
+permissions:
+  contents: write
+  actions: write
+  pages: write
+  id-token: write
+  issues: write
+
+concurrency:
+  group: full-monitor-postgres
+  cancel-in-progress: false
+
+env:
+  NODE_ENV: production
+  USE_POSTGRES: 'true'
+
+jobs:
+  # Job 1: Scrape websites
+  scrape:
+    if: inputs.skip_scrape != true
+    uses: ./.github/workflows/scrape-postgres.yml
+    with:
+      cascade: false  # Prevent cascading
+    permissions:
+      contents: write
+      actions: write
+    secrets: inherit
+  
+  # Job 2: Process content
+  process:
+    needs: [scrape]
+    if: always() && (needs.scrape.result == 'success' || inputs.skip_scrape == true)
+    uses: ./.github/workflows/process-postgres.yml
+    permissions:
+      contents: write
+      actions: write
+    with:
+      cascade: false  # Prevent cascading
+    secrets: inherit
+  
+  # Job 3: Analyze content
+  analyze:
+    needs: [process]
+    if: always() && (needs.process.result == 'success' || inputs.skip_process) && inputs.skip_analyze != true
+    uses: ./.github/workflows/analyze-postgres-enhanced.yml
+    permissions:
+      contents: write
+      actions: write
+    with:
+      trigger_source: ${{ inputs.skip_process && 'manual' || 'process' }}
+      run_id: ${{ needs.process.outputs.run_id || github.run_id }}
+      analysis_mode: ${{ inputs.analysis_mode }}
+      use_enhanced: ${{ inputs.use_enhanced }}
+      cascade: false  # Prevent cascading
+    secrets: inherit
+  
+  # Job 4: Sync and deploy - NOW USING STANDALONE WORKFLOW
+  sync-and-deploy:
+    needs: [process, analyze]
+    if: |
+      always() && 
+      (needs.analyze.result == 'success' || 
+       (inputs.skip_analyze == true && (needs.process.result == 'success' || inputs.skip_process == true)))
+    uses: ./.github/workflows/sync-deploy-postgres.yml
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+      issues: write
+    with:
+      skip_thebrain: ${{ inputs.skip_thebrain }}
+      trigger_source: 'full-monitor-postgres'
+    secrets:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      THEBRAIN_API_KEY: ${{ secrets.THEBRAIN_API_KEY }}
+      THEBRAIN_BRAIN_ID: ${{ secrets.THEBRAIN_BRAIN_ID }}
+      THEBRAIN_CENTRAL_THOUGHT_ID: ${{ secrets.THEBRAIN_CENTRAL_THOUGHT_ID }}
+      POSTGRES_CONNECTION_STRING: ${{ secrets.POSTGRES_CONNECTION_STRING }}
+      SMTP_HOST: ${{ secrets.SMTP_HOST }}
+      SMTP_PORT: ${{ secrets.SMTP_PORT }}
+      SMTP_SECURE: ${{ secrets.SMTP_SECURE }}
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASS: ${{ secrets.SMTP_PASS }}
+      EMAIL_TO: ${{ secrets.EMAIL_TO }}
+      EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      NOTIFICATION_EMAIL: ${{ secrets.NOTIFICATION_EMAIL }}
+      EMAIL_THRESHOLD: ${{ secrets.EMAIL_THRESHOLD }}
+
+  # Final status notification
+  notify:
+    needs: [sync-and-deploy]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send completion notification
+        run: |
+          if [ "${{ needs.sync-and-deploy.result }}" = "success" ]; then
+            echo "✅ Full PostgreSQL monitor pipeline completed successfully!"
+            echo "- Scrape: ✓"
+            echo "- Process: ✓"  
+            echo "- Analyze: ✓"
+            echo "- Sync & Deploy: ✓"
+            echo "- Dashboard deployed with PostgreSQL data!"
+            echo "🌐 Dashboard URL: ${{ needs.sync-and-deploy.outputs.deployment_url }}"
+            echo "🔢 High Priority Changes: ${{ needs.sync-and-deploy.outputs.high_priority_count }}"
+          else
+            echo "❌ PostgreSQL pipeline failed or was cancelled"
+            echo "Check previous job logs for details"
+          fi

@@ -1,0 +1,87 @@
+{
+  "id": 56,
+  "company": "Resemble AI",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:24:19.045Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added for Resemble AI pricing page",
+    "specific_changes": [
+      "Introduction of flexible credit packages",
+      "Addition of various product features such as voice cloning, text to speech, speech to speech, and more",
+      "Inclusion of case studies and research sections",
+      "Mention of state-of-the-art detection models and security awareness training"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI voice generation market",
+      "Growing demand for AI-powered voice solutions"
+    ],
+    "business_impact": "The changes are likely to attract more customers and increase revenue for Resemble AI, while also enhancing its reputation as a leader in the AI voice generation market.",
+    "strategic_direction": "The company appears to be focusing on expanding its product offerings and improving its detection capabilities to stay ahead in the market.",
+    "competitive_implications": "Resemble AI's updated pricing and product offerings may put pressure on competitors to follow suit, leading to a more competitive market landscape."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "Flexible credit packages"
+    ],
+    "features": [
+      "Flexible credit packages",
+      "State-of-the-art detection models",
+      "Security awareness training"
+    ],
+    "products": [
+      "Voice Cloning",
+      "Text to Speech",
+      "Speech to Speech",
+      "Voice Design",
+      "Multilingual",
+      "Audio Editing",
+      "Chatterbox"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "Generative Voice AI",
+      "Deepfake detection",
+      "AI Watermarker"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the market",
+      "Regulatory challenges related to AI-powered voice solutions"
+    ],
+    "key_findings": [
+      "Resemble AI is expanding its product offerings to cater to a wider range of customers",
+      "The company is investing in state-of-the-art detection models to improve its security capabilities"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the AI voice generation market",
+      "Expansion into new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor Resemble AI's pricing and product updates to stay competitive",
+      "Explore partnership opportunities with the company"
+    ]
+  },
+  "key_insights": [
+    "Resemble AI is expanding its product offerings to cater to a wider range of customers",
+    "The company is investing in state-of-the-art detection models to improve its security capabilities"
+  ],
+  "business_impact": "The changes are likely to attract more customers and increase revenue for Resemble AI, while also enhancing its reputation as a leader in the AI voice generation market.",
+  "competitive_implications": "Resemble AI's updated pricing and product offerings may put pressure on competitors to follow suit, leading to a more competitive market landscape.",
+  "content_hash_before": null,
+  "content_hash_after": "a48c217ebf2d00cebedb4bdd9ded5f1a4610a29059918870c7edb064240d35c9",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

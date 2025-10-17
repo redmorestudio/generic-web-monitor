@@ -1,0 +1,85 @@
+{
+  "id": 33,
+  "company": "Tabnine",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:28:21.319Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "New pricing plans and features announced",
+    "specific_changes": [
+      "Introduction of Dev, Enterprise, and Dev Preview plans",
+      "New features such as AI-powered code completion, natural language code generation, and code explanations",
+      "Enhanced security and protection features for Enterprise plan"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Growing demand for AI-powered software development tools",
+      "Increasing importance of security and protection in software development"
+    ],
+    "business_impact": "The new pricing plans and features could attract more customers and increase revenue for Tabnine, while also enhancing its competitive position in the market",
+    "strategic_direction": "Tabnine is focusing on providing a comprehensive AI-powered software development platform with enhanced security and protection features",
+    "competitive_implications": "Tabnine's new pricing plans and features could put pressure on competitors to update their own offerings and pricing strategies"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "software development"
+    ],
+    "pricing": [
+      "Dev plan: $9 per month",
+      "Enterprise plan: $39 per user per month"
+    ],
+    "features": [
+      "AI-powered code completion",
+      "natural language code generation",
+      "code explanations",
+      "test generation",
+      "AI-generated documentation",
+      "Code Review Agent"
+    ],
+    "products": [
+      "Tabnine"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "LLMs"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Intense competition in the market for AI-powered software development tools",
+      "Potential customer resistance to new pricing plans"
+    ],
+    "key_findings": [
+      "Tabnine is expanding its product offerings to cater to a wider range of customers",
+      "The company is emphasizing the importance of security and protection in software development"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the software development industry",
+      "Expansion into new markets and customer segments"
+    ],
+    "recommended_actions": [
+      "Monitor Tabnine's pricing and product strategies",
+      "Assess the competitive implications of Tabnine's new offerings"
+    ]
+  },
+  "key_insights": [
+    "Tabnine is expanding its product offerings to cater to a wider range of customers",
+    "The company is emphasizing the importance of security and protection in software development"
+  ],
+  "business_impact": "The new pricing plans and features could attract more customers and increase revenue for Tabnine, while also enhancing its competitive position in the market",
+  "competitive_implications": "Tabnine's new pricing plans and features could put pressure on competitors to update their own offerings and pricing strategies",
+  "content_hash_before": null,
+  "content_hash_after": "3216ce902972f1643737ecd7a41ef18fe65ccbc2f2fe3b177ac251c8fe4c6a82",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Competitive Monitor - 3D Force Graph (Working)</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #eee;
+            overflow: hidden;
+        }
+        
+        #toggle-controls {
+            display: none;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            cursor: pointer;
+            z-index: 101;
+            color: #00ff88;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 768px) {
+            #toggle-controls {
+                display: block;
+            }
+            
+            #controls {
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            }
+            
+            #controls.open {
+                transform: translateX(0);
+            }
+        }
+        
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            max-width: 350px;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+        
+        #stats {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 10px 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            font-size: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        #controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            z-index: 100;
+            width: 280px;
+            backdrop-filter: blur(10px);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .control-group {
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #333;
+        }
+        
+        label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            color: #aaa;
+            font-size: 12px;
+        }
+        
+        h3 {
+            margin: 0 0 10px 0;
+            color: #00ff88;
+        }
+        
+        .green { color: #00ff88; }
+        .stat-item { margin: 5px 0; }
+        
+        #legend {
+            position: absolute;
+            top: 10px;
+            right: 310px;
+            background: rgba(20, 20, 30, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            backdrop-filter: blur(10px);
+            max-width: 200px;
+            font-size: 12px;
+        }
+        
+        #legend h4 {
+            margin: 0 0 10px 0;
+            color: #00ff88;
+            font-size: 14px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+        }
+        
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 1200px) {
+            #legend {
+                display: none;
+            }
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+</head>
+<body>
+    <div id="info">
+        <h3>🧠 AI Competitive Monitor</h3>
+        <div id="node-info">Left-click and drag to rotate • Scroll to zoom</div>
+    </div>
+    
+    <div id="stats">
+        <div class="stat-item">Monitoring: <span id="company-count" class="green">--</span> companies</div>
+        <div class="stat-item">URLs: <span id="url-count" class="green">--</span></div>
+        <div class="stat-item">Nodes: <span id="node-count" class="green">--</span></div>
+        <div class="stat-item">Links: <span id="link-count" class="green">--</span></div>
+    </div>
+    
+    <div id="legend">
+        <h4>Legend</h4>
+        <div id="legend-content"></div>
+    </div>
+    
+    <div id="controls">
+        <h4>Controls</h4>
+        <div class="control-group">
+            <label>
+                Show Links
+                <input type="checkbox" id="toggle-links" checked>
+            </label>
+            <label>
+                Show Labels
+                <input type="checkbox" id="toggle-labels" checked>
+            </label>
+            <label>
+                Show Particles
+                <input type="checkbox" id="toggle-particles" checked>
+            </label>
+        </div>
+        <div class="control-group">
+            <label>
+                Force Strength
+                <input type="range" id="force-strength" min="-1000" max="-50" value="-300" step="50">
+                <span id="force-value">-300</span>
+            </label>
+        </div>
+    </div>
+    
+    <button id="toggle-controls">☰ Controls</button>
+    <div id="3d-graph"></div>
+
+    <script>
+        console.log('Initializing AI Competitive Monitor 3D Force Graph (Working Version)...');
+        
+        let Graph;
+        let graphData = { nodes: [], links: [] };
+        let rawData = null;
+        let linksEnabled = true;
+        let labelsEnabled = true;
+        let particlesEnabled = true;
+        
+        // Configuration
+        const CONFIG = {
+            linkDistance: 30,
+            linkWidth: 0.5,
+            linkOpacity: 0.3,
+            forceStrength: -300,
+            nodeColors: {
+                'AI Coding': '#ffeb3b',
+                'AI Hardware': '#4caf50',
+                'AI Infrastructure': '#9c27b0',
+                'AI Search': '#2196f3',
+                'AI Voice/Audio': '#ff9800',
+                'Enterprise AI': '#f44336',
+                'Image Generation': '#e91e63',
+                'LLM Providers': '#ff5722',
+                'Video AI': '#3f51b5',
+                'AI Company': '#00ff88',
+                'AI Tool': '#ff6f00',
+                'AI Model Provider': '#ff00ff',
+                'AI Concept': '#00ffff',
+                'AI Assistant': '#ffff00',
+                'AI Platform': '#ff69b4',
+                'Company': '#6fbf6f',
+                'default': '#888888'
+            }
+        };
+        
+        // Create simple text label for nodes
+        function createNodeObject(node) {
+            const sprite = new SpriteText(node.name);
+            sprite.material.depthWrite = false;
+            sprite.color = node.color || CONFIG.nodeColors[node.group] || CONFIG.nodeColors.default;
+            sprite.textHeight = 8;
+            sprite.fontWeight = 400; // Make font less bold
+            sprite.backgroundColor = false; // No background
+            return sprite;
+        }
+        
+        // Load and process data
+        async function loadData() {
+            try {
+                console.log('Loading data...');
+                const response = await fetch('https://redmorestudio.github.io/ai-competitive-monitor/api-data/dashboard.json');
+                rawData = await response.json();
+                
+                if (!rawData.dashboard?.company_activity) {
+                    throw new Error('Invalid data structure');
+                }
+                
+                console.log('Data loaded successfully');
+                buildGraph();
+                
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('node-info').textContent = 'Error loading data: ' + error.message;
+            }
+        }
+        
+        function buildGraph() {
+            console.log('Building graph...');
+            
+            // Clear existing data
+            graphData.nodes = [];
+            graphData.links = [];
+            
+            // Create nodes
+            const nodeMap = new Map();
+            let totalUrls = 0;
+            
+            rawData.dashboard.company_activity.forEach(company => {
+                // Use entity_type if available, otherwise fall back to type
+                const nodeType = company.entity_type || company.type || 'Company';
+                const node = {
+                    id: company.company,
+                    name: company.company,
+                    group: nodeType,
+                    color: CONFIG.nodeColors[nodeType] || CONFIG.nodeColors.default,
+                    val: company.url_count || 1,
+                    interestLevel: company.intelligence?.interest_level || 0
+                };
+                graphData.nodes.push(node);
+                nodeMap.set(company.company, node);
+                totalUrls += company.url_count || 0;
+            });
+            
+            console.log(`Created ${graphData.nodes.length} nodes`);
+            
+            // Create links based on shared technologies
+            const techMap = new Map();
+            rawData.dashboard.company_activity.forEach(company => {
+                if (company.intelligence?.ai_technologies) {
+                    company.intelligence.ai_technologies.forEach(tech => {
+                        if (!techMap.has(tech)) {
+                            techMap.set(tech, []);
+                        }
+                        techMap.get(tech).push(company.company);
+                    });
+                }
+            });
+            
+            // Connect companies that share technologies
+            techMap.forEach((companies, tech) => {
+                if (companies.length > 1) {
+                    for (let i = 0; i < companies.length - 1; i++) {
+                        for (let j = i + 1; j < companies.length; j++) {
+                            graphData.links.push({
+                                source: companies[i],
+                                target: companies[j],
+                                label: tech
+                            });
+                        }
+                    }
+                }
+            });
+            
+            // Add AI concept nodes
+            const conceptMap = new Map();
+            rawData.dashboard.company_activity.forEach(company => {
+                if (company.intelligence?.ai_ml_concepts) {
+                    company.intelligence.ai_ml_concepts.forEach(concept => {
+                        if (!conceptMap.has(concept)) {
+                            conceptMap.set(concept, []);
+                        }
+                        conceptMap.get(concept).push(company.company);
+                    });
+                }
+            });
+            
+            // Create concept nodes for concepts shared by 3+ companies
+            conceptMap.forEach((companies, concept) => {
+                if (companies.length >= 3) {
+                    const conceptNode = {
+                        id: `concept-${concept}`,
+                        name: concept,
+                        group: 'AI Concept',
+                        color: CONFIG.nodeColors['AI Concept'],
+                        val: companies.length * 4
+                    };
+                    graphData.nodes.push(conceptNode);
+                    
+                    companies.forEach(company => {
+                        graphData.links.push({
+                            source: company,
+                            target: conceptNode.id,
+                            label: 'uses concept'
+                        });
+                    });
+                }
+            });
+            
+            console.log(`Created ${graphData.links.length} links`);
+            
+            // Update stats
+            document.getElementById('company-count').textContent = rawData.dashboard.company_activity.length;
+            document.getElementById('url-count').textContent = totalUrls;
+            document.getElementById('node-count').textContent = graphData.nodes.length;
+            document.getElementById('link-count').textContent = graphData.links.length;
+            
+            // Initialize the graph
+            initializeGraph();
+            
+            // Update legend
+            updateLegend();
+        }
+        
+        function updateLegend() {
+            const nodeTypes = new Map();
+            graphData.nodes.forEach(node => {
+                const type = node.group;
+                if (!nodeTypes.has(type)) {
+                    nodeTypes.set(type, {
+                        color: CONFIG.nodeColors[type] || CONFIG.nodeColors.default,
+                        count: 0
+                    });
+                }
+                nodeTypes.get(type).count++;
+            });
+            
+            const legendContent = document.getElementById('legend-content');
+            legendContent.innerHTML = '';
+            
+            // Sort by count and limit to types that exist
+            const sortedTypes = Array.from(nodeTypes.entries())
+                .filter(([type, data]) => data.count > 0)
+                .sort((a, b) => b[1].count - a[1].count)
+                .slice(0, 10); // Show top 10 types
+            
+            sortedTypes.forEach(([type, data]) => {
+                const item = document.createElement('div');
+                item.className = 'legend-item';
+                item.innerHTML = `
+                    <div class="legend-color" style="background-color: ${data.color}"></div>
+                    <span>${type} (${data.count})</span>
+                `;
+                legendContent.appendChild(item);
+            });
+        }
+        
+        function initializeGraph() {
+            console.log('Initializing 3D graph...');
+            
+            try {
+                // Create graph instance
+                Graph = ForceGraph3D()(document.getElementById('3d-graph'));
+                
+                // Set clean data
+                const cleanData = {
+                    nodes: graphData.nodes.map(n => ({...n})),
+                    links: graphData.links.map(l => ({...l}))
+                };
+                
+                Graph
+                    .graphData(cleanData)
+                    .nodeLabel('name')
+                    .nodeAutoColorBy('group')
+                    .nodeVal('val')
+                    .nodeThreeObject(node => {
+                        if (!labelsEnabled) return new THREE.Mesh();
+                        return createNodeObject(node);
+                    })
+                    .nodeThreeObjectExtend(false)
+                    .linkWidth(link => {
+                        // Vary width based on relationship strength
+                        const baseWidth = CONFIG.linkWidth;
+                        if (link.label && link.label.includes('concept')) {
+                            return baseWidth * 1.5;
+                        }
+                        return baseWidth;
+                    })
+                    .linkColor(() => '#666666')
+                    .linkOpacity(CONFIG.linkOpacity)
+                    .linkDirectionalParticles(2)
+                    .linkDirectionalParticleSpeed(0.006)
+                    .linkDirectionalParticleColor(() => '#00ff88')
+                    .onNodeHover(node => {
+                        document.getElementById('node-info').textContent = node ? 
+                            `${node.name} (${node.group})` : 
+                            'Left-click and drag to rotate • Scroll to zoom';
+                    })
+                    .onNodeClick(node => {
+                        // Center camera on node
+                        const distance = 300;
+                        const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+                        Graph.cameraPosition(
+                            { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
+                            node,
+                            3000
+                        );
+                    });
+                
+                // Set basic forces
+                Graph.d3Force('charge').strength(CONFIG.forceStrength);
+                Graph.d3Force('link').distance(CONFIG.linkDistance);
+                
+                // Set initial camera position
+                Graph.cameraPosition({ x: 0, y: 0, z: 500 });
+                
+                console.log('Graph initialized successfully!');
+                
+            } catch (error) {
+                console.error('Error initializing graph:', error);
+                console.error('Stack:', error.stack);
+                document.getElementById('node-info').textContent = 'Error: ' + error.message;
+            }
+        }
+        
+        // Event handlers
+        document.getElementById('toggle-links').addEventListener('change', (e) => {
+            linksEnabled = e.target.checked;
+            if (Graph) {
+                Graph.linkOpacity(linksEnabled ? CONFIG.linkOpacity : 0);
+            }
+        });
+        
+        document.getElementById('toggle-labels').addEventListener('change', (e) => {
+            labelsEnabled = e.target.checked;
+            if (Graph) {
+                Graph.nodeThreeObject(node => {
+                    if (!labelsEnabled) return new THREE.Mesh();
+                    return createNodeObject(node);
+                });
+            }
+        });
+        
+        document.getElementById('toggle-particles').addEventListener('change', (e) => {
+            particlesEnabled = e.target.checked;
+            if (Graph) {
+                Graph.linkDirectionalParticles(particlesEnabled ? 2 : 0);
+            }
+        });
+        
+        document.getElementById('force-strength').addEventListener('input', (e) => {
+            const value = parseInt(e.target.value);
+            document.getElementById('force-value').textContent = value;
+            CONFIG.forceStrength = value;
+            if (Graph) {
+                Graph.d3Force('charge').strength(value);
+                Graph.d3ReheatSimulation();
+            }
+        });
+        
+        // Toggle controls on mobile
+        document.getElementById('toggle-controls').addEventListener('click', () => {
+            document.getElementById('controls').classList.toggle('open');
+        });
+        
+        // Start loading
+        loadData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+name: Process Content
+
+on:
+  # Allow manual trigger
+  workflow_dispatch:
+    inputs:
+      trigger_source:
+        description: 'Source that triggered this workflow'
+        required: false
+        type: string
+        default: 'manual'
+      run_id:
+        description: 'Run ID from scraping workflow'
+        required: false
+        type: string
+      mode:
+        description: 'Processing mode'
+        required: false
+        type: choice
+        options:
+          - 'latest'
+          - 'all'
+          - 'run'
+        default: 'latest'
+      use_three_db:
+        description: 'Use three-database architecture'
+        required: false
+        type: boolean
+        default: true
+      cascade:
+        description: 'Trigger next workflow in chain'
+        required: false
+        type: boolean
+        default: true
+  
+  # Allow being called by other workflows
+  workflow_call:
+    inputs:
+      trigger_source:
+        description: 'Source that triggered this workflow'
+        required: false
+        type: string
+        default: 'manual'
+      run_id:
+        description: 'Run ID from scraping workflow'
+        required: false
+        type: string
+      cascade:
+        description: 'Trigger next workflow in chain'
+        required: false
+        type: boolean
+        default: false  # Different default for when called by full-monitor
+    outputs:
+      run_id:
+        description: 'The workflow run ID'
+        value: ${{ jobs.process-content.outputs.run_id }}
+
+# Prevent concurrent runs
+concurrency:
+  group: process-workflow
+  cancel-in-progress: false
+
+env:
+  NODE_ENV: production
+  USE_THREE_DB: ${{ inputs.use_three_db || 'true' }}
+
+jobs:
+  process-content:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    outputs:
+      run_id: ${{ github.run_id }}
+    
+    permissions:
+      contents: write
+      actions: read
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true  # Fetch Git LFS files including raw_content.db
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      # Download raw_content.db artifact from scrape workflow
+      - name: Download raw content database
+        if: ${{ inputs.trigger_source == 'scrape' && inputs.run_id }}
+        id: download-artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: scraper-databases-${{ inputs.run_id }}
+          path: github-actions-backend/data
+        continue-on-error: true
+      
+      # Ensure all database files exist
+      - name: Ensure latest database files
+        run: |
+          cd github-actions-backend
+          echo "✅ Checking database files..."
+          
+          # Check if artifact download was attempted but failed
+          if [ "${{ inputs.trigger_source }}" = "scrape" ] && [ -n "${{ inputs.run_id }}" ] && [ "${{ steps.download-artifact.outcome }}" = "failure" ]; then
+            echo "⚠️  Artifact download failed for run_id: ${{ inputs.run_id }}"
+            echo "📥 Attempting to use databases from repository..."
+          fi
+          
+          # List current database files
+          echo "📁 Current database files:"
+          ls -la data/*.db 2>/dev/null || echo "No database files found yet"
+          
+          # If raw_content.db doesn't exist, try to get it from the repository
+          if [ ! -f data/raw_content.db ]; then
+            echo "📥 Pulling latest from repository to get databases..."
+            git fetch origin main
+            git checkout origin/main -- github-actions-backend/data/raw_content.db 2>/dev/null || true
+            git checkout origin/main -- github-actions-backend/data/intelligence.db 2>/dev/null || true
+            git checkout origin/main -- github-actions-backend/data/processed_content.db 2>/dev/null || true
+          fi
+          
+          # Final check
+          if [ ! -f data/raw_content.db ]; then
+            echo "❌ ERROR: raw_content.db not found!"
+            echo "💡 This workflow needs either:"
+            echo "   1. To be triggered by the scrape workflow (automatic)"
+            echo "   2. To have raw_content.db already in the repository"
+            echo "   3. Run the scrape workflow first"
+            exit 1
+          else
+            echo "✅ Found raw_content.db"
+            ls -lh data/*.db
+          fi
+      
+      # NEW: Initialize three-database architecture if needed
+      - name: Initialize Three-Database Architecture
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        run: |
+          cd github-actions-backend
+          
+          echo "🔧 Ensuring three-database architecture exists..."
+          
+          # Run initialization script which creates databases if missing
+          node scripts/init-db-three.js
+      
+      - name: Convert HTML to Markdown (three-db)
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        run: |
+          cd github-actions-backend
+          
+          echo "📝 Converting HTML to Markdown..."
+          echo "🚨 Note: Enhanced converter will ensure all change detection content has markdown"
+          
+          # Determine mode
+          if [ "${{ inputs.mode }}" = "run" ] && [ -n "${{ inputs.run_id }}" ]; then
+            node markdown-converter-three-db.js run ${{ inputs.run_id }}
+          elif [ "${{ inputs.mode }}" = "all" ]; then
+            node markdown-converter-three-db.js all
+          else
+            # Default mode (latest) - the converter will automatically
+            # process change detection content first
+            node markdown-converter-three-db.js latest
+          fi
+      
+      - name: Convert HTML to Markdown (legacy)
+        if: ${{ env.USE_THREE_DB != 'true' }}
+        run: |
+          cd github-actions-backend
+          
+          echo "📝 Converting HTML to Markdown (legacy mode)..."
+          
+          if [ "${{ inputs.mode }}" = "all" ]; then
+            node markdown-converter.js all
+          else
+            node markdown-converter.js latest
+          fi
+      
+      - name: Extract structured data
+        run: |
+          cd github-actions-backend
+          
+          echo "🔍 Extracting structured data from content..."
+          
+          # TODO: Implement structured data extraction
+          # This will parse markdown and extract:
+          # - Pricing information
+          # - Product features
+          # - Company updates
+          # - Technical specifications
+      
+      - name: Upload processed databases (three-db)
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: processed-databases-${{ github.run_id }}
+          path: |
+            github-actions-backend/data/raw_content.db
+            github-actions-backend/data/processed_content.db
+            github-actions-backend/data/intelligence.db
+          retention-days: 7
+      
+      - name: Upload processed database (legacy)
+        if: ${{ env.USE_THREE_DB != 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: processed-database-${{ github.run_id }}
+          path: github-actions-backend/data/monitor.db
+          retention-days: 7
+      
+      - name: Create process summary
+        run: |
+          cd github-actions-backend
+          mkdir -p ../api-data
+          echo "{
+            \"workflow\": \"process\",
+            \"run_id\": \"${{ github.run_id }}\",
+            \"timestamp\": \"$(date -u +%Y-%m-%dT%H:%M:%S.%3NZ)\",
+            \"status\": \"completed\",
+            \"mode\": \"${{ inputs.mode }}\",
+            \"use_three_db\": ${{ env.USE_THREE_DB }}
+          }" > ../api-data/last-process.json
+      
+      - name: Checkpoint databases before commit
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        run: |
+          cd github-actions-backend
+          echo "🔄 Checkpointing SQLite databases to ensure WAL changes are persisted..."
+          node scripts/checkpoint-databases.js
+      
+      - name: Commit processed data (three-db)
+        if: ${{ env.USE_THREE_DB == 'true' }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Function to retry git push with exponential backoff
+          push_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            local wait_time=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔄 Attempt $attempt/$max_attempts to push changes..."
+              
+              # Try to push
+              if git push origin main; then
+                echo "✅ Successfully pushed changes!"
+                return 0
+              fi
+              
+              echo "❌ Push failed, pulling latest changes..."
+              
+              # Pull latest changes and try to merge
+              git pull origin main --no-rebase || {
+                echo "❌ Pull failed"
+                return 1
+              }
+              
+              if [ $attempt -lt $max_attempts ]; then
+                echo "⏳ Waiting ${wait_time}s before retry..."
+                sleep $wait_time
+                wait_time=$((wait_time * 2))
+                attempt=$((attempt + 1))
+              else
+                echo "❌ All push attempts failed"
+                return 1
+              fi
+            done
+          }
+          
+          # DON'T reset to origin/main - that deletes our changes!
+          # Just add the files we want to commit
+          
+          # Add the databases if they exist
+          if [ -f "github-actions-backend/data/processed_content.db" ]; then
+            git add -f github-actions-backend/data/processed_content.db
+            echo "✅ Added processed_content.db to commit"
+          else
+            echo "⚠️  processed_content.db not found, skipping"
+          fi
+          
+          git add api-data/last-process.json || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🔄 Update processed content (three-db) - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+            
+            # Push with retry logic
+            push_with_retry || {
+              echo "⚠️  Failed to push changes after multiple attempts"
+              echo "⚠️  Changes will be included in next workflow run"
+              exit 0
+            }
+          fi
+      
+      - name: Commit processed data (legacy)
+        if: ${{ env.USE_THREE_DB != 'true' }}
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Function to retry git push with exponential backoff
+          push_with_retry() {
+            local max_attempts=5
+            local attempt=1
+            local wait_time=1
+            
+            while [ $attempt -le $max_attempts ]; do
+              echo "🔄 Attempt $attempt/$max_attempts to push changes..."
+              
+              # Try to push
+              if git push origin main; then
+                echo "✅ Successfully pushed changes!"
+                return 0
+              fi
+              
+              echo "❌ Push failed, pulling latest changes..."
+              
+              # Pull latest changes and try to merge
+              git pull origin main --no-rebase || {
+                echo "❌ Pull failed"
+                return 1
+              }
+              
+              if [ $attempt -lt $max_attempts ]; then
+                echo "⏳ Waiting ${wait_time}s before retry..."
+                sleep $wait_time
+                wait_time=$((wait_time * 2))
+                attempt=$((attempt + 1))
+              else
+                echo "❌ All push attempts failed"
+                return 1
+              fi
+            done
+          }
+          
+          # DON'T reset to origin/main - that deletes our changes!
+          # Just add the files we want to commit
+          
+          # Add the database
+          git add -f github-actions-backend/data/monitor.db || true
+          git add api-data/last-process.json || true
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🔄 Update processed content - $(date -u +%Y-%m-%d\ %H:%M:%S\ UTC)"
+            
+            # Push with retry logic
+            push_with_retry || {
+              echo "⚠️  Failed to push changes after multiple attempts"
+              echo "⚠️  Changes will be included in next workflow run"
+              exit 0
+            }
+          fi
+      
+      - name: Trigger Analyze workflow
+        if: inputs.cascade == true
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.AI_COMPETITIVE_MONITOR_TOKEN }}
+          script: |
+            const result = await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'analyze.yml',
+              ref: 'main',
+              inputs: {
+                trigger_source: 'process-cascade',
+                run_id: '${{ github.run_id }}',
+                cascade: 'true'  // Pass cascade through
+              }
+            });
+            console.log(`✅ Triggered Analyze workflow`);
+      
+      # Cascade parameter system implemented
+      # Manual runs (cascade: true) trigger the next workflow
+      # Full-monitor runs (cascade: false) prevent duplicates

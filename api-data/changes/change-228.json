@@ -1,0 +1,22 @@
+{
+  "id": 228,
+  "company": "OpenAI",
+  "page_url": "homepage",
+  "detected_at": "2025-07-22T18:18:01.891Z",
+  "change_type": "modified",
+  "interest_level": 9,
+  "ai_confidence": 0.95,
+  "summary": "Change detected",
+  "category": "General Update",
+  "strategic_analysis": {},
+  "entities": {},
+  "insights": {},
+  "key_insights": [],
+  "business_impact": "",
+  "competitive_implications": "",
+  "content_hash_before": "6973dddd3ef9cb6a2932702f31777faad9c9bf3124d147a84f31aadb6d139546",
+  "content_hash_after": "c8c2eaf2d2d717422c3ec32d1a6d4a859792a60ea689363a94ea25dc12dd4b86",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

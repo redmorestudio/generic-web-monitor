@@ -1,0 +1,132 @@
+[
+  {
+    "id": 2,
+    "name": "Anthropic",
+    "category": "LLM Providers",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "claude code",
+        "claude",
+        "api",
+        "max plan",
+        "team plan"
+      ],
+      "ai_technologies": [
+        "python",
+        "amazon bedrock",
+        "google cloud's vertex ai",
+        "api",
+        "sdks"
+      ]
+    }
+  },
+  {
+    "id": 11,
+    "name": "GitHub Copilot",
+    "category": "AI Coding",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "github copilot",
+        "github advanced security",
+        "github models",
+        "github codespaces",
+        "github actions"
+      ],
+      "ai_technologies": [
+        "python",
+        "windows terminal",
+        "github actions",
+        "github codespaces",
+        "github packages"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "name": "Google DeepMind",
+    "category": "LLM Providers",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "google ai studio",
+        "gemini app",
+        "vertex ai",
+        "google workspace",
+        "google photos"
+      ],
+      "ai_technologies": [
+        "python",
+        "google cloud",
+        "tensorflow",
+        "pytorch",
+        "android"
+      ]
+    }
+  },
+  {
+    "id": 34,
+    "name": "Midjourney",
+    "category": "Image Generation",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "basic plan",
+        "standard plan",
+        "pro plan",
+        "mega plan",
+        "midjourney magazine subscription"
+      ],
+      "ai_technologies": [
+        "discord",
+        "web",
+        "python"
+      ]
+    }
+  },
+  {
+    "id": 1,
+    "name": "OpenAI",
+    "category": "LLM Providers",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "chatgpt",
+        "sora",
+        "api platform",
+        "chatgpt plus",
+        "chatgpt pro"
+      ],
+      "ai_technologies": [
+        "python",
+        "web",
+        "ios",
+        "android",
+        "macos"
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "name": "Perplexity AI",
+    "category": "AI Search",
+    "industry": null,
+    "intelligence": {
+      "top_products": [
+        "perplexity pro",
+        "perplexity max",
+        "perplexity labs",
+        "perplexity research",
+        "perplexity ai"
+      ],
+      "ai_technologies": [
+        "unlimited file uploads",
+        "unlimited photo uploads",
+        "image generation",
+        "cloudflare",
+        "favicon"
+      ]
+    }
+  }
+]

@@ -1,0 +1,79 @@
+{
+  "id": 35,
+  "company": "Synthesia",
+  "page_url": "features",
+  "detected_at": "2025-07-21T15:28:02.992Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "New features and updates were added to the Synthesia platform, including Personal Avatars, Interactivity, and AI Dubbing.",
+    "specific_changes": [
+      "Introduction of Personal Avatars",
+      "Addition of Interactivity feature",
+      "Introduction of AI Dubbing",
+      "Update to the platform's features and templates"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI video platform market",
+      "Growing demand for personalized and interactive video content"
+    ],
+    "business_impact": "The updates can potentially increase customer engagement, retention, and acquisition, leading to revenue growth.",
+    "strategic_direction": "The company is focusing on enhancing its platform with new features and technologies to provide more value to customers.",
+    "competitive_implications": "Synthesia's updates can help the company maintain its competitive edge in the market and attract more customers."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [
+      "Personal Avatars",
+      "Interactivity",
+      "AI Dubbing",
+      "AI Screen Recorder",
+      "Multilingual Player"
+    ],
+    "products": [
+      "Synthesia"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition from other AI video platforms",
+      "Regulatory challenges related to AI technology"
+    ],
+    "key_findings": [
+      "Synthesia is investing in AI technology to enhance its platform",
+      "The company is focusing on providing more personalized and interactive video content"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the AI and video content space",
+      "Expansion into new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor Synthesia's progress and updates",
+      "Analyze the company's competitive positioning and market share"
+    ]
+  },
+  "key_insights": [
+    "Synthesia is investing in AI technology to enhance its platform",
+    "The company is focusing on providing more personalized and interactive video content"
+  ],
+  "business_impact": "The updates can potentially increase customer engagement, retention, and acquisition, leading to revenue growth.",
+  "competitive_implications": "Synthesia's updates can help the company maintain its competitive edge in the market and attract more customers.",
+  "content_hash_before": null,
+  "content_hash_after": "e7600e6697ca2bae111bd6a59c085d178407f28b2243a89b7f5fca656ee5752b",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

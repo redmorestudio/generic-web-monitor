@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Competitive Monitor - 3D Force Graph</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0f;
+            color: #eee;
+            overflow: hidden;
+        }
+        
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(20, 20, 30, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            max-width: 300px;
+            z-index: 100;
+        }
+        
+        #info h3 {
+            margin: 0 0 10px 0;
+            color: #00ff88;
+        }
+        
+        #controls {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(20, 20, 30, 0.9);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            z-index: 100;
+        }
+        
+        .control-group {
+            margin-bottom: 10px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #aaa;
+            font-size: 12px;
+        }
+        
+        select, button {
+            width: 100%;
+            padding: 5px;
+            background: #1a1a2e;
+            color: #eee;
+            border: 1px solid #333;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        button:hover {
+            background: #2a2a3e;
+            border-color: #00ff88;
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 20px;
+            color: #00ff88;
+        }
+        
+        .node-label {
+            color: #fff !important;
+            font-size: 12px !important;
+            text-shadow: 0 0 3px #000;
+        }
+        
+        #stats {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(20, 20, 30, 0.9);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            font-size: 12px;
+            z-index: 100;
+        }
+    </style>
+    <!-- Fixed CDN links with HTTPS and specific versions -->
+    <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+</head>
+<body>
+    <div id="loading">Loading AI Competitive Intelligence Graph...</div>
+    <div id="info" style="display: none;">
+        <h3>AI Competitive Monitor</h3>
+        <div id="node-info">Hover over nodes for details</div>
+    </div>
+    
+    <div id="controls" style="display: none;">
+        <div class="control-group">
+            <label>View Mode:</label>
+            <select id="viewMode">
+                <option value="companies">Company Network</option>
+                <option value="technologies">Technology Landscape</option>
+                <option value="concepts">AI/ML Concepts</option>
+                <option value="interest">Interest Analysis</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label>Filter by Type:</label>
+            <select id="filterType">
+                <option value="all">All Companies</option>
+                <option value="LLM Providers">LLM Providers</option>
+                <option value="AI Hardware">AI Hardware</option>
+                <option value="AI Frameworks">AI Frameworks</option>
+                <option value="Cloud Providers">Cloud Providers</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <button id="toggleParticles">Toggle Particles</button>
+        </div>
+        <div class="control-group">
+            <button id="resetView">Reset View</button>
+        </div>
+    </div>
+    
+    <div id="stats" style="display: none;">
+        <div id="statsContent"></div>
+    </div>
+    
+    <div id="3d-graph"></div>
+
+    <script>
+    // Configuration
+    const CONFIG = {
+        nodeColors: {
+            'LLM Providers': '#ff6b6b',
+            'AI Hardware': '#4ecdc4',
+            'AI Frameworks': '#45b7d1',
+            'Cloud Providers': '#96ceb4',
+            'AI Applications': '#f7b731',
+            'AI Research': '#5f27cd',
+            'default': '#667eea'
+        },
+        interestColors: {
+            'high': '#ff4444',
+            'medium': '#ffa726',
+            'low': '#66bb6a',
+            'unknown': '#666666'
+        },
+        particleSpeed: 0.003,
+        linkOpacity: 0.3,
+        linkWidth: 0.5
+    };
+
+    let Graph;
+    let graphData = { nodes: [], links: [] };
+    let rawData = {};
+    let particlesEnabled = true;
+    let currentView = 'companies';
+
+    // Initialize the graph
+    async function initGraph() {
+        try {
+            // Fetch data
+            const dashboardResponse = await fetch('./api-data/dashboard.json');
+            const companiesResponse = await fetch('./api-data/companies.json');
+            const changesResponse = await fetch('./api-data/changes.json');
+            
+            rawData = {
+                dashboard: await dashboardResponse.json(),
+                companies: await companiesResponse.json(),
+                changes: await changesResponse.json()
+            };
+            
+            // Build initial graph data
+            buildCompanyNetwork();
+            
+            // Hide loading, show controls
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('info').style.display = 'block';
+            document.getElementById('controls').style.display = 'block';
+            document.getElementById('stats').style.display = 'block';
+            
+            // Create the graph
+            Graph = ForceGraph3D()
+                (document.getElementById('3d-graph'))
+                .graphData(graphData)
+                .nodeLabel('label')
+                .nodeAutoColorBy('group')
+                .nodeThreeObject(node => {
+                    const sprite = new SpriteText(node.name);
+                    sprite.material.depthWrite = false;
+                    sprite.color = node.color || '#ffffff';
+                    sprite.textHeight = 6;
+                    return sprite;
+                })
+                .linkWidth(link => link.width || CONFIG.linkWidth)
+                .linkOpacity(CONFIG.linkOpacity)
+                .linkDirectionalParticles(link => particlesEnabled ? link.particles || 2 : 0)
+                .linkDirectionalParticleSpeed(CONFIG.particleSpeed)
+                .linkDirectionalParticleWidth(2)
+                .linkDirectionalParticleColor(link => link.color || '#ffffff')
+                .onNodeHover(node => {
+                    document.getElementById('node-info').innerHTML = node ? 
+                        `<strong>${node.name}</strong><br/>
+                         Type: ${node.group}<br/>
+                         ${node.description || ''}` : 
+                        'Hover over nodes for details';
+                })
+                .onNodeClick(node => {
+                    // Focus on node
+                    const distance = 200;
+                    const distRatio = 1 + distance/Math.hypot(node.x, node.y, node.z);
+                    
+                    Graph.cameraPosition(
+                        { x: node.x * distRatio, y: node.y * distRatio, z: node.z * distRatio },
+                        node,
+                        3000
+                    );
+                });
+            
+            // Set initial camera position
+            Graph.cameraPosition({ z: 500 });
+            
+            updateStats();
+            
+        } catch (error) {
+            console.error('Error loading data:', error);
+            document.getElementById('loading').innerHTML = 'Error loading data. Please ensure the API data is available.';
+        }
+    }
+
+    // Build company network view with enhanced intelligence tooltips
+    function buildCompanyNetwork() {
+        graphData.nodes = [];
+        graphData.links = [];
+        const nodeMap = new Map();
+        
+        // Create company nodes with rich intelligence data
+        rawData.dashboard.company_activity.forEach(company => {
+            // Extract intelligence data safely
+            const intelligence = company.intelligence || {};
+            const products = (intelligence.products || []).slice(0, 3).join(', ') || 'No products listed';
+            const technologies = (intelligence.technologies || []).slice(0, 3).join(', ') || 'No technologies listed';
+            const aiConcepts = (intelligence.ai_ml_concepts || []).slice(0, 2).join(', ') || 'No AI concepts listed';
+            const partners = (intelligence.partners || []).filter(p => p !== 'Unknown').slice(0, 2).join(', ') || 'No partners listed';
+            const interestLevel = intelligence.interest_level || 0;
+            const interestCategory = intelligence.interest_category || 'unknown';
+            
+            // Create rich tooltip with intelligence data
+            const tooltip = `<div style="font-size: 14px; line-height: 1.4; max-width: 300px;">
+                <strong style="color: #00ff88; font-size: 16px;">${company.company}</strong><br/>
+                <span style="color: #87CEEB;">📈 Interest Level: ${interestLevel}/10 (${interestCategory})</span><br/>
+                <span style="color: #ffd93d;">🔸 Type: ${company.type}</span><br/>
+                <span style="color: #aaa;">🔗 URLs Monitored: ${company.url_count}</span><br/><br/>
+                
+                <strong style="color: #ff6b6b;">🎯 Key Products:</strong><br/>
+                <span style="color: #ddd; font-size: 12px;">${products}</span><br/><br/>
+                
+                <strong style="color: #4ecdc4;">⚙️ Technologies:</strong><br/>
+                <span style="color: #ddd; font-size: 12px;">${technologies}</span><br/><br/>
+                
+                <strong style="color: #45b7d1;">🤖 AI/ML Focus:</strong><br/>
+                <span style="color: #ddd; font-size: 12px;">${aiConcepts}</span><br/><br/>
+                
+                ${partners !== 'No partners listed' ? `<strong style="color: #96ceb4;">🤝 Key Partners:</strong><br/><span style="color: #ddd; font-size: 12px;">${partners}</span>` : ''}
+            </div>`;
+            
+            const node = {
+                id: company.company,
+                name: company.company,
+                group: company.type,
+                color: CONFIG.nodeColors[company.type] || CONFIG.nodeColors.default,
+                label: tooltip,
+                description: `Interest: ${interestLevel}/10 | URLs: ${company.url_count}`,
+                val: Math.max(10, company.url_count * 3 + interestLevel * 2), // Node size based on URL count + interest
+                interestLevel: interestLevel,
+                interestCategory: interestCategory,
+                intelligence: intelligence
+            };
+            
+            graphData.nodes.push(node);
+            nodeMap.set(company.company, node);
+        });
+        
+        // Create technology/product connections
+        const techConnections = new Map();
+        
+        rawData.dashboard.company_activity.forEach(company => {
+            // Connect companies that share technologies
+            if (company.intelligence && company.intelligence.technologies) {
+                company.intelligence.technologies.forEach(tech => {
+                    if (!techConnections.has(tech)) {
+                        techConnections.set(tech, []);
+                    }
+                    techConnections.get(tech).push(company.company);
+                });
+            }
+        });
+        
+        // Create links between companies sharing technologies
+        techConnections.forEach((companies, tech) => {
+            if (companies.length > 1) {
+                for (let i = 0; i < companies.length; i++) {
+                    for (let j = i + 1; j < companies.length; j++) {
+                        const sourceNode = nodeMap.get(companies[i]);
+                        const targetNode = nodeMap.get(companies[j]);
+                        
+                        if (sourceNode && targetNode) {
+                            graphData.links.push({
+                                source: companies[i],
+                                target: companies[j],
+                                value: 1,
+                                color: '#667eea',
+                                width: 1,
+                                particles: 1,
+                                label: `Shared technology: ${tech}`
+                            });
+                        }
+                    }
+                }
+            }
+        });
+
+        // Update graph
+        if (Graph) {
+            Graph.graphData(graphData);
+        }
+    }
+
+    // Build interest analysis view
+    function buildInterestView() {
+        graphData.nodes = [];
+        graphData.links = [];
+        
+        // Create company nodes colored by interest level
+        rawData.dashboard.company_activity.forEach(company => {
+            const intelligence = company.intelligence || {};
+            const interestLevel = intelligence.interest_level || 0;
+            
+            // Color based on interest level
+            let color = '#666666'; // default
+            if (interestLevel >= 8) color = '#ff4444'; // high interest - red
+            else if (interestLevel >= 6) color = '#ffa726'; // medium-high - orange  
+            else if (interestLevel >= 4) color = '#ffd93d'; // medium - yellow
+            else if (interestLevel >= 2) color = '#66bb6a'; // low-medium - green
+            else color = '#87CEEB'; // very low - blue
+            
+            const node = {
+                id: company.company,
+                name: company.company,
+                group: `Interest ${interestLevel}`,
+                color: color,
+                label: `<strong style="color: ${color};">${company.company}</strong><br/>
+                        Interest Level: ${interestLevel}/10<br/>
+                        Category: ${intelligence.interest_category || 'unknown'}<br/>
+                        Type: ${company.type}`,
+                val: Math.max(8, interestLevel * 4), // Size based on interest level
+                interestLevel: interestLevel
+            };
+            
+            graphData.nodes.push(node);
+        });
+
+        if (Graph) {
+            Graph.graphData(graphData);
+        }
+    }
+
+    // Update statistics display
+    function updateStats() {
+        const stats = {
+            companies: rawData.dashboard.stats.companies,
+            urls: rawData.dashboard.stats.urls,
+            snapshots: rawData.dashboard.stats.snapshots,
+            nodes: graphData.nodes.length,
+            links: graphData.links.length
+        };
+        
+        document.getElementById('statsContent').innerHTML = `
+            <strong>Monitoring Stats:</strong><br/>
+            Companies: ${stats.companies}<br/>
+            URLs: ${stats.urls}<br/>
+            Snapshots: ${stats.snapshots}<br/>
+            Nodes: ${stats.nodes}<br/>
+            Links: ${stats.links}
+        `;
+    }
+
+    // Event listeners
+    document.addEventListener('DOMContentLoaded', function() {
+        initGraph();
+        
+        // View mode selector
+        document.getElementById('viewMode').addEventListener('change', function(e) {
+            currentView = e.target.value;
+            switch(currentView) {
+                case 'companies':
+                    buildCompanyNetwork();
+                    break;
+                case 'interest':
+                    buildInterestView();
+                    break;
+                default:
+                    buildCompanyNetwork();
+            }
+            updateStats();
+        });
+
+        // Filter selector
+        document.getElementById('filterType').addEventListener('change', function(e) {
+            const filterType = e.target.value;
+            if (filterType === 'all') {
+                buildCompanyNetwork();
+            } else {
+                // Filter nodes by company type
+                const filteredNodes = graphData.nodes.filter(node => 
+                    node.group === filterType || node.type === 'technology'
+                );
+                const nodeIds = new Set(filteredNodes.map(n => n.id));
+                const filteredLinks = graphData.links.filter(link =>
+                    nodeIds.has(link.source.id || link.source) && 
+                    nodeIds.has(link.target.id || link.target)
+                );
+                
+                Graph.graphData({ nodes: filteredNodes, links: filteredLinks });
+            }
+            updateStats();
+        });
+
+        // Toggle particles
+        document.getElementById('toggleParticles').addEventListener('click', function() {
+            particlesEnabled = !particlesEnabled;
+            Graph.linkDirectionalParticles(link => particlesEnabled ? link.particles || 2 : 0);
+        });
+
+        // Reset view
+        document.getElementById('resetView').addEventListener('click', function() {
+            Graph.cameraPosition({ z: 500 }, null, 2000);
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,88 @@
+{
+  "id": 57,
+  "company": "Replit",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:24:08.595Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New blog content and features announced",
+    "specific_changes": [
+      "Introduction of Replit Agent",
+      "Domain Purchasing on Replit",
+      "Web Search for Replit Agent",
+      "Effort-Based Pricing",
+      "Dynamic Intelligence for Replit Agent",
+      "Replit Import",
+      "Element Editor",
+      "Replit Auth",
+      "Secure Vibe Coding features"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on AI and automation",
+      "Growing importance of security in app development"
+    ],
+    "business_impact": "Enhanced competitiveness through new features and technologies",
+    "strategic_direction": "Expansion of features and technologies to enhance user experience and competitiveness",
+    "competitive_implications": "Replit is positioning itself as a leader in the app development and automation space"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "Effort-Based Pricing"
+    ],
+    "features": [
+      "Domain Purchasing",
+      "Web Search",
+      "Effort-Based Pricing",
+      "Dynamic Intelligence",
+      "Replit Import",
+      "Element Editor",
+      "Replit Auth"
+    ],
+    "products": [
+      "Replit Agent"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI",
+      "MCP (Model Context Protocol)"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition from Replit in the app development and automation space"
+    ],
+    "key_findings": [
+      "Replit is investing heavily in AI and automation",
+      "Security is a major focus area for Replit"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Replit",
+      "Integration with Replit's features and technologies"
+    ],
+    "recommended_actions": [
+      "Monitor Replit's feature and technology announcements",
+      "Consider partnership or integration opportunities with Replit"
+    ]
+  },
+  "key_insights": [
+    "Replit is investing heavily in AI and automation",
+    "Security is a major focus area for Replit"
+  ],
+  "business_impact": "Enhanced competitiveness through new features and technologies",
+  "competitive_implications": "Replit is positioning itself as a leader in the app development and automation space",
+  "content_hash_before": null,
+  "content_hash_after": "87fe480b9a4a1b945a9ab13bc3246804de7dd376bc2a91407ab8a2e5813b1c7c",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

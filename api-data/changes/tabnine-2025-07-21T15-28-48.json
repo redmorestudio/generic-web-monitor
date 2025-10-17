@@ -1,0 +1,85 @@
+{
+  "id": 30,
+  "company": "Tabnine",
+  "page_url": "blog",
+  "detected_at": "2025-07-21T15:28:48.769Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "New blog content and updates to existing pages",
+    "specific_changes": [
+      "Introduction of new blog posts",
+      "Updates to the 'Resources' section",
+      "Addition of new 'Guides and Reports' and 'Videos' sections",
+      "Introduction of a newsletter subscription option"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increasing focus on AI and machine learning in software development",
+      "Growing demand for secure and private AI solutions"
+    ],
+    "business_impact": "The changes suggest a strategic move by Tabnine to establish itself as a thought leader in the AI and software development space, with a focus on security and context-aware AI",
+    "strategic_direction": "The changes suggest a strategic direction for Tabnine towards establishing itself as a leader in the AI and software development space, with a focus on security, context-aware AI, and thought leadership",
+    "competitive_implications": "The changes may indicate a competitive advantage for Tabnine in the AI and software development space, particularly in terms of security and context-aware AI"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Software development",
+      "AI and machine learning"
+    ],
+    "pricing": [],
+    "features": [
+      "Air-gapped AI software development platform",
+      "Context-aware AI",
+      "Code privacy and security"
+    ],
+    "products": [
+      "Tabnine AI code assistant",
+      "Tabnine Code Review Agent"
+    ],
+    "partnerships": [
+      "Perforce Helix Core",
+      "NVIDIA"
+    ],
+    "technologies": [
+      "AI",
+      "Machine learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Competition from other AI and software development companies",
+      "Regulatory challenges and compliance issues"
+    ],
+    "key_findings": [
+      "Tabnine is focusing on security and context-aware AI in its product offerings",
+      "The company is establishing itself as a thought leader in the AI and software development space"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the AI and software development space",
+      "Expansion into new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor Tabnine's progress and updates in the AI and software development space",
+      "Consider partnership opportunities with Tabnine or other companies in the space"
+    ]
+  },
+  "key_insights": [
+    "Tabnine is focusing on security and context-aware AI in its product offerings",
+    "The company is establishing itself as a thought leader in the AI and software development space"
+  ],
+  "business_impact": "The changes suggest a strategic move by Tabnine to establish itself as a thought leader in the AI and software development space, with a focus on security and context-aware AI",
+  "competitive_implications": "The changes may indicate a competitive advantage for Tabnine in the AI and software development space, particularly in terms of security and context-aware AI",
+  "content_hash_before": null,
+  "content_hash_after": "3ffc60ab76f1343641cae55b7d03311fa2f48ab7210a56c52119b3c4b12426d5",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

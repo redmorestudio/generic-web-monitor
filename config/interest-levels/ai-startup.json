@@ -1,0 +1,73 @@
+{
+  "name": "AI Startup Interest Configuration",
+  "description": "Interest levels optimized for AI/ML startups monitoring competitors",
+  "extends": "default",
+  "version": "1.0.0",
+  "levels": {
+    "critical": {
+      "range": [8, 10],
+      "label": "Critical - Game Changer",
+      "color": "#e74c3c",
+      "criteria": [
+        "Achieves SOTA on benchmarks we target",
+        "Exclusive partnership with OpenAI/Anthropic/Google",
+        "Gets exclusive access to compute or datasets", 
+        "Hires away our key researchers",
+        "Claims breakthrough in our problem domain",
+        "Launches direct competitor to our product",
+        "Open sources model that makes ours obsolete",
+        "Secures deal with our target enterprise customer",
+        "Gets acquired by major tech company",
+        "Achieves viral adoption (1M+ users in a month)"
+      ]
+    },
+    "high": {
+      "range": [6, 7],
+      "label": "High - Strategic Move",
+      "color": "#3498db",
+      "criteria": [
+        "Releases new model with better benchmarks",
+        "Announces compute partnership or GPU access",
+        "Launches developer API or SDK",
+        "Publishes influential research paper",
+        "Gets into YC/major accelerator",
+        "Hires prominent AI researcher",
+        "Launches on Product Hunt with #1",
+        "Announces enterprise features",
+        "Partners with cloud provider",
+        "Releases training dataset"
+      ]
+    }
+  },
+  "scoring_factors": {
+    "technical_innovation": {
+      "weight": 0.40,
+      "description": "AI/ML technical breakthroughs and benchmarks"
+    },
+    "competitive_impact": {
+      "weight": 0.30,
+      "description": "Direct competition with our offerings"
+    },
+    "ecosystem_influence": {
+      "weight": 0.20,
+      "description": "Impact on AI/ML ecosystem and community"
+    },
+    "resource_advantage": {
+      "weight": 0.10,
+      "description": "Access to compute, data, or talent"
+    }
+  },
+  "keywords": {
+    "boost_score": [
+      "SOTA", "state-of-the-art", "benchmark", "leaderboard",
+      "open source", "model release", "API", "SDK", "dataset",
+      "compute", "GPU", "TPU", "training", "inference",
+      "transformer", "diffusion", "multimodal", "AGI"
+    ],
+    "domain_specific": [
+      "LLM", "fine-tuning", "RLHF", "prompt engineering",
+      "embeddings", "vector database", "RAG", "agents",
+      "chain-of-thought", "constitutional AI", "alignment"
+    ]
+  }
+}

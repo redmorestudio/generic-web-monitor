@@ -1,0 +1,325 @@
+{
+  "change_id": 99,
+  "url": "https://intel.com/content/www/us/en/newsroom",
+  "company": "Intel",
+  "company_category": "AI Hardware",
+  "detected_at": "2025-07-18 16:37:47",
+  "interest_level": 7,
+  "interest_category": "major_development",
+  "interest_explanation": "Intel introduced a new method for AI acceleration using speculative decoding, achieving up to 2.8 times faster LLM inference. Additionally, the company highlighted its progress in exascale computing with the Aurora Supercomputer and released an AI PC Global Report, emphasizing the importance of Intel-powered AI PCs in unlocking business potential.",
+  "interest_drivers": [
+    "AI PC Global Report",
+    "Speculative Decoding Advance for AI acceleration",
+    "Exascale computing with Aurora Supercomputer"
+  ],
+  "technical_innovation_score": 8,
+  "business_impact_score": 6,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://intel.com/content/www/us/en/newsroom\ncompany: Intel\nscraped_at: 2025-07-04 20:15:40\n---\n\n              Intel Newsroom Home\n\n[Skip to main content (Press Enter)](#)\n\n[![Intel News Room](https://newsroom.intel.com/wp-content/uploads/2024/10/intel-header-logo.svg)](https://newsroom.intel.com/)\n\n[Newsroom](https://newsroom.intel.com/)\n\nYour source for all news Intel\n\n*   Topic\n\n    *   [5G & Wireless](/5g-wireless)\n    *   [Altera](/altera)\n    *   [Artificial Intelligence](/artific...",
+    "after": "     var ajaxurl = 'https://newsroom.intel.com/wp-admin/admin-ajax.php'; document.addEventListener('DOMContentLoaded', function() { // Select all Gravity Forms buttons with the class \"gform\\_button button\" const buttons = document.querySelectorAll('.gform\\_button.button'); if (!buttons.length) return; console.log('Gravity Forms buttons found:', buttons); buttons.forEach((button) => { // Remove the inline \"onclick\" attribute button.removeAttribute('onclick'); button.classList.add('knockout'); // ..."
+  },
+  "diff": {
+    "added_sentences": [
+      "var ajaxurl = 'https://newsroom.",
+      "com/wp-admin/admin-ajax.",
+      "php'; document.",
+      "addEventListener('DOMContentLoaded', function() { // Select all Gravity Forms buttons with the class \"gform\\_button button\" const buttons = document.",
+      "querySelectorAll('.",
+      "gform\\_button.",
+      "button'); if (!",
+      "buttons.",
+      "length) return; console.",
+      "log('Gravity Forms buttons found:', buttons); buttons."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://intel.",
+      "com/content/www/us/en/newsroom\ncompany: Intel\nscraped_at: 2025-07-04 20:15:40\n---\n\n              Intel Newsroom Home\n\n[Skip to main content (Press Enter)](#)\n\n[!",
+      "com/)\n\nYour source for all news Intel\n\n*   Topic\n\n    *   [5G & Wireless](/5g-wireless)\n    *   [Altera](/altera)\n    *   [Artificial Intelligence](/artificial-intelligence)\n    *   [Automotive](/automotive)\n    *   [Client Computing](/client-computing)\n    *   [Corporate](/corporate)\n    *   [Data Center](/data-center)\n    *   [Intel Foundry](/intel-foundry)\n    *   [Intel Products](/intel-products)\n    *   [Manufacturing](/manufacturing)\n    *   [New Technologies](/new-technologies)\n    *   [Security](/security)\n    *   [Software](/software)\n\n*   Type\n\n    *   [News](/news)\n    *   [Opinion](/opinions)\n    *   [Press Kits](/press-kits)\n    *   [All Bios](/biographies)\n    *   [• Executive Team](https://newsroom.",
+      "com/board-of-directors)\n\n*   [Press Hub](https://newsroom.",
+      "svg)\n\n*    !",
+      "svg)\n\n !",
+      "svg)\n\n*   Topic\n\n    *   [5G & Wireless](/5g-wireless)\n    *   [Altera](/altera)\n    *   [Artificial Intelligence](/artificial-intelligence)\n    *   [Automotive](/automotive)\n    *   [Client Computing](/client-computing)\n    *   [Corporate](/corporate)\n    *   [Data Center](/data-center)\n    *   [Intel Foundry](/intel-foundry)\n    *   [Intel Products](/intel-products)\n    *   [Manufacturing](/manufacturing)\n    *   [New Technologies](/new-technologies)\n    *   [Security](/security)\n    *   [Software](/software)\n\n*   Type\n\n    *   [News](/news)\n    *   [Opinion](/opinions)\n    *   [Press Kits](/press-kits)\n    *   [All Bios](/biographies)\n    *   [• Executive Team](https://newsroom.",
+      "com/board-of-directors)\n\n*   [Press Hub](https://newsroom.",
+      "svg)\n\n*    !",
+      "svg) 5G & Wireless\n\nJune 30, 2025\n\n# Intel Xeon 6 Slashes Power Consumption for Nokia Core Network Customers\n\nLatest Xeon 6 CPUs with E-cores boost efficiency by 60% and performance by 150% over the previous generation."
+    ],
+    "key_changes": [
+      "New version: 15.1.0, 6.8.1, 0.07, 0.1, 1.75, 1.25, 2.375, 1.333, 1.125, 0.44, 0.67, 1.5, 2.25, 3.38, 5.06, 0.2, 0.4, 0.5, 1.6, 0.55, 1.2, 0.8, 33.333, 16.66666666666667, 14.28571428, 12.5, 33.222, 16.6667, 33.22222222, 16.66667, 0.9, 19.2, 1.0, 2.5, 13.3333333333, 30.6666666667, 65.3333333333, 82.6666666667, 91.3333333333, 1.3, 1.35, 1.4, 1.7, 1.1, 2.4, 1.37, 7.5, 6.5, 11.5, 1.18, 12.86, 0.6, 0.3, 157.39, 81.8, 34.12, 63.97, 81.71, 1.9, 2.9, 3.9, 4.9, 0.7, 0.75, 0.39, 0.575, 0.565, 1.05, 0.215, 0.61, 0.355, 0.95, 31.25, 68.75, 1.8, 0.25, 1.15, 0.85, 2.8, Version 2, 2.0, v2.26.0, v3.0.5, 2.26.0, 3.11, 4.90, 5.0, 5.1, 5.2, 6.0, 6.1, 8.1, 6.3, 6.2, 4.0, 3.8, 3.5",
+      "Price change: $,, $1, $2",
+      "New date mentioned: July 17, 2025, July 16, 2025, July 15, 2025, July 7, 2025",
+      "New model mentioned",
+      "New release mentioned",
+      "New launch mentioned",
+      "New update mentioned",
+      "New performance mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 98,
+    "summary": "98% content changed (23063 additions, 80 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "ssplayer",
+        "frequency": 1320
+      },
+      {
+        "word": "const",
+        "frequency": 1119
+      },
+      {
+        "word": "wap",
+        "frequency": 1102
+      },
+      {
+        "word": "tms",
+        "frequency": 976
+      },
+      {
+        "word": "onetrust-pc-sdk",
+        "frequency": 899
+      },
+      {
+        "word": "utag",
+        "frequency": 777
+      },
+      {
+        "word": "return",
+        "frequency": 758
+      },
+      {
+        "word": "sstemplate",
+        "frequency": 691
+      },
+      {
+        "word": "wrapper",
+        "frequency": 487
+      },
+      {
+        "word": "important",
+        "frequency": 464
+      },
+      {
+        "word": "100",
+        "frequency": 459
+      },
+      {
+        "word": "rht",
+        "frequency": 438
+      },
+      {
+        "word": "background-color",
+        "frequency": 423
+      },
+      {
+        "word": "width",
+        "frequency": 422
+      },
+      {
+        "word": "color",
+        "frequency": 413
+      },
+      {
+        "word": "height",
+        "frequency": 348
+      },
+      {
+        "word": "case",
+        "frequency": 336
+      },
+      {
+        "word": "let",
+        "frequency": 317
+      },
+      {
+        "word": "hover",
+        "frequency": 314
+      },
+      {
+        "word": "onetrust-banner-sdk",
+        "frequency": 312
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "gen",
+        "frequency": 3
+      },
+      {
+        "word": "chances",
+        "frequency": 3
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "thinkbook",
+        "frequency": 2
+      },
+      {
+        "word": "plus",
+        "frequency": 2
+      },
+      {
+        "word": "expandable",
+        "frequency": 2
+      },
+      {
+        "word": "3hl4ccp",
+        "frequency": 2
+      },
+      {
+        "word": "good",
+        "frequency": 2
+      },
+      {
+        "word": "laptop",
+        "frequency": 2
+      },
+      {
+        "word": "jxk79hpo1p",
+        "frequency": 2
+      },
+      {
+        "word": "imperial",
+        "frequency": 2
+      },
+      {
+        "word": "college",
+        "frequency": 2
+      },
+      {
+        "word": "london",
+        "frequency": 2
+      },
+      {
+        "word": "hpc",
+        "frequency": 2
+      },
+      {
+        "word": "scientific",
+        "frequency": 2
+      },
+      {
+        "word": "research",
+        "frequency": 2
+      },
+      {
+        "word": "gs7yofg26y",
+        "frequency": 2
+      },
+      {
+        "word": "future",
+        "frequency": 2
+      },
+      {
+        "word": "university",
+        "frequency": 2
+      },
+      {
+        "word": "reducing",
+        "frequency": 2
+      }
+    ],
+    "frequency_changes": {
+      "data": {
+        "before": 3,
+        "after": 835,
+        "change": 832
+      },
+      "icon": {
+        "before": 1,
+        "after": 452,
+        "change": 451
+      },
+      "consent": {
+        "before": 2,
+        "after": 335,
+        "change": 333
+      },
+      "svg": {
+        "before": 38,
+        "after": 368,
+        "change": 330
+      },
+      "background": {
+        "before": 2,
+        "after": 298,
+        "change": 296
+      },
+      "content": {
+        "before": 19,
+        "after": 303,
+        "change": 284
+      },
+      "type": {
+        "before": 2,
+        "after": 242,
+        "change": 240
+      },
+      "not": {
+        "before": 10,
+        "after": 243,
+        "change": 233
+      },
+      "com": {
+        "before": 169,
+        "after": 389,
+        "change": 220
+      },
+      "transform": {
+        "before": 1,
+        "after": 220,
+        "change": 219
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "wap tms",
+        "count": 952
+      },
+      {
+        "phrase": "utag data",
+        "count": 753
+      },
+      {
+        "phrase": "ssplayer icon",
+        "count": 274
+      },
+      {
+        "phrase": "sstemplate ssplayer",
+        "count": 236
+      },
+      {
+        "phrase": "intel com",
+        "count": 216
+      },
+      {
+        "phrase": "tms custom",
+        "count": 215
+      },
+      {
+        "phrase": "ssplayer rht",
+        "count": 187
+      },
+      {
+        "phrase": "tms consent",
+        "count": 168
+      },
+      {
+        "phrase": "newsroom intel",
+        "count": 159
+      },
+      {
+        "phrase": "https newsroom",
+        "count": 156
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

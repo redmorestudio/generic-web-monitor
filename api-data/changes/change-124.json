@@ -1,0 +1,321 @@
+{
+  "change_id": 124,
+  "url": "https://nvidia.com/ai",
+  "company": "NVIDIA",
+  "company_category": "AI Hardware",
+  "detected_at": "2025-07-18 16:38:34",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "No significant changes detected between the previous and current content of the NVIDIA AI homepage.",
+  "interest_drivers": [],
+  "technical_innovation_score": 2,
+  "business_impact_score": 2,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://nvidia.com/ai\ncompany: NVIDIA\nscraped_at: 2025-07-04 20:17:40\n---\n\n![](https://aorta.clickagy.com/pixel.gif?clkgypv=jstag&ws=1)![](https://aorta.clickagy.com/channel-sync/4?clkgypv=jstag&ws=1)![](https://aorta.clickagy.com/channel-sync/114?clkgypv=jstag&ws=1)                                                               AI Solutions for Enterprises | NVIDIA\n\nNVIDIA Home NVIDIA Home Menu Menu icon Menu Menu icon Close Close icon Close Close icon Close Close icon Caret down icon A...",
+    "after": "![](https://aorta.clickagy.com/pixel.gif?clkgypv=jstag&ws=1)![](https://aorta.clickagy.com/channel-sync/4?clkgypv=jstag&ws=1)![](https://aorta.clickagy.com/channel-sync/114?clkgypv=jstag&ws=1) .video-js { width: 300px; height: 150px; } .vjs-fluid:not(.vjs-audio-only-mode) { padding-top: 56.25% }                                                               function OptanonWrapper() { var event = new Event('bannerLoaded'); window.dispatchEvent(event); } \\_satellite\\[\"\\_runScript1\"\\](function(even..."
+  },
+  "diff": {
+    "added_sentences": [
+      "clkgypv=jstag&ws=1) .",
+      "video-js { width: 300px; height: 150px; } .",
+      "vjs-fluid:not(.",
+      "vjs-audio-only-mode) { padding-top: 56.",
+      "25% }                                                               function OptanonWrapper() { var event = new Event('bannerLoaded'); window.",
+      "dispatchEvent(event); } \\_satellite\\[\"\\_runScript1\"\\](function(event, target, Promise) { var cpage=window.",
+      "location.",
+      "href; //if((cpage.",
+      "indexOf('https://www.",
+      "com/gtc/recommended-sessions')<0&&cpage."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://nvidia.",
+      "com/ai\ncompany: NVIDIA\nscraped_at: 2025-07-04 20:17:40\n---\n\n!",
+      "clkgypv=jstag&ws=1)                                                               AI Solutions for Enterprises | NVIDIA\n\nNVIDIA Home NVIDIA Home Menu Menu icon Menu Menu icon Close Close icon Close Close icon Close Close icon Caret down icon Accordion is closed, click to open.",
+      "Caret down icon Accordion is closed, click to open.",
+      "Caret right icon Click to expand Caret right icon Click to expand Caret right icon Click to expand menu.",
+      "Shopping Cart Click to see cart items Search icon Click to search\n\nVisit your regional NVIDIA website for local content, pricing, and where to buy partners specific to your country.",
+      "ncid=no-ncid)\n\n[Skip to main content](#page-content)\n\n[Artificial Intelligence Computing Leadership from NVIDIA](https://www.",
+      "ncid=no-ncid \"Artificial Intelligence Computing Leadership from NVIDIA\")\n\n\n\nMain Menu\n\n*   Products\n\n    Cloud Services Data Center Embedded Systems Gaming and Creating Graphics Cards and GPUs Laptops Networking Professional Workstations Software Tools\n\n    Cloud Services\n\n    [\n\n    BioNeMo\n\n    AI-driven platform for life sciences research and discovery\n\n    ](https://www.",
+      "ncid=no-ncid)\n\n    [\n\n    DGX Cloud\n\n    Fully managed end-to-end AI platform on leading clouds\n\n    ](https://www.",
+      "ncid=no-ncid)\n\n    [\n\n    NeMo\n\n    Build, customize, and deploy multimodal generative AI\n\n    ](https://www."
+    ],
+    "key_changes": [
+      "New version: 56.25, 1.0.0, 1.0, 2.5, 1.4, 1.666, 1.2, 0.5, 1.5, 1.25, 1.125, 13.3333333333, 30.6666666667, 65.3333333333, 82.6666666667, 91.3333333333, 1.3, 1.35, 1.6, 1.875, 0.85, 1.1, 7.5, 11.5, 6.5, 1.75, 1.18, 177.7777777778, 1.63332, 0.06666, 0.7, 0.3, 0.4, 0.81666, 0.8, 0.2, 2.222222222, 0.1, 1.8, 1.67, 1.6666666667, 0.9, 0.3333333333, 0.75, 3.4, 0.6, 0.45, 3.5, 0.05, 0.44, 7.3, 1.17, 109.95, 84.9, 24.9, 159.9, 169.95, 184.5, 199.5, 39.9, 19.95, 189.9, 1.5715, 15.3137085, 11.3137085, 9.849242404917499, 24.091883092036785, 13.384776310850237, 22.627416997969522, 20.627416997969522, 23.091883092036785, 33.9411255, 1.28, 1.15, 4.1, 9.14285714, 21.5, 5.71428571, 1.46, 37.5, 25.5, 95.83333333, 91.66666667, 87.5, 83.33333333, 79.16666667, 70.83333333, 66.66666667, 62.5, 58.33333333, 54.16666667, 45.83333333, 41.66666667, 33.33333333, 29.16666667, 20.83333333, 16.66666667, 12.5, 8.33333333, 4.16666667, 2.2, 50.4, 0.875, 13.06, 83.94, 52.82, 0.00, 77.4, 166.7, 15.4, 0.19, 5.65042, 5.0, 5.17, 5.2, 0.15, 5.6, 3.0, 2.0",
+      "Price change: $1",
+      "New model mentioned",
+      "New api mentioned",
+      "New announcement mentioned",
+      "New update mentioned",
+      "New performance mentioned",
+      "New feature mentioned",
+      "New integration mentioned"
+    ],
+    "change_percentage": 93,
+    "summary": "93% content changed (26037 additions, 381 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "cleanslate",
+        "frequency": 3478
+      },
+      {
+        "word": "gallery-wrapper",
+        "frequency": 1543
+      },
+      {
+        "word": "onetrust-pc-sdk",
+        "frequency": 908
+      },
+      {
+        "word": "none",
+        "frequency": 869
+      },
+      {
+        "word": "display",
+        "frequency": 816
+      },
+      {
+        "word": "auto",
+        "frequency": 644
+      },
+      {
+        "word": "ant-col-rtl",
+        "frequency": 535
+      },
+      {
+        "word": "search-input-wrapper",
+        "frequency": 509
+      },
+      {
+        "word": "font-size",
+        "frequency": 472
+      },
+      {
+        "word": "margin-left",
+        "frequency": 466
+      },
+      {
+        "word": "max-width",
+        "frequency": 461
+      },
+      {
+        "word": "color",
+        "frequency": 454
+      },
+      {
+        "word": "height",
+        "frequency": 449
+      },
+      {
+        "word": "flex",
+        "frequency": 440
+      },
+      {
+        "word": "100",
+        "frequency": 426
+      },
+      {
+        "word": "search-facets-wrapper",
+        "frequency": 393
+      },
+      {
+        "word": "padding",
+        "frequency": 383
+      },
+      {
+        "word": "event-details-player",
+        "frequency": 338
+      },
+      {
+        "word": "background-color",
+        "frequency": 329
+      },
+      {
+        "word": "var",
+        "frequency": 313
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "26600",
+        "frequency": 68
+      },
+      {
+        "word": "26800",
+        "frequency": 68
+      },
+      {
+        "word": "264",
+        "frequency": 34
+      },
+      {
+        "word": "2624",
+        "frequency": 34
+      },
+      {
+        "word": "26255",
+        "frequency": 34
+      },
+      {
+        "word": "utc",
+        "frequency": 34
+      },
+      {
+        "word": "26linux",
+        "frequency": 34
+      },
+      {
+        "word": "20x86",
+        "frequency": 34
+      },
+      {
+        "word": "f6de67a8-94f5-4c45-8b9d-c49412cbb125",
+        "frequency": 34
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "ebu",
+        "frequency": 2
+      },
+      {
+        "word": "1751660255875",
+        "frequency": 2
+      },
+      {
+        "word": "8e2f28cc-bd93-4c54-a31a-b29e5e264532",
+        "frequency": 2
+      },
+      {
+        "word": "f490e882-1169-4a22-906e-22b655936598",
+        "frequency": 2
+      },
+      {
+        "word": "70a21f1b-a248-4da7-ace8-b287fe2a8b21",
+        "frequency": 2
+      },
+      {
+        "word": "33aaa0dd-12f5-4461-8f71-517fc015466e",
+        "frequency": 2
+      },
+      {
+        "word": "8625ae8f-011f-4f1c-ad9c-7bb9c9a299a4",
+        "frequency": 2
+      },
+      {
+        "word": "66fe5c81-cfd8-4abe-8ebc-6cae0b51a958",
+        "frequency": 2
+      },
+      {
+        "word": "e31950cb-951f-434e-b3ba-aafc9d717b33",
+        "frequency": 2
+      },
+      {
+        "word": "cdcb3405-803b-4de0-a1e4-f23e72917663",
+        "frequency": 2
+      }
+    ],
+    "frequency_changes": {
+      "left": {
+        "before": 3,
+        "after": 775,
+        "change": 772
+      },
+      "right": {
+        "before": 4,
+        "after": 739,
+        "change": 735
+      },
+      "width": {
+        "before": 34,
+        "after": 608,
+        "change": 574
+      },
+      "important": {
+        "before": 2,
+        "after": 364,
+        "change": 362
+      },
+      "button": {
+        "before": 1,
+        "after": 343,
+        "change": 342
+      },
+      "media": {
+        "before": 5,
+        "after": 319,
+        "change": 314
+      },
+      "function": {
+        "before": 2,
+        "after": 279,
+        "change": 277
+      },
+      "not": {
+        "before": 4,
+        "after": 237,
+        "change": 233
+      },
+      "center": {
+        "before": 28,
+        "after": 252,
+        "change": 224
+      },
+      "top": {
+        "before": 1,
+        "after": 216,
+        "change": 215
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "cleanslate gallery-wrapper",
+        "count": 1499
+      },
+      {
+        "phrase": "nvidia com",
+        "count": 755
+      },
+      {
+        "phrase": "https www",
+        "count": 594
+      },
+      {
+        "phrase": "www nvidia",
+        "count": 572
+      },
+      {
+        "phrase": "ncid no-ncid",
+        "count": 544
+      },
+      {
+        "phrase": "com en-us",
+        "count": 520
+      },
+      {
+        "phrase": "cleanslate search-input-wrapper",
+        "count": 504
+      },
+      {
+        "phrase": "cleanslate search-facets-wrapper",
+        "count": 393
+      },
+      {
+        "phrase": "ant-col-rtl left",
+        "count": 348
+      },
+      {
+        "phrase": "display block",
+        "count": 282
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

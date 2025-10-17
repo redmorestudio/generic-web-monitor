@@ -1,0 +1,61 @@
+{
+  "id": 214,
+  "company": "Codeium",
+  "page_url": "pricing",
+  "detected_at": "2025-07-22T17:14:39.794Z",
+  "change_type": "modified",
+  "interest_level": 4,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "update",
+    "change_scale": "minor",
+    "what_changed": "The download options for the Windsurf Editor changed from macOS to Windows",
+    "specific_changes": [
+      "Download options updated from macOS (Apple Silicon and Intel) to Windows (x64 and arm64)"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Windsurf is continuing to support multiple platforms"
+    ],
+    "business_impact": "The change may slightly improve user experience for Windows users, but it is unlikely to have a significant impact on the business",
+    "strategic_direction": "Windsurf is likely to continue supporting multiple platforms and improving user experience",
+    "competitive_implications": "The change is unlikely to affect Windsurf's competitive position"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [],
+    "features": [],
+    "products": [],
+    "partnerships": [],
+    "technologies": []
+  },
+  "insights": {
+    "threats": [
+      "If Windsurf does not continue to support multiple platforms, it may lose users to competitors"
+    ],
+    "key_findings": [
+      "Windsurf is supporting multiple platforms"
+    ],
+    "opportunities": [
+      "Windsurf could consider adding more platform support to attract more users"
+    ],
+    "recommended_actions": [
+      "Monitor user feedback on the updated download options",
+      "Consider adding support for more platforms"
+    ]
+  },
+  "key_insights": [
+    "Windsurf is supporting multiple platforms"
+  ],
+  "business_impact": "The change may slightly improve user experience for Windows users, but it is unlikely to have a significant impact on the business",
+  "competitive_implications": "The change is unlikely to affect Windsurf's competitive position",
+  "content_hash_before": "1ff5ddfcc3070fbb1432ee3e87b88bbb73c01388abe083bffd2b2d7134705c92",
+  "content_hash_after": "206147855745105f09acdd0d7e462df9555a63388cbb3ccf8a928540b395802c",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

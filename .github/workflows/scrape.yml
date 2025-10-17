@@ -1,0 +1,114 @@
+name: Scrape Websites
+
+on:
+  workflow_dispatch:
+    inputs:
+      cascade:
+        description: 'Trigger next workflow (process)'
+        required: false
+        default: 'true'
+        type: choice
+        options:
+        - 'true'
+        - 'false'
+  workflow_call:
+    inputs:
+      cascade:
+        description: 'Trigger next workflow (process)'
+        required: false
+        default: 'true'
+        type: string
+
+concurrency:
+  group: scrape-workflow
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        lfs: true
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        
+    - name: Install dependencies
+      run: |
+        cd github-actions-backend
+        npm install
+        npm audit fix --force || true
+        
+    - name: Download previous databases
+      uses: actions/download-artifact@v4
+      with:
+        name: ai-monitor-databases
+        path: github-actions-backend/data/
+      continue-on-error: true
+        
+    - name: Initialize databases if needed
+      run: |
+        cd github-actions-backend
+        node scripts/init-db-three.js
+        
+    - name: Run database migrations
+      run: |
+        cd github-actions-backend
+        # Run migration to add scrape_status column if needed
+        node scripts/add-scrape-status-column.js || true
+        
+    - name: Run intelligent scraper with captcha detection
+      env:
+        GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      run: |
+        cd github-actions-backend
+        node scraper-three-db-with-captcha-detection.js
+        
+    - name: Upload databases as artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: ai-monitor-databases
+        path: github-actions-backend/data/
+        retention-days: 7
+        
+    - name: Configure Git
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+    - name: Commit database updates
+      run: |
+        # Add only the committed databases
+        git add github-actions-backend/data/intelligence.db
+        git add github-actions-backend/data/processed_content.db
+        
+        # Check if there are changes to commit
+        if git diff --staged --quiet; then
+          echo "No database changes to commit"
+        else
+          git commit -m "🕷️ Update databases after scraping with captcha detection"
+          
+          # Push with retry logic
+          for attempt in {1..5}; do
+            if git push; then
+              echo "Successfully pushed on attempt $attempt"
+              break
+            else
+              echo "Push failed on attempt $attempt, retrying..."
+              git pull --rebase
+              sleep $((2 ** (attempt - 1)))
+            fi
+          done
+        fi
+        
+    - name: Trigger Process Workflow
+      if: ${{ inputs.cascade == 'true' || inputs.cascade == '' }}
+      uses: ./.github/workflows/process.yml
+      with:
+        cascade: ${{ inputs.cascade }}

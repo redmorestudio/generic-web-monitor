@@ -1,0 +1,117 @@
+{
+  "id": 149,
+  "company": "NVIDIA",
+  "page_url": "docs",
+  "detected_at": "2025-07-21T15:20:09.168Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "New content added to the NVIDIA Developer website, including new learning pathways, tutorials, news, and on-demand videos",
+    "specific_changes": [
+      "New learning pathway: Deploy Accelerated AI Models",
+      "Tutorials on automating network design, optimizing ML models, and training generalist robots",
+      "News on hackathon winners, NVIDIA Canary-Qwen-2.5B, and driving AI-powered robotics development",
+      "On-demand videos on GTC top talks, quantum computing, AI for humanoid robots, and more"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased investment in AI and cloud computing",
+      "Growing demand for edge AI and autonomous vehicles"
+    ],
+    "business_impact": "The changes indicate NVIDIA's continued focus on AI, cloud computing, and edge AI, with new resources and content added for developers and industries",
+    "strategic_direction": "NVIDIA is likely to continue investing in AI, cloud computing, and edge AI, with a focus on developer and industry engagement",
+    "competitive_implications": "NVIDIA's updates and new content may give it a competitive edge in the AI and cloud computing markets"
+  },
+  "entities": {
+    "people": [
+      "Ben Bloom",
+      "Bill Dally",
+      "Pieter Abbeel",
+      "Bing Sun",
+      "Bernt Børnich",
+      "Ankit Patel",
+      "Ming-Yu Liu",
+      "Cahlen Humphreys"
+    ],
+    "markets": [
+      "AECO",
+      "Automotive",
+      "Consumer Internet",
+      "Energy",
+      "Financial Services",
+      "Gaming",
+      "Global Public Sector"
+    ],
+    "pricing": [],
+    "features": [
+      "Artificial Intelligence",
+      "Cloud and Data Center",
+      "Design and Simulation",
+      "Graphics and Rendering",
+      "High-Performance Computing",
+      "Robotics and Edge AI",
+      "Autonomous Vehicles",
+      "Quantum Computing"
+    ],
+    "products": [
+      "NVIDIA NIM",
+      "Google Kubernetes Engine (GKE)",
+      "CUDA Toolkit",
+      "DLSS",
+      "HPC SDK",
+      "Nsight Systems",
+      "PhysicsNeMo",
+      "RAPIDS",
+      "Sionna",
+      "TensorRT",
+      "Triton Inference Server"
+    ],
+    "partnerships": [
+      "Google"
+    ],
+    "technologies": [
+      "Ansible",
+      "Git",
+      "CUDA-X",
+      "RTX"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI and cloud computing markets",
+      "Regulatory challenges in the autonomous vehicles market"
+    ],
+    "key_findings": [
+      "NVIDIA is expanding its AI and cloud computing offerings",
+      "The company is investing in edge AI and autonomous vehicles",
+      "NVIDIA is engaging with developers and industries through new content and resources"
+    ],
+    "opportunities": [
+      "Partnership opportunities with NVIDIA in AI and cloud computing",
+      "Investment opportunities in edge AI and autonomous vehicles"
+    ],
+    "recommended_actions": [
+      "Monitor NVIDIA's updates and new content",
+      "Explore partnership opportunities with NVIDIA",
+      "Invest in edge AI and autonomous vehicles"
+    ]
+  },
+  "key_insights": [
+    "NVIDIA is expanding its AI and cloud computing offerings",
+    "The company is investing in edge AI and autonomous vehicles",
+    "NVIDIA is engaging with developers and industries through new content and resources"
+  ],
+  "business_impact": "The changes indicate NVIDIA's continued focus on AI, cloud computing, and edge AI, with new resources and content added for developers and industries",
+  "competitive_implications": "NVIDIA's updates and new content may give it a competitive edge in the AI and cloud computing markets",
+  "content_hash_before": null,
+  "content_hash_after": "4314669df58e13b42cefa99ac5dcce2e284b2aba666f244bb72706bc82fa87dc",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

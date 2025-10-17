@@ -1,0 +1,114 @@
+{
+  "id": 175,
+  "company": "Intel",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:15:39.774Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added to Intel's homepage, focusing on Artificial Intelligence (AI) solutions",
+    "specific_changes": [
+      "Introduction of AI-focused content",
+      "Emphasis on Intel's AI solutions and technologies",
+      "Inclusion of AI-related products, such as AI accelerators and AI software",
+      "Addition of AI-focused sections, including 'AI Overview' and 'AI Solution Components'"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increasing demand for AI solutions",
+      "Growing competition in the AI market",
+      "Emerging trends in AI, such as Edge AI and Generative AI"
+    ],
+    "business_impact": "Intel's focus on AI solutions is likely to drive business growth and increase competitiveness in the tech industry",
+    "strategic_direction": "Intel's focus on AI solutions is likely to continue, with potential expansion into new areas, such as autonomous vehicles and smart cities",
+    "competitive_implications": "Intel's strategic shift towards AI solutions may pose a competitive threat to other tech companies, particularly those that are not investing heavily in AI research and development"
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Automotive",
+      "Education",
+      "Energy",
+      "Financial Services",
+      "Government",
+      "Healthcare",
+      "Manufacturing",
+      "Retail",
+      "Telecommunications"
+    ],
+    "pricing": [],
+    "features": [
+      "AI accelerators",
+      "AI software",
+      "AI workflows",
+      "Edge AI",
+      "FPGAs for AI",
+      "GPUs for AI",
+      "Networking for AI"
+    ],
+    "products": [
+      "Intel Core Ultra Processors",
+      "Intel Xeon Processors",
+      "Intel Xeon CPU Max Series",
+      "Intel Atom Processors",
+      "AI PCs Powered by Intel",
+      "Gaming Systems",
+      "Intel vPro for Business",
+      "Intel Arc Discrete Graphics",
+      "Intel Wi-Fi Products",
+      "AI Accelerators",
+      "Intel Gaudi AI Accelerators",
+      "AI Software Solutions",
+      "Intel Data Center GPU Flex Series"
+    ],
+    "partnerships": [
+      "Intel Partner Alliance"
+    ],
+    "technologies": [
+      "Artificial Intelligence (AI)",
+      "Machine Learning (ML)",
+      "Deep Learning (DL)",
+      "Natural Language Processing (NLP)"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Intense competition in the AI market",
+      "Rapidly evolving AI landscape, with emerging trends and technologies",
+      "Potential for Intel's AI solutions to be disrupted by new technologies or business models"
+    ],
+    "key_findings": [
+      "Intel's AI solutions are focused on enterprise AI, with an emphasis on security and compliance",
+      "Intel's AI portfolio includes a range of products and technologies, from AI accelerators to AI software",
+      "Intel's partner ecosystem is critical to its AI strategy, with partnerships with companies such as Microsoft and Google"
+    ],
+    "opportunities": [
+      "Growing demand for AI solutions in various industries",
+      "Increasing adoption of Edge AI and Generative AI",
+      "Potential for Intel to expand its AI offerings into new areas, such as autonomous vehicles and smart cities"
+    ],
+    "recommended_actions": [
+      "Monitor Intel's AI strategy and investments",
+      "Assess the competitive implications of Intel's AI focus",
+      "Explore potential partnerships or collaborations with Intel in the AI space"
+    ]
+  },
+  "key_insights": [
+    "Intel's AI solutions are focused on enterprise AI, with an emphasis on security and compliance",
+    "Intel's AI portfolio includes a range of products and technologies, from AI accelerators to AI software",
+    "Intel's partner ecosystem is critical to its AI strategy, with partnerships with companies such as Microsoft and Google"
+  ],
+  "business_impact": "Intel's focus on AI solutions is likely to drive business growth and increase competitiveness in the tech industry",
+  "competitive_implications": "Intel's strategic shift towards AI solutions may pose a competitive threat to other tech companies, particularly those that are not investing heavily in AI research and development",
+  "content_hash_before": null,
+  "content_hash_after": "2ad5fd442bb1948662010212c3f843722dc5602d8644da33eac0313d8beffe3d",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

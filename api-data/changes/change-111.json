@@ -1,0 +1,255 @@
+{
+  "change_id": 111,
+  "url": "https://mistral.ai/technology",
+  "company": "Mistral AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:38:10",
+  "interest_level": 2,
+  "interest_category": "routine_change",
+  "interest_explanation": "No significant changes detected between the previous and current content of the webpage. The technical innovation and business impact scores are low due to the lack of new or different information.",
+  "interest_drivers": [],
+  "technical_innovation_score": 2,
+  "business_impact_score": 2,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://mistral.ai/technology\ncompany: Mistral AI\nscraped_at: 2025-07-04 20:17:24\n---\n\nLa Plateforme - frontier LLMs | Mistral AI\n\n[\n\n](/)\n\n*   Products\n*   Solutions\n*   Research\n*   Resources\n*   [Pricing](/pricing)\n*   Company\n\n[Try the API\n\n](https://console.mistral.ai/)[Talk to sales\n\n](/contact)\n\n[\n\n](/)\n\n##\n\nEverything you need at the frontier.\n\nExplore, customize, and deploy AI solutions with complete control. La Plateforme gives you all the tools you need.\n\n[Enterprise deployme...",
+    "after": "La Plateforme - frontier LLMs | Mistral AIdocument.querySelectorAll('body link\\[rel=\"icon\"\\], body link\\[rel=\"apple-touch-icon\"\\]').forEach(el => document.head.appendChild(el)).magnifier { position: relative; display: inline-block; line-height: 0; } .magnifier-image { cursor: none; } .magnifying-glass { position: absolute; z-index: 1; background: #e5e5e5 no-repeat; border: solid #ebebeb; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3); opacity: 0; transition: opacity 0.3s; pointer-events: none; } .ma..."
+  },
+  "diff": {
+    "added_sentences": [
+      "La Plateforme - frontier LLMs | Mistral AIdocument.",
+      "querySelectorAll('body link\\[rel=\"icon\"\\], body link\\[rel=\"apple-touch-icon\"\\]').",
+      "forEach(el => document.",
+      "head.",
+      "appendChild(el)).",
+      "magnifier { position: relative; display: inline-block; line-height: 0; } .",
+      "magnifier-image { cursor: none; } .",
+      "magnifying-glass { position: absolute; z-index: 1; background: #e5e5e5 no-repeat; border: solid #ebebeb; box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.",
+      "3); opacity: 0; transition: opacity 0.",
+      "3s; pointer-events: none; } ."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://mistral.",
+      "ai/technology\ncompany: Mistral AI\nscraped_at: 2025-07-04 20:17:24\n---\n\nLa Plateforme - frontier LLMs | Mistral AI\n\n[\n\n](/)\n\n*   Products\n*   Solutions\n*   Research\n*   Resources\n*   [Pricing](/pricing)\n*   Company\n\n[Try the API\n\n](https://console.",
+      "ai/)[Talk to sales\n\n](/contact)\n\n[\n\n](/)\n\n##\n\nEverything you need at the frontier.",
+      "ai%2Fassets%2Fd5d4b57c-57b4-42b0-9dba-4b6f4dd03048&w=3840&q=75)\n\n###\n\nAI tooling, models, and infrastructure.",
+      "ai/)\n\nApplied AI and deployment services\n\n[TABLE]\n\n\nAI tooling\n\nAgents\n\nFine-tuning\n\nEmbedding\n\nFunction/tool calling\n\nDistillation\n\nSafety\n\nMonitoring\n\nLibrary of frontier LLMs\n\nSOTA language models\n\nSmall and edge models\n\nCode models \n\nMultimodal models\n\nCustom models\n\nAI infrastructure management\n\nInference container\n\nRouting/caching\n\nLoad balancing\n\nAPI gateway\n\nSecurity and resilience\n\n\n[/TABLE]\n\n###\n\nWhy la Plateforme?",
+      "###\n\nComprehensive AI tooling.",
+      "ai%2Fassets%2Fc2817c1e-3e52-4c15-8581-0c63f659ee3c&w=3840&q=75)\n\n###\n\nWidest library of frontier LLMs.",
+      "ai%2Fassets%2Fbdd57ea1-afa5-4e96-bcf9-3e900a168aa5&w=3840&q=75)\n\n###\n\nDeployable !",
+      "ai%2Fassets%2Fd191742d-2c13-4838-8fde-6080daab3b02&w=3840&q=75)\n\n###\n\nDeeply engaged applied AI services.",
+      "ai%2Fassets%2F26a4d80e-600f-4e4a-ae3f-10c088c17d37&w=3840&q=75)\n\n###\n\nBuild the next !"
+    ],
+    "key_changes": [
+      "New version: 0.3, 1.5, 11.7053, 5.85156, V5.79928, 35.1272, 29.2734, 17.559, 5.79883, V11.5981, V5.79883, 35.1293, 23.4219, 35.1239, 11.5977, V17.3969, V11.5977, 17.3984, V23.1977, V17.3984, 23.4162, 17.5625, 17.5648, 23.2012, V29.0005, V23.2012, 40.9867, 11.7072, 5.85352, 35.1252, 29.2715, 17.561, 35.1254, 23.418, 35.1258, 40.9828, 5.79932, V11.5986, V5.79932, 11.5986, V17.3979, 17.3979, V23.1972, 23.2007, V23.2007, 7.39166, 4.93066, 4.92969, V7.39936, V4.93066, 4.92681, 2.46875, 2.46484, V4.93744, V2.46875, 2.46197, V2.46869, 7.39941, V9.86811, V7.39941, 9.86133, V12.33, V9.86133, 0.890625, 24.8906, 9.5, 17.5, 48.9, 13.337, 31.940, 38.514, 32.319, 21.0039, 10.9983, 8.00293, 18.0086, 18.0117, 7.99143, 4.99609, 15.0164, 15.0117, 4.99583, 2.00049, 12.0164, 4.99582, 13.9934, 10.998, 15.0039, 0.00382328, 0.00382315, 17.0002, 14.0049, 44.55, 43.4, 0.5, 0.553711, 18.3331, 11.2204, V21.8886, V25.4442, 25.4426, 14.7759, V18.3331, V0.555664, 4.10927, 4.11086, 21.887, V14.7775, V4.11086, 24.8889, 0.554688, 0.555664, 4.28474, 25.7143, 8.57002, V29.9996, 21.4272, V25.7139, 8.57088, V21.429, 12.8562, V17.1429, 17.1415, V21.4281, 25.7129, 29.9986, 21.4286, V8.57143, V12.8567, V8.571, 12.8557, V4.28614, 4.28431, V12.8576, 0.000976562, V25.7143, 0.49966, 6.75, 3.89932, 6.74966, 7.29932, V6.74966, 10.6993, 14.0993, 17.4993, 16.8747, 14.0997, 14.099, 20.2497, V26.9997, V20.25, 3.89898, 3.89966, 16.875, V10.1247, 0.498981, V10.125, 0.49864, 8.57087, 4.28528, 4.28516, V8.57099, V4.28528, 21.4279, 8.57104, 12.8564, V12.8568, V8.57104, 21.4282, 4.28517, 8.57045, 21.4276, V21.4282, 17.1419, V17.1425, 21.4284, 8.57129, V4.28571, 25.7134, 21.4281, 21.4277, V25.7138, 29.9992, 8.57099, 25.7139, V17.1424, 29.025, 20.587, 20.934, 07.222, 26.036, 07.277, 40.111, 07.278, 00.666, 07.294, 00.675, 07.295, 16.909, 07.312, 54.829, 07.313, 36.215, 07.260, 27.8363, 24.4613, V3.37466, 21.0863, 17.7109, 21.0859, 24.4609, 10.125, V6.75, 17.7113, V3.375, 14.3359, 10.9609, 7.58594, V13.4997, 4.21094, V16.8747, V20.2497, V23.6247, V13.5, 0.835938, V23.625, V16.875, 13.0576, 23.4546, 3.43555, V26.7273, V23.4546, 9.84995, 3.81818, 6.64258, V7.0909, V3.81818, 16.264, 13.0566, 22.679, 13.6364, 19.4717, V16.9091, V13.6364, 6.64288, 0.545471, V3.8182, V0.545471, 13.0569, 9.84961, 3.43491, 13.6363, 13.057, V23.4545, 16.2643, V20.1818, V13.6363, V10.3636, V7.09088, 9.84962, 6.64225, 0.227539, 15.680, 07.240, 54.426, 07.116, 45.4, 45.1, 54.470, 07.131, 54.511, 07.146, 34.707, 07.159, 21.084, 07.172, 54.597, 07.186, 3.9996, V3.9996, 19.9996, V7.9996, V19.9996, 23.040, 20.703, 6.85726, 17.1429, 3.42871, V20.5715, 3.42859, 10.2857, V3.42857, V10.2857, V20.5714, 6.85714, 13.7143, 20.5714, 36.778, 20.717, 20.5665, 3.43359, 10.2832, V6.86135, 17.1387, V13.7169, V17.1446, V3.43359, 3.42776, V13.7167, 10.2833, V10.2889, V3.43343, 0.00567271, 44.385, 20.731, 38.8, 40.1, 20.727, 20.604, 20.833, 20.618, 20.876, 20.633, 23.165, 20.646, 23.278, 20.660, 23.223, 20.673, 34.5, 45.6, 22.045, 05.353, 24.5, 2.5, 36.8, 53.970, 20.680, 54.026, 20.687, 54.061, 20.694",
+      "Price change: $1, $10, $11, $27, $34, $35, $25, $24, $23, $21, $40, $41, $42, $28, $2, $47",
+      "New model mentioned",
+      "New api mentioned",
+      "New performance mentioned",
+      "New capability mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 90,
+    "summary": "90% content changed (3972 additions, 12 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "u003e",
+        "frequency": 822
+      },
+      {
+        "word": "fill",
+        "frequency": 580
+      },
+      {
+        "word": "children",
+        "frequency": 563
+      },
+      {
+        "word": "u003cpath",
+        "frequency": 468
+      },
+      {
+        "word": "dpl",
+        "frequency": 456
+      },
+      {
+        "word": "currentcolor",
+        "frequency": 451
+      },
+      {
+        "word": "classname",
+        "frequency": 367
+      },
+      {
+        "word": "div",
+        "frequency": 293
+      },
+      {
+        "word": "u003c",
+        "frequency": 232
+      },
+      {
+        "word": "locale",
+        "frequency": 230
+      },
+      {
+        "word": "static",
+        "frequency": 229
+      },
+      {
+        "word": "doppxp9fgttpv2c7eoewgupnnop3",
+        "frequency": 225
+      },
+      {
+        "word": "chunks",
+        "frequency": 220
+      },
+      {
+        "word": "button",
+        "frequency": 212
+      },
+      {
+        "word": "name",
+        "frequency": 194
+      },
+      {
+        "word": "props",
+        "frequency": 194
+      },
+      {
+        "word": "flex",
+        "frequency": 193
+      },
+      {
+        "word": "page",
+        "frequency": 164
+      },
+      {
+        "word": "icon",
+        "frequency": 147
+      },
+      {
+        "word": "46197",
+        "frequency": 132
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "technology",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "null": {
+        "before": 8,
+        "after": 912,
+        "change": 904
+      },
+      "svg": {
+        "before": 7,
+        "after": 272,
+        "change": 265
+      },
+      "url": {
+        "before": 43,
+        "after": 182,
+        "change": 139
+      },
+      "image": {
+        "before": 42,
+        "after": 143,
+        "change": 101
+      },
+      "www": {
+        "before": 1,
+        "after": 93,
+        "change": 92
+      },
+      "mistral": {
+        "before": 93,
+        "after": 180,
+        "change": 87
+      },
+      "width": {
+        "before": 4,
+        "after": 75,
+        "change": 71
+      },
+      "height": {
+        "before": 4,
+        "after": 73,
+        "change": 69
+      },
+      "next": {
+        "before": 43,
+        "after": 112,
+        "change": 69
+      },
+      "https": {
+        "before": 82,
+        "after": 145,
+        "change": 63
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "u003e u003cpath",
+        "count": 468
+      },
+      {
+        "phrase": "fill currentcolor",
+        "count": 445
+      },
+      {
+        "phrase": "currentcolor u003e",
+        "count": 443
+      },
+      {
+        "phrase": "null classname",
+        "count": 237
+      },
+      {
+        "phrase": "dpl dpl",
+        "count": 228
+      },
+      {
+        "phrase": "dpl doppxp9fgttpv2c7eoewgupnnop3",
+        "count": 225
+      },
+      {
+        "phrase": "static chunks",
+        "count": 220
+      },
+      {
+        "phrase": "div null",
+        "count": 218
+      },
+      {
+        "phrase": "svg u003e",
+        "count": 181
+      },
+      {
+        "phrase": "props children",
+        "count": 148
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

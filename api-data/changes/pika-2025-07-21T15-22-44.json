@@ -1,0 +1,86 @@
+{
+  "id": 67,
+  "company": "Pika",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:22:44.909Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "Introduction of new pricing plans and features for Pika's video creation services",
+    "specific_changes": [
+      "Introduction of four pricing plans: Free, Basic, Standard, and Pro",
+      "Specification of monthly video credits for each plan",
+      "Details on cost per video for different models and features",
+      "Introduction of the 2.2 model with updated pricing",
+      "Specification of feature-specific costs"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Pika is expanding its services to cater to a wider range of customers",
+      "The company is investing in new technologies and features to stay competitive"
+    ],
+    "business_impact": "The new pricing plans and features are likely to attract more customers and increase revenue for Pika",
+    "strategic_direction": "Pika is focusing on expanding its services and attracting more customers, indicating a growth-oriented strategy",
+    "competitive_implications": "The introduction of new pricing plans and features may put pressure on competitors to respond with similar offerings"
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "Free plan: $0",
+      "Basic plan: $8/month (billed yearly)",
+      "Standard plan: $28/month (billed yearly)",
+      "Pro plan: $76/month (billed yearly)"
+    ],
+    "features": [
+      "Pikadditions",
+      "Pikaswaps",
+      "Pikascenes",
+      "Pikatwists",
+      "Pikaffects",
+      "Selfie With Your Younger Self template"
+    ],
+    "products": [
+      "Pika"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "2.2 model"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "The introduction of new pricing plans and features may lead to increased competition",
+      "Pika's growth-oriented strategy may lead to increased costs and decreased profitability"
+    ],
+    "key_findings": [
+      "Pika is introducing new pricing plans and features to attract more customers",
+      "The company is investing in new technologies and features to stay competitive"
+    ],
+    "opportunities": [
+      "Pika's new pricing plans and features may attract more customers and increase revenue",
+      "The company's investment in new technologies and features may lead to increased competitiveness"
+    ],
+    "recommended_actions": [
+      "Monitor Pika's pricing plans and features to stay competitive",
+      "Invest in new technologies and features to stay ahead of the competition"
+    ]
+  },
+  "key_insights": [
+    "Pika is introducing new pricing plans and features to attract more customers",
+    "The company is investing in new technologies and features to stay competitive"
+  ],
+  "business_impact": "The new pricing plans and features are likely to attract more customers and increase revenue for Pika",
+  "competitive_implications": "The introduction of new pricing plans and features may put pressure on competitors to respond with similar offerings",
+  "content_hash_before": null,
+  "content_hash_after": "08f1a835502fdd816052874d99065a2817eb316c428eebcc817bf74d4f2486d6",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

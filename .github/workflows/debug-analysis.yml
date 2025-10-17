@@ -1,0 +1,60 @@
+name: Debug Analysis Pipeline
+
+on:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd github-actions-backend
+          npm install --omit=dev
+      
+      - name: Run debug script
+        run: |
+          cd github-actions-backend
+          node debug-analysis-pipeline.js
+        env:
+          USE_THREE_DB: 'true'
+          NODE_ENV: 'production'
+      
+      - name: Check database sizes
+        run: |
+          echo "Database file sizes:"
+          ls -lah github-actions-backend/data/*.db || echo "No database files found"
+      
+      - name: Test generate-static-data directly
+        run: |
+          cd github-actions-backend
+          echo "Running generate-static-data-wrapper.js..."
+          node generate-static-data-wrapper.js || echo "Generation failed with exit code $?"
+        env:
+          USE_THREE_DB: 'true'
+      
+      - name: Check generated files
+        run: |
+          echo "Files in api-data:"
+          ls -lah api-data/ || echo "No api-data directory"
+          
+          echo -e "\nChecking dashboard.json:"
+          if [ -f "api-data/dashboard.json" ]; then
+            echo "File exists. First 500 chars:"
+            head -c 500 api-data/dashboard.json
+            echo -e "\n\nGenerated_at field:"
+            grep -o '"generated_at":"[^"]*"' api-data/dashboard.json || echo "No generated_at found"
+          else
+            echo "dashboard.json not found!"
+          fi

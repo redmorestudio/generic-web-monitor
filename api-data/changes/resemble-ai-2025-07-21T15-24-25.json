@@ -1,0 +1,99 @@
+{
+  "id": 55,
+  "company": "Resemble AI",
+  "page_url": "homepage",
+  "detected_at": "2025-07-21T15:24:25.017Z",
+  "change_type": "new",
+  "interest_level": 9,
+  "ai_confidence": 0.9,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "major",
+    "what_changed": "New content added to the homepage of Resemble AI, including AI Voice Generator and Deepfake Detection for Enterprise, product features, case studies, research, and resources.",
+    "specific_changes": [
+      "Added AI Voice Generator and Deepfake Detection for Enterprise",
+      "Added product features such as Voice Cloning, Text to Speech, Speech to Speech, Voice Design, Multilingual, Audio Editing, and Chatterbox",
+      "Added case studies such as Personalization with Zomato and TrueFan, Crayola Adventures with Red Games, Fabler Transformed Bedtime for 1000’s of Children, and AI Powered Learning for Kids",
+      "Added research such as DETECT-2, PerTH Watermarker, Resemblyzer, and Deepfake Database",
+      "Added resources such as On Prem, API Docs, Status, Ethics, and Blog"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased focus on AI Voice Generator and Deepfake Detection",
+      "Expansion into new markets and industries"
+    ],
+    "business_impact": "The changes suggest a significant expansion of Resemble AI's product and service offerings, which could lead to increased revenue and market share.",
+    "strategic_direction": "The company appears to be focusing on developing and marketing its AI Voice Generator and Deepfake Detection products, with a emphasis on enterprise customers.",
+    "competitive_implications": "The changes could pose a threat to competitors in the AI Voice Generator and Deepfake Detection space, as Resemble AI is showcasing its expertise and capabilities."
+  },
+  "entities": {
+    "people": [],
+    "markets": [
+      "Enterprise"
+    ],
+    "pricing": [],
+    "features": [
+      "Generative AI",
+      "Realtime speech-to-speech voice conversion",
+      "High quality, human-like text-to-speech",
+      "Explainable AI with audio enabled language model"
+    ],
+    "products": [
+      "AI Voice Generator",
+      "Deepfake Detection",
+      "Voice Cloning",
+      "Text to Speech",
+      "Speech to Speech",
+      "Voice Design",
+      "Multilingual",
+      "Audio Editing",
+      "Chatterbox"
+    ],
+    "partnerships": [
+      "Zomato",
+      "TrueFan",
+      "Red Games",
+      "Fabler"
+    ],
+    "technologies": [
+      "AI",
+      "Machine Learning",
+      "Deep Learning"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI Voice Generator and Deepfake Detection space",
+      "Potential regulatory challenges"
+    ],
+    "key_findings": [
+      "Resemble AI is investing heavily in AI Voice Generator and Deepfake Detection",
+      "The company is expanding its product and service offerings",
+      "Resemble AI is targeting enterprise customers"
+    ],
+    "opportunities": [
+      "Partnership opportunities with Resemble AI",
+      "Potential for increased adoption of AI Voice Generator and Deepfake Detection technology"
+    ],
+    "recommended_actions": [
+      "Monitor Resemble AI's progress and updates",
+      "Consider partnership opportunities",
+      "Assess the potential impact on your business and industry"
+    ]
+  },
+  "key_insights": [
+    "Resemble AI is investing heavily in AI Voice Generator and Deepfake Detection",
+    "The company is expanding its product and service offerings",
+    "Resemble AI is targeting enterprise customers"
+  ],
+  "business_impact": "The changes suggest a significant expansion of Resemble AI's product and service offerings, which could lead to increased revenue and market share.",
+  "competitive_implications": "The changes could pose a threat to competitors in the AI Voice Generator and Deepfake Detection space, as Resemble AI is showcasing its expertise and capabilities.",
+  "content_hash_before": null,
+  "content_hash_after": "74a91a376dd57a0217dd251b0d80520e2144616838f8dd925d350d9e497bdf83",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

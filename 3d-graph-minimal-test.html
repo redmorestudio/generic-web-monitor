@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Force Graph - Minimal Test</title>
+    <style>
+        body {
+            margin: 0;
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+        }
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0,0,0,0.8);
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+    <script src="https://unpkg.com/three@0.152.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three-spritetext@1.8.0/dist/three-spritetext.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+</head>
+<body>
+    <div id="info">
+        <h3>Minimal Test</h3>
+        <div id="status">Loading...</div>
+    </div>
+    <div id="3d-graph"></div>
+
+    <script>
+        console.log('Starting minimal test...');
+        
+        // Create test data
+        const testData = {
+            nodes: [
+                { id: 'node1', name: 'Node 1', group: 'test' },
+                { id: 'node2', name: 'Node 2', group: 'test' },
+                { id: 'node3', name: 'Node 3', group: 'test' }
+            ],
+            links: [
+                { source: 'node1', target: 'node2' },
+                { source: 'node2', target: 'node3' },
+                { source: 'node3', target: 'node1' }
+            ]
+        };
+        
+        console.log('Test data:', testData);
+        
+        try {
+            // Create graph
+            const Graph = ForceGraph3D()
+                (document.getElementById('3d-graph'));
+            
+            console.log('Graph instance created');
+            
+            // Set data
+            Graph.graphData(testData);
+            
+            console.log('Graph data set successfully');
+            
+            // Configure
+            Graph
+                .nodeLabel('name')
+                .nodeAutoColorBy('group')
+                .linkWidth(1)
+                .linkOpacity(0.5);
+            
+            document.getElementById('status').textContent = 'Graph loaded successfully!';
+            
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('status').textContent = 'Error: ' + error.message;
+        }
+    </script>
+</body>
+</html>

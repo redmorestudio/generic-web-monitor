@@ -1,0 +1,281 @@
+{
+  "change_id": 133,
+  "url": "https://phind.com/search?q=pricing",
+  "company": "Phind",
+  "company_category": "AI Search",
+  "detected_at": "2025-07-18 16:40:31",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "The update removed external links and descriptions related to pricing, simplifying the page but reducing informational value.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://phind.com/search?q=pricing\ncompany: Phind\nscraped_at: 2025-07-04 20:17:57\n---\n\nPhind\n\nReport Bug\n\n|\n\nSign Up\n\nSign In\n\n[\n\n![Phind Logo](/assets/images/phind.svg)\n\n](/)\n\nQuestions\n\n[\n\nNew Question\n\n\n](/)\n\nLogin to save and view your conversation history.\n\nExplore More\n\n[\n\n![Phind Logo](/assets/images/phind.svg)\n\n](/)\n\n## pricing\n\nPHIND-70B MODEL\n\nGood balance of speed and quality for many use cases\n\n[1![favicon-https://en.wikipedia.org/wiki/Pricing](https://www.google.com/s2/favi...",
+    "after": "Phind\n\n!function(){try{var d=document.documentElement,n='data-theme',s='setAttribute';var e=localStorage.getItem('theme');if('system'===e||(!e&&true)){var t='(prefers-color-scheme: dark)',m=window.matchMedia(t);if(m.media!==t||m.matches){d.style.colorScheme = 'dark';d\\[s\\](n,'dark')}else{d.style.colorScheme = 'light';d\\[s\\](n,'light')}}else if(e){d\\[s\\](n,e|| '')}if(e==='light'||e==='dark')d.style.colorScheme=e}catch(e){}}()\n\nReport Bug\n\n|\n\nSign Up\n\nSign In\n\n[\n\n![Phind Logo](/assets/images/phind..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Phind\n\n!",
+      "function(){try{var d=document.",
+      "documentElement,n='data-theme',s='setAttribute';var e=localStorage.",
+      "getItem('theme');if('system'===e||(!",
+      "e&&true)){var t='(prefers-color-scheme: dark)',m=window.",
+      "matchMedia(t);if(m.",
+      "media!",
+      "==t||m.",
+      "matches){d.",
+      "style."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://phind.",
+      "com/search?",
+      "q=pricing\ncompany: Phind\nscraped_at: 2025-07-04 20:17:57\n---\n\nPhind\n\nReport Bug\n\n|\n\nSign Up\n\nSign In\n\n[\n\n!",
+      "svg)\n\n](/)\n\nQuestions\n\n[\n\nNew Question\n\n\n](/)\n\nLogin to save and view your conversation history.",
+      "svg)\n\n](/)\n\n## pricing\n\nPHIND-70B MODEL\n\nGood balance of speed and quality for many use cases\n\n[1!",
+      "[favicon-https://en.",
+      "wikipedia.",
+      "org/wiki/Pricing](https://www.",
+      "google.",
+      "com/s2/favicons?"
+    ],
+    "key_changes": [],
+    "change_percentage": 151,
+    "summary": "151% content changed (176 additions, 95 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "static",
+        "frequency": 81
+      },
+      {
+        "word": "chunks",
+        "frequency": 75
+      },
+      {
+        "word": "null",
+        "frequency": 45
+      },
+      {
+        "word": "children",
+        "frequency": 33
+      },
+      {
+        "word": "undefined",
+        "frequency": 30
+      },
+      {
+        "word": "next",
+        "frequency": 18
+      },
+      {
+        "word": "document",
+        "frequency": 13
+      },
+      {
+        "word": "data-sentry-source-file",
+        "frequency": 12
+      },
+      {
+        "word": "tsx",
+        "frequency": 12
+      },
+      {
+        "word": "style",
+        "frequency": 11
+      },
+      {
+        "word": "self",
+        "frequency": 10
+      },
+      {
+        "word": "push",
+        "frequency": 10
+      },
+      {
+        "word": "app",
+        "frequency": 10
+      },
+      {
+        "word": "layout",
+        "frequency": 10
+      },
+      {
+        "word": "13023",
+        "frequency": 9
+      },
+      {
+        "word": "15945",
+        "frequency": 9
+      },
+      {
+        "word": "41601",
+        "frequency": 9
+      },
+      {
+        "word": "73260",
+        "frequency": 9
+      },
+      {
+        "word": "81862",
+        "frequency": 9
+      },
+      {
+        "word": "c857e369-642a2881a992c7d3",
+        "frequency": 9
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "com",
+        "frequency": 23
+      },
+      {
+        "word": "https",
+        "frequency": 19
+      },
+      {
+        "word": "www",
+        "frequency": 14
+      },
+      {
+        "word": "wikipedia",
+        "frequency": 10
+      },
+      {
+        "word": "org",
+        "frequency": 10
+      },
+      {
+        "word": "dealhub",
+        "frequency": 9
+      },
+      {
+        "word": "shopify",
+        "frequency": 9
+      },
+      {
+        "word": "favicon-https",
+        "frequency": 8
+      },
+      {
+        "word": "google",
+        "frequency": 8
+      },
+      {
+        "word": "favicons",
+        "frequency": 8
+      },
+      {
+        "word": "domain",
+        "frequency": 8
+      },
+      {
+        "word": "openai",
+        "frequency": 7
+      },
+      {
+        "word": "wiki",
+        "frequency": 6
+      },
+      {
+        "word": "api",
+        "frequency": 6
+      },
+      {
+        "word": "glossary",
+        "frequency": 4
+      },
+      {
+        "word": "what",
+        "frequency": 4
+      },
+      {
+        "word": "online",
+        "frequency": 3
+      },
+      {
+        "word": "process",
+        "frequency": 3
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "company",
+        "frequency": 2
+      }
+    ],
+    "frequency_changes": {
+      "search": {
+        "before": 1,
+        "after": 6,
+        "change": 5
+      },
+      "type": {
+        "before": 1,
+        "after": 4,
+        "change": 3
+      },
+      "questions": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "new": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "static chunks",
+        "count": 75
+      },
+      {
+        "phrase": "self next",
+        "count": 10
+      },
+      {
+        "phrase": "chunks app",
+        "count": 10
+      },
+      {
+        "phrase": "null null",
+        "count": 10
+      },
+      {
+        "phrase": "next push",
+        "count": 9
+      },
+      {
+        "phrase": "41601 static",
+        "count": 9
+      },
+      {
+        "phrase": "chunks c857e369-642a2881a992c7d3",
+        "count": 9
+      },
+      {
+        "phrase": "13023 static",
+        "count": 9
+      },
+      {
+        "phrase": "chunks 13023-3ff686eab62f20e2",
+        "count": 9
+      },
+      {
+        "phrase": "13023-3ff686eab62f20e2 73260",
+        "count": 9
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

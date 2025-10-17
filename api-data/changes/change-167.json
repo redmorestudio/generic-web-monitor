@@ -1,0 +1,299 @@
+{
+  "change_id": 167,
+  "url": "https://stability.ai/stable-diffusion",
+  "company": "Stability AI",
+  "company_category": "LLM Providers",
+  "detected_at": "2025-07-18 16:41:50",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes detected between the previous and current content. The content appears to be identical, with no new features, updates, or announcements that would indicate technical innovation or business impact.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://stability.ai/stable-diffusion\ncompany: Stability AI\nscraped_at: 2025-07-04 20:20:32\n---\n\n    Stability AI Image Models — Stability AI\n\n[\n\n0\n\n](/cart)\n\n[Skip to Content](#page)\n\n [![Stability AI](//images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/6c9c4c25-5410-4547-bc26-dc621cdacb25/Stability+AI+logo.png?format=1500w)](/)\n\n [![Stability AI](//images.squarespace-cdn.com/content/v1/6213c340453c3f502425776e/330e6487-af90-43c8-a255-63b3440d0e34/StabilityAi_Logo_White-19...",
+    "after": "     Stability AI Image Models — Stability AI                          document.documentElement.classList.add('wf-loading') @keyframes fonts-loading { 0%, 99% { color: transparent; } } html.wf-loading \\* { animation: fonts-loading 3s; }   SQUARESPACE\\_ROLLUPS = {}; (function(rollups, name) { if (!rollups\\[name\\]) { rollups\\[name\\] = {}; } rollups\\[name\\].js = \\[\"//assets.squarespace.com/universal/scripts-compressed/extract-css-runtime-abcf3661bd0c9057-min.en-US.js\"\\]; })(SQUARESPACE\\_ROLLUPS, 's..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Stability AI Image Models — Stability AI                          document.",
+      "documentElement.",
+      "classList.",
+      "add('wf-loading') @keyframes fonts-loading { 0%, 99% { color: transparent; } } html.",
+      "wf-loading \\* { animation: fonts-loading 3s; }   SQUARESPACE\\_ROLLUPS = {}; (function(rollups, name) { if (!",
+      "rollups\\[name\\]) { rollups\\[name\\] = {}; } rollups\\[name\\].",
+      "js = \\[\"//assets.",
+      "squarespace.",
+      "com/universal/scripts-compressed/extract-css-runtime-abcf3661bd0c9057-min.",
+      "en-US."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://stability.",
+      "ai/stable-diffusion\ncompany: Stability AI\nscraped_at: 2025-07-04 20:20:32\n---\n\n    Stability AI Image Models — Stability AI\n\n[\n\n0\n\n](/cart)\n\n[Skip to Content](#page)\n\n [!",
+      "com/content/v1/6213c340453c3f502425776e/6c9c4c25-5410-4547-bc26-dc621cdacb25/Stability+AI+logo.",
+      "com/content/v1/6213c340453c3f502425776e/330e6487-af90-43c8-a255-63b3440d0e34/StabilityAi_Logo_White-19.",
+      "ai/partners)\n\n[Company](/company)\n\n[Board of Directors](/board-of-directors)\n\n[Safety](/safety)\n\n[Partners](/partners)\n\n[Research](/research)\n\n[Careers](/careers)\n\n[News](/news)\n\n[Resources](/resources)\n\n[Learning Hub](/learning-hub)\n\n[Customer Stories](/customer-stories)\n\n[Contact Us](/contact)\n\nOpen Menu Close Menu\n\n [!",
+      "com/content/v1/6213c340453c3f502425776e/6c9c4c25-5410-4547-bc26-dc621cdacb25/Stability+AI+logo.",
+      "com/content/v1/6213c340453c3f502425776e/330e6487-af90-43c8-a255-63b3440d0e34/StabilityAi_Logo_White-19.",
+      "ai/partners)\n\n[Company](/company)\n\n[Board of Directors](/board-of-directors)\n\n[Safety](/safety)\n\n[Partners](/partners)\n\n[Research](/research)\n\n[Careers](/careers)\n\n[News](/news)\n\n[Resources](/resources)\n\n[Learning Hub](/learning-hub)\n\n[Customer Stories](/customer-stories)\n\n[Contact Us](/contact)\n\nOpen Menu Close Menu\n\n[\n\nFolder: Models\n\n](/Models)\n\n[\n\nFolder: Applications\n\n](/applications)\n\n[\n\nFolder: Deployment\n\n](/deployment)\n\n[\n\nFolder: Company\n\n](/company)\n\n[\n\nNews\n\n](/news)\n\n[\n\nFolder: Resources\n\n](/resources)\n\n[Contact Us](/contact)\n\n[Back](/)\n\n[\n\nImage\n\n](/stable-image)\n\n[\n\nVideo\n\n](/stable-video)\n\n[\n\nAudio\n\n](/stable-audio)\n\n[\n\n3D\n\n](/stable-3d)\n\n[Back](/)\n\n[\n\nStable Assistant\n\n](/stable-assistant)\n\n[Stable Audio](https://www.",
+      "png)\n\n!",
+      "png)\n\nStable Diffusion 3."
+    ],
+    "key_changes": [
+      "New version: v6.0, 0.00, 0.6, 0.40, 1.5, 1.75, 0.5, 7.1, 14.2857142857, 32.7, 33.3, 1.2, 2.5, 1.25, 1.125, 13.3333333333, 30.6666666667, 65.3333333333, 82.6666666667, 91.3333333333, 1.3, 1.35, 1.6, 1.875, 1.4, 1.1, 7.5, 11.5, 6.5, 1.18, 0.7, 0.8, 0.75, 0.006, 0.023, 2.2, 0.096, 4.8, 0.532, 15.4, 0.72, 0.793, 0.853, 26.7, 0.902, 0.941, 0.968, 36.2, 0.987, 39.7, 43.7, 1.007, 48.3, 1.009, 55.3, 1.002, 78.2, 0.3, 0.022, 2.3, 0.091, 5.1, 0.18, 7.6, 0.508, 16.3, 0.607, 0.691, 0.762, 0.822, 28.4, 0.872, 0.912, 35.1, 0.944, 38.9, 0.985, 47.6, 0.996, 53.1, 1.001, 58.4, 1.003, 65.1, 11.0, 0.0215, 0.0, 10.0, 0.9, 21.0, 6.0, 15.0",
+      "Price change: $1",
+      "New date mentioned: 2/2/10, 1/2/27, 10/1/21, 12/2/41, 22/2/24, 41/3/45, 2/7/10, 17/2/19, 17/2/26, 19/1/32, 6/2/16, 2/6/10, 9/3/26, 2/8/10, 9/4/12, 8/2/12, 12/6/21, 13/2/15, 22/5/26, 16/2/17, 9/7/26, 9/8/12, 19/2/23, 7/12/10, 24/2/26, 22/9/26, 27/2/28, 10/9/11, 28/2/30, 11/9/13, 30/2/34, 11/12/14, 35/2/37, 11/22/13, 1/7/11, 2/4/10, 7/4/21, 9/6/19, 2/5/10, 2/5/19, 2/6/21, 2/9/10, 2/7/26, 1/2/11, 1/12/15, 11/2/12, 12/2/13, 3/8/11, 13/2/16, 8/3/11, 1/2/14, 9/2/10, 18/6/24, 10/2/12, 18/7/26, 12/2/15, 18/9/26, 1/12/14, 8/3/10, 2/3/26, 7/1/17, 4/2/13, 8/2/10, 3/7/12, 10/2/13, 3/9/13, 14/2/16, 10/3/12, 14/6/16, 10/6/12, 18/1/29, 4/14/13, 19/2/21, 15/7/24, 21/2/25, 7/15/10, 26/2/28, 10/15/12, 26/6/28, 10/18/12, 4/7/13, 5/2/15, 3/14/11, 5/5/10, 5/9/10, 17/6/28, 10/15/18, 9/2/18, 11/9/15, 9/6/17, 15/9/19, 18/2/24, 16/11/19, 24/2/31, 10/19/15, 28/6/36, 19/9/23, 31/2/37, 10/11/15, 38/2/40, 10/5/12, 40/2/50, 12/5/21, 51/2/53, 21/19/23, 53/2/55, 21/5/22",
+      "New model mentioned",
+      "New announcement mentioned",
+      "New performance mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 98,
+    "summary": "98% content changed (4003 additions, 57 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "onetrust-pc-sdk",
+        "frequency": 884
+      },
+      {
+        "word": "onetrust-banner-sdk",
+        "frequency": 267
+      },
+      {
+        "word": "var",
+        "frequency": 227
+      },
+      {
+        "word": "width",
+        "frequency": 227
+      },
+      {
+        "word": "ot-sdk-cookie-policy",
+        "frequency": 225
+      },
+      {
+        "word": "z-index",
+        "frequency": 177
+      },
+      {
+        "word": "display",
+        "frequency": 159
+      },
+      {
+        "word": "media",
+        "frequency": 159
+      },
+      {
+        "word": "none",
+        "frequency": 151
+      },
+      {
+        "word": "100",
+        "frequency": 145
+      },
+      {
+        "word": "font-size",
+        "frequency": 139
+      },
+      {
+        "word": "grid-area",
+        "frequency": 139
+      },
+      {
+        "word": "justify-content",
+        "frequency": 136
+      },
+      {
+        "word": "position",
+        "frequency": 134
+      },
+      {
+        "word": "align-items",
+        "frequency": 131
+      },
+      {
+        "word": "calc",
+        "frequency": 130
+      },
+      {
+        "word": "sqs-block-alignment-wrapper",
+        "frequency": 128
+      },
+      {
+        "word": "0px",
+        "frequency": 126
+      },
+      {
+        "word": "sqs-block",
+        "frequency": 126
+      },
+      {
+        "word": "flex-start",
+        "frequency": 125
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "330e6487-af90-43c8-a255-63b3440d0e34",
+        "frequency": 3
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "6c9c4c25-5410-4547-bc26-dc621cdacb25",
+        "frequency": 2
+      },
+      {
+        "word": "stable-diffusion",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      },
+      {
+        "word": "usp",
+        "frequency": 1
+      },
+      {
+        "word": "professional-membership-agreement",
+        "frequency": 1
+      },
+      {
+        "word": "ec71im",
+        "frequency": 1
+      },
+      {
+        "word": "nzazmdy4nzm3lje2nzeymdaznjk",
+        "frequency": 1
+      },
+      {
+        "word": "mtcyoduxnde3my4ymzuums4xnzi4nte1nte2ljaumc4w",
+        "frequency": 1
+      },
+      {
+        "word": "serv",
+        "frequency": 1
+      },
+      {
+        "word": "ice",
+        "frequency": 1
+      },
+      {
+        "word": "grassroots-innovation-in-open-models-suggested-amendments-to-the-ai-act",
+        "frequency": 1
+      },
+      {
+        "word": "pdf",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "center": {
+        "before": 1,
+        "after": 133,
+        "change": 132
+      },
+      "not": {
+        "before": 9,
+        "after": 140,
+        "change": 131
+      },
+      "button": {
+        "before": 1,
+        "after": 109,
+        "change": 108
+      },
+      "right": {
+        "before": 1,
+        "after": 85,
+        "change": 84
+      },
+      "com": {
+        "before": 24,
+        "after": 92,
+        "change": 68
+      },
+      "label": {
+        "before": 8,
+        "after": 76,
+        "change": 68
+      },
+      "checkbox": {
+        "before": 4,
+        "after": 49,
+        "change": 45
+      },
+      "block": {
+        "before": 1,
+        "after": 32,
+        "change": 31
+      },
+      "function": {
+        "before": 1,
+        "after": 31,
+        "change": 30
+      },
+      "svg": {
+        "before": 1,
+        "after": 27,
+        "change": 26
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "grid-area z-index",
+        "count": 126
+      },
+      {
+        "phrase": "sqs-block justify-content",
+        "count": 126
+      },
+      {
+        "phrase": "sqs-block-alignment-wrapper align-items",
+        "count": 126
+      },
+      {
+        "phrase": "media min-width",
+        "count": 80
+      },
+      {
+        "phrase": "calc var",
+        "count": 80
+      },
+      {
+        "phrase": "minmax var",
+        "count": 78
+      },
+      {
+        "phrase": "min-width 768px",
+        "count": 77
+      },
+      {
+        "phrase": "position relative",
+        "count": 72
+      },
+      {
+        "phrase": "ot-sdk-cookie-policy-v2 ot-sdk-cookie-policy",
+        "count": 71
+      },
+      {
+        "phrase": "width 100",
+        "count": 68
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

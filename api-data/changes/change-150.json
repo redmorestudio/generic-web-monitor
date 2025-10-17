@@ -1,0 +1,315 @@
+{
+  "change_id": 150,
+  "url": "https://replit.com/pricing",
+  "company": "Replit",
+  "company_category": "AI Coding",
+  "detected_at": "2025-07-18 16:40:54",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes detected in the pricing page content of Replit. The previous and current content appear to be identical, indicating no new features, updates, or technical innovations.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://replit.com/pricing\ncompany: Replit\nscraped_at: 2025-07-04 20:19:43\n---\n\nPricing - Replit\n\n[Skip to content](#main-content)\n\n*   [](/)\n\n*   *   Features\n\n        *   [Replit AI](/ai)\n        *   [Collaboration](/collaboration)\n        *   [CDE](/cloud-development-environment)\n        *   [Deployments](/deployments)\n\n    *   [Teams](/teams)\n    *   [Pricing](/pricing)\n    *   [Guides](/guides)\n    *   [Blog](https://blog.replit.com)\n    *   [Careers](/careers)\n*   *   [Log in](/lo...",
+    "after": "Pricing - Replit /\\* PLEX SANS \\*/ /\\* ibm-plex-sans-regular - latin \\*/ @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; src: local('IBM Plex Sans Regular'), local('IBMPlexSans-Regular'), url('/public/fonts/ibm-plex-sans-v8-latin-regular.woff2') format('woff2'), /\\* Chrome 26+, Opera 23+, Firefox 39+ \\*/ url('/public/fonts/ibm-plex-sans-v8-latin-regular.woff') format('woff'); /\\* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ \\*/ } /\\* ibm-plex-sans-italic - latin \\..."
+  },
+  "diff": {
+    "added_sentences": [
+      "Pricing - Replit /\\* PLEX SANS \\*/ /\\* ibm-plex-sans-regular - latin \\*/ @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 400; src: local('IBM Plex Sans Regular'), local('IBMPlexSans-Regular'), url('/public/fonts/ibm-plex-sans-v8-latin-regular.",
+      "woff2') format('woff2'), /\\* Chrome 26+, Opera 23+, Firefox 39+ \\*/ url('/public/fonts/ibm-plex-sans-v8-latin-regular.",
+      "woff') format('woff'); /\\* Chrome 6+, Firefox 3.",
+      "6+, IE 9+, Safari 5.",
+      "1+ \\*/ } /\\* ibm-plex-sans-italic - latin \\*/ @font-face { font-family: 'IBM Plex Sans'; font-style: italic; font-weight: 400; src: local('IBM Plex Sans Italic'), local('IBMPlexSans-Italic'), url('/public/fonts/ibm-plex-sans-v8-latin-italic.",
+      "woff2') format('woff2'), /\\* Chrome 26+, Opera 23+, Firefox 39+ \\*/ url('/public/fonts/ibm-plex-sans-v8-latin-italic.",
+      "woff') format('woff'); /\\* Chrome 6+, Firefox 3.",
+      "6+, IE 9+, Safari 5.",
+      "1+ \\*/ } /\\* ibm-plex-sans-500 - latin \\*/ @font-face { font-family: 'IBM Plex Sans'; font-style: normal; font-weight: 500; src: local('IBM Plex Sans Medium'), local('IBMPlexSans-Medium'), url('/public/fonts/ibm-plex-sans-v8-latin-500.",
+      "woff2') format('woff2'), /\\* Chrome 26+, Opera 23+, Firefox 39+ \\*/ url('/public/fonts/ibm-plex-sans-v8-latin-500."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://replit.",
+      "com/pricing\ncompany: Replit\nscraped_at: 2025-07-04 20:19:43\n---\n\nPricing - Replit\n\n[Skip to content](#main-content)\n\n*   [](/)\n\n*   *   Features\n\n        *   [Replit AI](/ai)\n        *   [Collaboration](/collaboration)\n        *   [CDE](/cloud-development-environment)\n        *   [Deployments](/deployments)\n\n    *   [Teams](/teams)\n    *   [Pricing](/pricing)\n    *   [Guides](/guides)\n    *   [Blog](https://blog.",
+      "com)\n    *   [Careers](/careers)\n*   *   [Log in](/login)\n    *   [Start building](/signup)\n\n*   *   Features\n\n        *   [Replit AI](/ai)\n        *   [Collaboration](/collaboration)\n        *   [CDE](/cloud-development-environment)\n        *   [Deployments](/deployments)\n\n    *   [Teams](/teams)\n    *   [Pricing](/pricing)\n    *   [Guides](/guides)\n    *   [Blog](https://blog.",
+      "Starter users get 1 free static deployment\n\nCompare plans\n\n[TABLE]\n\n\nStarter\n\nCore\n\nTeams\n\nEnterprise\n\nReplit AI\n\nAgent\n\nLimited\n\nAssistant (Chat)\n\nBasic\n\nAdvanced\n\nAdvanced\n\nAdvanced\n\nCode Completion\n\nCode Generation\n\nBasic\n\nAdvanced\n\nAdvanced\n\nAdvanced\n\nDebugger\n\nBasic\n\nAdvanced\n\nAdvanced\n\nAdvanced\n\nDevelopment\n\nvCPUs\n\n1\n\n4\n\n8\n\nUp to 64 vCPUs\n\nMemory (GiB)\n\n2\n\n8\n\n16\n\nUp to 128 GiB RAM\n\nOutbound data transfer (GiB)\n\n1\n\n100\n\n1,000\n\nCustom\n\nSSH access\n\nPublic Apps\n\n10\n\nUnlimited\n\nUnlimited\n\nUnlimited\n\nPrivate Apps\n\nCollaborators\n\n1\n\n3\n\nAll team members\n\nAll team members\n\nDevelopment Time (minutes)\n\n1200\n\nUnlimited\n\nUnlimited\n\nUnlimited\n\nStorage\n\nStorage per app (GiB)\n\n2\n\n50\n\n256\n\nCustom\n\nReplit Database\n\nPostgreSQL storage (GiB)\n\nCustom\n\nPostgreSQL compute (hours)\n\nCustom\n\nObject Storage\n\nObject Storage data transfer (GiB)\n\nObject Storage advanced operations\n\nObject Storage basic operations\n\nDeployments\n\nOutbound data transfer (GiB)\n\n10\n\n100\n\n1,000\n\nCustom\n\nReserved VM deployments\n\nAutoscale deployments\n\nAutoscale compute units\n\nAutoscale requests\n\nScheduled deployments\n\nScheduled compute units\n\nStatic deployments\n\n1\n\nPrivate deployments\n\nSecurity & Compliance\n\nRole-based access control\n\nSSO\n\nSingle-tenant with VPC\n\nComing soon\n\nCustom invoicing\n\nMember Support\n\nMember Support\n\nMember-only events\n\nEarly access to new features\n\nMember community\n\nOnboarding support\n\n\n[/TABLE]\n\nGet started with Replit TeamsGet enhanced security and compute for professional developers and teams shipping to production.",
+      "*   [\n\n    twitter\n\n\n\n    ](https://twitter.",
+      "com/replit)\n*   [\n\n    tiktok\n\n\n\n    ](https://www.",
+      "com/@replit)\n*   [\n\n    instagram\n\n\n\n    ](https://instagram.",
+      "it)\n*   [\n\n    facebook\n\n\n\n    ](https://facebook.",
+      "js](/languages/nodejs)\n*   [Nix](/languages/nix)\n*   [HTML, CSS, JS](/languages/html)\n*   [C++](/languages/cpp)\n*   [Golang](/languages/go)\n\n!",
+      "[](https://t."
+    ],
+    "key_changes": [
+      "New version: 3.6, 5.1, v4.7.0, 4.15.3, 0.4, 0.2, 0.5, 0.1, 0.75, 0.8, 17.4, 0.087, 0.05, 0.15, 36.04, 0.721, 20.88, 0.052, 5.0, 537.36, 120.0.0, 1.1, 1.0.1",
+      "New api mentioned",
+      "New feature mentioned"
+    ],
+    "change_percentage": 96,
+    "summary": "96% content changed (753 additions, 23 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "var",
+        "frequency": 254
+      },
+      {
+        "word": "display",
+        "frequency": 195
+      },
+      {
+        "word": "center",
+        "frequency": 166
+      },
+      {
+        "word": "none",
+        "frequency": 76
+      },
+      {
+        "word": "background-color",
+        "frequency": 64
+      },
+      {
+        "word": "column",
+        "frequency": 60
+      },
+      {
+        "word": "solid",
+        "frequency": 58
+      },
+      {
+        "word": "hover",
+        "frequency": 58
+      },
+      {
+        "word": "outline",
+        "frequency": 58
+      },
+      {
+        "word": "not",
+        "frequency": 54
+      },
+      {
+        "word": "-webkit-flex",
+        "frequency": 51
+      },
+      {
+        "word": "flex",
+        "frequency": 51
+      },
+      {
+        "word": "row",
+        "frequency": 51
+      },
+      {
+        "word": "color",
+        "frequency": 49
+      },
+      {
+        "word": "media",
+        "frequency": 48
+      },
+      {
+        "word": "--space-8",
+        "frequency": 47
+      },
+      {
+        "word": "-webkit-box",
+        "frequency": 44
+      },
+      {
+        "word": "-ms-flexbox",
+        "frequency": 44
+      },
+      {
+        "word": "span",
+        "frequency": 42
+      },
+      {
+        "word": "min-width",
+        "frequency": 41
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "26600",
+        "frequency": 4
+      },
+      {
+        "word": "26800",
+        "frequency": 4
+      },
+      {
+        "word": "260",
+        "frequency": 2
+      },
+      {
+        "word": "264",
+        "frequency": 2
+      },
+      {
+        "word": "2624",
+        "frequency": 2
+      },
+      {
+        "word": "26255",
+        "frequency": 2
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "table",
+        "frequency": 2
+      },
+      {
+        "word": "adsct",
+        "frequency": 2
+      },
+      {
+        "word": "bci",
+        "frequency": 2
+      },
+      {
+        "word": "utc",
+        "frequency": 2
+      },
+      {
+        "word": "26en-us",
+        "frequency": 2
+      },
+      {
+        "word": "26google",
+        "frequency": 2
+      },
+      {
+        "word": "20inc",
+        "frequency": 2
+      },
+      {
+        "word": "26linux",
+        "frequency": 2
+      },
+      {
+        "word": "20x86",
+        "frequency": 2
+      },
+      {
+        "word": "26na",
+        "frequency": 2
+      },
+      {
+        "word": "eci",
+        "frequency": 2
+      },
+      {
+        "word": "5286730e-209f-4cc9-9e3f-965be3c9ecd3",
+        "frequency": 2
+      },
+      {
+        "word": "integration",
+        "frequency": 2
+      }
+    ],
+    "frequency_changes": {
+      "100": {
+        "before": 3,
+        "after": 36,
+        "change": 33
+      },
+      "url": {
+        "before": 1,
+        "after": 26,
+        "change": 25
+      },
+      "public": {
+        "before": 3,
+        "after": 27,
+        "change": 24
+      },
+      "analytics": {
+        "before": 1,
+        "after": 20,
+        "change": 19
+      },
+      "document": {
+        "before": 2,
+        "after": 16,
+        "change": 14
+      },
+      "all": {
+        "before": 3,
+        "after": 12,
+        "change": 9
+      },
+      "com": {
+        "before": 27,
+        "after": 35,
+        "change": 8
+      },
+      "content": {
+        "before": 1,
+        "after": 9,
+        "change": 8
+      },
+      "new": {
+        "before": 3,
+        "after": 10,
+        "change": 7
+      },
+      "https": {
+        "before": 28,
+        "after": 34,
+        "change": 6
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "var --space-8",
+        "count": 47
+      },
+      {
+        "phrase": "display -webkit-box",
+        "count": 44
+      },
+      {
+        "phrase": "-webkit-box display",
+        "count": 44
+      },
+      {
+        "phrase": "display -webkit-flex",
+        "count": 44
+      },
+      {
+        "phrase": "-webkit-flex display",
+        "count": 44
+      },
+      {
+        "phrase": "display -ms-flexbox",
+        "count": 44
+      },
+      {
+        "phrase": "-ms-flexbox display",
+        "count": 44
+      },
+      {
+        "phrase": "display flex",
+        "count": 44
+      },
+      {
+        "phrase": "not disabled",
+        "count": 38
+      },
+      {
+        "phrase": "media screen",
+        "count": 36
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

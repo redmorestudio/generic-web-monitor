@@ -1,0 +1,83 @@
+{
+  "id": 36,
+  "company": "Synthesia",
+  "page_url": "pricing",
+  "detected_at": "2025-07-21T15:27:48.749Z",
+  "change_type": "new",
+  "interest_level": 8,
+  "ai_confidence": 0.8,
+  "summary": "Change detected",
+  "category": "General Update",
+  "change_summary": {
+    "change_type": "addition",
+    "change_scale": "significant",
+    "what_changed": "Introduction of new pricing plans and features",
+    "specific_changes": [
+      "New pricing plans: Basic, Starter, Creator, Enterprise",
+      "Introduction of new features: AI Video Assistant, 140+ languages, Remove Synthesia logo, Download your videos",
+      "Changes in usage limits: 3 minutes of video/month for Basic, 10 minutes of video/month for Starter, 30 minutes of video/month for Creator",
+      "Introduction of custom pricing for Enterprise plan"
+    ]
+  },
+  "strategic_analysis": {
+    "market_signals": [
+      "Increased competition in the AI video software market",
+      "Growing demand for AI-powered video creation tools"
+    ],
+    "business_impact": "The introduction of new pricing plans and features could attract more customers and increase revenue for Synthesia.",
+    "strategic_direction": "Synthesia is focusing on expanding its product offerings and pricing options to appeal to a wider range of customers.",
+    "competitive_implications": "Synthesia's new pricing plans and features could put pressure on competitors to update their own offerings."
+  },
+  "entities": {
+    "people": [],
+    "markets": [],
+    "pricing": [
+      "Basic: $0/mo",
+      "Starter: $29/mo",
+      "Creator: $89/mo",
+      "Enterprise: Custom pricing"
+    ],
+    "features": [
+      "AI Video Assistant",
+      "140+ languages",
+      "Remove Synthesia logo",
+      "Download your videos"
+    ],
+    "products": [
+      "Synthesia"
+    ],
+    "partnerships": [],
+    "technologies": [
+      "AI"
+    ]
+  },
+  "insights": {
+    "threats": [
+      "Increased competition in the AI video software market",
+      "Potential backlash from customers if the new pricing plans are not well-received"
+    ],
+    "key_findings": [
+      "Synthesia is introducing new pricing plans and features to attract more customers",
+      "The company is focusing on expanding its product offerings and pricing options"
+    ],
+    "opportunities": [
+      "Partnership opportunities with other companies in the AI video software market",
+      "Expansion into new markets and industries"
+    ],
+    "recommended_actions": [
+      "Monitor Synthesia's pricing and product offerings to stay competitive",
+      "Consider partnering with Synthesia to expand into new markets and industries"
+    ]
+  },
+  "key_insights": [
+    "Synthesia is introducing new pricing plans and features to attract more customers",
+    "The company is focusing on expanding its product offerings and pricing options"
+  ],
+  "business_impact": "The introduction of new pricing plans and features could attract more customers and increase revenue for Synthesia.",
+  "competitive_implications": "Synthesia's new pricing plans and features could put pressure on competitors to update their own offerings.",
+  "content_hash_before": null,
+  "content_hash_after": "92340c6de7518ef1a7968a854032a2d5f6e7b9569603008e60ca4357d809b3d2",
+  "ai_model": "groq-llama-3.3-70b",
+  "database_source": "postgresql",
+  "schema": "intelligence.changes"
+}

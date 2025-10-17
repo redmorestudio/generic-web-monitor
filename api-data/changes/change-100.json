@@ -1,0 +1,291 @@
+{
+  "change_id": 100,
+  "url": "https://lumalabs.ai/pricing",
+  "company": "Luma AI",
+  "company_category": "Video AI",
+  "detected_at": "2025-07-18 16:37:52",
+  "interest_level": 1,
+  "interest_category": "trivial",
+  "interest_explanation": "No significant changes detected in the provided content. The previous and current content appear to be identical, with no new or different information added.",
+  "interest_drivers": [],
+  "technical_innovation_score": 1,
+  "business_impact_score": 1,
+  "ai_key_changes": null,
+  "ai_business_context": null,
+  "has_content": true,
+  "content_preview": {
+    "before": "---\nurl: https://lumalabs.ai/pricing\ncompany: Luma AI\nscraped_at: 2025-07-04 20:15:44\n---\n\n## Page Not Found\n\n[\n\n![Luma AI Logo](/images/brand/luma-ai/logo-white.svg)\n\n](https://lumalabs.ai/)\n\n[](mailto:hello@lumalabs.ai)[](https://twitter.com/LumaLabsAI)[](https://www.instagram.com/lumalabsai/)[](https://www.linkedin.com/company/luma-ai/)[](https://www.youtube.com/channel/UC45T0I4p7A3dI0XvhivafZQ?sub_confirmation=1)\n\n[Dream Machine](/dream-machine)[Genie](/genie)[App](https://lumalabs.ai/app)[F...",
+    "after": ":host,:root,\\[data-theme\\]{--chakra-ring-inset:var(--chakra-empty,/\\*!\\*/ /\\*!\\*/);--chakra-ring-offset-width:0px;--chakra-ring-offset-color:#fff;--chakra-ring-color:rgba(66, 153, 225, 0.6);--chakra-ring-offset-shadow:0 0 #0000;--chakra-ring-shadow:0 0 #0000;--chakra-space-x-reverse:0;--chakra-space-y-reverse:0;--chakra-colors-transparent:transparent;--chakra-colors-current:currentColor;--chakra-colors-black:#000000;--chakra-colors-white:#FFFFFF;--chakra-colors-whiteAlpha-50:rgba(255, 255, 255, ..."
+  },
+  "diff": {
+    "added_sentences": [
+      ":host,:root,\\[data-theme\\]{--chakra-ring-inset:var(--chakra-empty,/\\*!",
+      "\\*/ /\\*!",
+      "\\*/);--chakra-ring-offset-width:0px;--chakra-ring-offset-color:#fff;--chakra-ring-color:rgba(66, 153, 225, 0.",
+      "6);--chakra-ring-offset-shadow:0 0 #0000;--chakra-ring-shadow:0 0 #0000;--chakra-space-x-reverse:0;--chakra-space-y-reverse:0;--chakra-colors-transparent:transparent;--chakra-colors-current:currentColor;--chakra-colors-black:#000000;--chakra-colors-white:#FFFFFF;--chakra-colors-whiteAlpha-50:rgba(255, 255, 255, 0.",
+      "04);--chakra-colors-whiteAlpha-100:rgba(255, 255, 255, 0.",
+      "06);--chakra-colors-whiteAlpha-200:rgba(255, 255, 255, 0.",
+      "08);--chakra-colors-whiteAlpha-300:rgba(255, 255, 255, 0.",
+      "16);--chakra-colors-whiteAlpha-400:rgba(255, 255, 255, 0.",
+      "24);--chakra-colors-whiteAlpha-500:rgba(255, 255, 255, 0.",
+      "36);--chakra-colors-whiteAlpha-600:rgba(255, 255, 255, 0."
+    ],
+    "removed_sentences": [
+      "---\nurl: https://lumalabs.",
+      "ai/pricing\ncompany: Luma AI\nscraped_at: 2025-07-04 20:15:44\n---\n\n## Page Not Found\n\n[\n\n!",
+      "!",
+      "bci=4&dv=UTC%26en-US%26Google%20Inc.",
+      "%26Linux%20x86_64%26255%26800%26600%264%2624%26800%26600%260%26na&eci=3&event=%7B%7D&event_id=725ff392-1d7b-4424-9fb6-6cc99bff521a&integration=gtm&p_id=Twitter&p_user_id=0&pl_id=3c3296cc-7d5d-489a-b75f-58b14abdbf8f&tw_document_href=https%3A%2F%2Flumalabs.",
+      "bci=4&dv=UTC%26en-US%26Google%20Inc.",
+      "%26Linux%20x86_64%26255%26800%26600%264%2624%26800%26600%260%26na&eci=3&event=%7B%7D&event_id=725ff392-1d7b-4424-9fb6-6cc99bff521a&integration=gtm&p_id=Twitter&p_user_id=0&pl_id=3c3296cc-7d5d-489a-b75f-58b14abdbf8f&tw_document_href=https%3A%2F%2Flumalabs."
+    ],
+    "key_changes": [
+      "New version: 0.6, 0.04, 0.06, 0.08, 0.16, 0.24, 0.36, 0.48, 0.64, 0.80, 0.92, 0.45, 0.625, 0.75, 0.875, 1.125, 1.25, 1.5, 1.875, 2.25, 3.75, 4.5, 0.05, 0.025, 0.1, 1.75, 2.5, 1.375, 1.625, 0.125, 0.25, 0.375, 0.5, 3.5, 0.2, 0.4, 1.15, 0.35, 1.33, 1.2",
+      "New feature mentioned"
+    ],
+    "change_percentage": 89,
+    "summary": "89% content changed (173 additions, 7 removals)"
+  },
+  "keywords": {
+    "new_keywords": [
+      {
+        "word": "var",
+        "frequency": 45
+      },
+      {
+        "word": "rgba",
+        "frequency": 37
+      },
+      {
+        "word": "data-theme",
+        "frequency": 31
+      },
+      {
+        "word": "255",
+        "frequency": 30
+      },
+      {
+        "word": "display",
+        "frequency": 27
+      },
+      {
+        "word": "center",
+        "frequency": 25
+      },
+      {
+        "word": "5rem",
+        "frequency": 16
+      },
+      {
+        "word": "where",
+        "frequency": 16
+      },
+      {
+        "word": "none",
+        "frequency": 14
+      },
+      {
+        "word": "host",
+        "frequency": 11
+      },
+      {
+        "word": "root",
+        "frequency": 11
+      },
+      {
+        "word": "25rem",
+        "frequency": 11
+      },
+      {
+        "word": "color",
+        "frequency": 11
+      },
+      {
+        "word": "inherit",
+        "frequency": 11
+      },
+      {
+        "word": "button",
+        "frequency": 11
+      },
+      {
+        "word": "100",
+        "frequency": 10
+      },
+      {
+        "word": "padding",
+        "frequency": 10
+      },
+      {
+        "word": "0px",
+        "frequency": 9
+      },
+      {
+        "word": "1px",
+        "frequency": 9
+      },
+      {
+        "word": "75rem",
+        "frequency": 9
+      }
+    ],
+    "removed_keywords": [
+      {
+        "word": "26600",
+        "frequency": 4
+      },
+      {
+        "word": "26800",
+        "frequency": 4
+      },
+      {
+        "word": "264",
+        "frequency": 2
+      },
+      {
+        "word": "2624",
+        "frequency": 2
+      },
+      {
+        "word": "26255",
+        "frequency": 2
+      },
+      {
+        "word": "---",
+        "frequency": 2
+      },
+      {
+        "word": "utc",
+        "frequency": 2
+      },
+      {
+        "word": "26linux",
+        "frequency": 2
+      },
+      {
+        "word": "20x86",
+        "frequency": 2
+      },
+      {
+        "word": "725ff392-1d7b-4424-9fb6-6cc99bff521a",
+        "frequency": 2
+      },
+      {
+        "word": "3c3296cc-7d5d-489a-b75f-58b14abdbf8f",
+        "frequency": 2
+      },
+      {
+        "word": "url",
+        "frequency": 1
+      },
+      {
+        "word": "pricing",
+        "frequency": 1
+      },
+      {
+        "word": "scraped",
+        "frequency": 1
+      },
+      {
+        "word": "2025-07-04",
+        "frequency": 1
+      }
+    ],
+    "frequency_changes": {
+      "not": {
+        "before": 1,
+        "after": 15,
+        "change": 14
+      },
+      "type": {
+        "before": 2,
+        "after": 12,
+        "change": 10
+      },
+      "document": {
+        "before": 2,
+        "after": 5,
+        "change": 3
+      },
+      "sub": {
+        "before": 1,
+        "after": 3,
+        "change": 2
+      },
+      "gtm": {
+        "before": 2,
+        "after": 4,
+        "change": 2
+      },
+      "svg": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "iframe": {
+        "before": 2,
+        "after": 3,
+        "change": 1
+      },
+      "media": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "page": {
+        "before": 1,
+        "after": 2,
+        "change": 1
+      },
+      "https": {
+        "before": 18,
+        "after": 19,
+        "change": 1
+      }
+    },
+    "significant_phrases": [
+      {
+        "phrase": "255 255",
+        "count": 20
+      },
+      {
+        "phrase": "not data-theme",
+        "count": 12
+      },
+      {
+        "phrase": "rgba 255",
+        "count": 10
+      },
+      {
+        "phrase": "https lumalabs",
+        "count": 9
+      },
+      {
+        "phrase": "data-theme data-theme",
+        "count": 8
+      },
+      {
+        "phrase": "data-theme light",
+        "count": 6
+      },
+      {
+        "phrase": "data-theme dark",
+        "count": 6
+      },
+      {
+        "phrase": "where button",
+        "count": 6
+      },
+      {
+        "phrase": "input type",
+        "count": 5
+      },
+      {
+        "phrase": "display -webkit-box",
+        "count": 5
+      }
+    ]
+  },
+  "entities": {},
+  "key_phrases": []
+}

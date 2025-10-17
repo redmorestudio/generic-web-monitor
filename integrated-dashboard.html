@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Competitive Monitor - Integrated View</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0e27;
+            color: #e4e4e7;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .stats-bar {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        /* Company Category Sections */
+        .category-section {
+            margin-bottom: 40px;
+        }
+        
+        .category-header {
+            background: rgba(99, 102, 241, 0.1);
+            border-left: 4px solid #6366f1;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        /* Company Grid */
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 25px;
+        }
+        
+        .company-card {
+            background: #1a1f3a;
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+        
+        .company-card.has-recent-change {
+            border-color: #fbbf24;
+            box-shadow: 0 0 20px rgba(251, 191, 36, 0.2);
+        }
+        
+        .company-card:hover {
+            transform: translateY(-2px);
+            border-color: #6366f1;
+        }
+        
+        /* Change Indicator */
+        .change-indicator {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #fbbf24;
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .company-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        
+        .company-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .threat-badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+        
+        .threat-high { 
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid #ef4444;
+        }
+        .threat-medium { 
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border: 1px solid #f59e0b;
+        }
+        .threat-low { 
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid #22c55e;
+        }
+        
+        /* Intelligence Grid */
+        .intel-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .intel-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .intel-label {
+            font-size: 0.75rem;
+            color: #9ca3af;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+        
+        .entity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        
+        .entity-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 0;
+        }
+        
+        .entity-item.new {
+            animation: highlight 3s ease-out;
+        }
+        
+        @keyframes highlight {
+            0% { background: rgba(251, 191, 36, 0.3); }
+            100% { background: transparent; }
+        }
+        
+        .entity-icon {
+            font-size: 1.2rem;
+        }
+        
+        .new-badge {
+            background: #fbbf24;
+            color: #000;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            margin-left: auto;
+        }
+        
+        /* Recent Change Box */
+        .recent-change-box {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .recent-change-box h4 {
+            color: #fbbf24;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .change-time {
+            color: #9ca3af;
+            font-size: 0.8rem;
+        }
+        
+        /* Filter Bar */
+        .filter-bar {
+            background: #1a1f3a;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        
+        .filter-label {
+            font-size: 0.9rem;
+            color: #9ca3af;
+        }
+        
+        .filter-button {
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: #a5b4fc;
+            padding: 5px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .filter-button:hover,
+        .filter-button.active {
+            background: rgba(99, 102, 241, 0.4);
+            border-color: #6366f1;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌐 AI Competitive Intelligence - Integrated View</h1>
+            <p>Complete competitive landscape with real-time change detection</p>
+            <div class="stats-bar" id="statsBar">
+                <div class="stat-item">Loading stats...</div>
+            </div>
+        </div>
+        
+        <div class="filter-bar">
+            <div class="filter-group">
+                <span class="filter-label">Show:</span>
+                <button class="filter-button active" onclick="filterView('all')">All Companies</button>
+                <button class="filter-button" onclick="filterView('changed')">With Changes</button>
+                <button class="filter-button" onclick="filterView('high-threat')">High Threat</button>
+            </div>
+            <div class="filter-group">
+                <span class="filter-label">Highlight:</span>
+                <button class="filter-button active" onclick="toggleHighlight()">Recent Changes</button>
+            </div>
+        </div>
+        
+        <div id="categorizedCompanies">
+            <div class="loading">Loading competitive landscape...</div>
+        </div>
+    </div>
+    
+    <script>
+        let dashboardData = null;
+        let changesData = null;
+        let companyDetailsData = null;
+        let currentFilter = 'all';
+        let highlightChanges = true;
+        
+        async function loadIntegratedView() {
+            try {
+                const [dashboard, changes, details] = await Promise.all([
+                    fetch('api-data/dashboard.json').then(r => r.json()),
+                    fetch('api-data/changes.json').then(r => r.json()),
+                    fetch('api-data/company-details.json').then(r => r.json())
+                ]);
+                
+                dashboardData = dashboard;
+                changesData = changes;
+                companyDetailsData = details;
+                
+                renderStats(dashboard.stats, changes.changes);
+                renderCategorizedCompanies(dashboard.company_activity, changes.changes, details.companies);
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('categorizedCompanies').innerHTML = 
+                    '<div class="loading">Error loading data. Please refresh.</div>';
+            }
+        }
+        
+        function renderStats(stats, changes) {
+            const recentChanges = changes.filter(c => {
+                const changeDate = new Date(c.created_at);
+                const dayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+                return changeDate > dayAgo;
+            });
+            
+            const statsBar = document.getElementById('statsBar');
+            statsBar.innerHTML = `
+                <div class="stat-item">🏢 <strong>${stats.companies}</strong> Companies</div>
+                <div class="stat-item">🔍 <strong>${stats.urls}</strong> URLs Monitored</div>
+                <div class="stat-item">🧠 <strong>${stats.snapshots}</strong> AI Analyses</div>
+                <div class="stat-item">⚡ <strong>${recentChanges.length}</strong> Changes (24h)</div>
+                <div class="stat-item">🔄 Updated: <strong>${getRelativeTime(new Date(stats.lastCheck))}</strong></div>
+            `;
+        }
+        
+        function renderCategorizedCompanies(companies, changes, details) {
+            // Group companies by category
+            const categorized = {};
+            companies.forEach(company => {
+                const category = company.type || 'Other';
+                if (!categorized[category]) {
+                    categorized[category] = [];
+                }
+                categorized[category].push(company);
+            });
+            
+            // Create a map of recent changes by company
+            const changesByCompany = {};
+            changes.forEach(change => {
+                if (!changesByCompany[change.company]) {
+                    changesByCompany[change.company] = [];
+                }
+                changesByCompany[change.company].push(change);
+            });
+            
+            // Render categories
+            const container = document.getElementById('categorizedCompanies');
+            container.innerHTML = Object.entries(categorized)
+                .sort(([a], [b]) => a.localeCompare(b))
+                .map(([category, companies]) => `
+                    <div class="category-section">
+                        <div class="category-header">
+                            ${getCategoryEmoji(category)} ${category} (${companies.length})
+                        </div>
+                        <div class="companies-grid">
+                            ${companies.map(company => 
+                                renderCompanyCard(company, changesByCompany[company.company], details.companies)
+                            ).join('')}
+                        </div>
+                    </div>
+                `).join('');
+        }
+        
+        function renderCompanyCard(company, companyChanges, allDetails) {
+            const hasRecentChange = companyChanges && companyChanges.length > 0;
+            const latestChange = hasRecentChange ? companyChanges[0] : null;
+            const threatClass = company.intelligence.threat_category;
+            
+            // Get full details for this company
+            const companyId = Object.keys(allDetails).find(id => 
+                allDetails[id].company_name === company.company
+            );
+            const fullDetails = companyId ? allDetails[companyId] : null;
+            
+            return `
+                <div class="company-card ${hasRecentChange ? 'has-recent-change' : ''}" 
+                     data-company="${company.company}"
+                     data-threat="${threatClass}"
+                     data-has-change="${hasRecentChange}">
+                    ${hasRecentChange && highlightChanges ? 
+                        `<div class="change-indicator">${latestChange.emoji} CHANGED</div>` : ''}
+                    
+                    <div class="company-header">
+                        <div class="company-name">${company.company}</div>
+                        <div class="threat-badge threat-${threatClass}">
+                            ${threatClass.toUpperCase()} THREAT
+                        </div>
+                    </div>
+                    
+                    <div class="intel-grid">
+                        ${company.intelligence.products.length > 0 ? `
+                        <div class="intel-section">
+                            <div class="intel-label">🚀 Products & Services</div>
+                            <div class="entity-list">
+                                ${company.intelligence.products.map((product, i) => `
+                                    <div class="entity-item ${isNewEntity(product, latestChange) ? 'new' : ''}">
+                                        <span class="entity-icon">•</span>
+                                        <span>${product}</span>
+                                        ${isNewEntity(product, latestChange) ? '<span class="new-badge">NEW</span>' : ''}
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${company.intelligence.technologies.length > 0 ? `
+                        <div class="intel-section">
+                            <div class="intel-label">🛠️ Technologies</div>
+                            <div class="entity-list">
+                                ${company.intelligence.technologies.map(tech => `
+                                    <div class="entity-item">
+                                        <span class="entity-icon">•</span>
+                                        <span>${tech}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${company.intelligence.ai_ml_concepts.length > 0 ? `
+                        <div class="intel-section">
+                            <div class="intel-label">🧠 AI/ML Focus</div>
+                            <div class="entity-list">
+                                ${company.intelligence.ai_ml_concepts.map(concept => `
+                                    <div class="entity-item">
+                                        <span class="entity-icon">•</span>
+                                        <span>${concept}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${fullDetails && fullDetails.metrics.length > 0 ? `
+                        <div class="intel-section">
+                            <div class="intel-label">📊 Key Metrics</div>
+                            <div class="entity-list">
+                                ${fullDetails.metrics.slice(0, 3).map(metric => `
+                                    <div class="entity-item">
+                                        <span class="entity-icon">•</span>
+                                        <span>${metric.metric}: ${metric.value}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    ${latestChange ? `
+                    <div class="recent-change-box">
+                        <h4>Latest Change</h4>
+                        <div>${latestChange.summary}</div>
+                        <div class="change-time">${latestChange.time_ago}</div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+        
+        function getCategoryEmoji(category) {
+            const emojis = {
+                'competitors': '⚔️',
+                'AI Hardware': '🖥️',
+                'AI Tools': '🛠️',
+                'LLM Providers': '🧠',
+                'Partners': '🤝',
+                'Industry Players': '🏭'
+            };
+            return emojis[category] || '📌';
+        }
+        
+        function isNewEntity(entityName, latestChange) {
+            // Simple check - in real implementation would compare before/after
+            return latestChange && latestChange.summary.toLowerCase().includes(entityName.toLowerCase());
+        }
+        
+        function getRelativeTime(date) {
+            const now = new Date();
+            const seconds = Math.floor((now - date) / 1000);
+            
+            if (seconds < 60) return 'just now';
+            if (seconds < 3600) return Math.floor(seconds / 60) + ' min ago';
+            if (seconds < 86400) return Math.floor(seconds / 3600) + ' hours ago';
+            if (seconds < 604800) return Math.floor(seconds / 86400) + ' days ago';
+            return date.toLocaleDateString();
+        }
+        
+        function filterView(filter) {
+            currentFilter = filter;
+            document.querySelectorAll('.filter-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.company-card').forEach(card => {
+                let show = true;
+                
+                if (filter === 'changed') {
+                    show = card.dataset.hasChange === 'true';
+                } else if (filter === 'high-threat') {
+                    show = card.dataset.threat === 'high';
+                }
+                
+                card.style.display = show ? 'block' : 'none';
+            });
+        }
+        
+        function toggleHighlight() {
+            highlightChanges = !highlightChanges;
+            event.target.classList.toggle('active');
+            loadIntegratedView(); // Reload to update highlighting
+        }
+        
+        // Load on page load
+        loadIntegratedView();
+        
+        // Refresh every 5 minutes
+        setInterval(loadIntegratedView, 5 * 60 * 1000);
+    </script>
+</body>
+</html>
