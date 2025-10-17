@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Generic Web Monitor</title>
+    <link rel="stylesheet" href="dashboard-styles.css">
+    <style>
+        /* Dashboard-specific styles */
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: var(--space-6);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-6);
+        }
+
+        .dashboard-header h1 {
+            margin: 0 0 var(--space-2) 0;
+            color: white;
+        }
+
+        .dashboard-header p {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .profile-selector {
+            background: white;
+            padding: var(--space-5);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-6);
+            box-shadow: var(--shadow-base);
+        }
+
+        .profile-selector-controls {
+            display: flex;
+            gap: var(--space-4);
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .profile-selector label {
+            font-weight: var(--font-weight-semibold);
+            color: var(--gray-800);
+            white-space: nowrap;
+        }
+
+        .profile-selector select {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        /* Importance Badge Styles */
+        .importance-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-md);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-sm);
+        }
+
+        .importance-critical {
+            background: #fee;
+            color: #c00;
+            border: 2px solid #c00;
+        }
+
+        .importance-important {
+            background: #fff3e0;
+            color: #e65100;
+            border: 2px solid #ff9800;
+        }
+
+        .importance-moderate {
+            background: #fff9c4;
+            color: #f57f17;
+            border: 2px solid #fbc02d;
+        }
+
+        .importance-low {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 2px solid #64b5f6;
+        }
+
+        .importance-minimal {
+            background: #f5f5f5;
+            color: #616161;
+            border: 2px solid #9e9e9e;
+        }
+
+        .importance-trivial {
+            background: #fafafa;
+            color: #9e9e9e;
+            border: 2px solid #e0e0e0;
+        }
+
+        /* Change Item Styles */
+        .change-item {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            margin-bottom: var(--space-4);
+            box-shadow: var(--shadow-base);
+            transition: box-shadow var(--transition-base);
+        }
+
+        .change-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .change-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+            flex-wrap: wrap;
+            gap: var(--space-3);
+        }
+
+        .change-item h4 {
+            margin: 0 0 var(--space-3) 0;
+            color: var(--gray-800);
+        }
+
+        .change-summary {
+            color: var(--gray-700);
+            line-height: var(--line-height-relaxed);
+            margin-bottom: var(--space-4);
+        }
+
+        .importance-context {
+            background: var(--gray-100);
+            padding: var(--space-4);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-4);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .importance-context strong {
+            display: block;
+            margin-bottom: var(--space-2);
+            color: var(--gray-800);
+        }
+
+        .importance-context p {
+            margin: 0 0 var(--space-2) 0;
+            color: var(--gray-600);
+        }
+
+        .importance-context .examples {
+            margin-top: var(--space-3);
+            padding: var(--space-3);
+            background: white;
+            border-radius: var(--radius-base);
+            font-size: var(--font-size-sm);
+            color: var(--gray-600);
+        }
+
+        .ai-analysis {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8eaff 100%);
+            padding: var(--space-4);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-4);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .ai-analysis strong {
+            display: block;
+            margin-bottom: var(--space-2);
+            color: var(--primary-color);
+        }
+
+        .ai-analysis p {
+            margin: 0;
+            color: var(--gray-700);
+        }
+
+        .change-actions {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+        }
+
+        .timestamp {
+            color: var(--gray-600);
+            font-size: var(--font-size-sm);
+        }
+
+        .profile-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-1);
+            padding: var(--space-1) var(--space-3);
+            background: var(--primary-light);
+            color: var(--primary-color);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+        }
+
+        /* Multi-Profile Summary View */
+        .profile-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: var(--space-5);
+        }
+
+        .profile-summary-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-base);
+            transition: all var(--transition-base);
+        }
+
+        .profile-summary-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .profile-summary-card h3 {
+            margin: 0 0 var(--space-4) 0;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .summary-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-4);
+            margin-bottom: var(--space-5);
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--primary-color);
+            margin-bottom: var(--space-1);
+        }
+
+        .stat-label {
+            display: block;
+            font-size: var(--font-size-xs);
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Filter Controls */
+        .filter-controls {
+            background: white;
+            padding: var(--space-5);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-5);
+            box-shadow: var(--shadow-base);
+        }
+
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
+            background: white;
+            padding: var(--space-5);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--space-5);
+            box-shadow: var(--shadow-base);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-4);
+        }
+
+        /* Loading and Empty States */
+        .loading-state {
+            text-align: center;
+            padding: var(--space-10);
+            color: var(--gray-600);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: var(--space-10);
+            color: var(--gray-600);
+        }
+
+        .empty-state h3 {
+            color: var(--gray-700);
+            margin-bottom: var(--space-3);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .profile-selector-controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .profile-selector select {
+                width: 100%;
+            }
+
+            .summary-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1>Generic Web Monitor</h1>
+            <p>Real-time competitive intelligence across all your profiles</p>
+        </div>
+
+        <!-- Profile Selector -->
+        <div class="profile-selector">
+            <div class="profile-selector-controls">
+                <label for="active-profile">Active Profile:</label>
+                <select id="active-profile" onchange="switchProfile(this.value)">
+                    <option value="all">📊 All Profiles - Summary View</option>
+                </select>
+                <button class="button button-secondary" onclick="manageProfiles()">⚙️ Manage Profiles</button>
+            </div>
+        </div>
+
+        <!-- Multi-Profile Summary View -->
+        <div id="multi-profile-view" style="display: none;">
+            <h2>All Profiles - Activity Summary</h2>
+            <div class="profile-summary-grid" id="profile-summary-grid">
+                <!-- Profile summary cards will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Single Profile View -->
+        <div id="single-profile-view" style="display: none;">
+            <!-- Stats Bar -->
+            <div class="stats-bar">
+                <div class="stats-grid" id="profile-stats">
+                    <!-- Stats will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="filter-controls">
+                <h4>Filter Changes</h4>
+                <div class="filter-grid">
+                    <div class="form-group">
+                        <label for="importance-filter">Importance Level</label>
+                        <select id="importance-filter" onchange="applyFilters()">
+                            <option value="">All Levels</option>
+                            <option value="9-10">Critical (9-10)</option>
+                            <option value="7-8">Important (7-8)</option>
+                            <option value="5-6">Moderate (5-6)</option>
+                            <option value="3-4">Low (3-4)</option>
+                            <option value="1-2">Minimal (1-2)</option>
+                            <option value="0">Trivial (0)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="competitor-filter">Competitor</label>
+                        <select id="competitor-filter" onchange="applyFilters()">
+                            <option value="">All Competitors</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="time-filter">Time Range</label>
+                        <select id="time-filter" onchange="applyFilters()">
+                            <option value="24h">Last 24 Hours</option>
+                            <option value="7d">Last 7 Days</option>
+                            <option value="30d">Last 30 Days</option>
+                            <option value="all">All Time</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="filter-buttons">
+                    <button class="button button-ghost" onclick="clearFilters()">Clear Filters</button>
+                </div>
+            </div>
+
+            <!-- Changes Feed -->
+            <div id="changes-feed">
+                <!-- Change items will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mock data for demonstration - Replace with API calls
+        const mockProfiles = [
+            {
+                id: 'energy-drinks',
+                name: '🥤 Energy Drinks',
+                domain: 'energy-drinks',
+                competitors: ['Red Bull', 'Monster Energy', 'Rockstar'],
+                stats: {
+                    critical: 3,
+                    important: 5,
+                    moderate: 8,
+                    total: 15
+                },
+                importanceBands: [
+                    {
+                        min: 9, max: 10,
+                        label: 'Critical',
+                        description: 'New product lines, major formula changes, market entry/exit',
+                        examples: ['Launching new drink line', 'Discontinuing major product', 'Major reformulation']
+                    },
+                    {
+                        min: 7, max: 8,
+                        label: 'Important',
+                        description: 'New flavors, packaging redesigns, major sponsorships, pricing changes',
+                        examples: ['New flavor announcement', 'Partnership with major athlete', 'Significant price increase']
+                    },
+                    {
+                        min: 5, max: 6,
+                        label: 'Moderate',
+                        description: 'Limited editions, regional launches, promotional campaigns',
+                        examples: ['Limited edition flavor', 'Regional product launch', 'Seasonal promotion']
+                    }
+                ]
+            },
+            {
+                id: 'ai',
+                name: '🤖 AI Competitors',
+                domain: 'ai',
+                competitors: ['OpenAI', 'Anthropic', 'Google AI'],
+                stats: {
+                    critical: 1,
+                    important: 8,
+                    moderate: 3,
+                    total: 12
+                },
+                importanceBands: [
+                    {
+                        min: 9, max: 10,
+                        label: 'Critical',
+                        description: 'New model releases, major capability announcements, pricing changes',
+                        examples: ['New flagship model', 'Major API changes', 'Pricing restructure']
+                    }
+                ]
+            },
+            {
+                id: 'automobiles',
+                name: '🚗 Automobiles',
+                domain: 'automobiles',
+                competitors: ['Tesla', 'Ford', 'GM'],
+                stats: {
+                    critical: 2,
+                    important: 4,
+                    moderate: 6,
+                    total: 12
+                },
+                importanceBands: []
+            }
+        ];
+
+        const mockChanges = [
+            {
+                id: 1,
+                profileId: 'energy-drinks',
+                competitor: 'Red Bull',
+                importance: 9,
+                importanceBand: {
+                    min: 9, max: 10,
+                    label: 'Critical',
+                    description: 'New product lines, major formula changes, market entry/exit',
+                    examples: ['Launching new drink line', 'Discontinuing major product', 'Major reformulation']
+                },
+                title: 'Red Bull: New Product Line Launch',
+                summary: 'Red Bull announces "Red Bull Zero" - first completely sugar-free line targeting health-conscious consumers',
+                aiAnalysis: 'Significance: 9/10 - Major market move targeting health segment. Competitive response expected from Monster and Rockstar within 6 months.',
+                sourceUrl: 'https://redbull.com/products',
+                timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000)
+            },
+            {
+                id: 2,
+                profileId: 'energy-drinks',
+                competitor: 'Monster Energy',
+                importance: 7,
+                importanceBand: {
+                    min: 7, max: 8,
+                    label: 'Important',
+                    description: 'New flavors, packaging redesigns, major sponsorships',
+                    examples: ['New flavor announcement', 'Partnership with major athlete']
+                },
+                title: 'Monster Energy: Sponsorship Deal with Formula 1',
+                summary: 'Monster Energy becomes official energy drink partner of Formula 1, replacing Red Bull in major markets',
+                aiAnalysis: 'Significance: 7/10 - Strategic sponsorship move challenging Red Bull\'s dominance in motorsports.',
+                sourceUrl: 'https://monsterenergy.com/news',
+                timestamp: new Date(Date.now() - 5 * 60 * 60 * 1000)
+            },
+            {
+                id: 3,
+                profileId: 'ai',
+                competitor: 'OpenAI',
+                importance: 9,
+                importanceBand: {
+                    min: 9, max: 10,
+                    label: 'Critical',
+                    description: 'New model releases, major capability announcements',
+                    examples: ['New flagship model', 'Major API changes']
+                },
+                title: 'OpenAI: GPT-5 Release Announcement',
+                summary: 'OpenAI announces GPT-5 with improved reasoning capabilities and 50% cost reduction',
+                aiAnalysis: 'Significance: 9/10 - Major competitive threat. Performance improvements and pricing pressure on all competitors.',
+                sourceUrl: 'https://openai.com/blog',
+                timestamp: new Date(Date.now() - 1 * 60 * 60 * 1000)
+            }
+        ];
+
+        let currentProfile = null;
+        let allChanges = mockChanges;
+        let filteredChanges = mockChanges;
+
+        // Initialize dashboard
+        function init() {
+            loadProfiles();
+            switchProfile('all');
+        }
+
+        // Load profiles into selector
+        function loadProfiles() {
+            const selector = document.getElementById('active-profile');
+
+            mockProfiles.forEach(profile => {
+                const option = document.createElement('option');
+                option.value = profile.id;
+                option.textContent = profile.name;
+                selector.appendChild(option);
+            });
+        }
+
+        // Switch between profiles
+        function switchProfile(profileId) {
+            const selector = document.getElementById('active-profile');
+            selector.value = profileId;
+            currentProfile = profileId;
+
+            if (profileId === 'all') {
+                document.getElementById('multi-profile-view').style.display = 'block';
+                document.getElementById('single-profile-view').style.display = 'none';
+                renderMultiProfileView();
+            } else {
+                document.getElementById('multi-profile-view').style.display = 'none';
+                document.getElementById('single-profile-view').style.display = 'block';
+                loadProfileData(profileId);
+            }
+        }
+
+        // Render multi-profile summary view
+        function renderMultiProfileView() {
+            const grid = document.getElementById('profile-summary-grid');
+            grid.innerHTML = '';
+
+            mockProfiles.forEach(profile => {
+                const card = document.createElement('div');
+                card.className = 'profile-summary-card';
+                card.innerHTML = `
+                    <h3>${profile.name}</h3>
+                    <div class="summary-stats">
+                        <div class="stat">
+                            <span class="stat-value">${profile.stats.critical}</span>
+                            <span class="stat-label">Critical (9-10)</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">${profile.stats.important}</span>
+                            <span class="stat-label">Important (7-8)</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">${profile.stats.total}</span>
+                            <span class="stat-label">Total Changes</span>
+                        </div>
+                    </div>
+                    <button class="button button-primary button-full" onclick="switchProfile('${profile.id}')">
+                        View Dashboard →
+                    </button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Load single profile data
+        function loadProfileData(profileId) {
+            const profile = mockProfiles.find(p => p.id === profileId);
+            if (!profile) return;
+
+            // Update stats
+            const statsGrid = document.getElementById('profile-stats');
+            statsGrid.innerHTML = `
+                <div class="stat">
+                    <span class="stat-value">${profile.stats.critical}</span>
+                    <span class="stat-label">Critical Changes</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">${profile.stats.important}</span>
+                    <span class="stat-label">Important Changes</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">${profile.stats.moderate}</span>
+                    <span class="stat-label">Moderate Changes</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-value">${profile.stats.total}</span>
+                    <span class="stat-label">Total Changes</span>
+                </div>
+            `;
+
+            // Update competitor filter
+            const competitorFilter = document.getElementById('competitor-filter');
+            competitorFilter.innerHTML = '<option value="">All Competitors</option>';
+            profile.competitors.forEach(comp => {
+                const option = document.createElement('option');
+                option.value = comp;
+                option.textContent = comp;
+                competitorFilter.appendChild(option);
+            });
+
+            // Filter and render changes
+            applyFilters();
+        }
+
+        // Apply filters to changes
+        function applyFilters() {
+            const importanceFilter = document.getElementById('importance-filter').value;
+            const competitorFilter = document.getElementById('competitor-filter').value;
+            const timeFilter = document.getElementById('time-filter').value;
+
+            filteredChanges = allChanges.filter(change => {
+                // Profile filter
+                if (currentProfile !== 'all' && change.profileId !== currentProfile) return false;
+
+                // Importance filter
+                if (importanceFilter) {
+                    const [min, max] = importanceFilter.split('-').map(Number);
+                    if (max !== undefined) {
+                        if (change.importance < min || change.importance > max) return false;
+                    } else {
+                        if (change.importance !== min) return false;
+                    }
+                }
+
+                // Competitor filter
+                if (competitorFilter && change.competitor !== competitorFilter) return false;
+
+                // Time filter
+                if (timeFilter !== 'all') {
+                    const now = Date.now();
+                    const changeTime = change.timestamp.getTime();
+                    const ranges = {
+                        '24h': 24 * 60 * 60 * 1000,
+                        '7d': 7 * 24 * 60 * 60 * 1000,
+                        '30d': 30 * 24 * 60 * 60 * 1000
+                    };
+                    if (now - changeTime > ranges[timeFilter]) return false;
+                }
+
+                return true;
+            });
+
+            renderChanges();
+        }
+
+        // Render changes feed
+        function renderChanges() {
+            const feed = document.getElementById('changes-feed');
+
+            if (filteredChanges.length === 0) {
+                feed.innerHTML = `
+                    <div class="empty-state">
+                        <h3>No changes found</h3>
+                        <p>Try adjusting your filters or check back later for new updates.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            feed.innerHTML = '';
+            filteredChanges.forEach(change => {
+                const changeItem = createChangeItem(change);
+                feed.appendChild(changeItem);
+            });
+        }
+
+        // Create change item element
+        function createChangeItem(change) {
+            const item = document.createElement('div');
+            item.className = 'change-item';
+
+            const importanceClass = getImportanceClass(change.importance);
+            const profile = mockProfiles.find(p => p.id === change.profileId);
+
+            item.innerHTML = `
+                <div class="change-header">
+                    <div class="importance-badge ${importanceClass}">
+                        ${change.importance}/10 - ${change.importanceBand.label}
+                    </div>
+                    <span class="timestamp">${formatTimeAgo(change.timestamp)}</span>
+                </div>
+
+                <h4>${change.title}</h4>
+                <p class="change-summary">${change.summary}</p>
+
+                <div class="importance-context">
+                    <strong>Why this is ${change.importanceBand.label} (${change.importanceBand.min}-${change.importanceBand.max}) for ${profile.name}:</strong>
+                    <p>"${change.importanceBand.description}"</p>
+                    <div class="examples">
+                        <strong>Examples:</strong> ${change.importanceBand.examples.join(', ')}
+                    </div>
+                </div>
+
+                <div class="ai-analysis">
+                    <strong>🤖 AI Analysis:</strong>
+                    <p>${change.aiAnalysis}</p>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+                    <span class="profile-tag">${profile.name}</span>
+                    <div class="change-actions">
+                        <a href="${change.sourceUrl}" target="_blank" class="button button-secondary button-sm">
+                            View Source →
+                        </a>
+                        <button class="button button-ghost button-sm" onclick="viewHistory('${change.competitor}')">
+                            History
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            return item;
+        }
+
+        // Get importance CSS class
+        function getImportanceClass(importance) {
+            if (importance >= 9) return 'importance-critical';
+            if (importance >= 7) return 'importance-important';
+            if (importance >= 5) return 'importance-moderate';
+            if (importance >= 3) return 'importance-low';
+            if (importance >= 1) return 'importance-minimal';
+            return 'importance-trivial';
+        }
+
+        // Format time ago
+        function formatTimeAgo(date) {
+            const seconds = Math.floor((new Date() - date) / 1000);
+
+            const intervals = {
+                year: 31536000,
+                month: 2592000,
+                week: 604800,
+                day: 86400,
+                hour: 3600,
+                minute: 60
+            };
+
+            for (const [unit, secondsInUnit] of Object.entries(intervals)) {
+                const interval = Math.floor(seconds / secondsInUnit);
+                if (interval >= 1) {
+                    return interval === 1 ? `1 ${unit} ago` : `${interval} ${unit}s ago`;
+                }
+            }
+
+            return 'Just now';
+        }
+
+        // Clear all filters
+        function clearFilters() {
+            document.getElementById('importance-filter').value = '';
+            document.getElementById('competitor-filter').value = '';
+            document.getElementById('time-filter').value = '24h';
+            applyFilters();
+        }
+
+        // Navigate to profile manager
+        function manageProfiles() {
+            window.location.href = 'profile-manager.html';
+        }
+
+        // View competitor history
+        function viewHistory(competitor) {
+            alert(`View change history for ${competitor}\n\n(This would show a modal or navigate to a history page)`);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

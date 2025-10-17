@@ -1,0 +1,29 @@
+{
+  "profilePath": "/Users/sethredmore/generic-web-monitor/profiles/examples/ai-competitors.json",
+  "timestamp": "2025-10-17T04:56:40.787Z",
+  "schemaValidation": {
+    "valid": false,
+    "errors": [
+      "profile.competitors[0].urls[1].type: Value 'product' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[1].urls[1].type: Value 'product' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[2].urls[1].type: Value 'product' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[3].urls[2].type: Value 'technology' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[4].urls[1].type: Value 'product' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[5].urls[1].type: Value 'product' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[5].urls[2].type: Value 'features' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[6].urls[1].type: Value 'features' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[8].urls[1].type: Value 'product' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[9].urls[1].type: Value 'features' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[10].urls[1].type: Value 'features' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[10].urls[2].type: Value 'about' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[12].urls[1].type: Value 'platform' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[12].urls[2].type: Value 'solutions' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[13].urls[1].type: Value 'platform' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[13].urls[2].type: Value 'resources' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[14].urls[1].type: Value 'product' not in allowed values: homepage, products, pricing, blog, news, docs",
+      "profile.competitors[15].urls[1].type: Value 'product' not in allowed values: homepage, products, pricing, blog, news, docs"
+    ],
+    "warnings": []
+  },
+  "urlAccessibility": null
+}

@@ -40,7 +40,27 @@
                   "required": ["url", "type"],
                   "properties": {
                     "url": {"type": "string", "format": "uri"},
-                    "type": {"type": "string", "enum": ["homepage", "products", "pricing", "blog", "news", "docs"]}
+                    "type": {
+                      "type": "string",
+                      "enum": [
+                        "homepage",
+                        "products",
+                        "product",
+                        "pricing",
+                        "blog",
+                        "news",
+                        "docs",
+                        "api",
+                        "features",
+                        "technology",
+                        "about",
+                        "platform",
+                        "solutions",
+                        "resources",
+                        "other"
+                      ],
+                      "description": "Type of page being monitored"
+                    }
                   }
                 }
               },

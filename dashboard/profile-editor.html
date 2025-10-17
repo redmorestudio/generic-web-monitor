@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Editor - Generic Web Monitor</title>
+    <link rel="stylesheet" href="dashboard-styles.css">
+    <style>
+        /* Editor-specific styles */
+        body {
+            background: var(--gray-100);
+        }
+
+        .editor-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-5);
+        }
+
+        /* Header with actions bar */
+        .editor-header {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-5);
+            margin-bottom: var(--space-5);
+            box-shadow: var(--shadow-base);
+            position: sticky;
+            top: 0;
+            z-index: var(--z-sticky);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+        }
+
+        .header-title {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .dirty-indicator {
+            display: none;
+            width: 8px;
+            height: 8px;
+            background: var(--warning-border);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .dirty-indicator.active {
+            display: block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .actions-bar {
+            display: flex;
+            gap: var(--space-3);
+            flex-wrap: wrap;
+        }
+
+        .actions-group {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        /* Tabs navigation */
+        .tabs-nav {
+            display: flex;
+            gap: var(--space-2);
+            border-bottom: 2px solid var(--gray-300);
+            margin-bottom: var(--space-5);
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            padding: var(--space-3) var(--space-5);
+            border: none;
+            background: transparent;
+            color: var(--gray-600);
+            font-weight: var(--font-weight-semibold);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all var(--transition-base);
+            white-space: nowrap;
+        }
+
+        .tab-button:hover {
+            color: var(--primary-color);
+            background: var(--gray-100);
+        }
+
+        .tab-button.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-button .badge {
+            margin-left: var(--space-2);
+        }
+
+        /* Tab content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn var(--transition-slow);
+        }
+
+        /* Competitors section */
+        .competitor-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .competitor-card {
+            background: var(--white);
+            border: 2px solid var(--gray-300);
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
+            transition: all var(--transition-base);
+        }
+
+        .competitor-card.collapsed .competitor-urls {
+            display: none;
+        }
+
+        .competitor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-3);
+            cursor: pointer;
+        }
+
+        .competitor-info {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            flex: 1;
+        }
+
+        .competitor-name {
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-md);
+            color: var(--gray-800);
+        }
+
+        .competitor-actions {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        .url-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+            padding-left: var(--space-6);
+        }
+
+        .url-item {
+            display: flex;
+            gap: var(--space-3);
+            align-items: center;
+            padding: var(--space-3);
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+        }
+
+        .url-input {
+            flex: 2;
+        }
+
+        .url-type-select {
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .url-toggle {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background: var(--gray-400);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            transition: background var(--transition-base);
+        }
+
+        .toggle-switch.active {
+            background: var(--accent-color);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: var(--white);
+            border-radius: 50%;
+            transition: transform var(--transition-base);
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(20px);
+        }
+
+        /* Importance bands */
+        .bands-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .band-card {
+            background: var(--white);
+            border-left: 4px solid var(--primary-color);
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .band-header-row {
+            display: flex;
+            gap: var(--space-4);
+            align-items: center;
+            margin-bottom: var(--space-3);
+        }
+
+        .band-range {
+            display: flex;
+            gap: var(--space-2);
+            align-items: center;
+        }
+
+        .band-range input {
+            width: 80px;
+        }
+
+        .color-picker-group {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        input[type="color"] {
+            width: 50px;
+            height: 36px;
+            border: 2px solid var(--gray-400);
+            border-radius: var(--radius-base);
+            cursor: pointer;
+        }
+
+        .band-preview {
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            display: inline-block;
+        }
+
+        .examples-editor {
+            margin-top: var(--space-3);
+        }
+
+        .example-item {
+            display: flex;
+            gap: var(--space-2);
+            margin-bottom: var(--space-2);
+        }
+
+        .example-item input {
+            flex: 1;
+        }
+
+        /* Keywords section */
+        .keywords-section {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-5);
+        }
+
+        .keyword-priority-group {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .priority-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-3);
+        }
+
+        .priority-title {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .keyword-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            margin-bottom: var(--space-3);
+        }
+
+        .keyword-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-3);
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+        }
+
+        .keyword-chip button {
+            background: none;
+            border: none;
+            color: var(--gray-600);
+            cursor: pointer;
+            padding: 0;
+            font-size: var(--font-size-md);
+            line-height: 1;
+        }
+
+        .keyword-chip button:hover {
+            color: var(--danger-color);
+        }
+
+        .keyword-input-group {
+            display: flex;
+            gap: var(--space-2);
+        }
+
+        /* Page weights */
+        .weights-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .weight-item {
+            background: var(--white);
+            padding: var(--space-4);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .weight-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-3);
+        }
+
+        .weight-slider {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .weight-slider input[type="range"] {
+            flex: 1;
+        }
+
+        .weight-value {
+            min-width: 60px;
+            text-align: right;
+            font-weight: var(--font-weight-semibold);
+            color: var(--primary-color);
+        }
+
+        .weight-bar {
+            height: 8px;
+            background: var(--gray-200);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin-top: var(--space-2);
+        }
+
+        .weight-bar-fill {
+            height: 100%;
+            background: var(--primary-color);
+            transition: width var(--transition-base);
+        }
+
+        /* Coverage visualization */
+        .coverage-visual {
+            background: var(--white);
+            padding: var(--space-5);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-5);
+        }
+
+        .coverage-scale {
+            display: flex;
+            height: 40px;
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            margin-bottom: var(--space-3);
+        }
+
+        .coverage-segment {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-weight: var(--font-weight-semibold);
+            font-size: var(--font-size-sm);
+        }
+
+        .coverage-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--font-size-sm);
+            color: var(--gray-600);
+        }
+
+        /* Validation alerts */
+        .validation-alert {
+            margin-bottom: var(--space-4);
+        }
+
+        /* Drag handle */
+        .drag-handle {
+            cursor: grab;
+            color: var(--gray-500);
+            font-size: var(--font-size-lg);
+        }
+
+        .drag-handle:active {
+            cursor: grabbing;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .actions-bar {
+                justify-content: stretch;
+            }
+
+            .actions-group {
+                flex: 1;
+            }
+
+            .actions-group .button {
+                flex: 1;
+            }
+
+            .band-header-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .url-item {
+                flex-direction: column;
+            }
+
+            .url-type-select {
+                max-width: none;
+            }
+        }
+
+        /* Loading overlay */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: var(--z-modal);
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-content {
+            background: var(--white);
+            padding: var(--space-8);
+            border-radius: var(--radius-lg);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="editor-container">
+        <!-- Header with actions bar -->
+        <div class="editor-header">
+            <div class="header-top">
+                <div class="header-title">
+                    <span class="dirty-indicator" id="dirty-indicator"></span>
+                    <h1 id="profile-title">Loading Profile...</h1>
+                </div>
+                <div class="actions-bar">
+                    <div class="actions-group">
+                        <button class="button button-success" id="save-btn" onclick="saveProfile()">
+                            Save Changes
+                        </button>
+                        <button class="button button-outline" id="validate-btn" onclick="validateProfile()">
+                            Validate
+                        </button>
+                        <button class="button button-secondary" id="test-btn" onclick="testProfile()">
+                            Test Profile
+                        </button>
+                    </div>
+                    <div class="actions-group">
+                        <button class="button button-secondary" onclick="exportProfile()">
+                            Export JSON
+                        </button>
+                        <button class="button button-ghost" onclick="cancelChanges()">
+                            Cancel
+                        </button>
+                        <button class="button button-danger" onclick="deleteProfile()">
+                            Delete
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Validation messages -->
+            <div id="validation-messages"></div>
+        </div>
+
+        <!-- Tabs navigation -->
+        <div class="tabs-nav">
+            <button class="tab-button active" data-tab="settings" onclick="switchTab('settings')">
+                Profile Settings
+            </button>
+            <button class="tab-button" data-tab="competitors" onclick="switchTab('competitors')">
+                Competitors & URLs
+                <span class="badge badge-primary" id="competitors-count">0</span>
+            </button>
+            <button class="tab-button" data-tab="importance" onclick="switchTab('importance')">
+                Importance Bands
+                <span class="badge badge-primary" id="bands-count">0</span>
+            </button>
+            <button class="tab-button" data-tab="keywords" onclick="switchTab('keywords')">
+                Keywords
+                <span class="badge badge-primary" id="keywords-count">0</span>
+            </button>
+            <button class="tab-button" data-tab="weights" onclick="switchTab('weights')">
+                Page Weights
+            </button>
+        </div>
+
+        <!-- Tab: Profile Settings -->
+        <div class="tab-content active" id="tab-settings">
+            <div class="card">
+                <h2 class="card-title">Profile Information</h2>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="profile-name">Profile Name</label>
+                        <input type="text" id="profile-name" class="form-input" placeholder="e.g., Energy Drinks Monitor">
+                        <span class="form-helper">Display name for this monitoring profile</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-domain">Domain/Industry</label>
+                        <input type="text" id="profile-domain" class="form-input" placeholder="e.g., energy-drinks">
+                        <span class="form-helper">Unique identifier for this domain</span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profile-description">Description</label>
+                        <textarea id="profile-description" class="form-textarea" rows="4" placeholder="Describe what this profile monitors..."></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-2">
+                        <div class="form-group">
+                            <label for="profile-status">Status</label>
+                            <select id="profile-status" class="form-select">
+                                <option value="active">Active</option>
+                                <option value="paused">Paused</option>
+                                <option value="archived">Archived</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="analysis-template">Analysis Template</label>
+                            <select id="analysis-template" class="form-select">
+                                <option value="templates/generic-analysis.txt">Generic</option>
+                                <option value="templates/energy-drinks-analysis.txt">Energy Drinks</option>
+                                <option value="templates/saas-analysis.txt">SaaS</option>
+                                <option value="templates/ecommerce-analysis.txt">E-Commerce</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Profile ID</label>
+                        <input type="text" id="profile-id" class="form-input" readonly>
+                        <span class="form-helper">Unique identifier (read-only)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Competitors & URLs -->
+        <div class="tab-content" id="tab-competitors">
+            <div class="card" style="margin-bottom: var(--space-5);">
+                <div class="card-header">
+                    <h2 class="card-title">Competitors</h2>
+                    <button class="button button-primary" onclick="addCompetitor()">
+                        + Add Competitor
+                    </button>
+                </div>
+            </div>
+
+            <div class="competitor-list" id="competitors-list">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Tab: Importance Bands -->
+        <div class="tab-content" id="tab-importance">
+            <!-- Coverage visualization -->
+            <div class="coverage-visual">
+                <h3>Coverage Scale (0-10)</h3>
+                <div class="coverage-scale" id="coverage-scale">
+                    <!-- Populated by JavaScript -->
+                </div>
+                <div class="coverage-labels">
+                    <span>0</span>
+                    <span>5</span>
+                    <span>10</span>
+                </div>
+            </div>
+
+            <div class="card" style="margin-bottom: var(--space-5);">
+                <div class="card-header">
+                    <h2 class="card-title">Importance Bands</h2>
+                    <button class="button button-primary" onclick="addBand()">
+                        + Add Band
+                    </button>
+                </div>
+            </div>
+
+            <div class="bands-list" id="bands-list">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Tab: Keywords -->
+        <div class="tab-content" id="tab-keywords">
+            <div class="keywords-section" id="keywords-section">
+                <!-- High priority -->
+                <div class="keyword-priority-group">
+                    <div class="priority-header">
+                        <div class="priority-title">
+                            <h3>High Priority Keywords</h3>
+                            <span class="badge badge-danger" id="high-count">0</span>
+                        </div>
+                    </div>
+                    <div class="keyword-chips" id="high-keywords">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    <div class="keyword-input-group">
+                        <input type="text" id="high-keyword-input" class="form-input" placeholder="Add keyword...">
+                        <button class="button button-primary" onclick="addKeyword('high')">Add</button>
+                        <button class="button button-secondary" onclick="showBulkImport('high')">Bulk Import</button>
+                    </div>
+                </div>
+
+                <!-- Medium priority -->
+                <div class="keyword-priority-group">
+                    <div class="priority-header">
+                        <div class="priority-title">
+                            <h3>Medium Priority Keywords</h3>
+                            <span class="badge badge-warning" id="medium-count">0</span>
+                        </div>
+                    </div>
+                    <div class="keyword-chips" id="medium-keywords">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    <div class="keyword-input-group">
+                        <input type="text" id="medium-keyword-input" class="form-input" placeholder="Add keyword...">
+                        <button class="button button-primary" onclick="addKeyword('medium')">Add</button>
+                        <button class="button button-secondary" onclick="showBulkImport('medium')">Bulk Import</button>
+                    </div>
+                </div>
+
+                <!-- Low priority -->
+                <div class="keyword-priority-group">
+                    <div class="priority-header">
+                        <div class="priority-title">
+                            <h3>Low Priority Keywords</h3>
+                            <span class="badge badge-info" id="low-count">0</span>
+                        </div>
+                    </div>
+                    <div class="keyword-chips" id="low-keywords">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    <div class="keyword-input-group">
+                        <input type="text" id="low-keyword-input" class="form-input" placeholder="Add keyword...">
+                        <button class="button button-primary" onclick="addKeyword('low')">Add</button>
+                        <button class="button button-secondary" onclick="showBulkImport('low')">Bulk Import</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab: Page Weights -->
+        <div class="tab-content" id="tab-weights">
+            <div class="card" style="margin-bottom: var(--space-5);">
+                <div class="card-header">
+                    <h2 class="card-title">Page Type Weights</h2>
+                    <button class="button button-primary" onclick="addPageWeight()">
+                        + Add Custom Type
+                    </button>
+                </div>
+                <p style="color: var(--gray-600); margin: 0;">
+                    Adjust importance multipliers (0.5 - 2.0) for different page types
+                </p>
+            </div>
+
+            <div class="weights-list" id="weights-list">
+                <!-- Populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading overlay -->
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p style="margin-top: var(--space-4);">Processing...</p>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let profileData = null;
+        let originalData = null;
+        let isDirty = false;
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProfile();
+            setupKeyboardShortcuts();
+            setupAutoSave();
+        });
+
+        // Load profile from URL parameter
+        async function loadProfile() {
+            const params = new URLSearchParams(window.location.search);
+            const profileId = params.get('profile');
+
+            if (!profileId) {
+                alert('No profile specified');
+                window.location.href = 'profile-manager.html';
+                return;
+            }
+
+            try {
+                // In production, fetch from API
+                // For demo, load example data
+                const response = await fetch(`../profiles/examples/${profileId}.json`);
+                const data = await response.json();
+                profileData = data.profile;
+                originalData = JSON.parse(JSON.stringify(profileData));
+
+                populateForm();
+                updateCounts();
+            } catch (error) {
+                console.error('Failed to load profile:', error);
+                alert('Failed to load profile: ' + error.message);
+            }
+        }
+
+        // Populate form with profile data
+        function populateForm() {
+            if (!profileData) return;
+
+            // Settings tab
+            document.getElementById('profile-title').textContent = `Edit: ${profileData.name}`;
+            document.getElementById('profile-name').value = profileData.name || '';
+            document.getElementById('profile-domain').value = profileData.domain || '';
+            document.getElementById('profile-description').value = profileData.description || '';
+            document.getElementById('profile-status').value = profileData.status || 'active';
+            document.getElementById('analysis-template').value = profileData.analysisPromptTemplate || '';
+            document.getElementById('profile-id').value = profileData.id || '';
+
+            // Populate other tabs
+            renderCompetitors();
+            renderImportanceBands();
+            renderKeywords();
+            renderPageWeights();
+        }
+
+        // Render competitors list
+        function renderCompetitors() {
+            const container = document.getElementById('competitors-list');
+            container.innerHTML = '';
+
+            if (!profileData.competitors || profileData.competitors.length === 0) {
+                container.innerHTML = '<div class="alert alert-info">No competitors added yet. Click "Add Competitor" to get started.</div>';
+                return;
+            }
+
+            profileData.competitors.forEach((comp, compIdx) => {
+                const card = document.createElement('div');
+                card.className = 'competitor-card';
+                card.innerHTML = `
+                    <div class="competitor-header" onclick="toggleCompetitor(${compIdx})">
+                        <div class="competitor-info">
+                            <span class="drag-handle" title="Drag to reorder">⋮⋮</span>
+                            <span class="competitor-name">${comp.name}</span>
+                            <span class="badge badge-primary">${comp.urls ? comp.urls.length : 0} URLs</span>
+                        </div>
+                        <div class="competitor-actions" onclick="event.stopPropagation()">
+                            <button class="button button-sm button-secondary" onclick="addUrl(${compIdx})">+ Add URL</button>
+                            <button class="button button-sm button-danger" onclick="removeCompetitor(${compIdx})">Remove</button>
+                        </div>
+                    </div>
+                    <div class="competitor-urls">
+                        <div class="url-list" id="url-list-${compIdx}">
+                            <!-- URLs populated below -->
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+
+                // Render URLs for this competitor
+                renderUrls(compIdx);
+            });
+        }
+
+        function renderUrls(compIdx) {
+            const competitor = profileData.competitors[compIdx];
+            const container = document.getElementById(`url-list-${compIdx}`);
+
+            if (!competitor.urls || competitor.urls.length === 0) {
+                container.innerHTML = '<p style="color: var(--gray-600); font-size: var(--font-size-sm);">No URLs added yet</p>';
+                return;
+            }
+
+            container.innerHTML = '';
+            competitor.urls.forEach((urlObj, urlIdx) => {
+                const urlItem = document.createElement('div');
+                urlItem.className = 'url-item';
+                urlItem.innerHTML = `
+                    <span class="drag-handle" title="Drag to reorder">⋮⋮</span>
+                    <input type="text" class="form-input url-input" value="${urlObj.url}"
+                           onchange="updateUrl(${compIdx}, ${urlIdx}, 'url', this.value)">
+                    <select class="form-select url-type-select"
+                            onchange="updateUrl(${compIdx}, ${urlIdx}, 'type', this.value)">
+                        <option value="homepage" ${urlObj.type === 'homepage' ? 'selected' : ''}>Homepage</option>
+                        <option value="products" ${urlObj.type === 'products' ? 'selected' : ''}>Products</option>
+                        <option value="pricing" ${urlObj.type === 'pricing' ? 'selected' : ''}>Pricing</option>
+                        <option value="blog" ${urlObj.type === 'blog' ? 'selected' : ''}>Blog</option>
+                        <option value="news" ${urlObj.type === 'news' ? 'selected' : ''}>News</option>
+                        <option value="docs" ${urlObj.type === 'docs' ? 'selected' : ''}>Docs</option>
+                        <option value="features" ${urlObj.type === 'features' ? 'selected' : ''}>Features</option>
+                        <option value="about" ${urlObj.type === 'about' ? 'selected' : ''}>About</option>
+                        <option value="other" ${urlObj.type === 'other' ? 'selected' : ''}>Other</option>
+                    </select>
+                    <div class="url-toggle">
+                        <div class="toggle-switch ${urlObj.enabled !== false ? 'active' : ''}"
+                             onclick="toggleUrl(${compIdx}, ${urlIdx})">
+                        </div>
+                        <small>${urlObj.enabled !== false ? 'On' : 'Off'}</small>
+                    </div>
+                    <button class="button button-sm button-danger" onclick="removeUrl(${compIdx}, ${urlIdx})">×</button>
+                `;
+                container.appendChild(urlItem);
+            });
+        }
+
+        function toggleCompetitor(idx) {
+            const cards = document.querySelectorAll('.competitor-card');
+            cards[idx].classList.toggle('collapsed');
+        }
+
+        function addCompetitor() {
+            const name = prompt('Enter competitor name:');
+            if (!name) return;
+
+            if (!profileData.competitors) {
+                profileData.competitors = [];
+            }
+
+            profileData.competitors.push({
+                name: name,
+                urls: [],
+                keywords: []
+            });
+
+            markDirty();
+            renderCompetitors();
+            updateCounts();
+        }
+
+        function removeCompetitor(idx) {
+            if (!confirm(`Remove ${profileData.competitors[idx].name}?`)) return;
+
+            profileData.competitors.splice(idx, 1);
+            markDirty();
+            renderCompetitors();
+            updateCounts();
+        }
+
+        function addUrl(compIdx) {
+            const url = prompt('Enter URL:');
+            if (!url) return;
+
+            if (!profileData.competitors[compIdx].urls) {
+                profileData.competitors[compIdx].urls = [];
+            }
+
+            profileData.competitors[compIdx].urls.push({
+                url: url,
+                type: 'homepage',
+                enabled: true
+            });
+
+            markDirty();
+            renderUrls(compIdx);
+            updateCounts();
+        }
+
+        function removeUrl(compIdx, urlIdx) {
+            profileData.competitors[compIdx].urls.splice(urlIdx, 1);
+            markDirty();
+            renderUrls(compIdx);
+            updateCounts();
+        }
+
+        function updateUrl(compIdx, urlIdx, field, value) {
+            profileData.competitors[compIdx].urls[urlIdx][field] = value;
+            markDirty();
+        }
+
+        function toggleUrl(compIdx, urlIdx) {
+            const urlObj = profileData.competitors[compIdx].urls[urlIdx];
+            urlObj.enabled = !urlObj.enabled;
+            markDirty();
+            renderUrls(compIdx);
+        }
+
+        // Render importance bands
+        function renderImportanceBands() {
+            const container = document.getElementById('bands-list');
+            container.innerHTML = '';
+
+            if (!profileData.importanceBands || profileData.importanceBands.length === 0) {
+                container.innerHTML = '<div class="alert alert-info">No importance bands defined.</div>';
+                return;
+            }
+
+            // Sort by min score
+            profileData.importanceBands.sort((a, b) => b.min - a.min);
+
+            profileData.importanceBands.forEach((band, idx) => {
+                const card = document.createElement('div');
+                card.className = 'band-card';
+                card.style.borderLeftColor = band.color || '#667eea';
+                card.innerHTML = `
+                    <div class="band-header-row">
+                        <div class="form-group" style="flex: 1; margin: 0;">
+                            <input type="text" class="form-input" value="${band.label}"
+                                   onchange="updateBand(${idx}, 'label', this.value)"
+                                   placeholder="Band name">
+                        </div>
+                        <div class="band-range">
+                            <input type="number" class="form-input" value="${band.min}" min="0" max="10"
+                                   onchange="updateBand(${idx}, 'min', parseInt(this.value))">
+                            <span>to</span>
+                            <input type="number" class="form-input" value="${band.max}" min="0" max="10"
+                                   onchange="updateBand(${idx}, 'max', parseInt(this.value))">
+                        </div>
+                        <div class="color-picker-group">
+                            <input type="color" value="${band.color || '#667eea'}"
+                                   onchange="updateBand(${idx}, 'color', this.value)">
+                            <div class="band-preview" style="background: ${band.color || '#667eea'}; color: white;">
+                                ${band.label}
+                            </div>
+                        </div>
+                        <button class="button button-sm button-danger" onclick="removeBand(${idx})">Remove</button>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-textarea" rows="2"
+                                  onchange="updateBand(${idx}, 'description', this.value)">${band.description || ''}</textarea>
+                    </div>
+
+                    <div class="examples-editor">
+                        <label>Examples</label>
+                        <div id="examples-${idx}">
+                            ${(band.examples || []).map((ex, exIdx) => `
+                                <div class="example-item">
+                                    <input type="text" class="form-input" value="${ex}"
+                                           onchange="updateExample(${idx}, ${exIdx}, this.value)">
+                                    <button class="button button-sm button-danger" onclick="removeExample(${idx}, ${exIdx})">×</button>
+                                </div>
+                            `).join('')}
+                        </div>
+                        <button class="button button-sm button-secondary" onclick="addExample(${idx})">+ Add Example</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            renderCoverageVisual();
+        }
+
+        function renderCoverageVisual() {
+            const scale = document.getElementById('coverage-scale');
+            scale.innerHTML = '';
+
+            if (!profileData.importanceBands || profileData.importanceBands.length === 0) {
+                scale.innerHTML = '<div style="padding: var(--space-3); text-align: center; color: var(--gray-600);">No bands defined</div>';
+                return;
+            }
+
+            // Sort and render coverage
+            const sortedBands = [...profileData.importanceBands].sort((a, b) => a.min - b.min);
+
+            sortedBands.forEach(band => {
+                const width = ((band.max - band.min + 1) / 11) * 100;
+                const segment = document.createElement('div');
+                segment.className = 'coverage-segment';
+                segment.style.width = width + '%';
+                segment.style.background = band.color || '#667eea';
+                segment.textContent = `${band.min}-${band.max}`;
+                scale.appendChild(segment);
+            });
+
+            // Check for gaps
+            checkCoverageGaps();
+        }
+
+        function checkCoverageGaps() {
+            const messages = document.getElementById('validation-messages');
+            const covered = new Array(11).fill(false);
+
+            profileData.importanceBands.forEach(band => {
+                for (let i = band.min; i <= band.max; i++) {
+                    covered[i] = true;
+                }
+            });
+
+            const gaps = [];
+            for (let i = 0; i <= 10; i++) {
+                if (!covered[i]) gaps.push(i);
+            }
+
+            if (gaps.length > 0) {
+                messages.innerHTML = `
+                    <div class="alert alert-warning">
+                        <strong>Coverage gaps detected:</strong> Values ${gaps.join(', ')} are not covered by any band.
+                    </div>
+                `;
+            } else {
+                messages.innerHTML = '';
+            }
+        }
+
+        function addBand() {
+            if (!profileData.importanceBands) {
+                profileData.importanceBands = [];
+            }
+
+            profileData.importanceBands.push({
+                min: 0,
+                max: 0,
+                label: 'New Band',
+                description: '',
+                examples: [],
+                color: '#667eea'
+            });
+
+            markDirty();
+            renderImportanceBands();
+            updateCounts();
+        }
+
+        function removeBand(idx) {
+            if (!confirm('Remove this importance band?')) return;
+            profileData.importanceBands.splice(idx, 1);
+            markDirty();
+            renderImportanceBands();
+            updateCounts();
+        }
+
+        function updateBand(idx, field, value) {
+            profileData.importanceBands[idx][field] = value;
+            markDirty();
+            if (field === 'min' || field === 'max') {
+                renderCoverageVisual();
+            }
+        }
+
+        function addExample(bandIdx) {
+            if (!profileData.importanceBands[bandIdx].examples) {
+                profileData.importanceBands[bandIdx].examples = [];
+            }
+            profileData.importanceBands[bandIdx].examples.push('');
+            markDirty();
+            renderImportanceBands();
+        }
+
+        function removeExample(bandIdx, exIdx) {
+            profileData.importanceBands[bandIdx].examples.splice(exIdx, 1);
+            markDirty();
+            renderImportanceBands();
+        }
+
+        function updateExample(bandIdx, exIdx, value) {
+            profileData.importanceBands[bandIdx].examples[exIdx] = value;
+            markDirty();
+        }
+
+        // Render keywords
+        function renderKeywords() {
+            if (!profileData.domainKeywords) {
+                profileData.domainKeywords = { high: [], medium: [], low: [] };
+            }
+
+            ['high', 'medium', 'low'].forEach(priority => {
+                const container = document.getElementById(`${priority}-keywords`);
+                const keywords = profileData.domainKeywords[priority] || [];
+
+                container.innerHTML = keywords.length === 0
+                    ? '<p style="color: var(--gray-600); font-size: var(--font-size-sm);">No keywords added yet</p>'
+                    : keywords.map((kw, idx) => `
+                        <div class="keyword-chip">
+                            <span>${kw}</span>
+                            <button onclick="removeKeyword('${priority}', ${idx})">×</button>
+                        </div>
+                    `).join('');
+
+                document.getElementById(`${priority}-count`).textContent = keywords.length;
+            });
+        }
+
+        function addKeyword(priority) {
+            const input = document.getElementById(`${priority}-keyword-input`);
+            const keyword = input.value.trim();
+
+            if (!keyword) return;
+
+            if (!profileData.domainKeywords[priority]) {
+                profileData.domainKeywords[priority] = [];
+            }
+
+            if (profileData.domainKeywords[priority].includes(keyword)) {
+                alert('Keyword already exists');
+                return;
+            }
+
+            profileData.domainKeywords[priority].push(keyword);
+            input.value = '';
+            markDirty();
+            renderKeywords();
+            updateCounts();
+        }
+
+        function removeKeyword(priority, idx) {
+            profileData.domainKeywords[priority].splice(idx, 1);
+            markDirty();
+            renderKeywords();
+            updateCounts();
+        }
+
+        function showBulkImport(priority) {
+            const keywords = prompt('Enter keywords separated by commas:');
+            if (!keywords) return;
+
+            const newKeywords = keywords.split(',').map(k => k.trim()).filter(k => k);
+
+            if (!profileData.domainKeywords[priority]) {
+                profileData.domainKeywords[priority] = [];
+            }
+
+            newKeywords.forEach(kw => {
+                if (!profileData.domainKeywords[priority].includes(kw)) {
+                    profileData.domainKeywords[priority].push(kw);
+                }
+            });
+
+            markDirty();
+            renderKeywords();
+            updateCounts();
+        }
+
+        // Render page weights
+        function renderPageWeights() {
+            const container = document.getElementById('weights-list');
+
+            if (!profileData.pageWeights) {
+                profileData.pageWeights = {};
+            }
+
+            const weights = Object.entries(profileData.pageWeights);
+
+            if (weights.length === 0) {
+                container.innerHTML = '<div class="alert alert-info">No page weights defined. Add custom page types.</div>';
+                return;
+            }
+
+            container.innerHTML = weights.map(([type, weight]) => `
+                <div class="weight-item">
+                    <div class="weight-header">
+                        <h4>${type}</h4>
+                        <button class="button button-sm button-danger" onclick="removePageWeight('${type}')">Remove</button>
+                    </div>
+                    <div class="weight-slider">
+                        <input type="range" min="0.5" max="2.0" step="0.1" value="${weight}"
+                               oninput="updatePageWeight('${type}', parseFloat(this.value))">
+                        <span class="weight-value">${weight.toFixed(1)}x</span>
+                    </div>
+                    <div class="weight-bar">
+                        <div class="weight-bar-fill" style="width: ${(weight / 2.0) * 100}%"></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addPageWeight() {
+            const type = prompt('Enter page type name:');
+            if (!type) return;
+
+            if (profileData.pageWeights[type]) {
+                alert('Page type already exists');
+                return;
+            }
+
+            profileData.pageWeights[type] = 1.0;
+            markDirty();
+            renderPageWeights();
+        }
+
+        function removePageWeight(type) {
+            if (!confirm(`Remove "${type}" weight?`)) return;
+            delete profileData.pageWeights[type];
+            markDirty();
+            renderPageWeights();
+        }
+
+        function updatePageWeight(type, value) {
+            profileData.pageWeights[type] = value;
+            markDirty();
+            renderPageWeights();
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+
+            // Update tab content
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(`tab-${tabName}`).classList.add('active');
+        }
+
+        // Update counts in badges
+        function updateCounts() {
+            const competitorsCount = profileData.competitors ? profileData.competitors.length : 0;
+            const urlsCount = profileData.competitors
+                ? profileData.competitors.reduce((sum, c) => sum + (c.urls ? c.urls.length : 0), 0)
+                : 0;
+            const bandsCount = profileData.importanceBands ? profileData.importanceBands.length : 0;
+            const keywordsCount = profileData.domainKeywords
+                ? Object.values(profileData.domainKeywords).flat().length
+                : 0;
+
+            document.getElementById('competitors-count').textContent = competitorsCount;
+            document.getElementById('bands-count').textContent = bandsCount;
+            document.getElementById('keywords-count').textContent = keywordsCount;
+        }
+
+        // Dirty state management
+        function markDirty() {
+            isDirty = true;
+            document.getElementById('dirty-indicator').classList.add('active');
+            document.getElementById('save-btn').classList.add('button-warning');
+        }
+
+        function clearDirty() {
+            isDirty = false;
+            document.getElementById('dirty-indicator').classList.remove('active');
+            document.getElementById('save-btn').classList.remove('button-warning');
+        }
+
+        // Save profile
+        async function saveProfile() {
+            // Collect form data
+            profileData.name = document.getElementById('profile-name').value;
+            profileData.domain = document.getElementById('profile-domain').value;
+            profileData.description = document.getElementById('profile-description').value;
+            profileData.status = document.getElementById('profile-status').value;
+            profileData.analysisPromptTemplate = document.getElementById('analysis-template').value;
+            profileData.lastModified = new Date().toISOString();
+
+            // Validate before saving
+            const validation = validateProfile();
+            if (!validation.valid) {
+                alert('Validation failed:\n' + validation.errors.join('\n'));
+                return;
+            }
+
+            try {
+                showLoading(true);
+
+                // In production, POST to API
+                // await fetch('/api/profiles', { method: 'POST', body: JSON.stringify({ profile: profileData }) });
+
+                // Simulate API call
+                await sleep(1000);
+
+                clearDirty();
+                originalData = JSON.parse(JSON.stringify(profileData));
+
+                showLoading(false);
+                showNotification('Profile saved successfully!', 'success');
+            } catch (error) {
+                showLoading(false);
+                alert('Failed to save profile: ' + error.message);
+            }
+        }
+
+        // Validate profile
+        function validateProfile() {
+            const errors = [];
+
+            if (!profileData.name || profileData.name.trim() === '') {
+                errors.push('Profile name is required');
+            }
+
+            if (!profileData.domain || profileData.domain.trim() === '') {
+                errors.push('Domain is required');
+            }
+
+            if (!profileData.competitors || profileData.competitors.length === 0) {
+                errors.push('At least one competitor is required');
+            }
+
+            if (!profileData.importanceBands || profileData.importanceBands.length === 0) {
+                errors.push('At least one importance band is required');
+            }
+
+            // Check coverage
+            if (profileData.importanceBands) {
+                const covered = new Array(11).fill(false);
+                profileData.importanceBands.forEach(band => {
+                    for (let i = band.min; i <= band.max; i++) {
+                        covered[i] = true;
+                    }
+                });
+
+                const gaps = [];
+                for (let i = 0; i <= 10; i++) {
+                    if (!covered[i]) gaps.push(i);
+                }
+
+                if (gaps.length > 0) {
+                    errors.push(`Importance scale has gaps at: ${gaps.join(', ')}`);
+                }
+            }
+
+            const valid = errors.length === 0;
+
+            if (valid) {
+                document.getElementById('validation-messages').innerHTML =
+                    '<div class="alert alert-success">Profile is valid!</div>';
+            } else {
+                document.getElementById('validation-messages').innerHTML =
+                    '<div class="alert alert-danger"><strong>Validation errors:</strong><ul>' +
+                    errors.map(e => `<li>${e}</li>`).join('') + '</ul></div>';
+            }
+
+            return { valid, errors };
+        }
+
+        // Test profile
+        async function testProfile() {
+            if (isDirty) {
+                if (!confirm('You have unsaved changes. Save before testing?')) {
+                    return;
+                }
+                await saveProfile();
+            }
+
+            showLoading(true);
+
+            // In production, trigger test monitoring run
+            await sleep(2000);
+
+            showLoading(false);
+            alert('Test run started! Check dashboard for results.');
+        }
+
+        // Export profile
+        function exportProfile() {
+            const dataStr = JSON.stringify({ profile: profileData }, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+            const exportFileDefaultName = `profile-${profileData.domain}-${Date.now()}.json`;
+
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+
+            showNotification('Profile exported!', 'success');
+        }
+
+        // Delete profile
+        function deleteProfile() {
+            const confirmText = `Delete profile "${profileData.name}"? This action cannot be undone.\n\nType the profile name to confirm:`;
+            const confirmation = prompt(confirmText);
+
+            if (confirmation !== profileData.name) {
+                alert('Profile name did not match. Deletion cancelled.');
+                return;
+            }
+
+            // In production, DELETE to API
+            alert('Profile deleted (demo mode)');
+            window.location.href = 'profile-manager.html';
+        }
+
+        // Cancel changes
+        function cancelChanges() {
+            if (isDirty) {
+                if (!confirm('You have unsaved changes. Discard them?')) {
+                    return;
+                }
+            }
+            window.location.href = 'profile-manager.html';
+        }
+
+        // Keyboard shortcuts
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', function(e) {
+                // Ctrl/Cmd + S to save
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    saveProfile();
+                }
+
+                // Ctrl/Cmd + E to export
+                if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+                    e.preventDefault();
+                    exportProfile();
+                }
+            });
+        }
+
+        // Auto-save warning
+        function setupAutoSave() {
+            window.addEventListener('beforeunload', function(e) {
+                if (isDirty) {
+                    e.preventDefault();
+                    e.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
+                    return e.returnValue;
+                }
+            });
+        }
+
+        // Utilities
+        function showLoading(show) {
+            document.getElementById('loading-overlay').classList.toggle('active', show);
+        }
+
+        function showNotification(message, type) {
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type}`;
+            alertDiv.textContent = message;
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '20px';
+            alertDiv.style.right = '20px';
+            alertDiv.style.zIndex = '9999';
+            alertDiv.style.animation = 'slideInRight 0.3s';
+
+            document.body.appendChild(alertDiv);
+
+            setTimeout(() => {
+                alertDiv.style.animation = 'fadeOut 0.3s';
+                setTimeout(() => alertDiv.remove(), 300);
+            }, 3000);
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+    </script>
+</body>
+</html>

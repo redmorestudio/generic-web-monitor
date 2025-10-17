@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Manager - Generic Web Monitor</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #333;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .profile-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .profile-card.new {
+            border: 2px dashed #667eea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            cursor: pointer;
+        }
+
+        .profile-card.new:hover {
+            background: #f8f9ff;
+        }
+
+        .profile-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .profile-title {
+            flex: 1;
+        }
+
+        .profile-card h3 {
+            margin: 0 0 8px 0;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 18px;
+        }
+
+        .health-indicator {
+            font-size: 20px;
+            cursor: help;
+        }
+
+        .health-good { color: #28a745; }
+        .health-warning { color: #ffc107; }
+        .health-critical { color: #dc3545; }
+
+        .profile-status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-paused {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .completeness-bar {
+            width: 100%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .completeness-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+        }
+
+        .completeness-text {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        .profile-stats {
+            margin: 15px 0;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .profile-stats p {
+            margin: 6px 0;
+            line-height: 1.5;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .stat-label {
+            font-weight: 500;
+        }
+
+        .stat-value {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .profile-meta {
+            font-size: 12px;
+            color: #999;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #eee;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .button-primary {
+            background: #667eea;
+            color: white;
+            flex: 1;
+        }
+
+        .button-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .button-secondary {
+            background: #eee;
+            color: #333;
+            flex: 1;
+        }
+
+        .button-secondary:hover {
+            background: #ddd;
+        }
+
+        .button-tune {
+            background: #17a2b8;
+            color: white;
+            flex: 1;
+        }
+
+        .button-tune:hover {
+            background: #138496;
+        }
+
+        .button-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .button-danger:hover {
+            background: #c82333;
+        }
+
+        .dropdown-container {
+            position: relative;
+            flex: 0;
+        }
+
+        .dropdown-button {
+            background: #f8f9fa;
+            color: #333;
+            padding: 8px 12px;
+            border: 1px solid #dee2e6;
+        }
+
+        .dropdown-button:hover {
+            background: #e9ecef;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            min-width: 200px;
+            z-index: 1000;
+            display: none;
+            margin-top: 4px;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 10px 16px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 14px;
+            color: #333;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dropdown-item:hover {
+            background: #f8f9fa;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 6px 6px 0 0;
+        }
+
+        .dropdown-item:last-child {
+            border-radius: 0 0 6px 6px;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: #dee2e6;
+            margin: 4px 0;
+        }
+
+        .dropdown-item.danger {
+            color: #dc3545;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .empty-state h2 {
+            margin: 0 0 15px 0;
+            color: #333;
+        }
+
+        .empty-state p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .profile-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-actions {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+            }
+
+            .dropdown-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Monitoring Profiles</h1>
+            <button class="button button-primary" onclick="createProfile()">
+                + Create New Profile
+            </button>
+        </div>
+
+        <div class="profile-grid" id="profile-grid">
+            <!-- Energy Drinks Profile -->
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-title">
+                        <h3>
+                            <span class="health-indicator health-good" title="Profile is healthy - all systems operational">✓</span>
+                            Energy Drinks
+                        </h3>
+                        <span class="profile-status status-active">Active</span>
+                    </div>
+                </div>
+
+                <div class="completeness-bar">
+                    <div class="completeness-fill" style="width: 95%"></div>
+                </div>
+                <div class="completeness-text">95% Complete</div>
+
+                <div class="profile-stats">
+                    <p><span class="stat-label">Competitors:</span> <span class="stat-value">12</span></p>
+                    <p><span class="stat-label">URLs Tracked:</span> <span class="stat-value">48</span></p>
+                    <p><span class="stat-label">Importance Bands:</span> <span class="stat-value">5</span></p>
+                    <p><span class="stat-label">Changes (7d):</span> <span class="stat-value">23</span></p>
+                </div>
+
+                <div class="profile-meta">
+                    Last edited: 3 days ago | Last run: 2 hours ago
+                </div>
+
+                <div class="profile-actions">
+                    <button class="button button-primary" onclick="editProfile('energy-drinks')">
+                        ✏️ Edit
+                    </button>
+                    <button class="button button-tune" onclick="tuneBands('energy-drinks')">
+                        🎛️ Tune Bands
+                    </button>
+                    <div class="dropdown-container">
+                        <button class="button dropdown-button" onclick="toggleDropdown('energy-drinks')">
+                            ⋮
+                        </button>
+                        <div class="dropdown-menu" id="dropdown-energy-drinks">
+                            <button class="dropdown-item" onclick="editProfile('energy-drinks')">
+                                ✏️ Edit Profile
+                            </button>
+                            <button class="dropdown-item" onclick="tuneBands('energy-drinks')">
+                                🎛️ Tune Importance Bands
+                            </button>
+                            <button class="dropdown-item" onclick="editCompetitors('energy-drinks')">
+                                🏢 Edit Competitors
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" onclick="viewDashboard('energy-drinks')">
+                                📊 View Dashboard
+                            </button>
+                            <button class="dropdown-item" onclick="testProfile('energy-drinks')">
+                                🧪 Test Profile
+                            </button>
+                            <button class="dropdown-item" onclick="exportProfile('energy-drinks')">
+                                📥 Export JSON
+                            </button>
+                            <button class="dropdown-item" onclick="duplicateProfile('energy-drinks')">
+                                📋 Duplicate Profile
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" onclick="archiveProfile('energy-drinks')">
+                                📦 Archive Profile
+                            </button>
+                            <button class="dropdown-item danger" onclick="deleteProfile('energy-drinks')">
+                                🗑️ Delete Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI Competitors Profile -->
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-title">
+                        <h3>
+                            <span class="health-indicator health-warning" title="Minor issues detected - some URLs may be down">⚠️</span>
+                            AI Competitors
+                        </h3>
+                        <span class="profile-status status-active">Active</span>
+                    </div>
+                </div>
+
+                <div class="completeness-bar">
+                    <div class="completeness-fill" style="width: 78%"></div>
+                </div>
+                <div class="completeness-text">78% Complete</div>
+
+                <div class="profile-stats">
+                    <p><span class="stat-label">Competitors:</span> <span class="stat-value">16</span></p>
+                    <p><span class="stat-label">URLs Tracked:</span> <span class="stat-value">64</span></p>
+                    <p><span class="stat-label">Importance Bands:</span> <span class="stat-value">3</span></p>
+                    <p><span class="stat-label">Changes (7d):</span> <span class="stat-value">15</span></p>
+                </div>
+
+                <div class="profile-meta">
+                    Last edited: 1 week ago | Last run: 1 hour ago
+                </div>
+
+                <div class="profile-actions">
+                    <button class="button button-primary" onclick="editProfile('ai')">
+                        ✏️ Edit
+                    </button>
+                    <button class="button button-tune" onclick="tuneBands('ai')">
+                        🎛️ Tune Bands
+                    </button>
+                    <div class="dropdown-container">
+                        <button class="button dropdown-button" onclick="toggleDropdown('ai')">
+                            ⋮
+                        </button>
+                        <div class="dropdown-menu" id="dropdown-ai">
+                            <button class="dropdown-item" onclick="editProfile('ai')">
+                                ✏️ Edit Profile
+                            </button>
+                            <button class="dropdown-item" onclick="tuneBands('ai')">
+                                🎛️ Tune Importance Bands
+                            </button>
+                            <button class="dropdown-item" onclick="editCompetitors('ai')">
+                                🏢 Edit Competitors
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" onclick="viewDashboard('ai')">
+                                📊 View Dashboard
+                            </button>
+                            <button class="dropdown-item" onclick="testProfile('ai')">
+                                🧪 Test Profile
+                            </button>
+                            <button class="dropdown-item" onclick="exportProfile('ai')">
+                                📥 Export JSON
+                            </button>
+                            <button class="dropdown-item" onclick="duplicateProfile('ai')">
+                                📋 Duplicate Profile
+                            </button>
+                            <div class="dropdown-divider"></div>
+                            <button class="dropdown-item" onclick="archiveProfile('ai')">
+                                📦 Archive Profile
+                            </button>
+                            <button class="dropdown-item danger" onclick="deleteProfile('ai')">
+                                🗑️ Delete Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Profile Card -->
+            <div class="profile-card new" onclick="createProfile()">
+                <div style="text-align: center;">
+                    <h2 style="font-size: 48px; margin: 0;">+</h2>
+                    <p style="margin: 10px 0 0 0; color: #667eea; font-weight: 600;">
+                        Create New Profile
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown-container')) {
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.classList.remove('show');
+                });
+            }
+        });
+
+        // Load profiles from localStorage or API
+        function loadProfiles() {
+            // In production, this would fetch from API
+            // For now, using the hardcoded demo profiles shown in HTML
+        }
+
+        function createProfile() {
+            window.location.href = 'setup-wizard.html';
+        }
+
+        function viewDashboard(profileId) {
+            window.location.href = `index.html?profile=${profileId}`;
+        }
+
+        function editProfile(profileId) {
+            // Navigate to the new profile editor
+            window.location.href = `profile-editor.html?profile=${profileId}`;
+        }
+
+        function tuneBands(profileId) {
+            // Navigate to the profile editor with focus on importance bands tab
+            window.location.href = `profile-editor.html?profile=${profileId}&tab=bands`;
+        }
+
+        function editCompetitors(profileId) {
+            // Navigate to the profile editor with focus on competitors tab
+            window.location.href = `profile-editor.html?profile=${profileId}&tab=competitors`;
+        }
+
+        function toggleDropdown(profileId) {
+            event.stopPropagation();
+            const dropdown = document.getElementById(`dropdown-${profileId}`);
+
+            // Close all other dropdowns
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                if (menu.id !== `dropdown-${profileId}`) {
+                    menu.classList.remove('show');
+                }
+            });
+
+            // Toggle current dropdown
+            dropdown.classList.toggle('show');
+        }
+
+        function testProfile(profileId) {
+            alert(`Testing profile "${profileId}"...\n\nThis will validate:\n- All URLs are accessible\n- Competitors are properly configured\n- Importance bands are defined\n- Profile schema is valid`);
+            // In production, this would call the API to test the profile
+        }
+
+        function exportProfile(profileId) {
+            // Export profile configuration as JSON
+            const profile = {
+                id: profileId,
+                name: profileId,
+                timestamp: new Date().toISOString(),
+                config: {
+                    // Profile configuration would be loaded from API
+                    competitors: [],
+                    urls: [],
+                    importanceBands: [],
+                    settings: {}
+                }
+            };
+
+            const dataStr = JSON.stringify(profile, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
+            const exportFileDefaultName = `profile-${profileId}-${Date.now()}.json`;
+
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+        }
+
+        function duplicateProfile(profileId) {
+            const newName = prompt(`Enter a name for the duplicate profile:`, `${profileId}-copy`);
+            if (newName) {
+                alert(`Profile "${profileId}" duplicated as "${newName}"`);
+                // In production, this would call API to duplicate profile
+                loadProfiles();
+            }
+        }
+
+        function archiveProfile(profileId) {
+            if (confirm(`Archive profile "${profileId}"?\n\nArchived profiles are paused and hidden from the main view but can be restored later.`)) {
+                alert(`Profile "${profileId}" archived`);
+                // In production, this would call API to archive profile
+                loadProfiles();
+            }
+        }
+
+        function deleteProfile(profileId) {
+            if (confirm(`Are you sure you want to delete the profile "${profileId}"?\n\nThis action cannot be undone. All historical data will be lost.`)) {
+                const confirmText = prompt(`Type "${profileId}" to confirm deletion:`);
+                if (confirmText === profileId) {
+                    alert(`Profile "${profileId}" deleted`);
+                    // In production, this would call API to delete profile
+                    loadProfiles();
+                } else {
+                    alert('Deletion cancelled - name did not match');
+                }
+            }
+        }
+
+        function pauseProfile(profileId) {
+            // Toggle profile active status
+            alert(`Profile "${profileId}" paused`);
+        }
+
+        function runProfile(profileId) {
+            // Trigger immediate monitoring run
+            alert(`Starting monitoring run for "${profileId}"`);
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProfiles();
+        });
+    </script>
+</body>
+</html>

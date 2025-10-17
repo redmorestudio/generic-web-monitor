@@ -1,0 +1,16 @@
+{
+  "name": "generic-web-monitor",
+  "version": "2.0.0",
+  "description": "Domain-agnostic web monitoring framework with AI-powered discovery",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Tests coming soon\""
+  },
+  "keywords": ["monitoring", "competitive-intelligence", "web-scraping", "ai"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.0"
+  }
+}

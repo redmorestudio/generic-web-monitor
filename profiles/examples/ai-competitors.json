@@ -1,0 +1,625 @@
+{
+  "profile": {
+    "id": "03287c19-080d-4f35-ae47-491b26d5b689",
+    "name": "AI Competitors Monitor",
+    "domain": "ai-technology",
+    "description": "Monitor AI companies for product launches, pricing changes, model releases, and strategic moves. Covers major LLM providers, coding assistants, video/image AI, and enterprise AI platforms.",
+    "competitors": [
+      {
+        "name": "Anthropic",
+        "urls": [
+          {
+            "url": "https://anthropic.com",
+            "type": "homepage"
+          },
+          {
+            "url": "https://anthropic.com/claude",
+            "type": "product"
+          },
+          {
+            "url": "https://anthropic.com/pricing",
+            "type": "pricing"
+          },
+          {
+            "url": "https://anthropic.com/news",
+            "type": "news"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "OpenAI",
+        "urls": [
+          {
+            "url": "https://openai.com",
+            "type": "homepage"
+          },
+          {
+            "url": "https://openai.com/chatgpt",
+            "type": "product"
+          },
+          {
+            "url": "https://openai.com/pricing",
+            "type": "pricing"
+          },
+          {
+            "url": "https://openai.com/blog",
+            "type": "blog"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Google DeepMind",
+        "urls": [
+          {
+            "url": "https://deepmind.google",
+            "type": "homepage"
+          },
+          {
+            "url": "https://ai.google/discover/gemini",
+            "type": "product"
+          },
+          {
+            "url": "https://blog.google/technology/ai/",
+            "type": "blog"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Mistral AI",
+        "urls": [
+          {
+            "url": "https://mistral.ai",
+            "type": "homepage"
+          },
+          {
+            "url": "https://mistral.ai/news/",
+            "type": "news"
+          },
+          {
+            "url": "https://mistral.ai/technology/",
+            "type": "technology"
+          },
+          {
+            "url": "https://docs.mistral.ai",
+            "type": "docs"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Codeium",
+        "urls": [
+          {
+            "url": "https://codeium.com",
+            "type": "homepage"
+          },
+          {
+            "url": "https://codeium.com/windsurf",
+            "type": "product"
+          },
+          {
+            "url": "https://codeium.com/pricing",
+            "type": "pricing"
+          },
+          {
+            "url": "https://codeium.com/blog",
+            "type": "blog"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Anysphere",
+        "urls": [
+          {
+            "url": "https://anysphere.inc",
+            "type": "homepage"
+          },
+          {
+            "url": "https://cursor.com",
+            "type": "product"
+          },
+          {
+            "url": "https://cursor.com/features",
+            "type": "features"
+          },
+          {
+            "url": "https://cursor.com/pricing",
+            "type": "pricing"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Synthesia",
+        "urls": [
+          {
+            "url": "https://synthesia.io",
+            "type": "homepage"
+          },
+          {
+            "url": "https://synthesia.io/features",
+            "type": "features"
+          },
+          {
+            "url": "https://synthesia.io/pricing",
+            "type": "pricing"
+          },
+          {
+            "url": "https://synthesia.io/blog",
+            "type": "blog"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Pika",
+        "urls": [
+          {
+            "url": "https://pika.art",
+            "type": "homepage"
+          },
+          {
+            "url": "https://pika.art/pricing",
+            "type": "pricing"
+          },
+          {
+            "url": "https://pika.art/blog",
+            "type": "blog"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Moonvalley",
+        "urls": [
+          {
+            "url": "https://moonvalley.ai",
+            "type": "homepage"
+          },
+          {
+            "url": "https://moonvalley.ai/create",
+            "type": "product"
+          },
+          {
+            "url": "https://moonvalley.ai/pricing",
+            "type": "pricing"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "HeyGen",
+        "urls": [
+          {
+            "url": "https://heygen.com",
+            "type": "homepage"
+          },
+          {
+            "url": "https://heygen.com/features",
+            "type": "features"
+          },
+          {
+            "url": "https://heygen.com/pricing",
+            "type": "pricing"
+          },
+          {
+            "url": "https://heygen.com/blog",
+            "type": "blog"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Ideogram",
+        "urls": [
+          {
+            "url": "https://ideogram.ai",
+            "type": "homepage"
+          },
+          {
+            "url": "https://ideogram.ai/features",
+            "type": "features"
+          },
+          {
+            "url": "https://ideogram.ai/about",
+            "type": "about"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Midjourney",
+        "urls": [
+          {
+            "url": "https://midjourney.com",
+            "type": "homepage"
+          },
+          {
+            "url": "https://docs.midjourney.com",
+            "type": "docs"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Articul8",
+        "urls": [
+          {
+            "url": "https://articul8.ai",
+            "type": "homepage"
+          },
+          {
+            "url": "https://articul8.ai/platform",
+            "type": "platform"
+          },
+          {
+            "url": "https://articul8.ai/solutions",
+            "type": "solutions"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Prompt Security",
+        "urls": [
+          {
+            "url": "https://promptsecurity.io",
+            "type": "homepage"
+          },
+          {
+            "url": "https://promptsecurity.io/platform",
+            "type": "platform"
+          },
+          {
+            "url": "https://promptsecurity.io/resources",
+            "type": "resources"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "Modular",
+        "urls": [
+          {
+            "url": "https://modular.com",
+            "type": "homepage"
+          },
+          {
+            "url": "https://modular.com/mojo",
+            "type": "product"
+          },
+          {
+            "url": "https://modular.com/blog",
+            "type": "blog"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      },
+      {
+        "name": "LangChain",
+        "urls": [
+          {
+            "url": "https://langchain.com",
+            "type": "homepage"
+          },
+          {
+            "url": "https://langchain.com/langsmith",
+            "type": "product"
+          },
+          {
+            "url": "https://blog.langchain.dev",
+            "type": "blog"
+          },
+          {
+            "url": "https://docs.langchain.com",
+            "type": "docs"
+          }
+        ],
+        "keywords": [
+          "ai",
+          "ml",
+          "model",
+          "api",
+          "assistant",
+          "agent",
+          "llm",
+          "neural"
+        ]
+      }
+    ],
+    "importanceBands": [
+      {
+        "min": 9,
+        "max": 10,
+        "label": "Critical",
+        "description": "New model releases, major pricing changes, strategic pivots, acquisitions",
+        "examples": [
+          "GPT-5 launch announcement",
+          "Major pricing overhaul (e.g., 50% price reduction)",
+          "Company acquisition or merger",
+          "Strategic pivot announcement",
+          "Major partnership (e.g., Google + Anthropic collaboration)",
+          "Breakthrough capability announcement"
+        ]
+      },
+      {
+        "min": 7,
+        "max": 8,
+        "label": "Important",
+        "description": "New features, API updates, significant partnerships, model improvements",
+        "examples": [
+          "New API endpoint release",
+          "Major partnership announcement",
+          "New feature launch (e.g., vision, voice, multimodal)",
+          "Model performance improvement (20%+ better)",
+          "Enterprise tier announcement",
+          "New model variant (e.g., Claude 3 Opus)",
+          "Security/compliance certification"
+        ]
+      },
+      {
+        "min": 5,
+        "max": 6,
+        "label": "Moderate",
+        "description": "Documentation updates, blog posts, minor features, webinars",
+        "examples": [
+          "Technical blog post or case study",
+          "Documentation expansion or reorganization",
+          "Minor feature addition",
+          "Webinar or conference announcement",
+          "Case study publication",
+          "Developer tool update",
+          "Community event"
+        ]
+      },
+      {
+        "min": 3,
+        "max": 4,
+        "label": "Low",
+        "description": "Bug fixes, maintenance announcements, minor updates",
+        "examples": [
+          "Bug fix announcement",
+          "Scheduled maintenance notice",
+          "Minor API update or deprecation",
+          "Status page update",
+          "Library version bump",
+          "Minor UI improvements"
+        ]
+      },
+      {
+        "min": 1,
+        "max": 2,
+        "label": "Minimal",
+        "description": "Website tweaks, minor content changes, routine updates",
+        "examples": [
+          "Homepage content refresh",
+          "Minor copy changes",
+          "FAQ update",
+          "Social media link additions",
+          "Footer updates"
+        ]
+      },
+      {
+        "min": 0,
+        "max": 0,
+        "label": "Trivial",
+        "description": "Typos, formatting, inconsequential changes",
+        "examples": [
+          "Typo correction",
+          "Copyright year update",
+          "Minor formatting adjustment",
+          "Image optimization",
+          "Whitespace changes"
+        ]
+      }
+    ],
+    "contentTypes": [
+      "homepage",
+      "products",
+      "pricing",
+      "blog",
+      "news",
+      "docs",
+      "api",
+      "features",
+      "technology",
+      "about"
+    ],
+    "pageWeights": {
+      "homepage": 0.8,
+      "index": 0.8,
+      "home": 0.8,
+      "news": 1.2,
+      "blog": 1.2,
+      "updates": 1.2,
+      "technology": 1.5,
+      "features": 1.5,
+      "products": 1.5,
+      "pricing": 2,
+      "announcement": 2
+    },
+    "domainKeywords": {
+      "high": [
+        "price",
+        "pricing",
+        "launch",
+        "new",
+        "release",
+        "announce",
+        "available",
+        "introducing"
+      ],
+      "medium": [
+        "feature",
+        "update",
+        "improve",
+        "enhance",
+        "api",
+        "model",
+        "performance",
+        "capability"
+      ],
+      "low": [
+        "fix",
+        "patch",
+        "minor",
+        "small",
+        "tweak",
+        "adjust"
+      ]
+    },
+    "analysisPromptTemplate": "templates/ai-technology-analysis.txt",
+    "discovery": {
+      "enabled": false,
+      "autoExpand": false,
+      "seedCompetitors": [
+        "OpenAI",
+        "Anthropic",
+        "Google DeepMind"
+      ],
+      "maxCompetitors": 20
+    },
+    "created": "2025-10-17T04:56:35.865Z",
+    "lastModified": "2025-10-17T04:56:35.866Z",
+    "status": "active"
+  }
+}

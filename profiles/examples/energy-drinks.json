@@ -1,0 +1,126 @@
+{
+  "profile": {
+    "id": "550e8400-e29b-41d4-a716-446655440000",
+    "name": "Energy Drinks Monitor",
+    "domain": "energy-drinks",
+    "description": "Track energy drink market changes including new products, pricing, and sponsorships",
+
+    "competitors": [
+      {
+        "name": "Red Bull",
+        "urls": [
+          {"url": "https://redbull.com", "type": "homepage"},
+          {"url": "https://redbull.com/products", "type": "products"},
+          {"url": "https://redbull.com/energydrink", "type": "products"}
+        ],
+        "keywords": ["energy", "caffeine", "taurine", "B-vitamins", "wings"]
+      },
+      {
+        "name": "Monster Energy",
+        "urls": [
+          {"url": "https://monsterenergy.com", "type": "homepage"},
+          {"url": "https://monsterenergy.com/products", "type": "products"}
+        ],
+        "keywords": ["energy", "extreme", "unleash the beast"]
+      }
+    ],
+
+    "importanceBands": [
+      {
+        "min": 9, "max": 10,
+        "label": "Critical",
+        "description": "New product lines, major formula changes, market entry/exit, major recalls",
+        "examples": [
+          "Launching new energy drink line",
+          "Discontinuing major product",
+          "Major formula reformulation",
+          "Entering new market (country/segment)",
+          "Safety recall announcement"
+        ]
+      },
+      {
+        "min": 7, "max": 8,
+        "label": "Important",
+        "description": "New flavors, packaging redesigns, major sponsorships, pricing changes",
+        "examples": [
+          "New flavor announcement",
+          "Partnership with major athlete/team",
+          "Significant price increase",
+          "Can/bottle redesign",
+          "New size variant"
+        ]
+      },
+      {
+        "min": 5, "max": 6,
+        "label": "Moderate",
+        "description": "Limited editions, regional launches, promotional campaigns, website updates",
+        "examples": [
+          "Limited edition flavor",
+          "Regional product launch",
+          "Seasonal promotion",
+          "Website redesign"
+        ]
+      },
+      {
+        "min": 3, "max": 4,
+        "label": "Low",
+        "description": "Minor promotional campaigns, social media campaigns, event sponsorships",
+        "examples": [
+          "Social media campaign launch",
+          "Minor event sponsorship",
+          "Promotional contest"
+        ]
+      },
+      {
+        "min": 1, "max": 2,
+        "label": "Minimal",
+        "description": "Routine content updates, ingredient list formatting, FAQ updates",
+        "examples": [
+          "Updated ingredient list format",
+          "Added FAQ entry",
+          "Minor copy changes"
+        ]
+      },
+      {
+        "min": 0, "max": 0,
+        "label": "Trivial",
+        "description": "Typos, formatting changes, copyright updates",
+        "examples": [
+          "Fixed spelling error",
+          "Updated copyright year",
+          "Minor formatting adjustment"
+        ]
+      }
+    ],
+
+    "contentTypes": ["products", "pricing", "blog", "news", "sponsorships"],
+
+    "pageWeights": {
+      "products": 2.0,
+      "pricing": 2.0,
+      "sponsorships": 1.5,
+      "news": 1.2,
+      "blog": 1.0,
+      "homepage": 0.8
+    },
+
+    "domainKeywords": {
+      "high": ["launch", "new product", "price", "formula", "discontinued", "recall", "ingredients"],
+      "medium": ["flavor", "packaging", "partnership", "sponsor", "event", "redesign"],
+      "low": ["campaign", "promotion", "update", "refresh", "contest"]
+    },
+
+    "analysisPromptTemplate": "templates/energy-drinks-analysis.txt",
+
+    "discovery": {
+      "enabled": true,
+      "autoExpand": true,
+      "seedCompetitors": ["Red Bull", "Monster Energy"],
+      "maxCompetitors": 15
+    },
+
+    "created": "2025-01-16T10:00:00Z",
+    "lastModified": "2025-01-16T10:00:00Z",
+    "status": "active"
+  }
+}
