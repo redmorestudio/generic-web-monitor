@@ -62,6 +62,8 @@ how do we add a news feed/twitter feed if we want to track a sentiment vector ov
 
 with the 3d display can we size them using the revenue of each company - size it by public information, search SEC filings, use funding as a proxy for revenue - somehow show color differently to indicate?  or transparency?
 
+ how can the CMO (or others) do a SWOT analysis/competitive analysis - pick who they go against, as well as A vs. B  - how do you find the "white area" that is interesting to attack
+
  
  
 ---
