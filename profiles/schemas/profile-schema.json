@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": ["profile"],
+  "properties": {
+    "profile": {
+      "type": "object",
+      "required": ["id", "name", "domain", "competitors", "importanceBands"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier (UUID)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Display name",
+          "example": "Energy Drinks Monitor"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Industry/domain identifier",
+          "example": "energy-drinks"
+        },
+        "description": {
+          "type": "string",
+          "description": "What this profile monitors"
+        },
+
+        "competitors": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "urls"],
+            "properties": {
+              "name": {"type": "string", "example": "Red Bull"},
+              "urls": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["url", "type"],
+                  "properties": {
+                    "url": {"type": "string", "format": "uri"},
+                    "type": {"type": "string", "enum": ["homepage", "products", "pricing", "blog", "news", "docs"]}
+                  }
+                }
+              },
+              "keywords": {
+                "type": "array",
+                "items": {"type": "string"},
+                "example": ["energy", "caffeine", "taurine"]
+              }
+            }
+          }
+        },
+
+        "importanceBands": {
+          "type": "array",
+          "description": "User-defined importance scale (0-10)",
+          "items": {
+            "type": "object",
+            "required": ["min", "max", "label", "description", "examples"],
+            "properties": {
+              "min": {"type": "integer", "minimum": 0, "maximum": 10},
+              "max": {"type": "integer", "minimum": 0, "maximum": 10},
+              "label": {"type": "string", "example": "Critical"},
+              "description": {"type": "string", "example": "New product lines, major formula changes"},
+              "examples": {
+                "type": "array",
+                "items": {"type": "string"},
+                "example": ["Launching new energy drink line", "Discontinuing major product"]
+              }
+            }
+          }
+        },
+
+        "contentTypes": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Types of content to monitor",
+          "example": ["products", "pricing", "blog", "news", "sponsorships"]
+        },
+
+        "pageWeights": {
+          "type": "object",
+          "description": "Multipliers for different page types",
+          "example": {
+            "products": 2.0,
+            "pricing": 2.0,
+            "sponsorships": 1.5,
+            "news": 1.2,
+            "blog": 1.0,
+            "homepage": 0.8
+          }
+        },
+
+        "domainKeywords": {
+          "type": "object",
+          "required": ["high", "medium", "low"],
+          "properties": {
+            "high": {
+              "type": "array",
+              "items": {"type": "string"},
+              "description": "High-priority keywords",
+              "example": ["launch", "new product", "price", "formula", "discontinued"]
+            },
+            "medium": {
+              "type": "array",
+              "items": {"type": "string"},
+              "example": ["flavor", "packaging", "partnership", "sponsor"]
+            },
+            "low": {
+              "type": "array",
+              "items": {"type": "string"},
+              "example": ["campaign", "promotion", "update"]
+            }
+          }
+        },
+
+        "analysisPromptTemplate": {
+          "type": "string",
+          "description": "Path to Claude prompt template",
+          "example": "templates/energy-drinks-analysis.txt"
+        },
+
+        "discovery": {
+          "type": "object",
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "autoExpand": {"type": "boolean"},
+            "seedCompetitors": {
+              "type": "array",
+              "items": {"type": "string"}
+            },
+            "maxCompetitors": {"type": "integer"}
+          }
+        },
+
+        "created": {"type": "string", "format": "date-time"},
+        "lastModified": {"type": "string", "format": "date-time"},
+        "status": {"type": "string", "enum": ["active", "paused", "archived"]}
+      }
+    }
+  }
+}
