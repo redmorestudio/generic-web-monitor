@@ -6,6 +6,7 @@
 3. Custom importance bands
 4. NAICS configuration
 5. Testing before live
+6. <<will randy know that something changed???
 
 ### Sarah - Competitive Analyst
 1. <<real-time alerts for 9-10, daily, 6-10, weekly everything>>
@@ -47,7 +48,21 @@ open questions
 
   we do need to figure out how we map all the products across the competition
 
-  
+ need a way of saying - here's the competitors you gave us, here's their product pages, what do you want us to track? - this is a business thing, not a technical thing.  would be best if we had the quarterly meetings - at least every half year for traditional companies.  for AI it's probably way faster than that. (quarterly)
+
+ need to look at security and backups make sure we're at 3 points of failure, disgruntled employee stuffs
+
+what is our processs for managing new companies - how can it find out about new products? new pages of content that are relevant - this was the announcement, here's the new page - should I start tracking it?
+
+how do we morph this into our ability to compare products 
+
+phase 2: explore how to do longitudinal analysis - look along dimensions and show what's changing over what dimensions
+
+how do we add a news feed/twitter feed if we want to track a sentiment vector over time
+
+with the 3d display can we size them using the revenue of each company - size it by public information, search SEC filings, use funding as a proxy for revenue - somehow show color differently to indicate?  or transparency?
+
+ 
  
 ---
 
