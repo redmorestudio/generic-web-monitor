@@ -64,6 +64,8 @@ with the 3d display can we size them using the revenue of each company - size it
 
  how can the CMO (or others) do a SWOT analysis/competitive analysis - pick who they go against, as well as A vs. B  - how do you find the "white area" that is interesting to attack
 
+ how do we handle cloudflare protected sites?  maybe totheweb?  (investigate using a comet browser plugin)
+
  
  
 ---
