@@ -66,7 +66,7 @@ with the 3d display can we size them using the revenue of each company - size it
 
  how do we handle cloudflare protected sites?  maybe totheweb?  (investigate using a comet browser plugin)
 
- 
+ let's be able to "train" it on the competitor analyses that are already available - we could even do ourselves by starting with a list of companies/products and running it through randy's perplexity magic
  
 ---
 
